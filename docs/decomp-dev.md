@@ -17,8 +17,8 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The report currently
-credits seven game-server functions totaling 350 bytes, each verified at 100.0%
-by objdiff 3.8.0.
+credits 115 functions totaling 2,740 bytes, each verified at 100.0% by objdiff
+3.8.0.
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
 file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
 rebuilds recorded source and target objects locally without placing original

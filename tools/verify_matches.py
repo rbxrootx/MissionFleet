@@ -1,4 +1,5 @@
 """Rebuild and objdiff locally recorded matches against private target images."""
+import argparse
 import hashlib
 import json
 import os
@@ -48,7 +49,7 @@ def assembly_for(symbol, code, relocations):
     return "\n".join(lines) + "\n"
 
 
-def verify(document, match):
+def verify(document, match, compiled_objects):
     compiler = document["compiler"]
     compiler_root = Path(os.environ.get("MSVC6_ROOT", ROOT / ".analysis-deps" / "msvc6.5"))
     cl = compiler_root / "Bin" / "CL.EXE"
@@ -69,16 +70,23 @@ def verify(document, match):
     stem = f"{component}-{match['address']}"
     target_source = BUILD / f"{stem}-target.s"
     target_object = BUILD / f"{stem}-target.obj"
-    base_object = BUILD / f"{stem}-base.obj"
     diff_file = BUILD / f"{stem}-diff.json"
     target_source.write_text(assembly_for(match["symbol"], code, match["relocations"]), encoding="ascii")
     run([clang, "--target=i686-pc-windows-msvc", "-c", target_source, "-o", target_object])
 
-    environment = os.environ.copy()
-    environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
-    compile_command = [str(cl), "/nologo", "/c", *compiler["flags"],
-                       f"/Fo{base_object}", str(ROOT / match["source"])]
-    run(compile_command, env=environment)
+    source = ROOT / match["source"]
+    flags = tuple(match.get("flags", compiler["flags"]))
+    compile_key = (source, flags)
+    if compile_key not in compiled_objects:
+        key_hash = hashlib.sha256((str(source) + "\0" + "\0".join(flags)).encode()).hexdigest()[:16]
+        base_object = BUILD / f"base-{key_hash}.obj"
+        environment = os.environ.copy()
+        environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
+        compile_command = [str(cl), "/nologo", "/c", *flags,
+                           f"/Fo{base_object}", str(source)]
+        run(compile_command, env=environment)
+        compiled_objects[compile_key] = base_object
+    base_object = compiled_objects[compile_key]
     run([str(objdiff), "diff", "-1", str(target_object), "-2", str(base_object),
          match["symbol"], "-o", str(diff_file), "--format", "json-pretty"])
 
@@ -86,16 +94,26 @@ def verify(document, match):
     symbol = next(item for item in diff["left"]["symbols"] if item.get("name") == match["symbol"])
     if symbol.get("match_percent") != 100.0 or int(symbol.get("size", 0)) != int(match["size"]):
         raise ValueError(f"Mismatch at {component}:{match['address']}: {symbol.get('match_percent')}%")
-    print(f"verified {component}:{match['address']} ({match['size']} bytes, objdiff 100.0%)")
+    return f"{component}:{match['address']} ({match['size']} bytes)"
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--verbose", action="store_true", help="print each verified symbol")
+    args = parser.parse_args()
     document = json.loads(CONFIG.read_text(encoding="utf-8"))
     if document.get("schema_version") != 1:
         raise ValueError("Unsupported verification schema")
     BUILD.mkdir(parents=True, exist_ok=True)
+    compiled_objects = {}
+    verified = []
     for match in document["matches"]:
-        verify(document, match)
+        verified.append(verify(document, match, compiled_objects))
+    if args.verbose:
+        for item in verified:
+            print(f"verified {item}")
+    total_bytes = sum(int(match["size"]) for match in document["matches"])
+    print(f"verified {len(verified)} functions / {total_bytes} bytes at objdiff 100.0%")
 
 
 if __name__ == "__main__":
