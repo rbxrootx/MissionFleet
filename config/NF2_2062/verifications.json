@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "image_base": "00401000",
+  "compiler": {
+    "family": "Microsoft Visual C++ 6.0 SP5",
+    "version": "12.00.8804",
+    "flags": ["/Od", "/GZ", "/GX-"],
+    "package_sha256": "16f639b7961ca74b938532d912d2bb655d5ea08b01dc2f50e4a180774d138169",
+    "cl_sha256": "1bf99f206271ecdbd13da2829192ea2c02e2a44c740b8d72935d5d9cb753b156"
+  },
+  "matches": [
+    {
+      "component": "game-server",
+      "address": "0043f169",
+      "size": 42,
+      "source": "src/game-server/CGCServerClasses/CRootServer/NavyFIELDRootServer.cpp",
+      "symbol": "?LookupServerAt0043F169@NavyFieldRootServer@@QAEXI@Z",
+      "relocations": [
+        {
+          "offset": 22,
+          "symbol": "?LookupServer@NavyFieldRootServer@@QAEXI@Z"
+        },
+        {
+          "offset": 32,
+          "symbol": "__chkesp"
+        }
+      ]
+    }
+  ]
+}

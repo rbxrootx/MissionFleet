@@ -7,11 +7,13 @@ and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
 The matching project now has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
 Its public-safe inventory covers 18,925 recovered functions across the login,
-game, and persistence servers. The baseline is intentionally 0%: functions are
-credited only after the reconstructed C/C++ produces byte-identical object code.
+game, and persistence servers. Functions are credited only after reconstructed
+C/C++ produces byte-identical object code. The first game-server function is now
+verified at 100.0% by objdiff.
 
 ```powershell
 python tools/generate_progress.py
+python tools/verify_matches.py
 python -m unittest discover -s tests -v
 ```
 
@@ -44,9 +46,9 @@ recovery hashes, limits, and reproducibility details.
 
 ## Matching workflow
 
-The recovered code is 32-bit x86 and shows a Visual C++ 6.0-era toolchain.
-The exact service pack and flags remain a compiler-matching question; see
-[compiler evidence](config/NF2_2062/COMPILER.md). Decompiled functions move
+The recovered code is 32-bit x86. Visual C++ 6.0 SP5 with `/Od /GZ /GX-` is
+confirmed for the first matched game function; see [compiler evidence](config/NF2_2062/COMPILER.md).
+Decompiled functions move
 into `src/login-server`, `src/game-server`, or `src/save-server`. A function is
 promoted in `config/NF2_2062/matches.json` only after objdiff verifies a
 byte-identical object-code match.

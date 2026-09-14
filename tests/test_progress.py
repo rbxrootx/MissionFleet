@@ -8,12 +8,12 @@ class ProgressReportTests(unittest.TestCase):
     def setUp(self):
         self.report = generate_progress.build_report()
 
-    def test_public_baseline_is_complete_and_honest(self):
+    def test_public_inventory_and_verified_progress_are_complete_and_honest(self):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 18_925)
         self.assertEqual(self.report["measures"]["total_code"], "2865356")
-        self.assertEqual(self.report["measures"]["matched_functions"], 0)
-        self.assertEqual(self.report["measures"]["matched_code"], "0")
+        self.assertEqual(self.report["measures"]["matched_functions"], 1)
+        self.assertEqual(self.report["measures"]["matched_code"], "42")
         self.assertEqual(len(self.report["units"]), 3)
 
     def test_function_identities_are_unique_per_unit(self):

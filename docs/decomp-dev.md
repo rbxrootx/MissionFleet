@@ -16,10 +16,12 @@ python tools/generate_progress.py
 python tools/generate_progress.py --check
 ```
 
-The report begins at 0%. Decompiled pseudocode does not count as matching source.
+Decompiled pseudocode does not count as matching source. The report currently
+credits one 42-byte game-server function verified at 100.0% by objdiff 3.8.0.
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
-file and marked as byte-identical under objdiff 3.8.0. The promotion tool that
-creates those records will be added with the first verified matching function.
+file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
+rebuilds recorded source and target objects locally without placing original
+machine code in the repository.
 
 The workflow at `.github/workflows/progress.yml` uploads
 `build/progress/report.json`. After the repository is published and that workflow

@@ -6,10 +6,10 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 A deterministic objdiff v2 report now tracks 18,925 functions and 2,865,356
-identified code bytes in three decomp.dev categories. The initial progress is
-0%, because emitted Ghidra pseudocode is not counted as a compiler match. The
-report round-trips through objdiff 3.8.0 and is ready for a GitHub Actions
-artifact once this repository is published.
+identified code bytes in three decomp.dev categories. One 42-byte game-server
+function is reconstructed in C++ and matches at 100.0% under objdiff 3.8.0.
+Emitted Ghidra pseudocode does not count as a compiler match. The report is ready
+for a GitHub Actions artifact once this repository is published.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
@@ -44,4 +44,5 @@ records. An experimental decoder produced visually inspected ship layers.
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
-Nothing has been published, committed or pushed.
+The public-safe decompilation project has a local Git history. It has not yet
+been published or pushed.
