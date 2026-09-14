@@ -22,7 +22,10 @@ Observed PE timestamps and original entry points:
 The first confirmed match is game function `0043f169`. Microsoft compiler
 12.00.8804 with `/Od /GZ /GX-` emits the same 42 bytes and relocations, and
 objdiff 3.8.0 reports 100.0%. This confirms SP5 and those flags for that function;
-other translation units still require their own evidence.
+other translation units still require their own evidence. A second verified
+profile uses `/Od /GX-` without `/GZ` and occurs in all three server images,
+including the first matched login-server functions. The runtime stack-check flag
+therefore varies across compiled source units.
 
 The compiler package SHA-256 is
 `16f639b7961ca74b938532d912d2bb655d5ea08b01dc2f50e4a180774d138169`;
