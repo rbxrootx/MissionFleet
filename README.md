@@ -8,7 +8,7 @@ and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 The matching project has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
 Its public-safe inventory covers 18,925 recovered functions across the login,
 game, and persistence servers. Functions are credited only after reconstructed
-C/C++ produces byte-identical object code. The current 2,132 reconstructed
+C/C++ produces byte-identical object code. The current 2,160 reconstructed
 functions are verified individually at 100.0% by objdiff.
 
 ```powershell
