@@ -5,22 +5,24 @@ and persistence servers. Their recovered memory regions, Ghidra project and
 C pseudocode are available locally. **Start with [the decompilation project](decomp/README.md)
 and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
-The matching project now has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
+The matching project now has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md)
+and a [decomp.me scratch workflow](docs/decomp-me.md).
 Its public-safe inventory covers 18,925 recovered functions across the login,
 game, and persistence servers. Functions are credited only after reconstructed
-C/C++ produces byte-identical object code. The current 1,367 reconstructed
+C/C++ produces byte-identical object code. The current 1,381 reconstructed
 functions are verified individually at 100.0% by objdiff.
 
 ```powershell
 python tools/generate_progress.py
 python tools/verify_matches.py
+python tools/verify_matches.py --only game-server:00533743
 python tools/find_repeated_functions.py --min-count 4 --limit 20
+python tools/export_decompme_scratch.py game-server 00533743
 python -m unittest discover -s tests -v
 ```
 
 The generated `NF2_2062_report` is validated against objdiff 3.8.0 locally and
-the GitHub Actions workflow is ready to upload it for decomp.dev. Publishing the
-repository and registering its dashboard still require a working GitHub login.
+uploaded by GitHub Actions to the active [decomp.dev dashboard](https://decomp.dev/rbxrootx/MissionFleet).
 
 The inspected installation is `D:\FleetMission`. It was read without modifying
 or executing its files. The original game, assets and third-party server code
