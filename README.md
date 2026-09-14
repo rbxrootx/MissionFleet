@@ -14,6 +14,7 @@ functions are verified individually at 100.0% by objdiff.
 ```powershell
 python tools/generate_progress.py
 python tools/verify_matches.py
+python tools/find_repeated_functions.py --min-count 4 --limit 20
 python -m unittest discover -s tests -v
 ```
 
@@ -52,6 +53,10 @@ Decompiled functions move
 into `src/login-server`, `src/game-server`, or `src/save-server`. A function is
 promoted in `config/NF2_2062/matches.json` only after objdiff verifies a
 byte-identical object-code match.
+
+`tools/find_repeated_functions.py` ranks byte-identical unmatched bodies across
+all three recovered server regions. Use its output to select a source pattern,
+then add a match only after `tools/verify_matches.py` reports objdiff 100.0%.
 
 ## Client inspection and experimental asset preview
 
