@@ -1,0 +1,81 @@
+# MissionFleet native decompilation project
+
+The supplied historical NavyFIELD package contains actual native login, game
+and persistence servers. Their recovered memory regions, Ghidra project and
+C pseudocode are available locally. **Start with [the decompilation project](decomp/README.md)
+and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
+
+The matching project now has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
+Its public-safe inventory covers 18,925 recovered functions across the login,
+game, and persistence servers. The baseline is intentionally 0%: functions are
+credited only after the reconstructed C/C++ produces byte-identical object code.
+
+```powershell
+python tools/generate_progress.py
+python -m unittest discover -s tests -v
+```
+
+The generated `NF2_2062_report` is validated against objdiff 3.8.0 locally and
+the GitHub Actions workflow is ready to upload it for decomp.dev. Publishing the
+repository and registering its dashboard still require a working GitHub login.
+
+The inspected installation is `D:\FleetMission`. It was read without modifying
+or executing its files. The original game, assets and third-party server code
+are not included or relicensed here.
+
+## Native recovery pipeline
+
+The supplied server programs use NsPack. The local pipeline extracts the
+archives, recovers each compressed memory region, restores normalized branch
+operands and import labels, then exports Ghidra pseudocode and indexes.
+
+```powershell
+python tools/inspect_inputs.py
+python tools/unpack_nspack.py
+python tools/recover_imports.py
+python tools/run_decompilation.py
+python tools/index_decompilation.py
+python tools/verify_decompilation.py
+```
+
+Private binaries and derived pseudocode remain Git-ignored. See
+[decomp/README.md](decomp/README.md) for exact local artifact locations,
+recovery hashes, limits, and reproducibility details.
+
+## Matching workflow
+
+The recovered code is 32-bit x86 and shows a Visual C++ 6.0-era toolchain.
+The exact service pack and flags remain a compiler-matching question; see
+[compiler evidence](config/NF2_2062/COMPILER.md). Decompiled functions move
+into `src/login-server`, `src/game-server`, or `src/save-server`. A function is
+promoted in `config/NF2_2062/matches.json` only after objdiff verifies a
+byte-identical object-code match.
+
+## Client inspection and experimental asset preview
+
+The PE inventory uses `pefile`; version 2023.2.7 is already installed here.
+On another machine, install `requirements-analysis.txt` for PE metadata.
+
+```powershell
+python tools/inventory.py 'D:\FleetMission'
+python tools/sprite_index.py 'D:\FleetMission'
+python tools/sprite_preview.py 'D:\FleetMission\SPR\ShipStructureF000.spr' --frame 0 --output reports/ship-preview.png
+python tools/sprite_preview.py 'D:\FleetMission\SPR\ShipStructureF000.spr' --frame 1 --output reports/ship-top-preview.png
+```
+
+Generated reports are local and ignored by Git:
+
+- `reports/inventory.json`: SHA-256 hashes, sizes, PE imports/exports, sections,
+  version metadata and product URL evidence with file offsets.
+- `reports/inventory.md`: readable inventory summary.
+- `reports/sprites.json`: image metadata and payload offsets; this is large.
+- `reports/ship-preview.png` and `reports/ship-top-preview.png`: experimental
+  decoded previews from the user's local assets.
+
+The sprite index supports observed v3.2/v3.3 image headers and rejects embedded
+audio. The PNG preview supports observed RGB565 literal runs in format `(2, 2)`.
+Other pixel formats, animation metadata, maps, missions and encoded data tables
+are not decoded. No stock client behavior or gameplay parity was tested.
+
+See [findings](docs/findings.md), [asset format notes](docs/asset-format.md),
+[decomp.dev integration](docs/decomp-dev.md), and [remaining work](docs/roadmap.md).

@@ -1,0 +1,28 @@
+name: Decompilation progress
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate decomp.dev report
+        run: python tools/generate_progress.py
+      - name: Verify deterministic report
+        run: python tools/generate_progress.py --check
+      - name: Upload decomp.dev report
+        uses: actions/upload-artifact@v4
+        with:
+          name: NF2_2062_report
+          path: build/progress/report.json
+          if-no-files-found: error
