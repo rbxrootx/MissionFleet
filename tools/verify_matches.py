@@ -100,19 +100,45 @@ def verify(document, match, compiled_objects):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verbose", action="store_true", help="print each verified symbol")
+    parser.add_argument(
+        "--only",
+        action="append",
+        metavar="COMPONENT:ADDRESS",
+        help="verify one match (repeatable); the default verifies the full inventory",
+    )
     args = parser.parse_args()
     document = json.loads(CONFIG.read_text(encoding="utf-8"))
     if document.get("schema_version") != 1:
         raise ValueError("Unsupported verification schema")
+    matches = document["matches"]
+    if args.only:
+        requested = set()
+        for selector in args.only:
+            try:
+                component, address = selector.rsplit(":", 1)
+            except ValueError as error:
+                raise ValueError(f"Invalid match selector: {selector}") from error
+            requested.add((component, address.upper()))
+        matches = [
+            match for match in matches
+            if (match["component"], match["address"].upper()) in requested
+        ]
+        found = {(match["component"], match["address"].upper()) for match in matches}
+        missing = requested - found
+        if missing:
+            raise ValueError(
+                "Unknown match selector(s): "
+                + ", ".join(f"{component}:{address}" for component, address in sorted(missing))
+            )
     BUILD.mkdir(parents=True, exist_ok=True)
     compiled_objects = {}
     verified = []
-    for match in document["matches"]:
+    for match in matches:
         verified.append(verify(document, match, compiled_objects))
     if args.verbose:
         for item in verified:
             print(f"verified {item}")
-    total_bytes = sum(int(match["size"]) for match in document["matches"])
+    total_bytes = sum(int(match["size"]) for match in matches)
     print(f"verified {len(verified)} functions / {total_bytes} bytes at objdiff 100.0%")
 
 
