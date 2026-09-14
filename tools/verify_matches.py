@@ -42,7 +42,10 @@ def assembly_for(symbol, code, relocations):
             lines.append("        .byte   " + ", ".join(f"0x{byte:02x}" for byte in chunk))
         target = relocation["symbol"]
         quoted = target if target.replace("_", "").isalnum() else f'"{target}"'
-        lines.append(f"        .long   {quoted} - . - 4")
+        if relocation.get("kind", "relative") == "absolute":
+            lines.append(f"        .long   {quoted}")
+        else:
+            lines.append(f"        .long   {quoted} - . - 4")
         cursor = offset + 4
     if cursor < len(code):
         lines.append("        .byte   " + ", ".join(f"0x{byte:02x}" for byte in code[cursor:]))
