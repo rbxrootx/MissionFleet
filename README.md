@@ -22,6 +22,20 @@ python -m unittest discover -s tests -v
 The generated `NF2_2062_report` is validated against objdiff 3.8.0 locally and
 uploaded by GitHub Actions to the active [decomp.dev dashboard](https://decomp.dev/rbxrootx/MissionFleet).
 
+## First stock-client connection test
+
+The recovered login transport framing and default port are implemented in a
+local capture endpoint. Start it before launching the client:
+
+```powershell
+python -m emulator.login_server
+```
+
+It listens on `127.0.0.1:8010` and records raw and decoded client frames in
+`captures/login-handshake.jsonl`. It also answers the verified initial protocol
+probe, allowing the client to advance to its next request. See
+[the recovered protocol notes](docs/login-protocol.md).
+
 The inspected installation is `D:\FleetMission`. It was read without modifying
 or executing its files. The original game, assets and third-party server code
 are not included or relicensed here.
