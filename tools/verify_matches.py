@@ -81,7 +81,9 @@ def verify(document, match, compiled_objects):
     flags = tuple(match.get("flags", compiler["flags"]))
     compile_key = (source, flags)
     if compile_key not in compiled_objects:
-        key_hash = hashlib.sha256((str(source) + "\0" + "\0".join(flags)).encode()).hexdigest()[:16]
+        source_digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        key_material = str(source) + "\0" + "\0".join(flags) + "\0" + source_digest
+        key_hash = hashlib.sha256(key_material.encode()).hexdigest()[:16]
         base_object = BUILD / f"base-{key_hash}.obj"
         environment = os.environ.copy()
         environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
