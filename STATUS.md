@@ -1,4 +1,4 @@
-# Native decompilation status — 14 September 2026
+# Native decompilation status — 15 September 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
@@ -6,11 +6,11 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 A deterministic objdiff v2 report now tracks 18,925 functions and 2,865,356
-identified code bytes in three decomp.dev categories. There are 5,521 functions
-totaling 183,139 bytes reconstructed in C++, now spanning login, game and
+identified code bytes in three decomp.dev categories. There are 5,549 functions
+totaling 186,541 bytes reconstructed in C++, now spanning login, game and
 persistence; each matches at 100.0% under objdiff 3.8.0.
-Emitted Ghidra pseudocode does not count as a compiler match. The report is ready
-for a GitHub Actions artifact once this repository is published.
+Emitted Ghidra pseudocode does not count as a compiler match. GitHub Actions
+publishes the generated report to the active decomp.dev project.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
@@ -45,5 +45,5 @@ records. An experimental decoder produced visually inspected ship layers.
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
-The public-safe decompilation project has a local Git history. It has not yet
-been published or pushed.
+The public-safe decompilation project is published at
+`https://github.com/rbxrootx/MissionFleet`.

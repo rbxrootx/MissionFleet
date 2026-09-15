@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from emulator.protocol import DEFAULT_LOGIN_PORT, Frame, FrameDecoder, ProtocolError
+from emulator.protocol import DEFAULT_LOGIN_PORT, Frame, NativeUnprotectedFrameDecoder
 
 
 INITIAL_PROBE = 0x8001000F
@@ -51,16 +51,15 @@ async def _capture_client(
 ) -> None:
     peer = writer.get_extra_info("peername")
     peer_text = f"{peer[0]}:{peer[1]}" if peer else "unknown"
-    decoder = FrameDecoder()
+    decoder = NativeUnprotectedFrameDecoder(invalid_magic_window_configured=True)
     log.write(_event("connected", peer=peer_text))
     try:
         while data := await reader.read(32768):
             log.write(_event("bytes", peer=peer_text, count=len(data), hex=data.hex()))
-            try:
-                frames = decoder.feed(data)
-            except ProtocolError as error:
-                log.write(_event("protocol_error", peer=peer_text, error=str(error)))
-                break
+            invalid_before = decoder.invalid_magic_count
+            frames = decoder.feed(data)
+            for _ in range(decoder.invalid_magic_count - invalid_before):
+                log.write(_event("invalid_magic", peer=peer_text))
             for frame in frames:
                 log.write(
                     _event(

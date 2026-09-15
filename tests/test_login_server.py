@@ -40,6 +40,22 @@ class LoginServerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(0)
         self.assertIn("sent_frame", [event["event"] for event in self.log.events])
 
+    async def test_bad_magic_frame_is_consumed_before_following_probe(self):
+        reader, writer = await asyncio.open_connection(self.host, self.port)
+        invalid = bytearray(Frame(1, 2, 3, b"bad").encode())
+        invalid[0] ^= 1
+        writer.write(bytes(invalid) + Frame(0x8001000F, 0, 0).encode())
+        await writer.drain()
+        reply_bytes = await asyncio.wait_for(reader.readexactly(HEADER_SIZE), 1)
+        self.assertEqual(
+            FrameDecoder().feed(reply_bytes),
+            [Frame(0x8002000F, 0, 0)],
+        )
+        writer.close()
+        await writer.wait_closed()
+        await asyncio.sleep(0)
+        self.assertIn("invalid_magic", [event["event"] for event in self.log.events])
+
 
 if __name__ == "__main__":
     unittest.main()
