@@ -236,6 +236,26 @@ window slot is configured it posts message `0x4ca`. It leaves buffered bytes
 unchanged, skips parsing, and returns `-1`. `apply_wsarecv_result` reproduces
 this exact success/failure split and counter wrapping.
 
+### Connection socket-event dispatch
+
+Routine `0x00410700` recognizes exactly three socket-event values. Event `1`
+calls the virtual read callback at vtable offset `+8` and returns its result
+unchanged. Event `0x10` calls `WSAAsyncSelect(socket, window, 0x464, 0x23)`.
+Any result except exact `-1` sets the active field at connection offset `0xac`
+to one, calls the virtual connected callback at `+0x0c`, and returns zero.
+
+On exact `-1`, the connect path requests shutdown only when the registry owner
+at `+0x48` and active field are both nonzero. It clears active, calls
+`shutdown(socket, 1)`, and queues socket event `0x20`; otherwise it returns zero
+without those mutations. Event `0x20` first calls the virtual close callback at
+`+0x10`, then increments the two 64-bit owner counters at `+0xbd0` and `+0xc08`
+with carry, and returns `-1`. Other event values return zero without dispatch.
+`dispatch_socket_event` records these callback and state effects while leaving
+the virtual callback bodies to their own subsystems. The close-counter owner is
+a native precondition: the original routine dereferences it unconditionally
+after the callback, so the model rejects a missing statistics owner rather than
+inventing a null-safe path.
+
 ### Unprotected frame parsing
 
 The unprotected loop at `0x004105d3` waits for at least the 20-byte header, then
@@ -301,6 +321,8 @@ and memory base `0x00401000`. Its source packed stream is recorded as SHA-256
 - `0x00410340` calls `WSARecv`, waits for the complete normal or protected frame,
   verifies magic, checks the stateless checksum unless the message is
   `0x8002000f`, dispatches it, compacts the buffer, and continues parsing.
+- `0x00410700` dispatches read, connect, and close socket events, registers
+  message `0x464` with mask `0x23`, and maintains two close counters.
 
 Uncertainties are intentionally bounded: the mismatch path can retry with a
 connection table and only enables receive table mode for message `0x8002030e`,

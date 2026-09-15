@@ -118,6 +118,22 @@ def main() -> None:
     if bytes.fromhex("ff15d0c54300") in receive_failure:
         raise AssertionError("receive failure branch unexpectedly calls WSAGetLastError")
 
+    socket_events = function_bytes(image, 0x00410700, 229)
+    require(socket_events, bytes.fromhex("488bf183f81f77"), "event-minus-one switch range")
+    require(socket_events, bytes.fromhex("ff5208"), "read-event virtual callback")
+    require(socket_events, bytes.fromhex("6a236864040000"), "connect async-select mask and message")
+    require(socket_events, bytes.fromhex("83f8ff"), "async-select exact -1 failure")
+    require(socket_events, bytes.fromhex("c786ac00000001000000"), "connect success activation")
+    require(socket_events, bytes.fromhex("ff520c"), "connect-success virtual callback")
+    require(socket_events, bytes.fromhex("8b464833c93bc174"), "connect-failure registry guard")
+    require(socket_events, bytes.fromhex("398eac000000"), "connect-failure active guard")
+    require(socket_events, bytes.fromhex("6a0150"), "connect-failure receive shutdown")
+    require(socket_events, bytes.fromhex("6a2051"), "connect-failure queued close event")
+    require(socket_events, bytes.fromhex("ff5010"), "close-event virtual callback")
+    require(socket_events, bytes.fromhex("8b88d00b000003ca8988d00b0000"), "first close counter")
+    require(socket_events, bytes.fromhex("8bb0080c000003f289b0080c0000"), "second close counter")
+    require(socket_events, bytes.fromhex("83c8ff"), "close-event return value -1")
+
     receive = function_bytes(image, 0x00410340, 960)
     require(receive, bytes.fromhex("ff15d8c54300"), "WSARecv call")
     require(receive, bytes.fromhex("83f814"), "20-byte header boundary")
@@ -240,7 +256,7 @@ def main() -> None:
 
     print(
         "validated login transport evidence at 0x0040b4f3, 0x0040f560, 0x00410000, "
-        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410e40, 0x00411010, 0x00411520, "
+        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410700, 0x00410e40, 0x00411010, 0x00411520, "
         "0x00411320, 0x004113e0, and 0x00411720"
     )
 
