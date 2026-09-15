@@ -148,6 +148,25 @@ def main() -> None:
     require(peer_identity, bytes.fromhex("e8a9d40100"), "peer address string assignment")
     require(peer_identity, bytes.fromhex("8bc6"), "peer success boolean return")
 
+    socket_error = function_bytes(image, 0x00410D60, 211)
+    require(socket_error, bytes.fromhex("3d412700008bf17f2c742a"), "dead 10049 error classification")
+    require(socket_error, bytes.fromhex("3d342700007f237421"), "dead 10036 error classification")
+    require(socket_error, bytes.fromhex("8b464885c07434"), "optional socket-error statistics owner")
+    require(socket_error, bytes.fromhex("8b90d80b000083c201"), "first socket-error counter increment")
+    require(
+        socket_error,
+        bytes.fromhex("8b90100c000083d10083c201"),
+        "second socket-error counter increment",
+    )
+    require(socket_error, bytes.fromhex("8b86b800000083f8ff"), "error window sentinel")
+    require(socket_error, bytes.fromhex("68cb040000"), "socket-error window message 0x4cb")
+    require(socket_error, bytes.fromhex("8b464885c0742e"), "socket-error registry guard")
+    require(socket_error, bytes.fromhex("8b86ac00000085c07424"), "socket-error active guard")
+    require(socket_error, bytes.fromhex("c786ac00000000000000"), "socket-error active clear")
+    require(socket_error, bytes.fromhex("6a0152"), "socket-error receive shutdown")
+    require(socket_error, bytes.fromhex("6a2050"), "socket-error queued close event")
+    require(socket_error, bytes.fromhex("33c0"), "socket-error return value zero")
+
     receive = function_bytes(image, 0x00410340, 960)
     require(receive, bytes.fromhex("ff15d8c54300"), "WSARecv call")
     require(receive, bytes.fromhex("83f814"), "20-byte header boundary")
@@ -270,7 +289,7 @@ def main() -> None:
 
     print(
         "validated login transport evidence at 0x0040b4f3, 0x0040f560, 0x00410000, "
-        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410700, 0x00410820, 0x00410e40, 0x00411010, 0x00411520, "
+        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410700, 0x00410820, 0x00410d60, 0x00410e40, 0x00411010, 0x00411520, "
         "0x00411320, 0x004113e0, and 0x00411720"
     )
 

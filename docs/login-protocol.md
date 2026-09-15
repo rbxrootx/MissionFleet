@@ -267,6 +267,22 @@ address to `inet_ntoa`, assigns that text to the caller string, and returns true
 `resolve_peer_identity` reproduces the success boundary, output preservation,
 network byte order, and dotted-decimal address conversion.
 
+### Socket-error shutdown
+
+Routine `0x00410d60` sends every input error code through one observable path.
+It performs comparisons and subtractions for codes including 995, 10014,
+10030, 10036, 10038, 10039, and 10049, but never reads the computed result.
+These instructions therefore do not define distinct runtime behavior.
+
+When a statistics owner exists, the routine first increments two 64-bit
+counters at owner offsets `+0xbd8` and `+0xc10`. If the connection window slot
+at `+0xb8` is anything other than `-1`, it synchronously sends window message
+`0x4cb` with that slot as `wParam`. Finally, when both registry owner `+0x48`
+and active field `+0xac` are nonzero, it clears active, calls
+`shutdown(socket, 1)`, and queues close event `0x20`. It always returns zero.
+`handle_socket_error` preserves this ordering, optional accounting, exact
+notification sentinel, and guarded close request for the emulator.
+
 ### Unprotected frame parsing
 
 The unprotected loop at `0x004105d3` waits for at least the 20-byte header, then
@@ -336,6 +352,8 @@ and memory base `0x00401000`. Its source packed stream is recorded as SHA-256
   message `0x464` with mask `0x23`, and maintains two close counters.
 - `0x00410820` resolves the connection peer into a dotted IPv4 string and a
   host-order 16-bit port while preserving both outputs on failure.
+- `0x00410d60` accounts and reports socket errors before guarded receive
+  shutdown, with no behavioral distinction among its input error codes.
 
 Uncertainties are intentionally bounded: the mismatch path can retry with a
 connection table and only enables receive table mode for message `0x8002030e`,
