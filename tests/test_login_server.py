@@ -1,7 +1,7 @@
 import asyncio
 import unittest
 
-from emulator.login_server import create_server
+from emulator.login_server import create_server, select_listen_port
 from emulator.protocol import Frame, FrameDecoder, HEADER_SIZE
 
 
@@ -59,6 +59,11 @@ class LoginServerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         await writer.wait_closed()
         await asyncio.sleep(0)
         self.assertIn("invalid_magic", [event["event"] for event in self.log.events])
+
+    def test_stock_client_mode_selects_evidence_backed_port(self):
+        self.assertEqual(select_listen_port(None, False), 8010)
+        self.assertEqual(select_listen_port(None, True), 8001)
+        self.assertEqual(select_listen_port(9000, True), 9000)
 
 
 if __name__ == "__main__":

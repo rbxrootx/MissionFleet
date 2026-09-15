@@ -36,6 +36,21 @@ It listens on `127.0.0.1:8010` and records raw and decoded client frames in
 probe, allowing the client to advance to its next request. See
 [the recovered protocol notes](docs/login-protocol.md).
 
+The supplied 2.062 client's `ITNTL.dll` contains one hardcoded
+`shgame3.nf2.com.cn:8001` target. Create a hash-checked local copy and listen on
+that client-facing port:
+
+```powershell
+python tools/patch_stock_client_endpoint.py `
+  "private-inputs/navyfield-2062/CJN大海战2062_客户端/CJN大海战2062 客户端/ITNTL.dll" `
+  "build/stock-client/ITNTL.dll"
+python -m emulator.login_server --stock-client
+```
+
+Use the generated DLL in a separate client copy. The patcher refuses to modify
+the evidence file in place and accepts only its recorded SHA-256. See
+[the client bootstrap evidence](docs/stock-client-bootstrap.md).
+
 The inspected installation is `D:\FleetMission`. It was read without modifying
 or executing its files. The original game, assets and third-party server code
 are not included or relicensed here.

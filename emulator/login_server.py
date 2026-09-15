@@ -15,6 +15,13 @@ from emulator.login_dispatch import classify_login_frame
 
 INITIAL_PROBE = 0x8001000F
 INITIAL_PROBE_REPLY = 0x8002000F
+STOCK_CLIENT_PORT = 8001
+
+
+def select_listen_port(port: int | None, stock_client: bool) -> int:
+    if port is not None:
+        return port
+    return STOCK_CLIENT_PORT if stock_client else DEFAULT_LOGIN_PORT
 
 
 def response_for_frame(frame: Frame) -> Frame | None:
@@ -121,7 +128,12 @@ def main() -> None:
         description="Capture and decode the stock client's first login-server frames."
     )
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=DEFAULT_LOGIN_PORT)
+    parser.add_argument("--port", type=int)
+    parser.add_argument(
+        "--stock-client",
+        action="store_true",
+        help="listen on the supplied 2.062 client's hardcoded port 8001",
+    )
     parser.add_argument(
         "--capture",
         type=Path,
@@ -130,7 +142,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     try:
-        asyncio.run(serve(args.host, args.port, args.capture))
+        asyncio.run(serve(args.host, select_listen_port(args.port, args.stock_client), args.capture))
     except KeyboardInterrupt:
         pass
 
