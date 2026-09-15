@@ -1,3 +1,4 @@
+import hashlib
 import json
 import unittest
 
@@ -26,6 +27,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertNotIn("private-inputs", text)
         self.assertNotIn("C:\\\\Users", text)
         self.assertNotIn("D:\\\\FleetMission", text)
+
+    def test_source_hash_validation_accepts_only_line_ending_conversion(self):
+        lf = b"one\ntwo\n"
+        crlf = b"one\r\ntwo\r\n"
+        expected = {
+            hashlib.sha256(lf).hexdigest(),
+            hashlib.sha256(crlf).hexdigest(),
+        }
+        self.assertEqual(generate_progress.source_hashes(lf), expected)
+        self.assertEqual(generate_progress.source_hashes(crlf), expected)
+        changed = generate_progress.source_hashes(b"one\nchanged\n")
+        self.assertTrue(expected.isdisjoint(changed))
 
 
 if __name__ == "__main__":

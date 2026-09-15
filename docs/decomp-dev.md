@@ -45,8 +45,8 @@ credits 5,549 functions totaling 186,541 bytes, each verified at 100.0% by objdi
 file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
 rebuilds recorded source and target objects locally without placing original
 machine code in the repository.
+Source integrity accepts Git's LF and CRLF checkout forms as equivalent; every
+other byte change invalidates the recorded match.
 
 The workflow at `.github/workflows/progress.yml` uploads
-`build/progress/report.json`. After the repository is published and that workflow
-succeeds on its default branch, a repository administrator can register it at
-`https://decomp.dev/manage/new`.
+`build/progress/report.json` for the registered decomp.dev project.

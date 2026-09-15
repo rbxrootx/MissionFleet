@@ -16,6 +16,17 @@ COMPONENT_LABELS = {
 }
 
 
+def source_hashes(data):
+    """Return hashes equivalent under Git's LF/CRLF working-tree conversion."""
+    lf = data.replace(b"\r\n", b"\n")
+    crlf = lf.replace(b"\n", b"\r\n")
+    return {
+        hashlib.sha256(data).hexdigest(),
+        hashlib.sha256(lf).hexdigest(),
+        hashlib.sha256(crlf).hexdigest(),
+    }
+
+
 def measure(rows, matched, unit_count):
     total_bytes = sum(int(row["size"]) for row in rows)
     matched_rows = [row for row in rows if (row["component"], row["address"]) in matched]
@@ -70,7 +81,7 @@ def load_matches(inventory):
         source = (ROOT / item["source"]).resolve()
         if ROOT.resolve() not in source.parents or not source.is_file():
             raise ValueError(f"Match source is missing or outside the project: {source}")
-        if hashlib.sha256(source.read_bytes()).hexdigest() != item["source_sha256"]:
+        if item["source_sha256"] not in source_hashes(source.read_bytes()):
             raise ValueError(f"Match source changed: {source}")
         result.add(key)
     return result
