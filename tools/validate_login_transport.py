@@ -134,6 +134,20 @@ def main() -> None:
     require(socket_events, bytes.fromhex("8bb0080c000003f289b0080c0000"), "second close counter")
     require(socket_events, bytes.fromhex("83c8ff"), "close-event return value -1")
 
+    peer_identity = function_bytes(image, 0x00410820, 116)
+    require(peer_identity, bytes.fromhex("c744241010000000"), "16-byte peer name capacity")
+    require(peer_identity, bytes.fromhex("ff15acc54300"), "peer getpeername call")
+    require(peer_identity, bytes.fromhex("83f8ff0f95c2"), "peer exact -1 failure test")
+    require(peer_identity, bytes.fromhex("8b44240a50ff15ccc54300"), "peer port ntohs conversion")
+    require(peer_identity, bytes.fromhex("25ffff0000"), "peer port 16-bit mask")
+    require(
+        peer_identity,
+        bytes.fromhex("8b54240c25ffff0000528901ff15c8c54300"),
+        "peer IPv4 inet_ntoa conversion",
+    )
+    require(peer_identity, bytes.fromhex("e8a9d40100"), "peer address string assignment")
+    require(peer_identity, bytes.fromhex("8bc6"), "peer success boolean return")
+
     receive = function_bytes(image, 0x00410340, 960)
     require(receive, bytes.fromhex("ff15d8c54300"), "WSARecv call")
     require(receive, bytes.fromhex("83f814"), "20-byte header boundary")
@@ -256,7 +270,7 @@ def main() -> None:
 
     print(
         "validated login transport evidence at 0x0040b4f3, 0x0040f560, 0x00410000, "
-        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410700, 0x00410e40, 0x00411010, 0x00411520, "
+        "0x0040f8b0, 0x0040fef0, 0x0040ffc0, 0x004102c0, 0x00410340, 0x004105d3, 0x00410700, 0x00410820, 0x00410e40, 0x00411010, 0x00411520, "
         "0x00411320, 0x004113e0, and 0x00411720"
     )
 

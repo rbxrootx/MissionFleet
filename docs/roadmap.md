@@ -1,5 +1,17 @@
 # Work required before claiming an emulator
 
+MissionFleet's primary deliverable is a working, maintainable open-source
+reimplementation of NavyFIELD 2.062. Recovered binaries provide behavioral
+evidence for protocols, file formats, simulation rules, and client flows.
+Byte-identical compilation remains useful provenance, but it is not a release
+gate.
+
+Subsystem boundaries permit deliberate replacement of implementation details.
+The renderer may use a modern graphics API while preserving asset
+interpretation, camera behavior, animation timing, visual rules, and
+gameplay-visible results. Network and simulation compatibility is validated at
+external boundaries rather than by reproducing obsolete compiler output.
+
 The supplied historical server binaries have now been recovered and decompiled;
 see [the native project](../decomp/README.md). No stock client login or battle has passed.
 

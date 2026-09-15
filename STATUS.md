@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 A deterministic objdiff v2 report now tracks 18,925 functions and 2,865,356
-identified code bytes in three decomp.dev categories. There are 5,550 functions
-totaling 186,770 bytes reconstructed in C++, now spanning login, game and
+identified code bytes in three decomp.dev categories. There are 5,551 functions
+totaling 186,886 bytes reconstructed in C++, now spanning login, game and
 persistence; each matches at 100.0% under objdiff 3.8.0.
 Emitted Ghidra pseudocode does not count as a compiler match. GitHub Actions
 publishes the generated report to the active decomp.dev project.

@@ -256,6 +256,17 @@ a native precondition: the original routine dereferences it unconditionally
 after the callback, so the model rejects a missing statistics owner rather than
 inventing a null-safe path.
 
+### Peer identity extraction
+
+Routine `0x00410820` zeroes a 16-byte `sockaddr_in`, initializes its length to
+16, and calls `getpeername` on the connection socket at offset `+4`. Only exact
+return value `-1` is failure. Failure returns false without writing either
+caller output. Every other result passes the two-byte network-order port through
+`ntohs`, masks it to 16 bits, stores it through the port output, passes the IPv4
+address to `inet_ntoa`, assigns that text to the caller string, and returns true.
+`resolve_peer_identity` reproduces the success boundary, output preservation,
+network byte order, and dotted-decimal address conversion.
+
 ### Unprotected frame parsing
 
 The unprotected loop at `0x004105d3` waits for at least the 20-byte header, then
@@ -323,6 +334,8 @@ and memory base `0x00401000`. Its source packed stream is recorded as SHA-256
   `0x8002000f`, dispatches it, compacts the buffer, and continues parsing.
 - `0x00410700` dispatches read, connect, and close socket events, registers
   message `0x464` with mask `0x23`, and maintains two close counters.
+- `0x00410820` resolves the connection peer into a dotted IPv4 string and a
+  host-order 16-bit port while preserving both outputs on failure.
 
 Uncertainties are intentionally bounded: the mismatch path can retry with a
 connection table and only enables receive table mode for message `0x8002030e`,
