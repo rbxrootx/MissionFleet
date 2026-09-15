@@ -39,6 +39,10 @@ class LoginServerIntegrationTests(unittest.IsolatedAsyncioTestCase):
         await writer.wait_closed()
         await asyncio.sleep(0)
         self.assertIn("sent_frame", [event["event"] for event in self.log.events])
+        frame_event = next(event for event in self.log.events if event["event"] == "frame")
+        self.assertTrue(frame_event["dispatch_accepted"])
+        self.assertEqual(frame_event["dispatch_handler"], "liveness_probe")
+        self.assertEqual(frame_event["dispatch_reason"], "")
 
     async def test_bad_magic_frame_is_consumed_before_following_probe(self):
         reader, writer = await asyncio.open_connection(self.host, self.port)

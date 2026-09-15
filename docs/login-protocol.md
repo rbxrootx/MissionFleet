@@ -326,6 +326,16 @@ incoming `0x8001000f` frame receives `0x8002000f` with zero parameters and no
 payload. The capture endpoint implements that exchange and leaves later
 messages unanswered until their payload layouts are verified.
 
+The same dispatcher now provides an explicit routing inventory. Fixed payload
+sizes are `0x10` for `0x80011200` and `0x80017000` through `0x80017003`, `0x18`
+for `0x80017004` and `0x8001e002`, `0x24` for `0x80017001` and `0x80017005`,
+and `0x1c` for `0x8002d012`. Message `0x80011000` requires exactly parameter 1
+times `0x38` payload bytes with 32-bit arithmetic. `0x8001e001` requires
+parameter 1 in `1..3` and exactly `0x60` bytes. The probe and messages
+`0x80011100`, `0x80016001`, and `0x80016002` have no dispatcher-level length
+gate. `classify_login_frame` exposes these handler boundaries, and capture logs
+now record the accepted handler or rejection reason for every decoded frame.
+
 ## Evidence boundary
 
 The current subsystem is validated against these original-code facts:

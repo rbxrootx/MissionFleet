@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from emulator.protocol import DEFAULT_LOGIN_PORT, Frame, NativeUnprotectedFrameDecoder
+from emulator.login_dispatch import classify_login_frame
 
 
 INITIAL_PROBE = 0x8001000F
@@ -61,6 +62,7 @@ async def _capture_client(
             for _ in range(decoder.invalid_magic_count - invalid_before):
                 log.write(_event("invalid_magic", peer=peer_text))
             for frame in frames:
+                decision = classify_login_frame(frame)
                 log.write(
                     _event(
                         "frame",
@@ -70,6 +72,9 @@ async def _capture_client(
                         parameter_2=f"0x{frame.parameter_2:08x}",
                         payload_length=len(frame.payload),
                         payload_hex=frame.payload.hex(),
+                        dispatch_handler=decision.handler,
+                        dispatch_accepted=decision.accepted,
+                        dispatch_reason=decision.reason,
                     )
                 )
                 response = response_for_frame(frame)

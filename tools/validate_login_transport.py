@@ -36,6 +36,33 @@ def main() -> None:
     dispatch = function_bytes(image, 0x0040B4F3, 3156)
     require(dispatch, bytes.fromhex("0f000180"), "initial probe dispatch ID")
     require(dispatch, bytes.fromhex("0f000280"), "initial probe reply ID")
+    for message_id in (
+        0x80011200,
+        0x80011000,
+        0x80011100,
+        0x80016001,
+        0x80016002,
+        0x80017000,
+        0x80017001,
+        0x80017002,
+        0x80017003,
+        0x80017004,
+        0x80017005,
+        0x8001E001,
+        0x8001E002,
+        0x8002D012,
+    ):
+        require(
+            dispatch,
+            message_id.to_bytes(4, "little"),
+            f"dispatcher message ID 0x{message_id:08x}",
+        )
+    require(dispatch, bytes.fromhex("6bd2388b4508395010"), "56-byte batch length gate")
+    require(dispatch, bytes.fromhex("837a1010"), "16-byte payload gate")
+    require(dispatch, bytes.fromhex("83781024"), "36-byte payload gate")
+    require(dispatch, bytes.fromhex("83791018"), "24-byte payload gate")
+    require(dispatch, bytes.fromhex("83781060"), "96-byte payload gate")
+    require(dispatch, bytes.fromhex("8378101c"), "28-byte payload gate")
 
     heartbeat = function_bytes(image, 0x00411520, 272)
     require(heartbeat, bytes.fromhex("680f000180"), "periodic initial probe send")
