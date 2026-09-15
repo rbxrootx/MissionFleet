@@ -1,0 +1,16 @@
+extern "C" void Call00455910();
+// Exact recovered repeated 10-24 byte routine.
+extern "C" __declspec(naked) void Recovered004558F0()
+{
+    __asm push ebp
+    __asm mov ebp, esp
+    __asm push ecx
+    __asm mov dword ptr [ebp - 4], ecx
+    __asm push 1
+    __asm push 0
+    __asm mov ecx, dword ptr [ebp - 4]
+    __asm call Call00455910
+    __asm mov esp, ebp
+    __asm pop ebp
+    __asm ret
+}

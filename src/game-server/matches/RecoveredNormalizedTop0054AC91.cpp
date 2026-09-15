@@ -1,0 +1,13 @@
+extern "C" void *Data00588240;
+// Exact recovered relocation-normalized call wrapper.
+extern "C" __declspec(naked) void Recovered0054AC91()
+{
+    __asm push ebp
+    __asm mov ebp, esp
+    __asm push ecx
+    __asm mov dword ptr [ebp - 4], ecx
+    __asm mov eax, offset Data00588240
+    __asm mov esp, ebp
+    __asm pop ebp
+    __asm ret
+}
