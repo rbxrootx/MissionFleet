@@ -1,0 +1,21 @@
+// Exact recovered repeated state/math helper.
+extern "C" __declspec(naked) void Recovered0053DF09()
+{
+    __asm push ebp
+    __asm mov ebp, esp
+    __asm push ecx
+    __asm mov dword ptr [ebp-4], ecx
+    __asm mov eax, dword ptr [ebp+8]
+    __asm neg eax
+    __asm sbb eax, eax
+    __asm and eax, 4
+    __asm or al, 8
+    __asm mov ecx, dword ptr [ebp-4]
+    __asm mov edx, dword ptr [ecx+184]
+    __asm or edx, eax
+    __asm mov eax, dword ptr [ebp-4]
+    __asm mov dword ptr [eax+184], edx
+    __asm mov esp, ebp
+    __asm pop ebp
+    __asm ret 4
+}

@@ -7,6 +7,11 @@ import shutil
 import subprocess
 from pathlib import Path
 
+if __package__:
+    from .audit_thunk_targets import audit
+else:
+    from audit_thunk_targets import audit
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "NF2_2062" / "verifications.json"
 BUILD = ROOT / "build" / "matches"
@@ -135,6 +140,15 @@ def main():
                 "Unknown match selector(s): "
                 + ", ".join(f"{component}:{address}" for component, address in sorted(missing))
             )
+    # Check original destinations before objdiff replaces operands with symbols.
+    selected_document = dict(document, matches=matches)
+    components = {match["component"] for match in matches}
+    checked, failures = audit(selected_document, {
+        component: REGIONS[component].read_bytes() for component in components
+    })
+    if failures:
+        raise ValueError("Thunk destination audit failed:\n" + "\n".join(failures))
+    print(f"audited {checked} thunk destinations", flush=True)
     BUILD.mkdir(parents=True, exist_ok=True)
     compiled_objects = {}
     verified = []
