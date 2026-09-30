@@ -60,7 +60,7 @@ def write_png(path, width, height, pixels):
     path.write_bytes(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)) + chunk(b"IDAT", zlib.compress(rows)) + chunk(b"IEND", b""))
 
 
-def preview(source, frame_number, output):
+def decode_frame(source, frame_number):
     info = index_sprite(source)
     if not 0 <= frame_number < len(info["frames"]):
         raise ValueError("Frame number out of range")
@@ -71,6 +71,11 @@ def preview(source, frame_number, output):
         stream.seek(frame["payload_offset"])
         data = stream.read(frame["payload_size"])
     pixels = decode(data, frame["width"], frame["height"])
+    return frame, pixels
+
+
+def preview(source, frame_number, output):
+    frame, pixels = decode_frame(source, frame_number)
     write_png(output, frame["width"], frame["height"], pixels)
     return frame
 

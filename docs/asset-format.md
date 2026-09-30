@@ -57,3 +57,15 @@ A broader sample of the first frame of 12 ship-structure files decoded 6 and
 rejected 6 with unsupported run layouts. Results are in the generated
 `reports/preview-validation.json`. This decoder must not be presented as covering
 every `(2, 2)` image or every sprite file.
+
+## Client visual board
+
+`tools/sprite_gallery.py D:\FleetMission` decodes and directly composites the
+bottom and top layers from four verified ship-structure files. It writes
+`reports/client-visuals/fleet-board.png` and a JSON evidence manifest. Ship
+pixels are neither scaled nor recolored; the ocean field and placement are only
+a presentation layout and are not claimed to reconstruct an in-game scene.
+
+The manifest also records two excluded top layers and their unsupported run
+modes. Keeping those exclusions visible prevents a successful gallery from
+overstating decoder coverage.

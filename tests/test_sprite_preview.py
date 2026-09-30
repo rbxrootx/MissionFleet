@@ -2,6 +2,7 @@ import struct
 import unittest
 
 from tools.sprite_preview import decode
+from tools.sprite_gallery import composite, ocean
 from tools.sprite_index import UnsupportedSprite
 
 
@@ -22,3 +23,11 @@ class PreviewTests(unittest.TestCase):
                 decode(data, 2, 1)
         with self.assertRaises(UnsupportedSprite):
             decode(struct.pack("<HBH", 0, 1, 2) + b"\0\0\xfe\xff", 2, 1)
+
+    def test_gallery_composite_preserves_transparency_and_source_color(self):
+        target = ocean(3, 2)
+        before = bytes(target)
+        source = bytes([0, 0, 0, 0, 255, 0, 0, 255])
+        composite(target, 3, 2, source, 2, 1, 1, 1)
+        self.assertEqual(before[(1 * 3 + 1) * 4:(1 * 3 + 2) * 4], target[(1 * 3 + 1) * 4:(1 * 3 + 2) * 4])
+        self.assertEqual(bytes([255, 0, 0, 255]), target[(1 * 3 + 2) * 4:(1 * 3 + 3) * 4])
