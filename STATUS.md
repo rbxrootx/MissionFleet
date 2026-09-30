@@ -1,4 +1,4 @@
-# Native decompilation status — 15 September 2026
+# Native decompilation status — 30 September 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
@@ -49,11 +49,14 @@ layout and `ShipStructureF/N/S###.spr` selection paths. Six complete ship layer
 pairs now decode through the corrected preview pipeline. See
 [client unpacking](docs/client-unpacking.md) for hashes, commands and limits.
 
-The first current-client render subsystem is now executable reconstruction:
-the ship sprite path follows the recovered 64-byte animation records through
-timed frame selection, anchor and parent offsets, clipping, origin translation,
-and the final screen-vtable blit arguments. Tests cover the recovered valid-input
-behavior; see [client render path](docs/client-render-path.md).
+The current-client ship path has confirmed 64-byte animation records, timed
+frame selection, anchor and parent offsets, and the final sprite-vtable call.
+The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
+16-bit span conversion, screen allocation, and the same sprite/screen call
+boundary. The Python renderer model now uses screen-owned clipping and origin
+translation, and the targeted subsystem test covers that call boundary. See
+[client render path](docs/client-render-path.md) and
+[ITNTL sprite loader](docs/itntl-sprite-loader.md).
 
 That trace now reaches the current sprite object's concrete RGB16 compositor.
 For the normal `0x100` color and zero-effect ship path, the reconstruction copies

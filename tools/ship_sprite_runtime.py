@@ -19,10 +19,17 @@ class Rect:
 
 @dataclass(frozen=True)
 class Sprite:
+    width: int
+    height: int
+    surface: Any
+
+
+@dataclass(frozen=True)
+class Screen:
     origin_x: int
     origin_y: int
-    bounds: Rect
-    surface: Any
+    viewport: Rect
+    pixels: Any
 
 
 @dataclass(frozen=True)
@@ -54,6 +61,7 @@ class RenderNode:
 @dataclass(frozen=True)
 class BlitCommand:
     surface: Any
+    target: Any
     x: int
     y: int
     clip: Rect
@@ -86,29 +94,31 @@ def select_animation_frame(record: AnimationRecord, elapsed: int):
     return record.frames[(elapsed // record.frame_period) % len(record.frames)]
 
 
-def clip_sprite(sprite: Sprite, x: int, y: int, clip: Rect, color: int, mode: int):
+def clip_sprite(sprite: Sprite, screen: Screen, x: int, y: int, clip: Rect,
+                color: int, mode: int):
     """Reconstruct Core.dll 0x587BA830 before its screen-vtable slot-1 call."""
-    absolute_bounds = Rect(
-        sprite.origin_x + sprite.bounds.left,
-        sprite.origin_y + sprite.bounds.top,
-        sprite.origin_x + sprite.bounds.right,
-        sprite.origin_y + sprite.bounds.bottom,
+    absolute_viewport = Rect(
+        screen.origin_x + screen.viewport.left,
+        screen.origin_y + screen.viewport.top,
+        screen.origin_x + screen.viewport.right,
+        screen.origin_y + screen.viewport.bottom,
     )
     clipped = Rect(
-        max(clip.left, absolute_bounds.left),
-        max(clip.top, absolute_bounds.top),
-        min(clip.right, absolute_bounds.right),
-        min(clip.bottom, absolute_bounds.bottom),
+        max(clip.left, absolute_viewport.left),
+        max(clip.top, absolute_viewport.top),
+        min(clip.right, absolute_viewport.right),
+        min(clip.bottom, absolute_viewport.bottom),
     )
     return BlitCommand(
         sprite.surface,
-        x - sprite.origin_x,
-        y - sprite.origin_y,
+        screen.pixels,
+        x - screen.origin_x,
+        y - screen.origin_y,
         Rect(
-            clipped.left - sprite.origin_x,
-            clipped.top - sprite.origin_y,
-            clipped.right - sprite.origin_x,
-            clipped.bottom - sprite.origin_y,
+            clipped.left - screen.origin_x,
+            clipped.top - screen.origin_y,
+            clipped.right - screen.origin_x,
+            clipped.bottom - screen.origin_y,
         ),
         color,
         mode,
@@ -116,7 +126,7 @@ def clip_sprite(sprite: Sprite, x: int, y: int, clip: Rect, color: int, mode: in
 
 
 def build_ship_blit(record: AnimationRecord | None, node: RenderNode,
-                    parent_x: int = 0, parent_y: int = 0):
+                    screen: Screen, parent_x: int = 0, parent_y: int = 0):
     """Reconstruct the ship node's 0x587B5DB0 -> 0x5849C770 draw path."""
     if record is None or not node.visible or node.elapsed < 0:
         return None
@@ -125,7 +135,7 @@ def build_ship_blit(record: AnimationRecord | None, node: RenderNode,
         return None
     x = node.x + record.anchor_x + parent_x + frame.offset_x
     y = node.y + record.anchor_y + parent_y + frame.offset_y
-    return clip_sprite(frame.sprite, x, y, record.clip, node.color, node.mode)
+    return clip_sprite(frame.sprite, screen, x, y, record.clip, node.color, node.mode)
 
 
 def blit_opaque_rgb16_spans(payload: bytes, width: int, height: int,

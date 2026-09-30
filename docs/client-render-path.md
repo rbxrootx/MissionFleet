@@ -53,19 +53,29 @@ invalid record.
 
 ## Geometry clamp and screen call
 
-`0x5849C770` passes the selected sprite to `0x587BA830`. Sprite origin accessors
-return `+0x04` and `+0x08`; bounds accessors return origin plus the rectangle at
-`+0x14..+0x20`; the frame surface accessor returns `+0x50`. The dispatcher:
+`0x5849C770` passes the selected sprite as `this` and the target screen as the
+first explicit argument to `0x587BA830`. The origin and rectangle accessors in
+this wrapper are called on the screen object: origin at `+0x04/+0x08`, viewport
+rectangle at `+0x14..+0x20`, and target pixel buffer at `+0x50`. The dispatcher:
 
-1. clamps the requested rectangle to those absolute sprite bounds;
-2. subtracts the sprite origin from the draw position and clamped rectangle;
-3. invokes screen vtable slot 1 with the frame surface, adjusted position,
-   adjusted rectangle, node color at `+0x28`, and node mode at `+0x2C`.
+1. clamps the requested rectangle to the screen viewport;
+2. subtracts the screen origin from the draw position and clamped rectangle;
+3. calls slot 1 on the selected sprite object with the target screen's pixel
+   buffer, screen-local position and rectangle, node color at `+0x28`, and node
+   effect value at `+0x2C`.
 
-`tools/ship_sprite_runtime.py` is an executable behavioral reconstruction of
-this chain. Its tests cover record and image-table bounds, frame timing and
-wraparound, anchor/parent/frame offsets, clipping, origin translation, color,
-mode, visibility, empty animations and negative elapsed time.
+The `ITNTL.dll` comparison path independently confirms this object boundary at
+`0x100EB530`: the screen is its first argument, and slot 1 is invoked on the
+sprite object (`this`) with the screen buffer and screen-local geometry. Its
+node draw at `0x100EA3D0` passes the parent-adjusted node position and inherited
+clip rectangle into that wrapper. The full ITNTL loader trace is recorded in
+[ITNTL sprite loader](itntl-sprite-loader.md).
+
+`tools/ship_sprite_runtime.py` models the screen-owned origin and viewport
+explicitly. Its `Screen` input carries the target pixel pointer, and the blit
+command now includes both source sprite data and target pixels. The frame-path
+check verifies viewport intersection and translation into screen-local
+coordinates.
 
 ## Remaining uncertainty
 
@@ -77,14 +87,20 @@ non-ship render-node subclasses still require separate traces.
 ## Opaque RGB16 compositor path
 
 The slot-1 call belongs to the selected sprite object, with the render target
-passed as its first stack argument. The older readable `ITNTL.dll` preserves
-the same interface in `0x100EB530`; this resolves an ambiguity that could not be
-settled from the current call's decompiler types alone.
+passed as its first stack argument. In `0x587BA830`, `param_1` is the sprite's
+implicit `this` and `param_2` is the target screen. The dispatcher gets the
+target pixel buffer from the screen at `+0x50`, then calls sprite vtable slot 1
+(`sprite_vtable + 4`) with that buffer, screen-local position and clip, and the
+node color/effect values. The readable `ITNTL.dll` has the same object boundary
+in `0x100EB530`, where sprite vtable slot 1 receives the target pixel buffer
+before the coordinates, clip and effect arguments.
 
 For a 16-bit render target (`DAT_58905F98 == 2`) and compressed sprite format
 byte `2`, the current loader selects constructor `0x588009C0` or `0x5880D370`
 according to the display pixel masks. Their vtables are `0x588BE71C` and
-`0x588BE72C`; their slot-1 compositors are `0x58800A60` and `0x5880D420`.
+`0x588BE72C`; their slot-1 compositors are `0x58800A60` and `0x5880D420`. These
+methods consume the compressed pixel stream at `this + 0x0C` and write to the
+passed screen buffer.
 
 At `0x58800B56`, the first compositor tests color against `0x100`. At
 `0x58800B63`, the color-`0x100`, effect-`0` case enters a direct-copy loop. That

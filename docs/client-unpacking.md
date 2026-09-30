@@ -1,10 +1,13 @@
 # Current client unpacking evidence
 
 `FleetMission.exe` loads `Core.dll` and calls its exported `WinMain`. Static PE
-inspection does not show a load reference to `Main.dll`. `Core.dll` is therefore
-the authoritative initial client module for the installed build; `Main.dll`
-and `ITNTL.dll` remain useful comparison modules until a live load path proves
-otherwise.
+inspection does not show a direct load reference to `Main.dll`; this does not
+exclude a dynamic `LoadLibraryA`/`GetProcAddress` path. The installed-client
+runtime evidence now identifies `Main.dll` as VMProtect-protected and
+`ITNTL.dll` as readable native x86. Both export `AllocScreen` and related
+lifecycle names. The export match is useful evidence for the renderer boundary,
+but does not prove the protected and readable implementations are byte- or
+behavior-identical. See [ITNTL sprite loader](itntl-sprite-loader.md).
 
 The installed `Core.dll` has SHA-256
 `75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4`.
@@ -34,10 +37,12 @@ span fields at offsets `+0` and `+3`, advances by five bytes, and ignores byte
 comparison module and corrected a false run-mode assumption in the preview
 decoder.
 
-This is an unpacked mapped image, not a claim that VMProtect virtualization is
-fully removed. Native packed functions are available for decompilation now.
-Functions translated into VM bytecode still require handler analysis or
-behavioral reconstruction after they are identified.
+This is an unpacked mapped `Core.dll` image, not a claim that VMProtect
+virtualization is fully removed from `Main.dll`. Native packed functions are
+available for decompilation from the captured image. Functions translated into
+VM bytecode still require separate identification and behavioral
+reconstruction; the capture does not translate that bytecode into native
+function bodies.
 
 The first render subsystem traced through that recovered native code is the
 ship sprite path. It establishes the exact animation-record stride, timed frame
