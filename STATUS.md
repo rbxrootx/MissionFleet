@@ -26,7 +26,7 @@ seeding, restored branch operands, import labels and string cross-references.
 Open [decomp/README.md](decomp/README.md) for artifact locations and reproducible
 commands. The Ghidra project and pseudocode are under
 `private-inputs/decompilation/`. Original hashes and recovery bounds are recorded
-beside each raw region. No original executable was run or modified.
+beside each raw region. Server executables were not run or modified.
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
@@ -41,7 +41,13 @@ as compatible with the modern installation: 10 of 11 compared top-level DATA
 tables differ. No original-client login, harbor or battle was demonstrated.
 
 Earlier work inventoried 1,819 modern-client files and indexed 367,391 image
-records. An experimental decoder produced visually inspected ship layers.
+records. The installed client's VMProtect loader was executed locally and its
+`Core.dll` mapping was captured without modifying the installation. The dump
+recovered 11,751,424 mapped bytes with no unreadable pages, including 4,268,228
+bytes of native `.text`. Current-client Ghidra traces confirm the Sangduck span
+layout and `ShipStructureF/N/S###.spr` selection paths. Six complete ship layer
+pairs now decode through the corrected preview pipeline. See
+[client unpacking](docs/client-unpacking.md) for hashes, commands and limits.
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.

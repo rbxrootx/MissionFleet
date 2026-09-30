@@ -51,9 +51,10 @@ Use the generated DLL in a separate client copy. The patcher refuses to modify
 the evidence file in place and accepts only its recorded SHA-256. See
 [the client bootstrap evidence](docs/stock-client-bootstrap.md).
 
-The inspected installation is `D:\FleetMission`. It was read without modifying
-or executing its files. The original game, assets and third-party server code
-are not included or relicensed here.
+The inspected installation is `D:\FleetMission`. Its files are never modified
+in place. The client is launched only by the documented local capture tools.
+The original game, assets and third-party server code are not included or
+relicensed here.
 
 ## Native recovery pipeline
 
@@ -97,6 +98,8 @@ python tools/inventory.py 'D:\FleetMission'
 python tools/sprite_index.py 'D:\FleetMission'
 python tools/sprite_preview.py 'D:\FleetMission\SPR\ShipStructureF000.spr' --frame 0 --output reports/ship-preview.png
 python tools/sprite_preview.py 'D:\FleetMission\SPR\ShipStructureF000.spr' --frame 1 --output reports/ship-top-preview.png
+python tools/sprite_gallery.py 'D:\FleetMission'
+python tools/dump_loaded_module.py --launch 'D:\FleetMission\FleetMission.exe' --module Core.dll --output reports/unpacked-client --terminate
 ```
 
 Generated reports are local and ignored by Git:
@@ -109,9 +112,11 @@ Generated reports are local and ignored by Git:
   decoded previews from the user's local assets.
 
 The sprite index supports observed v3.2/v3.3 image headers and rejects embedded
-audio. The PNG preview supports observed RGB565 literal runs in format `(2, 2)`.
+audio. The PNG preview supports the compressed two-byte pixel branch in format
+`(2, 2)`, tied to the current recovered client loader.
 Other pixel formats, animation metadata, maps, missions and encoded data tables
-are not decoded. No stock client behavior or gameplay parity was tested.
+are not decoded. The module dumper reconstructs mapped VMProtect sections for
+static analysis; it does not claim to lift functions that remain virtualized.
 
-See [findings](docs/findings.md), [asset format notes](docs/asset-format.md),
+See [findings](docs/findings.md), [client unpacking](docs/client-unpacking.md), [asset format notes](docs/asset-format.md),
 [decomp.dev integration](docs/decomp-dev.md), and [remaining work](docs/roadmap.md).

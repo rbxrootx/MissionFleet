@@ -43,9 +43,14 @@ files containing sound records and does not scan around them heuristically.
 For the observed `(2, 2)` pixel format, the implemented subset uses a
 little-endian 16-bit control value. `0xFFFF` advances a row and resets the cursor;
 `0xFFFE` ends the final row/image. Other values skip that many bytes relative to
-the current row cursor, followed by a one-byte run mode, a little-endian 16-bit
-byte count and pixel bytes. Mode zero copies literal RGB565 pixels. Skipped
-pixels remain transparent. Other modes are rejected.
+the current row cursor, followed by one ignored byte, a little-endian 16-bit
+byte count and pixel bytes. Skipped pixels remain transparent.
+
+This span interpretation is tied to the installed `ITNTL.dll` SHA-256
+`bf158b65e5c110aa6ac7aa6d9e64b0f4b831bdc224b444650d24c85b43db01b7`.
+Ghidra identifies the loader as `FUN_100EB760`. In its two-byte compressed
+branch, the original code reads signed 16-bit values at span offsets `+0` and
+`+3`, advances by five bytes, and never reads or branches on byte `+2`.
 
 Two layers of `ShipStructureF000.spr` were decoded and visually inspected:
 `FF2_bottom.bmp` and `FF2_top.bmp`, each 488 by 218 pixels. Tests verify relative
@@ -66,6 +71,7 @@ bottom and top layers from four verified ship-structure files. It writes
 pixels are neither scaled nor recolored; the ocean field and placement are only
 a presentation layout and are not claimed to reconstruct an in-game scene.
 
-The manifest also records two excluded top layers and their unsupported run
-modes. Keeping those exclusions visible prevents a successful gallery from
-overstating decoder coverage.
+The earlier preview treated the ignored span byte as a run mode and therefore
+rejected valid layers. After tracing the current `Core.dll` loader, the board
+now includes six complete bottom/top pairs. Other pixel widths and uncompressed
+branches remain outside this decoder's current scope.

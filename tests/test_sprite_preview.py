@@ -3,11 +3,14 @@ import unittest
 
 from tools.sprite_preview import decode
 from tools.sprite_gallery import composite, ocean
-from tools.sprite_index import UnsupportedSprite
 
 
 def run(skip, *colors):
     return struct.pack("<HBH", skip, 0, len(colors) * 2) + struct.pack("<" + "H" * len(colors), *colors)
+
+
+def run_with_ignored_byte(skip, ignored, *colors):
+    return struct.pack("<HBH", skip, ignored, len(colors) * 2) + struct.pack("<" + "H" * len(colors), *colors)
 
 
 class PreviewTests(unittest.TestCase):
@@ -21,8 +24,10 @@ class PreviewTests(unittest.TestCase):
         for data in [run(4, 0xffff) + b"\xfe\xff", b"\xff\xff\xfe\xff", b"\xfe\xfftrailing", run(0, 0), b"\x01\x00"]:
             with self.assertRaises(ValueError):
                 decode(data, 2, 1)
-        with self.assertRaises(UnsupportedSprite):
-            decode(struct.pack("<HBH", 0, 1, 2) + b"\0\0\xfe\xff", 2, 1)
+        self.assertEqual(
+            decode(run_with_ignored_byte(0, 0xff, 0xf800) + b"\xfe\xff", 1, 1),
+            bytes([255, 0, 0, 255]),
+        )
 
     def test_gallery_composite_preserves_transparency_and_source_color(self):
         target = ocean(3, 2)

@@ -1,7 +1,7 @@
-"""Experimental RGB565 literal-run decoder for Sangduck sprites.
+"""Decode the observed two-byte compressed Sangduck sprite layout.
 
-Supports observed format bytes (2, 2) and literal run mode 0 only.
-It rejects other layouts. This is an asset preview, not a game renderer.
+The span layout follows the original ITNTL.dll loader at 0x100EB760:
+int16 skip bytes, one ignored byte, int16 literal byte count, then pixels.
 """
 import argparse
 from pathlib import Path
@@ -34,11 +34,10 @@ def decode(data, width, height):
             continue
         if position + 3 > len(data):
             raise ValueError("Truncated run header")
-        mode = data[position]
+        # ITNTL.dll reads the two signed 16-bit fields at +0 and +3, advances
+        # five bytes, and never branches on the intervening byte.
         length = struct.unpack_from("<H", data, position + 1)[0]
         position += 3
-        if mode != 0:
-            raise UnsupportedSprite(f"Unsupported run mode {mode}")
         cursor_bytes += x_bytes
         if x_bytes % 2 or length % 2 or cursor_bytes + length > width * 2 or position + length > len(data):
             raise ValueError("Invalid run bounds")

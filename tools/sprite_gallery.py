@@ -10,20 +10,18 @@ from pathlib import Path
 
 try:
     from .sprite_preview import decode_frame, write_png
-    from .sprite_index import UnsupportedSprite
 except ImportError:
     from sprite_preview import decode_frame, write_png
-    from sprite_index import UnsupportedSprite
 
 
 DEFAULT_SPRITES = (
     "ShipStructureF000.spr",
+    "ShipStructureF001.spr",
+    "ShipStructureF003.spr",
     "ShipStructureF004.spr",
     "ShipStructureF007.spr",
     "ShipStructureF008.spr",
 )
-
-UNSUPPORTED_TOP_LAYERS = ("ShipStructureF001.spr", "ShipStructureF003.spr")
 
 
 def ocean(width, height):
@@ -55,9 +53,10 @@ def composite(target, target_width, target_height, source, source_width, source_
 
 
 def build(client, output, manifest):
-    width, height = 1280, 860
+    width, height = 1920, 1080
     canvas = ocean(width, height)
-    placements = ((55, 55), (650, 35), (30, 505), (580, 500))
+    placements = ((40, 55), (690, 55), (1325, 45),
+                  (40, 650), (675, 665), (1230, 625))
     evidence = []
     for name, (left, top) in zip(DEFAULT_SPRITES, placements):
         source = client / "SPR" / name
@@ -75,12 +74,6 @@ def build(client, output, manifest):
         composite(canvas, width, height, top_pixels, top_frame["width"], top_frame["height"], left, top)
         item["top_frame"] = {"ordinal": 1, "source_name": top_frame["source_name"], "status": "decoded"}
         evidence.append(item)
-    unsupported = []
-    for name in UNSUPPORTED_TOP_LAYERS:
-        try:
-            decode_frame(client / "SPR" / name, 1)
-        except UnsupportedSprite as exc:
-            unsupported.append({"file": f"SPR/{name}", "frame": 1, "reason": str(exc)})
     write_png(output, width, height, canvas)
     manifest.parent.mkdir(parents=True, exist_ok=True)
     manifest.write_text(json.dumps({
@@ -90,10 +83,9 @@ def build(client, output, manifest):
         "presentation_background": "generated ocean field",
         "sprite_processing": "RGB565 decode and direct alpha composite; no scaling or recoloring",
         "sources": evidence,
-        "excluded_unsupported_layers": unsupported,
         "uncertainties": [
             "Placement is a gallery layout, not a recovered in-game scene transform.",
-            "The decoder currently supports observed format bytes 2,2 and literal run mode 0 only.",
+            "The decoder currently supports the original loader's compressed two-byte pixel branch only.",
         ],
     }, indent=2, ensure_ascii=True), encoding="utf-8")
     return evidence
