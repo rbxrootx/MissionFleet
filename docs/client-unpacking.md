@@ -38,3 +38,8 @@ This is an unpacked mapped image, not a claim that VMProtect virtualization is
 fully removed. Native packed functions are available for decompilation now.
 Functions translated into VM bytecode still require handler analysis or
 behavioral reconstruction after they are identified.
+
+The first render subsystem traced through that recovered native code is the
+ship sprite path. It establishes the exact animation-record stride, timed frame
+selection, node anchoring, clipping and final screen-vtable call. See the
+[current client ship sprite render path](client-render-path.md).

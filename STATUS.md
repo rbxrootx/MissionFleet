@@ -49,6 +49,12 @@ layout and `ShipStructureF/N/S###.spr` selection paths. Six complete ship layer
 pairs now decode through the corrected preview pipeline. See
 [client unpacking](docs/client-unpacking.md) for hashes, commands and limits.
 
+The first current-client render subsystem is now executable reconstruction:
+the ship sprite path follows the recovered 64-byte animation records through
+timed frame selection, anchor and parent offsets, clipping, origin translation,
+and the final screen-vtable blit arguments. Tests cover the recovered valid-input
+behavior; see [client render path](docs/client-render-path.md).
+
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
 The public-safe decompilation project is published at

@@ -118,5 +118,6 @@ Other pixel formats, animation metadata, maps, missions and encoded data tables
 are not decoded. The module dumper reconstructs mapped VMProtect sections for
 static analysis; it does not claim to lift functions that remain virtualized.
 
-See [findings](docs/findings.md), [client unpacking](docs/client-unpacking.md), [asset format notes](docs/asset-format.md),
+See [findings](docs/findings.md), [client unpacking](docs/client-unpacking.md),
+[client render path](docs/client-render-path.md), [asset format notes](docs/asset-format.md),
 [decomp.dev integration](docs/decomp-dev.md), and [remaining work](docs/roadmap.md).

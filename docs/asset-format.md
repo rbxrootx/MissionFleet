@@ -2,7 +2,7 @@
 
 These observations apply to the installed client and are not a universal format
 specification. The parser is original code written from local structural
-observations. The game binaries were never loaded or executed.
+observations and confirmed against the locally captured, unpacked client code.
 
 Static inspection of the unprotected `ITNTL.dll` sprite loader showed a 132-byte
 file header, version checks, 112-byte image headers for v3.2/v3.3, and a separate
@@ -55,8 +55,10 @@ branch, the original code reads signed 16-bit values at span offsets `+0` and
 Two layers of `ShipStructureF000.spr` were decoded and visually inspected:
 `FF2_bottom.bmp` and `FF2_top.bmp`, each 488 by 218 pixels. Tests verify relative
 skips, row reset, color channels, transparent pixels and malformed input bounds.
-Exact original palette conversion, all sprite formats, animation, cropping,
-anchors and compositor behavior have not been verified.
+Exact original palette conversion, all sprite formats and the final pixel
+compositor have not been verified. The current client's ship animation timing,
+anchors and clipping path are now reconstructed in
+[client-render-path.md](client-render-path.md).
 
 A broader sample of the first frame of 12 ship-structure files decoded 6 and
 rejected 6 with unsupported run layouts. Results are in the generated

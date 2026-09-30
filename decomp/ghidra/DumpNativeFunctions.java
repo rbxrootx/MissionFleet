@@ -12,7 +12,15 @@ public class DumpNativeFunctions extends GhidraScript {
         DecompInterface decompiler = new DecompInterface();
         decompiler.openProgram(currentProgram);
         try {
-            for (String value : getScriptArgs()) {
+            String[] args = getScriptArgs();
+            boolean listCallers = true;
+            int firstAddress = 0;
+            if (args.length != 0 && args[0].equals("--no-callers")) {
+                listCallers = false;
+                firstAddress = 1;
+            }
+            for (int argIndex = firstAddress; argIndex < args.length; ++argIndex) {
+                String value = args[argIndex];
                 Address address = toAddr(value);
                 Function function = getFunctionContaining(address);
                 if (function == null) {
@@ -21,11 +29,13 @@ public class DumpNativeFunctions extends GhidraScript {
                 }
                 println("\n===== " + function.getName() + " @ " + function.getEntryPoint() +
                     " bytes=" + function.getBody().getNumAddresses() + " =====");
-                println("CALLERS:");
-                for (Reference reference : getReferencesTo(function.getEntryPoint())) {
-                    Function caller = getFunctionContaining(reference.getFromAddress());
-                    if (caller != null) println("  " + caller.getName() + " @ " + caller.getEntryPoint() +
-                        " from " + reference.getFromAddress());
+                if (listCallers) {
+                    println("CALLERS:");
+                    for (Reference reference : getReferencesTo(function.getEntryPoint())) {
+                        Function caller = getFunctionContaining(reference.getFromAddress());
+                        if (caller != null) println("  " + caller.getName() + " @ " + caller.getEntryPoint() +
+                            " from " + reference.getFromAddress());
+                    }
                 }
                 println("CALLEES:");
                 for (Function callee : function.getCalledFunctions(monitor))
