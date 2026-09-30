@@ -54,7 +54,7 @@ class RenderNode:
     y: int
     elapsed: int
     color: int
-    mode: int
+    effect: int
     visible: bool = True
 
 
@@ -66,7 +66,7 @@ class BlitCommand:
     y: int
     clip: Rect
     color: int
-    mode: int
+    effect: int
 
 
 def animation_record_offset(record_count: int, table_present: bool, index: int):
@@ -95,7 +95,7 @@ def select_animation_frame(record: AnimationRecord, elapsed: int):
 
 
 def clip_sprite(sprite: Sprite, screen: Screen, x: int, y: int, clip: Rect,
-                color: int, mode: int):
+                color: int, effect: int):
     """Reconstruct Core.dll 0x587BA830 before its screen-vtable slot-1 call."""
     absolute_viewport = Rect(
         screen.origin_x + screen.viewport.left,
@@ -121,7 +121,7 @@ def clip_sprite(sprite: Sprite, screen: Screen, x: int, y: int, clip: Rect,
             clipped.bottom - screen.origin_y,
         ),
         color,
-        mode,
+        effect,
     )
 
 
@@ -135,7 +135,7 @@ def build_ship_blit(record: AnimationRecord | None, node: RenderNode,
         return None
     x = node.x + record.anchor_x + parent_x + frame.offset_x
     y = node.y + record.anchor_y + parent_y + frame.offset_y
-    return clip_sprite(frame.sprite, screen, x, y, record.clip, node.color, node.mode)
+    return clip_sprite(frame.sprite, screen, x, y, record.clip, node.color, node.effect)
 
 
 def blit_opaque_rgb16_spans(payload: bytes, width: int, height: int,
@@ -186,6 +186,84 @@ def blit_opaque_rgb16_spans(payload: bytes, width: int, height: int,
                 target = destination_y * pitch + destination_x * 2
                 framebuffer[target:target + 2] = payload[position + offset:position + offset + 2]
                 copied += 1
+        position += length
+        cursor_bytes += length
+    raise ValueError("Missing image terminator")
+
+
+def _blend_rgb565_ship_pixel(source: int, destination: int) -> int:
+    """Apply Core 0x58800A60's color=0x80/effect=0x101 RGB565 arithmetic.
+
+    The constants and operation order are taken from the decompiled low-color,
+    nonzero-effect branch. The 5/6/5 masks are the RGB565 specialization used
+    by the compositor; integer overflow is narrowed to the destination word.
+    """
+    color, effect = 0x80, 0x101
+    source_scale = color * ((effect + 0x100) >> 3) >> 5
+    destination_scale = 0x20 - (color >> 3)
+    red_blue_mask, green_mask = 0xF81F, 0x07E0
+    destination_channels = (
+        (((destination & red_blue_mask) >> 5) * destination_scale & red_blue_mask) |
+        (((destination & green_mask) * destination_scale >> 5) & green_mask)
+    )
+    source_channels = (
+        (((source & red_blue_mask) >> 5) * source_scale & red_blue_mask) |
+        (((source & green_mask) * source_scale >> 5) & green_mask)
+    )
+    return (destination_channels + source_channels) & 0xFFFF
+
+
+def blit_ship_rgb565_effect_spans(payload: bytes, width: int, height: int,
+                                  framebuffer: bytearray, pitch: int,
+                                  target_height: int, x: int, y: int, clip: Rect):
+    """Apply the observed ship color=0x80/effect=0x101 span compositor.
+
+    Span headers and row/end markers match the opaque RGB16 path. Skipped
+    pixels leave the destination untouched; literal pixels use the original
+    compositor's fixed-point RGB565 branch.
+    """
+    if width <= 0 or height <= 0 or pitch <= 0 or pitch % 2:
+        raise ValueError("Invalid RGB16 surface geometry")
+    target_width = pitch // 2
+    if target_height <= 0 or len(framebuffer) < pitch * target_height:
+        raise ValueError("Framebuffer is smaller than its declared surface")
+    if not (0 <= clip.left <= clip.right <= target_width and
+            0 <= clip.top <= clip.bottom <= target_height):
+        raise ValueError("Clip rectangle lies outside the target surface")
+
+    position = row = cursor_bytes = blended = 0
+    while position + 2 <= len(payload):
+        control = struct.unpack_from("<h", payload, position)[0]
+        position += 2
+        if control == -2:
+            if position != len(payload) or row != height - 1:
+                raise ValueError("Unexpected image terminator")
+            return blended
+        if control == -1:
+            row += 1
+            cursor_bytes = 0
+            if row >= height:
+                raise ValueError("Too many image rows")
+            continue
+        if control < 0 or position + 3 > len(payload):
+            raise ValueError("Invalid span control")
+        length = struct.unpack_from("<H", payload, position + 1)[0]
+        position += 3
+        cursor_bytes += control
+        if (control % 2 or length % 2 or cursor_bytes + length > width * 2 or
+                position + length > len(payload)):
+            raise ValueError("Invalid span bounds")
+        for offset in range(0, length, 2):
+            destination_x = x + (cursor_bytes + offset) // 2
+            destination_y = y + row
+            if (clip.left <= destination_x < clip.right and
+                    clip.top <= destination_y < clip.bottom):
+                target = destination_y * pitch + destination_x * 2
+                source = struct.unpack_from("<H", payload, position + offset)[0]
+                destination = struct.unpack_from("<H", framebuffer, target)[0]
+                struct.pack_into("<H", framebuffer, target,
+                                 _blend_rgb565_ship_pixel(source, destination))
+                blended += 1
         position += length
         cursor_bytes += length
     raise ValueError("Missing image terminator")

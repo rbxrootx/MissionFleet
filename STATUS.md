@@ -59,11 +59,13 @@ translation, and the targeted subsystem test covers that call boundary. See
 [ITNTL sprite loader](docs/itntl-sprite-loader.md).
 
 That trace now reaches the current sprite object's concrete RGB16 compositor.
-For the normal `0x100` color and zero-effect ship path, the reconstruction copies
-literal RGB16 span words exactly, preserves transparent skips, honors clipping
-and target pitch, and recognizes the original `-1` row and `-2` image markers.
-The six-ship visual board now renders its 12 source layers through that recovered
-RGB16 path before PNG conversion.
+For the normal `0x100` color and zero-effect path, the reconstruction copies
+literal RGB16 span words exactly. For the observed ship call (`color=0x80`,
+`effect=0x101`), it also models the decompiled RGB565 per-pixel math. Both paths
+preserve transparent skips, clipping, target pitch, and the original `-1` row
+and `-2` image markers. The normal path rendered all 12 source layers on the
+six-ship visual board; the nondefault effect still needs live-client image
+comparison. See [client render path](docs/client-render-path.md).
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.

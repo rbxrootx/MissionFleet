@@ -3,8 +3,8 @@ import unittest
 
 from tools.ship_sprite_runtime import (
     AnimationFrame, AnimationRecord, BlitCommand, Rect, RenderNode, Screen, Sprite,
-    animation_record_offset, blit_opaque_rgb16_spans, build_ship_blit, image_frame_at,
-    select_animation_frame,
+    animation_record_offset, blit_opaque_rgb16_spans, blit_ship_rgb565_effect_spans,
+    build_ship_blit, image_frame_at, select_animation_frame,
 )
 
 
@@ -30,7 +30,7 @@ class ShipSpriteRuntimeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             select_animation_frame(AnimationRecord(0, frames, 0, 0, record.clip), 0)
 
-    def test_ship_node_builds_original_screen_blit_arguments(self):
+    def test_ship_node_preserves_original_color_and_effect_arguments(self):
         sprite = Sprite(40, 30, "frame-surface")
         screen = Screen(100, 200, Rect(0, 0, 800, 600), "target-buffer")
         record = AnimationRecord(
@@ -39,11 +39,11 @@ class ShipSpriteRuntimeTests(unittest.TestCase):
             5, -2, Rect(50, 70, 300, 280),
         )
         command = build_ship_blit(
-            record, RenderNode(100, 200, 100, 0xAABBCCDD, 0x102), screen, 10, 20,
+            record, RenderNode(100, 200, 100, 0x80, 0x101), screen, 10, 20,
         )
         self.assertEqual(
             BlitCommand("frame-surface", "target-buffer", 18, 22,
-                        Rect(0, 0, 200, 80), 0xAABBCCDD, 0x102),
+                        Rect(0, 0, 200, 80), 0x80, 0x101),
             command,
         )
 
@@ -87,3 +87,12 @@ class ShipSpriteRuntimeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             blit_opaque_rgb16_spans(payload[:-1], 3, 1, bytearray(8), 8, 1,
                                     0, 0, Rect(0, 0, 4, 1))
+
+    def test_ship_rgb565_effect_uses_observed_color_and_effect_math(self):
+        payload = (struct.pack("<hBH", 0, 0, 2) + struct.pack("<H", 0xF81F) +
+                   struct.pack("<h", -2))
+        framebuffer = bytearray(struct.pack("<H", 0x39E7))
+        blended = blit_ship_rgb565_effect_spans(
+            payload, 1, 1, framebuffer, 2, 1, 0, 0, Rect(0, 0, 1, 1))
+        self.assertEqual(1, blended)
+        self.assertEqual(0xD8E0, struct.unpack_from("<H", framebuffer)[0])

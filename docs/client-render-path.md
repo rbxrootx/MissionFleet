@@ -81,8 +81,8 @@ coordinates.
 
 The recovered code fixes the layout and arithmetic above. Field names are
 descriptive names assigned by this project because original symbols are absent.
-The nondefault color/effect branches inside the pixel compositors and all
-non-ship render-node subclasses still require separate traces.
+Other color/effect combinations and all non-ship render-node subclasses still
+require separate traces.
 
 ## Opaque RGB16 compositor path
 
@@ -112,8 +112,31 @@ matching the loader evidence.
 
 `blit_opaque_rgb16_spans` reconstructs this normal opaque path, including the
 separate horizontal-clipping behavior, skipped-pixel transparency and target
-pitch. The other compositor branches implement color/effect transforms and
-remain a distinct reconstruction task.
+pitch.
+
+The ship draw caller at `0x58525B10` also sets color `0x80` through
+`0x587B5540` (node `+0x28`) and effect `0x101` through `0x587B55B0` (node
+`+0x2C`). `0x587B5DB0` passes those fields to the animation renderer in that
+same order. This observed pair takes the `color < 0x100`, nonzero-effect path
+in the `0x58800A60` compositor. Its decompiled RGB565 arithmetic is:
+
+```
+source_scale      = color * ((effect + 0x100) >> 3) >> 5
+destination_scale = 0x20 - (color >> 3)
+dst_rb = (((dst & 0xF81F) >> 5) * destination_scale) & 0xF81F
+dst_g  = (((dst & 0x07E0) * destination_scale) >> 5) & 0x07E0
+src_rb = (((src & 0xF81F) >> 5) * source_scale) & 0xF81F
+src_g  = (((src & 0x07E0) * source_scale) >> 5) & 0x07E0
+out    = ((dst_rb | dst_g) + (src_rb | src_g)) & 0xFFFF
+```
+
+`blit_ship_rgb565_effect_spans` implements this caller-specific RGB565 span
+path, including skipped pixels, clipping and target pitch. The formulas and
+operation order come from the decompiled branch. The mask specialization is
+RGB565 red/blue `0xF81F` and green `0x07E0`, matching the RGB565 target used by
+the current visual pipeline. A runtime
+pixel-for-pixel comparison against the original client has not been made, so
+the output is not independently validated against a live client frame.
 
 As an integration check, all 12 bottom/top layers used by the generated ship
 board were rendered into RGB16 surfaces through this path and compared with the
