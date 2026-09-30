@@ -55,6 +55,11 @@ timed frame selection, anchor and parent offsets, clipping, origin translation,
 and the final screen-vtable blit arguments. Tests cover the recovered valid-input
 behavior; see [client render path](docs/client-render-path.md).
 
+That trace now reaches the current sprite object's concrete RGB16 compositor.
+For the normal `0x100` color and zero-effect ship path, the reconstruction copies
+literal RGB16 span words exactly, preserves transparent skips, honors clipping
+and target pitch, and recognizes the original `-1` row and `-2` image markers.
+
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
 The public-safe decompilation project is published at

@@ -1,8 +1,9 @@
+import struct
 import unittest
 
 from tools.ship_sprite_runtime import (
     AnimationFrame, AnimationRecord, BlitCommand, Rect, RenderNode, Sprite,
-    animation_record_offset, build_ship_blit, image_frame_at,
+    animation_record_offset, blit_opaque_rgb16_spans, build_ship_blit, image_frame_at,
     select_animation_frame,
 )
 
@@ -55,3 +56,32 @@ class ShipSpriteRuntimeTests(unittest.TestCase):
         self.assertIsNone(build_ship_blit(
             record, RenderNode(0, 0, 0, 0, 0, visible=False)))
         self.assertIsNone(build_ship_blit(record, RenderNode(0, 0, -1, 0, 0)))
+
+    def test_opaque_rgb16_span_copy_preserves_pixels_transparency_and_pitch(self):
+        def run(skip, *pixels):
+            return (struct.pack("<hBH", skip, 0x7F, len(pixels) * 2) +
+                    struct.pack("<" + "H" * len(pixels), *pixels))
+
+        payload = (run(0, 0xF800) + run(2, 0x07E0) + struct.pack("<h", -1) +
+                   run(2, 0x001F) + struct.pack("<h", -2))
+        framebuffer = bytearray(b"\x55" * (12 * 4))
+        copied = blit_opaque_rgb16_spans(
+            payload, 3, 2, framebuffer, 12, 4, 1, 1, Rect(0, 0, 6, 4))
+        self.assertEqual(3, copied)
+        self.assertEqual(struct.pack("<H", 0xF800), framebuffer[14:16])
+        self.assertEqual(b"\x55\x55", framebuffer[16:18])
+        self.assertEqual(struct.pack("<H", 0x07E0), framebuffer[18:20])
+        self.assertEqual(struct.pack("<H", 0x001F), framebuffer[28:30])
+        self.assertEqual(b"\x55\x55", framebuffer[30:32])
+
+    def test_opaque_rgb16_span_copy_clips_and_rejects_malformed_streams(self):
+        payload = (struct.pack("<hBH", 0, 0, 6) + struct.pack("<HHH", 1, 2, 3) +
+                   struct.pack("<h", -2))
+        framebuffer = bytearray(8)
+        copied = blit_opaque_rgb16_spans(
+            payload, 3, 1, framebuffer, 8, 1, 0, 0, Rect(1, 0, 3, 1))
+        self.assertEqual(2, copied)
+        self.assertEqual(b"\x00\x00" + struct.pack("<HH", 2, 3) + b"\x00\x00", framebuffer)
+        with self.assertRaises(ValueError):
+            blit_opaque_rgb16_spans(payload[:-1], 3, 1, bytearray(8), 8, 1,
+                                    0, 0, Rect(0, 0, 4, 1))

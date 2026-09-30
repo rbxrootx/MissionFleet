@@ -71,6 +71,35 @@ mode, visibility, empty animations and negative elapsed time.
 
 The recovered code fixes the layout and arithmetic above. Field names are
 descriptive names assigned by this project because original symbols are absent.
-The semantic meaning of every color/mode bit, screen vtable slot 1's pixel
-compositor, and all non-ship render-node subclasses still require separate
-traces.
+The nondefault color/effect branches inside the pixel compositors and all
+non-ship render-node subclasses still require separate traces.
+
+## Opaque RGB16 compositor path
+
+The slot-1 call belongs to the selected sprite object, with the render target
+passed as its first stack argument. The older readable `ITNTL.dll` preserves
+the same interface in `0x100EB530`; this resolves an ambiguity that could not be
+settled from the current call's decompiler types alone.
+
+For a 16-bit render target (`DAT_58905F98 == 2`) and compressed sprite format
+byte `2`, the current loader selects constructor `0x588009C0` or `0x5880D370`
+according to the display pixel masks. Their vtables are `0x588BE71C` and
+`0x588BE72C`; their slot-1 compositors are `0x58800A60` and `0x5880D420`.
+
+At `0x58800B56`, the first compositor tests color against `0x100`. At
+`0x58800B63`, the color-`0x100`, effect-`0` case enters a direct-copy loop. That
+loop reads a signed 16-bit control, advances the destination by nonnegative
+skip bytes, reads the literal byte count at span offset `+3`, advances the
+source by five header bytes, and copies the RGB16 words unchanged. `-1` starts
+the next row and `-2` ends the image. The byte at span offset `+2` is ignored,
+matching the loader evidence.
+
+`blit_opaque_rgb16_spans` reconstructs this normal opaque path, including the
+separate horizontal-clipping behavior, skipped-pixel transparency and target
+pitch. The other compositor branches implement color/effect transforms and
+remain a distinct reconstruction task.
+
+As an integration check, all 12 bottom/top layers used by the generated ship
+board were rendered into RGB16 surfaces through this path and compared with the
+independent RGBA preview decoder after round-tripping its colors to RGB565. All
+209,806 literal pixels and every transparent skip matched.

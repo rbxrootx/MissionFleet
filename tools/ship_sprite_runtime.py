@@ -5,6 +5,7 @@ in docs/client-render-path.md. This module models the valid-input behavior; it
 does not execute or wrap original game code.
 """
 from dataclasses import dataclass
+import struct
 from typing import Any, Sequence
 
 
@@ -125,3 +126,56 @@ def build_ship_blit(record: AnimationRecord | None, node: RenderNode,
     x = node.x + record.anchor_x + parent_x + frame.offset_x
     y = node.y + record.anchor_y + parent_y + frame.offset_y
     return clip_sprite(frame.sprite, x, y, record.clip, node.color, node.mode)
+
+
+def blit_opaque_rgb16_spans(payload: bytes, width: int, height: int,
+                            framebuffer: bytearray, pitch: int,
+                            target_height: int, x: int, y: int, clip: Rect):
+    """Reconstruct the opaque/effect-zero span-copy path at Core 0x58800B69.
+
+    The original routine copies source RGB16 words without color conversion.
+    This implementation also covers its horizontally-clipped branch while
+    preserving the same skipped-pixel transparency and row/end markers.
+    """
+    if width <= 0 or height <= 0 or pitch <= 0 or pitch % 2:
+        raise ValueError("Invalid RGB16 surface geometry")
+    target_width = pitch // 2
+    if target_height <= 0 or len(framebuffer) < pitch * target_height:
+        raise ValueError("Framebuffer is smaller than its declared surface")
+    if not (0 <= clip.left <= clip.right <= target_width and
+            0 <= clip.top <= clip.bottom <= target_height):
+        raise ValueError("Clip rectangle lies outside the target surface")
+
+    position = row = cursor_bytes = copied = 0
+    while position + 2 <= len(payload):
+        control = struct.unpack_from("<h", payload, position)[0]
+        position += 2
+        if control == -2:
+            if position != len(payload) or row != height - 1:
+                raise ValueError("Unexpected image terminator")
+            return copied
+        if control == -1:
+            row += 1
+            cursor_bytes = 0
+            if row >= height:
+                raise ValueError("Too many image rows")
+            continue
+        if control < 0 or position + 3 > len(payload):
+            raise ValueError("Invalid span control")
+        length = struct.unpack_from("<H", payload, position + 1)[0]
+        position += 3
+        cursor_bytes += control
+        if (control % 2 or length % 2 or cursor_bytes + length > width * 2 or
+                position + length > len(payload)):
+            raise ValueError("Invalid span bounds")
+        for offset in range(0, length, 2):
+            destination_x = x + (cursor_bytes + offset) // 2
+            destination_y = y + row
+            if (clip.left <= destination_x < clip.right and
+                    clip.top <= destination_y < clip.bottom):
+                target = destination_y * pitch + destination_x * 2
+                framebuffer[target:target + 2] = payload[position + offset:position + offset + 2]
+                copied += 1
+        position += length
+        cursor_bytes += length
+    raise ValueError("Missing image terminator")

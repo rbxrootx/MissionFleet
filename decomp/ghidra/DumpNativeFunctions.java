@@ -14,10 +14,16 @@ public class DumpNativeFunctions extends GhidraScript {
         try {
             String[] args = getScriptArgs();
             boolean listCallers = true;
+            boolean decompile = true;
             int firstAddress = 0;
-            if (args.length != 0 && args[0].equals("--no-callers")) {
-                listCallers = false;
-                firstAddress = 1;
+            while (firstAddress < args.length && args[firstAddress].startsWith("--")) {
+                if (args[firstAddress].equals("--no-callers")) listCallers = false;
+                else if (args[firstAddress].equals("--callees-only")) {
+                    listCallers = false;
+                    decompile = false;
+                }
+                else throw new IllegalArgumentException("Unknown option: " + args[firstAddress]);
+                ++firstAddress;
             }
             for (int argIndex = firstAddress; argIndex < args.length; ++argIndex) {
                 String value = args[argIndex];
@@ -40,9 +46,11 @@ public class DumpNativeFunctions extends GhidraScript {
                 println("CALLEES:");
                 for (Function callee : function.getCalledFunctions(monitor))
                     println("  " + callee.getName() + " @ " + callee.getEntryPoint());
-                DecompileResults result = decompiler.decompileFunction(function, 60, monitor);
-                if (result.decompileCompleted()) println(result.getDecompiledFunction().getC());
-                else println("DECOMPILATION FAILED: " + result.getErrorMessage());
+                if (decompile) {
+                    DecompileResults result = decompiler.decompileFunction(function, 60, monitor);
+                    if (result.decompileCompleted()) println(result.getDecompiledFunction().getC());
+                    else println("DECOMPILATION FAILED: " + result.getErrorMessage());
+                }
             }
         } finally {
             decompiler.dispose();
