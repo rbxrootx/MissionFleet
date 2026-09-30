@@ -59,6 +59,8 @@ That trace now reaches the current sprite object's concrete RGB16 compositor.
 For the normal `0x100` color and zero-effect ship path, the reconstruction copies
 literal RGB16 span words exactly, preserves transparent skips, honors clipping
 and target pitch, and recognizes the original `-1` row and `-2` image markers.
+The six-ship visual board now renders its 12 source layers through that recovered
+RGB16 path before PNG conversion.
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.

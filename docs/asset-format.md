@@ -68,10 +68,13 @@ every `(2, 2)` image or every sprite file.
 ## Client visual board
 
 `tools/sprite_gallery.py D:\FleetMission` decodes and directly composites the
-bottom and top layers from four verified ship-structure files. It writes
+bottom and top layers from six verified ship-structure files. It writes
 `reports/client-visuals/fleet-board.png` and a JSON evidence manifest. Ship
 pixels are neither scaled nor recolored; the ocean field and placement are only
 a presentation layout and are not claimed to reconstruct an in-game scene.
+
+The gallery now routes those layers through the reconstructed current-client
+opaque RGB16 span compositor before converting the completed surface to PNG.
 
 The earlier preview treated the ignored span byte as a run mode and therefore
 rejected valid layers. After tracing the current `Core.dll` loader, the board

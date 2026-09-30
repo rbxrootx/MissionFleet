@@ -2,7 +2,7 @@ import struct
 import unittest
 
 from tools.sprite_preview import decode
-from tools.sprite_gallery import composite, ocean
+from tools.sprite_gallery import composite, ocean, rgba_to_rgb16, rgb16_to_rgba
 
 
 def run(skip, *colors):
@@ -36,3 +36,9 @@ class PreviewTests(unittest.TestCase):
         composite(target, 3, 2, source, 2, 1, 1, 1)
         self.assertEqual(before[(1 * 3 + 1) * 4:(1 * 3 + 2) * 4], target[(1 * 3 + 1) * 4:(1 * 3 + 2) * 4])
         self.assertEqual(bytes([255, 0, 0, 255]), target[(1 * 3 + 2) * 4:(1 * 3 + 3) * 4])
+
+    def test_gallery_rgb16_surface_conversion_matches_original_channel_expansion(self):
+        source = bytes([255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255])
+        packed = rgba_to_rgb16(source)
+        self.assertEqual(struct.pack("<HHH", 0xF800, 0x07E0, 0x001F), packed)
+        self.assertEqual(source, rgb16_to_rgba(packed))
