@@ -6,7 +6,11 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ADDRESSES = ("587BA830", "58800A60", "5880D420")
+ADDRESSES = (
+    "587BA830", "58800A60", "5880D420",
+    "588009C0", "58800A30", "588099F0",
+    "5880D370", "5880D3E0", "58816550",
+)
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
     "587BA830": {
@@ -26,6 +30,42 @@ EVIDENCE = {
         "called_by": "Slot 1 of the sprite vtable installed by constructor 0x5880D370; selected by the alternate 16-bit display-mask path for compressed format-2 sprites.",
         "behavior": "Consumes a sprite span stream and writes converted pixels to the passed render target using the alternate mask-specialized blend paths.",
         "uncertainty": "The exact pixel-format distinction from 0x58800A60 and the meaning of all mask/effect values remain unresolved; no live framebuffer comparison has been recorded.",
+    },
+    "588009C0": {
+        "name_in_analysis": "FUN_588009c0",
+        "called_by": "Selected by the Core loader for the first compressed-format-2 sprite class on a 16-bit target; installs vtable 0x588BE71C.",
+        "behavior": "Calls shared base initialization at 0x587C9800 with the three constructor arguments, stores the class vtable at object offset 0, and returns the object.",
+        "uncertainty": "The names and semantic meaning of the three base-initialization arguments are unresolved; the constructor call site and vtable write are visible in the mapped Core analysis.",
+    },
+    "58800A30": {
+        "name_in_analysis": "FUN_58800a30",
+        "called_by": "Slot 0 of vtable 0x588BE71C installed by constructor 0x588009C0.",
+        "behavior": "Calls class cleanup at 0x588009F0; when flag bit 0 is set, releases 0x38 bytes at the object address through 0x58831034; returns the object address.",
+        "uncertainty": "The exact C++ deleting-destructor convention is inferred from the flag-controlled deallocation call; external delete call sites were not traced in this slice.",
+    },
+    "588099F0": {
+        "name_in_analysis": "FUN_588099f0",
+        "called_by": "Slot 2 of vtable 0x588BE71C installed by constructor 0x588009C0; the indirect invocation sites for this slot have not yet been identified.",
+        "behavior": "Reads the sprite span stream at object offset 0x0C, rejects an empty stream and nonintersecting clip geometry, obtains destination geometry through screen helpers, then walks row/span controls and writes masked 16-bit pixel results to the target buffer.",
+        "uncertainty": "The precise slot-2 effect contract, runtime mask configuration, and all span subformats are not fully named from Ghidra pseudocode. No live framebuffer comparison has been recorded.",
+    },
+    "5880D370": {
+        "name_in_analysis": "FUN_5880d370",
+        "called_by": "Selected by the Core loader for the alternate compressed-format-2 sprite class on a 16-bit target; installs vtable 0x588BE72C.",
+        "behavior": "Calls shared base initialization at 0x587C9800 with the three constructor arguments, stores the class vtable at object offset 0, and returns the object.",
+        "uncertainty": "The names and semantic meaning of the three base-initialization arguments are unresolved; the constructor call site and vtable write are visible in the mapped Core analysis.",
+    },
+    "5880D3E0": {
+        "name_in_analysis": "FUN_5880d3e0",
+        "called_by": "Slot 0 of vtable 0x588BE72C installed by constructor 0x5880D370.",
+        "behavior": "Calls class cleanup at 0x5880D3A0; when flag bit 0 is set, releases 0x38 bytes at the object address through 0x58831034; returns the object address.",
+        "uncertainty": "The exact C++ deleting-destructor convention is inferred from the flag-controlled deallocation call; external delete call sites were not traced in this slice.",
+    },
+    "58816550": {
+        "name_in_analysis": "FUN_58816550",
+        "called_by": "Slot 2 of vtable 0x588BE72C installed by constructor 0x5880D370; the indirect invocation sites for this slot have not yet been identified.",
+        "behavior": "Reads the sprite span stream at object offset 0x0C, rejects an empty stream and nonintersecting clip geometry, obtains destination geometry through screen helpers, then walks row/span controls and writes masked 16-bit pixel results to the target buffer.",
+        "uncertainty": "The precise slot-2 effect contract, runtime mask configuration, and all span subformats are not fully named from Ghidra pseudocode. No live framebuffer comparison has been recorded.",
     },
 }
 

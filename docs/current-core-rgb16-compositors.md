@@ -1,7 +1,8 @@
-# Installed Core.dll RGB16 span compositor pair
+# Installed Core.dll RGB16 sprite classes and span compositors
 
-This slice covers the two sprite slot-1 compositors selected by the installed
-client's 16-bit compressed-format-2 loading path. The capture is tied to the
+This slice covers both sprite classes selected by the installed client's
+16-bit compressed-format-2 loading path: their constructors, slot-0 cleanup,
+and slot-1/slot-2 span methods. The capture is tied to the
 installed `D:\FleetMission\Core.dll` hash
 `75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4`; the
 mapped image hash is recorded in
@@ -50,23 +51,63 @@ order for this caller is recorded in the render trace. The sibling's exact
 pixel-format distinction and all of its mask/effect cases still need their own
 trace.
 
+## Slot-2 sibling methods and class lifecycle
+
+The constructors also establish the full vtables from the mapped Core image.
+Ghidra confirms that `0x588009C0` calls shared initialization at `0x587C9800`
+and stores `0x588BE71C` at object offset 0; `0x5880D370` performs the same
+initialization and stores `0x588BE72C`. The vtable entries in the capture are:
+
+| Class vtable | Slot 0 destructor | Slot 1 compositor | Slot 2 compositor |
+| --- | --- | --- | --- |
+| `0x588BE71C` | `0x58800A30` | `0x58800A60` | `0x588099F0` |
+| `0x588BE72C` | `0x5880D3E0` | `0x5880D420` | `0x58816550` |
+
+Each slot-0 method calls its class cleanup routine and conditionally releases
+`0x38` bytes when flag bit 0 is set. Ghidra's decompilation of each slot-2
+method shows an empty-stream guard at object offset `+0x0C`, an intersection
+test for the supplied rectangle, screen helper calls, and row/span traversal
+that writes masked 16-bit values to the target. The methods reference
+different groups of pixel-mask globals, consistent with the two
+mask-specialized class variants.
+
+The constructor/vtable/slot relationship is established directly by the
+mapped vtable contents and Ghidra's constructor bodies. No slot-2 invocation
+site has been identified, so its runtime use and its relationship to the
+ship's observed slot-1 draw path remain unproven. Ghidra's generic parameter
+names do not establish every argument's semantic name, and the mask/effect
+cases have not been exhaustively traced or compared against original-client
+pixels.
+
+The function bodies used for this trace were decompiled from the existing
+Ghidra program `/Core.unpacked.dll`; the selected output is
+`var/current-core-rgb16-siblings.c`, produced by
+`var/run-current-ghidra-core-rgb16-siblings.cmd`. For example, the constructor
+body stores `&DAT_588be71c` into `*param_1`, while the slot-2 bodies guard
+`*(this + 0x0c)` before computing the clipped rectangle and reading the span
+stream. These are direct observations from the decompiled functions, while the
+field names and higher-level effect labels remain project interpretations.
+
 ## Byte-match validation and limits
 
-All three indexed extents were emitted from the mapped runtime bytes and rebuilt
-with the repository's pinned VC6 toolchain. Objdiff 3.8.0 reports 100% for the
+The initial dispatcher and slot-1 pair (272, 36,733, and 37,154 bytes) were
+emitted from the mapped runtime bytes and rebuilt with the repository's pinned
+VC6 toolchain. Objdiff 3.8.0 reports 100% for the
 complete 272-byte, 36,733-byte, and 37,154-byte bodies; 15, 925, and 925
-captured immediate or address operands respectively are audited. This validates
-exact output against the hash-pinned mapped capture. The reconstruction emits
-each decoded instruction byte; it does not claim to have recovered the original
-compiler's optimization decisions or high-level source.
-
-The three matched functions total 74,159 bytes.
+captured immediate or address operands respectively are audited. The six
+class lifecycle and slot-2 functions add 29,686 bytes: constructors of 45 bytes
+each, destructors of 46 bytes each, and slot-2 bodies of 14,711 and 14,793
+bytes. Their 1,310 captured immediate or address operands are audited. Objdiff
+reports 100% for all nine functions (103,845 bytes total) against the
+hash-pinned mapped capture. The generated source preserves the captured
+instruction stream; it does not claim to recover the original compiler's
+optimization decisions or high-level source.
 
 The original on-disk Core.dll PE has zero raw bytes for the `.text` section
-containing both extents. `tools/compare_current_core_disk.py` records that
+containing these extents. `tools/compare_current_core_disk.py` records that
 limitation rather than treating rebuilt-image offsets as original file
 offsets. Therefore the byte match is against the installed module's mapped
 runtime capture, whose manifest path and original file hash are pinned, not a
 direct comparison to raw on-disk function bytes. No pixel-for-pixel comparison
 against a live original-client framebuffer has been made. The mask values at
-runtime and the complete sibling blend contract remain open.
+runtime, slot-2 caller path, and complete blend contracts remain open.
