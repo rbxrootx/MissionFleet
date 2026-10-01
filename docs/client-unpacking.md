@@ -91,6 +91,20 @@ captured process to `MSVCRTD.DLL+0xE2C0`, whose export is `operator new(unsigned
 int)`. `InitCGCDLL` at `0x10033A70` delegates to `0x10102C40`, which copies the
 host's callback table into renderer globals.
 
+The 678-byte entrypoint at `0x101E2B70` is byte-matched as `entry` in
+`src/client-2062/Main/entry.cpp`; the source emits the captured instruction
+bytes because VC6 re-encodes equivalent instructions differently. The
+behavior below comes from the separate Ghidra decompilation, not from treating
+byte emission as recovered high-level logic. Its `param_4 == 1` branch reads a
+bit-coded stream at `0x10135000` and writes decoded bytes starting at
+`0x10001000`. The following paths scan decoded code for relative-call
+operands, resolve import names through function pointers at `0x101E30DC` and
+`0x101E30E0`, and apply base relocations using delta-coded offsets beginning
+at `0x10000FFC`. The observed path then transfers to `0x1016CC50`. This match
+reconstructs the native image-loader stage; it does not translate VMProtect
+bytecode elsewhere in the module. The entrypoint argument contract and full
+VM-protection coverage remain unresolved.
+
 The archived readable `ITNTL.dll` independently uses the same `0x7C` allocation
 in its `AllocScreen` at `0x1002F8E0`, but calls constructor `0x10046C20` and
 stores the object in different globals. This confirms the allocation size and
@@ -123,8 +137,9 @@ VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The fifty-nine verified client byte
-matches include `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
+are analysis metadata and still need review. The seventy-eight verified client
+byte matches include the `0x101E2B70` native entrypoint,
+`InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
 child constructors, the three common control initialization/list functions,
 and the sprite-resource wrapper/parser and their helpers. From roots `0x100FFAC0`

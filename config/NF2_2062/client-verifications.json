@@ -4244,6 +4244,26 @@
         "behavior": "Ghidra pseudocode confirms this method reads the same source bounds and encoded span data as the neighboring compositor methods, clips to the target surface, and blends RGB16 pixels using the five host-provided channel masks; param_9 selects an opacity-like path below 0x100 and param_10 selects additional blend paths by sign and zero tests, though the source-level meanings are unresolved",
         "uncertainty": "The pointer-table owner and runtime caller are not identified. The host-provided masks vary with renderer configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
       }
+    },
+    {
+      "address": "101E2B70",
+      "name": "entry",
+      "size": 678,
+      "symbol": "_entry",
+      "source": "src/client-2062/Main/entry.cpp",
+      "source_sha256": "1ae87e318b20d2db2c50260b6cbf701d032a9d8500045d57e639c105eaa9fa2a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "entry",
+        "called_by": "Ghidra references the entrypoint from the module bootstrap at 0x10000138 and from the image entry point",
+        "behavior": "For param_4 == 1, Ghidra shows a bit-coded decompressor reading from 0x10135000 and writing at 0x10001000, followed by relative-call fixups, import resolution through function pointers at 0x101E30DC and 0x101E30E0, base-relocation fixups driven from 0x10000FFC, and a jump to 0x1016CC50",
+        "uncertainty": "This reconstructs the 678-byte native entrypoint from the mapped image; it does not remove or translate any VMProtect bytecode elsewhere. The entrypoint argument contract and the complete protection coverage of the module remain unresolved."
+      }
     }
   ]
 }
