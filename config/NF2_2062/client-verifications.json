@@ -5786,6 +5786,27 @@
         "behavior": "30-byte deleting-destructor wrapper associated with FUN_1008AD20's vtable.",
         "uncertainty": "The exact object ownership and destructor semantics are bounded by the wrapper's captured bytes; the represented UI component name is unknown."
       }
+    },
+    {
+      "address": "10048B60",
+      "name": "FUN_10048b60",
+      "size": 14940,
+      "symbol": "_FUN_10048b60",
+      "source": "src/client-2062/Main/FUN_10048b60.cpp",
+      "source_sha256": "456eda2562cb3f1c6cdbcfddaa09f649b8806bb2443dcc21b6756714437e8b45",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10048b60",
+        "called_by": "No direct code caller is recorded. The pointer at 0x10175B44 is slot +0x14 in the table whose base is installed at 0x10175B30 by FUN_10048A90/FUN_10048B10; the constructor's live instantiation path is not established.",
+        "behavior": "The 14,940-byte __fastcall method dispatches decoded application events by fields in its record: it checks the 0x8000 class word at +0x6, reads event IDs at +0x4 and subcodes at +0xC, and routes scene, room, battle, result, and error-related updates. Observed IDs include 0x80000200, 0x80020112, 0x80020113, and 0x80020116.",
+        "uncertainty": "This is a high-level application event dispatcher, not the raw socket-frame parser. The owner class, live caller path, return-value contract, and meanings of most event IDs remain unresolved. The 0x80000003 / 0x8002 branch is consistent with the historical rejection/close path in docs/login-protocol.md, but that cross-build protocol evidence does not establish full semantic equivalence."
+      }
     }
   ]
 }
