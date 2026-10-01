@@ -68,7 +68,10 @@ def verify_match(document, match, image, cl, clang, objdiff):
     source_object = BUILD / f"{stem}-source.obj"
     diff_file = BUILD / f"{stem}-diff.json"
     target_source.write_text(
-        assembly_for(match["symbol"], code, match.get("relocations", [])),
+        assembly_for(match["symbol"], code, [
+            relocation for relocation in match.get("relocations", [])
+            if not relocation.get("audit_only")
+        ]),
         encoding="ascii",
     )
     run([clang, "--target=i686-pc-windows-msvc", "-c", target_source,
@@ -102,9 +105,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", action="append", metavar="ADDRESS",
                         help="verify one function address (repeatable)")
+    parser.add_argument("--config", type=Path, default=CONFIG,
+                        help="verification inventory (defaults to the archived 2062 client)")
     args = parser.parse_args()
 
-    document = json.loads(CONFIG.read_text(encoding="utf-8"))
+    config_path = args.config if args.config.is_absolute() else ROOT / args.config
+    document = json.loads(config_path.read_text(encoding="utf-8"))
     if document.get("schema_version") != 1:
         raise ValueError("Unsupported client verification schema")
     capture = ROOT / document["mapped_image"]

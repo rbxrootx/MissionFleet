@@ -15,18 +15,21 @@ COMPONENT_LABELS = {
     "game-server": "Game server",
     "save-server": "Persistence server",
     "client-main": "Archived 2062 Main.dll",
+    "client-main-current": "Installed FleetMission Main.dll",
 }
 IMAGE_BASES = {
     "login-server": 0x401000,
     "game-server": 0x401000,
     "save-server": 0x401000,
     "client-main": 0x10000000,
+    "client-main-current": 0x58730000,
 }
 SOURCE_PATHS = {
     "login-server": "src/login-server",
     "game-server": "src/game-server",
     "save-server": "src/save-server",
     "client-main": "src/client-2062/Main",
+    "client-main-current": "src/client-current/Main",
 }
 
 
@@ -86,7 +89,11 @@ def measure(rows, matched, unit_count):
 
 def load_inventory():
     rows = []
-    for inventory_path in (CONFIG / "functions.tsv", CONFIG / "client-functions.tsv"):
+    for inventory_path in (
+        CONFIG / "functions.tsv",
+        CONFIG / "client-functions.tsv",
+        ROOT / "config" / "NF2_2026" / "client-functions.tsv",
+    ):
         with inventory_path.open(encoding="utf-8", newline="") as stream:
             rows.extend(csv.DictReader(stream, delimiter="\t"))
     seen = set()
@@ -124,31 +131,34 @@ def load_matches(inventory):
             raise ValueError(f"Match source changed: {source}")
         result.add(key)
 
-    client_document = json.loads(
-        (CONFIG / "client-verifications.json").read_text(encoding="utf-8")
+    client_configs = (
+        (CONFIG / "client-verifications.json", "client-main"),
+        (ROOT / "config" / "NF2_2026" / "client-verifications.json", "client-main-current"),
     )
-    if client_document.get("schema_version") != 1 or client_document.get("component") != "Main.dll":
-        raise ValueError("Unsupported client verification inventory")
-    for item in client_document["matches"]:
-        required = {
-            "address", "name", "size", "symbol", "source", "source_sha256",
-            "verified_by", "flags", "relocations", "evidence",
-        }
-        if not required.issubset(item) or item["verified_by"] != "objdiff-3.8.0-byte-identical":
-            raise ValueError(f"Unverified client match record: {item}")
-        key = ("client-main", item["address"].lower())
-        if key not in inventory or key in result:
-            raise ValueError(f"Unknown or duplicate client match: {key}")
-        expected = inventory[key]
-        if item["name"] != expected["name"] or int(item["size"]) != int(expected["size"]):
-            raise ValueError(f"Client match identity differs from inventory: {key}")
-        source = (ROOT / item["source"]).resolve()
-        if (ROOT.resolve() not in source.parents or not source.is_file()
-                or not exact_case_path_exists(item["source"])):
-            raise ValueError(f"Client match source is missing, mis-cased, or outside the project: {source}")
-        if item["source_sha256"] not in source_hashes(source.read_bytes()):
-            raise ValueError(f"Client match source changed: {source}")
-        result.add(key)
+    for client_config, component in client_configs:
+        client_document = json.loads(client_config.read_text(encoding="utf-8"))
+        if client_document.get("schema_version") != 1 or client_document.get("component") != "Main.dll":
+            raise ValueError(f"Unsupported client verification inventory: {client_config}")
+        for item in client_document["matches"]:
+            required = {
+                "address", "name", "size", "symbol", "source", "source_sha256",
+                "verified_by", "flags", "relocations", "evidence",
+            }
+            if not required.issubset(item) or item["verified_by"] != "objdiff-3.8.0-byte-identical":
+                raise ValueError(f"Unverified client match record: {item}")
+            key = (component, item["address"].lower())
+            if key not in inventory or key in result:
+                raise ValueError(f"Unknown or duplicate client match: {key}")
+            expected = inventory[key]
+            if item["name"] != expected["name"] or int(item["size"]) != int(expected["size"]):
+                raise ValueError(f"Client match identity differs from inventory: {key}")
+            source = (ROOT / item["source"]).resolve()
+            if (ROOT.resolve() not in source.parents or not source.is_file()
+                    or not exact_case_path_exists(item["source"])):
+                raise ValueError(f"Client match source is missing, mis-cased, or outside the project: {source}")
+            if item["source_sha256"] not in source_hashes(source.read_bytes()):
+                raise ValueError(f"Client match source changed: {source}")
+            result.add(key)
     return result
 
 
@@ -204,7 +214,7 @@ def main():
         OUTPUT.write_text(text, encoding="utf-8", newline="\n")
     report = json.loads(text)
     m = report["measures"]
-    print(f"NF2_2062: {m['matched_functions']}/{m['total_functions']} functions, "
+    print(f"FleetMission: {m['matched_functions']}/{m['total_functions']} functions, "
           f"{m['matched_code']}/{m['total_code']} bytes ({m['matched_code_percent']:.4f}%)")
 
 

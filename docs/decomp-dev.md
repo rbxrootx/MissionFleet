@@ -27,12 +27,15 @@ report from a GitHub Actions artifact; it does not host or perform the actual
 decompilation. The per-function compiler experiment site is decomp.me.
 
 This repository generates one report named `NF2_2062_report`, with Login,
-Game, Persistence, and archived 2062 `Main.dll` categories.
+Game, Persistence, archived 2062 `Main.dll`, and installed FleetMission
+`Main.dll` categories. The two client inventories are separate builds and use
+their own capture hashes and function-address bases.
 `config/NF2_2062/functions.tsv` contains the server inventory;
-`client-functions.tsv` contains public-safe Ghidra metadata for the mapped
-client module. They contain names, addresses, and body sizes, but no original
-machine code or game assets. Ghidra function boundaries, especially in the
-protected client image, remain subject to review.
+`client-functions.tsv` contains public-safe Ghidra metadata for the archived
+client module; `config/NF2_2026/client-functions.tsv` records the installed
+client build. These inventories contain names, addresses, and body sizes, but
+no original machine code or game assets. Ghidra function boundaries,
+especially in protected client images, remain subject to review.
 
 Regenerate the local report:
 
@@ -42,13 +45,16 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,702 functions totaling 639,997 bytes (15.5364% of indexed code), each
+credits 5,704 functions totaling 641,767 bytes (9.9154% of indexed code), each
 verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll`
 functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
 committed. The newest client match is the
 [application-event dispatcher](client-event-dispatch.md), whose table-backed
 event routes are documented separately from the raw socket protocol.
+Two further matches cover 1,770 bytes of the installed client's screen
+lifecycle; the local capture-specific configuration and verifier pin that
+separate build. See [screen lifecycle evidence](current-client-screen-lifecycle.md).
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
 file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
 rebuilds recorded source and target objects locally without placing original

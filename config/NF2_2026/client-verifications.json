@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "component": "Main.dll",
+  "image_base": "58730000",
+  "mapped_image": "reports/unpacked-current-main/Main.mapped.bin",
+  "manifest": "reports/unpacked-current-main/manifest.json",
+  "mapped_sha256": "e04ba858c5aec15f5c1e93adc3ef4ae1761767b92353294e57b4603f8c796831",
+  "original_sha256": "74398355bad12f5349319967ec92c08f2bb2e82dbb441acaeeffb4e55b4359dd",
+  "compiler": {
+    "family": "Microsoft Visual C++ 6.0 SP5",
+    "flags": [
+      "/O2",
+      "/GX-"
+    ],
+    "cl_sha256": "1bf99f206271ecdbd13da2829192ea2c02e2a44c740b8d72935d5d9cb753b156"
+  },
+  "matches": [
+    {
+      "address": "587962C0",
+      "name": "AllocScreen",
+      "size": 66,
+      "symbol": "_AllocScreen",
+      "source": "src/client-current/Main/AllocScreen.cpp",
+      "source_sha256": "9247a774b28ff360c6d938969b4d3492d8f60226a21ffb8c64589a4a6cb31eda",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "587C35A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58A24594",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "AllocScreen",
+        "called_by": "Export AllocScreen at RVA 0x662C0 in the installed Main.dll image.",
+        "behavior": "Allocates 0x84 bytes through 0x5897CC4E, constructs the screen through FUN_587C35A0, stores the pointer at 0x58A24584, optionally calls vtable offset +0x20 through 0x58A24594, and returns the stored pointer.",
+        "uncertainty": "The host meaning of the optional third parameter and vtable callback is unknown. This capture is the installed 2026 build, distinct from the archived 2062 Main.dll."
+      }
+    },
+    {
+      "address": "587C35A0",
+      "name": "FUN_587c35a0",
+      "size": 1704,
+      "symbol": "_FUN_587c35a0",
+      "source": "src/client-current/Main/FUN_587c35a0.cpp",
+      "source_sha256": "d7fc1d7ec0d4e8536bcc575fe52653dc299966f1615131e22189d32b0ad833c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 153,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58A24A68",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "58A24A68",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "58A24A68",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 286,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 295,
+          "target_address": "58A24A64",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 310,
+          "target_address": "58A24A64",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "58A24A64",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 345,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 358,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 365,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 387,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 415,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 424,
+          "target_address": "58A24A60",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 438,
+          "target_address": "58A24A60",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 447,
+          "target_address": "58A24A60",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 486,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 515,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 543,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 552,
+          "target_address": "58A24A5C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 567,
+          "target_address": "58A24A5C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 576,
+          "target_address": "58A24A5C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 602,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 615,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 622,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 644,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 672,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 681,
+          "target_address": "58A24A58",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 695,
+          "target_address": "58A24A58",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 704,
+          "target_address": "58A24A58",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 730,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 743,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 750,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 772,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 800,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 809,
+          "target_address": "58A24A54",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 824,
+          "target_address": "58A24A54",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 833,
+          "target_address": "58A24A54",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 859,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 872,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 879,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 901,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 929,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 938,
+          "target_address": "58A24A50",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 952,
+          "target_address": "58A24A50",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 961,
+          "target_address": "58A24A50",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 987,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1000,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1019,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1041,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1072,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1084,
+          "target_address": "58A2456C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1110,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1123,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1130,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1152,
+          "target_address": "58A24530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1183,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1195,
+          "target_address": "58A24570",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1221,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1234,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1277,
+          "target_address": "5898C008",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1313,
+          "target_address": "5898C004",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1323,
+          "target_address": "58A2456C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1377,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1388,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1402,
+          "target_address": "5898C000",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1412,
+          "target_address": "589C31AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1417,
+          "target_address": "589C3144",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1423,
+          "target_address": "58A2456C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1445,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1456,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1464,
+          "target_address": "58A2456C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1492,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1533,
+          "target_address": "5878D6D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1542,
+          "target_address": "58A24594",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1556,
+          "target_address": "58A24594",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1576,
+          "target_address": "58A24594",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1602,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1615,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1625,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1648,
+          "target_address": "588EADE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1657,
+          "target_address": "58A24810",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c35a0",
+        "called_by": "Directly called by exported AllocScreen at 0x587962C0.",
+        "behavior": "Initializes a CMenuScreen/CNavyFIELDScreen object, constructs a series of child controls with 0x70-byte allocations, initializes shared menu fields, and reads a FleetMission registry version value before returning the screen object.",
+        "uncertainty": "The exact purpose and labels of several child controls and the significance of the registry/version paths are not fully established. Ghidra's indexed function extent is 1,704 bytes."
+      }
+    }
+  ]
+}

@@ -104,8 +104,10 @@ this snapshot. `InitCGCDLL` at `0x587956B0` forwards its argument to
 bytes, calls constructor `0x587C35A0` with its second argument, stores the
 resulting object in a module global, and optionally calls a method at vtable
 offset `+0x20` using its third argument. `GetUserId` at `0x58796310` returns a
-pointer to a module global. These are Ghidra pseudocode observations only; they
-have not yet been reconstructed or byte-matched.
+pointer to a module global. The exported `AllocScreen` and its direct screen
+constructor are now byte-matched against this capture; see [installed screen
+lifecycle](current-client-screen-lifecycle.md). The remaining export
+observations above are not yet reconstructed or byte-matched.
 
 The inventory snapshot referenced by the ITNTL comparison records a different
 `Main.dll` build (`b3aac421e83c7b0b90224619038e4e2632a7d6ab58ebfd0f9783cbc6e6a57a31`).
