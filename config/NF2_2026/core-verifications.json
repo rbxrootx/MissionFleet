@@ -16,6 +16,118 @@
   },
   "matches": [
     {
+      "address": "587BA830",
+      "name": "FUN_587ba830",
+      "size": 272,
+      "symbol": "_FUN_587ba830",
+      "source": "src/client-current/Core/FUN_587ba830.cpp",
+      "source_sha256": "adb5a05b69fe33672ee6db2b74ebb9e05e6af435156086f0921c97a5d41774d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "584869C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5848C0B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "584A0630",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "584A0630",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "584A0670",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "584A0670",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "584A0650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "584A0650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "584A0610",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "584A0610",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "584869C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 155,
+          "target_address": "5848C0B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "584869C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 187,
+          "target_address": "5848C0B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "584849C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba830",
+        "called_by": "Directly called by animation-frame wrapper 0x5849C770 from the ship render-node draw path at 0x587B5DB0.",
+        "behavior": "Ghidra shows viewport-edge clamping, screen-origin subtraction for draw position and clip edges, target-buffer retrieval, and indirect dispatch through sprite vtable slot 1. Readable ITNTL.dll independently supports slot 1 receiving the buffer, local geometry, color, and effect.",
+        "uncertainty": "Core Ghidra pseudocode misattributes arguments around the buffer accessor and indirect call, so the exact Core ABI is not established from pseudocode alone. No explicit rejection of an inverted clip is visible; downstream handling is unverified. Pixel output is not yet compared against a live original-client frame."
+      }
+    },
+    {
       "address": "58800A60",
       "name": "FUN_58800a60",
       "size": 36733,

@@ -163,5 +163,7 @@ remain unknown. See the
 
 The installed `Core.dll` pair selected by the current ship render path is now
 also byte-matched against its mapped runtime capture: `0x58800A60` and
-`0x5880D420`, totaling 73,887 bytes. The direct dispatch and capture limits are
-recorded in [installed Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).
+`0x5880D420`, totaling 73,887 bytes. Their 272-byte screen dispatcher at
+`0x587BA830` is also matched, bringing this path to 74,159 bytes. The direct
+dispatch and capture limits are recorded in
+[installed Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).

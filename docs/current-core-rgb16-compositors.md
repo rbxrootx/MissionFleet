@@ -16,6 +16,18 @@ and effect through `0x587BA830`. That dispatcher calls slot 1 on the sprite
 object. Readable `ITNTL.dll` independently confirms the screen-buffer and
 geometry argument boundary at `0x100EB530` and the node call at `0x100EA3D0`.
 
+The 272-byte dispatcher at `0x587BA830` is byte-matched too. Its Ghidra body
+reads screen origin and viewport through screen accessors, clamps the requested
+rectangle, translates position and clip coordinates into screen space, retrieves
+the target buffer, and dispatches indirectly through sprite vtable slot 1. The
+Core pseudocode misattributes arguments around the buffer accessor and virtual
+call, so it does not establish the exact Core ABI on its own. Readable ITNTL
+code independently supports the slot-1 argument order: buffer, local position,
+clipped rectangle, color, and effect. No explicit inverted-clip rejection is
+visible in the dispatcher, and downstream no-op behavior has not been checked.
+This ties frame selection to the compositor methods without relying on guessed
+direct-call references to the virtual slot.
+
 For a 16-bit target and compressed format byte 2, the current Core loader
 constructs one of two sprite types according to the display masks:
 
@@ -40,13 +52,15 @@ trace.
 
 ## Byte-match validation and limits
 
-Both indexed extents were emitted from the mapped runtime bytes and rebuilt
+All three indexed extents were emitted from the mapped runtime bytes and rebuilt
 with the repository's pinned VC6 toolchain. Objdiff 3.8.0 reports 100% for the
-complete 36,733-byte and 37,154-byte bodies, and 925 captured immediate or
-address operands per body are audited. This validates exact output against the
-hash-pinned mapped capture. The reconstruction emits each decoded instruction
-byte; it does not claim to have recovered the original compiler's optimization
-decisions or high-level source.
+complete 272-byte, 36,733-byte, and 37,154-byte bodies; 15, 925, and 925
+captured immediate or address operands respectively are audited. This validates
+exact output against the hash-pinned mapped capture. The reconstruction emits
+each decoded instruction byte; it does not claim to have recovered the original
+compiler's optimization decisions or high-level source.
+
+The three matched functions total 74,159 bytes.
 
 The original on-disk Core.dll PE has zero raw bytes for the `.text` section
 containing both extents. `tools/compare_current_core_disk.py` records that

@@ -6,9 +6,15 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ADDRESSES = ("58800A60", "5880D420")
+ADDRESSES = ("587BA830", "58800A60", "5880D420")
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
+    "587BA830": {
+        "name_in_analysis": "FUN_587ba830",
+        "called_by": "Directly called by animation-frame wrapper 0x5849C770 from the ship render-node draw path at 0x587B5DB0.",
+        "behavior": "Ghidra shows viewport-edge clamping, screen-origin subtraction for draw position and clip edges, target-buffer retrieval, and indirect dispatch through sprite vtable slot 1. Readable ITNTL.dll independently supports slot 1 receiving the buffer, local geometry, color, and effect.",
+        "uncertainty": "Core Ghidra pseudocode misattributes arguments around the buffer accessor and indirect call, so the exact Core ABI is not established from pseudocode alone. No explicit rejection of an inverted clip is visible; downstream handling is unverified. Pixel output is not yet compared against a live original-client frame.",
+    },
     "58800A60": {
         "name_in_analysis": "FUN_58800a60",
         "called_by": "Slot 1 of the sprite vtable installed by constructor 0x588009C0; selected by the 16-bit target and compressed format-2 loader path.",

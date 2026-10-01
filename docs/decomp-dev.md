@@ -45,7 +45,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,721 functions totaling 716,035 bytes (6.8398% of indexed code), each
+credits 5,722 functions totaling 716,307 bytes (6.8424% of indexed code), each
 verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll`
 functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -55,8 +55,9 @@ event routes are documented separately from the raw socket protocol.
 Seventeen matches cover 2,151 bytes in the installed client's `Main.dll`:
 1,770 bytes in the screen lifecycle and 381 bytes in the VM entry/trampoline
 slice. A separate capture-specific profile indexes 13,030 functions / 3,996,277
-bytes from installed `Core.dll`; its two RGB16 span compositors match 73,887
-bytes. See the [screen lifecycle](current-client-screen-lifecycle.md),
+bytes from installed `Core.dll`; two RGB16 span compositors and their 272-byte
+screen dispatcher match 74,159 bytes. See the
+[screen lifecycle](current-client-screen-lifecycle.md),
 [VM entry/trampoline evidence](client-vm-entry-trampolines.md), and
 [Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
