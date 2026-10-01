@@ -27,6 +27,7 @@ ADDRESSES = (
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
     "58910C40", "58910C70", "58913D40",
+    "58916B80", "58916BB0", "58919DE0",
     "58F76B6B", "58C3A998", "58BF62F5", "58DDB193", "58BFF900",
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
     "58C319AB", "58D6F6B0", "58D6F58A", "58C5D37B", "58FAC690",
@@ -216,6 +217,24 @@ EVIDENCE = {
     "58913D40": {
         "name_in_analysis": "FUN_58913d40",
         "called_by": "Vtable slot +8 at 0x589A2D68 for CType1MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_58910C20 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 1.",
+        "behavior": "Checks the object data pointer, clips the requested rectangle against stored bounds, obtains row stride and buffer origin through FUN_5890C1C0 and FUN_58789FB0, traverses signed-word stream records while clipping rows, then processes packed pixel data with MMX paths and masks DAT_58A284DC, DAT_58A284E4, DAT_58A284EC, DAT_58A284F4, and DAT_58A284FC.",
+        "uncertainty": "The stream record schema, parameter roles, pixel/channel layout, mask meanings, and virtual method contract remain unresolved.",
+    },
+    "58916B80": {
+        "name_in_analysis": "FUN_58916b80",
+        "called_by": "Vtable slot +0 at 0x589A2D78 for CType2MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_58916B60 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 2.",
+        "behavior": "Installs the CType2MMXAlphaSpriteData vtable, invokes the CSpriteData base destructor FUN_58903AC0, and passes this to FUN_5897CC42 when the low bit of the second argument is set.",
+        "uncertainty": "The deletion callback target and ownership contract are unresolved; the destructor does not itself clear or release the object field at +0x0C in the captured body.",
+    },
+    "58916BB0": {
+        "name_in_analysis": "FUN_58916bb0",
+        "called_by": "Vtable slot +4 at 0x589A2D78 for CType2MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_58916B60 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 2.",
+        "behavior": "Checks the object data pointer, clips the requested rectangle against stored bounds, obtains row stride and buffer origin through FUN_5890C1C0 and FUN_58789FB0, traverses the signed-word source stream to skip clipped rows and variable-sized records, then mixes packed source/destination pixel data with scalar and MMX paths using masks DAT_58A284DC and DAT_58A284E4.",
+        "uncertainty": "The stream record schema, rectangle and final argument roles, pixel/channel layout, mask semantics, and virtual method contract remain unresolved.",
+    },
+    "58919DE0": {
+        "name_in_analysis": "FUN_58919de0",
+        "called_by": "Vtable slot +8 at 0x589A2D78 for CType2MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_58916B60 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 2.",
         "behavior": "Checks the object data pointer, clips the requested rectangle against stored bounds, obtains row stride and buffer origin through FUN_5890C1C0 and FUN_58789FB0, traverses signed-word stream records while clipping rows, then processes packed pixel data with MMX paths and masks DAT_58A284DC, DAT_58A284E4, DAT_58A284EC, DAT_58A284F4, and DAT_58A284FC.",
         "uncertainty": "The stream record schema, parameter roles, pixel/channel layout, mask meanings, and virtual method contract remain unresolved.",
     },

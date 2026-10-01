@@ -52,16 +52,17 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,809 functions totaling 1,094,438 bytes (10.4544% of indexed code),
+credits 5,812 functions totaling 1,119,346 bytes (10.6923% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
-committed. The installed 2026 `Main.dll` inventory has 104 exact function
-matches totaling 380,282 bytes. Its latest class slice covers the three
-parser-selected `CType1MMXAlphaSpriteData` virtual methods. The sibling
+committed. The installed 2026 `Main.dll` inventory has 107 exact function
+matches totaling 405,190 bytes. Its latest class slice covers the three
+parser-selected `CType2MMXAlphaSpriteData` virtual methods. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and
-[`CType1MMXAlphaSpriteData`](current-client-alpha-type1-methods.md) slice
-reports record their parser/vtable evidence, uncertainties, and byte checks.
+[`CType1MMXAlphaSpriteData`](current-client-alpha-type1-methods.md) and
+[`CType2MMXAlphaSpriteData`](current-client-alpha-type2-methods.md) reports
+record parser/vtable evidence, uncertainties, and byte checks.
 Earlier documented
 slices cover the renderer/authentication exports and screen lifecycle, the
 `InitCGCDLL` callback-table copier, screen child-list and static-text helpers,
