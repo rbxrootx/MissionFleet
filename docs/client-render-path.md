@@ -142,3 +142,10 @@ As an integration check, all 12 bottom/top layers used by the generated ship
 board were rendered into RGB16 surfaces through this path and compared with the
 independent RGBA preview decoder after round-tripping its colors to RGB565. All
 209,806 literal pixels and every transparent skip matched.
+
+The mapped protected `Main.dll` independently contains a 37,130-byte 16-bit
+span compositor at `0x1015A8A0`. Its pixel-buffer/pitch accesses, transparent
+run traversal, and channel-mask blend paths are now byte-matched from the
+runtime image. The static pointer-table slot is known, while the owning class
+and runtime dispatch path remain unresolved; see the
+[Main.dll span compositor notes](client-rgb16-span-compositor.md).

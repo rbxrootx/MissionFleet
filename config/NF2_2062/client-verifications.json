@@ -4139,6 +4139,27 @@
         "called_by": "FUN_100fed50@100FED50",
         "behavior": "recursively translates a control and flagged descendants horizontally"
       }
+    },
+    {
+      "address": "1015A8A0",
+      "name": "FUN_1015a8a0",
+      "size": 37130,
+      "symbol": "_FUN_1015a8a0",
+      "source": "src/client-2062/Main/FUN_1015a8a0.cpp",
+      "source_sha256": "eb8c4c190d7c3a5b54d7d2c59ee1d4852f4ea718f564d5e5d5be09eff4b299ea",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1015a8a0",
+        "called_by": "mapped pointer table slot 0x10176B90 contains 0x1015A8A0; Ghidra direct-reference query returned no code references, so the owning class/dispatch route is unresolved",
+        "behavior": "Ghidra pseudocode reads an encoded transparent-run span stream from this+0x0C, clips the requested rectangle, writes 16-bit pixels through the target buffer at param_1+0x08 using pitch at param_1+0x0C, and applies per-channel color/effect arithmetic using DAT_101C9300, DAT_101C9308, and DAT_101C9310; the function has no direct call targets",
+        "uncertainty": "The pointer-table owner and runtime caller are not identified. The three masks depend on display configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
+      }
     }
   ]
 }
