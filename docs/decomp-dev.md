@@ -52,20 +52,21 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,758 functions totaling 736,504 bytes (7.0353% of indexed code), each
+credits 5,770 functions totaling 736,852 bytes (7.0386% of indexed code), each
 verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll`
 functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
 committed. The newest client match is the
 [application-event dispatcher](client-event-dispatch.md), whose table-backed
 event routes are documented separately from the raw socket protocol.
-Fifty-three matches cover 22,348 bytes in the installed client's `Main.dll`:
+Sixty-five matches cover 22,696 bytes in the installed client's `Main.dll`:
 1,792 bytes across the renderer/authentication exports and screen lifecycle,
 586 bytes in the `InitCGCDLL` callback-table copier, 603 bytes in the screen
 child-list initializer/insert/remove helpers, 344 bytes in the static-text
 control constructor and direct helper path, 13,311 bytes in the CSH sprite-file
-loader/parser path, 381 bytes in the VM entry/trampoline slice, and 5,331 bytes
-in the logo/control screen constructor and directly constructed controls. The three
+loader/parser path, 348 bytes in the sprite-data format constructor dispatch,
+381 bytes in the VM entry/trampoline slice, and 5,331 bytes in the logo/control
+screen constructor and directly constructed controls. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
@@ -76,6 +77,7 @@ screen dispatcher match 74,159 bytes. See the
 [installed-client child-list evidence](current-client-child-lists.md),
 [installed-client static-text evidence](current-client-static-text.md),
 [installed-client sprite-loader evidence](current-client-sprite-loader.md),
+[installed-client sprite-data constructor evidence](current-client-sprite-data-formats.md),
 [installed-client logo/control screen evidence](current-client-logo-screen.md),
 [VM entry/trampoline evidence](client-vm-entry-trampolines.md), and
 [Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).

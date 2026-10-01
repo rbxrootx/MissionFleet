@@ -54,10 +54,15 @@ generator now emits the original encoding for identity-`lea` instructions:
 VC6 uses these as padding, and assembling the mnemonic alone can shorten the
 instruction and shift all later bytes.
 
+The constructor slice for the parser's four observed sprite-data class families
+is documented in [`current-client-sprite-data-formats.md`](current-client-sprite-data-formats.md).
+Those constructor matches do not cover the pixel-decoding methods behind their
+vtables.
+
 The current matching source preserves the captured x86 instruction stream in
 naked assembly, with Ghidra decompilation and call-site evidence documenting
 what that stream does. This is exact function-level machine-code coverage; it
 is not a recovered high-level C implementation. The parser’s many record
-constructors and decoder helpers, the callback targets and signatures, sprite
+decoder helpers, the callback targets and signatures, sprite
 structure field meanings, and runtime loading in the emulator remain unresolved.
 No bootable-client or in-emulator test is implied by these matches.
