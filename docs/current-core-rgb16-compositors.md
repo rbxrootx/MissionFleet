@@ -79,6 +79,13 @@ names do not establish every argument's semantic name, and the mask/effect
 cases have not been exhaustively traced or compared against original-client
 pixels.
 
+An x86 call-site scan found generic virtual calls through vtable offset `+8`,
+but that offset is shared by unrelated classes. For example,
+`0x587C2EB0` calls the `+8` method on an object stored at its own `+0x50` with
+one explicit value; the two compositor methods decompile with ten explicit
+parameters. That call is not evidence for either compositor's dispatch. A
+call site tied to vtables `0x588BE71C` or `0x588BE72C` remains unresolved.
+
 The function bodies used for this trace were decompiled from the existing
 Ghidra program `/Core.unpacked.dll`; the selected output is
 `var/current-core-rgb16-siblings.c`, produced by

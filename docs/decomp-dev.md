@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,812 functions totaling 1,119,346 bytes (10.6923% of indexed code),
+credits 5,818 functions totaling 1,149,032 bytes (10.9759% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,8 +72,12 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,277
-bytes from installed `Core.dll`; two RGB16 span compositors and their 272-byte
-screen dispatcher match 74,159 bytes. See the
+bytes from installed `Core.dll`; nine renderer functions match 103,845 bytes,
+covering the dispatcher, both RGB16 sprite classes' constructors, slot-0
+cleanup, and slot-1/slot-2 methods. These matches use the mapped runtime image;
+the on-disk `.text` bytes are absent, and the source preserves the captured
+instruction stream rather than claiming high-level source recovery. Slot-2
+callers and framebuffer output remain unverified. See the
 [screen lifecycle](current-client-screen-lifecycle.md),
 [installed-client child-list evidence](current-client-child-lists.md),
 [installed-client static-text evidence](current-client-static-text.md),
