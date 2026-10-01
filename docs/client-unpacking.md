@@ -112,7 +112,7 @@ screen constructor `0x1004DB50`, and its full-screen, logo, and overlay
 constructors at `0x1002C3D0`, `0x100FD890`, and `0x100F34A0` are reconstructed
 along with the sprite-resource wrapper at `0x100FFAC0` and its 10,934-byte
 loader at `0x100FFC40`, in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-`
-and objdiff 3.8.0 reproduce all 19,380 bytes exactly. Relative call targets and
+and objdiff 3.8.0 reproduce all 19,536 bytes exactly. Relative call targets and
 `AllocScreen`'s four absolute global addresses are checked against the captured
 operands. The callback copier's absolute renderer-global operands remain literal
 machine addresses in its object code and therefore compare directly without
@@ -123,7 +123,7 @@ VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The forty-six verified client byte
+are analysis metadata and still need review. The forty-seven verified client byte
 matches include `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
 child constructors, the three common control initialization/list functions,
@@ -135,7 +135,9 @@ host callback thunks, and the compiler's vector-construction/unwind path. The
 unwind helper `0x1016C9F0` is 128 bytes: its branch at `0x1016CA44` targets
 `0x1016CA5D`, and its epilogue returns at `0x1016CA6D` just before the next
 function at `0x1016CA70`; the previous 105-byte Ghidra extent ended mid-instruction
-and has been corrected in `client-functions.tsv`.
+and has been corrected in `client-functions.tsv`. From the overlay constructor at
+`0x100F34A0`, the direct-call walk reaches 36 indexed functions, all byte-matched;
+this includes `0x100F3F40`, the 256-slot overlay reset/release routine.
 `FUN_10015b80` is called seven times by the screen constructor to configure its
 label rows. The three common control functions are
 byte-level reconstructions grounded in the captured instruction sequence; the
@@ -147,8 +149,8 @@ those fields is still inferred. Ghidra's pseudocode for the 2,751-byte full-scre
 constructor shows nine randomly positioned children with spacing checks, plus
 resource and control arrays; the RNG callback's contract and several child-field
 meanings remain unknown. The 375-byte overlay constructor initializes a 256-slot
-child-control table and delegates more setup to `0x100F3F40`, whose behavior is
-not yet reconstructed. The full-screen constructor still calls unmatched helpers
+child-control table and delegates cleanup/reset to the now-matched `0x100F3F40`.
+The full-screen constructor still calls unmatched helpers
 at `0x10032360`, `0x100FF160`, `0x100FF120`, `0x10018950`, `0x101047F0`,
 `0x10018600`, `0x100188E0`, `0x10103B80`, and `0x10022F80`. Ghidra's pseudocode
 shows loader-state gates, record validation, and sprite/effect callback paths,

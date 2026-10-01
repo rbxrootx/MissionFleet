@@ -42,8 +42,8 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The report currently
-credits 5,597 functions totaling 206,266 bytes, each verified at 100.0% by
-objdiff 3.8.0. This includes forty-six 2062 `Main.dll` functions totaling 19,380 bytes;
+credits 5,598 functions totaling 206,422 bytes, each verified at 100.0% by
+objdiff 3.8.0. This includes forty-seven 2062 `Main.dll` functions totaling 19,536 bytes;
 their local verifier is `tools/verify_client_matches.py` and its hash-pinned
 input capture is not committed.
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source

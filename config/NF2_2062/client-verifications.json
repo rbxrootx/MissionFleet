@@ -2056,6 +2056,25 @@
         "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
         "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
       }
+    },
+    {
+      "address": "100F3F40",
+      "name": "FUN_100f3f40",
+      "size": 156,
+      "symbol": "_ResetOverlayControlState",
+      "source": "src/client-2062/Main/ResetOverlayControlState.cpp",
+      "source_sha256": "74045890281fbaab307d04bc797f633d0a5bf13210fb59592abf4bdac089e459",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100f3f40",
+        "called_by": "FUN_100f34a0@100F34A0",
+        "behavior": "releases two optional stored overlay handles through host callbacks, then loops 256 slots releasing up to two child interfaces per slot and clears their per-slot state fields"
+      }
     }
   ]
 }
