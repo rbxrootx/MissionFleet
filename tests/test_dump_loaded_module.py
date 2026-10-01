@@ -1,7 +1,7 @@
 import struct
 import unittest
 
-from tools.dump_loaded_module import align, normalize_image_base, rebuild_pe
+from tools.dump_loaded_module import align, merge_manifest, normalize_image_base, rebuild_pe
 
 
 class DumpLoadedModuleTests(unittest.TestCase):
@@ -43,6 +43,21 @@ class DumpLoadedModuleTests(unittest.TestCase):
         self.assertEqual((1, 0x500000), (count, loaded))
         self.assertEqual(0x400000, struct.unpack_from("<I", normalized, optional + 28)[0])
         self.assertEqual(0x401234, struct.unpack_from("<I", normalized, 0x1004)[0])
+
+    def test_manifest_merges_distinct_module_captures_and_replaces_same_mapping(self):
+        navy = {"name": "NavyFIELD.exe", "path": "client/NavyFIELD.exe", "base": 0x400000}
+        main = {"name": "Main.dll", "path": "client/Main.dll", "base": 0x10000000}
+        manifest = merge_manifest(None, 10, [navy])
+        manifest = merge_manifest(manifest, 20, [main])
+        self.assertEqual(20, manifest["pid"])
+        self.assertEqual({"NavyFIELD.exe", "Main.dll"},
+                         {item["name"] for item in manifest["modules"]})
+
+        recaptured = {**main, "capture_pid": 30}
+        manifest = merge_manifest(manifest, 30, [recaptured])
+        self.assertEqual(2, len(manifest["modules"]))
+        self.assertEqual(30, next(item["capture_pid"] for item in manifest["modules"]
+                                  if item["name"] == "Main.dll"))
 
 
 if __name__ == "__main__":

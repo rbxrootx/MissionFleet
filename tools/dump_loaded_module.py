@@ -5,6 +5,7 @@ original sections have zero raw size on disk but are materialized by the loader.
 """
 import argparse
 import ctypes
+import hashlib
 from ctypes import wintypes
 import json
 import os
@@ -166,6 +167,23 @@ def rebuild_pe(image):
     return bytes(output), rebuilt
 
 
+def merge_manifest(manifest, pid, records):
+    """Keep earlier module captures when multiple runs share one output folder."""
+    result = dict(manifest or {})
+    result["schema"] = 1
+    result["pid"] = pid
+    modules = list(result.get("modules", []))
+    for record in records:
+        key = (record["name"].casefold(), record["path"], record["base"])
+        modules = [
+            item for item in modules
+            if (item["name"].casefold(), item["path"], item["base"]) != key
+        ]
+        modules.append(record)
+    result["modules"] = modules
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     target = parser.add_mutually_exclusive_group(required=True)
@@ -219,7 +237,10 @@ def main():
             if missing:
                 raise RuntimeError(f"modules unloaded during settle interval: {', '.join(missing)}")
         args.output.mkdir(parents=True, exist_ok=True)
-        manifest = {"schema": 1, "pid": pid, "modules": []}
+        manifest_path = args.output / "manifest.json"
+        previous_manifest = json.loads(manifest_path.read_text(encoding="utf-8")) \
+            if manifest_path.exists() else None
+        new_records = []
         for key in sorted(wanted):
             module = found[key]
             image, failed = read_image(pid, module)
@@ -238,14 +259,17 @@ def main():
             rebuilt_path = args.output / f"{stem}.unpacked{Path(module['name']).suffix}"
             memory_path.write_bytes(image)
             rebuilt_path.write_bytes(rebuilt)
-            manifest["modules"].append({
+            new_records.append({
                 **module, "failed_page_offsets": failed, "sections": sections,
+                "capture_pid": pid,
+                "original_sha256": hashlib.sha256(original).hexdigest(),
                 "loaded_image_base": loaded_base, "preferred_image_base": preferred_base,
                 "analysis_image_base": preferred_base if args.normalize_base else loaded_base,
                 "normalized_highlow_relocations": relocation_count,
                 "mapped_image": str(memory_path), "rebuilt_pe": str(rebuilt_path),
             })
-        (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        manifest = merge_manifest(previous_manifest, pid, new_records)
+        manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         print(json.dumps({"pid": pid, "dumped": [item["name"] for item in manifest["modules"]]}))
     finally:
         if child and args.terminate and child.poll() is None:

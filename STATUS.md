@@ -67,6 +67,13 @@ and `-2` image markers. The normal path rendered all 12 source layers on the
 six-ship visual board; the nondefault effect still needs live-client image
 comparison. See [client render path](docs/client-render-path.md).
 
+The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
+its DLL entrypoint expands its protected image into native mapped code. Ghidra
+recovers its `AllocScreen` export and confirms a `0x7C` allocation; the archived
+readable `ITNTL.dll` uses the same allocation size but a different constructor,
+so it is only a boundary cross-check. No client login was used. See the
+[archived client capture and renderer evidence](docs/client-unpacking.md).
+
 Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
 The public-safe decompilation project is published at

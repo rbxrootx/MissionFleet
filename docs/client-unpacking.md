@@ -52,9 +52,9 @@ The archived 2062 package has a separate `NavyFIELD.exe` (SHA-256
 `dd53bd78d5a4eaae916a428f9086582bf8603be2e680c2a84459f21afe03e663`). The
 executable's entry point is in the small on-disk `.nsp1` bootstrap; its
 handoff enters `.nsp0`, whose raw size is zero, so static disassembly stops
-before the startup functions. The
-existing `dump_loaded_module.py` tool now accepts `--settle` to wait after a
-module appears before reading its mapped pages. A six-second settled capture
+before the startup functions. The existing `dump_loaded_module.py` tool accepts
+`--settle` to wait after a module appears before reading its mapped pages. A
+six-second settled capture
 produced a 655,360-byte mapped image with no unreadable pages; the rebuilt PE
 and memory image are preserved locally under the ignored
 `reports/unpacked-2062-client/` directory.
@@ -64,12 +64,38 @@ Ghidra analysis of that mapped snapshot recovered the startup transfer
 fixups and invokes the runtime startup routine; the latter initializes the
 window/display path. This analysis does not establish that the entire protected
 image is devirtualized. During the observed 20-second executable run,
-`Main.dll` and `ITNTL.dll` did not load, so their game-specific initialization
-is still beyond this startup trace. The archived `Main.dll` has zero raw bytes
-for its `CODE` and `DATA` sections and no TLS directory; its module entry point
-is at RVA `0x1E2B70`. The next capture needs a state that actually activates the
-game DLLs, or a separately validated in-process loader path. No authentication
-was attempted.
+`Main.dll` and `ITNTL.dll` did not load. The archived `Main.dll` has zero raw
+bytes for its `CODE` and `DATA` sections, no TLS directory, and a module entry
+point at RVA `0x1E2B70`. A separate 32-bit PowerShell host, with the archived
+`MSVCRTD.DLL` beside it, loaded `Main.dll` through the Windows loader without
+starting the game or authenticating. Its DLL entrypoint expanded the protected
+image in memory. `dump_loaded_module.py` captured 1,982,464 bytes at base
+`0x10000000` with no unreadable pages; the `.CODE` section contains 1,093,152
+nonzero bytes. The mapped capture SHA-256 is
+`ce1129ff2b23a5f08c3641f2d85d8a38f3590ce95497703b1c3944a22ae8ce35` and stays
+under the ignored `reports/unpacked-2062-client/` directory.
+
+The repeatable isolated-host sequence is:
+
+```
+rtk proxy C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/load_module_host.ps1 -ModulePath var\navyfield2062\Main.dll -HoldSeconds 120
+rtk python tools/dump_loaded_module.py --pid <printed-pid> --module Main.dll --output reports/unpacked-2062-client
+```
+
+Ghidra recovered the DLL entrypoint at `0x101E2B70`, which expands the code
+stream from `0x10135000` to `0x10001000` and applies import/relocation fixups.
+The exported `AllocScreen` at `0x100348B0` allocates `0x7C` bytes through an
+initialized function pointer, then calls constructor `0x1004DB50` with the
+caller-supplied configuration. The pointer at `0x1017515C` resolves in the
+captured process to `MSVCRTD.DLL+0xE2C0`, whose export is `operator new(unsigned
+int)`. `InitCGCDLL` at `0x10033A70` delegates to `0x10102C40`, which copies the
+host's callback table into renderer globals.
+
+The archived readable `ITNTL.dll` independently uses the same `0x7C` allocation
+in its `AllocScreen` at `0x1002F8E0`, but calls constructor `0x10046C20` and
+stores the object in different globals. This confirms the allocation size and
+export boundary, not equivalence of the protected constructor or the full
+renderer. No original game login or network connection was attempted.
 
 The first render subsystem traced through that recovered native code is the
 ship sprite path. It establishes the exact animation-record stride, timed frame
