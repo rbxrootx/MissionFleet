@@ -183,3 +183,9 @@ The first render subsystem traced through that recovered native code is the
 ship sprite path. It establishes the exact animation-record stride, timed frame
 selection, node anchoring, clipping and final screen-vtable call. See the
 [current client ship sprite render path](client-render-path.md).
+
+The next validated UI subsystem is the 177-arm control/menu dispatcher at
+`0x1001DAB0` and its 12-function direct-helper closure. Its mapped bytes and
+call relocations pass the local client verifier. The observed operations,
+supporting helper behavior, and unresolved callback/control semantics are
+recorded in the [client UI control dispatch notes](client-ui-control-dispatch.md).
