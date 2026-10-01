@@ -48,5 +48,7 @@ the mapped image at objdiff 100%, totaling 348 bytes. The complete current
 
 The source currently preserves each captured x86 constructor as naked assembly;
 this is exact machine-code matching rather than recovered high-level C++. The
-pixel conversion routines behind these vtables, the complete record schema,
-and visual rendering in the emulator remain future work.
+first class's virtual methods are documented in
+[`current-client-high555-sprite-methods.md`](current-client-high555-sprite-methods.md).
+The other eleven class vtables, complete record schema, and visual rendering in
+the emulator remain future work.
