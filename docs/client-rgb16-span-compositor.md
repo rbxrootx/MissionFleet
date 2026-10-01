@@ -75,15 +75,26 @@ roles are not identified. The pointer-table slot at `0x10176B70` contains
 `0x10144810`. Ghidra found no direct calls or code references to the function,
 so its dispatch path and connection to the other methods remain uncertain.
 
+`0x1014C060` is a 7,773-byte sibling at table slot `0x10176B7C`. Its Ghidra
+decompilation shows the same source bounds, clipped destination surface, and
+span-stream traversal as the other methods. It reads the five host-provided
+channel masks and uses two additional explicit values to select packed blend
+paths: one is compared against `0x100`, while the other is tested for zero and
+sign. Those branch conditions are observed; the original argument names and
+their semantic labels are not recovered. Ghidra reports no direct call targets
+or code references to this function, so the owner and runtime dispatch remain
+unknown.
+
 ## Byte-match validation and limits
 
 The reconstructed sources preserve each mapped instruction, including the
 implicit string and packed-pixel instructions that VC6's inline assembler
 cannot express. `tools/verify_client_matches.py --only 10144810 --only 101481E0
---only 1014DF30 --only 1015A8A0` compiles all four sources with the recorded
-VC6 flags and confirms 104,411 bytes at 100% objdiff similarity. `/Zm200` raises
-VC6's internal compiler heap limit for these large inline-assembly functions;
-it does not alter code generation. None has direct-call relocations to resolve.
+--only 1014C060 --only 1014DF30 --only 1015A8A0` compiles all five sources
+with the recorded VC6 flags and confirms 112,184 bytes at 100% objdiff
+similarity. `/Zm200` raises VC6's internal compiler heap limit for these large
+inline-assembly functions; it does not alter code generation. These methods
+have no direct-call relocations to resolve.
 
 The Ghidra signature does not recover the original parameter names or the
 meaning of each effect value. The runtime target masks can vary with host

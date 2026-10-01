@@ -4223,6 +4223,27 @@
         "behavior": "Ghidra pseudocode reads and clips the same span-encoded source into a 16-bit target surface, uses the five host-provided channel-mask globals, and processes three explicit color/effect-like integer arguments in packed per-channel arithmetic; exact argument roles are unresolved",
         "uncertainty": "The pointer-table owner and runtime caller are not identified. The host-provided masks vary with renderer configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
       }
+    },
+    {
+      "address": "1014C060",
+      "name": "FUN_1014c060",
+      "size": 7773,
+      "symbol": "_FUN_1014c060",
+      "source": "src/client-2062/Main/FUN_1014c060.cpp",
+      "source_sha256": "79cff7edf21f0c83266ff1d2289d8912abb839adf72dedaa4546eb2f25e1f6a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1014c060",
+        "called_by": "mapped function-pointer table slot 0x10176B7C contains 0x1014C060; Ghidra direct-reference query returned no code references, so the table owner and runtime dispatch route remain unresolved",
+        "behavior": "Ghidra pseudocode confirms this method reads the same source bounds and encoded span data as the neighboring compositor methods, clips to the target surface, and blends RGB16 pixels using the five host-provided channel masks; param_9 selects an opacity-like path below 0x100 and param_10 selects additional blend paths by sign and zero tests, though the source-level meanings are unresolved",
+        "uncertainty": "The pointer-table owner and runtime caller are not identified. The host-provided masks vary with renderer configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
+      }
     }
   ]
 }
