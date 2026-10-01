@@ -532,7 +532,7 @@
       "size": 2751,
       "symbol": "_CreateFullScreenControl",
       "source": "src/client-2062/Main/CreateFullScreenControl.cpp",
-      "source_sha256": "54dae938f6da8431a4eac97c099429fbb1adc672831ff5fc66d1947850f8efcc",
+      "source_sha256": "c21e5941d98b74def917f88c709a5bb64621860394ca6b229f034718f698f7bb",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -561,7 +561,7 @@
         },
         {
           "offset": 211,
-          "symbol": "_FUN_10032360",
+          "symbol": "_InitializeFrameControl",
           "target_address": "10032360"
         },
         {
@@ -596,27 +596,27 @@
         },
         {
           "offset": 436,
-          "symbol": "_FUN_100ff160",
+          "symbol": "_SetTreeControlStyle",
           "target_address": "100FF160"
         },
         {
           "offset": 448,
-          "symbol": "_FUN_100ff120",
+          "symbol": "_SetTreeControlVisibility",
           "target_address": "100FF120"
         },
         {
           "offset": 464,
-          "symbol": "_FUN_100ff160",
+          "symbol": "_SetTreeControlStyle",
           "target_address": "100FF160"
         },
         {
           "offset": 480,
-          "symbol": "_FUN_100ff160",
+          "symbol": "_SetTreeControlStyle",
           "target_address": "100FF160"
         },
         {
           "offset": 492,
-          "symbol": "_FUN_100ff120",
+          "symbol": "_SetTreeControlVisibility",
           "target_address": "100FF120"
         },
         {
@@ -696,7 +696,7 @@
         },
         {
           "offset": 1294,
-          "symbol": "_FUN_10018600",
+          "symbol": "_InitializeTextControl",
           "target_address": "10018600"
         },
         {
@@ -711,7 +711,7 @@
         },
         {
           "offset": 1355,
-          "symbol": "_FUN_100188e0",
+          "symbol": "_SetTextControlPairedValue",
           "target_address": "100188E0"
         },
         {
@@ -746,12 +746,12 @@
         },
         {
           "offset": 1784,
-          "symbol": "_FUN_100ff160",
+          "symbol": "_SetTreeControlStyle",
           "target_address": "100FF160"
         },
         {
           "offset": 1797,
-          "symbol": "_FUN_100ff120",
+          "symbol": "_SetTreeControlVisibility",
           "target_address": "100FF120"
         },
         {
@@ -786,12 +786,12 @@
         },
         {
           "offset": 2275,
-          "symbol": "_FUN_100ff160",
+          "symbol": "_SetTreeControlStyle",
           "target_address": "100FF160"
         },
         {
           "offset": 2315,
-          "symbol": "_FUN_100ff120",
+          "symbol": "_SetTreeControlVisibility",
           "target_address": "100FF120"
         },
         {
@@ -816,7 +816,7 @@
         },
         {
           "offset": 2630,
-          "symbol": "_FUN_100ff120",
+          "symbol": "_SetTreeControlVisibility",
           "target_address": "100FF120"
         }
       ],
@@ -2074,6 +2074,130 @@
         "name_in_analysis": "FUN_100f3f40",
         "called_by": "FUN_100f34a0@100F34A0",
         "behavior": "releases two optional stored overlay handles through host callbacks, then loops 256 slots releasing up to two child interfaces per slot and clears their per-slot state fields"
+      }
+    },
+    {
+      "address": "10032360",
+      "name": "FUN_10032360",
+      "size": 147,
+      "symbol": "_InitializeFrameControl",
+      "source": "src/client-2062/Main/InitializeFrameControl.cpp",
+      "source_sha256": "4519c258dceecd2928d59abb249cf39eaef028d16f5ab2cc7f31ed753ed7a1e1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 31,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10032360",
+        "called_by": "FUN_1002c3d0@1002C3D0 and FUN_100ffc40@100FFC40",
+        "behavior": "initializes a common control, copies six descriptor fields when the optional frame descriptor is non-null, and stores descriptor frame-count minus one in the control state"
+      }
+    },
+    {
+      "address": "100FF160",
+      "name": "FUN_100ff160",
+      "size": 53,
+      "symbol": "_SetTreeControlStyle",
+      "source": "src/client-2062/Main/SetTreeControlStyle.cpp",
+      "source_sha256": "6f9969cee7ab42d80438e6308e9a0473b5ea839c2ac27f2c386a65075520c5b1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "symbol": "_SetTreeControlStyle",
+          "target_address": "100FF160"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100ff160",
+        "called_by": "screen control initialization and tree-control updates",
+        "behavior": "stores a style value on the control and recursively propagates it to child nodes whose 0x25 flag has bit 7 set"
+      }
+    },
+    {
+      "address": "100FF120",
+      "name": "FUN_100ff120",
+      "size": 53,
+      "symbol": "_SetTreeControlVisibility",
+      "source": "src/client-2062/Main/SetTreeControlVisibility.cpp",
+      "source_sha256": "a42245bf731ac03011882ec830b02d57030ca2bec72a54005d64ac4d7d34ed80",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "symbol": "_SetTreeControlVisibility",
+          "target_address": "100FF120"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100ff120",
+        "called_by": "screen control initialization and tree-control updates",
+        "behavior": "stores a visibility value on the control and recursively propagates it to child nodes whose 0x25 flag has bit 6 set"
+      }
+    },
+    {
+      "address": "10018600",
+      "name": "FUN_10018600",
+      "size": 206,
+      "symbol": "_InitializeTextControl",
+      "source": "src/client-2062/Main/InitializeTextControl.cpp",
+      "source_sha256": "d0d87bd9dcfe3ecda18cc2f461d9f2da4866a0c87a9731c34cdf63dd6dfd699f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 60,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 127,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10018600",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "initializes a text-like control, delegates base state to FUN_100fe9b0, allocates and clears a 0x80-byte buffer, then configures its vtable and style bits"
+      }
+    },
+    {
+      "address": "100188E0",
+      "name": "FUN_100188e0",
+      "size": 13,
+      "symbol": "_SetTextControlPairedValue",
+      "source": "src/client-2062/Main/SetTextControlPairedValue.cpp",
+      "source_sha256": "a09eefb436f4c1cae45e979de78cf7d01c5ef5b8f6be17bbb9e20dd668d4adb4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100188E0",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "writes one value to the control fields at offsets 0x70 and 0x74; semantic purpose of the paired fields remains uncertain"
       }
     }
   ]

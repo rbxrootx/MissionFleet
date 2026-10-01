@@ -112,7 +112,7 @@ screen constructor `0x1004DB50`, and its full-screen, logo, and overlay
 constructors at `0x1002C3D0`, `0x100FD890`, and `0x100F34A0` are reconstructed
 along with the sprite-resource wrapper at `0x100FFAC0` and its 10,934-byte
 loader at `0x100FFC40`, in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-`
-and objdiff 3.8.0 reproduce all 19,536 bytes exactly. Relative call targets and
+and objdiff 3.8.0 reproduce all 20,008 bytes exactly. Relative call targets and
 `AllocScreen`'s four absolute global addresses are checked against the captured
 operands. The callback copier's absolute renderer-global operands remain literal
 machine addresses in its object code and therefore compare directly without
@@ -123,7 +123,7 @@ VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The forty-seven verified client byte
+are analysis metadata and still need review. The fifty-two verified client byte
 matches include `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
 child constructors, the three common control initialization/list functions,
@@ -150,12 +150,17 @@ constructor shows nine randomly positioned children with spacing checks, plus
 resource and control arrays; the RNG callback's contract and several child-field
 meanings remain unknown. The 375-byte overlay constructor initializes a 256-slot
 child-control table and delegates cleanup/reset to the now-matched `0x100F3F40`.
-The full-screen constructor still calls unmatched helpers
-at `0x10032360`, `0x100FF160`, `0x100FF120`, `0x10018950`, `0x101047F0`,
-`0x10018600`, `0x100188E0`, `0x10103B80`, and `0x10022F80`. Ghidra's pseudocode
+The full-screen constructor's common frame-control initializer `0x10032360`,
+recursive style and visibility setters `0x100FF160` and `0x100FF120`, text-like
+control initializer `0x10018600`, and paired-field setter `0x100188E0` are now
+byte-matched and tied back to their call sites in `0x1002C3D0`. The initializer
+clears a 0x80-byte buffer; the setter writes one value to offsets `+0x70` and
+`+0x74`, whose exact meaning remains uncertain. Four direct control helpers remain
+unmatched: `0x10018950`, `0x101047F0`, `0x10103B80`, and `0x10022F80`. Ghidra's pseudocode
 shows loader-state gates, record validation, and sprite/effect callback paths,
 but the loader's global-state and indirect host-callback contracts are not yet
-fully understood. The overlay's `0x100F3F40` setup routine also remains unmatched.
+fully understood. The full-screen RNG callback contract and meanings of several
+child fields also remain unresolved.
 Re-run client verification with `python tools/verify_client_matches.py`; the tool checks the
 original module hash, mapped-image hash, compiler hash, call destinations,
 absolute global addresses, and objdiff scores. Captures and compiler binaries

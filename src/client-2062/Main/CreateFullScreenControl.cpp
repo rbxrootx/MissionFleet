@@ -6,13 +6,13 @@ extern "C" void AttachControlList();
 extern "C" void CreateFullScreenControl();
 extern "C" void CreateLogoControl();
 extern "C" void CreateOverlayControl();
-extern "C" void FUN_10018600();
-extern "C" void FUN_100188e0();
+extern "C" void InitializeTextControl();
+extern "C" void SetTextControlPairedValue();
 extern "C" void FUN_10018950();
 extern "C" void FUN_10022f80();
-extern "C" void FUN_10032360();
-extern "C" void FUN_100ff120();
-extern "C" void FUN_100ff160();
+extern "C" void InitializeFrameControl();
+extern "C" void SetTreeControlVisibility();
+extern "C" void SetTreeControlStyle();
 extern "C" void FUN_100ffac0();
 extern "C" void FUN_10103b80();
 extern "C" void FUN_101047f0();
@@ -153,7 +153,7 @@ L_1002C47D:
         push ebx
         push esi
         mov ecx, eax
-        call FUN_10032360
+        call InitializeFrameControl
         ; Exact immediate encoding: jmp short L_1002C4AB
         __asm _emit 0xeb
         __asm _emit 0x02
@@ -290,19 +290,19 @@ L_1002C56E:
         mov ecx, dword ptr [esi + 2c8h]
         push 101h
         mov byte ptr [esp + 30h], bl
-        call FUN_100ff160
+        call SetTreeControlStyle
         mov ecx, dword ptr [esi + 2c8h]
         push ebx
-        call FUN_100ff120
+        call SetTreeControlVisibility
         mov ecx, dword ptr [esi + 2cch]
         push 0fffffeffh
-        call FUN_100ff160
+        call SetTreeControlStyle
         mov ecx, dword ptr [esi + 2d8h]
         push 0fffffeffh
-        call FUN_100ff160
+        call SetTreeControlStyle
         mov ecx, dword ptr [esi + 2cch]
         push ebx
-        call FUN_100ff120
+        call SetTreeControlVisibility
         mov eax, dword ptr [esi + 2c8h]
         ; Exact immediate encoding: mov ecx, 7fffh
         __asm _emit 0xb9
@@ -690,7 +690,7 @@ L_1002C85B:
         push ebx
         push esi
         mov ecx, eax
-        call FUN_10018600
+        call InitializeTextControl
         mov edi, eax
         ; Exact immediate encoding: jmp short L_1002C8E8
         __asm _emit 0xeb
@@ -725,7 +725,7 @@ L_1002C905:
 L_1002C912:
         mov ecx, dword ptr [esi + 0a004h]
         push 32h
-        call FUN_100188e0
+        call SetTextControlPairedValue
         push 90h
         call AllocateObjectThunk
         add esp, 4
@@ -969,10 +969,10 @@ L_1002CAB7:
         push 101h
         mov byte ptr [esp + 30h], bl
         mov dword ptr [esi + edi*4 + 0b0h], ecx
-        call FUN_100ff160
+        call SetTreeControlStyle
         mov ecx, dword ptr [esi + edi*4 + 0b0h]
         push ebx
-        call FUN_100ff120
+        call SetTreeControlVisibility
         mov eax, dword ptr [esi + edi*4 + 0b0h]
         ; Exact immediate encoding: and word ptr [eax + 24h], 0bfffh
         __asm _emit 0x66
@@ -1208,7 +1208,7 @@ L_1002CCA1:
         mov ecx, eax
         mov byte ptr [esp + 30h], bl
         mov dword ptr [esi + 9ff8h], eax
-        call FUN_100ff160
+        call SetTreeControlStyle
         mov eax, dword ptr [esi + 9ff8h]
         push ebx
         ; Exact immediate encoding: mov dword ptr [eax + 80h], 101h
@@ -1231,7 +1231,7 @@ L_1002CCA1:
         __asm _emit 0xff
         __asm _emit 0x7f
         mov ecx, dword ptr [esi + 9ff8h]
-        call FUN_100ff120
+        call SetTreeControlVisibility
         mov eax, dword ptr [esi + 9ff8h]
         mov dword ptr [eax + 84h], ebx
         mov ecx, dword ptr [esi + 9ff8h]
@@ -1395,7 +1395,7 @@ L_1002CE06:
         mov ecx, dword ptr [edi]
         push ebx
         mov byte ptr [esp + 30h], bl
-        call FUN_100ff120
+        call SetTreeControlVisibility
         mov eax, dword ptr [edi]
         xor ecx, ecx
         add edi, 4
