@@ -24,7 +24,7 @@ ADDRESSES = (
     "58962D60", "58962DE0", "5895F370", "58903AC0", "5897CF96",
     "5897CC42", "5897CBDA", "58789FB0", "5890C1C0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
-    "58923DC0",
+    "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "58F76B6B", "58C3A998", "58BF62F5", "58DDB193", "58BFF900",
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
     "58C319AB", "58D6F6B0", "58D6F58A", "58C5D37B", "58FAC690",
@@ -340,6 +340,24 @@ EVIDENCE = {
     "58923DC0": {
         "name_in_analysis": "FUN_58923dc0",
         "called_by": "Vtable slot +8 at 0x589A2D98 for CType1MMXTrueSpriteData; the parser installs that vtable through constructor FUN_5891FB10 when its format discriminator DAT_589CDFFC equals 3 and record subfield piVar13[0xB] is 1.",
+        "behavior": "Reads the sprite-data object's +8 and +0x0C fields through FUN_58789FB0 and FUN_5890C1C0, then runs a second packed MMX buffer operation using the format's color masks.",
+        "uncertainty": "The exact argument roles, channel layout, buffer organization, virtual method name, and return contract are not established by the vtable slot or Ghidra pseudocode alone.",
+    },
+    "58926C30": {
+        "name_in_analysis": "FUN_58926c30",
+        "called_by": "Vtable slot +0 at 0x589A2DA8 for CType2MMXTrueSpriteData; the parser installs that vtable through constructor FUN_58926C10 when its format discriminator DAT_589CDFFC equals 3 and record subfield piVar13[0xB] is 2.",
+        "behavior": "Installs the CType2MMXTrueSpriteData vtable, dispatches the optional object field at +0x0C through FUN_5897CF96, invokes the CSpriteData base destructor FUN_58903AC0, and passes the object to FUN_5897CC42 when the low bit of its second argument is set.",
+        "uncertainty": "The callback targets and ownership contract are not recovered; the low-bit flag is described only from its observed branch.",
+    },
+    "58926C70": {
+        "name_in_analysis": "FUN_58926c70",
+        "called_by": "Vtable slot +4 at 0x589A2DA8 for CType2MMXTrueSpriteData; the parser installs that vtable through constructor FUN_58926C10 when its format discriminator DAT_589CDFFC equals 3 and record subfield piVar13[0xB] is 2.",
+        "behavior": "Reads sprite-data fields at +4, +8, and +0x0C, clips requested coordinates against stored bounds, walks a signed-word encoded source stream, and performs packed color arithmetic with MMX and the format masks.",
+        "uncertainty": "The exact channel layout, weighting arguments, source-buffer organization, virtual method name, and return contract remain unresolved.",
+    },
+    "5892AFD0": {
+        "name_in_analysis": "FUN_5892afd0",
+        "called_by": "Vtable slot +8 at 0x589A2DA8 for CType2MMXTrueSpriteData; the parser installs that vtable through constructor FUN_58926C10 when its format discriminator DAT_589CDFFC equals 3 and record subfield piVar13[0xB] is 2.",
         "behavior": "Reads the sprite-data object's +8 and +0x0C fields through FUN_58789FB0 and FUN_5890C1C0, then runs a second packed MMX buffer operation using the format's color masks.",
         "uncertainty": "The exact argument roles, channel layout, buffer organization, virtual method name, and return contract are not established by the vtable slot or Ghidra pseudocode alone.",
     },
