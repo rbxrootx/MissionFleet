@@ -1,13 +1,15 @@
 # Main.dll RGB16 span compositor
 
-`0x1015A8A0` is a 37,130-byte leaf function in the mapped 2062 `Main.dll`.
-Ghidra decompiles it as a `__thiscall` method with nine explicit parameters.
-Its accesses and clipping arithmetic are consistent with a target surface,
-position, clip rectangle, color value, and effect value; those parameter roles
-remain inferred because the owning class and dispatch path are unresolved. The
-method reads a run-encoded sprite stream and writes 16-bit pixels, connecting
-the recovered Main.dll image to sprite-render behavior traced through `Core.dll`
-and `ITNTL.dll`.
+The mapped 2062 `Main.dll` contains a family of span-render methods, including
+`0x1015A8A0` (37,130 bytes), `0x1014DF30` (36,606 bytes), and `0x101481E0`
+(15,988 bytes). Ghidra decompiles them as `__thiscall` methods with nine
+explicit parameters.
+The method accesses and clipping arithmetic are consistent with a target
+surface, position, clip rectangle, color value, and effect value; those
+parameter roles remain inferred because the owning class and dispatch path are
+unresolved. The methods read run-encoded sprite data and write 16-bit pixels,
+connecting the recovered Main.dll image to sprite-render behavior traced through
+`Core.dll` and `ITNTL.dll`.
 
 ## Evidence from Main.dll
 
@@ -55,18 +57,28 @@ calls or code references for the sibling either. These nearby entries and their
 shared stream/mask behavior support treating them as a renderer method family,
 while leaving the table owner and runtime dispatch unresolved.
 
+`0x101481E0` is another method in this family. It uses the same target surface,
+clipping pattern, and encoded span stream, with two additional masks:
+`DAT_101C92F0` and `DAT_101C92F8`. `FUN_10102C40` copies them from host-table
+offsets `+0x6C` and `+0x64`, respectively. Its packed pixel arithmetic reads
+these masks alongside `DAT_101C9300`, `DAT_101C9308`, and `DAT_101C9310`.
+The mapped pointer-table slot at `0x10176B78` contains `0x101481E0`; Ghidra
+found no direct calls or code references to it. The role of the two extra masks
+and this method's exact effect modes remain uncertain.
+
 ## Byte-match validation and limits
 
 The reconstructed sources preserve each mapped instruction, including the
 implicit string and packed-pixel instructions that VC6's inline assembler
-cannot express. `tools/verify_client_matches.py --only 1014DF30 --only 1015A8A0`
-compiles both sources with the recorded VC6 flags and confirms all 73,736 bytes
-at 100% objdiff similarity. `/Zm200` raises VC6's internal compiler heap limit
-for these unusually large inline-assembly functions; it does not alter code
-generation. Neither function has direct-call relocations to resolve.
+cannot express. `tools/verify_client_matches.py --only 101481E0 --only 1014DF30
+--only 1015A8A0` compiles all three sources with the recorded VC6 flags and
+confirms 89,724 bytes at 100% objdiff similarity. `/Zm200` raises VC6's internal
+compiler heap limit for these large inline-assembly functions; it does not alter
+code generation. None of the three functions has direct-call relocations to
+resolve.
 
 The Ghidra signature does not recover the original parameter names or the
-meaning of each effect value. The runtime target masks can vary with display
+meaning of each effect value. The runtime target masks can vary with host
 configuration, and this static reconstruction has not yet been compared against
 a captured live frame. Byte identity is verified against the mapped Main.dll
-capture; the owner class and exact runtime caller are still open questions.
+capture; the owner class and exact runtime caller remain open questions.
