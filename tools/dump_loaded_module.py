@@ -174,6 +174,8 @@ def main():
     parser.add_argument("--module", action="append", required=True)
     parser.add_argument("--output", type=Path, default=Path("reports/unpacked-client"))
     parser.add_argument("--wait", type=float, default=15.0)
+    parser.add_argument("--settle", type=float, default=0.0,
+                        help="Wait after target modules load before reading their mapped pages")
     parser.add_argument("--terminate", action="store_true")
     parser.add_argument("--normalize-base", action="store_true",
                         help="Apply standard HIGHLOW relocations back to the preferred base")
@@ -204,6 +206,18 @@ def main():
         missing = sorted(wanted - set(found))
         if missing:
             raise RuntimeError(f"modules did not load: {', '.join(missing)}")
+        if args.settle > 0:
+            time.sleep(args.settle)
+            if child and child.poll() is not None:
+                raise RuntimeError(f"client exited during settle interval with code {child.returncode}")
+            found = {
+                item["name"].casefold(): item
+                for item in modules(pid)
+                if item["name"].casefold() in wanted
+            }
+            missing = sorted(wanted - set(found))
+            if missing:
+                raise RuntimeError(f"modules unloaded during settle interval: {', '.join(missing)}")
         args.output.mkdir(parents=True, exist_ok=True)
         manifest = {"schema": 1, "pid": pid, "modules": []}
         for key in sorted(wanted):
@@ -221,7 +235,7 @@ def main():
             rebuilt, sections = rebuild_pe(analysis_image)
             stem = Path(module["name"]).stem
             memory_path = args.output / f"{stem}.mapped.bin"
-            rebuilt_path = args.output / f"{stem}.unpacked.dll"
+            rebuilt_path = args.output / f"{stem}.unpacked{Path(module['name']).suffix}"
             memory_path.write_bytes(image)
             rebuilt_path.write_bytes(rebuilt)
             manifest["modules"].append({
