@@ -13,14 +13,14 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 20_941)
         self.assertEqual(self.report["measures"]["total_code"], "4118837")
-        self.assertEqual(self.report["measures"]["matched_functions"], 5_558)
-        self.assertEqual(self.report["measures"]["matched_code"], "188055")
+        self.assertEqual(self.report["measures"]["matched_functions"], 5_564)
+        self.assertEqual(self.report["measures"]["matched_code"], "192845")
         self.assertEqual(len(self.report["units"]), 4)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_016)
         self.assertEqual(client["measures"]["total_code"], "1253481")
-        self.assertEqual(client["measures"]["matched_functions"], 7)
-        self.assertEqual(client["measures"]["matched_code"], "1169")
+        self.assertEqual(client["measures"]["matched_functions"], 13)
+        self.assertEqual(client["measures"]["matched_code"], "5959")
 
     def test_function_identities_are_unique_per_unit(self):
         for unit in self.report["units"]:

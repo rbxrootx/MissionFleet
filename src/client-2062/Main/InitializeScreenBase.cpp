@@ -10,6 +10,7 @@ struct ScreenBase {
 extern "C" ScreenBase* InitializeCommon(void*, int, int, int, int, unsigned short);
 extern "C" void AttachControlList(void* child);
 extern "C" void AttachByLayer(void* child);
+extern "C" void InitializeRowControl();
 
 // Ghidra identifies this shared initializer at Main.dll 0x100fe9b0. Its
 // operands and stack cleanup are retained directly because the source-level
@@ -238,6 +239,45 @@ extern "C" __declspec(naked) void AttachByLayer(void*) {
         mov [eax + 40h], ecx
         pop ebx
         ret 4
+    }
+}
+
+// The seven label rows in FUN_1004db50 call 0x10015b80 with a parent, the
+// renderer resource pointer, rectangle/style values, a color and two zeros.
+// This exact body forwards the rectangle to InitializeCommon, then records the
+// supplied render fields and installs the label-control vtable.
+extern "C" __declspec(naked) void InitializeRowControl() {
+    __asm {
+        mov eax, [esp + 18h]
+        mov edx, [esp + 10h]
+        push esi
+        mov esi, ecx
+        mov ecx, [esp + 18h]
+        push 40h
+        push eax
+        mov eax, [esp + 18h]
+        push ecx
+        mov ecx, [esp + 14h]
+        push edx
+        push eax
+        push ecx
+        mov ecx, esi
+        call InitializeCommon
+        mov edx, [esp + 0ch]
+        mov eax, [esp + 20h]
+        mov ecx, [esp + 24h]
+        mov [esi + 50h], edx
+        mov edx, [esp + 28h]
+        mov [esi + 60h], eax
+        mov dword ptr [esi], 1017541ch
+        mov [esi + 64h], ecx
+        mov [esi + 68h], edx
+        mov dword ptr [esi + 58h], 8
+        mov dword ptr [esi + 5ch], 10h
+        mov dword ptr [esi + 54h], 0
+        mov eax, esi
+        pop esi
+        ret 24h
     }
 }
 

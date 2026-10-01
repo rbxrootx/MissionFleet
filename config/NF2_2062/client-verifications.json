@@ -8,7 +8,10 @@
   "original_sha256": "dd53bd78d5a4eaae916a428f9086582bf8603be2e680c2a84459f21afe03e663",
   "compiler": {
     "family": "Microsoft Visual C++ 6.0 SP5",
-    "flags": ["/O2", "/GX-"],
+    "flags": [
+      "/O2",
+      "/GX-"
+    ],
     "cl_sha256": "1bf99f206271ecdbd13da2829192ea2c02e2a44c740b8d72935d5d9cb753b156"
   },
   "matches": [
@@ -20,7 +23,10 @@
       "source": "src/client-2062/Main/InitCGCDLL.cpp",
       "source_sha256": "6b4f9aa0ccf6f0450aaa4b1462135893b7d605b78c07c4b01761ae8f0c561419",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [
         {
           "offset": 6,
@@ -42,7 +48,10 @@
       "source": "src/client-2062/Main/CopyHostCallbacks.cpp",
       "source_sha256": "c4fb8752bdc3f1b82c4137718b03fbb208ceea90ae7e4424967a526e3a911d5d",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [],
       "evidence": {
         "name_in_analysis": "FUN_10102c40",
@@ -58,7 +67,10 @@
       "source": "src/client-2062/Main/AllocScreen.cpp",
       "source_sha256": "5931c2292a6008d1ba0c037cf2691aeaee237150bb2e4df81c948ff8f82885e9",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [
         {
           "offset": 3,
@@ -108,9 +120,12 @@
       "size": 56,
       "symbol": "?Initialize@ScreenBase@@QAEPAU1@PAXHHHHG@Z",
       "source": "src/client-2062/Main/InitializeScreenBase.cpp",
-      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "source_sha256": "efa43758a237b9293a93094e9d5617b284ea3d02f12d12a464a065321bbe1ee8",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [
         {
           "offset": 36,
@@ -130,9 +145,12 @@
       "size": 149,
       "symbol": "_InitializeCommon",
       "source": "src/client-2062/Main/InitializeScreenBase.cpp",
-      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "source_sha256": "efa43758a237b9293a93094e9d5617b284ea3d02f12d12a464a065321bbe1ee8",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [
         {
           "offset": 130,
@@ -157,9 +175,12 @@
       "size": 146,
       "symbol": "_AttachControlList",
       "source": "src/client-2062/Main/InitializeScreenBase.cpp",
-      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "source_sha256": "efa43758a237b9293a93094e9d5617b284ea3d02f12d12a464a065321bbe1ee8",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [],
       "evidence": {
         "name_in_analysis": "FUN_100fef00",
@@ -173,14 +194,696 @@
       "size": 190,
       "symbol": "_AttachByLayer",
       "source": "src/client-2062/Main/InitializeScreenBase.cpp",
-      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "source_sha256": "efa43758a237b9293a93094e9d5617b284ea3d02f12d12a464a065321bbe1ee8",
       "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": ["/O2", "/GX-"],
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
       "relocations": [],
       "evidence": {
         "name_in_analysis": "FUN_100fefa0",
         "called_by": "FUN_100fe9b0@100FE9B0 and FUN_10038130@10038130",
         "behavior": "detaches a control from the owner's second intrusive list and inserts it in layer order while maintaining the list head"
+      }
+    },
+    {
+      "address": "10015B80",
+      "name": "FUN_10015b80",
+      "size": 98,
+      "symbol": "_InitializeRowControl",
+      "source": "src/client-2062/Main/InitializeScreenBase.cpp",
+      "source_sha256": "efa43758a237b9293a93094e9d5617b284ea3d02f12d12a464a065321bbe1ee8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 33,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10015b80",
+        "called_by": "FUN_1004db50@1004DB50 seven times",
+        "behavior": "initializes a label control through the common base initializer, then sets resource, color, render bounds, and label-control vtable"
+      }
+    },
+    {
+      "address": "1004DB50",
+      "name": "FUN_1004db50",
+      "size": 1411,
+      "symbol": "?ConstructScreen@Screen@@QAEPAU1@PAX@Z",
+      "source": "src/client-2062/Main/ConstructScreen.cpp",
+      "source_sha256": "bceca1c09999bfa5d9e2406d8f4be48be4e5a572cb4590dda2d3d26d95efdc8b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 45,
+          "symbol": "_InitializeScreenBase",
+          "target_address": "10038130"
+        },
+        {
+          "offset": 78,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 129,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 150,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 218,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 231,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 238,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 288,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 309,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 371,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 384,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 391,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 442,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 463,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 524,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 537,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 544,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 595,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 616,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 678,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 691,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 698,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 748,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 769,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 831,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 844,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 851,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 902,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 923,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 984,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 997,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1004,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1055,
+          "symbol": "_InitializeRowControl",
+          "target_address": "10015B80"
+        },
+        {
+          "offset": 1076,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1139,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1152,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1171,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1212,
+          "symbol": "_CreateFullScreenControl",
+          "target_address": "1002C3D0"
+        },
+        {
+          "offset": 1265,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1278,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1285,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1311,
+          "symbol": "_CreateLogoControl",
+          "target_address": "100FD890"
+        },
+        {
+          "offset": 1340,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1363,
+          "symbol": "_CreateOverlayControl",
+          "target_address": "100F34A0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1004db50",
+        "called_by": "AllocScreen@100348B0",
+        "behavior": "initializes the inherited screen, creates seven configured label rows, constructs the background, logo and overlay controls, stores final screen state, and restores the SEH chain"
+      }
+    },
+    {
+      "address": "1016C7A0",
+      "name": "FUN_1016c7a0",
+      "size": 6,
+      "symbol": "_AllocateObjectThunk",
+      "source": "src/client-2062/Main/AllocateObjectThunk.cpp",
+      "source_sha256": "190d68076d1b54d41a2f75f9dff1bc0d4a51ba1257a198e488c04139492fea5b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c7a0",
+        "called_by": "FUN_1004db50@1004DB50",
+        "behavior": "tail-dispatches through the host callback pointer at 0x1017515c and preserves the callback return value"
+      }
+    },
+    {
+      "address": "100FD890",
+      "name": "FUN_100fd890",
+      "size": 149,
+      "symbol": "_CreateLogoControl",
+      "source": "src/client-2062/Main/CreateLogoControl.cpp",
+      "source_sha256": "20514b69fcff7f8fe2ec83d3106445eda60d1ad41df4cc4e3a5038f35f442d35",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 53,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 110,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 123,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100fd890",
+        "called_by": "FUN_1004db50@1004DB50",
+        "behavior": "initializes a 0x40-byte control, stores the configured position and 256x0 extent, sets the logo vtable and joins the owner and layer control lists"
+      }
+    },
+    {
+      "address": "1002C3D0",
+      "name": "FUN_1002c3d0",
+      "size": 2751,
+      "symbol": "_CreateFullScreenControl",
+      "source": "src/client-2062/Main/CreateFullScreenControl.cpp",
+      "source_sha256": "54dae938f6da8431a4eac97c099429fbb1adc672831ff5fc66d1947850f8efcc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 67,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 136,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 165,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 183,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 211,
+          "symbol": "_FUN_10032360",
+          "target_address": "10032360"
+        },
+        {
+          "offset": 238,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 269,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 299,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 333,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 363,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 397,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 436,
+          "symbol": "_FUN_100ff160",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 448,
+          "symbol": "_FUN_100ff120",
+          "target_address": "100FF120"
+        },
+        {
+          "offset": 464,
+          "symbol": "_FUN_100ff160",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 480,
+          "symbol": "_FUN_100ff160",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 492,
+          "symbol": "_FUN_100ff120",
+          "target_address": "100FF120"
+        },
+        {
+          "offset": 537,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 566,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 587,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 621,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 657,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 691,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 900,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 963,
+          "symbol": "_FUN_10018950",
+          "target_address": "10018950"
+        },
+        {
+          "offset": 987,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1045,
+          "symbol": "_FUN_101047f0",
+          "target_address": "101047F0"
+        },
+        {
+          "offset": 1094,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1107,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1146,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1159,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1235,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1294,
+          "symbol": "_FUN_10018600",
+          "target_address": "10018600"
+        },
+        {
+          "offset": 1329,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1342,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1355,
+          "symbol": "_FUN_100188e0",
+          "target_address": "100188E0"
+        },
+        {
+          "offset": 1365,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1423,
+          "symbol": "_FUN_10103b80",
+          "target_address": "10103B80"
+        },
+        {
+          "offset": 1491,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 1504,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 1695,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1747,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 1784,
+          "symbol": "_FUN_100ff160",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 1797,
+          "symbol": "_FUN_100ff120",
+          "target_address": "100FF120"
+        },
+        {
+          "offset": 1996,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        },
+        {
+          "offset": 2009,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 2116,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2145,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 2168,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2249,
+          "symbol": "_FUN_10022f80",
+          "target_address": "10022F80"
+        },
+        {
+          "offset": 2275,
+          "symbol": "_FUN_100ff160",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 2315,
+          "symbol": "_FUN_100ff120",
+          "target_address": "100FF120"
+        },
+        {
+          "offset": 2358,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2387,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 2451,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2545,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 2630,
+          "symbol": "_FUN_100ff120",
+          "target_address": "100FF120"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1002c3d0",
+        "called_by": "FUN_1004db50@1004DB50",
+        "behavior": "initializes the full-screen background control and its nested resources, list controls, decorative/randomized positions, and state arrays"
+      }
+    },
+    {
+      "address": "100F34A0",
+      "name": "FUN_100f34a0",
+      "size": 375,
+      "symbol": "_CreateOverlayControl",
+      "source": "src/client-2062/Main/CreateOverlayControl.cpp",
+      "source_sha256": "c27ef1a49879fd71e318cfada4a80e958458d609872450b216acaa9927a23e08",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 75,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 125,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 154,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 178,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 207,
+          "symbol": "_FUN_100ffac0",
+          "target_address": "100FFAC0"
+        },
+        {
+          "offset": 247,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 294,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 350,
+          "symbol": "_FUN_100f3f40",
+          "target_address": "100F3F40"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100f34a0",
+        "called_by": "FUN_1004db50@1004DB50",
+        "behavior": "initializes overlay state and a 256-entry owned-control table, then delegates additional initialization to FUN_100f3f40"
       }
     }
   ]
