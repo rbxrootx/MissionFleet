@@ -45,6 +45,12 @@ class ProgressReportTests(unittest.TestCase):
         changed = generate_progress.source_hashes(b"one\nchanged\n")
         self.assertTrue(expected.isdisjoint(changed))
 
+    def test_source_paths_keep_exact_case_on_case_insensitive_hosts(self):
+        exact = "src/client-2062/Main/FUN_1008f9c0.cpp"
+        mis_cased = "src/client-2062/Main/FUN_1008F9C0.cpp"
+        self.assertTrue(generate_progress.exact_case_path_exists(exact))
+        self.assertFalse(generate_progress.exact_case_path_exists(mis_cased))
+
 
 if __name__ == "__main__":
     unittest.main()

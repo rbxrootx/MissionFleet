@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,28 @@ def source_hashes(data):
         hashlib.sha256(lf).hexdigest(),
         hashlib.sha256(crlf).hexdigest(),
     }
+
+
+@lru_cache(maxsize=None)
+def directory_entry_names(directory):
+    path = Path(directory)
+    if not path.is_dir():
+        return frozenset()
+    return frozenset(entry.name for entry in path.iterdir())
+
+
+def exact_case_path_exists(relative_path):
+    """Check path-component spelling even on case-insensitive filesystems."""
+    current = ROOT
+    for part in Path(relative_path).parts:
+        if part in {"", "."}:
+            continue
+        if part == "..":
+            return False
+        if part not in directory_entry_names(current):
+            return False
+        current = current / part
+    return current.is_file()
 
 
 def measure(rows, matched, unit_count):
@@ -94,8 +117,9 @@ def load_matches(inventory):
         if item["name"] != expected["name"] or int(item["size"]) != int(expected["size"]):
             raise ValueError(f"Match identity differs from inventory: {key}")
         source = (ROOT / item["source"]).resolve()
-        if ROOT.resolve() not in source.parents or not source.is_file():
-            raise ValueError(f"Match source is missing or outside the project: {source}")
+        if (ROOT.resolve() not in source.parents or not source.is_file()
+                or not exact_case_path_exists(item["source"])):
+            raise ValueError(f"Match source is missing, mis-cased, or outside the project: {source}")
         if item["source_sha256"] not in source_hashes(source.read_bytes()):
             raise ValueError(f"Match source changed: {source}")
         result.add(key)
@@ -119,8 +143,9 @@ def load_matches(inventory):
         if item["name"] != expected["name"] or int(item["size"]) != int(expected["size"]):
             raise ValueError(f"Client match identity differs from inventory: {key}")
         source = (ROOT / item["source"]).resolve()
-        if ROOT.resolve() not in source.parents or not source.is_file():
-            raise ValueError(f"Client match source is missing or outside the project: {source}")
+        if (ROOT.resolve() not in source.parents or not source.is_file()
+                or not exact_case_path_exists(item["source"])):
+            raise ValueError(f"Client match source is missing, mis-cased, or outside the project: {source}")
         if item["source_sha256"] not in source_hashes(source.read_bytes()):
             raise ValueError(f"Client match source changed: {source}")
         result.add(key)
