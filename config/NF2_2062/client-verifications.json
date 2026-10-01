@@ -108,7 +108,7 @@
       "size": 56,
       "symbol": "?Initialize@ScreenBase@@QAEPAU1@PAXHHHHG@Z",
       "source": "src/client-2062/Main/InitializeScreenBase.cpp",
-      "source_sha256": "4b82513cf096bf00012302c46d2b6ecbffe7cd018db7a0b1ddd80ad24e06600a",
+      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": ["/O2", "/GX-"],
       "relocations": [
@@ -122,6 +122,65 @@
         "name_in_analysis": "FUN_10038130",
         "called_by": "FUN_1004db50@1004DB50",
         "behavior": "calls the common control initializer with the owner, rectangle and layer; sets flag 0x20; installs vtable 0x1017566c; returns this"
+      }
+    },
+    {
+      "address": "100FE9B0",
+      "name": "FUN_100fe9b0",
+      "size": 149,
+      "symbol": "_InitializeCommon",
+      "source": "src/client-2062/Main/InitializeScreenBase.cpp",
+      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [
+        {
+          "offset": 130,
+          "symbol": "_AttachControlList",
+          "target_address": "100FEF00"
+        },
+        {
+          "offset": 138,
+          "symbol": "_AttachByLayer",
+          "target_address": "100FEFA0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100fe9b0",
+        "called_by": "FUN_10038130@10038130 and FUN_10015b80@10015B80",
+        "behavior": "initializes control geometry, vtable, flags and two intrusive-list nodes; attaches to the owner lists in order when owner is non-null"
+      }
+    },
+    {
+      "address": "100FEF00",
+      "name": "FUN_100fef00",
+      "size": 146,
+      "symbol": "_AttachControlList",
+      "source": "src/client-2062/Main/InitializeScreenBase.cpp",
+      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100fef00",
+        "called_by": "FUN_100fe9b0@100FE9B0 and FUN_10038130@10038130",
+        "behavior": "detaches a control from the owner's first intrusive list and inserts it in layer order while maintaining the list head"
+      }
+    },
+    {
+      "address": "100FEFA0",
+      "name": "FUN_100fefa0",
+      "size": 190,
+      "symbol": "_AttachByLayer",
+      "source": "src/client-2062/Main/InitializeScreenBase.cpp",
+      "source_sha256": "bd335fa6b9c66fedcc713a869f4ead6c6ab16ccd99a82a0cc5d5c2063ad07077",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100fefa0",
+        "called_by": "FUN_100fe9b0@100FE9B0 and FUN_10038130@10038130",
+        "behavior": "detaches a control from the owner's second intrusive list and inserts it in layer order while maintaining the list head"
       }
     }
   ]

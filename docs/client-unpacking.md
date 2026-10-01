@@ -105,20 +105,27 @@ that the table must be readable through at least byte `0x1CF`; the candidate
 layout models it as `0x1D0` bytes, but no host-side length argument was found.
 The callback table's semantic field names remain unknown.
 
-`InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, and `FUN_10038130` are reconstructed
-in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and objdiff 3.8.0
-reproduce all 684 bytes exactly. Their relative call targets and `AllocScreen`'s
-four absolute global addresses are checked against the captured operands. The
-callback copier's absolute renderer-global operands remain literal machine
-addresses in its object code and therefore compare directly without relocation
-normalization.
+`InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`, and the shared
+control initializer/list helpers at `0x100FE9B0`, `0x100FEF00`, and `0x100FEFA0`
+are reconstructed in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and
+objdiff 3.8.0 reproduce all 1,169 bytes exactly. Relative call targets and
+`AllocScreen`'s four absolute global addresses are checked against the captured
+operands. The callback copier's absolute renderer-global operands remain literal
+machine addresses in its object code and therefore compare directly without
+relocation normalization.
+
+This work verifies against the local mapped-image snapshot; it does not remove
+VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,481 body bytes. Function boundaries
-are analysis metadata and still need review. The four verified client byte
-matches are `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, and
-`FUN_10038130`. `AllocScreen`'s
-1,411-byte constructor at `0x1004DB50` remains unmatched. Re-run client
+are analysis metadata and still need review. The seven verified client byte
+matches are `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`, and the
+three common control initialization/list functions. Those three functions are
+byte-level reconstructions grounded in the captured instruction sequence; the
+neutral helper names describe their observed list roles, while the owner-list
+field semantics are still inferred from offsets and insertion behavior.
+`AllocScreen`'s 1,411-byte constructor at `0x1004DB50` remains unmatched. Re-run client
 verification with `python tools/verify_client_matches.py`; the tool checks the
 original module hash, mapped-image hash, compiler hash, call destinations,
 absolute global addresses, and objdiff scores. Captures and compiler binaries
