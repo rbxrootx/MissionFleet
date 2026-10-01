@@ -6,9 +6,9 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 A deterministic objdiff v2 report now tracks 20,941 functions and 4,118,837
-identified code bytes across four decomp.dev categories. There are 5,553
-functions totaling 187,464 bytes reconstructed in C++, spanning login, game,
-persistence and two archived client functions; each matches at 100.0% under
+identified code bytes across four decomp.dev categories. There are 5,554
+functions totaling 187,514 bytes reconstructed in C++, spanning login, game,
+persistence and three archived client functions; each matches at 100.0% under
 objdiff 3.8.0.
 Emitted Ghidra pseudocode does not count as a compiler match. GitHub Actions
 publishes the generated report to the active decomp.dev project.
@@ -71,10 +71,10 @@ comparison. See [client render path](docs/client-render-path.md).
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
 2,016 Ghidra-recognized functions are now in the progress inventory. The
-16-byte `InitCGCDLL` export and its 562-byte callback-table copy callee match
-byte for byte. Their field semantics remain unknown. `AllocScreen` confirms a
-`0x7C` allocation, but its C++ candidate has not yet matched. No client login
-was used. See the
+16-byte `InitCGCDLL` export, its 562-byte callback-table copy callee, and the
+50-byte `AllocScreen` factory match byte for byte. The callback field semantics
+remain unknown. `AllocScreen` calls a 1,411-byte screen constructor that is the
+next unmatched implementation in this path. No client login was used. See the
 [archived client capture and renderer evidence](docs/client-unpacking.md).
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license

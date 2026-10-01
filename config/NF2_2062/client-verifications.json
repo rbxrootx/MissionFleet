@@ -49,6 +49,58 @@
         "called_by": "InitCGCDLL@10033A70",
         "behavior": "copies host table fields at offsets 0x00-0x88 and 0x1CC to renderer globals, then returns one"
       }
+    },
+    {
+      "address": "100348B0",
+      "name": "AllocScreen",
+      "size": 50,
+      "symbol": "_AllocScreen",
+      "source": "src/client-2062/Main/AllocScreen.cpp",
+      "source_sha256": "5931c2292a6008d1ba0c037cf2691aeaee237150bb2e4df81c948ff8f82885e9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [
+        {
+          "offset": 3,
+          "symbol": "?AllocateScreenObject@@YAPAXI@Z",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 22,
+          "symbol": "?ConstructScreen@Screen@@QAEPAU1@PAX@Z",
+          "target_address": "1004DB50"
+        },
+        {
+          "offset": 27,
+          "symbol": "?g_screen_current@@3PAUScreen@@A",
+          "target_address": "101C56E4",
+          "kind": "absolute"
+        },
+        {
+          "offset": 32,
+          "symbol": "?g_screen_renderer@@3PAUScreen@@A",
+          "target_address": "101ACE50",
+          "kind": "absolute"
+        },
+        {
+          "offset": 40,
+          "symbol": "?g_screen_current@@3PAUScreen@@A",
+          "target_address": "101C56E4",
+          "kind": "absolute"
+        },
+        {
+          "offset": 45,
+          "symbol": "?g_screen_renderer@@3PAUScreen@@A",
+          "target_address": "101ACE50",
+          "kind": "absolute"
+        }
+      ],
+      "evidence": {
+        "export": "AllocScreen",
+        "allocator_address": "1016C7A0",
+        "constructor_address": "1004DB50",
+        "behavior": "allocates 0x7C bytes, conditionally calls the screen constructor, stores its result in two globals"
+      }
     }
   ]
 }

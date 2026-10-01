@@ -72,7 +72,7 @@ starting the game or authenticating. Its DLL entrypoint expanded the protected
 image in memory. `dump_loaded_module.py` captured 1,982,464 bytes at base
 `0x10000000` with no unreadable pages; the `.CODE` section contains 1,093,152
 nonzero bytes. The mapped capture SHA-256 is
-`ce1129ff2b23a5f08c3641f2d85d8a38f3590ce95497703b1c3944a22ae8ce35` and stays
+`929af9b902a107f9e1d4b5e291a56551f88e882a201249b3bb89d17706a5cd00` and stays
 under the ignored `reports/unpacked-2062-client/` directory.
 
 The repeatable isolated-host sequence is:
@@ -105,20 +105,23 @@ that the table must be readable through at least byte `0x1CF`; the candidate
 layout models it as `0x1D0` bytes, but no host-side length argument was found.
 The callback table's semantic field names remain unknown.
 
-Both functions are reconstructed in `src/client-2062/Main/`. Visual C++ 6.0
-SP5 `/O2 /GX-` and objdiff 3.8.0 reproduce all 578 bytes exactly. The wrapper's
-relative call target is checked against the captured operand. The copy routine's
-absolute renderer-global operands remain literal machine addresses in its
-object code and therefore compare directly without relocation normalization.
+`InitCGCDLL`, `FUN_10102c40`, and `AllocScreen` are reconstructed in
+`src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and objdiff 3.8.0
+reproduce all 628 bytes exactly. Their relative call targets and `AllocScreen`'s
+four absolute global addresses are checked against the captured operands. The
+callback copier's absolute renderer-global operands remain literal machine
+addresses in its object code and therefore compare directly without relocation
+normalization.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,481 body bytes. Function boundaries
-are analysis metadata and still need review. Only `InitCGCDLL` and
-`FUN_10102c40` currently count as client byte matches; `AllocScreen.cpp` is an
-unverified behavioral candidate and is deliberately excluded from the verified
-inventory. Re-run client verification with `python tools/verify_client_matches.py`; the tool checks the
-original module hash, mapped-image hash, compiler hash, call destination, and
-objdiff score. Captures and compiler binaries remain local and ignored.
+are analysis metadata and still need review. `InitCGCDLL`, `FUN_10102c40`, and
+`AllocScreen` are the three verified client byte matches. `AllocScreen`'s
+1,411-byte constructor at `0x1004DB50` remains unmatched. Re-run client
+verification with `python tools/verify_client_matches.py`; the tool checks the
+original module hash, mapped-image hash, compiler hash, call destinations,
+absolute global addresses, and objdiff scores. Captures and compiler binaries
+remain local and ignored.
 
 The first render subsystem traced through that recovered native code is the
 ship sprite path. It establishes the exact animation-record stride, timed frame
