@@ -101,6 +101,28 @@
         "constructor_address": "1004DB50",
         "behavior": "allocates 0x7C bytes, conditionally calls the screen constructor, stores its result in two globals"
       }
+    },
+    {
+      "address": "10038130",
+      "name": "FUN_10038130",
+      "size": 56,
+      "symbol": "?Initialize@ScreenBase@@QAEPAU1@PAXHHHHG@Z",
+      "source": "src/client-2062/Main/InitializeScreenBase.cpp",
+      "source_sha256": "4b82513cf096bf00012302c46d2b6ecbffe7cd018db7a0b1ddd80ad24e06600a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [
+        {
+          "offset": 36,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10038130",
+        "called_by": "FUN_1004db50@1004DB50",
+        "behavior": "calls the common control initializer with the owner, rectangle and layer; sets flag 0x20; installs vtable 0x1017566c; returns this"
+      }
     }
   ]
 }

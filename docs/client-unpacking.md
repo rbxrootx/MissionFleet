@@ -105,9 +105,9 @@ that the table must be readable through at least byte `0x1CF`; the candidate
 layout models it as `0x1D0` bytes, but no host-side length argument was found.
 The callback table's semantic field names remain unknown.
 
-`InitCGCDLL`, `FUN_10102c40`, and `AllocScreen` are reconstructed in
-`src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and objdiff 3.8.0
-reproduce all 628 bytes exactly. Their relative call targets and `AllocScreen`'s
+`InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, and `FUN_10038130` are reconstructed
+in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and objdiff 3.8.0
+reproduce all 684 bytes exactly. Their relative call targets and `AllocScreen`'s
 four absolute global addresses are checked against the captured operands. The
 callback copier's absolute renderer-global operands remain literal machine
 addresses in its object code and therefore compare directly without relocation
@@ -115,8 +115,9 @@ normalization.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,481 body bytes. Function boundaries
-are analysis metadata and still need review. `InitCGCDLL`, `FUN_10102c40`, and
-`AllocScreen` are the three verified client byte matches. `AllocScreen`'s
+are analysis metadata and still need review. The four verified client byte
+matches are `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, and
+`FUN_10038130`. `AllocScreen`'s
 1,411-byte constructor at `0x1004DB50` remains unmatched. Re-run client
 verification with `python tools/verify_client_matches.py`; the tool checks the
 original module hash, mapped-image hash, compiler hash, call destinations,
