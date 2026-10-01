@@ -25,6 +25,7 @@ ADDRESSES = (
     "5897CC42", "5897CBDA", "58789FB0", "5890C1C0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
+    "5890E620", "5890E650", "5890FA20",
     "58F76B6B", "58C3A998", "58BF62F5", "58DDB193", "58BFF900",
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
     "58C319AB", "58D6F6B0", "58D6F58A", "58C5D37B", "58FAC690",
@@ -180,6 +181,24 @@ EVIDENCE = {
         "called_by": "Directly selected by the installed sprite parser at 0x58903E40 in its format-3 variant-2 branch.",
         "behavior": "Stores the three supplied values in object slots 3, 1, and 2, then installs the CType2MMXTrueSpriteData vtable.",
         "uncertainty": "The semantic meanings of the three object slots and the parser's format discriminator values are not independently decoded.",
+    },
+    "5890E620": {
+        "name_in_analysis": "FUN_5890e620",
+        "called_by": "Vtable slot +0 at 0x589A2D58 for CType0MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_5890E600 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 0.",
+        "behavior": "Installs the CType0MMXAlphaSpriteData vtable, invokes the CSpriteData base destructor FUN_58903AC0, and passes this to FUN_5897CC42 when the low bit of the second argument is set.",
+        "uncertainty": "The deletion callback target and ownership contract are unresolved; the destructor does not itself clear or release the object field at +0x0C in the captured body.",
+    },
+    "5890E650": {
+        "name_in_analysis": "FUN_5890e650",
+        "called_by": "Vtable slot +4 at 0x589A2D58 for CType0MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_5890E600 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 0.",
+        "behavior": "Checks the object data pointer, clips the requested rectangle against stored bounds, obtains row stride and buffer origin through FUN_5890C1C0 and FUN_58789FB0, and mixes packed source/destination pixel data using scalar and MMX paths with masks DAT_58A284DC and DAT_58A284E4.",
+        "uncertainty": "The meaning of the rectangle and final two arguments, pixel/channel layout, mask semantics, source data schema, and virtual method contract remain unresolved.",
+    },
+    "5890FA20": {
+        "name_in_analysis": "FUN_5890fa20",
+        "called_by": "Vtable slot +8 at 0x589A2D58 for CType0MMXAlphaSpriteData; the parser installs that vtable through constructor FUN_5890E600 when DAT_589CDFFC equals 4 and record subfield piVar13[0xB] is 0.",
+        "behavior": "Checks the object data pointer, clips the requested rectangle against stored bounds, obtains row stride and buffer origin through FUN_5890C1C0 and FUN_58789FB0, then processes packed pixel data with MMX paths and the observed masks DAT_58A284DC, DAT_58A284E4, DAT_58A284EC, DAT_58A284F4, and DAT_58A284FC.",
+        "uncertainty": "The parameter roles, color/channel layout, masks' semantics, pixel-buffer organization, and virtual method contract remain unresolved.",
     },
     "5890E600": {
         "name_in_analysis": "FUN_5890e600",

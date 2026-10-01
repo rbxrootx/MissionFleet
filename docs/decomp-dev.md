@@ -52,22 +52,19 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,779 functions totaling 760,499 bytes (7.2645% of indexed code), each
-verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll`
-functions totaling 453,111 bytes; their local verifier is
+credits 5,806 functions totaling 1,070,116 bytes (10.2220% of indexed code),
+each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
+`Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
-committed. The newest client match is the
-[application-event dispatcher](client-event-dispatch.md), whose table-backed
-event routes are documented separately from the raw socket protocol.
-Seventy-four matches cover 46,343 bytes in the installed client's `Main.dll`:
-1,792 bytes across the renderer/authentication exports and screen lifecycle,
-586 bytes in the `InitCGCDLL` callback-table copier, 603 bytes in the screen
-child-list initializer/insert/remove helpers, 344 bytes in the static-text
-control constructor and direct helper path, 13,311 bytes in the CSH sprite-file
-loader/parser path, 348 bytes in the sprite-data format constructor dispatch,
-23,647 bytes in the `CType0MMXHigh555SpriteData` vtable/method path, 381 bytes
-in the VM entry/trampoline slice, and 5,331 bytes in the logo/control screen
-constructor and directly constructed controls. The three
+committed. The installed 2026 `Main.dll` inventory has 101 exact function
+matches totaling 355,960 bytes. Its latest class slice covers the three
+parser-selected `CType0MMXAlphaSpriteData` virtual methods; see
+[`current-client-alpha-type0-methods.md`](current-client-alpha-type0-methods.md)
+for parser/vtable evidence, uncertainties, and verification. Earlier documented
+slices cover the renderer/authentication exports and screen lifecycle, the
+`InitCGCDLL` callback-table copier, screen child-list and static-text helpers,
+the CSH sprite loader/parser, sprite-data constructors and methods, VM entry
+trampolines, and logo/control screen construction. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
