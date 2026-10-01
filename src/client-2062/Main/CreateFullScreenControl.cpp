@@ -15,7 +15,7 @@ extern "C" void SetTreeControlVisibility();
 extern "C" void SetTreeControlStyle();
 extern "C" void FUN_100ffac0();
 extern "C" void FUN_10103b80();
-extern "C" void FUN_101047f0();
+extern "C" void InitializeControlVariant();
 extern "C" void InitializeCommon();
 extern "C" void InitializeRowControl();
 extern "C" void InitializeScreenBase();
@@ -555,7 +555,7 @@ L_1002C79B:
         push ebx
         push esi
         mov ecx, eax
-        call FUN_101047f0
+        call InitializeControlVariant
         ; Exact immediate encoding: jmp short L_1002C7ED
         __asm _emit 0xeb
         __asm _emit 0x02

@@ -123,7 +123,7 @@ VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The fifty-two verified client byte
+are analysis metadata and still need review. The fifty-four verified client byte
 matches include `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
 child constructors, the three common control initialization/list functions,
@@ -156,7 +156,11 @@ control initializer `0x10018600`, and paired-field setter `0x100188E0` are now
 byte-matched and tied back to their call sites in `0x1002C3D0`. The initializer
 clears a 0x80-byte buffer; the setter writes one value to offsets `+0x70` and
 `+0x74`, whose exact meaning remains uncertain. Four direct control helpers remain
-unmatched: `0x10018950`, `0x101047F0`, `0x10103B80`, and `0x10022F80`. Ghidra's pseudocode
+unmatched: `0x10018950`, `0x10103B80`, and `0x10022F80`. The variant-control
+constructor pair `0x101047F0`/`0x10104F50` now byte-matches as well. Ghidra shows
+the base initializer allocating a 257-byte buffer when none is supplied, building
+a 0x58-byte child, and calling an indirect function pointer at `0x1017509C`; its
+contract is still unknown. Ghidra's pseudocode
 shows loader-state gates, record validation, and sprite/effect callback paths,
 but the loader's global-state and indirect host-callback contracts are not yet
 fully understood. The full-screen RNG callback contract and meanings of several

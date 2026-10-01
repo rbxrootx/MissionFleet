@@ -532,7 +532,7 @@
       "size": 2751,
       "symbol": "_CreateFullScreenControl",
       "source": "src/client-2062/Main/CreateFullScreenControl.cpp",
-      "source_sha256": "7c850f8d60473e6d6a552c2274c0c149bce836b14fcd662c67bf5b2b6dbe9348",
+      "source_sha256": "b75c93a0fdfbc52d7333a2d3af47776ed483b036dc7c95a3cab2bc16c5b683ab",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -666,7 +666,7 @@
         },
         {
           "offset": 1045,
-          "symbol": "_FUN_101047f0",
+          "symbol": "_InitializeControlVariant",
           "target_address": "101047F0"
         },
         {
@@ -2198,6 +2198,76 @@
         "name_in_analysis": "FUN_100188E0",
         "called_by": "FUN_1002c3d0@1002C3D0",
         "behavior": "writes one value to the control fields at offsets 0x70 and 0x74; semantic purpose of the paired fields remains uncertain"
+      }
+    },
+    {
+      "address": "101047F0",
+      "name": "FUN_101047f0",
+      "size": 69,
+      "symbol": "_InitializeControlVariant",
+      "source": "src/client-2062/Main/InitializeControlVariant.cpp",
+      "source_sha256": "d083d5938035e3f6be6ae7623dab7d8f379b5367a6150ab880750be4eedb190f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 53,
+          "symbol": "_InitializeControlVariantBase",
+          "target_address": "10104F50"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_101047f0",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "forwards ten constructor arguments and a zero to the variant-control base initializer, then installs the derived vtable"
+      }
+    },
+    {
+      "address": "10104F50",
+      "name": "FUN_10104f50",
+      "size": 331,
+      "symbol": "_InitializeControlVariantBase",
+      "source": "src/client-2062/Main/InitializeControlVariantBase.cpp",
+      "source_sha256": "b97256fbed146ccfe31829f3f6aee7b9c3284d1ac00393cff13a8f485d91b4f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 62,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 153,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 206,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 242,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 280,
+          "symbol": "_SetTreeControlStyle",
+          "target_address": "100FF160"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10104f50",
+        "called_by": "FUN_101047f0@101047F0",
+        "behavior": "initializes base fields, optionally allocates and clears a 257-byte buffer, allocates and initializes a 0x58-byte child control, applies style -200, then calls the indirect function pointer at 0x1017509c and stores its return word at 0x101c9340; callback meaning is unknown"
       }
     }
   ]
