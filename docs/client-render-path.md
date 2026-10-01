@@ -143,10 +143,10 @@ board were rendered into RGB16 surfaces through this path and compared with the
 independent RGBA preview decoder after round-tripping its colors to RGB565. All
 209,806 literal pixels and every transparent skip matched.
 
-The mapped protected `Main.dll` independently contains 16-bit span-compositor
-methods at `0x101481E0`, `0x1014DF30`, and `0x1015A8A0`, totaling 89,724 bytes. Their
-pixel-buffer/pitch accesses, transparent-run traversal, and channel-mask blend
-paths are byte-matched from the runtime image. Their static pointer-table slots
-are known, while the owning class and runtime dispatch paths remain unresolved;
-see the
+The mapped protected `Main.dll` independently contains 16-bit span-render
+methods at `0x10144810`, `0x101481E0`, `0x1014DF30`, and `0x1015A8A0`, totaling
+104,411 bytes. Their pixel-buffer/pitch accesses, transparent-run traversal,
+and channel-mask blend paths are byte-matched from the runtime image. Their
+static pointer-table slots are known, while the owning class and runtime
+dispatch paths remain unresolved; see the
 [Main.dll span compositor notes](client-rgb16-span-compositor.md).

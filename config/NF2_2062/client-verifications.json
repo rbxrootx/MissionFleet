@@ -4202,6 +4202,27 @@
         "behavior": "Ghidra pseudocode reads the clipped run-encoded sprite stream and 16-bit destination surface, then blends through the three channel mask globals plus DAT_101C92F0 and DAT_101C92F8; FUN_10102C40 copies those two extra mask fields from host-table offsets +0x6C and +0x64",
         "uncertainty": "The pointer-table owner and runtime caller are not identified. The host-provided masks vary with renderer configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
       }
+    },
+    {
+      "address": "10144810",
+      "name": "FUN_10144810",
+      "size": 14687,
+      "symbol": "_FUN_10144810",
+      "source": "src/client-2062/Main/FUN_10144810.cpp",
+      "source_sha256": "269dc34741029426325b81c6a43c48d36cee56ee44e2298c16222f1b5eae9419",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10144810",
+        "called_by": "mapped function-pointer table slot 0x10176B70 contains 0x10144810; Ghidra direct-reference query returned no code references, so the table owner and runtime dispatch route remain unresolved",
+        "behavior": "Ghidra pseudocode reads and clips the same span-encoded source into a 16-bit target surface, uses the five host-provided channel-mask globals, and processes three explicit color/effect-like integer arguments in packed per-channel arithmetic; exact argument roles are unresolved",
+        "uncertainty": "The pointer-table owner and runtime caller are not identified. The host-provided masks vary with renderer configuration, and Ghidra's register-derived parameters do not establish all source-level parameter names or effect meanings."
+      }
     }
   ]
 }
