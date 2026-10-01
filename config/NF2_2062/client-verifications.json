@@ -532,7 +532,7 @@
       "size": 2751,
       "symbol": "_CreateFullScreenControl",
       "source": "src/client-2062/Main/CreateFullScreenControl.cpp",
-      "source_sha256": "e9ffd79d0c8166a22197ecd7a06b568bb153ccfe43922c2ef5db90422fad33c2",
+      "source_sha256": "f08e6cc12eda1daf8e66e98741089d8e1b5ba4c6b85076bb3c68f2fdf4e75aac",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -721,7 +721,7 @@
         },
         {
           "offset": 1423,
-          "symbol": "_FUN_10103b80",
+          "symbol": "_InitializeControlNode",
           "target_address": "10103B80"
         },
         {
@@ -781,7 +781,7 @@
         },
         {
           "offset": 2249,
-          "symbol": "_FUN_10022f80",
+          "symbol": "_InitializeDescriptorControl",
           "target_address": "10022F80"
         },
         {
@@ -2342,6 +2342,81 @@
         "name_in_analysis": "FUN_10018950",
         "called_by": "FUN_1002c3d0@1002C3D0",
         "behavior": "initializes control fields and optional 257-byte buffer, creates a 0x58-byte child and applies style -200, then selects resource dimensions by returned language ID and wraps an optional callback-created resource; contracts at indirect pointer globals 0x1017509c and 0x1017503c remain unknown"
+      }
+    },
+    {
+      "address": "10103B80",
+      "name": "FUN_10103b80",
+      "size": 139,
+      "symbol": "_InitializeControlNode",
+      "source": "src/client-2062/Main/InitializeControlNode.cpp",
+      "source_sha256": "a0fc31e773528baa83983a698c4e741fe18f490bf2de4a067dca47a1b3273ac1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 33,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10103b80",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "delegates common control initialization, copies constructor arguments into fields at +0x50 through +0x70, initializes five state fields to zero, sets the vtable, and stores 0xffff at +0x8c"
+      }
+    },
+    {
+      "address": "10047950",
+      "name": "FUN_10047950",
+      "size": 227,
+      "symbol": "_InitializeControlBase",
+      "source": "src/client-2062/Main/InitializeControlBase.cpp",
+      "source_sha256": "513280faf4731bcec6d301ce97fc661b2206d7c0ea7f17b0eb49fdc848eeb43a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 33,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10047950",
+        "called_by": "FUN_10022f80@10022F80",
+        "behavior": "delegates shared state initialization, copies descriptor fields when present, writes default control fields and uses the 0x40000000 sentinel in three state slots; field semantics remain unresolved"
+      }
+    },
+    {
+      "address": "10022F80",
+      "name": "FUN_10022f80",
+      "size": 166,
+      "symbol": "_InitializeDescriptorControl",
+      "source": "src/client-2062/Main/InitializeDescriptorControl.cpp",
+      "source_sha256": "547440950d30e8b044c1996d1ec1d59b9cae4dfdfcbed70d93f34ef3bc29479b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 34,
+          "symbol": "_InitializeControlBase",
+          "target_address": "10047950"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10022f80",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "calls the base initializer, installs its derived vtable, copies six descriptor fields when the optional descriptor is non-null, and sets a control flag; field meanings remain partly uncertain"
       }
     }
   ]

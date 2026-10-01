@@ -9,12 +9,12 @@ extern "C" void CreateOverlayControl();
 extern "C" void InitializeTextControl();
 extern "C" void SetTextControlPairedValue();
 extern "C" void InitializeLanguageControl();
-extern "C" void FUN_10022f80();
+extern "C" void InitializeDescriptorControl();
 extern "C" void InitializeFrameControl();
 extern "C" void SetTreeControlVisibility();
 extern "C" void SetTreeControlStyle();
 extern "C" void FUN_100ffac0();
-extern "C" void FUN_10103b80();
+extern "C" void InitializeControlNode();
 extern "C" void InitializeControlVariant();
 extern "C" void InitializeCommon();
 extern "C" void InitializeRowControl();
@@ -757,7 +757,7 @@ L_1002C912:
         push edx
         push esi
         mov ecx, eax
-        call FUN_10103b80
+        call InitializeControlNode
         ; Exact immediate encoding: jmp short L_1002C967
         __asm _emit 0xeb
         __asm _emit 0x02
@@ -1197,7 +1197,7 @@ L_1002CC82:
         push ecx
         push 20h
         mov ecx, eax
-        call FUN_10022f80
+        call InitializeDescriptorControl
         ; Exact immediate encoding: jmp short L_1002CCA1
         __asm _emit 0xeb
         __asm _emit 0x02
