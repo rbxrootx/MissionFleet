@@ -40,6 +40,8 @@ def audit_relocations(document, match, code):
             actual = (address + offset + 4 + struct.unpack_from("<i", code, offset)[0]) & 0xFFFFFFFF
         elif kind == "absolute":
             actual = struct.unpack_from("<I", code, offset)[0]
+        elif kind == "immediate":
+            actual = struct.unpack_from("<I", code, offset)[0]
         else:
             raise ValueError(f"Unknown relocation kind: {kind}")
         expected = int(relocation["target_address"], 16)

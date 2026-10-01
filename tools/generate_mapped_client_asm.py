@@ -18,7 +18,7 @@ def asm_operand(text):
     )
 
 
-def render_function(name, address, code, disassembler):
+def render_function(name, address, code, disassembler, emit_all=False):
     instructions = list(disassembler.disasm(code, address))
     if sum(item.size for item in instructions) != len(code):
         raise ValueError(f"Capstone did not decode the complete {address:08X} extent")
@@ -43,7 +43,7 @@ def render_function(name, address, code, disassembler):
         is_string = instruction.mnemonic.startswith(("lods", "stos", "movs", "scas", "cmps"))
         has_prefix = any(instruction.prefix) or instruction.mnemonic in {"retf", "iretd"}
         is_direct_call = instruction.mnemonic in {"call", "lcall"}
-        if branch or is_direct_call or is_mmx or absolute_operands or is_string or has_prefix:
+        if emit_all or branch or is_direct_call or is_mmx or absolute_operands or is_string or has_prefix:
             lines.append(f"        ; Exact mapped bytes {raw}: {instruction.mnemonic} {instruction.op_str}".rstrip())
             lines.extend(f"        __asm _emit 0x{value:02x}" for value in instruction.bytes)
         else:
@@ -57,6 +57,13 @@ def render_function(name, address, code, disassembler):
                     "offset": instruction.address - address + encoding.imm_offset,
                     "target_address": f"{target:08X}",
                     "kind": "relative",
+                })
+            elif emit_all:
+                value = next(op.imm for op in instruction.operands if op.type == CS_OP_IMM) & 0xFFFFFFFF
+                relocations.append({
+                    "offset": instruction.address - address + encoding.imm_offset,
+                    "target_address": f"{value:08X}",
+                    "kind": "immediate",
                 })
         if encoding.disp_size == 4 and absolute_operands:
             for operand in absolute_operands:
@@ -76,6 +83,8 @@ def main():
     parser.add_argument("--inventory", required=True, type=Path)
     parser.add_argument("--image-base", required=True, type=lambda value: int(value, 0))
     parser.add_argument("--source-root", required=True, type=Path)
+    parser.add_argument("--emit-all", action="store_true",
+                        help="emit every decoded instruction byte for flag/register-sensitive code")
     parser.add_argument("addresses", nargs="+")
     args = parser.parse_args()
 
@@ -93,13 +102,17 @@ def main():
         code = image[start:start + size]
         if start < 0 or len(code) != size:
             raise ValueError(f"Function {address:08X} is outside the mapped image")
-        source, relocations = render_function(record["name"], address, code, decoder)
+        source, relocations = render_function(record["name"], address, code, decoder, args.emit_all)
         output = ROOT / args.source_root / f"{record['name']}.cpp"
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(source, encoding="ascii", newline="\n")
         relocation_report[f"{address:08X}"] = relocations
         print(f"Wrote {size} bytes to {output.relative_to(ROOT)}; {len(relocations)} address operands recorded")
     report = ROOT / "var" / "current-main-relocations.json"
+    if report.exists():
+        existing = __import__("json").loads(report.read_text(encoding="utf-8"))
+        existing.update(relocation_report)
+        relocation_report = existing
     report.write_text(__import__("json").dumps(relocation_report, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote relocation audit inputs to {report.relative_to(ROOT)}")
 

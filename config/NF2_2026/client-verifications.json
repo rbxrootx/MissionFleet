@@ -640,6 +640,502 @@
         "behavior": "Initializes a CMenuScreen/CNavyFIELDScreen object, constructs a series of child controls with 0x70-byte allocations, initializes shared menu fields, and reads a FleetMission registry version value before returning the screen object.",
         "uncertainty": "The exact purpose and labels of several child controls and the significance of the registry/version paths are not fully established. Ghidra's indexed function extent is 1,704 bytes."
       }
+    },
+    {
+      "address": "58F76B6B",
+      "name": "entry",
+      "size": 37,
+      "symbol": "_entry",
+      "source": "src/client-current/Main/entry.cpp",
+      "source_sha256": "5d9bcb5ae9134b58855edd96634435a4ec79f3a8d0c0c45b38a197054eac5268",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "45D54D3E",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 6,
+          "target_address": "58C3A998",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58C60FD6",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "entry",
+        "called_by": "PE module entrypoint at RVA 0x846B6B in the installed Main.dll.",
+        "behavior": "The 37-byte entry stream pushes 0x45D54D3E, calls 0x58C3A998, then contains flag/register operations ending in a JMP to 0x58C60FD6.",
+        "uncertainty": "The on-disk .vmp1 bytes are unchanged in this function. Dynamic reachability of its trailing JMP is not established because the C3A998 helper chain ends in PUSH EBP; RET, whose EBP target is unknown."
+      }
+    },
+    {
+      "address": "58C3A998",
+      "name": "FUN_58c3a998",
+      "size": 26,
+      "symbol": "_FUN_58c3a998",
+      "source": "src/client-current/Main/FUN_58c3a998.cpp",
+      "source_sha256": "e074a1ea7f100187c1acd8bbed92ce7ab38089f1047f92fc257a3e54bce2106c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "58BF62F5",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58c3a998",
+        "called_by": "Direct call from entry at 0x58F76B6B.",
+        "behavior": "The captured function transfers into helper 0x58BF62F5.",
+        "uncertainty": "Ghidra's register/flag-level pseudocode does not establish the helper's VMProtect semantics."
+      }
+    },
+    {
+      "address": "58BF62F5",
+      "name": "FUN_58bf62f5",
+      "size": 179,
+      "symbol": "_FUN_58bf62f5",
+      "source": "src/client-current/Main/FUN_58bf62f5.cpp",
+      "source_sha256": "101f99a1f2c8067443fd9de2ec835bff96710838e718037654fa8081063b1ae7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "76756450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "48730000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "06503607",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "1E9405A3",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "6A3F6D46",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "000000C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "48730000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "58BF6376",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "64EF55FB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "58DDB193",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58bf62f5",
+        "called_by": "Reached from the entry setup helper at 0x58C3A998.",
+        "behavior": "A 179-byte protected-section routine ending in a JMP to 0x58DDB193; its mapped immediate operands include load-time values that differ from the on-disk bytes.",
+        "uncertainty": "The transfer chain is statically observed, but the EBP-based dynamic target and the routine's VM state/application-level behavior are not recovered."
+      }
+    },
+    {
+      "address": "58DDB193",
+      "name": "FUN_58ddb193",
+      "size": 13,
+      "symbol": "_FUN_58ddb193",
+      "source": "src/client-current/Main/FUN_58ddb193.cpp",
+      "source_sha256": "988f058ef59d40595a971421692cbe1bf1422c7cbbfaf610cd9dffaa57b0396c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58BFF900",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58ddb193",
+        "called_by": "Static helper chain from 0x58BF62F5.",
+        "behavior": "A 13-byte transfer in the entry setup helper chain.",
+        "uncertainty": "The transfer target is recorded from captured code; the protected state transition is unknown."
+      }
+    },
+    {
+      "address": "58BFF900",
+      "name": "FUN_58bff900",
+      "size": 2,
+      "symbol": "_FUN_58bff900",
+      "source": "src/client-current/Main/FUN_58bff900.cpp",
+      "source_sha256": "5f87b66af27fec2bfac00c7c7ce4505b7186e660c4e070aa9d1947365c56e893",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58bff900",
+        "called_by": "Static helper chain through 0x58DDB193.",
+        "behavior": "The two captured instructions are PUSH EBP; RET, transferring control to the runtime value in EBP.",
+        "uncertainty": "The EBP target and the dynamic return destination are unknown; this is not proven to return to the lexical caller."
+      }
+    },
+    {
+      "address": "58C60FD6",
+      "name": "thunk_FUN_58e0a61e",
+      "size": 5,
+      "symbol": "_thunk_FUN_58e0a61e",
+      "source": "src/client-current/Main/thunk_FUN_58e0a61e.cpp",
+      "source_sha256": "53f6381267ccbf66588e8949436ed0face4d1727f6fb7b3b120e21a170b2a925",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58E0A61E",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "thunk_FUN_58e0a61e",
+        "called_by": "The entry function has a direct JMP at 0x58F76B8B to this thunk after its call to 0x58C3A998; whether runtime execution reaches that lexical JMP is unresolved.",
+        "behavior": "A 5-byte thunk that transfers to 0x58E0A61E.",
+        "uncertainty": "This records the captured trampoline edge only."
+      }
+    },
+    {
+      "address": "58E0A61E",
+      "name": "FUN_58e0a61e",
+      "size": 11,
+      "symbol": "_FUN_58e0a61e",
+      "source": "src/client-current/Main/FUN_58e0a61e.cpp",
+      "source_sha256": "75d2ce8bcb839178c79aadcf41985adf5b601e3ac079e0af920d9934c9af320a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58F8160D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58e0a61e",
+        "called_by": "Reached through thunk 0x58C60FD6.",
+        "behavior": "Compares EDI with ESP+0x60, then jumps to 0x58F8160D; that CMP supplies flags for the following JA.",
+        "uncertainty": "The VM interpreter state and intended application routine remain unresolved."
+      }
+    },
+    {
+      "address": "58F8160D",
+      "name": "FUN_58f8160d",
+      "size": 13,
+      "symbol": "_FUN_58f8160d",
+      "source": "src/client-current/Main/FUN_58f8160d.cpp",
+      "source_sha256": "24356c32d59fdff54cd2f81ebcf0394b7b706bda7ed0fdab979ad0dc7ff640a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58C84F0B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 9,
+          "target_address": "58DC34AD",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58f8160d",
+        "called_by": "Reached from 0x58E0A61E.",
+        "behavior": "JA transfers to the 2-byte JMP ESI stub at 0x58C84F0B; fallthrough loads EDX from ESP and JMPs to 0x58DC34AD. The JA flags were set by the preceding CMP at 0x58E0A622.",
+        "uncertainty": "The runtime comparison outcome and ESI target are unknown; do not infer handler semantics from the static branch."
+      }
+    },
+    {
+      "address": "58C84F0B",
+      "name": "FUN_58c84f0b",
+      "size": 2,
+      "symbol": "_FUN_58c84f0b",
+      "source": "src/client-current/Main/FUN_58c84f0b.cpp",
+      "source_sha256": "e01dbb82774c9db083b1cac83933021109f8403f5e0a23f6776b6e283ce32139",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58c84f0b",
+        "called_by": "Conditional path from 0x58F8160D.",
+        "behavior": "The captured 2-byte function body is JMP ESI.",
+        "uncertainty": "The runtime ESI value and handler set are not present in the static capture."
+      }
+    },
+    {
+      "address": "58DC34AD",
+      "name": "FUN_58dc34ad",
+      "size": 26,
+      "symbol": "_FUN_58dc34ad",
+      "source": "src/client-current/Main/FUN_58dc34ad.cpp",
+      "source_sha256": "09923796d0cba653fe436f726ef986405a4d8777d39192856273db4c43ec60aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "00000040",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 13,
+          "target_address": "FFFFFFFC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "58C319AB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58dc34ad",
+        "called_by": "Conditional path from 0x58F8160D.",
+        "behavior": "Transfers to 0x58C319AB with an unconditional JMP.",
+        "uncertainty": "The protected state transition and meaning of the alternate path are unknown."
+      }
+    },
+    {
+      "address": "58C319AB",
+      "name": "FUN_58c319ab",
+      "size": 7,
+      "symbol": "_FUN_58c319ab",
+      "source": "src/client-current/Main/FUN_58c319ab.cpp",
+      "source_sha256": "cdc8ffc8114030886a68dc14c22196de7d7e50d5ed0e0c6832ccc23834838fae",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58D6F6B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58c319ab",
+        "called_by": "Reached from 0x58DC34AD.",
+        "behavior": "Transfers to 0x58D6F6B0.",
+        "uncertainty": "The destination's role in the VMProtect protocol remains unknown."
+      }
+    },
+    {
+      "address": "58D6F6B0",
+      "name": "FUN_58d6f6b0",
+      "size": 6,
+      "symbol": "_FUN_58d6f6b0",
+      "source": "src/client-current/Main/FUN_58d6f6b0.cpp",
+      "source_sha256": "bbd784c09359ef3bbc4dd8995e27766806cf26570bd1b9e1d86a3556cd8761d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58D6F58A",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58d6f6b0",
+        "called_by": "Reached from 0x58C319AB.",
+        "behavior": "Pushes EDI and jumps to the 25-byte routine at 0x58D6F58A.",
+        "uncertainty": "The runtime purpose of the register transfer is unknown."
+      }
+    },
+    {
+      "address": "58D6F58A",
+      "name": "FUN_58d6f58a",
+      "size": 25,
+      "symbol": "_FUN_58d6f58a",
+      "source": "src/client-current/Main/FUN_58d6f58a.cpp",
+      "source_sha256": "97d7514dbf13b12975a1c1925caae8015a1e00f1d2b94c146a4a4b8829eea371",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58C5D37B",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58d6f58a",
+        "called_by": "Direct JMP from 0x58D6F6B0.",
+        "behavior": "A 25-byte flag/register-sensitive routine ending in a JMP to thunk 0x58C5D37B.",
+        "uncertainty": "No application-level meaning is established from this static body."
+      }
+    },
+    {
+      "address": "58C5D37B",
+      "name": "thunk_FUN_58fac690",
+      "size": 6,
+      "symbol": "_thunk_FUN_58fac690",
+      "source": "src/client-current/Main/thunk_FUN_58fac690.cpp",
+      "source_sha256": "9d973f827a6af626532fd3eeccca84be2f210664b1d3b8036dd56adc29186c30",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58FAC690",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "thunk_FUN_58fac690",
+        "called_by": "Direct JMP from 0x58D6F59E.",
+        "behavior": "Executes CLD and jumps to 0x58FAC690.",
+        "uncertainty": "This is a transfer stub; its runtime context is not fully understood."
+      }
+    },
+    {
+      "address": "58FAC690",
+      "name": "FUN_58fac690",
+      "size": 23,
+      "symbol": "_FUN_58fac690",
+      "source": "src/client-current/Main/FUN_58fac690.cpp",
+      "source_sha256": "48efa148680e4407bc66f8eaea4fd776d45b60f8c5192e8de760e784b42ff964",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "68F66CEB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "58C84F0B",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58fac690",
+        "called_by": "Direct JMP from thunk 0x58C5D37B.",
+        "behavior": "Executes a REP MOVSB sequence and then jumps to the shared JMP ESI stub at 0x58C84F0B.",
+        "uncertainty": "The copy count, source/destination register meaning, and indirect ESI target are not established for the VMProtect runtime path."
+      }
     }
   ]
 }

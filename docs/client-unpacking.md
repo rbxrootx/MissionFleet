@@ -75,28 +75,31 @@ replacement DLL. No game login or network connection was attempted.
 
 The installed-build Ghidra image uses its captured base `0x58730000`; its
 module entrypoint at RVA `0x846B6B` is therefore `0x58F76B6B`, inside `.vmp1`.
-At that address the mapped bytes form a 37-byte function. Its first 24 bytes are
-unchanged from the on-disk `.vmp1` data, so the loader's section materialization
-does not itself unpack this entrypoint stub. The initial path pushes
-`0x45D54D3E`, calls `0x58C3A998`, and then reaches the thunk at `0x58C60FD6`,
-which jumps to `0x58E0A61E` and then `0x58F8160D`. Ghidra's pseudocode for the
-entrypoint reduces these paths to helper calls, while its raw instruction view
-contains register-sensitive and flag-sensitive instructions; the pseudocode is
-not sufficient to infer the VM state or original protected routine.
+At that address the mapped bytes form a 37-byte function, and all 37 bytes
+match the on-disk `.vmp1` data. The loader's section materialization does not
+unpack this entrypoint stub. The instruction stream pushes `0x45D54D3E`, calls
+`0x58C3A998`, and later contains a jump to `0x58C60FD6`, which jumps to
+`0x58E0A61E` and then `0x58F8160D`. Dynamic reachability of that later jump is
+not established: the `0x58C3A998` helper chain ends in `PUSH EBP; RET`, and the
+runtime EBP target is unknown. Ghidra's pseudocode flattens the entrypoint into
+helper calls; its raw instruction view contains register-sensitive and
+flag-sensitive instructions, so the pseudocode is not sufficient to infer the
+VM state or original protected routine.
 
-At `0x58F8160D`, the observed conditional path reaches `0x58C84F0B`, whose
-instruction is `JMP ESI`. The other path calls through `0x58DC34AD` and then
-`0x58C319AB`. A separate helper chain from `0x58C3A998` runs through
-`0x58BF62F5` to `0x58DDB193` and `0x58BFF900`. The transfer through `ESI` is
-direct evidence of an indirect dispatch boundary in the protected region; it is
-not a recovered bytecode table or evidence that the VM has been devirtualized.
-The mapped capture establishes the dispatcher bytes and these static edges, but
-not the runtime value of `ESI`, the dispatched handler set, or the protected
-game routines represented by those handlers. Those details remain uncertain.
-By contrast, the recovered `.text` contains ordinary native routines: for
-example, `AllocScreen` at `0x587962C0` disassembles as a conventional allocation
-and constructor path. This confirms that the capture usefully materializes
-native code while leaving the entrypoint's protected dispatch unresolved.
+At `0x58F8160D`, `JA` reaches `0x58C84F0B`, whose instruction is `JMP ESI`.
+The fallthrough path jumps through `0x58DC34AD`, `0x58C319AB`,
+`0x58D6F6B0`, `0x58D6F58A`, `0x58C5D37B`, and `0x58FAC690`, then reaches that
+same `JMP ESI` stub. Both static branches therefore converge on an indirect
+dispatch instruction. A 15-function slice across this trampoline path now
+matches the mapped image byte-for-byte, with operand values audited and the
+on-disk difference in `0x58BF62F5` recorded. This is not a recovered bytecode
+table or evidence that the VM has been devirtualized: the runtime ESI value,
+handler set, and protected game routines remain unknown. Detailed extents and
+comparisons are in [VM entry and trampoline evidence](client-vm-entry-trampolines.md).
+The recovered `.text` also contains ordinary native routines; for example,
+`AllocScreen` at `0x587962C0` disassembles as a conventional allocation and
+constructor path. This confirms that the capture usefully materializes native
+code while leaving the entrypoint's protected dispatch unresolved.
 
 The three exports used as renderer/authentication boundaries also decompile from
 this snapshot. `InitCGCDLL` at `0x587956B0` forwards its argument to
