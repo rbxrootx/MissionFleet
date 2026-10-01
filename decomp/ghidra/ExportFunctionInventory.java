@@ -10,9 +10,13 @@ import java.nio.charset.StandardCharsets;
 
 public class ExportFunctionInventory extends GhidraScript {
     @Override public void run() throws Exception {
+        if (getScriptArgs().length < 1 || getScriptArgs().length > 2) {
+            throw new IllegalArgumentException("output TSV path [component] required");
+        }
         File output = new File(getScriptArgs()[0]);
         File parent = output.getParentFile();
         if (parent != null) parent.mkdirs();
+        String component = getScriptArgs().length == 2 ? getScriptArgs()[1] : "client-main";
         int count = 0;
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(
                 new java.io.FileOutputStream(output), StandardCharsets.UTF_8))) {
@@ -22,7 +26,7 @@ public class ExportFunctionInventory extends GhidraScript {
                 Function function = functions.next();
                 if (function.isExternal()) continue;
                 String name = function.getName().replace('\t', '_').replace('\n', '_').replace('\r', '_');
-                writer.println("client-main\t" + function.getEntryPoint() + "\t" + name + "\t" +
+                writer.println(component + "\t" + function.getEntryPoint() + "\t" + name + "\t" +
                     function.getBody().getNumAddresses());
                 ++count;
             }

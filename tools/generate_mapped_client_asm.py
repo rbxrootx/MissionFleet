@@ -83,6 +83,9 @@ def main():
     parser.add_argument("--inventory", required=True, type=Path)
     parser.add_argument("--image-base", required=True, type=lambda value: int(value, 0))
     parser.add_argument("--source-root", required=True, type=Path)
+    parser.add_argument("--relocations", type=Path,
+                        default=Path("var/current-main-relocations.json"),
+                        help="path for mapped operand audit records")
     parser.add_argument("--emit-all", action="store_true",
                         help="emit every decoded instruction byte for flag/register-sensitive code")
     parser.add_argument("addresses", nargs="+")
@@ -107,8 +110,9 @@ def main():
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(source, encoding="ascii", newline="\n")
         relocation_report[f"{address:08X}"] = relocations
-        print(f"Wrote {size} bytes to {output.relative_to(ROOT)}; {len(relocations)} address operands recorded")
-    report = ROOT / "var" / "current-main-relocations.json"
+        print(f"Wrote {size} bytes to {output.relative_to(ROOT)}; "
+              f"{len(relocations)} operand audit entries recorded")
+    report = args.relocations if args.relocations.is_absolute() else ROOT / args.relocations
     if report.exists():
         existing = __import__("json").loads(report.read_text(encoding="utf-8"))
         existing.update(relocation_report)

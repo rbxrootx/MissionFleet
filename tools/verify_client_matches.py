@@ -28,6 +28,13 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def source_hashes(path):
+    data = path.read_bytes()
+    lf = data.replace(b"\r\n", b"\n")
+    crlf = lf.replace(b"\n", b"\r\n")
+    return {hashlib.sha256(value).hexdigest() for value in (data, lf, crlf)}
+
+
 def audit_relocations(document, match, code):
     address = int(match["address"], 16)
     checked = 0
@@ -80,8 +87,7 @@ def verify_match(document, match, image, cl, clang, objdiff):
          "-o", target_object])
 
     source = ROOT / match["source"]
-    source_digest = sha256(source)
-    if match.get("source_sha256") and source_digest != match["source_sha256"]:
+    if match.get("source_sha256") and match["source_sha256"] not in source_hashes(source):
         raise ValueError(f"Source hash differs for {match['source']}")
     flags = tuple(match.get("flags", document["compiler"]["flags"]))
     environment = os.environ.copy()
@@ -122,8 +128,16 @@ def main():
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     modules = [item for item in manifest.get("modules", [])
                if item.get("name", "").casefold() == document["component"].casefold()]
-    if not any(item.get("original_sha256") == document["original_sha256"]
-               for item in modules):
+    identifies_original = False
+    for module in modules:
+        if module.get("original_sha256") == document["original_sha256"]:
+            identifies_original = True
+            break
+        original_path = Path(module.get("path", ""))
+        if original_path.is_file() and sha256(original_path) == document["original_sha256"]:
+            identifies_original = True
+            break
+    if not identifies_original:
         raise ValueError("Capture manifest does not identify the expected original client")
 
     matches = document["matches"]

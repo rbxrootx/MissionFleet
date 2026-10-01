@@ -16,6 +16,7 @@ COMPONENT_LABELS = {
     "save-server": "Persistence server",
     "client-main": "Archived 2062 Main.dll",
     "client-main-current": "Installed FleetMission Main.dll",
+    "client-core-current": "Installed FleetMission Core.dll",
 }
 IMAGE_BASES = {
     "login-server": 0x401000,
@@ -23,6 +24,7 @@ IMAGE_BASES = {
     "save-server": 0x401000,
     "client-main": 0x10000000,
     "client-main-current": 0x58730000,
+    "client-core-current": 0x58480000,
 }
 SOURCE_PATHS = {
     "login-server": "src/login-server",
@@ -30,6 +32,7 @@ SOURCE_PATHS = {
     "save-server": "src/save-server",
     "client-main": "src/client-2062/Main",
     "client-main-current": "src/client-current/Main",
+    "client-core-current": "src/client-current/Core",
 }
 
 
@@ -93,6 +96,7 @@ def load_inventory():
         CONFIG / "functions.tsv",
         CONFIG / "client-functions.tsv",
         ROOT / "config" / "NF2_2026" / "client-functions.tsv",
+        ROOT / "config" / "NF2_2026" / "core-functions.tsv",
     ):
         with inventory_path.open(encoding="utf-8", newline="") as stream:
             rows.extend(csv.DictReader(stream, delimiter="\t"))
@@ -132,12 +136,15 @@ def load_matches(inventory):
         result.add(key)
 
     client_configs = (
-        (CONFIG / "client-verifications.json", "client-main"),
-        (ROOT / "config" / "NF2_2026" / "client-verifications.json", "client-main-current"),
+        (CONFIG / "client-verifications.json", "client-main", "Main.dll"),
+        (ROOT / "config" / "NF2_2026" / "client-verifications.json",
+         "client-main-current", "Main.dll"),
+        (ROOT / "config" / "NF2_2026" / "core-verifications.json",
+         "client-core-current", "Core.dll"),
     )
-    for client_config, component in client_configs:
+    for client_config, component, module_name in client_configs:
         client_document = json.loads(client_config.read_text(encoding="utf-8"))
-        if client_document.get("schema_version") != 1 or client_document.get("component") != "Main.dll":
+        if client_document.get("schema_version") != 1 or client_document.get("component") != module_name:
             raise ValueError(f"Unsupported client verification inventory: {client_config}")
         for item in client_document["matches"]:
             required = {

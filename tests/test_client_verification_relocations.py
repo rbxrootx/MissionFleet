@@ -1,7 +1,10 @@
+import hashlib
 import struct
+import tempfile
 import unittest
+from pathlib import Path
 
-from tools.verify_client_matches import audit_relocations
+from tools.verify_client_matches import audit_relocations, source_hashes
 
 
 class ClientRelocationAuditTests(unittest.TestCase):
@@ -19,6 +22,15 @@ class ClientRelocationAuditTests(unittest.TestCase):
 
         self.assertEqual(audit_relocations({}, {"address": "00001000",
                                                  "relocations": relocations}, code), 3)
+
+    def test_source_hash_accepts_git_line_ending_conversion(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            source = Path(temporary_directory) / "source.cpp"
+            source.write_bytes(b"one\r\ntwo\r\n")
+
+            hashes = source_hashes(source)
+            self.assertIn(hashlib.sha256(b"one\ntwo\n").hexdigest(), hashes)
+            self.assertEqual(len(hashes), 2)
 
 
 if __name__ == "__main__":

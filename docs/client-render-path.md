@@ -160,3 +160,8 @@ and `0x10176B04` belong to a separately anchored object vtable and are also
 bounded and byte-matched. The renderer class owner and live dispatch paths
 remain unknown. See the
 [Main.dll span compositor notes](client-rgb16-span-compositor.md).
+
+The installed `Core.dll` pair selected by the current ship render path is now
+also byte-matched against its mapped runtime capture: `0x58800A60` and
+`0x5880D420`, totaling 73,887 bytes. The direct dispatch and capture limits are
+recorded in [installed Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).
