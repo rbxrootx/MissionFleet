@@ -36,19 +36,34 @@ The mapped image contains a code-pointer-table slot at `0x10176B90` whose value
 is `0x1015A8A0`; neighboring entries point to other functions in the same code
 region.
 Ghidra reports no direct call targets or code references to this function, so
-the table's owning class and the runtime dispatch path remain unresolved. The
+the table's owning class and runtime dispatch path remain unresolved. The
 pointer-table evidence supports a method-dispatch role, but does not identify a
 specific sprite subclass or prove which live render path selects it.
 
+## Sibling blend method
+
+`0x1014DF30` is a separate 36,606-byte `__thiscall` method with the same
+Ghidra parameter layout. Its pseudocode reads the same stream fields and host
+mask globals, clips against the destination bounds, and walks transparent runs
+and row controls. It branches into additional 16-bit color/effect loops. The
+record field at `+3` also selects paths using bits 1 and 2; the exact meaning of
+those flags is not established by the pseudocode.
+
+The mapped function-pointer table slot at `0x10176B84` contains
+`0x1014DF30`; slot `0x10176B90` contains `0x1015A8A0`. Ghidra found no direct
+calls or code references for the sibling either. These nearby entries and their
+shared stream/mask behavior support treating them as a renderer method family,
+while leaving the table owner and runtime dispatch unresolved.
+
 ## Byte-match validation and limits
 
-The reconstructed source preserves each mapped instruction, including the
+The reconstructed sources preserve each mapped instruction, including the
 implicit string and packed-pixel instructions that VC6's inline assembler
-cannot express. `tools/verify_client_matches.py --only 1015A8A0` compiles the
-source with the recorded VC6 flags and confirms all 37,130 bytes at 100% objdiff
-similarity. `/Zm200` raises VC6's internal compiler heap limit for this unusually
-large inline-assembly function; it does not alter code generation. The function
-has no direct-call relocations to resolve.
+cannot express. `tools/verify_client_matches.py --only 1014DF30 --only 1015A8A0`
+compiles both sources with the recorded VC6 flags and confirms all 73,736 bytes
+at 100% objdiff similarity. `/Zm200` raises VC6's internal compiler heap limit
+for these unusually large inline-assembly functions; it does not alter code
+generation. Neither function has direct-call relocations to resolve.
 
 The Ghidra signature does not recover the original parameter names or the
 meaning of each effect value. The runtime target masks can vary with display
