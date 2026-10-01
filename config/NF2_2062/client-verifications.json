@@ -532,7 +532,7 @@
       "size": 2751,
       "symbol": "_CreateFullScreenControl",
       "source": "src/client-2062/Main/CreateFullScreenControl.cpp",
-      "source_sha256": "b75c93a0fdfbc52d7333a2d3af47776ed483b036dc7c95a3cab2bc16c5b683ab",
+      "source_sha256": "e9ffd79d0c8166a22197ecd7a06b568bb153ccfe43922c2ef5db90422fad33c2",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -656,7 +656,7 @@
         },
         {
           "offset": 963,
-          "symbol": "_FUN_10018950",
+          "symbol": "_InitializeLanguageControl",
           "target_address": "10018950"
         },
         {
@@ -2268,6 +2268,80 @@
         "name_in_analysis": "FUN_10104f50",
         "called_by": "FUN_101047f0@101047F0",
         "behavior": "initializes base fields, optionally allocates and clears a 257-byte buffer, allocates and initializes a 0x58-byte child control, applies style -200, then calls the indirect function pointer at 0x1017509c and stores its return word at 0x101c9340; callback meaning is unknown"
+      }
+    },
+    {
+      "address": "101029B0",
+      "name": "FUN_101029b0",
+      "size": 32,
+      "symbol": "_InitializeResourceWrapper",
+      "source": "src/client-2062/Main/InitializeResourceWrapper.cpp",
+      "source_sha256": "dc0e456536c43772ffe11c1824275b1c2494afb7eb334c4367640b4eb549474c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101029b0",
+        "called_by": "FUN_10018950@10018950",
+        "behavior": "sets a wrapper vtable, 8/16 fields, and stores the provided resource pointer at +0x0c"
+      }
+    },
+    {
+      "address": "10018950",
+      "name": "FUN_10018950",
+      "size": 569,
+      "symbol": "_InitializeLanguageControl",
+      "source": "src/client-2062/Main/InitializeLanguageControl.cpp",
+      "source_sha256": "528d0c85d17cfdef472d5bbe80b5631edf0dbfd8dd159956897278bcaa195611",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 62,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 159,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 219,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 255,
+          "symbol": "_InitializeCommon",
+          "target_address": "100FE9B0"
+        },
+        {
+          "offset": 293,
+          "symbol": "_SetTreeControlStyle",
+          "target_address": "100FF160"
+        },
+        {
+          "offset": 469,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 493,
+          "symbol": "_InitializeResourceWrapper",
+          "target_address": "101029B0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10018950",
+        "called_by": "FUN_1002c3d0@1002C3D0",
+        "behavior": "initializes control fields and optional 257-byte buffer, creates a 0x58-byte child and applies style -200, then selects resource dimensions by returned language ID and wraps an optional callback-created resource; contracts at indirect pointer globals 0x1017509c and 0x1017503c remain unknown"
       }
     }
   ]

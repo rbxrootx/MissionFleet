@@ -8,7 +8,7 @@ extern "C" void CreateLogoControl();
 extern "C" void CreateOverlayControl();
 extern "C" void InitializeTextControl();
 extern "C" void SetTextControlPairedValue();
-extern "C" void FUN_10018950();
+extern "C" void InitializeLanguageControl();
 extern "C" void FUN_10022f80();
 extern "C" void InitializeFrameControl();
 extern "C" void SetTreeControlVisibility();
@@ -515,7 +515,7 @@ L_1002C696:
         push ebx
         push esi
         mov ecx, eax
-        call FUN_10018950
+        call InitializeLanguageControl
         ; Exact immediate encoding: jmp short L_1002C79B
         __asm _emit 0xeb
         __asm _emit 0x02
