@@ -114,6 +114,18 @@ the pointer. The callback meanings and the complete entrypoint argument
 contract are unresolved; this helper is part of native initialization and
 teardown, not evidence that VM bytecode has been devirtualized.
 
+The entrypoint's tail-jump target at `0x1016CC50` was missing from Ghidra's
+function inventory. Its code has a separate prologue and epilogue, one inbound
+tail-jump from `entry`, and a stable body ending at `0x1016CD42`; defining this
+boundary yielded a 243-byte function that now matches with all four relative
+call destinations checked. Its decompilation dispatches on values 0 through 3,
+calls the callback at `DAT_101C9368` on selected paths, routes lifecycle events
+through `FUN_1016CB40`, and calls `FUN_10033A60`. That 8-byte target simply
+returns 1 and now has its own byte match; it is distinct from the exported
+`InitCGCDLL` at `0x10033A70`.
+The values resemble standard DLL attach/detach reasons, but their external
+contract and the callback's meaning remain unproven.
+
 The archived readable `ITNTL.dll` independently uses the same `0x7C` allocation
 in its `AllocScreen` at `0x1002F8E0`, but calls constructor `0x10046C20` and
 stores the object in different globals. This confirms the allocation size and
@@ -144,9 +156,9 @@ relocation normalization.
 This work verifies against the local mapped-image snapshot; it does not remove
 VMProtect from the shipping module or produce a standalone runnable DLL.
 
-The public-safe function index for this mapped `Main.dll` contains 2,016
-Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The seventy-nine verified client
+The public-safe function index for this mapped `Main.dll` contains 2,017
+Ghidra-recognized functions totaling 1,253,747 body bytes. Function boundaries
+are analysis metadata and still need review. The eighty-one verified client
 byte matches include the `0x101E2B70` native entrypoint,
 `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen

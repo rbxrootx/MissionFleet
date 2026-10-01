@@ -4290,6 +4290,67 @@
         "behavior": "Ghidra shows a reason-1 path allocating and zeroing a 0x80-entry callback table, initializing related globals, calling FUN_1016CD68, and incrementing a state counter; the reason-0 path decrements the counter, invokes nonzero callbacks in reverse order, frees the table, and clears its pointer",
         "uncertainty": "The callback-table contract, allocator/free callback identities, and entrypoint reason/argument semantics are not recovered. This native lifecycle helper does not establish that VMProtect bytecode has been translated."
       }
+    },
+    {
+      "address": "1016CC50",
+      "name": "FUN_1016cc50",
+      "size": 243,
+      "symbol": "_FUN_1016cc50",
+      "source": "src/client-2062/Main/FUN_1016cc50.cpp",
+      "source_sha256": "c0199aeeee47ee9f92086a80fbc42f4c6159d88a3f7d3801cb58e62daca24232",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 94,
+          "symbol": "_FUN_1016cb40",
+          "target_address": "1016CB40"
+        },
+        {
+          "offset": 124,
+          "symbol": "_FUN_10033a60",
+          "target_address": "10033A60"
+        },
+        {
+          "offset": 154,
+          "symbol": "_FUN_1016cb40",
+          "target_address": "1016CB40"
+        },
+        {
+          "offset": 183,
+          "symbol": "_FUN_1016cb40",
+          "target_address": "1016CB40"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cc50 (boundary defined from the entrypoint's tail-jump target; Ghidra body 0x1016CC50-0x1016CD42)",
+        "called_by": "The 0x101E2B70 entrypoint tail-jumps here; Ghidra reports the control-transfer reference",
+        "behavior": "The Ghidra decompilation checks reason values 0, 1, 2, and 3, gates the reason-1/2 path with callback DAT_101C9368, calls FUN_1016CB40 for attach/detach bookkeeping, and calls FUN_10033A60, whose separate 8-byte body unconditionally returns 1",
+        "uncertainty": "The callback signature and reason-argument meanings are inferred from the observed branch values and Win32 entrypoint shape; the helper's exact CRT role and VMProtect coverage are not established."
+      }
+    },
+    {
+      "address": "10033A60",
+      "name": "FUN_10033a60",
+      "size": 8,
+      "symbol": "_FUN_10033a60",
+      "source": "src/client-2062/Main/FUN_10033a60.cpp",
+      "source_sha256": "616b6f395dbdaeae7d162d4d82e339061e32a5d142079d0778f15913b5caa175",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10033a60",
+        "called_by": "FUN_1016CC50 invokes this function once on its reason-dispatch path",
+        "behavior": "Ghidra decompiles the 8-byte function as an unconditional return of 1; the captured body is mov eax,1 followed by ret 0x0c",
+        "uncertainty": "The function's caller-supplied argument meanings are not recovered; the nearby exported InitCGCDLL at 0x10033A70 is a separate function."
+      }
     }
   ]
 }
