@@ -105,6 +105,15 @@ reconstructs the native image-loader stage; it does not translate VMProtect
 bytecode elsewhere in the module. The entrypoint argument contract and full
 VM-protection coverage remain unresolved.
 
+The entrypoint's reason-dependent lifecycle path also reaches the 263-byte
+`FUN_1016CB40`, reconstructed at 100% with its call relocation to
+`0x1016CD68` checked. Ghidra shows its reason-1 branch allocating a 0x80-entry
+callback table and incrementing a state counter. Its reason-0 branch decrements
+the counter, walks populated callbacks backward, frees the table, and clears
+the pointer. The callback meanings and the complete entrypoint argument
+contract are unresolved; this helper is part of native initialization and
+teardown, not evidence that VM bytecode has been devirtualized.
+
 The archived readable `ITNTL.dll` independently uses the same `0x7C` allocation
 in its `AllocScreen` at `0x1002F8E0`, but calls constructor `0x10046C20` and
 stores the object in different globals. This confirms the allocation size and
@@ -137,7 +146,7 @@ VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
 Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
-are analysis metadata and still need review. The seventy-eight verified client
+are analysis metadata and still need review. The seventy-nine verified client
 byte matches include the `0x101E2B70` native entrypoint,
 `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen

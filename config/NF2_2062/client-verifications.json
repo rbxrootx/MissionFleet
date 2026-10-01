@@ -4264,6 +4264,32 @@
         "behavior": "For param_4 == 1, Ghidra shows a bit-coded decompressor reading from 0x10135000 and writing at 0x10001000, followed by relative-call fixups, import resolution through function pointers at 0x101E30DC and 0x101E30E0, base-relocation fixups driven from 0x10000FFC, and a jump to 0x1016CC50",
         "uncertainty": "This reconstructs the 678-byte native entrypoint from the mapped image; it does not remove or translate any VMProtect bytecode elsewhere. The entrypoint argument contract and the complete protection coverage of the module remain unresolved."
       }
+    },
+    {
+      "address": "1016CB40",
+      "name": "FUN_1016cb40",
+      "size": 263,
+      "symbol": "_FUN_1016cb40",
+      "source": "src/client-2062/Main/FUN_1016cb40.cpp",
+      "source_sha256": "b2b5c2877df34ca0612cdac6fbfff92d561dda1acdccd3e989470d4928502805",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 142,
+          "symbol": "_FUN_1016cd68",
+          "target_address": "1016CD68"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cb40",
+        "called_by": "Ghidra reports three references from the 0x101E2B70 entrypoint's reason-dependent path",
+        "behavior": "Ghidra shows a reason-1 path allocating and zeroing a 0x80-entry callback table, initializing related globals, calling FUN_1016CD68, and incrementing a state counter; the reason-0 path decrements the counter, invokes nonzero callbacks in reverse order, frees the table, and clears its pointer",
+        "uncertainty": "The callback-table contract, allocator/free callback identities, and entrypoint reason/argument semantics are not recovered. This native lifecycle helper does not establish that VMProtect bytecode has been translated."
+      }
     }
   ]
 }
