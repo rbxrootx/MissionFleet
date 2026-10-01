@@ -38,8 +38,10 @@ The other statically visible path is:
 comparison flags. The fallthrough chain adjusts the stack and register state,
 performs `REP MOVSB`, and rejoins the same two-byte `JMP ESI` stub. This proves
 that both static branches converge on an indirect dispatch instruction. The
-captured image does not reveal ESI's runtime value or the handler set, so it
-does not identify the protected application routines.
+mapped image alone does not reveal ESI's runtime value. An isolated runtime
+trace now records the first 16 DLL-initialization targets and one executed path;
+it does not establish the full handler set or identify the protected gameplay
+routines. See [installed Main.dll runtime VM dispatch evidence](client-vm-runtime-dispatch.md).
 
 The on-disk and mapped bytes are identical for 14 of the 15 extents. The
 179-byte `58BF62F5` body differs at offsets `+0x1E`, `+0x1F`, `+0x79`, `+0x7A`,

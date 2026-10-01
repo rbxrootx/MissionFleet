@@ -93,13 +93,22 @@ same `JMP ESI` stub. Both static branches therefore converge on an indirect
 dispatch instruction. A 15-function slice across this trampoline path now
 matches the mapped image byte-for-byte, with operand values audited and the
 on-disk difference in `0x58BF62F5` recorded. This is not a recovered bytecode
-table or evidence that the VM has been devirtualized: the runtime ESI value,
-handler set, and protected game routines remain unknown. Detailed extents and
-comparisons are in [VM entry and trampoline evidence](client-vm-entry-trampolines.md).
+table or evidence that the VM has been devirtualized. A separate isolated
+runtime trace now records the first 16 DLL-initialization ESI targets, but the
+full handler set and protected game routines remain unknown. Detailed extents
+and comparisons are in [VM entry and trampoline evidence](client-vm-entry-trampolines.md).
 The recovered `.text` also contains ordinary native routines; for example,
 `AllocScreen` at `0x587962C0` disassembles as a conventional allocation and
 constructor path. This confirms that the capture usefully materializes native
 code while leaving the entrypoint's protected dispatch unresolved.
+
+The first 16 runtime targets through the VM's `JMP ESI` dispatcher during this
+isolated DLL initialization are now captured, along with one 59-instruction
+path from its first handler to the next dispatch. Their live code and stream
+bytes are validated against the hash-pinned mapped image. This establishes a
+runtime edge and evidence for the VM stream and stack registers, not a complete
+VMProtect unpack or a gameplay-handler inventory. See [runtime VM dispatch
+evidence](client-vm-runtime-dispatch.md).
 
 The three exports used as renderer/authentication boundaries also decompile from
 this snapshot. `InitCGCDLL` at `0x587956B0` forwards its argument to
@@ -107,10 +116,35 @@ this snapshot. `InitCGCDLL` at `0x587956B0` forwards its argument to
 bytes, calls constructor `0x587C35A0` with its second argument, stores the
 resulting object in a module global, and optionally calls a method at vtable
 offset `+0x20` using its third argument. `GetUserId` at `0x58796310` returns a
-pointer to a module global. The exported `AllocScreen` and its direct screen
-constructor are now byte-matched against this capture; see [installed screen
-lifecycle](current-client-screen-lifecycle.md). The remaining export
-observations above are not yet reconstructed or byte-matched.
+pointer to `0x58A0B450`. All three export bodies now have byte-matched source
+and verify against the installed capture using VC6/objdiff. The `InitCGCDLL`
+match preserves its direct-call relocation to `0x58907CE0` and audits that
+destination independently. The exported `AllocScreen` and its direct screen
+constructor are described in [installed screen lifecycle](current-client-screen-lifecycle.md).
+For `GetUserId`, the global's value and host-side ownership remain unknown; for
+`InitCGCDLL`, the callback-table contract consumed by its callee remains
+unknown.
+
+The installed `InitCGCDLL` call target, `FUN_58907CE0`, is also byte-matched.
+Ghidra's decompilation and the 586-byte instruction stream show ordered copies
+from callback-table offsets `0x00` through `0x88`, plus `0x1CC`, into fixed
+renderer globals, followed by a return value of one. The highest observed read
+ends at byte `0x1CF`, so the caller must provide readable storage through at
+least `0x1D0` bytes for this path; the function has no length argument or
+validation. The exact x86 source retains the captured instructions because the
+compiler emits different byte/word-load forms from the straightforward C
+assignments. Field meanings and the host's actual allocation size remain
+unresolved.
+
+The current screen constructors also share two ordered child-list structures
+and paired removal paths, all now byte-matched with their base initializer.
+Their field offsets, ordering behavior, evidence, and limits are recorded in
+[the installed-client child-list notes](current-client-child-lists.md).
+
+The installed screen constructor also creates seven static-text controls from
+a shared string pointer. Their `0x80`-byte buffer setup, bounded byte copy,
+direct helper closure, and callback-slot uncertainties are documented in
+[the installed-client static-text notes](current-client-static-text.md).
 
 The inventory snapshot referenced by the ITNTL comparison records a different
 `Main.dll` build (`b3aac421e83c7b0b90224619038e4e2632a7d6ab58ebfd0f9783cbc6e6a57a31`).

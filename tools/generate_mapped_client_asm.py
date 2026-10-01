@@ -4,7 +4,7 @@ import csv
 import re
 from pathlib import Path
 
-from capstone import Cs, CS_ARCH_X86, CS_GRP_JUMP, CS_MODE_32, CS_OP_IMM, CS_OP_MEM
+from capstone import Cs, CS_ARCH_X86, CS_GRP_JUMP, CS_MODE_32, CS_OP_IMM, CS_OP_MEM, CS_OP_REG
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,10 +40,21 @@ def render_function(name, address, code, disassembler, emit_all=False):
             if operand.type == CS_OP_MEM and not operand.mem.base and not operand.mem.index
             and not operand.mem.segment
         ]
+        identity_lea = (
+            instruction.mnemonic == "lea"
+            and len(instruction.operands) == 2
+            and instruction.operands[0].type == CS_OP_REG
+            and instruction.operands[1].type == CS_OP_MEM
+            and instruction.operands[1].mem.base == instruction.operands[0].reg
+            and instruction.operands[1].mem.index == 0
+            and instruction.operands[1].mem.disp == 0
+            and instruction.operands[1].mem.segment == 0
+        )
         is_string = instruction.mnemonic.startswith(("lods", "stos", "movs", "scas", "cmps"))
         has_prefix = any(instruction.prefix) or instruction.mnemonic in {"retf", "iretd"}
         is_direct_call = instruction.mnemonic in {"call", "lcall"}
-        if emit_all or branch or is_direct_call or is_mmx or absolute_operands or is_string or has_prefix:
+        if (emit_all or branch or is_direct_call or is_mmx or absolute_operands
+                or is_string or has_prefix or identity_lea):
             lines.append(f"        ; Exact mapped bytes {raw}: {instruction.mnemonic} {instruction.op_str}".rstrip())
             lines.extend(f"        __asm _emit 0x{value:02x}" for value in instruction.bytes)
         else:

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "component": "Main.dll",
+  "image_base": "58730000",
+  "mapped_image": "reports/unpacked-current-main/Main.mapped.bin",
+  "manifest": "reports/unpacked-current-main/manifest.json",
+  "mapped_sha256": "e04ba858c5aec15f5c1e93adc3ef4ae1761767b92353294e57b4603f8c796831",
+  "original_sha256": "74398355bad12f5349319967ec92c08f2bb2e82dbb441acaeeffb4e55b4359dd",
+  "blocks": [
+    {
+      "block_sha256": "a2f7112155890e63d5ba2e4f6c68209247be6f5bf19680b7cf2806ae3fb291cc",
+      "address": "58BD01ED",
+      "size": 125,
+      "source": "src/client-current/vm-blocks/VMHandler_58bd01ed.cpp",
+      "source_sha256": "697ef3b8bff0db39c45d3bc133bbcb0951f34707aa03c42fd099258cb0c8b37c",
+      "symbol": "_VMHandler_58bd01ed",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "evidence": "Repeated runtime dispatch target; 59-step single-instruction trace executes this block to JMP 0x58D870E8.",
+      "uncertainty": "Basic-block extent on the observed path, not a function boundary. VM opcode semantics and whole-VM equivalence are unknown; trap-flag instrumentation may affect code that observes TF indirectly."
+    },
+    {
+      "block_sha256": "3365feb47f755b28f30adce58331432d21a1a957464b11db02c9101876ec53bc",
+      "address": "58BEB131",
+      "size": 9,
+      "source": "src/client-current/vm-blocks/VMHandler_58beb131.cpp",
+      "source_sha256": "5a45284bc65fabb314a62410c98daded3f1b3dc3fb805cc549ac5895d861c539",
+      "symbol": "_VMHandler_58beb131",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "evidence": "Second runtime JMP ESI target in a three-dispatch trace. Single-stepped instructions at 0x58BEB131 and 0x58BEB135 decode as MOV EDX,[EBP] and JMP 0x58BCA099; the next observed IP is 0x58BCA099.",
+      "uncertainty": "Nine-byte executed basic block only; the trampoline at 0x58BCA099 is outside this block. The bytecode operation meaning and subsequent VM state are unresolved. The instruction trace sets EFLAGS.TF."
+    },
+    {
+      "block_sha256": "8328a47bf346275aacc523eca2699c3676e3e7ef755fba6d1d25c6d20f2426ff",
+      "address": "58DAFF71",
+      "size": 15,
+      "source": "src/client-current/vm-blocks/VMHandler_58daff71.cpp",
+      "source_sha256": "907c6ecbd37cd02e367046676215cf4833797ef0d88f53b33eb7c1d396ee95b1",
+      "symbol": "_VMHandler_58daff71",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "evidence": "Third runtime JMP ESI target in two repeated four-dispatch traces. The executed path reads a dword through [EBP], adds four to EBP, then directly jumps to 0x58D5FED9.",
+      "uncertainty": "Fifteen-byte executed basic block only; subsequent trampoline path is outside this block. Opcode semantics and VM state after the path are unresolved. The instruction trace sets EFLAGS.TF."
+    },
+    {
+      "block_sha256": "74a6758d767019099fc899525aae0e5cb3a5eeb2a523abae6f2399630e4f44c3",
+      "address": "58C85B6B",
+      "size": 147,
+      "source": "src/client-current/vm-blocks/VMHandler_58c85b6b.cpp",
+      "source_sha256": "91c08ef0792dc2a0d5bdb8a076767e1dd0ec4a3fbaa29b26382c1217c942c14f",
+      "symbol": "_VMHandler_58c85b6b",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "evidence": "Fourth runtime JMP ESI target in two repeated five-dispatch traces. The 46 traced instructions run sequentially from 0x58C85B6B through the terminal direct JMP at 0x58C85BF9, which transfers to 0x58C9884B.",
+      "uncertainty": "147-byte executed basic block only; trampoline code beginning at 0x58C9884B is outside it. Opaque arithmetic/flag operations prevent assigning VM opcode semantics. The instruction trace sets EFLAGS.TF."
+    },
+    {
+      "block_sha256": "8e1bdd25e7fad720f99832922e52eb6694a10e3bc157e8c805b249b8c091ce7c",
+      "address": "58C0E4F5",
+      "size": 69,
+      "source": "src/client-current/vm-blocks/VMHandler_58c0e4f5.cpp",
+      "source_sha256": "6b8e11a57856fd4cf3bb249f49e6566c67770dc3196ecbe6aef937649572bbe9",
+      "symbol": "_VMHandler_58c0e4f5",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "evidence": "Fifth runtime JMP ESI target in two repeated six-dispatch traces. The executed instruction sequence starts at 0x58C0E4F5 and ends in a direct JMP at 0x58C0E535 to 0x58D8AF3E.",
+      "uncertainty": "Sixty-nine-byte executed basic block only. Subsequent VM trampoline flow is outside the block; opaque register and flag operations do not establish opcode semantics. The instruction trace sets EFLAGS.TF, and this block executes PUSHFD then POP [EDI], so TF is written into VM data and the observed data side effect is not representative of an uninstrumented run."
+    }
+  ]
+}
