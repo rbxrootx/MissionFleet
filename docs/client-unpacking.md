@@ -3,8 +3,8 @@
 `FleetMission.exe` loads `Core.dll` and calls its exported `WinMain`. Static PE
 inspection does not show a direct load reference to `Main.dll`; this does not
 exclude a dynamic `LoadLibraryA`/`GetProcAddress` path. The installed-client
-runtime evidence now identifies `Main.dll` as VMProtect-protected and
-`ITNTL.dll` as readable native x86. Both export `AllocScreen` and related
+runtime evidence is consistent with VMProtect protection on `Main.dll`;
+`ITNTL.dll` is readable native x86. Both export `AllocScreen` and related
 lifecycle names. The export match is useful evidence for the renderer boundary,
 but does not prove the protected and readable implementations are byte- or
 behavior-identical. See [ITNTL sprite loader](itntl-sprite-loader.md).
@@ -37,12 +37,80 @@ span fields at offsets `+0` and `+3`, advances by five bytes, and ignores byte
 comparison module and corrected a false run-mode assumption in the preview
 decoder.
 
-This is an unpacked mapped `Core.dll` image, not a claim that VMProtect
-virtualization is fully removed from `Main.dll`. Native packed functions are
-available for decompilation from the captured image. Functions translated into
-VM bytecode still require separate identification and behavioral
-reconstruction; the capture does not translate that bytecode into native
-function bodies.
+This is a mapped `Core.dll` image. It exposes runtime-materialized PE sections
+for static analysis, but does not translate VM bytecode into native function
+bodies. A separate capture of the installed `Main.dll` follows below.
+
+## Current installed `Main.dll` runtime capture
+
+The installed `D:\FleetMission\Main.dll` has SHA-256
+`74398355bad12f5349319967ec92c08f2bb2e82dbb441acaeeffb4e55b4359dd` and
+preferred image base `0x10000000`. Its on-disk `.text`, `.rdata`, `.data`, and `.vmp0`
+sections have zero raw size; `.vmp1` has raw bytes. Loading this DLL alone in
+the isolated 32-bit host caused the Windows loader and module entrypoint to
+materialize a mapped image at `0x58730000`. The capture has 8,941,568 bytes and
+no unreadable pages. The mapped image SHA-256 is
+`e04ba858c5aec15f5c1e93adc3ef4ae1761767b92353294e57b4603f8c796831`; its
+manifest verifies the captured file hash against the on-disk module. The
+PE-shaped snapshot and mapped bytes are kept locally under the ignored
+`reports/unpacked-current-main/` directory. To repeat the capture, load the DLL
+in the isolated host and dump its mapped pages:
+
+```
+rtk proxy C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools\load_module_host.ps1 -ModulePath D:\FleetMission\Main.dll -HoldSeconds 120
+rtk python tools/dump_loaded_module.py --pid <printed-pid> --module Main.dll --output reports/unpacked-current-main
+```
+
+Ghidra analysis recognized 8,474 function entries in the snapshot: 8,441 in
+`.text`, with 2,352,205 bytes across their recorded bodies, and 33 small
+entries in `.vmp1` totaling 853 bytes. This is an automatic static-analysis
+inventory, not a verified function boundary set or a byte-matched source
+reconstruction. The module entrypoint remains at RVA `0x846B6B` inside `.vmp1`.
+The capture therefore recovers a substantial native code region for
+decompilation, while the remaining VMProtect code/data and entrypoint behavior
+still need separate analysis. It is not a fully devirtualized or standalone
+replacement DLL. No game login or network connection was attempted.
+
+### Current-build VM dispatch boundary
+
+The installed-build Ghidra image uses its captured base `0x58730000`; its
+module entrypoint at RVA `0x846B6B` is therefore `0x58F76B6B`, inside `.vmp1`.
+At that address the mapped bytes form a 37-byte function. Its first 24 bytes are
+unchanged from the on-disk `.vmp1` data, so the loader's section materialization
+does not itself unpack this entrypoint stub. The initial path pushes
+`0x45D54D3E`, calls `0x58C3A998`, and then reaches the thunk at `0x58C60FD6`,
+which jumps to `0x58E0A61E` and then `0x58F8160D`. Ghidra's pseudocode for the
+entrypoint reduces these paths to helper calls, while its raw instruction view
+contains register-sensitive and flag-sensitive instructions; the pseudocode is
+not sufficient to infer the VM state or original protected routine.
+
+At `0x58F8160D`, the observed conditional path reaches `0x58C84F0B`, whose
+instruction is `JMP ESI`. The other path calls through `0x58DC34AD` and then
+`0x58C319AB`. A separate helper chain from `0x58C3A998` runs through
+`0x58BF62F5` to `0x58DDB193` and `0x58BFF900`. The transfer through `ESI` is
+direct evidence of an indirect dispatch boundary in the protected region; it is
+not a recovered bytecode table or evidence that the VM has been devirtualized.
+The mapped capture establishes the dispatcher bytes and these static edges, but
+not the runtime value of `ESI`, the dispatched handler set, or the protected
+game routines represented by those handlers. Those details remain uncertain.
+By contrast, the recovered `.text` contains ordinary native routines: for
+example, `AllocScreen` at `0x587962C0` disassembles as a conventional allocation
+and constructor path. This confirms that the capture usefully materializes
+native code while leaving the entrypoint's protected dispatch unresolved.
+
+The three exports used as renderer/authentication boundaries also decompile from
+this snapshot. `InitCGCDLL` at `0x587956B0` forwards its argument to
+`0x58907CE0` and returns zero. `AllocScreen` at `0x587962C0` allocates `0x84`
+bytes, calls constructor `0x587C35A0` with its second argument, stores the
+resulting object in a module global, and optionally calls a method at vtable
+offset `+0x20` using its third argument. `GetUserId` at `0x58796310` returns a
+pointer to a module global. These are Ghidra pseudocode observations only; they
+have not yet been reconstructed or byte-matched.
+
+The inventory snapshot referenced by the ITNTL comparison records a different
+`Main.dll` build (`b3aac421e83c7b0b90224619038e4e2632a7d6ab58ebfd0f9783cbc6e6a57a31`).
+That older hash should not be conflated with the current installed build
+captured above or with the separate archived 2062 client below.
 
 ## Archived 2062 client startup capture
 
@@ -126,6 +194,30 @@ returns 1 and now has its own byte match; it is distinct from the exported
 The values resemble standard DLL attach/detach reasons, but their external
 contract and the callback's meaning remain unproven.
 
+The attach path's `FUN_1016CD68` thunk is also byte-matched. Its six bytes jump
+through IAT slot `0x10175118`, whose captured value is `0x1020AD20`. The
+supplied `MSVCRTD.DLL` has preferred base `0x10200000` and exports `_initterm`
+at RVA `0xAD20`, identifying the thunk target by address. `FUN_1016CB40`
+pushes `0x1017F018` then `0x1017F000` before calling it; under the observed
+32-bit calling convention these are the end and start pointers for a 24-byte
+range, or six 32-bit pointer slots. The captured table is `[0,
+0x10033870, 0x10042CB0, 0x10042CD0, 0x10042CF0, 0x10042D10]`; the leading
+null is skipped. Microsoft's CRT reference says `_initterm` walks a function
+pointer table and skips null entries
+([Microsoft Learn](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/initterm-initterm-e?view=msvc-170)).
+Each initializer and the relevant call/cleanup chain now has a byte-matched
+source under `src/client-2062/Main/`. `0x10033870` builds an object-array
+instance with a 0x1000 count and registers `0x10033890` through `_atexit`;
+the cleanup restores its vtable and conditionally invokes a CRT thunk.
+`0x10042CB0`, `0x10042CD0`, `0x10042CF0`, and `0x10042D10` each call the
+host callback stored at `0x10175050` with `(0, 1, size)` and save the result in
+four consecutive globals. The `0x100E2800` constructor confirms the object-array
+setup, calls callbacks at `0x10175140` and `0x10175120`, and allocates through
+the matched thunk at `0x1016C7A0`. Its teardown reaches the matched `__onexit`
+and `_atexit` helpers. The callback signatures and the semantic purposes of the
+four global blocks remain uncertain; this evidence establishes initialization
+order and machine behavior, not higher-level subsystem names.
+
 The archived readable `ITNTL.dll` independently uses the same `0x7C` allocation
 in its `AllocScreen` at `0x1002F8E0`, but calls constructor `0x10046C20` and
 stores the object in different globals. This confirms the allocation size and
@@ -156,14 +248,25 @@ relocation normalization.
 This work verifies against the local mapped-image snapshot; it does not remove
 VMProtect from the shipping module or produce a standalone runnable DLL.
 
-The public-safe function index for this mapped `Main.dll` contains 2,017
-Ghidra-recognized functions totaling 1,253,747 body bytes. Function boundaries
-are analysis metadata and still need review. The eighty-one verified client
-byte matches include the `0x101E2B70` native entrypoint,
-`InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
-`FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
-child constructors, the three common control initialization/list functions,
-and the sprite-resource wrapper/parser and their helpers. From roots `0x100FFAC0`
+The public-safe function index for this mapped `Main.dll` now contains 2,030
+indexed functions totaling 1,253,985 body bytes. This includes six table-target
+functions (94 bytes) whose extents were established from mapped pointer entries,
+RET boundaries, and Ghidra decompilation. Function boundaries are analysis
+metadata and still need review. The 150 verified client byte matches include
+the `0x101E2B70` native entrypoint, `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`,
+`FUN_10038130`, `FUN_10015b80`, the allocator thunk, the screen constructor,
+all three screen child constructors, the three common control initialization/list
+functions, and the sprite-resource wrapper/parser and helpers. They also include
+the [paired resource-backed UI construction tree](client-resource-backed-ui-tree.md)
+and all six CRT initializer entries with their object-array construction/cleanup
+chain.
+The renderer vtable at `0x10176B08` now has 24 matched span-render methods,
+13 deleting-destructor wrappers, 13 destructor bodies, and two shared cleanup
+helpers, plus two matched zero-returning virtual stubs: 54 functions / 382,093
+bytes. Two state-transition methods from a separately anchored vtable and two
+additional table-referenced leaf functions are also matched; their unresolved
+ownership is recorded in [the compositor notes](client-rgb16-span-compositor.md).
+From roots `0x100FFAC0`
 and `0x100FFC40`, a direct-call walk reaches 34 indexed functions; all 34 now
 have byte-matched source, with no direct-call target outside the function index.
 That walk includes the parser's DirectDraw surface helpers, interface constructors,

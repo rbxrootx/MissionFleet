@@ -2,11 +2,13 @@
 
 This trace is from the readable x86 `ITNTL.dll` in the supplied stock client,
 SHA-256 `bf158b65e5c110aa6ac7aa6d9e64b0f4b831bdc224b444650d24c85b43db01b7`.
-The matching protected `Main.dll` inventory hash is
+The older inventory snapshot recorded this protected `Main.dll` hash as
 `b3aac421e83c7b0b90224619038e4e2632a7d6ab58ebfd0f9783cbc6e6a57a31`.
 Addresses use its image base `0x10000000`. This is direct static Ghidra evidence
 from that binary; matching names or layouts do not by themselves prove that a
-protected `Main.dll` implementation is identical.
+protected `Main.dll` implementation is identical. The currently installed
+`D:\FleetMission\Main.dll` is a different build; its runtime capture is
+documented in [client unpacking](client-unpacking.md).
 
 ## Screen allocation and object relationship
 
@@ -17,6 +19,12 @@ configuration. `Main.dll` exports the same lifecycle names, including
 `AllocScreen`, but the modules have separate implementations. The inventory
 also shows `Main.dll` imports `LoadLibraryA` and `GetProcAddress`, so static
 imports alone do not resolve its runtime module links.
+
+The later installed `D:\FleetMission\Main.dll` build has a distinct runtime
+capture: its recovered `AllocScreen` requests `0x84` bytes and calls a different
+constructor. This confirms that the readable ITNTL routine is comparison
+evidence for the boundary, not an implementation substitute. See
+[the current Main.dll capture](client-unpacking.md#current-installed-maindll-runtime-capture).
 
 The sprite draw wrapper is `0x100EB530(sprite, screen, x, y, left, top, right,
 bottom, color, effect)`, with the sprite as implicit `this`. It obtains screen

@@ -143,10 +143,20 @@ board were rendered into RGB16 surfaces through this path and compared with the
 independent RGBA preview decoder after round-tripping its colors to RGB565. All
 209,806 literal pixels and every transparent skip matched.
 
-The mapped protected `Main.dll` independently contains 16-bit span-render
-methods at `0x10144810`, `0x101481E0`, `0x1014DF30`, and `0x1015A8A0`, totaling
-104,411 bytes. Their pixel-buffer/pitch accesses, transparent-run traversal,
-and channel-mask blend paths are byte-matched from the runtime image. Their
-static pointer-table slots are known, while the owning class and runtime
-dispatch paths remain unresolved; see the
+The mapped protected `Main.dll` independently contains 24 byte-matched
+span-render table members totaling 381,241 bytes:
+`0x10109CF0`, `0x1010B0B0`, `0x1010C2E0`, `0x1010F390`, `0x101121F0`,
+`0x101153F0`, `0x10118360`, `0x10119E00`, `0x1011B150`, `0x1011F370`,
+`0x10122220`, `0x10126570`, `0x101294F0`, `0x1012D2B0`, `0x1012F130`,
+`0x10137E90`, `0x1013B8A0`, `0x10144810`, `0x101481E0`, `0x1014C060`,
+`0x1014DF30`, `0x10156E30`, `0x1015A8A0`, and `0x101639B0`. Their
+pixel-buffer/pitch accesses, transparent-run traversal, and variant-specific
+blend paths are byte-matched from the runtime image. The table also contains
+13 matched deleting-destructor wrappers and their 13 matched bodies, plus two
+shared matched cleanup helpers. The final three-slot group includes matched
+zero-returning stubs at `0x10176B9C` and `0x10176BA0`; these complete the
+13-group vtable run but do not render pixels. Nearby methods at `0x10176B00`
+and `0x10176B04` belong to a separately anchored object vtable and are also
+bounded and byte-matched. The renderer class owner and live dispatch paths
+remain unknown. See the
 [Main.dll span compositor notes](client-rgb16-span-compositor.md).

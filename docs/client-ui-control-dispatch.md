@@ -7,6 +7,9 @@ their instruction bytes, relocations, globals, and objdiff score against the
 captured image; the generated C-like source by itself is not treated as proof
 of higher-level behavior.
 
+The separate paired resource-backed constructor tree is documented in
+[client-resource-backed-ui-tree.md](client-resource-backed-ui-tree.md).
+
 ## Evidence and observed behavior
 
 Ghidra's pseudocode for `0x1001DAB0` shows a 177-arm switch driven by its first

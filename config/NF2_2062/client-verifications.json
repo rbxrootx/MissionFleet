@@ -1754,31 +1754,6 @@
       }
     },
     {
-      "address": "1016C784",
-      "name": "FUN_1016c784",
-      "size": 11,
-      "symbol": "_FUN_1016c784",
-      "source": "src/client-2062/Main/FUN_1016c784.cpp",
-      "source_sha256": "f2735257a704017465779825cf4bf4e5188de50c1d804258911ea2e4261b701e",
-      "verified_by": "objdiff-3.8.0-byte-identical",
-      "flags": [
-        "/O2",
-        "/GX-"
-      ],
-      "relocations": [
-        {
-          "offset": 5,
-          "symbol": "_FUN_1016cd44",
-          "target_address": "1016CD44"
-        }
-      ],
-      "evidence": {
-        "name_in_analysis": "FUN_1016c784",
-        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
-        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
-      }
-    },
-    {
       "address": "1016CAA0",
       "name": "`eh_vector_constructor_iterator'",
       "size": 113,
@@ -4350,6 +4325,1466 @@
         "called_by": "FUN_1016CC50 invokes this function once on its reason-dispatch path",
         "behavior": "Ghidra decompiles the 8-byte function as an unconditional return of 1; the captured body is mov eax,1 followed by ret 0x0c",
         "uncertainty": "The function's caller-supplied argument meanings are not recovered; the nearby exported InitCGCDLL at 0x10033A70 is a separate function."
+      }
+    },
+    {
+      "address": "1016CD68",
+      "name": "FUN_1016cd68",
+      "size": 6,
+      "symbol": "_FUN_1016cd68",
+      "source": "src/client-2062/Main/FUN_1016cd68.cpp",
+      "source_sha256": "572d7f7247b2d7a3965b81faf7715d264d6bee2f40d9e1f829d92d045bf2cfda",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd68",
+        "called_by": "FUN_1016CB40 calls this thunk after pushing 0x1017F018 and 0x1017F000",
+        "behavior": "The six captured bytes jump indirectly through 0x10175118; that runtime IAT slot contains 0x1020AD20, which resolves to MSVCRTD.DLL base 0x10200000 plus exported RVA 0xAD20, named _initterm",
+        "uncertainty": "The IAT target is verified for this captured load. Exact CRT initializer behavior follows the exported name and caller-passed bounds, not a symbol record embedded in Main.dll."
+      }
+    },
+    {
+      "address": "10033870",
+      "name": "FUN_10033870",
+      "size": 29,
+      "symbol": "_FUN_10033870",
+      "source": "src/client-2062/Main/FUN_10033870.cpp",
+      "source_sha256": "c77a5875dcfdf156b5ae82cc5557e1c6761b74b6aa3d428718bbef89d10731ad",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "symbol": "_FUN_100e2800",
+          "target_address": "100E2800"
+        },
+        {
+          "offset": 23,
+          "symbol": "_FUN_1016c830",
+          "target_address": "1016C830"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10033870",
+        "behavior": "Called from the six-slot _initterm table at 0x1017F000; constructs a 0x1000-entry global object array, then registers FUN_10033890 for cleanup.",
+        "uncertainty": "The host callback called by the constructor and the semantic meaning of the 0x1000 entries are not established."
+      }
+    },
+    {
+      "address": "10033890",
+      "name": "FUN_10033890",
+      "size": 10,
+      "symbol": "_FUN_10033890",
+      "source": "src/client-2062/Main/FUN_10033890.cpp",
+      "source_sha256": "0011659fc34bbd28a8e9afe68447ce2e03c2e59b75695dc61438d3dce36b91e8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "symbol": "_FUN_100e28c0",
+          "target_address": "100E28C0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10033890",
+        "behavior": "Registered by FUN_10033870; restores the global object-array vtable and conditionally invokes the CRT cleanup thunk.",
+        "uncertainty": "The condition reads object-array field +0x0c; the higher-level lifecycle meaning is unknown."
+      }
+    },
+    {
+      "address": "10042CB0",
+      "name": "FUN_10042cb0",
+      "size": 21,
+      "symbol": "_FUN_10042cb0",
+      "source": "src/client-2062/Main/FUN_10042cb0.cpp",
+      "source_sha256": "94d9adc9b94ceb9e7641523ab36122c512011dbd4536b70946fbe331eea224ed",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10042cb0",
+        "behavior": "Initializer from the observed _initterm table calls the host callback in IAT slot 0x10175050 with (0,1,0x9600) and stores its result at 0x101C5918.",
+        "uncertainty": "The callback signature and allocation purpose are not established."
+      }
+    },
+    {
+      "address": "10042CD0",
+      "name": "FUN_10042cd0",
+      "size": 21,
+      "symbol": "_FUN_10042cd0",
+      "source": "src/client-2062/Main/FUN_10042cd0.cpp",
+      "source_sha256": "f711f5bd4938f604e593bc7143a43c33c7b888089b2611d68678c310bb78954f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10042cd0",
+        "behavior": "Initializer from the observed _initterm table calls the host callback in IAT slot 0x10175050 with (0,1,0xFF00) and stores its result at 0x101C5914.",
+        "uncertainty": "The callback signature and allocation purpose are not established."
+      }
+    },
+    {
+      "address": "10042CF0",
+      "name": "FUN_10042cf0",
+      "size": 21,
+      "symbol": "_FUN_10042cf0",
+      "source": "src/client-2062/Main/FUN_10042cf0.cpp",
+      "source_sha256": "7bebbe8121e3af90f42b9ac21982f438d047ae2a4c0f9658954a6ab8e765ae39",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10042cf0",
+        "behavior": "Initializer from the observed _initterm table calls the host callback in IAT slot 0x10175050 with (0,1,0xFF00) and stores its result at 0x101C5910.",
+        "uncertainty": "The callback signature and allocation purpose are not established."
+      }
+    },
+    {
+      "address": "10042D10",
+      "name": "FUN_10042d10",
+      "size": 21,
+      "symbol": "_FUN_10042d10",
+      "source": "src/client-2062/Main/FUN_10042d10.cpp",
+      "source_sha256": "718bbb49848aaf215c0b6ef0bc28917e825480c78fac8514c7f4f46d24492983",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10042d10",
+        "behavior": "Initializer from the observed _initterm table calls the host callback in IAT slot 0x10175050 with (0,1,0x9B9B9B) and stores its result at 0x101C590C.",
+        "uncertainty": "The callback signature and allocation purpose are not established."
+      }
+    },
+    {
+      "address": "100E28C0",
+      "name": "FUN_100e28c0",
+      "size": 21,
+      "symbol": "_FUN_100e28c0",
+      "source": "src/client-2062/Main/FUN_100e28c0.cpp",
+      "source_sha256": "ddcd68c1064cf519188db3db82c7934ad6ebfa885b699d7f7173dff3b2fca913",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 15,
+          "symbol": "_FUN_1016c784",
+          "target_address": "1016C784"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100e28c0",
+        "behavior": "Cleanup callback reached through the object-array registration; restores vtable 0x1017654C and conditionally calls FUN_1016c784.",
+        "uncertainty": "The exact meaning of object field +0x0c and of the cleanup thunk is unknown."
+      }
+    },
+    {
+      "address": "100E2800",
+      "name": "FUN_100e2800",
+      "size": 140,
+      "symbol": "_FUN_100e2800",
+      "source": "src/client-2062/Main/FUN_100e2800.cpp",
+      "source_sha256": "84652fc4cb9a28a1a52869fd78ade3f33b8dcaabc211e50c76fb123d59360e92",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 51,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100e2800",
+        "behavior": "Called by FUN_10033870 with (0x1000,0); initializes the array object, conditionally allocates its storage, invokes callback 0x10175140 with 0x22B, and fills entries through callback 0x10175120.",
+        "uncertainty": "The indirect callback contracts and why this constructor uses a 0x1000-entry array are unresolved."
+      }
+    },
+    {
+      "address": "1016C784",
+      "name": "FUN_1016c784",
+      "size": 11,
+      "symbol": "_FUN_1016c784",
+      "source": "src/client-2062/Main/FUN_1016c784.cpp",
+      "source_sha256": "f2735257a704017465779825cf4bf4e5188de50c1d804258911ea2e4261b701e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 5,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c784",
+        "behavior": "Small CRT cleanup wrapper that pushes its argument and calls the thunk at 0x1016CD44.",
+        "uncertainty": "The thunk target is identified by address only; its external runtime effect is unknown."
+      }
+    },
+    {
+      "address": "1016C7F0",
+      "name": "__onexit",
+      "size": 63,
+      "symbol": "_FUN_1016c7f0",
+      "source": "src/client-2062/Main/FUN_1016c7f0.cpp",
+      "source_sha256": "043b1c582a4b6d349afd80b0f2bcf0bba438fb92c57e40ee37483642585978d0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 46,
+          "symbol": "_FUN_1016cd56",
+          "target_address": "1016CD56"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c7f0",
+        "behavior": "Ghidra identifies this as Visual Studio 2003 Debug __onexit. It selects the host callback in 0x10175150 when 0x101C9370 equals -1, otherwise calls thunk 0x1016CD56 with the callback-table bounds and requested function.",
+        "uncertainty": "The host callback and fallback thunk contracts are known only from call shape and addresses."
+      }
+    },
+    {
+      "address": "1016C830",
+      "name": "_atexit",
+      "size": 24,
+      "symbol": "_FUN_1016c830",
+      "source": "src/client-2062/Main/FUN_1016c830.cpp",
+      "source_sha256": "0a3475e232590fe5804a7a95bd51a68e5b79482eeec86e31675c256329daa20e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 8,
+          "symbol": "_FUN_1016c7f0",
+          "target_address": "1016C7F0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c830",
+        "behavior": "Ghidra identifies this as Visual Studio 2003 Debug _atexit; it forwards the function pointer to __onexit and converts a non-null result to zero, null to -1.",
+        "uncertainty": "The broader CRT shutdown execution path is outside this initializer trace."
+      }
+    },
+    {
+      "address": "1013B8A0",
+      "name": "FUN_1013b8a0",
+      "size": 36709,
+      "symbol": "_FUN_1013b8a0",
+      "source": "src/client-2062/Main/FUN_1013b8a0.cpp",
+      "source_sha256": "d99d5915e4c6911edd104085868f258201eba26b0d60cfd206746cd03d97095f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1013b8a0",
+        "called_by": "Mapped pointer-table slot 0x10176B6C contains 0x1013B8A0; adjacent slots 0x10176B70 and 0x10176B78 contain byte-matched sibling methods 0x10144810 and 0x101481E0. Ghidra direct-call and reference queries found no code references to this entry.",
+        "behavior": "Ghidra decompilation shows the same clipped five-byte-header span stream used by the documented compositor family: source stream at this+0x0C, bounds at this+0x04/+0x08, destination buffer at param_1+0x08 and pitch at param_1+0x0C. The method blends 16-bit pixels using host-configured masks DAT_101C9300, DAT_101C9308, DAT_101C9310 plus DAT_101C92F0 and DAT_101C92F8; its branches also inspect span-record flag bits and param_8/param_9 threshold ranges.",
+        "uncertainty": "The vtable owner and live dispatch route are unknown. Ghidra parameter names do not establish effect semantics, and the additional masks and span flag branches have not been assigned source-level names. The match preserves every instruction from the captured body but does not by itself validate rendered pixels against a live frame."
+      }
+    },
+    {
+      "address": "1012F130",
+      "name": "FUN_1012f130",
+      "size": 36184,
+      "symbol": "_FUN_1012f130",
+      "source": "src/client-2062/Main/FUN_1012f130.cpp",
+      "source_sha256": "9ff974fc5eb855417be696439bd3354f5c163b10268a5e405755fe73bfcc9695",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1012f130",
+        "called_by": "Mapped pointer-table slot 0x10176B60 contains 0x1012F130; neighboring slots 0x10176B6C, 0x10176B70, and 0x10176B78 contain the matched compositors 0x1013B8A0, 0x10144810, and 0x101481E0. Ghidra direct-call and reference queries found no code references to this entry.",
+        "behavior": "Ghidra decompilation identifies a __thiscall span compositor: source stream at this+0x0C, source dimensions at this+0x04/+0x08, target buffer/pitch at param_1+0x08/+0x0C, clipped row and horizontal bounds, transparent-run skips and row controls. It blends 16-bit pixels through host-configured masks DAT_101C9300, DAT_101C9308, DAT_101C9310, DAT_101C92F0, and DAT_101C92F8; param_8/param_9 thresholds and span-record flag bits select the packed-pixel paths.",
+        "uncertainty": "The vtable owner and live dispatch route are unknown. The semantic names of param_8/param_9, the span flags and the two additional masks are not established, and no live-frame pixel comparison has been run. The verified source preserves the captured machine instructions exactly."
+      }
+    },
+    {
+      "address": "10137E90",
+      "name": "FUN_10137e90",
+      "size": 14750,
+      "symbol": "_FUN_10137e90",
+      "source": "src/client-2062/Main/FUN_10137e90.cpp",
+      "source_sha256": "9d9643d54f032a087b3e5a55c021dbf56fa21bd6fc9a11ed0cde522698910b8c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10137e90",
+        "called_by": "Mapped pointer-table slot 0x10176B64 contains 0x10137E90; adjacent slots 0x10176B60 and 0x10176B6C contain matched span methods 0x1012F130 and 0x1013B8A0. Ghidra direct-call and reference queries found no code references to this entry.",
+        "behavior": "Ghidra decompilation shows another __thiscall span-render method: stream at this+0x0C, bounds at this+0x04/+0x08, clipping to the destination buffer/pitch at param_1+0x08/+0x0C, transparent-run skips and row markers. It prepares packed-channel components from param_8, reads all five host-configured mask globals DAT_101C9300/08/10 and DAT_101C92F0/F8, and selects 16-bit blend paths using param_9 and param_10 thresholds.",
+        "uncertainty": "The vtable owner and live dispatch path are unknown. Ghidra parameter names do not recover the color/effect contract of param_8/param_9/param_10 or the span flag meanings; no live-frame pixel comparison is available. The source preserves every instruction in the indexed body."
+      }
+    },
+    {
+      "address": "1012D2B0",
+      "name": "FUN_1012d2b0",
+      "size": 7686,
+      "symbol": "_FUN_1012d2b0",
+      "source": "src/client-2062/Main/FUN_1012d2b0.cpp",
+      "source_sha256": "4dd67035ad0e2099f6beb7137a705859f3be7826c7796e283e491f7d72126419",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1012d2b0",
+        "called_by": "Mapped function-pointer-table slot 0x10176B58 contains 0x1012D2B0; adjacent slots include 0x101294F0, a short thunk at 0x1012F0E0, and matched compositor entries at 0x1012F130 and 0x10137E90. Ghidra found no direct call or data references to this function, so its owner and runtime dispatch remain unresolved.",
+        "behavior": "Ghidra decompilation shows a __thiscall span-render method using the stream at this+0x0C, source bounds at this+0x04/+0x08, target buffer/pitch at param_1+0x08/+0x0C, rectangle clipping, transparent-run skips, and row/end controls. It prepares packed RGB16 channel values from param_8 and uses all five host-configured masks DAT_101C9300/08/10 and DAT_101C92F0/F8 in packed blend paths selected by param_9 and param_10.",
+        "uncertainty": "The table owner and live dispatch path are unknown. Parameter/effect meanings and the span-record flag semantics remain unresolved; this byte match does not establish a live-frame pixel comparison."
+      }
+    },
+    {
+      "address": "1011F370",
+      "name": "FUN_1011f370",
+      "size": 11831,
+      "symbol": "_FUN_1011f370",
+      "source": "src/client-2062/Main/FUN_1011f370.cpp",
+      "source_sha256": "e09ceeb303050ac6900bac0b20024f3ebd80f328f023a712c212548cb52cab6e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1011f370",
+        "called_by": "Mapped function-pointer-table slot 0x10176B40 contains 0x1011F370. Ghidra reports no direct call/data references to the function; the table owner and runtime selection path remain unresolved.",
+        "behavior": "Ghidra decompilation shows the span pointer at this+0x0C, bounds at this+0x04/+0x08, clipping to bounds supplied by param_6/param_7, and destination pixels/pitch at param_1+0x08/+0x0C. It walks five-byte span records with nonnegative transparent skips, a 0xFFFF row control, and negative values below -1 as termination. The packed blend path branches on param_9/param_10 and references DAT_101C92F0/F8; horizontal destination addressing uses DAT_101ACDB4.",
+        "uncertainty": "The table owner, live caller, pixel format, and parameter/effect meanings are unknown. The decompilation does not show the three DAT_101C9300/08/10 masks used by neighboring blend routines, so only membership in the broader span-render table is established. No live-frame comparison is available."
+      }
+    },
+    {
+      "address": "10122220",
+      "name": "FUN_10122220",
+      "size": 17222,
+      "symbol": "_FUN_10122220",
+      "source": "src/client-2062/Main/FUN_10122220.cpp",
+      "source_sha256": "bb26612d1fd266c0bf4966b4d324eb072cc7eb18b32dcde16481eed57bb7e10f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10122220",
+        "called_by": "Mapped function-pointer-table slot 0x10176B48 contains 0x10122220, between the short thunk at slot 0x10176B44 and sibling 0x10126570 at slot 0x10176B4C. Ghidra reports no direct references to this entry; the table owner and live dispatch remain unknown.",
+        "behavior": "Ghidra decompilation shows the span stream at this+0x0C, bounds at this+0x04/+0x08, clipping, and destination buffer/pitch at param_1+0x08/+0x0C. It traverses signed 16-bit run records with transparent skips, -1 row controls, negative termination, a length at record+3, and payload at +5. DAT_101ACDB4 scales destination addressing. The routine reads DAT_101C92F0/F8 and tests record flags for byte, short, int, and packed-wide pixel paths.",
+        "uncertainty": "The table owner and live caller, stride-global value, meanings of record-flag combinations, pixel format, and effect arguments are unknown. This is evidence for a variable-format span compositor, not a specific RGB16-only path."
+      }
+    },
+    {
+      "address": "10126570",
+      "name": "FUN_10126570",
+      "size": 12039,
+      "symbol": "_FUN_10126570",
+      "source": "src/client-2062/Main/FUN_10126570.cpp",
+      "source_sha256": "54b8094698985f094771e60dbcf2107b8d1da14e90845b0de77ef0330efd52f6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10126570",
+        "called_by": "Captured function-pointer-table slot 0x10176B4C contains 0x10126570, between slot 0x10176B48 -> 0x10122220 and slot 0x10176B50 -> thunk 0x101294A0. Ghidra reports no direct code references, leaving the table owner and runtime dispatch unresolved.",
+        "behavior": "Ghidra decompilation shows a __thiscall span-render method with the shared source stream and bounds, target buffer/pitch, rectangle clipping, transparent skips, and row/end controls. Each literal record has a u16 length at +3 and payload at +5. Record bits select byte, short, integer, and packed-wide paths; the method uses DAT_101C92F0/F8 and DAT_101ACDB4.",
+        "uncertainty": "The record-bit contract, pixel format, stride-global meaning, parameter/effect roles, table owner, and live runtime dispatch remain unresolved. The decompilation leaves param_8 unused."
+      }
+    },
+    {
+      "address": "101294F0",
+      "name": "FUN_101294f0",
+      "size": 15799,
+      "symbol": "_FUN_101294f0",
+      "source": "src/client-2062/Main/FUN_101294f0.cpp",
+      "source_sha256": "2edb4a8dade74b0d372a7e6d1bde237909584e2dd69c9eddc972fd42f5632e28",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101294f0",
+        "called_by": "Captured function-pointer-table slot 0x10176B54 contains 0x101294F0, adjacent to the destructor wrapper at slot 0x10176B50 and compositor 0x1012D2B0 at slot 0x10176B58. Ghidra found no direct call or data references to this method; the owner and runtime dispatch remain unresolved.",
+        "behavior": "Ghidra decompilation shows the shared clipped span-stream method: source pointer and bounds, destination buffer and pitch, transparent-run skips, row/end controls, and mask-based pixel paths using DAT_101C9300/08/10.",
+        "uncertainty": "The table owner, live caller, parameter/effect meanings, and exact span-record flag contract remain unresolved; a live-frame pixel comparison has not been made."
+      }
+    },
+    {
+      "address": "10156E30",
+      "name": "FUN_10156e30",
+      "size": 14839,
+      "symbol": "_FUN_10156e30",
+      "source": "src/client-2062/Main/FUN_10156e30.cpp",
+      "source_sha256": "a7e89362a40781be9591eeb424d37a025481acadae3c4ae8723fa2453cb5cb50",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10156e30",
+        "called_by": "Captured function-pointer-table slot 0x10176B88 contains 0x10156E30; adjacent slots point to matched method 0x1014DF30, a short thunk at 0x1015A850, and matched compositor 0x1015A8A0. Ghidra found no direct references to this method or slot, leaving its owner and runtime dispatch unknown.",
+        "behavior": "Ghidra decompilation shows a __thiscall clipped RGB16 span renderer using the shared source stream/bounds, target buffer/pitch, transparent-run skips, row/end controls, and all five renderer mask globals DAT_101C9300/08/10 and DAT_101C92F0/F8.",
+        "uncertainty": "The table owner, live selection path, mask values in a live frame, and source-level parameter/effect names remain unresolved."
+      }
+    },
+    {
+      "address": "101639B0",
+      "name": "FUN_101639b0",
+      "size": 14769,
+      "symbol": "_FUN_101639b0",
+      "source": "src/client-2062/Main/FUN_101639b0.cpp",
+      "source_sha256": "1adfd4c8a17064af0a7eeaf5f7a0446a0afa4d2ae7726542a433a469f24dea11",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101639b0",
+        "called_by": "Captured table slot 0x10176B94 contains 0x101639B0, adjacent to matched compositor 0x1015A8A0 and a short entry at 0x10167390. Ghidra found no direct references to this entry or its slot and no outgoing direct calls; the owner and live dispatcher remain unknown.",
+        "behavior": "Ghidra decompilation shows clipped 16-bit span rendering with the shared source stream/bounds, destination buffer/pitch, transparent skips, row/end controls, a u16 run length at +3, payload at +5, and paths using all five renderer masks DAT_101C9300/08/10 and DAT_101C92F0/F8.",
+        "uncertainty": "Encoded record-flag and effect-parameter meanings, runtime mask values, table owner, and live caller remain unresolved."
+      }
+    },
+    {
+      "address": "1011B150",
+      "name": "FUN_1011b150",
+      "size": 16916,
+      "symbol": "_FUN_1011b150",
+      "source": "src/client-2062/Main/FUN_1011b150.cpp",
+      "source_sha256": "16c22a81a3a5196b34efa76597c3acbbca58c2779b222ffd284bfe42b268148a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1011b150",
+        "called_by": "The mapped image stores 1011B150 in captured function-pointer-table slot 10176B3C. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8, DAT_101c9300.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "1010C2E0",
+      "name": "FUN_1010c2e0",
+      "size": 12458,
+      "symbol": "_FUN_1010c2e0",
+      "source": "src/client-2062/Main/FUN_1010c2e0.cpp",
+      "source_sha256": "940ac8751c260aa8187904ea57ee811eafe2c57b51be97f60321541cec99e7b6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010c2e0",
+        "called_by": "The mapped image stores 1010C2E0 in captured function-pointer-table slot 10176B18. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "1010F390",
+      "name": "FUN_1010f390",
+      "size": 11783,
+      "symbol": "_FUN_1010f390",
+      "source": "src/client-2062/Main/FUN_1010f390.cpp",
+      "source_sha256": "ce5448e24268230df195528e4b285b2294f09bc6d455f4899d0c3175827d3c71",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010f390",
+        "called_by": "The mapped image stores 1010F390 in captured function-pointer-table slot 10176B1C. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8, DAT_101c9300, DAT_101c9308, DAT_101c9310.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "101121F0",
+      "name": "FUN_101121f0",
+      "size": 12797,
+      "symbol": "_FUN_101121f0",
+      "source": "src/client-2062/Main/FUN_101121f0.cpp",
+      "source_sha256": "697b41cf2e8c22e084f780641cef002be03b3177ece51e7c5b9ee35231a914bd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101121f0",
+        "called_by": "The mapped image stores 101121F0 in captured function-pointer-table slot 10176B24. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "101153F0",
+      "name": "FUN_101153f0",
+      "size": 12030,
+      "symbol": "_FUN_101153f0",
+      "source": "src/client-2062/Main/FUN_101153f0.cpp",
+      "source_sha256": "c74e82d95755d84209e72b063a77457913a53c60e8228726f72cf6d5562a4cdb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101153f0",
+        "called_by": "The mapped image stores 101153F0 in captured function-pointer-table slot 10176B28. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8, DAT_101c9300, DAT_101c9308, DAT_101c9310.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "10109CF0",
+      "name": "FUN_10109cf0",
+      "size": 5043,
+      "symbol": "_FUN_10109cf0",
+      "source": "src/client-2062/Main/FUN_10109cf0.cpp",
+      "source_sha256": "1884a61ebbc177fcd7c05015e6d6dac06a918e6744af5f6b426183b095d600b3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109cf0",
+        "called_by": "The mapped image stores 10109CF0 in captured function-pointer-table slot 10176B0C. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "1010B0B0",
+      "name": "FUN_1010b0b0",
+      "size": 4571,
+      "symbol": "_FUN_1010b0b0",
+      "source": "src/client-2062/Main/FUN_1010b0b0.cpp",
+      "source_sha256": "0c08c6978ad021f80af7daef2a63cb2e713dd53bd01cd4d3c5576e97ac5e48d3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010b0b0",
+        "called_by": "The mapped image stores 1010B0B0 in captured function-pointer-table slot 10176B10. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8, DAT_101c9300, DAT_101c9308, DAT_101c9310.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "10118360",
+      "name": "FUN_10118360",
+      "size": 6812,
+      "symbol": "_FUN_10118360",
+      "source": "src/client-2062/Main/FUN_10118360.cpp",
+      "source_sha256": "4140b84fd2287fe8e5691c0a7c4a781f79fc9a3e375e0dcdaece4673edf78339",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10118360",
+        "called_by": "The mapped image stores 10118360 in captured function-pointer-table slot 10176B30. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8, DAT_101c9300.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "10119E00",
+      "name": "FUN_10119e00",
+      "size": 4819,
+      "symbol": "_FUN_10119e00",
+      "source": "src/client-2062/Main/FUN_10119e00.cpp",
+      "source_sha256": "0f840c2f58f3ac793ef892a956a5e21c62c395a4637a674c5b513c555e56fd3a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10119e00",
+        "called_by": "The mapped image stores 10119E00 in captured function-pointer-table slot 10176B34. Ghidra reports no direct code callers; the table owner and runtime dispatch path remain unresolved.",
+        "behavior": "Ghidra decompilation shows clipped span rendering using the source stream at this+0x0C, source bounds at this+0x04/+0x08, destination buffer/pitch, and the shared transparent-run/row-end record traversal. Referenced renderer globals: DAT_101c92f0, DAT_101c92f8.",
+        "uncertainty": "Source-level pixel-format, record-flag, effect-parameter, mask-configuration, owning-class, and live-dispatch semantics remain unresolved."
+      }
+    },
+    {
+      "address": "10109CC0",
+      "name": "FUN_10109cc0",
+      "size": 30,
+      "symbol": "_FUN_10109cc0",
+      "source": "src/client-2062/Main/FUN_10109cc0.cpp",
+      "source_sha256": "79fe54c0694d5f5ea082bd3e3b3cc59738d88823b406d45a3bd532315fdeb590",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109cc0",
+        "called_by": "Captured table slot 10176B08 contains 10109CC0; Ghidra shows its direct call to destructor body 10109CE0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 10109CE0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1010C2B0",
+      "name": "FUN_1010c2b0",
+      "size": 30,
+      "symbol": "_FUN_1010c2b0",
+      "source": "src/client-2062/Main/FUN_1010c2b0.cpp",
+      "source_sha256": "bec08dea18dea62935515327f0830d77c476c775da7926e9dd80ed5921a74987",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010c2b0",
+        "called_by": "Captured table slot 10176B14 contains 1010C2B0; Ghidra shows its direct call to destructor body 1010C2D0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1010C2D0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "101121C0",
+      "name": "FUN_101121c0",
+      "size": 30,
+      "symbol": "_FUN_101121c0",
+      "source": "src/client-2062/Main/FUN_101121c0.cpp",
+      "source_sha256": "29a451a70c2c1493c577625d2d358b0089d9691524fb8bf81df558b7e3ef65ba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101121c0",
+        "called_by": "Captured table slot 10176B20 contains 101121C0; Ghidra shows its direct call to destructor body 101121E0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 101121E0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "10118310",
+      "name": "FUN_10118310",
+      "size": 30,
+      "symbol": "_FUN_10118310",
+      "source": "src/client-2062/Main/FUN_10118310.cpp",
+      "source_sha256": "a63a9066f2b61380c36e59072c7ad351a22f7f8e49f266af27acf36c6be0d0f0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10118310",
+        "called_by": "Captured table slot 10176B2C contains 10118310; Ghidra shows its direct call to destructor body 10118330.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 10118330; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1011B100",
+      "name": "FUN_1011b100",
+      "size": 30,
+      "symbol": "_FUN_1011b100",
+      "source": "src/client-2062/Main/FUN_1011b100.cpp",
+      "source_sha256": "763c4d9bec335d581220cda3dbd853d271ac0bdc6ee7b09247d71a29dcf31f8c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1011b100",
+        "called_by": "Captured table slot 10176B38 contains 1011B100; Ghidra shows its direct call to destructor body 1011B120.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1011B120; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "101221D0",
+      "name": "FUN_101221d0",
+      "size": 30,
+      "symbol": "_FUN_101221d0",
+      "source": "src/client-2062/Main/FUN_101221d0.cpp",
+      "source_sha256": "7878b0b52d7b2a2bd8bd8abc0be3e7573226072eaea62d460adb6781c44c6284",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101221d0",
+        "called_by": "Captured table slot 10176B44 contains 101221D0; Ghidra shows its direct call to destructor body 101221F0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 101221F0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "101294A0",
+      "name": "FUN_101294a0",
+      "size": 30,
+      "symbol": "_FUN_101294a0",
+      "source": "src/client-2062/Main/FUN_101294a0.cpp",
+      "source_sha256": "c68388946ded5cb70e2207ea347a1355015c838fd35cbe356e822251364ff22f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101294a0",
+        "called_by": "Captured table slot 10176B50 contains 101294A0; Ghidra shows its direct call to destructor body 101294C0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 101294C0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1012F0E0",
+      "name": "FUN_1012f0e0",
+      "size": 30,
+      "symbol": "_FUN_1012f0e0",
+      "source": "src/client-2062/Main/FUN_1012f0e0.cpp",
+      "source_sha256": "7b097f8cd63220f3ea3225887fd1b90306ad54c8ecac4f2e8dc6b3d64629509c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1012f0e0",
+        "called_by": "Captured table slot 10176B5C contains 1012F0E0; Ghidra shows its direct call to destructor body 1012F100.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1012F100; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1013B850",
+      "name": "FUN_1013b850",
+      "size": 30,
+      "symbol": "_FUN_1013b850",
+      "source": "src/client-2062/Main/FUN_1013b850.cpp",
+      "source_sha256": "67dc92ed0a2fb81351097ed05741f492fb31d334deea38b36752d80e9f748ded",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1013b850",
+        "called_by": "Captured table slot 10176B68 contains 1013B850; Ghidra shows its direct call to destructor body 1013B870.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1013B870; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "10148190",
+      "name": "FUN_10148190",
+      "size": 30,
+      "symbol": "_FUN_10148190",
+      "source": "src/client-2062/Main/FUN_10148190.cpp",
+      "source_sha256": "c7f31285f0b2a69fbe786fac5ceb85caa646d33c69244f13e50db2211e6df70b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10148190",
+        "called_by": "Captured table slot 10176B74 contains 10148190; Ghidra shows its direct call to destructor body 101481B0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 101481B0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1014DEE0",
+      "name": "FUN_1014dee0",
+      "size": 30,
+      "symbol": "_FUN_1014dee0",
+      "source": "src/client-2062/Main/FUN_1014dee0.cpp",
+      "source_sha256": "29afeee0b4f84fbac171d774f6fdbbf994436bb70f3feda893870703455a7f12",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1014dee0",
+        "called_by": "Captured table slot 10176B80 contains 1014DEE0; Ghidra shows its direct call to destructor body 1014DF00.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1014DF00; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "1015A850",
+      "name": "FUN_1015a850",
+      "size": 30,
+      "symbol": "_FUN_1015a850",
+      "source": "src/client-2062/Main/FUN_1015a850.cpp",
+      "source_sha256": "22733c30d969e31a2ee195a82064c08fdab8947c1b58c6d127fc48e53b60d236",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1015a850",
+        "called_by": "Captured table slot 10176B8C contains 1015A850; Ghidra shows its direct call to destructor body 1015A870.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 1015A870; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "10167390",
+      "name": "FUN_10167390",
+      "size": 30,
+      "symbol": "_FUN_10167390",
+      "source": "src/client-2062/Main/FUN_10167390.cpp",
+      "source_sha256": "c492496169522045d92cf435f6ce3f4a0066b0e9631b989ca6e9d43d02696f28",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10167390",
+        "called_by": "Captured table slot 10176B98 contains 10167390; Ghidra shows its direct call to destructor body 101673B0.",
+        "behavior": "The __thiscall deleting-destructor wrapper invokes 101673B0; if flag bit 0 is set, it calls the already verified free wrapper 0x1016C784, then returns this.",
+        "uncertainty": "The table owner and caller path remain unresolved; Ghidra identifies the delete-flag branch but not the broader object lifecycle semantics."
+      }
+    },
+    {
+      "address": "10109CE0",
+      "name": "FUN_10109ce0",
+      "size": 11,
+      "symbol": "_FUN_10109ce0",
+      "source": "src/client-2062/Main/FUN_10109ce0.cpp",
+      "source_sha256": "c923b4890bc36acf2e1fd5e5c0a375b82ab74cffc1059a82c5e8ba44bdb6d01b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109ce0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 10109CC0, which is stored in table slot 10176B08.",
+        "behavior": "Restores the object vptr to 10176B08 and tail-calls the shared base cleanup at 0x100FF9F0.",
+        "uncertainty": "The owning C++ class is unresolved; the field layout and base cleanup behavior are recorded from Ghidra pseudocode."
+      }
+    },
+    {
+      "address": "1010C2D0",
+      "name": "FUN_1010c2d0",
+      "size": 11,
+      "symbol": "_FUN_1010c2d0",
+      "source": "src/client-2062/Main/FUN_1010c2d0.cpp",
+      "source_sha256": "421f5d690a629ed941c2451e31c0fadcb76a25c5fa7ad406de5b8e4c6c39f8a2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010c2d0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1010C2B0, which is stored in table slot 10176B14.",
+        "behavior": "Restores the object vptr to 10176B14 and tail-calls the shared base cleanup at 0x100FF9F0.",
+        "uncertainty": "The owning C++ class is unresolved; the field layout and base cleanup behavior are recorded from Ghidra pseudocode."
+      }
+    },
+    {
+      "address": "101121E0",
+      "name": "FUN_101121e0",
+      "size": 11,
+      "symbol": "_FUN_101121e0",
+      "source": "src/client-2062/Main/FUN_101121e0.cpp",
+      "source_sha256": "70526ca983115a13e819cbf2d5d8d117ef1612fd200c144f76b2975daeed3d9f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101121e0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 101121C0, which is stored in table slot 10176B20.",
+        "behavior": "Restores the object vptr to 10176B20 and tail-calls the shared base cleanup at 0x100FF9F0.",
+        "uncertainty": "The owning C++ class is unresolved; the field layout and base cleanup behavior are recorded from Ghidra pseudocode."
+      }
+    },
+    {
+      "address": "10118330",
+      "name": "FUN_10118330",
+      "size": 41,
+      "symbol": "_FUN_10118330",
+      "source": "src/client-2062/Main/FUN_10118330.cpp",
+      "source_sha256": "d16ce987246a26158330ae2b5b1005c45332f10ae18187aaf36a15ee726ed8f7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10118330",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 10118310, which is stored in table slot 10176B2C.",
+        "behavior": "Restores the object vptr to 10176B2C; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "1011B120",
+      "name": "FUN_1011b120",
+      "size": 41,
+      "symbol": "_FUN_1011b120",
+      "source": "src/client-2062/Main/FUN_1011b120.cpp",
+      "source_sha256": "b0d3ef44b7e6b19c3215cb67ede97e40b9ce95bf8bf449f34aa135f72d7fe53f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1011b120",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1011B100, which is stored in table slot 10176B38.",
+        "behavior": "Restores the object vptr to 10176B38; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "101221F0",
+      "name": "FUN_101221f0",
+      "size": 41,
+      "symbol": "_FUN_101221f0",
+      "source": "src/client-2062/Main/FUN_101221f0.cpp",
+      "source_sha256": "874e773896b64f6ccd8056ccc7909984d47062824e18747bc17f1d0a04851179",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101221f0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 101221D0, which is stored in table slot 10176B44.",
+        "behavior": "Restores the object vptr to 10176B44; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "101294C0",
+      "name": "FUN_101294c0",
+      "size": 41,
+      "symbol": "_FUN_101294c0",
+      "source": "src/client-2062/Main/FUN_101294c0.cpp",
+      "source_sha256": "d7a3d09b756ef9b44b9eb75eabaf475d8b3bf837b060453e3f067b1e22deab8f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101294c0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 101294A0, which is stored in table slot 10176B50.",
+        "behavior": "Restores the object vptr to 10176B50; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "1012F100",
+      "name": "FUN_1012f100",
+      "size": 41,
+      "symbol": "_FUN_1012f100",
+      "source": "src/client-2062/Main/FUN_1012f100.cpp",
+      "source_sha256": "f8c8e84c9a9f420d98cb24357b56e7d4ae58167af3d72eeca8df78dacfb68353",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1012f100",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1012F0E0, which is stored in table slot 10176B5C.",
+        "behavior": "Restores the object vptr to 10176B5C; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "1013B870",
+      "name": "FUN_1013b870",
+      "size": 41,
+      "symbol": "_FUN_1013b870",
+      "source": "src/client-2062/Main/FUN_1013b870.cpp",
+      "source_sha256": "fe93451a105ab7d1e10a05b0aaad7e70ccacabf035ba0ff02705a57d3f12b639",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1013b870",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1013B850, which is stored in table slot 10176B68.",
+        "behavior": "Restores the object vptr to 10176B68; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "101481B0",
+      "name": "FUN_101481b0",
+      "size": 41,
+      "symbol": "_FUN_101481b0",
+      "source": "src/client-2062/Main/FUN_101481b0.cpp",
+      "source_sha256": "36da9aa8a7311153e746c990fb820900b30ba7929a1970c3e08e26bbc19121e5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101481b0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 10148190, which is stored in table slot 10176B74.",
+        "behavior": "Restores the object vptr to 10176B74; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "1014DF00",
+      "name": "FUN_1014df00",
+      "size": 41,
+      "symbol": "_FUN_1014df00",
+      "source": "src/client-2062/Main/FUN_1014df00.cpp",
+      "source_sha256": "ff75f307f7e91ea946f09503624125918ea733c1b1d44b2461b582be3340cacc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1014df00",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1014DEE0, which is stored in table slot 10176B80.",
+        "behavior": "Restores the object vptr to 10176B80; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "1015A870",
+      "name": "FUN_1015a870",
+      "size": 41,
+      "symbol": "_FUN_1015a870",
+      "source": "src/client-2062/Main/FUN_1015a870.cpp",
+      "source_sha256": "74af655caf634ed6a3c2e232fdf70a0b2f2395d1b3e43b0667a4441022d5df27",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1015a870",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 1015A850, which is stored in table slot 10176B8C.",
+        "behavior": "Restores the object vptr to 10176B8C; if field +0x0C is nonzero, calls the verified release helper 0x1016CD44 and clears the field, then calls shared base cleanup 0x100FF9F0.",
+        "uncertainty": "The semantic meaning of field +0x0C and the owning C++ class remain unresolved."
+      }
+    },
+    {
+      "address": "101673B0",
+      "name": "FUN_101673b0",
+      "size": 11,
+      "symbol": "_FUN_101673b0",
+      "source": "src/client-2062/Main/FUN_101673b0.cpp",
+      "source_sha256": "18ef62f58592cdb30c34b396fdfd7837c05c4b90185cd6d1ccf14af0f58ba834",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101673b0",
+        "called_by": "Ghidra shows the direct call from deleting-destructor wrapper 10167390, which is stored in table slot 10176B98.",
+        "behavior": "Restores the object vptr to 10176B98 and calls 0x10167DB0, which decrements global DAT_101C9328.",
+        "uncertainty": "The counter's semantic meaning and owning class are not established."
+      }
+    },
+    {
+      "address": "100FF9F0",
+      "name": "FUN_100ff9f0",
+      "size": 21,
+      "symbol": "_FUN_100ff9f0",
+      "source": "src/client-2062/Main/FUN_100ff9f0.cpp",
+      "source_sha256": "6298c527b7d262fd6050192ec310ead68232bbd6cdcd24364cac12c593458de3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100ff9f0",
+        "called_by": "Ghidra call-reference evidence: called by 12 span-table destructor bodies, including 0x10109CE0, 0x1010C2D0, 0x101121E0, and the 41-byte per-object cleanup variants.",
+        "behavior": "Shared base cleanup restores vptr 0x10176774 and calls verified release helper 0x1016CD44 when field +0x0C is nonzero.",
+        "uncertainty": "The ownership meaning of field +0x0C and base class name remain unknown."
+      }
+    },
+    {
+      "address": "10167DB0",
+      "name": "FUN_10167db0",
+      "size": 20,
+      "symbol": "_FUN_10167db0",
+      "source": "src/client-2062/Main/FUN_10167db0.cpp",
+      "source_sha256": "cac4bb5c1ee8b28a1eda3c5e6c8e859ccae294d9532d77055cdb346f51b2e98e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10167db0",
+        "called_by": "Ghidra call-reference evidence: called by 0x101673B0; other references include control constructors 0x1010368F and 0x10104BCE.",
+        "behavior": "Restores vptr 0x10176BD8 and decrements global DAT_101C9328.",
+        "uncertainty": "The global counter's semantic meaning and owning class remain unresolved."
+      }
+    },
+    {
+      "address": "10109BD0",
+      "name": "FUN_10109bd0",
+      "size": 35,
+      "symbol": "_FUN_10109bd0",
+      "source": "src/client-2062/Main/FUN_10109bd0.cpp",
+      "source_sha256": "4617e9fbf7dc572b746ea2052494b0ad9e48b64cb0fe19282beb6e3c257f6933",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109bd0",
+        "called_by": "0x10176B00 contains this entry. The separate object's vtable address point is 0x10176AD8, which destructor body 0x10109B40 restores; Ghidra was given the bounded extent ending at the final RET.",
+        "behavior": "If field +0x50 is 1, writes 2; if it is 5, writes 3; otherwise returns field +0x34.",
+        "uncertainty": "The meaning of states at +0x50, the returned +0x34 field, the owning class, and its runtime caller are unresolved."
+      }
+    },
+    {
+      "address": "10109C00",
+      "name": "FUN_10109c00",
+      "size": 42,
+      "symbol": "_FUN_10109c00",
+      "source": "src/client-2062/Main/FUN_10109c00.cpp",
+      "source_sha256": "5e659ce868fea6022751ae9f96878c4d3bbbc61d7cc74faffd49f058ea2ecd14",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109c00",
+        "called_by": "0x10176B04 contains this entry in the separate vtable whose address point 0x10176AD8 is restored by destructor body 0x10109B40. Ghidra's switch uses the five-entry table at +0x2C.",
+        "behavior": "Switches on field +0x50: values 2 or 4 write 1; values 3 or 6 write 5; other values return field +0x34.",
+        "uncertainty": "The meaning of states at +0x50, the returned +0x34 field, the owning class, and its runtime caller are unresolved. The jump table is data and is excluded from this function extent."
+      }
+    },
+    {
+      "address": "10043C50",
+      "name": "FUN_10043c50",
+      "size": 5,
+      "symbol": "_FUN_10043c50",
+      "source": "src/client-2062/Main/FUN_10043c50.cpp",
+      "source_sha256": "241c96570d7025e602ef790f57078b125b5400dacb5a3476e275f444a1ac8f2e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10043c50",
+        "called_by": "Mapped pointer-table slots 0x10176B9C and 0x10175960 both contain 0x10043C50; Ghidra shows no direct callers.",
+        "behavior": "Returns zero and cleans one four-byte stack argument (xor eax,eax; ret 4).",
+        "uncertainty": "The callback's parameter contract, semantic role, and relationship between the two pointer tables remain unresolved."
+      }
+    },
+    {
+      "address": "10043C70",
+      "name": "FUN_10043c70",
+      "size": 3,
+      "symbol": "_FUN_10043c70",
+      "source": "src/client-2062/Main/FUN_10043c70.cpp",
+      "source_sha256": "f5a06406c5036a6d94a7a0d642f8c602c4f18e372b0862840a10db881371771e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10043c70",
+        "called_by": "Mapped vtable slots 0x10176BA0 and 0x10175948 both contain 0x10043C70; the first follows the final compositor deleting-destructor slot 0x10176B98.",
+        "behavior": "Returns zero (xor eax,eax; ret).",
+        "uncertainty": "The callback's parameter contract and semantic role remain unresolved."
+      }
+    },
+    {
+      "address": "101673C0",
+      "name": "FUN_101673c0",
+      "size": 3,
+      "symbol": "_FUN_101673c0",
+      "source": "src/client-2062/Main/FUN_101673c0.cpp",
+      "source_sha256": "91cbef2b25b8225b5e855be45e21d4f4ca8f1ae92dbfb073c129c38d6a6d3733",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101673c0",
+        "called_by": "Raw mapped pointer-table slots 0x10176BA4, 0x10176BA8, and 0x10175330 contain this address.",
+        "behavior": "Returns without changing the result register and removes one four-byte stack argument (ret 4).",
+        "uncertainty": "No constructor or destructor stores 0x10176BA4 or 0x10176BA8 as a vptr. The owning table/class and callback contract remain unknown."
+      }
+    },
+    {
+      "address": "101673D0",
+      "name": "FUN_101673d0",
+      "size": 6,
+      "symbol": "_FUN_101673d0",
+      "source": "src/client-2062/Main/FUN_101673d0.cpp",
+      "source_sha256": "11b1c4579734cc87487e0c52a81e66ae28497cb80596ab2c9d5e1170c5cc6f05",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101673d0",
+        "called_by": "Raw mapped pointer-table slots 0x10176BAC and 0x101768A4 contain this address.",
+        "behavior": "Returns the constant 1.",
+        "uncertainty": "No constructor or destructor stores 0x10176BAC as a vptr. The owning table/class and callback contract remain unknown."
+      }
+    },
+    {
+      "address": "1008F9C0",
+      "name": "FUN_1008f9c0",
+      "size": 3608,
+      "symbol": "_FUN_1008f9c0",
+      "source": "src/client-2062/Main/FUN_1008F9C0.cpp",
+      "source_sha256": "034cc5fd7421a786d0583199dd92eedb079aa305ef0e13ba375da02c384505fd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1008f9c0",
+        "called_by": "Ghidra shows this parent constructor allocating FUN_10086240 at call site 0x100901DE and storing the returned pointer at this+0xE0, then allocating FUN_1008AD20 at 0x10090223 and storing it at this+0xE4. It is itself referenced by 0x1007FAB4.",
+        "behavior": "The parent constructs a composite control tree. It allocates many 0x54-byte child controls through 0x1016C7A0, calls shared initialization/resource helpers, constructs the two sibling object types, and stores them in adjacent fields at +0xE0 and +0xE4.",
+        "uncertainty": "The tree and resource-table construction are evidenced by Ghidra pseudocode and direct call references. The visible name/purpose of the overall screen and most child resource labels remain unknown."
+      }
+    },
+    {
+      "address": "10086240",
+      "name": "FUN_10086240",
+      "size": 8795,
+      "symbol": "_FUN_10086240",
+      "source": "src/client-2062/Main/FUN_10086240.cpp",
+      "source_sha256": "832dab1a81d92369660320cad40202cc0017533b94cac6c1a4dc7dc31dc9da27",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10086240",
+        "called_by": "Called only by the parent constructor FUN_1008F9C0 at 0x100901DE; the parent stores its return value at this+0xE0. Its vptr is 0x10175E44 and that vtable entry points to the 30-byte deleting-destructor wrapper FUN_100884A0.",
+        "behavior": "This 8,795-byte __thiscall constructor calls the shared base initializer FUN_10047F90, installs vptr 0x10175E44, initializes geometry fields, and builds numerous 0x54-byte child controls from records reached through the shared resource context. It uses allocation thunk 0x1016C7A0 and shared helpers including 0x100FE9B0 and 0x100172C0.",
+        "uncertainty": "This is one member of a paired resource-backed UI constructor family. Its exact panel name, child labels, and semantic meanings of the resource indices are not established."
+      }
+    },
+    {
+      "address": "1008AD20",
+      "name": "FUN_1008ad20",
+      "size": 9036,
+      "symbol": "_FUN_1008ad20",
+      "source": "src/client-2062/Main/FUN_1008AD20.cpp",
+      "source_sha256": "967286d570d888c26ea1985cf83c22f545fea1c44f276aebde0add8e38014132",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1008ad20",
+        "called_by": "Called only by the parent constructor FUN_1008F9C0 at 0x10090223; the parent stores its return value at this+0xE4. Its vptr is 0x10175E70 and that vtable entry points to the 30-byte deleting-destructor wrapper FUN_1008D070.",
+        "behavior": "This 9,036-byte __thiscall constructor calls the shared base initializer FUN_10047F90, installs vptr 0x10175E70, initializes geometry fields, and builds numerous 0x54-byte child controls from records reached through the shared resource context. It uses allocation thunk 0x1016C7A0 and shared helpers including 0x100FE9B0 and 0x100172C0.",
+        "uncertainty": "This is the sibling of FUN_10086240 in one parent UI tree. Its exact panel name, child labels, and semantic meanings of the resource indices are not established."
+      }
+    },
+    {
+      "address": "100884A0",
+      "name": "FUN_100884a0",
+      "size": 30,
+      "symbol": "_FUN_100884a0",
+      "source": "src/client-2062/Main/FUN_100884a0.cpp",
+      "source_sha256": "3740fa83abc4778d299e6d1c97a18811826fd6f985c04824d96afe821e6aaed4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_100884a0",
+        "called_by": "Referenced by the vtable at 0x10175E44, which FUN_10086240 stores as its vptr.",
+        "behavior": "30-byte deleting-destructor wrapper associated with FUN_10086240's vtable.",
+        "uncertainty": "The exact object ownership and destructor semantics are bounded by the wrapper's captured bytes; the represented UI component name is unknown."
+      }
+    },
+    {
+      "address": "1008D070",
+      "name": "FUN_1008d070",
+      "size": 30,
+      "symbol": "_FUN_1008d070",
+      "source": "src/client-2062/Main/FUN_1008d070.cpp",
+      "source_sha256": "ab8dcf05745191832d4b7cd32930165a44aed0333dd403c3bccec707193624f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1008d070",
+        "called_by": "Referenced by the vtable at 0x10175E70, which FUN_1008AD20 stores as its vptr.",
+        "behavior": "30-byte deleting-destructor wrapper associated with FUN_1008AD20's vtable.",
+        "uncertainty": "The exact object ownership and destructor semantics are bounded by the wrapper's captured bytes; the represented UI component name is unknown."
       }
     }
   ]
