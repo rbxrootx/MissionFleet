@@ -19,7 +19,7 @@ ADDRESSES = (
     "58962D40", "5891CD00", "5891FB10", "58926C10", "5890E600",
     "58910C20", "58916B60",
     "5892DF10", "5892DF50", "58931D20", "58937530", "58937580",
-    "58933B50", "58903AC0", "5897CF96",
+    "58933B50", "58943C90", "58943CE0", "589402F0", "58903AC0", "5897CF96",
     "5897CC42", "5897CBDA", "58789FB0", "5890C1C0",
     "58F76B6B", "58C3A998", "58BF62F5", "58DDB193", "58BFF900",
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
@@ -229,6 +229,24 @@ EVIDENCE = {
         "name_in_analysis": "FUN_58933b50",
         "called_by": "Vtable slot +8 at 0x589A2DC8 for CType1MMXHigh555SpriteData; the parser installs that vtable through constructor FUN_58937510 when the format-2 High555 branch has record subfield piVar13[0xB] equal to 1.",
         "behavior": "Reads the sprite-data object's +8 and +0x0C fields through FUN_58789FB0 and FUN_5890C1C0, then runs a second long buffer-processing loop with MMX operations including MOVQ, PAND, PSRLW, PMULLW, and PADDUSW.",
+        "uncertainty": "The exact argument roles, pixel-buffer layout, and return/result contract are not established by the vtable slot or Ghidra pseudocode alone.",
+    },
+    "58943C90": {
+        "name_in_analysis": "FUN_58943c90",
+        "called_by": "Vtable slot +0 at 0x589A2DD8 for CType2MMXHigh555SpriteData; the parser installs that vtable through constructor FUN_58943C70 when the format-2 High555 branch has record subfield piVar13[0xB] equal to 2.",
+        "behavior": "Installs the CType2MMXHigh555SpriteData vtable, dispatches the optional object field at +0x0C through FUN_5897CF96, invokes the CSpriteData base destructor FUN_58903AC0, and passes the object to FUN_5897CC42 when the low bit of its second argument is set.",
+        "uncertainty": "The callback targets and ownership contract are not recovered; the low-bit flag is described only from its observed branch.",
+    },
+    "58943CE0": {
+        "name_in_analysis": "FUN_58943ce0",
+        "called_by": "Vtable slot +4 at 0x589A2DD8 for CType2MMXHigh555SpriteData; the parser installs that vtable through constructor FUN_58943C70 when the format-2 High555 branch has record subfield piVar13[0xB] equal to 2.",
+        "behavior": "Reads the sprite-data object's +8 and +0x0C fields through FUN_58789FB0 and FUN_5890C1C0, clips the requested rectangle against object bounds, and processes a signed-word run stream and pixel buffers with packed MMX operations including MOVQ, PAND, PSRLW, PMULLW, and PADDUSW.",
+        "uncertainty": "The exact argument roles, pixel-buffer layout, and return/result contract are not established by the vtable slot or Ghidra pseudocode alone.",
+    },
+    "589402F0": {
+        "name_in_analysis": "FUN_589402f0",
+        "called_by": "Vtable slot +8 at 0x589A2DD8 for CType2MMXHigh555SpriteData; the parser installs that vtable through constructor FUN_58943C70 when the format-2 High555 branch has record subfield piVar13[0xB] equal to 2.",
+        "behavior": "Reads the sprite-data object's +8 and +0x0C fields through FUN_58789FB0 and FUN_5890C1C0, then runs a second rectangle/buffer path with packed MMX operations including MOVQ, PAND, PSRLW, PMULLW, and PADDUSW.",
         "uncertainty": "The exact argument roles, pixel-buffer layout, and return/result contract are not established by the vtable slot or Ghidra pseudocode alone.",
     },
     "58903AC0": {
