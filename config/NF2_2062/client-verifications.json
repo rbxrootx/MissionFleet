@@ -885,6 +885,1177 @@
         "called_by": "FUN_1004db50@1004DB50",
         "behavior": "initializes overlay state and a 256-entry owned-control table, then delegates additional initialization to FUN_100f3f40"
       }
+    },
+    {
+      "address": "100FFAC0",
+      "name": "FUN_100ffac0",
+      "size": 152,
+      "symbol": "_InitializeSpriteAssetResource",
+      "source": "src/client-2062/Main/InitializeSpriteAssetResource.cpp",
+      "source_sha256": "0d570d01071daf44f6bceb4cb8aac09aed039a6f06def0210ce2863ecfb3e8a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "symbol": "_FUN_100ffc40",
+          "target_address": "100FFC40"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100ffac0",
+        "called_by": "FUN_1002c3d0@1002C3D0 and FUN_100f34a0@100F34A0",
+        "behavior": "tries resource setup through FUN_100ffc40; on failure initializes the Sangduck Sprite File path and zeros resource state fields"
+      }
+    },
+    {
+      "address": "100FFC40",
+      "name": "FUN_100ffc40",
+      "size": 10934,
+      "symbol": "_LoadSpriteAssetResource",
+      "source": "src/client-2062/Main/LoadSpriteAssetResource.cpp",
+      "source_sha256": "235337a16064ed7c475167e7bf9d62433aeb16ee9487ed55e3130c0ea1b34ebe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 87,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 95,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 615,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 760,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 793,
+          "symbol": "_FUN_10103560",
+          "target_address": "10103560"
+        },
+        {
+          "offset": 857,
+          "symbol": "_FUN_101036b0",
+          "target_address": "101036B0"
+        },
+        {
+          "offset": 1112,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1141,
+          "symbol": "_FUN_101673e0",
+          "target_address": "101673E0"
+        },
+        {
+          "offset": 1270,
+          "symbol": "_FUN_10167820",
+          "target_address": "10167820"
+        },
+        {
+          "offset": 1306,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 1339,
+          "symbol": "_FUN_10167370",
+          "target_address": "10167370"
+        },
+        {
+          "offset": 1397,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2147,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2186,
+          "symbol": "_FUN_1015a830",
+          "target_address": "1015A830"
+        },
+        {
+          "offset": 2198,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2237,
+          "symbol": "_FUN_1014dec0",
+          "target_address": "1014DEC0"
+        },
+        {
+          "offset": 2249,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2288,
+          "symbol": "_FUN_10148170",
+          "target_address": "10148170"
+        },
+        {
+          "offset": 2320,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2359,
+          "symbol": "_FUN_1013b830",
+          "target_address": "1013B830"
+        },
+        {
+          "offset": 2371,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2410,
+          "symbol": "_FUN_1012f0c0",
+          "target_address": "1012F0C0"
+        },
+        {
+          "offset": 2422,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2461,
+          "symbol": "_FUN_10129480",
+          "target_address": "10129480"
+        },
+        {
+          "offset": 2506,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2545,
+          "symbol": "_FUN_101221b0",
+          "target_address": "101221B0"
+        },
+        {
+          "offset": 2557,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2596,
+          "symbol": "_FUN_1011b0e0",
+          "target_address": "1011B0E0"
+        },
+        {
+          "offset": 2608,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2647,
+          "symbol": "_FUN_101182f0",
+          "target_address": "101182F0"
+        },
+        {
+          "offset": 2692,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2721,
+          "symbol": "_FUN_101121a0",
+          "target_address": "101121A0"
+        },
+        {
+          "offset": 2730,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2759,
+          "symbol": "_FUN_1010c290",
+          "target_address": "1010C290"
+        },
+        {
+          "offset": 2768,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 2797,
+          "symbol": "_FUN_10109ca0",
+          "target_address": "10109CA0"
+        },
+        {
+          "offset": 3082,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 3088,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 3200,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 3210,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 3669,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 3679,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 4266,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 4709,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 4811,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 4821,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 5020,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 5128,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 5182,
+          "symbol": "_FUN_1016caa0",
+          "target_address": "1016CAA0"
+        },
+        {
+          "offset": 5586,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 5614,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 6404,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 6410,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 6699,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 6727,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 7819,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 7998,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8163,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8202,
+          "symbol": "_FUN_1015a830",
+          "target_address": "1015A830"
+        },
+        {
+          "offset": 8214,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8253,
+          "symbol": "_FUN_1014dec0",
+          "target_address": "1014DEC0"
+        },
+        {
+          "offset": 8265,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8304,
+          "symbol": "_FUN_10148170",
+          "target_address": "10148170"
+        },
+        {
+          "offset": 8340,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8379,
+          "symbol": "_FUN_1013b830",
+          "target_address": "1013B830"
+        },
+        {
+          "offset": 8391,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8430,
+          "symbol": "_FUN_1012f0c0",
+          "target_address": "1012F0C0"
+        },
+        {
+          "offset": 8442,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8481,
+          "symbol": "_FUN_10129480",
+          "target_address": "10129480"
+        },
+        {
+          "offset": 8526,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8565,
+          "symbol": "_FUN_101221b0",
+          "target_address": "101221B0"
+        },
+        {
+          "offset": 8577,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8616,
+          "symbol": "_FUN_1011b0e0",
+          "target_address": "1011B0E0"
+        },
+        {
+          "offset": 8628,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8663,
+          "symbol": "_FUN_101182f0",
+          "target_address": "101182F0"
+        },
+        {
+          "offset": 8709,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8738,
+          "symbol": "_FUN_101121a0",
+          "target_address": "101121A0"
+        },
+        {
+          "offset": 8771,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8800,
+          "symbol": "_FUN_1010c290",
+          "target_address": "1010C290"
+        },
+        {
+          "offset": 8833,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 8862,
+          "symbol": "_FUN_10109ca0",
+          "target_address": "10109CA0"
+        },
+        {
+          "offset": 10042,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 10172,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 10222,
+          "symbol": "_FUN_1016caa0",
+          "target_address": "1016CAA0"
+        },
+        {
+          "offset": 10365,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 10384,
+          "symbol": "_FUN_1016cd4a",
+          "target_address": "1016CD4A"
+        },
+        {
+          "offset": 10842,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        },
+        {
+          "offset": 10898,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_100ffc40",
+        "called_by": "FUN_100ffac0@100FFAC0",
+        "behavior": "processes the loaded Sangduck sprite asset through a stateful resource parser with file, sprite-frame, effect, and engine callback paths; semantics depend on global loader state and callback contracts"
+      }
+    },
+    {
+      "address": "10167820",
+      "name": "FUN_10167820",
+      "size": 519,
+      "symbol": "_CreateSurfaceFromSpriteFrame",
+      "source": "src/client-2062/Main/CreateSurfaceFromSpriteFrame.cpp",
+      "source_sha256": "a5cd09417f163e15ecc071a0e964a1aa435957b07be38854c68106efab9ecbba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 301,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 405,
+          "symbol": "_FUN_1016c784",
+          "target_address": "1016C784"
+        },
+        {
+          "offset": 448,
+          "symbol": "_FUN_1016c784",
+          "target_address": "1016C784"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10167820",
+        "called_by": "FUN_100ffc40@100FFC40",
+        "behavior": "creates/configures a sprite-sized graphics surface from width, height, pixel-format, and device globals; uses surface vtable calls and an allocator-backed row descriptor, returning success or failure"
+      }
+    },
+    {
+      "address": "101036B0",
+      "name": "FUN_101036b0",
+      "size": 407,
+      "symbol": "_CreateSpriteDataSurface",
+      "source": "src/client-2062/Main/CreateSpriteDataSurface.cpp",
+      "source_sha256": "f0abaac1104ddc21a729e21c67d8ae999c04e2ed21f022f4980d9d8743c89d8a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101036b0",
+        "called_by": "FUN_100ffc40@100FFC40",
+        "behavior": "creates/configures a device surface using frame byte count, pixel-format globals, and surface-vtable calls; failure and success update the wrapper output fields differently"
+      }
+    },
+    {
+      "address": "10103560",
+      "name": "FUN_10103560",
+      "size": 47,
+      "symbol": "_FUN_10103560",
+      "source": "src/client-2062/Main/FUN_10103560.cpp",
+      "source_sha256": "eee36ac265f64d252a598d2759f63f732511235875e1b99455645e55666d4afc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "symbol": "_FUN_10167d20",
+          "target_address": "10167D20"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10103560",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "10109CA0",
+      "name": "FUN_10109ca0",
+      "size": 20,
+      "symbol": "_FUN_10109ca0",
+      "source": "src/client-2062/Main/FUN_10109ca0.cpp",
+      "source_sha256": "ae7f1d7f8e5842a48984151879513a4808aebb6dbbf4519804216d4c8b3d9f23",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10109ca0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and clears the three stored state fields"
+      }
+    },
+    {
+      "address": "1010C290",
+      "name": "FUN_1010c290",
+      "size": 20,
+      "symbol": "_FUN_1010c290",
+      "source": "src/client-2062/Main/FUN_1010c290.cpp",
+      "source_sha256": "10541d0de06d2b5c6a2d80cca5dbcc2195df85a8e07d47237adf60170ea616e3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1010c290",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and clears the three stored state fields"
+      }
+    },
+    {
+      "address": "101121A0",
+      "name": "FUN_101121a0",
+      "size": 20,
+      "symbol": "_FUN_101121a0",
+      "source": "src/client-2062/Main/FUN_101121a0.cpp",
+      "source_sha256": "632a9270055856233b0a0f54277681d1608c4d9b4c974362d5dff9f9dfa70cd1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101121a0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and clears the three stored state fields"
+      }
+    },
+    {
+      "address": "101182F0",
+      "name": "FUN_101182f0",
+      "size": 32,
+      "symbol": "_FUN_101182f0",
+      "source": "src/client-2062/Main/FUN_101182f0.cpp",
+      "source_sha256": "da0f1ea78f1a4c8f01f907f0319b7b0a0cfaa2a90b5a6567edb505b46c8d6938",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101182f0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1011B0E0",
+      "name": "FUN_1011b0e0",
+      "size": 32,
+      "symbol": "_FUN_1011b0e0",
+      "source": "src/client-2062/Main/FUN_1011b0e0.cpp",
+      "source_sha256": "634a71fb10a9226678ee413d3e80360414b4540fce1d026e1743154f2ad07f2a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1011b0e0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "101221B0",
+      "name": "FUN_101221b0",
+      "size": 32,
+      "symbol": "_FUN_101221b0",
+      "source": "src/client-2062/Main/FUN_101221b0.cpp",
+      "source_sha256": "765f2ac98c46bf898b5abb8d90f77b74d0c586e1f996e61c74b78cec203a063f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_101221b0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "10129480",
+      "name": "FUN_10129480",
+      "size": 32,
+      "symbol": "_FUN_10129480",
+      "source": "src/client-2062/Main/FUN_10129480.cpp",
+      "source_sha256": "72e27555ac2401a1521ab98a6731e51f2c72b4a706850671d7e6a74dc5a6ef2c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10129480",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1012F0C0",
+      "name": "FUN_1012f0c0",
+      "size": 32,
+      "symbol": "_FUN_1012f0c0",
+      "source": "src/client-2062/Main/FUN_1012f0c0.cpp",
+      "source_sha256": "7ffb7bf926d73383546e3ee37fefdaaf5ef0913930a138f4099950cb712b8521",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1012f0c0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1013B830",
+      "name": "FUN_1013b830",
+      "size": 32,
+      "symbol": "_FUN_1013b830",
+      "source": "src/client-2062/Main/FUN_1013b830.cpp",
+      "source_sha256": "2b99d9eb245c3c783e01abd1d4596b3bcf525c188f9a0c4c1cb78061b0a32947",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1013b830",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "10148170",
+      "name": "FUN_10148170",
+      "size": 32,
+      "symbol": "_FUN_10148170",
+      "source": "src/client-2062/Main/FUN_10148170.cpp",
+      "source_sha256": "e01bb7db88ad4a65f35d80c257a13fc6f1a41a6d7299e64b55bc28cab025063b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10148170",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1014DEC0",
+      "name": "FUN_1014dec0",
+      "size": 32,
+      "symbol": "_FUN_1014dec0",
+      "source": "src/client-2062/Main/FUN_1014dec0.cpp",
+      "source_sha256": "387918dc884c9c3b3ecec5141f6dd1d010b8401beee0afdb6724f7590ea1fd8f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1014dec0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1015A830",
+      "name": "FUN_1015a830",
+      "size": 32,
+      "symbol": "_FUN_1015a830",
+      "source": "src/client-2062/Main/FUN_1015a830.cpp",
+      "source_sha256": "a1893252cc60175678bddecd45dc22c303bf6c599ac60fb14651e71e109ac1cf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1015a830",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "10167370",
+      "name": "FUN_10167370",
+      "size": 22,
+      "symbol": "_FUN_10167370",
+      "source": "src/client-2062/Main/FUN_10167370.cpp",
+      "source_sha256": "83aa8a90a9bccb3ff19979824f97e3e30adde2df286b755821c6b6aa91d0d1e9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "symbol": "_FUN_10167d20",
+          "target_address": "10167D20"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10167370",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "101673E0",
+      "name": "FUN_101673e0",
+      "size": 71,
+      "symbol": "_FUN_101673e0",
+      "source": "src/client-2062/Main/FUN_101673e0.cpp",
+      "source_sha256": "e544ebce99259a7e35f9787d19aac5a7ef530fec9e2754cbc155368a3589c592",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 9,
+          "symbol": "_FUN_10103560",
+          "target_address": "10103560"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_101673e0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "10167D20",
+      "name": "FUN_10167d20",
+      "size": 83,
+      "symbol": "_FUN_10167d20",
+      "source": "src/client-2062/Main/FUN_10167d20.cpp",
+      "source_sha256": "f3d4f26344934106cf250058637fdb61c6a5c52f3f437a00ca1de44b191cf95d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "symbol": "_FUN_10167bf0",
+          "target_address": "10167BF0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10167d20",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "1016C784",
+      "name": "FUN_1016c784",
+      "size": 11,
+      "symbol": "_FUN_1016c784",
+      "source": "src/client-2062/Main/FUN_1016c784.cpp",
+      "source_sha256": "f2735257a704017465779825cf4bf4e5188de50c1d804258911ea2e4261b701e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 5,
+          "symbol": "_FUN_1016cd44",
+          "target_address": "1016CD44"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c784",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "1016CAA0",
+      "name": "`eh_vector_constructor_iterator'",
+      "size": 113,
+      "symbol": "_FUN_1016caa0",
+      "source": "src/client-2062/Main/FUN_1016caa0.cpp",
+      "source_sha256": "7f6655cf073fe1063fc93e9e94e99f1cc4c3b58e418520128ae0af69baad6ff2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 107,
+          "symbol": "_FUN_1016cb11",
+          "target_address": "1016CB11"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "`eh_vector_constructor_iterator'",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "iterates a count of elements, calls the supplied constructor callback for each, advances by the supplied stride, and uses the module exception path for cleanup"
+      }
+    },
+    {
+      "address": "1016CD44",
+      "name": "FUN_1016cd44",
+      "size": 6,
+      "symbol": "_FUN_1016cd44",
+      "source": "src/client-2062/Main/FUN_1016cd44.cpp",
+      "source_sha256": "a2380d6a98e68bc7dec6aac5743fa2a6bebac34e13aa8df34cdc88800eaa37fc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd44",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
+      }
+    },
+    {
+      "address": "1016CD4A",
+      "name": "FUN_1016cd4a",
+      "size": 6,
+      "symbol": "_FUN_1016cd4a",
+      "source": "src/client-2062/Main/FUN_1016cd4a.cpp",
+      "source_sha256": "b683214c1e3132923d0ed85f5837da8c994b7e6567ed822b5f856500791e7f38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd4a",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
+      }
+    },
+    {
+      "address": "10167BF0",
+      "name": "FUN_10167bf0",
+      "size": 293,
+      "symbol": "_FUN_10167bf0",
+      "source": "src/client-2062/Main/FUN_10167bf0.cpp",
+      "source_sha256": "3027373d72eb632c073e7fe0e1501805ef14dac22e01741a167bd72a5cfdd415",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 64,
+          "symbol": "_FUN_1016cd74",
+          "target_address": "1016CD74"
+        },
+        {
+          "offset": 137,
+          "symbol": "_FUN_1016cd6e",
+          "target_address": "1016CD6E"
+        },
+        {
+          "offset": 192,
+          "symbol": "_AllocateObjectThunk",
+          "target_address": "1016C7A0"
+        },
+        {
+          "offset": 214,
+          "symbol": "_FUN_10105c00",
+          "target_address": "10105C00"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10167bf0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes global graphics-interface objects through host callback thunks, then creates the dependent helper object; Ghidra shows its return does not distinguish every interface-creation failure"
+      }
+    },
+    {
+      "address": "10105C00",
+      "name": "FUN_10105c00",
+      "size": 32,
+      "symbol": "_FUN_10105c00",
+      "source": "src/client-2062/Main/FUN_10105c00.cpp",
+      "source_sha256": "de8921783fd087080211178d5fd857920f881e5dcbf788df228d8b7cb7638f2a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 24,
+          "symbol": "_FUN_10105c40",
+          "target_address": "10105C40"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_10105c00",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "initializes a 16-byte interface object with its vtable and copies three caller-supplied values into the object"
+      }
+    },
+    {
+      "address": "1016CD6E",
+      "name": "FUN_1016cd6e",
+      "size": 6,
+      "symbol": "_FUN_1016cd6e",
+      "source": "src/client-2062/Main/FUN_1016cd6e.cpp",
+      "source_sha256": "81729c8620077ff68c6b9e639efca9d4461b7c81134f0cb48e1f2d3a32dcd802",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd6e",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
+      }
+    },
+    {
+      "address": "1016CD74",
+      "name": "FUN_1016cd74",
+      "size": 6,
+      "symbol": "_FUN_1016cd74",
+      "source": "src/client-2062/Main/FUN_1016cd74.cpp",
+      "source_sha256": "4ce130ec0396ab2f466758f2de05dcb3f7ef1f442f7307ee10335325ef21258c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd74",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
+      }
+    },
+    {
+      "address": "1016C9F0",
+      "name": "FUN_1016c9f0",
+      "size": 128,
+      "symbol": "_FUN_1016c9f0",
+      "source": "src/client-2062/Main/FUN_1016c9f0.cpp",
+      "source_sha256": "f79cbc97b05d9aa4ef48c4cacdc782e1463d07a5c9660240cd282b6196553fbe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 91,
+          "symbol": "_FUN_1016ca70",
+          "target_address": "1016CA70"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016c9f0",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "walks constructed array elements backward and invokes the supplied destructor callback, with an SEH cleanup path"
+      }
+    },
+    {
+      "address": "1016CA70",
+      "name": "ArrayUnwindFilter",
+      "size": 44,
+      "symbol": "_FUN_1016ca70",
+      "source": "src/client-2062/Main/FUN_1016ca70.cpp",
+      "source_sha256": "93b1f7e485da121c545df990807b0b7a0d939620680c71b7e76b72867846f8bb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 34,
+          "symbol": "_FUN_1016cd62",
+          "target_address": "1016CD62"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "ArrayUnwindFilter",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "performs the exact native setup sequence used by the sprite-resource parser; see the mapped instructions and direct-call evidence"
+      }
+    },
+    {
+      "address": "1016CB11",
+      "name": "FUN_1016cb11",
+      "size": 28,
+      "symbol": "_FUN_1016cb11",
+      "source": "src/client-2062/Main/FUN_1016cb11.cpp",
+      "source_sha256": "ae780c3944905dc2dd923cd5f16e636e4bebe76d62eff14ade57eb18f154d2c8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "symbol": "_FUN_1016c9f0",
+          "target_address": "1016C9F0"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cb11",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "checks the vector-construction exception state and calls the array-unwind helper with the original base, stride, constructed count, and callback when cleanup is required"
+      }
+    },
+    {
+      "address": "10105C40",
+      "name": "FUN_10105c40",
+      "size": 159,
+      "symbol": "_FUN_10105c40",
+      "source": "src/client-2062/Main/FUN_10105c40.cpp",
+      "source_sha256": "1ef0db48a33a1560327f8b7ea74ad183b46edac7a7704fbb465c9cee0a092c05",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10105c40",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "queries a device-dependent COM interface by its captured GUID, stores the result, calls its setup vtable slot, then releases the temporary interface"
+      }
+    },
+    {
+      "address": "1016CD62",
+      "name": "FUN_1016cd62",
+      "size": 6,
+      "symbol": "_FUN_1016cd62",
+      "source": "src/client-2062/Main/FUN_1016cd62.cpp",
+      "source_sha256": "d7da95e74ee44824736193e4f8dbf9841c785f7d87c853a0c86342b94bb16622",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_1016cd62",
+        "called_by": "FUN_100ffc40@100FFC40 or a direct sprite-loader child",
+        "behavior": "tail-dispatches through its host callback pointer and preserves the original caller stack contract"
+      }
     }
   ]
 }

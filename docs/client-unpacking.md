@@ -110,8 +110,9 @@ initializer/list helpers at `0x100FE9B0`, `0x100FEF00`, and `0x100FEFA0`, the
 row initializer `0x10015B80`, the allocator callback thunk `0x1016C7A0`, the
 screen constructor `0x1004DB50`, and its full-screen, logo, and overlay
 constructors at `0x1002C3D0`, `0x100FD890`, and `0x100F34A0` are reconstructed
-in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-` and objdiff 3.8.0
-reproduce all 5,959 bytes exactly. Relative call targets and
+along with the sprite-resource wrapper at `0x100FFAC0` and its 10,934-byte
+loader at `0x100FFC40`, in `src/client-2062/Main/`. Visual C++ 6.0 SP5 `/O2 /GX-`
+and objdiff 3.8.0 reproduce all 19,380 bytes exactly. Relative call targets and
 `AllocScreen`'s four absolute global addresses are checked against the captured
 operands. The callback copier's absolute renderer-global operands remain literal
 machine addresses in its object code and therefore compare directly without
@@ -121,11 +122,20 @@ This work verifies against the local mapped-image snapshot; it does not remove
 VMProtect from the shipping module or produce a standalone runnable DLL.
 
 The public-safe function index for this mapped `Main.dll` contains 2,016
-Ghidra-recognized functions totaling 1,253,481 body bytes. Function boundaries
-are analysis metadata and still need review. The thirteen verified client byte
+Ghidra-recognized functions totaling 1,253,504 body bytes. Function boundaries
+are analysis metadata and still need review. The forty-six verified client byte
 matches include `InitCGCDLL`, `FUN_10102c40`, `AllocScreen`, `FUN_10038130`,
 `FUN_10015b80`, the allocator thunk, the screen constructor, all three screen
-child constructors, and the three common control initialization/list functions.
+child constructors, the three common control initialization/list functions,
+and the sprite-resource wrapper/parser and their helpers. From roots `0x100FFAC0`
+and `0x100FFC40`, a direct-call walk reaches 34 indexed functions; all 34 now
+have byte-matched source, with no direct-call target outside the function index.
+That walk includes the parser's DirectDraw surface helpers, interface constructors,
+host callback thunks, and the compiler's vector-construction/unwind path. The
+unwind helper `0x1016C9F0` is 128 bytes: its branch at `0x1016CA44` targets
+`0x1016CA5D`, and its epilogue returns at `0x1016CA6D` just before the next
+function at `0x1016CA70`; the previous 105-byte Ghidra extent ended mid-instruction
+and has been corrected in `client-functions.tsv`.
 `FUN_10015b80` is called seven times by the screen constructor to configure its
 label rows. The three common control functions are
 byte-level reconstructions grounded in the captured instruction sequence; the
@@ -138,9 +148,12 @@ constructor shows nine randomly positioned children with spacing checks, plus
 resource and control arrays; the RNG callback's contract and several child-field
 meanings remain unknown. The 375-byte overlay constructor initializes a 256-slot
 child-control table and delegates more setup to `0x100F3F40`, whose behavior is
-not yet reconstructed. The full-screen constructor also calls unmatched helpers
-at `0x100FFAC0`, `0x10032360`, `0x100FF160`, `0x100FF120`, `0x10018950`,
-`0x101047F0`, `0x10018600`, `0x100188E0`, `0x10103B80`, and `0x10022F80`.
+not yet reconstructed. The full-screen constructor still calls unmatched helpers
+at `0x10032360`, `0x100FF160`, `0x100FF120`, `0x10018950`, `0x101047F0`,
+`0x10018600`, `0x100188E0`, `0x10103B80`, and `0x10022F80`. Ghidra's pseudocode
+shows loader-state gates, record validation, and sprite/effect callback paths,
+but the loader's global-state and indirect host-callback contracts are not yet
+fully understood. The overlay's `0x100F3F40` setup routine also remains unmatched.
 Re-run client verification with `python tools/verify_client_matches.py`; the tool checks the
 original module hash, mapped-image hash, compiler hash, call destinations,
 absolute global addresses, and objdiff scores. Captures and compiler binaries
