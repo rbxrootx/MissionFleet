@@ -13,6 +13,19 @@ COMPONENT_LABELS = {
     "login-server": "Login server",
     "game-server": "Game server",
     "save-server": "Persistence server",
+    "client-main": "Archived 2062 Main.dll",
+}
+IMAGE_BASES = {
+    "login-server": 0x401000,
+    "game-server": 0x401000,
+    "save-server": 0x401000,
+    "client-main": 0x10000000,
+}
+SOURCE_PATHS = {
+    "login-server": "src/login-server",
+    "game-server": "src/game-server",
+    "save-server": "src/save-server",
+    "client-main": "src/client-2062/Main",
 }
 
 
@@ -49,8 +62,10 @@ def measure(rows, matched, unit_count):
 
 
 def load_inventory():
-    with (CONFIG / "functions.tsv").open(encoding="utf-8", newline="") as stream:
-        rows = list(csv.DictReader(stream, delimiter="\t"))
+    rows = []
+    for inventory_path in (CONFIG / "functions.tsv", CONFIG / "client-functions.tsv"):
+        with inventory_path.open(encoding="utf-8", newline="") as stream:
+            rows.extend(csv.DictReader(stream, delimiter="\t"))
     seen = set()
     inventory = {}
     for row in rows:
@@ -84,6 +99,31 @@ def load_matches(inventory):
         if item["source_sha256"] not in source_hashes(source.read_bytes()):
             raise ValueError(f"Match source changed: {source}")
         result.add(key)
+
+    client_document = json.loads(
+        (CONFIG / "client-verifications.json").read_text(encoding="utf-8")
+    )
+    if client_document.get("schema_version") != 1 or client_document.get("component") != "Main.dll":
+        raise ValueError("Unsupported client verification inventory")
+    for item in client_document["matches"]:
+        required = {
+            "address", "name", "size", "symbol", "source", "source_sha256",
+            "verified_by", "flags", "relocations", "evidence",
+        }
+        if not required.issubset(item) or item["verified_by"] != "objdiff-3.8.0-byte-identical":
+            raise ValueError(f"Unverified client match record: {item}")
+        key = ("client-main", item["address"].lower())
+        if key not in inventory or key in result:
+            raise ValueError(f"Unknown or duplicate client match: {key}")
+        expected = inventory[key]
+        if item["name"] != expected["name"] or int(item["size"]) != int(expected["size"]):
+            raise ValueError(f"Client match identity differs from inventory: {key}")
+        source = (ROOT / item["source"]).resolve()
+        if ROOT.resolve() not in source.parents or not source.is_file():
+            raise ValueError(f"Client match source is missing or outside the project: {source}")
+        if item["source_sha256"] not in source_hashes(source.read_bytes()):
+            raise ValueError(f"Client match source changed: {source}")
+        result.add(key)
     return result
 
 
@@ -108,7 +148,7 @@ def build_report():
                 "name": report_name,
                 "size": row["size"],
                 "fuzzy_match_percent": 100.0 if is_match else 0.0,
-                "address": str(address - 0x401000),
+                "address": str(address - IMAGE_BASES[component]),
                 "metadata": {"virtual_address": str(address)},
             })
         units.append({
@@ -118,7 +158,7 @@ def build_report():
             "metadata": {
                 "complete": measures["matched_functions"] == measures["total_functions"],
                 "module_name": label,
-                "source_path": f"src/{component}",
+                "source_path": SOURCE_PATHS[component],
                 "progress_categories": [component],
             },
         })

@@ -27,9 +27,12 @@ report from a GitHub Actions artifact; it does not host or perform the actual
 decompilation. The per-function compiler experiment site is decomp.me.
 
 This repository generates one report named `NF2_2062_report`, with Login,
-Game, and Persistence categories. `config/NF2_2062/functions.tsv` is a reviewed,
-public-safe snapshot of the local Ghidra function inventory. It contains names,
-addresses, and body sizes, but no original machine code or game assets.
+Game, Persistence, and archived 2062 `Main.dll` categories.
+`config/NF2_2062/functions.tsv` contains the server inventory;
+`client-functions.tsv` contains public-safe Ghidra metadata for the mapped
+client module. They contain names, addresses, and body sizes, but no original
+machine code or game assets. Ghidra function boundaries, especially in the
+protected client image, remain subject to review.
 
 Regenerate the local report:
 
@@ -39,8 +42,10 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The report currently
-credits 5,551 functions totaling 186,886 bytes, each verified at 100.0% by objdiff
-3.8.0.
+credits 5,553 functions totaling 187,464 bytes, each verified at 100.0% by
+objdiff 3.8.0. This includes two 2062 `Main.dll` functions totaling 578 bytes;
+their local verifier is `tools/verify_client_matches.py` and its hash-pinned
+input capture is not committed.
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
 file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
 rebuilds recorded source and target objects locally without placing original

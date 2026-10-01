@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "component": "Main.dll",
+  "image_base": "10000000",
+  "mapped_image": "reports/unpacked-2062-client/Main.mapped.bin",
+  "manifest": "reports/unpacked-2062-client/manifest.json",
+  "mapped_sha256": "929af9b902a107f9e1d4b5e291a56551f88e882a201249b3bb89d17706a5cd00",
+  "original_sha256": "dd53bd78d5a4eaae916a428f9086582bf8603be2e680c2a84459f21afe03e663",
+  "compiler": {
+    "family": "Microsoft Visual C++ 6.0 SP5",
+    "flags": ["/O2", "/GX-"],
+    "cl_sha256": "1bf99f206271ecdbd13da2829192ea2c02e2a44c740b8d72935d5d9cb753b156"
+  },
+  "matches": [
+    {
+      "address": "10033A70",
+      "name": "InitCGCDLL",
+      "size": 16,
+      "symbol": "_InitCGCDLL",
+      "source": "src/client-2062/Main/InitCGCDLL.cpp",
+      "source_sha256": "6b4f9aa0ccf6f0450aaa4b1462135893b7d605b78c07c4b01761ae8f0c561419",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [
+        {
+          "offset": 6,
+          "symbol": "?CopyHostCallbacks@@YAHPAX@Z",
+          "target_address": "10102C40"
+        }
+      ],
+      "evidence": {
+        "export": "InitCGCDLL",
+        "callee_address": "10102C40",
+        "behavior": "forwards the host callback-table pointer and returns zero"
+      }
+    },
+    {
+      "address": "10102C40",
+      "name": "FUN_10102c40",
+      "size": 562,
+      "symbol": "?CopyHostCallbacks@@YAHPAX@Z",
+      "source": "src/client-2062/Main/CopyHostCallbacks.cpp",
+      "source_sha256": "c4fb8752bdc3f1b82c4137718b03fbb208ceea90ae7e4424967a526e3a911d5d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": ["/O2", "/GX-"],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_10102c40",
+        "called_by": "InitCGCDLL@10033A70",
+        "behavior": "copies host table fields at offsets 0x00-0x88 and 0x1CC to renderer globals, then returns one"
+      }
+    }
+  ]
+}

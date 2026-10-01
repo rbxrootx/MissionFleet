@@ -6,15 +6,16 @@ C pseudocode are available locally. **Start with [the decompilation project](dec
 and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
 The matching project has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
-Its public-safe inventory covers 18,925 recovered functions across the login,
-game, and persistence servers. Functions are credited only after reconstructed
-C/C++ produces byte-identical object code. The current 5,551 reconstructed
-functions are verified individually at 100.0% by objdiff.
+Its public-safe inventory covers 20,941 functions across the login, game,
+persistence, and archived 2062 `Main.dll` modules. Functions are credited only
+after reconstructed C/C++ produces byte-identical object code. The current
+5,553 reconstructed functions are verified individually at 100.0% by objdiff.
 
 ```powershell
 python tools/generate_progress.py
 python tools/verify_matches.py
 python tools/verify_matches.py --only game-server:00533743
+python tools/verify_client_matches.py
 python tools/find_repeated_functions.py --min-count 4 --limit 20
 python -m unittest discover -s tests -v
 ```

@@ -97,6 +97,29 @@ stores the object in different globals. This confirms the allocation size and
 export boundary, not equivalence of the protected constructor or the full
 renderer. No original game login or network connection was attempted.
 
+`InitCGCDLL` at `0x10033A70` is a 16-byte host boundary: it forwards its first
+argument to `0x10102C40` and returns zero. The callee's recovered 562-byte body
+copies host-provided callback values into renderer globals, reading fields
+through index `0x73` (byte offset `0x1CC`) and returning one. This establishes
+that the table must be readable through at least byte `0x1CF`; the candidate
+layout models it as `0x1D0` bytes, but no host-side length argument was found.
+The callback table's semantic field names remain unknown.
+
+Both functions are reconstructed in `src/client-2062/Main/`. Visual C++ 6.0
+SP5 `/O2 /GX-` and objdiff 3.8.0 reproduce all 578 bytes exactly. The wrapper's
+relative call target is checked against the captured operand. The copy routine's
+absolute renderer-global operands remain literal machine addresses in its
+object code and therefore compare directly without relocation normalization.
+
+The public-safe function index for this mapped `Main.dll` contains 2,016
+Ghidra-recognized functions totaling 1,253,481 body bytes. Function boundaries
+are analysis metadata and still need review. Only `InitCGCDLL` and
+`FUN_10102c40` currently count as client byte matches; `AllocScreen.cpp` is an
+unverified behavioral candidate and is deliberately excluded from the verified
+inventory. Re-run client verification with `python tools/verify_client_matches.py`; the tool checks the
+original module hash, mapped-image hash, compiler hash, call destination, and
+objdiff score. Captures and compiler binaries remain local and ignored.
+
 The first render subsystem traced through that recovered native code is the
 ship sprite path. It establishes the exact animation-record stride, timed frame
 selection, node anchoring, clipping and final screen-vtable call. See the
