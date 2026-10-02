@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
-identified code bytes across six report units. There are 6,235 verified matches
-totaling 1,378,182 bytes (13.1644%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,238 verified matches
+totaling 1,378,317 bytes (13.1656%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -59,7 +59,8 @@ update and its reset/start methods, ship-scene triggers and direct helpers, and
 the ship-scene update dispatcher and its direct transition handlers: 122 matched
 functions / 280,539 bytes across the ship path.
 The locale cache's null-acquisition entry, runtime lock/diagnostic helpers, and
-error dispatcher add twelve verified function spans / 1,237 bytes. The
+error dispatcher and its diagnostic notification wrappers add fourteen
+verified function spans / 1,372 bytes. The
 dispatcher span includes bytes between Ghidra's discontiguous blocks, including
 the separately matched lock-cleanup helper; progress byte totals sum function
 spans and are not a count of unique image bytes. See

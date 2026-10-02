@@ -76597,6 +76597,126 @@
         "behavior": "Reads the dispatcher category from the stack argument and handles observed categories 2, 4, 6, 8, 0xB, 0xF, 0x15, and 0x16. It uses the category-slot mapper 0x588730BF and runtime record lookup 0x58873101; for guarded paths it acquires lock index 3, reads/updates the selected global state, invokes the corresponding indirect callback through the observed guard slot, and releases the lock in normal and exception cleanup paths. Unknown categories set the observed error value 0x16 through 0x5886246F and call 0x58850FAB. These branches and calls are direct Ghidra observations.",
         "uncertainty": "The category meanings, record layout, callback target semantics, and externally observable error effects remain unknown. Ghidra reports two body ranges (0x5887316E..0x588732E5 and 0x58873308..0x5887335F; 464 summed bytes); the normalized linear span is 498 bytes through the cleanup INT3 at 0x5887335F, including the normal epilogue at 0x5887333C and bytes between body ranges. The span policy is grounded in the emitted Ghidra ranges and instruction boundaries; it does not establish high-level source semantics."
       }
+    },
+    {
+      "address": "58850EF7",
+      "name": "FUN_58850ef7",
+      "size": 55,
+      "symbol": "_FUN_58850ef7",
+      "source": "src/client-current/Core/FUN_58850ef7.cpp",
+      "source_sha256": "e1c7c40c620cfb13db0a0d48e324d2bee36d891b856fd29e32024d9ec4c7238e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58850C9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "58850F2E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58850CE7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850ef7",
+        "called_by": "Runtime error wrapper 0x58850FAB invokes this helper with five zero arguments. Ghidra also shows a call from sibling runtime wrapper 0x58850FBB.",
+        "behavior": "Initializes a 40-byte local diagnostic buffer through 0x58850C9F(0), passes the caller's five arguments and that buffer to 0x58850F2E, then performs cleanup through 0x58850CE7 and returns. All three direct callees are independently byte-verified.",
+        "uncertainty": "The diagnostic buffer layout, argument meanings, and visible side effects are not identified; only the setup/call/cleanup sequence is directly established by Ghidra."
+      }
+    },
+    {
+      "address": "58850FBB",
+      "name": "FUN_58850fbb",
+      "size": 28,
+      "symbol": "_FUN_58850fbb",
+      "source": "src/client-current/Core/FUN_58850fbb.cpp",
+      "source_sha256": "074e70d35ea5ba86ab291f1d5a1bbf7ba2b76d38b90f696cc801ce98cb8aa8c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58850EF7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "58850FD9",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850fbb",
+        "called_by": "Ghidra records callers 0x5883A2AC and 0x5883A24A; this wrapper invokes the shared diagnostic routine 0x58850EF7 and then the runtime error reporter 0x58850FD9.",
+        "behavior": "Passes five zero arguments to 0x58850EF7 and then five zero arguments to 0x58850FD9. Both call edges are directly visible in Ghidra and the emitted byte sequence is verified.",
+        "uncertainty": "Ghidra marks the first call as non-returning even though 0x58850EF7's decompilation has a return; whether the second call is reachable in the observed runtime path is unresolved."
+      }
+    },
+    {
+      "address": "58850FD9",
+      "name": "FUN_58850fd9",
+      "size": 52,
+      "symbol": "_FUN_58850fd9",
+      "source": "src/client-current/Core/FUN_58850fd9.cpp",
+      "source_sha256": "fe713415cf612657a9018e26d1618c01c7e7e2fb83c300be94bae3d1a95869fb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588943B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "58850DAF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "58894254",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "588943B4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850fd9",
+        "called_by": "Diagnostic wrapper 0x58850FBB calls this with five zero arguments. Ghidra also records many Core runtime and allocation-error callers.",
+        "behavior": "Calls the indirect handler in global slot 0x588943B8 with code 0x17 and executes software interrupt 0x29 when that handler returns nonzero. It then reports status 0xC0000417 through 0x58850DAF, passes that status to the indirect callback slot 0x58894254, and forwards its result through slot 0x588943B4.",
+        "uncertainty": "The three indirect callback targets and their effects are unresolved. Ghidra exposes their slot addresses, arguments, and conditional order; the high-level meaning of status 0xC0000417 is not established."
+      }
     }
   ]
 }

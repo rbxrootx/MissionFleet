@@ -99,9 +99,29 @@ ADDRESSES = (
     "58862710", "58873129", "58873057", "588730B3", "58850DAF",
     "58850FAB", "58873101", "588732F8", "58832760", "588730BF", "5883274E",
     "5887316E",
+    "58850EF7",
+    "58850FBB", "58850FD9",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
+    "58850FBB": {
+        "name_in_analysis": "FUN_58850fbb",
+        "called_by": "Ghidra records callers 0x5883A2AC and 0x5883A24A; this wrapper invokes the shared diagnostic routine 0x58850EF7 and then the runtime error reporter 0x58850FD9.",
+        "behavior": "Passes five zero arguments to 0x58850EF7 and then five zero arguments to 0x58850FD9. Both call edges are directly visible in Ghidra and the emitted byte sequence is verified.",
+        "uncertainty": "Ghidra marks the first call as non-returning even though 0x58850EF7's decompilation has a return; whether the second call is reachable in the observed runtime path is unresolved.",
+    },
+    "58850FD9": {
+        "name_in_analysis": "FUN_58850fd9",
+        "called_by": "Diagnostic wrapper 0x58850FBB calls this with five zero arguments. Ghidra also records many Core runtime and allocation-error callers.",
+        "behavior": "Calls the indirect handler in global slot 0x588943B8 with code 0x17 and executes software interrupt 0x29 when that handler returns nonzero. It then reports status 0xC0000417 through 0x58850DAF, passes that status to the indirect callback slot 0x58894254, and forwards its result through slot 0x588943B4.",
+        "uncertainty": "The three indirect callback targets and their effects are unresolved. Ghidra exposes their slot addresses, arguments, and conditional order; the high-level meaning of status 0xC0000417 is not established.",
+    },
+    "58850EF7": {
+        "name_in_analysis": "FUN_58850ef7",
+        "called_by": "Runtime error wrapper 0x58850FAB invokes this helper with five zero arguments. Ghidra also shows a call from sibling runtime wrapper 0x58850FBB.",
+        "behavior": "Initializes a 40-byte local diagnostic buffer through 0x58850C9F(0), passes the caller's five arguments and that buffer to 0x58850F2E, then performs cleanup through 0x58850CE7 and returns. All three direct callees are independently byte-verified.",
+        "uncertainty": "The diagnostic buffer layout, argument meanings, and visible side effects are not identified; only the setup/call/cleanup sequence is directly established by Ghidra.",
+    },
     "5887316E": {
         "name_in_analysis": "FUN_5887316e",
         "called_by": "Runtime-state handler 0x58862710 enters this dispatcher for the null locale-record acquisition path. Ghidra lists the direct helper set and assigns the trailing cleanup range through 0x5887335F to this same function.",
