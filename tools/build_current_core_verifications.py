@@ -80,6 +80,8 @@ ADDRESSES = (
     "58856ABC", "58860D5F", "58850F2E", "58855EA0", "5885761B",
     "58861412", "58860617", "58860656", "5886132B", "58861372",
     "5885A0C8", "58860697", "588613B9", "588613D7",
+    "58860A36", "58860A9B", "58860D25", "58860D42", "5885B8D2",
+    "58861559", "588615C8", "5885DAD1", "5885D904", "5885D93B",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -2152,6 +2154,66 @@ EVIDENCE = {
         "called_by": "Called by `0x58861372` for a character that can be restored to the alternate stream.",
         "behavior": "Conditionally decrements the alternate parser's current-position field when it differs from the start and the character/cursor conditions permit restoration.",
         "uncertainty": "The alternate cursor fields are not named; conditions and decrement are directly visible in Ghidra.",
+    },
+    "58860A36": {
+        "name_in_analysis": "FUN_58860a36",
+        "called_by": "Selected by integer-format dispatcher `0x588608EE`; it uses `0x5885CDC0` to parse and `0x58861559` to store the converted value.",
+        "behavior": "Prepares the stream position through `0x58860D25`, initializes a bounded character-parser record through `0x5885B8D2`, then calls `0x5885CDC0` with the active conversion context. It stores the result through `0x58861559` only when the parser indicates a value was consumed and the destination mode byte is clear; otherwise it returns the observed status.",
+        "uncertainty": "The enclosing object layout, dispatcher code names, and status-byte semantics are not recovered. Field offsets, call order, and conditional result storage are directly visible in Ghidra.",
+    },
+    "58860A9B": {
+        "name_in_analysis": "FUN_58860a9b",
+        "called_by": "Selected by alternate integer-format dispatcher `0x58860962`; it uses `0x5885D110` to parse and `0x588615C8` to store the converted value.",
+        "behavior": "Prepares the alternate stream position through `0x58860D42`, initializes a bounded parser record through `0x5885B8D2`, calls `0x5885D110`, and conditionally stores the result through `0x588615C8` based on the consumed-input status and destination mode byte.",
+        "uncertainty": "The enclosing object layout, alternate parser distinction, and status-byte meanings are not recovered. Field offsets, helper calls, and result-store condition are direct Ghidra observations.",
+    },
+    "58860D25": {
+        "name_in_analysis": "FUN_58860d25",
+        "called_by": "Called by `0x58860A36` before integer parsing.",
+        "behavior": "Reads past leading characters classified with mask `8` through `0x5885D904`, then restores the first nonmatching character through `0x588613B9`.",
+        "uncertainty": "The stream API's operation names are not recovered. Reader, classifier, and pushback calls are directly visible in Ghidra.",
+    },
+    "58860D42": {
+        "name_in_analysis": "FUN_58860d42",
+        "called_by": "Called by `0x58860A9B` before alternate-path integer parsing.",
+        "behavior": "Reads past leading characters classified with mask `8` through `0x5885D93B`, then restores the first nonmatching character through `0x588613D7`.",
+        "uncertainty": "The reason for the alternate stream path and its operation names are not recovered. Helper calls and sequence are direct Ghidra observations.",
+    },
+    "5885B8D2": {
+        "name_in_analysis": "FUN_5885b8d2",
+        "called_by": "Called by both object methods `0x58860A36` and `0x58860A9B` to initialize their local parser stream record.",
+        "behavior": "Forwards the destination record and four source/bounds values to initializer `0x5885DAD1`, then returns the destination pointer.",
+        "uncertainty": "The source-record type and byte-count parameters are not named; the forwarding call is directly visible in Ghidra.",
+    },
+    "58861559": {
+        "name_in_analysis": "FUN_58861559",
+        "called_by": "Called by `0x58860A36` when the primary parser consumed input and the output-mode byte is clear.",
+        "behavior": "Consumes the next destination pointer from a pointer list, reads its required width through `0x5886074D`, and stores one, two, four, or eight bytes from the parsed value. A null destination sets error `0x16`; unsupported widths return 0 without writing.",
+        "uncertainty": "The destination-list and width-record types are unknown. Width branches, pointer advancement, error value, and stores are directly visible in Ghidra.",
+    },
+    "588615C8": {
+        "name_in_analysis": "FUN_588615c8",
+        "called_by": "Called by `0x58860A9B` when the alternate parser consumed input and the output-mode byte is clear.",
+        "behavior": "Parallel to `0x58861559`, consuming the next pointer from the alternate destination list and storing one, two, four, or eight bytes according to the width returned by `0x5886074D`; null destinations set error `0x16`.",
+        "uncertainty": "The reason for the separate destination list and its record type are unknown. Pointer advancement, width branches, error value, and writes are directly visible in Ghidra.",
+    },
+    "5885DAD1": {
+        "name_in_analysis": "FUN_5885dad1",
+        "called_by": "Called by parser-record adapter `0x5885B8D2`.",
+        "behavior": "Initializes a seven-DWORD stream/parser record: clears two cursor fields, stores source and bound values, and stores an optional status-byte pointer, setting that byte to 1 when present.",
+        "uncertainty": "The record's source-level type and field names are not recovered. Field offsets and initialization are directly visible in Ghidra.",
+    },
+    "5885D904": {
+        "name_in_analysis": "FUN_5885d904",
+        "called_by": "Called by `0x58860D25` to skip leading classified characters on the primary stream.",
+        "behavior": "Repeatedly reads through `0x5885A0C8`, returns -1 at EOF, increments the consumed-character counter, and returns the first byte for which locale classifier `0x5885761B` does not contain mask `8`.",
+        "uncertainty": "The source stream and counter field names are not known; read, EOF, counter update, and classifier call are directly visible in Ghidra.",
+    },
+    "5885D93B": {
+        "name_in_analysis": "FUN_5885d93b",
+        "called_by": "Called by `0x58860D42` to skip leading classified characters on the alternate stream.",
+        "behavior": "Repeatedly reads through `0x58860697`, returns -1 at EOF, and returns the first byte for which `0x5885761B` does not contain mask `8`.",
+        "uncertainty": "The alternate reader's stream record is not named. The read loop, EOF branch, and classifier call are directly visible in Ghidra.",
     },
 }
 

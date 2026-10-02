@@ -72811,6 +72811,363 @@
         "behavior": "Conditionally decrements the alternate parser's current-position field when it differs from the start and the character/cursor conditions permit restoration.",
         "uncertainty": "The alternate cursor fields are not named; conditions and decrement are directly visible in Ghidra."
       }
+    },
+    {
+      "address": "58860A36",
+      "name": "FUN_58860a36",
+      "size": 101,
+      "symbol": "_FUN_58860a36",
+      "source": "src/client-current/Core/FUN_58860a36.cpp",
+      "source_sha256": "a1a21e7c26cd6c2f9a07641737b0bceb4132709ef3f0e6e37db29dcfbd007c21",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58860D25",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "5885CDC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "58861559",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860a36",
+        "called_by": "Selected by integer-format dispatcher `0x588608EE`; it uses `0x5885CDC0` to parse and `0x58861559` to store the converted value.",
+        "behavior": "Prepares the stream position through `0x58860D25`, initializes a bounded character-parser record through `0x5885B8D2`, then calls `0x5885CDC0` with the active conversion context. It stores the result through `0x58861559` only when the parser indicates a value was consumed and the destination mode byte is clear; otherwise it returns the observed status.",
+        "uncertainty": "The enclosing object layout, dispatcher code names, and status-byte semantics are not recovered. Field offsets, call order, and conditional result storage are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860A9B",
+      "name": "FUN_58860a9b",
+      "size": 101,
+      "symbol": "_FUN_58860a9b",
+      "source": "src/client-current/Core/FUN_58860a9b.cpp",
+      "source_sha256": "0e59e0035dab266f05e379a695665e9645e163fe707ba31d84a5c419fbfcb9c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58860D42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "5885D110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "588615C8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860a9b",
+        "called_by": "Selected by alternate integer-format dispatcher `0x58860962`; it uses `0x5885D110` to parse and `0x588615C8` to store the converted value.",
+        "behavior": "Prepares the alternate stream position through `0x58860D42`, initializes a bounded parser record through `0x5885B8D2`, calls `0x5885D110`, and conditionally stores the result through `0x588615C8` based on the consumed-input status and destination mode byte.",
+        "uncertainty": "The enclosing object layout, alternate parser distinction, and status-byte meanings are not recovered. Field offsets, helper calls, and result-store condition are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860D25",
+      "name": "FUN_58860d25",
+      "size": 29,
+      "symbol": "_FUN_58860d25",
+      "source": "src/client-current/Core/FUN_58860d25.cpp",
+      "source_sha256": "06494f786162b0918860a4572812826ce27c397bb81fa92c5e58d4e1e40f59d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "5885D904",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 21,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860d25",
+        "called_by": "Called by `0x58860A36` before integer parsing.",
+        "behavior": "Reads past leading characters classified with mask `8` through `0x5885D904`, then restores the first nonmatching character through `0x588613B9`.",
+        "uncertainty": "The stream API's operation names are not recovered. Reader, classifier, and pushback calls are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860D42",
+      "name": "FUN_58860d42",
+      "size": 29,
+      "symbol": "_FUN_58860d42",
+      "source": "src/client-current/Core/FUN_58860d42.cpp",
+      "source_sha256": "d92dd56c0d3938be5b2d9b41eded750f8767137158894c04933b7321dda50c54",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "5885D93B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 21,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860d42",
+        "called_by": "Called by `0x58860A9B` before alternate-path integer parsing.",
+        "behavior": "Reads past leading characters classified with mask `8` through `0x5885D93B`, then restores the first nonmatching character through `0x588613D7`.",
+        "uncertainty": "The reason for the alternate stream path and its operation names are not recovered. Helper calls and sequence are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5885B8D2",
+      "name": "FUN_5885b8d2",
+      "size": 30,
+      "symbol": "_FUN_5885b8d2",
+      "source": "src/client-current/Core/FUN_5885b8d2.cpp",
+      "source_sha256": "53b913dc6fa63f3b5260f7427073c53737986d9316f3c88834265df86ad996a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5885DAD1",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885b8d2",
+        "called_by": "Called by both object methods `0x58860A36` and `0x58860A9B` to initialize their local parser stream record.",
+        "behavior": "Forwards the destination record and four source/bounds values to initializer `0x5885DAD1`, then returns the destination pointer.",
+        "uncertainty": "The source-record type and byte-count parameters are not named; the forwarding call is directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58861559",
+      "name": "FUN_58861559",
+      "size": 111,
+      "symbol": "_FUN_58861559",
+      "source": "src/client-current/Core/FUN_58861559.cpp",
+      "source_sha256": "0e1958be21dd9bbcf049b0dfc8cd84a7445eed5345b0c0c24dc50816a3ea7f01",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861559",
+        "called_by": "Called by `0x58860A36` when the primary parser consumed input and the output-mode byte is clear.",
+        "behavior": "Consumes the next destination pointer from a pointer list, reads its required width through `0x5886074D`, and stores one, two, four, or eight bytes from the parsed value. A null destination sets error `0x16`; unsupported widths return 0 without writing.",
+        "uncertainty": "The destination-list and width-record types are unknown. Width branches, pointer advancement, error value, and stores are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588615C8",
+      "name": "FUN_588615c8",
+      "size": 111,
+      "symbol": "_FUN_588615c8",
+      "source": "src/client-current/Core/FUN_588615c8.cpp",
+      "source_sha256": "74d3c8efd590ccbb1d02bcb513580dbaf56e8ccb6229c86ac1a18ef142f89c42",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588615c8",
+        "called_by": "Called by `0x58860A9B` when the alternate parser consumed input and the output-mode byte is clear.",
+        "behavior": "Parallel to `0x58861559`, consuming the next pointer from the alternate destination list and storing one, two, four, or eight bytes according to the width returned by `0x5886074D`; null destinations set error `0x16`.",
+        "uncertainty": "The reason for the separate destination list and its record type are unknown. Pointer advancement, width branches, error value, and writes are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885DAD1",
+      "name": "FUN_5885dad1",
+      "size": 49,
+      "symbol": "_FUN_5885dad1",
+      "source": "src/client-current/Core/FUN_5885dad1.cpp",
+      "source_sha256": "09bdf3edb8f803cfb80851c78080a436600ad4e8a610cf2e76900d73dcbe3af3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5885dad1",
+        "called_by": "Called by parser-record adapter `0x5885B8D2`.",
+        "behavior": "Initializes a seven-DWORD stream/parser record: clears two cursor fields, stores source and bound values, and stores an optional status-byte pointer, setting that byte to 1 when present.",
+        "uncertainty": "The record's source-level type and field names are not recovered. Field offsets and initialization are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D904",
+      "name": "FUN_5885d904",
+      "size": 55,
+      "symbol": "_FUN_5885d904",
+      "source": "src/client-current/Core/FUN_5885d904.cpp",
+      "source_sha256": "288d20218c9294642b7e0f5c7d4900030ef056e143430a34ef3fdb8c8deafd55",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "5885761B",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d904",
+        "called_by": "Called by `0x58860D25` to skip leading classified characters on the primary stream.",
+        "behavior": "Repeatedly reads through `0x5885A0C8`, returns -1 at EOF, increments the consumed-character counter, and returns the first byte for which locale classifier `0x5885761B` does not contain mask `8`.",
+        "uncertainty": "The source stream and counter field names are not known; read, EOF, counter update, and classifier call are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D93B",
+      "name": "FUN_5885d93b",
+      "size": 47,
+      "symbol": "_FUN_5885d93b",
+      "source": "src/client-current/Core/FUN_5885d93b.cpp",
+      "source_sha256": "757fce5080917ead04054e3f6b010eddcb85ce23d2a4af03272f3c3e707f5f2c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "5885761B",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d93b",
+        "called_by": "Called by `0x58860D42` to skip leading classified characters on the alternate stream.",
+        "behavior": "Repeatedly reads through `0x58860697`, returns -1 at EOF, and returns the first byte for which `0x5885761B` does not contain mask `8`.",
+        "uncertainty": "The alternate reader's stream record is not named. The read loop, EOF branch, and classifier call are directly visible in Ghidra."
+      }
     }
   ]
 }
