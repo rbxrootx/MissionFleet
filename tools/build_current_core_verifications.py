@@ -60,6 +60,9 @@ ADDRESSES = (
     "58865B3B", "588659C1", "588690DF", "5887C5BB", "58868DAB",
     "58859C70",
     "5885A030", "58859EC2", "588623B4", "5886CE81", "5886CC10", "588701D2",
+    "58859DB6", "58859D2A", "58859D02", "58859DAA", "58859E56",
+    "58859F0E", "58859F3F", "58859E62", "58859EB6", "58859FCB",
+    "58859F62", "5885A039", "58859D16",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1580,6 +1583,84 @@ EVIDENCE = {
         "called_by": "Directly called by cleanup callback `0x58859C70`; Ghidra initially had no function boundary at this direct-call target. It was seeded at `0x588701D2` and disassembles as a 162-byte function ending at `0x58870274`.",
         "behavior": "Initializes a 16-byte mapped record through `0x58832760`, calls `0x58863C1C(8)`, then walks pointer slots from index 3 up to global bound `0x58969614`. For each nonnull pointer it conditionally calls `0x58851481` when object flag bit 13 is set and counts returns other than -1; it always invokes callback slot `0x58894218` with object address +0x20, releases the pointer through `0x5886CC10`, and clears its array slot. It returns the count after exception cleanup.",
         "uncertainty": "The array bound, object type, callback ABI, and meaning of the counted `0x58851481` result remain unknown. Initialization, range, flag check, callback, release, clear, and return are direct Ghidra observations.",
+    },
+    "58859DB6": {
+        "name_in_analysis": "FUN_58859db6",
+        "called_by": "Called by record wrapper `0x58859EC2`; Ghidra lists no other direct caller.",
+        "behavior": "Calls `0x58832760(&0x588ED180, 0x2C)`, acquires a state value through `0x58863C1C`, and walks `DAT_58969614` pointer slots beginning at `DAT_58969618`. It calls `0x58859F0E` for each slot and, when that helper accepts an entry, builds a temporary record and calls `0x58859D2A`. It then releases the local state through `0x58859E56`.",
+        "uncertainty": "The array's role, local record schema, and state helper contracts are unknown. Bounds, call arguments, acceptance branch, temporary-field copies, and cleanup order are visible in Ghidra.",
+    },
+    "58859D2A": {
+        "name_in_analysis": "FUN_58859d2a",
+        "called_by": "Called by `0x58859DB6` for accepted pointer-array entries; the Ghidra call graph shows no other direct caller.",
+        "behavior": "Calls `0x58832760(&0x588ED160, 8)` and invokes callback slot wrapper `0x58859D02` on the supplied object. If `0x58859F0E` accepts it and either the supplied byte or object flag bit 1 is set, calls `0x58859FCB`; on a -1 result writes -1 through the output pointer, otherwise increments the supplied counter. It finishes through cleanup wrapper `0x58859DAA`.",
+        "uncertainty": "The callback role, flag meaning, counter meaning, and `0x58859FCB` contract are unknown. The branch inputs, calls, and output updates are direct Ghidra observations.",
+    },
+    "58859D02": {
+        "name_in_analysis": "FUN_58859d02",
+        "called_by": "Used by registry transition helpers `0x58859D2A` and `0x58859E62`, and by other Core.dll callers including `0x5885135C`, `0x5885A0D3`, and `0x5885A245`.",
+        "behavior": "Invokes callback slot `0x58894220` with the supplied object pointer plus `0x20`.",
+        "uncertainty": "The callback ABI and object role are not named; the slot and pointer adjustment are directly visible in Ghidra.",
+    },
+    "58859DAA": {
+        "name_in_analysis": "FUN_58859daa",
+        "called_by": "Called at the end of `0x58859D2A`.",
+        "behavior": "Reads the caller's third stack argument and forwards it to `0x58859D16`.",
+        "uncertainty": "The record field and callback semantics are unknown; the forwarding operation is directly visible in Ghidra.",
+    },
+    "58859D16": {
+        "name_in_analysis": "FUN_58859d16",
+        "called_by": "Called by wrappers `0x58859DAA` and `0x58859EB6`, and by Ghidra callers elsewhere in Core.dll.",
+        "behavior": "Invokes callback slot `0x5889421C` with the supplied pointer plus `0x20`.",
+        "uncertainty": "The callback ABI and lifecycle meaning are unknown; the slot and pointer adjustment are direct observations.",
+    },
+    "58859E56": {
+        "name_in_analysis": "FUN_58859e56",
+        "called_by": "Called after the pointer-array scan in `0x58859DB6`.",
+        "behavior": "Forwards a pointer stored in the caller's third stack argument to `0x58863C64`.",
+        "uncertainty": "The record and helper contracts are not named; the exact dereference and call are directly visible in Ghidra.",
+    },
+    "58859F0E": {
+        "name_in_analysis": "FUN_58859f0e",
+        "called_by": "Called from the array scan in `0x58859DB6` and from its per-entry transition helper `0x58859D2A`.",
+        "behavior": "If the object pointer is nonzero and flag bit 13 at object offset `+0x0C` is set, calls `0x58859F3F` on that flag word. It returns 1 when that helper's low-byte result is nonzero; otherwise it increments the integer at the second argument and returns 0. Other inputs return 0 without changing the counter.",
+        "uncertainty": "The counter's meaning and flag lifecycle are unknown; the pointer, bit test, helper call, return, and increment are visible in Ghidra.",
+    },
+    "58859F3F": {
+        "name_in_analysis": "FUN_58859f3f",
+        "called_by": "Called by `0x58859F0E` and public wrapper `0x5885A039`.",
+        "behavior": "Derives an output from the supplied flag word. Its low byte is 1 when `(flags & 0x103) == 2` and `(flags & 0xC0) != 0`; otherwise the low byte is bit 11 of the input. The decompiled function also preserves a transformed upper 24-bit portion of the word.",
+        "uncertainty": "The flag fields' semantic names are not known. The exact mask, branch, and returned bit fields are directly visible in Ghidra.",
+    },
+    "58859E62": {
+        "name_in_analysis": "FUN_58859e62",
+        "called_by": "Called by wrapper `0x5885A039` when its object passes `0x58859F3F`.",
+        "behavior": "Calls `0x58832760(&0x588ED1A0, 0x0C)`, calls callback slot wrapper `0x58859D02` for the first input pointer, passes a nested pointer to `0x58859FCB`, releases through `0x58859EB6`, and returns the validation helper's result.",
+        "uncertainty": "The local record and callback contracts are unknown. The record size, nested-pointer access, helper calls, cleanup order, and return are direct Ghidra observations.",
+    },
+    "58859EB6": {
+        "name_in_analysis": "FUN_58859eb6",
+        "called_by": "Called by `0x58859E62` after its validation operation.",
+        "behavior": "Reads the caller's third stack argument and forwards it to `0x58859D16`.",
+        "uncertainty": "The forwarded record and callback meaning are unknown; the dereference and helper call are directly visible in Ghidra.",
+    },
+    "58859FCB": {
+        "name_in_analysis": "FUN_58859fcb",
+        "called_by": "Used by registry transition `0x58859D2A` and query wrapper `0x58859E62`.",
+        "behavior": "Enters and exits a shared state gate through `0x58850C9F(0)` and `0x58850CE7`. A null input delegates to `0x58859EC2(0)`. For a nonnull input it calls `0x58859F62`; if that returns zero, it checks flag bit 11, obtains a value via `0x5886CC56`, and calls `0x5887031F`. It returns -1 when those checks do not take the zero-return paths, otherwise zero.",
+        "uncertainty": "The gate, object state, helper contracts, and -1 result meaning are not named. Branch and call order are direct Ghidra evidence.",
+    },
+    "58859F62": {
+        "name_in_analysis": "FUN_58859f62",
+        "called_by": "Called by `0x58859FCB`; Ghidra also lists callers `0x588513F3`, `0x5885A898`, `0x5886E2FD`, `0x5885A61A`, and `0x5885AAC1`.",
+        "behavior": "When the low two flag bits equal 2 and at least one bit in `0xC0` is set, computes the live byte count from the object's first two pointer fields, resets the end pointer to the begin pointer, and clears the third field. For a positive count, it obtains a value through `0x5886CC56` and passes it with the begin pointer, count, and output buffer to `0x58870B79`. A short transfer sets flag bit 4 under a lock and returns -1; a complete transfer conditionally clears flag bit 1 and returns zero.",
+        "uncertainty": "The object layout, transfer helper semantics, and flag lifecycle are unresolved. Pointer arithmetic, tests, locked updates, and return values are visible in Ghidra.",
+    },
+    "5885A039": {
+        "name_in_analysis": "FUN_5885a039",
+        "called_by": "Called from `0x58521620` at `0x58521678` as part of its state-processing path.",
+        "behavior": "A null argument delegates to `0x58859EC2(0)`. Otherwise it applies `0x58859F3F` to the DWORD at object offset `+0x0C`; a zero low-byte result returns zero. For a nonzero result, it builds three local pointers and calls `0x58859E62`, returning that result.",
+        "uncertainty": "The entry's higher-level purpose, object type, and nested record contract are unknown. Caller, field offset, predicate, and forwarded helper are direct Ghidra observations.",
     },
 }
 
