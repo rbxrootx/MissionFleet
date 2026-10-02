@@ -71,6 +71,8 @@ ADDRESSES = (
     "5885AAB5", "5885AB61", "5885ABF7", "5885AD58", "5885AC64",
     "5885ADC3",
     "5885ADCB", "5885B05C", "5885B067", "5885B0CB", "5885B11B", "5885B53B",
+    "5885BB18", "5885BF85", "5885C3F2", "5885C4AD", "5885C568", "5885C670",
+    "5885C778", "5885C7B2", "5885C7EC", "5885C826",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1879,6 +1881,66 @@ EVIDENCE = {
         "called_by": "Ghidra decompiles this 19-byte function as a direct caller of `0x5885B11B`.",
         "behavior": "Forwards its argument to `0x5885B11B` with mode value 1, then returns.",
         "uncertainty": "The wrapper discards the callee's returned value in the decompiled prototype; whether that reflects the original calling convention or a Ghidra prototype artifact is not established.",
+    },
+    "5885BB18": {
+        "name_in_analysis": "FUN_5885bb18",
+        "called_by": "The mapped Core.dll caller graph shows this as the entry point for one of two parallel numeric-string parsers. It directly dispatches `I`/`N` tokens to `0x5885C3F2` and `0x5885C568` and uses the `0x58860617` helper family.",
+        "behavior": "Skips accepted leading characters, records an optional sign, and parses decimal or `0x`-prefixed hexadecimal significands into a caller-provided digit buffer. It recognizes the decimal separator through locale state, processes a matching exponent marker, bounds exponent accumulation at `0x1451`, and returns distinct status values on malformed, incomplete, or range-limited input. `I` and `N` tokens are delegated to dedicated handlers.",
+        "uncertainty": "This function appears to build an intermediate numeric representation rather than directly return a floating-point value; the exact output record and status enum names are not recovered. The branch logic, buffer writes, locale read, constants, and helper calls are direct Ghidra evidence.",
+    },
+    "5885BF85": {
+        "name_in_analysis": "FUN_5885bf85",
+        "called_by": "The mapped Core.dll caller graph shows this as the parallel entry point to `0x5885BB18`; it dispatches special tokens to `0x5885C4AD` and `0x5885C670` and uses the `0x58860656` helper family.",
+        "behavior": "Mirrors the sign, decimal/hexadecimal significand, locale decimal-separator, exponent, buffer-bound, and status-return flow of `0x5885BB18`, using the alternate character and token helper family at `0x58860656`, `0x58861372`, `0x5885DC39`, and the paired handlers.",
+        "uncertainty": "The reason for maintaining this parallel path, the exact output record, and status enum names are not established. Its operation sequence and helper substitutions are directly visible in Ghidra.",
+    },
+    "5885C3F2": {
+        "name_in_analysis": "FUN_5885c3f2",
+        "called_by": "Called by `0x5885BB18` when the next token begins with `I` or `i`.",
+        "behavior": "Consumes a case-insensitive `INF` token and checks for the optional `INITY` suffix, using the parser's character reader. It backs up the current character through `0x5886132B` at token boundaries and returns the observed parser status codes.",
+        "uncertainty": "The numerical infinity value is produced outside this helper; the helper only advances the parser state and returns a status. This division of work is inferred from its arguments and the caller branch.",
+    },
+    "5885C4AD": {
+        "name_in_analysis": "FUN_5885c4ad",
+        "called_by": "Called by `0x5885BF85` when the next token begins with `I` or `i`.",
+        "behavior": "Parallel to `0x5885C3F2`: consumes a case-insensitive `INF` token, checks for optional `INITY`, backs up at token boundaries with `0x58861372`, and returns parser status codes.",
+        "uncertainty": "The numerical infinity result is handled outside this helper. The alternate character reader and pushback helper indicate a parallel parsing context, but its precise caller contract is unnamed.",
+    },
+    "5885C568": {
+        "name_in_analysis": "FUN_5885c568",
+        "called_by": "Called by `0x5885BB18` when the next token begins with `N` or `n`; delegates payload checks to `0x5885C7EC` and `0x5885C778`.",
+        "behavior": "Consumes a case-insensitive `NAN` token. If followed by `(`, it checks two special payload forms, otherwise scans an alphanumeric/underscore payload through the closing `)`; it uses parser pushback and returns distinct status codes for the recognized paths.",
+        "uncertainty": "The meaning of the two special payload forms and returned status codes is not named. Accepted character classes, delimiter handling, helper calls, and return constants are visible in Ghidra.",
+    },
+    "5885C670": {
+        "name_in_analysis": "FUN_5885c670",
+        "called_by": "Called by `0x5885BF85` when the next token begins with `N` or `n`; delegates payload checks to `0x5885C826` and `0x5885C7B2`.",
+        "behavior": "Parallel to `0x5885C568`: consumes a case-insensitive `NAN` token, checks two special forms inside an optional parenthesized payload, accepts alphanumeric/underscore payload characters through `)`, and returns distinct status codes.",
+        "uncertainty": "The special payload meanings and status-code names are not recovered. The alternate reader/pushback helpers and control flow are directly visible in Ghidra.",
+    },
+    "5885C778": {
+        "name_in_analysis": "FUN_5885c778",
+        "called_by": "Called by `0x5885C568` during parenthesized `NAN` payload parsing.",
+        "behavior": "Consumes up to four successive characters when each matches one of the two corresponding entries in a read-only character table; returns 1 only after all four match, otherwise 0.",
+        "uncertainty": "The table bytes are not assigned a source-level token name here; the bounded comparison and reader call are directly visible in Ghidra.",
+    },
+    "5885C7B2": {
+        "name_in_analysis": "FUN_5885c7b2",
+        "called_by": "Called by `0x5885C670` during parenthesized `NAN` payload parsing.",
+        "behavior": "Parallel to `0x5885C778`, using the alternate character reader and its paired four-character lookup table.",
+        "uncertainty": "The table bytes are not assigned a source-level token name; comparison count and return behavior are directly visible in Ghidra.",
+    },
+    "5885C7EC": {
+        "name_in_analysis": "FUN_5885c7ec",
+        "called_by": "Called by `0x5885C568` before the second parenthesized `NAN` payload check.",
+        "behavior": "Consumes up to five successive characters when each matches one of the two corresponding entries in a read-only character table; returns 1 only after all five match, otherwise 0.",
+        "uncertainty": "The table bytes are not assigned a source-level token name here; the bounded comparison and reader call are directly visible in Ghidra.",
+    },
+    "5885C826": {
+        "name_in_analysis": "FUN_5885c826",
+        "called_by": "Called by `0x5885C670` before the second parenthesized `NAN` payload check.",
+        "behavior": "Parallel to `0x5885C7EC`, using the alternate character reader and its paired five-character lookup table.",
+        "uncertainty": "The table bytes are not assigned a source-level token name; comparison count and return behavior are directly visible in Ghidra.",
     },
 }
 
