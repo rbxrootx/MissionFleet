@@ -71850,6 +71850,967 @@
         "behavior": "Maps parser statuses to two-word 64-bit floating-point result encodings. It writes signed zero, infinity-like exponent patterns, and special-value payloads, and delegates ordinary conversion statuses 0 and 1 to dedicated helpers. It returns status values separately from the result record.",
         "uncertainty": "The parser status names and exact exception policy are not recovered. Status dispatch, sign-byte access at offset `0x308`, high/low word writes, constants, and helper calls are directly visible in Ghidra."
       }
+    },
+    {
+      "address": "5885CACC",
+      "name": "FUN_5885cacc",
+      "size": 756,
+      "symbol": "_FUN_5885cacc",
+      "source": "src/client-current/Core/FUN_5885cacc.cpp",
+      "source_sha256": "173ea8ddd6d4d62b6483a8f291a0234b2e67d4d22e5489430001c70955397f6b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58861412",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "5885CD17",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58850F2E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "5885CD28",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "5885CD28",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "5885CD28",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58855EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5885761B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 219,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 293,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 315,
+          "target_address": "5886132B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "58831BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 456,
+          "target_address": "58831B50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "58860617",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "5885CC54",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "5886132B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 583,
+          "target_address": "58860D5F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 609,
+          "target_address": "5885CDBB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 620,
+          "target_address": "58856ABC",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885cacc",
+        "called_by": "Called by conversion-context wrapper `0x5885CDC0`; parallel implementation `0x5885CE1C` is called by `0x5885D110`.",
+        "behavior": "Parses an integer from a character stream using a requested base from 2 through 36, or automatic base selection when the base is zero. It skips locale-classified leading characters, accepts a sign, recognizes a `0x` prefix and octal leading-zero form when auto-selecting, accumulates digits with 64-bit arithmetic, tracks end-of-input and overflow, and writes the observed error codes `0x16` or `0x22` on invalid-base or range paths.",
+        "uncertainty": "The exact signed-versus-unsigned API contract, context flags, and error semantics are not symbolically named. Base selection, digit accumulation, overflow tests, state updates, and return constants are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885CE1C",
+      "name": "FUN_5885ce1c",
+      "size": 756,
+      "symbol": "_FUN_5885ce1c",
+      "source": "src/client-current/Core/FUN_5885ce1c.cpp",
+      "source_sha256": "d702f5859976a0e31c8069402c038768aab60427bcb49a42754be547020c224f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58861412",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "5885D067",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58850F2E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "5885D078",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "5885D078",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "5885D078",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58855EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5885761B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 219,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 293,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 315,
+          "target_address": "58861372",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "58831BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 456,
+          "target_address": "58831B50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "58860656",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "5885CFA4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "58861372",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 583,
+          "target_address": "58860D5F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 609,
+          "target_address": "5885D10B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 620,
+          "target_address": "58856ABC",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885ce1c",
+        "called_by": "Called by conversion-context wrapper `0x5885D110`; parallel implementation `0x5885CACC` is called by `0x5885CDC0`.",
+        "behavior": "Mirrors `0x5885CACC` for the alternate character reader/pushback path: validates the base, performs automatic decimal/octal/hexadecimal base selection, accepts a sign, accumulates base-2-to-36 digits in 64 bits, and handles end-pointer and overflow state with the same observed error constants.",
+        "uncertainty": "The reason for the alternate reader path and the precise signed-versus-unsigned contract are not established. Its helper substitutions and matching control flow are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885CDC0",
+      "name": "FUN_5885cdc0",
+      "size": 92,
+      "symbol": "_FUN_5885cdc0",
+      "source": "src/client-current/Core/FUN_5885cdc0.cpp",
+      "source_sha256": "fdac77bdfca62a66b1c8c302e6bd8e541591c979a828d66858fb937e328a1414",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58850C9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "5885DA94",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "5885CACC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58850CE7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885cdc0",
+        "called_by": "Called by object method `0x58860A36`; its peer `0x5885D110` is called by `0x58860A9B`.",
+        "behavior": "Initializes a local conversion-state record through `0x58850C9F`, transfers caller state through `0x5885DA94`, invokes `0x5885CACC`, restores state through `0x58850CE7`, conditionally terminates the end-pointer output, and returns the parser's 64-bit result.",
+        "uncertainty": "Ghidra reconstructs several parameters as stack arguments; the state record's original type and public API name are unknown. The helper order and pointer condition are directly visible."
+      }
+    },
+    {
+      "address": "5885D110",
+      "name": "FUN_5885d110",
+      "size": 92,
+      "symbol": "_FUN_5885d110",
+      "source": "src/client-current/Core/FUN_5885d110.cpp",
+      "source_sha256": "7fec7873d830311ff9d2a5e934ae9f67410de0611419ae2bd440ad7cb64e6377",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58850C9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "5885DA94",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "5885CE1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58850CE7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d110",
+        "called_by": "Called by object method `0x58860A9B`; its peer `0x5885CDC0` is called by `0x58860A36`.",
+        "behavior": "Uses the same state initialization, transfer, cleanup, end-pointer termination, and 64-bit return sequence as `0x5885CDC0`, but invokes alternate parser `0x5885CE1C`.",
+        "uncertainty": "The reason for the parallel API path and the full stack-argument prototype are not recovered; direct calls and control flow are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58850C9F",
+      "name": "FUN_58850c9f",
+      "size": 72,
+      "symbol": "_FUN_58850c9f",
+      "source": "src/client-current/Core/FUN_58850c9f.cpp",
+      "source_sha256": "6ee5662ba39ac0fbd34be95ebfac8003c7bebf378bfcf9c91689a0661a2a0042",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 39,
+          "target_address": "58969980",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "58907518",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "5890751C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850c9f",
+        "called_by": "Called at the start of both conversion-state wrappers, `0x5885CDC0` and `0x5885D110`.",
+        "behavior": "Clears selected fields in a caller-provided state record. If a second record is provided, copies its first two DWORDs; otherwise it copies two global defaults unless a global mode flag requests an early return. On initialization it sets the record's active byte.",
+        "uncertainty": "The state record and global mode meanings are not named. Exact fields and branch conditions are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58850CE7",
+      "name": "FUN_58850ce7",
+      "size": 60,
+      "symbol": "_FUN_58850ce7",
+      "source": "src/client-current/Core/FUN_58850ce7.cpp",
+      "source_sha256": "522c7cbaa18f5647a2084b939cb24b6ee6fe555ec5bbcc2ce7aca274f7690e03",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "58850D92",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58850D92",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850ce7",
+        "called_by": "Called after parsing by both `0x5885CDC0` and `0x5885D110`; Ghidra also records many unrelated Core.dll callers.",
+        "behavior": "Restores selected global state from a saved record: it clears one mode bit when the saved mode equals 2, and conditionally writes saved values back to two thread-context fields based on saved flags.",
+        "uncertainty": "The saved-state fields and mode semantics are not named. Conditions and writes are directly observed; its broader CRT usage is outside this parser slice."
+      }
+    },
+    {
+      "address": "5885DA94",
+      "name": "FUN_5885da94",
+      "size": 61,
+      "symbol": "_FUN_5885da94",
+      "source": "src/client-current/Core/FUN_5885da94.cpp",
+      "source_sha256": "56ac998353e3f5b2f23d95d34451bf130f7f270f12605aa0707b87a6b3b45c06",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5885da94",
+        "called_by": "Called by both `0x5885CDC0` and `0x5885D110` to transfer conversion state before parsing.",
+        "behavior": "Copies seven DWORD state fields into a local record, then clears the first and seventh source fields.",
+        "uncertainty": "The record's semantic type is not recovered; copy and clearing behavior are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58831B50",
+      "name": "FUN_58831b50",
+      "size": 52,
+      "symbol": "_FUN_58831b50",
+      "source": "src/client-current/Core/FUN_58831b50.cpp",
+      "source_sha256": "0d4b9aa8b927b7e12770fa7bf4d132c10d618cbb2d4638e1c5a1eca85e8e5fb2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58831b50",
+        "called_by": "Called by both base parsers to multiply the current 64-bit accumulator by the selected base.",
+        "behavior": "Multiplies two 64-bit values represented as pairs of DWORDs and returns the 64-bit product, including the cross terms in the high DWORD.",
+        "uncertainty": "Its four-argument split-word calling convention is recovered from Ghidra; signedness is irrelevant for the parser's unsigned accumulator use."
+      }
+    },
+    {
+      "address": "58831BA0",
+      "name": "FUN_58831ba0",
+      "size": 104,
+      "symbol": "_FUN_58831ba0",
+      "source": "src/client-current/Core/FUN_58831ba0.cpp",
+      "source_sha256": "bf1d07f00460d88c5afc2bfdccfd60723ce13e6f532e93502579b00bfd48186a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58831ba0",
+        "called_by": "Called by both base parsers to calculate the maximum accumulator quotient for the selected base.",
+        "behavior": "Divides a 64-bit numerator supplied as two DWORDs by a 64-bit divisor supplied as two DWORDs and returns the quotient through a split-word result. A nonzero divisor high word uses a shift/quotient-correction path.",
+        "uncertainty": "The helper's input-range preconditions and divide-by-zero behavior are not documented by the recovered prototype; the caller passes the maximum 64-bit numerator and a validated base."
+      }
+    },
+    {
+      "address": "58856ABC",
+      "name": "FUN_58856abc",
+      "size": 65,
+      "symbol": "_FUN_58856abc",
+      "source": "src/client-current/Core/FUN_58856abc.cpp",
+      "source_sha256": "2ef86da471782b129c41798d846bdeec48c0574cf242ed4b7bbce9d0022c9131",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58856abc",
+        "called_by": "Called by both base parsers after digit accumulation to compare the result and sign flags against representable bounds.",
+        "behavior": "Returns true immediately when the parser's overflow flag is set; otherwise, for the signed path, checks the low/high words against positive `0x7FFFFFFF` or negative `0x80000000` limits.",
+        "uncertainty": "The parser flag names are not recovered. Bit tests and comparison limits are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860D5F",
+      "name": "FUN_58860d5f",
+      "size": 37,
+      "symbol": "_FUN_58860d5f",
+      "source": "src/client-current/Core/FUN_58860d5f.cpp",
+      "source_sha256": "a1c1f35789ffa1169ea44081e1d8b86c936567fd7095f6da7489b82d7233cf48",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58860d5f",
+        "called_by": "Called by both base parsers after their digit loops when the overflow/status flag does not require the range-result path.",
+        "behavior": "Compares two cursor-position pairs in the parser state. It returns 1 when both pairs match; otherwise it writes a zero byte through the stored end-pointer output and returns 0.",
+        "uncertainty": "The cursor-pair meaning and precise end-pointer API are not named. The comparisons and conditional write are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58850F2E",
+      "name": "FUN_58850f2e",
+      "size": 124,
+      "symbol": "_FUN_58850f2e",
+      "source": "src/client-current/Core/FUN_58850f2e.cpp",
+      "source_sha256": "d7728b69e3315669ccd0b4945930eebca024d2a302071331c51f4453e9fcd7eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58850D4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58850D23",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "58850FD9",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850f2e",
+        "called_by": "Both base parsers call this handler on an invalid requested base after storing error `0x16` in the conversion record.",
+        "behavior": "Resolves an error callback from the supplied record or thread context, falls back to a guarded callback table, and calls the configured handler; if no fallback exists it invokes the non-returning failure path.",
+        "uncertainty": "The callback signatures and error-handler policy are not recovered. Indirect call setup and fallbacks are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58855EA0",
+      "name": "FUN_58855ea0",
+      "size": 91,
+      "symbol": "_FUN_58855ea0",
+      "source": "src/client-current/Core/FUN_58855ea0.cpp",
+      "source_sha256": "091eb302fe48f12f3c2dae5750fb5acf974463950c676c7eb532784069421af3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58850D92",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5886CF4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "5886CFAC",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58855ea0",
+        "called_by": "Called by both base parsers when the conversion record's locale/classification state byte is zero.",
+        "behavior": "Copies two classification-table pointers from the current thread context, refreshes them through `0x5886CF4E` and `0x5886CFAC`, and sets a context flag plus the record's state byte if the flag was previously clear.",
+        "uncertainty": "The classification tables and thread-context flag meanings are not symbolically named. Pointer sources and writes are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5885761B",
+      "name": "FUN_5885761b",
+      "size": 87,
+      "symbol": "_FUN_5885761b",
+      "source": "src/client-current/Core/FUN_5885761b.cpp",
+      "source_sha256": "0aa413489e07a59a8dca50ddabdd6626a6e02fcc366f6408d66f190888ca319c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58863F1F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "588561F5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "5886F0B2",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885761b",
+        "called_by": "Both base parsers use it to classify leading characters with mask `8`; the object/locale form reads the supplied table or delegates for characters above 0x100.",
+        "behavior": "Returns a character-class mask. With no locale record it delegates to `0x58863F1F` and `0x588561F5`; with a record it reads the local table for byte-range characters or calls `0x5886F0B2` for larger values.",
+        "uncertainty": "The class-bit names and helper contracts are not present in the symbol table; table bounds and delegation branches are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58861412",
+      "name": "FUN_58861412",
+      "size": 33,
+      "symbol": "_FUN_58861412",
+      "source": "src/client-current/Core/FUN_58861412.cpp",
+      "source_sha256": "88952fe991b6436224c294418df82885143eb9dac73fb339e659983d6f1cb202",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861412",
+        "called_by": "Called at the beginning of both base parsers to validate the parser-state record.",
+        "behavior": "Returns 1 when the record's first and seventh DWORDs are nonzero; otherwise sets error `0x16`, calls the error-state helper `0x58850FAB`, and returns 0.",
+        "uncertainty": "The two field meanings are unknown; tests, error assignment, and return values are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860617",
+      "name": "FUN_58860617",
+      "size": 63,
+      "symbol": "_FUN_58860617",
+      "source": "src/client-current/Core/FUN_58860617.cpp",
+      "source_sha256": "a6026d7b28eb8a80e674b6a2b1ef2075e8f25f6d25c6fdb653e2cfaa0cfc468e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860617",
+        "called_by": "Used throughout `0x5885CACC` and `0x5885BB18` to read the current parser character.",
+        "behavior": "Advances the parser's 64-bit character count, checks its current and end positions, reads through `0x5885A0C8` when within bounds, and advances the source pointer after a successful read.",
+        "uncertainty": "The returned sentinel convention and meaning of the parser position pairs are not named; the bound check and pointer updates are direct Ghidra evidence."
+      }
+    },
+    {
+      "address": "58860656",
+      "name": "FUN_58860656",
+      "size": 65,
+      "symbol": "_FUN_58860656",
+      "source": "src/client-current/Core/FUN_58860656.cpp",
+      "source_sha256": "5a824a157a45a1a3a34d62e45e7751fc2c69db5a9935fcd8f394a02e1dda0129",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 46,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860656",
+        "called_by": "Used throughout `0x5885CE1C` and `0x5885BF85` to read the alternate parser character stream.",
+        "behavior": "Advances two position counters, returns zero when the read is beyond the configured bounds, and otherwise calls `0x58860697` and maps its -1 result to zero.",
+        "uncertainty": "The distinction from reader `0x58860617` and zero-versus-EOF treatment are not named; counter checks and result handling are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886132B",
+      "name": "FUN_5886132b",
+      "size": 71,
+      "symbol": "_FUN_5886132b",
+      "source": "src/client-current/Core/FUN_5886132b.cpp",
+      "source_sha256": "0d5bc09b32240bc0f0827135992854d912186906fd03975cbacd81ee2c359610",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 62,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886132b",
+        "called_by": "Both parser paths call this after the digit loop to push back the first non-digit when it remains within the source bounds.",
+        "behavior": "Decrements the parser position pair and, for a valid nonzero/non-EOF character still within bounds, calls reinsertion adapter `0x588613B9`.",
+        "uncertainty": "The two parser position pairs' semantic names are unknown; cursor arithmetic and conditions are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58861372",
+      "name": "FUN_58861372",
+      "size": 71,
+      "symbol": "_FUN_58861372",
+      "source": "src/client-current/Core/FUN_58861372.cpp",
+      "source_sha256": "532369d2570fb530468407a9b6bb74b598578608c263430be359235630a73f36",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 62,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861372",
+        "called_by": "The alternate parser path calls this after its digit loop to push back the first non-digit when it remains within bounds.",
+        "behavior": "Decrements the alternate parser position pair and conditionally delegates the character to `0x588613D7`.",
+        "uncertainty": "Its relation to the primary cursor record is inferred from the alternate reader path; all checks and updates are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5885A0C8",
+      "name": "FUN_5885a0c8",
+      "size": 11,
+      "symbol": "_FUN_5885a0c8",
+      "source": "src/client-current/Core/FUN_5885a0c8.cpp",
+      "source_sha256": "3ebce3f60f1a12df0d32095c59270db6461ea50afddf052ac2c26e8fd2813418",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "5885A08C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a0c8",
+        "called_by": "Called by `0x58860617` after that reader confirms it is within the configured input bound.",
+        "behavior": "Forwards to stream-character helper `0x5885A08C` and returns.",
+        "uncertainty": "The stream source contract is not named; direct forwarding is visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860697",
+      "name": "FUN_58860697",
+      "size": 22,
+      "symbol": "_FUN_58860697",
+      "source": "src/client-current/Core/FUN_58860697.cpp",
+      "source_sha256": "8193d55511957634b726ecc3da8743358519457efb77a9fc6843febcfb9226db",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58860697",
+        "called_by": "Called by `0x58860656` after its input-bound checks.",
+        "behavior": "Returns -1 when the current byte pointer equals the end pointer; otherwise returns the byte and increments the current pointer.",
+        "uncertainty": "The record fields' symbolic names are unknown; boundary test, read, increment, and sentinel are directly visible."
+      }
+    },
+    {
+      "address": "588613B9",
+      "name": "FUN_588613b9",
+      "size": 30,
+      "symbol": "_FUN_588613b9",
+      "source": "src/client-current/Core/FUN_588613b9.cpp",
+      "source_sha256": "307ccd02b3afcc68fb3154cdfa45be486bfab908e74c02449fec8d7bbe08203f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "5885AC64",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588613b9",
+        "called_by": "Called by `0x5886132B` for a character that can be restored to the primary stream.",
+        "behavior": "For non-EOF characters decrements one cursor field and forwards the character and owning stream to `0x5885AC64`.",
+        "uncertainty": "The called stream operation's precise API name is unresolved; argument forwarding and decrement are directly visible."
+      }
+    },
+    {
+      "address": "588613D7",
+      "name": "FUN_588613d7",
+      "size": 31,
+      "symbol": "_FUN_588613d7",
+      "source": "src/client-current/Core/FUN_588613d7.cpp",
+      "source_sha256": "4a8f5184dd138805aabc65abf109008c8c4fe9f8da4e5dd958483fb83db1f29b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588613d7",
+        "called_by": "Called by `0x58861372` for a character that can be restored to the alternate stream.",
+        "behavior": "Conditionally decrements the alternate parser's current-position field when it differs from the start and the character/cursor conditions permit restoration.",
+        "uncertainty": "The alternate cursor fields are not named; conditions and decrement are directly visible in Ghidra."
+      }
     }
   ]
 }
