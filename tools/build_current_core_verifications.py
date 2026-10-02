@@ -44,6 +44,7 @@ ADDRESSES = (
     "58534B00", "584B5140", "5856DBC0",
     "58534D30", "58534E80", "5852D160", "5852D0C0", "5852D5D0", "585341D0", "58534760", "585348B0", "58521FF0", "587B4180", "584C0DE0", "58484B20", "587B5730", "58529610", "58532AD0", "5848C0B0", "5849F480", "587B52B0", "587B5520", "584BF150", "5884CE10", "5884C890", "58831004", "58859610", "58864670", "5882E770", "58487710", "5884D3E5", "5886CED0", "58879A60", "58879A70", "5886246F", "58868BF1", "588646B0", "588646D0", "587AABC0", "5882E666", "58487680", "58487780", "588647D0", "58864910", "58864C70", "58864FE0", "58864C40", "58873ED0", "58873EB0", "58873EE0", "58870110", "58870130", "58870160", "588701C0", "588721E0", "58873F20", "58873F50", "58859720", "5887D0C0", "58531000", "58530EA0",
     "587B6530", "587B3FD0", "587B4550", "587B45C0",
+    "5857FE50", "58539D50",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1198,6 +1199,18 @@ EVIDENCE = {
         "called_by": "Called by scene update callback 0x58531000 at 0x58531F5C before the circular child-update traversal.",
         "behavior": "When scene fields +0xA4 and +0xA0 both equal 0x40000000, increments +0x9C. If object +0x88 exists, calls its vtable slot +0x0C with a value based on global 0x58962064 minus 100 times the counter. Once the counter exceeds 0x4F, clears +0xA0 and calls object vtable slot +0x08.",
         "uncertainty": "The two sentinel fields, object type, slot +0x0C calling convention, and meaning/units of the global coordinate remain unknown. No live object motion or visual result was observed.",
+    },
+    "5857FE50": {
+        "name_in_analysis": "FUN_5857fe50",
+        "called_by": "Ghidra records a direct call from `0x5856E240` at `0x5856E2F1`; this constructor calls the resource initializer `0x58539D50` at `0x5857FECF`.",
+        "behavior": "Initializes a scene base with six zero values and `0x40`, installs vtable address point `0x588AA82C`, initializes a temporary child/context object, then calls `0x58539D50` with global `0x589056B4`. It creates another child via `0x585367B0`, stores it at receiver offset `+0x60`, and calls that child's virtual slot `+0x04`.",
+        "uncertainty": "The scene class, temporary object's role, child type, and virtual-slot semantics are not named. The constructor sequence, vtable, field write, and call arguments are directly visible in Ghidra.",
+    },
+    "58539D50": {
+        "name_in_analysis": "FUN_58539d50",
+        "called_by": "Scene constructor `0x5857FE50` calls it with global `0x589056B4` at `0x5857FECF`.",
+        "behavior": "Stores its argument in global `0x589056B4`, resets related state, and initializes a group of scene resources. The Ghidra call sequence repeatedly invokes factory callback `0x588940D4` with resource IDs including `10`, `11`, `0x10`, `0x14`, and `0x18`, plus mapped dimensions/flags and label pointers; the returned objects are wrapped by `0x587B60F0` and stored in scene globals. It also initializes repeated child/resource arrays and additional scene state.",
+        "uncertainty": "Factory callback implementation, resource-ID meanings, label semantics, child-object types, and rendered composition are unresolved. The callback inputs, wrapper, global destinations, loop bounds, and direct call sequence are visible in Ghidra; this is a static constructor trace without a frame capture.",
     },
 }
 

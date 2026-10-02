@@ -28,7 +28,11 @@ conversion helpers use callback `0x5889429C` with graphics-context global
 This evidence connects the resource rows to a concrete Core-side backend
 adapter and records the exact call and clipping behavior. The implementations
 behind the callback globals are supplied by runtime setup; their registration
-site and native drawing implementation are not identified here. The callback
+site and native drawing implementation are not identified here. The mapped
+Core capture stores `0x76ECA940` at `0x588940D4`, `0x76ECAF50` at
+`0x588940B0`, and `0x77594F10` at `0x5889429C`; all three target addresses lie
+outside Core's mapped image. The capture manifest saved Core.dll only, so these
+addresses cannot yet be assigned to a loaded host module. The callback
 contract's character encoding, precise format semantics, colors, and final
 pixels remain uncertain, and there is no live frame capture in this slice.
 

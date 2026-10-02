@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,001 functions totaling 1,342,432 bytes (12.8232% of indexed code),
+credits 6,003 functions totaling 1,346,588 bytes (12.8629% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,7 +72,7 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,319
-bytes from installed `Core.dll`; 192 functions match 297,245 bytes, including
+bytes from installed `Core.dll`; 194 functions match 301,401 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -100,12 +100,16 @@ The scene's deleting wrapper and per-resource string-vector cleanup add four
 matches / 1,121 bytes; see
 [`current-core-scene-resource-vector-cleanup.md`](current-core-scene-resource-vector-cleanup.md).
 The scene resource row population, scroll dispatch, text-render callback, and
-Core-side text backend dispatch add 18 verified functions / 8,619 bytes; see
+Core-side text backend dispatch add 18 verified functions / 8,619 bytes; the
+scene constructor and its 3,926-byte resource setup routine add 2 more matches /
+4,156 bytes. See
 [`current-core-scene-resource-row-view.md`](current-core-scene-resource-row-view.md)
 and
 [`current-core-scene-resource-text-renderer.md`](current-core-scene-resource-text-renderer.md)
 and
-[`current-core-text-render-backend.md`](current-core-text-render-backend.md).
+[`current-core-text-render-backend.md`](current-core-text-render-backend.md)
+and
+[`current-core-resource-screen-construction.md`](current-core-resource-screen-construction.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.

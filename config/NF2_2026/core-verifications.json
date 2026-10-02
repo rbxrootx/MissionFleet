@@ -63979,6 +63979,48 @@
         "behavior": "Calls registered callback 0x5889429C with the active graphics-context global and the supplied string to obtain a DWORD result, forwarding zeroed optional arguments and the supplied context value.",
         "uncertainty": "The callback contract and result meaning are unknown; this helper's argument forwarding and return are directly established by Ghidra."
       }
+    },
+    {
+      "address": "5857FE50",
+      "name": "FUN_5857fe50",
+      "size": 230,
+      "symbol": "_FUN_5857fe50",
+      "source": "src/client-current/Core/FUN_5857fe50.cpp",
+      "source_sha256": "50e3ccffad3c068f4242647a422b39847dad66a857307ed1418a9140f4a445a9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5857fe50",
+        "called_by": "Ghidra records a direct call from `0x5856E240` at `0x5856E2F1`; this constructor calls the resource initializer `0x58539D50` at `0x5857FECF`.",
+        "behavior": "Initializes a scene base with six zero values and `0x40`, installs vtable address point `0x588AA82C`, initializes a temporary child/context object, then calls `0x58539D50` with global `0x589056B4`. It creates another child via `0x585367B0`, stores it at receiver offset `+0x60`, and calls that child's virtual slot `+0x04`.",
+        "uncertainty": "The scene class, temporary object's role, child type, and virtual-slot semantics are not named. The constructor sequence, vtable, field write, and call arguments are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58539D50",
+      "name": "FUN_58539d50",
+      "size": 3926,
+      "symbol": "_FUN_58539d50",
+      "source": "src/client-current/Core/FUN_58539d50.cpp",
+      "source_sha256": "3b2975313e3e53353028444c757646053ca76b4ad1b3ffbf39f4eebeaef1ae5f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58539d50",
+        "called_by": "Scene constructor `0x5857FE50` calls it with global `0x589056B4` at `0x5857FECF`.",
+        "behavior": "Stores its argument in global `0x589056B4`, resets related state, and initializes a group of scene resources. The Ghidra call sequence repeatedly invokes factory callback `0x588940D4` with resource IDs including `10`, `11`, `0x10`, `0x14`, and `0x18`, plus mapped dimensions/flags and label pointers; the returned objects are wrapped by `0x587B60F0` and stored in scene globals. It also initializes repeated child/resource arrays and additional scene state.",
+        "uncertainty": "Factory callback implementation, resource-ID meanings, label semantics, child-object types, and rendered composition are unresolved. The callback inputs, wrapper, global destinations, loop bounds, and direct call sequence are visible in Ghidra; this is a static constructor trace without a frame capture."
+      }
     }
   ]
 }
