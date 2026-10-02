@@ -11,10 +11,10 @@ class ProgressReportTests(unittest.TestCase):
 
     def test_public_inventory_and_verified_progress_are_complete_and_honest(self):
         self.assertEqual(self.report["version"], 2)
-        self.assertEqual(self.report["measures"]["total_functions"], 42_460)
-        self.assertEqual(self.report["measures"]["total_code"], "10468846")
-        self.assertEqual(self.report["measures"]["matched_functions"], 6_056)
-        self.assertEqual(self.report["measures"]["matched_code"], "1355990")
+        self.assertEqual(self.report["measures"]["total_functions"], 42_461)
+        self.assertEqual(self.report["measures"]["total_code"], "10469008")
+        self.assertEqual(self.report["measures"]["matched_functions"], 6_062)
+        self.assertEqual(self.report["measures"]["matched_code"], "1356454")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -29,10 +29,10 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(current["measures"]["matched_code"], "405190")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
-        self.assertEqual(core["measures"]["total_functions"], 13_031)
-        self.assertEqual(core["measures"]["total_code"], "3996397")
-        self.assertEqual(core["measures"]["matched_functions"], 247)
-        self.assertEqual(core["measures"]["matched_code"], "310803")
+        self.assertEqual(core["measures"]["total_functions"], 13_032)
+        self.assertEqual(core["measures"]["total_code"], "3996559")
+        self.assertEqual(core["measures"]["matched_functions"], 253)
+        self.assertEqual(core["measures"]["matched_code"], "311267")
 
     def test_function_identities_are_unique_per_unit(self):
         for unit in self.report["units"]:

@@ -67648,6 +67648,276 @@
         "behavior": "Calls `0x5885A030` and `0x588701D2`, then walks three DWORD pointers from global `0x58969618` in four-byte steps. For each pointer it calls `0x5886CE81` on the stored value and callback slot `0x58894218` on that value plus `0x20`. It releases the array through `0x5886CC10`, then clears global `0x58969618`.",
         "uncertainty": "The array element type, callback ABI, and ownership semantics are unknown. Its callback-table address, three-element loop, call order, release, and global clear are directly visible in the seeded Ghidra function."
       }
+    },
+    {
+      "address": "5885A030",
+      "name": "FUN_5885a030",
+      "size": 9,
+      "symbol": "_FUN_5885a030",
+      "source": "src/client-current/Core/FUN_5885a030.cpp",
+      "source_sha256": "e35cf3932448c5d7237bbc718d185325b48a95174b2fe25f2f0aebfaa2bbd732",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58859EC2",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a030",
+        "called_by": "The cleanup callback `0x58859C70` calls this before processing the global pointer array; Ghidra also shows a caller at `0x58865DE5`.",
+        "behavior": "Calls `0x58859EC2` with argument 1 and discards its return value.",
+        "uncertainty": "The downstream initialization or cleanup effect is not named; the single call and argument are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58859EC2",
+      "name": "FUN_58859ec2",
+      "size": 76,
+      "symbol": "_FUN_58859ec2",
+      "source": "src/client-current/Core/FUN_58859ec2.cpp",
+      "source_sha256": "3fe044ad5b804e1307bfc0aab20fdffe32408d95ced39bfdbaa37d61de82d4af",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 59,
+          "target_address": "58859DB6",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58859ec2",
+        "called_by": "Called by `0x5885A030` with argument 1, and directly by `0x58859FCB` and `0x5885A039`.",
+        "behavior": "Builds local 8-byte input/output records and passes their addresses to `0x58859DB6`. If its byte argument is nonzero, it copies the first local input DWORD to the output record and returns that value; otherwise it returns zero.",
+        "uncertainty": "The helper `0x58859DB6` record contract and the significance of the returned value are unknown. Local record fields, conditional copy, and return are visible in Ghidra."
+      }
+    },
+    {
+      "address": "588623B4",
+      "name": "FUN_588623b4",
+      "size": 95,
+      "symbol": "_FUN_588623b4",
+      "source": "src/client-current/Core/FUN_588623b4.cpp",
+      "source_sha256": "e467feac903454a23219574c927abfa5a9fb7c8fdd41b25b1191ab954d09c94f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 39,
+          "target_address": "588C3F70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "58862335",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588623b4",
+        "called_by": "The allocation-release wrapper `0x5886CC10` uses this to map a nonzero callback argument before its fallback state update; Ghidra also shows callers at `0x58862413` and `0x58862436`.",
+        "behavior": "For inputs 1 through 13, returns a DWORD from an 8-byte-stride table at `0x588C3F6C`. For inputs below `0x719`, it searches records beginning at `0x588C3F70` and returns a record field on a match. Otherwise, it maps input ranges to fallback values 8, 13, or 14.",
+        "uncertainty": "The table record schema and the semantic meaning of returned values are unknown. Bounds, search call, table bases, stride, and fallback ranges are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5886CE81",
+      "name": "FUN_5886ce81",
+      "size": 64,
+      "symbol": "_FUN_5886ce81",
+      "source": "src/client-current/Core/FUN_5886ce81.cpp",
+      "source_sha256": "a56ac2b875573c3adbfc34a5392c74584d38a38015b92dfb6b6777da317c1c1a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 37,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886ce81",
+        "called_by": "The three-element cleanup loop at `0x58859C70` calls this for every stored pointer; Ghidra also shows callers at `0x588513F3` and `0x5885AAC1`.",
+        "behavior": "When both bits 13 and 6 are set in the DWORD at object offset `+0x0C`, releases the pointer at `+4` through `0x5886CC10`, clears those two bits under a locked operation, and zeros fields at offsets `+0`, `+4`, and `+8`.",
+        "uncertainty": "The object type, bit meanings, and ownership protocol are unknown. The bit test, release, locked mask, and field writes are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886CC10",
+      "name": "FUN_5886cc10",
+      "size": 58,
+      "symbol": "_FUN_5886cc10",
+      "source": "src/client-current/Core/FUN_5886cc10.cpp",
+      "source_sha256": "79b40c14f042e2f58db89aa9535c020eda1d8a26b732bcf89f6c3d947f4e750c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58969C70",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "58894164",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "588941FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "588623B4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886cc10",
+        "called_by": "Used by `0x58859C70`, its per-object helper `0x5886CE81`, and many other Core.dll paths to release pointer-valued state.",
+        "behavior": "For a nonzero argument, calls callback slot `0x58894164` with global context `0x58969C70` and the pointer. If the callback returns zero, obtains another value through `0x588941FC`, maps it with `0x588623B4`, and stores the mapped value through the state pointer returned by `0x5886246F`.",
+        "uncertainty": "The callback ABIs, release contract, mapped value meaning, and fallback state field are not named. The null guard, callback arguments, conditional fallback, and helper order are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588701D2",
+      "name": "FUN_588701d2",
+      "size": 162,
+      "symbol": "_FUN_588701d2",
+      "source": "src/client-current/Core/FUN_588701d2.cpp",
+      "source_sha256": "baeb0589476691ee4bc9699176769d1fcdac325e76ac073deb79e2741d877eb7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED5B0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58969614",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "58851481",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 88,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "58894218",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "58870274",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588701d2",
+        "called_by": "Directly called by cleanup callback `0x58859C70`; Ghidra initially had no function boundary at this direct-call target. It was seeded at `0x588701D2` and disassembles as a 162-byte function ending at `0x58870274`.",
+        "behavior": "Initializes a 16-byte mapped record through `0x58832760`, calls `0x58863C1C(8)`, then walks pointer slots from index 3 up to global bound `0x58969614`. For each nonnull pointer it conditionally calls `0x58851481` when object flag bit 13 is set and counts returns other than -1; it always invokes callback slot `0x58894218` with object address +0x20, releases the pointer through `0x5886CC10`, and clears its array slot. It returns the count after exception cleanup.",
+        "uncertainty": "The array bound, object type, callback ABI, and meaning of the counted `0x58851481` result remain unknown. Initialization, range, flag check, callback, release, clear, and return are direct Ghidra observations."
+      }
     }
   ]
 }
