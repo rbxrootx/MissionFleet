@@ -17,12 +17,27 @@ resource arrays and repeated child entries. The static trace now connects the
 scene constructor to the same renderer adapter whose draw and text-conversion
 path is documented in [the backend notes](current-core-text-render-backend.md).
 
+The same setup call site invokes three short helpers. `0x5853ACB0` forwards its
+temporary object to `0x587BD5D0` and returns zero. `0x5853ADA0(2)` uses the
+registered registry callbacks with the literal key path
+`SOFTWARE\FleetMission\NAVYFIELDClient\Log`; argument 2 skips the function's
+argument-0 read and argument-1 write branches. Those branches refer to literal
+value names `ID`, `PlayerID`, `pass`, and `PS`, but the resource screen calls
+neither branch. `0x5853ACD0` stores an object from `0x584F1470` at
+`0x589620A4`, then loads the mapped path `.\spr\Warning.spr` through `0x587803B0` and
+stores that result at `0x589606DC`.
+
+The installed file is `D:\FleetMission\SPR\en-us\Warning.spr`. The current
+sprite previewer indexes it as pixel format `[1,2]` and rejects it because its
+decoder currently supports `[2,2]`; the warning art's decoded appearance is
+therefore not established here.
+
 The callback factory's implementation, resource-ID names, label meanings,
 child types, and resulting layout remain unknown. The captured callback pointer
 is outside the Core image, and its owning module was not recorded in the
 capture manifest. No live frame or input sequence was verified.
 
-Both functions match the hash-pinned mapped Core image at 100% under VC6 SP5
-and objdiff 3.8.0: `0x5857FE50` (230 bytes) and `0x58539D50` (3,926 bytes), for
-4,156 exact bytes. The verifier checked zero relative relocations in these
-function spans.
+All five functions match the hash-pinned mapped Core image at 100% under VC6
+SP5 and objdiff 3.8.0: `0x5857FE50` (230 bytes), `0x58539D50` (3,926),
+`0x5853ACB0` (19), `0x5853ACD0` (204), and `0x5853ADA0` (467), for 4,846
+exact bytes. The verifier checked zero relative relocations in these spans.

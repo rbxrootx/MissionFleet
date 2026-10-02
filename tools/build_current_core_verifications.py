@@ -44,7 +44,7 @@ ADDRESSES = (
     "58534B00", "584B5140", "5856DBC0",
     "58534D30", "58534E80", "5852D160", "5852D0C0", "5852D5D0", "585341D0", "58534760", "585348B0", "58521FF0", "587B4180", "584C0DE0", "58484B20", "587B5730", "58529610", "58532AD0", "5848C0B0", "5849F480", "587B52B0", "587B5520", "584BF150", "5884CE10", "5884C890", "58831004", "58859610", "58864670", "5882E770", "58487710", "5884D3E5", "5886CED0", "58879A60", "58879A70", "5886246F", "58868BF1", "588646B0", "588646D0", "587AABC0", "5882E666", "58487680", "58487780", "588647D0", "58864910", "58864C70", "58864FE0", "58864C40", "58873ED0", "58873EB0", "58873EE0", "58870110", "58870130", "58870160", "588701C0", "588721E0", "58873F20", "58873F50", "58859720", "5887D0C0", "58531000", "58530EA0",
     "587B6530", "587B3FD0", "587B4550", "587B45C0",
-    "5857FE50", "58539D50",
+    "5857FE50", "58539D50", "5853ACB0", "5853ACD0", "5853ADA0",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1211,6 +1211,24 @@ EVIDENCE = {
         "called_by": "Scene constructor `0x5857FE50` calls it with global `0x589056B4` at `0x5857FECF`.",
         "behavior": "Stores its argument in global `0x589056B4`, resets related state, and initializes a group of scene resources. The Ghidra call sequence repeatedly invokes factory callback `0x588940D4` with resource IDs including `10`, `11`, `0x10`, `0x14`, and `0x18`, plus mapped dimensions/flags and label pointers; the returned objects are wrapped by `0x587B60F0` and stored in scene globals. It also initializes repeated child/resource arrays and additional scene state.",
         "uncertainty": "Factory callback implementation, resource-ID meanings, label semantics, child-object types, and rendered composition are unresolved. The callback inputs, wrapper, global destinations, loop bounds, and direct call sequence are visible in Ghidra; this is a static constructor trace without a frame capture.",
+    },
+    "5853ACB0": {
+        "name_in_analysis": "FUN_5853acb0",
+        "called_by": "Scene constructor `0x5857FE50` calls it with a temporary object at `0x5857FEC1` before resource setup `0x58539D50`.",
+        "behavior": "Forwards its argument to `0x587BD5D0` and returns zero.",
+        "uncertainty": "The helper's object type and initializer effects are not recovered; the single call and return value are directly visible in Ghidra.",
+    },
+    "5853ACD0": {
+        "name_in_analysis": "FUN_5853acd0",
+        "called_by": "Resource screen setup `0x58539D50` calls it immediately after `0x5853ADA0(2)`.",
+        "behavior": "Allocates and stores an object returned by `0x584F1470` at global `0x589620A4`, then loads the mapped path `.\\spr\\Warning.spr` through `0x587803B0` and stores the resulting object at `0x589606DC`.",
+        "uncertainty": "The first object's type, the loaded sprite's role in the screen, and its visible appearance are not established by these calls. The allocation, globals, helper calls, and path string are directly visible in Ghidra and mapped data.",
+    },
+    "5853ADA0": {
+        "name_in_analysis": "FUN_5853ada0",
+        "called_by": "Resource screen setup `0x58539D50` calls it with argument `2` at `0x58539DA5`.",
+        "behavior": "Uses registered callbacks with the mapped registry path `SOFTWARE\\FleetMission\\NAVYFIELDClient\\Log` and value strings `ID`, `PlayerID`, `pass`, and `PS`. Argument zero reads selected values and prepares writes; argument one writes selected values. The observed screen-setup call passes `2`, which falls through those mode branches and proceeds to the final cleanup callback.",
+        "uncertainty": "The registry callback implementations and exact value types are not identified; the function's names are inferred from the literal path/value strings. The caller's argument `2` and the function's branch behavior are directly visible in Ghidra.",
     },
 }
 

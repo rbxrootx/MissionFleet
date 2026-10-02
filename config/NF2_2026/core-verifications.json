@@ -64021,6 +64021,69 @@
         "behavior": "Stores its argument in global `0x589056B4`, resets related state, and initializes a group of scene resources. The Ghidra call sequence repeatedly invokes factory callback `0x588940D4` with resource IDs including `10`, `11`, `0x10`, `0x14`, and `0x18`, plus mapped dimensions/flags and label pointers; the returned objects are wrapped by `0x587B60F0` and stored in scene globals. It also initializes repeated child/resource arrays and additional scene state.",
         "uncertainty": "Factory callback implementation, resource-ID meanings, label semantics, child-object types, and rendered composition are unresolved. The callback inputs, wrapper, global destinations, loop bounds, and direct call sequence are visible in Ghidra; this is a static constructor trace without a frame capture."
       }
+    },
+    {
+      "address": "5853ACB0",
+      "name": "FUN_5853acb0",
+      "size": 19,
+      "symbol": "_FUN_5853acb0",
+      "source": "src/client-current/Core/FUN_5853acb0.cpp",
+      "source_sha256": "7849479ad63688b928fe586b687cc70c9cc94c0ab48f23df3db513d88f51faeb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5853acb0",
+        "called_by": "Scene constructor `0x5857FE50` calls it with a temporary object at `0x5857FEC1` before resource setup `0x58539D50`.",
+        "behavior": "Forwards its argument to `0x587BD5D0` and returns zero.",
+        "uncertainty": "The helper's object type and initializer effects are not recovered; the single call and return value are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5853ACD0",
+      "name": "FUN_5853acd0",
+      "size": 204,
+      "symbol": "_FUN_5853acd0",
+      "source": "src/client-current/Core/FUN_5853acd0.cpp",
+      "source_sha256": "3caa7336a0ed200748edafbd98d18a2dc5c2981ac2f8e2d28d99e15b0a68d5d6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5853acd0",
+        "called_by": "Resource screen setup `0x58539D50` calls it immediately after `0x5853ADA0(2)`.",
+        "behavior": "Allocates and stores an object returned by `0x584F1470` at global `0x589620A4`, then loads the mapped path `.\\spr\\Warning.spr` through `0x587803B0` and stores the resulting object at `0x589606DC`.",
+        "uncertainty": "The first object's type, the loaded sprite's role in the screen, and its visible appearance are not established by these calls. The allocation, globals, helper calls, and path string are directly visible in Ghidra and mapped data."
+      }
+    },
+    {
+      "address": "5853ADA0",
+      "name": "FUN_5853ada0",
+      "size": 467,
+      "symbol": "_FUN_5853ada0",
+      "source": "src/client-current/Core/FUN_5853ada0.cpp",
+      "source_sha256": "dd43cdc94e8efaad300e4dc82c3ac7da9bb5d9add376c8252ddc5df11351176a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5853ada0",
+        "called_by": "Resource screen setup `0x58539D50` calls it with argument `2` at `0x58539DA5`.",
+        "behavior": "Uses registered callbacks with the mapped registry path `SOFTWARE\\FleetMission\\NAVYFIELDClient\\Log` and value strings `ID`, `PlayerID`, `pass`, and `PS`. Argument zero reads selected values and prepares writes; argument one writes selected values. The observed screen-setup call passes `2`, which falls through those mode branches and proceeds to the final cleanup callback.",
+        "uncertainty": "The registry callback implementations and exact value types are not identified; the function's names are inferred from the literal path/value strings. The caller's argument `2` and the function's branch behavior are directly visible in Ghidra."
+      }
     }
   ]
 }

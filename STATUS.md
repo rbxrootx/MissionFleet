@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,459 functions and 10,468,768
-identified code bytes across six report units. There are 6,003 verified matches
-totaling 1,346,588 bytes (12.8629%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,006 verified matches
+totaling 1,347,278 bytes (12.8695%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -94,9 +94,10 @@ dispatch/conversion functions add 724 exact bytes. Core clips draw bounds and
 dispatches through runtime-registered callbacks, whose implementation and final
 pixels remain unresolved; see
 [backend evidence](docs/current-core-text-render-backend.md).
-The resource scene constructor and its resource setup routine add two matches /
-4,156 exact bytes. They create wrapped resources through the same callback
-factory; resource IDs and visual layout remain unresolved. See
+The resource scene constructor/setup plus its three direct initialization
+helpers add five matches / 4,846 exact bytes. They create wrapped resources,
+read a named registry path, and request `.\\spr\\Warning.spr`; callback
+meanings and warning-sprite pixels remain unresolved. See
 [scene construction evidence](docs/current-core-resource-screen-construction.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call

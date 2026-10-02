@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,003 functions totaling 1,346,588 bytes (12.8629% of indexed code),
+credits 6,006 functions totaling 1,347,278 bytes (12.8695% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,7 +72,7 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,319
-bytes from installed `Core.dll`; 194 functions match 301,401 bytes, including
+bytes from installed `Core.dll`; 197 functions match 302,091 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -101,8 +101,8 @@ matches / 1,121 bytes; see
 [`current-core-scene-resource-vector-cleanup.md`](current-core-scene-resource-vector-cleanup.md).
 The scene resource row population, scroll dispatch, text-render callback, and
 Core-side text backend dispatch add 18 verified functions / 8,619 bytes; the
-scene constructor and its 3,926-byte resource setup routine add 2 more matches /
-4,156 bytes. See
+resource-screen constructor, setup, and three initializer helpers add 5 more
+matches / 4,846 bytes. See
 [`current-core-scene-resource-row-view.md`](current-core-scene-resource-row-view.md)
 and
 [`current-core-scene-resource-text-renderer.md`](current-core-scene-resource-text-renderer.md)
