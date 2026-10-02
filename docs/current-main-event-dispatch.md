@@ -34,6 +34,10 @@ include:
 - `0x80000500`, which passes a byte from the payload to `FUN_587e5fc0`, may
   call `FUN_587ea630` depending on the screen-state field, and then calls the
   queue/reset helper `FUN_587e8a40`.
+- `0x80000300`, which compares the pointers at `0x58A24580` and `0x58A2459C`;
+  when equal, it calls `FUN_587e5fb0`, which sets the receiver's DWORD at
+  `+0x384` to 1 and returns. Ghidra lists five additional direct callers of
+  this 11-byte setter elsewhere in the client.
 
 There is a second top-level class path for `0x8001`; it contains many further
 event IDs, including `0x80021034` and `0x80021002`. The handler is therefore
@@ -52,6 +56,8 @@ The `0x80000100` route now has a verified callee reconstruction:
 The `0x80000500` route's 32-byte mode-byte helper, 126-byte two-range ID-list
 helper, and 443-byte queue/screen-state reset helper are byte-matched and
 documented in that event-queue note.
+The shared 11-byte setter used by `0x80000300` is also byte-matched; the
+meaning of `+0x384` remains unknown.
 
 The function has only been validated by comparing the address ranges,
 disassembly, and decompilation against the local mapped capture. Runtime

@@ -82957,6 +82957,25 @@
       "verified_by": "objdiff-3.8.0-byte-identical"
     },
     {
+      "address": "587E5FB0",
+      "name": "FUN_587e5fb0",
+      "size": 11,
+      "symbol": "_FUN_587e5fb0",
+      "source": "src/client-current/Main/FUN_587e5fb0.cpp",
+      "source_sha256": "aeb55eb9069ab66b76fb4cb5b0a8f13ca4c1e47d5ade8b77bf068d2d8dfdfb82",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [
+        { "offset": 6, "target_address": "00000001", "kind": "immediate", "audit_only": true }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5fb0",
+        "called_by": "Ghidra lists six direct callers; 0x587BC645 is the 0x80000300 path in FUN_587bb700, reached only when pointers at 0x58A24580 and 0x58A2459C compare equal.",
+        "behavior": "Writes DWORD 1 to the receiver field at +0x384 and returns. The instruction stream is 11 bytes: C7 81 84 03 00 00 01 00 00 00 C3.",
+        "uncertainty": "The meaning and lifecycle of receiver field +0x384 are unknown. Static caller and mapped-image evidence only; no runtime state transition has been observed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
       "address": "587E5FC0",
       "name": "FUN_587e5fc0",
       "size": 32,
