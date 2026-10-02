@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,954 functions totaling 1,330,074 bytes (12.7052% of indexed code),
+credits 5,979 functions totaling 1,332,692 bytes (12.7302% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,7 +72,7 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,309
-bytes from installed `Core.dll`; 145 functions match 284,887 bytes, including
+bytes from installed `Core.dll`; 170 functions match 287,505 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -94,6 +94,8 @@ The parser for those three line-based resources adds five byte-matched functions
 / 1,039 bytes and records the LF delimiter, CR trimming, empty-line handling,
 and indexed record accessors; see
 [`current-core-scene-record-parser.md`](current-core-scene-record-parser.md).
+The three per-resource line-string vectors add 25 matches / 2,618 bytes; see
+[`current-core-scene-resource-vectors.md`](current-core-scene-resource-vectors.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.
@@ -111,7 +113,8 @@ callers and framebuffer output remain unverified. See the
 [installed-client logo/control screen evidence](current-client-logo-screen.md),
 [VM entry/trampoline evidence](client-vm-entry-trampolines.md), and
 [Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md) and
-[Core.dll ship sprite-loader evidence](current-core-ship-sprite-loader.md) and
+[Core.dll ship sprite-loader evidence](current-core-ship-sprite-loader.md),
+[Core.dll scene resource-vector evidence](current-core-scene-resource-vectors.md), and
 [three-byte-target class evidence](current-core-three-byte-sprite-class.md) and
 [its selector-1 sibling](current-core-three-byte-sprite-class1.md) and
 [its selector-2 sibling](current-core-three-byte-sprite-class2.md) and

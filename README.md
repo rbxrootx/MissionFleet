@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,459 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 5,954 matches are verified individually at 100.0% by objdiff.
+The current 5,979 matches are verified individually at 100.0% by objdiff.
 
 ```powershell
 python tools/generate_progress.py

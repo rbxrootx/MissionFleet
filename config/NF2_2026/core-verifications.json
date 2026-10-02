@@ -2027,6 +2027,1148 @@
       }
     },
     {
+      "address": "584A9AD0",
+      "name": "FUN_584a9ad0",
+      "size": 128,
+      "symbol": "_FUN_584a9ad0",
+      "source": "src/client-current/Core/FUN_584a9ad0.cpp",
+      "source_sha256": "3558ca440d543aacd52aa6b2cc56053d10e1902e7e3e2b6cc60978b853dabe35",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "584A8EF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "584AA7B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "584A91D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584a9ad0",
+        "called_by": "File loader 0x586EA6E0 once for the first parsed line and once for each subsequent line before insertion into the selected per-file vector.",
+        "behavior": "Constructs a temporary 24-byte string object from the NUL-terminated line: obtains its length and delegates string initialization/copy to 0x584A91D0.",
+        "uncertainty": "The source text encoding and exact class name are not established. The 24-byte object layout and short-string fields are visible in Ghidra; calling it an MSVC string is an ABI inference."
+      }
+    },
+    {
+      "address": "584A9D30",
+      "name": "FUN_584a9d30",
+      "size": 29,
+      "symbol": "_FUN_584a9d30",
+      "source": "src/client-current/Core/FUN_584a9d30.cpp",
+      "source_sha256": "9d75b0131df74fe6ce4301f2034e1cf7acb442284ea7897a388860acd0470051",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "584AA4E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "584A9BF0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584a9d30",
+        "called_by": "File loader 0x586EA6E0 after each temporary line string has been copied into the selected vector.",
+        "behavior": "Destroys the temporary string object, releases its heap storage when required, and resets its inline state through 0x584AA4E0 and 0x584A9BF0.",
+        "uncertainty": "The helper routines' allocator and exception-state contracts are not named; the caller's construction/copy/destruction order is directly visible."
+      }
+    },
+    {
+      "address": "584A91D0",
+      "name": "FUN_584a91d0",
+      "size": 310,
+      "symbol": "_FUN_584a91d0",
+      "source": "src/client-current/Core/FUN_584a91d0.cpp",
+      "source_sha256": "fc8d135612fff46a735f5d324b2730a6deb76dbeba8a35f41c07a70074d5a459",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "584AA850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "584AA570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "584A2320",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "584AA6F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "584AA5E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 145,
+          "target_address": "58487F30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "584A9300",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "584AA850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "584AA3A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "584A9130",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 209,
+          "target_address": "58486DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "584AA6F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 276,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "584AA5E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "58487F30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584a91d0",
+        "called_by": "String constructor 0x584A9AD0 for every parsed resource line.",
+        "behavior": "Initializes a 24-byte string representation. Lengths below 16 use inline storage with capacity 15; longer strings allocate storage, copy the bytes, and write length/capacity fields.",
+        "uncertainty": "The 24-byte layout and 15-byte inline threshold are direct Ghidra observations; the standard-library type name, allocator identity, and text encoding are inferred or unresolved."
+      }
+    },
+    {
+      "address": "584CEB30",
+      "name": "FUN_584ceb30",
+      "size": 38,
+      "symbol": "_FUN_584ceb30",
+      "source": "src/client-current/Core/FUN_584ceb30.cpp",
+      "source_sha256": "03ab808586e8d5fbc17437f50f04e05261f155b623ad8ea8fcf016d9c9eab360",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_584ceb30",
+        "called_by": "Parser accessors 0x58797EE0/0x58797F30 and the scene resource loader's post-parse count path.",
+        "behavior": "Returns the number of parser entries as `(end - begin) / 0x18`, confirming 24-byte elements in the parsed line collection.",
+        "uncertainty": "The parser collection's class identity is unnamed; its pointer arithmetic and 24-byte stride are direct from mapped code."
+      }
+    },
+    {
+      "address": "5850BB30",
+      "name": "FUN_5850bb30",
+      "size": 35,
+      "symbol": "_FUN_5850bb30",
+      "source": "src/client-current/Core/FUN_5850bb30.cpp",
+      "source_sha256": "f0d7ba9d3e1899b7c71cb9d08f97dd2a5aa281421f319632ce68fef6a4a908ca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "58504C30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5850bb30",
+        "called_by": "File loader 0x586EA6E0 for each temporary line string, with the destination descriptor selected by 0x586E94F0(scene, fileIndex).",
+        "behavior": "Forwards the line string to the destination vector's append routine at 0x58504C30.",
+        "uncertainty": "The destination vectors' user-facing role is not established; the caller and append call are direct evidence."
+      }
+    },
+    {
+      "address": "58504C30",
+      "name": "FUN_58504c30",
+      "size": 105,
+      "symbol": "_FUN_58504c30",
+      "source": "src/client-current/Core/FUN_58504c30.cpp",
+      "source_sha256": "bb48f49ca493e787ee5cf37ebbb0003c01829a6382ba5f144b7afe9cf03c9bcd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 42,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "58504BB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "58504CA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504c30",
+        "called_by": "Append wrapper 0x5850BB30 when storing scene resource lines.",
+        "behavior": "Compares the vector's end and capacity pointers, appending in place through 0x58504BB0 when space remains and invoking 0x58504CA0 when full.",
+        "uncertainty": "The element class is unnamed; the three-pointer descriptor and branch condition are direct Ghidra evidence."
+      }
+    },
+    {
+      "address": "58504BB0",
+      "name": "FUN_58504bb0",
+      "size": 113,
+      "symbol": "_FUN_58504bb0",
+      "source": "src/client-current/Core/FUN_58504bb0.cpp",
+      "source_sha256": "1e798b995b387a80c401bbfee81672146a58b15c02e4e2761543321657f77658",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58504AA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58487F40",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504bb0",
+        "called_by": "The in-capacity branch of vector append routine 0x58504C30.",
+        "behavior": "Constructs one 24-byte element at the current end through 0x58504AA0 and advances the end pointer by 0x18.",
+        "uncertainty": "The exact C++ element type is not named; element stride and end-pointer update are direct observations."
+      }
+    },
+    {
+      "address": "58504CA0",
+      "name": "FUN_58504ca0",
+      "size": 482,
+      "symbol": "_FUN_58504ca0",
+      "source": "src/client-current/Core/FUN_58504ca0.cpp",
+      "source_sha256": "47353b8f38f31eb8d88ebc67c21b7cef4c63fa5d485c5f5022746ad3e1d2b2eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "584A3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "58488040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "58508A00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "58504920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 240,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 259,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 282,
+          "target_address": "58501A80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 332,
+          "target_address": "58505960",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "58505960",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 402,
+          "target_address": "58505960",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 432,
+          "target_address": "58508A60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 458,
+          "target_address": "585071C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504ca0",
+        "called_by": "The full-capacity branch of vector append routine 0x58504C30.",
+        "behavior": "Chooses a larger capacity, allocates a new block, constructs the inserted 24-byte value at its new position, transfers elements before and after it, then replaces the old descriptor and releases old storage.",
+        "uncertainty": "The allocator and element class names are unresolved. Growth, insertion position, transfer ranges, and old-storage cleanup are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58504AA0",
+      "name": "FUN_58504aa0",
+      "size": 64,
+      "symbol": "_FUN_58504aa0",
+      "source": "src/client-current/Core/FUN_58504aa0.cpp",
+      "source_sha256": "fabf93f92242b8a02b6db8375e9d262b59e1de9737837754abe1d1881c305e84",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "58487980",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "584C52B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504aa0",
+        "called_by": "In-capacity append helper 0x58504BB0.",
+        "behavior": "Allocates a 0x18-byte string element and copy-constructs its value through 0x584C52B0.",
+        "uncertainty": "The precise element class name is not established; its size and copy-construction path are direct."
+      }
+    },
+    {
+      "address": "58501A80",
+      "name": "FUN_58501a80",
+      "size": 55,
+      "symbol": "_FUN_58501a80",
+      "source": "src/client-current/Core/FUN_58501a80.cpp",
+      "source_sha256": "9745407274c77803ad7f9c544586cfe1e50804f4346541c31112c8f6d28940f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58487980",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "584C52B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58501a80",
+        "called_by": "Reallocating append helper 0x58504CA0 at the insertion point in the new block.",
+        "behavior": "Allocates and copy-constructs one 0x18-byte string element through 0x584C52B0.",
+        "uncertainty": "The standard-library type name is inferred from the matching element stride and string copy routine."
+      }
+    },
+    {
+      "address": "58504B50",
+      "name": "FUN_58504b50",
+      "size": 92,
+      "symbol": "_FUN_58504b50",
+      "source": "src/client-current/Core/FUN_58504b50.cpp",
+      "source_sha256": "38c96f8b7a45a4e59172c88f2cc97896d37ea6ea102412e85ba6146320053e25",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58501A80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504b50",
+        "called_by": "Range transfer helper 0x58505960 while relocating existing vector elements.",
+        "behavior": "Copy-assigns one existing 0x18-byte element into the current end of the destination vector through 0x58501A80 and advances the destination end pointer by 0x18.",
+        "uncertainty": "The element's class name is not recovered; the copy construction and destination pointer update are direct."
+      }
+    },
+    {
+      "address": "58504AE0",
+      "name": "FUN_58504ae0",
+      "size": 95,
+      "symbol": "_FUN_58504ae0",
+      "source": "src/client-current/Core/FUN_58504ae0.cpp",
+      "source_sha256": "9b30d06f971914559c0beae4025c460ddea20d8c493b5102373da61d1c24d469",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "58501AD0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504ae0",
+        "called_by": "Vector replacement/cleanup helpers 0x58508A60 and 0x585071C0.",
+        "behavior": "Walks a range in 0x18-byte steps and destroys each string element through 0x58501AD0.",
+        "uncertainty": "Only the range and destructor dispatch are established; allocator internals remain unnamed."
+      }
+    },
+    {
+      "address": "58501AD0",
+      "name": "FUN_58501ad0",
+      "size": 16,
+      "symbol": "_FUN_58501ad0",
+      "source": "src/client-current/Core/FUN_58501ad0.cpp",
+      "source_sha256": "92e3c277df561fab7bf1680187000651e6f086fecd9f57de309039eca14d1356",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58502140",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58501ad0",
+        "called_by": "String range destructor 0x58504AE0.",
+        "behavior": "Delegates per-element destruction from the range loop to helper 0x58502140.",
+        "uncertainty": "The helper's exact heap-release behavior is not established in this slice; the per-element destructor call and 0x18-byte iteration are direct."
+      }
+    },
+    {
+      "address": "584C52B0",
+      "name": "FUN_584c52b0",
+      "size": 105,
+      "symbol": "_FUN_584c52b0",
+      "source": "src/client-current/Core/FUN_584c52b0.cpp",
+      "source_sha256": "be134bd24055d92f416ef29c5224d71e014fe089a0516608f43d9efc5cd7c139",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "584A9070",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58487DD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "584C5B20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584c52b0",
+        "called_by": "Element constructors 0x58504AA0 and 0x58501A80 when a parsed line is inserted or reinserted during vector growth.",
+        "behavior": "Constructs a string value by copying the source string representation into the destination object.",
+        "uncertainty": "The exact class and allocator helper contracts are not named; its constructor role follows from both element-construction callsites."
+      }
+    },
+    {
+      "address": "584A3730",
+      "name": "FUN_584a3730",
+      "size": 30,
+      "symbol": "_FUN_584a3730",
+      "source": "src/client-current/Core/FUN_584a3730.cpp",
+      "source_sha256": "55e2cf4f7ab112db3f09de04ce25be5e58291e7a398faec124537e69ffdc44e1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "58486EB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584a3730",
+        "called_by": "Vector storage cleanup 0x58508A60 and growth guard cleanup 0x585071C0.",
+        "behavior": "Releases vector storage using an allocation size of elementCount times 0x18 bytes.",
+        "uncertainty": "The underlying allocator contract is unnamed; the byte-count arithmetic is direct."
+      }
+    },
+    {
+      "address": "5850A170",
+      "name": "FUN_5850a170",
+      "size": 38,
+      "symbol": "_FUN_5850a170",
+      "source": "src/client-current/Core/FUN_5850a170.cpp",
+      "source_sha256": "6bacd4f482e813683bb2f43de91e6fb75567b7297c9437d9ec8bf81288ab3b53",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5850a170",
+        "called_by": "Capacity check 0x586EBCD0 and growth-capacity helper 0x58508A00.",
+        "behavior": "Returns vector capacity as `(capacityPointer - beginPointer) / 0x18`.",
+        "uncertainty": "The vector type name is not established; pointer roles follow the direct begin/end/capacity comparisons in 0x58504C30."
+      }
+    },
+    {
+      "address": "58508A00",
+      "name": "FUN_58508a00",
+      "size": 84,
+      "symbol": "_FUN_58508a00",
+      "source": "src/client-current/Core/FUN_58508a00.cpp",
+      "source_sha256": "c99307a3d00f796f66863d1d6fac4a013e69ba021e8a2f145f8e42d8bbfb34b8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5850A170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "584A3D70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58508a00",
+        "called_by": "Reallocating append helper 0x58504CA0.",
+        "behavior": "Computes a growth capacity of at least the requested count, normally increasing existing capacity by half, subject to a maximum-size bound.",
+        "uncertainty": "The maximum-size helper contract is not named; the 1.5x growth and requested-capacity comparison are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58508A60",
+      "name": "FUN_58508a60",
+      "size": 163,
+      "symbol": "_FUN_58508a60",
+      "source": "src/client-current/Core/FUN_58508a60.cpp",
+      "source_sha256": "44fb86309ad24ea3640e9b13618e5586042f643d869a9708881f83dca91b0478",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "58487F30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58504AE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "584A3730",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58508a60",
+        "called_by": "Reserve helper 0x586E7EF0 after allocation and transfer of existing elements.",
+        "behavior": "Destroys old elements and storage, then updates the vector's begin, end, and capacity pointers using the new buffer and counts.",
+        "uncertainty": "The parameter names are inferred from callsites; the three pointer writes and 0x18-byte element stride are direct."
+      }
+    },
+    {
+      "address": "58505960",
+      "name": "FUN_58505960",
+      "size": 177,
+      "symbol": "_FUN_58505960",
+      "source": "src/client-current/Core/FUN_58505960.cpp",
+      "source_sha256": "4b9340939229584885166cd86725e22ee0f88b50226a65ff1c0632cb1092f816",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58487280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "58487280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58487400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "584872B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "58504B50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "58487F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 155,
+          "target_address": "58506E00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58505960",
+        "called_by": "Reserve helper 0x586E7EF0 and reallocating append helper 0x58504CA0.",
+        "behavior": "Transfers a range of 0x18-byte elements into newly allocated storage, using 0x58504B50 for each element and cleaning up partial work on its guarded path.",
+        "uncertainty": "The exact exception guarantee and element copy/move distinction remain unresolved; loop bounds and element stride are direct."
+      }
+    },
+    {
+      "address": "58504920",
+      "name": "FUN_58504920",
+      "size": 19,
+      "symbol": "_FUN_58504920",
+      "source": "src/client-current/Core/FUN_58504920.cpp",
+      "source_sha256": "eff877e31ec7d58de71deb9ace6f566d8f202a07aadb21b08fd46bce104db6ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "584A35D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58504920",
+        "called_by": "Reserve helper 0x586E7EF0 and reallocating append helper 0x58504CA0.",
+        "behavior": "Requests vector storage sized for the supplied element capacity through the allocator helper.",
+        "uncertainty": "The decompiler shows the allocation helper chain but not its underlying heap contract; callers pass capacities later multiplied by 0x18."
+      }
+    },
+    {
+      "address": "585071C0",
+      "name": "FUN_585071c0",
+      "size": 81,
+      "symbol": "_FUN_585071c0",
+      "source": "src/client-current/Core/FUN_585071c0.cpp",
+      "source_sha256": "78693b61590e5fcb57aa386df43174c99d831790b311c87875e1a060d9d937e8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 39,
+          "target_address": "58504AE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "584A3730",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_585071c0",
+        "called_by": "Exception cleanup path in reserve helper 0x586E7EF0.",
+        "behavior": "When temporary storage was allocated, destroys its constructed elements and releases the buffer.",
+        "uncertainty": "The guard object's field names and exact exception guarantee are not recovered; cleanup conditions and calls are direct."
+      }
+    },
+    {
+      "address": "584A3D70",
+      "name": "FUN_584a3d70",
+      "size": 59,
+      "symbol": "_FUN_584a3d70",
+      "source": "src/client-current/Core/FUN_584a3d70.cpp",
+      "source_sha256": "4f02c1fc128c0f80f0b87bfc7a9eb436033697ad2459aae83184bcc33f7ef673",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "584A3D50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "58487290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "584873D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584a3d70",
+        "called_by": "Capacity checks in 0x586EBCD0 and 0x58508A00.",
+        "behavior": "Returns the allocator/container maximum element count used to reject impossible vector growth requests.",
+        "uncertainty": "The exact max-size calculation is delegated through runtime helpers and is not named in Ghidra."
+      }
+    },
+    {
+      "address": "58488040",
+      "name": "FUN_58488040",
+      "size": 13,
+      "symbol": "_FUN_58488040",
+      "source": "src/client-current/Core/FUN_58488040.cpp",
+      "source_sha256": "8a5c75dad73dc2726aa1304d5b9c53625cd1ee7c7e6d435e5a5bd677c435492f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "5882E78D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58488040",
+        "called_by": "Reserve wrapper 0x586EBCD0 when the requested line count exceeds the container maximum.",
+        "behavior": "Takes the nonreturning error path through runtime helper 0x5882E78D with message data at 0x58894D20.",
+        "uncertainty": "The formatted exception type is not proven by this function alone; the nonreturning helper and message pointer are direct."
+      }
+    },
+    {
+      "address": "586EBCD0",
+      "name": "FUN_586ebcd0",
+      "size": 58,
+      "symbol": "_FUN_586ebcd0",
+      "source": "src/client-current/Core/FUN_586ebcd0.cpp",
+      "source_sha256": "b094979ddc2acbe8a20739acb1f23e4e2cd251785466432589ac681790a7c152",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "5850A170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "584A3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58488040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "586E7EF0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_586ebcd0",
+        "called_by": "Resource loader 0x586EA6E0 once for each file index, after parsing its lines and before appending them.",
+        "behavior": "Ensures the selected per-file vector has capacity for the parsed line count; checks the maximum size before delegating allocation and element transfer to 0x586E7EF0.",
+        "uncertainty": "The three resource descriptors' user-facing purpose and vector class name are unknown. The scene base/index arithmetic, requested count, capacity check, and reserve call are direct."
+      }
+    },
+    {
+      "address": "586E7EF0",
+      "name": "FUN_586e7ef0",
+      "size": 229,
+      "symbol": "_FUN_586e7ef0",
+      "source": "src/client-current/Core/FUN_586e7ef0.cpp",
+      "source_sha256": "fbb53489186f30996c19ea6d36a5fd553b02bc2600c459de3a435278e2f56258",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "58504920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "58505960",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 192,
+          "target_address": "58508A60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "586E94B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_586e7ef0",
+        "called_by": "Capacity reservation helper 0x586EBCD0 when a per-file vector cannot hold all parsed lines.",
+        "behavior": "Allocates storage for the requested capacity, transfers current 0x18-byte elements, updates the vector descriptor, and releases temporary storage on the guarded failure path.",
+        "uncertainty": "The exact exception guarantee and allocator semantics are not named; allocation, transfer range, pointer update, and cleanup calls are visible in Ghidra."
+      }
+    },
+    {
       "address": "587BA830",
       "name": "FUN_587ba830",
       "size": 272,
