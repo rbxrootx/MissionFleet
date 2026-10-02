@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,460 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 6,083 matches cover 1,358,095 bytes (12.9725%) and are verified
+The current 6,104 matches cover 1,360,509 bytes (12.9956%) and are verified
 individually at 100.0% by objdiff.
 
 ```powershell
@@ -125,4 +125,5 @@ See [findings](docs/findings.md), [client unpacking](docs/client-unpacking.md),
 [the current Core cleanup path](docs/current-core-cleanup-release.md),
 [the Core pointer registry](docs/current-core-pointer-registry.md),
 [the Core byte-stream handlers](docs/current-core-byte-stream-io.md),
+[the Core buffered stream subsystem](docs/current-core-buffered-stream-io.md),
 [decomp.dev integration](docs/decomp-dev.md), and [remaining work](docs/roadmap.md).
