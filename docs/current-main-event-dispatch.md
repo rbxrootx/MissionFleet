@@ -60,6 +60,20 @@ documented in that event-queue note.
 The shared 11-byte setter used by `0x80000300` is also byte-matched; the
 meaning of `+0x384` remains unknown.
 
+The `0x80011035` route calls `FUN_587d6a60` at `0x587BB845`, passing a value
+through one stack argument while loading the receiver from `0x58A24598` into
+ECX. Ghidra identifies one other direct call, from `FUN_58871de0` at
+`0x58871F51`. The helper is now a 60-byte exact match. It accepts indices 0
+through 3, obtains the selected object pointer from receiver offset `+0x8C` with
+a four-byte stride, calls `FUN_58907990` with the global at `0x58A248FC`, then
+transfers to the selected object's vtable entry at `+4`. Values above 3 return
+without that dispatch. Ghidra's indirect-call recovery is uncertain, so the
+target method's signature and meaning remain unknown; the receiver table's
+type and lifetime are also unresolved. No runtime call has been captured.
+The mapped-byte evidence and audit operands are pinned in
+[`FUN_587d6a60.cpp`](../src/client-current/Main/FUN_587d6a60.cpp) and the
+verification inventory.
+
 [`FUN_587bb700.cpp`](../src/client-current/Main/FUN_587bb700.cpp) preserves the
 complete dispatcher instruction stream across all 17 Ghidra body ranges. Each
 range compiles as a separate naked x86 symbol so relative branch bytes retain

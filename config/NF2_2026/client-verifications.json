@@ -83237,6 +83237,46 @@
         "uncertainty": "The source-level parameter and constructor signature, meanings of other initialized fields, allocation failure behavior, and runtime construction path are unresolved. The full body is static mapped-image evidence; runtime construction is untested."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587D6A60",
+      "name": "FUN_587d6a60",
+      "size": 60,
+      "symbol": "_FUN_587d6a60",
+      "source": "src/client-current/Main/FUN_587d6a60.cpp",
+      "source_sha256": "92a0f0d6ae2a5d64fe6124733546b5185dd8cad45bf9545d677eaa250f5b1f27",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d6a60",
+        "called_by": "Ghidra reference analysis finds calls at 0x587BB845 from FUN_587bb700 and 0x58871F51 from FUN_58871de0. The dispatcher loads ECX from 0x58A24598 before passing the stack argument.",
+        "behavior": "Ghidra decompilation and mapped instructions show an unsigned index check for 0 through 3, selection of a pointer from receiver +0x8C with four-byte stride, a call to FUN_58907990 with global 0x58A248FC, and an indirect transfer through the selected object's vtable entry at +4. Values above 3 return without dispatch.",
+        "uncertainty": "Ghidra warns that it could not recover the indirect call cleanly. The vtable target signature and meaning, selected-table type and lifetime, and runtime route behavior are unresolved."
+      }
     }
   ]
 }
