@@ -91,6 +91,9 @@ coordinate semantics, and the roles of the two opaque callees remain
 unresolved. No live execution has been captured. See
 [`FUN_58871de0.cpp`](../src/client-current/Main/FUN_58871de0.cpp) for the exact
 matched body and the inventory for its 20 checked operands.
+The transport target `FUN_58970c70` is now byte-matched and identified against
+the client's Winsock import table; its header, checksum, and error paths are
+documented in [the outbound sender note](current-main-network-sender.md).
 
 [`FUN_587bb700.cpp`](../src/client-current/Main/FUN_587bb700.cpp) preserves the
 complete dispatcher instruction stream across all 17 Ghidra body ranges. Each

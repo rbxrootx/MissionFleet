@@ -83419,6 +83419,202 @@
         "behavior": "Ghidra body is contiguous from 0x58871DE0 through 0x58871F60 (385 bytes). It iterates up to 32 pointers from receiver +0xF8, tests bit 0 at each object's +0x24, compares two global DWORD values at 0x58A284CC/+0x58A284D0 with bounds derived from object offsets +4/+8/+0x14/+0x18/+0x1C/+0x20, and branches on field +0x60. The observed calls include FUN_588e7700, FUN_5897cc36, FUN_587d6a60, and FUN_58970c70. FUN_58970c70 receives literal 0x80011035 on two paths, with values read from the second parameter at +0x50 and either a packed value or 0xFFFFFFFF.",
         "uncertainty": "The checked objects, global values, offsets, and event fields do not have confirmed semantic types. FUN_588e7700, FUN_58970c70, and the indirect helper behavior are not fully recovered, and no runtime execution was observed."
       }
+    },
+    {
+      "address": "58970C70",
+      "name": "FUN_58970c70",
+      "size": 671,
+      "symbol": "_FUN_58970c70",
+      "source": "src/client-current/Main/FUN_58970c70.cpp",
+      "source_sha256": "19a5d8032c62c753c893e3e2de8e08711f67fda3173d648319fa447d8dcaa97e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58970F06",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58970E78",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "01020304",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "8002000F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58970DA6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "00000004",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 300,
+          "target_address": "7C8BA106",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "00000003",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 331,
+          "target_address": "00000014",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 359,
+          "target_address": "00000004",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 370,
+          "target_address": "00000002",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 382,
+          "target_address": "00000004",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 414,
+          "target_address": "5898C444",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 425,
+          "target_address": "58970EF9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 431,
+          "target_address": "5898C448",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 436,
+          "target_address": "000003E5",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 442,
+          "target_address": "58970EF9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 474,
+          "target_address": "5898C454",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 484,
+          "target_address": "5898C458",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 496,
+          "target_address": "58971480",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 506,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 596,
+          "target_address": "01020304",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 604,
+          "target_address": "00000014",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 610,
+          "target_address": "5898C444",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 621,
+          "target_address": "5898C448",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 626,
+          "target_address": "000003E5",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 635,
+          "target_address": "58970AE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 651,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58970c70",
+        "called_by": "Ghidra references include two call sites in FUN_58871de0 (0x58871E9D, 0x58871F29) and four in FUN_587bb700 (0x587BC8EE, 0x587BC907, 0x587BC920, 0x587C175D).",
+        "behavior": "Ghidra assigns a contiguous 671-byte body. Its indirect call at 0x5898C444 is confirmed as the Main.dll WSASend IAT pointer by equality with the mapped import slot at 0x58D69010; 0x5898C448, 0x5898C454, and 0x5898C458 likewise match WSAGetLastError, shutdown, and closesocket imports. It rejects context socket field +4 == -1. It forms a 20-byte header containing 0x01020304, the message code, two supplied DWORDs, and payload length. One context branch sends header and payload; the other computes a weighted checksum (except message 0x8002000F), applies a fixed xor or context-table mix, and sends the checksum as a trailing buffer. WSA error 0x3E5 is treated as pending; other errors may trigger shutdown, close, and context cleanup.",
+        "uncertainty": "Header fields, context flags/table roles, checksum purpose and compatibility, overlapped-operation lifetime, and message payload schemas remain unresolved. No traffic capture or live send comparison has validated the wire bytes."
+      }
     }
   ]
 }
