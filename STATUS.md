@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
-identified code bytes across six report units. There are 6,263 verified matches
-totaling 1,430,386 bytes (13.6630%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,152
+identified code bytes across six report units. There are 6,337 verified matches
+totaling 1,483,651 bytes (14.1716%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -184,9 +184,38 @@ handling; see [the sender note](docs/current-main-network-sender.md).
 The sender's three-function socket-error cleanup path adds 174 bytes; see
 [the cleanup note](docs/current-main-socket-cleanup.md). The address parser,
 async socket opener, and handle-table insertion add 798 bytes; see
-[the connection note](docs/current-main-socket-connect.md). Current-build Main
-coverage is 130 / 8,474 identified functions and
-456,968 / 2,353,108 bytes. See
+[the connection note](docs/current-main-socket-connect.md). The nested
+`FUN_588C4210` handler and its `0x80023101`, `02`, `05`, and `07` helpers add
+7,908 verified bytes across nine body ranges for the `0x800231xx` event family.
+The shared `FUN_58764D30` message/UI routine adds 18,901 bytes across two
+ranges and has 151 direct callers, including the `0x80023106` message path.
+The cached `FUN_5876BAF0` initializer adds 233 bytes and has 662 direct-call
+references across 166 callers, including that message path.
+Its directly called `FUN_58763890` constructor adds 1,757 bytes across one
+contiguous range.
+The shared `FUN_58751BF0` text routine adds 655 bytes across one range and is
+called by the `0x80023107` notification path; its downstream
+`FUN_58751A60` helper adds 387 bytes across two ranges. Its paired tree-field
+update helpers and recursive descendants add another 326 bytes across eight
+ranges. The sprite file, bundle, sprite-data destruction, and child lifecycle
+slice adds six verified functions / 651 bytes, including two corrected
+destructor extents after an instruction-level gap audit; see the
+[sprite lifecycle evidence](docs/current-main-sprite-lifecycle.md).
+The doubly linked child-order list adds two more functions / 295 bytes; see the
+[child-order evidence](docs/current-main-child-order.md). Screen-tree child
+updates and flagged position propagation add three functions / 195 bytes; see
+the [screen-tree evidence](docs/current-main-screen-tree.md).
+The `CWordWrap_Modifed` text parser and its complete record/container helpers
+add 20 verified functions / 2,901 bytes; see the
+[word-wrap evidence](docs/current-main-wordwrap.md).
+The current screen hierarchy and child-render dispatcher add seven functions
+/ 173 bytes; see the
+[screen-family evidence](docs/current-main-screen-family.md).
+The 13,492-byte `CShip_MapObjectScreen` constructor adds one verified
+function; see the
+[constructor evidence](docs/current-main-ship-map-screen-constructor.md).
+Current-build Main coverage is now 204 / 8,474 functions and
+510,233 / 2,353,218 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:

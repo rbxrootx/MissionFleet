@@ -12,8 +12,8 @@ The subcodes observed in `0x5882D710` are:
 - `2`: if the record's `+0x30` state is zero, set it to one and call its virtual
   slot `+0x0C`.
 - `4`: call `0x584A0DA0`, which returns one.
-- `0x10`: call `0x5882CC40`, which forwards values through registered callback
-  `0x58894538`.
+- `0x10`: call `0x5882CC40`, which re-registers the socket through
+  `WSAAsyncSelect` with message `0x462` and event mask `0x27`.
 - `0x20`: if record field `+0x0C` is nonzero and its key is not `-1`, clear its
   `+0x30` state, call virtual slot `+0x10`, remove it from the keyed table,
   decrement context field `+0x21C`, call registered callback `0x58894558`, and
@@ -40,6 +40,19 @@ checksums, and submits the record through callback `0x58894530`. For context
 state `+0x44` nonzero, it follows a modified checksum path. A callback error
 other than `0x3E5` enters cleanup `0x5882C440`.
 
+The four transport callback slots resolve to imported Winsock APIs in the
+captured Core image. Their pointer values equal the corresponding IAT entries:
+`0x58894530` is `WSASend` (`0x58D13004`), `0x58894534` is `WSARecv`
+(`0x58D13008`), `0x58894538` is `WSAAsyncSelect` (`0x58D1300C`), and
+`0x58894550` is `ioctlsocket` (`0x58D13024`). This makes the `0x10` event path
+concrete: it passes the socket handle from context `+4`, the window value
+resolved through the owner at context `+0x2C` and offset `+0x218`, message
+`0x462`, and mask `0x27` to `WSAAsyncSelect`. The mask is
+`FD_READ | FD_WRITE | FD_OOB | FD_CLOSE`; the earlier `FD_CONNECT` event
+therefore enables the subsequent read and close notifications. Subcode `1`
+then reaches the record parser, whose availability and receive callbacks are
+`ioctlsocket` and `WSARecv` respectively.
+
 The table helpers use the 65,536-entry table at context `+0x220` and
 `(key & 0xFFFF) * 4` to locate a bucket, follow 12-byte
 linked nodes, and unlink a matching key before releasing the node through
@@ -52,13 +65,15 @@ The `0x40220`-byte context allocation, table initialization, field offsets, and
 registered configuration/error callbacks are traced in
 [the context-construction notes](current-core-async-io-context.md).
 
-This establishes a mapped receive/dispatch/send lifecycle and exact checksum
-arithmetic, but not a complete transport protocol specification. The registered
-I/O callback ABI, context and record type names, meanings of most subcodes and
-record codes, checksum/key purpose, payload schemas, and behavior for real
-server traffic are unresolved. No packet capture or live client/server session
-was available, so the observed arithmetic is not claimed to be cryptographic
-or authenticated.
+This establishes the captured Core image's receive/dispatch/send lifecycle,
+the Winsock event re-registration after `FD_CONNECT`, and exact checksum
+arithmetic, but not a complete transport protocol specification. Context and
+record type names, payload schemas, checksum/key purpose, and behavior for real
+server traffic remain unresolved. The Main and Core captures come from
+different process IDs, so the shared socket/window object identity and the
+presence of this exact Core event flow in the captured Main process are not
+proven. No packet capture or live client/server session was available, so the
+observed arithmetic is not claimed to be cryptographic or authenticated.
 
 Eighteen functions from this path match the hash-pinned installed Core image at
 100% under VC6 SP5 and objdiff 3.8.0, totaling 3,280 bytes. The mapped helpers

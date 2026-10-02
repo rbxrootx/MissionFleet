@@ -9,6 +9,14 @@ from capstone import Cs, CS_ARCH_X86, CS_GRP_JUMP, CS_MODE_32, CS_OP_IMM, CS_OP_
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def cpp_identifier(name):
+    """Convert a Ghidra label to a stable identifier accepted by C++."""
+    identifier = re.sub(r"\W", "_", name)
+    if not identifier or identifier[0].isdigit():
+        identifier = "_" + identifier
+    return identifier
+
+
 def parse_ghidra_body_ranges(text, address):
     """Read one function's inclusive BODY_RANGES block from a Ghidra dump."""
     entry = f"entry {address:08x}"
@@ -163,7 +171,8 @@ def main():
     for raw_address in args.addresses:
         address = int(raw_address, 16)
         record = records[raw_address.upper()]
-        output = ROOT / args.source_root / f"{record['name']}.cpp"
+        source_name = cpp_identifier(record["name"])
+        output = ROOT / args.source_root / f"{source_name}.cpp"
         output.parent.mkdir(parents=True, exist_ok=True)
         if ghidra_dump is None:
             ranges = [(address, int(record["size"]))]
@@ -182,8 +191,8 @@ def main():
             code = image[start:start + size]
             if start < 0 or len(code) != size:
                 raise ValueError(f"Function range {segment_address:08X} is outside the mapped image")
-            name = (record["name"] if ghidra_dump is None else
-                    f"{record['name']}_segment_{index:02d}")
+            name = (source_name if ghidra_dump is None else
+                    f"{source_name}_segment_{index:02d}")
             source, relocations = render_function(name, segment_address, code, decoder, args.emit_all)
             sources.append(source)
             segment_records.append({

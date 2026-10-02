@@ -65770,8 +65770,8 @@
       "evidence": {
         "name_in_analysis": "FUN_5882d710",
         "called_by": "Main event loop `0x5882E060` calls it for queued event code `0x462` when global `0x589660D0` is nonzero (call at `0x5882E346`).",
-        "behavior": "Increments receiver field `+0x214`, formats the mapped text `Notify %5d` into its `+0x104` buffer, resolves the target record by the low-16-bit key through `0x5882D6C0`, and dispatches on the low 16 bits of the event subcode. Subcodes 1, 2, and 4 route to record parsing, state/virtual callbacks, and a constant-true helper; subcode `0x10` posts code `0x462` through `0x5882CC40`; subcode `0x20` resets a record, invokes its virtual callback, decrements a tracked count, closes its handle, and marks the record key `-1`.",
-        "uncertainty": "The event structure and key table types, record class, callback meanings, network handle semantics, and symbolic subcode names are unknown. The main-loop caller, counter/string writes, lookup, subcode comparisons, and delegate order are direct Ghidra observations; `Notify %5d` is a mapped format string."
+        "behavior": "Increments receiver field `+0x214`, formats the mapped text `Notify %5d` into its `+0x104` buffer, resolves the target record by the low-16-bit key through `0x5882D6C0`, and dispatches on the low 16 bits of the event subcode. Subcodes 1 (`FD_READ`), 2 (`FD_WRITE`), 4 (`FD_OOB`), 0x10 (`FD_CONNECT`), and 0x20 (`FD_CLOSE`) match Winsock async event values. Subcode 1 routes to record parsing; subcode `0x10` calls `0x5882CC40` to re-register message `0x462` with event mask `0x27`; subcodes 2 and 4 route to state/virtual callbacks and a constant-true helper; subcode `0x20` resets a record, invokes its virtual callback, decrements a tracked count, closes its handle, and marks the record key `-1`.",
+        "uncertainty": "The event structure and key table types, record class, and some virtual callback meanings remain unknown. The Core image's WSAAsyncSelect IAT identity and the event-code mapping are established, but the Core and Main captures are separate processes, so their shared socket/window object identity is not proven. The main-loop caller, counter/string writes, lookup, subcode comparisons, and delegate order are direct Ghidra observations; `Notify %5d` is a mapped format string."
       }
     },
     {
@@ -66006,8 +66006,8 @@
       "evidence": {
         "name_in_analysis": "FUN_5882c520",
         "called_by": "Custom-I/O event dispatcher `0x5882D710` invokes it for subcode 1; async record helper `0x5882C990` also calls it on the same context object.",
-        "behavior": "Maintains a growable receive buffer in the context object, queries and reads bytes through registered callbacks `0x58894550` and `0x58894534`, and parses complete records with a `0x14`-byte header. Each record must begin with DWORD `0x01020304`; the parser computes a weighted checksum across header bytes and payload bytes, then applies either a fixed xor or the table-based mixer `0x5848BCB0` according to context flags. A mismatch dispatches through virtual slot `+0x04`; a match dispatches through `+0x14`; one recognized record code triggers `0x5882CCF0` before the next record is consumed.",
-        "uncertainty": "The socket/stream callback ABI, context layout, header field names, payload schemas, checksum purpose, special record-code meanings, and callback virtual-slot contracts are unknown. Buffer growth/compaction, marker comparison, checksum arithmetic, record bounds, and dispatch branches follow Ghidra control flow; no captured network traffic was available."
+        "behavior": "Maintains a growable receive buffer in the context object, queries available bytes through `ioctlsocket` at callback slot `0x58894550` using request `FIONREAD` (`0x4004667F`), and reads through `WSARecv` at slot `0x58894534`. It parses complete records with a `0x14`-byte header. Each record must begin with DWORD `0x01020304`; the parser computes a weighted checksum across header bytes and payload bytes, then applies either a fixed xor or the table-based mixer `0x5848BCB0` according to context flags. A mismatch dispatches through virtual slot `+0x04`; a match dispatches through `+0x14`; one recognized record code triggers `0x5882CCF0` before the next record is consumed.",
+        "uncertainty": "The context layout, header field names, payload schemas, checksum purpose, special record-code meanings, and callback virtual-slot contracts are unknown. Callback API identities are established by matching the captured Core callback-slot values to the WS2_32 IAT; buffer growth/compaction, marker comparison, checksum arithmetic, record bounds, and dispatch branches follow Ghidra control flow. No captured network traffic was available."
       }
     },
     {
@@ -66109,9 +66109,9 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_5882cc40",
-        "called_by": "Event dispatcher `0x5882D710` calls it with subcode `0x27` for incoming event subcode `0x10`.",
-        "behavior": "Calls `0x5882C4C0` with constants/values from this call path, then passes its result and the DWORD at receiver offset `+4` to registered callback `0x58894538`; returns whether that callback's result differs from `-1`.",
-        "uncertainty": "The registered callback's posting/queue semantics and the getter's complete argument contract are not identified. The indirect call arguments and return test are directly visible in Ghidra."
+        "called_by": "Event dispatcher `0x5882D710` calls it with event mask `0x27` for incoming subcode `0x10` (`FD_CONNECT`).",
+        "behavior": "Calls `0x5882C4C0` on the owner at receiver `+0x2C` to obtain its DWORD at `+0x218`, then calls the Core function-pointer slot `0x58894538` (whose captured value matches the resolved `WS2_32!WSAAsyncSelect` IAT entry) with socket handle from receiver `+4`, that window value, message `0x462`, and mask `0x27` (`FD_READ | FD_WRITE | FD_OOB | FD_CLOSE`). Returns whether the API result differs from `-1`.",
+        "uncertainty": "The owner's concrete type and the cross-capture identity of the window remain unknown. The callback target is resolved from the captured Core slot value matching its WS2_32 IAT entry; the call arguments and return test are direct Ghidra observations."
       }
     },
     {
@@ -66138,8 +66138,8 @@
       "evidence": {
         "name_in_analysis": "FUN_5882c4e0",
         "called_by": "Receive parser `0x5882C520` uses it with request code `0x4004667F` before growing or filling the receive buffer.",
-        "behavior": "Calls registered callback `0x58894550` with the context handle at `+4` and its two supplied arguments; returns whether the callback result is not `-1`.",
-        "uncertainty": "The request code and callback contract are unknown. The forwarded arguments and boolean conversion are direct Ghidra observations."
+        "behavior": "Calls the `ioctlsocket` API through Core callback slot `0x58894550` with the context handle at `+4` and its two supplied arguments; the receive parser supplies request code `0x4004667F` (`FIONREAD`) to obtain available bytes. Returns whether the API result is not `-1`.",
+        "uncertainty": "The exact output-buffer ownership remains unknown. The callback target is resolved by matching the captured Core slot value to the `ioctlsocket` IAT entry; forwarded arguments and boolean conversion are direct Ghidra observations."
       }
     },
     {
@@ -66403,8 +66403,8 @@
       "evidence": {
         "name_in_analysis": "FUN_5882c990",
         "called_by": "Special-record response helper `0x5882CCF0` submits code `0x8002030E` through this routine; Ghidra also shows many client call sites sharing the same context helper.",
-        "behavior": "Builds a `0x14`-byte record header beginning with `0x01020304`, stores the message and supplied fields, computes a weighted checksum over the header and payload, and submits the header/payload through registered callback `0x58894530` using the context handle at `+4`. The send mode and checksum path change when context field `+0x44` is nonzero; an I/O error other than pending code `0x3E5` routes to cleanup `0x5882C440`.",
-        "uncertainty": "The callback's transport semantics, header field names, checksum purpose, payload ownership, and pending-error contract are not identified. Header construction, checksum arithmetic, callback arguments, and error comparison are direct Ghidra observations."
+        "behavior": "Builds a `0x14`-byte record header beginning with `0x01020304`, stores the message and supplied fields, computes a weighted checksum over the header and payload, and submits the header/payload through `WSASend` at Core callback slot `0x58894530` using the context handle at `+4`. The send mode and checksum path change when context field `+0x44` is nonzero; an I/O error other than pending code `0x3E5` routes to cleanup `0x5882C440`.",
+        "uncertainty": "Header field names, checksum purpose, payload ownership, and the pending-error contract are not identified. The callback target is resolved by matching the captured Core slot value to its WS2_32 IAT entry; header construction, checksum arithmetic, callback arguments, and error comparison are direct Ghidra observations."
       }
     },
     {

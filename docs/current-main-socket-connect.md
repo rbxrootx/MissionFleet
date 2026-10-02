@@ -37,6 +37,37 @@ The call targets are grounded in the mapped image: the pointer values at
 `0x5898C45C` equal the captured Main IAT entries for `gethostbyname`,
 `inet_addr`, `connect`, `WSASocketA`, `WSAAsyncSelect`, and `setsockopt`.
 
+## Relationship to the Core async-I/O dispatcher
+
+The Main and Core mapped images were captured in separate processes: Main PID
+47248 at `0x58730000`, and Core PID 42108 at `0x58480000`. Their mapped virtual
+ranges overlap, so they are independent analysis snapshots rather than a
+single process map. The Core trace below establishes a complete async-I/O
+sequence in that capture; it does not prove that the exact same socket and
+window objects were active in the captured Main process.
+
+Main initially registers message `0x462` with `WSAAsyncSelect` and mask
+`0x10` (`FD_CONNECT`). Core's dispatcher `0x5882D710` routes queued event code
+`0x462`; its subcode `0x10` path calls `0x5882CC40` with mask `0x27`. The Core
+slot `0x58894538` contains the same pointer as Core's `WS2_32!WSAAsyncSelect`
+IAT entry at `0x58D1300C`. The helper therefore calls
+`WSAAsyncSelect(socket, window, 0x462, 0x27)`, switching that socket after
+`FD_CONNECT` to `FD_READ | FD_WRITE | FD_OOB | FD_CLOSE`. Subcode `1`
+(`FD_READ`) calls Core parser `0x5882C520`; that parser asks `ioctlsocket` for
+`FIONREAD` and consumes available bytes through `WSARecv`. Core's output path
+uses `WSASend`. The callback-to-IAT matches and event flow are recorded in
+[the Core async-I/O notes](current-core-async-io-records.md).
+
+In Main's captured image, Ghidra references show one call through its
+`WSAAsyncSelect` IAT slot `0x5898C450`, at `0x58970FE1`. Main also pushes
+`0x462` at `0x588C4FCA` inside high-level game-event handler `0x588C4210`,
+called by `0x587BB700`; that path calls `0x5876BAF0(0x462, 0, 0, 0)` and then
+`0x58764D30`, and has not been tied to the socket context. This second use
+shows the number is not unique by itself. The phase change from initial
+`FD_CONNECT` registration to Core's `0x27` mask is directly reconstructed
+within their respective captures, but the separate PIDs leave the cross-image
+socket/window object identity unproven. No live event trace has been captured.
+
 The observed return rule is unusual and remains unlabeled: a nonzero `connect`
 result returns 1 and leaves the registration in place; a zero result calls
 `FUN_58971480` to unregister the handle and returns 0. The `WSAAsyncSelect`

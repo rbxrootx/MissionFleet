@@ -1,9 +1,14 @@
 import unittest
 
-from tools.generate_mapped_client_asm import parse_ghidra_body_ranges
+from tools.generate_mapped_client_asm import cpp_identifier, parse_ghidra_body_ranges
 
 
 class GhidraBodyRangeParsingTests(unittest.TestCase):
+    def test_sanitizes_ghidra_labels_for_cpp_symbols(self):
+        self.assertEqual(cpp_identifier("Catch_All@58902628"), "Catch_All_58902628")
+        self.assertEqual(cpp_identifier("FUN_58902440"), "FUN_58902440")
+        self.assertEqual(cpp_identifier("123"), "_123")
+
     def test_reads_inclusive_discontiguous_ranges(self):
         dump = """ENTRY 00001000
 NAME FUN_1000
