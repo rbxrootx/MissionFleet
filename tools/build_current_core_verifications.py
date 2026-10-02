@@ -73,6 +73,8 @@ ADDRESSES = (
     "5885ADCB", "5885B05C", "5885B067", "5885B0CB", "5885B11B", "5885B53B",
     "5885BB18", "5885BF85", "5885C3F2", "5885C4AD", "5885C568", "5885C670",
     "5885C778", "5885C7B2", "5885C7EC", "5885C826",
+    "5885B6F8", "5885B84E", "5885B86F", "5885B890", "5885B8B1",
+    "5885B8F0", "5885B97A", "5885BA04", "5885BA8E", "5885C860", "5885C9A8",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1941,6 +1943,72 @@ EVIDENCE = {
         "called_by": "Called by `0x5885C670` before the second parenthesized `NAN` payload check.",
         "behavior": "Parallel to `0x5885C7EC`, using the alternate character reader and its paired five-character lookup table.",
         "uncertainty": "The table bytes are not assigned a source-level token name; comparison count and return behavior are directly visible in Ghidra.",
+    },
+    "5885B6F8": {
+        "name_in_analysis": "FUN_5885b6f8",
+        "called_by": "Called by the 64-bit result converter `0x5885C9A8` for one of its special parser statuses.",
+        "behavior": "Writes a sign-controlled 64-bit special-value pattern: low DWORD 1 and high DWORD `0x7FF00000` with the supplied sign in bit 31.",
+        "uncertainty": "The caller's status code and resulting floating-point category are not named. The emitted bit pattern and store order are directly visible in Ghidra.",
+    },
+    "5885B84E": {
+        "name_in_analysis": "FUN_5885b84e",
+        "called_by": "Called by `0x5885C860` when its parser status is 0.",
+        "behavior": "Builds a two-DWORD local argument record from the supplied second value and zero, then forwards it with the first argument to `0x5885E370`.",
+        "uncertainty": "The record's field names and helper semantics are not recovered; forwarding arguments and initialization are directly visible in Ghidra.",
+    },
+    "5885B86F": {
+        "name_in_analysis": "FUN_5885b86f",
+        "called_by": "Called by `0x5885C9A8` when its parser status is 0.",
+        "behavior": "Builds a local two-DWORD argument record whose second field is 1, then forwards it with the supplied values to `0x5885E370`.",
+        "uncertainty": "The helper's record contract is not recovered. The flag construction and call arguments are directly visible in Ghidra.",
+    },
+    "5885B890": {
+        "name_in_analysis": "FUN_5885b890",
+        "called_by": "Called by `0x5885C860` when its parser status is 1.",
+        "behavior": "Builds a two-DWORD local argument record from the supplied second value and zero, then forwards it with the first argument to `0x5886006F`.",
+        "uncertainty": "The record's field names and helper semantics are not recovered; forwarding arguments and initialization are directly visible in Ghidra.",
+    },
+    "5885B8B1": {
+        "name_in_analysis": "FUN_5885b8b1",
+        "called_by": "Called by `0x5885C9A8` when its parser status is 1.",
+        "behavior": "Builds a local two-DWORD argument record whose second field is 1, then forwards it with the supplied values to `0x5886006F`.",
+        "uncertainty": "The helper's record contract is not recovered. The flag construction and call arguments are directly visible in Ghidra.",
+    },
+    "5885B8F0": {
+        "name_in_analysis": "FUN_5885b8f0",
+        "called_by": "Calls the numeric parser `0x5885BB18`, then passes its status and 780-byte intermediate record to the 32-bit result converter `0x5885C860`.",
+        "behavior": "Validates the input string and output capacity, sets error `0x16` and returns 1 for invalid pointers, otherwise parses into a stack intermediate record and converts to a one-word result. It conditionally clears a caller-provided byte when two saved status fields are zero.",
+        "uncertainty": "The full prototype is obscured by Ghidra's stack-argument reconstruction, and the conditionally cleared byte's role is unknown. The calls, stack buffer size, pointer checks, and field tests are direct observations.",
+    },
+    "5885B97A": {
+        "name_in_analysis": "FUN_5885b97a",
+        "called_by": "Calls `0x5885BB18` followed by the 64-bit result converter `0x5885C9A8`.",
+        "behavior": "Validates the input string and output capacity, parses into a 780-byte stack intermediate record, converts to a two-word result, and applies the same observed conditional output-byte clear as `0x5885B8F0`.",
+        "uncertainty": "The function's full prototype and the cleared byte's meaning are not recovered; validation, calls, stack buffer, and condition are directly visible in Ghidra.",
+    },
+    "5885BA04": {
+        "name_in_analysis": "FUN_5885ba04",
+        "called_by": "Calls the alternate numeric parser `0x5885BF85`, then passes its status and intermediate record to `0x5885C860`.",
+        "behavior": "Parallel to `0x5885B8F0` for the second parser path: validates input and output capacity, parses into a 780-byte stack record, converts to a one-word result, and applies the same conditional output-byte clear.",
+        "uncertainty": "The full prototype, distinction between parser variants, and cleared byte's meaning are not recovered. The code paths and shared converter are direct Ghidra evidence.",
+    },
+    "5885BA8E": {
+        "name_in_analysis": "FUN_5885ba8e",
+        "called_by": "Calls the alternate numeric parser `0x5885BF85`, then passes its status and intermediate record to `0x5885C9A8`.",
+        "behavior": "Parallel to `0x5885B97A` for the second parser path: validates input and output capacity, parses into a 780-byte stack record, converts to a two-word result, and applies the same conditional output-byte clear.",
+        "uncertainty": "The full prototype, distinction between parser variants, and cleared byte's meaning are not recovered. The code paths and shared converter are direct Ghidra evidence.",
+    },
+    "5885C860": {
+        "name_in_analysis": "FUN_5885c860",
+        "called_by": "Called by wrappers `0x5885B8F0` and `0x5885BA04`; delegates statuses 0 and 1 to `0x5885B84E` and `0x5885B890`.",
+        "behavior": "Maps parser statuses to 32-bit floating-point result encodings. The switch constructs signed zero and infinity-like exponent patterns, preserves selected intermediate bits for special cases, writes a canonical `0xFFC00000` pattern for status 6, and delegates ordinary conversion statuses 0 and 1 to dedicated helpers. It returns conversion/status values separately from the output word.",
+        "uncertainty": "The parser status names and exact IEEE exception policy are not recovered. Status dispatch, constants, sign-byte access at intermediate offset `0x308`, result writes, and helper calls are directly visible in Ghidra.",
+    },
+    "5885C9A8": {
+        "name_in_analysis": "FUN_5885c9a8",
+        "called_by": "Called by wrappers `0x5885B97A` and `0x5885BA8E`; delegates ordinary statuses to `0x5885B86F` and `0x5885B8B1`, and a special status to `0x5885B6F8`.",
+        "behavior": "Maps parser statuses to two-word 64-bit floating-point result encodings. It writes signed zero, infinity-like exponent patterns, and special-value payloads, and delegates ordinary conversion statuses 0 and 1 to dedicated helpers. It returns status values separately from the result record.",
+        "uncertainty": "The parser status names and exact exception policy are not recovered. Status dispatch, sign-byte access at offset `0x308`, high/low word writes, constants, and helper calls are directly visible in Ghidra.",
     },
 }
 
