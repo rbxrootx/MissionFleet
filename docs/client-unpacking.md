@@ -332,8 +332,11 @@ The full-screen constructor's common frame-control initializer `0x10032360`,
 recursive style and visibility setters `0x100FF160` and `0x100FF120`, text-like
 control initializer `0x10018600`, and paired-field setter `0x100188E0` are now
 byte-matched and tied back to their call sites in `0x1002C3D0`. The initializer
-clears a 0x80-byte buffer; the setter writes one value to offsets `+0x70` and
-`+0x74`, whose exact meaning remains uncertain. Four direct control helpers remain
+clears a 0x80-byte buffer. The setter is now reconstructed as a typed C++ method
+on an opaque `TextControl` layout, rather than an instruction-emitting stub;
+Visual C++ 6.0 SP5 `/O2 /GX-` recompiles its 13 bytes at 100% objdiff. It writes
+one value to offsets `+0x74` and `+0x70`, whose exact meaning remains uncertain.
+Four direct control helpers remain
 unmatched: `0x10103B80` and `0x10022F80`. The variant-control
 constructor pair `0x101047F0`/`0x10104F50` now byte-matches as well. Ghidra shows
 the base initializer allocating a 257-byte buffer when none is supplied, building

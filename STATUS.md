@@ -49,6 +49,12 @@ layout and `ShipStructureF/N/S###.spr` selection paths. Six complete ship layer
 pairs now decode through the corrected preview pipeline. See
 [client unpacking](docs/client-unpacking.md) for hashes, commands and limits.
 
+For the archived 2.062 client, the 13-byte paired text-control setter at
+`0x100188E0` is now a typed C++ method instead of an emitted-byte stub. The
+recorded Visual C++ 6.0 SP5 `/O2 /GX-` profile reproduces all 13 bytes at 100%
+objdiff. Its two field meanings remain unknown, and this source-quality gain
+does not advance the overall byte-match count.
+
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
 The installed mapped `Core.dll` slice now also covers ship-node construction,
