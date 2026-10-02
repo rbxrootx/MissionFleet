@@ -31,6 +31,7 @@ ADDRESSES = (
     "58F76B6B", "58C3A998", "58BF62F5", "58DDB193", "58BFF900",
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
     "58C319AB", "58D6F6B0", "58D6F58A", "58C5D37B", "58FAC690",
+    "58753590", "58753DE0", "587535C0", "58753E10",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -687,6 +688,30 @@ EVIDENCE = {
         "called_by": "Direct JMP from thunk 0x58C5D37B.",
         "behavior": "Executes a REP MOVSB sequence and then jumps to the shared JMP ESI stub at 0x58C84F0B.",
         "uncertainty": "The copy count, source/destination register meaning, and indirect ESI target are not established for the VMProtect runtime path.",
+    },
+    "58753590": {
+        "name_in_analysis": "FUN_58753590",
+        "called_by": "Directly used by wrapper 0x58753DE0 inside collection routine 0x587540C0.",
+        "behavior": "Walks source and destination pointers in 18-DWORD (0x48-byte) steps. For each element, when the destination is nonnull, it copies exactly 18 DWORDs; the source/destination advances are direct Ghidra observations.",
+        "uncertainty": "The 0x48-byte record's type and the reason the copy is conditional on the destination are unknown. The record stride and copied field count are directly visible.",
+    },
+    "58753DE0": {
+        "name_in_analysis": "FUN_58753de0",
+        "called_by": "Collection routine 0x587540C0 calls this from two insertion branches.",
+        "behavior": "Masks the low byte of the receiver pointer into a local value, then calls 0x58753590 with the supplied source range, receiver field at +8, and that mask value. Ghidra shows the same wrapper shape as 0x58753E10, but the target helper uses 0x48-byte records.",
+        "uncertainty": "The low-byte mask's semantic role and record type are unknown; arguments and call flow are directly visible.",
+    },
+    "587535C0": {
+        "name_in_analysis": "FUN_587535c0",
+        "called_by": "Directly used by wrapper 0x58753E10 inside collection routine 0x58754360.",
+        "behavior": "Walks source and destination pointers in 0x202-DWORD (0x808-byte) steps. For each element, when the destination is nonnull, it copies exactly 0x202 DWORDs; the source/destination advances are direct Ghidra observations.",
+        "uncertainty": "The 0x808-byte record's type and the reason the copy is conditional on the destination are unknown. The record stride and copied field count are directly visible.",
+    },
+    "58753E10": {
+        "name_in_analysis": "FUN_58753e10",
+        "called_by": "Collection routine 0x58754360 calls this from two insertion branches.",
+        "behavior": "Masks the low byte of the receiver pointer into a local value, then calls 0x587535C0 with the supplied source range, receiver field at +8, and that mask value. Ghidra shows the same wrapper shape as 0x58753DE0, but the target helper uses 0x808-byte records.",
+        "uncertainty": "The low-byte mask's semantic role and record type are unknown; arguments and call flow are directly visible.",
     },
 }
 

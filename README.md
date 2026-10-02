@@ -9,10 +9,12 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 6,240 matches cover 1,378,608 bytes (13.1684%) and are verified
+The current 6,244 matches cover 1,378,797 bytes (13.1702%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
+The latest current Main.dll fixed-record copy path is documented in
+[the Main record-copy notes](docs/current-main-record-copy.md).
 
 ```powershell
 python tools/generate_progress.py

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
-identified code bytes across six report units. There are 6,240 verified matches
-totaling 1,378,608 bytes (13.1684%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,244 verified matches
+totaling 1,378,797 bytes (13.1702%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -149,6 +149,14 @@ preserve transparent skips, clipping, target pitch, and the original `-1` row
 and `-2` image markers. The normal path rendered all 12 source layers on the
 six-ship visual board; the nondefault effect still needs live-client image
 comparison. See [client render path](docs/client-render-path.md).
+
+The installed current `Main.dll` fixed-record copy path now has four byte
+matches (189 bytes): two helpers copy records of `0x48` and `0x808` bytes,
+and two wrappers prepare ranges before calling those helpers. Ghidra caller
+cross-references confirm the wrappers feed vector insertion paths. The record
+types remain unnamed, and this static match does not establish runtime use or
+improve the playable-client status. See
+[the Main record-copy notes](docs/current-main-record-copy.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
