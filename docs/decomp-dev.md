@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,979 functions totaling 1,332,692 bytes (12.7302% of indexed code),
+credits 5,997 functions totaling 1,341,708 bytes (12.8163% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -71,8 +71,8 @@ trampolines, and logo/control screen construction. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
-capture-specific profile indexes 13,030 functions / 3,996,309
-bytes from installed `Core.dll`; 174 functions match 288,626 bytes, including
+capture-specific profile indexes 13,030 functions / 3,996,319
+bytes from installed `Core.dll`; 188 functions match 296,521 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -99,6 +99,11 @@ The three per-resource line-string vectors add 25 matches / 2,618 bytes; see
 The scene's deleting wrapper and per-resource string-vector cleanup add four
 matches / 1,121 bytes; see
 [`current-core-scene-resource-vector-cleanup.md`](current-core-scene-resource-vector-cleanup.md).
+The scene resource row population, scroll dispatch, and text-render callback add
+14 verified functions / 7,895 bytes; see
+[`current-core-scene-resource-row-view.md`](current-core-scene-resource-row-view.md)
+and
+[`current-core-scene-resource-text-renderer.md`](current-core-scene-resource-text-renderer.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.

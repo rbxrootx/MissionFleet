@@ -63759,6 +63759,142 @@
         "behavior": "If first-visible index is zero, sets the scrollbar to the mapped minimum and applies control value 0xFE. Otherwise decrements first-visible index, updates the floating scrollbar position, applies it through 0x587B5730, and refreshes the 15 rows through 0x586EB530.",
         "uncertainty": "The scrollbar constants' units and symbolic names are unknown. The lower-bound test, decrement, and refresh sequence are direct Ghidra observations."
       }
+    },
+    {
+      "address": "584849C0",
+      "name": "FUN_584849c0",
+      "size": 17,
+      "symbol": "_FUN_584849c0",
+      "source": "src/client-current/Core/FUN_584849c0.cpp",
+      "source_sha256": "b65b97bcbf655171c0082e0ae93f93fa4f771d6115c9df25fbfafeb3d36bdd50",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_584849c0",
+        "called_by": "Text-row renderer 0x587B6280 calls this with its renderer context before dispatching the draw operation through that context's virtual slot +8.",
+        "behavior": "Returns the DWORD at +0x50 of its receiver. In the row-render path, the returned value is passed as the final draw argument to the renderer interface.",
+        "uncertainty": "The renderer context type and the semantic name of its +0x50 field are not recovered. The getter and its use as a draw argument are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "584958D0",
+      "name": "FUN_584958d0",
+      "size": 23,
+      "symbol": "_FUN_584958d0",
+      "source": "src/client-current/Core/FUN_584958d0.cpp",
+      "source_sha256": "a34fd4113ed074b92500c200e4d12fe3e35671a7825d2667c6d1aa7b5e58796c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_584958d0",
+        "called_by": "Text-row renderer 0x587B6280 uses this width helper when applying its horizontal text-alignment flags.",
+        "behavior": "Returns the difference between receiver fields +0x1C and +0x14. The renderer adds the value or half of it to its text x position in the corresponding flag branches.",
+        "uncertainty": "The two fields' names, units, and complete alignment-flag contract are unknown. The subtraction and x-position uses are visible in the mapped code."
+      }
+    },
+    {
+      "address": "587B6280",
+      "name": "FUN_587b6280",
+      "size": 671,
+      "symbol": "_FUN_587b6280",
+      "source": "src/client-current/Core/FUN_587b6280.cpp",
+      "source_sha256": "79de24655f759c5001e3a54ac192322a3e418f7437c165abaeb7a975b5d39eaa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "587B650F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "58495710",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 155,
+          "target_address": "58495870",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "587B64AD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 371,
+          "target_address": "587B64AD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 383,
+          "target_address": "587B64AD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 422,
+          "target_address": "584958D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 454,
+          "target_address": "584958D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 532,
+          "target_address": "584849C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 642,
+          "target_address": "58495870",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 661,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6280",
+        "called_by": "Installed Core vtable address point 0x58894C58 stores this function at slot +0x14; text-row constructor 0x584823B0 installs that vtable and allocates the row's 0x80-byte text buffer at +0x6C.",
+        "behavior": "When node flag bit 0 is set, dispatches negative-order child render callbacks before its own draw, intersects the node rectangle with the incoming clip, computes the text origin, and passes the row's +0x6C text buffer and style fields to the renderer object at +0x50 through virtual slot +8. It then dispatches the remaining child callbacks.",
+        "uncertainty": "The renderer interface's concrete implementation, text encoding, full style-flag meanings, child-list sentinel contract, and visible pixels are unresolved. Vtable membership, clipping arithmetic, buffer/style arguments, and virtual call order are directly visible in Ghidra and the mapped image."
+      }
     }
   ]
 }

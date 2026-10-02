@@ -19,6 +19,7 @@ ADDRESSES = (
     "58504920", "585071C0", "584A3D70", "58488040",
     "586EBCD0", "586E7EF0", "586E9070", "586E9510", "586EBB80", "586EBD10",
     "584AA480", "584860A0", "584C5D40", "586E94F0", "58507730",
+    "584849C0", "584958D0", "587B6280",
     "586E9880", "586E9AF0", "586EAA50", "586EB530", "586EB640", "586EB730",
     "587BA830", "58800A60", "5880D420",
     "588009C0", "58800A30", "588099F0",
@@ -129,6 +130,18 @@ EVIDENCE = {
         "behavior": "Returns the address of element `index` in the vector: begin + index * 0x18.",
         "uncertainty": "The helper is an indexed address calculation. Element layout and string contents are established by the separately mapped string/vector helpers; the element's exact source-level type is not named.",
     },
+    "584849C0": {
+        "name_in_analysis": "FUN_584849c0",
+        "called_by": "Text-row renderer 0x587B6280 calls this with its renderer context before dispatching the draw operation through that context's virtual slot +8.",
+        "behavior": "Returns the DWORD at +0x50 of its receiver. In the row-render path, the returned value is passed as the final draw argument to the renderer interface.",
+        "uncertainty": "The renderer context type and the semantic name of its +0x50 field are not recovered. The getter and its use as a draw argument are direct Ghidra observations.",
+    },
+    "584958D0": {
+        "name_in_analysis": "FUN_584958d0",
+        "called_by": "Text-row renderer 0x587B6280 uses this width helper when applying its horizontal text-alignment flags.",
+        "behavior": "Returns the difference between receiver fields +0x1C and +0x14. The renderer adds the value or half of it to its text x position in the corresponding flag branches.",
+        "uncertainty": "The two fields' names, units, and complete alignment-flag contract are unknown. The subtraction and x-position uses are visible in the mapped code.",
+    },
     "586EB530": {
         "name_in_analysis": "FUN_586eb530",
         "called_by": "Tab selection 0x586E9880, page-up/down helpers 0x586EB640 and 0x586EB730, input handler 0x586E9AF0, and state updater 0x586EAA50 call it to refresh the selected resource's rows.",
@@ -164,6 +177,12 @@ EVIDENCE = {
         "called_by": "Ghidra records the routine among callbacks that invoke 0x586EB530 to repopulate scene rows.",
         "behavior": "When the receiver's enable/state bits select state 1, it updates grouped control values including 15 repeated entries and refreshes the selected resource rows through 0x586EB530; state 4 applies another group of control updates, while state 5 calls two methods on a stored interface after a counter reaches 0x0C. It also walks an intrusive callback list stored at +0x3C.",
         "uncertainty": "The control-state meanings, relationship of each numeric value to animation/layout, interface contract, and list-node semantics remain unresolved. State tests, repeated group sizes, row-refresh call, counter threshold, and callback traversal are visible in Ghidra.",
+    },
+    "587B6280": {
+        "name_in_analysis": "FUN_587b6280",
+        "called_by": "Installed Core vtable address point 0x58894C58 stores this function at slot +0x14; text-row constructor 0x584823B0 installs that vtable and allocates the row's 0x80-byte text buffer at +0x6C.",
+        "behavior": "When node flag bit 0 is set, dispatches negative-order child render callbacks before its own draw, intersects the node rectangle with the incoming clip, computes the text origin, and passes the row's +0x6C text buffer and style fields to the renderer object at +0x50 through virtual slot +8. It then dispatches the remaining child callbacks.",
+        "uncertainty": "The renderer interface's concrete implementation, text encoding, full style-flag meanings, child-list sentinel contract, and visible pixels are unresolved. Vtable membership, clipping arithmetic, buffer/style arguments, and virtual call order are directly visible in Ghidra and the mapped image.",
     },
     "58797A90": {
         "name_in_analysis": "FUN_58797a90",
