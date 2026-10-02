@@ -74,6 +74,24 @@ The mapped-byte evidence and audit operands are pinned in
 [`FUN_587d6a60.cpp`](../src/client-current/Main/FUN_587d6a60.cpp) and the
 verification inventory.
 
+Its second direct caller, `FUN_58871de0`, is now also byte-matched across its
+contiguous 385-byte Ghidra body. The only direct caller is `FUN_5877a5d0` at
+`0x5877A629`; the mapped instructions load the receiver into ECX and push ESI
+for the second parameter. The caller reaches it only when its `+0x254` field
+is nonzero. The callee examines up to 32 pointers from receiver `+0xF8`, tests
+bit 0 at each pointed-to object's `+0x24`, and compares global values at
+`0x58A284CC/+0x58A284D0` with bounds assembled from object offsets `+4`, `+8`,
+`+0x14`, `+0x18`, `+0x1C`, and `+0x20`. On observed branches it calls
+`FUN_588e7700`, `FUN_5897cc36`, and the already matched `FUN_587d6a60`; it also
+calls `FUN_58970c70` with literal `0x80011035` and values read or formed from
+the second parameter and selected object. A later bounds check uses receiver
+`+0xA0` and may pass `0xFFFFFFFF` to the same call target. These facts support
+a connected path into the `0x80011035` dispatcher route, but field meanings,
+coordinate semantics, and the roles of the two opaque callees remain
+unresolved. No live execution has been captured. See
+[`FUN_58871de0.cpp`](../src/client-current/Main/FUN_58871de0.cpp) for the exact
+matched body and the inventory for its 20 checked operands.
+
 [`FUN_587bb700.cpp`](../src/client-current/Main/FUN_587bb700.cpp) preserves the
 complete dispatcher instruction stream across all 17 Ghidra body ranges. Each
 range compiles as a separate naked x86 symbol so relative branch bytes retain

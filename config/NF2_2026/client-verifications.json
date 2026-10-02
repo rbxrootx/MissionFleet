@@ -83277,6 +83277,148 @@
         "behavior": "Ghidra decompilation and mapped instructions show an unsigned index check for 0 through 3, selection of a pointer from receiver +0x8C with four-byte stride, a call to FUN_58907990 with global 0x58A248FC, and an indirect transfer through the selected object's vtable entry at +4. Values above 3 return without dispatch.",
         "uncertainty": "Ghidra warns that it could not recover the indirect call cleanly. The vtable target signature and meaning, selected-table type and lifetime, and runtime route behavior are unresolved."
       }
+    },
+    {
+      "address": "58871DE0",
+      "name": "FUN_58871de0",
+      "size": 385,
+      "symbol": "_FUN_58871de0",
+      "source": "src/client-current/Main/FUN_58871de0.cpp",
+      "source_sha256": "2eb6968c62b6082221317c7f347afce31563f69e67daee67413e5413ea05decb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 27,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 180,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "80011035",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 243,
+          "target_address": "588E7700",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 253,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 325,
+          "target_address": "80011035",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 330,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 336,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 341,
+          "target_address": "58871E47",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "5897CC36",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 351,
+          "target_address": "80000001",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 364,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 370,
+          "target_address": "587D6A60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 376,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 381,
+          "target_address": "58871E47",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58871de0",
+        "called_by": "Ghidra finds one direct caller at 0x5877A629 in FUN_5877a5d0. Mapped caller instructions load ECX from [0x58A24598]+0xDB4, push ESI as the stack argument, then call this function.",
+        "behavior": "Ghidra body is contiguous from 0x58871DE0 through 0x58871F60 (385 bytes). It iterates up to 32 pointers from receiver +0xF8, tests bit 0 at each object's +0x24, compares two global DWORD values at 0x58A284CC/+0x58A284D0 with bounds derived from object offsets +4/+8/+0x14/+0x18/+0x1C/+0x20, and branches on field +0x60. The observed calls include FUN_588e7700, FUN_5897cc36, FUN_587d6a60, and FUN_58970c70. FUN_58970c70 receives literal 0x80011035 on two paths, with values read from the second parameter at +0x50 and either a packed value or 0xFFFFFFFF.",
+        "uncertainty": "The checked objects, global values, offsets, and event fields do not have confirmed semantic types. FUN_588e7700, FUN_58970c70, and the indirect helper behavior are not fully recovered, and no runtime execution was observed."
+      }
     }
   ]
 }
