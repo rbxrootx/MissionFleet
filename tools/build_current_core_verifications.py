@@ -70,6 +70,7 @@ ADDRESSES = (
     "5885A7C9", "5885A821", "5885A898", "5885AA66", "5885AAC1",
     "5885AAB5", "5885AB61", "5885ABF7", "5885AD58", "5885AC64",
     "5885ADC3",
+    "5885ADCB", "5885B05C", "5885B067", "5885B0CB", "5885B11B", "5885B53B",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1842,6 +1843,42 @@ EVIDENCE = {
         "called_by": "Cleanup tail of `0x5885AD58`.",
         "behavior": "Forwards the current object context to callback wrapper `0x58859D16`.",
         "uncertainty": "The callback's lifecycle meaning is unknown; forwarding is directly visible in Ghidra.",
+    },
+    "5885ADCB": {
+        "name_in_analysis": "FUN_5885adcb",
+        "called_by": "Called by the 11-byte adapter `0x5885B05C`; Ghidra shows direct calls to date arithmetic, UTC-offset, and local-time normalization helpers.",
+        "behavior": "Validates the input pointers and calendar fields, initializes a nine-DWORD output record to -1, reads timezone-related values through `0x5887141B`, `0x58871447`, and `0x58871473`, and normalizes the supplied date/time through `0x58862705`. For the extended range it applies offset and day/week/year adjustments; invalid input sets error `0x16`.",
+        "uncertainty": "The nine output fields and timezone helpers' contracts are not symbolically named. Their field writes, range branches, and helper calls are direct Ghidra observations; calendar/timezone interpretation follows those operations.",
+    },
+    "5885B05C": {
+        "name_in_analysis": "FUN_5885b05c",
+        "called_by": "Called twice by `0x5885B11B` while applying timezone-related adjustments.",
+        "behavior": "Passes both arguments directly to `0x5885ADCB` and returns its result.",
+        "uncertainty": "It is a forwarding adapter; the caller's timezone-conversion intent is inferred from surrounding Ghidra control flow.",
+    },
+    "5885B067": {
+        "name_in_analysis": "FUN_5885b067",
+        "called_by": "Called by `0x5885B11B` to compute year-dependent day offsets; Ghidra shows its only callee is the signed 64-bit division helper `0x5887D0E0`.",
+        "behavior": "Computes a signed 64-bit day offset from the year using 400-year, 100-year, and 4-year cycle divisions, then subtracts the fixed epoch adjustment `0x11`.",
+        "uncertainty": "The epoch convention and exact date origin are not named. The arithmetic and constants are directly visible in Ghidra.",
+    },
+    "5885B0CB": {
+        "name_in_analysis": "FUN_5885b0cb",
+        "called_by": "Called by `0x5885B11B` and `0x5885ADCB`; Ghidra shows it tests remainders using `0x5887D190`.",
+        "behavior": "Tests the supplied year against divisors 4, 100, and 400, returning a nonzero value for years divisible by 4 except century years not divisible by 400. This is the standard Gregorian leap-year predicate as implemented by the original code.",
+        "uncertainty": "The function's return convention is represented through the low DWORD of a decompiler-composed value; exact caller use is visible, but no source-level name is present.",
+    },
+    "5885B11B": {
+        "name_in_analysis": "FUN_5885b11b",
+        "called_by": "Called by wrapper `0x5885B53B`; its own direct callees include the year-offset helper `0x5885B067`, leap-year predicate `0x5885B0CB`, and normalizer `0x58862705`.",
+        "behavior": "Normalizes a nine-DWORD calendar/time record. It carries out-of-range months into the year, uses a month-length table and leap-year checks to normalize the day, then carries seconds into minutes, minutes into hours, and hours into days using wide division helpers. With `param_2 == 0` it delegates final normalization to `0x58862705`; otherwise it applies timezone-related adjustments through `0x5886867D` and `0x5885B05C`. On failure it stores error `0x16` and returns -1:-1.",
+        "uncertainty": "The record's field names, epoch, and exact mode names are not available. The field accesses, carry logic, helper calls, error path, and return construction are directly visible in Ghidra.",
+    },
+    "5885B53B": {
+        "name_in_analysis": "FUN_5885b53b",
+        "called_by": "Ghidra decompiles this 19-byte function as a direct caller of `0x5885B11B`.",
+        "behavior": "Forwards its argument to `0x5885B11B` with mode value 1, then returns.",
+        "uncertainty": "The wrapper discards the callee's returned value in the decompiled prototype; whether that reflects the original calling convention or a Ghidra prototype artifact is not established.",
     },
 }
 
