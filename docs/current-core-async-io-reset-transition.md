@@ -22,7 +22,9 @@ helper passes the first record's leading value to `0x58863C1C`, supplies the
 second record in ECX to `0x58857887`, and gives the third record to
 `0x58857860`; it also calls `0x58832760` with table `0x588ED120` and count 8.
 These calls and record placements are direct disassembly/decompiler evidence,
-but the record schemas and helper contracts remain unknown.
+but the record schemas and helper contracts remain unknown. The one-time
+initializer, callback-table entries, and cleanup path are traced in
+[the runtime-state initializer notes](current-core-runtime-state-initializer.md).
 
 If the third argument is still zero, `0x5885796F` calls `0x5886F1DC`. When that
 helper returns zero, it calls `0x5886F17D`, which reads bit 0 of the DWORD at

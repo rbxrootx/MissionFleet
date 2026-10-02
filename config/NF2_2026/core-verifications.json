@@ -67046,6 +67046,608 @@
         "behavior": "Forwards its first argument to `0x5885796F` with mode `2` and third argument `0`.",
         "uncertainty": "The mode value's semantic name and the callers' state-change intent remain unknown; argument values and callers are direct Ghidra observations."
       }
+    },
+    {
+      "address": "58857887",
+      "name": "FUN_58857887",
+      "size": 196,
+      "symbol": "_FUN_58857887",
+      "source": "src/client-current/Core/FUN_58857887.cpp",
+      "source_sha256": "6a11836dd979c1b4311a98a1fae239f02a99b9510a23bd7f0f9b3998b7925866",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED100",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 16,
+          "target_address": "5896960C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5885793B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "58969604",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58969608",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "5885786C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "589698A8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "589698B4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 108,
+          "target_address": "58865C2B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "5889466C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "5889465C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "58865E63",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "58894674",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58894670",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 154,
+          "target_address": "58865E63",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 169,
+          "target_address": "5896960C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58857887",
+        "called_by": "Reset-record helper `0x5885781F` supplies this function with the record pointer in ECX.",
+        "behavior": "Initializes a local record through `0x58832760(&0x588ED100, 0x14)`, checks completion byte `0x5896960C`, and sets lock word `0x58969604` under LOCK. Depending on the first input value, it optionally decodes and calls the value in `0x58969608`, then calls `0x58865C2B` with one of two global records. It executes the callback ranges `[0x5889465C,0x5889466C)` for input value zero and `[0x58894670,0x58894674)` unconditionally; if the second pointed value is zero, it sets completion byte and the third pointed byte to one.",
+        "uncertainty": "The argument record schema, lock protocol, encoded indirect target, global record meanings, callback purposes, and state flag roles are unresolved. The address ranges, branch values, writes, and call order are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5885786C",
+      "name": "FUN_5885786c",
+      "size": 27,
+      "symbol": "_FUN_5885786c",
+      "source": "src/client-current/Core/FUN_5885786c.cpp",
+      "source_sha256": "cf82af80c60bec8ce6a9ebd84777288944ab5f98be12705782352a966f825b49",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885786c",
+        "called_by": "One-time runtime initializer `0x58857887` uses it to transform the stored value at `0x58969608`; state handler `0x5887316E` also calls it.",
+        "behavior": "XORs the input with global `0x58906040`, then rotates the result right by the low five bits of that global value.",
+        "uncertainty": "The global's runtime identity and the transformed value's semantic role are unknown; arithmetic and call sites are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58865E63",
+      "name": "FUN_58865e63",
+      "size": 43,
+      "symbol": "_FUN_58865e63",
+      "source": "src/client-current/Core/FUN_58865e63.cpp",
+      "source_sha256": "7e4c209a3d61cf7e5b8b3f282a72f56cc492a48af1cda02954ce26b63d1edb15",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58865e63",
+        "called_by": "One-time runtime initializer `0x58857887` invokes this for two callback ranges.",
+        "behavior": "Walks a half-open range of DWORD function pointers, skips null entries, and invokes each nonnull entry indirectly.",
+        "uncertainty": "The callback ABI and array lifecycle are unresolved. Range iteration, null check, and indirect invocation are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58865C2B",
+      "name": "FUN_58865c2b",
+      "size": 57,
+      "symbol": "_FUN_58865c2b",
+      "source": "src/client-current/Core/FUN_58865c2b.cpp",
+      "source_sha256": "cf98f890da100159a6cd1ec2f9f6764bc82bec6d222c9f43ba3ab7600a212fb8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58892DB1",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832538",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58865972",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58832515",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58865c2b",
+        "called_by": "Initializer `0x58857887` passes one of two mapped global records when its first pointed value is 0 or 1.",
+        "behavior": "Calls `0x58832538(0x10)`, prepares local records with two fields set to 2, and passes their addresses to `0x58865972`.",
+        "uncertainty": "The helper contract and local record meaning are unknown; arguments and order are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58865972",
+      "name": "FUN_58865972",
+      "size": 76,
+      "symbol": "_FUN_58865972",
+      "source": "src/client-current/Core/FUN_58865972.cpp",
+      "source_sha256": "f5b06ab89e6686c421159d37b826614d936b1efaae3c084b3bcbcfbc452ab98f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED350",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "58865B3B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "588659C1",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58865972",
+        "called_by": "Record helper `0x58865C2B` constructs and invokes this routine.",
+        "behavior": "Initializes a 12-byte local record through `0x58832760(&0x588ED350, 0x0C)`, calls `0x58863C1C` with the first record's leading value, obtains a result from `0x58865B3B`, cleans the third record field through `0x588659C1`, and returns the result.",
+        "uncertainty": "The record type, callback-table ownership, and return-code meaning are unresolved. Initialization and helper order are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58865B3B",
+      "name": "FUN_58865b3b",
+      "size": 218,
+      "symbol": "_FUN_58865b3b",
+      "source": "src/client-current/Core/FUN_58865b3b.cpp",
+      "source_sha256": "61b1de56a142224f7a8013a817536473db23546051f98a7792e099c3dcfbbe33",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 27,
+          "target_address": "58865C11",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58865C0E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58865C0E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 123,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 180,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58865b3b",
+        "called_by": "Record helper `0x58865972` uses this as its result-producing operation.",
+        "behavior": "Reads two encoded range endpoints through its input record and decodes them with global `0x58906040`. It walks the range backward; for each entry that differs from the cookie, it overwrites the entry with the cookie before decoding and invoking it. It refreshes the endpoints after callbacks, frees a non-sentinel allocation through `0x5886CC10`, then writes the cookie to three record fields. It returns `-1` for a null start pointer and zero otherwise.",
+        "uncertainty": "The input record type, encoding contract, callback ABI, and allocator ownership are not recovered. Endpoint reads, decode arithmetic, mutation order, callback loop, release call, and return conditions are visible in Ghidra."
+      }
+    },
+    {
+      "address": "588659C1",
+      "name": "FUN_588659c1",
+      "size": 12,
+      "symbol": "_FUN_588659c1",
+      "source": "src/client-current/Core/FUN_588659c1.cpp",
+      "source_sha256": "c66d19e7561526764246adcb8252500eb5211caddb5bb44ce3632c90957818f0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588659c1",
+        "called_by": "Cleanup path at the end of `0x58865972` passes it the third record's leading value.",
+        "behavior": "Dereferences the value at its caller's third stack argument and forwards that DWORD to `0x58863C64`.",
+        "uncertainty": "The pointed-to record and cleanup API meaning are unknown; the dereference and forwarding call are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "588690DF",
+      "name": "FUN_588690df",
+      "size": 39,
+      "symbol": "_FUN_588690df",
+      "source": "src/client-current/Core/FUN_588690df.cpp",
+      "source_sha256": "f9b9756cc3bdda9f296b9c69639c0526825c789387eab5e2ac94678e74e23690",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 33,
+          "target_address": "58868DAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588690df",
+        "called_by": "Runtime initializer callback table at `0x58894660` contains this function pointer.",
+        "behavior": "Creates two local DWORD values set to 4 and one zero byte, then passes their addresses to `0x58868DAB`.",
+        "uncertainty": "The local record schema and initializer contract are unknown; the callback-table entry, local values, and call are direct observations."
+      }
+    },
+    {
+      "address": "5887C5BB",
+      "name": "FUN_5887c5bb",
+      "size": 23,
+      "symbol": "_FUN_5887c5bb",
+      "source": "src/client-current/Core/FUN_5887c5bb.cpp",
+      "source_sha256": "2bc058628e11b9e679450240592dba7313bd34e69b80453774b02eebe1c688c9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58907D30",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "588942F8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887c5bb",
+        "called_by": "Runtime initializer callback table at `0x58894664` contains this function pointer.",
+        "behavior": "Reads global `0x58907D30`; if it is neither `-1` nor `-2`, passes it to callback slot `0x588942F8`.",
+        "uncertainty": "The global's handle/state meaning and callback ABI are unknown; the sentinel checks and conditional callback are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58868DAB",
+      "name": "FUN_58868dab",
+      "size": 98,
+      "symbol": "_FUN_58868dab",
+      "source": "src/client-current/Core/FUN_58868dab.cpp",
+      "source_sha256": "66122d506331f51e94e2ed3e53ffdf915665e1b4e59890e72ada4348fec66b65",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED490",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58969984",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58907460",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58969988",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "588762A7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "58868E0D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58868dab",
+        "called_by": "Runtime initialization callback `0x588690DF` passes its three local record addresses here.",
+        "behavior": "Initializes a 12-byte local record using `0x58832760(&0x588ED490, 0x0C)`, calls `0x58863C1C` with the leading input value, conditionally transforms the global pointer at `0x58969984` through `0x588762A7` when it differs from sentinel `0x58907460`, then calls `0x58868E0D`.",
+        "uncertainty": "The state object, sentinel meaning, callback contracts, and purpose of the transformed global pointer remain unknown. The one-entry range, equality guard, and call order are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58859C70",
+      "name": "FUN_58859c70",
+      "size": 76,
+      "symbol": "_FUN_58859c70",
+      "source": "src/client-current/Core/FUN_58859c70.cpp",
+      "source_sha256": "626e55e9259ce5339328e700e0cbfe24a6fd4c0c5d0fb71326604f3b953a08c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "5885A030",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 9,
+          "target_address": "588701D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 16,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "5886CE81",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58894218",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58969618",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58859c70",
+        "called_by": "The third nonnull pointer in initializer callback range `[0x5889465C,0x5889466C)` resolves to this code address. Ghidra originally had no function boundary here; the entry was seeded from that mapped pointer and disassembled as a 76-byte function.",
+        "behavior": "Calls `0x5885A030` and `0x588701D2`, then walks three DWORD pointers from global `0x58969618` in four-byte steps. For each pointer it calls `0x5886CE81` on the stored value and callback slot `0x58894218` on that value plus `0x20`. It releases the array through `0x5886CC10`, then clears global `0x58969618`.",
+        "uncertainty": "The array element type, callback ABI, and ownership semantics are unknown. Its callback-table address, three-element loop, call order, release, and global clear are directly visible in the seeded Ghidra function."
+      }
     }
   ]
 }

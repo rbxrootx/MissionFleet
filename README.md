@@ -6,10 +6,10 @@ C pseudocode are available locally. **Start with [the decompilation project](dec
 and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
 The matching project has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
-Its public-safe inventory covers 42,459 functions across the login, game,
+Its public-safe inventory covers 42,460 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 6,045 matches cover 1,355,125 bytes (12.9445%) and are verified
+The current 6,056 matches cover 1,355,990 bytes (12.9526%) and are verified
 individually at 100.0% by objdiff.
 
 ```powershell

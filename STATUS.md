@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,459 functions and 10,468,770
-identified code bytes across six report units. There are 6,045 verified matches
-totaling 1,355,125 bytes (12.9445%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,460 functions and 10,468,846
+identified code bytes across six report units. There are 6,056 verified matches
+totaling 1,355,990 bytes (12.9526%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -80,6 +80,11 @@ CLR-directory check, resolution of `mscoree.dll` / `CorExitProcess`, state
 record calls, a TEB policy-bit read, and an `INT3` path; callback ABIs and the
 breakpoint's handling remain unresolved. See
 [reset transition evidence](docs/current-core-async-io-reset-transition.md).
+Its one-time callback initializer and callback-table entries add eleven exact
+matches / 865 bytes; following a mapped callback pointer exposed and indexed a
+76-byte function Ghidra had not assigned a boundary. The callback records and
+runtime state meanings remain unresolved. See
+[initializer evidence](docs/current-core-runtime-state-initializer.md).
 The child-field accessor at `0x584869C0` adds one 17-byte exact match; its
 `receiver +4` return is established, while its coordinate meaning remains an
 inference from placement call sites. See

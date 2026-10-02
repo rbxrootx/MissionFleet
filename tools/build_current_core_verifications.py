@@ -56,6 +56,9 @@ ADDRESSES = (
     "5882D330", "5882D2F0", "587B41E0", "58857B5A",
     "5885796F", "58857A5B", "58857A9D", "5885781F",
     "5886F1DC", "5886F17D", "58857A2D", "58857B3D",
+    "58857887", "5885786C", "58865E63", "58865C2B", "58865972",
+    "58865B3B", "588659C1", "588690DF", "5887C5BB", "58868DAB",
+    "58859C70",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1474,6 +1477,72 @@ EVIDENCE = {
         "called_by": "Event/state handlers `0x58862710` and `0x5887316E` call this wrapper.",
         "behavior": "Forwards its first argument to `0x5885796F` with mode `2` and third argument `0`.",
         "uncertainty": "The mode value's semantic name and the callers' state-change intent remain unknown; argument values and callers are direct Ghidra observations.",
+    },
+    "58857887": {
+        "name_in_analysis": "FUN_58857887",
+        "called_by": "Reset-record helper `0x5885781F` supplies this function with the record pointer in ECX.",
+        "behavior": "Initializes a local record through `0x58832760(&0x588ED100, 0x14)`, checks completion byte `0x5896960C`, and sets lock word `0x58969604` under LOCK. Depending on the first input value, it optionally decodes and calls the value in `0x58969608`, then calls `0x58865C2B` with one of two global records. It executes the callback ranges `[0x5889465C,0x5889466C)` for input value zero and `[0x58894670,0x58894674)` unconditionally; if the second pointed value is zero, it sets completion byte and the third pointed byte to one.",
+        "uncertainty": "The argument record schema, lock protocol, encoded indirect target, global record meanings, callback purposes, and state flag roles are unresolved. The address ranges, branch values, writes, and call order are direct Ghidra observations.",
+    },
+    "5885786C": {
+        "name_in_analysis": "FUN_5885786c",
+        "called_by": "One-time runtime initializer `0x58857887` uses it to transform the stored value at `0x58969608`; state handler `0x5887316E` also calls it.",
+        "behavior": "XORs the input with global `0x58906040`, then rotates the result right by the low five bits of that global value.",
+        "uncertainty": "The global's runtime identity and the transformed value's semantic role are unknown; arithmetic and call sites are direct Ghidra observations.",
+    },
+    "58865E63": {
+        "name_in_analysis": "FUN_58865e63",
+        "called_by": "One-time runtime initializer `0x58857887` invokes this for two callback ranges.",
+        "behavior": "Walks a half-open range of DWORD function pointers, skips null entries, and invokes each nonnull entry indirectly.",
+        "uncertainty": "The callback ABI and array lifecycle are unresolved. Range iteration, null check, and indirect invocation are directly visible in Ghidra.",
+    },
+    "58865C2B": {
+        "name_in_analysis": "FUN_58865c2b",
+        "called_by": "Initializer `0x58857887` passes one of two mapped global records when its first pointed value is 0 or 1.",
+        "behavior": "Calls `0x58832538(0x10)`, prepares local records with two fields set to 2, and passes their addresses to `0x58865972`.",
+        "uncertainty": "The helper contract and local record meaning are unknown; arguments and order are direct Ghidra observations.",
+    },
+    "58865972": {
+        "name_in_analysis": "FUN_58865972",
+        "called_by": "Record helper `0x58865C2B` constructs and invokes this routine.",
+        "behavior": "Initializes a 12-byte local record through `0x58832760(&0x588ED350, 0x0C)`, calls `0x58863C1C` with the first record's leading value, obtains a result from `0x58865B3B`, cleans the third record field through `0x588659C1`, and returns the result.",
+        "uncertainty": "The record type, callback-table ownership, and return-code meaning are unresolved. Initialization and helper order are direct Ghidra observations.",
+    },
+    "58865B3B": {
+        "name_in_analysis": "FUN_58865b3b",
+        "called_by": "Record helper `0x58865972` uses this as its result-producing operation.",
+        "behavior": "Reads two encoded range endpoints through its input record and decodes them with global `0x58906040`. It walks the range backward; for each entry that differs from the cookie, it overwrites the entry with the cookie before decoding and invoking it. It refreshes the endpoints after callbacks, frees a non-sentinel allocation through `0x5886CC10`, then writes the cookie to three record fields. It returns `-1` for a null start pointer and zero otherwise.",
+        "uncertainty": "The input record type, encoding contract, callback ABI, and allocator ownership are not recovered. Endpoint reads, decode arithmetic, mutation order, callback loop, release call, and return conditions are visible in Ghidra.",
+    },
+    "588659C1": {
+        "name_in_analysis": "FUN_588659c1",
+        "called_by": "Cleanup path at the end of `0x58865972` passes it the third record's leading value.",
+        "behavior": "Dereferences the value at its caller's third stack argument and forwards that DWORD to `0x58863C64`.",
+        "uncertainty": "The pointed-to record and cleanup API meaning are unknown; the dereference and forwarding call are direct Ghidra observations.",
+    },
+    "588690DF": {
+        "name_in_analysis": "FUN_588690df",
+        "called_by": "Runtime initializer callback table at `0x58894660` contains this function pointer.",
+        "behavior": "Creates two local DWORD values set to 4 and one zero byte, then passes their addresses to `0x58868DAB`.",
+        "uncertainty": "The local record schema and initializer contract are unknown; the callback-table entry, local values, and call are direct observations.",
+    },
+    "5887C5BB": {
+        "name_in_analysis": "FUN_5887c5bb",
+        "called_by": "Runtime initializer callback table at `0x58894664` contains this function pointer.",
+        "behavior": "Reads global `0x58907D30`; if it is neither `-1` nor `-2`, passes it to callback slot `0x588942F8`.",
+        "uncertainty": "The global's handle/state meaning and callback ABI are unknown; the sentinel checks and conditional callback are directly visible in Ghidra.",
+    },
+    "58868DAB": {
+        "name_in_analysis": "FUN_58868dab",
+        "called_by": "Runtime initialization callback `0x588690DF` passes its three local record addresses here.",
+        "behavior": "Initializes a 12-byte local record using `0x58832760(&0x588ED490, 0x0C)`, calls `0x58863C1C` with the leading input value, conditionally transforms the global pointer at `0x58969984` through `0x588762A7` when it differs from sentinel `0x58907460`, then calls `0x58868E0D`.",
+        "uncertainty": "The state object, sentinel meaning, callback contracts, and purpose of the transformed global pointer remain unknown. The one-entry range, equality guard, and call order are direct Ghidra observations.",
+    },
+    "58859C70": {
+        "name_in_analysis": "FUN_58859c70",
+        "called_by": "The third nonnull pointer in initializer callback range `[0x5889465C,0x5889466C)` resolves to this code address. Ghidra originally had no function boundary here; the entry was seeded from that mapped pointer and disassembled as a 76-byte function.",
+        "behavior": "Calls `0x5885A030` and `0x588701D2`, then walks three DWORD pointers from global `0x58969618` in four-byte steps. For each pointer it calls `0x5886CE81` on the stored value and callback slot `0x58894218` on that value plus `0x20`. It releases the array through `0x5886CC10`, then clears global `0x58969618`.",
+        "uncertainty": "The array element type, callback ABI, and ownership semantics are unknown. Its callback-table address, three-element loop, call order, release, and global clear are directly visible in the seeded Ghidra function.",
     },
 }
 
