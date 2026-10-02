@@ -90,6 +90,8 @@ ADDRESSES = (
     "5885D96A", "5885D9D4", "5885D99F", "5885DA0F",
     "588606AD", "588606FD", "58861476", "588614EC",
     "58860B00", "58860B36", "58860B6C", "58860BC3",
+    "5886DDA0", "5886DC70", "5886E0A9", "5886DE19", "5886DDD8",
+    "5887B1C5", "5887B1D9", "5886FB2F", "5886FA97",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -2408,6 +2410,60 @@ EVIDENCE = {
         "called_by": "Called by alternate literal comparator `0x58860B36` after its preliminary comparison.",
         "behavior": "Alternate counterpart to `0x58860B6C`, optionally consumes an additional character based on the conversion table, compares the configured byte at `+0x2D`, and restores input on mismatch.",
         "uncertainty": "The alternate special-character rule and record field meaning are unknown. Reads, compare, pushback, and returns are direct Ghidra observations.",
+    },
+    "5886DDA0": {
+        "name_in_analysis": "FUN_5886dda0",
+        "called_by": "Called by primary and alternate wide-character scan emitters `0x58861476` and `0x588614EC`.",
+        "behavior": "Creates a local conversion state, initializes it with the supplied state value, delegates character conversion to `0x5886DC70`, cleans up the state, and returns the conversion result.",
+        "uncertainty": "The local state structure and result units are not symbolically named. Initialization, conversion, cleanup, and return ordering are directly visible in Ghidra.",
+    },
+    "5886DC70": {
+        "name_in_analysis": "FUN_5886dc70",
+        "called_by": "Called by `0x5886DDA0`; Ghidra also records callers in other Core multibyte conversion routines.",
+        "behavior": "Dispatches character conversion using a code-page/state record. It clears output for null/empty input, handles single-byte output directly, uses the UTF-8 decoder `0x5886E0A9` for code page `0xFDE9`, and otherwise calls the multibyte validation/conversion helper `0x5886FB2F`; it sets the record's conversion error fields when input is invalid.",
+        "uncertainty": "The full code-page enum, output-count contract, and state-record type are not recovered. Conditions, constants, state offsets, and call targets are direct Ghidra observations.",
+    },
+    "5886E0A9": {
+        "name_in_analysis": "FUN_5886e0a9",
+        "called_by": "Selected by `0x5886DC70` for code page `0xFDE9`.",
+        "behavior": "Calls UTF-8 decoder `0x5886DE19`; for a completed conversion, clamps values above `0xFFFF` to `0xFFFD` and stores the resulting 16-bit unit when an output pointer is present.",
+        "uncertainty": "The semantic name of code page `0xFDE9` and exact conversion-count convention are inferred from the decoder path; clamp and store logic are visible in Ghidra.",
+    },
+    "5886DE19": {
+        "name_in_analysis": "FUN_5886de19",
+        "called_by": "Called by UTF-8 adapter `0x5886E0A9`; Ghidra also shows a sibling caller `0x5886E0EC`.",
+        "behavior": "Decodes a bounded UTF-8 byte sequence into a code point, supports continuation state across incomplete input, validates continuation bytes and Unicode scalar ranges, writes an optional output value, and routes malformed input through `0x5887B1D9`. It uses `0x5886DDD8` to determine the lead-byte length and `0x5887B1C5` to clear state for a zero result.",
+        "uncertainty": "The exact status enum and state-record field names are not recovered. UTF-8 masks, bounds, scalar checks, state updates, and helper calls are directly visible in Ghidra.",
+    },
+    "5886DDD8": {
+        "name_in_analysis": "FUN_5886ddd8",
+        "called_by": "Called by UTF-8 decoder `0x5886DE19` to classify the first byte.",
+        "behavior": "Returns the expected sequence length for a UTF-8 lead byte: zero for NUL, one for a nonnegative single-byte character, two through four for matching lead-byte masks, and `-1` for an invalid prefix.",
+        "uncertainty": "The exact source-level enum is unknown. Byte masks, return values, and branches are direct Ghidra observations.",
+    },
+    "5887B1C5": {
+        "name_in_analysis": "FUN_5887b1c5",
+        "called_by": "Called by `0x5886DE19` when the decoder completes a no-output/single-byte state transition.",
+        "behavior": "Clears two DWORDs in the decoder state and returns the supplied status value.",
+        "uncertainty": "The two state fields and status name are unknown. Writes and return are directly visible in Ghidra.",
+    },
+    "5887B1D9": {
+        "name_in_analysis": "FUN_5887b1d9",
+        "called_by": "Called by UTF-8 decoder `0x5886DE19` for malformed or out-of-range input.",
+        "behavior": "Clears the first two DWORDs of the conversion state, sets the error flag at `+0x1C`, stores error code `0x2A` at `+0x18`, and returns `-1`.",
+        "uncertainty": "The record type and symbolic error name are unresolved. State offsets, constant, and return are directly visible in Ghidra.",
+    },
+    "5886FB2F": {
+        "name_in_analysis": "FUN_5886fb2f",
+        "called_by": "Called by `0x5886DC70` for the alternate multibyte path.",
+        "behavior": "Calls `0x5886FA97` to filter the conversion flags by code page, then forwards the conversion record and filtered flags through the indirect callback at `DAT_5889429C`.",
+        "uncertainty": "The callback's concrete target and full ABI are not statically resolved. Direct helper call, argument flow, and indirect dispatch slot are visible in Ghidra.",
+    },
+    "5886FA97": {
+        "name_in_analysis": "FUN_5886fa97",
+        "called_by": "Called by multibyte dispatcher `0x5886FB2F`.",
+        "behavior": "Returns a code-page-specific subset of the supplied conversion flags, with explicit cases for the enumerated code-page values and an unchanged-flags fallback.",
+        "uncertainty": "The code-page names and flag-bit meanings are not recovered. Constants, branches, and returned masks are direct Ghidra observations.",
     },
 }
 

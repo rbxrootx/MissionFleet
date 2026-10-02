@@ -74578,6 +74578,404 @@
         "behavior": "Alternate counterpart to `0x58860B6C`, optionally consumes an additional character based on the conversion table, compares the configured byte at `+0x2D`, and restores input on mismatch.",
         "uncertainty": "The alternate special-character rule and record field meaning are unknown. Reads, compare, pushback, and returns are direct Ghidra observations."
       }
+    },
+    {
+      "address": "5886DDA0",
+      "name": "FUN_5886dda0",
+      "size": 56,
+      "symbol": "_FUN_5886dda0",
+      "source": "src/client-current/Core/FUN_5886dda0.cpp",
+      "source_sha256": "a7da76400384020a03db71c3043b09ecb7ac5772a713797461a49c29c8b6a60f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "58850C9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "5886DC70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58850CE7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886dda0",
+        "called_by": "Called by primary and alternate wide-character scan emitters `0x58861476` and `0x588614EC`.",
+        "behavior": "Creates a local conversion state, initializes it with the supplied state value, delegates character conversion to `0x5886DC70`, cleans up the state, and returns the conversion result.",
+        "uncertainty": "The local state structure and result units are not symbolically named. Initialization, conversion, cleanup, and return ordering are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886DC70",
+      "name": "FUN_5886dc70",
+      "size": 304,
+      "symbol": "_FUN_5886dc70",
+      "source": "src/client-current/Core/FUN_5886dc70.cpp",
+      "source_sha256": "fae0316d2e475218b9f9b68b64ec95117f4f3572aee5a82aaa2d8acb7fd401fe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "5886DD8E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5886DD8E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "5886DD99",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5886DD99",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58855EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "58969988",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5886E0A9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "5886DD9B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "5886DD89",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 145,
+          "target_address": "5886DD89",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "5886FB2F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "5886FB2F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 293,
+          "target_address": "58969988",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886dc70",
+        "called_by": "Called by `0x5886DDA0`; Ghidra also records callers in other Core multibyte conversion routines.",
+        "behavior": "Dispatches character conversion using a code-page/state record. It clears output for null/empty input, handles single-byte output directly, uses the UTF-8 decoder `0x5886E0A9` for code page `0xFDE9`, and otherwise calls the multibyte validation/conversion helper `0x5886FB2F`; it sets the record's conversion error fields when input is invalid.",
+        "uncertainty": "The full code-page enum, output-count contract, and state-record type are not recovered. Conditions, constants, state offsets, and call targets are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5886E0A9",
+      "name": "FUN_5886e0a9",
+      "size": 67,
+      "symbol": "_FUN_5886e0a9",
+      "source": "src/client-current/Core/FUN_5886e0a9.cpp",
+      "source_sha256": "96bb13b2d72b431266d632bfab174f8a955a4d44e4679bbe80f39c539883dcef",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "5886DE19",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886e0a9",
+        "called_by": "Selected by `0x5886DC70` for code page `0xFDE9`.",
+        "behavior": "Calls UTF-8 decoder `0x5886DE19`; for a completed conversion, clamps values above `0xFFFF` to `0xFFFD` and stores the resulting 16-bit unit when an output pointer is present.",
+        "uncertainty": "The semantic name of code page `0xFDE9` and exact conversion-count convention are inferred from the decoder path; clamp and store logic are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886DE19",
+      "name": "FUN_5886de19",
+      "size": 441,
+      "symbol": "_FUN_5886de19",
+      "source": "src/client-current/Core/FUN_5886de19.cpp",
+      "source_sha256": "5b2cec9be490848b617fd0630655e28ac31b698afa048570eba6e7d0981ffc49",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58969990",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58895250",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "5886DFC3",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5886DDD8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5886DFBB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "5886DFC3",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 209,
+          "target_address": "5886DFB8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "5886DFB8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 226,
+          "target_address": "5886DFB8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 281,
+          "target_address": "5886DFB8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 332,
+          "target_address": "5886DE77",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 409,
+          "target_address": "5887B1C5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 420,
+          "target_address": "5887B1D9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 435,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886de19",
+        "called_by": "Called by UTF-8 adapter `0x5886E0A9`; Ghidra also shows a sibling caller `0x5886E0EC`.",
+        "behavior": "Decodes a bounded UTF-8 byte sequence into a code point, supports continuation state across incomplete input, validates continuation bytes and Unicode scalar ranges, writes an optional output value, and routes malformed input through `0x5887B1D9`. It uses `0x5886DDD8` to determine the lead-byte length and `0x5887B1C5` to clear state for a zero result.",
+        "uncertainty": "The exact status enum and state-record field names are not recovered. UTF-8 masks, bounds, scalar checks, state updates, and helper calls are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886DDD8",
+      "name": "FUN_5886ddd8",
+      "size": 65,
+      "symbol": "_FUN_5886ddd8",
+      "source": "src/client-current/Core/FUN_5886ddd8.cpp",
+      "source_sha256": "5c22d91d68ebd8555328922cdc91242de5300066e119fc850d0f3bc52e6c665a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5886ddd8",
+        "called_by": "Called by UTF-8 decoder `0x5886DE19` to classify the first byte.",
+        "behavior": "Returns the expected sequence length for a UTF-8 lead byte: zero for NUL, one for a nonnegative single-byte character, two through four for matching lead-byte masks, and `-1` for an invalid prefix.",
+        "uncertainty": "The exact source-level enum is unknown. Byte masks, return values, and branches are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5887B1C5",
+      "name": "FUN_5887b1c5",
+      "size": 20,
+      "symbol": "_FUN_5887b1c5",
+      "source": "src/client-current/Core/FUN_5887b1c5.cpp",
+      "source_sha256": "1a4266659ba5708c71b16343bdee646fc15d849eff5660858bd15d90dacba286",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5887b1c5",
+        "called_by": "Called by `0x5886DE19` when the decoder completes a no-output/single-byte state transition.",
+        "behavior": "Clears two DWORDs in the decoder state and returns the supplied status value.",
+        "uncertainty": "The two state fields and status name are unknown. Writes and return are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5887B1D9",
+      "name": "FUN_5887b1d9",
+      "size": 34,
+      "symbol": "_FUN_5887b1d9",
+      "source": "src/client-current/Core/FUN_5887b1d9.cpp",
+      "source_sha256": "f12b7bb00c315a86e2c05110f4ee8cb8ed37eba69158a752f4242291d2628c4c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5887b1d9",
+        "called_by": "Called by UTF-8 decoder `0x5886DE19` for malformed or out-of-range input.",
+        "behavior": "Clears the first two DWORDs of the conversion state, sets the error flag at `+0x1C`, stores error code `0x2A` at `+0x18`, and returns `-1`.",
+        "uncertainty": "The record type and symbolic error name are unresolved. State offsets, constant, and return are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886FB2F",
+      "name": "FUN_5886fb2f",
+      "size": 42,
+      "symbol": "_FUN_5886fb2f",
+      "source": "src/client-current/Core/FUN_5886fb2f.cpp",
+      "source_sha256": "02e6e2b652fca812e558e387b12ac893bf0b035d8fb1907389682e2c1c6121ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "5886FA97",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "5889429C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886fb2f",
+        "called_by": "Called by `0x5886DC70` for the alternate multibyte path.",
+        "behavior": "Calls `0x5886FA97` to filter the conversion flags by code page, then forwards the conversion record and filtered flags through the indirect callback at `DAT_5889429C`.",
+        "uncertainty": "The callback's concrete target and full ABI are not statically resolved. Direct helper call, argument flow, and indirect dispatch slot are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886FA97",
+      "name": "FUN_5886fa97",
+      "size": 152,
+      "symbol": "_FUN_5886fa97",
+      "source": "src/client-current/Core/FUN_5886fa97.cpp",
+      "source_sha256": "1224b11f2da47453bcf5f93066933baef6d13477490393b3a39c9bd2907aa5d0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5886fa97",
+        "called_by": "Called by multibyte dispatcher `0x5886FB2F`.",
+        "behavior": "Returns a code-page-specific subset of the supplied conversion flags, with explicit cases for the enumerated code-page values and an unchanged-flags fallback.",
+        "uncertainty": "The code-page names and flag-bit meanings are not recovered. Constants, branches, and returned masks are direct Ghidra observations."
+      }
     }
   ]
 }
