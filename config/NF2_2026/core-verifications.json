@@ -76029,6 +76029,408 @@
         "behavior": "Iterates the requested number of DWORD pointer slots and releases each through the already matched allocator helper `0x5886CC10`.",
         "uncertainty": "The slots' source-level element type is unknown. Loop bounds, pointer stepping, and release call are direct Ghidra observations."
       }
+    },
+    {
+      "address": "58862710",
+      "name": "FUN_58862710",
+      "size": 68,
+      "symbol": "_FUN_58862710",
+      "source": "src/client-current/Core/FUN_58862710.cpp",
+      "source_sha256": "2688460d09176ccac0fc503746db128878e59ec69a2c936224cb0bac40abae11",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58862710",
+        "called_by": "Locale record cache accessor 0x58876226 delegates its null-acquisition branch here. Ghidra also shows this routine calling 0x58873129, 0x5887316E, 0x58850DAF, and 0x58857B3D.",
+        "behavior": "Checks runtime state via 0x58873129/0x5887316E, conditionally dispatches an indirect callback through global slot 0x588943B8 when the observed flag is set, then enters the diagnostic path 0x58850DAF and state helper 0x58857B3D before the software interrupt. These control-flow edges and constants are direct Ghidra observations.",
+        "uncertainty": "The indirect callback target and diagnostic side effects are unresolved. The routine is reached on null cache acquisition; its broader runtime role is inferred from that caller and the state/error helpers."
+      }
+    },
+    {
+      "address": "58873129",
+      "name": "FUN_58873129",
+      "size": 39,
+      "symbol": "_FUN_58873129",
+      "source": "src/client-current/Core/FUN_58873129.cpp",
+      "source_sha256": "197cb0c4e49574ebf318ed05cf2f368afcd44548dba98ecf8184b6797920d8c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58873129",
+        "called_by": "Runtime state handler 0x58862710 calls this check before its error path.",
+        "behavior": "Builds the observed local descriptor with two fields set to 3 and passes it to 0x58873057, which performs the runtime lock/state check.",
+        "uncertainty": "The descriptor's type and the semantic meaning of value 3 are unknown; the initialized values and call are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58873057",
+      "name": "FUN_58873057",
+      "size": 89,
+      "symbol": "_FUN_58873057",
+      "source": "src/client-current/Core/FUN_58873057.cpp",
+      "source_sha256": "556fcd5bddd9c8a46eabde603e48ba4eb745055c51d2bcd896c51c8218fae9df",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED650",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58969C38",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "588730B3",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58873057",
+        "called_by": "Called by runtime check wrapper 0x58873129 and by other Core runtime-state routines.",
+        "behavior": "Installs an exception-list frame, prepares lock metadata through 0x58832760, acquires the indexed lock through 0x58863C1C, checks the observed lock cookie/state expression, and releases through 0x588730B3 on its cleanup path.",
+        "uncertainty": "The lock-table and cookie semantics are not fully named. The calls, index derivation, and cleanup edges are visible in Ghidra; the synchronization purpose is inferred from the acquire/release helpers."
+      }
+    },
+    {
+      "address": "588730B3",
+      "name": "FUN_588730b3",
+      "size": 12,
+      "symbol": "_FUN_588730b3",
+      "source": "src/client-current/Core/FUN_588730b3.cpp",
+      "source_sha256": "477ec92aead4e2ec3aaccb741b6784d3884909b1b910cb8b2fd10b8d8926fb4c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588730b3",
+        "called_by": "Runtime lock wrapper 0x58873057 uses it to release its acquired indexed lock.",
+        "behavior": "Loads the saved frame's lock descriptor and forwards it to 0x58863C64, the already byte-verified indexed-lock release helper.",
+        "uncertainty": "The frame layout is compiler/runtime-specific; the forwarding operation is directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58850DAF",
+      "name": "FUN_58850daf",
+      "size": 313,
+      "symbol": "_FUN_58850daf",
+      "source": "src/client-current/Core/FUN_58850daf.cpp",
+      "source_sha256": "af5d513e60d12f18923405c6d43f0246ce842175824c92c1c3b82cbd72e74a92",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "5883274E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5884CE10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5884CE10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 250,
+          "target_address": "58894394",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "58894274",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 273,
+          "target_address": "588943B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 295,
+          "target_address": "5883274E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 307,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850daf",
+        "called_by": "Runtime state failure handler 0x58862710 calls this with argument 3.",
+        "behavior": "Resets the observed diagnostic state through 0x5883274E, calls 0x5884CE10 and conditionally invokes indirect callback slots before a second state reset. Ghidra shows the callback slots and branch conditions directly.",
+        "uncertainty": "The callback targets and externally visible diagnostic effects are unresolved. Stack-cookie machinery appears in Ghidra's decompilation and is compiler-generated rather than domain behavior."
+      }
+    },
+    {
+      "address": "58850FAB",
+      "name": "FUN_58850fab",
+      "size": 16,
+      "symbol": "_FUN_58850fab",
+      "source": "src/client-current/Core/FUN_58850fab.cpp",
+      "source_sha256": "835d5c8b15d2b766f33829608bc7279e68a7c9a3aca4acb3651a7c353b185378",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 8,
+          "target_address": "58850EF7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58850fab",
+        "called_by": "Runtime error dispatcher 0x5887316E calls this on the observed error-state branch.",
+        "behavior": "Forwards five zero arguments to 0x58850EF7; the forwarding call is directly visible in Ghidra.",
+        "uncertainty": "The downstream notification routine 0x58850EF7 and its callback effects are outside this verified slice."
+      }
+    },
+    {
+      "address": "58873101",
+      "name": "FUN_58873101",
+      "size": 40,
+      "symbol": "_FUN_58873101",
+      "source": "src/client-current/Core/FUN_58873101.cpp",
+      "source_sha256": "f98f1e5cb3f5bd76e07f83a9b1f666370278248d63af9787b1015fced4f2b231",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "588C4C70",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58873101",
+        "called_by": "Runtime error dispatcher 0x5887316E uses it while scanning the global 0x0C-byte runtime record array.",
+        "behavior": "Walks up to DAT_588C4C70 records from the supplied base, compares each record's field at +4 with the requested value, returns the matching record address, or returns zero at the end.",
+        "uncertainty": "The record type and compared field's semantic name are unknown; the stride, bound, comparison, and return behavior are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "588732F8",
+      "name": "FUN_588732f8",
+      "size": 16,
+      "symbol": "_FUN_588732f8",
+      "source": "src/client-current/Core/FUN_588732f8.cpp",
+      "source_sha256": "3748fe747412094729a43570b1c07a0f10ff60b852eb563c91c4068e6253b3f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588732f8",
+        "called_by": "Runtime error dispatcher 0x5887316E invokes this as an indexed-lock cleanup path.",
+        "behavior": "Conditionally releases lock index 3 through the already verified helper 0x58863C64 based on the saved low-byte state.",
+        "uncertainty": "Ghidra presents the saved register as an unaffiliated value because this is a compiler cleanup fragment; its exact originating source construct is uncertain."
+      }
+    },
+    {
+      "address": "58832760",
+      "name": "FUN_58832760",
+      "size": 69,
+      "symbol": "_FUN_58832760",
+      "source": "src/client-current/Core/FUN_58832760.cpp",
+      "source_sha256": "26f24b4273541543e359d4fc9dec4c55597b2c3e8293667ffe1b7dc4c0f16f7a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "5884ED90",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58832760",
+        "called_by": "Runtime lock setup and error dispatch routines use this prologue helper before entering exception-protected regions.",
+        "behavior": "Builds the observed exception-list frame, saves nonvolatile registers and a stack-cookie expression, then installs the new ExceptionList pointer.",
+        "uncertainty": "Ghidra reports incomplete stack-space tracking; the emitted bytes and concrete frame writes are visible, while high-level calling semantics are compiler/runtime-specific."
+      }
+    },
+    {
+      "address": "588730BF",
+      "name": "FUN_588730bf",
+      "size": 66,
+      "symbol": "_FUN_588730bf",
+      "source": "src/client-current/Core/FUN_588730bf.cpp",
+      "source_sha256": "c3a27b74a6efe8fda821866f17e6b2c2252ed21035ab7b8e75e7310b250b03bf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 39,
+          "target_address": "58969C34",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "58969C3C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "58969C38",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58969C30",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588730bf",
+        "called_by": "Runtime error dispatcher 0x5887316E maps error categories through this helper.",
+        "behavior": "Returns addresses of category-specific global state slots for codes 2, 6, 0xF, 0x15, and 0x16, and returns null for unrecognized codes.",
+        "uncertainty": "The global slots' semantic meanings are not established; address mapping and null behavior are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5883274E",
+      "name": "FUN_5883274e",
+      "size": 11,
+      "symbol": "_FUN_5883274e",
+      "source": "src/client-current/Core/FUN_5883274e.cpp",
+      "source_sha256": "eb36a9a86bed65fb4dfd3f7ed8edb7fe058ffe4dca01e2b05497fabf2ebf4a7c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58966724",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883274e",
+        "called_by": "Diagnostic helper 0x58850DAF clears this state on entry and on its observed callback path.",
+        "behavior": "Writes zero to global DAT_58966724 and returns.",
+        "uncertainty": "The global's semantic role is unknown; the write is a direct Ghidra observation."
+      }
     }
   ]
 }

@@ -96,9 +96,77 @@ ADDRESSES = (
     "5887628F", "58876286", "58863C1C", "58863C64",
     "588761A5", "58875FDA", "58875F5D", "5887617C", "58876756",
     "5887614B", "588762F7", "58876122", "58876C7D", "588769DC",
+    "58862710", "58873129", "58873057", "588730B3", "58850DAF",
+    "58850FAB", "58873101", "588732F8", "58832760", "588730BF", "5883274E",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
+    "58862710": {
+        "name_in_analysis": "FUN_58862710",
+        "called_by": "Locale record cache accessor 0x58876226 delegates its null-acquisition branch here. Ghidra also shows this routine calling 0x58873129, 0x5887316E, 0x58850DAF, and 0x58857B3D.",
+        "behavior": "Checks runtime state via 0x58873129/0x5887316E, conditionally dispatches an indirect callback through global slot 0x588943B8 when the observed flag is set, then enters the diagnostic path 0x58850DAF and state helper 0x58857B3D before the software interrupt. These control-flow edges and constants are direct Ghidra observations.",
+        "uncertainty": "The indirect callback target and diagnostic side effects are unresolved. The routine is reached on null cache acquisition; its broader runtime role is inferred from that caller and the state/error helpers.",
+    },
+    "58873129": {
+        "name_in_analysis": "FUN_58873129",
+        "called_by": "Runtime state handler 0x58862710 calls this check before its error path.",
+        "behavior": "Builds the observed local descriptor with two fields set to 3 and passes it to 0x58873057, which performs the runtime lock/state check.",
+        "uncertainty": "The descriptor's type and the semantic meaning of value 3 are unknown; the initialized values and call are direct Ghidra observations.",
+    },
+    "58873057": {
+        "name_in_analysis": "FUN_58873057",
+        "called_by": "Called by runtime check wrapper 0x58873129 and by other Core runtime-state routines.",
+        "behavior": "Installs an exception-list frame, prepares lock metadata through 0x58832760, acquires the indexed lock through 0x58863C1C, checks the observed lock cookie/state expression, and releases through 0x588730B3 on its cleanup path.",
+        "uncertainty": "The lock-table and cookie semantics are not fully named. The calls, index derivation, and cleanup edges are visible in Ghidra; the synchronization purpose is inferred from the acquire/release helpers.",
+    },
+    "588730B3": {
+        "name_in_analysis": "FUN_588730b3",
+        "called_by": "Runtime lock wrapper 0x58873057 uses it to release its acquired indexed lock.",
+        "behavior": "Loads the saved frame's lock descriptor and forwards it to 0x58863C64, the already byte-verified indexed-lock release helper.",
+        "uncertainty": "The frame layout is compiler/runtime-specific; the forwarding operation is directly visible in Ghidra.",
+    },
+    "58850DAF": {
+        "name_in_analysis": "FUN_58850daf",
+        "called_by": "Runtime state failure handler 0x58862710 calls this with argument 3.",
+        "behavior": "Resets the observed diagnostic state through 0x5883274E, calls 0x5884CE10 and conditionally invokes indirect callback slots before a second state reset. Ghidra shows the callback slots and branch conditions directly.",
+        "uncertainty": "The callback targets and externally visible diagnostic effects are unresolved. Stack-cookie machinery appears in Ghidra's decompilation and is compiler-generated rather than domain behavior.",
+    },
+    "58850FAB": {
+        "name_in_analysis": "FUN_58850fab",
+        "called_by": "Runtime error dispatcher 0x5887316E calls this on the observed error-state branch.",
+        "behavior": "Forwards five zero arguments to 0x58850EF7; the forwarding call is directly visible in Ghidra.",
+        "uncertainty": "The downstream notification routine 0x58850EF7 and its callback effects are outside this verified slice.",
+    },
+    "58873101": {
+        "name_in_analysis": "FUN_58873101",
+        "called_by": "Runtime error dispatcher 0x5887316E uses it while scanning the global 0x0C-byte runtime record array.",
+        "behavior": "Walks up to DAT_588C4C70 records from the supplied base, compares each record's field at +4 with the requested value, returns the matching record address, or returns zero at the end.",
+        "uncertainty": "The record type and compared field's semantic name are unknown; the stride, bound, comparison, and return behavior are direct Ghidra observations.",
+    },
+    "588732F8": {
+        "name_in_analysis": "FUN_588732f8",
+        "called_by": "Runtime error dispatcher 0x5887316E invokes this as an indexed-lock cleanup path.",
+        "behavior": "Conditionally releases lock index 3 through the already verified helper 0x58863C64 based on the saved low-byte state.",
+        "uncertainty": "Ghidra presents the saved register as an unaffiliated value because this is a compiler cleanup fragment; its exact originating source construct is uncertain.",
+    },
+    "58832760": {
+        "name_in_analysis": "FUN_58832760",
+        "called_by": "Runtime lock setup and error dispatch routines use this prologue helper before entering exception-protected regions.",
+        "behavior": "Builds the observed exception-list frame, saves nonvolatile registers and a stack-cookie expression, then installs the new ExceptionList pointer.",
+        "uncertainty": "Ghidra reports incomplete stack-space tracking; the emitted bytes and concrete frame writes are visible, while high-level calling semantics are compiler/runtime-specific.",
+    },
+    "588730BF": {
+        "name_in_analysis": "FUN_588730bf",
+        "called_by": "Runtime error dispatcher 0x5887316E maps error categories through this helper.",
+        "behavior": "Returns addresses of category-specific global state slots for codes 2, 6, 0xF, 0x15, and 0x16, and returns null for unrecognized codes.",
+        "uncertainty": "The global slots' semantic meanings are not established; address mapping and null behavior are directly visible in Ghidra.",
+    },
+    "5883274E": {
+        "name_in_analysis": "FUN_5883274e",
+        "called_by": "Diagnostic helper 0x58850DAF clears this state on entry and on its observed callback path.",
+        "behavior": "Writes zero to global DAT_58966724 and returns.",
+        "uncertainty": "The global's semantic role is unknown; the write is a direct Ghidra observation.",
+    },
     "584869C0": {
         "name_in_analysis": "FUN_584869c0",
         "called_by": "The mapped Core.dll references this helper from the ship renderer (0x587B6D70), scene object construction (0x586E8270), and ship-state setup (0x5852D5D0), among other callers.",
