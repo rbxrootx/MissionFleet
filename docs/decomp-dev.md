@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 5,818 functions totaling 1,149,032 bytes (10.9759% of indexed code),
+credits 5,954 functions totaling 1,330,074 bytes (12.7052% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -71,10 +71,34 @@ trampolines, and logo/control screen construction. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
-capture-specific profile indexes 13,030 functions / 3,996,277
-bytes from installed `Core.dll`; nine renderer functions match 103,845 bytes,
-covering the dispatcher, both RGB16 sprite classes' constructors, slot-0
-cleanup, and slot-1/slot-2 methods. These matches use the mapped runtime image;
+capture-specific profile indexes 13,030 functions / 3,996,309
+bytes from installed `Core.dll`; 145 functions match 284,887 bytes, including
+122 ship-path functions matching 280,539
+bytes, covering the dispatcher, eight sprite classes, ship animation and draw
+path, the render-node constructors and ordered child lists, and the cache/loader/parser.
+The separate CRT floating-point error-path slice adds 17 byte-matched functions
+totaling 3,292 bytes. The child-field accessor at `0x584869C0` adds 17 bytes;
+Ghidra establishes a DWORD read at receiver `+4`, while its likely coordinate
+role is inferred from callers; see
+[`current-core-child-offset-accessor.md`](current-core-child-offset-accessor.md).
+The scene phase-setup handler and its bounded child-table accessor add two
+exact matches / 488 bytes; see
+[`current-core-scene-phase-setup-handler.md`](current-core-scene-phase-setup-handler.md).
+The phase-8 scene layout constructor at `0x586E8270` adds another 3,336-byte
+match; see
+[`current-core-scene-layout-constructor.md`](current-core-scene-layout-constructor.md).
+Its post-construction resource loader adds two matches for the mapped
+`Announcement.txt`, `Patch.txt`, and `Eula.sdt` paths; see
+[`current-core-scene-text-resource-loader.md`](current-core-scene-text-resource-loader.md).
+The parser for those three line-based resources adds five byte-matched functions
+/ 1,039 bytes and records the LF delimiter, CR trimming, empty-line handling,
+and indexed record accessors; see
+[`current-core-scene-record-parser.md`](current-core-scene-record-parser.md).
+The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
+epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
+at `0x5884C890` was rechecked at objdiff 100%.
+[`current-core-floating-point-error-path.md`](current-core-floating-point-error-path.md).
+These matches use the mapped runtime image;
 the on-disk `.text` bytes are absent, and the source preserves the captured
 instruction stream rather than claiming high-level source recovery. Slot-2
 callers and framebuffer output remain unverified. See the
@@ -86,7 +110,16 @@ callers and framebuffer output remain unverified. See the
 [installed-client High555 sprite-method evidence](current-client-high555-sprite-methods.md),
 [installed-client logo/control screen evidence](current-client-logo-screen.md),
 [VM entry/trampoline evidence](client-vm-entry-trampolines.md), and
-[Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).
+[Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md) and
+[Core.dll ship sprite-loader evidence](current-core-ship-sprite-loader.md) and
+[three-byte-target class evidence](current-core-three-byte-sprite-class.md) and
+[its selector-1 sibling](current-core-three-byte-sprite-class1.md) and
+[its selector-2 sibling](current-core-three-byte-sprite-class2.md) and
+[four-byte-target class evidence](current-core-four-byte-sprite-class0.md).
+The current ship render-node construction and ordered parent-child list evidence
+is recorded in [the node construction slice](current-core-ship-node-construction.md).
+The flag, ordering-key, and `+0x68` property setters are documented in
+[the ship-node property setter slice](current-core-ship-node-properties.md).
 `config/NF2_2062/matches.json` accepts only records tied to an unchanged source
 file and marked as byte-identical under objdiff 3.8.0. `tools/verify_matches.py`
 rebuilds recorded source and target objects locally without placing original

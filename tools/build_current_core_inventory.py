@@ -6,6 +6,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
+# Ghidra stores this parser's discontiguous control-flow body as the sum of its
+# block addresses. Its byte-matching extent is the full linear output through
+# RET at 0x587BA82C, including addresses omitted from that sparse body.
+# Ghidra can end these bodies mid-instruction. Keep the full linear spans:
+# 0x587B6D70 ends at its RET; 0x586EA6E0 continues through RET 8 at 0x586EA97C;
+# 0x5884C890 continues through MOV EAX,[ESP+0xC], POP/POP/RET at 0x5884CDC0.
+LINEAR_SPAN_OVERRIDES = {
+    "587b6d70": 0x3ABD,
+    "586ea6e0": 0x29D,
+    "5884c890": 0x537,
+}
 
 
 def main():
@@ -32,7 +43,7 @@ def main():
     seen = set()
     for row in rows:
         address = f"{int(row['address'], 16):08x}"
-        size = int(row["size"])
+        size = LINEAR_SPAN_OVERRIDES.get(address, int(row["size"]))
         name = row["name"]
         if size <= 0 or address in seen or not name:
             raise ValueError(f"Invalid or duplicate Ghidra function record: {row}")

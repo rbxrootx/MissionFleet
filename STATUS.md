@@ -1,17 +1,16 @@
-# Native decompilation status — 30 September 2026
+# Native decompilation status — 1 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-A deterministic objdiff v2 report now tracks 20,941 functions and 4,118,837
-identified code bytes across four decomp.dev categories. There are 5,554
-functions totaling 187,514 bytes reconstructed in C++, spanning login, game,
-persistence and three archived client functions; each matches at 100.0% under
-objdiff 3.8.0.
-Emitted Ghidra pseudocode does not count as a compiler match. GitHub Actions
-publishes the generated report to the active decomp.dev project.
+The deterministic objdiff v2 report tracks 42,459 functions and 10,468,758
+identified code bytes across six report units. There are 5,954 verified matches
+totaling 1,330,074 bytes (12.7052%), each at 100.0% under objdiff 3.8.0. A
+verified machine-code match is not by itself proof of recovered high-level
+source or playable behavior. GitHub Actions publishes the generated report to
+the active decomp.dev project.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
@@ -52,6 +51,44 @@ pairs now decode through the corrected preview pipeline. See
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
+The installed mapped `Core.dll` slice now also covers ship-node construction,
+optional animation-record geometry setup, and both ordered parent-child lists,
+including their existing-link removal paths, property setters, ordered child
+render scheduler, animation-node update callback, and derived animation-state
+update and its reset/start methods, ship-scene triggers and direct helpers, and
+the ship-scene update dispatcher and its direct transition handlers: 122 matched
+functions / 280,539 bytes across the ship path.
+The node construction, list, and property slice contributes 22 functions /
+2,343 bytes; the scheduler adds three functions / 412 bytes and animation
+updates add two functions / 207 bytes; the derived animation state machine path
+adds seven functions / 1,807 bytes.
+The ship-scene dispatcher and its forty-three matched transitive helper/handler
+functions cover 20,982 bytes with 750 captured operand targets checked. The
+state-2 constructor's descriptor setup, heap-allocation retry path, and both
+allocation-failure exception branches now have byte-matched callsite evidence.
+A separate floating-point error-handling slice adds 17 functions / 3,292 bytes
+with 74 operand targets checked; see
+[floating-point error-path notes](docs/current-core-floating-point-error-path.md).
+The child-field accessor at `0x584869C0` adds one 17-byte exact match; its
+`receiver +4` return is established, while its coordinate meaning remains an
+inference from placement call sites. See
+[accessor evidence](docs/current-core-child-offset-accessor.md).
+The state-7 phase transition helper and its bounded child-table accessor add
+two verified functions / 488 bytes. The dispatcher calls the handler with
+`0x20000` after moving phase 9 to phase `0x10`; details and unresolved table
+semantics are in [the handler evidence](docs/current-core-scene-phase-setup-handler.md).
+The phase-8 path now also includes the 3,336-byte scene layout constructor at
+`0x586E8270`, with 166 captured operand targets checked; see
+[constructor evidence](docs/current-core-scene-layout-constructor.md).
+Its post-construction text-resource loader and three-path setup wrapper add
+669 and 57 verified bytes; the strings identify `Announcement.txt`, `Patch.txt`,
+and `Eula.sdt`. See
+[loader evidence](docs/current-core-scene-text-resource-loader.md).
+The loader's parser now has five additional byte-matched functions / 1,039 bytes:
+the mapped LF delimiter, CR trimming, empty-line skipping, in-place tokenization,
+and first/next record accessors are established from Ghidra and mapped data.
+The child-control types, text encoding, and rendered output remain unverified;
+see [parser evidence](docs/current-core-scene-record-parser.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin
@@ -72,9 +109,9 @@ The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
 2,016 Ghidra-recognized functions are now in the progress inventory. The
 16-byte `InitCGCDLL` export, its 562-byte callback-table copy callee, and the
-50-byte `AllocScreen` factory match byte for byte. The callback field semantics
-remain unknown. `AllocScreen` calls a 1,411-byte screen constructor that is the
-next unmatched implementation in this path. No client login was used. See the
+50-byte `AllocScreen` factory and its 1,411-byte screen constructor match byte
+for byte. The callback field semantics and full control behavior remain
+unknown; no playable screen or client login was demonstrated. See the
 [archived client capture and renderer evidence](docs/client-unpacking.md).
 
 Recovered code/assets remain local and Git-ignored. The workspace MIT license

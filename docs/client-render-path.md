@@ -114,11 +114,14 @@ matching the loader evidence.
 separate horizontal-clipping behavior, skipped-pixel transparency and target
 pitch.
 
-The ship draw caller at `0x58525B10` also sets color `0x80` through
-`0x587B5540` (node `+0x28`) and effect `0x101` through `0x587B55B0` (node
-`+0x2C`). `0x587B5DB0` passes those fields to the animation renderer in that
-same order. This observed pair takes the `color < 0x100`, nonzero-effect path
-in the `0x58800A60` compositor. Its decompiled RGB565 arithmetic is:
+The ship scene constructor at `0x58525B10` calls color setter `0x587B5540`
+(node `+0x28`) and effect setter `0x587B55B0` (node `+0x2C`) with values
+including color `0x80` and effect `0x101`. The setters recursively propagate
+values through children selected by different flag bits. The direct
+constructor callsites load several child references, so the same-node pairing
+of those exact values has not yet been established. If passed together, they
+take the `color < 0x100`, nonzero-effect path in the `0x58800A60` compositor.
+Its decompiled RGB565 arithmetic is:
 
 ```
 source_scale      = color * ((effect + 0x100) >> 3) >> 5
@@ -136,7 +139,9 @@ operation order come from the decompiled branch. The mask specialization is
 RGB565 red/blue `0xF81F` and green `0x07E0`, matching the RGB565 target used by
 the current visual pipeline. A runtime
 pixel-for-pixel comparison against the original client has not been made, so
-the output is not independently validated against a live client frame.
+the output is not independently validated against a live client frame. The
+same-node color/effect pairing also remains unresolved; see the
+[ship node-effect setup evidence](current-core-ship-node-effects.md).
 
 As an integration check, all 12 bottom/top layers used by the generated ship
 board were rendered into RGB16 surfaces through this path and compared with the
@@ -161,9 +166,29 @@ bounded and byte-matched. The renderer class owner and live dispatch paths
 remain unknown. See the
 [Main.dll span compositor notes](client-rgb16-span-compositor.md).
 
-The installed `Core.dll` pair selected by the current ship render path is now
-also byte-matched against its mapped runtime capture: `0x58800A60` and
-`0x5880D420`, totaling 73,887 bytes. Their 272-byte screen dispatcher at
-`0x587BA830` is also matched, bringing this path to 74,159 bytes. The direct
-dispatch and capture limits are recorded in
-[installed Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md).
+The installed `Core.dll` ship path now has 117 byte-matched functions totaling
+275,989 bytes against its mapped runtime capture. These cover the screen
+dispatcher, both RGB16 classes' constructors, destructors, and slot-1/slot-2
+methods, three three-byte-target sprite classes, three four-byte-target classes,
+plus ship scene/state setup, animation attachment, timed-frame wrapper,
+render-node draw slot and constructors, ordered child lists, node property
+setters, the signed-order child-render scheduler, animation tick updater and
+derived animation-state updater with reset/start methods, scene trigger and
+counter/effect helpers, and cache/loader/parser. The direct-dispatch,
+loader, and capture limits are recorded in the
+[RGB16 compositor evidence](current-core-rgb16-compositors.md) and
+[ship sprite-loader evidence](current-core-ship-sprite-loader.md) and
+[three-byte-target class evidence](current-core-three-byte-sprite-class.md) and
+[its selector-1 sibling](current-core-three-byte-sprite-class1.md) and
+[its selector-2 sibling](current-core-three-byte-sprite-class2.md) and
+[four-byte-target selector-0 evidence](current-core-four-byte-sprite-class0.md)
+and [selector-1 evidence](current-core-four-byte-sprite-class1.md) and
+[selector-2 evidence](current-core-four-byte-sprite-class2.md) and
+[ship animation attachment and draw evidence](current-core-ship-frame-renderer.md) and
+[ship node effect setup](current-core-ship-node-effects.md) and
+[ship render-node construction and child-list evidence](current-core-ship-node-construction.md) and
+[ship-node property setter evidence](current-core-ship-node-properties.md) and
+[ordered child-render scheduler evidence](current-core-child-render-scheduler.md) and
+[animation-node update evidence](current-core-animation-tick-update.md) and
+[derived ship-animation state evidence](current-core-ship-animation-state-update.md) and
+[ship-scene update dispatcher evidence](current-core-ship-scene-update-dispatcher.md).

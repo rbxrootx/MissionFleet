@@ -54,6 +54,11 @@ def render_function(name, address, code, disassembler, emit_all=False):
         has_prefix = any(instruction.prefix) or instruction.mnemonic in {"retf", "iretd"}
         is_direct_call = instruction.mnemonic in {"call", "lcall"}
         if (emit_all or branch or is_direct_call or is_mmx or absolute_operands
+                or instruction.mnemonic == "int3"
+                or (instruction.mnemonic == "ret" and instruction.op_str)
+                or (instruction.mnemonic == "nop" and instruction.size > 1)
+                or instruction.mnemonic in {"stmxcsr", "ldmxcsr"}
+                or instruction.mnemonic.startswith("f")
                 or is_string or has_prefix or identity_lea):
             lines.append(f"        ; Exact mapped bytes {raw}: {instruction.mnemonic} {instruction.op_str}".rstrip())
             lines.extend(f"        __asm _emit 0x{value:02x}" for value in instruction.bytes)
