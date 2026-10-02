@@ -68419,6 +68419,446 @@
         "behavior": "Invokes callback slot `0x5889421C` with the supplied pointer plus `0x20`.",
         "uncertainty": "The callback ABI and lifecycle meaning are unknown; the slot and pointer adjustment are direct observations."
       }
+    },
+    {
+      "address": "5885A08C",
+      "name": "FUN_5885a08c",
+      "size": 60,
+      "symbol": "_FUN_5885a08c",
+      "source": "src/client-current/Core/FUN_5885a08c.cpp",
+      "source_sha256": "a90c56f5ac0aaf8e6285b7136f9d76465a0588b79be227e322f84c408c62d28c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5886F03E",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a08c",
+        "called_by": "The byte-reader handler `0x5885A0D3` calls this after accepting the object state.",
+        "behavior": "Rejects a null stream record by setting global status `0x16` and calling `0x58850FAB`. Otherwise it decrements the remaining-byte field at record offset `+8`; if the result is negative, it delegates to `0x5886F03E`. When bytes remain, it reads one unsigned byte from the current data pointer, advances that pointer, and returns the byte.",
+        "uncertainty": "The record layout and underflow helper contract are not named. Null handling, decrement, pointer update, and return value are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885A0D3",
+      "name": "FUN_5885a0d3",
+      "size": 267,
+      "symbol": "_FUN_5885a0d3",
+      "source": "src/client-current/Core/FUN_5885a0d3.cpp",
+      "source_sha256": "f7523b2fde0f8ce92658b02ba4f130cd9be2451c568a367851f540e6355988eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED1C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5885A1CE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "58859D02",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "5886CC56",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "58907530",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 123,
+          "target_address": "58907530",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "58906040",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 213,
+          "target_address": "58850750",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "5885A0F9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "5885A08C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 245,
+          "target_address": "5885A1E4",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a0d3",
+        "called_by": "Ghidra identifies direct callers `0x5851EFF0` and `0x58521690`.",
+        "behavior": "Calls `0x58832760(&0x588ED1C0, 0x14)`. For a nonnull object it invokes `0x58859D02`, checks flag bit 12 at object offset `+0x0C`, and consults the object index from `0x5886CC56` against records at `0x589699B0`. If accepted, it reads one byte through `0x5885A08C` and releases state through `0x5885A1E4`. Rejected or null paths set global status `0x16`; rejected state also calls `0x58850750(&0x58906040, ...)`. Error paths return -1.",
+        "uncertainty": "The object and record types, index table, flag meanings, callback role, and error-state contract remain unknown. The two direct callers, call order, field offsets, status writes, and branches are Ghidra observations."
+      }
+    },
+    {
+      "address": "5885A1E4",
+      "name": "FUN_5885a1e4",
+      "size": 8,
+      "symbol": "_FUN_5885a1e4",
+      "source": "src/client-current/Core/FUN_5885a1e4.cpp",
+      "source_sha256": "2a414685c430485f606df8e0397d7716daa6fedce0c69452b81154cbe0bbef03",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58859D16",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a1e4",
+        "called_by": "Called by byte-reader handler `0x5885A0D3` after the byte-read helper returns.",
+        "behavior": "Forwards to `0x58859D16`, which invokes callback slot `0x5889421C` on the current object context.",
+        "uncertainty": "The callback's lifecycle meaning and implicit calling convention are unknown; the forwarding call is directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885A1EC",
+      "name": "FUN_5885a1ec",
+      "size": 89,
+      "symbol": "_FUN_5885a1ec",
+      "source": "src/client-current/Core/FUN_5885a1ec.cpp",
+      "source_sha256": "81ffec0467c547e204efdc187474458630b01f54f96c704817405e1a8da4e29a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58867D73",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a1ec",
+        "called_by": "Ghidra shows this as a Core.dll helper that reads a 64-bit value through `0x58867D73`; exact runtime caller names are outside this byte-I/O slice.",
+        "behavior": "If either input pointer is null, stores global status `0x16`, calls `0x58850FAB`, and returns -1. Otherwise it calls `0x58867D73` with the first pointer, stores the returned 64-bit value through the second pointer, and returns zero unless the value equals -1.",
+        "uncertainty": "The 64-bit value's meaning and helper contract are not known. Null checks, store, sentinel comparison, and return values are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5885A245",
+      "name": "FUN_5885a245",
+      "size": 294,
+      "symbol": "_FUN_5885a245",
+      "source": "src/client-current/Core/FUN_5885a245.cpp",
+      "source_sha256": "8eec50496692c35420d8d2294236e77db6eb5dc0feee2835236d301f855817ad",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED1E0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58850F2E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5885A35B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58859D02",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "5886CC56",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "58907530",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "58907530",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "58850F2E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "58906040",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58850750",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 240,
+          "target_address": "5885A276",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "5885A379",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 272,
+          "target_address": "5885A371",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a245",
+        "called_by": "Called by wrapper `0x5885A3A6`; Ghidra lists no other direct caller.",
+        "behavior": "Calls `0x58832760(&0x588ED1E0, 0x10)`. For a nonnull object it invokes `0x58859D02`, checks flag bit 12 at object offset `+0x0C`, and consults its index from `0x5886CC56` against records at `0x589699B0`. If accepted, it writes one byte through `0x5885A379` and releases state through `0x5885A371`. Null or rejected states set status `0x16` on the supplied error record, call `0x58850F2E`, and rejected state additionally calls `0x58850750(&0x58906040, ...)`. Error paths return -1.",
+        "uncertainty": "Object and record types, index-table meaning, bit meanings, and callback contracts remain unknown. Branches, field offsets, calls, error writes, and return conditions are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885A371",
+      "name": "FUN_5885a371",
+      "size": 8,
+      "symbol": "_FUN_5885a371",
+      "source": "src/client-current/Core/FUN_5885a371.cpp",
+      "source_sha256": "809db7fced859b2c74ea064860d31322e987fd45e77c9102d25e28458e594fea",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58859D16",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a371",
+        "called_by": "Called by the byte-writer handler `0x5885A245` after the write helper returns.",
+        "behavior": "Forwards to `0x58859D16`, which invokes callback slot `0x5889421C` on the current object context.",
+        "uncertainty": "The callback's lifecycle meaning and implicit calling convention are unknown; the forwarding call is directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885A379",
+      "name": "FUN_5885a379",
+      "size": 45,
+      "symbol": "_FUN_5885a379",
+      "source": "src/client-current/Core/FUN_5885a379.cpp",
+      "source_sha256": "7708ed9bb8aa312b8b9c8dc8213e2b052df210e7863f3081c634a6cb5435437b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "588710FD",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a379",
+        "called_by": "Called by byte-writer handler `0x5885A245`.",
+        "behavior": "Decrements the remaining-byte field at record offset `+8`. If it becomes negative, delegates to `0x588710FD`; otherwise it writes the low byte of the first argument at the current data pointer, advances the pointer, and returns that byte.",
+        "uncertainty": "The stream record type and overflow-helper contract are unknown. Counter, write, pointer advance, delegation condition, and return are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885A3A6",
+      "name": "FUN_5885a3a6",
+      "size": 52,
+      "symbol": "_FUN_5885a3a6",
+      "source": "src/client-current/Core/FUN_5885a3a6.cpp",
+      "source_sha256": "bad1c4c46d36a201589ea07897f0907cfd3c94d8ca67bbddd5a61c444a64e600",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58850C9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5885A245",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58850CE7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885a3a6",
+        "called_by": "Ghidra shows a direct caller at `0x5851F040`.",
+        "behavior": "Enters a shared state gate with `0x58850C9F(0)`, calls `0x5885A245` with the two inputs and a 40-byte local error record, exits through `0x58850CE7`, and returns the writer result.",
+        "uncertainty": "The gate contract and local error-record schema are unresolved; wrapper boundaries, local size, helper arguments, and call order are direct evidence."
+      }
     }
   ]
 }

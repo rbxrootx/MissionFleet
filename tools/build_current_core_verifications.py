@@ -63,6 +63,8 @@ ADDRESSES = (
     "58859DB6", "58859D2A", "58859D02", "58859DAA", "58859E56",
     "58859F0E", "58859F3F", "58859E62", "58859EB6", "58859FCB",
     "58859F62", "5885A039", "58859D16",
+    "5885A08C", "5885A0D3", "5885A1E4", "5885A1EC",
+    "5885A245", "5885A371", "5885A379", "5885A3A6",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1661,6 +1663,54 @@ EVIDENCE = {
         "called_by": "Called from `0x58521620` at `0x58521678` as part of its state-processing path.",
         "behavior": "A null argument delegates to `0x58859EC2(0)`. Otherwise it applies `0x58859F3F` to the DWORD at object offset `+0x0C`; a zero low-byte result returns zero. For a nonzero result, it builds three local pointers and calls `0x58859E62`, returning that result.",
         "uncertainty": "The entry's higher-level purpose, object type, and nested record contract are unknown. Caller, field offset, predicate, and forwarded helper are direct Ghidra observations.",
+    },
+    "5885A08C": {
+        "name_in_analysis": "FUN_5885a08c",
+        "called_by": "The byte-reader handler `0x5885A0D3` calls this after accepting the object state.",
+        "behavior": "Rejects a null stream record by setting global status `0x16` and calling `0x58850FAB`. Otherwise it decrements the remaining-byte field at record offset `+8`; if the result is negative, it delegates to `0x5886F03E`. When bytes remain, it reads one unsigned byte from the current data pointer, advances that pointer, and returns the byte.",
+        "uncertainty": "The record layout and underflow helper contract are not named. Null handling, decrement, pointer update, and return value are directly visible in Ghidra.",
+    },
+    "5885A0D3": {
+        "name_in_analysis": "FUN_5885a0d3",
+        "called_by": "Ghidra identifies direct callers `0x5851EFF0` and `0x58521690`.",
+        "behavior": "Calls `0x58832760(&0x588ED1C0, 0x14)`. For a nonnull object it invokes `0x58859D02`, checks flag bit 12 at object offset `+0x0C`, and consults the object index from `0x5886CC56` against records at `0x589699B0`. If accepted, it reads one byte through `0x5885A08C` and releases state through `0x5885A1E4`. Rejected or null paths set global status `0x16`; rejected state also calls `0x58850750(&0x58906040, ...)`. Error paths return -1.",
+        "uncertainty": "The object and record types, index table, flag meanings, callback role, and error-state contract remain unknown. The two direct callers, call order, field offsets, status writes, and branches are Ghidra observations.",
+    },
+    "5885A1E4": {
+        "name_in_analysis": "FUN_5885a1e4",
+        "called_by": "Called by byte-reader handler `0x5885A0D3` after the byte-read helper returns.",
+        "behavior": "Forwards to `0x58859D16`, which invokes callback slot `0x5889421C` on the current object context.",
+        "uncertainty": "The callback's lifecycle meaning and implicit calling convention are unknown; the forwarding call is directly visible in Ghidra.",
+    },
+    "5885A1EC": {
+        "name_in_analysis": "FUN_5885a1ec",
+        "called_by": "Ghidra shows this as a Core.dll helper that reads a 64-bit value through `0x58867D73`; exact runtime caller names are outside this byte-I/O slice.",
+        "behavior": "If either input pointer is null, stores global status `0x16`, calls `0x58850FAB`, and returns -1. Otherwise it calls `0x58867D73` with the first pointer, stores the returned 64-bit value through the second pointer, and returns zero unless the value equals -1.",
+        "uncertainty": "The 64-bit value's meaning and helper contract are not known. Null checks, store, sentinel comparison, and return values are direct Ghidra observations.",
+    },
+    "5885A245": {
+        "name_in_analysis": "FUN_5885a245",
+        "called_by": "Called by wrapper `0x5885A3A6`; Ghidra lists no other direct caller.",
+        "behavior": "Calls `0x58832760(&0x588ED1E0, 0x10)`. For a nonnull object it invokes `0x58859D02`, checks flag bit 12 at object offset `+0x0C`, and consults its index from `0x5886CC56` against records at `0x589699B0`. If accepted, it writes one byte through `0x5885A379` and releases state through `0x5885A371`. Null or rejected states set status `0x16` on the supplied error record, call `0x58850F2E`, and rejected state additionally calls `0x58850750(&0x58906040, ...)`. Error paths return -1.",
+        "uncertainty": "Object and record types, index-table meaning, bit meanings, and callback contracts remain unknown. Branches, field offsets, calls, error writes, and return conditions are directly visible in Ghidra.",
+    },
+    "5885A371": {
+        "name_in_analysis": "FUN_5885a371",
+        "called_by": "Called by the byte-writer handler `0x5885A245` after the write helper returns.",
+        "behavior": "Forwards to `0x58859D16`, which invokes callback slot `0x5889421C` on the current object context.",
+        "uncertainty": "The callback's lifecycle meaning and implicit calling convention are unknown; the forwarding call is directly visible in Ghidra.",
+    },
+    "5885A379": {
+        "name_in_analysis": "FUN_5885a379",
+        "called_by": "Called by byte-writer handler `0x5885A245`.",
+        "behavior": "Decrements the remaining-byte field at record offset `+8`. If it becomes negative, delegates to `0x588710FD`; otherwise it writes the low byte of the first argument at the current data pointer, advances the pointer, and returns that byte.",
+        "uncertainty": "The stream record type and overflow-helper contract are unknown. Counter, write, pointer advance, delegation condition, and return are directly visible in Ghidra.",
+    },
+    "5885A3A6": {
+        "name_in_analysis": "FUN_5885a3a6",
+        "called_by": "Ghidra shows a direct caller at `0x5851F040`.",
+        "behavior": "Enters a shared state gate with `0x58850C9F(0)`, calls `0x5885A245` with the two inputs and a 40-byte local error record, exits through `0x58850CE7`, and returns the writer result.",
+        "uncertainty": "The gate contract and local error-record schema are unresolved; wrapper boundaries, local size, helper arguments, and call order are direct evidence.",
     },
 }
 
