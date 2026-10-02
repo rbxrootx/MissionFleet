@@ -7,7 +7,7 @@ complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
 identified code bytes across six report units. There are 6,244 verified matches
-totaling 1,379,042 bytes (13.1726%), each at 100.0% under objdiff 3.8.0. A
+totaling 1,381,420 bytes (13.1953%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -167,12 +167,13 @@ types remain unnamed, and this static match does not establish runtime use or
 improve the playable-client status. See
 [the Main record-copy notes](docs/current-main-record-copy.md).
 
-The current `Main.dll` event route `0x80000100` now has a verified 245-byte
-callee at `0x587E8590`. It preserves the observed payload-copy and bounded
-queue-insertion instructions, with the caller linkage and unresolved callback
-and ownership semantics recorded in
-[the event-queue notes](docs/current-main-event-queue.md). Current-build Main
-coverage is 112 / 8,474 identified functions and 405,624 / 2,353,108 bytes.
+The current `Main.dll` event route `0x80000100` has a verified 245-byte
+enqueuer at `0x587E8590`. Its embedded queue consumer at `0x587FAEC0` adds
+2,378 verified bytes across two disjoint code ranges; the constructor
+identifies a `CFDCSingleQueue<_QueueBlock>` with 512 slots of 16 bytes. Event
+meanings and queue ownership remain unresolved. Current-build Main coverage is
+113 / 8,474 identified functions and 408,002 / 2,353,108 bytes. See
+[the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its

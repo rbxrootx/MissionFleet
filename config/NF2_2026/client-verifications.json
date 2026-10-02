@@ -82922,6 +82922,39 @@
         "uncertainty": "The callback purpose, queue field meanings, dropped-entry policy, and copied payload ownership are not established. The behavior and argument order are tied to the mapped disassembly and Ghidra decompilation; semantic names remain provisional."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587FAEC0",
+      "name": "FUN_587faec0",
+      "size": 2378,
+      "symbol": "_FUN_587faec0",
+      "source": "src/client-current/Main/FUN_587faec0.cpp",
+      "source_sha256": "ac8263173ec8756ee0b6f386a29a62ab418c4bedc684ac69ae88c7eba0289e35",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FAEC0",
+          "size": 2353,
+          "symbol": "_FUN_587faec0_segment_00"
+        },
+        {
+          "address": "587FB7F4",
+          "size": 25,
+          "symbol": "_FUN_587faec0_segment_01"
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587faec0",
+        "called_by": "Called at 0x587FEF80 and 0x587FEFCB from FUN_587fd890; both are direct calls in the captured mapped image.",
+        "behavior": "Reads the embedded queue's consumer and producer indices at +0x104B0/+0x104AC, wraps the consumer index using capacity +0x104A4, decrements count +0x104A8 when consuming, then loads four DWORDs from the 16-byte slot at +0x104B4. It stores the second slot field as active event state at +0x10490 and continues through the decompiled UI/event dispatch routes. The adjacent constructor FUN_588011c0 labels the queue vtable CFDCSingleQueue<_QueueBlock>::vftable and sets capacity to 0x200.",
+        "uncertainty": "Ghidra reports unsettled type propagation. The full event-record schema, callback and slot-field meanings, route semantics, and runtime conditions are unresolved. The body is split across two Ghidra ranges; the source preserves each range separately and does not include intervening bytes."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# Current client event payload queue insertion
+# Current client event queue
 
 `FUN_587e8590` is the concrete target of the `0x80000100` route in
 [`FUN_587bb700`](current-main-event-dispatch.md). Ghidra reports a contiguous
@@ -39,8 +39,35 @@ The helper's observable steps are:
 Those offsets, argument order, branches, and call destinations are visible in
 the caller and callee instructions and agree with Ghidra's decompilation. The
 ring-buffer interpretation follows the increment, wrap, comparison, and
-16-byte stride; the field names are provisional. The callback contract, the
-allocator and copy helper's broader contracts, whether the no-write path
-transfers or releases an allocated pointer elsewhere, and the queue consumer
-remain unknown. This is static evidence; this path has not been exercised in a
-running client.
+16-byte stride; the field names are provisional.
+
+The matching queue reader is `FUN_587faec0`, called from `FUN_587fd890` at
+`0x587fef80` and `0x587fefcb`. Its 2,378 bytes verify at 100.0% across the
+Ghidra ranges `0x587faec0..0x587fb7f0` and `0x587fb7f4..0x587fb80c`. The source
+keeps those ranges as separate symbols and excludes the four intervening bytes.
+Because Ghidra reports unsettled type propagation and the method combines the
+queue read with a large event/UI dispatch, the source preserves the decoded
+x86 instructions instead of inventing pointer and callback types.
+
+On entry, the reader checks consumer index `+0x104b0` against producer index
+`+0x104ac`. If they differ, it advances with wraparound using capacity
+`+0x104a4` and decrements `+0x104a8`. It then loads four DWORDs from the
+selected 16-byte slot at `+0x104b4`, copies the second field into active event
+state at `+0x10490`, and continues through callback and event/UI routes. The
+disassembly shows the reads and calls, but most event meanings remain unknown.
+The reader still loads a slot when the indices match, so empty-queue behavior
+cannot be inferred without confirming initial slot contents and runtime state.
+
+The owning constructor `FUN_588011c0` identifies its vtable as
+`CPageFightOn_ControlMenuScreen` and its embedded queue at `+0x104a0` as
+`CFDCSingleQueue<_QueueBlock>`. It sets the capacity to `0x200`, allocates
+`0x2000` bytes for the slots, and zeros the count and both indices. The mapped
+vtable at `0x5899d180` contains `FUN_587ef910` at `+8` and `FUN_587fd890` at
+`+0xC`, consistent with cleanup and update roles. `FUN_587ef910` drains
+pending slots and passes each nonnull fourth field to `FUN_5897ce26`; the
+allocator's ownership contract is not fully recovered.
+
+The producer, reader, constructor, and cleanup evidence is static. No live
+client queue traffic has been captured, and the callback contract, event
+schema, drop behavior when the ring is full, payload ownership, and final UI
+effects remain uncertain.
