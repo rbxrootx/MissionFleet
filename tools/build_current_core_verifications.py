@@ -45,6 +45,7 @@ ADDRESSES = (
     "58534D30", "58534E80", "5852D160", "5852D0C0", "5852D5D0", "585341D0", "58534760", "585348B0", "58521FF0", "587B4180", "584C0DE0", "58484B20", "587B5730", "58529610", "58532AD0", "5848C0B0", "5849F480", "587B52B0", "587B5520", "584BF150", "5884CE10", "5884C890", "58831004", "58859610", "58864670", "5882E770", "58487710", "5884D3E5", "5886CED0", "58879A60", "58879A70", "5886246F", "58868BF1", "588646B0", "588646D0", "587AABC0", "5882E666", "58487680", "58487780", "588647D0", "58864910", "58864C70", "58864FE0", "58864C40", "58873ED0", "58873EB0", "58873EE0", "58870110", "58870130", "58870160", "588701C0", "588721E0", "58873F20", "58873F50", "58859720", "5887D0C0", "58531000", "58530EA0",
     "587B6530", "587B3FD0", "587B4550", "587B45C0",
     "5857FE50", "58539D50", "5853ACB0", "5853ACD0", "5853ADA0",
+    "5856E240", "5882DD60",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1229,6 +1230,18 @@ EVIDENCE = {
         "called_by": "Resource screen setup `0x58539D50` calls it with argument `2` at `0x58539DA5`.",
         "behavior": "Uses registered callbacks with the mapped registry path `SOFTWARE\\FleetMission\\NAVYFIELDClient\\Log` and value strings `ID`, `PlayerID`, `pass`, and `PS`. Argument zero reads selected values and prepares writes; argument one writes selected values. The observed screen-setup call passes `2`, which falls through those mode branches and proceeds to the final cleanup callback.",
         "uncertainty": "The registry callback implementations and exact value types are not identified; the function's names are inferred from the literal path/value strings. The caller's argument `2` and the function's branch behavior are directly visible in Ghidra.",
+    },
+    "5856E240": {
+        "name_in_analysis": "FUN_5856e240",
+        "called_by": "Window/bootstrap setup routine `0x5882DD60` calls it after creating and storing its shared context objects, then runs the newly created object's virtual method at `+0x04`.",
+        "behavior": "Initializes globals for the active scene context, calls registered startup callbacks, allocates and initializes a `0x74`-byte object through `0x5856DDB0`, allocates a `0x64`-byte scene through constructor `0x5857FE50`, stores it in global `0x58962228`, writes global context `0x58965F1C` to a registered interface, and calls three setup helpers on the scene before invoking its virtual slot `+0x04`.",
+        "uncertainty": "The allocated object types, callback contracts, meaning of the globals, and virtual method behavior are not named. The call order, allocation sizes, global stores, and virtual dispatch are Ghidra observations; the `scene` label follows the constructor's known resource initialization path.",
+    },
+    "5882DD60": {
+        "name_in_analysis": "FUN_5882dd60",
+        "called_by": "`WinMain` calls this routine from both branches selected by `0x584C55A0`: each branch first calls `0x58521FF0` with a different mapped string and window geometry. Ghidra records the two call sites at `0x5856E783` and `0x5856E816`.",
+        "behavior": "Builds shared window/client context around registered runtime callbacks, optionally prepares a callback structure, derives adjusted geometry for modes other than 10, calls the registered window/context factory, and on success creates and stores three helper/context objects before calling `0x5856E240` to install and initialize the resource scene. The success path stores the main context at `0x58965F1C` and a large `0x40220`-byte allocated object at `0x589660D0`.",
+        "uncertainty": "The callback implementations and the types/roles of the allocated objects are outside this Core function. `WinMain`'s decompiled call expression supplies four apparent arguments while this function is decompiled with eleven parameters, so parameter/register mapping and mode-specific geometry semantics remain unresolved; no UI frame or interaction was captured.",
     },
 }
 

@@ -64084,6 +64084,428 @@
         "behavior": "Uses registered callbacks with the mapped registry path `SOFTWARE\\FleetMission\\NAVYFIELDClient\\Log` and value strings `ID`, `PlayerID`, `pass`, and `PS`. Argument zero reads selected values and prepares writes; argument one writes selected values. The observed screen-setup call passes `2`, which falls through those mode branches and proceeds to the final cleanup callback.",
         "uncertainty": "The registry callback implementations and exact value types are not identified; the function's names are inferred from the literal path/value strings. The caller's argument `2` and the function's branch behavior are directly visible in Ghidra."
       }
+    },
+    {
+      "address": "5856E240",
+      "name": "FUN_5856e240",
+      "size": 353,
+      "symbol": "_FUN_5856e240",
+      "source": "src/client-current/Core/FUN_5856e240.cpp",
+      "source_sha256": "846653e9b0731544874aa119b8d25444c5a5e96e5b7fbcc95c52870857cd285e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "5856E500",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "589660B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "589660D0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "58962230",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "588944B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "5856DDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "58965F24",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 178,
+          "target_address": "5857FE50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 212,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "589056B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 223,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "5856E520",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 253,
+          "target_address": "5856E510",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 261,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "5856E4F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "585008C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 284,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "58500D10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 304,
+          "target_address": "585008C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 311,
+          "target_address": "58500D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 316,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 324,
+          "target_address": "58962228",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5856e240",
+        "called_by": "Window/bootstrap setup routine `0x5882DD60` calls it after creating and storing its shared context objects, then runs the newly created object's virtual method at `+0x04`.",
+        "behavior": "Initializes globals for the active scene context, calls registered startup callbacks, allocates and initializes a `0x74`-byte object through `0x5856DDB0`, allocates a `0x64`-byte scene through constructor `0x5857FE50`, stores it in global `0x58962228`, writes global context `0x58965F1C` to a registered interface, and calls three setup helpers on the scene before invoking its virtual slot `+0x04`.",
+        "uncertainty": "The allocated object types, callback contracts, meaning of the globals, and virtual method behavior are not named. The call order, allocation sizes, global stores, and virtual dispatch are Ghidra observations; the `scene` label follows the constructor's known resource initialization path."
+      }
+    },
+    {
+      "address": "5882DD60",
+      "name": "FUN_5882dd60",
+      "size": 760,
+      "symbol": "_FUN_5882dd60",
+      "source": "src/client-current/Core/FUN_5882dd60.cpp",
+      "source_sha256": "975955153be9f7f0d1060f458d330d68a25eff92cafde27712ade92b507dcbf7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5889433C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "587B4180",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "5882DE5E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "588942E0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "5889444C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 182,
+          "target_address": "58894460",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "588940BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "58894438",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 240,
+          "target_address": "588941FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 250,
+          "target_address": "5882E04B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 387,
+          "target_address": "5889443C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 392,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 398,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 405,
+          "target_address": "5882E049",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 415,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 422,
+          "target_address": "588944D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 428,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 435,
+          "target_address": "58894490",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 443,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 488,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 497,
+          "target_address": "5882D920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 531,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 565,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 576,
+          "target_address": "5882D8C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 610,
+          "target_address": "58965F78",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 620,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 626,
+          "target_address": "587C3BE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 639,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 663,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 672,
+          "target_address": "5882D330",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 706,
+          "target_address": "589660D0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 718,
+          "target_address": "589660D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 728,
+          "target_address": "589660D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 737,
+          "target_address": "5856E240",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882dd60",
+        "called_by": "`WinMain` calls this routine from both branches selected by `0x584C55A0`: each branch first calls `0x58521FF0` with a different mapped string and window geometry. Ghidra records the two call sites at `0x5856E783` and `0x5856E816`.",
+        "behavior": "Builds shared window/client context around registered runtime callbacks, optionally prepares a callback structure, derives adjusted geometry for modes other than 10, calls the registered window/context factory, and on success creates and stores three helper/context objects before calling `0x5856E240` to install and initialize the resource scene. The success path stores the main context at `0x58965F1C` and a large `0x40220`-byte allocated object at `0x589660D0`.",
+        "uncertainty": "The callback implementations and the types/roles of the allocated objects are outside this Core function. `WinMain`'s decompiled call expression supplies four apparent arguments while this function is decompiled with eleven parameters, so parameter/register mapping and mode-specific geometry semantics remain unresolved; no UI frame or interaction was captured."
+      }
     }
   ]
 }

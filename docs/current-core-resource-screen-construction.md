@@ -7,6 +7,8 @@ address point `0x588AA82C`, initializes a temporary child/context object, calls
 `0x585367B0`, stores it at receiver offset `+0x60`, and invokes that child's
 virtual slot `+0x04`. This ties the resource setup routine to a concrete
 constructed scene object; the class and child types remain unnamed.
+The client startup path that reaches `0x5856E240` from `WinMain` is documented
+in [the entry and window setup notes](current-core-client-entry-and-window-setup.md).
 
 `0x58539D50` stores its argument in `0x589056B4`, resets related globals, and
 builds a set of screen resources. It makes repeated calls through factory

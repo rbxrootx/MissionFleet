@@ -99,6 +99,8 @@ helpers add five matches / 4,846 exact bytes. They create wrapped resources,
 read a named registry path, and request `.\\spr\\Warning.spr`; callback
 meanings and warning-sprite pixels remain unresolved. See
 [scene construction evidence](docs/current-core-resource-screen-construction.md).
+The client startup and window setup path is documented in
+[the entry-flow notes](docs/current-core-client-entry-and-window-setup.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin
