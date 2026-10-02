@@ -19,16 +19,19 @@ callback `0x58894564` with mode `2` and that buffer. If its 16-bit result is
 zero, the constructor clears the buffer again, calls `0x58894568`, then retries
 `0x58894564` with the returned 16-bit value. A nonzero result from either
 `0x58894564` call causes it to pass mapped string `Error` to `0x587B41E0`, then
-call `0x58857B5A(0)`. The reporting helper obtains a value through
+call `0x58857B5A(0)`. That wrapper enters the reset/state-transition path
+documented in [the reset transition notes](current-core-async-io-reset-transition.md).
+The reporting helper obtains a value through
 `0x588941FC`, passes it and constants `0x1300`/`0x400` to `0x5889438C`,
 forwards the local result and error string through `0x5889446C` with value
-`0x10`, then calls `0x58894388` with that local result. The reset wrapper
-forwards to `0x5885796F` with two zero arguments.
+`0x10`, then calls `0x58894388` with that local result. The wrapper forwards
+`(value, 0, 0)` to `0x5885796F`; its byte-matched helper path is detailed in the
+reset transition notes.
 
 This ties the event handler's counter, callback context, status string, and
 keyed-record table to explicit constructor writes. Callback purposes, the
-400-byte configuration schema, table-node type, vtable method roles, and reset
-side effects remain unknown; no setup callback or live server event was
+400-byte configuration schema, table-node type, vtable method roles, and
+callback meanings remain unknown; no setup callback or live server event was
 captured.
 
 All four functions match the hash-pinned installed Core image at 100% under

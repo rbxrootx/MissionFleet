@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,037 functions totaling 1,354,559 bytes (12.9390% of indexed code),
+credits 6,045 functions totaling 1,355,125 bytes (12.9445% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,7 +72,7 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,321
-bytes from installed `Core.dll`; 228 functions match 309,372 bytes, including
+bytes from installed `Core.dll`; 236 functions match 309,938 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -80,8 +80,13 @@ The separate CRT floating-point error-path slice adds 17 byte-matched functions
 totaling 3,292 bytes. The async-I/O context constructor, its bucket-table
 initializer, and its error-report/reset helpers add four exact matches / 544
 bytes; the 65,536-bucket table is confirmed at context `+0x220`, while callback
-meanings and reset side effects remain unresolved. See
+meanings and user-visible setup effects remain unresolved. See
 [`current-core-async-io-context.md`](current-core-async-io-context.md). The
+reset/state-transition routine and seven direct helpers add eight matches / 566
+bytes, with the PE32 CLR check, module/export lookup, callback sequence, and
+TEB policy-bit test recorded from Ghidra; the callback ABIs and `INT3` handling
+remain unknown. See
+[`current-core-async-io-reset-transition.md`](current-core-async-io-reset-transition.md).
 child-field accessor at `0x584869C0` adds 17 bytes;
 Ghidra establishes a DWORD read at receiver `+4`, while its likely coordinate
 role is inferred from callers; see

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,459 functions and 10,468,770
-identified code bytes across six report units. There are 6,037 verified matches
-totaling 1,354,559 bytes (12.9390%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,045 verified matches
+totaling 1,355,125 bytes (12.9445%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -72,8 +72,14 @@ with 74 operand targets checked; see
 The async-I/O context constructor, its bucket-table initializer, and the
 constructor's error-report/reset helpers add four exact matches / 544 bytes.
 The 65,536-bucket table is confirmed at context `+0x220`; callback meanings and
-reset side effects remain unresolved. See
+user-visible setup effects remain unresolved. See
 [context construction evidence](docs/current-core-async-io-context.md).
+The reset/state-transition routine and its seven direct helpers add eight exact
+matches / 566 bytes with 29 relocation operands checked. Ghidra traces a PE32
+CLR-directory check, resolution of `mscoree.dll` / `CorExitProcess`, state
+record calls, a TEB policy-bit read, and an `INT3` path; callback ABIs and the
+breakpoint's handling remain unresolved. See
+[reset transition evidence](docs/current-core-async-io-reset-transition.md).
 The child-field accessor at `0x584869C0` adds one 17-byte exact match; its
 `receiver +4` return is established, while its coordinate meaning remains an
 inference from placement call sites. See

@@ -54,6 +54,8 @@ ADDRESSES = (
     "5882CCF0", "5882C440", "5882C4C0", "5882D5F0", "5882C990",
     "5882D170", "58831042", "58831034",
     "5882D330", "5882D2F0", "587B41E0", "58857B5A",
+    "5885796F", "58857A5B", "58857A9D", "5885781F",
+    "5886F1DC", "5886F17D", "58857A2D", "58857B3D",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1421,9 +1423,57 @@ EVIDENCE = {
     },
     "58857B5A": {
         "name_in_analysis": "FUN_58857b5a",
-        "called_by": "Context constructor `0x5882D330` calls it with zero after reporting the mapped `Error` string; scene/client cleanup `0x5856E0D0` also calls it with zero.",
+        "called_by": "Context constructor `0x5882D330` calls it with zero after reporting the mapped `Error` string; scene/client cleanup `0x5856E0D0` also calls it with zero. It invokes reset routine `0x5885796F` with mode and third argument both zero.",
         "behavior": "Forwards its argument to `0x5885796F` with two zero arguments.",
         "uncertainty": "The downstream state transition and resource meaning are not recovered; the forwarding call is directly visible in Ghidra.",
+    },
+    "5885796F": {
+        "name_in_analysis": "FUN_5885796f",
+        "called_by": "Mode-zero wrapper `0x58857B5A`, mode-two wrapper `0x58857B3D`, and initialization routine `0x588317EF` call it with distinct argument tuples.",
+        "behavior": "When its third argument is zero, it asks `0x58857A5B` whether the current image has a nonzero CLR data-directory entry and, if so, runs `0x58857A9D` with its first argument. It then constructs a three-pointer argument record and invokes `0x5885781F`. If the third argument remains zero after that call, it checks `0x5886F1DC`, otherwise queries the TEB policy bit through `0x5886F17D`, writes the resulting low byte to its local state, and calls `0x58857A2D`; this path ends in an `INT3` instruction.",
+        "uncertainty": "The purpose and ABI of the state transition record, callback slots, policy probe, and final helper are not known. The CLR image checks, callback arguments, branch conditions, call order, local-byte calculation, and breakpoint are directly visible in Ghidra and the mapped image.",
+    },
+    "58857A5B": {
+        "name_in_analysis": "FUN_58857a5b",
+        "called_by": "Reset routine `0x5885796F` calls this only when its third argument is zero.",
+        "behavior": "Obtains an image base through callback slot `0x588942AC`; checks for MZ, PE, PE32 optional-header magic, more than 14 data directories, and a nonzero DWORD at optional-header offset `+0xE8`, then returns a boolean result.",
+        "uncertainty": "The callback slot's API name and the semantic label for the optional-header directory are not asserted. The compared constants, offsets, bounds test, and return behavior are visible in Ghidra.",
+    },
+    "58857A9D": {
+        "name_in_analysis": "FUN_58857a9d",
+        "called_by": "Reset routine `0x5885796F` calls it with its first argument only when `0x58857A5B` returns nonzero; `0x58857A2D` also calls it unconditionally.",
+        "behavior": "Uses callback slots `0x5889426C`, `0x588942DC`, and `0x588942E8` to acquire a handle for mapped module name `mscoree.dll`, resolve mapped export name `CorExitProcess`, conditionally invoke the resolved pointer, and release a nonzero handle.",
+        "uncertainty": "The callback slot identities and the ABI/meaning of the value passed to the resolved export are not established. The two mapped strings, conditional resolution/invocation, and handle-release sequence are direct observations.",
+    },
+    "5885781F": {
+        "name_in_analysis": "FUN_5885781f",
+        "called_by": "Reset routine `0x5885796F` passes three stack-record pointers to this helper.",
+        "behavior": "Calls `0x58832760` with mapped table `0x588ED120` and count 8; calls `0x58863C1C` with the first DWORD reached through its first argument; then passes its second argument as ECX to `0x58857887` and its third argument to `0x58857860` before restoring its exception state.",
+        "uncertainty": "The table contents, record schemas, helper contracts, and state-transition meaning are unknown. The stack-record dereference and ordered calls are directly visible in Ghidra.",
+    },
+    "5886F1DC": {
+        "name_in_analysis": "FUN_5886f1dc",
+        "called_by": "Reset routine `0x5885796F` calls this when its third argument remains zero after the state-record helper.",
+        "behavior": "Calls `0x5886F18F`; when that returns zero, calls `0x5886F60D` with a local DWORD. Returns true exactly when that local DWORD is not 1.",
+        "uncertainty": "The service-state and policy meaning of the helpers and local value are unknown; branch and return conditions are direct Ghidra observations.",
+    },
+    "5886F17D": {
+        "name_in_analysis": "FUN_5886f17d",
+        "called_by": "Reset routine `0x5885796F` calls this when `0x5886F1DC` returns zero.",
+        "behavior": "Reads the TEB pointer from `FS:[0x18]`, follows offsets `+0x30` and `+0x68`, then returns bit 0 of that DWORD after shifting it right by 8.",
+        "uncertainty": "The TEB substructure field's semantic meaning is unresolved; the segment read, offsets, shift, mask, and return are directly visible in Ghidra.",
+    },
+    "58857A2D": {
+        "name_in_analysis": "FUN_58857a2d",
+        "called_by": "Reset routine `0x5885796F` calls it with its first argument and local state byte; it is also a direct state-finalization helper in that path.",
+        "behavior": "If the state byte is nonzero, calls callback slots `0x58894254` and `0x588943B4` in sequence; then always calls `0x58857A9D`, invokes callback slot `0x5889420C` with the first argument, and executes `INT3`.",
+        "uncertainty": "The callback purposes and debugger/breakpoint behavior in normal operation are unknown. Branch and call order are directly visible in Ghidra.",
+    },
+    "58857B3D": {
+        "name_in_analysis": "FUN_58857b3d",
+        "called_by": "Event/state handlers `0x58862710` and `0x5887316E` call this wrapper.",
+        "behavior": "Forwards its first argument to `0x5885796F` with mode `2` and third argument `0`.",
+        "uncertainty": "The mode value's semantic name and the callers' state-change intent remain unknown; argument values and callers are direct Ghidra observations.",
     },
 }
 
