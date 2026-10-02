@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,459 functions and 10,468,770
-identified code bytes across six report units. There are 6,033 verified matches
-totaling 1,354,015 bytes (12.9338%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,037 verified matches
+totaling 1,354,559 bytes (12.9390%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -69,6 +69,11 @@ allocation-failure exception branches now have byte-matched callsite evidence.
 A separate floating-point error-handling slice adds 17 functions / 3,292 bytes
 with 74 operand targets checked; see
 [floating-point error-path notes](docs/current-core-floating-point-error-path.md).
+The async-I/O context constructor, its bucket-table initializer, and the
+constructor's error-report/reset helpers add four exact matches / 544 bytes.
+The 65,536-bucket table is confirmed at context `+0x220`; callback meanings and
+reset side effects remain unresolved. See
+[context construction evidence](docs/current-core-async-io-context.md).
 The child-field accessor at `0x584869C0` adds one 17-byte exact match; its
 `receiver +4` return is established, while its coordinate meaning remains an
 inference from placement call sites. See
@@ -109,6 +114,8 @@ The callback installed by window setup is traced in
 [the window callback notes](docs/current-core-client-window-callback.md).
 The `0x462` event and record receive/send path is documented in
 [the async-I/O record notes](docs/current-core-async-io-records.md).
+The object and inline keyed table used by this path are reconstructed in
+[the context-construction notes](docs/current-core-async-io-context.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin

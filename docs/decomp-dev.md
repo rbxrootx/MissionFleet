@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,033 functions totaling 1,354,015 bytes (12.9338% of indexed code),
+credits 6,037 functions totaling 1,354,559 bytes (12.9390% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -72,12 +72,17 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,321
-bytes from installed `Core.dll`; 224 functions match 308,828 bytes, including
+bytes from installed `Core.dll`; 228 functions match 309,372 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
 The separate CRT floating-point error-path slice adds 17 byte-matched functions
-totaling 3,292 bytes. The child-field accessor at `0x584869C0` adds 17 bytes;
+totaling 3,292 bytes. The async-I/O context constructor, its bucket-table
+initializer, and its error-report/reset helpers add four exact matches / 544
+bytes; the 65,536-bucket table is confirmed at context `+0x220`, while callback
+meanings and reset side effects remain unresolved. See
+[`current-core-async-io-context.md`](current-core-async-io-context.md). The
+child-field accessor at `0x584869C0` adds 17 bytes;
 Ghidra establishes a DWORD read at receiver `+4`, while its likely coordinate
 role is inferred from callers; see
 [`current-core-child-offset-accessor.md`](current-core-child-offset-accessor.md).
@@ -120,6 +125,8 @@ The setup-installed message dispatcher and its helpers are traced in
 [`current-core-client-window-callback.md`](current-core-client-window-callback.md).
 The main-loop record parser and response sender are traced in
 [`current-core-async-io-records.md`](current-core-async-io-records.md).
+Their `0x40220`-byte context object and inline 65,536-entry table are described
+in [`current-core-async-io-context.md`](current-core-async-io-context.md).
 The inventory spans at `0x586EA6E0`, `0x5884C890`, and `0x5882C990` now include
 their complete epilogues; Ghidra's prior extents ended mid-instruction. These
 expanded functions were rechecked at objdiff 100%.

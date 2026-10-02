@@ -40,12 +40,17 @@ checksums, and submits the record through callback `0x58894530`. For context
 state `+0x44` nonzero, it follows a modified checksum path. A callback error
 other than `0x3E5` enters cleanup `0x5882C440`.
 
-The table helpers use `(key & 0xFFFF) * 4` to locate a bucket, follow 12-byte
+The table helpers use the 65,536-entry table at context `+0x220` and
+`(key & 0xFFFF) * 4` to locate a bucket, follow 12-byte
 linked nodes, and unlink a matching key before releasing the node through
 `0x58831034`. `0x5882D670` decrements the tracked count only when it is nonzero
 and the supplied key is not `-1`. Receive-buffer allocation goes through
 `0x58831042` to the already byte-matched allocator `0x58831004`; copies use the
 already byte-matched helper `0x5884C890`.
+
+The `0x40220`-byte context allocation, table initialization, field offsets, and
+registered configuration/error callbacks are traced in
+[the context-construction notes](current-core-async-io-context.md).
 
 This establishes a mapped receive/dispatch/send lifecycle and exact checksum
 arithmetic, but not a complete transport protocol specification. The registered

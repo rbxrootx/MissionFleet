@@ -53,6 +53,7 @@ ADDRESSES = (
     "5882D670", "5882D6C0", "584A0DA0", "5882CC40", "5882C4E0",
     "5882CCF0", "5882C440", "5882C4C0", "5882D5F0", "5882C990",
     "5882D170", "58831042", "58831034",
+    "5882D330", "5882D2F0", "587B41E0", "58857B5A",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1331,8 +1332,8 @@ EVIDENCE = {
     "5882D6C0": {
         "name_in_analysis": "FUN_5882d6c0",
         "called_by": "Custom-I/O event dispatcher `0x5882D710` uses it to resolve the event's low-16-bit key before handling subcodes.",
-        "behavior": "Selects a bucket at receiver base plus `(key & 0xFFFF) * 4`, follows nodes through field `+8` until a node's first DWORD equals the key, then returns its second DWORD; returns zero when no bucket or key match exists.",
-        "uncertainty": "The container and node types are not named. Bucket arithmetic, link offset, key comparison, return field, and null result are directly visible in Ghidra.",
+        "behavior": "The dispatcher sets ECX to context `+0x220` before calling this helper. It selects a bucket at that table base plus `(key & 0xFFFF) * 4`, follows nodes through field `+8` until a node's first DWORD equals the key, then returns its second DWORD; returns zero when no bucket or key match exists.",
+        "uncertainty": "The container and node types are not named. The constructor-to-table relationship, bucket arithmetic, link offset, key comparison, return field, and null result are directly visible in Ghidra.",
     },
     "584A0DA0": {
         "name_in_analysis": "FUN_584a0da0",
@@ -1399,6 +1400,30 @@ EVIDENCE = {
         "called_by": "Record unlink helper `0x5882D5F0` releases the removed 12-byte node through this routine.",
         "behavior": "Forwards the supplied pointer to thunk `0x5886CC10` and returns.",
         "uncertainty": "The thunk's allocator/deallocation contract and calling convention are not recovered from this wrapper; the forwarding call is directly visible in Ghidra.",
+    },
+    "5882D330": {
+        "name_in_analysis": "FUN_5882d330",
+        "called_by": "Window/context setup `0x5882DD60` allocates `0x40220` bytes, passes its main context `0x58965F1C` to this constructor, and stores the returned object at `0x589660D0`.",
+        "behavior": "Installs vtable address point `0x588BE7D4`, initializes a 65,536-entry DWORD bucket array beginning at receiver `+0x220` through `0x5882D2F0`, clears event count `+0x214`, stores the supplied main context at `+0x218`, and clears outstanding count `+0x21C`. It queries registered callbacks `0x58894564` and `0x58894568` using a zeroed 400-byte local buffer and a returned 16-bit value; on either nonzero callback result it forwards mapped string `Error` through `0x587B41E0` and calls `0x58857B5A(0)`. It finally clears the status buffer at `+0x104`.",
+        "uncertainty": "The callback APIs, local configuration record, stored main-context role, bucket entry types, vtable methods, and reset-wrapper effects are unresolved. Allocation size, vtable, field offsets, bucket initialization, callback branch conditions/order, and mapped `Error` literal are directly supported by Ghidra and mapped data.",
+    },
+    "5882D2F0": {
+        "name_in_analysis": "FUN_5882d2f0",
+        "called_by": "Context constructor `0x5882D330` passes receiver `+0x220` to it at `0x5882D379`.",
+        "behavior": "Writes zero to 65,536 consecutive DWORDs beginning at the supplied pointer and returns that pointer. In this constructor the span is exactly `0x40000` bytes, matching the bucket region inside the `0x40220`-byte allocation.",
+        "uncertainty": "The hash/bucket record semantics are not established by the zeroing helper itself; the span and caller placement are direct Ghidra observations.",
+    },
+    "587B41E0": {
+        "name_in_analysis": "FUN_587b41e0",
+        "called_by": "Context constructor `0x5882D330` calls it with the mapped literal `Error` on two nonzero callback-result paths.",
+        "behavior": "Obtains a value through callback `0x588941FC`, passes it with constants `0x1300` and `0x400` to callback `0x5889438C`, forwards the returned local value and supplied string to callback `0x5889446C` with final value `0x10`, then passes the local value to callback `0x58894388`.",
+        "uncertainty": "The callbacks' roles, local value type, error-report destination, and string encoding are unknown. Their order and arguments are direct Ghidra observations; describing the supplied literal as an error string follows the mapped bytes `Error`.",
+    },
+    "58857B5A": {
+        "name_in_analysis": "FUN_58857b5a",
+        "called_by": "Context constructor `0x5882D330` calls it with zero after reporting the mapped `Error` string; scene/client cleanup `0x5856E0D0` also calls it with zero.",
+        "behavior": "Forwards its argument to `0x5885796F` with two zero arguments.",
+        "uncertainty": "The downstream state transition and resource meaning are not recovered; the forwarding call is directly visible in Ghidra.",
     },
 }
 
