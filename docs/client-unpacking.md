@@ -343,6 +343,10 @@ and updates the observed style bits; its zero-token path clears the text and
 inline state. Both callback signatures are inferred from stack cleanup, and
 their contracts remain unverified. The two functions share a hash-pinned opaque
 layout header, which the client verifier now checks alongside each source file.
+The constructor's allocator thunk and MSVC unwind path are traced separately
+in [the text-control construction notes](client-text-control-construction.md);
+the current constructor source remains instruction-level assembly, not a typed
+C++ reconstruction.
 Four direct control helpers remain
 unmatched: `0x10103B80` and `0x10022F80`. The variant-control
 constructor pair `0x101047F0`/`0x10104F50` now byte-matches as well. Ghidra shows
