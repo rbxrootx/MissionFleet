@@ -336,6 +336,13 @@ clears a 0x80-byte buffer. The setter is now reconstructed as a typed C++ method
 on an opaque `TextControl` layout, rather than an instruction-emitting stub;
 Visual C++ 6.0 SP5 `/O2 /GX-` recompiles its 13 bytes at 100% objdiff. It writes
 one value to offsets `+0x74` and `+0x70`, whose exact meaning remains uncertain.
+The adjacent 100-byte text-state updater `0x10018840` is also now expressed as
+a typed method and recompiles byte-for-byte. Its nonzero-token path invokes the
+callbacks at `0x101750B0` and `0x101750A8`, stores the callback result at `+0x78`,
+and updates the observed style bits; its zero-token path clears the text and
+inline state. Both callback signatures are inferred from stack cleanup, and
+their contracts remain unverified. The two functions share a hash-pinned opaque
+layout header, which the client verifier now checks alongside each source file.
 Four direct control helpers remain
 unmatched: `0x10103B80` and `0x10022F80`. The variant-control
 constructor pair `0x101047F0`/`0x10104F50` now byte-matches as well. Ghidra shows

@@ -35,6 +35,17 @@ def source_hashes(path):
     return {hashlib.sha256(value).hexdigest() for value in (data, lf, crlf)}
 
 
+def audit_source_dependencies(match, root=ROOT):
+    checked = 0
+    for dependency in match.get("source_dependencies", []):
+        path = root / dependency["path"]
+        expected = dependency["sha256"]
+        if not path.is_file() or expected not in source_hashes(path):
+            raise ValueError(f"Source dependency hash differs for {dependency['path']}")
+        checked += 1
+    return checked
+
+
 def audit_relocations(document, match, code):
     address = int(match["address"], 16)
     checked = 0
@@ -89,6 +100,7 @@ def verify_match(document, match, image, cl, clang, objdiff):
     source = ROOT / match["source"]
     if match.get("source_sha256") and match["source_sha256"] not in source_hashes(source):
         raise ValueError(f"Source hash differs for {match['source']}")
+    audit_source_dependencies(match)
     flags = tuple(match.get("flags", document["compiler"]["flags"]))
     environment = os.environ.copy()
     environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")

@@ -51,9 +51,12 @@ pairs now decode through the corrected preview pipeline. See
 
 For the archived 2.062 client, the 13-byte paired text-control setter at
 `0x100188E0` is now a typed C++ method instead of an emitted-byte stub. The
-recorded Visual C++ 6.0 SP5 `/O2 /GX-` profile reproduces all 13 bytes at 100%
-objdiff. Its two field meanings remain unknown, and this source-quality gain
-does not advance the overall byte-match count.
+neighboring 100-byte text-state updater at `0x10018840` is also a typed method;
+both compile to the original bytes under the recorded Visual C++ 6.0 SP5
+`/O2 /GX-` profile. ObjDiff checks the updater's two callback-global addresses
+as relocations, and the shared opaque layout header is hash-pinned by the
+verifier. The callback contracts and field meanings remain unknown. This
+source-quality gain does not advance the overall byte-match count.
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.

@@ -2162,7 +2162,13 @@
       "size": 13,
       "symbol": "?SetTextControlPairedValue@TextControl@@QAEXI@Z",
       "source": "src/client-2062/Main/SetTextControlPairedValue.cpp",
-      "source_sha256": "e52426680bf330201753e7d2af47d16caa7b0165851e7006f2b478849d1877af",
+      "source_sha256": "3c7b5b163cc59d85bb1be542319e8337c8c54d0bfea1070e7d725d0f8933eabb",
+      "source_dependencies": [
+        {
+          "path": "src/client-2062/Main/TextControlLayout.h",
+          "sha256": "7c32bb793dacc7fdd5d775efa51dc40aa8f6f234950850038552ca324c2484cb"
+        }
+      ],
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -3842,15 +3848,34 @@
       "address": "10018840",
       "name": "FUN_10018840",
       "size": 100,
-      "symbol": "_FUN_10018840",
+      "symbol": "?SetResourceText@TextControl@@QAEXH@Z",
       "source": "src/client-2062/Main/FUN_10018840.cpp",
-      "source_sha256": "1bf99c090f3df9a75d3df6016e609a4d9c0b05b3cc01c9c6a84ece4f930ef4f6",
+      "source_sha256": "126eff6c25a3aa893c92c3f45d515503b3523afaf84b4c2eb90041add2887001",
+      "source_dependencies": [
+        {
+          "path": "src/client-2062/Main/TextControlLayout.h",
+          "sha256": "7c32bb793dacc7fdd5d775efa51dc40aa8f6f234950850038552ca324c2484cb"
+        }
+      ],
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
         "/GX-"
       ],
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 34,
+          "symbol": "_DAT_101750B0",
+          "target_address": "101750B0",
+          "kind": "absolute"
+        },
+        {
+          "offset": 41,
+          "symbol": "_DAT_101750A8",
+          "target_address": "101750A8",
+          "kind": "absolute"
+        }
+      ],
       "evidence": {
         "name_in_analysis": "FUN_10018840",
         "called_by": "FUN_1001dab0@1001DAB0, FUN_1001d710@1001D710, FUN_10021260@10021260",

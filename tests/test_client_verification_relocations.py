@@ -4,7 +4,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.verify_client_matches import audit_relocations, source_hashes
+from tools.verify_client_matches import (
+    audit_relocations,
+    audit_source_dependencies,
+    source_hashes,
+)
 
 
 class ClientRelocationAuditTests(unittest.TestCase):
@@ -31,6 +35,21 @@ class ClientRelocationAuditTests(unittest.TestCase):
             hashes = source_hashes(source)
             self.assertIn(hashlib.sha256(b"one\ntwo\n").hexdigest(), hashes)
             self.assertEqual(len(hashes), 2)
+
+    def test_source_dependency_hash_is_enforced(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            dependency = root / "layout.h"
+            dependency.write_bytes(b"struct Control {};\n")
+            match = {"source_dependencies": [{
+                "path": "layout.h",
+                "sha256": hashlib.sha256(dependency.read_bytes()).hexdigest(),
+            }]}
+
+            self.assertEqual(audit_source_dependencies(match, root), 1)
+            dependency.write_bytes(b"struct Other {};\n")
+            with self.assertRaisesRegex(ValueError, "layout.h"):
+                audit_source_dependencies(match, root)
 
 
 if __name__ == "__main__":

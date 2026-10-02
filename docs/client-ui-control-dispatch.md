@@ -29,7 +29,7 @@ The verified direct-call closure adds these helpers:
 | --- | ---: | --- |
 | `0x10015B40` | 54 | Copies six descriptor fields into a control. |
 | `0x10017900` | 115 | Applies a descriptor to a control and child; invokes `0x100FF160` when a descriptor is present. |
-| `0x10018840` | 100 | Updates text-like state, including clearing it for a zero token and calling indirect text callbacks otherwise. |
+| `0x10018840` | 100 | Compiler-validated `TextControl::SetResourceText`: copies the paired field, handles zero/nonzero token paths, calls both text callbacks on the nonzero path, and updates state/style fields. Callback signatures are inferred from stack cleanup; contracts remain unresolved. |
 | `0x1001D710` | 95 | Updates child text/position and dispatches through an owner virtual method. |
 | `0x1001D870` | 203 | Repositions the control and eight children through `0x100FECD0`. |
 | `0x10021260` | 95 | Updates child text/position and dispatches through an owner virtual method. |
@@ -47,7 +47,9 @@ against the local capture at 100% objdiff similarity.
 ## Uncertainties
 
 The indirect callbacks at `DAT_101750A8` and `DAT_101750B0` have not been
-resolved to stable signatures or semantic contracts. Several virtual calls are
+resolved to stable signatures or semantic contracts. Their typed C++ call
+signatures are inferred from observed stack cleanup and exact byte comparison,
+not independently confirmed at runtime. Several virtual calls are
 identified only by their observed vtable offsets. Ghidra emits `unaff_EDI` and
 other untracked register values in some dispatcher arms, so the pseudocode does
 not establish their original source-level parameters. Offsets such as `+0x70`,
