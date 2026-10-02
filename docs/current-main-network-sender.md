@@ -55,3 +55,5 @@ The exact emitted x86 body is in
 [`FUN_58970c70.cpp`](../src/client-current/Main/FUN_58970c70.cpp); source hash,
 compiler flags, and operand checks are pinned in
 `config/NF2_2026/client-verifications.json`.
+The two send-error cleanup branches and their handle-table unlink helper are
+documented in [the socket cleanup note](current-main-socket-cleanup.md).

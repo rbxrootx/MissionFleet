@@ -83615,6 +83615,107 @@
         "behavior": "Ghidra assigns a contiguous 671-byte body. Its indirect call at 0x5898C444 is confirmed as the Main.dll WSASend IAT pointer by equality with the mapped import slot at 0x58D69010; 0x5898C448, 0x5898C454, and 0x5898C458 likewise match WSAGetLastError, shutdown, and closesocket imports. It rejects context socket field +4 == -1. It forms a 20-byte header containing 0x01020304, the message code, two supplied DWORDs, and payload length. One context branch sends header and payload; the other computes a weighted checksum (except message 0x8002000F), applies a fixed xor or context-table mix, and sends the checksum as a trailing buffer. WSA error 0x3E5 is treated as pending; other errors may trigger shutdown, close, and context cleanup.",
         "uncertainty": "Header fields, context flags/table roles, checksum purpose and compatibility, overlapped-operation lifetime, and message payload schemas remain unresolved. No traffic capture or live send comparison has validated the wire bytes."
       }
+    },
+    {
+      "address": "58970AE0",
+      "name": "FUN_58970ae0",
+      "size": 72,
+      "symbol": "_FUN_58970ae0",
+      "source": "src/client-current/Main/FUN_58970ae0.cpp",
+      "source_sha256": "87e2c1ab97277ed9bb06f1a08afce336a9fe2a61c57ca3ece679d90874689da7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 30,
+          "target_address": "5898C454",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "5898C458",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58971480",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "FFFFFFFF",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58970ae0",
+        "called_by": "Ghidra decompilation and references tie this helper to send-error cleanup in FUN_58970c70; it also calls FUN_58971480 at 0x58970B13.",
+        "behavior": "Checks context fields +0x30 and +4. When both permit cleanup, it calls the virtual method at +0x10, invokes the confirmed shutdown(socket, 1) and closesocket imports, calls FUN_58971480 with the socket handle, then stores -1 at +4 and zero at +0x30.",
+        "uncertainty": "The virtual callback, context flag +0x30, and lifetime rules for the removed socket entry are unnamed. No live error path has been exercised."
+      }
+    },
+    {
+      "address": "58971480",
+      "name": "FUN_58971480",
+      "size": 43,
+      "symbol": "_FUN_58971480",
+      "source": "src/client-current/Main/FUN_58971480.cpp",
+      "source_sha256": "f809323fb6dca84900f09a774e386ed206d99e5881e43db5cc8852a7e12f1f58",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "target_address": "58971440",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58971480",
+        "called_by": "Ghidra references include FUN_58970ae0 at 0x58970B13 and FUN_58970c70 at 0x58970E5F; it calls FUN_58971440 at 0x5897149C.",
+        "behavior": "If context DWORD +0x21C is nonzero and the socket argument is not -1, it passes the handle to FUN_58971440 using bucket-table base context +0x220, then decrements +0x21C.",
+        "uncertainty": "The count at +0x21C and the meaning of its lifetime are unknown. The decrement is observed even if FUN_58971440 finds no matching node."
+      }
+    },
+    {
+      "address": "58971440",
+      "name": "FUN_58971440",
+      "size": 59,
+      "symbol": "_FUN_58971440",
+      "source": "src/client-current/Main/FUN_58971440.cpp",
+      "source_sha256": "3feee5411370c81e08a1f628edf7192db3c9396d433755e72ca4934919ba258b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58971440",
+        "called_by": "Ghidra reference analysis finds one direct call, from FUN_58971480 at 0x5897149C. The caller loads ECX with context +0x220 and pushes the handle.",
+        "behavior": "Uses the low 16 bits of the socket handle to select a DWORD bucket from the table at context +0x220, follows next pointers at node +8, compares each node's first DWORD with the full handle, and unlinks a match from the head or predecessor. It does not free the node.",
+        "uncertainty": "Node ownership, bucket-table initialization and capacity, duplicate-handle behavior, and where unlinked nodes are freed remain unknown."
+      }
     }
   ]
 }
