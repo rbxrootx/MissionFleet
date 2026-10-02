@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,459 functions and 10,468,768
-identified code bytes across six report units. There are 6,006 verified matches
-totaling 1,347,278 bytes (12.8695%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,459 functions and 10,468,770
+identified code bytes across six report units. There are 6,033 verified matches
+totaling 1,354,015 bytes (12.9338%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -107,6 +107,8 @@ The loop's teardown path is traced in
 [the client cleanup notes](docs/current-core-client-shutdown.md).
 The callback installed by window setup is traced in
 [the window callback notes](docs/current-core-client-window-callback.md).
+The `0x462` event and record receive/send path is documented in
+[the async-I/O record notes](docs/current-core-async-io-records.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin

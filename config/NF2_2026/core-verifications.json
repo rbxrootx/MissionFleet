@@ -65655,6 +65655,841 @@
         "behavior": "Checks receiver fields at offsets `+0x50`, `+0x68`, and `+0x6C`, calling `0x587C8930` once for each nonzero field.",
         "uncertainty": "The receiver type, field ownership, and deallocation/helper semantics are unknown. The three offsets, independent nonzero tests, and call count are direct Ghidra observations; the receiver passed at the window callback call site is not explicit in the decompiler output."
       }
+    },
+    {
+      "address": "5882D710",
+      "name": "FUN_5882d710",
+      "size": 365,
+      "symbol": "_FUN_5882d710",
+      "source": "src/client-current/Core/FUN_5882d710.cpp",
+      "source_sha256": "c61717c994fffe86f9c9685429543a47eff06fffdc6496f0cebc83d7af0a47e1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 58,
+          "target_address": "5884CE10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "584B0DF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "5882D875",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 133,
+          "target_address": "5882D6C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "5882D875",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5882D875",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 204,
+          "target_address": "5882C520",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5882D875",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "584A0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "5882D875",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 234,
+          "target_address": "5882CC40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "584AFC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "5882CC80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 302,
+          "target_address": "5882CC80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 330,
+          "target_address": "5882D670",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 343,
+          "target_address": "58894558",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d710",
+        "called_by": "Main event loop `0x5882E060` calls it for queued event code `0x462` when global `0x589660D0` is nonzero (call at `0x5882E346`).",
+        "behavior": "Increments receiver field `+0x214`, formats the mapped text `Notify %5d` into its `+0x104` buffer, resolves the target record by the low-16-bit key through `0x5882D6C0`, and dispatches on the low 16 bits of the event subcode. Subcodes 1, 2, and 4 route to record parsing, state/virtual callbacks, and a constant-true helper; subcode `0x10` posts code `0x462` through `0x5882CC40`; subcode `0x20` resets a record, invokes its virtual callback, decrements a tracked count, closes its handle, and marks the record key `-1`.",
+        "uncertainty": "The event structure and key table types, record class, callback meanings, network handle semantics, and symbolic subcode names are unknown. The main-loop caller, counter/string writes, lookup, subcode comparisons, and delegate order are direct Ghidra observations; `Notify %5d` is a mapped format string."
+      }
+    },
+    {
+      "address": "584AFC90",
+      "name": "FUN_584afc90",
+      "size": 17,
+      "symbol": "_FUN_584afc90",
+      "source": "src/client-current/Core/FUN_584afc90.cpp",
+      "source_sha256": "7c74ecd0726a2d38041435298dc76198f7e98efa9009719135662db07f05a808",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_584afc90",
+        "called_by": "Event dispatcher `0x5882D710` reads this value before applying subcode 2; Ghidra also shows many other state-control callers.",
+        "behavior": "Returns the DWORD at receiver offset `+0x30`.",
+        "uncertainty": "The receiver class and field meaning are not identified; the offset and returned value are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5882CC80",
+      "name": "FUN_5882cc80",
+      "size": 22,
+      "symbol": "_FUN_5882cc80",
+      "source": "src/client-current/Core/FUN_5882cc80.cpp",
+      "source_sha256": "e66bcf2fc48ee26aea0388e38503145c223374f17ddd26e3b717fb24d2ca8c32",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5882cc80",
+        "called_by": "Event dispatcher `0x5882D710` uses it to write values 0 or 1 during subcodes 2 and `0x20`; error cleanup `0x5882C440` also writes zero.",
+        "behavior": "Stores its argument at receiver offset `+0x30`.",
+        "uncertainty": "The field's semantic meaning and receiver type are not named; the write target and call-site values are directly visible."
+      }
+    },
+    {
+      "address": "584B0DF0",
+      "name": "FUN_584b0df0",
+      "size": 93,
+      "symbol": "_FUN_584b0df0",
+      "source": "src/client-current/Core/FUN_584b0df0.cpp",
+      "source_sha256": "6d38272e658ded542576d6ff888210afd339306dbbd7cb2caabf41f98b3acd27",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "584866E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "584B0E50",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_584b0df0",
+        "called_by": "Event dispatcher `0x5882D710` calls it after incrementing receiver field `+0x214`, targeting a buffer at `+0x104` with capacity `0x104` and mapped format string `Notify %5d`.",
+        "behavior": "Measures the destination's existing string length with helper `0x584866E0` and bound `0x7FFFFFFF`; if the result is negative, clears the first byte when capacity is nonzero. Otherwise it delegates formatted output to `0x584B0E50` with the destination, capacity, a zero argument, format string, and variadic arguments.",
+        "uncertainty": "The lower formatting helper's complete truncation and encoding contract is unresolved. The bound, negative-result clear branch, and forwarding arguments are visible in Ghidra and the caller."
+      }
+    },
+    {
+      "address": "5882C520",
+      "name": "FUN_5882c520",
+      "size": 1092,
+      "symbol": "_FUN_5882c520",
+      "source": "src/client-current/Core/FUN_5882c520.cpp",
+      "source_sha256": "facd6c57d6ba7098015b61c903837abe6e90664299abf3c6afaab9ee1c388d37",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "588942B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5882C4E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "5882C95D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58831042",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5884C890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "58831034",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "58831042",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 249,
+          "target_address": "5884C890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 272,
+          "target_address": "58831034",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 371,
+          "target_address": "58894534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 380,
+          "target_address": "5882C958",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 417,
+          "target_address": "5882C956",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 453,
+          "target_address": "5882C92A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 479,
+          "target_address": "5882C92A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 494,
+          "target_address": "5882C91B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 535,
+          "target_address": "5882C866",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "5882C866",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 583,
+          "target_address": "5884C890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 731,
+          "target_address": "5848BCB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 831,
+          "target_address": "5882CCF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1023,
+          "target_address": "5882C440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1064,
+          "target_address": "5884C890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1074,
+          "target_address": "5882C6B8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c520",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` invokes it for subcode 1; async record helper `0x5882C990` also calls it on the same context object.",
+        "behavior": "Maintains a growable receive buffer in the context object, queries and reads bytes through registered callbacks `0x58894550` and `0x58894534`, and parses complete records with a `0x14`-byte header. Each record must begin with DWORD `0x01020304`; the parser computes a weighted checksum across header bytes and payload bytes, then applies either a fixed xor or the table-based mixer `0x5848BCB0` according to context flags. A mismatch dispatches through virtual slot `+0x04`; a match dispatches through `+0x14`; one recognized record code triggers `0x5882CCF0` before the next record is consumed.",
+        "uncertainty": "The socket/stream callback ABI, context layout, header field names, payload schemas, checksum purpose, special record-code meanings, and callback virtual-slot contracts are unknown. Buffer growth/compaction, marker comparison, checksum arithmetic, record bounds, and dispatch branches follow Ghidra control flow; no captured network traffic was available."
+      }
+    },
+    {
+      "address": "5882D670",
+      "name": "FUN_5882d670",
+      "size": 70,
+      "symbol": "_FUN_5882d670",
+      "source": "src/client-current/Core/FUN_5882d670.cpp",
+      "source_sha256": "83afdbbcd6a30eac70d2f8933b5ac45a95e95292e43b782a0f11a5dfb93940a7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 39,
+          "target_address": "5882D5F0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d670",
+        "called_by": "Event dispatcher `0x5882D710` calls it when completing subcode `0x20`; record-error path `0x5882C440` also invokes it.",
+        "behavior": "When receiver field `+0x21C` is nonzero and the supplied key is not `-1`, removes the keyed record through `0x5882D5F0` and decrements `+0x21C`.",
+        "uncertainty": "The tracked count and record ownership meaning are unnamed. The guard, unlink call, and decrement are direct observations."
+      }
+    },
+    {
+      "address": "5882D6C0",
+      "name": "FUN_5882d6c0",
+      "size": 67,
+      "symbol": "_FUN_5882d6c0",
+      "source": "src/client-current/Core/FUN_5882d6c0.cpp",
+      "source_sha256": "55d4f2bf05a8c21e611e2b03782b9f304906968a5bca88c3c2b4c509ad8c4e01",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d6c0",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` uses it to resolve the event's low-16-bit key before handling subcodes.",
+        "behavior": "Selects a bucket at receiver base plus `(key & 0xFFFF) * 4`, follows nodes through field `+8` until a node's first DWORD equals the key, then returns its second DWORD; returns zero when no bucket or key match exists.",
+        "uncertainty": "The container and node types are not named. Bucket arithmetic, link offset, key comparison, return field, and null result are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "584A0DA0",
+      "name": "FUN_584a0da0",
+      "size": 16,
+      "symbol": "_FUN_584a0da0",
+      "source": "src/client-current/Core/FUN_584a0da0.cpp",
+      "source_sha256": "488d8e910ed13bb0d371ddad4c21fc50ed01007d79e95787cb86e0cf8a5372ce",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_584a0da0",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` routes subcode 4 to this helper.",
+        "behavior": "Returns constant 1.",
+        "uncertainty": "The event protocol meaning of the constant result is unknown."
+      }
+    },
+    {
+      "address": "5882CC40",
+      "name": "FUN_5882cc40",
+      "size": 61,
+      "symbol": "_FUN_5882cc40",
+      "source": "src/client-current/Core/FUN_5882cc40.cpp",
+      "source_sha256": "75b20ddeabb06beb11530acf077d549c4b280744f87634c959a28f82be492f6e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "5882C4C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "58894538",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882cc40",
+        "called_by": "Event dispatcher `0x5882D710` calls it with subcode `0x27` for incoming event subcode `0x10`.",
+        "behavior": "Calls `0x5882C4C0` with constants/values from this call path, then passes its result and the DWORD at receiver offset `+4` to registered callback `0x58894538`; returns whether that callback's result differs from `-1`.",
+        "uncertainty": "The registered callback's posting/queue semantics and the getter's complete argument contract are not identified. The indirect call arguments and return test are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5882C4E0",
+      "name": "FUN_5882c4e0",
+      "size": 60,
+      "symbol": "_FUN_5882c4e0",
+      "source": "src/client-current/Core/FUN_5882c4e0.cpp",
+      "source_sha256": "1189121f49f6e2bc336c140c98125b43de9a6b8196061cb8288575528e5e36c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 26,
+          "target_address": "58894550",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c4e0",
+        "called_by": "Receive parser `0x5882C520` uses it with request code `0x4004667F` before growing or filling the receive buffer.",
+        "behavior": "Calls registered callback `0x58894550` with the context handle at `+4` and its two supplied arguments; returns whether the callback result is not `-1`.",
+        "uncertainty": "The request code and callback contract are unknown. The forwarded arguments and boolean conversion are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5882CCF0",
+      "name": "FUN_5882ccf0",
+      "size": 375,
+      "symbol": "_FUN_5882ccf0",
+      "source": "src/client-current/Core/FUN_5882ccf0.cpp",
+      "source_sha256": "dbce68796a0aa4f635c2e32b75af09b2accbee80c6e805493dadbbec82290834",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "5882CE4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "5882D170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 271,
+          "target_address": "5848C0B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 300,
+          "target_address": "5848C0B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 341,
+          "target_address": "5882C990",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882ccf0",
+        "called_by": "Receive parser `0x5882C520` invokes it after recognizing a valid special record code `0x8002030D` in the non-mixed-checksum path.",
+        "behavior": "With a nonzero first argument, derives a value from the two supplied record fields using the mapped constants `0xF3A91CD0` and `0x7C8BA106`, releases any prior object at context `+0x40`, constructs a `0x9C`-byte object containing an `0x800`-byte buffer, initializes it through virtual slot `+4`, sets context flags at `+0x48` and `+0x4C`, derives values at `+0x54` and `+0x58`, and submits record code `0x8002030E` through `0x5882C990`. With a zero first argument, it clears context field `+0x4C`.",
+        "uncertainty": "The record fields' semantic names, constructed object type, seed/key purpose, derived-field roles, and protocol meaning of codes `0x8002030D`/`0x8002030E` are unresolved. Allocation sizes, constants, writes, virtual dispatch, and send-helper arguments are Ghidra observations."
+      }
+    },
+    {
+      "address": "5882C440",
+      "name": "FUN_5882c440",
+      "size": 123,
+      "symbol": "_FUN_5882c440",
+      "source": "src/client-current/Core/FUN_5882c440.cpp",
+      "source_sha256": "2969f021c8392c12fb3c06efbdb7d478e841da70415cde99b67916fa19eb47d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 63,
+          "target_address": "58894544",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "58894558",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "5882D670",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "5882CC80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c440",
+        "called_by": "Receive parser `0x5882C520` and async send helper `0x5882C990` call this on invalid-record or non-pending I/O error paths.",
+        "behavior": "When the record is neither special sentinel `-0x22222223` nor key `-1`, and its field `+0x0C` is set, invokes virtual slot `+0x10`, calls registered callbacks `0x58894544` and `0x58894558` with the record key, removes/decrements that key through `0x5882D670`, marks the key `-1`, and writes zero to state field `+0x30` through `0x5882CC80`.",
+        "uncertainty": "The sentinel meaning, callback semantics, record class, and reason for the cleanup guard are unknown. The guard conditions, call order, key reset, and state write are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5882C4C0",
+      "name": "FUN_5882c4c0",
+      "size": 20,
+      "symbol": "_FUN_5882c4c0",
+      "source": "src/client-current/Core/FUN_5882c4c0.cpp",
+      "source_sha256": "da0f4f9e13e17e09403beca76be713ae0fe1bf9a598dafb8dbd740d2fec1d68d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c4c0",
+        "called_by": "Notification-post helper `0x5882CC40` uses it to obtain the payload paired with message `0x462`.",
+        "behavior": "Returns the DWORD at receiver offset `+0x218`.",
+        "uncertainty": "The receiver class and field role are not named; the getter and caller use are directly visible."
+      }
+    },
+    {
+      "address": "5882D5F0",
+      "name": "FUN_5882d5f0",
+      "size": 128,
+      "symbol": "_FUN_5882d5f0",
+      "source": "src/client-current/Core/FUN_5882d5f0.cpp",
+      "source_sha256": "2a28ef9e7409281e842847b59237a2dcd5f9b664bd7e637844b192f857031666",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 111,
+          "target_address": "58831034",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d5f0",
+        "called_by": "Tracked-record completion helper `0x5882D670` invokes it before decrementing receiver field `+0x21C`.",
+        "behavior": "Finds the keyed node in the selected low-16-bit bucket, unlinks it from either the bucket head or predecessor, then releases the 12-byte node through `0x58831034`.",
+        "uncertainty": "The bucket node type, allocation source, and ownership contract are unresolved. The link updates, key search, fixed release size, and call site are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5882C990",
+      "name": "FUN_5882c990",
+      "size": 687,
+      "symbol": "_FUN_5882c990",
+      "source": "src/client-current/Core/FUN_5882c990.cpp",
+      "source_sha256": "b1c7bf6450cb4c724e58a59c3d7d89f9a6a947854802ced6c38a051032b78aa9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "5882CC2D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5882CB86",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "5882CAAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "5848BCB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 460,
+          "target_address": "58894530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 471,
+          "target_address": "5889453C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 486,
+          "target_address": "5882C440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "5882CC2F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 498,
+          "target_address": "5882CC24",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 626,
+          "target_address": "58894530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 637,
+          "target_address": "5889453C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 652,
+          "target_address": "5882C440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 677,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c990",
+        "called_by": "Special-record response helper `0x5882CCF0` submits code `0x8002030E` through this routine; Ghidra also shows many client call sites sharing the same context helper.",
+        "behavior": "Builds a `0x14`-byte record header beginning with `0x01020304`, stores the message and supplied fields, computes a weighted checksum over the header and payload, and submits the header/payload through registered callback `0x58894530` using the context handle at `+4`. The send mode and checksum path change when context field `+0x44` is nonzero; an I/O error other than pending code `0x3E5` routes to cleanup `0x5882C440`.",
+        "uncertainty": "The callback's transport semantics, header field names, checksum purpose, payload ownership, and pending-error contract are not identified. Header construction, checksum arithmetic, callback arguments, and error comparison are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "5882D170",
+      "name": "FUN_5882d170",
+      "size": 61,
+      "symbol": "_FUN_5882d170",
+      "source": "src/client-current/Core/FUN_5882d170.cpp",
+      "source_sha256": "2f3b170123ab8772155419d5c21359fd00b95ebc9d23041b1c76fa8e063d3e65",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "587350F0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d170",
+        "called_by": "Special-record response helper `0x5882CCF0` uses it after allocating a `0x9C`-byte context object and requesting an `0x800`-byte backing buffer.",
+        "behavior": "Initializes the receiver through `0x587350F0` using the supplied size and mode 1, installs mapped vtable address point `0x588BE7C8`, stores the size at receiver field `+8`, sets field `+0x98` to `0x1C`, and returns the receiver.",
+        "uncertainty": "The constructed class, ownership semantics of `0x587350F0`, and meaning of field `+0x98` are not recovered. The constructor call, vtable, fields, and return are Ghidra observations."
+      }
+    },
+    {
+      "address": "58831042",
+      "name": "FUN_58831042",
+      "size": 9,
+      "symbol": "_FUN_58831042",
+      "source": "src/client-current/Core/FUN_58831042.cpp",
+      "source_sha256": "a713dd7762843095e0d9577e6eb7d1f182335e79bf01a8a69fd6c1cba5018661",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 5,
+          "target_address": "58831004",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58831042",
+        "called_by": "Receive-buffer growth `0x5882C520` and response-object setup `0x587350F0` reach this allocator wrapper.",
+        "behavior": "Forwards to allocation helper `0x58831004`, which is already byte-matched in the Core verification set, and returns its result.",
+        "uncertainty": "The underlying allocator contract is not inferred from the wrapper alone; the forwarding call is directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58831034",
+      "name": "FUN_58831034",
+      "size": 14,
+      "symbol": "_FUN_58831034",
+      "source": "src/client-current/Core/FUN_58831034.cpp",
+      "source_sha256": "078b4c9dc44231d8e96131245a76e7ff3c5b3d5f7812bdbc4da41a0afa34ade3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58831081",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58831034",
+        "called_by": "Record unlink helper `0x5882D5F0` releases the removed 12-byte node through this routine.",
+        "behavior": "Forwards the supplied pointer to thunk `0x5886CC10` and returns.",
+        "uncertainty": "The thunk's allocator/deallocation contract and calling convention are not recovered from this wrapper; the forwarding call is directly visible in Ghidra."
+      }
     }
   ]
 }

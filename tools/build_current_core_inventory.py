@@ -12,6 +12,8 @@ EXPECTED_CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac70
 # Ghidra can end these bodies mid-instruction. Keep the full linear spans:
 # 0x587B6D70 ends at its RET; 0x586EA6E0 continues through RET 8 at 0x586EA97C;
 # 0x5884C890 continues through MOV EAX,[ESP+0xC], POP/POP/RET at 0x5884CDC0.
+# 0x5882C990's Ghidra body stops at the C2 opcode; include the full RET 0x18
+# at 0x5882CC3C so the indexed function ends on an instruction boundary.
 LINEAR_SPAN_OVERRIDES = {
     "587b6d70": 0x3ABD,
     "586ea6e0": 0x29D,
@@ -21,6 +23,7 @@ LINEAR_SPAN_OVERRIDES = {
     # verification include the intervening mapped bytes and the final RET.
     "586e9af0": 0xB4A,
     "586eaa50": 0xAD9,
+    "5882c990": 0x2AF,
 }
 
 

@@ -49,6 +49,10 @@ ADDRESSES = (
     "5882E060",
     "5882DBD0", "5856E0D0",
     "5882DA20", "5882E530", "5856E040", "587BD560",
+    "5882D710", "584AFC90", "5882CC80", "584B0DF0", "5882C520",
+    "5882D670", "5882D6C0", "584A0DA0", "5882CC40", "5882C4E0",
+    "5882CCF0", "5882C440", "5882C4C0", "5882D5F0", "5882C990",
+    "5882D170", "58831042", "58831034",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1287,6 +1291,114 @@ EVIDENCE = {
         "called_by": "Window callback `0x5882DA20` invokes it for code `0x1C` when global `0x58965F74` is nonzero; Ghidra also records a caller at `0x587BCFD9`.",
         "behavior": "Checks receiver fields at offsets `+0x50`, `+0x68`, and `+0x6C`, calling `0x587C8930` once for each nonzero field.",
         "uncertainty": "The receiver type, field ownership, and deallocation/helper semantics are unknown. The three offsets, independent nonzero tests, and call count are direct Ghidra observations; the receiver passed at the window callback call site is not explicit in the decompiler output.",
+    },
+    "5882D710": {
+        "name_in_analysis": "FUN_5882d710",
+        "called_by": "Main event loop `0x5882E060` calls it for queued event code `0x462` when global `0x589660D0` is nonzero (call at `0x5882E346`).",
+        "behavior": "Increments receiver field `+0x214`, formats the mapped text `Notify %5d` into its `+0x104` buffer, resolves the target record by the low-16-bit key through `0x5882D6C0`, and dispatches on the low 16 bits of the event subcode. Subcodes 1, 2, and 4 route to record parsing, state/virtual callbacks, and a constant-true helper; subcode `0x10` posts code `0x462` through `0x5882CC40`; subcode `0x20` resets a record, invokes its virtual callback, decrements a tracked count, closes its handle, and marks the record key `-1`.",
+        "uncertainty": "The event structure and key table types, record class, callback meanings, network handle semantics, and symbolic subcode names are unknown. The main-loop caller, counter/string writes, lookup, subcode comparisons, and delegate order are direct Ghidra observations; `Notify %5d` is a mapped format string.",
+    },
+    "584AFC90": {
+        "name_in_analysis": "FUN_584afc90",
+        "called_by": "Event dispatcher `0x5882D710` reads this value before applying subcode 2; Ghidra also shows many other state-control callers.",
+        "behavior": "Returns the DWORD at receiver offset `+0x30`.",
+        "uncertainty": "The receiver class and field meaning are not identified; the offset and returned value are direct Ghidra observations.",
+    },
+    "5882CC80": {
+        "name_in_analysis": "FUN_5882cc80",
+        "called_by": "Event dispatcher `0x5882D710` uses it to write values 0 or 1 during subcodes 2 and `0x20`; error cleanup `0x5882C440` also writes zero.",
+        "behavior": "Stores its argument at receiver offset `+0x30`.",
+        "uncertainty": "The field's semantic meaning and receiver type are not named; the write target and call-site values are directly visible.",
+    },
+    "584B0DF0": {
+        "name_in_analysis": "FUN_584b0df0",
+        "called_by": "Event dispatcher `0x5882D710` calls it after incrementing receiver field `+0x214`, targeting a buffer at `+0x104` with capacity `0x104` and mapped format string `Notify %5d`.",
+        "behavior": "Measures the destination's existing string length with helper `0x584866E0` and bound `0x7FFFFFFF`; if the result is negative, clears the first byte when capacity is nonzero. Otherwise it delegates formatted output to `0x584B0E50` with the destination, capacity, a zero argument, format string, and variadic arguments.",
+        "uncertainty": "The lower formatting helper's complete truncation and encoding contract is unresolved. The bound, negative-result clear branch, and forwarding arguments are visible in Ghidra and the caller.",
+    },
+    "5882C520": {
+        "name_in_analysis": "FUN_5882c520",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` invokes it for subcode 1; async record helper `0x5882C990` also calls it on the same context object.",
+        "behavior": "Maintains a growable receive buffer in the context object, queries and reads bytes through registered callbacks `0x58894550` and `0x58894534`, and parses complete records with a `0x14`-byte header. Each record must begin with DWORD `0x01020304`; the parser computes a weighted checksum across header bytes and payload bytes, then applies either a fixed xor or the table-based mixer `0x5848BCB0` according to context flags. A mismatch dispatches through virtual slot `+0x04`; a match dispatches through `+0x14`; one recognized record code triggers `0x5882CCF0` before the next record is consumed.",
+        "uncertainty": "The socket/stream callback ABI, context layout, header field names, payload schemas, checksum purpose, special record-code meanings, and callback virtual-slot contracts are unknown. Buffer growth/compaction, marker comparison, checksum arithmetic, record bounds, and dispatch branches follow Ghidra control flow; no captured network traffic was available.",
+    },
+    "5882D670": {
+        "name_in_analysis": "FUN_5882d670",
+        "called_by": "Event dispatcher `0x5882D710` calls it when completing subcode `0x20`; record-error path `0x5882C440` also invokes it.",
+        "behavior": "When receiver field `+0x21C` is nonzero and the supplied key is not `-1`, removes the keyed record through `0x5882D5F0` and decrements `+0x21C`.",
+        "uncertainty": "The tracked count and record ownership meaning are unnamed. The guard, unlink call, and decrement are direct observations.",
+    },
+    "5882D6C0": {
+        "name_in_analysis": "FUN_5882d6c0",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` uses it to resolve the event's low-16-bit key before handling subcodes.",
+        "behavior": "Selects a bucket at receiver base plus `(key & 0xFFFF) * 4`, follows nodes through field `+8` until a node's first DWORD equals the key, then returns its second DWORD; returns zero when no bucket or key match exists.",
+        "uncertainty": "The container and node types are not named. Bucket arithmetic, link offset, key comparison, return field, and null result are directly visible in Ghidra.",
+    },
+    "584A0DA0": {
+        "name_in_analysis": "FUN_584a0da0",
+        "called_by": "Custom-I/O event dispatcher `0x5882D710` routes subcode 4 to this helper.",
+        "behavior": "Returns constant 1.",
+        "uncertainty": "The event protocol meaning of the constant result is unknown.",
+    },
+    "5882CC40": {
+        "name_in_analysis": "FUN_5882cc40",
+        "called_by": "Event dispatcher `0x5882D710` calls it with subcode `0x27` for incoming event subcode `0x10`.",
+        "behavior": "Calls `0x5882C4C0` with constants/values from this call path, then passes its result and the DWORD at receiver offset `+4` to registered callback `0x58894538`; returns whether that callback's result differs from `-1`.",
+        "uncertainty": "The registered callback's posting/queue semantics and the getter's complete argument contract are not identified. The indirect call arguments and return test are directly visible in Ghidra.",
+    },
+    "5882C4E0": {
+        "name_in_analysis": "FUN_5882c4e0",
+        "called_by": "Receive parser `0x5882C520` uses it with request code `0x4004667F` before growing or filling the receive buffer.",
+        "behavior": "Calls registered callback `0x58894550` with the context handle at `+4` and its two supplied arguments; returns whether the callback result is not `-1`.",
+        "uncertainty": "The request code and callback contract are unknown. The forwarded arguments and boolean conversion are direct Ghidra observations.",
+    },
+    "5882CCF0": {
+        "name_in_analysis": "FUN_5882ccf0",
+        "called_by": "Receive parser `0x5882C520` invokes it after recognizing a valid special record code `0x8002030D` in the non-mixed-checksum path.",
+        "behavior": "With a nonzero first argument, derives a value from the two supplied record fields using the mapped constants `0xF3A91CD0` and `0x7C8BA106`, releases any prior object at context `+0x40`, constructs a `0x9C`-byte object containing an `0x800`-byte buffer, initializes it through virtual slot `+4`, sets context flags at `+0x48` and `+0x4C`, derives values at `+0x54` and `+0x58`, and submits record code `0x8002030E` through `0x5882C990`. With a zero first argument, it clears context field `+0x4C`.",
+        "uncertainty": "The record fields' semantic names, constructed object type, seed/key purpose, derived-field roles, and protocol meaning of codes `0x8002030D`/`0x8002030E` are unresolved. Allocation sizes, constants, writes, virtual dispatch, and send-helper arguments are Ghidra observations.",
+    },
+    "5882C440": {
+        "name_in_analysis": "FUN_5882c440",
+        "called_by": "Receive parser `0x5882C520` and async send helper `0x5882C990` call this on invalid-record or non-pending I/O error paths.",
+        "behavior": "When the record is neither special sentinel `-0x22222223` nor key `-1`, and its field `+0x0C` is set, invokes virtual slot `+0x10`, calls registered callbacks `0x58894544` and `0x58894558` with the record key, removes/decrements that key through `0x5882D670`, marks the key `-1`, and writes zero to state field `+0x30` through `0x5882CC80`.",
+        "uncertainty": "The sentinel meaning, callback semantics, record class, and reason for the cleanup guard are unknown. The guard conditions, call order, key reset, and state write are direct Ghidra observations.",
+    },
+    "5882C4C0": {
+        "name_in_analysis": "FUN_5882c4c0",
+        "called_by": "Notification-post helper `0x5882CC40` uses it to obtain the payload paired with message `0x462`.",
+        "behavior": "Returns the DWORD at receiver offset `+0x218`.",
+        "uncertainty": "The receiver class and field role are not named; the getter and caller use are directly visible.",
+    },
+    "5882D5F0": {
+        "name_in_analysis": "FUN_5882d5f0",
+        "called_by": "Tracked-record completion helper `0x5882D670` invokes it before decrementing receiver field `+0x21C`.",
+        "behavior": "Finds the keyed node in the selected low-16-bit bucket, unlinks it from either the bucket head or predecessor, then releases the 12-byte node through `0x58831034`.",
+        "uncertainty": "The bucket node type, allocation source, and ownership contract are unresolved. The link updates, key search, fixed release size, and call site are direct Ghidra observations.",
+    },
+    "5882C990": {
+        "name_in_analysis": "FUN_5882c990",
+        "called_by": "Special-record response helper `0x5882CCF0` submits code `0x8002030E` through this routine; Ghidra also shows many client call sites sharing the same context helper.",
+        "behavior": "Builds a `0x14`-byte record header beginning with `0x01020304`, stores the message and supplied fields, computes a weighted checksum over the header and payload, and submits the header/payload through registered callback `0x58894530` using the context handle at `+4`. The send mode and checksum path change when context field `+0x44` is nonzero; an I/O error other than pending code `0x3E5` routes to cleanup `0x5882C440`.",
+        "uncertainty": "The callback's transport semantics, header field names, checksum purpose, payload ownership, and pending-error contract are not identified. Header construction, checksum arithmetic, callback arguments, and error comparison are direct Ghidra observations.",
+    },
+    "5882D170": {
+        "name_in_analysis": "FUN_5882d170",
+        "called_by": "Special-record response helper `0x5882CCF0` uses it after allocating a `0x9C`-byte context object and requesting an `0x800`-byte backing buffer.",
+        "behavior": "Initializes the receiver through `0x587350F0` using the supplied size and mode 1, installs mapped vtable address point `0x588BE7C8`, stores the size at receiver field `+8`, sets field `+0x98` to `0x1C`, and returns the receiver.",
+        "uncertainty": "The constructed class, ownership semantics of `0x587350F0`, and meaning of field `+0x98` are not recovered. The constructor call, vtable, fields, and return are Ghidra observations.",
+    },
+    "58831042": {
+        "name_in_analysis": "FUN_58831042",
+        "called_by": "Receive-buffer growth `0x5882C520` and response-object setup `0x587350F0` reach this allocator wrapper.",
+        "behavior": "Forwards to allocation helper `0x58831004`, which is already byte-matched in the Core verification set, and returns its result.",
+        "uncertainty": "The underlying allocator contract is not inferred from the wrapper alone; the forwarding call is directly visible in Ghidra.",
+    },
+    "58831034": {
+        "name_in_analysis": "FUN_58831034",
+        "called_by": "Record unlink helper `0x5882D5F0` releases the removed 12-byte node through this routine.",
+        "behavior": "Forwards the supplied pointer to thunk `0x5886CC10` and returns.",
+        "uncertainty": "The thunk's allocator/deallocation contract and calling convention are not recovered from this wrapper; the forwarding call is directly visible in Ghidra.",
     },
 }
 

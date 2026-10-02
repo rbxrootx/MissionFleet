@@ -52,7 +52,7 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,006 functions totaling 1,347,278 bytes (12.8695% of indexed code),
+credits 6,033 functions totaling 1,354,015 bytes (12.9338% of indexed code),
 each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
 `Main.dll` functions totaling 453,111 bytes; their local verifier is
 `tools/verify_client_matches.py` and its hash-pinned input capture is not
@@ -71,8 +71,8 @@ trampolines, and logo/control screen construction. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
-capture-specific profile indexes 13,030 functions / 3,996,319
-bytes from installed `Core.dll`; 197 functions match 302,091 bytes, including
+capture-specific profile indexes 13,030 functions / 3,996,321
+bytes from installed `Core.dll`; 224 functions match 308,828 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -118,9 +118,11 @@ The event-loop and resource-scene teardown path is documented in
 [`current-core-client-shutdown.md`](current-core-client-shutdown.md).
 The setup-installed message dispatcher and its helpers are traced in
 [`current-core-client-window-callback.md`](current-core-client-window-callback.md).
-The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
-epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
-at `0x5884C890` was rechecked at objdiff 100%.
+The main-loop record parser and response sender are traced in
+[`current-core-async-io-records.md`](current-core-async-io-records.md).
+The inventory spans at `0x586EA6E0`, `0x5884C890`, and `0x5882C990` now include
+their complete epilogues; Ghidra's prior extents ended mid-instruction. These
+expanded functions were rechecked at objdiff 100%.
 [`current-core-floating-point-error-path.md`](current-core-floating-point-error-path.md).
 These matches use the mapped runtime image;
 the on-disk `.text` bytes are absent, and the source preserves the captured
