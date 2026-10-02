@@ -44,6 +44,9 @@ dispatch possibility, but the table boundaries, owner class, and live
 instantiation path have not been identified. The current evidence does not
 justify naming a class or claiming a vtable slot.
 
+The `0x80000100` route now has a verified callee reconstruction:
+[`FUN_587e8590`](current-main-event-queue.md) copies and queues its payload.
+
 The function has only been validated by comparing the address ranges,
 disassembly, and decompilation against the local mapped capture. Runtime
 dispatch has not been exercised, and there is no source match for this

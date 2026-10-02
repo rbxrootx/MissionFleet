@@ -82882,6 +82882,46 @@
         "behavior": "Masks the low byte of the receiver pointer into a local value, then calls 0x587535C0 with the supplied source range, receiver field at +8, and that mask value. Ghidra shows the same wrapper shape as 0x58753DE0, but the target helper uses 0x808-byte records.",
         "uncertainty": "The low-byte mask's semantic role and record type are unknown; arguments and call flow are directly visible."
       }
+    },
+    {
+      "address": "587E8590",
+      "name": "FUN_587e8590",
+      "size": 245,
+      "symbol": "_FUN_587e8590",
+      "source": "src/client-current/Main/FUN_587e8590.cpp",
+      "source_sha256": "f65bdcf7018d200540f19a9ae8947a21b153b192c25edcd9657bec85c431bb01",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "5898C1A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e8590",
+        "called_by": "Direct call at 0x587BC0D6 from the 0x80000100 branch in FUN_587bb700; ECX is loaded from 0x58A2459C.",
+        "behavior": "When the object flag at +0x21C38 is nonzero, calls the callback at 0x5898C1A0 before and after payload copying and increments +0x21C30. For nonzero size, allocates through 0x5897152E and copies from the supplied pointer through 0x5897CD4C. Advances a circular index using object fields +0x104A4/+0x104AC; if the next index differs from +0x104B0, writes a 16-byte record at the buffer at +0x104B4 and increments +0x104A8.",
+        "uncertainty": "The callback purpose, queue field meanings, dropped-entry policy, and copied payload ownership are not established. The behavior and argument order are tied to the mapped disassembly and Ghidra decompilation; semantic names remain provisional."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }
