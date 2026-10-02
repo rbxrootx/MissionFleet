@@ -9,6 +9,43 @@ from capstone import Cs, CS_ARCH_X86, CS_GRP_JUMP, CS_MODE_32, CS_OP_IMM, CS_OP_
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def parse_ghidra_body_ranges(text, address):
+    """Read one function's inclusive BODY_RANGES block from a Ghidra dump."""
+    entry = f"entry {address:08x}"
+    lines = text.splitlines()
+    try:
+        entry_index = next(i for i, line in enumerate(lines) if line.strip().lower() == entry)
+    except StopIteration as error:
+        raise ValueError(f"Ghidra dump has no entry at {address:08X}") from error
+
+    try:
+        ranges_index = next(i for i in range(entry_index + 1, len(lines))
+                            if lines[i].strip() == "BODY_RANGES")
+        end_index = next(i for i in range(ranges_index + 1, len(lines))
+                         if lines[i].startswith("SIGNATURE "))
+    except StopIteration as error:
+        raise ValueError(f"Ghidra dump has no complete body-range block at {address:08X}") from error
+
+    ranges = []
+    previous_end = -1
+    for line in lines[ranges_index + 1:end_index]:
+        value = line.strip()
+        if not value:
+            continue
+        match = re.fullmatch(r"([0-9a-fA-F]+)\.\.([0-9a-fA-F]+)", value)
+        if not match:
+            raise ValueError(f"Invalid Ghidra body range at {address:08X}: {value}")
+        start, inclusive_end = (int(part, 16) for part in match.groups())
+        if inclusive_end < start or start <= previous_end:
+            raise ValueError(f"Unsorted or overlapping Ghidra body range at {address:08X}: {value}")
+        ranges.append((start, inclusive_end - start + 1))
+        previous_end = inclusive_end
+
+    if not ranges or ranges[0][0] != address:
+        raise ValueError(f"Ghidra body ranges do not start at function entry {address:08X}")
+    return ranges
+
+
 def asm_operand(text):
     return re.sub(
         r"(?<![A-Za-z0-9_])0x([0-9a-fA-F]+)",
@@ -110,6 +147,8 @@ def main():
                         help="path for mapped operand audit records")
     parser.add_argument("--emit-all", action="store_true",
                         help="emit every decoded instruction byte for flag/register-sensitive code")
+    parser.add_argument("--ghidra-dump", type=Path,
+                        help="preserve the selected functions' discontiguous ranges from one Ghidra text dump")
     parser.add_argument("addresses", nargs="+")
     args = parser.parse_args()
 
@@ -119,21 +158,58 @@ def main():
     decoder = Cs(CS_ARCH_X86, CS_MODE_32)
     decoder.detail = True
     relocation_report = {}
+    ghidra_dump = ((ROOT / args.ghidra_dump).read_text(encoding="utf-8")
+                   if args.ghidra_dump else None)
     for raw_address in args.addresses:
         address = int(raw_address, 16)
         record = records[raw_address.upper()]
-        size = int(record["size"])
-        start = address - args.image_base
-        code = image[start:start + size]
-        if start < 0 or len(code) != size:
-            raise ValueError(f"Function {address:08X} is outside the mapped image")
-        source, relocations = render_function(record["name"], address, code, decoder, args.emit_all)
         output = ROOT / args.source_root / f"{record['name']}.cpp"
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(source, encoding="ascii", newline="\n")
-        relocation_report[f"{address:08X}"] = relocations
-        print(f"Wrote {size} bytes to {output.relative_to(ROOT)}; "
-              f"{len(relocations)} operand audit entries recorded")
+        if ghidra_dump is None:
+            ranges = [(address, int(record["size"]))]
+        else:
+            ranges = parse_ghidra_body_ranges(ghidra_dump, address)
+            if sum(size for _, size in ranges) != int(record["size"]):
+                raise ValueError(
+                    f"Ghidra ranges for {address:08X} total "
+                    f"{sum(size for _, size in ranges)}, inventory has {record['size']} bytes"
+                )
+
+        sources = []
+        segment_records = []
+        for index, (segment_address, size) in enumerate(ranges):
+            start = segment_address - args.image_base
+            code = image[start:start + size]
+            if start < 0 or len(code) != size:
+                raise ValueError(f"Function range {segment_address:08X} is outside the mapped image")
+            name = (record["name"] if ghidra_dump is None else
+                    f"{record['name']}_segment_{index:02d}")
+            source, relocations = render_function(name, segment_address, code, decoder, args.emit_all)
+            sources.append(source)
+            segment_records.append({
+                "address": f"{segment_address:08X}",
+                "size": size,
+                "symbol": f"_{name}",
+                "relocations": relocations,
+            })
+
+        if ghidra_dump is None:
+            output_source = sources[0]
+            relocation_report[f"{address:08X}"] = segment_records[0]["relocations"]
+        else:
+            output_source = (
+                "// Complete Ghidra body ranges for the selected function.\n"
+                f"// {len(ranges)} discontiguous segments; total {int(record['size'])} bytes.\n\n"
+                + "\n".join(sources)
+            )
+            relocation_report[f"{address:08X}"] = {
+                "size": int(record["size"]),
+                "segments": segment_records,
+            }
+        output.write_text(output_source, encoding="ascii", newline="\n")
+        audit_count = sum(len(segment["relocations"]) for segment in segment_records)
+        print(f"Wrote {record['size']} bytes across {len(ranges)} range(s) to "
+              f"{output.relative_to(ROOT)}; {audit_count} operand audit entries recorded")
     report = args.relocations if args.relocations.is_absolute() else ROOT / args.relocations
     if report.exists():
         existing = __import__("json").loads(report.read_text(encoding="utf-8"))

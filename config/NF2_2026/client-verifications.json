@@ -82957,6 +82957,42 @@
       "verified_by": "objdiff-3.8.0-byte-identical"
     },
     {
+      "address": "587BB700",
+      "name": "FUN_587bb700",
+      "size": 25950,
+      "symbol": "_FUN_587bb700",
+      "source": "src/client-current/Main/FUN_587bb700.cpp",
+      "source_sha256": "e6a646d49052d39f7f9524cd5f681b81d19df542cd2c9a9095cd8339f702d8f4",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [],
+      "segments": [
+        { "address": "587BB700", "size": 1357, "symbol": "_FUN_587bb700_segment_00" },
+        { "address": "587BBC50", "size": 537, "symbol": "_FUN_587bb700_segment_01" },
+        { "address": "587BBE6C", "size": 24, "symbol": "_FUN_587bb700_segment_02" },
+        { "address": "587BBE8F", "size": 6462, "symbol": "_FUN_587bb700_segment_03" },
+        { "address": "587BD7D0", "size": 833, "symbol": "_FUN_587bb700_segment_04" },
+        { "address": "587BDB14", "size": 1929, "symbol": "_FUN_587bb700_segment_05" },
+        { "address": "587BE2A0", "size": 2541, "symbol": "_FUN_587bb700_segment_06" },
+        { "address": "587BEC90", "size": 1235, "symbol": "_FUN_587bb700_segment_07" },
+        { "address": "587BF170", "size": 1139, "symbol": "_FUN_587bb700_segment_08" },
+        { "address": "587BF5F1", "size": 280, "symbol": "_FUN_587bb700_segment_09" },
+        { "address": "587BF710", "size": 50, "symbol": "_FUN_587bb700_segment_10" },
+        { "address": "587BF75D", "size": 247, "symbol": "_FUN_587bb700_segment_11" },
+        { "address": "587BF862", "size": 97, "symbol": "_FUN_587bb700_segment_12" },
+        { "address": "587BF8D1", "size": 197, "symbol": "_FUN_587bb700_segment_13" },
+        { "address": "587BF9A4", "size": 86, "symbol": "_FUN_587bb700_segment_14" },
+        { "address": "587BFA08", "size": 2915, "symbol": "_FUN_587bb700_segment_15" },
+        { "address": "587C0573", "size": 6021, "symbol": "_FUN_587bb700_segment_16" }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587bb700",
+        "called_by": "Ghidra reference analysis found no direct code callers and one data reference at 0x5899A30C; the dispatch-table owner and runtime entry path remain unconfirmed.",
+        "behavior": "Ghidra assigns 25,950 code bytes across 17 discontiguous ranges. The dispatcher inspects event fields at record offsets +0x4, +0x6, +0x8, +0xC, and +0x10. Observed routes include 0x80000100 payload queueing, 0x80000300 state setting, and 0x80000500 input handling plus queue reset.",
+        "uncertainty": "Ghidra reports unsettled parameter type propagation and an injected __alloca_probe recovery. The event-record schema, owner class, dispatch-table boundaries, indirect entry path, and live runtime conditions are unresolved. The source preserves each mapped Ghidra range separately and excludes intervening bytes."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
       "address": "587E5FB0",
       "name": "FUN_587e5fb0",
       "size": 11,

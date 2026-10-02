@@ -6,7 +6,8 @@ Ghidra assigns it 25,950 bytes across 17 disjoint address ranges. The gaps
 between those ranges are not part of the function; treating the full
 `0x587bb700..0x587c1cf7` span as code would include unrelated bytes. This
 analysis uses the mapped capture and Ghidra's decoded instructions and
-decompilation. It is not yet a reconstructed or byte-matched source function.
+decompilation. Its complete 25,950-byte body is now reproduced as 17 separately
+verified ranges; gaps between the ranges remain excluded.
 
 At entry, the instructions read a 16-bit value at record offset `+0x6` and
 compare it with `0x8000`; on that path they read a 32-bit event value at `+0x4`.
@@ -58,6 +59,14 @@ helper, and 443-byte queue/screen-state reset helper are byte-matched and
 documented in that event-queue note.
 The shared 11-byte setter used by `0x80000300` is also byte-matched; the
 meaning of `+0x384` remains unknown.
+
+[`FUN_587bb700.cpp`](../src/client-current/Main/FUN_587bb700.cpp) preserves the
+complete dispatcher instruction stream across all 17 Ghidra body ranges. Each
+range compiles as a separate naked x86 symbol so relative branch bytes retain
+their original offsets and bytes in the comparison. The event routes listed
+above are visible in its Ghidra decompilation and mapped disassembly. Exact byte
+matching does not resolve the dispatch table's owner or establish live runtime
+dispatch.
 
 The function has only been validated by comparing the address ranges,
 disassembly, and decompilation against the local mapped capture. Runtime
