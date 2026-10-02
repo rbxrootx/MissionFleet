@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
-identified code bytes across six report units. There are 6,253 verified matches
-totaling 1,415,364 bytes (13.5195%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,254 verified matches
+totaling 1,428,298 bytes (13.6431%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -175,9 +175,11 @@ state setter (`0x80000300`). The queue constructor identifies a
 adds another 2,378 matched bytes across two ranges. The queue owner's update
 function `FUN_587fd890` adds 6,314 bytes across two ranges and calls that reader
 twice. Its cleanup function `FUN_587ef910` adds 1,068 bytes across three ranges
-and drains pending payload pointers. Event meanings, queue ownership, and the
-dispatch table's runtime owner remain unresolved. Current-build Main coverage
-is 120 / 8,474 identified functions and 441,946 / 2,353,108 bytes. See
+and drains pending payload pointers. The owning constructor `FUN_588011c0` adds
+12,934 bytes across three ranges, including embedded queue setup and allocation.
+Event meanings, queue ownership, and the dispatch table's runtime owner remain
+unresolved. Current-build Main coverage is 121 / 8,474 identified functions
+and 454,880 / 2,353,108 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:

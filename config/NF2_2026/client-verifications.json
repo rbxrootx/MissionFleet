@@ -83215,6 +83215,28 @@
         "uncertainty": "The vtable role is inferred from a data reference, not a runtime call trace. The release helper's ownership contract, other screen fields, and live teardown effects remain unresolved. The three Ghidra ranges are static mapped-image evidence; runtime cleanup is untested."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "588011C0",
+      "name": "FUN_588011c0",
+      "size": 12934,
+      "symbol": "_FUN_588011c0",
+      "source": "src/client-current/Main/FUN_588011c0.cpp",
+      "source_sha256": "1b123a8df55e3c6189489f56330a00517acf0767f390b22e3bca798c04e45191",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [],
+      "segments": [
+        { "address": "588011C0", "size": 2381, "symbol": "_FUN_588011c0_segment_00" },
+        { "address": "58801B10", "size": 6648, "symbol": "_FUN_588011c0_segment_01" },
+        { "address": "58803510", "size": 3905, "symbol": "_FUN_588011c0_segment_02" }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588011c0",
+        "called_by": "Ghidra records a direct caller at 0x5878C650. The constructor stores vtable address 0x5899D180, also observed in the queue owner's vtable evidence.",
+        "behavior": "Ghidra assigns 12,934 bytes across three body ranges. It initializes the embedded queue at +0x104A0 with queue vtable 0x5899BD88, writes capacity 0x200 at +0x104A4, allocates 0x2000 bytes for 512 16-byte slots through 0x5897152E, stores the slot pointer at +0x104B4, and zeros producer +0x104AC, consumer +0x104B0, and count +0x104A8. The rest of the body initializes the owning screen's other fields and resources.",
+        "uncertainty": "The source-level parameter and constructor signature, meanings of other initialized fields, allocation failure behavior, and runtime construction path are unresolved. The full body is static mapped-image evidence; runtime construction is untested."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }

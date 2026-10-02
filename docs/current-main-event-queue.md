@@ -58,14 +58,18 @@ disassembly shows the reads and calls, but most event meanings remain unknown.
 The reader still loads a slot when the indices match, so empty-queue behavior
 cannot be inferred without confirming initial slot contents and runtime state.
 
-The owning constructor `FUN_588011c0` identifies its vtable as
-`CPageFightOn_ControlMenuScreen` and its embedded queue at `+0x104a0` as
-`CFDCSingleQueue<_QueueBlock>`. It sets the capacity to `0x200`, allocates
-`0x2000` bytes for the slots, and zeros the count and both indices. The mapped
-vtable at `0x5899d180` contains `FUN_587ef910` at `+8` and `FUN_587fd890` at
-`+0xC`, consistent with cleanup and update roles. `FUN_587ef910` drains
-pending slots and passes each nonnull fourth field to `FUN_5897ce26`; the
-allocator's ownership contract is not fully recovered.
+The owning constructor `FUN_588011c0` now byte-matches its 12,934-byte Ghidra
+body across three ranges and has a direct caller at `0x5878C650`. Ghidra
+identifies its vtable as `CPageFightOn_ControlMenuScreen` and its embedded
+queue at `+0x104a0` as `CFDCSingleQueue<_QueueBlock>`. It sets capacity to
+`0x200`, allocates `0x2000` bytes for the slots, and zeros count and both
+indices. The source preserves the three ranges and excludes gaps:
+[`FUN_588011c0.cpp`](../src/client-current/Main/FUN_588011c0.cpp).
+
+The mapped vtable at `0x5899d180` contains `FUN_587ef910` at `+8` and
+`FUN_587fd890` at `+0xC`, consistent with cleanup and update roles.
+`FUN_587ef910` drains pending slots and passes each nonnull fourth field to
+`FUN_5897ce26`; the allocator's ownership contract is not fully recovered.
 
 `FUN_587ef910` now byte-matches its 1,068-byte Ghidra body across three
 discontiguous ranges. The function is referenced at vtable slot `0x5899D188`
