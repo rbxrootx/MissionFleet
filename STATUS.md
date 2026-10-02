@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,008
-identified code bytes across six report units. There are 6,234 verified matches
-totaling 1,377,684 bytes (13.1596%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
+identified code bytes across six report units. There are 6,235 verified matches
+totaling 1,378,182 bytes (13.1644%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -58,10 +58,12 @@ render scheduler, animation-node update callback, and derived animation-state
 update and its reset/start methods, ship-scene triggers and direct helpers, and
 the ship-scene update dispatcher and its direct transition handlers: 122 matched
 functions / 280,539 bytes across the ship path.
-The locale cache's null-acquisition entry and runtime lock/diagnostic helpers
-add eleven verified functions / 739 bytes; the larger dispatcher remains
-uncounted because the current Ghidra instruction inventory has an undecoded
-extent. See [the slice notes](docs/current-core-runtime-error-entry.md).
+The locale cache's null-acquisition entry, runtime lock/diagnostic helpers, and
+error dispatcher add twelve verified function spans / 1,237 bytes. The
+dispatcher span includes bytes between Ghidra's discontiguous blocks, including
+the separately matched lock-cleanup helper; progress byte totals sum function
+spans and are not a count of unique image bytes. See
+[the slice notes](docs/current-core-runtime-error-entry.md).
 The node construction, list, and property slice contributes 22 functions /
 2,343 bytes; the scheduler adds three functions / 412 bytes and animation
 updates add two functions / 207 bytes; the derived animation state machine path

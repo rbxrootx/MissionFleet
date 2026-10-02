@@ -98,9 +98,16 @@ ADDRESSES = (
     "5887614B", "588762F7", "58876122", "58876C7D", "588769DC",
     "58862710", "58873129", "58873057", "588730B3", "58850DAF",
     "58850FAB", "58873101", "588732F8", "58832760", "588730BF", "5883274E",
+    "5887316E",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
+    "5887316E": {
+        "name_in_analysis": "FUN_5887316e",
+        "called_by": "Runtime-state handler 0x58862710 enters this dispatcher for the null locale-record acquisition path. Ghidra lists the direct helper set and assigns the trailing cleanup range through 0x5887335F to this same function.",
+        "behavior": "Reads the dispatcher category from the stack argument and handles observed categories 2, 4, 6, 8, 0xB, 0xF, 0x15, and 0x16. It uses the category-slot mapper 0x588730BF and runtime record lookup 0x58873101; for guarded paths it acquires lock index 3, reads/updates the selected global state, invokes the corresponding indirect callback through the observed guard slot, and releases the lock in normal and exception cleanup paths. Unknown categories set the observed error value 0x16 through 0x5886246F and call 0x58850FAB. These branches and calls are direct Ghidra observations.",
+        "uncertainty": "The category meanings, record layout, callback target semantics, and externally observable error effects remain unknown. Ghidra reports two body ranges (0x5887316E..0x588732E5 and 0x58873308..0x5887335F; 464 summed bytes); the normalized linear span is 498 bytes through the cleanup INT3 at 0x5887335F, including the normal epilogue at 0x5887333C and bytes between body ranges. The span policy is grounded in the emitted Ghidra ranges and instruction boundaries; it does not establish high-level source semantics.",
+    },
     "58862710": {
         "name_in_analysis": "FUN_58862710",
         "called_by": "Locale record cache accessor 0x58876226 delegates its null-acquisition branch here. Ghidra also shows this routine calling 0x58873129, 0x5887316E, 0x58850DAF, and 0x58857B3D.",

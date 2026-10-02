@@ -24,6 +24,11 @@ LINEAR_SPAN_OVERRIDES = {
     "586e9af0": 0xB4A,
     "586eaa50": 0xAD9,
     "5882c990": 0x2AF,
+    # The dispatcher body has discontiguous ranges at 0x5887316E..0x588732E5
+    # and 0x58873308..0x5887335F (Ghidra body bytes=464). Use the complete
+    # linear span through its cleanup INT3 at 0x5887335F so the trailing
+    # normal epilogue at 0x5887333C and assigned SEH cleanup block are included.
+    "5887316e": 0x1F2,
 }
 
 

@@ -76431,6 +76431,172 @@
         "behavior": "Writes zero to global DAT_58966724 and returns.",
         "uncertainty": "The global's semantic role is unknown; the write is a direct Ghidra observation."
       }
+    },
+    {
+      "address": "5887316E",
+      "name": "FUN_5887316e",
+      "size": 498,
+      "symbol": "_FUN_5887316e",
+      "source": "src/client-current/Core/FUN_5887316e.cpp",
+      "source_sha256": "dc89e5144e93ba3c27d2c3465b8f64c9958ab40e9f5a576b4c1ea9372e835f7e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED630",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "58868BF1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5887333C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "58873101",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "588730BF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "5885786C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "5887334C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "588C4C74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 297,
+          "target_address": "588C4C78",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 338,
+          "target_address": "588732F8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 352,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 367,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 413,
+          "target_address": "5889459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 450,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 485,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "58857B3D",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887316e",
+        "called_by": "Runtime-state handler 0x58862710 enters this dispatcher for the null locale-record acquisition path. Ghidra lists the direct helper set and assigns the trailing cleanup range through 0x5887335F to this same function.",
+        "behavior": "Reads the dispatcher category from the stack argument and handles observed categories 2, 4, 6, 8, 0xB, 0xF, 0x15, and 0x16. It uses the category-slot mapper 0x588730BF and runtime record lookup 0x58873101; for guarded paths it acquires lock index 3, reads/updates the selected global state, invokes the corresponding indirect callback through the observed guard slot, and releases the lock in normal and exception cleanup paths. Unknown categories set the observed error value 0x16 through 0x5886246F and call 0x58850FAB. These branches and calls are direct Ghidra observations.",
+        "uncertainty": "The category meanings, record layout, callback target semantics, and externally observable error effects remain unknown. Ghidra reports two body ranges (0x5887316E..0x588732E5 and 0x58873308..0x5887335F; 464 summed bytes); the normalized linear span is 498 bytes through the cleanup INT3 at 0x5887335F, including the normal epilogue at 0x5887333C and bytes between body ranges. The span policy is grounded in the emitted Ghidra ranges and instruction boundaries; it does not establish high-level source semantics."
+      }
     }
   ]
 }
