@@ -65382,6 +65382,279 @@
         "behavior": "Runs once while global guard `0x5896222C` is zero. It releases two stored objects through virtual slot `+0x08`, calls helpers `0x585008C0`, `0x58500D90`, `0x585008C0`, `0x58500DB0`, and `0x58857B5A(0)`, writes `0x41` and zero to globals `0x589604E0` and `0x589604E1`, sets the guard, releases globals `0x58965F24` and `0x58962228` through virtual slot zero with argument 1, then calls registered callback `0x58894468(0)`.",
         "uncertainty": "The two object types, helper side effects, virtual-slot argument meanings, state bytes, and final callback contract are unresolved. The guard, call sequence, global writes, releases, and sole direct caller are Ghidra observations; identifying this as scene/client cleanup follows its enclosing caller and the globals released."
       }
+    },
+    {
+      "address": "5882DA20",
+      "name": "FUN_5882da20",
+      "size": 328,
+      "symbol": "_FUN_5882da20",
+      "source": "src/client-current/Core/FUN_5882da20.cpp",
+      "source_sha256": "823ce57234eb4645c1f6790efac9e3bd0961553fa5dd90707642fd126718c214",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5882DB1E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "588944B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5882DB1E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58894448",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "587BD560",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "58965F38",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "58965F1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "588944B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "589660D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "589660D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 183,
+          "target_address": "58965F74",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "5882E530",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "589660C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "589660C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "589660C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 249,
+          "target_address": "5882DBD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 271,
+          "target_address": "5856E040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 302,
+          "target_address": "58894448",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 318,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882da20",
+        "called_by": "Window/context setup `0x5882DD60` places this function pointer in a callback record and submits it through registered callback `0x58894438` at `0x5882DDE7`.",
+        "behavior": "Dispatches on its second argument. Code 2 calls teardown `0x5882DBD0`; code 3 queries coordinates through callback `0x588944B8` and stores adjusted values via `0x5882E530`; code `0x10` forwards a local event record through stored object's virtual slot `+0x10`; code `0x1C` invokes callback `0x58894448` and, when global `0x58965F74` is nonzero, calls `0x587BD560`; code `0x20` calls callback `0x588944B4(0)`. All cases then call generic handler `0x5856E040`; a nonzero return invokes callback `0x58894448` with the original four arguments.",
+        "uncertainty": "The registered callback contracts, exact message/event ABI, coordinate meanings, stored object type, and `0x587BD560` receiver identity are unresolved. The dispatch constants, branch conditions, helper calls, and callback order are Ghidra observations. Calling it a window-message procedure is supported by its installation in the setup callback record and message-like codes, but no native window API trace or runtime event log was captured."
+      }
+    },
+    {
+      "address": "5882E530",
+      "name": "FUN_5882e530",
+      "size": 31,
+      "symbol": "_FUN_5882e530",
+      "source": "src/client-current/Core/FUN_5882e530.cpp",
+      "source_sha256": "e06f67c40fcd58ac261ef442b1cc84da674564dc71ba8067d82070fa762eefda",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5882e530",
+        "called_by": "Window callback `0x5882DA20` invokes it for event code 3 after obtaining two values through callback `0x588944B8`.",
+        "behavior": "Stores its two supplied DWORD values at receiver offsets `+0x58` and `+0x5C`.",
+        "uncertainty": "The receiver class and stored fields' meanings are not named. The two writes and caller's value source are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5856E040",
+      "name": "FUN_5856e040",
+      "size": 134,
+      "symbol": "_FUN_5856e040",
+      "source": "src/client-current/Core/FUN_5856e040.cpp",
+      "source_sha256": "fc73f374acac3b9baf9aa5fec38fc153224e4d56623c1c1bfc93d9f22026cb64",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "588944B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "588944B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "588944BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "58831050",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5856e040",
+        "called_by": "Window callback `0x5882DA20` invokes it after its event-specific switch for every input code.",
+        "behavior": "Returns 1 by default. For input code 1 it invokes callback `0x588944BC` with the first argument and value 1. For code 7 it obtains a 16-byte local record through callback `0x588944B8` and passes it to `0x588944B0`. For code `0x112`, it returns 0 when the third argument masked with `0xFFF0` equals `0xF100`.",
+        "uncertainty": "The callback meanings, local record schema, and symbolic meanings of the numeric event and command values are unresolved. Conditions, arguments, callback order, and return values follow directly from Ghidra control flow."
+      }
+    },
+    {
+      "address": "587BD560",
+      "name": "FUN_587bd560",
+      "size": 74,
+      "symbol": "_FUN_587bd560",
+      "source": "src/client-current/Core/FUN_587bd560.cpp",
+      "source_sha256": "5b5d5be835d1f047ecbd2ec39000bddc464df70100e3f3a6f3436d88e8d7653a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "587C8930",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "587C8930",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "587C8930",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587bd560",
+        "called_by": "Window callback `0x5882DA20` invokes it for code `0x1C` when global `0x58965F74` is nonzero; Ghidra also records a caller at `0x587BCFD9`.",
+        "behavior": "Checks receiver fields at offsets `+0x50`, `+0x68`, and `+0x6C`, calling `0x587C8930` once for each nonzero field.",
+        "uncertainty": "The receiver type, field ownership, and deallocation/helper semantics are unknown. The three offsets, independent nonzero tests, and call count are direct Ghidra observations; the receiver passed at the window callback call site is not explicit in the decompiler output."
+      }
     }
   ]
 }

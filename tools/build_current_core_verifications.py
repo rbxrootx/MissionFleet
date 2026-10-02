@@ -48,6 +48,7 @@ ADDRESSES = (
     "5856E240", "5882DD60",
     "5882E060",
     "5882DBD0", "5856E0D0",
+    "5882DA20", "5882E530", "5856E040", "587BD560",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1262,6 +1263,30 @@ EVIDENCE = {
         "called_by": "Exit/setup cleanup routine `0x5882DBD0` calls it at `0x5882DC01`.",
         "behavior": "Runs once while global guard `0x5896222C` is zero. It releases two stored objects through virtual slot `+0x08`, calls helpers `0x585008C0`, `0x58500D90`, `0x585008C0`, `0x58500DB0`, and `0x58857B5A(0)`, writes `0x41` and zero to globals `0x589604E0` and `0x589604E1`, sets the guard, releases globals `0x58965F24` and `0x58962228` through virtual slot zero with argument 1, then calls registered callback `0x58894468(0)`.",
         "uncertainty": "The two object types, helper side effects, virtual-slot argument meanings, state bytes, and final callback contract are unresolved. The guard, call sequence, global writes, releases, and sole direct caller are Ghidra observations; identifying this as scene/client cleanup follows its enclosing caller and the globals released.",
+    },
+    "5882DA20": {
+        "name_in_analysis": "FUN_5882da20",
+        "called_by": "Window/context setup `0x5882DD60` places this function pointer in a callback record and submits it through registered callback `0x58894438` at `0x5882DDE7`.",
+        "behavior": "Dispatches on its second argument. Code 2 calls teardown `0x5882DBD0`; code 3 queries coordinates through callback `0x588944B8` and stores adjusted values via `0x5882E530`; code `0x10` forwards a local event record through stored object's virtual slot `+0x10`; code `0x1C` invokes callback `0x58894448` and, when global `0x58965F74` is nonzero, calls `0x587BD560`; code `0x20` calls callback `0x588944B4(0)`. All cases then call generic handler `0x5856E040`; a nonzero return invokes callback `0x58894448` with the original four arguments.",
+        "uncertainty": "The registered callback contracts, exact message/event ABI, coordinate meanings, stored object type, and `0x587BD560` receiver identity are unresolved. The dispatch constants, branch conditions, helper calls, and callback order are Ghidra observations. Calling it a window-message procedure is supported by its installation in the setup callback record and message-like codes, but no native window API trace or runtime event log was captured.",
+    },
+    "5882E530": {
+        "name_in_analysis": "FUN_5882e530",
+        "called_by": "Window callback `0x5882DA20` invokes it for event code 3 after obtaining two values through callback `0x588944B8`.",
+        "behavior": "Stores its two supplied DWORD values at receiver offsets `+0x58` and `+0x5C`.",
+        "uncertainty": "The receiver class and stored fields' meanings are not named. The two writes and caller's value source are directly visible in Ghidra.",
+    },
+    "5856E040": {
+        "name_in_analysis": "FUN_5856e040",
+        "called_by": "Window callback `0x5882DA20` invokes it after its event-specific switch for every input code.",
+        "behavior": "Returns 1 by default. For input code 1 it invokes callback `0x588944BC` with the first argument and value 1. For code 7 it obtains a 16-byte local record through callback `0x588944B8` and passes it to `0x588944B0`. For code `0x112`, it returns 0 when the third argument masked with `0xFFF0` equals `0xF100`.",
+        "uncertainty": "The callback meanings, local record schema, and symbolic meanings of the numeric event and command values are unresolved. Conditions, arguments, callback order, and return values follow directly from Ghidra control flow.",
+    },
+    "587BD560": {
+        "name_in_analysis": "FUN_587bd560",
+        "called_by": "Window callback `0x5882DA20` invokes it for code `0x1C` when global `0x58965F74` is nonzero; Ghidra also records a caller at `0x587BCFD9`.",
+        "behavior": "Checks receiver fields at offsets `+0x50`, `+0x68`, and `+0x6C`, calling `0x587C8930` once for each nonzero field.",
+        "uncertainty": "The receiver type, field ownership, and deallocation/helper semantics are unknown. The three offsets, independent nonzero tests, and call count are direct Ghidra observations; the receiver passed at the window callback call site is not explicit in the decompiler output.",
     },
 }
 

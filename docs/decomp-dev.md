@@ -116,6 +116,8 @@ Its subsequent event loop is documented in
 [`current-core-client-main-loop.md`](current-core-client-main-loop.md).
 The event-loop and resource-scene teardown path is documented in
 [`current-core-client-shutdown.md`](current-core-client-shutdown.md).
+The setup-installed message dispatcher and its helpers are traced in
+[`current-core-client-window-callback.md`](current-core-client-window-callback.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.

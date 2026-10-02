@@ -3,7 +3,8 @@
 The event loop `0x5882E060` calls `0x5882DBD0` from both of its observed
 termination paths: missing required context at `0x5882E40A`, and a queued-event
 poll result at `0x5882E460`. The same cleanup routine is also called from setup
-callback `0x5882DA20` at `0x5882DB18`.
+callback `0x5882DA20` at `0x5882DB18`; that window callback's other event
+branches are documented in [the window callback notes](current-core-client-window-callback.md).
 
 `0x5882DBD0` clears three dispatch globals, then calls `0x5856E0D0`. It releases
 the non-null objects in globals `0x589660D0`, `0x58965F78`, and `0x58965F74`
