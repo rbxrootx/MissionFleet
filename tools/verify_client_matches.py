@@ -72,20 +72,114 @@ def audit_relocations(document, match, code):
     return checked
 
 
+def resolve_segments(document, match, image):
+    """Return validated address slices for one Ghidra function body."""
+    if match.get("relocations"):
+        raise ValueError("Segmented matches must put relocations on each segment")
+    image_base = int(document["image_base"], 16)
+    image_end = image_base + len(image)
+    segments = match.get("segments")
+    if not isinstance(segments, list) or not segments:
+        raise ValueError(f"Segmented match {match['address']} has no segments")
+    if segments[0].get("address", "").upper() != match["address"].upper():
+        raise ValueError(f"First segment for {match['address']} must start at the function entry")
+
+    resolved = []
+    total_size = 0
+    previous_end = image_base - 1
+    seen_symbols = set()
+    for segment in segments:
+        address = int(segment["address"], 16)
+        size = int(segment["size"])
+        symbol = segment.get("symbol")
+        start = address - image_base
+        end = address + size
+        if size <= 0 or start < 0 or end > image_end:
+            raise ValueError(f"Invalid segment extent at {address:08X}")
+        if address <= previous_end:
+            raise ValueError(f"Overlapping or unsorted segment at {address:08X}")
+        if not isinstance(symbol, str) or not symbol or symbol in seen_symbols:
+            raise ValueError(f"Invalid or repeated source symbol for segment at {address:08X}")
+        code = image[start:start + size]
+        segment_match = {
+            "address": segment["address"],
+            "relocations": segment.get("relocations", []),
+        }
+        audited = audit_relocations(document, segment_match, code)
+        resolved.append({
+            "address": segment["address"],
+            "size": size,
+            "symbol": symbol,
+            "code": code,
+            "relocations": segment_match["relocations"],
+            "audited_relocations": audited,
+        })
+        previous_end = end - 1
+        total_size += size
+        seen_symbols.add(symbol)
+
+    if total_size != int(match["size"]):
+        raise ValueError(
+            f"Segment bytes for {match['address']} total {total_size}, "
+            f"expected {match['size']}"
+        )
+    return resolved
+
+
 def verify_match(document, match, image, cl, clang, objdiff):
     image_base = int(document["image_base"], 16)
+    safe_symbol = re.sub(r"[^A-Za-z0-9_.-]+", "_", match["symbol"])
+    stem = f"{match['address']}-{safe_symbol}"
+    source_object = BUILD / f"{stem}-source.obj"
+    source = ROOT / match["source"]
+    if match.get("source_sha256") and match["source_sha256"] not in source_hashes(source):
+        raise ValueError(f"Source hash differs for {match['source']}")
+    audit_source_dependencies(match)
+    flags = tuple(match.get("flags", document["compiler"]["flags"]))
+    environment = os.environ.copy()
+    environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
+    run([str(cl), "/nologo", "/c", *flags, f"/Fo{source_object}", str(source)],
+        env=environment)
+
+    if "segments" in match:
+        segments = resolve_segments(document, match, image)
+        audited_relocations = sum(s["audited_relocations"] for s in segments)
+        for index, segment in enumerate(segments):
+            segment_stem = f"{stem}-segment-{index:02d}"
+            target_source = BUILD / f"{segment_stem}-target.s"
+            target_object = BUILD / f"{segment_stem}-target.obj"
+            diff_file = BUILD / f"{segment_stem}-diff.json"
+            target_source.write_text(
+                assembly_for(segment["symbol"], segment["code"], [
+                    relocation for relocation in segment["relocations"]
+                    if not relocation.get("audit_only")
+                ]),
+                encoding="ascii",
+            )
+            run([clang, "--target=i686-pc-windows-msvc", "-c", target_source,
+                 "-o", target_object])
+            run([str(objdiff), "diff", "-1", str(target_object), "-2", str(source_object),
+                 segment["symbol"], "-o", str(diff_file), "--format", "json-pretty"])
+            diff = json.loads(diff_file.read_text(encoding="utf-8"))
+            symbol = next(item for item in diff["left"]["symbols"]
+                          if item.get("name") == segment["symbol"])
+            if (symbol.get("match_percent") != 100.0 or
+                    int(symbol.get("size", 0)) != segment["size"]):
+                raise ValueError(
+                    f"Mismatch at {document['component']}:{segment['address']}: "
+                    f"{symbol.get('match_percent')}% ({symbol.get('size')} bytes)"
+                )
+        return (f"{document['component']}:{match['address']} ({match['size']} bytes; "
+                f"{len(segments)} segments; {audited_relocations} relocations checked)")
+
     start = int(match["address"], 16) - image_base
     size = int(match["size"])
     code = image[start:start + size]
     if start < 0 or len(code) != size:
         raise ValueError(f"Target function lies outside {document['mapped_image']}")
     audited_relocations = audit_relocations(document, match, code)
-
-    safe_symbol = re.sub(r"[^A-Za-z0-9_.-]+", "_", match["symbol"])
-    stem = f"{match['address']}-{safe_symbol}"
     target_source = BUILD / f"{stem}-target.s"
     target_object = BUILD / f"{stem}-target.obj"
-    source_object = BUILD / f"{stem}-source.obj"
     diff_file = BUILD / f"{stem}-diff.json"
     target_source.write_text(
         assembly_for(match["symbol"], code, [
@@ -96,16 +190,6 @@ def verify_match(document, match, image, cl, clang, objdiff):
     )
     run([clang, "--target=i686-pc-windows-msvc", "-c", target_source,
          "-o", target_object])
-
-    source = ROOT / match["source"]
-    if match.get("source_sha256") and match["source_sha256"] not in source_hashes(source):
-        raise ValueError(f"Source hash differs for {match['source']}")
-    audit_source_dependencies(match)
-    flags = tuple(match.get("flags", document["compiler"]["flags"]))
-    environment = os.environ.copy()
-    environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
-    run([str(cl), "/nologo", "/c", *flags, f"/Fo{source_object}", str(source)],
-        env=environment)
     run([str(objdiff), "diff", "-1", str(target_object), "-2", str(source_object),
          match["symbol"], "-o", str(diff_file), "--format", "json-pretty"])
 

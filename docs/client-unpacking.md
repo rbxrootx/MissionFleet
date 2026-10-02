@@ -71,6 +71,11 @@ decompilation, while the remaining VMProtect code/data and entrypoint behavior
 still need separate analysis. It is not a fully devirtualized or standalone
 replacement DLL. No game login or network connection was attempted.
 
+The largest currently inspected current-build routine is the
+[event dispatcher at `0x587bb700`](current-main-event-dispatch.md). Its Ghidra
+body consists of disjoint ranges; it is under behavioral analysis and is not
+yet a byte-matched source reconstruction.
+
 ### Current-build VM dispatch boundary
 
 The installed-build Ghidra image uses its captured base `0x58730000`; its
