@@ -27,9 +27,11 @@ instructions were emitted into candidate source and verified by objdiff 3.8.0
 against the pinned image: all 31 functions and 3,491 bytes match at 100%.
 
 Remaining uncertainties include the symbolic names of format modes and object
-fields, the locale-table selection contract, width-record source types, and
-the precise status/count semantics of the outer scan loop. The UTF-8 conversion
-and emission path is separately documented in
+fields, the remaining locale-cache ownership semantics, width-record source
+types, and the precise status/count semantics of the outer scan loop. Locale
+record lookup is documented in
+[`current-core-locale-record-cache.md`](current-core-locale-record-cache.md);
+the UTF-8 conversion and emission path is separately documented in
 [`current-core-utf8-conversion.md`](current-core-utf8-conversion.md). This slice
 verifies machine-code identity; it does not establish a complete client build
 or prove the whole scan API's runtime behavior.

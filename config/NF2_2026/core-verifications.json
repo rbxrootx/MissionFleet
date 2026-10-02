@@ -74976,6 +74976,347 @@
         "behavior": "Returns a code-page-specific subset of the supplied conversion flags, with explicit cases for the enumerated code-page values and an unchanged-flags fallback.",
         "uncertainty": "The code-page names and flag-bit meanings are not recovered. Constants, branches, and returned masks are direct Ghidra observations."
       }
+    },
+    {
+      "address": "58863F1F",
+      "name": "FUN_58863f1f",
+      "size": 36,
+      "symbol": "_FUN_58863f1f",
+      "source": "src/client-current/Core/FUN_58863f1f.cpp",
+      "source_sha256": "93f8603a03900e2f586e8764d91fbd3cbb6a942338dfc8b8e40a9e3f87c691dc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5886CF21",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58863f1f",
+        "called_by": "Used by the scan match predicate, UTF-8 output paths, numeric conversion, and character-classification routines, including `0x58861476`, `0x588614EC`, and `0x5885761B`.",
+        "behavior": "Gets the current runtime state through `0x58868BA0`, reads its locale-data pointer at `+0x4C`, passes the pointer by reference to refresh helper `0x5886CF21`, then returns the resulting locale-data pointer.",
+        "uncertainty": "The runtime-state type and locale-data record schema are not named. Field offset, helper order, and returned pointer are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58868BA0",
+      "name": "FUN_58868ba0",
+      "size": 14,
+      "symbol": "_FUN_58868ba0",
+      "source": "src/client-current/Core/FUN_58868ba0.cpp",
+      "source_sha256": "170f6f8010ff553a8faece0ec1621cc7fb8964889b926c6e066b0aea827156de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58868BF1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 9,
+          "target_address": "58862710",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58868ba0",
+        "called_by": "Used by locale-data accessor `0x58863F1F` and runtime locale initializer `0x58876226`, among other Core routines.",
+        "behavior": "Checks the thread's runtime state through `0x58868BF1`; when the expected state is unavailable it follows the observed initialization/error path, including calls through `0x58873129`, `0x5887316E`, `0x58850DAF`, and `0x58857B3D`, plus an indirect callback slot.",
+        "uncertainty": "The initialization flag and callback ABI are not named. The function's branches and calls are direct Ghidra evidence; the error path's runtime meaning is not inferred beyond its observed operations."
+      }
+    },
+    {
+      "address": "5886CF21",
+      "name": "FUN_5886cf21",
+      "size": 45,
+      "symbol": "_FUN_5886cf21",
+      "source": "src/client-current/Core/FUN_5886cf21.cpp",
+      "source_sha256": "7bb0869a9c1b3117cbecd830b162dfd71607a765a7f2cae7eb2d796deeb8b237",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58969984",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58907804",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58876226",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886cf21",
+        "called_by": "Called by locale-data accessor `0x58863F1F` with the current runtime state and cached locale pointer address.",
+        "behavior": "When the cached pointer differs from global `DAT_58969984` and a state flag permits refresh, obtains an updated locale pointer through `0x58876226` and writes it to the supplied cache slot.",
+        "uncertainty": "The global locale pointer and state-flag names are unresolved. The comparison, flag test, refresh call, and pointer write are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58876226",
+      "name": "FUN_58876226",
+      "size": 98,
+      "symbol": "_FUN_58876226",
+      "source": "src/client-current/Core/FUN_58876226.cpp",
+      "source_sha256": "c2cfd9424036e9afa407801b32eb8e1e45c379f52899f74179053f7797347f10",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "588ED6D0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "58832760",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "58868BA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58907804",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58863C1C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58969984",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "588762A7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "58876286",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876226",
+        "called_by": "Selected by locale cache updater `0x5886CF21` when the cached locale pointer must be refreshed.",
+        "behavior": "Checks the runtime state's cached pointer against global `DAT_58969984`; on a cache miss it enters locale lock index 4 through `0x58863C1C`, assigns the global pointer through `0x588762A7`, releases the lock through `0x58876286`, and returns the acquired pointer. It restores the exception-list state on the observed success paths and delegates null acquisition to `0x58862710`.",
+        "uncertainty": "The locking ABI, cache-reference semantics, and exceptional null-path contract are not fully recovered. The field offsets, call sequence, and branches are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588762A7",
+      "name": "FUN_588762a7",
+      "size": 80,
+      "symbol": "_FUN_588762a7",
+      "source": "src/client-current/Core/FUN_588762a7.cpp",
+      "source_sha256": "95a7d949ece1caa5b97d0676e6718c4679fdd1d5cb596e23fc6fe4b642e8031f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 35,
+          "target_address": "58875F5D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "588761A5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "58907460",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58875FDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588762a7",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` to publish or clear the cached locale pointer.",
+        "behavior": "Normalizes null inputs to a null value; when the pointer changes, stores and retains the new pointer through `0x58875F5D`, then releases the prior pointer through `0x588761A5` and, for a non-static record whose reference count reaches zero, releases it through `0x58875FDA`.",
+        "uncertainty": "The record type and exact ownership/refcount contract are not named. Pointer comparisons, retain/release calls, and sentinel check are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5887628F",
+      "name": "FUN_5887628f",
+      "size": 18,
+      "symbol": "_FUN_5887628f",
+      "source": "src/client-current/Core/FUN_5887628f.cpp",
+      "source_sha256": "6f0e4be9f89da3bda4a5fb1eb358460c57eedce605c3ee27f15904b70093b4c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5887628f",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` during its exception-state cleanup.",
+        "behavior": "Restores the thread's exception-list pointer from the caller's saved EBP frame and returns.",
+        "uncertainty": "This is a compiler/runtime cleanup helper; the exact exception-frame type is not recovered. The frame offset and assignment are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58876286",
+      "name": "FUN_58876286",
+      "size": 9,
+      "symbol": "_FUN_58876286",
+      "source": "src/client-current/Core/FUN_58876286.cpp",
+      "source_sha256": "0b7a36d17459ef57b7c2d3cef4b3623a235958a0d88c5b3d2990ac27a7832abd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58863C64",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876286",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` to release locale lock index 4.",
+        "behavior": "Delegates lock release for index 4 to `0x58863C64`.",
+        "uncertainty": "The lock object's type is not named. The fixed index and delegated helper are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58863C1C",
+      "name": "FUN_58863c1c",
+      "size": 23,
+      "symbol": "_FUN_58863c1c",
+      "source": "src/client-current/Core/FUN_58863c1c.cpp",
+      "source_sha256": "34edbdc5c3efbba738df28eedc71001d1d60c9946133987d978c9bb793017d91",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58969620",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "58894220",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58863c1c",
+        "called_by": "Called by locale cache acquisition `0x58876226` with index 4, and used by other runtime-state helpers.",
+        "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect lock callback `DAT_58894220`.",
+        "uncertainty": "The callback target and lock-record type are not recovered. Base address, stride, argument calculation, and indirect call are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58863C64",
+      "name": "FUN_58863c64",
+      "size": 23,
+      "symbol": "_FUN_58863c64",
+      "source": "src/client-current/Core/FUN_58863c64.cpp",
+      "source_sha256": "d3fcafc68611aa71fdee20cee8703424bdaecc7752e6df1c8ae0071a33313afb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58969620",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5889421C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58863c64",
+        "called_by": "Called by `0x58876286` to release locale lock index 4 and by other indexed runtime lock wrappers.",
+        "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect release callback `DAT_5889421C`.",
+        "uncertainty": "The callback target and lock-record type are not recovered. Address arithmetic and indirect call are directly visible in Ghidra."
+      }
     }
   ]
 }

@@ -92,6 +92,8 @@ ADDRESSES = (
     "58860B00", "58860B36", "58860B6C", "58860BC3",
     "5886DDA0", "5886DC70", "5886E0A9", "5886DE19", "5886DDD8",
     "5887B1C5", "5887B1D9", "5886FB2F", "5886FA97",
+    "58863F1F", "58868BA0", "5886CF21", "58876226", "588762A7",
+    "5887628F", "58876286", "58863C1C", "58863C64",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -2464,6 +2466,60 @@ EVIDENCE = {
         "called_by": "Called by multibyte dispatcher `0x5886FB2F`.",
         "behavior": "Returns a code-page-specific subset of the supplied conversion flags, with explicit cases for the enumerated code-page values and an unchanged-flags fallback.",
         "uncertainty": "The code-page names and flag-bit meanings are not recovered. Constants, branches, and returned masks are direct Ghidra observations.",
+    },
+    "58863F1F": {
+        "name_in_analysis": "FUN_58863f1f",
+        "called_by": "Used by the scan match predicate, UTF-8 output paths, numeric conversion, and character-classification routines, including `0x58861476`, `0x588614EC`, and `0x5885761B`.",
+        "behavior": "Gets the current runtime state through `0x58868BA0`, reads its locale-data pointer at `+0x4C`, passes the pointer by reference to refresh helper `0x5886CF21`, then returns the resulting locale-data pointer.",
+        "uncertainty": "The runtime-state type and locale-data record schema are not named. Field offset, helper order, and returned pointer are directly visible in Ghidra.",
+    },
+    "58868BA0": {
+        "name_in_analysis": "FUN_58868ba0",
+        "called_by": "Used by locale-data accessor `0x58863F1F` and runtime locale initializer `0x58876226`, among other Core routines.",
+        "behavior": "Checks the thread's runtime state through `0x58868BF1`; when the expected state is unavailable it follows the observed initialization/error path, including calls through `0x58873129`, `0x5887316E`, `0x58850DAF`, and `0x58857B3D`, plus an indirect callback slot.",
+        "uncertainty": "The initialization flag and callback ABI are not named. The function's branches and calls are direct Ghidra evidence; the error path's runtime meaning is not inferred beyond its observed operations.",
+    },
+    "5886CF21": {
+        "name_in_analysis": "FUN_5886cf21",
+        "called_by": "Called by locale-data accessor `0x58863F1F` with the current runtime state and cached locale pointer address.",
+        "behavior": "When the cached pointer differs from global `DAT_58969984` and a state flag permits refresh, obtains an updated locale pointer through `0x58876226` and writes it to the supplied cache slot.",
+        "uncertainty": "The global locale pointer and state-flag names are unresolved. The comparison, flag test, refresh call, and pointer write are visible in Ghidra.",
+    },
+    "58876226": {
+        "name_in_analysis": "FUN_58876226",
+        "called_by": "Selected by locale cache updater `0x5886CF21` when the cached locale pointer must be refreshed.",
+        "behavior": "Checks the runtime state's cached pointer against global `DAT_58969984`; on a cache miss it enters locale lock index 4 through `0x58863C1C`, assigns the global pointer through `0x588762A7`, releases the lock through `0x58876286`, and returns the acquired pointer. It restores the exception-list state on the observed success paths and delegates null acquisition to `0x58862710`.",
+        "uncertainty": "The locking ABI, cache-reference semantics, and exceptional null-path contract are not fully recovered. The field offsets, call sequence, and branches are directly visible in Ghidra.",
+    },
+    "588762A7": {
+        "name_in_analysis": "FUN_588762a7",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` to publish or clear the cached locale pointer.",
+        "behavior": "Normalizes null inputs to a null value; when the pointer changes, stores and retains the new pointer through `0x58875F5D`, then releases the prior pointer through `0x588761A5` and, for a non-static record whose reference count reaches zero, releases it through `0x58875FDA`.",
+        "uncertainty": "The record type and exact ownership/refcount contract are not named. Pointer comparisons, retain/release calls, and sentinel check are visible in Ghidra.",
+    },
+    "5887628F": {
+        "name_in_analysis": "FUN_5887628f",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` during its exception-state cleanup.",
+        "behavior": "Restores the thread's exception-list pointer from the caller's saved EBP frame and returns.",
+        "uncertainty": "This is a compiler/runtime cleanup helper; the exact exception-frame type is not recovered. The frame offset and assignment are direct Ghidra observations.",
+    },
+    "58876286": {
+        "name_in_analysis": "FUN_58876286",
+        "called_by": "Called by locale cache acquisition routine `0x58876226` to release locale lock index 4.",
+        "behavior": "Delegates lock release for index 4 to `0x58863C64`.",
+        "uncertainty": "The lock object's type is not named. The fixed index and delegated helper are visible in Ghidra.",
+    },
+    "58863C1C": {
+        "name_in_analysis": "FUN_58863c1c",
+        "called_by": "Called by locale cache acquisition `0x58876226` with index 4, and used by other runtime-state helpers.",
+        "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect lock callback `DAT_58894220`.",
+        "uncertainty": "The callback target and lock-record type are not recovered. Base address, stride, argument calculation, and indirect call are direct Ghidra observations.",
+    },
+    "58863C64": {
+        "name_in_analysis": "FUN_58863c64",
+        "called_by": "Called by `0x58876286` to release locale lock index 4 and by other indexed runtime lock wrappers.",
+        "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect release callback `DAT_5889421C`.",
+        "uncertainty": "The callback target and lock-record type are not recovered. Address arithmetic and indirect call are directly visible in Ghidra.",
     },
 }
 
