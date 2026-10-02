@@ -83172,6 +83172,27 @@
         "uncertainty": "The meanings of the compared resources, screen flags, queue data ownership, and final callback are not established. The call route and observed field/call operations are static Ghidra and mapped-image evidence; runtime effects remain untested."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587FD890",
+      "name": "FUN_587fd890",
+      "size": 6314,
+      "symbol": "_FUN_587fd890",
+      "source": "src/client-current/Main/FUN_587fd890.cpp",
+      "source_sha256": "7cbbe3f7d41fe89a26989347a8b7b05064325a42d15383a139e8c15a67e097a0",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [],
+      "segments": [
+        { "address": "587FD890", "size": 3657, "symbol": "_FUN_587fd890_segment_00" },
+        { "address": "587FE6E0", "size": 2657, "symbol": "_FUN_587fd890_segment_01" }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587fd890",
+        "called_by": "The mapped vtable at 0x5899D180 has a data reference to this function at slot +0x0C; Ghidra also records the cleanup function FUN_587ef910 at slot +0x08.",
+        "behavior": "Ghidra assigns 6,314 bytes across two body ranges. The routine checks bit 2 of the receiver's word at +0x24, performs screen/update work, and directly calls queue reader FUN_587faec0 at 0x587FEF80 and 0x587FEFCB. The first reader call is followed by updating +0x10488 and a loop through FUN_587fb810; before the second call it checks the queue count at +0x104A8 and calls FUN_587e95c0.",
+        "uncertainty": "The owner role is inferred from a vtable data reference, not a runtime call trace. The meanings of update fields, loop values, queue event behavior, and screen actions remain unresolved. Both body ranges are static mapped-image evidence; runtime behavior is untested."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }

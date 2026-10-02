@@ -67,10 +67,21 @@ vtable at `0x5899d180` contains `FUN_587ef910` at `+8` and `FUN_587fd890` at
 pending slots and passes each nonnull fourth field to `FUN_5897ce26`; the
 allocator's ownership contract is not fully recovered.
 
-The producer, reader, constructor, and cleanup evidence is static. No live
-client queue traffic has been captured, and the callback contract, event
-schema, drop behavior when the ring is full, payload ownership, and final UI
-effects remain uncertain.
+The update function `FUN_587fd890` is referenced by data from vtable slot
+`0x5899D18C` (`+0x0C` in the table at `0x5899D180`). Its two Ghidra ranges,
+`0x587FD890..0x587FE6D8` and `0x587FE6E0..0x587FF140`, account for 6,314
+matched bytes. It runs its update path when bit 2 is set in the receiver's
+`+0x24` word and calls the matched queue reader at `0x587FEF80` and
+`0x587FEFCB`. After the first read it copies `+0x10C0C` to `+0x10488` and
+repeats `FUN_587fb810` while that value remains positive, adding the helper's
+result each time. Before the second read it checks queue count `+0x104A8` and
+calls `FUN_587e95c0`. These are observed field accesses and call order; their
+screen/update semantics remain unresolved.
+
+The producer, reader, constructor, cleanup, and update evidence is static. The
+vtable reference does not confirm a live call path. No live client queue traffic
+has been captured, and the callback contract, event schema, drop behavior when
+the ring is full, payload ownership, and final UI effects remain uncertain.
 
 ## Queue reset from event `0x80000500`
 
