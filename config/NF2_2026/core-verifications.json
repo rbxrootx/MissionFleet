@@ -63895,6 +63895,90 @@
         "behavior": "When node flag bit 0 is set, dispatches negative-order child render callbacks before its own draw, intersects the node rectangle with the incoming clip, computes the text origin, and passes the row's +0x6C text buffer and style fields to the renderer object at +0x50 through virtual slot +8. It then dispatches the remaining child callbacks.",
         "uncertainty": "The renderer interface's concrete implementation, text encoding, full style-flag meanings, child-list sentinel contract, and visible pixels are unresolved. Vtable membership, clipping arithmetic, buffer/style arguments, and virtual call order are directly visible in Ghidra and the mapped image."
       }
+    },
+    {
+      "address": "587B6530",
+      "name": "FUN_587b6530",
+      "size": 462,
+      "symbol": "_FUN_587b6530",
+      "source": "src/client-current/Core/FUN_587b6530.cpp",
+      "source_sha256": "61d3a0c4c328720d7d8f55088ee123481b4c97621b50222a0aa5e141bc1ca8ca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6530",
+        "called_by": "The renderer adapter vtable address point 0x588BDC5C has slot +0x08 pointing to this function; text control draw callback 0x587B6280 dispatches through that slot.",
+        "behavior": "When text and the supplied renderer/resource are non-null, acquires the drawing surface through global renderer object 0x584869C0 and its slot +0x44. It applies callback-configured state, clips the requested vertical bounds to the supplied rectangle, chooses format 4 or 6 from the mode argument, and forwards one or two text draws through 0x587B3FD0 before releasing the surface through slot +0x68. In mode zero, the optional second draw is offset by one pixel in both axes.",
+        "uncertainty": "The meanings of callback slots at 0x588940A0/84/A8/C4, argument flags, selected format values, and optional offset draw's visual role are unresolved. Argument flow and clipping conditions are directly visible in Ghidra; no rendered frame was captured."
+      }
+    },
+    {
+      "address": "587B3FD0",
+      "name": "FUN_587b3fd0",
+      "size": 116,
+      "symbol": "_FUN_587b3fd0",
+      "source": "src/client-current/Core/FUN_587b3fd0.cpp",
+      "source_sha256": "e21ea2ba5f1b24efd63e1d1225320e74c4593e041c8e7cd81e7427fee7b620c6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b3fd0",
+        "called_by": "Text drawing adapter 0x587B6530 calls it for the main draw and, in one mode, an offset draw.",
+        "behavior": "Obtains a converted string buffer and its character count from 0x587B45C0/0x587B4550, invokes the registered draw callback at 0x588940B0 with the destination surface, coordinates, mode, rectangle, text resource, converted buffer, and count, then releases the temporary conversion buffer through a Core thunk.",
+        "uncertainty": "The exact encoding, callback ABI semantics, and the final argument's meaning are not established by this Core call path. The callback receives the observed values in the mapped order; its implementation is outside this function and supplied through runtime registration."
+      }
+    },
+    {
+      "address": "587B4550",
+      "name": "FUN_587b4550",
+      "size": 105,
+      "symbol": "_FUN_587b4550",
+      "source": "src/client-current/Core/FUN_587b4550.cpp",
+      "source_sha256": "594f1ed69c068db259eb4b8e6f0d41bb6277a923d7b0789edb9c6ddb8a2c7d02",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b4550",
+        "called_by": "String conversion helper 0x587B3FD0 uses it to allocate/fill its temporary buffer; text-format helper 0x587B3300 also calls it.",
+        "behavior": "If no character count was supplied, asks callback 0x5889429C to measure the string. It allocates a temporary buffer sized at twice the character count, then calls the same callback with the active graphics context and string to populate the buffer.",
+        "uncertainty": "The callback's text encoding, byte-count convention, and graphics-context semantics are unresolved. Multiplication, allocation, and callback argument order are directly visible; the buffer's contents are not inspected at runtime."
+      }
+    },
+    {
+      "address": "587B45C0",
+      "name": "FUN_587b45c0",
+      "size": 41,
+      "symbol": "_FUN_587b45c0",
+      "source": "src/client-current/Core/FUN_587b45c0.cpp",
+      "source_sha256": "f88d21faf804f6abf5020e23a17ab19b08fbec9c2f8fa05c86d1b7b11d4e3b40",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b45c0",
+        "called_by": "String conversion helper 0x587B3FD0 and fallback sizing path in 0x587B4550.",
+        "behavior": "Calls registered callback 0x5889429C with the active graphics-context global and the supplied string to obtain a DWORD result, forwarding zeroed optional arguments and the supplied context value.",
+        "uncertainty": "The callback contract and result meaning are unknown; this helper's argument forwarding and return are directly established by Ghidra."
+      }
     }
   ]
 }

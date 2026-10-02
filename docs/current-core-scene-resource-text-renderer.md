@@ -22,12 +22,14 @@ style fields at `+0x60`, `+0x64`, and `+0x68`, the clipped bounds, and flags at
 `+0x54` through the renderer interface's virtual slot `+8`. Helper
 `0x584849C0` returns the renderer-context field at `+0x50`, which is passed as
 an argument to that draw operation. The callback then continues the child
-render traversal. This proves the control-flow and render-call inputs; it does
-not identify the concrete renderer implementation or every style-bit meaning.
+render traversal. The row's Core adapter is traced through virtual slot +0x08
+to `0x587B6530`; see the [backend dispatch notes](current-core-text-render-backend.md).
+The runtime callback implementations and every style-bit meaning remain
+unknown.
 
 All three newly reconstructed functions—`0x584849C0` (17 bytes),
 `0x584958D0` (23), and `0x587B6280` (671)—match the installed mapped Core image
 at **100% across 711 bytes** under the pinned VC6 SP5 and objdiff 3.8.0
 pipeline. The 12 fixed call targets in the main callback were audited.
-Ghidra's source and the vtable bytes establish the row-to-renderer route, but
-there is still no live frame capture proving the final pixels.
+Ghidra's source and vtable bytes establish the row-to-adapter route, but there
+is still no live frame capture proving the final pixels.

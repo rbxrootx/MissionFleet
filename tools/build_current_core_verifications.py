@@ -43,6 +43,7 @@ ADDRESSES = (
     "58495710", "58495870", "587B5F40", "58495610", "587B5B20",
     "58534B00", "584B5140", "5856DBC0",
     "58534D30", "58534E80", "5852D160", "5852D0C0", "5852D5D0", "585341D0", "58534760", "585348B0", "58521FF0", "587B4180", "584C0DE0", "58484B20", "587B5730", "58529610", "58532AD0", "5848C0B0", "5849F480", "587B52B0", "587B5520", "584BF150", "5884CE10", "5884C890", "58831004", "58859610", "58864670", "5882E770", "58487710", "5884D3E5", "5886CED0", "58879A60", "58879A70", "5886246F", "58868BF1", "588646B0", "588646D0", "587AABC0", "5882E666", "58487680", "58487780", "588647D0", "58864910", "58864C70", "58864FE0", "58864C40", "58873ED0", "58873EB0", "58873EE0", "58870110", "58870130", "58870160", "588701C0", "588721E0", "58873F20", "58873F50", "58859720", "5887D0C0", "58531000", "58530EA0",
+    "587B6530", "587B3FD0", "587B4550", "587B45C0",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1168,6 +1169,30 @@ EVIDENCE = {
         "behavior": "A 4,095-byte scene update dispatcher. When the update-enable bit at +0x24 is set, it processes several encoded scene-state branches, updates stage and counter fields, starts transition 0x5852D160 on one parity branch of state 1, invokes other screen/resource helpers on additional states, calls child/update helper 0x58530EA0, then dispatches virtual update slot +0x0C through the circular child list at +0x3C.",
         "uncertainty": "The scene-state codes, offsets, parity counter, resource IDs, and most called helpers do not have established semantic names. Static vtable and call evidence verifies control flow; it does not show which branch occurs in a live client or establish displayed pixels.",
     },
+    "587B6530": {
+        "name_in_analysis": "FUN_587b6530",
+        "called_by": "The renderer adapter vtable address point 0x588BDC5C has slot +0x08 pointing to this function; text control draw callback 0x587B6280 dispatches through that slot.",
+        "behavior": "When text and the supplied renderer/resource are non-null, acquires the drawing surface through global renderer object 0x584869C0 and its slot +0x44. It applies callback-configured state, clips the requested vertical bounds to the supplied rectangle, chooses format 4 or 6 from the mode argument, and forwards one or two text draws through 0x587B3FD0 before releasing the surface through slot +0x68. In mode zero, the optional second draw is offset by one pixel in both axes.",
+        "uncertainty": "The meanings of callback slots at 0x588940A0/84/A8/C4, argument flags, selected format values, and optional offset draw's visual role are unresolved. Argument flow and clipping conditions are directly visible in Ghidra; no rendered frame was captured.",
+    },
+    "587B3FD0": {
+        "name_in_analysis": "FUN_587b3fd0",
+        "called_by": "Text drawing adapter 0x587B6530 calls it for the main draw and, in one mode, an offset draw.",
+        "behavior": "Obtains a converted string buffer and its character count from 0x587B45C0/0x587B4550, invokes the registered draw callback at 0x588940B0 with the destination surface, coordinates, mode, rectangle, text resource, converted buffer, and count, then releases the temporary conversion buffer through a Core thunk.",
+        "uncertainty": "The exact encoding, callback ABI semantics, and the final argument's meaning are not established by this Core call path. The callback receives the observed values in the mapped order; its implementation is outside this function and supplied through runtime registration.",
+    },
+    "587B4550": {
+        "name_in_analysis": "FUN_587b4550",
+        "called_by": "String conversion helper 0x587B3FD0 uses it to allocate/fill its temporary buffer; text-format helper 0x587B3300 also calls it.",
+        "behavior": "If no character count was supplied, asks callback 0x5889429C to measure the string. It allocates a temporary buffer sized at twice the character count, then calls the same callback with the active graphics context and string to populate the buffer.",
+        "uncertainty": "The callback's text encoding, byte-count convention, and graphics-context semantics are unresolved. Multiplication, allocation, and callback argument order are directly visible; the buffer's contents are not inspected at runtime.",
+    },
+    "587B45C0": {
+        "name_in_analysis": "FUN_587b45c0",
+        "called_by": "String conversion helper 0x587B3FD0 and fallback sizing path in 0x587B4550.",
+        "behavior": "Calls registered callback 0x5889429C with the active graphics-context global and the supplied string to obtain a DWORD result, forwarding zeroed optional arguments and the supplied context value.",
+        "uncertainty": "The callback contract and result meaning are unknown; this helper's argument forwarding and return are directly established by Ghidra.",
+    },
     "58530EA0": {
         "name_in_analysis": "FUN_58530ea0",
         "called_by": "Called by scene update callback 0x58531000 at 0x58531F5C before the circular child-update traversal.",
@@ -1201,9 +1226,17 @@ def main():
     relocations = json.loads(relocation_path.read_text(encoding="utf-8"))
     old_config = json.loads((ROOT / "config/NF2_2062/client-verifications.json").read_text(encoding="utf-8"))
 
+    output = ROOT / "config/NF2_2026/core-verifications.json"
+    previous_addresses = []
+    if output.exists():
+        previous = json.loads(output.read_text(encoding="utf-8"))
+        previous_addresses = [item["address"] for item in previous.get("matches", [])]
+    ordered_addresses = [address for address in previous_addresses if address in ADDRESSES]
+    ordered_addresses.extend(address for address in ADDRESSES if address not in ordered_addresses)
+
     matches = []
     marker = "objdiff-3.8.0-byte-identical" if args.mark_verified else "candidate-not-yet-verified"
-    for address in ADDRESSES:
+    for address in ordered_addresses:
         row = inventory[address]
         name = row["name"]
         source = f"src/client-current/Core/{name}.cpp"
@@ -1240,7 +1273,6 @@ def main():
         },
         "matches": matches,
     }
-    output = ROOT / "config/NF2_2026/core-verifications.json"
     output.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Wrote {len(matches)} {marker} Core.dll records to {output.relative_to(ROOT)}")
 

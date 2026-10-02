@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,459 functions and 10,468,768
-identified code bytes across six report units. There are 5,997 verified matches
-totaling 1,341,708 bytes (12.8163%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,001 verified matches
+totaling 1,342,432 bytes (12.8232%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -89,6 +89,11 @@ the mapped LF delimiter, CR trimming, empty-line skipping, in-place tokenization
 and first/next record accessors are established from Ghidra and mapped data.
 The child-control types, text encoding, and rendered output remain unverified;
 see [parser evidence](docs/current-core-scene-record-parser.md).
+The scene's row-render path now reaches its concrete Core adapter: four backend
+dispatch/conversion functions add 724 exact bytes. Core clips draw bounds and
+dispatches through runtime-registered callbacks, whose implementation and final
+pixels remain unresolved; see
+[backend evidence](docs/current-core-text-render-backend.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin
