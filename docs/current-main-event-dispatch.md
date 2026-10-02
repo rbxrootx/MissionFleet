@@ -31,6 +31,9 @@ include:
 - `0x8000010A` and `0x80000200`, which branch on additional fields and call
   client state/UI helpers. Their semantic labels are not established by this
   function alone.
+- `0x80000500`, which passes a byte from the payload to `FUN_587e5fc0`, may
+  call `FUN_587ea630` depending on the screen-state field, and then calls the
+  queue/reset helper `FUN_587e8a40`.
 
 There is a second top-level class path for `0x8001`; it contains many further
 event IDs, including `0x80021034` and `0x80021002`. The handler is therefore
@@ -46,6 +49,8 @@ justify naming a class or claiming a vtable slot.
 
 The `0x80000100` route now has a verified callee reconstruction:
 [`FUN_587e8590`](current-main-event-queue.md) copies and queues its payload.
+The `0x80000500` route's 443-byte queue and screen-state reset helper is also
+byte-matched and documented in that event-queue note.
 
 The function has only been validated by comparing the address ranges,
 disassembly, and decompilation against the local mapped capture. Runtime

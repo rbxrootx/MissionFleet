@@ -82955,6 +82955,106 @@
         "uncertainty": "Ghidra reports unsettled type propagation. The full event-record schema, callback and slot-field meanings, route semantics, and runtime conditions are unresolved. The body is split across two Ghidra ranges; the source preserves each range separately and does not include intervening bytes."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587E8A40",
+      "name": "FUN_587e8a40",
+      "size": 443,
+      "symbol": "_FUN_587e8a40",
+      "source": "src/client-current/Main/FUN_587e8a40.cpp",
+      "source_sha256": "c28100a2cd590058f94cccb677aaeda558ccc29fd383a2a331f93c79c707f7fc",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "587E7D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "587E7E00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "588C6090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "587CCEC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "587E5C30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "5875CF00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 276,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 375,
+          "target_address": "587A75E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 388,
+          "target_address": "587A75E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 412,
+          "target_address": "588D6500",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e8a40",
+        "called_by": "Direct call at 0x587BC7CB in the 0x80000500 route of FUN_587bb700.",
+        "behavior": "Conditionally releases the values at +0x58 and +0x5C after comparing them with +0x28/+0x2C, then clears queue write/read/count fields +0x104AC/+0x104B0/+0x104A8. It calls 0x588C6090 with (0x22B, 0), adjusts screen-state flags, selects follow-up helpers based on fields +0x105A2 and +0x105F0, and ends with a virtual method transfer.",
+        "uncertainty": "The meanings of the compared resources, screen flags, queue data ownership, and final callback are not established. The call route and observed field/call operations are static Ghidra and mapped-image evidence; runtime effects remain untested."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }

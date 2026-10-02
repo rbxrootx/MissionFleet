@@ -71,3 +71,20 @@ The producer, reader, constructor, and cleanup evidence is static. No live
 client queue traffic has been captured, and the callback contract, event
 schema, drop behavior when the ring is full, payload ownership, and final UI
 effects remain uncertain.
+
+## Queue reset from event `0x80000500`
+
+The `0x80000500` branch in `FUN_587bb700` reads a byte from the event payload
+and passes it to `FUN_587e5fc0`. If the screen-state word at object offset
+`+0x105f0` is not 6, it also passes the next payload byte to `FUN_587ea630`.
+The branch then calls `FUN_587e8a40` with the current screen object.
+
+`FUN_587e8a40` is reconstructed from the 443-byte mapped extent and verifies
+at 100.0%, with all 13 direct-call targets checked. It conditionally invokes
+resource and screen helpers based on paired fields at `+0x58/+0x5c` and
+`+0x28/+0x2c`, clears the queue's producer index, consumer index, and count,
+then changes several screen-state flags and selects additional helpers based
+on offsets `+0x105a2` and `+0x105f0`. Its last operation transfers through a
+virtual method. The compared values' meanings and the final callback contract
+remain unknown; the original field accesses and call sequence are preserved in
+[`FUN_587e8a40.cpp`](../src/client-current/Main/FUN_587e8a40.cpp).
