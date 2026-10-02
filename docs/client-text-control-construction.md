@@ -56,3 +56,20 @@ instruction sequence and call destinations, not the identity of the allocator
 behind `0x1017515C`, the user-facing meaning of the fields, or the original
 source-level type hierarchy. Do not count the current assembly source as a
 typed C++ decompilation of this constructor.
+
+VC6 SP5 `/O2 /GX` source probes modeled the function as a derived
+`TextControl` constructor and allocated 128 bytes with either
+`new char[0x80]` or an explicit `operator new(0x80)` call. Both generated the
+same `0x19930520` exception-frame signature, allocator call shape, and
+base-destructor unwind funclet. This supports (but does not prove) that the
+target allocates its buffer with a C++ `new` expression. The corrected-layout
+probe reaches 94.0833% objdiff similarity, not a match: VC6 emits object relocations for its
+EH handler and `__except_list`, and schedules the allocation argument and EH
+state before the target's ordinary field writes. The mapped target contains
+the corresponding fixed addresses and a different instruction order. The
+byte-exact assembly remains the verified source until those differences are
+resolved without weakening the byte check.
+
+The probe also rejected an earlier layout guess: the target only writes one
+byte at `+0x80`; the final cleared dword is at `+0x180`. Treating `+0x80` as an
+0x80-byte embedded array incorrectly placed that dword at `+0x200`.
