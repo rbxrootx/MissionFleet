@@ -1,13 +1,13 @@
-# Native decompilation status — 1 October 2026
+# Native decompilation status — 2 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,459 functions and 10,468,758
-identified code bytes across six report units. There are 5,983 verified matches
-totaling 1,333,813 bytes (12.7409%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,459 functions and 10,468,768
+identified code bytes across six report units. There are 5,994 verified matches
+totaling 1,340,997 bytes (12.8095%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.

@@ -18,6 +18,8 @@ ADDRESSES = (
     "584A3730", "5850A170", "58508A00", "58508A60", "58505960",
     "58504920", "585071C0", "584A3D70", "58488040",
     "586EBCD0", "586E7EF0", "586E9070", "586E9510", "586EBB80", "586EBD10",
+    "584AA480", "584860A0", "584C5D40", "586E94F0", "58507730",
+    "586E9880", "586E9AF0", "586EAA50", "586EB530", "586EB640", "586EB730",
     "587BA830", "58800A60", "5880D420",
     "588009C0", "58800A30", "588099F0",
     "5880D370", "5880D3E0", "58816550",
@@ -96,6 +98,72 @@ EVIDENCE = {
         "called_by": "Scene cleanup routine 0x586E9070 uses it to bound iteration over the descriptors beginning at receiver +0x138.",
         "behavior": "Returns the number of 12-byte records in the begin/end span: (end - begin) / 0x0C. In this scene, resource loader 0x586EA6E0 selects descriptors 0, 1, and 2 for Announcement, Patch, and Eula resources.",
         "uncertainty": "This helper only establishes a count of 12-byte records. The descriptor meaning comes from the separately documented resource loader and indexed accessor call sites.",
+    },
+    "584AA480": {
+        "name_in_analysis": "FUN_584aa480",
+        "called_by": "Row population wrapper 0x584C5D40 calls it for each selected resource string before the row-control buffer is updated.",
+        "behavior": "Calls 0x584AA450 to test the string representation; returns the original object pointer when storage is inline and the heap-data pointer obtained through 0x584872B0 when storage is external.",
+        "uncertainty": "The exact string class and allocator ABI are not named. The inline-versus-external branch and returned pointer are visible in Ghidra and related to the 24-byte string layout already traced in the vector population path.",
+    },
+    "584860A0": {
+        "name_in_analysis": "FUN_584860a0",
+        "called_by": "Row population function 0x586EB530 calls this setter once per visible row, passing either the selected line-string data or an empty temporary string.",
+        "behavior": "If receiver field +0x6C and source are non-null, delegates to 0x587B4180 to copy the source into the receiver's +0x6C buffer with a 0x80-byte capacity argument.",
+        "uncertainty": "The receiver class and buffer's exact encoding/truncation contract are unknown. The destination field, capacity argument, and helper call are direct Ghidra evidence; identifying the receiver as a row text control is supported by its 15 repeated scene children but remains a class-role inference.",
+    },
+    "584C5D40": {
+        "name_in_analysis": "FUN_584c5d40",
+        "called_by": "Row population function 0x586EB530 calls this after computing a line element address with 0x58507730.",
+        "behavior": "Forwards the supplied string object to 0x584AA480 and returns its selected character-data pointer.",
+        "uncertainty": "The wrapper's broader call contract is unknown. The single delegate and returned value are visible in Ghidra.",
+    },
+    "586E94F0": {
+        "name_in_analysis": "FUN_586e94f0",
+        "called_by": "Resource row population 0x586EB530 and cleanup 0x586E9070 use it to select one of three adjacent per-resource descriptors.",
+        "behavior": "Returns the address of descriptor `index` in the 12-byte descriptor span: base + index * 0x0C.",
+        "uncertainty": "The helper is a plain indexed address calculation. The three descriptors' resource roles are established by loader 0x586EA6E0 and constructor/layout evidence.",
+    },
+    "58507730": {
+        "name_in_analysis": "FUN_58507730",
+        "called_by": "Resource row population function 0x586EB530 uses it to select a 24-byte line-string element from the chosen descriptor.",
+        "behavior": "Returns the address of element `index` in the vector: begin + index * 0x18.",
+        "uncertainty": "The helper is an indexed address calculation. Element layout and string contents are established by the separately mapped string/vector helpers; the element's exact source-level type is not named.",
+    },
+    "586EB530": {
+        "name_in_analysis": "FUN_586eb530",
+        "called_by": "Tab selection 0x586E9880, page-up/down helpers 0x586EB640 and 0x586EB730, input handler 0x586E9AF0, and state updater 0x586EAA50 call it to refresh the selected resource's rows.",
+        "behavior": "Iterates 15 row slots. For each slot it computes first-visible-index + slot, compares that index with the selected string-vector count, and either retrieves the 24-byte string element and passes its character-data pointer to setter 0x584860A0 or passes an empty temporary string to clear that slot.",
+        "uncertainty": "The 15 scene child receivers are consistent with the constructor's 15 repeated child allocations and cleanup's 15 pointer releases; their concrete UI class and on-screen geometry are not proven by these calls alone. The exact viewport count, selection-index arithmetic, and empty-row path are directly visible.",
+    },
+    "586EB640": {
+        "name_in_analysis": "FUN_586eb640",
+        "called_by": "Tab/input dispatcher 0x586E9880 and input handler 0x586E9AF0 call it for the page-down action.",
+        "behavior": "When first-visible index is below the selected resource's line count minus 15, increments it, updates the associated floating scrollbar position using the remaining scroll range, updates the control through 0x587B5730, and refreshes the 15 rows through 0x586EB530. At the boundary it clamps the scrollbar to the mapped maximum and applies control value 0x213.",
+        "uncertainty": "The numeric units and symbolic meanings of the scrollbar constants are unresolved. The index bound, increment, float update, and row refresh are directly visible.",
+    },
+    "586EB730": {
+        "name_in_analysis": "FUN_586eb730",
+        "called_by": "Tab/input dispatcher 0x586E9880 and input handler 0x586E9AF0 call it for the page-up action.",
+        "behavior": "If first-visible index is zero, sets the scrollbar to the mapped minimum and applies control value 0xFE. Otherwise decrements first-visible index, updates the floating scrollbar position, applies it through 0x587B5730, and refreshes the 15 rows through 0x586EB530.",
+        "uncertainty": "The scrollbar constants' units and symbolic names are unknown. The lower-bound test, decrement, and refresh sequence are direct Ghidra observations.",
+    },
+    "586E9880": {
+        "name_in_analysis": "FUN_586e9880",
+        "called_by": "Ghidra records it as the scene's 0x14C-byte control object callback path; it dispatches the selected child pointer for event type 2.",
+        "behavior": "Compares the incoming child pointer against three resource-tab pointers. On a recognized tab, it stores the selected resource index, resets the first-visible index when the tab's loaded-state flag is set, updates the scrollbar, refreshes rows through 0x586EB530, and marks the selected tab. Two other child pointers dispatch to page-down and page-up helpers 0x586EB730 and 0x586EB640.",
+        "uncertainty": "The visible tab labels, control class names, loaded-state field semantics, and remaining child action semantics are unknown. The three-way dispatch and state writes are visible in Ghidra; calling these pointers resource tabs follows their relationship to the three resource descriptors.",
+    },
+    "586E9AF0": {
+        "name_in_analysis": "FUN_586e9af0",
+        "called_by": "Installed scene vtable callback; its selected-tab identity and direct live event entry were not resolved, but it contains the input paths that invoke 0x586EB640, 0x586EB730, and 0x586EB530.",
+        "behavior": "Processes the selected scene-control input modes, including event codes 0x100, 0x200, 0x201, 0x202, and 0x20A. Its keyboard-control branch routes child codes 0x26 and 0x28 to page-up/down; its pointer/wheel paths adjust the first-visible index and scrollbar position, then refresh the 15 resource rows through 0x586EB530. It also maintains pointer-drag and focus-related state fields.",
+        "uncertainty": "The complete event object's ABI, vtable slot identity, external coordinate helper semantics, and live event sequence are unverified. Ghidra establishes the branches and updates statically; this is not a runtime input capture.",
+    },
+    "586EAA50": {
+        "name_in_analysis": "FUN_586eaa50",
+        "called_by": "Ghidra records the routine among callbacks that invoke 0x586EB530 to repopulate scene rows.",
+        "behavior": "When the receiver's enable/state bits select state 1, it updates grouped control values including 15 repeated entries and refreshes the selected resource rows through 0x586EB530; state 4 applies another group of control updates, while state 5 calls two methods on a stored interface after a counter reaches 0x0C. It also walks an intrusive callback list stored at +0x3C.",
+        "uncertainty": "The control-state meanings, relationship of each numeric value to animation/layout, interface contract, and list-node semantics remain unresolved. State tests, repeated group sizes, row-refresh call, counter threshold, and callback traversal are visible in Ghidra.",
     },
     "58797A90": {
         "name_in_analysis": "FUN_58797a90",
@@ -1130,7 +1198,12 @@ def main():
             "source_sha256": digest(source_path),
             "verified_by": marker,
             "flags": ["/O2", "/GX-", "/Zm200"],
-            "relocations": [dict(item, audit_only=True) for item in relocations[address]],
+            # A previous interrupted source-generation run can leave a valid
+            # generated function source without committing its final relocation
+            # report. Such functions with no relocation operands need an empty
+            # audit list; the byte verifier remains the authority.
+            "relocations": [dict(item, audit_only=True)
+                            for item in relocations.get(address, [])],
             "evidence": EVIDENCE[address],
         })
 

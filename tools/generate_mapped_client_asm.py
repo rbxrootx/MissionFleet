@@ -51,6 +51,11 @@ def render_function(name, address, code, disassembler, emit_all=False):
             and instruction.operands[1].mem.segment == 0
         )
         is_string = instruction.mnemonic.startswith(("lods", "stos", "movs", "scas", "cmps"))
+        # VC6's inline assembler rejects several scalar SSE conversion forms
+        # even when Capstone prints valid Intel syntax. Preserve these encodings
+        # just like prefixed SSE instructions instead of asking ML.EXE to parse
+        # an opcode it does not recognize.
+        is_legacy_assembler_unsupported = instruction.mnemonic.startswith(("cvtt",))
         has_prefix = any(instruction.prefix) or instruction.mnemonic in {"retf", "iretd"}
         is_direct_call = instruction.mnemonic in {"call", "lcall"}
         if (emit_all or branch or is_direct_call or is_mmx or absolute_operands
@@ -58,6 +63,7 @@ def render_function(name, address, code, disassembler, emit_all=False):
                 or (instruction.mnemonic == "ret" and instruction.op_str)
                 or (instruction.mnemonic == "nop" and instruction.size > 1)
                 or instruction.mnemonic in {"stmxcsr", "ldmxcsr"}
+                or is_legacy_assembler_unsupported
                 or instruction.mnemonic.startswith("f")
                 or is_string or has_prefix or identity_lea):
             lines.append(f"        ; Exact mapped bytes {raw}: {instruction.mnemonic} {instruction.op_str}".rstrip())

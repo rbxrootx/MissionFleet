@@ -16,6 +16,11 @@ LINEAR_SPAN_OVERRIDES = {
     "587b6d70": 0x3ABD,
     "586ea6e0": 0x29D,
     "5884c890": 0x537,
+    # These scene callbacks contain small holes between Ghidra's control-flow
+    # ranges. Keep the complete linear output span so disassembly and byte
+    # verification include the intervening mapped bytes and the final RET.
+    "586e9af0": 0xB4A,
+    "586eaa50": 0xAD9,
 }
 
 
