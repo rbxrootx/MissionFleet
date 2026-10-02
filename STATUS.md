@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,042
-identified code bytes across six report units. There are 6,260 verified matches
-totaling 1,429,588 bytes (13.6554%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,263 verified matches
+totaling 1,430,386 bytes (13.6630%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -182,9 +182,11 @@ unresolved. The outbound network sender `FUN_58970c70` adds 671 matched bytes,
 including the 20-byte record header, optional checksum path, and Winsock error
 handling; see [the sender note](docs/current-main-network-sender.md).
 The sender's three-function socket-error cleanup path adds 174 bytes; see
-[the cleanup note](docs/current-main-socket-cleanup.md). Current-build Main
-coverage is 127 / 8,474 identified functions and
-456,170 / 2,353,108 bytes. See
+[the cleanup note](docs/current-main-socket-cleanup.md). The address parser,
+async socket opener, and handle-table insertion add 798 bytes; see
+[the connection note](docs/current-main-socket-connect.md). Current-build Main
+coverage is 130 / 8,474 identified functions and
+456,968 / 2,353,108 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:

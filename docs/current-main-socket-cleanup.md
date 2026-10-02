@@ -43,3 +43,5 @@ callback contract, ownership of unlinked nodes, and the behavior when no
 matching node exists remain unknown. The cleanup branches have not been
 exercised at runtime. Exact source hashes, compiler flags, and operand checks
 are in `config/NF2_2026/client-verifications.json`.
+The matching handle insertion path is documented in
+[the socket connection note](current-main-socket-connect.md).

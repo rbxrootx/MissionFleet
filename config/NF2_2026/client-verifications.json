@@ -83716,6 +83716,277 @@
         "behavior": "Uses the low 16 bits of the socket handle to select a DWORD bucket from the table at context +0x220, follows next pointers at node +8, compares each node's first DWORD with the full handle, and unlinks a match from the head or predecessor. It does not free the node.",
         "uncertainty": "Node ownership, bucket-table initialization and capacity, duplicate-handle behavior, and where unlinked nodes are freed remain unknown."
       }
+    },
+    {
+      "address": "58970F10",
+      "name": "FUN_58970f10",
+      "size": 87,
+      "symbol": "_FUN_58970f10",
+      "source": "src/client-current/Main/FUN_58970f10.cpp",
+      "source_sha256": "3844a01d5927048a88255b8fc9f6f47ad26851c9b6e75c266f6b8d4f65b5e4e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58970F10",
+          "size": 87,
+          "symbol": "_FUN_58970f10_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58970f10",
+        "called_by": "Ghidra reference analysis finds a direct call at 0x58971038 from FUN_58970f90; mapped caller instructions load ECX with the owner object, then push the socket context and handle.",
+        "behavior": "Allocates a 12-byte node. On success it writes the socket handle, the supplied socket-context pointer, and the prior bucket head, inserts the node at owner +0x220 + ((handle & 0xFFFF) * 4), and increments owner +0x21C. If allocation returns null, it writes zero to that bucket and still increments the counter.",
+        "uncertainty": "The owner type and counter meaning are unknown. Allocation-failure behavior clears the selected bucket even if it held a list; no runtime failure case was captured."
+      }
+    },
+    {
+      "address": "58970F90",
+      "name": "FUN_58970f90",
+      "size": 224,
+      "symbol": "_FUN_58970f90",
+      "source": "src/client-current/Main/FUN_58970f90.cpp",
+      "source_sha256": "a803c743a255737c9bd37b6b96af099e311a4e37087d4623016fc5da6afc13bb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58970F90",
+          "size": 224,
+          "symbol": "_FUN_58970f90_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5897102A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "5897102A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "5898C44C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "00000462",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "5898C450",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "00001002",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "0000FFFF",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "00040000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "5898C45C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "5898C458",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58971480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "58970F10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "5898C440",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58971480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58970f90",
+        "called_by": "Ghidra reference analysis finds one direct call from FUN_58971070 at 0x58971240. The caller passes a 16-byte address structure and length 0x10.",
+        "behavior": "Uses WSASocketA (AF_INET, SOCK_STREAM, protocol 0, flags 1) when context +4 is -1, stores the supplied owner object at context +0x2C, registers WSAAsyncSelect with its +0x218 field, message 0x462, and mask 0x10, then sets SO_RCVBUF (level 0xFFFF, option 0x1002) to 0x40000. It registers the socket through FUN_58970f10 before calling connect with the supplied sockaddr and length. A nonzero connect result returns 1; a zero result unregisters the handle and returns 0.",
+        "uncertainty": "The asynchronous return contract is not identified. The WSAAsyncSelect failure branch returns zero without the shutdown/close sequence; its runtime cleanup and the meaning of the result are untested."
+      }
+    },
+    {
+      "address": "58971070",
+      "name": "FUN_58971070",
+      "size": 487,
+      "symbol": "_FUN_58971070",
+      "source": "src/client-current/Main/FUN_58971070.cpp",
+      "source_sha256": "2652cb19176857fd4debeee77085ad2004709b914a7f8c7ee22c689715f8a83e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58971070",
+          "size": 173,
+          "symbol": "_FUN_58971070_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "589711E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "589711E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "00000002",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58971120",
+          "size": 314,
+          "symbol": "_FUN_58971070_segment_01",
+          "relocations": [
+            {
+              "offset": 133,
+              "target_address": "589710FA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "00000002",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5898C43C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "5898C438",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 234,
+              "target_address": "589710FA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "000000FF",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "58970F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 304,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58971070",
+        "called_by": "Ghidra references show callers FUN_58790560 at 0x58790727, FUN_587936d0 at 0x58793A06, and FUN_587b7990 at 0x587B7B91.",
+        "behavior": "Builds an AF_INET sockaddr from a numeric dotted address and port, or calls inet_addr and falls back to gethostbyname for a hostname, selecting the first returned address. It byte-swaps the port and calls FUN_58970f90 with the address and length 0x10. Ghidra assigns two body ranges, 0x58971070..0x5897111C (173 bytes) and 0x58971120..0x58971259 (314 bytes); the three-byte gap is excluded.",
+        "uncertainty": "Hostname result ownership, malformed-address handling, octet range validation, and caller port semantics are unresolved. No DNS or socket operation has been run."
+      }
     }
   ]
 }
