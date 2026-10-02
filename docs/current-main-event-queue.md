@@ -79,6 +79,21 @@ and passes it to `FUN_587e5fc0`. If the screen-state word at object offset
 `+0x105f0` is not 6, it also passes the next payload byte to `FUN_587ea630`.
 The branch then calls `FUN_587e8a40` with the current screen object.
 
+`FUN_587e5fc0` stores its byte at `+0x378`. When bit `0x40` is clear, it
+clears bit 0 in the 16-bit field at `+0x24` of the object referenced by
+`+0x21cac`. It is 32 bytes and verifies byte-for-byte with its immediate
+operand checked.
+
+`FUN_587ea630` reads eight 16-bit values from the payload and iterates eight
+global pointer slots from `0x58A0B1C4` through `0x58A0B1E0`. For slots whose
+pointed-to object has bit 0 set at `+0x64`, it walks a linked list rooted at
+`[0x58A247F8]+0x0C`, comparing each node's 16-bit value at `+0x350` with the
+current input value. If a match also equals the value at `+0x350` in
+`[0x58A247F8]+4`, it calls `0x588DB3A0(1, 2)` and sets the screen object's
+`+0x380` field to 1. This 126-byte function has two Ghidra body ranges (45 and
+81 bytes); the source and verifier preserve that gap and check both ranges plus
+all six direct, absolute, and immediate operands.
+
 `FUN_587e8a40` is reconstructed from the 443-byte mapped extent and verifies
 at 100.0%, with all 13 direct-call targets checked. It conditionally invokes
 resource and screen helpers based on paired fields at `+0x58/+0x5c` and
@@ -88,3 +103,8 @@ on offsets `+0x105a2` and `+0x105f0`. Its last operation transfers through a
 virtual method. The compared values' meanings and the final callback contract
 remain unknown; the original field accesses and call sequence are preserved in
 [`FUN_587e8a40.cpp`](../src/client-current/Main/FUN_587e8a40.cpp).
+
+The input handlers' field meanings, the eight IDs' schema and payload bounds,
+the global list types, and the effects of `0x588DB3A0` remain unresolved. The
+caller offsets and helper instructions are static Ghidra and mapped-image
+evidence; this event path has not been exercised at runtime.

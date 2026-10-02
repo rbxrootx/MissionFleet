@@ -49,11 +49,12 @@ justify naming a class or claiming a vtable slot.
 
 The `0x80000100` route now has a verified callee reconstruction:
 [`FUN_587e8590`](current-main-event-queue.md) copies and queues its payload.
-The `0x80000500` route's 443-byte queue and screen-state reset helper is also
-byte-matched and documented in that event-queue note.
+The `0x80000500` route's 32-byte mode-byte helper, 126-byte two-range ID-list
+helper, and 443-byte queue/screen-state reset helper are byte-matched and
+documented in that event-queue note.
 
 The function has only been validated by comparing the address ranges,
 disassembly, and decompilation against the local mapped capture. Runtime
 dispatch has not been exercised, and there is no source match for this
-function yet. The most useful next slice is to trace the caller and contracts
-of `FUN_587e8590`, then return to the `0x80000100` route with that evidence.
+function yet. Further dispatcher work should follow another direct event route
+only after its callee extent and caller argument flow are established.

@@ -82957,6 +82957,68 @@
       "verified_by": "objdiff-3.8.0-byte-identical"
     },
     {
+      "address": "587E5FC0",
+      "name": "FUN_587e5fc0",
+      "size": 32,
+      "symbol": "_FUN_587e5fc0",
+      "source": "src/client-current/Main/FUN_587e5fc0.cpp",
+      "source_sha256": "1e55f25be458d03e3e01d8025324a30b404ee070c02e1f1a675657c8460fe6de",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [
+        { "offset": 21, "target_address": "0000FFFE", "kind": "immediate", "audit_only": true }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5fc0",
+        "called_by": "Direct call at 0x587BC7A9 in the 0x80000500 branch of FUN_587bb700; the caller passes the byte at [EBX] and object pointer from [0x58A2459C].",
+        "behavior": "Stores the supplied byte at object offset +0x378. If bit 0x40 is clear, it clears bit 0 of the 16-bit field at offset +0x24 in the object referenced from +0x21CAC, then returns with RET 4.",
+        "uncertainty": "The meaning of the byte at +0x378 and the referenced object's +0x24 flag are unresolved. Evidence is static Ghidra and mapped-image analysis; runtime effects are untested."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587EA630",
+      "name": "FUN_587ea630",
+      "size": 126,
+      "symbol": "_FUN_587ea630",
+      "source": "src/client-current/Main/FUN_587ea630.cpp",
+      "source_sha256": "98e2ba92047e899096fb838edefacfa3602fde13efe5a0909717ae5b5f610b4c",
+      "source_dependencies": [
+        { "path": "src/client-current/Main/FUN_587ea630_segment_00.cpp", "sha256": "9fb7a357e82c9a5a6a598ec16931c840f4952099134e37241ebe25e7c35674fe" },
+        { "path": "src/client-current/Main/FUN_587ea630_segment_01.cpp", "sha256": "504b8c495ab1a0ad638ddd67c5a03e29453ccec1681bd2ed79c1bfb0ba6710c0" }
+      ],
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EA630",
+          "size": 45,
+          "symbol": "_FUN_587ea630_segment_00",
+          "relocations": [
+            { "offset": 14, "target_address": "58A0B1C4", "kind": "immediate", "audit_only": true },
+            { "offset": 29, "target_address": "58A247F8", "kind": "absolute", "audit_only": true }
+          ]
+        },
+        {
+          "address": "587EA660",
+          "size": 81,
+          "symbol": "_FUN_587ea630_segment_01",
+          "relocations": [
+            { "offset": 16, "target_address": "588DB3A0", "kind": "relative", "audit_only": true },
+            { "offset": 22, "target_address": "58A247F8", "kind": "absolute", "audit_only": true },
+            { "offset": 48, "target_address": "00000001", "kind": "immediate", "audit_only": true },
+            { "offset": 67, "target_address": "58A0B1E4", "kind": "immediate", "audit_only": true }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ea630",
+        "called_by": "Direct call at 0x587BC7C0 in the 0x80000500 branch of FUN_587bb700, after the caller advances EBX by one byte; ECX is the object pointer from [0x58A2459C].",
+        "behavior": "Iterates eight 16-bit input values and eight pointer slots from 0x58A0B1C4 through 0x58A0B1E0. For enabled slot objects (byte +0x64 bit 0 set), it traverses the list rooted at [0x58A247F8]+0x0C via next pointer +0x78 and compares each node's 16-bit +0x350 value. When a node matches and the object at [0x58A247F8]+4 has the same +0x350 value, it calls 0x588DB3A0 with (1,2) and sets this object's +0x380 field to 1.",
+        "uncertainty": "The meanings of the eight input IDs, global pointer slots, list-node fields, helper call, and +0x380 state are unresolved. The payload length and runtime effects are untested; reconstruction follows the two Ghidra body ranges and their mapped instructions."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
       "address": "587E8A40",
       "name": "FUN_587e8a40",
       "size": 443,
