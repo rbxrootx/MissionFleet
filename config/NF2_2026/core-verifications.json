@@ -73168,6 +73168,1416 @@
         "behavior": "Repeatedly reads through `0x58860697`, returns -1 at EOF, and returns the first byte for which `0x5885761B` does not contain mask `8`.",
         "uncertainty": "The alternate reader's stream record is not named. The read loop, EOF branch, and classifier call are directly visible in Ghidra."
       }
+    },
+    {
+      "address": "588608EE",
+      "name": "FUN_588608ee",
+      "size": 76,
+      "symbol": "_FUN_588608ee",
+      "source": "src/client-current/Core/FUN_588608ee.cpp",
+      "source_sha256": "43d960645a64ecc5c88fb47995a2b0227ee62402ffe257781cbfe3cc07694d49",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58860C95",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58860A36",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "588609D6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "588608C2",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588608ee",
+        "called_by": "Called by primary scan-format handler `0x58860C11`.",
+        "behavior": "Dispatches on the format byte at receiver offset `+0x38`: modes 0, 1, and 8 select pointer/character handlers; modes 2\u20136 call integer conversion `0x58860A36` with mode-specific base and flags; mode 7 selects numeric conversion `0x588609D6`; mode 9 selects `0x58861559` when the output-mode byte permits.",
+        "uncertainty": "The format enum names and precise scanf-compatible semantics are not recovered. Switch cases, field offsets, and targets are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860962",
+      "name": "FUN_58860962",
+      "size": 76,
+      "symbol": "_FUN_58860962",
+      "source": "src/client-current/Core/FUN_58860962.cpp",
+      "source_sha256": "653cc8df60285d30775df3376b2aa79c41a80298d7a915b4cf526a9800ab197e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58860CDD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58860A9B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58860A06",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "588608D6",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860962",
+        "called_by": "Called by alternate scan-format handler `0x58860C53`.",
+        "behavior": "Parallel dispatcher using the format byte at `+0x40`: modes 0, 1, and 8 select `0x58860CDD`; modes 2\u20136 select matched integer handler `0x58860A9B`; mode 7 selects `0x58860A06`; mode 9 selects `0x588615C8` when the alternate output-mode byte permits.",
+        "uncertainty": "The reason for the parallel record layout and the format enum names are unknown. Branches and target calls are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588609D6",
+      "name": "FUN_588609d6",
+      "size": 48,
+      "symbol": "_FUN_588609d6",
+      "source": "src/client-current/Core/FUN_588609d6.cpp",
+      "source_sha256": "851e2ade815d0194009ed860fd156e5be5158cb7917d6561dc5fce5a6e4d38e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "58860D25",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "5885D23C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5885D16C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588609d6",
+        "called_by": "Selected by primary dispatcher `0x588608EE` for mode 7.",
+        "behavior": "Skips leading classified characters via `0x58860D25`, resolves the destination width with `0x5886074D`, and selects primary narrow or wide numeric sink `0x5885D16C` / `0x5885D23C` or the alternate-format sinks `0x5885D1D4` / `0x5885D2A8` based on the width and format state.",
+        "uncertainty": "The width values' C type names and format-state semantics are unresolved; calls and branches are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860A06",
+      "name": "FUN_58860a06",
+      "size": 48,
+      "symbol": "_FUN_58860a06",
+      "source": "src/client-current/Core/FUN_58860a06.cpp",
+      "source_sha256": "2f98fc93180f99ffd1652ed1e06e54a8abbc47f7b183f62ad1e232a71f8ada00",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "58860D42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "5885D2A8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5885D1D4",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860a06",
+        "called_by": "Selected by alternate dispatcher `0x58860962` for mode 7.",
+        "behavior": "Alternate counterpart to `0x588609D6`: skips leading classified characters via `0x58860D42`, resolves width with `0x5886074D`, and calls one of the four numeric sink wrappers according to format state and destination width.",
+        "uncertainty": "The alternate record layout and width-to-type mapping are not named. Branch conditions and calls are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860C11",
+      "name": "FUN_58860c11",
+      "size": 66,
+      "symbol": "_FUN_58860c11",
+      "source": "src/client-current/Core/FUN_58860c11.cpp",
+      "source_sha256": "68dd6a77d2f0e106ebd5da0b9932c5f51efc99d45c6f13f4cbb6b817a7123315",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "target_address": "588608EE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58860B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58860D25",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860c11",
+        "called_by": "Primary scan entry `0x588607B2` delegates to this routine for its conversion loop.",
+        "behavior": "Reads the primary mode byte at `+0x38`: mode 2 skips classified input, mode 3 compares a literal through `0x58860B00`, mode 4 dispatches through `0x588608EE`, and the remaining branch terminates or updates the conversion count according to status.",
+        "uncertainty": "The caller's full loop contract and field names are not recovered. Mode tests, helper calls, and count updates are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860C53",
+      "name": "FUN_58860c53",
+      "size": 66,
+      "symbol": "_FUN_58860c53",
+      "source": "src/client-current/Core/FUN_58860c53.cpp",
+      "source_sha256": "8c46b1587a864171fae479dd6be340fa327402af97943cc5578610818a12770e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 29,
+          "target_address": "58860962",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58860B36",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58860D42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860c53",
+        "called_by": "Alternate scan entry `0x5886083D` delegates to this routine for its conversion loop.",
+        "behavior": "Alternate counterpart to `0x58860C11`: it reads mode at `+0x40`, uses `0x58860B36` for literal comparison, dispatches through `0x58860962`, and updates the alternate count/status fields.",
+        "uncertainty": "The alternate record's semantics are unresolved; mode tests, calls, and field accesses are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860C95",
+      "name": "FUN_58860c95",
+      "size": 72,
+      "symbol": "_FUN_58860c95",
+      "source": "src/client-current/Core/FUN_58860c95.cpp",
+      "source_sha256": "f3226f643ccb232765d9036cccb4cf05763212366a32aff3e2123bc3d9825007",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58860D25",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5885D600",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5885D314",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860c95",
+        "called_by": "Selected by primary format dispatcher `0x588608EE` for modes 0, 1, and 8.",
+        "behavior": "Resolves a bounded destination width and routes to the primary byte or word/string scan handlers `0x5885D314` and `0x5885D600` depending on width and mode.",
+        "uncertainty": "The source-level destination type and format-mode names are unknown. Width checks and branch targets are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860CDD",
+      "name": "FUN_58860cdd",
+      "size": 72,
+      "symbol": "_FUN_58860cdd",
+      "source": "src/client-current/Core/FUN_58860cdd.cpp",
+      "source_sha256": "03b388e3365187ddaa20c0a82c1ba0daa7faf82a0652949d69e1f46f916102bc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58860D42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5886074D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5885D78C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5885D494",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860cdd",
+        "called_by": "Selected by alternate format dispatcher `0x58860962` for modes 0, 1, and 8.",
+        "behavior": "Alternate counterpart to `0x58860C95`, resolving destination width before selecting byte or word scan handlers `0x5885D494` and `0x5885D78C`.",
+        "uncertainty": "The alternate width record's type and format names are not recovered; accesses and calls are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5886074D",
+      "name": "FUN_5886074d",
+      "size": 55,
+      "symbol": "_FUN_5886074d",
+      "source": "src/client-current/Core/FUN_5886074d.cpp",
+      "source_sha256": "45b26f6dab73bbc8e9c563273466bec95f113d391f6b3b218fe3c9732b983ea6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 36,
+          "target_address": "588612D8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "588612B5",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886074d",
+        "called_by": "Called by scan output handlers, including `0x58861559`, `0x588615C8`, `0x588609D6`, and `0x58860A06`.",
+        "behavior": "Resolves the effective destination width from the scan record and delegates to width helpers `0x588612D8` or `0x588612B5` for its two layout paths.",
+        "uncertainty": "The width-record type and complete width enum are not named. Field reads and helper selection are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588612D8",
+      "name": "FUN_588612d8",
+      "size": 49,
+      "symbol": "_FUN_588612d8",
+      "source": "src/client-current/Core/FUN_588612d8.cpp",
+      "source_sha256": "252e1ef56ba63704c4e3eacc7dfb7bab99bbda4e4d6aaad2d43807027d927391",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588612d8",
+        "called_by": "Called by width resolver `0x5886074D` for its primary record layout.",
+        "behavior": "Returns a width value selected from the primary conversion record's type and size fields.",
+        "uncertainty": "The returned width values' source-level type names are unresolved. The field accesses and branch-selected values are visible in Ghidra."
+      }
+    },
+    {
+      "address": "588612B5",
+      "name": "FUN_588612b5",
+      "size": 35,
+      "symbol": "_FUN_588612b5",
+      "source": "src/client-current/Core/FUN_588612b5.cpp",
+      "source_sha256": "fe1673227ab25137e94e6af2a58c2291b3d741a7bfc88fe85e2b109c9f89ab08",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588612b5",
+        "called_by": "Called by width resolver `0x5886074D` for its alternate record layout.",
+        "behavior": "Returns the destination width from alternate conversion-record fields.",
+        "uncertainty": "The alternate layout and width enum are not named. Field accesses and return values are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D16C",
+      "name": "FUN_5885d16c",
+      "size": 104,
+      "symbol": "_FUN_5885d16c",
+      "source": "src/client-current/Core/FUN_5885d16c.cpp",
+      "source_sha256": "47aa01fb67d87c7b38d413f2839fce3a06fce9bf4b41a9ecd6aa0e2531868a86",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 48,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "5885B8F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "5885D96A",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d16c",
+        "called_by": "Selected by numeric format dispatcher for the primary single-DWORD destination path.",
+        "behavior": "Parses through float parser `0x5885B8F0`, writes the converted result through `0x5885D96A`, and returns the parse/store status.",
+        "uncertainty": "The target language type and parser status names are not recovered. Calls, store width, and return handling are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D23C",
+      "name": "FUN_5885d23c",
+      "size": 108,
+      "symbol": "_FUN_5885d23c",
+      "source": "src/client-current/Core/FUN_5885d23c.cpp",
+      "source_sha256": "5c9f7398e9cbe7247402eba0108fe30f1217c32dd124d27ba6665e1ec3990e25",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 52,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "5885B97A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "5885D9D4",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d23c",
+        "called_by": "Selected by numeric format dispatcher for the primary two-DWORD destination path.",
+        "behavior": "Parses through double parser `0x5885B97A`, writes the two-DWORD result through `0x5885D9D4`, and returns the parse/store status.",
+        "uncertainty": "The target type name and status contract are not recovered; call sequence and writes are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D1D4",
+      "name": "FUN_5885d1d4",
+      "size": 104,
+      "symbol": "_FUN_5885d1d4",
+      "source": "src/client-current/Core/FUN_5885d1d4.cpp",
+      "source_sha256": "5ecc09e05c88c5ee94e6adc896859c5bb7a737650aded026335b9f2e0222e464",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 48,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "5885BA04",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "5885D99F",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d1d4",
+        "called_by": "Selected by numeric format dispatcher for the alternate single-DWORD destination path.",
+        "behavior": "Uses alternate parser `0x5885BA04` and stores its converted result through `0x5885D99F`.",
+        "uncertainty": "The alternate parser's precise numeric semantics and status name are unresolved. Calls and writes are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D2A8",
+      "name": "FUN_5885d2a8",
+      "size": 108,
+      "symbol": "_FUN_5885d2a8",
+      "source": "src/client-current/Core/FUN_5885d2a8.cpp",
+      "source_sha256": "a6f0e438a7e3e92ef9f7567a1a1454c5164ada301b5843d7b247354ca2d898ea",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 52,
+          "target_address": "5885B8D2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "5885BA8E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "5885DA0F",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d2a8",
+        "called_by": "Selected by numeric format dispatcher for the alternate two-DWORD destination path.",
+        "behavior": "Uses alternate double parser `0x5885BA8E` and stores its converted result through `0x5885DA0F`.",
+        "uncertainty": "The alternate record and target type names are not recovered. Calls, two-DWORD output, and status flow are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D314",
+      "name": "FUN_5885d314",
+      "size": 384,
+      "symbol": "_FUN_5885d314",
+      "source": "src/client-current/Core/FUN_5885d314.cpp",
+      "source_sha256": "26b0791a976ee0f1754fefbfd773a0439642b32850cea3387b91426e65d271b3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 233,
+          "target_address": "588606AD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 289,
+          "target_address": "5885D387",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 297,
+          "target_address": "5885D387",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 309,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 325,
+          "target_address": "5885D349",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 355,
+          "target_address": "5885D349",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 380,
+          "target_address": "5885D34B",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d314",
+        "called_by": "Selected by primary format handler `0x58860C95` for its one-byte destination path.",
+        "behavior": "Reads characters from the primary stream, applies match predicate `0x588606AD`, respects the configured width and buffer state, writes the accepted span, terminates it when required, and restores the first nonmatching character.",
+        "uncertainty": "The record's buffer contract and whether every mode requires termination are not symbolically named. Read/match/write/pushback branches are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D600",
+      "name": "FUN_5885d600",
+      "size": 396,
+      "symbol": "_FUN_5885d600",
+      "source": "src/client-current/Core/FUN_5885d600.cpp",
+      "source_sha256": "b407f5691b1be9f626dc6906dfdb1a75d2f35827da6c6eaef673d0f70bb6f96d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 235,
+          "target_address": "588606AD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 271,
+          "target_address": "58861476",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 298,
+          "target_address": "5885D675",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 308,
+          "target_address": "5885D675",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "5885D635",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 365,
+          "target_address": "5885D635",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 392,
+          "target_address": "5885D637",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d600",
+        "called_by": "Selected by primary format handler `0x58860C95` for its word-sized destination path.",
+        "behavior": "Primary wide-character scan loop. It reads through the primary reader, tests `0x588606AD`, applies width/buffer checks, emits encoded output, and pushes back the first character that ends the scan.",
+        "uncertainty": "Wide-string encoding details are handled by callees and not fully recovered here. Loop and helper choices are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D494",
+      "name": "FUN_5885d494",
+      "size": 364,
+      "symbol": "_FUN_5885d494",
+      "source": "src/client-current/Core/FUN_5885d494.cpp",
+      "source_sha256": "2b0e53bf233bb2e73f29f73f616c73587277da7efbdd168273d2893339eb04d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 213,
+          "target_address": "588606FD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "5885D4FE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 277,
+          "target_address": "5885D4FE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 289,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 305,
+          "target_address": "5885D4C9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "5885D4C9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "5885D4CB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d494",
+        "called_by": "Selected by alternate format handler `0x58860CDD` for its one-byte destination path.",
+        "behavior": "Alternate byte-scan loop using predicate `0x588606FD`, maintaining the alternate stream and output state, and restoring the first nonmatching character.",
+        "uncertainty": "The alternate buffer record type and terminator rules are unresolved. Control flow and helper calls are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D78C",
+      "name": "FUN_5885d78c",
+      "size": 376,
+      "symbol": "_FUN_5885d78c",
+      "source": "src/client-current/Core/FUN_5885d78c.cpp",
+      "source_sha256": "aaa37b23d8a30ab44dc2f27fa12c7b90f7da0ed568179893ac1f1dd556450c1c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 38,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 215,
+          "target_address": "588606FD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 251,
+          "target_address": "588614EC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 278,
+          "target_address": "5885D7F8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "5885D7F8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 315,
+          "target_address": "5885D7C1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 345,
+          "target_address": "5885D7C1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 372,
+          "target_address": "5885D7C3",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d78c",
+        "called_by": "Selected by alternate format handler `0x58860CDD` for its word-sized destination path.",
+        "behavior": "Alternate wide-character scan loop using `0x588606FD`; it tracks width, emits encoded output, and restores the first character that does not match.",
+        "uncertainty": "The alternate encoding and buffer semantics are not fully recovered. Loop operations are visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D96A",
+      "name": "FUN_5885d96a",
+      "size": 53,
+      "symbol": "_FUN_5885d96a",
+      "source": "src/client-current/Core/FUN_5885d96a.cpp",
+      "source_sha256": "2497f9376a0c6222ecdcb857e989a27735a0b58b5352c79228b2adc796e7e6ba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d96a",
+        "called_by": "Called by primary numeric sink wrapper `0x5885D16C` after parsing.",
+        "behavior": "Stores one 32-bit word through the provided output pointer and reports success.",
+        "uncertainty": "The wrapper's pointer contract is not named. The single store and return value are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D9D4",
+      "name": "FUN_5885d9d4",
+      "size": 59,
+      "symbol": "_FUN_5885d9d4",
+      "source": "src/client-current/Core/FUN_5885d9d4.cpp",
+      "source_sha256": "ec4ac8355efffd5502460381f2a035cd98bed1cc0071cb727e9ea32d1a75558b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d9d4",
+        "called_by": "Called by primary numeric sink wrapper `0x5885D23C` after parsing.",
+        "behavior": "Stores a 64-bit result as two 32-bit words through the supplied output pointer and reports success.",
+        "uncertainty": "The output alignment and type contract are not symbolically named. The two writes and return are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885D99F",
+      "name": "FUN_5885d99f",
+      "size": 53,
+      "symbol": "_FUN_5885d99f",
+      "source": "src/client-current/Core/FUN_5885d99f.cpp",
+      "source_sha256": "ed90d6aecf2be5bfdc5482cda09628d39c0c1612ff0e29c644f4ff3788290407",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885d99f",
+        "called_by": "Called by alternate numeric sink wrapper `0x5885D1D4` after parsing.",
+        "behavior": "Writes one 32-bit result to the alternate destination and reports success.",
+        "uncertainty": "The alternate output pointer contract is not named. Store and return are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5885DA0F",
+      "name": "FUN_5885da0f",
+      "size": 59,
+      "symbol": "_FUN_5885da0f",
+      "source": "src/client-current/Core/FUN_5885da0f.cpp",
+      "source_sha256": "5f79e53cc56cf34d5c5a84ab95de0e509875e714ab669cd70cabe6a4753dcf81",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886246F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58850FAB",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885da0f",
+        "called_by": "Called by alternate numeric sink wrapper `0x5885D2A8` after parsing.",
+        "behavior": "Writes a 64-bit result as two 32-bit words to the alternate destination and reports success.",
+        "uncertainty": "The alternate output alignment and type are unresolved. Writes and return are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "588606AD",
+      "name": "FUN_588606ad",
+      "size": 80,
+      "symbol": "_FUN_588606ad",
+      "source": "src/client-current/Core/FUN_588606ad.cpp",
+      "source_sha256": "7b7a911e60647597d5961183098620bf74730182ba92edd57123a61acfa7075c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588606ad",
+        "called_by": "Used by primary byte and wide-character scan loops `0x5885D314` and `0x5885D600`.",
+        "behavior": "Rejects EOF; accepts every non-EOF character for mask 0; for mask 1 rejects ASCII whitespace bytes 9\u201313 and 0x20; for mask 8 consults the primary classification bitmap at record offset `+0x3C`.",
+        "uncertainty": "Mask names and bitmap schema are unresolved. The byte tests and bitmap access are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588606FD",
+      "name": "FUN_588606fd",
+      "size": 80,
+      "symbol": "_FUN_588606fd",
+      "source": "src/client-current/Core/FUN_588606fd.cpp",
+      "source_sha256": "23dac90130bc0e9a57ba126e19f342bfb01cdb2736c44918d9d94e97f530804f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588606fd",
+        "called_by": "Used by alternate byte and wide-character scan loops `0x5885D494` and `0x5885D78C`.",
+        "behavior": "Parallel match predicate: rejects EOF, accepts any character for mask 0, filters ASCII whitespace for mask 1, and uses alternate classification bitmap at `+0x44` for mask 8.",
+        "uncertainty": "The alternate classification-record type and symbolic mask names are unknown. Branches and bitmap offset are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58861476",
+      "name": "FUN_58861476",
+      "size": 118,
+      "symbol": "_FUN_58861476",
+      "source": "src/client-current/Core/FUN_58861476.cpp",
+      "source_sha256": "ea661a4c418afd2adf9b8b7073452e799908c978eb3dbc43b904a164c44df6c4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58863F1F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "5886DDA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861476",
+        "called_by": "Called from primary wide-character scan loop `0x5885D600` when converting a character for output.",
+        "behavior": "Checks the character conversion table, reads from the primary stream, encodes output through `0x5886DDA0`, advances the destination by two bytes, and updates remaining-width state.",
+        "uncertainty": "The conversion-table entries and encoding semantics are not reconstructed. Table branch, reader, emitter, and state updates are visible in Ghidra."
+      }
+    },
+    {
+      "address": "588614EC",
+      "name": "FUN_588614ec",
+      "size": 109,
+      "symbol": "_FUN_588614ec",
+      "source": "src/client-current/Core/FUN_588614ec.cpp",
+      "source_sha256": "fe5aacbb92f0dcc7acb45730473ff2e948d0185780bc90c4fe1351dc89124da4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58863F1F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5886DDA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588614ec",
+        "called_by": "Called from alternate wide-character scan loop `0x5885D78C` for output conversion.",
+        "behavior": "Alternate counterpart to `0x58861476`: consults the conversion table, reads alternate-stream data, emits encoded bytes through `0x5886DDA0`, and advances the alternate destination and width fields.",
+        "uncertainty": "The alternate record semantics and character encoding contract are unresolved. The checks and updates are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58860B00",
+      "name": "FUN_58860b00",
+      "size": 54,
+      "symbol": "_FUN_58860b00",
+      "source": "src/client-current/Core/FUN_58860b00.cpp",
+      "source_sha256": "1fc906d4c83e290acbd1db61578eff05b8464f1ce4c0b46a4cfde61818d93be3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58860B6C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860b00",
+        "called_by": "Called by primary scan loop `0x58860C11` for literal-character mode.",
+        "behavior": "Reads a primary stream character, compares it with the configured literal byte, restores the input on mismatch, and delegates equality handling to `0x58860B6C`.",
+        "uncertainty": "The literal mode's termination/count semantics are not fully established. Read, compare, pushback, and delegate are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860B36",
+      "name": "FUN_58860b36",
+      "size": 54,
+      "symbol": "_FUN_58860b36",
+      "source": "src/client-current/Core/FUN_58860b36.cpp",
+      "source_sha256": "e7c4bfb7db9a0dcf7a6b16a01bd9ce4b79947e9eaa8a275eb6b6c422af80a992",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58860BC3",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860b36",
+        "called_by": "Called by alternate scan loop `0x58860C53` for literal-character mode.",
+        "behavior": "Alternate literal-character counterpart: reads and compares against the configured byte, restores input on mismatch, and delegates equality handling to `0x58860BC3`.",
+        "uncertainty": "The alternate literal-mode contract is not named. Branches and stream operations are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860B6C",
+      "name": "FUN_58860b6c",
+      "size": 87,
+      "symbol": "_FUN_58860b6c",
+      "source": "src/client-current/Core/FUN_58860b6c.cpp",
+      "source_sha256": "49664be93c527fd0b84d927b6eb803c463b261deffccbc3914c0259966d5556f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58863F1F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "5885A0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "588613B9",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860b6c",
+        "called_by": "Called by primary literal comparator `0x58860B00` after its preliminary comparison.",
+        "behavior": "Uses the character conversion table to determine whether an additional primary stream character is needed, reads it when required, compares against record byte `+0x25`, and restores the consumed character and expected value on mismatch.",
+        "uncertainty": "The special-character encoding rule and record field name are unresolved. Table check and stream operations are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58860BC3",
+      "name": "FUN_58860bc3",
+      "size": 78,
+      "symbol": "_FUN_58860bc3",
+      "source": "src/client-current/Core/FUN_58860bc3.cpp",
+      "source_sha256": "b080e65391e7be7d2199b17e2e17de9b215dc7855d75d18512bb8b388933c1f5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58863F1F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58860697",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "588613D7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860bc3",
+        "called_by": "Called by alternate literal comparator `0x58860B36` after its preliminary comparison.",
+        "behavior": "Alternate counterpart to `0x58860B6C`, optionally consumes an additional character based on the conversion table, compares the configured byte at `+0x2D`, and restores input on mismatch.",
+        "uncertainty": "The alternate special-character rule and record field meaning are unknown. Reads, compare, pushback, and returns are direct Ghidra observations."
+      }
     }
   ]
 }

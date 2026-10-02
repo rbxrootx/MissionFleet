@@ -6,10 +6,10 @@ C pseudocode are available locally. **Start with [the decompilation project](dec
 and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
 The matching project has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
-Its public-safe inventory covers 42,460 functions across the login, game,
+Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 6,164 matches cover 1,370,590 bytes (13.0919%) and are verified
+The current 6,195 matches cover 1,374,081 bytes (13.1252%) and are verified
 individually at 100.0% by objdiff.
 
 ```powershell
@@ -126,4 +126,5 @@ See [findings](docs/findings.md), [client unpacking](docs/client-unpacking.md),
 [the Core pointer registry](docs/current-core-pointer-registry.md),
 [the Core byte-stream handlers](docs/current-core-byte-stream-io.md),
 [the Core buffered stream subsystem](docs/current-core-buffered-stream-io.md),
+[the Core scan-conversion dispatch subsystem](docs/current-core-scan-conversion-dispatch.md),
 [decomp.dev integration](docs/decomp-dev.md), and [remaining work](docs/roadmap.md).
