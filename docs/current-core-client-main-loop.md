@@ -16,12 +16,13 @@ Selected event-code ranges are sent through a registered callback or a stored
 object's virtual slot `+0x10`. Code `0x462` routes to `0x5882D710` when global
 `0x589660D0` is nonzero; a late loop iteration calls registered callback
 `0x58894240` with value 1. One event-check path calls `0x5882DBD0` and returns
-one.
+one. The cleanup routine and its guarded resource-scene cleanup helper are
+detailed in [the exit-cleanup notes](current-core-client-shutdown.md).
 
 This is static control-flow evidence for timer sampling, queued-event dispatch,
 and two cleanup/return paths. Callback identities and contracts, timer units,
-event-record structure and symbolic event names, the stored dispatch object's
-type, and the cleanup effects remain unknown. No client session was run to
+event-record structure and symbolic event names, and the stored dispatch
+object's type remain unknown. No client session was run to
 capture actual event traffic, timing, frame output, or exit behavior.
 
 The function matches the hash-pinned installed Core image at 100% under VC6 SP5

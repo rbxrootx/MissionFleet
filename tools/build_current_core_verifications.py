@@ -47,6 +47,7 @@ ADDRESSES = (
     "5857FE50", "58539D50", "5853ACB0", "5853ACD0", "5853ADA0",
     "5856E240", "5882DD60",
     "5882E060",
+    "5882DBD0", "5856E0D0",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1249,6 +1250,18 @@ EVIDENCE = {
         "called_by": "`WinMain` calls this function at `0x5856E88F` after `0x5882DD60` succeeds, the registered context callbacks run, and startup helpers `0x58502810` and `0x585022F0` complete.",
         "behavior": "Runs the client's main timer and message loop. It first requires globals `0x58965F74` and `0x58965F78`, otherwise calls cleanup helper `0x5882DBD0` and returns zero. The loop compares elapsed values returned by callback `0x58894524` against global threshold `0x58905FC0`, conditionally runs registered update/render helpers, polls and removes queued events through callbacks `0x58894478`, `0x58894450`, and `0x58894474`, then dispatches selected event-code ranges through a registered callback or virtual slot `+0x10`. Event code `0x462` is routed to `0x5882D710` when global `0x589660D0` is set; late loop iterations call callback `0x58894240` with value 1.",
         "uncertainty": "The callback implementations, event structure layout, event-code symbolic meanings, timer units, dispatch-object type, and cleanup contract are not recovered. The numeric branches, global checks, callback order, dispatch slots, and return paths are Ghidra observations; the labels 'timer' and 'message loop' describe the repeated time sampling and queued-event dispatch, not a runtime API capture.",
+    },
+    "5882DBD0": {
+        "name_in_analysis": "FUN_5882dbd0",
+        "called_by": "Main loop `0x5882E060` calls this routine before returning from both the missing-context path (`0x5882E40A`) and the event-poll termination path (`0x5882E460`). It is also called from setup callback `0x5882DA20` at `0x5882DB18`.",
+        "behavior": "Clears dispatch globals `0x589660C4`, `0x589660C8`, and `0x589660CC`, then calls Core helper `0x5856E0D0`. It releases non-null objects in globals `0x589660D0`, `0x58965F78`, and `0x58965F74` through their first virtual slot with argument 1, clearing each global. It then invokes registered callback `0x58894484`, zero-initializes a `0x94`-byte local record through `0x5884CE10`, sets its first DWORD to `0x94`, and passes it to callback `0x58894134`; if the resulting local status is 2, it calls `0x588944C0` with global context `0x58965F1C`.",
+        "uncertainty": "The released object types and virtual-slot argument semantics, callback contracts, local record schema, and meaning of status 2 are unknown. The teardown-shaped caller paths, global resets, virtual dispatches, record size, and conditional callback are direct Ghidra observations; the `cleanup` label is based on those effects and its call sites.",
+    },
+    "5856E0D0": {
+        "name_in_analysis": "FUN_5856e0d0",
+        "called_by": "Exit/setup cleanup routine `0x5882DBD0` calls it at `0x5882DC01`.",
+        "behavior": "Runs once while global guard `0x5896222C` is zero. It releases two stored objects through virtual slot `+0x08`, calls helpers `0x585008C0`, `0x58500D90`, `0x585008C0`, `0x58500DB0`, and `0x58857B5A(0)`, writes `0x41` and zero to globals `0x589604E0` and `0x589604E1`, sets the guard, releases globals `0x58965F24` and `0x58962228` through virtual slot zero with argument 1, then calls registered callback `0x58894468(0)`.",
+        "uncertainty": "The two object types, helper side effects, virtual-slot argument meanings, state bytes, and final callback contract are unresolved. The guard, call sequence, global writes, releases, and sole direct caller are Ghidra observations; identifying this as scene/client cleanup follows its enclosing caller and the globals released.",
     },
 }
 
