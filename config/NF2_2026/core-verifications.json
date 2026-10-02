@@ -76717,6 +76717,236 @@
         "behavior": "Calls the indirect handler in global slot 0x588943B8 with code 0x17 and executes software interrupt 0x29 when that handler returns nonzero. It then reports status 0xC0000417 through 0x58850DAF, passes that status to the indirect callback slot 0x58894254, and forwards its result through slot 0x588943B4.",
         "uncertainty": "The three indirect callback targets and their effects are unresolved. Ghidra exposes their slot addresses, arguments, and conditional order; the high-level meaning of status 0xC0000417 is not established."
       }
+    },
+    {
+      "address": "58831086",
+      "name": "FUN_58831086",
+      "size": 40,
+      "symbol": "_FUN_58831086",
+      "source": "src/client-current/Core/FUN_58831086.cpp",
+      "source_sha256": "cfb939e5f708e3629db31524eb823565049dce53962844d33f4ab8cafcaed8e4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58894274",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 16,
+          "target_address": "588943B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "58894254",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "588943B4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58831086",
+        "called_by": "Runtime exception-record constructor 0x588310AE calls this with the address of its captured record. It is also referenced through runtime error handling in adjacent functions.",
+        "behavior": "Calls indirect callback slots 0x58894274(0) and 0x588943B0(param_1), obtains a callback result by calling slot 0x58894254 with status 0xC0000409, then forwards that result through slot 0x588943B4.",
+        "uncertainty": "Callback implementations are outside the captured Core image. Ghidra shows the slot addresses and argument order; it does not establish the external handlers' effects."
+      }
+    },
+    {
+      "address": "588310AE",
+      "name": "FUN_588310ae",
+      "size": 251,
+      "symbol": "_FUN_588310ae",
+      "source": "src/client-current/Core/FUN_588310ae.cpp",
+      "source_sha256": "1e039157b3040bd43df6119e9375168ccf2e1c60031cdd62a7ab34637fc32537",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "588943B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "589664C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589664C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "589664C0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "589664BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "589664B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "589664B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "589664E0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "589664D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "589664B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "589664AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "589664A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "589664A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "589664D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "589664CC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "589664D0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "589664DC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "58966418",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "589664D0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "589663D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "589663C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 172,
+          "target_address": "589663CC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 182,
+          "target_address": "589663D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "58906040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "58906080",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "588C1C60",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "58831086",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588310ae",
+        "called_by": "Ghidra records references to this runtime-failure path from the Core exception and stack-check routines; it dispatches its filled record to 0x58831086.",
+        "behavior": "Calls callback slot 0x588943B8 with 0x17, captures the resulting status/flags, and writes the observed processor context, stack pointer, return address, and failure status 0xC0000409 into global record fields around 0x589663C8..0x589664E0. It then calls 0x58831086 with record address 0x588C1C60.",
+        "uncertainty": "The global record's external structure type and callback behavior are unknown. Field offsets and constants are direct Ghidra observations; interpreting it as an exception/failure record is supported by the captured register state and status constant."
+      }
     }
   ]
 }

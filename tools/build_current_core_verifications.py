@@ -101,9 +101,22 @@ ADDRESSES = (
     "5887316E",
     "58850EF7",
     "58850FBB", "58850FD9",
+    "58831086", "588310AE",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
+    "58831086": {
+        "name_in_analysis": "FUN_58831086",
+        "called_by": "Runtime exception-record constructor 0x588310AE calls this with the address of its captured record. It is also referenced through runtime error handling in adjacent functions.",
+        "behavior": "Calls indirect callback slots 0x58894274(0) and 0x588943B0(param_1), obtains a callback result by calling slot 0x58894254 with status 0xC0000409, then forwards that result through slot 0x588943B4.",
+        "uncertainty": "Callback implementations are outside the captured Core image. Ghidra shows the slot addresses and argument order; it does not establish the external handlers' effects.",
+    },
+    "588310AE": {
+        "name_in_analysis": "FUN_588310ae",
+        "called_by": "Ghidra records references to this runtime-failure path from the Core exception and stack-check routines; it dispatches its filled record to 0x58831086.",
+        "behavior": "Calls callback slot 0x588943B8 with 0x17, captures the resulting status/flags, and writes the observed processor context, stack pointer, return address, and failure status 0xC0000409 into global record fields around 0x589663C8..0x589664E0. It then calls 0x58831086 with record address 0x588C1C60.",
+        "uncertainty": "The global record's external structure type and callback behavior are unknown. Field offsets and constants are direct Ghidra observations; interpreting it as an exception/failure record is supported by the captured register state and status constant.",
+    },
     "58850FBB": {
         "name_in_analysis": "FUN_58850fbb",
         "called_by": "Ghidra records callers 0x5883A2AC and 0x5883A24A; this wrapper invokes the shared diagnostic routine 0x58850EF7 and then the runtime error reporter 0x58850FD9.",
