@@ -16,13 +16,12 @@ the lock through `0x58876286` / `0x58863C64`; the lock-entry wrapper
 `0x58863C1C` dispatches through its corresponding indirect callback. The cache
 setter retains a changed-in pointer through `0x58875F5D`, releases the old
 pointer through `0x588761A5`, and passes a non-static record with zero
-references to `0x58875FDA` for release.
+references to `0x58875FDA` for release. Those retain/release and cleanup paths
+are byte-matched in [`current-core-locale-record-lifetime.md`](current-core-locale-record-lifetime.md).
 
 All nine functions in this slice, totaling 346 bytes, were verified at 100%
 byte identity by objdiff 3.8.0 against the pinned mapped `Core.dll` image.
 
-The runtime state's source-level type and flag, lock callback targets,
-reference-count record semantics, and null-allocation failure path remain
-unresolved. The retain/release functions `0x588761A5`, `0x58875FDA`, and
-`0x58875F5D`, and fail-fast helper `0x58862710`, are direct callees or
-exception-path dependencies but are not part of this verified slice.
+The runtime state's source-level type and flag, lock callback targets, and
+null-allocation failure path remain unresolved. The zero-reference error path
+through `0x58862710` is outside this verified slice.

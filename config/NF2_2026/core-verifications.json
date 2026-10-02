@@ -75317,6 +75317,718 @@
         "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect release callback `DAT_5889421C`.",
         "uncertainty": "The callback target and lock-record type are not recovered. Address arithmetic and indirect call are directly visible in Ghidra."
       }
+    },
+    {
+      "address": "588761A5",
+      "name": "FUN_588761a5",
+      "size": 129,
+      "symbol": "_FUN_588761a5",
+      "source": "src/client-current/Core/FUN_588761a5.cpp",
+      "source_sha256": "bbf7d0758da73caf54390ad59c1c48f67702e52b55e4984c231a48be3ae4c6d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 75,
+          "target_address": "58907520",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5887617C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588761a5",
+        "called_by": "Called by locale-record cache setter `0x588762A7` when replacing a cached locale record.",
+        "behavior": "Atomically decrements the record's count at `+0x0C`, the counts behind selected pointers at `+0x7C`, `+0x84`, `+0x80`, and `+0x8C`, and paired pointer fields across six records beginning at `+0x28`; it also decrements a related object's count through `0x5887617C`.",
+        "uncertainty": "The record and nested pointer types are not named, and the count-field ownership rules are unresolved. Offsets, six-entry loop, sentinel test, and atomic updates are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58875FDA",
+      "name": "FUN_58875fda",
+      "size": 328,
+      "symbol": "_FUN_58875fda",
+      "source": "src/client-current/Core/FUN_58875fda.cpp",
+      "source_sha256": "179acd355855fc83b09a4d3c0161f105e7933669ca5f403f53f7ad6ee15d70c4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58907310",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "588762F7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "58876756",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 158,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 177,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 202,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "5887614B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "58907520",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 294,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 320,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58875fda",
+        "called_by": "Called by locale-record cache setter `0x588762A7` when the replaced record reaches its observed zero-reference condition.",
+        "behavior": "Releases nested records and the outer locale record according to zero-count and static-sentinel checks. It delegates record-specific cleanup to `0x588762F7`, `0x58876756`, and `0x5887614B`, and frees the selected objects through the already matched `0x5886CC10`.",
+        "uncertainty": "The nested record types, ownership relationships, and static objects are not symbolically named. Branches, offsets, helper calls, and zero-count tests are visible in Ghidra."
+      }
+    },
+    {
+      "address": "58875F5D",
+      "name": "FUN_58875f5d",
+      "size": 125,
+      "symbol": "_FUN_58875f5d",
+      "source": "src/client-current/Core/FUN_58875f5d.cpp",
+      "source_sha256": "0965ffb896cd0f02cdeff95a142e92443285cf144617deb6261f27bf7a2bc7fa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 71,
+          "target_address": "58907520",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "58876122",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58875f5d",
+        "called_by": "Called by locale-record cache setter `0x588762A7` for the newly published record.",
+        "behavior": "Atomically increments the record and nested pointer counts at fixed fields and across six paired entries, then increments the related object's count through `0x58876122`.",
+        "uncertainty": "The source-level record types and count ownership rules remain unresolved. Field offsets, loop bounds, atomic operations, and helper call are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5887617C",
+      "name": "FUN_5887617c",
+      "size": 41,
+      "symbol": "_FUN_5887617c",
+      "source": "src/client-current/Core/FUN_5887617c.cpp",
+      "source_sha256": "ec922051eedf641152d59f963b942019ea3abd06465309d7ee8e6df43a2fa593",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "588C4E78",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887617c",
+        "called_by": "Called by `0x588761A5` to decrement the related object's counter at `+0xB0`; Ghidra also records a caller in locale-record construction.",
+        "behavior": "For a nonnull, non-static object, atomically decrements the counter at `+0xB0` and returns the post-decrement value; for null or the static sentinel it returns `0x7FFFFFFF`.",
+        "uncertainty": "The counter's source-level name and sentinel contract are unknown. Atomic update, offset, sentinel, and return values are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58876756",
+      "name": "FUN_58876756",
+      "size": 105,
+      "symbol": "_FUN_58876756",
+      "source": "src/client-current/Core/FUN_58876756.cpp",
+      "source_sha256": "c0ef6385a5001f3de9f972136191c4322fe3cf693ac01c23471e05ecf97ebf52",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "58907310",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "58907314",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "58907318",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "58907340",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "58907344",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876756",
+        "called_by": "Called by locale-record release routine `0x58875FDA` when one nested record reaches zero references.",
+        "behavior": "Checks five selected pointers in the nested record against their global default values and frees each non-default pointer through `0x5886CC10`.",
+        "uncertainty": "The nested type and meaning of the global defaults are unresolved. Field indices, comparisons, and frees are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "5887614B",
+      "name": "FUN_5887614b",
+      "size": 49,
+      "symbol": "_FUN_5887614b",
+      "source": "src/client-current/Core/FUN_5887614b.cpp",
+      "source_sha256": "2f4e6f17deb431968e696fdd7fdc4bfecd9721233352ea0cb17375b1d92df4ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "588C4E78",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58876C7D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887614b",
+        "called_by": "Called by locale-record release routine `0x58875FDA` for its related object field.",
+        "behavior": "If the object is nonnull, not the static sentinel, and its counter at `+0xB0` is zero, calls its field cleanup routine `0x58876C7D` and frees the object through `0x5886CC10`.",
+        "uncertainty": "The object type, counter meaning, and sentinel name are unresolved. Guard conditions and cleanup/free order are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588762F7",
+      "name": "FUN_588762f7",
+      "size": 254,
+      "symbol": "_FUN_588762f7",
+      "source": "src/client-current/Core/FUN_588762f7.cpp",
+      "source_sha256": "3a30dd58797dfa5fb9ef89709202edc6c0200b82d359c7e39cee30c5fb440ab2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "588763F2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "5890731C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "58907320",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58907324",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "58907328",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "5890732C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58907330",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "58907334",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "58907348",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "5890734C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "58907350",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 192,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 202,
+          "target_address": "58907354",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "58907358",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "5890735C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 246,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588762f7",
+        "called_by": "Called by locale-record release routine `0x58875FDA` for one nested record.",
+        "behavior": "Checks thirteen selected pointer slots against their corresponding global defaults and frees each non-default pointer through `0x5886CC10`.",
+        "uncertainty": "The nested record type and symbolic names of its fields/defaults are unknown. Slot offsets, default comparisons, and frees are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "58876122",
+      "name": "FUN_58876122",
+      "size": 41,
+      "symbol": "_FUN_58876122",
+      "source": "src/client-current/Core/FUN_58876122.cpp",
+      "source_sha256": "535fb014df81db08274d0f2269964617148f5b2892996b62224a1e9fcec2d639",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "588C4E78",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876122",
+        "called_by": "Called by locale-record retain routine `0x58875F5D` to increment the related object's counter at `+0xB0`.",
+        "behavior": "For a nonnull, non-static object, atomically increments the counter at `+0xB0` and returns the post-increment value; for null or the static sentinel it returns `0x7FFFFFFF`.",
+        "uncertainty": "The counter's source-level name and sentinel contract are unresolved. Atomic update, offset, sentinel, and return values are direct Ghidra observations."
+      }
+    },
+    {
+      "address": "58876C7D",
+      "name": "FUN_58876c7d",
+      "size": 228,
+      "symbol": "_FUN_58876c7d",
+      "source": "src/client-current/Core/FUN_58876c7d.cpp",
+      "source_sha256": "381ca579f05c213516f47f3b5a6c159c0ae008dfc040fa76c77ea07f8cdcae4f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58876D5E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 21,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "588769DC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 196,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876c7d",
+        "called_by": "Called by object release wrapper `0x5887614B` when the object's reference count reaches zero; also used by object construction cleanup.",
+        "behavior": "Cleans up repeated pointer-array fields within the object through `0x588769DC` and frees several standalone pointer fields through `0x5886CC10`.",
+        "uncertainty": "The object field types and meanings remain unknown. Array offsets/counts, pointer fields, and cleanup order are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "588769DC",
+      "name": "FUN_588769dc",
+      "size": 37,
+      "symbol": "_FUN_588769dc",
+      "source": "src/client-current/Core/FUN_588769dc.cpp",
+      "source_sha256": "87a4b19f249e86f3fa734e9670860142004f830bb6e60fbf5a44d78b6f4c596a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886CC10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588769dc",
+        "called_by": "Called repeatedly by `0x58876C7D` for each pointer-array field in the locale-related object.",
+        "behavior": "Iterates the requested number of DWORD pointer slots and releases each through the already matched allocator helper `0x5886CC10`.",
+        "uncertainty": "The slots' source-level element type is unknown. Loop bounds, pointer stepping, and release call are direct Ghidra observations."
+      }
     }
   ]
 }

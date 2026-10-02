@@ -94,6 +94,8 @@ ADDRESSES = (
     "5887B1C5", "5887B1D9", "5886FB2F", "5886FA97",
     "58863F1F", "58868BA0", "5886CF21", "58876226", "588762A7",
     "5887628F", "58876286", "58863C1C", "58863C64",
+    "588761A5", "58875FDA", "58875F5D", "5887617C", "58876756",
+    "5887614B", "588762F7", "58876122", "58876C7D", "588769DC",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -2520,6 +2522,66 @@ EVIDENCE = {
         "called_by": "Called by `0x58876286` to release locale lock index 4 and by other indexed runtime lock wrappers.",
         "behavior": "Computes the indexed 0x18-byte lock record from `DAT_58969620` and dispatches through indirect release callback `DAT_5889421C`.",
         "uncertainty": "The callback target and lock-record type are not recovered. Address arithmetic and indirect call are directly visible in Ghidra.",
+    },
+    "588761A5": {
+        "name_in_analysis": "FUN_588761a5",
+        "called_by": "Called by locale-record cache setter `0x588762A7` when replacing a cached locale record.",
+        "behavior": "Atomically decrements the record's count at `+0x0C`, the counts behind selected pointers at `+0x7C`, `+0x84`, `+0x80`, and `+0x8C`, and paired pointer fields across six records beginning at `+0x28`; it also decrements a related object's count through `0x5887617C`.",
+        "uncertainty": "The record and nested pointer types are not named, and the count-field ownership rules are unresolved. Offsets, six-entry loop, sentinel test, and atomic updates are directly visible in Ghidra.",
+    },
+    "58875FDA": {
+        "name_in_analysis": "FUN_58875fda",
+        "called_by": "Called by locale-record cache setter `0x588762A7` when the replaced record reaches its observed zero-reference condition.",
+        "behavior": "Releases nested records and the outer locale record according to zero-count and static-sentinel checks. It delegates record-specific cleanup to `0x588762F7`, `0x58876756`, and `0x5887614B`, and frees the selected objects through the already matched `0x5886CC10`.",
+        "uncertainty": "The nested record types, ownership relationships, and static objects are not symbolically named. Branches, offsets, helper calls, and zero-count tests are visible in Ghidra.",
+    },
+    "58875F5D": {
+        "name_in_analysis": "FUN_58875f5d",
+        "called_by": "Called by locale-record cache setter `0x588762A7` for the newly published record.",
+        "behavior": "Atomically increments the record and nested pointer counts at fixed fields and across six paired entries, then increments the related object's count through `0x58876122`.",
+        "uncertainty": "The source-level record types and count ownership rules remain unresolved. Field offsets, loop bounds, atomic operations, and helper call are directly visible in Ghidra.",
+    },
+    "5887617C": {
+        "name_in_analysis": "FUN_5887617c",
+        "called_by": "Called by `0x588761A5` to decrement the related object's counter at `+0xB0`; Ghidra also records a caller in locale-record construction.",
+        "behavior": "For a nonnull, non-static object, atomically decrements the counter at `+0xB0` and returns the post-decrement value; for null or the static sentinel it returns `0x7FFFFFFF`.",
+        "uncertainty": "The counter's source-level name and sentinel contract are unknown. Atomic update, offset, sentinel, and return values are direct Ghidra observations.",
+    },
+    "58876756": {
+        "name_in_analysis": "FUN_58876756",
+        "called_by": "Called by locale-record release routine `0x58875FDA` when one nested record reaches zero references.",
+        "behavior": "Checks five selected pointers in the nested record against their global default values and frees each non-default pointer through `0x5886CC10`.",
+        "uncertainty": "The nested type and meaning of the global defaults are unresolved. Field indices, comparisons, and frees are directly visible in Ghidra.",
+    },
+    "5887614B": {
+        "name_in_analysis": "FUN_5887614b",
+        "called_by": "Called by locale-record release routine `0x58875FDA` for its related object field.",
+        "behavior": "If the object is nonnull, not the static sentinel, and its counter at `+0xB0` is zero, calls its field cleanup routine `0x58876C7D` and frees the object through `0x5886CC10`.",
+        "uncertainty": "The object type, counter meaning, and sentinel name are unresolved. Guard conditions and cleanup/free order are directly visible in Ghidra.",
+    },
+    "588762F7": {
+        "name_in_analysis": "FUN_588762f7",
+        "called_by": "Called by locale-record release routine `0x58875FDA` for one nested record.",
+        "behavior": "Checks thirteen selected pointer slots against their corresponding global defaults and frees each non-default pointer through `0x5886CC10`.",
+        "uncertainty": "The nested record type and symbolic names of its fields/defaults are unknown. Slot offsets, default comparisons, and frees are directly visible in Ghidra.",
+    },
+    "58876122": {
+        "name_in_analysis": "FUN_58876122",
+        "called_by": "Called by locale-record retain routine `0x58875F5D` to increment the related object's counter at `+0xB0`.",
+        "behavior": "For a nonnull, non-static object, atomically increments the counter at `+0xB0` and returns the post-increment value; for null or the static sentinel it returns `0x7FFFFFFF`.",
+        "uncertainty": "The counter's source-level name and sentinel contract are unresolved. Atomic update, offset, sentinel, and return values are direct Ghidra observations.",
+    },
+    "58876C7D": {
+        "name_in_analysis": "FUN_58876c7d",
+        "called_by": "Called by object release wrapper `0x5887614B` when the object's reference count reaches zero; also used by object construction cleanup.",
+        "behavior": "Cleans up repeated pointer-array fields within the object through `0x588769DC` and frees several standalone pointer fields through `0x5886CC10`.",
+        "uncertainty": "The object field types and meanings remain unknown. Array offsets/counts, pointer fields, and cleanup order are directly visible in Ghidra.",
+    },
+    "588769DC": {
+        "name_in_analysis": "FUN_588769dc",
+        "called_by": "Called repeatedly by `0x58876C7D` for each pointer-array field in the locale-related object.",
+        "behavior": "Iterates the requested number of DWORD pointer slots and releases each through the already matched allocator helper `0x5886CC10`.",
+        "uncertainty": "The slots' source-level element type is unknown. Loop bounds, pointer stepping, and release call are direct Ghidra observations.",
     },
 }
 
