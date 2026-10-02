@@ -3169,6 +3169,171 @@
       }
     },
     {
+      "address": "586E9070",
+      "name": "FUN_586e9070",
+      "size": 921,
+      "symbol": "_FUN_586e9070",
+      "source": "src/client-current/Core/FUN_586e9070.cpp",
+      "source_sha256": "09ab714c77855675da9649f107fb5ccc4b8058b734d429e53626e18453643ea1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 188,
+          "target_address": "586E91DF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "586E911D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 836,
+          "target_address": "586EBD10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 865,
+          "target_address": "586E94F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 872,
+          "target_address": "586EBB80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 889,
+          "target_address": "586EBB00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 904,
+          "target_address": "586E9050",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 912,
+          "target_address": "5856B7C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_586e9070",
+        "called_by": "The mapped scene cleanup wrapper at 0x586E9510 calls it at 0x586E951A; Ghidra also identifies an unwind cleanup caller at 0x5888C993.",
+        "behavior": "Resets the object's vtable pointer to 0x588B3194, releases and clears multiple stored object pointers through their virtual slot 0, loops over the 12-byte descriptors beginning at receiver +0x138, and calls 0x586EBB80 for each descriptor to destroy its live string elements. It then clears another vector and delegates final cleanup to 0x586E9050 and 0x5856B7C0.",
+        "uncertainty": "The exact class name, ownership meaning of most object fields, and whether any cleared controls display the loaded text are unknown. The vector range and cleanup call order are directly visible in Ghidra; labels such as scene destructor are based on the vtable reset and cleanup-shaped caller, not recovered symbols."
+      }
+    },
+    {
+      "address": "586E9510",
+      "name": "FUN_586e9510",
+      "size": 49,
+      "symbol": "_FUN_586e9510",
+      "source": "src/client-current/Core/FUN_586e9510.cpp",
+      "source_sha256": "9718e828b56fa9a64d145806392163b7d3c541357f03a01744a198063ff2ce6a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "586E9070",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "58831034",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_586e9510",
+        "called_by": "Ghidra identifies it as the deleting-destructor wrapper associated with the cleanup routine 0x586E9070; the wrapper calls that routine unconditionally.",
+        "behavior": "Calls 0x586E9070, then if bit 0 of its second argument is set, calls 0x58831034 with the object pointer and size 0x14C; it returns the original pointer.",
+        "uncertainty": "The second argument's complete flag contract and allocator/deallocation semantics of 0x58831034 are not established. The conditional bit test, fixed size, and call order are directly visible in Ghidra."
+      }
+    },
+    {
+      "address": "586EBB80",
+      "name": "FUN_586ebb80",
+      "size": 113,
+      "symbol": "_FUN_586ebb80",
+      "source": "src/client-current/Core/FUN_586ebb80.cpp",
+      "source_sha256": "08ff0c6296975ef57a023165e9c9d67eee4ae1f5c8a2fb00b482650aa84cae03",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 48,
+          "target_address": "58487F30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58487F10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "58504AE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_586ebb80",
+        "called_by": "Scene cleanup routine 0x586E9070 calls it for each 12-byte descriptor selected by 0x586E94F0.",
+        "behavior": "If the string vector's begin and end pointers differ, destroys the live element range through 0x58504AE0 and resets end to begin, retaining the vector allocation/capacity.",
+        "uncertainty": "The exact container and allocator type names are unresolved. Element destruction, end-pointer reset, and non-empty guard follow directly from Ghidra control flow."
+      }
+    },
+    {
+      "address": "586EBD10",
+      "name": "FUN_586ebd10",
+      "size": 38,
+      "symbol": "_FUN_586ebd10",
+      "source": "src/client-current/Core/FUN_586ebd10.cpp",
+      "source_sha256": "311e669727d27473716697cac390c8113b8a457af63f52de1f65fe06c5fd9e2f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_586ebd10",
+        "called_by": "Scene cleanup routine 0x586E9070 uses it to bound iteration over the descriptors beginning at receiver +0x138.",
+        "behavior": "Returns the number of 12-byte records in the begin/end span: (end - begin) / 0x0C. In this scene, resource loader 0x586EA6E0 selects descriptors 0, 1, and 2 for Announcement, Patch, and Eula resources.",
+        "uncertainty": "This helper only establishes a count of 12-byte records. The descriptor meaning comes from the separately documented resource loader and indexed accessor call sites."
+      }
+    },
+    {
       "address": "587BA830",
       "name": "FUN_587ba830",
       "size": 272,

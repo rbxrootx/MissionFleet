@@ -72,7 +72,7 @@ export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
 capture-specific profile indexes 13,030 functions / 3,996,309
-bytes from installed `Core.dll`; 170 functions match 287,505 bytes, including
+bytes from installed `Core.dll`; 174 functions match 288,626 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
@@ -96,6 +96,9 @@ and indexed record accessors; see
 [`current-core-scene-record-parser.md`](current-core-scene-record-parser.md).
 The three per-resource line-string vectors add 25 matches / 2,618 bytes; see
 [`current-core-scene-resource-vectors.md`](current-core-scene-resource-vectors.md).
+The scene's deleting wrapper and per-resource string-vector cleanup add four
+matches / 1,121 bytes; see
+[`current-core-scene-resource-vector-cleanup.md`](current-core-scene-resource-vector-cleanup.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.
@@ -115,6 +118,7 @@ callers and framebuffer output remain unverified. See the
 [Core.dll RGB16 compositor evidence](current-core-rgb16-compositors.md) and
 [Core.dll ship sprite-loader evidence](current-core-ship-sprite-loader.md),
 [Core.dll scene resource-vector evidence](current-core-scene-resource-vectors.md), and
+[Core.dll scene resource-vector cleanup evidence](current-core-scene-resource-vector-cleanup.md),
 [three-byte-target class evidence](current-core-three-byte-sprite-class.md) and
 [its selector-1 sibling](current-core-three-byte-sprite-class1.md) and
 [its selector-2 sibling](current-core-three-byte-sprite-class2.md) and
