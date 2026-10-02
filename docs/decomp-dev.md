@@ -112,6 +112,8 @@ and
 [`current-core-resource-screen-construction.md`](current-core-resource-screen-construction.md).
 The `WinMain` to resource-scene setup path is traced in
 [`current-core-client-entry-and-window-setup.md`](current-core-client-entry-and-window-setup.md).
+Its subsequent event loop is documented in
+[`current-core-client-main-loop.md`](current-core-client-main-loop.md).
 The inventory spans at `0x586EA6E0` and `0x5884C890` now include their complete
 epilogues; Ghidra's prior extents ended mid-instruction. The expanded function
 at `0x5884C890` was rechecked at objdiff 100%.

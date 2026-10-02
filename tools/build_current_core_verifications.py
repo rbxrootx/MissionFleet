@@ -46,6 +46,7 @@ ADDRESSES = (
     "587B6530", "587B3FD0", "587B4550", "587B45C0",
     "5857FE50", "58539D50", "5853ACB0", "5853ACD0", "5853ADA0",
     "5856E240", "5882DD60",
+    "5882E060",
 )
 CORE_SHA256 = "75e3270f5636f9aa7292ea6dc0b4a0c79f2154bc9d5d31f75b11ac7081f128a4"
 EVIDENCE = {
@@ -1242,6 +1243,12 @@ EVIDENCE = {
         "called_by": "`WinMain` calls this routine from both branches selected by `0x584C55A0`: each branch first calls `0x58521FF0` with a different mapped string and window geometry. Ghidra records the two call sites at `0x5856E783` and `0x5856E816`.",
         "behavior": "Builds shared window/client context around registered runtime callbacks, optionally prepares a callback structure, derives adjusted geometry for modes other than 10, calls the registered window/context factory, and on success creates and stores three helper/context objects before calling `0x5856E240` to install and initialize the resource scene. The success path stores the main context at `0x58965F1C` and a large `0x40220`-byte allocated object at `0x589660D0`.",
         "uncertainty": "The callback implementations and the types/roles of the allocated objects are outside this Core function. `WinMain`'s decompiled call expression supplies four apparent arguments while this function is decompiled with eleven parameters, so parameter/register mapping and mode-specific geometry semantics remain unresolved; no UI frame or interaction was captured.",
+    },
+    "5882E060": {
+        "name_in_analysis": "FUN_5882e060",
+        "called_by": "`WinMain` calls this function at `0x5856E88F` after `0x5882DD60` succeeds, the registered context callbacks run, and startup helpers `0x58502810` and `0x585022F0` complete.",
+        "behavior": "Runs the client's main timer and message loop. It first requires globals `0x58965F74` and `0x58965F78`, otherwise calls cleanup helper `0x5882DBD0` and returns zero. The loop compares elapsed values returned by callback `0x58894524` against global threshold `0x58905FC0`, conditionally runs registered update/render helpers, polls and removes queued events through callbacks `0x58894478`, `0x58894450`, and `0x58894474`, then dispatches selected event-code ranges through a registered callback or virtual slot `+0x10`. Event code `0x462` is routed to `0x5882D710` when global `0x589660D0` is set; late loop iterations call callback `0x58894240` with value 1.",
+        "uncertainty": "The callback implementations, event structure layout, event-code symbolic meanings, timer units, dispatch-object type, and cleanup contract are not recovered. The numeric branches, global checks, callback order, dispatch slots, and return paths are Ghidra observations; the labels 'timer' and 'message loop' describe the repeated time sampling and queued-event dispatch, not a runtime API capture.",
     },
 }
 

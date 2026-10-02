@@ -101,6 +101,8 @@ meanings and warning-sprite pixels remain unresolved. See
 [scene construction evidence](docs/current-core-resource-screen-construction.md).
 The client startup and window setup path is documented in
 [the entry-flow notes](docs/current-core-client-entry-and-window-setup.md).
+The next `WinMain` phase, including event polling and dispatch, is described in
+[the main-loop notes](docs/current-core-client-main-loop.md).
 The readable `ITNTL.dll` adds a source-backed file/resource loader trace,
 16-bit span conversion, screen allocation, and the same sprite/screen call
 boundary. The Python renderer model now uses screen-owned clipping and origin

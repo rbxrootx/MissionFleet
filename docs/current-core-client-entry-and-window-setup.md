@@ -6,7 +6,8 @@ of `0x584C55A0`, prepares a string and geometry through `0x58521FF0`, and calls
 `0x5856E816`. Ghidra shows the first layout centered around `0x400` by
 `0x302` dimensions and the second at origin with `0x400` by `0x300` dimensions.
 After successful setup, `WinMain` invokes registered callbacks on the returned
-context and continues into `0x5882E060` and subsequent startup routines.
+context, runs two startup helpers, and enters the main event loop at
+`0x5882E060`; that loop is described in [the main-loop notes](current-core-client-main-loop.md).
 
 `0x5882DD60` coordinates registered window/context callbacks, optional setup
 data, geometry adjustments for modes other than 10, and creation of three
