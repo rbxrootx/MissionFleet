@@ -67,6 +67,15 @@ vtable at `0x5899d180` contains `FUN_587ef910` at `+8` and `FUN_587fd890` at
 pending slots and passes each nonnull fourth field to `FUN_5897ce26`; the
 allocator's ownership contract is not fully recovered.
 
+`FUN_587ef910` now byte-matches its 1,068-byte Ghidra body across three
+discontiguous ranges. The function is referenced at vtable slot `0x5899D188`
+(`+0x08` in the table at `0x5899D180`). During its drain loop, it advances the
+consumer index at `+0x104B0`, wraps at capacity `+0x104A4`, decrements count
+`+0x104A8`, and reads the fourth DWORD from the current 16-byte slot at
+`+0x104B4`. It calls `FUN_5897ce26` only when that pointer is nonnull, then
+continues its screen teardown sequence. The source preserves the three ranges
+and excludes their gaps.
+
 The update function `FUN_587fd890` is referenced by data from vtable slot
 `0x5899D18C` (`+0x0C` in the table at `0x5899D180`). Its two Ghidra ranges,
 `0x587FD890..0x587FE6D8` and `0x587FE6E0..0x587FF140`, account for 6,314

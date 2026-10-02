@@ -83193,6 +83193,28 @@
         "uncertainty": "The owner role is inferred from a vtable data reference, not a runtime call trace. The meanings of update fields, loop values, queue event behavior, and screen actions remain unresolved. Both body ranges are static mapped-image evidence; runtime behavior is untested."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587EF910",
+      "name": "FUN_587ef910",
+      "size": 1068,
+      "symbol": "_FUN_587ef910",
+      "source": "src/client-current/Main/FUN_587ef910.cpp",
+      "source_sha256": "cc086490adbe470d5d120a228a7fe1ed746a5172fb26094917cd412c96e30f5e",
+      "flags": ["/O2", "/GX-", "/Zm200"],
+      "relocations": [],
+      "segments": [
+        { "address": "587EF910", "size": 471, "symbol": "_FUN_587ef910_segment_00" },
+        { "address": "587EFAF0", "size": 205, "symbol": "_FUN_587ef910_segment_01" },
+        { "address": "587EFBC0", "size": 392, "symbol": "_FUN_587ef910_segment_02" }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ef910",
+        "called_by": "The mapped vtable at 0x5899D180 has a data reference to this function at slot +0x08; FUN_587fd890 occupies slot +0x0C.",
+        "behavior": "Ghidra assigns 1,068 bytes across three body ranges. The function resets multiple UI fields, then drains the embedded queue while producer and consumer indices differ. It advances and wraps the consumer index using capacity +0x104A4, decrements count +0x104A8, reads the fourth DWORD from each 16-byte slot at +0x104B4, and calls FUN_5897ce26 for each nonnull pointer. It then continues releasing/resetting other screen resources.",
+        "uncertainty": "The vtable role is inferred from a data reference, not a runtime call trace. The release helper's ownership contract, other screen fields, and live teardown effects remain unresolved. The three Ghidra ranges are static mapped-image evidence; runtime cleanup is untested."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }
