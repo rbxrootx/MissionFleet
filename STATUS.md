@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,344
-identified code bytes across six report units. There are 6,462 verified matches
-totaling 2,037,266 bytes (19.4593%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,463 verified matches
+totaling 2,037,580 bytes (19.4623%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -210,6 +210,13 @@ and constructs the screen when absent, then applies the recorded child-list
 and state updates. ObjDiff checks all 16 mapped operands. The caller's class,
 field meanings, and runtime appearance remain unresolved. See
 [the caller evidence](docs/current-main-control-menu-setup-caller.md).
+
+`FUN_5888D110` adds the 314-byte settings initializer directly called by that
+setup path with `DAT_58A0B450`. Its record reads, callback calls, string-length
+scan, state writes, and conditional branches are documented from the mapped
+instructions; 13 operand targets pass ObjDiff. Callback contracts and field
+meanings remain unresolved, and no emulator test was performed. See
+[the initializer evidence](docs/current-main-control-menu-settings-initializer.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands

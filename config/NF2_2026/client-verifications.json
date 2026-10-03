@@ -234116,6 +234116,111 @@
         "version": "19.1.4",
         "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
       }
+    },
+    {
+      "address": "5888D110",
+      "name": "FUN_5888d110",
+      "size": 314,
+      "symbol": "_FUN_5888d110",
+      "source": "src/client-current/Main/FUN_5888d110.cpp",
+      "source_sha256": "5be605c9b70d688c0fe5e448f947b9560284ab2287ef2f28fb35684737df1173",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58A0B468",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58895090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "58A0B46C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "58895060",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5899A274",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 165,
+          "target_address": "58A0B4A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 255,
+          "target_address": "58A0B4A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888d110",
+        "called_by": "The matched setup caller FUN_5878AD50 directly calls this function at 0x5878ADD9 with DAT_58A0B450 as its stack argument.",
+        "behavior": "Clears 0x30 bytes beginning at receiver+0x78 through the observed 0x5897CC48 callback call shape. Reads dwords at +0x18 and +0x1C from the supplied record into globals 0x58A0B468 and 0x58A0B46C. It applies XOR 0xAAAAAAAA to those values before two direct calls, invokes the observed callback at 0x5898C198 with receiver-derived and record arguments, calls 0x5875F940 on receiver+0x154, and calls the callback at 0x5898C030 with the key at 0x5899A274. It measures a null-terminated string at child+0x80, stores that length at +0x8C and +0x94, then branches on globals 0x58A0B4A0 and 0x58A0B4A4 to update receiver and child fields before ret 4.",
+        "uncertainty": "The meaning and schema of the supplied record, the two XOR-transformed values, callback contracts, string-key meaning, control field identities, and branch meanings are unresolved. Ghidra headless decompilation did not return; behavior here is limited to the captured Ghidra extent, callsite, and decoded instructions. No emulator or visual test was performed."
+      }
     }
   ]
 }
