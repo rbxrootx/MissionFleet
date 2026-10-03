@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
-identified code bytes across six report units. There are 6,345 verified matches
-totaling 1,568,980 bytes (14.9865%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,346 verified matches
+totaling 1,577,794 bytes (15.0707%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -240,8 +240,14 @@ Ghidra ranges with 534 mapped operands checked. Ten direct callers, AP/HE and
 armor-defense diagnostics, penetration/damage branches, and remaining rule
 uncertainties are captured in the
 [combat resolver evidence](docs/current-main-combat-hit-resolver.md).
-Current-build Main coverage is now 212 / 8,474 functions and
-595,562 / 2,353,354 bytes. See
+The record-driven control refresh `FUN_5886ba60` adds 8,814 bytes across four
+Ghidra ranges with 492 mapped operands checked. Raw caller instructions clarify
+its receiver and stack-argument use; the complete mapped span byte-matches, but
+Ghidra's pseudocode has unresolved blocks and the screen identity and field
+semantics remain unknown. See
+[the refresh evidence](docs/current-main-record-driven-control-refresh.md).
+Current-build Main coverage is now 213 / 8,474 functions and
+604,376 / 2,353,354 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
