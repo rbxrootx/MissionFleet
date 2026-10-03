@@ -21,6 +21,7 @@ ADDRESSES = (
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
     "5897D5D0",
+    "588EADE0",
     "587750B0", "58731BD0",
     "5897CEC8", "58731500", "5897CE38",
     "5892DEF0", "58937510", "58943C70", "5894CC60", "589563E0",
@@ -113,6 +114,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
     "5897D5D0",
+    "588EADE0",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
     "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
@@ -293,6 +295,12 @@ EVIDENCE = {
         "called_by": "Called by both child initializer helpers 0x589724B0 and 0x58972500 on the logo/control-menu screen path.",
         "behavior": "Matches the six-byte shared helper body; its operand target is checked against the mapped image.",
         "uncertainty": "The delegated callback target and operation are unresolved.",
+    },
+    "588EADE0": {
+        "name_in_analysis": "FUN_588eade0",
+        "called_by": "Directly called at 0x587C3C0F by the matched AllocScreen constructor FUN_587C35A0 after its observed condition check.",
+        "behavior": "Matches the 316-byte Ghidra-indexed function extent in the mapped Main.dll image, emitted as literal bytes because the full extent does not decode contiguously.",
+        "uncertainty": "The exact instruction boundaries and high-level behavior are not recovered; this record establishes only byte identity for the indexed extent.",
     },
     "5878D6D0": {
         "name_in_analysis": "FUN_5878d6d0",
