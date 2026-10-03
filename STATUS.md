@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,408 verified matches
-totaling 1,920,183 bytes (18.3410%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,411 verified matches
+totaling 1,929,284 bytes (18.4280%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -130,6 +130,12 @@ mapped operands checked. The matched ship-map handler dispatches payload tags
 0 and 1 here, and the spatial update dispatches code 5. Diagnostic strings
 name move, attack, and return-to-base paths; protocol and field meanings remain
 partly unresolved. See [the handler evidence](docs/current-main-aircraft-control-handler.md).
+
+`FUN_587df580` adds a 2,815-byte selector-driven control refresh across two
+Ghidra ranges, with 64 operands checked. It resolves and stores a selected
+record, then clears or refreshes child controls; the CPageFactory update is one
+of its callers. Selector and control meanings remain unresolved. See
+[the refresh evidence](docs/current-main-control-selection-refresh.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
@@ -470,8 +476,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 277 / 8,474 functions and
-953,051 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 278 / 8,474 functions and
+955,866 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
