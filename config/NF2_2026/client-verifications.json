@@ -194103,6 +194103,35 @@
         "behavior": "Resets per-object fields and child-control flags, releases existing state objects on a replacement path, then updates sprite-backed children and fields according to the selector. Several branches read shared sprite data and copy record values into child objects.",
         "uncertainty": "The selector names, receiver class, record schemas, field semantics, resource identities, and full visible effects remain unknown. Ghidra reports three body ranges totaling 4,336 bytes; 10-byte and 9-byte gaps between them are not owned. No runtime test was performed."
       }
+    },
+    {
+      "address": "588ADE00",
+      "name": "FUN_588ade00",
+      "size": 4331,
+      "symbol": "_FUN_588ade00",
+      "source": "src/client-current/Main/FUN_588ade00.cpp",
+      "source_sha256": "3f6f3d1077a5bb6c1f58afd53c20b1763e88791d1ff792aaa767563067f0d494",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588ADE00",
+          "size": 4331,
+          "symbol": "_FUN_588ade00_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra direct-reference audit shows FUN_588ade00 called by FUN_588b0940, which assigns the CPannelShipTree vftable to its receiver before calling this function.",
+        "called_by": "FUN_588b0940 is the only direct caller found by Ghidra. It calls FUN_588ade00() after initializing the CPannelShipTree screen and its control state.",
+        "behavior": "Writes fixed integer constants to hundreds of offsets in its sole receiver argument; Ghidra pseudocode shows no other parameters, calls, reads, or branches.",
+        "uncertainty": "The semantic names and exact consumers of the populated fields remain unknown. Ghidra reports one contiguous 4,331-byte body. No runtime visual comparison was performed."
+      }
     }
   ]
 }
