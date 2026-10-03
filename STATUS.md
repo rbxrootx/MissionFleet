@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,446
-identified code bytes across six report units. There are 6,578 verified matches
-totaling 2,074,907 bytes (19.8187%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,449
+identified code bytes across six report units. There are 6,594 verified matches
+totaling 2,077,003 bytes (19.8387%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -66,13 +66,18 @@ byte match and left semantically unresolved. Control labels, record meanings,
 and visual/runtime behavior remain unknown. See
 [the equipment-board evidence](docs/current-main-spec-board-equipment-vtable.md).
 
-The verified control-menu factory `FUN_587DBA00` calls `FUN_587D7B90` twice;
-each returned child pointer is stored in a distinct receiver field. This 486-byte
-initializer allocates a `0xD4`-byte child, configures observed bounds and
-control values from three global tables, and applies two conditional cleanup
-calls. All bytes and 19 mapped operands match. The child type, table meanings,
-and eight still-unmatched direct callees remain unresolved. See the
-[factory-child evidence](docs/current-main-control-menu-factory-child-initializer.md).
+The RTTI-backed `CLoopSpriteBundleButton` now has all six primary vtable slots
+byte-matched. Its 356-byte constructor installs the table at `0x58997CD0`; the
+complete-object locator and TypeDescriptor identify the class. The 30-byte
+deleting destructor and two event methods fill the three previously unmatched
+vtable slots. Thirteen more functions cover the destructor body and connected
+state/child path. This increment adds 2,096 exact bytes across 16 functions
+and checks 41 mapped operand targets. The destructor extent was corrected by
+three bytes to include `ret 4`; two following `int3` bytes are padding. The
+verified control-menu factory's `FUN_587D7B90` child path now has every direct
+callee matched. Field meanings, UI actions, and one other direct caller of the
+constructor remain unresolved. See the
+[factory-child and class evidence](docs/current-main-control-menu-factory-child-initializer.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads

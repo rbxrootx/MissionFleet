@@ -46,7 +46,10 @@ ADDRESSES = (
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
-    "587D8840", "587D7B90", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "587D8840", "587D7B90", "58794600", "58794240", "587943A0", "587944B0",
+    "587940D0", "58794110", "58794150", "587941A0", "587941E0", "587945C0", "588A5380",
+    "58794770", "587942C0", "58794340", "58794050", "587941C0",
+    "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
@@ -80,7 +83,10 @@ SOURCE_COMPILER_ADDRESSES = {
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
-    "587D8840", "587D7B90", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "587D8840", "587D7B90", "58794600", "58794240", "587943A0", "587944B0",
+    "587940D0", "58794110", "58794150", "587941A0", "587941E0", "587945C0", "588A5380",
+    "58794770", "587942C0", "58794340", "58794050", "587941C0",
+    "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 }
 SOURCE_COMPILER = {
@@ -1180,6 +1186,102 @@ EVIDENCE = {
         "called_by": "Directly called twice by the verified CPageFactory_ControlMenuScreen constructor 0x587DBA00; its results are stored at receiver offsets +0x504 and +0x584.",
         "behavior": "Allocates a 0xD4-byte child object, initializes its primary region through 0x58794600, reads bounded values from three observed global record arrays, passes those values to child-control methods, sets flags at +0x24 and +0x26, and conditionally calls two release/cleanup helpers before returning the child pointer.",
         "uncertainty": "The child class, global-record meanings, control roles, and contracts of the unmatched direct callees are unresolved. Description is limited to observed allocation size, fields, branches, and calls. The indexed 486-byte extent decodes continuously to its ret at 0x587D7D75.",
+    },
+    "58794600": {
+        "name_in_analysis": "FUN_58794600",
+        "called_by": "Directly called by the verified factory-child initializer 0x587D7B90 and by 0x588AC750; both pass the new receiver in ECX.",
+        "behavior": "RTTI identifies the installed vtable at 0x58997CD0 as CLoopSpriteBundleButton. Its complete-object locator is at 0x58997CCC and its TypeDescriptor at 0x589C2F94. The vtable points to 0x58794770 at slot +0x0C and 0x587943A0 at +0x10. The constructor calls base initializer 0x58734A30, allocates a 0x58-byte child, conditionally initializes it through 0x589031A0, installs child vtable 0x5898CA74, calls 0x58902D20, initializes observed receiver fields and calls 0x58794240 before returning with ret 0x14.",
+        "uncertainty": "The fields' roles and the visible rendering effect remain unresolved. The indexed 356-byte extent decodes continuously through its stack-cleaning return.",
+    },
+    "58794240": {
+        "name_in_analysis": "FUN_58794240",
+        "called_by": "Directly called by 0x58794600 and two adjacent initializers, 0x587943A0 and 0x587944B0.",
+        "behavior": "Clears receiver fields at +0x7C and +0x80. When +0xC4 is nonzero, it updates related child fields through the pointer at +0xB4, sets the observed +0x64 value to 0x40000000, and synchronizes +0x54. When +0x88 is nonzero, it copies the observed scalar and six-word block into the child record.",
+        "uncertainty": "The receiver/child types and meanings of the copied values remain unresolved. The indexed 116-byte body decodes continuously through its return at 0x587942B3.",
+    },
+    "587943A0": {
+        "name_in_analysis": "FUN_587943a0",
+        "called_by": "RTTI identifies this as CLoopSpriteBundleButton vtable slot +0x10. It also shares receiver fields and helper 0x58794240 with the 0x58794600 initializer path.",
+        "behavior": "Tests receiver flag bits, walks a child chain through virtual slot +0x10, filters an incoming record with selector 0x201, and updates receiver state fields. Two observed state branches dispatch through child virtual slot +0x18; the 0x10 branch also calls 0x58794240 to synchronize the child record.",
+        "uncertainty": "The receiver type, meaning of selector 0x201, virtual callback contracts, and state-field semantics are unresolved. The 267-byte indexed body decodes continuously through its ret 4.",
+    },
+    "587944B0": {
+        "name_in_analysis": "FUN_587944b0",
+        "called_by": "Adjacent state method to 0x587943A0; it shares the same receiver offsets and directly calls 0x58794240 on its 0x20 state path.",
+        "behavior": "Compares the receiver's current index with the count in the record at +0x54, then handles observed input selectors 0, 1, 0x20, and 0x1000. The branches clear or copy child indices, toggle state through receiver flag bits, set +0x7C to observed state values 0x10 or 0x1000, and call 0x58794240 for the 0x20 path.",
+        "uncertainty": "Its external caller or vtable slot has not been established, and the selector and state meanings remain unresolved. The 259-byte indexed body decodes continuously through its ret 4.",
+    },
+    "587940D0": {
+        "name_in_analysis": "FUN_587940d0",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "When its first argument is nonzero, stores it at receiver offset +0xBC, stores its second value at +0x84, and toggles bit 2 in the word at +0x70 according to the third argument.",
+        "uncertainty": "The arguments' meanings and receiver type are unresolved. The 50-byte body returns with ret 0x0C.",
+    },
+    "58794110": {
+        "name_in_analysis": "FUN_58794110",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "When its first argument is nonzero, stores arguments at receiver offsets +0xC0, +0x8C, and +0x5C, and toggles bit 3 in the word at +0x70 according to the third argument.",
+        "uncertainty": "The arguments' meanings and receiver type are unresolved. The 57-byte body returns with ret 0x10.",
+    },
+    "58794150": {
+        "name_in_analysis": "FUN_58794150",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "When its first argument is nonzero, stores arguments at receiver offsets +0xB8 and +0x90, writes 0x40000000 at +0xA8, and toggles bit 4 at +0x70; otherwise it clears +0xA8.",
+        "uncertainty": "The arguments' meanings and receiver type are unresolved. The 69-byte body has two ret 0x0C paths.",
+    },
+    "587941A0": {
+        "name_in_analysis": "FUN_587941a0",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "Copies its two arguments to receiver offsets +0x68 and +0x6C, then returns with ret 8.",
+        "uncertainty": "The argument meanings and receiver type are unresolved.",
+    },
+    "587941E0": {
+        "name_in_analysis": "FUN_587941e0",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "When its first argument is nonzero, stores arguments at receiver offsets +0x88, +0xC4, and +0x54, toggles bit 1 at +0x70 from the third argument, and copies six words from the referenced record into receiver offsets +0x0C..+0x20.",
+        "uncertainty": "The record schema, argument meanings, and receiver type are unresolved. The 84-byte body returns with ret 0x0C.",
+    },
+    "587945C0": {
+        "name_in_analysis": "FUN_587945c0",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "Clears observed receiver fields from +0x5C through +0xB0, sets +0x64 to 0x40000000, clears the child index at +0x50 and the corresponding child field, then tail-jumps to synchronizer 0x58794240.",
+        "uncertainty": "The cleared fields' meanings and receiver type are unresolved. The 56-byte indexed body ends in a direct jump to its verified synchronization helper.",
+    },
+    "588A5380": {
+        "name_in_analysis": "FUN_588a5380",
+        "called_by": "Directly called by the 486-byte child initializer 0x587D7B90.",
+        "behavior": "Returns immediately with ret 4 without reading its argument.",
+        "uncertainty": "The callback's role is unknown; the indexed body is exactly three bytes.",
+    },
+    "58794770": {
+        "name_in_analysis": "FUN_58794770",
+        "called_by": "RTTI identifies this as CLoopSpriteBundleButton vtable slot +0x0C in the table installed by FUN_58794600.",
+        "behavior": "Tests receiver state and flags, computes bounded coordinate adjustments in the observed modes, calls the shared child/update helper on receiver and child objects, then dispatches the selector at +0x7C through FUN_587944B0. It may call state-entry or state-exit helpers FUN_587942C0 and FUN_58794340, and walks a child chain through virtual slot +0x0C.",
+        "uncertainty": "The input event contract, mode values, coordinate units, and child callback meaning remain unresolved. The 412-byte indexed body ends with a tail jump to the observed child callback.",
+    },
+    "587942C0": {
+        "name_in_analysis": "FUN_587942c0",
+        "called_by": "Directly called by CLoopSpriteBundleButton vtable method 0x58794770.",
+        "behavior": "Sets receiver field +0x80, optionally calls FUN_58907990 and a child method, dispatches value 3 through a child virtual slot, and when +0x7C is zero changes it to 1 while synchronizing child pointer/index fields.",
+        "uncertainty": "The meanings of the state values, child method, and fields are unresolved. The 125-byte body decodes continuously through ret.",
+    },
+    "58794340": {
+        "name_in_analysis": "FUN_58794340",
+        "called_by": "Directly called by CLoopSpriteBundleButton vtable method 0x58794770.",
+        "behavior": "When receiver fields show the observed active values, clears +0x80 and dispatches value 4 through the child virtual slot; it then resets +0x7C and synchronizes child pointer/index fields.",
+        "uncertainty": "The meanings of the state values, child method, and fields are unresolved. The 81-byte body decodes continuously through ret.",
+    },
+    "58794050": {
+        "name_in_analysis": "FUN_58794050",
+        "called_by": "Directly called by CLoopSpriteBundleButton deleting destructor 0x587941C0.",
+        "behavior": "Sets the receiver's vtable to 0x58997CD0 during cleanup, destroys its optional child at +0xB4 through that child's first vtable slot, clears the child pointer, and calls the verified base cleanup helper 0x589038A0.",
+        "uncertainty": "The child object's type and purpose of the cleanup helper remain unresolved. The 114-byte indexed body restores the exception handler and returns normally.",
+    },
+    "587941C0": {
+        "name_in_analysis": "FUN_587941c0",
+        "called_by": "RTTI identifies this as CLoopSpriteBundleButton vtable slot +0x00 in the table installed by FUN_58794600.",
+        "behavior": "Calls class cleanup body 0x58794050, conditionally releases the receiver through 0x5897CC42 according to the deleting-destructor flag, then returns the receiver with ret 4.",
+        "uncertainty": "The allocator contract is inferred only from the mapped call and flag branch. The original 27-byte extent omitted ret 4; mapped code ends at that 30-byte return, followed by two int3 padding bytes before FUN_587941E0.",
     },
 }
 
