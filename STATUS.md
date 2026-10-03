@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,459
-identified code bytes across six report units. There are 6,642 verified matches
-totaling 2,091,313 bytes (19.9754%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,647 verified matches
+totaling 2,092,762 bytes (19.9892%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -116,6 +116,12 @@ helpers for 121 new exact bytes; the existing bounded-format wrapper was also
 reverified from its board caller. Eight mapped operand targets were checked.
 Two host import identities and the message/temporary-record contracts remain
 unknown. See [the message-bridge evidence](docs/current-main-market-board-message-bridge.md).
+
+The matched `CMarketBoard` constructor's direct-call layer now has all 20
+inventory-backed targets verified. Five child initializers add 1,449 bytes at
+100%, with 45 mapped operands checked. Their vtable class names and UI roles
+remain unresolved. See
+[the constructor-child evidence](docs/current-main-market-board-constructor-children.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads
