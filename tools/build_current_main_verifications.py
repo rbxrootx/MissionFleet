@@ -42,7 +42,8 @@ ADDRESSES = (
     "589088D0",
     "587315F0", "587B9970", "587BABC0", "587DAC20", "587DAD80",
     "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
-    "58819A70",
+    "58819A70", "587B67A0", "588EC200", "588EC5B0", "588ECC80",
+    "588ECCC0", "588ECD00", "588EC5D0", "58889020",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -71,7 +72,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "589088D0",
     "587315F0", "587B9970", "587BABC0", "587DAC20", "587DAD80",
     "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
-    "58819A70",
+    "58819A70", "587B67A0", "588EC200", "588EC5B0", "588ECC80",
+    "588ECCC0", "588ECD00", "588EC5D0", "58889020",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -990,6 +992,54 @@ EVIDENCE = {
         "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 after its four-way point test selects a control.",
         "behavior": "Updates a nested control through the observed base helper and helper 0x58902D20, then returns the updated object result.",
         "uncertainty": "The nested-control identity and exact state semantics are unresolved.",
+    },
+    "587B67A0": {
+        "name_in_analysis": "FUN_587b67a0",
+        "called_by": "Directly called by CSpecBoard_Body vtable method 0x58889020.",
+        "behavior": "Stores its two stack arguments at receiver offsets +0x68 and +0x6C, sets +0x70 to 0x40000000, and returns with ret 8.",
+        "uncertainty": "The receiver type and the meanings of the three fields are unresolved.",
+    },
+    "588EC200": {
+        "name_in_analysis": "FUN_588ec200",
+        "called_by": "Directly called by the CSpecBoard_Body scalar deleting destructor at vtable slot +0x00.",
+        "behavior": "Performs the class cleanup path and calls the base cleanup helper 0x58902C10 before returning.",
+        "uncertainty": "Child field ownership and individual child roles are unresolved.",
+    },
+    "588EC5B0": {
+        "name_in_analysis": "FUN_588ec5b0",
+        "called_by": "RTTI identifies this as CSpecBoard_Body vtable slot +0x00 at address point 0x589A1548.",
+        "behavior": "Calls class cleanup 0x588EC200, conditionally releases the object through 0x5897CC42, returns the receiver, and includes ret 4.",
+        "uncertainty": "The scalar-deletion flag's ownership policy is visible, but the managed allocation origin is not traced here.",
+    },
+    "588ECC80": {
+        "name_in_analysis": "FUN_588ecc80",
+        "called_by": "RTTI identifies this as CSpecBoard_Body vtable slot +0x04 at address point 0x589A1548.",
+        "behavior": "Updates receiver flag bits and fields +0x50/+0x54 from an observed child/global value, then tail-jumps to 0x58888FF0.",
+        "uncertainty": "The flag meanings, child role, and destination method contract are unresolved.",
+    },
+    "588ECCC0": {
+        "name_in_analysis": "FUN_588eccc0",
+        "called_by": "RTTI identifies this as CSpecBoard_Body vtable slot +0x08 at address point 0x589A1548.",
+        "behavior": "Sets and clears observed receiver flag bits, copies the child pointer at +0x04 into +0x50, stores -0x15E at +0x54, and returns.",
+        "uncertainty": "The flags and stored selector are not assigned semantic names.",
+    },
+    "588ECD00": {
+        "name_in_analysis": "FUN_588ecd00",
+        "called_by": "RTTI identifies this as CSpecBoard_Body vtable slot +0x0C at address point 0x589A1548.",
+        "behavior": "Tests the receiver flag at +0x24, dispatches through helpers 0x58902E10 and 0x58889020, and has a tail path ending in jmp eax.",
+        "uncertainty": "The dispatch event schema and indirect target identity are unresolved. Its corrected 412-byte extent includes the final pop/pop/jmp sequence at 0x588ECE99..0x588ECE9B; four following int3 bytes are padding.",
+    },
+    "588EC5D0": {
+        "name_in_analysis": "FUN_588ec5d0",
+        "called_by": "RTTI identifies this as CSpecBoard_Body vtable slot +0x18 at address point 0x589A1548.",
+        "behavior": "Processes the class's observed event path through calls to 0x588F3FA0, 0x587D8E70, 0x58764D30, 0x5876A570, 0x58798D60, and other mapped helpers, then exits through its stack-cookie path and ret 0x0C.",
+        "uncertainty": "The event payload meaning, child identities, and most helper contracts remain unresolved.",
+    },
+    "58889020": {
+        "name_in_analysis": "FUN_58889020",
+        "called_by": "Directly called by CSpecBoard_Body vtable method 0x588ECD00.",
+        "behavior": "Reads receiver fields +0x68 and +0x54, passes derived values to 0x587B67A0, then tail-dispatches through a child vtable slot at +0x04.",
+        "uncertainty": "The child class and purpose of the indirect method remain unresolved.",
     },
 }
 
