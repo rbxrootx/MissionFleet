@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,427 verified matches
-totaling 1,979,284 bytes (18.9056%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,428 verified matches
+totaling 1,982,193 bytes (18.9333%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -241,6 +241,13 @@ ranges, with 84 mapped operand targets checked. It constructs two observed
 record variants (`0x05` and `0x06`), then applies per-entry state and flags. The
 record types, field meanings, and owning class remain unidentified. See
 [the record-builder evidence](docs/current-main-record-backed-32-slot-builder.md).
+
+`FUN_587603c0` adds a 2,909-byte `CExEditTextScreen` key handler across five
+Ghidra ranges, with 52 mapped operand targets checked. RTTI anchors its vtable
+slot at `+0x1C`; the handler updates text/caret state and contains branches for
+the observed navigation and delete key values. The text encoding and several
+path-sensitive state meanings remain unknown. See
+[the key-handler evidence](docs/current-main-exedit-text-key-handler.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
