@@ -233254,6 +233254,745 @@
         "uncertainty": "The child-list sentinel, event purpose, earlier state/control branches, and tail-call target meaning remain unresolved. No emulator test was performed."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587E2E80",
+      "name": "FUN_587e2e80",
+      "size": 502,
+      "symbol": "_FUN_587e2e80_segment_00",
+      "source": "src/client-current/Main/FUN_587e2e80.cpp",
+      "source_sha256": "bfc7361ec9d5b7ca9b8854eb2b6ef8815b5ebd41c0254e3187047275d5628c43",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E2E80",
+          "size": 502,
+          "symbol": "_FUN_587E2E80_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 11,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "587E0E40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "588890F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58A247FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "588C0BD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "588ED750",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 199,
+              "target_address": "588B2700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 312,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 318,
+              "target_address": "58A24590",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 367,
+              "target_address": "5884E640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 373,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 386,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 391,
+              "target_address": "58770530",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 426,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 439,
+              "target_address": "58798D60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 498,
+              "target_address": "587BA670",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra identifies FUN_587E2E80 as a function in the CPageFactory_ControlMenuScreen vtable at 0x5899B824, slot +0x04.",
+        "called_by": "The parent vtable points to this method. It directly calls the verified control-rebuild routine FUN_587E0E40 at 0x587E2EA6.",
+        "behavior": "Stores this in a global, writes state 0x100 at object offset +0x58, calls FUN_587E0E40, invokes other UI and global helpers, clears low state bits on child controls referenced at +0x4F4/+0x4F8/+0x4FC, then tail-jumps to FUN_587BA670. The contiguous 502-byte body ends at that tail jump.",
+        "uncertainty": "The method and state meaning, helper semantics, child roles, and visible control behavior remain unresolved. No emulator test was performed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587DEB30",
+      "name": "FUN_587deb30",
+      "size": 1112,
+      "symbol": "_FUN_587deb30_segment_00",
+      "source": "src/client-current/Main/FUN_587deb30.cpp",
+      "source_sha256": "7f34683ecfbe1c894393e1ab8a5fe105abfe018552b861699c0330802884f526",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DEB30",
+          "size": 1112,
+          "symbol": "_FUN_587DEB30_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "587DEDAF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "587DED54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "587DEC3D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "587DEC3D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "587DEC3D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "588BA8E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 345,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 387,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 412,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 472,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 509,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 522,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 535,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 554,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 581,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 594,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 607,
+              "target_address": "5873A540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 626,
+              "target_address": "587315C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 650,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 670,
+              "target_address": "58A2462C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 683,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 696,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 703,
+              "target_address": "5876B9F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 718,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 725,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 751,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 758,
+              "target_address": "587DAD80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 773,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 780,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 804,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 811,
+              "target_address": "587DAC20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 833,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 852,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 879,
+              "target_address": "587DEF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 892,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 905,
+              "target_address": "5873A540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 924,
+              "target_address": "587315C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1027,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1049,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1070,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1092,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The CPageFactory_ControlMenuScreen vtable at 0x5899B824 points to FUN_587DEB30 at slot +0x10 (pointer at 0x5899B834). The contiguous body ends with ret 4.",
+        "called_by": "This virtual callback receives one stack argument and traverses child controls through vtable slot +0x10.",
+        "behavior": "When state bit 0x02 is set, searches the child chain at +0x3C by invoking each child +0x10 method with the stack argument and comparing the result with child field +0x34. On a match it processes branches from the field at +4 relative to 0x100, calls control helpers, and returns the object field at +0x34; unmatched and inactive paths return zero.",
+        "uncertainty": "The callback argument, event values, child identifiers, helper effects, and user-facing behavior are unresolved. No emulator test was performed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587D7EC0",
+      "name": "FUN_587d7ec0",
+      "size": 583,
+      "symbol": "_FUN_587d7ec0_segment_00",
+      "source": "src/client-current/Main/FUN_587d7ec0.cpp",
+      "source_sha256": "d40077deebe40ca409e69cf4a1a8b3ef47b7c7ee7a2d165d52a4582f6b00ba68",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D7EC0",
+          "size": 583,
+          "symbol": "_FUN_587D7EC0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "587D8102",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "587D80FF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "587D80FF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "587D80FF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5898C074",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "5898C078",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "587D80D1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 346,
+              "target_address": "587D80D1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 392,
+              "target_address": "5898C078",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The CPageFactory_ControlMenuScreen vtable at 0x5899B824 points to FUN_587D7EC0 at slot +0x14 (pointer at 0x5899B838). The body ends with ret 0x0C.",
+        "called_by": "This virtual callback receives three stack arguments and may dispatch a child object through virtual slot +0x14 while traversing the list at +0x4C.",
+        "behavior": "If state bit 0x01 is set, traverses linked child controls from +0x4C. For child state values with a negative signed word at +0x26, passes three arguments through the child objects +0x14 method, then advances by the link at +0x48. Other branches update or dispatch control state and return through one of the two ret 0x0C paths.",
+        "uncertainty": "The callback arguments, child status values, link meanings, and helper behavior are unresolved. No emulator test was performed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587DA7F0",
+      "name": "FUN_587da7f0",
+      "size": 417,
+      "symbol": "_FUN_587da7f0_segment_00",
+      "source": "src/client-current/Main/FUN_587da7f0.cpp",
+      "source_sha256": "6ef5510e22c2a244ead882c3a6ef2a0934cbd174d69cb130a2ed4e297cc9924c",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DA7F0",
+          "size": 417,
+          "symbol": "_FUN_587DA7F0_segment_00",
+          "relocations": [
+            {
+              "offset": 180,
+              "target_address": "587D7820",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 371,
+              "target_address": "587D7AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 405,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The CPageFactory_ControlMenuScreen vtable at 0x5899B824 points to FUN_587DA7F0 at slot +0x08 (pointer at 0x5899B82C). The body ends in an indirect tail jump.",
+        "called_by": "This virtual method dispatches child-object vtable slot +0x08 and tail-jumps through eax.",
+        "behavior": "Masks and updates state bits at +0x24, then invokes child +0x08 methods for objects referenced at +0x1044/+0x1048/+0x104C and further child fields. It calls FUN_587D7820 and FUN_587D7AD0, updates child flags, and ends with an indirect jump through a value loaded from a global object.",
+        "uncertainty": "The state meaning, child roles, helper behavior, and tail-dispatch target are not identified. No emulator test was performed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "587DA7D0",
+      "name": "FUN_587da7d0",
+      "size": 30,
+      "symbol": "_FUN_587da7d0_segment_00",
+      "source": "src/client-current/Main/FUN_587da7d0.cpp",
+      "source_sha256": "2c7300a1db6666522d1fd8981c96caf37c9c4d78c2c74d82d83b7ed9f3f8ac40",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DA7D0",
+          "size": 30,
+          "symbol": "_FUN_587DA7D0_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "587D7000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The CPageFactory_ControlMenuScreen vtable at 0x5899B824 points to FUN_587DA7D0 at slot +0x00. The constructor installs that vtable.",
+        "called_by": "This is the first virtual method in the class vtable. It calls base helper FUN_587D7000 and conditionally calls 0x5897CC42 when its stack flag bit 0 is set.",
+        "behavior": "Returns the receiver in eax and ends with ret 4. The complete body is 30 bytes; the prior inventory ended after pop esi and omitted the following ret 4. Two int3 alignment bytes precede the next vtable method at 0x587DA7F0.",
+        "uncertainty": "The base-helper and cleanup-helper semantics and the stack flag meaning are not identified. No emulator test was performed."
+      },
+      "verified_by": "objdiff-3.8.0-byte-identical"
     }
   ]
 }

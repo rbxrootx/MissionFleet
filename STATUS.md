@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,341
-identified code bytes across six report units. There are 6,456 verified matches
-totaling 2,034,370 bytes (19.4317%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,344
+identified code bytes across six report units. There are 6,461 verified matches
+totaling 2,037,014 bytes (19.4569%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -196,6 +196,13 @@ captured bodies, totaling 6,884 bytes. Together with the separately matched
 2,583-byte constructor, the class is covered at the function-byte level; its
 control meanings and in-game behavior are still unverified. See
 [the vtable coverage map](docs/current-main-factory-help-vtable.md).
+
+`CPageFactory_ControlMenuScreen` now has byte-matched coverage for all seven
+non-null methods in its vtable, totaling 12,164 bytes; its separate
+12,589-byte constructor is also matched. This batch adds the `+0x04`, `+0x08`,
+`+0x10`, and `+0x14` methods and corrects the `+0x00` body to include its
+`ret 4` epilogue. No emulator interaction test was performed. See
+[the vtable coverage map](docs/current-main-control-menu-vtable.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
