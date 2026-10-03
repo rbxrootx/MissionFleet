@@ -240311,6 +240311,1135 @@
         "behavior": "Scans a supplied NUL-terminated string, allocates and clears a buffer, copies string data, and updates the receiver's observed string fields through helpers 0x58731B60 and 0x58907F80.",
         "uncertainty": "The string's role and receiver field meanings are unresolved. Its corrected 268-byte extent includes the observed register epilogue and ret 0x0C."
       }
+    },
+    {
+      "address": "587315F0",
+      "name": "FUN_587315f0",
+      "size": 34,
+      "symbol": "_FUN_587315f0",
+      "source": "src/client-current/Main/FUN_587315f0.cpp",
+      "source_sha256": "0aba390c85b85f925e979439eb4f1597479dfdc7d6b0010c91f6d5eec27fabfc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587315f0",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 while processing a pointer/mouse event.",
+        "behavior": "Receives the boolean-like result of the panel's point-in-control test and updates a short control-state field; the 34-byte body contains no mapped operands.",
+        "uncertainty": "The precise control-state bit meaning and visual consequence are unresolved."
+      }
+    },
+    {
+      "address": "587B9970",
+      "name": "FUN_587b9970",
+      "size": 55,
+      "symbol": "_FUN_587b9970",
+      "source": "src/client-current/Main/FUN_587b9970.cpp",
+      "source_sha256": "4e9643c40233715e4f5157081c6141366d233b11b62224e08f5715a4887525fe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 37,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9970",
+        "called_by": "Directly called by CPannelArmorControl method 0x58816EE0 after it builds a four-value record from panel state.",
+        "behavior": "Forwards the selector derived from an object field shifted right by 10 and a pointer to the assembled four-value record into the observed helper dispatch.",
+        "uncertainty": "The destination contract, record schema, and selector meaning remain unresolved."
+      }
+    },
+    {
+      "address": "587BABC0",
+      "name": "FUN_587babc0",
+      "size": 91,
+      "symbol": "_FUN_587babc0",
+      "source": "src/client-current/Main/FUN_587babc0.cpp",
+      "source_sha256": "66dc3c457c1c195dbefb95a72b0bd84b0f9be34abb567e840fc55d2e7009e92c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 30,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587babc0",
+        "called_by": "Directly called by 0x58816DB0 after it copies the armor panel's four-value state into a snapshot object.",
+        "behavior": "Receives the constant selector 4 after the snapshot fields and display values have been updated.",
+        "uncertainty": "The selector's receiver and downstream state-transition meaning are unresolved."
+      }
+    },
+    {
+      "address": "587DAC20",
+      "name": "FUN_587dac20",
+      "size": 348,
+      "symbol": "_FUN_587dac20",
+      "source": "src/client-current/Main/FUN_587dac20.cpp",
+      "source_sha256": "ce7880a976f354277b13220fccf63468a7358318a34fc137f8c8b07ad030a70e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "587DAD66",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5899BA88",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C178",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "587DAD5C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "587DAD5C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 255,
+          "target_address": "587D8F90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 266,
+          "target_address": "5899BA70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "5898C178",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "587D8F90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "587D6830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 337,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587dac20",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 for one of its keyboard/event-code branches; additional callers occur in other client event handlers.",
+        "behavior": "Runs the observed event path and reaches a complete stack-cookie call, stack restore, and return at 0x587DAD7B. The inventory extent was corrected to 348 bytes to include that epilogue; four following int3 bytes precede 0x587DAD80.",
+        "uncertainty": "The event code's user-facing action and shared state contract across its callers remain unresolved."
+      }
+    },
+    {
+      "address": "587DAD80",
+      "name": "FUN_587dad80",
+      "size": 290,
+      "symbol": "_FUN_587dad80",
+      "source": "src/client-current/Main/FUN_587dad80.cpp",
+      "source_sha256": "85bdb156718ebf2135a672d97398362f27058a8744b0a288df1372192e2a924f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "587DAE8C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5899BAC4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5898C178",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "587D8FF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "5899BAAC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 178,
+          "target_address": "587D8FF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 243,
+          "target_address": "587D8FF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 264,
+          "target_address": "587D6830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 279,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587dad80",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 for its observed keyboard/event-code branch; additional callers occur in other client event handlers.",
+        "behavior": "Executes the selected event path, calls helper 0x5897CBDA, restores its stack, and returns.",
+        "uncertainty": "The event code's user-facing action and helper contract remain unresolved."
+      }
+    },
+    {
+      "address": "58815C80",
+      "name": "FUN_58815c80",
+      "size": 117,
+      "symbol": "_FUN_58815c80",
+      "source": "src/client-current/Main/FUN_58815c80.cpp",
+      "source_sha256": "687f4b13614d06e9cd8da11578a5529d677560a1d3491bb764c25417d1c3e06a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58815c80",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x58816EE0 on its selected-control branch.",
+        "behavior": "Updates the panel's observed short-valued state fields, clamping a value at offset +0x8C to zero on the corresponding branch.",
+        "uncertainty": "The meaning of the selected control and the short fields is unresolved."
+      }
+    },
+    {
+      "address": "58816DB0",
+      "name": "FUN_58816db0",
+      "size": 293,
+      "symbol": "_FUN_58816db0",
+      "source": "src/client-current/Main/FUN_58816db0.cpp",
+      "source_sha256": "5857dc188247264d151bf34fce132458ab63582608a0ff4fc75587ae504de0be",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 170,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 263,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58816db0",
+        "called_by": "Identified by its receiver fields and direct calls as a CPannelArmorControl state/snapshot routine; Ghidra caller ownership is not yet resolved.",
+        "behavior": "Copies 0x3C3 dwords from the observed global record at 0x58A24598+0xD78 into receiver +0x198, snapshots four associated values and four short fields, refreshes the panel, and clears bit 1 on a child flag.",
+        "uncertainty": "The global record schema, ownership of the snapshot receiver, and caller lifecycle remain unresolved."
+      }
+    },
+    {
+      "address": "58816EE0",
+      "name": "FUN_58816ee0",
+      "size": 1003,
+      "symbol": "_FUN_58816ee0",
+      "source": "src/client-current/Main/FUN_58816ee0.cpp",
+      "source_sha256": "76100d3926468ff86951d341b59811e64aad42b67e10fe317c718e4861e9fb62",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "588172C2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "58816FB8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58816FAD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 231,
+          "target_address": "58817071",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 257,
+          "target_address": "58817066",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 336,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 342,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 347,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 393,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 416,
+          "target_address": "5881712A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 442,
+          "target_address": "5881711F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 486,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 521,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 527,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 532,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 578,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 601,
+          "target_address": "588171E3",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 627,
+          "target_address": "588171D8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 671,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 706,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 712,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 717,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 763,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 781,
+          "target_address": "588172B1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 788,
+          "target_address": "58815C80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 955,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 964,
+          "target_address": "587B9970",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58816ee0",
+        "called_by": "RTTI identifies this as CPannelArmorControl vtable slot +0x18 at address point 0x5899D7AC.",
+        "behavior": "Handles command 2 for four paired increment/decrement controls, clamps counts to the observed 0..255 range, refreshes the panel, and forwards an assembled four-value record on the selection branch.",
+        "uncertainty": "The control labels, four field meanings, and downstream dispatch contract remain unresolved."
+      }
+    },
+    {
+      "address": "588172D0",
+      "name": "FUN_588172d0",
+      "size": 1327,
+      "symbol": "_FUN_588172d0",
+      "source": "src/client-current/Main/FUN_588172d0.cpp",
+      "source_sha256": "c8d7b3729e79b65534905d5e03eb87e7aa379ceee0fcb23f3943c3c96aaba1cb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "588177F8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "58817596",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "5881749D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "58817423",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 189,
+          "target_address": "58A246F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 225,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 231,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "58A246F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 285,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 304,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 314,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 326,
+          "target_address": "58817365",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 357,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 368,
+          "target_address": "587DAC20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 383,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 388,
+          "target_address": "587DAD80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 483,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 489,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 506,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 607,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 653,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 666,
+          "target_address": "58819A70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 690,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 697,
+          "target_address": "587BABC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 717,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 730,
+          "target_address": "588176B6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 736,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 748,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 771,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 789,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 801,
+          "target_address": "58817779",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 810,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 833,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 851,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 863,
+          "target_address": "58817779",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 872,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 895,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 913,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 925,
+          "target_address": "58817779",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 937,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 945,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 964,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 982,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 994,
+          "target_address": "58817779",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1000,
+          "target_address": "588177EF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1006,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1018,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1042,
+          "target_address": "58817780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1059,
+          "target_address": "58817779",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1068,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1111,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1157,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1196,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1201,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1242,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1248,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1253,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588172d0",
+        "called_by": "RTTI identifies this as CPannelArmorControl vtable slot +0x10 at address point 0x5899D7AC.",
+        "behavior": "Processes event records, hit-tests four controls, increments or decrements the associated short values, invokes refresh, and dispatches observed event codes through 0x587DAC20/0x587DAD80 and other helpers.",
+        "uncertainty": "The event payload fields, control labels, event-code meanings, and dispatch outcomes are unresolved."
+      }
+    },
+    {
+      "address": "588193B0",
+      "name": "FUN_588193b0",
+      "size": 365,
+      "symbol": "_FUN_588193b0",
+      "source": "src/client-current/Main/FUN_588193b0.cpp",
+      "source_sha256": "2c62c0f4a05da66f5df9af626d13b51132981425a7a7163bb307351707dbed60",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58819515",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "58819515",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "58819515",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 358,
+          "target_address": "58815E10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588193b0",
+        "called_by": "Ghidra shows four direct calls to the CPannelArmorControl refresh method 0x58815E10; the caller and exact callback registration are unresolved.",
+        "behavior": "Selects one of four state slots from a 16-bit selector, stores the supplied pointer/value pair, zeroes the corresponding count when the pointer is null, and marks the related child for refresh when its flag is set.",
+        "uncertainty": "The selector enum, pointer/value pair semantics, and callback owner are unresolved."
+      }
+    },
+    {
+      "address": "58819A70",
+      "name": "FUN_58819a70",
+      "size": 325,
+      "symbol": "_FUN_58819a70",
+      "source": "src/client-current/Main/FUN_58819a70.cpp",
+      "source_sha256": "7ff9e68e2f0dbbb98bbc40644f55d83fdd91a9a8548325fb89b350f54420ebba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 98,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "58819B6F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 317,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58819a70",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 after its four-way point test selects a control.",
+        "behavior": "Updates a nested control through the observed base helper and helper 0x58902D20, then returns the updated object result.",
+        "uncertainty": "The nested-control identity and exact state semantics are unresolved."
+      }
     }
   ]
 }

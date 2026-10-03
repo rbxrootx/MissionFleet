@@ -40,6 +40,9 @@ ADDRESSES = (
     "58731540", "58759F20", "58759F60", "587B99F0", "587D89F0",
     "58875190", "588752D0", "588F4060", "58907990", "589087F0",
     "589088D0",
+    "587315F0", "587B9970", "587BABC0", "587DAC20", "587DAD80",
+    "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
+    "58819A70",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -66,6 +69,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "58731540", "58759F20", "58759F60", "587B99F0", "587D89F0",
     "58875190", "588752D0", "588F4060", "58907990", "589087F0",
     "589088D0",
+    "587315F0", "587B9970", "587BABC0", "587DAC20", "587DAD80",
+    "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
+    "58819A70",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -918,6 +924,72 @@ EVIDENCE = {
         "called_by": "Directly called by helper 0x5884E210.",
         "behavior": "Scans a supplied NUL-terminated string, allocates and clears a buffer, copies string data, and updates the receiver's observed string fields through helpers 0x58731B60 and 0x58907F80.",
         "uncertainty": "The string's role and receiver field meanings are unresolved. Its corrected 268-byte extent includes the observed register epilogue and ret 0x0C.",
+    },
+    "587315F0": {
+        "name_in_analysis": "FUN_587315f0",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 while processing a pointer/mouse event.",
+        "behavior": "Receives the boolean-like result of the panel's point-in-control test and updates a short control-state field; the 34-byte body contains no mapped operands.",
+        "uncertainty": "The precise control-state bit meaning and visual consequence are unresolved.",
+    },
+    "587B9970": {
+        "name_in_analysis": "FUN_587b9970",
+        "called_by": "Directly called by CPannelArmorControl method 0x58816EE0 after it builds a four-value record from panel state.",
+        "behavior": "Forwards the selector derived from an object field shifted right by 10 and a pointer to the assembled four-value record into the observed helper dispatch.",
+        "uncertainty": "The destination contract, record schema, and selector meaning remain unresolved.",
+    },
+    "587BABC0": {
+        "name_in_analysis": "FUN_587babc0",
+        "called_by": "Directly called by 0x58816DB0 after it copies the armor panel's four-value state into a snapshot object.",
+        "behavior": "Receives the constant selector 4 after the snapshot fields and display values have been updated.",
+        "uncertainty": "The selector's receiver and downstream state-transition meaning are unresolved.",
+    },
+    "587DAC20": {
+        "name_in_analysis": "FUN_587dac20",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 for one of its keyboard/event-code branches; additional callers occur in other client event handlers.",
+        "behavior": "Runs the observed event path and reaches a complete stack-cookie call, stack restore, and return at 0x587DAD7B. The inventory extent was corrected to 348 bytes to include that epilogue; four following int3 bytes precede 0x587DAD80.",
+        "uncertainty": "The event code's user-facing action and shared state contract across its callers remain unresolved.",
+    },
+    "587DAD80": {
+        "name_in_analysis": "FUN_587dad80",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 for its observed keyboard/event-code branch; additional callers occur in other client event handlers.",
+        "behavior": "Executes the selected event path, calls helper 0x5897CBDA, restores its stack, and returns.",
+        "uncertainty": "The event code's user-facing action and helper contract remain unresolved.",
+    },
+    "58815C80": {
+        "name_in_analysis": "FUN_58815c80",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x58816EE0 on its selected-control branch.",
+        "behavior": "Updates the panel's observed short-valued state fields, clamping a value at offset +0x8C to zero on the corresponding branch.",
+        "uncertainty": "The meaning of the selected control and the short fields is unresolved.",
+    },
+    "58816DB0": {
+        "name_in_analysis": "FUN_58816db0",
+        "called_by": "Identified by its receiver fields and direct calls as a CPannelArmorControl state/snapshot routine; Ghidra caller ownership is not yet resolved.",
+        "behavior": "Copies 0x3C3 dwords from the observed global record at 0x58A24598+0xD78 into receiver +0x198, snapshots four associated values and four short fields, refreshes the panel, and clears bit 1 on a child flag.",
+        "uncertainty": "The global record schema, ownership of the snapshot receiver, and caller lifecycle remain unresolved.",
+    },
+    "58816EE0": {
+        "name_in_analysis": "FUN_58816ee0",
+        "called_by": "RTTI identifies this as CPannelArmorControl vtable slot +0x18 at address point 0x5899D7AC.",
+        "behavior": "Handles command 2 for four paired increment/decrement controls, clamps counts to the observed 0..255 range, refreshes the panel, and forwards an assembled four-value record on the selection branch.",
+        "uncertainty": "The control labels, four field meanings, and downstream dispatch contract remain unresolved.",
+    },
+    "588172D0": {
+        "name_in_analysis": "FUN_588172d0",
+        "called_by": "RTTI identifies this as CPannelArmorControl vtable slot +0x10 at address point 0x5899D7AC.",
+        "behavior": "Processes event records, hit-tests four controls, increments or decrements the associated short values, invokes refresh, and dispatches observed event codes through 0x587DAC20/0x587DAD80 and other helpers.",
+        "uncertainty": "The event payload fields, control labels, event-code meanings, and dispatch outcomes are unresolved.",
+    },
+    "588193B0": {
+        "name_in_analysis": "FUN_588193b0",
+        "called_by": "Ghidra shows four direct calls to the CPannelArmorControl refresh method 0x58815E10; the caller and exact callback registration are unresolved.",
+        "behavior": "Selects one of four state slots from a 16-bit selector, stores the supplied pointer/value pair, zeroes the corresponding count when the pointer is null, and marks the related child for refresh when its flag is set.",
+        "uncertainty": "The selector enum, pointer/value pair semantics, and callback owner are unresolved.",
+    },
+    "58819A70": {
+        "name_in_analysis": "FUN_58819a70",
+        "called_by": "Directly called by CPannelArmorControl vtable method 0x588172D0 after its four-way point test selects a control.",
+        "behavior": "Updates a nested control through the observed base helper and helper 0x58902D20, then returns the updated object result.",
+        "uncertainty": "The nested-control identity and exact state semantics are unresolved.",
     },
 }
 
