@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,347
-identified code bytes across six report units. There are 6,469 verified matches
-totaling 2,039,737 bytes (19.4829%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,350
+identified code bytes across six report units. There are 6,474 verified matches
+totaling 2,041,494 bytes (19.4997%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -76,6 +76,14 @@ controls and fills them with nine localized harbor-name strings. ObjDiff checks
 all ranges and 90 mapped operands. Control interactions and runtime appearance
 remain unresolved. See
 [the constructor evidence](docs/current-main-jump-addon-constructor.md).
+
+Five virtual methods from the adjacent RTTI-backed `CPannelJump_AddOn` vtable
+at `0x5899F9BC` now byte-match: slots `+0x00`, `+0x04`, `+0x08`, `+0x0C`, and
+`+0x18`, totaling 1,757 bytes with 71 mapped operands checked. The 30-byte
+slot-zero code body ends with the byte at `0x58886EED`; two following `int3`
+bytes at `0x58886EEE` and `0x58886EEF` precede the next function. Selector, child, and callback
+semantics remain incomplete, and no emulator runtime test was performed. See
+[the vtable evidence](docs/current-main-jump-addon-vtable.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
