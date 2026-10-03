@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,383 verified matches
-totaling 1,818,142 bytes (17.3664%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,384 verified matches
+totaling 1,822,729 bytes (17.4102%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,13 +439,13 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 250 / 8,474 functions and
-844,724 / 2,353,390 bytes. The `CPannelJump_ControlMenuScreen` initializer
-`FUN_58889640` adds a 4,605-byte match in one range, with 104 relocation
-operands checked. Ghidra ties it to global UI setup through `FUN_5878af40`,
-which stores the returned pointer in `DAT_58A245BC`; the resource identities,
-child labels, and actions remain unresolved. See the
-[initializer evidence](docs/current-main-jump-control-menu-screen.md).
+Current-build Main coverage is now 251 / 8,474 functions and
+849,311 / 2,353,390 bytes. The `CPannelCommunicatorConfigHarborInfoTab`
+initializer `FUN_588304f0` adds a 4,587-byte match in one range, with 139
+relocation operands checked. Ghidra ties it to `FUN_58843380`, which allocates
+`0x25C` bytes and stores the returned pointer at `+0x170`; the function loads
+`CHIP.spr`, but specific asset mappings and control meanings remain unresolved.
+See the [initializer evidence](docs/current-main-communicator-config-harbor-info-tab.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
