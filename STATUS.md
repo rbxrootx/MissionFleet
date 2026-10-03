@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,350
-identified code bytes across six report units. There are 6,474 verified matches
-totaling 2,041,494 bytes (19.4997%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,478 verified matches
+totaling 2,042,530 bytes (19.5096%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -84,6 +84,13 @@ slot-zero code body ends with the byte at `0x58886EED`; two following `int3`
 bytes at `0x58886EEE` and `0x58886EEF` precede the next function. Selector, child, and callback
 semantics remain incomplete, and no emulator runtime test was performed. See
 [the vtable evidence](docs/current-main-jump-addon-vtable.md).
+
+Four methods directly connected to that AddOn vtable now match another 1,036
+bytes and 31 mapped operands: the child-cleanup routine called by slot `+0x00`,
+and three selector helpers called by slot `+0x18`. Evidence records list the
+exact call sites, field offsets, globals, and helper dispatches; ownership and
+visible meaning of those fields remain unresolved. No emulator runtime test was
+performed. See [the callback and cleanup evidence](docs/current-main-jump-addon-callbacks.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
