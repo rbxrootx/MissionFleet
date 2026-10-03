@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,384 verified matches
-totaling 1,822,729 bytes (17.4102%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,385 verified matches
+totaling 1,827,265 bytes (17.4535%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,13 +439,13 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 251 / 8,474 functions and
-849,311 / 2,353,390 bytes. The `CPannelCommunicatorConfigHarborInfoTab`
-initializer `FUN_588304f0` adds a 4,587-byte match in one range, with 139
-relocation operands checked. Ghidra ties it to `FUN_58843380`, which allocates
-`0x25C` bytes and stores the returned pointer at `+0x170`; the function loads
-`CHIP.spr`, but specific asset mappings and control meanings remain unresolved.
-See the [initializer evidence](docs/current-main-communicator-config-harbor-info-tab.md).
+Current-build Main coverage is now 252 / 8,474 functions and
+853,847 / 2,353,390 bytes. The `CPannelTradingShipInfo` initializer
+`FUN_588bf4c0` adds a 4,536-byte match across two ranges, with 125 relocation
+operands checked. It loads `ITFTRD.spr` and `ShipStructureMarket.spr` and is
+used from both the trade-panel and warehouse-item-info paths; the visual
+mapping and child meanings remain unresolved. See the
+[initializer evidence](docs/current-main-trading-ship-info.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
