@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
-identified code bytes across six report units. There are 6,342 verified matches
-totaling 1,540,287 bytes (14.7124%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,343 verified matches
+totaling 1,550,098 bytes (14.8061%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -226,9 +226,13 @@ The panel item manager adds one verified 10,242-byte constructor; see the
 ranges; all seven gaps decode as alignment instructions and 397 mapped
 operands were checked. It refreshes battle/fleet controls and state from the
 observed records; receiver class and field semantics remain unknown. See the
-[state-updater evidence](docs/current-main-state-updater.md).
-Current-build Main coverage is now 209 / 8,474 functions and
-566,869 / 2,353,354 bytes. See
+[state-updater evidence](docs/current-main-state-updater.md). The shared
+`FUN_587f2dd0` battle-statistics helper adds 9,811 bytes across four Ghidra
+ranges, with 475 operands checked; its state-dependent per-side totals,
+counter adjustments, and result labels are recorded in the
+[battle-statistics evidence](docs/current-main-battle-statistics.md).
+Current-build Main coverage is now 210 / 8,474 functions and
+576,680 / 2,353,354 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
