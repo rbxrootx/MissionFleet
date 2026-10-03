@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,388 verified matches
-totaling 1,840,787 bytes (17.5827%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,389 verified matches
+totaling 1,845,135 bytes (17.6242%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,15 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 255 / 8,474 functions and
-867,369 / 2,353,390 bytes. `CPageChannelBattle_ControlMenuScreen` initializer
+Current-build Main coverage is now 256 / 8,474 functions and
+871,717 / 2,353,390 bytes. The `CForce` constructor `FUN_5877cc30` adds a
+4,348-byte match in one Ghidra range, with 113 mapped operands checked. Ghidra
+shows five callers; each allocates `0x27C` bytes before constructing the object.
+The constructor copies 96 words from its input into the receiver and creates
+sprite-backed child objects from shared data tables. The input schema and child
+field/resource meanings remain unresolved. See the
+[CForce constructor evidence](docs/current-main-force-constructor.md).
+`CPageChannelBattle_ControlMenuScreen` initializer
 `FUN_587d26c0` adds a 4,467-byte match across two Ghidra ranges, with 97 mapped
 operands checked. The startup initializer `FUN_5878af40` allocates `0xAE4`
 bytes, stores the returned screen in `DAT_58A245A0`, then sets flags and a timer.
