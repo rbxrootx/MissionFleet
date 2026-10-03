@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,420 verified matches
-totaling 1,958,266 bytes (18.7048%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,421 verified matches
+totaling 1,961,323 bytes (18.7340%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -195,6 +195,13 @@ one Ghidra range, with 253 mapped operands checked. It conditionally invokes
 vtable callbacks for global objects, clears their slots, processes a pointer
 array, and returns `1`. Object types, ownership, and the host unload contract
 remain unresolved. See [the teardown evidence](docs/current-main-close-cgc-dll.md).
+
+`FUN_58800360` adds a 3,057-byte map and harbor resource initializer across two
+Ghidra ranges, with 104 mapped operands checked. Its direct callers pass
+mode-derived identifiers; the body selects observed CMF and faction harbor SPR
+paths and populates a large child buffer. The identifier contract, file schemas,
+and resulting layout remain unresolved. See
+[the initializer evidence](docs/current-main-map-resource-initializer.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
