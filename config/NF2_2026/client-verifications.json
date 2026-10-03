@@ -237133,6 +237133,596 @@
         "behavior": "For event value 2, compares its child pointer argument against receiver fields +0x98 and +0x9C; matching fields dispatch to helpers 0x588AA0D0 and 0x588AA120 respectively. Other inputs return zero. Uses ret 0x0C.",
         "uncertainty": "The child roles and helper effects remain unresolved. No emulator event test was performed."
       }
+    },
+    {
+      "address": "58750010",
+      "name": "FUN_58750010",
+      "size": 398,
+      "symbol": "_FUN_58750010",
+      "source": "src/client-current/Main/FUN_58750010.cpp",
+      "source_sha256": "c37ba0d76524d95d456841254c35a1cb6500e2a12cd6639a7257c541613b4d77",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897E6AE",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5898D5C8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5898CA74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 172,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "5898CA74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 253,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton constructor for RTTI-identified CBundleButton.",
+        "called_by": "Verified CPannelJump_ControlMenuScreen constructor FUN_58889640 calls this initializer five times for allocated child objects. This body writes vtable address 0x5898D5C8, whose RTTI name is CBundleButton.",
+        "behavior": "Initializes its base through 0x589031A0, installs the CBundleButton vtable, allocates two 0x58-byte child controls and initializes them through 0x589031A0, then stores them at receiver +0x54 and +0x58. Initializes receiver fields from +0x5C through +0xB4, including selector field +0x9C.",
+        "uncertainty": "The child roles, constructor arguments, state field meanings, and visible labels remain unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587501a0",
+      "name": "FUN_587501a0",
+      "size": 60,
+      "symbol": "_FUN_587501a0",
+      "source": "src/client-current/Main/FUN_587501a0.cpp",
+      "source_sha256": "c18a9923dbb19d8ed71e4f7d8522d07f39c0e0f4bfa73a04b76541e2190f8e9d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 43,
+          "target_address": "5874FBD0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton child configuration method for RTTI-identified CBundleButton.",
+        "called_by": "The verified CPannelJump_ControlMenuScreen constructor calls this method after each of its five CBundleButton constructions; the receiver is the newly constructed CBundleButton child.",
+        "behavior": "Conditionally stores two non-null stack pointers at receiver +0x5C and +0x60, passes three more arguments to 0x5874FBD0, then dispatches receiver vtable slot +0x08.",
+        "uncertainty": "The argument schemas and meanings of the child pointers are unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5874f990",
+      "name": "FUN_5874f990",
+      "size": 130,
+      "symbol": "_FUN_5874f990",
+      "source": "src/client-current/Main/FUN_5874f990.cpp",
+      "source_sha256": "905e60dc3b20d8227895ced09e5c1c588e9961cde9c49e42a8e144995059b655",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897F888",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5898D5C8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "58902D60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton cleanup body for RTTI-identified CBundleButton.",
+        "called_by": "RTTI-backed CBundleButton scalar deleting destructor FUN_5874FA40 calls this body at 0x5874FA43. The body writes the CBundleButton vtable at 0x5898D5C8.",
+        "behavior": "For non-null child pointers at receiver +0x54 and +0x58, calls the first child vtable entry with argument 1 and clears the field. It then calls base cleanup helper 0x58902D60.",
+        "uncertainty": "Child ownership, cleanup argument semantics, and base helper behavior remain unresolved. No runtime cleanup test was performed."
+      }
+    },
+    {
+      "address": "5874fa40",
+      "name": "FUN_5874fa40",
+      "size": 30,
+      "symbol": "_FUN_5874fa40",
+      "source": "src/client-current/Main/FUN_5874fa40.cpp",
+      "source_sha256": "b8429fb402cdd66c05297016db23b4b16a296ef1fe286c3303c2b155cb557f98",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "5874F990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton scalar deleting destructor for RTTI-identified CBundleButton.",
+        "called_by": "The RTTI-backed CBundleButton vtable at 0x5898D5C8 points to this method at slot +0x00.",
+        "behavior": "Calls cleanup body FUN_5874F990, tests stack flag bit 0, conditionally calls 0x5897CC42 with the receiver, returns the receiver, and ends with ret 4. The function is 30 bytes; two int3 bytes follow before FUN_5874FA60.",
+        "uncertainty": "The stack flag and allocator helper meanings are unresolved. The extent was corrected from 27 bytes to include ret 4; no runtime destruction test was performed."
+      }
+    },
+    {
+      "address": "58731770",
+      "name": "FUN_58731770",
+      "size": 30,
+      "symbol": "_FUN_58731770",
+      "source": "src/client-current/Main/FUN_58731770.cpp",
+      "source_sha256": "7e64c9847bfaa262ed3914b13f7c9bc45d257291927c0a25e95bc22fd5885504",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CBundleButton virtual state method for RTTI-identified CBundleButton.",
+        "called_by": "The RTTI-backed CBundleButton vtable at 0x5898D5C8 points to this method at slot +0x04.",
+        "behavior": "Updates receiver state bits at +0x24 to mode 0x100 and sets low bits 0..2.",
+        "uncertainty": "State and low-bit meanings are unresolved; no emulator test was performed."
+      }
+    },
+    {
+      "address": "5874fa60",
+      "name": "FUN_5874fa60",
+      "size": 364,
+      "symbol": "_FUN_5874fa60",
+      "source": "src/client-current/Main/FUN_5874fa60.cpp",
+      "source_sha256": "e770303bde664b4284914b380e7e5aa9aa7b1ecc11a256f01e977756f41e3767",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "5874FBC6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5874FBA5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5874FBA5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "5874FBA5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "5874FBA5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 169,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 182,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "5873A540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 237,
+          "target_address": "5873A540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 264,
+          "target_address": "5873A540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "5873A540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "5874FA20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 313,
+          "target_address": "5874FA20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton virtual update method for RTTI-identified CBundleButton.",
+        "called_by": "The RTTI-backed CBundleButton vtable at 0x5898D5C8 points to this method at slot +0x0C.",
+        "behavior": "When receiver flag bit 2 at +0x24 is set, processes modes 0x100, 0x200, 0x400, and 0x500. It updates state bits, uses geometry at global 0x58A284C8 and helper 0x58731540, calls 0x5873A540 on child fields +0x54 and +0x58, checks progress with helper 0x5874FA20, updates receiver fields +0xA0/+0xA4, then traverses children at +0x3C and dispatches slot +0x0C.",
+        "uncertainty": "The meaning of geometry, child progress, receiver states, and callback effects remain unresolved. No visual emulator test was performed."
+      }
+    },
+    {
+      "address": "587501e0",
+      "name": "FUN_587501e0",
+      "size": 281,
+      "symbol": "_FUN_587501e0",
+      "source": "src/client-current/Main/FUN_587501e0.cpp",
+      "source_sha256": "0faea22041471fab4f3c5f284e5b078ec951a1b1a5645191c302fefbe0eaa566",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "587502F1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "587502F1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "587502F1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "587502F1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "5874FDD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 226,
+          "target_address": "5874FEF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "5874FCD0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton virtual event method for RTTI-identified CBundleButton.",
+        "called_by": "The RTTI-backed CBundleButton vtable at 0x5898D5C8 points to this method at slot +0x10.",
+        "behavior": "When receiver flag bit 1 is set, searches the child list at +0x3C. It branches on observed event values 0x200, 0x201, 0x202, 0x100, and 0x20A, dispatching helper routines 0x5874FDD0, 0x5874FEF0, and 0x5874FCD0 in observed cases; other paths return receiver field +0x34.",
+        "uncertainty": "Event argument meaning, child roles, and state changes are unresolved. No emulator input test was performed."
+      }
+    },
+    {
+      "address": "5874fa20",
+      "name": "FUN_5874fa20",
+      "size": 28,
+      "symbol": "_FUN_5874fa20",
+      "source": "src/client-current/Main/FUN_5874fa20.cpp",
+      "source_sha256": "638784722422e9e3c4bb635971cc5d950ae85a3998f1e3c935793ac125356dd2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CBundleButton child-progress predicate for RTTI-identified CBundleButton.",
+        "called_by": "Virtual update method FUN_5874FA60 calls this helper at 0x5874FB81 and 0x5874FB96.",
+        "behavior": "Reads child pointer receiver +0x54; returns zero if null. Otherwise computes word at child +0x0C times dword at child +0x08 minus one, then returns whether receiver +0x50 is greater than or equal to that value.",
+        "uncertainty": "Child field units and boolean meaning are unresolved. No runtime case test was performed."
+      }
+    },
+    {
+      "address": "5874fbd0",
+      "name": "FUN_5874fbd0",
+      "size": 235,
+      "symbol": "_FUN_5874fbd0",
+      "source": "src/client-current/Main/FUN_5874fbd0.cpp",
+      "source_sha256": "f127cc5864bcb15068fa1d1d69c174bb6a0f279194ace206df4df8f13fe5c76c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CBundleButton indexed child-data setup helper for RTTI-identified CBundleButton.",
+        "called_by": "CBundleButton child-configuration method FUN_587501A0 calls this helper directly.",
+        "behavior": "Stores an argument at receiver +0x50, copies two seven-dword blocks into receiver ranges +0x64 and +0x80, resolves two indexed records using selector +0x9C and bounds/count fields at resource offsets +0x160 and +0x190 with 0x40-byte stride, then assigns and copies record fields into children +0x54 and +0x58.",
+        "uncertainty": "The copied blocks and indexed record schema are unresolved. No runtime resource test was performed."
+      }
+    },
+    {
+      "address": "5874fcd0",
+      "name": "FUN_5874fcd0",
+      "size": 253,
+      "symbol": "_FUN_5874fcd0",
+      "source": "src/client-current/Main/FUN_5874fcd0.cpp",
+      "source_sha256": "21fcb2a7354fb8eb9e78b9f74a90d7737db12a3adb5f287d40603819d065d869",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CBundleButton indexed-state helper for RTTI-identified CBundleButton.",
+        "called_by": "CBundleButton virtual event method FUN_587501E0 calls this helper directly.",
+        "behavior": "Uses indexes +0x68 and +0x84 to resolve bounded 0x40-byte records from receiver +0x50 resource state, updates child data at +0x54 and +0x58, sets selector field +0x9C to 1, then calls 0x58907990 and a child virtual method.",
+        "uncertainty": "The event branch contract, resource schema, and helper effects remain unresolved. No runtime event test was performed."
+      }
+    },
+    {
+      "address": "5874fdd0",
+      "name": "FUN_5874fdd0",
+      "size": 281,
+      "symbol": "_FUN_5874fdd0",
+      "source": "src/client-current/Main/FUN_5874fdd0.cpp",
+      "source_sha256": "0dda9ccac8fbeaf44fcca889deddbf333222ae7748825f53ce7ce97197c03af9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 257,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 263,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton indexed-state helper for RTTI-identified CBundleButton.",
+        "called_by": "CBundleButton virtual event method FUN_587501E0 calls this helper directly.",
+        "behavior": "Uses indexes +0x74 and +0x90 to resolve bounded 0x40-byte records from receiver resource state at +0x50, updates child data at +0x54 and +0x58, sets selector field +0x9C to 4, then calls 0x58907990 and a child virtual method.",
+        "uncertainty": "The event branch contract, resource schema, and helper effects remain unresolved. No runtime event test was performed."
+      }
+    },
+    {
+      "address": "5874fef0",
+      "name": "FUN_5874fef0",
+      "size": 281,
+      "symbol": "_FUN_5874fef0",
+      "source": "src/client-current/Main/FUN_5874fef0.cpp",
+      "source_sha256": "b9a2eae27e7e81f1e045f951026d259d99f4c3f1197e8b79286426e322b36942",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 257,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 263,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CBundleButton indexed-state helper for RTTI-identified CBundleButton.",
+        "called_by": "CBundleButton virtual event method FUN_587501E0 calls this helper directly.",
+        "behavior": "Uses indexes +0x6C and +0x88 to resolve bounded 0x40-byte records from receiver resource state at +0x50, updates child data at +0x54 and +0x58, sets selector field +0x9C to 2, then calls 0x58907990 and a child virtual method.",
+        "uncertainty": "The event branch contract, resource schema, and helper effects remain unresolved. No runtime event test was performed."
+      }
     }
   ]
 }
