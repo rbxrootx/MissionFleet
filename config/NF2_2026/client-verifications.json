@@ -201686,6 +201686,42 @@
         "behavior": "Installs the CPannelFireControlAddOnMI vtable and initializes child controls from shared sprite-table entries. Ghidra shows child pointers stored from receiver offsets +0xA8 through +0x11C and a final field at +0x120 set to 1.",
         "uncertainty": "The visible names and exact roles of the child controls, sprite-table entries, and state flag remain unresolved. No runtime or visual test was performed."
       }
+    },
+    {
+      "address": "587A1DE0",
+      "name": "FUN_587a1de0",
+      "size": 3931,
+      "symbol": "_FUN_587a1de0",
+      "source": "src/client-current/Main/FUN_587a1de0.cpp",
+      "source_sha256": "8b7733e0fb58323c14b6ea6e0105aa3ec6cc1633853f1324a2671ca778e47bdb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587A1DE0",
+          "size": 3931,
+          "symbol": "_FUN_587a1de0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898C034",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra assigns the CMessageFilter::vftable at the function entry.",
+        "called_by": "The direct caller FUN_5878af40 allocates a four-byte object, calls this initializer, and stores its result in DAT_58A24578.",
+        "behavior": "Loads the callback pointer from DAT_5898C034, installs the CMessageFilter vtable, and invokes that callback 543 times with addresses of static DAT_ records. This count and call pattern are directly visible in the Ghidra body.",
+        "uncertainty": "The callback ABI and semantics, meanings and contents of the static records, and the runtime role of the resulting object remain unresolved."
+      }
     }
   ]
 }

@@ -6,7 +6,7 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,398 verified matches
+identified code bytes across six report units. There are 6,399 verified matches
 totaling 1,882,853 bytes (17.9844%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -439,8 +439,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 265 / 8,474 functions and
-909,435 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 266 / 8,474 functions and
+913,366 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
@@ -461,6 +461,13 @@ constructs it and stores it at `+0xA4`; its child pointer fields span `+0xA8`
 through `+0x11C`, and the field at `+0x120` is set to 1. The individual control
 roles remain unknown. See the
 [AddOnMI constructor evidence](docs/current-main-fire-control-addon-mi-constructor.md).
+
+The `CMessageFilter` initializer `FUN_587a1de0` adds a 3,931-byte match in
+one Ghidra range, with one mapped operand target checked. The startup caller
+`FUN_5878af40` allocates its four-byte object and stores it in
+`DAT_58A24578`; the body invokes a callback 543 times with static record
+addresses. Callback semantics and record meanings remain unknown. See the
+[message-filter initializer evidence](docs/current-main-message-filter-initializer.md).
 `FUN_5876a570` adds a 4,160-byte prompt-handler
 match in one Ghidra range, with 266 mapped operands checked. Its callers pass
 many action codes; the communicator-configuration panel uses code 300 for the
