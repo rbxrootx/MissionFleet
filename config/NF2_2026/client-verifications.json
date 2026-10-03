@@ -5067,9 +5067,9 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_5874ba60",
-        "called_by": "Called by FUN_58903E40 on malformed sprite headers and payloads to populate its local error buffer.",
-        "behavior": "Validates the destination size, forwards the format string and variadic argument list through FUN_5897CE38 with a maximum output of size minus one, and explicitly terminates the buffer on truncation/error.",
-        "uncertainty": "The host callback behind FUN_5897CE38 and exact callback ABI are unresolved; this record describes the observed wrapper contract only."
+        "called_by": "Called by FUN_58903E40 on malformed sprite headers and payloads, and by the CMarketBoard-connected helper FUN_5890BC40 on two branches.",
+        "behavior": "Validates the destination size, forwards the format string and variadic argument list through FUN_5897CE38 with a maximum output of size minus one, explicitly terminates the buffer on truncation/error, and returns the observed invalid-argument or insufficient-buffer HRESULTs on those error paths.",
+        "uncertainty": "The host callback behind FUN_5897CE38 and exact callback ABI are unresolved; the board caller's message/string contract is also unknown."
       }
     },
     {
@@ -248884,6 +248884,183 @@
         "called_by": "Direct callee of CMarketBoard child-event method 0x58798850.",
         "behavior": "Checks repeated child and collection fields including +0xA8, +0xA4, +0x10, and +0x0C, and applies the same observed indirect child-update helper 0x5897CC72 across the corresponding branches.",
         "uncertainty": "The difference from nearby routine 0x588804F0, child schema, update contract, and units remain unresolved. Its 280-byte body and 13 mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5897CC72",
+      "name": "FUN_5897cc72",
+      "size": 6,
+      "symbol": "_FUN_5897cc72",
+      "source": "src/client-current/Main/FUN_5897cc72.cpp",
+      "source_sha256": "2d0a95d2bc5c45012e3ed91a84ae136bdbcda405638c96e0d16ff1e7c306496e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C218",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cc72",
+        "called_by": "Directly invoked repeatedly by the verified child-update routines 0x588804F0 and 0x58880630.",
+        "behavior": "Tail-jumps through the mapped import pointer at 0x5898C218; this is a six-byte import thunk rather than an in-module implementation body.",
+        "uncertainty": "The imported API name and runtime callback behavior remain unidentified. The thunk's six bytes and one mapped target are verified."
+      }
+    },
+    {
+      "address": "587B9FE0",
+      "name": "FUN_587b9fe0",
+      "size": 26,
+      "symbol": "_FUN_587b9fe0",
+      "source": "src/client-current/Main/FUN_587b9fe0.cpp",
+      "source_sha256": "949d3fc4debb488a24516f2ba8ef819a7115b6b724f60fb5629c24ce2b901f56",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9fe0",
+        "called_by": "Directly called by the verified CMarketBoard child helper 0x58797610.",
+        "behavior": "Loads its first stack argument and sends observed message identifier 0x80013127 through verified sender 0x58970C70.",
+        "uncertainty": "The message schema and argument meaning remain unresolved. The 26-byte body and one mapped operand target are verified."
+      }
+    },
+    {
+      "address": "587B9F70",
+      "name": "FUN_587b9f70",
+      "size": 72,
+      "symbol": "_FUN_587b9f70",
+      "source": "src/client-current/Main/FUN_587b9f70.cpp",
+      "source_sha256": "e469ff9bf159466aae19e7a0a52038d5e40b43910e81cdd4bd273c1ec822e987",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "5897CE26",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9f70",
+        "called_by": "Directly called twice by verified CMarketBoard child helper 0x587986E0.",
+        "behavior": "Requests an observed eight-byte record through 0x5897152E, copies two supplied values into it, sends message 0x80013123 through verified sender 0x58970C70, then releases the temporary through 0x5897CE26.",
+        "uncertainty": "The record fields, message schema, and lifetime contract remain unresolved. The 72-byte body and three mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5897152E",
+      "name": "FUN_5897152e",
+      "size": 11,
+      "symbol": "_FUN_5897152e",
+      "source": "src/client-current/Main/FUN_5897152e.cpp",
+      "source_sha256": "8184b9646f2ab07effc6cc9c93ca9d4f9205ff352ccaf6431d4f6f011048bde6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897152e",
+        "called_by": "Direct callee of the verified record/message helper 0x587B9F70.",
+        "behavior": "Executes the observed 11-byte hotpatch-style entry and tail-jumps to already verified allocator routine 0x5897CC4E.",
+        "uncertainty": "The patch-prologue purpose is inferred from the instruction pattern; allocation size/ownership is determined by the caller. Its one mapped operand target is verified."
+      }
+    },
+    {
+      "address": "5897CE26",
+      "name": "FUN_5897ce26",
+      "size": 6,
+      "symbol": "_FUN_5897ce26",
+      "source": "src/client-current/Main/FUN_5897ce26.cpp",
+      "source_sha256": "4523770e346df7ee2885fe7832f36b2da13ca4d77a8922189ef44965449f9766",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C240",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ce26",
+        "called_by": "Direct callee of the verified record/message helper 0x587B9F70.",
+        "behavior": "Tail-jumps through the mapped import pointer at 0x5898C240 to release the temporary record.",
+        "uncertainty": "The imported API name and exact allocator pairing are unresolved. The six-byte thunk and one mapped target are verified."
       }
     }
   ]
