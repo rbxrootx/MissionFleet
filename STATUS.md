@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,446 verified matches
-totaling 2,028,026 bytes (19.3711%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,341
+identified code bytes across six report units. There are 6,456 verified matches
+totaling 2,034,370 bytes (19.4317%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -136,6 +136,66 @@ pinned Clang-cl 19.1.4 compiler for this `_emit`-only body; other matches still
 use the recorded MSVC compiler. State names and visual animation remain
 unresolved, and emulator behavior is untested. See
 [the method evidence](docs/current-main-factory-help-state-update.md).
+
+`FUN_58852d10` adds an 80-byte `CPannelFactoryHelp` virtual event callback at
+vtable slot `+0x18`. For event value 2, it scans 15 groups of three entries and
+resets matched child state through `FUN_588504C0`. ObjDiff checks the complete
+body and its call target. Event and table-key meanings remain unresolved; no
+emulator test was performed. See
+[the callback evidence](docs/current-main-factory-help-event-callback.md).
+
+`FUN_58852cd0` adds a 58-byte `CPannelFactoryHelp` vtable method at slot
+`+0x08`. When a state flag is set, it applies a state mask, sets transition
+bit `0x0400`, clears an associated dword, and clears two low state bits. ObjDiff
+checks every byte. Event and field meanings remain unresolved; no emulator test
+was performed. See
+[the method evidence](docs/current-main-factory-help-state-reset.md).
+
+`FUN_58853870` adds a 262-byte `CPannelFactoryHelp` transition handler at
+vtable slot `+0x40`. It updates state and target fields, dispatches child
+methods, and traverses paired control entries. ObjDiff checks the complete
+body and three mapped operands. Control meanings and runtime appearance remain
+unresolved. See
+[the method evidence](docs/current-main-factory-help-transition-handler.md).
+
+`FUN_588561f0` adds an 880-byte `CPannelFactoryHelp` method at vtable slot
+`+0x3C`. It sets state flags, derives target coordinates from captured display
+fields, and dispatches across paired child controls. ObjDiff checks all bytes
+and 26 mapped operands. Field units and control meanings remain unresolved.
+See [the method evidence](docs/current-main-factory-help-display-state-method.md).
+
+`FUN_58856560` adds a 2,344-byte `CPannelFactoryHelp` child-event method at
+vtable slot `+0x48`. It walks child objects, calls virtual slot `+0x10` with
+the event argument, and has additional control and state branches. ObjDiff
+checks all bytes and 193 mapped operands. Event and child identifiers remain
+unresolved. See
+[the method evidence](docs/current-main-factory-help-child-event-method.md).
+
+`FUN_58853c20` adds a 763-byte `CPannelFactoryHelp` parameter-event method at
+vtable slot `+0x50`. For event value 2, it updates global control fields and
+dispatches child events and layout helpers. ObjDiff checks all bytes and 34
+mapped operands. Event and field meanings remain unresolved. See
+[the method evidence](docs/current-main-factory-help-parameter-event-method.md).
+
+`FUN_588504a0`, `FUN_588536a0`, and `FUN_58854440` add three complete
+`CPannelFactoryHelp` vtable methods. Their inventory extents now include the
+observed `ret 4`, `ret 4`, and `ret 0x0C` epilogues, respectively. ObjDiff
+verifies the corrected 30-, 30-, and 378-byte bodies. The reason for extending
+the generated inventory extents is documented in
+[the epilogue-boundary evidence](docs/current-main-factory-help-epilogue-boundaries.md).
+
+`FUN_58857850` adds the remaining `CPannelFactoryHelp` vtable method at slot
+`+0x44`. Its body contains a branch into a split child-chain epilogue and a
+tail dispatch. The captured bytes prove the complete 1,519-byte extent; ObjDiff
+checks every byte and 38 mapped operands. Child-chain semantics remain partly
+unknown. See
+[the child-chain evidence](docs/current-main-factory-help-child-chain-dispatch.md).
+
+All 11 non-null `CPannelFactoryHelp` vtable methods now match their complete
+captured bodies, totaling 6,884 bytes. Together with the separately matched
+2,583-byte constructor, the class is covered at the function-byte level; its
+control meanings and in-game behavior are still unverified. See
+[the vtable coverage map](docs/current-main-factory-help-vtable.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
