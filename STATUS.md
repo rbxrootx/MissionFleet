@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,403
-identified code bytes across six report units. There are 6,556 verified matches
-totaling 2,067,551 bytes (19.7485%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,420
+identified code bytes across six report units. There are 6,576 verified matches
+totaling 2,074,250 bytes (19.8125%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -54,6 +54,16 @@ jump; six bytes were added to the inventory. Parent allocation and child offset
 are documented from the factory callsite; labels, event meanings, and visual
 behavior remain unresolved, and no emulator runtime test was performed. See
 [the vtable evidence](docs/current-main-spec-board-body-vtable.md).
+
+The RTTI-backed `CSpecBoard_Equip` class now has all seven vtable slots and its
+directly connected cleanup, event, and repeated-control helpers matched. This
+adds 6,699 exact bytes across 20 functions, with 186 mapped relocation targets
+checked. Three extents were corrected to include complete return/jump
+epilogues, adding 17 code bytes to the inventory. One 726-byte helper retains
+two trailing `FF` bytes that Capstone does not decode; they are included in the
+byte match and left semantically unresolved. Control labels, record meanings,
+and visual/runtime behavior remain unknown. See
+[the equipment-board evidence](docs/current-main-spec-board-equipment-vtable.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads

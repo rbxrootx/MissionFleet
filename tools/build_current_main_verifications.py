@@ -44,6 +44,10 @@ ADDRESSES = (
     "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
     "58819A70", "587B67A0", "588EC200", "588EC5B0", "588ECC80",
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
+    "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
+    "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
+    "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -74,6 +78,10 @@ SOURCE_COMPILER_ADDRESSES = {
     "58815C80", "58816DB0", "58816EE0", "588172D0", "588193B0",
     "58819A70", "587B67A0", "588EC200", "588EC5B0", "588ECC80",
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
+    "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
+    "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
+    "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -1040,6 +1048,126 @@ EVIDENCE = {
         "called_by": "Directly called by CSpecBoard_Body vtable method 0x588ECD00.",
         "behavior": "Reads receiver fields +0x68 and +0x54, passes derived values to 0x587B67A0, then tail-dispatches through a child vtable slot at +0x04.",
         "uncertainty": "The child class and purpose of the indirect method remain unresolved.",
+    },
+    "588EF600": {
+        "name_in_analysis": "FUN_588ef600",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x00 at address point 0x589A1758.",
+        "behavior": "Calls class cleanup 0x588EF260, conditionally releases through 0x5897CC42, returns the receiver, and includes ret 4.",
+        "uncertainty": "The scalar-deletion flag policy is observed; the object's allocation origin is outside this slice.",
+    },
+    "588EF260": {
+        "name_in_analysis": "FUN_588ef260",
+        "called_by": "Directly called by the CSpecBoard_Equip scalar deleting destructor at vtable slot +0x00.",
+        "behavior": "Performs the class cleanup path and calls the base cleanup helper 0x58902C10 before returning.",
+        "uncertainty": "Child ownership and individual child roles remain unresolved.",
+    },
+    "588EFC40": {
+        "name_in_analysis": "FUN_588efc40",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x04 at address point 0x589A1758.",
+        "behavior": "Updates observed receiver flags and fields, calls 0x58907990, then reaches an indirect child-method path and returns.",
+        "uncertainty": "The field flags, child-method contract, and result meaning are unresolved.",
+    },
+    "588EFD00": {
+        "name_in_analysis": "FUN_588efd00",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x08 at address point 0x589A1758.",
+        "behavior": "Updates a child/control state, calls 0x587D7820 and 0x58907990, then invokes an indirect child method.",
+        "uncertainty": "The child identity, state fields, and indirect method contract are unresolved.",
+    },
+    "588EFA20": {
+        "name_in_analysis": "FUN_588efa20",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x0C at address point 0x589A1758.",
+        "behavior": "Checks receiver flags, calls 0x58902E10 and 0x587B7400, and ends on a dynamic dispatch path through eax.",
+        "uncertainty": "The event payload and indirect dispatch target are unresolved.",
+    },
+    "587B7400": {
+        "name_in_analysis": "FUN_587b7400",
+        "called_by": "Directly called twice by CSpecBoard_Equip vtable method 0x588EFA20.",
+        "behavior": "Processes supplied panel values through helper 0x58907820 and returns with ret 0x0C.",
+        "uncertainty": "The input record schema and result semantics remain unresolved.",
+    },
+    "588F1160": {
+        "name_in_analysis": "FUN_588f1160",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x10 at address point 0x589A1758.",
+        "behavior": "Processes control events, hit-tests through 0x58731540, and calls the observed repeated-control helpers 0x588EFF30 and 0x588F0150 alongside state helpers.",
+        "uncertainty": "The event payload, repeated control identities, and user-visible actions are unresolved.",
+    },
+    "5880AF30": {
+        "name_in_analysis": "FUN_5880af30",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x14 at address point 0x589A1758.",
+        "behavior": "Runs a short receiver-state branch and returns with ret 0x0C; its 91-byte body contains no mapped operand targets.",
+        "uncertainty": "The event meaning and returned state are unresolved.",
+    },
+    "588F0460": {
+        "name_in_analysis": "FUN_588f0460",
+        "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x18 at address point 0x589A1758.",
+        "behavior": "Dispatches the panel's observed event path through helpers 0x588EFF30, 0x588F0150, 0x587D8840, 0x588E65D0, and other mapped control helpers, then returns with ret 0x0C.",
+        "uncertainty": "The event payload, control identities, and user-visible actions remain unresolved.",
+    },
+    "587D7820": {
+        "name_in_analysis": "FUN_587d7820",
+        "called_by": "Directly called by CSpecBoard_Equip vtable method 0x588EFD00.",
+        "behavior": "Walks an indexed control/state sequence, updates observed child flags, and returns with ret 4 after the complete eight-byte epilogue.",
+        "uncertainty": "The sequence schema and flag meanings remain unresolved.",
+    },
+    "587D8840": {
+        "name_in_analysis": "FUN_587d8840",
+        "called_by": "Directly called by CSpecBoard_Equip vtable method 0x588F0460.",
+        "behavior": "Forwards the observed values through helper 0x587B98B0 on three branches and returns.",
+        "uncertainty": "The forwarded values and helper contract are unresolved.",
+    },
+    "588E65D0": {
+        "name_in_analysis": "FUN_588e65d0",
+        "called_by": "Directly called by CSpecBoard_Equip vtable method 0x588F0460.",
+        "behavior": "Returns true when the observed word at record offset +6 equals 7, and false otherwise.",
+        "uncertainty": "The tested record type and discriminator meaning are unresolved.",
+    },
+    "588EFF30": {
+        "name_in_analysis": "FUN_588eff30",
+        "called_by": "Directly called by CSpecBoard_Equip vtable methods 0x588F1160 and 0x588F0460.",
+        "behavior": "Processes repeated child/control records through helpers 0x58908170, 0x58908650, 0x58902EA0, and 0x58903360; its complete six-byte register/stack epilogue is included.",
+        "uncertainty": "The table schema and child/control meanings remain unresolved.",
+    },
+    "588F0150": {
+        "name_in_analysis": "FUN_588f0150",
+        "called_by": "Directly called by CSpecBoard_Equip vtable methods 0x588F1160 and 0x588F0460.",
+        "behavior": "Processes a related repeated child/control path through helpers 0x58908170, 0x589086F0, 0x58902EA0, and 0x58903360. The 726-byte mapped extent is emitted byte-for-byte; its final two bytes are FF FF, which Capstone does not decode as a valid x86 instruction.",
+        "uncertainty": "The final FF FF bytes may be embedded data or an invalid/unidentified instruction sequence; they are retained because the original indexed Ghidra extent and direct callsites cover the complete 726-byte body. The table schema remains unresolved.",
+    },
+    "58908170": {
+        "name_in_analysis": "FUN_58908170",
+        "called_by": "Directly called by CSpecBoard_Equip helpers 0x588F1160, 0x588EFF30, and 0x588F0150.",
+        "behavior": "Walks an observed linked field at +0x14, increments the returned index, and yields -1 when the walk terminates without a matching entry.",
+        "uncertainty": "The entry type and the meaning of the returned index are unresolved.",
+    },
+    "58908650": {
+        "name_in_analysis": "FUN_58908650",
+        "called_by": "Directly called by CSpecBoard_Equip helper 0x588EFF30.",
+        "behavior": "If receiver +0x80 is null, copies receiver +0x7C there; otherwise follows the pointer at +0x80 to its +0x10 field and stores that field when non-null.",
+        "uncertainty": "The child-link type and the purpose of the +0x7C/+0x80 fields remain unresolved.",
+    },
+    "589086F0": {
+        "name_in_analysis": "FUN_589086f0",
+        "called_by": "Directly called by CSpecBoard_Equip helper 0x588F0150.",
+        "behavior": "Uses receiver child pointers at +0x78/+0x80, walks +0x14-linked entries, and applies an observed index/stride versus bounds check before updating +0x80.",
+        "uncertainty": "The linked-entry schema, dimension units, and choice policy remain unresolved.",
+    },
+    "587B98B0": {
+        "name_in_analysis": "FUN_587b98b0",
+        "called_by": "Directly called three times by CSpecBoard_Equip helper 0x587D8840.",
+        "behavior": "Builds the observed byte/word payload from its arguments, dispatches selector 0x80011004 through 0x58970C70, then runs the stack-cookie check and returns with ret 0x18.",
+        "uncertainty": "The payload schema, dispatch result, and caller's state semantics are unresolved.",
+    },
+    "58907820": {
+        "name_in_analysis": "FUN_58907820",
+        "called_by": "Directly called by CSpecBoard_Equip helper 0x587B7400.",
+        "behavior": "Branches on receiver field +0x1C, converts the supplied floating-point values through x87 operations, and dispatches through observed vtable offsets +0x4C, +0x0C, and +0x10; one branch calls 0x5897CCA0.",
+        "uncertainty": "The numeric record type, units, and downstream helper contract are unresolved. Helper 0x5897CCA0 remains unmatched in this slice.",
+    },
+    "5897CC90": {
+        "name_in_analysis": "FUN_5897cc90",
+        "called_by": "Directly called by CSpecBoard_Equip helper 0x58907820.",
+        "behavior": "A six-byte indirect jump thunk through the callback slot at 0x5898C228.",
+        "uncertainty": "The callback target and host-side contract are unresolved.",
     },
 }
 
