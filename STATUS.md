@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,394 verified matches
-totaling 1,866,426 bytes (17.8276%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,395 verified matches
+totaling 1,870,586 bytes (17.8673%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,14 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 261 / 8,474 functions and
-893,008 / 2,353,390 bytes. The `CPannelFireControlAddOnAircraft` constructor
+Current-build Main coverage is now 262 / 8,474 functions and
+897,168 / 2,353,390 bytes. `FUN_5876a570` adds a 4,160-byte prompt-handler
+match in one Ghidra range, with 266 mapped operands checked. Its callers pass
+many action codes; the communicator-configuration panel uses code 300 for the
+friend-deletion prompt, and `FUN_587bb700` passes codes 100, 600, and `0x15E`.
+The owner class, full action enum, and UI callback contract remain unknown. See
+the [prompt-handler evidence](docs/current-main-prompt-handler.md).
+The `CPannelFireControlAddOnAircraft` constructor
 `FUN_5885aaa0` adds a 4,161-byte match in one range, with 130 mapped operands
 checked. Its `CPannelFireControl` caller allocates `0xAB4` bytes and stores the
 child at `+0x9C`; this constructor creates eight repeated sprite-backed
