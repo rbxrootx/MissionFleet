@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,365
-identified code bytes across six report units. There are 6,517 verified matches
-totaling 2,051,835 bytes (19.5985%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,387
+identified code bytes across six report units. There are 6,537 verified matches
+totaling 2,060,059 bytes (19.6770%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -27,6 +27,15 @@ Open [decomp/README.md](decomp/README.md) for artifact locations and reproducibl
 commands. The Ghidra project and pseudocode are under
 `private-inputs/decompilation/`. Original hashes and recovery bounds are recorded
 beside each raw region. Server executables were not run or modified.
+
+The RTTI-backed `CPannelEscortShipConfig` panel now has its 2,583-byte
+constructor, four vtable methods, cleanup and field helpers, plus eleven
+directly called UI and data helpers. The slice adds 8,224 byte-matched bytes
+across 20 functions; five function extents were corrected to include complete
+return instructions or an internal jump target boundary. The verified caller
+allocates `0xE8` bytes and constructs the panel. Sprite/control roles and the
+data-record schema remain unresolved; no emulator runtime test was performed.
+See [the class evidence](docs/current-main-escort-ship-config-class.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads

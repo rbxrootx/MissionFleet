@@ -35,6 +35,11 @@ ADDRESSES = (
     "58906EA0", "58907100", "58907180", "589071A0",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
+    "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
+    "5884DAD0", "5884DCC0", "5884E1C0", "5884E210",
+    "58731540", "58759F20", "58759F60", "587B99F0", "587D89F0",
+    "58875190", "588752D0", "588F4060", "58907990", "589087F0",
+    "589088D0",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -56,6 +61,11 @@ SOURCE_COMPILER_ADDRESSES = {
     "58906EA0", "58907100", "58907180", "589071A0",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
+    "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
+    "5884DAD0", "5884DCC0", "5884E1C0", "5884E210",
+    "58731540", "58759F20", "58759F60", "587B99F0", "587D89F0",
+    "58875190", "588752D0", "588F4060", "58907990", "589087F0",
+    "589088D0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -788,6 +798,126 @@ EVIDENCE = {
         "called_by": "Vtable slot +0x0C at 0x5899A0CC for RTTI type .?AVCMovingSpriteDataScreen@@.",
         "behavior": "When receiver flag bit 2 is set, examines mode bits in +0x24 and compares receiver fields +4/+8 with cached values +0x68/+0x6C; observed branches update state fields and call helper 0x58902E10. It then traverses the circular child list at +0x3C and dispatches each child's slot +0x0C.",
         "uncertainty": "The mode labels, field meanings, helper contract, and user-visible effect are unresolved; this description records only observed branches, accesses, and dispatches.",
+    },
+    "5884E690": {
+        "name_in_analysis": "FUN_5884e690",
+        "called_by": "The verified FUN_587DBA00 calls it at 0x587DC66B after requesting a 0xE8-byte object; the returned pointer is stored at caller offset +0xDD4.",
+        "behavior": "Initializes the screen base through 0x589031A0, installs the RTTI-backed CPannelEscortShipConfig vtable at 0x5899E830, and constructs nested screen/control objects through the observed helper calls and child-list setup.",
+        "uncertainty": "The roles of the nested controls, resource records, and constructor arguments remain unknown; no client runtime or visual test was performed.",
+    },
+    "5884DD00": {
+        "name_in_analysis": "FUN_5884dd00",
+        "called_by": "Vtable slot +0 at 0x5899E830 for RTTI type .?AVCPannelEscortShipConfig@@.",
+        "behavior": "Calls cleanup body 0x5884DAD0, invokes host thunk 0x5897CC42 when bit 0 of the stack deletion flag is set, and returns the receiver with ret 4.",
+        "uncertainty": "The host thunk's ownership policy is unresolved. The 30-byte extent includes ret 4; trailing int3 bytes are excluded.",
+    },
+    "5884E500": {
+        "name_in_analysis": "FUN_5884e500",
+        "called_by": "Vtable slot +0x0C at 0x5899E830 for RTTI type .?AVCPannelEscortShipConfig@@.",
+        "behavior": "When receiver flag bit 2 is set, checks selector byte +0xD4 and a child value reached from +0x64; its branches call 0x58902E60 and local helpers 0x5884E210/0x5884E1C0 while updating observed state.",
+        "uncertainty": "The selector values, child meaning, state names, and visible effect remain unknown.",
+    },
+    "5884DF70": {
+        "name_in_analysis": "FUN_5884df70",
+        "called_by": "Vtable slot +0x10 at 0x5899E830 for RTTI type .?AVCPannelEscortShipConfig@@.",
+        "behavior": "When receiver flag bit 1 is set, walks the circular child list at +0x3C, dispatches child slot +0x10, compares the returned value with child field +0x34, and calls helpers 0x58907990 and 0x58731540 on observed branches.",
+        "uncertainty": "The event/result contract and meanings of the child fields remain unresolved.",
+    },
+    "5884DD20": {
+        "name_in_analysis": "FUN_5884dd20",
+        "called_by": "Vtable slot +0x18 at 0x5899E830 for RTTI type .?AVCPannelEscortShipConfig@@.",
+        "behavior": "Dispatches on its stack arguments and receiver fields +0x60/+0xD4, updates observed selector/state bits, and calls helpers 0x587B99F0, 0x587D89F0, and 0x5884DCC0.",
+        "uncertainty": "Argument labels, selector meanings, and user-facing actions remain unresolved.",
+    },
+    "5884DAD0": {
+        "name_in_analysis": "FUN_5884dad0",
+        "called_by": "Directly called by scalar-deleting destructor 0x5884DD00.",
+        "behavior": "Installs the class vtable, traverses and cleans the class's observed child/object fields, and calls cleanup helper 0x589033E0; the body uses the captured MSVC exception-registration pattern.",
+        "uncertainty": "Child ownership and several field roles are unresolved; the description follows the observed cleanup calls and writes.",
+    },
+    "5884DCC0": {
+        "name_in_analysis": "FUN_5884dcc0",
+        "called_by": "Directly called by class vtable method 0x5884DD20.",
+        "behavior": "Scans DWORD entries from 0x589CC878 up to 0x589CCC78 for the supplied 16-bit value and returns 1 on a match or 0 when absent.",
+        "uncertainty": "The table's contents and the compared value's semantic role are unknown. Its 52-byte extent includes ret 4.",
+    },
+    "5884E1C0": {
+        "name_in_analysis": "FUN_5884e1c0",
+        "called_by": "Directly called by class methods 0x5884E500 and 0x5884E210.",
+        "behavior": "Loops over five entries rooted at receiver +0x98, checks globals at 0x58A0B1E4/0x58A0B1FD, and writes 0 or 1 to field +0x50 of the corresponding referenced objects.",
+        "uncertainty": "The five entries, global selector, and field +0x50's meaning are unresolved.",
+    },
+    "5884E210": {
+        "name_in_analysis": "FUN_5884e210",
+        "called_by": "Directly called by class constructor 0x5884E690 and vtable method 0x5884E500.",
+        "behavior": "Processes a bounded set of receiver data, calls helpers 0x589087F0 and 0x589088D0 across its branches, invokes 0x588F4060, and applies the five-entry update helper 0x5884E1C0.",
+        "uncertainty": "The data-record schema and helper parameter meanings remain unresolved.",
+    },
+    "58731540": {
+        "name_in_analysis": "FUN_58731540",
+        "called_by": "Directly called by class vtable method 0x5884DF70.",
+        "behavior": "Tests a supplied point against the receiver's bounds formed from offsets +0x14/+0x18 and +0x1C/+0x20 with the observed origin offsets, returning 1 inside and 0 outside.",
+        "uncertainty": "The coordinate space and caller's interpretation of the hit-test result are unresolved.",
+    },
+    "58759F20": {
+        "name_in_analysis": "FUN_58759f20",
+        "called_by": "Directly called by CPannelEscortShipConfig constructor 0x5884E690.",
+        "behavior": "If receiver field +0x50 is null, allocates a 12-byte record, clears its first two DWORDs, stores the supplied value at +8, and mirrors the record pointer at receiver +0x54.",
+        "uncertainty": "The record's type and the two receiver fields' ownership relationship are unknown.",
+    },
+    "58759F60": {
+        "name_in_analysis": "FUN_58759f60",
+        "called_by": "Directly called by CPannelEscortShipConfig constructor 0x5884E690.",
+        "behavior": "Calls base initializer 0x589031A0, briefly installs vtable 0x5898C500, sets bit 0x20 in flags +0x24, clears fields +0x50/+0x54/+0x58, then installs vtable 0x5898D7A0.",
+        "uncertainty": "The final RTTI type and fields' meanings are not established by this body alone.",
+    },
+    "587B99F0": {
+        "name_in_analysis": "FUN_587b99f0",
+        "called_by": "Directly called by class vtable method 0x5884DD20.",
+        "behavior": "Forwards two supplied arguments, an observed byte, three zero values, and selector 0x8001F009 to helper 0x58970C70.",
+        "uncertainty": "The forwarded selector and dispatch result semantics are unresolved.",
+    },
+    "587D89F0": {
+        "name_in_analysis": "FUN_587d89f0",
+        "called_by": "Directly called by class vtable method 0x5884DD20.",
+        "behavior": "Uses helper 0x588F4060 to look up a selected entry, initializes and clears bounded buffers with 0x5897152E/0x5897CC48, then processes indexed data through the observed branches and helper calls.",
+        "uncertainty": "The record layout and selector meanings are unresolved. The corrected 1,143-byte extent includes the tail jump at 0x587D8E62 back into this function; bytes after that jump are padding.",
+    },
+    "58875190": {
+        "name_in_analysis": "FUN_58875190",
+        "called_by": "Directly called by CPannelEscortShipConfig constructor 0x5884E690.",
+        "behavior": "Selects a record from receiver table +0x18C when count +0x164 exceeds 0x1A, then copies its observed fields into the supplied child object, including the pointer at record +0x68.",
+        "uncertainty": "The table's record type and copied field meanings are unresolved.",
+    },
+    "588752D0": {
+        "name_in_analysis": "FUN_588752d0",
+        "called_by": "Directly called by CPannelEscortShipConfig constructor 0x5884E690.",
+        "behavior": "Initializes nested screen objects through 0x589031A0, installs observed screen vtables including 0x5899EF40, allocates child objects, configures child-list fields, and calls 0x58907100 for one nested object.",
+        "uncertainty": "The roles of the nested controls and the installed vtable's semantic type remain unresolved.",
+    },
+    "588F4060": {
+        "name_in_analysis": "FUN_588f4060",
+        "called_by": "Directly called by 0x5884E210 and 0x587D89F0.",
+        "behavior": "Walks a linked chain rooted at receiver +4, compares each entry's field +0x48 shifted right by 10 with the supplied selector, and returns the matching entry or zero.",
+        "uncertainty": "The selector encoding and entry type are unresolved. The 41-byte extent includes ret 4.",
+    },
+    "58907990": {
+        "name_in_analysis": "FUN_58907990",
+        "called_by": "Directly called by class vtable method 0x5884DF70.",
+        "behavior": "Converts an integer argument to the observed floating-point record fields and calls helper 0x58907820; other branches test values through 9 and select alternate exits.",
+        "uncertainty": "The record type, units, and meaning of the range branches are unresolved.",
+    },
+    "589087F0": {
+        "name_in_analysis": "FUN_589087f0",
+        "called_by": "Directly called by helper 0x5884E210.",
+        "behavior": "Walks child links from receiver +0x78, dispatches child slot +0 with argument 1, then clears receiver fields +0x78 through +0x88.",
+        "uncertainty": "The child ownership policy and roles of the cleared fields remain unresolved.",
+    },
+    "589088D0": {
+        "name_in_analysis": "FUN_589088d0",
+        "called_by": "Directly called by helper 0x5884E210.",
+        "behavior": "Scans a supplied NUL-terminated string, allocates and clears a buffer, copies string data, and updates the receiver's observed string fields through helpers 0x58731B60 and 0x58907F80.",
+        "uncertainty": "The string's role and receiver field meanings are unresolved. Its corrected 268-byte extent includes the observed register epilogue and ret 0x0C.",
     },
 }
 
