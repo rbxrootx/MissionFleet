@@ -236553,6 +236553,586 @@
         "behavior": "For event value 2 and a matching receiver field +0x224, checks receiver state +0x22C. A 0x40000000 state is cleared and triggers 0x587B6020 plus a receiver virtual call at slot +0x04. If state is zero and global 0x58A247F4+0x30 is nonzero, it sets 0x40000000, extracts a five-bit value from a nested global field, combines it with receiver +0x228, and calls 0x587B6020. Returns through ret 0x0C.",
         "uncertainty": "The event parameter meaning, state flag, nested global field, and callback effects remain unresolved. No emulator input test was performed."
       }
+    },
+    {
+      "address": "588aa180",
+      "name": "FUN_588aa180",
+      "size": 1165,
+      "symbol": "_FUN_588aa180",
+      "source": "src/client-current/Main/FUN_588aa180.cpp",
+      "source_sha256": "3580774bf14d97efb56e46b200c7021f9a834a5a985d9b6ede1db3bebb4e88f6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58987D20",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "587B62B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "589A0750",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "589A076C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 254,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 285,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 352,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 372,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 398,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 420,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 480,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 500,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 526,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 557,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 564,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 624,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 644,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 670,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 701,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 711,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 733,
+          "target_address": "58A246B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 791,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 798,
+          "target_address": "58A24794",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 808,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 834,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 850,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 860,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 882,
+          "target_address": "58A246B8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 940,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 947,
+          "target_address": "58A24794",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 957,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 983,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 999,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1009,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1045,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1082,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule constructor for RTTI-identified CPannelRule.",
+        "called_by": "CPannelJump_ControlMenuScreen constructor FUN_58889640 directly calls this function for an allocated child object; the body installs vtable address 0x589A0750, whose RTTI name is CPannelRule.",
+        "behavior": "Initializes the base through 0x587B62B0, installs the class vtable, allocates child controls through 0x5897CC4E, and initializes data-backed controls through helpers including 0x58731C60, 0x58733280, and 0x588F3D70. Stores child pointers in receiver fields and applies observed state masks through 0x58902D20 and 0x58902CE0.",
+        "uncertainty": "The resource indices, field schemas, child identities, labels, and rendered layout remain unresolved. The calls and receiver fields are documented without inferred UI semantics; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588a9da0",
+      "name": "FUN_588a9da0",
+      "size": 245,
+      "symbol": "_FUN_588a9da0",
+      "source": "src/client-current/Main/FUN_588a9da0.cpp",
+      "source_sha256": "33742286e4f6d4486486a988bb2326cee232386da724e38af4bac6053410b3f5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58987AE8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "589A0750",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "587B5F50",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule cleanup body for RTTI-identified CPannelRule.",
+        "called_by": "RTTI-backed CPannelRule scalar deleting destructor FUN_588A9F00 calls this function at 0x588A9F03. The body writes the CPannelRule vtable at 0x589A0750.",
+        "behavior": "Cleans non-null receiver pointer fields +0x84, +0x88, +0x90, +0x8C, +0x94, +0x98, +0x9C, and +0xA8 by calling each child first-vtable entry with argument 1 and clearing the field. It then calls 0x587B5F50 on the receiver.",
+        "uncertainty": "Child ownership, cleanup argument semantics, and the base helper contract are unresolved. No runtime destruction test was performed."
+      }
+    },
+    {
+      "address": "588a9f00",
+      "name": "FUN_588a9f00",
+      "size": 30,
+      "symbol": "_FUN_588a9f00",
+      "source": "src/client-current/Main/FUN_588a9f00.cpp",
+      "source_sha256": "c3c7965ff0f4af895d782a5ba2f9020cb17573e83ea9728997d13d8ba2146fa5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588A9DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule scalar deleting destructor for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x00.",
+        "behavior": "Calls cleanup body FUN_588A9DA0, tests stack flag bit 0, conditionally calls 0x5897CC42 with the receiver, returns the receiver, and ends with ret 4. The function is 30 bytes; two int3 bytes follow before FUN_588A9F20.",
+        "uncertainty": "The stack flag and allocator helper meanings are unresolved. The extent was corrected from inventory length 27 to include ret 4; no runtime destruction test was performed."
+      }
+    },
+    {
+      "address": "588a9ea0",
+      "name": "FUN_588a9ea0",
+      "size": 39,
+      "symbol": "_FUN_588a9ea0",
+      "source": "src/client-current/Main/FUN_588a9ea0.cpp",
+      "source_sha256": "84ea5f05ad36212b4054c9a9c9bbd36d736947560847eaf560beed584b9af1b5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CPannelRule virtual state method for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x04.",
+        "behavior": "Updates receiver state bits at +0x24 by selecting mode 0x100, ORing low bits 0..2, then clearing bit 1 with mask 0xFFFD.",
+        "uncertainty": "The state mode and bit meanings are unresolved; no emulator test was performed."
+      }
+    },
+    {
+      "address": "588a9ed0",
+      "name": "FUN_588a9ed0",
+      "size": 39,
+      "symbol": "_FUN_588a9ed0",
+      "source": "src/client-current/Main/FUN_588a9ed0.cpp",
+      "source_sha256": "8ca5a6540bac5c1c4337d314f9b74dde12327bab4065f0266d23b6d2f27e4633",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "CPannelRule virtual state method for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x08.",
+        "behavior": "Updates receiver state bits at +0x24 by selecting mode 0x400, ORing low bits 0..2, then clearing bit 1 with mask 0xFFFD.",
+        "uncertainty": "The state mode and bit meanings are unresolved; no emulator test was performed."
+      }
+    },
+    {
+      "address": "588a9f20",
+      "name": "FUN_588a9f20",
+      "size": 430,
+      "symbol": "_FUN_588a9f20",
+      "source": "src/client-current/Main/FUN_588a9f20.cpp",
+      "source_sha256": "31555c695d81b2e5224848ca052394a7b29b6cfa8f9725a9dc552b548af4df16",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 226,
+          "target_address": "58902E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 250,
+          "target_address": "588AA0AB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 325,
+          "target_address": "58770A80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule virtual update method for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x0C.",
+        "behavior": "Runs when receiver flag bit 2 at +0x24 is set. For modes 0x100 and 0x400 it computes bounded coordinate deltas from receiver +0x04/+0x08 and target fields +0x6C/+0x70, calls interpolation helper 0x58902E10, then changes state when coordinates settle. It includes mode 0x200 and 0x500 branches and finally traverses children from +0x3C, dispatching child vtable slot +0x0C.",
+        "uncertainty": "Field units, transition names, and callback effects remain unresolved; no visual emulator test was performed."
+      }
+    },
+    {
+      "address": "588aa640",
+      "name": "FUN_588aa640",
+      "size": 173,
+      "symbol": "_FUN_588aa640",
+      "source": "src/client-current/Main/FUN_588aa640.cpp",
+      "source_sha256": "bf1d94166edadb9aa54124e264a96adae232cd1ed920465d97983805b03b65fd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 132,
+          "target_address": "588AA120",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 161,
+          "target_address": "588AA0D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule virtual input method for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x10.",
+        "behavior": "When receiver flag bit 1 is set, traverses the list at receiver +0x3C and dispatches child vtable slot +0x10 until the supplied pointer is found. In mode 0x200 it branches on event values 0x100, 0x201, 0x202, and 0x20A, routes child codes 0x26 and 0x28 to helpers 0x588AA120 and 0x588AA0D0, and returns receiver field +0x34 on the remaining paths.",
+        "uncertainty": "The event parameter schema, child identities, mode meaning, and helper effects remain unresolved. No emulator input test was performed."
+      }
+    },
+    {
+      "address": "588aa610",
+      "name": "FUN_588aa610",
+      "size": 47,
+      "symbol": "_FUN_588aa610",
+      "source": "src/client-current/Main/FUN_588aa610.cpp",
+      "source_sha256": "7f18959c70a786124d3526e0337e755e271764ae9c228f3bbae239c143087254",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "588AA0D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "588AA120",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "CPannelRule virtual event dispatch method for RTTI-identified CPannelRule.",
+        "called_by": "The RTTI-backed CPannelRule vtable at 0x589A0750 points to this function at slot +0x18.",
+        "behavior": "For event value 2, compares its child pointer argument against receiver fields +0x98 and +0x9C; matching fields dispatch to helpers 0x588AA0D0 and 0x588AA120 respectively. Other inputs return zero. Uses ret 0x0C.",
+        "uncertainty": "The child roles and helper effects remain unresolved. No emulator event test was performed."
+      }
     }
   ]
 }

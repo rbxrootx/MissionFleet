@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,353
-identified code bytes across six report units. There are 6,487 verified matches
-totaling 2,045,842 bytes (19.5412%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,356
+identified code bytes across six report units. There are 6,495 verified matches
+totaling 2,048,010 bytes (19.5619%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -116,6 +116,14 @@ operands. The scalar deleting destructor's inventory extent was corrected from
 padding. Resource roles and child layout meanings remain unresolved, and no
 emulator runtime test was performed. See
 [the class evidence](docs/current-main-launched-ship-class.md).
+
+The RTTI-backed `CPannelRule` child now has its 1,165-byte constructor,
+245-byte cleanup body, and all seven vtable entries matched or previously
+verified. The new work matches 2,168 bytes across eight functions and 61
+operands. Its scalar deleting destructor extent was corrected from 27 bytes to
+include the observed `ret 4`; following `int3` bytes remain excluded. Resource
+roles and child behavior remain unresolved; no emulator runtime test was
+performed. See [the class evidence](docs/current-main-rule-class.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
