@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,152
-identified code bytes across six report units. There are 6,337 verified matches
-totaling 1,483,651 bytes (14.1716%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,187
+identified code bytes across six report units. There are 6,338 verified matches
+totaling 1,496,638 bytes (14.2956%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -214,8 +214,10 @@ The current screen hierarchy and child-render dispatcher add seven functions
 The 13,492-byte `CShip_MapObjectScreen` constructor adds one verified
 function; see the
 [constructor evidence](docs/current-main-ship-map-screen-constructor.md).
-Current-build Main coverage is now 204 / 8,474 functions and
-510,233 / 2,353,218 bytes. See
+The input/chat dispatcher adds one more exact function match; see the
+[input/chat evidence](docs/current-main-input-chat-dispatch.md).
+Current-build Main coverage is now 205 / 8,474 functions and
+523,220 / 2,353,253 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
