@@ -1,13 +1,13 @@
-# Native decompilation status — 2 October 2026
+# Native decompilation status — 3 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
-identified code bytes across six report units. There are 6,350 verified matches
-totaling 1,612,298 bytes (15.4003%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
+identified code bytes across six report units. There are 6,382 verified matches
+totaling 1,813,537 bytes (17.3224%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -57,6 +57,53 @@ both compile to the original bytes under the recorded Visual C++ 6.0 SP5
 as relocations, and the shared opaque layout header is hash-pinned by the
 verifier. The callback contracts and field meanings remain unknown. This
 source-quality gain does not advance the overall byte-match count.
+
+The current-client `CLogoControlMenuScreen` method at `0x5878E2D0` now has an
+RTTI-backed class identification and a byte-identical 5,707-byte match. Its
+initialization fills 0x100-byte object slots near references to regional host
+literals and callback/configuration accessors; the exact mapping remains
+unresolved. See [the slice notes](docs/current-main-logo-control-menu-screen.md).
+
+The `CSpecBoard_Body` constructor at `0x588EDC50` now has a byte-identical
+5,643-byte match. Its caller allocates a `0x140`-byte child and stores it at
+parent offset `+0xDAC`; resource indices and control behavior remain unknown.
+See [the constructor evidence](docs/current-main-spec-board-body-constructor.md).
+
+The communicator-configuration panel's RTTI-identified message handler at
+`0x588450B0` now has a byte-identical 5,567-byte match. Its message branches
+update child state and handle cursor tests across four controls; message
+contracts and control mappings remain unresolved. See
+[the handler evidence](docs/current-main-communicator-config-panel-handler.md).
+
+The `CMarketBoard` constructor at `0x58799EB0` now has a byte-identical
+5,371-byte match. Its first caller stores the `0x304`-byte child at parent
+offset `+0xDB0` in the path that selects `ShipStructureMarket.spr`; resource
+indices and control meanings remain unresolved. See
+[the constructor evidence](docs/current-main-market-board-constructor.md).
+
+The nested `CPannelCommunicatorConfigFort` constructor at `0x5882D1F0` now has
+a byte-identical 5,235-byte match. Its parent is the communicator-configuration
+panel, and it creates the `CMarketBoard` child at `+0x174`; resource meanings
+and visible controls remain unresolved. See
+[the nested constructor evidence](docs/current-main-communicator-config-fort-constructor.md).
+
+The `CPageFactory_ControlMenuScreen` update method at `0x587E44C0` now has a
+byte-identical 5,224-byte match across four ranges. Its state branches move
+layout values and update child-control flags; state and control meanings remain
+unknown. See [the method evidence](docs/current-main-control-menu-state-update.md).
+
+The mission-event `DoAction` routine at `0x587A90D0` now has a byte-identical
+5,041-byte match across five ranges. Ghidra ties it to assertion strings in
+`MissionEventManager.cpp`; it dispatches event codes `0` through `0x15`, whose
+meanings remain unresolved. See
+[the method evidence](docs/current-main-mission-event-do-action.md).
+
+The `CShip_MapObjectScreen` vtable method at `0x588E5150` now has a byte-
+identical 5,014-byte match. Its three state branches update object counters,
+movement helpers, and child-control flags; state meanings remain unresolved.
+Two commutative `test` instructions require explicit original-byte emission for
+the compiler to preserve their encodings. See
+[the method evidence](docs/current-main-ship-map-object-update.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
@@ -261,14 +308,144 @@ vtable entry identifies the class, and its collision branch invokes the
 byte-matched damage resolver; units, status meanings, and hit effects remain
 unresolved. See the
 [shell map-object update evidence](docs/current-main-shell-map-object-update.md).
-The `CPannelCommunicatorConfigManageFleetTab` constructor `FUN_58836b90` adds
+The installed Main item/equipment detail renderer `FUN_5879b3b0` adds an
+8,189-byte match across one contiguous Ghidra range with 260 mapped operands
+checked. Nearby event handlers identify scroll, cancel, and buy-equipment
+actions; the record schema and precise screen identity remain unresolved. See
+the [item detail evidence](docs/current-main-item-detail-renderer.md).
+The shared `FUN_587e0e40` control rebuild routine adds one verified 8,252-byte
+match across ten segments with 173 mapped operands checked. Four 9-byte
+continuations after calls to the indirect callback thunk `FUN_5897cc42` are
+included because each contains a stack cleanup and receiver-field store that
+flows into the next Ghidra-owned block; the separate 3-byte alignment gap is
+excluded. Its class, resource schema, control identities, and runtime
+appearance remain unknown. See the
+[control rebuild evidence](docs/current-main-control-rebuild.md). The
+`CPannelCommunicatorConfigManageFleetTab` constructor `FUN_58836b90` adds
 8,448 bytes across two Ghidra ranges with 414 mapped operands checked. Its
 parent creates it immediately before the separately matched Manage Squad tab;
 the child control meanings remain unresolved. See the
 [Manage Fleet tab evidence](docs/current-main-manage-fleet-tab-constructor.md).
-Current-build Main coverage is now 217 / 8,474 functions and
-638,880 / 2,353,354 bytes. See
-[the event-queue notes](docs/current-main-event-queue.md).
+The `CRoomSettingManager` constructor `FUN_588c9280` adds a 7,746-byte match
+across five Ghidra ranges with 274 mapped operands checked. Its parent allocates
+`0x2AC` bytes for the receiver; the four intervening gaps are skipped alignment
+instructions. Resource labels and child-control meanings remain unresolved.
+See the [room setting manager evidence](docs/current-main-room-setting-manager-constructor.md).
+The `CPanelDashboard` constructor `FUN_58812170` adds a 7,574-byte match in one
+contiguous Ghidra range with 264 mapped operands checked. Its global setup
+caller allocates `0x19C` bytes and stores the constructed panel in
+`DAT_58A245C8`; child controls are built from indexed resource tables. Their
+labels and behavior remain unresolved. See the
+[dashboard constructor evidence](docs/current-main-dashboard-constructor.md).
+The `CPannelTrade` constructor `FUN_588b61e0` adds a 7,555-byte match across
+three Ghidra ranges with 199 mapped operands checked. It loads
+`ITFTRD.spr`; its caller allocates `0x1DC` bytes and stores the returned panel
+at parent offset `+0x4F4`. The two three-byte inter-range gaps are skipped LEA
+alignment instructions. Resource labels and trade interactions remain
+unresolved. See the
+[trade panel evidence](docs/current-main-trade-panel-constructor.md).
+The `FUN_5878af40` startup resource and global UI initializer adds a 7,492-byte
+match across two Ghidra ranges with 396 mapped operands checked. An adjacent
+startup wrapper passes its address to a callback-registration slot; the body
+loads shared SPR assets and constructs global panels, including the matched
+dashboard. The callback contract and resource-table meanings remain unresolved.
+See the [global UI setup evidence](docs/current-main-global-ui-setup.md).
+The `CPannelOption` constructor `FUN_588a13c0` adds a 7,395-byte match in one
+contiguous Ghidra range with 256 mapped operands checked. Its startup caller
+allocates `0x370` bytes, passes the observed layout arguments, and stores it in
+`DAT_58A2462C`; the constructor loads `ITFOPT.spr` and builds child controls.
+Their labels and option effects remain unresolved. See the
+[option panel evidence](docs/current-main-option-panel-constructor.md).
+The `CHCB_CenterPoint` constructor `FUN_587808a0` adds a 7,107-byte match
+across two Ghidra ranges with 222 mapped operands checked. Its caller loads
+`HCB.spr`, `HCBEFF.spr`, and `HCBSND.spr`, allocates `0xDC`-byte entries, and
+stores the constructed pointers in its sprite list. The three bytes between
+the ranges are unowned and skipped by a branch. Resource modes and runtime
+appearance remain unresolved. See the
+[center-point constructor evidence](docs/current-main-hcb-center-point-constructor.md).
+The `CPageResultOfBattle_ControlMenuScreen` constructor `FUN_5880dd80` adds a
+7,101-byte match across two Ghidra ranges with 205 mapped operands checked.
+The global UI initializer allocates `0x90C` bytes, passes its position and
+layout arguments, and stores the screen pointer in `DAT_58A245A4`. The six
+bytes between ranges are unowned and skipped by a jump. Child labels and
+interactive behavior remain unresolved. See the
+[battle-result menu evidence](docs/current-main-battle-result-control-menu.md).
+The virtual update routine `FUN_5873fe80` adds a 6,761-byte match in one
+contiguous Ghidra range with 298 mapped operands checked. An imported vftable
+slot points to it, and the function updates position history and sprite state;
+its class and field semantics remain unresolved. See the
+[virtual spatial update evidence](docs/current-main-virtual-spatial-update.md).
+The item-detail population routine `FUN_5879dd90` adds a 6,702-byte match
+across five Ghidra ranges with 214 mapped operands checked. Two callers pass
+category-filtered 20-byte records; the routine builds detail controls and
+refreshes the matched renderer, but record fields and stat units remain
+unresolved. Its four three-byte gaps are unowned and skipped by jumps. See the
+[item-detail population evidence](docs/current-main-item-detail-population.md).
+The `CPannelMainControl_MenuScreen` constructor `FUN_5888e5e0` adds a 6,596-byte
+match in one contiguous range with 196 mapped operands checked. Its caller
+allocates `0x650` bytes, passes the observed layout arguments, and stores it in
+`DAT_58A245C0`; child labels and actions remain unresolved. See the
+[main control-menu evidence](docs/current-main-control-menu-constructor.md).
+The `CPannelArmorControl` constructor `FUN_58817900` adds a 6,580-byte match
+across four Ghidra ranges with 237 mapped operands checked. It loads
+`ITPNAMR.spr`; its caller allocates `0xAC` bytes and stores it at parent offset
+`+0xDC8`. The three gaps are unowned and skipped by jumps. Child labels and
+interactions remain unknown. See the
+[armor-control evidence](docs/current-main-armor-control-constructor.md).
+The virtual `CPageChannelBattle_ControlMenuScreen` method `FUN_587d3860` adds a
+6,493-byte match across three ranges with 166 mapped operands checked. RTTI
+and its vftable tie it to that class; it resets/rebuilds sprite children, but
+its exact callback role remains unresolved. Its two gaps are unowned and
+skipped by jumps. See the
+[channel-battle control update evidence](docs/current-main-channel-battle-control-update.md).
+The `CPannelCommunicatorConfigPannel` constructor `FUN_58843380` adds a
+6,408-byte match across four ranges with 181 mapped operands checked. Its
+caller allocates `0x18C` bytes and stores the panel at parent offset `+0xDC`.
+The gaps are unowned; the middle gap separates a branch target from the next
+range's start. See the
+[communicator-configuration panel evidence](docs/current-main-communicator-config-panel.md).
+The `CMissionFile` construction routine `FUN_587ad4b0` adds a 6,185-byte match
+across six Ghidra ranges with 159 mapped operands checked. Its three direct
+callers pass mode values `-1`, `1,000,000`, and `1,000,001`; Ghidra shows the
+million-mode path creating default `Garrison` entries and the other paths
+building nested records. The record schema, field meanings, and runtime effects
+remain uncertain. See the
+[mission-file evidence](docs/current-main-mission-file-constructor.md).
+The `CPannelFireControl` constructor `FUN_58854a00` adds a 6,126-byte match in
+one Ghidra range with 167 mapped operands checked. Its startup caller allocates
+`0x320` bytes and stores the panel in `DAT_58A245C4`; its body builds 32 repeated
+sprite-bundle children and several groups of controls. Their labels, actions,
+and resource indices remain unresolved. See the
+[fire-control panel evidence](docs/current-main-fire-control-panel-constructor.md).
+The record-driven updater `FUN_58864fd0` adds a 6,071-byte match across four
+Ghidra ranges with 132 operands checked. The dispatcher reaches it through
+`FUN_58871d60` for case `0x80020118`; it copies record data and updates repeated
+child-resource pointers. Its receiver type and record semantics remain
+unknown. See the
+[record refresh evidence](docs/current-main-record-refresh-method.md).
+The `CPannelReadyNCancelOnJoin` constructor `FUN_588a7310` adds a 5,977-byte
+match across two ranges with 193 operands checked. Its caller allocates `0x208`
+bytes and stores it at parent offset `+0x174`; the body builds resource-backed
+sprite and menu controls. Their exact labels and ready/cancel behavior remain
+unresolved. See the
+[ready/cancel panel evidence](docs/current-main-ready-cancel-on-join-panel.md).
+The `FUN_58850a70` method adds a 5,933-byte match across 40 Ghidra ranges with
+125 operands checked. Its caller derives one of 15 display modes from object
+and UI state, then this function toggles groups of child-control flags and
+issues drawing calls. The mode labels and receiver type remain unknown. See
+the [15-mode update evidence](docs/current-main-15-mode-control-state-refresh.md).
+The `CSpecBoard_Equip` constructor `FUN_588f15f0` adds a 5,868-byte match across
+two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
+and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
+sprite and data controls. Exact labels and actions remain unknown. See the
+[equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
+Current-build Main coverage is now 249 / 8,474 functions and
+840,119 / 2,353,390 bytes. The `CPannelCommunicatorConfigMemoManage`
+initializer `FUN_5883f4c0` adds a 4,619-byte match in one range, with 134
+relocation operands checked. Ghidra shows `FUN_58843380` allocating `0x118`
+bytes and storing the returned pointer at `+0xBC`; sprite resource meanings
+remain unresolved. See the
+[initializer evidence](docs/current-main-communicator-config-memo-manage.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
