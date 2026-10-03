@@ -32,6 +32,8 @@ ADDRESSES = (
     "58C60FD6", "58E0A61E", "58F8160D", "58C84F0B", "58DC34AD",
     "58C319AB", "58D6F6B0", "58D6F58A", "58C5D37B", "58FAC690",
     "58753590", "58753DE0", "587535C0", "58753E10",
+    "58906EA0", "58907100", "58907180", "589071A0",
+    "58906F30", "58907380", "58907390",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -45,6 +47,18 @@ RELOCATION_OVERRIDES = {
             "audit_only": False,
         },
     ],
+}
+SOURCE_COMPILER_ADDRESSES = {
+    # The legacy MSVC 6 executable cannot start in the current Windows
+    # environment (WinError 623). These all emit literal x86 instruction
+    # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "58906EA0", "58907100", "58907180", "589071A0",
+    "58906F30", "58907380", "58907390",
+}
+SOURCE_COMPILER = {
+    "kind": "clang-cl",
+    "version": "19.1.4",
+    "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
     "5878D6D0": {
@@ -713,11 +727,64 @@ EVIDENCE = {
         "behavior": "Masks the low byte of the receiver pointer into a local value, then calls 0x587535C0 with the supplied source range, receiver field at +8, and that mask value. Ghidra shows the same wrapper shape as 0x58753DE0, but the target helper uses 0x808-byte records.",
         "uncertainty": "The low-byte mask's semantic role and record type are unknown; arguments and call flow are directly visible.",
     },
+    "58906EA0": {
+        "name_in_analysis": "FUN_58906ea0",
+        "called_by": "Called by the CNumberScreen scalar-deleting destructor at 0x58907180.",
+        "behavior": "Installs the CNumberScreen vtable, invokes the first virtual method with argument 1 for nonnull fields at +0xF4 and +0xF0, clears both fields, then calls the CScreen cleanup helper at 0x58902D60.",
+        "uncertainty": "The two child fields' semantic roles and ownership policy are unresolved; the virtual dispatch and field updates are directly observed.",
+    },
+    "58907100": {
+        "name_in_analysis": "FUN_58907100",
+        "called_by": "Directly called twice by the verified CPannelJump_ControlMenuScreen constructor FUN_58889640.",
+        "behavior": "Calls the CScreen/base initializer at 0x589031A0, installs RTTI-backed CNumberScreen vtable 0x589A2938, stores the supplied fields, initializes observed state and child fields, and calls helper 0x58907040.",
+        "uncertainty": "Constructor argument meanings and most receiver field roles remain unresolved; the client/emulator runtime behavior has not been exercised.",
+    },
+    "58907180": {
+        "name_in_analysis": "FUN_58907180",
+        "called_by": "Vtable slot +0 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Calls cleanup body 0x58906EA0, calls host thunk 0x5897CC42 when bit 0 of the stack deletion flag is set, and returns the receiver with ret 4.",
+        "uncertainty": "The host thunk's destruction/ownership contract is unresolved. The 30-byte extent includes ret 4; the following two int3 bytes are padding.",
+    },
+    "589071A0": {
+        "name_in_analysis": "FUN_589071a0",
+        "called_by": "Vtable slot +0x0C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "When receiver flag bit 2 is set and the values at +0x60 and +0x64 differ, moves the value at +0x60 toward +0x64 using the observed thresholds and step sizes, stores it, calls 0x58907040, and dispatches virtual slot +0x0C over the child list at +0x3C.",
+        "uncertainty": "The values' units, meanings, thresholds, and child update contract are unknown; no numeric or UI semantics are inferred.",
+    },
+    "58906F30": {
+        "name_in_analysis": "FUN_58906f30",
+        "called_by": "Vtable slot +0x14 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "When receiver flag bit 0 is set, walks the child list at +0x4C, dispatches slot +0x14 for qualifying entries, uses helper 0x5873A5D0 with receiver fields including +0xF8 and +0xE8, then traverses the child list again and dispatches the same slot.",
+        "uncertainty": "The visible result, helper semantics, child eligibility, and fields' semantic roles are not established; no emulator visual test was performed.",
+    },
+    "58907380": {
+        "name_in_analysis": "FUN_58907380",
+        "called_by": "Vtable slot +0x18 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x589072A0.",
+        "uncertainty": "The field and helper contract are unresolved.",
+    },
+    "58907390": {
+        "name_in_analysis": "FUN_58907390",
+        "called_by": "Vtable slot +0x1C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x58907300.",
+        "uncertainty": "The field and helper contract are unresolved.",
+    },
 }
 
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def merge_match_records(previous, updates):
+    """Replace updated addresses in place and retain all other catalog rows."""
+    pending = {item["address"].upper(): item for item in updates}
+    merged = []
+    for item in previous:
+        address = item["address"].upper()
+        merged.append(pending.pop(address, item))
+    merged.extend(pending.values())
+    return merged
 
 
 def main():
@@ -755,10 +822,19 @@ def main():
             "source_sha256": sha256(source_path),
             "verified_by": marker,
             "flags": ["/O2", "/GX-", "/Zm200"],
+            **({"source_compiler": SOURCE_COMPILER}
+               if address in SOURCE_COMPILER_ADDRESSES else {}),
             "relocations": [dict(item, audit_only=item.get("audit_only", True))
                             for item in relocations],
             "evidence": EVIDENCE[address],
         })
+    # This script maintains a rolling subset of the full current-client
+    # verification catalog. Preserve older verified records outside the
+    # subset so adding a focused batch cannot silently erase progress.
+    output = ROOT / "config/NF2_2026/client-verifications.json"
+    if output.is_file():
+        previous = json.loads(output.read_text(encoding="utf-8"))
+        matches = merge_match_records(previous["matches"], matches)
     document = {
         "schema_version": 1,
         "component": "Main.dll",
@@ -770,7 +846,6 @@ def main():
         "compiler": old_config["compiler"],
         "matches": matches,
     }
-    output = ROOT / "config/NF2_2026/client-verifications.json"
     output.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Wrote {len(matches)} {marker} records to {output.relative_to(ROOT)}")
 

@@ -2313,7 +2313,7 @@
         "name_in_analysis": "FUN_588f3d70",
         "called_by": "Called by the installed logo/control screen constructor at 0x5878D6D0 for the Logo.spr path.",
         "behavior": "Calls FUN_58906de0 to initialize/load the supplied sprite-file object, installs the CSpriteFileFDL vtable, checks the resulting sprite/effect/bundle arrays, and calls FUN_587750B0 with mode 2 only when those arrays are empty and the final flag is 1.",
-        "uncertainty": "The caller-visible meaning of the final flag and the empty-file fallback path are not established; the sprite object\u00e2\u20ac\u2122s indexed field names are retained as offsets."
+        "uncertainty": "The caller-visible meaning of the final flag and the empty-file fallback path are not established; the sprite object\u2019s indexed field names are retained as offsets."
       }
     },
     {
@@ -2347,7 +2347,7 @@
         "name_in_analysis": "FUN_58906de0",
         "called_by": "Called by FUN_588F3D70 and other sprite-file consumers.",
         "behavior": "Installs the CSpriteFile vtable and delegates to FUN_58903E40. When the input is null or the parser reports zero, it resets the header fields and writes the 40-byte `Sangduck Sprite File` fallback signature.",
-        "uncertainty": "The parser\u00e2\u20ac\u2122s success status and ownership of allocated payloads are only partially established; several fallback structure fields have no recovered semantic names."
+        "uncertainty": "The parser\u2019s success status and ownership of allocated payloads are only partially established; several fallback structure fields have no recovered semantic names."
       }
     },
     {
@@ -4887,7 +4887,7 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_58903e40",
-        "called_by": "Directly called by FUN_58906DE0; the parent loader is reached from the installed logo screen\u00e2\u20ac\u2122s `.\\SPR\\Logo.spr` path.",
+        "called_by": "Directly called by FUN_58906DE0; the parent loader is reached from the installed logo screen\u2019s `.\\SPR\\Logo.spr` path.",
         "behavior": "The 12,100-byte parser has both host-resource and file-callback input paths. It checks the 40-byte `Sangduck Sprite File` signature, handles format versions 1 through 3, validates size/check fields, allocates sprite/effect/bundle tables, decodes sprite payload data, and formats errors through FUN_5874BA60.",
         "uncertainty": "The exact meanings of the packed header fields, renderer mode globals, payload encodings, and many directly called record/decoder helpers remain unresolved. The corrected extent includes the observed security-cookie epilogue and `ret 8`; the Ghidra body-byte count had stopped five bytes short of that return."
       }
@@ -5011,8 +5011,8 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_587750b0",
-        "called_by": "Called by FUN_588F3D70 with mode 2 when the loaded file\u00e2\u20ac\u2122s checked arrays are empty and its final flag is 1.",
-        "behavior": "If the object\u00e2\u20ac\u2122s handle at +4 is nonzero, builds a bounded path/message buffer from the input and one of several mode-specific strings, appends CRLF, and uses host-supplied callbacks to open, seek, write, and close a handle. The verified code span ends at `ret 8` and is 515 bytes.",
+        "called_by": "Called by FUN_588F3D70 with mode 2 when the loaded file\u2019s checked arrays are empty and its final flag is 1.",
+        "behavior": "If the object\u2019s handle at +4 is nonzero, builds a bounded path/message buffer from the input and one of several mode-specific strings, appends CRLF, and uses host-supplied callbacks to open, seek, write, and close a handle. The verified code span ends at `ret 8` and is 515 bytes.",
         "uncertainty": "The callback signatures, file/path roles, and purpose of this conditional write are not resolved; the function is not labeled as a save or log routine."
       }
     },
@@ -5041,7 +5041,7 @@
         "name_in_analysis": "FUN_58731bd0",
         "called_by": "Called by FUN_587750B0 to append a mode-specific path component; it delegates destination-length checking to FUN_58731500.",
         "behavior": "Checks the supplied destination capacity, scans the existing destination through FUN_58731500, appends bytes from the supplied source until NUL or capacity exhaustion, terminates the destination, and returns the captured negative error code on invalid size or truncation.",
-        "uncertainty": "The helper\u00e2\u20ac\u2122s intended library/API name and exact meaning of its error constants are not established by the client call graph."
+        "uncertainty": "The helper\u2019s intended library/API name and exact meaning of its error constants are not established by the client call graph."
       }
     },
     {
@@ -237722,6 +237722,303 @@
         "called_by": "CBundleButton virtual event method FUN_587501E0 calls this helper directly.",
         "behavior": "Uses indexes +0x6C and +0x88 to resolve bounded 0x40-byte records from receiver resource state at +0x50, updates child data at +0x54 and +0x58, sets selector field +0x9C to 2, then calls 0x58907990 and a child virtual method.",
         "uncertainty": "The event branch contract, resource schema, and helper effects remain unresolved. No runtime event test was performed."
+      }
+    },
+    {
+      "address": "58906EA0",
+      "name": "FUN_58906ea0",
+      "size": 142,
+      "symbol": "_FUN_58906ea0",
+      "source": "src/client-current/Main/FUN_58906ea0.cpp",
+      "source_sha256": "16cc87eec04e9d1adb5d6ce5c29986d140ca5167d0ac596bd1a1e312929b7b4d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897F888",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "589A2938",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "58902D60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58906ea0",
+        "called_by": "Called by the CNumberScreen scalar-deleting destructor at 0x58907180.",
+        "behavior": "Installs the CNumberScreen vtable, invokes the first virtual method with argument 1 for nonnull fields at +0xF4 and +0xF0, clears both fields, then calls the CScreen cleanup helper at 0x58902D60.",
+        "uncertainty": "The two child fields' semantic roles and ownership policy are unresolved; the virtual dispatch and field updates are directly observed."
+      }
+    },
+    {
+      "address": "58907100",
+      "name": "FUN_58907100",
+      "size": 116,
+      "symbol": "_FUN_58907100",
+      "source": "src/client-current/Main/FUN_58907100.cpp",
+      "source_sha256": "ef755bd72708f4725e4f714bde478f97ce791d3de09ffce3c799f858eb70dcec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "589A2938",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "58907040",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907100",
+        "called_by": "Directly called twice by the verified CPannelJump_ControlMenuScreen constructor FUN_58889640.",
+        "behavior": "Calls the CScreen/base initializer at 0x589031A0, installs RTTI-backed CNumberScreen vtable 0x589A2938, stores the supplied fields, initializes observed state and child fields, and calls helper 0x58907040.",
+        "uncertainty": "Constructor argument meanings and most receiver field roles remain unresolved; the client/emulator runtime behavior has not been exercised."
+      }
+    },
+    {
+      "address": "58907180",
+      "name": "FUN_58907180",
+      "size": 30,
+      "symbol": "_FUN_58907180",
+      "source": "src/client-current/Main/FUN_58907180.cpp",
+      "source_sha256": "4abd867e6ab2383ba1f0fb8e424c3d7e9c0c7b0fbee13414efbff73cc662a832",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58906EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907180",
+        "called_by": "Vtable slot +0 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Calls cleanup body 0x58906EA0, calls host thunk 0x5897CC42 when bit 0 of the stack deletion flag is set, and returns the receiver with ret 4.",
+        "uncertainty": "The host thunk's destruction/ownership contract is unresolved. The 30-byte extent includes ret 4; the following two int3 bytes are padding."
+      }
+    },
+    {
+      "address": "589071A0",
+      "name": "FUN_589071a0",
+      "size": 243,
+      "symbol": "_FUN_589071a0",
+      "source": "src/client-current/Main/FUN_589071a0.cpp",
+      "source_sha256": "263a5f59b7f845fbbeee9b657ac789163d97ee769395806538334b504e595237",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "5890728D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "5890726F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "58907265",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "58907040",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589071a0",
+        "called_by": "Vtable slot +0x0C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "When receiver flag bit 2 is set and the values at +0x60 and +0x64 differ, moves the value at +0x60 toward +0x64 using the observed thresholds and step sizes, stores it, calls 0x58907040, and dispatches virtual slot +0x0C over the child list at +0x3C.",
+        "uncertainty": "The values' units, meanings, thresholds, and child update contract are unknown; no numeric or UI semantics are inferred."
+      }
+    },
+    {
+      "address": "58906F30",
+      "name": "FUN_58906f30",
+      "size": 265,
+      "symbol": "_FUN_58906f30",
+      "source": "src/client-current/Main/FUN_58906f30.cpp",
+      "source_sha256": "a9f16f1d590b3c810be083fbcadd4c60e65d630190c3ddd5959f288ad51e3b74",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58907032",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "5890700E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "5873A5D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58906f30",
+        "called_by": "Vtable slot +0x14 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "When receiver flag bit 0 is set, walks the child list at +0x4C, dispatches slot +0x14 for qualifying entries, uses helper 0x5873A5D0 with receiver fields including +0xF8 and +0xE8, then traverses the child list again and dispatches the same slot.",
+        "uncertainty": "The visible result, helper semantics, child eligibility, and fields' semantic roles are not established; no emulator visual test was performed."
+      }
+    },
+    {
+      "address": "58907380",
+      "name": "FUN_58907380",
+      "size": 13,
+      "symbol": "_FUN_58907380",
+      "source": "src/client-current/Main/FUN_58907380.cpp",
+      "source_sha256": "930c2bee121be2d327fdc3e56662f678ef0341786de283bd56c3c19dad4e401f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 8,
+          "target_address": "589072A0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907380",
+        "called_by": "Vtable slot +0x18 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x589072A0.",
+        "uncertainty": "The field and helper contract are unresolved."
+      }
+    },
+    {
+      "address": "58907390",
+      "name": "FUN_58907390",
+      "size": 13,
+      "symbol": "_FUN_58907390",
+      "source": "src/client-current/Main/FUN_58907390.cpp",
+      "source_sha256": "afb1db7cc170f45778e531d0ed7e0614a09282637cd1f8356bc0eb98ed44a8c5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 8,
+          "target_address": "58907300",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907390",
+        "called_by": "Vtable slot +0x1C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
+        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x58907300.",
+        "uncertainty": "The field and helper contract are unresolved."
       }
     }
   ]

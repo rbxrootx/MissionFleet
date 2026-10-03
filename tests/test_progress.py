@@ -2,7 +2,7 @@ import hashlib
 import json
 import unittest
 
-from tools import generate_progress
+from tools import build_current_main_verifications, generate_progress
 
 
 class ProgressReportTests(unittest.TestCase):
@@ -13,9 +13,9 @@ class ProgressReportTests(unittest.TestCase):
     def test_public_inventory_and_verified_progress_are_complete_and_honest(self):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
-        self.assertEqual(self.report["measures"]["total_code"], "10469359")
-        self.assertEqual(self.report["measures"]["matched_functions"], 6_507)
-        self.assertEqual(self.report["measures"]["matched_code"], "2050381")
+        self.assertEqual(self.report["measures"]["total_code"], "10469362")
+        self.assertEqual(self.report["measures"]["matched_functions"], 6_514)
+        self.assertEqual(self.report["measures"]["matched_code"], "2051203")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -25,9 +25,9 @@ class ProgressReportTests(unittest.TestCase):
         current = next(unit for unit in self.report["units"]
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
-        self.assertEqual(current["measures"]["total_code"], "2353425")
-        self.assertEqual(current["measures"]["matched_functions"], 374)
-        self.assertEqual(current["measures"]["matched_code"], "1076963")
+        self.assertEqual(current["measures"]["total_code"], "2353428")
+        self.assertEqual(current["measures"]["matched_functions"], 381)
+        self.assertEqual(current["measures"]["matched_code"], "1077785")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -63,6 +63,23 @@ class ProgressReportTests(unittest.TestCase):
         mis_cased = "src/client-2062/Main/FUN_1008F9C0.cpp"
         self.assertTrue(generate_progress.exact_case_path_exists(exact))
         self.assertFalse(generate_progress.exact_case_path_exists(mis_cased))
+
+    def test_current_client_verification_updates_preserve_existing_catalog_order(self):
+        old = [
+            {"address": "1000", "name": "old-a"},
+            {"address": "2000", "name": "old-b"},
+            {"address": "3000", "name": "old-c"},
+        ]
+        updates = [
+            {"address": "2000", "name": "new-b"},
+            {"address": "4000", "name": "new-d"},
+        ]
+        merged = build_current_main_verifications.merge_match_records(old, updates)
+        self.assertEqual(
+            [(item["address"], item["name"]) for item in merged],
+            [("1000", "old-a"), ("2000", "new-b"),
+             ("3000", "old-c"), ("4000", "new-d")],
+        )
 
 
 if __name__ == "__main__":

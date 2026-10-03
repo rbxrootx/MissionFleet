@@ -1,0 +1,43 @@
+# Current Main.dll `CNumberScreen` class
+
+## RTTI and construction evidence
+
+The vtable address point is `0x589A2938`. Its Complete Object Locator is at
+`0x589AB0D8`; the type descriptor at `0x589B9918` names the class
+`.?AVCNumberScreen@@`. The verified `CPannelJump_ControlMenuScreen`
+constructor `FUN_58889640` directly calls `FUN_58907100` twice. That
+constructor initializes the base through `FUN_589031A0`, installs the
+`CNumberScreen` vtable, stores its supplied values and observed state fields,
+and calls `FUN_58907040`.
+
+## Constructor, cleanup, and vtable
+
+The 142-byte cleanup body `FUN_58906EA0` is called by the scalar-deleting
+destructor. It installs the class vtable, invokes the first virtual method with
+argument 1 for nonnull fields at `+0xF4` and `+0xF0`, clears each field, then
+calls the `CScreen` cleanup helper `FUN_58902D60`.
+
+| Slot | Function | Bytes | Captured behavior |
+| --- | --- | ---: | --- |
+| `+0x00` | `FUN_58907180` | 30 | Calls the cleanup body and invokes host thunk `0x5897CC42` when bit 0 of the stack deletion flag is set; returns the receiver with `ret 4`. |
+| `+0x04` | `FUN_58731770` | 30 | Previously byte-verified shared state method. |
+| `+0x08` | `FUN_588A9ED0` | 39 | Previously byte-verified shared state method. |
+| `+0x0C` | `FUN_589071A0` | 243 | Advances the value at `+0x60` toward `+0x64` using observed thresholds and step sizes when receiver flag bit 2 is set, then updates the child list at `+0x3C` through slot `+0x0C`. |
+| `+0x10` | `FUN_5873B360` | 69 | Previously byte-verified shared method. |
+| `+0x14` | `FUN_58906F30` | 265 | With receiver flag bit 0 set, visits the child list at `+0x4C`, calls child slot `+0x14` for observed eligible entries, uses helper `0x5873A5D0`, then visits the list again. |
+| `+0x18` | `FUN_58907380` | 13 | Forwards the receiver field at `+0xEC` to helper `0x589072A0`. |
+| `+0x1C` | `FUN_58907390` | 13 | Forwards the receiver field at `+0xEC` to helper `0x58907300`. |
+
+Objdiff 3.8.0 verifies the seven newly matched functions: **822 bytes and 18
+mapped operands**. Together with the three previously verified shared slots,
+all eight vtable entries match. The scalar-deleting destructor's extent was
+corrected from 27 to 30 bytes to include `ret 4`; the two following `int3`
+bytes are padding and excluded.
+
+## Limits
+
+The class name is confirmed by RTTI, but numeric field units and meanings,
+child roles, helper contracts, and visible output are unresolved. Function
+matching validates emitted bytes against the captured image; it does not prove
+the high-level behavior or that the class has been exercised in the emulator.
+No emulator runtime or visual test was performed.

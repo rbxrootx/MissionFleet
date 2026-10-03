@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,359
-identified code bytes across six report units. There are 6,507 verified matches
-totaling 2,050,381 bytes (19.5846%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,362
+identified code bytes across six report units. There are 6,514 verified matches
+totaling 2,051,203 bytes (19.5924%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -132,6 +132,15 @@ functions and 45 operands. The scalar deleting destructor extent was corrected
 to include its `ret 4`; trailing `int3` padding is excluded. Child/resource
 semantics remain unresolved, and no emulator runtime test was performed. See
 [the class evidence](docs/current-main-bundle-button-class.md).
+
+The RTTI-backed `CNumberScreen` class now has its constructor, cleanup body,
+and all eight vtable entries matched or previously verified. The new work
+matches 822 bytes across seven functions and 18 mapped operands. The scalar
+deleting destructor extent was corrected from 27 to 30 bytes to include its
+`ret 4`; trailing `int3` padding is excluded. Numeric field meanings, child
+roles, helper contracts, and rendered appearance remain unresolved; no emulator
+runtime or visual test was performed. See
+[the class evidence](docs/current-main-number-screen-class.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
