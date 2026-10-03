@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,402 verified matches
-totaling 1,882,853 bytes (17.9844%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,403 verified matches
+totaling 1,902,080 bytes (18.1681%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 269 / 8,474 functions and
-924,939 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 270 / 8,474 functions and
+928,662 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
@@ -487,6 +487,13 @@ with five mapped operand targets checked. It fills coordinate record arrays
 through 20-iteration, 120-iteration, and caller-sized loops from two lookup tables. Its
 only identified direct caller is `FUN_588e05c0`; class and rendered effect remain
 unknown. See the [geometry-helper evidence](docs/current-main-geometry-helper.md).
+The `CPannelCommunicatorConfigMemoManage` virtual handler `FUN_58840890` adds
+3,723 bytes in one Ghidra range, with 137 mapped operands checked. Its vtable
+address is `0x5899E390`, 0x18 bytes into the table installed by constructor
+`FUN_5883F4C0`. Command 2 dispatches among child controls, changes mode and
+selection fields, and updates child flags; command `0xF764` follows a separate
+selection path. Control labels and command meanings remain unknown. See the
+[memo-management handler evidence](docs/current-main-communicator-config-memo-handler.md).
 `FUN_5876a570` adds a 4,160-byte prompt-handler
 match in one Ghidra range, with 266 mapped operands checked. Its callers pass
 many action codes; the communicator-configuration panel uses code 300 for the
