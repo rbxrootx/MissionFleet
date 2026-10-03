@@ -234221,6 +234221,754 @@
         "behavior": "Clears 0x30 bytes beginning at receiver+0x78 through the observed 0x5897CC48 callback call shape. Reads dwords at +0x18 and +0x1C from the supplied record into globals 0x58A0B468 and 0x58A0B46C. It applies XOR 0xAAAAAAAA to those values before two direct calls, invokes the observed callback at 0x5898C198 with receiver-derived and record arguments, calls 0x5875F940 on receiver+0x154, and calls the callback at 0x5898C030 with the key at 0x5899A274. It measures a null-terminated string at child+0x80, stores that length at +0x8C and +0x94, then branches on globals 0x58A0B4A0 and 0x58A0B4A4 to update receiver and child fields before ret 4.",
         "uncertainty": "The meaning and schema of the supplied record, the two XOR-transformed values, callback contracts, string-key meaning, control field identities, and branch meanings are unresolved. Ghidra headless decompilation did not return; behavior here is limited to the captured Ghidra extent, callsite, and decoded instructions. No emulator or visual test was performed."
       }
+    },
+    {
+      "address": "588889D0",
+      "name": "FUN_588889d0",
+      "size": 30,
+      "symbol": "_FUN_588889d0",
+      "source": "src/client-current/Main/FUN_588889d0.cpp",
+      "source_sha256": "348e5a43e6e893bc0833ed91a739147f9945b23e2cb90f174479e3a233037c5c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58888480",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x00.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "Calls FUN_58888480, conditionally calls 0x5897CC42 based on stack flag bit 0, returns the receiver, and ends with ret 4 at 0x588889EB.",
+        "uncertainty": "The base cleanup helper, stack flag meaning, and receiver ownership are unresolved. Ghidra inventory previously stopped before ret 4; two int3 bytes follow before the next function. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58889200",
+      "name": "FUN_58889200",
+      "size": 194,
+      "symbol": "_FUN_58889200",
+      "source": "src/client-current/Main/FUN_58889200.cpp",
+      "source_sha256": "1a7e1c5312fbecad9d4f7b8781a8ef90049ed110a4a4dadc79ab68fc1548d7de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 47,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "587B67A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "588F3F70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "587B67A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "587B67A0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x04.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "Updates receiver state at +0x24, copies +4 to +0x50, clears +0x54, branches on globals 0x58A24580 and 0x58A24598, dispatches child virtual methods, and calls FUN_587B67A0 with values derived from child fields.",
+        "uncertainty": "The global comparison, child roles, state bits, and FUN_587B67A0 contract remain unknown; the final paths tail-dispatch through a child vtable. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888E30",
+      "name": "FUN_58888e30",
+      "size": 156,
+      "symbol": "_FUN_58888e30",
+      "source": "src/client-current/Main/FUN_58888e30.cpp",
+      "source_sha256": "3e5dd1ac1804c3238a873c286dcd7a7c546a57a07e545fd571531d3cbdde90d1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x08.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "Sets the receiver state mode to 0x400 while applying the observed masks, copies +4 to +0x50, stores -0xC8 at +0x54, and dispatches child virtual slot +0x08 for children at +0xDC through +0xE8. A flag check on the child at +0xF0 gates another virtual call and a write of 5 to the child at +0xF4+0x50.",
+        "uncertainty": "Child class identities, state bits, coordinates, and the significance of constant -0xC8 and value 5 are unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588892D0",
+      "name": "FUN_588892d0",
+      "size": 804,
+      "symbol": "_FUN_588892d0",
+      "source": "src/client-current/Main/FUN_588892d0.cpp",
+      "source_sha256": "c516fa0aa18c62733a5b05f752d735ee75cff11ecea19e94f1c95884cb694b9e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "588895C5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "587950D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "5899FBB4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5874BA60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "5888940E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 198,
+          "target_address": "58902EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 340,
+          "target_address": "588895C5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "588895C5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 378,
+          "target_address": "588894EB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 390,
+          "target_address": "5888955C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 412,
+          "target_address": "58889554",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 427,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 436,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 448,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 460,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 475,
+          "target_address": "58889554",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 485,
+          "target_address": "58889554",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 494,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 503,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 515,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 527,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 567,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 579,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 605,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 620,
+          "target_address": "58793E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 740,
+          "target_address": "587315C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x0C.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "When receiver flag bit 2 is set, prepares a 0x40-byte buffer from receiver fields and a constant at 0x5899FBB4, then handles mode fields at +0xD0 and +0xD2. The mode branches update receiver and child fields, call helpers including FUN_58902EA0, FUN_587315F0, FUN_587315C0, and traverse the child list at +0x3C through virtual slot +0x0C. It can tail-dispatch through the child vtable after cleanup.",
+        "uncertainty": "The mode numbers, buffer meaning, child roles, callback contracts, and user-facing behavior are not identified; the description is limited to the captured instruction flow. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5873B360",
+      "name": "FUN_5873b360",
+      "size": 69,
+      "symbol": "_FUN_5873b360",
+      "source": "src/client-current/Main/FUN_5873b360.cpp",
+      "source_sha256": "f5421a5d0bec77dc93f1b7a8c2191fa44424f8eb3fd9f1e2222114e433f8a52e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x10.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "Checks receiver state bit 1 and the list head at +0x3C, then traverses links beginning at +0x34. It calls each child through virtual slot +0x10 with the supplied argument, compares the returned pointer against the list boundary, and returns either the found pointer or receiver field +0x34; both exits use ret 4.",
+        "uncertainty": "The list element and argument types, stopping condition meaning, and returned pointer role are unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588889F0",
+      "name": "FUN_588889f0",
+      "size": 904,
+      "symbol": "_FUN_588889f0",
+      "source": "src/client-current/Main/FUN_588889f0.cpp",
+      "source_sha256": "2e0f5ac7b538781285a6a339860262a860a26a58fc20cdb523ff13dedfb069d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58888CEC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5899FB98",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "5899BB60",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58888C22",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 262,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 268,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 280,
+          "target_address": "58A245E4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 305,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 333,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 345,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 351,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 357,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 369,
+          "target_address": "58A245F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 381,
+          "target_address": "58888C2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 400,
+          "target_address": "5899FB80",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 406,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 415,
+          "target_address": "5899BB60",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 420,
+          "target_address": "58888C22",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 435,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 441,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "587D6DB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 504,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 509,
+          "target_address": "587D6DB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 543,
+          "target_address": "5899FB64",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 549,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 558,
+          "target_address": "58996C38",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 566,
+          "target_address": "5898C3B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 580,
+          "target_address": "58A245A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 593,
+          "target_address": "58888D71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 600,
+          "target_address": "587D16B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 621,
+          "target_address": "58A245A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 634,
+          "target_address": "58888D71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 641,
+          "target_address": "587D16B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 662,
+          "target_address": "58A245A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 675,
+          "target_address": "58888D71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 682,
+          "target_address": "587D16B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 703,
+          "target_address": "58A245A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 716,
+          "target_address": "58888D71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 723,
+          "target_address": "587D16B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 742,
+          "target_address": "58888D71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 748,
+          "target_address": "58A245A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 753,
+          "target_address": "587D1810",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 782,
+          "target_address": "5899FB48",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 797,
+          "target_address": "5899FB28",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 803,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 809,
+          "target_address": "58A24820",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 826,
+          "target_address": "587626C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 848,
+          "target_address": "58A24820",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 854,
+          "target_address": "58762610",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "The RTTI-backed CPannelJump_ControlMenuScreen vtable at 0x5899FB0C points to this method at slot +0x18.",
+        "called_by": "The method is referenced by the RTTI-backed class vtable; no direct caller is asserted.",
+        "behavior": "Dispatches on incoming selector values 2, 3, 4, and 0xEF10. Branches compare the supplied child pointer with receiver fields +0x80 through +0xF4, invoke callbacks or helper routines, update child state at +0x50, and return through ret 0x0C paths.",
+        "uncertainty": "Selector meanings, child identities, callback contracts, and visible actions are unresolved. The body is documented from the captured disassembly and vtable membership only. No emulator runtime test was performed."
+      }
     }
   ]
 }

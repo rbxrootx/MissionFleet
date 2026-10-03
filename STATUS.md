@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,344
-identified code bytes across six report units. There are 6,463 verified matches
-totaling 2,037,580 bytes (19.4623%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,347
+identified code bytes across six report units. There are 6,469 verified matches
+totaling 2,039,737 bytes (19.4829%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -217,6 +217,14 @@ scan, state writes, and conditional branches are documented from the mapped
 instructions; 13 operand targets pass ObjDiff. Callback contracts and field
 meanings remain unresolved, and no emulator test was performed. See
 [the initializer evidence](docs/current-main-control-menu-settings-initializer.md).
+
+The RTTI-backed `CPannelJump_ControlMenuScreen` vtable at `0x5899FB0C` now has
+all seven entries matched, totaling 2,251 bytes. This batch adds six methods
+(2,157 bytes) and extends the `+0x00` method through its observed `ret 4`,
+correcting its inventory size from 27 to 30 bytes. Six methods reverified at
+ObjDiff 100%, with 98 operand targets checked; the `+0x14` entry was already
+verified. No emulator test was performed. See
+[the vtable evidence](docs/current-main-jump-control-menu-vtable.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
