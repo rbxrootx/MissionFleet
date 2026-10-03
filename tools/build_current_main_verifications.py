@@ -34,6 +34,7 @@ ADDRESSES = (
     "58753590", "58753DE0", "587535C0", "58753E10",
     "58906EA0", "58907100", "58907180", "589071A0",
     "58906F30", "58907380", "58907390",
+    "587B67C0", "587B67F0", "587B69E0",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -54,6 +55,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58906EA0", "58907100", "58907180", "589071A0",
     "58906F30", "58907380", "58907390",
+    "587B67C0", "587B67F0", "587B69E0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -768,6 +770,24 @@ EVIDENCE = {
         "called_by": "Vtable slot +0x1C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
         "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x58907300.",
         "uncertainty": "The field and helper contract are unresolved.",
+    },
+    "587B69E0": {
+        "name_in_analysis": "FUN_587b69e0",
+        "called_by": "Directly called by the verified CPannelJump_ControlMenuScreen constructor FUN_58889640.",
+        "behavior": "Calls helper 0x58731C60, stores constructor inputs and initial values in receiver fields, and installs the RTTI-backed vtable for CMovingSpriteDataScreen at 0x5899A0CC.",
+        "uncertainty": "Constructor argument meanings and the purpose/units of the initialized fields remain unresolved.",
+    },
+    "587B67C0": {
+        "name_in_analysis": "FUN_587b67c0",
+        "called_by": "Vtable slot +0 at 0x5899A0CC for RTTI type .?AVCMovingSpriteDataScreen@@.",
+        "behavior": "Reinstalls the class vtable, calls cleanup helper 0x589038B0, invokes host thunk 0x5897CC42 when bit 0 of the stack deletion flag is set, and returns the receiver with ret 4.",
+        "uncertainty": "The host thunk's ownership contract is unresolved. The 36-byte extent includes ret 4; the following int3 bytes are padding.",
+    },
+    "587B67F0": {
+        "name_in_analysis": "FUN_587b67f0",
+        "called_by": "Vtable slot +0x0C at 0x5899A0CC for RTTI type .?AVCMovingSpriteDataScreen@@.",
+        "behavior": "When receiver flag bit 2 is set, examines mode bits in +0x24 and compares receiver fields +4/+8 with cached values +0x68/+0x6C; observed branches update state fields and call helper 0x58902E10. It then traverses the circular child list at +0x3C and dispatches each child's slot +0x0C.",
+        "uncertainty": "The mode labels, field meanings, helper contract, and user-visible effect are unresolved; this description records only observed branches, accesses, and dispatches.",
     },
 }
 

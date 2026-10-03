@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,362
-identified code bytes across six report units. There are 6,514 verified matches
-totaling 2,051,203 bytes (19.5924%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,365
+identified code bytes across six report units. There are 6,517 verified matches
+totaling 2,051,835 bytes (19.5985%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -141,6 +141,16 @@ deleting destructor extent was corrected from 27 to 30 bytes to include its
 roles, helper contracts, and rendered appearance remain unresolved; no emulator
 runtime or visual test was performed. See
 [the class evidence](docs/current-main-number-screen-class.md).
+
+The RTTI-backed `CMovingSpriteDataScreen` class now has its constructor,
+scalar-deleting destructor, and custom `+0x0C` method matched, completing all
+six identified vtable slots with the four previously verified shared methods.
+The new work matches 632 bytes across three functions and 12 mapped operands.
+The destructor extent was corrected from 33 to 36 bytes to include its `ret 4`;
+the following `int3` bytes are padding. Constructor parameters, state-field
+meanings, mode labels, and the custom method's user-visible effect remain
+unresolved; no emulator runtime or visual test was performed. See
+[the class evidence](docs/current-main-moving-sprite-data-screen-class.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
