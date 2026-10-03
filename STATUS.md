@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,350
-identified code bytes across six report units. There are 6,478 verified matches
-totaling 2,042,530 bytes (19.5096%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,479 verified matches
+totaling 2,043,192 bytes (19.5159%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -91,6 +91,14 @@ and three selector helpers called by slot `+0x18`. Evidence records list the
 exact call sites, field offsets, globals, and helper dispatches; ownership and
 visible meaning of those fields remain unresolved. No emulator runtime test was
 performed. See [the callback and cleanup evidence](docs/current-main-jump-addon-callbacks.md).
+
+`FUN_58888480` adds the 662-byte child-cleanup body called by
+`CPannelJump_ControlMenuScreen` scalar deleting destructor `FUN_588889D0`.
+RTTI confirms the body installs that class vtable before visiting its child
+pointer fields and calling the base cleanup helper. ObjDiff checks all bytes
+and four mapped operands. Child ownership and one repeated field cleanup remain
+unresolved; no emulator runtime test was performed. See
+[the destructor evidence](docs/current-main-jump-control-menu-destructor.md).
 
 `FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
 ranges. Its direct caller processes the same 0x14-byte record stride and
