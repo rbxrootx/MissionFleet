@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,449
-identified code bytes across six report units. There are 6,594 verified matches
-totaling 2,077,003 bytes (19.8387%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,459
+identified code bytes across six report units. There are 6,609 verified matches
+totaling 2,080,150 bytes (19.8687%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -75,9 +75,18 @@ state/child path. This increment adds 2,096 exact bytes across 16 functions
 and checks 41 mapped operand targets. The destructor extent was corrected by
 three bytes to include `ret 4`; two following `int3` bytes are padding. The
 verified control-menu factory's `FUN_587D7B90` child path now has every direct
-callee matched. Field meanings, UI actions, and one other direct caller of the
-constructor remain unresolved. See the
+callee matched. Field meanings and UI actions remain unresolved. See the
 [factory-child and class evidence](docs/current-main-control-menu-factory-child-initializer.md).
+
+The RTTI-backed `CPannelSetNameOfNewShip` constructor and six-slot event
+surface now match byte for byte. Its verified `CMarketBoard` caller stores the
+constructed panel at `+0x1CC`. The constructor creates its text controls and a
+`CLoopSpriteBundleButton`; the class slice adds 2,667 bytes over nine functions,
+then six directly connected input, buffer, state and geometry helpers add 480
+bytes. All 15 functions check 100 mapped operand targets. Two indexed extents
+were corrected to include complete returns, adding 10 identified code bytes.
+Text encoding, event payloads, prompts and displayed action remain unresolved.
+See [the new-ship panel evidence](docs/current-main-set-name-new-ship-panel.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads

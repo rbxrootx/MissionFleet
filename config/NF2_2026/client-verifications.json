@@ -1345,7 +1345,7 @@
       "relocations": [],
       "evidence": {
         "name_in_analysis": "FUN_58731ce0",
-        "called_by": "Directly called by FUN_58733280 with the constructor's string argument.",
+        "called_by": "Directly called by FUN_58733280 with the constructor's string argument and by CPannelSetNameOfNewShip geometry helper FUN_587626C0.",
         "behavior": "If the destination pointer at object offset +0x6C and the source string are nonnull, copies bytes into the buffer and writes a terminator; the 0x80-byte bound allows at most 127 non-NUL characters.",
         "uncertainty": "The buffer is cleared before this helper is called by the observed constructor path, but other callers and non-cleared-buffer behavior are not audited. The string's higher-level role is unknown."
       }
@@ -245041,6 +245041,1008 @@
         "called_by": "RTTI identifies this as CLoopSpriteBundleButton vtable slot +0x00 in the table installed by FUN_58794600.",
         "behavior": "Calls class cleanup body 0x58794050, conditionally releases the receiver through 0x5897CC42 according to the deleting-destructor flag, then returns the receiver with ret 4.",
         "uncertainty": "The allocator contract is inferred only from the mapped call and flag branch. The original 27-byte extent omitted ret 4; mapped code ends at that 30-byte return, followed by two int3 padding bytes before FUN_587941E0."
+      }
+    },
+    {
+      "address": "588AC750",
+      "name": "FUN_588ac750",
+      "size": 751,
+      "symbol": "_FUN_588ac750",
+      "source": "src/client-current/Main/FUN_588ac750.cpp",
+      "source_sha256": "1fc3b63ffe0c96380308aa5713aad61cc464f303d90e757cb65ccb73dd9df965",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58987E69",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "589A07A4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "58A24548",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 289,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 334,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 344,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 354,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 397,
+          "target_address": "58794600",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 410,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 451,
+          "target_address": "58A246F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 490,
+          "target_address": "587941A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 498,
+          "target_address": "587945C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 503,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 549,
+          "target_address": "587941E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 554,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 600,
+          "target_address": "587940D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 605,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 652,
+          "target_address": "58794110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 663,
+          "target_address": "58794150",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 672,
+          "target_address": "588A5380",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac750",
+        "called_by": "RTTI identifies this constructor's installed vtable at 0x589A07A4 as CPannelSetNameOfNewShip. The verified CMarketBoard constructor 0x58799EB0 calls it at 0x5879B32F and stores the returned pointer at receiver offset +0x1CC.",
+        "behavior": "Initializes the CMenuScreen base through 0x589031A0, installs the CPannelSetNameOfNewShip vtable, and creates text/control children. It allocates a 0xD4-byte child and initializes it as CLoopSpriteBundleButton through verified constructor 0x58794600, then configures that child from checked shared-table entries. It initializes 32 fixed-size 0x100-byte records and stores a caller-provided pointer at +0x2080.",
+        "uncertainty": "The exact meanings of the child controls, table entries, 32 records, and stored pointer remain unresolved. The indexed 751-byte body decodes continuously through ret 0x1C."
+      }
+    },
+    {
+      "address": "588AC110",
+      "name": "FUN_588ac110",
+      "size": 140,
+      "symbol": "_FUN_588ac110",
+      "source": "src/client-current/Main/FUN_588ac110.cpp",
+      "source_sha256": "cb05b738d154f312cdb980a93fa4f71ddee5c750195fff57836f0ed3d1951d39",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58988648",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "589A07A4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac110",
+        "called_by": "Directly called by CPannelSetNameOfNewShip deleting destructor 0x588AC1B0.",
+        "behavior": "Sets the receiver vtable to 0x589A07A4 during cleanup, destroys optional children at +0x60, +0x6C, and +0x70 through their first virtual slots, clears each pointer, and calls verified base cleanup helper 0x58902C10.",
+        "uncertainty": "The child types and their UI purposes remain unresolved. The 140-byte body restores the exception handler and returns normally."
+      }
+    },
+    {
+      "address": "588AC1B0",
+      "name": "FUN_588ac1b0",
+      "size": 30,
+      "symbol": "_FUN_588ac1b0",
+      "source": "src/client-current/Main/FUN_588ac1b0.cpp",
+      "source_sha256": "7ede9bd72ea664ac37dcaf344cbd4681ce1e652c43b91b17d7a19fa93ce04dd3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588AC110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac1b0",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x00 in the table installed by FUN_588AC750.",
+        "behavior": "Calls cleanup body 0x588AC110, conditionally releases the receiver through 0x5897CC42 according to the deleting-destructor flag, then returns the receiver with ret 4.",
+        "uncertainty": "The allocator meaning is inferred from the mapped flag branch. The indexed 27-byte extent omitted ret 4 at 0x588AC1CB; two int3 padding bytes follow before the next method at 0x588AC1D0, so the corrected size is 30 bytes."
+      }
+    },
+    {
+      "address": "588AC1D0",
+      "name": "FUN_588ac1d0",
+      "size": 150,
+      "symbol": "_FUN_588ac1d0",
+      "source": "src/client-current/Main/FUN_588ac1d0.cpp",
+      "source_sha256": "21fc5d599a8d678f9b15eea91c5cbeb4432ec96eb2f03a78d6608d30ccf5ebcb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "58A245C0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "5888CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac1d0",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x04.",
+        "behavior": "Sets observed control flags, clears the text buffer through the callback at 0x5898C1A8, calls 0x5875F940, resets receiver fields +0x50 and +0x54, sends an observed update through 0x5888CC90, and dispatches a child method through virtual slot +0x18.",
+        "uncertainty": "The callback contract, field meanings, and update message meaning are unresolved. The original 143-byte indexed extent omitted pop esi; ret at 0x588AC265..0x588AC266; the corrected 150-byte body ends before seven int3 padding bytes."
+      }
+    },
+    {
+      "address": "588AC270",
+      "name": "FUN_588ac270",
+      "size": 118,
+      "symbol": "_FUN_588ac270",
+      "source": "src/client-current/Main/FUN_588ac270.cpp",
+      "source_sha256": "8a1f36180c1163242a299937fa4bfbb659b1bf79d0dca4a6c46396489676081c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 65,
+          "target_address": "58A245C0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "58A245C0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "5888CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac270",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x08.",
+        "behavior": "Updates observed receiver flags and fields +0x50/+0x54, calls the child at +0x6C through its first virtual slot, updates manager flags at 0x58A245C0, sends an observed update through 0x5888CC90, and dispatches a manager child call through virtual slot +0x18.",
+        "uncertainty": "The state meanings and callback/update message contracts are unresolved. The indexed 118-byte body returns normally."
+      }
+    },
+    {
+      "address": "588AC2F0",
+      "name": "FUN_588ac2f0",
+      "size": 672,
+      "symbol": "_FUN_588ac2f0",
+      "source": "src/client-current/Main/FUN_588ac2f0.cpp",
+      "source_sha256": "724c4ba373bcd0bb0904bf1249d2babd600d3bb48fcf74d0c96b65a9f4845544",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "588AC586",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "588AC429",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "588AC429",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 177,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 243,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 282,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 309,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 389,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "588AC567",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 427,
+          "target_address": "588AC521",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 483,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 520,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 537,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 545,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 555,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac2f0",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x0C.",
+        "behavior": "Handles observed control-mode branches 0x100, 0x200, and 0x400; examines the text buffer under +0x6C for character and length conditions; dispatches prompt/update helpers; adjusts receiver values through 0x58902E60; and calls the established panel-state helper 0x587B7400.",
+        "uncertainty": "The incoming event schema, text encoding, mode meanings, prompt actions, and receiver units remain unresolved. The indexed 672-byte body decodes continuously through its tail return path."
+      }
+    },
+    {
+      "address": "588ACA40",
+      "name": "FUN_588aca40",
+      "size": 226,
+      "symbol": "_FUN_588aca40",
+      "source": "src/client-current/Main/FUN_588aca40.cpp",
+      "source_sha256": "3f9d1d2f5e742732cb07339f4721bc75f93bbfa675f07b61ae27f22357f8889d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "588ACB1D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "588ACB1D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 178,
+          "target_address": "588AC590",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 192,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588aca40",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x10.",
+        "behavior": "Walks a child chain through virtual slot +0x10, handles observed input selectors 0x100 and 0x20A, and for selected table-dispatched cases checks the text buffer and calls helper 0x588AC590. It returns the observed receiver field at +0x34.",
+        "uncertainty": "The selector and lookup-table meanings, child callback contract, and input schema remain unresolved. The indexed 226-byte body returns with ret 4."
+      }
+    },
+    {
+      "address": "588ACB60",
+      "name": "FUN_588acb60",
+      "size": 142,
+      "symbol": "_FUN_588acb60",
+      "source": "src/client-current/Main/FUN_588acb60.cpp",
+      "source_sha256": "bfe13af82572d6e02076efa137e4ef1a468f3c59d3c0688e6e03d90cc4bae11a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 51,
+          "target_address": "588AC590",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589A07C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 88,
+          "target_address": "58A24820",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "587626C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "58A24820",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58762610",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588acb60",
+        "called_by": "RTTI identifies this as CPannelSetNameOfNewShip vtable slot +0x18.",
+        "behavior": "Branches on selectors 2, 3, and 4. Selector 2 checks text-buffer length and calls 0x588AC590; selector 3 calls the host callback at 0x5898C030 and helper 0x587626C0; selector 4 calls helper 0x58762610.",
+        "uncertainty": "The selector meanings, host callback contract, and visible UI effects remain unresolved. The indexed 142-byte body returns with ret 0x0C."
+      }
+    },
+    {
+      "address": "588AC590",
+      "name": "FUN_588ac590",
+      "size": 438,
+      "symbol": "_FUN_588ac590",
+      "source": "src/client-current/Main/FUN_588ac590.cpp",
+      "source_sha256": "6e104c15fdc7a5e9457243a34e2966cad8e1c2811d7b3e7ad56e7cb6ad4302cb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 32,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "588AC6DD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "588AC6DD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 154,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "588AC6DD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 309,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "587B98B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 337,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 353,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 366,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 390,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 428,
+          "target_address": "587B9870",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ac590",
+        "called_by": "Directly called by CPannelSetNameOfNewShip vtable handlers 0x588ACA40 and 0x588ACB60.",
+        "behavior": "Copies text from the child at +0x6C into one of 32 records indexed by receiver field +0x78, cycles the index using state +0x7C, checks the result through a callback at 0x5898C1A8 and helper 0x587A2D40, then invokes either the verified input/update path 0x587B98B0 or the message helpers 0x5876BAF0/0x58764D30.",
+        "uncertainty": "The text encoding, record purpose, callback meaning, message identifier, and semantics of the pointer at +0x2080 are unresolved. The indexed 438-byte body decodes continuously through its tail return."
+      }
+    },
+    {
+      "address": "5875F940",
+      "name": "FUN_5875f940",
+      "size": 41,
+      "symbol": "_FUN_5875f940",
+      "source": "src/client-current/Main/FUN_5875f940.cpp",
+      "source_sha256": "eb9c918c47b92056b69a01e8216dd314c128f1b583cc4174ab7d08fb4b861849",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5875f940",
+        "called_by": "Directly called by CPannelSetNameOfNewShip vtable methods 0x588AC1D0, 0x588AC2F0, and helper 0x588AC590.",
+        "behavior": "Clears receiver fields at +0x8C, +0x84, +0x98, +0x94, and +0xE4, then clears the first word of the buffer addressed by receiver field +0x80.",
+        "uncertainty": "The reset-field purposes and text encoding are unknown. The 41-byte indexed body ends with ret."
+      }
+    },
+    {
+      "address": "5888CC90",
+      "name": "FUN_5888cc90",
+      "size": 63,
+      "symbol": "_FUN_5888cc90",
+      "source": "src/client-current/Main/FUN_5888cc90.cpp",
+      "source_sha256": "798f8349497b66ba67be4ef05bcd80504e7c5af75641bb5cfb1cc6858d27ecc7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5888cc90",
+        "called_by": "Directly called by CPannelSetNameOfNewShip vtable methods 0x588AC1D0 and 0x588AC270.",
+        "behavior": "For a nonzero argument, conditionally sets flag bit 1 on the child at receiver +0x150 when receiver field +0x10C equals 2; for a zero argument it clears flag bits on children at +0x154 and +0x150.",
+        "uncertainty": "The child types and meaning of the mode/flag values are unresolved. The 63-byte indexed body returns with ret 4."
+      }
+    },
+    {
+      "address": "587A2D40",
+      "name": "FUN_587a2d40",
+      "size": 31,
+      "symbol": "_FUN_587a2d40",
+      "source": "src/client-current/Main/FUN_587a2d40.cpp",
+      "source_sha256": "10cb38f5d4a6154f75b0bfa7bfdf5bc25895b2de11f87e8b13e449ff7d9f2763",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5898C03C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a2d40",
+        "called_by": "Directly called by CPannelSetNameOfNewShip helper 0x588AC590.",
+        "behavior": "Returns zero for a null string or one beginning with `/`; otherwise passes the string to the host callback at 0x5898C03C and returns that callback's result.",
+        "uncertainty": "The callback's validation rule and return-value meaning are unresolved. The 31-byte indexed body returns with ret 8."
+      }
+    },
+    {
+      "address": "587B9870",
+      "name": "FUN_587b9870",
+      "size": 50,
+      "symbol": "_FUN_587b9870",
+      "source": "src/client-current/Main/FUN_587b9870.cpp",
+      "source_sha256": "4bec105d1fb6a2daf15c24f391080e9cefdbe9ecde6159d24d551c81ad1e848c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9870",
+        "called_by": "Directly called by CPannelSetNameOfNewShip helper 0x588AC590.",
+        "behavior": "Obtains the supplied string length through callback 0x5898C1A8, sets bit 0x10000 in a supplied word, and dispatches message 0x8001040A with the string and observed fields through verified sender 0x58970C70.",
+        "uncertainty": "The message schema, string encoding, and receiver/argument semantics remain unresolved. The 50-byte indexed body returns with ret 8."
+      }
+    },
+    {
+      "address": "587626C0",
+      "name": "FUN_587626c0",
+      "size": 267,
+      "symbol": "_FUN_587626c0",
+      "source": "src/client-current/Main/FUN_587626c0.cpp",
+      "source_sha256": "cd96849cc9eb7fc200d9dd6c6148cba1af4d2c2f98785055e68922bc34041bb2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "587627C4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "58A28520",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "58A28520",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 253,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587626c0",
+        "called_by": "Directly called by CPannelSetNameOfNewShip vtable method 0x588ACB60 on its observed selector-3 branch.",
+        "behavior": "Uses fields at +0x64 and +0x6C to measure and position a child region, clamps the resulting coordinates against dimensions at 0x58A28520, updates the geometry through 0x58903290, adjusts receiver flags, and calls 0x58731CE0 for associated child state.",
+        "uncertainty": "The coordinate units, child roles, and visible effect are unresolved. The 267-byte indexed body returns with ret 0x10."
+      }
+    },
+    {
+      "address": "58762610",
+      "name": "FUN_58762610",
+      "size": 28,
+      "symbol": "_FUN_58762610",
+      "source": "src/client-current/Main/FUN_58762610.cpp",
+      "source_sha256": "e5324c83b60490e09b7bbf613b161d5fbabef1c7acf31c67d28a0098119300a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58762610",
+        "called_by": "Directly called by CPannelSetNameOfNewShip vtable method 0x588ACB60 on its observed selector-4 branch.",
+        "behavior": "When its argument equals receiver field +0x60, clears selected flag bits at +0x24 and resets +0x60 to zero.",
+        "uncertainty": "The argument and state meaning are unresolved. The 28-byte indexed body returns with ret 4."
       }
     }
   ]

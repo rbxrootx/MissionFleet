@@ -83,7 +83,9 @@ handles observed selectors `0`, `1`, `0x20`, and `0x1000`, updating the same
 receiver/child fields and calling the synchronizer for selector `0x20`. Both
 match completely with 7 and 6 mapped operand targets checked, respectively.
 All 12 direct callees of `FUN_587D7B90` now match. The other direct caller of
-`FUN_58794600` is `FUN_588AC750`; its owning object path has not yet been traced.
-The event payload, state semantics, labels and visible actions remain unknown.
+`FUN_58794600` is the RTTI-backed `CPannelSetNameOfNewShip` constructor
+`FUN_588AC750`; its complete constructor and vtable path are documented in
+[the panel evidence](current-main-set-name-new-ship-panel.md). The event
+payload, state semantics, labels and visible actions remain unknown.
 
 No emulator runtime or visual test was performed.
