@@ -32,6 +32,16 @@ The direct constructor/helper slice is:
 | `0x58907FD0` | 116 | `CListTextScreen`; initializes the static-text base and list state |
 | `0x5876E510` | 164 | `CFadeMovingSpriteBundleScreen`; initializes from a sprite bundle and stores screen parameters |
 | `0x5875B000` | 140 | `CDataEncryptor`; initializes fields and constructs nested state |
+| `0x5890B370` | 323 | Base initializer reached through `FUN_5890A5B0` on this screen's construction path |
+| `0x587B66E0` | 165 | Shared helper reached through `FUN_5876E510`; other callers exist |
+| `0x588C60E0` | 143 | Helper reached through `FUN_5875B000`; dispatches two indirect host callbacks |
+| `0x589728D0` | 25 | Helper reached through `FUN_587C75E0`; delegates into `FUN_58972850` |
+| `0x58972850` | 124 | Child-initialization helper called from `FUN_589728D0` |
+| `0x589724B0` | 79 | First helper called by `FUN_58972850` |
+| `0x58972500` | 79 | Second helper called by `FUN_58972850` |
+| `0x5897D5D0` | 6 | Shared indirect callback thunk called by both child helpers |
+| `0x5897CC3C` | 6 | Indirect callback thunk used by `FUN_588C60E0` |
+| `0x5897CC36` | 6 | Indirect callback thunk used by `FUN_588C60E0` |
 | `0x58902CE0` | 59 | Updates a child-list field and recursively visits nodes selected by flag `0x4000` |
 | `0x58902D20` | 59 | Updates a second child-list field and recursively visits nodes selected by flag `0x8000` |
 
@@ -42,10 +52,13 @@ meaning to controls whose role is unknown.
 
 ## Byte-match validation
 
-The 14 functions in this screen slice compiled with the pinned MSVC 6.0 SP5
-toolchain and verified at objdiff 100% against the mapped image. The whole
-current-Main verification inventory also passed: 53 functions, 22,348 bytes,
-with all recorded direct-call and absolute-operand destinations audited.
+The 24 functions in this screen slice cover 6,287 bytes and verify at objdiff
+100% against the mapped image. The original 14 were built with the pinned MSVC
+6.0 SP5 toolchain; the ten added instruction-stream helpers were compiled with
+the recorded clang-cl toolchain. Their direct-call and absolute-operand
+destinations were audited. The screen-constructor call-graph audit through
+depth six now has no unmatched callees. Overall project progress is tracked in
+[`STATUS.md`](../STATUS.md).
 
 During validation, `0x58748E40` exposed a Ghidra extent error. The inventory's
 191-byte size stopped in executable code. Disassembly reaches `ret 4` at

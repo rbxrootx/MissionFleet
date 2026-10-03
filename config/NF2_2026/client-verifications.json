@@ -252686,6 +252686,468 @@
         "behavior": "Matches the 75-byte compiler-generated array-destruction helper, including its observed SEH prolog call and captured cleanup argument setup. A valid C alias is used for Ghidra's quoted label; the instruction bytes are unchanged.",
         "uncertainty": "The element type and callback semantics are not independently recovered from this helper."
       }
+    },
+    {
+      "address": "589728D0",
+      "name": "FUN_589728d0",
+      "size": 25,
+      "symbol": "_FUN_589728d0",
+      "source": "src/client-current/Main/FUN_589728d0.cpp",
+      "source_sha256": "7eebaf8af49721c0e27cff4b1c61bcd41ef03a775e0d100893d48ff5f1372468",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "589A302C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 15,
+          "target_address": "58972850",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589728d0",
+        "called_by": "Called by FUN_587C75E0, which is directly initialized from the matched logo/control-menu screen constructor at 0x5878D6D0.",
+        "behavior": "Matches the 25-byte helper selected on that constructor path; its two operand targets match the installed image.",
+        "uncertainty": "The child object's high-level role and the meaning of its stored fields are not identified by this call path."
+      }
+    },
+    {
+      "address": "5890B370",
+      "name": "FUN_5890b370",
+      "size": 323,
+      "symbol": "_FUN_5890b370",
+      "source": "src/client-current/Main/FUN_5890b370.cpp",
+      "source_sha256": "05af43c2901388ef17cdc1cd03d97cf977b351375d05461fd2658c61b3cc1c9a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898AA83",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "58731700",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "589A2AFC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5898CA74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 268,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 289,
+          "target_address": "5898C19C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 295,
+          "target_address": "58A28528",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890b370",
+        "called_by": "Called by FUN_5890A5B0, which is directly invoked during construction of the logo/control-menu screen at 0x5878D6D0.",
+        "behavior": "Matches the 323-byte initializer reached on that screen path, including its 11 audited operand targets.",
+        "uncertainty": "The initializer's complete object contract and semantics of its arguments remain unresolved."
+      }
+    },
+    {
+      "address": "587B66E0",
+      "name": "FUN_587b66e0",
+      "size": 165,
+      "symbol": "_FUN_587b66e0",
+      "source": "src/client-current/Main/FUN_587b66e0.cpp",
+      "source_sha256": "a6d4637c1d8b648bf035624675bf57266d2f4e7a6d97c85506d2b5bcfe1c7fa1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 34,
+          "target_address": "58734A30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "5899A0B0",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b66e0",
+        "called_by": "Called by FUN_5876E510, which is reached while constructing the matched logo/control-menu screen at 0x5878D6D0; other callers also exist.",
+        "behavior": "Matches the 165-byte shared helper and its two mapped operand targets.",
+        "uncertainty": "Its receiver/argument roles are not identified across the multiple callers."
+      }
+    },
+    {
+      "address": "588C60E0",
+      "name": "FUN_588c60e0",
+      "size": 143,
+      "symbol": "_FUN_588c60e0",
+      "source": "src/client-current/Main/FUN_588c60e0.cpp",
+      "source_sha256": "40af7b8f0090f84fcd30a098e3d24f79c7f2693cb29721655bbb5f9d6c6c8a18",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "589A0BE8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 88,
+          "target_address": "5897CC3C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "5897CC36",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c60e0",
+        "called_by": "Called by FUN_5875B000 on the matched logo/control-menu screen construction path.",
+        "behavior": "Matches the 143-byte helper and all four mapped operand targets.",
+        "uncertainty": "The helper's broader object contract and semantic meaning of the arguments remain unresolved."
+      }
+    },
+    {
+      "address": "58972850",
+      "name": "FUN_58972850",
+      "size": 124,
+      "symbol": "_FUN_58972850",
+      "source": "src/client-current/Main/FUN_58972850.cpp",
+      "source_sha256": "09477c747dcac7a64ea48c44bab55af443d29a02b01b186181c01da0b3743375",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 99,
+          "target_address": "589724B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 108,
+          "target_address": "58972500",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58972850",
+        "called_by": "Directly called by FUN_589728D0, itself reached from the logo/control-menu screen constructor path.",
+        "behavior": "Matches the 124-byte helper body and its two mapped operand targets.",
+        "uncertainty": "Its receiver fields and higher-level child operation remain unnamed."
+      }
+    },
+    {
+      "address": "5897CC3C",
+      "name": "FUN_5897cc3c",
+      "size": 6,
+      "symbol": "_FUN_5897cc3c",
+      "source": "src/client-current/Main/FUN_5897cc3c.cpp",
+      "source_sha256": "9b97deb8f8b3c46d6e5b69c6882b473efec198ffb6d26342048166ae48da90b9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C1F4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cc3c",
+        "called_by": "Called by FUN_588C60E0 during the logo/control-menu screen's child initializer path.",
+        "behavior": "Six-byte indirect jump thunk through the host pointer at 0x5898C1F4; all six bytes and the absolute pointer operand match.",
+        "uncertainty": "The host callback target and operation are unresolved."
+      }
+    },
+    {
+      "address": "5897CC36",
+      "name": "FUN_5897cc36",
+      "size": 6,
+      "symbol": "_FUN_5897cc36",
+      "source": "src/client-current/Main/FUN_5897cc36.cpp",
+      "source_sha256": "273a48085bb60199041e0d023ade7f66a284994c2110ad2d1b987b866a2c17eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C1F0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cc36",
+        "called_by": "Called by FUN_588C60E0 during the logo/control-menu screen's child initializer path.",
+        "behavior": "Six-byte indirect jump thunk through the host pointer at 0x5898C1F0; all six bytes and the absolute pointer operand match.",
+        "uncertainty": "The host callback target and operation are unresolved."
+      }
+    },
+    {
+      "address": "589724B0",
+      "name": "FUN_589724b0",
+      "size": 79,
+      "symbol": "_FUN_589724b0",
+      "source": "src/client-current/Main/FUN_589724b0.cpp",
+      "source_sha256": "3ea328acc18fff3658b6b2b305b7fa908681baf54c8730f4ef95b1d256e2c147",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 35,
+          "target_address": "589A3048",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5898CF60",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5898C354",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "5897D5D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589724b0",
+        "called_by": "Called by FUN_58972850 at its first child-initialization call site in the logo/control-menu screen path.",
+        "behavior": "Matches the 79-byte function selected at 0x589728B2, including all mapped operand targets.",
+        "uncertainty": "The child object role and the semantic meaning of its fields remain unidentified."
+      }
+    },
+    {
+      "address": "58972500",
+      "name": "FUN_58972500",
+      "size": 79,
+      "symbol": "_FUN_58972500",
+      "source": "src/client-current/Main/FUN_58972500.cpp",
+      "source_sha256": "404f4859529e00a599517a7afe984edb0276f5eec0889602678855ce86c26954",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 35,
+          "target_address": "589A3048",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5898CF60",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5898C354",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "5897D5D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58972500",
+        "called_by": "Called by FUN_58972850 at its second child-initialization call site in the logo/control-menu screen path.",
+        "behavior": "Matches the 79-byte function selected at 0x589728BB, including all mapped operand targets.",
+        "uncertainty": "The child object role and the semantic meaning of its fields remain unidentified."
+      }
+    },
+    {
+      "address": "5897D5D0",
+      "name": "FUN_5897d5d0",
+      "size": 6,
+      "symbol": "_FUN_5897d5d0",
+      "source": "src/client-current/Main/FUN_5897d5d0.cpp",
+      "source_sha256": "88b88a232cede134329521343e5f2ee9b8ccfd2f90e0fe75694b85388350a73c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C358",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897d5d0",
+        "called_by": "Called by both child initializer helpers 0x589724B0 and 0x58972500 on the logo/control-menu screen path.",
+        "behavior": "Matches the six-byte shared helper body; its operand target is checked against the mapped image.",
+        "uncertainty": "The delegated callback target and operation are unresolved."
+      }
     }
   ]
 }
