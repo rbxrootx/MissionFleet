@@ -47,7 +47,7 @@ ADDRESSES = (
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
     "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
-    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90",
+    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
     # Preserve the direct-call relocation as a symbolic target in both object
@@ -81,7 +81,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
     "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
-    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90",
+    "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -1168,6 +1168,12 @@ EVIDENCE = {
         "called_by": "Directly called by CSpecBoard_Equip helper 0x58907820.",
         "behavior": "A six-byte indirect jump thunk through the callback slot at 0x5898C228.",
         "uncertainty": "The callback target and host-side contract are unresolved.",
+    },
+    "5897CCA0": {
+        "name_in_analysis": "FUN_5897cca0",
+        "called_by": "Directly called twice by CSpecBoard_Equip numeric helper 0x58907820; the mapped code matches a complete conversion routine through its return at 0x5897CD4A.",
+        "behavior": "Converts an x87 floating-point value to a signed 64-bit integer using a fast SSE2 truncation path when the observed runtime flag and floating-point control word permit it, otherwise using an x87 rounding-and-correction path. The indexed extent was 145 bytes and cut an instruction; mapped code runs 171 bytes through leave/ret, followed by an int3 pad and the next indexed thunk at 0x5897CD4C.",
+        "uncertainty": "The runtime flag at 0x58A289A4 and exact compiler-runtime symbol are unidentified. The corrected boundary follows decoded instruction boundaries, both terminating returns, the following int3, and the next indexed thunk.",
     },
 }
 

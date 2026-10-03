@@ -39,13 +39,19 @@ record offset `+6` equals 7). The repeated-control functions
 and observed vtable offsets `+0x4C`, `+0x0C`, and `+0x10`; it calls the
 six-byte thunk `FUN_5897CC90` through callback slot `0x5898C228`.
 
-One direct downstream helper, `FUN_5897CCA0`, called from `FUN_58907820`, is
-not yet matched. It remains outside this verified slice.
+The numeric path's downstream conversion helper, `FUN_5897CCA0`, is included.
+The original function index assigned it 145 bytes, ending mid-instruction. The
+mapped code decodes continuously through its `leave; ret` at `0x5897CD49`, then
+has an `int3` pad before the next indexed thunk at `0x5897CD4C`; the verified
+extent is therefore 171 bytes. It converts an x87 value to a signed 64-bit
+integer, using the observed runtime flag and floating-point control word to
+choose a fast SSE2 truncation path or an x87 rounding-and-correction path. The
+flag's meaning and compiler-runtime symbol remain unidentified.
 
 ## Byte validation and extent corrections
 
-All 20 functions added here pass `verify_client_matches.py`: 6,699 bytes at
-100.0% objdiff match, with 186 mapped relocation targets checked. Sources use
+The 21 functions added here pass `verify_client_matches.py`: 6,870 bytes at
+100.0% objdiff match, with 188 mapped relocation targets checked. Sources use
 the pinned clang-cl 19.1.4 instruction emitter and match the captured mapped
 image.
 

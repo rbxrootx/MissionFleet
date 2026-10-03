@@ -244192,6 +244192,45 @@
         "behavior": "A six-byte indirect jump thunk through the callback slot at 0x5898C228.",
         "uncertainty": "The callback target and host-side contract are unresolved."
       }
+    },
+    {
+      "address": "5897CCA0",
+      "name": "FUN_5897cca0",
+      "size": 171,
+      "symbol": "_FUN_5897cca0",
+      "source": "src/client-current/Main/FUN_5897cca0.cpp",
+      "source_sha256": "68301c91df5e3fa641b9f7768811589282a740c32b9ceb185525b1d90a198629",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58A289A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "58A289A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cca0",
+        "called_by": "Directly called twice by CSpecBoard_Equip numeric helper 0x58907820; the mapped code matches a complete conversion routine through its return at 0x5897CD4A.",
+        "behavior": "Converts an x87 floating-point value to a signed 64-bit integer using a fast SSE2 truncation path when the observed runtime flag and floating-point control word permit it, otherwise using an x87 rounding-and-correction path. The indexed extent was 145 bytes and cut an instruction; mapped code runs 171 bytes through leave/ret, followed by an int3 pad and the next indexed thunk at 0x5897CD4C.",
+        "uncertainty": "The runtime flag at 0x58A289A4 and exact compiler-runtime symbol are unidentified. The corrected boundary follows decoded instruction boundaries, both terminating returns, the following int3, and the next indexed thunk."
+      }
     }
   ]
 }
