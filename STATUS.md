@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,426 verified matches
-totaling 1,976,333 bytes (18.8774%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,427 verified matches
+totaling 1,979,284 bytes (18.9056%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -235,6 +235,12 @@ deleting-destructor wrapper. ObjDiff 3.8.0 matches all bytes, with 243 mapped
 operand targets checked. Global slot ownership, indirect cleanup contracts,
 and runtime destruction effects remain unresolved. See
 [the destructor evidence](docs/current-main-navyfield-screen-destructor.md).
+
+`FUN_587a6220` adds a 2,951-byte 32-slot record builder across three Ghidra
+ranges, with 84 mapped operand targets checked. It constructs two observed
+record variants (`0x05` and `0x06`), then applies per-entry state and flags. The
+record types, field meanings, and owning class remain unidentified. See
+[the record-builder evidence](docs/current-main-record-backed-32-slot-builder.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
