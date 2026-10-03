@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,430 verified matches
-totaling 1,987,964 bytes (18.9885%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,431 verified matches
+totaling 1,990,823 bytes (19.0158%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -260,6 +260,12 @@ operand targets checked. It advances position/state, performs a weighted
 distance check, and calls the verified combat hit/damage resolver on a result
 branch. The object class and state-field meanings remain unknown. See
 [the state-update evidence](docs/current-main-combat-effect-state-update.md).
+
+`FUN_587b83e0` adds a 2,859-byte chat/channel event handler across two Ghidra
+ranges, with 194 mapped operand targets checked. Its callback pointer is
+present at `0x5899A178`; observed branches route channel/member results and
+localized user-list strings. Callback ownership and protocol schemas remain
+unknown. See [the handler evidence](docs/current-main-chat-channel-event-handler.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
