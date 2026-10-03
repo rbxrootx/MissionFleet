@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,187
-identified code bytes across six report units. There are 6,339 verified matches
-totaling 1,509,227 bytes (14.4159%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
+identified code bytes across six report units. There are 6,340 verified matches
+totaling 1,520,007 bytes (14.5187%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -218,8 +218,10 @@ The input/chat dispatcher adds one exact function match; see the
 [input/chat evidence](docs/current-main-input-chat-dispatch.md).
 The 12,589-byte control-menu constructor adds one exact match; see the
 [control-menu constructor evidence](docs/current-main-control-menu-constructor.md).
-Current-build Main coverage is now 206 / 8,474 functions and
-535,809 / 2,353,253 bytes. See
+The fleet message handler adds one exact match; see the
+[handler evidence](docs/current-main-fleet-message-handler.md).
+Current-build Main coverage is now 207 / 8,474 functions and
+546,589 / 2,353,354 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
