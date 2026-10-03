@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,429 verified matches
-totaling 1,985,101 bytes (18.9611%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,430 verified matches
+totaling 1,987,964 bytes (18.9885%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -254,6 +254,12 @@ targets checked. Its callers provide event codes, it forms coordinate- and
 slot-backed payloads, and one route sends message `0x80020500` through the
 verified outbound sender. Event schemas and server compatibility remain
 unresolved. See [the payload-builder evidence](docs/current-main-event-payload-builder.md).
+
+`FUN_588f55c0` adds a 2,863-byte combat-effect state updater, with 123 mapped
+operand targets checked. It advances position/state, performs a weighted
+distance check, and calls the verified combat hit/damage resolver on a result
+branch. The object class and state-field meanings remain unknown. See
+[the state-update evidence](docs/current-main-combat-effect-state-update.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
