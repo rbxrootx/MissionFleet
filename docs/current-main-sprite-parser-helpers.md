@@ -5,9 +5,9 @@ current `Main.dll` sprite parser at `0x58903E40`. The parent parser's byte match
 and its call sites provide the evidence for this boundary; the helper names
 remain Ghidra labels unless otherwise stated.
 
-Seven helpers now reproduce their mapped x86 bytes exactly under the recorded
-VC6-compatible profile. ObjDiff 3.8.0 reports 100% for all seven, covering
-1,229 bytes and 56 audited relocation operands:
+Twelve helpers now reproduce their mapped x86 bytes exactly under the recorded
+VC6-compatible profile. ObjDiff 3.8.0 reports 100% for all twelve, covering
+1,469 bytes and 63 audited relocation operands:
 
 | Address | Bytes | Parser evidence |
 | --- | ---: | --- |
@@ -18,15 +18,19 @@ VC6-compatible profile. ObjDiff 3.8.0 reports 100% for all seven, covering
 | `0x5896C010` | 569 | Selected in the format-2 high-color variant path. |
 | `0x5896BF10` | 22 | Selected from a later format-2 payload path. |
 | `0x5897CD4C` | 6 | Indirect-call thunk reached on the format-3 path. |
+| `0x5897D0BE` | 77 | Construction/cleanup helper called on two parser paths; emitted with a valid C alias for Ghidra's quoted symbol. |
+| `0x5897D7BC` | 69 | Exception-registration prolog called by the construction helper. |
+| `0x5897D10B` | 24 | Cleanup helper that invokes `__ArrayUnwind` with captured count, stride, and callback arguments. |
+| `0x5897D801` | 20 | Exception-registration epilog called by the construction helper. |
+| `0x5897CFFD` | 50 | `__ArrayUnwind`, called by the cleanup helper; exact indexed byte extent matched as literal bytes. |
 
 The helper roles above are bounded to their parser branch, call targets, and
 observed machine instructions. The format table schema, object-field meanings,
 and host callback targets remain unresolved.
 
-The construction/exception-cleanup branch remains open. Its 77-byte helper is
-named `` `eh_vector_constructor_iterator' `` in the inventory; that quoted
-Ghidra label produced invalid C++ when emitted, so it did not pass the byte
-verifier. Its caller's helper chain also reaches `__ArrayUnwind` at `0x5897CFFD`,
-whose indexed Ghidra function extent is not fully decoded. I left that chain
-out of verified progress rather than infer bytes or substitute a host runtime
-implementation. This does not affect the seven verified helpers listed above.
+The construction/exception-cleanup branch now matches byte-for-byte. Ghidra's
+indexed 50-byte extent for `__ArrayUnwind` is not fully decoded, so the candidate
+emits the mapped bytes literally and records zero inferred relocation operands.
+This proves the indexed byte span, not the instruction boundaries or runtime
+semantics; those remain unknown. The complete parser call-graph sweep through
+depth five reports no unmatched callees.

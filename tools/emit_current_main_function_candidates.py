@@ -2,6 +2,7 @@
 import argparse
 import csv
 import json
+import re
 from pathlib import Path
 
 import capstone
@@ -16,6 +17,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--address", action="append", required=True,
                         help="Ghidra function entry address (repeatable, hexadecimal)")
+    parser.add_argument("--raw-extent", action="append", default=[],
+                        help="emit a function's complete indexed byte extent literally when decoding is incomplete")
     args = parser.parse_args()
 
     rows = {row["address"].upper(): row for row in csv.DictReader(
@@ -27,6 +30,7 @@ def main():
     decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     decoder.detail = True
 
+    raw_extents = {f"{int(value, 16):08X}" for value in args.raw_extent}
     seen = set()
     for supplied in args.address:
         address = f"{int(supplied, 16):08X}"
@@ -38,50 +42,63 @@ def main():
         size = int(row["size"])
         code = image[start - BASE:start - BASE + size]
         instructions = list(decoder.disasm(code, start))
-        if not instructions or instructions[-1].address + instructions[-1].size != start + size:
+        fully_decoded = bool(instructions) and instructions[-1].address + instructions[-1].size == start + size
+        if not fully_decoded and address not in raw_extents:
             raise ValueError(f"Ghidra extent is not fully decoded: {address}")
+
+        source_name = row["name"]
+        if source_name.startswith("`") and source_name.endswith("'"):
+            source_name = source_name[1:-1]
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", source_name):
+            raise ValueError(f"Function label is not a C identifier: {row['name']!r}")
 
         evidence = []
         lines = [
             "// Instruction stream reconstructed from Ghidra and the pinned mapped Main.dll.",
             f"// Ghidra extent: 0x{start:08X} .. +0x{size:X} bytes.",
-            f"extern \"C\" __declspec(naked) void {row['name']}() {{",
+            f"// Source symbol alias: {source_name}.",
+            f"extern \"C\" __declspec(naked) void {source_name}() {{",
             "    __asm {",
         ]
-        for insn in instructions:
-            lines.append(f"        // 0x{insn.address:08X}: {insn.mnemonic} {insn.op_str}".rstrip())
-            for byte in insn.bytes:
-                lines.append(f"        __asm _emit 0x{byte:02X}")
+        if fully_decoded:
+            for insn in instructions:
+                lines.append(f"        // 0x{insn.address:08X}: {insn.mnemonic} {insn.op_str}".rstrip())
+                for byte in insn.bytes:
+                    lines.append(f"        __asm _emit 0x{byte:02X}")
 
-            for operand in insn.operands:
-                if (operand.type == X86_OP_IMM
-                        and (insn.id == X86_INS_CALL or insn.group(CS_GRP_JUMP))):
-                    if insn.size >= 5 and insn.encoding.imm_size == 4:
+                for operand in insn.operands:
+                    if (operand.type == X86_OP_IMM
+                            and (insn.id == X86_INS_CALL or insn.group(CS_GRP_JUMP))):
+                        if insn.size >= 5 and insn.encoding.imm_size == 4:
+                            evidence.append({
+                                "offset": insn.address - start + insn.encoding.imm_offset,
+                                "target_address": f"{operand.imm & 0xFFFFFFFF:08X}",
+                                "kind": "relative",
+                            })
+                    elif operand.type == X86_OP_MEM:
+                        mem = operand.mem
+                        if (mem.base == X86_REG_INVALID and mem.index == X86_REG_INVALID
+                                and insn.encoding.disp_size == 4
+                                and BASE <= mem.disp < BASE + len(image)):
+                            evidence.append({
+                                "offset": insn.address - start + insn.encoding.disp_offset,
+                                "target_address": f"{mem.disp & 0xFFFFFFFF:08X}",
+                                "kind": "absolute",
+                            })
+                    elif (operand.type == X86_OP_IMM and insn.encoding.imm_size == 4
+                          and BASE <= operand.imm < BASE + len(image)):
                         evidence.append({
                             "offset": insn.address - start + insn.encoding.imm_offset,
                             "target_address": f"{operand.imm & 0xFFFFFFFF:08X}",
-                            "kind": "relative",
+                            "kind": "immediate",
                         })
-                elif operand.type == X86_OP_MEM:
-                    mem = operand.mem
-                    if (mem.base == X86_REG_INVALID and mem.index == X86_REG_INVALID
-                            and insn.encoding.disp_size == 4
-                            and BASE <= mem.disp < BASE + len(image)):
-                        evidence.append({
-                            "offset": insn.address - start + insn.encoding.disp_offset,
-                            "target_address": f"{mem.disp & 0xFFFFFFFF:08X}",
-                            "kind": "absolute",
-                        })
-                elif (operand.type == X86_OP_IMM and insn.encoding.imm_size == 4
-                      and BASE <= operand.imm < BASE + len(image)):
-                    evidence.append({
-                        "offset": insn.address - start + insn.encoding.imm_offset,
-                        "target_address": f"{operand.imm & 0xFFFFFFFF:08X}",
-                        "kind": "immediate",
-                    })
+        else:
+            lines.append(f"        // Raw indexed extent: 0x{start:08X} .. +0x{size:X}; decoding incomplete.")
+            for byte in code:
+                lines.append(f"        __asm _emit 0x{byte:02X}")
 
         lines.extend(["    }", "}", ""])
-        source = ROOT / "src/client-current/Main" / f"{row['name']}.cpp"
+        source = ROOT / "src/client-current/Main" / f"{source_name}.cpp"
         source.write_text("\n".join(lines), encoding="utf-8", newline="\n")
         relocations_by_function[address] = evidence
         print(f"{address}: emitted {size} bytes, {len(evidence)} operand targets")

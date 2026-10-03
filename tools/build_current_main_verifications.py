@@ -15,6 +15,7 @@ ADDRESSES = (
     "5876E510", "5875B000", "58902CE0", "58902D20",
     "588F3D70", "58906DE0", "58903E40", "5897D53A", "58907A90",
     "589073B0", "5896C460", "5896C010", "5896BF10", "5897CD4C",
+    "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "587750B0", "58731BD0",
     "5897CEC8", "58731500", "5897CE38",
     "5892DEF0", "58937510", "58943C70", "5894CC60", "589563E0",
@@ -85,13 +86,22 @@ RELOCATION_OVERRIDES = {
         },
     ],
 }
+SOURCE_NAME_OVERRIDES = {
+    # Ghidra uses backtick quoting for this non-C identifier. The assembler
+    # body is unchanged; use its valid plain function name as the object symbol.
+    "5897D0BE": "eh_vector_constructor_iterator",
+}
+SYMBOL_OVERRIDES = {
+    "5897D0BE": "_eh_vector_constructor_iterator",
+}
 SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
-    "5896BF10", "5897CD4C",
+    "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
+    "5897D801", "5897CFFD",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
     "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
@@ -176,6 +186,36 @@ EVIDENCE = {
         "called_by": "Directly called by the installed sprite parser at 0x58903E40 on its format-3 handling path.",
         "behavior": "Matches the six-byte indirect-call thunk used by the parser's format-3 path.",
         "uncertainty": "The host callback target and format-specific operation are not identified.",
+    },
+    "5897D0BE": {
+        "name_in_analysis": "`eh_vector_constructor_iterator'",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in two construction/cleanup paths.",
+        "behavior": "Matches the 77-byte helper and its local SEH setup, cleanup, and array-unwind calls as present in the installed Main.dll capture. The source uses a valid C alias for Ghidra's quoted label; the bytes are unchanged.",
+        "uncertainty": "The element constructor/destructor target semantics and element type are not recoverable from this helper alone.",
+    },
+    "5897D7BC": {
+        "name_in_analysis": "__SEH_prolog4",
+        "called_by": "Called by the array-construction helper at 0x5897D0BE for its exception-handler chain setup.",
+        "behavior": "Matches the 69-byte exception-registration prolog, including the saved frame/register state and handler link visible in the instruction stream.",
+        "uncertainty": "This is a compiler support routine; its broader runtime contract is inferred only from its machine instructions and call position.",
+    },
+    "5897D10B": {
+        "name_in_analysis": "FUN_5897d10b",
+        "called_by": "Called from the array-construction helper at 0x5897D0BE during its exception cleanup path.",
+        "behavior": "Matches the 24-byte cleanup helper, which conditionally invokes __ArrayUnwind at 0x5897CFFD using captured count, element-stride, and callback arguments.",
+        "uncertainty": "The exact element type and unwind operation's semantic meaning are not identified.",
+    },
+    "5897D801": {
+        "name_in_analysis": "__SEH_epilog4",
+        "called_by": "Called by the array-construction helper at 0x5897D0BE when leaving its protected construction path.",
+        "behavior": "Matches the 20-byte exception-registration epilog, restoring the prior FS:[0] chain and saved frame registers before returning.",
+        "uncertainty": "This is a compiler support routine; the description is limited to its observed machine instructions and call position.",
+    },
+    "5897CFFD": {
+        "name_in_analysis": "__ArrayUnwind",
+        "called_by": "Called at 0x5897D10B+0x13 by the array-construction cleanup helper.",
+        "behavior": "Matches the 50-byte indexed function extent from the mapped Main.dll image, emitted as literal bytes because Ghidra's instruction decoding does not cover the full extent.",
+        "uncertainty": "This exact byte match does not recover instruction boundaries or the helper's semantics; no behavior is inferred from raw bytes.",
     },
     "5878D6D0": {
         "name_in_analysis": "FUN_5878d6d0",
@@ -1845,7 +1885,8 @@ def main():
     matches = []
     for address in ADDRESSES:
         row = inventory[address]
-        source = f"src/client-current/Main/{row['name']}.cpp"
+        source_name = SOURCE_NAME_OVERRIDES.get(address, row["name"])
+        source = f"src/client-current/Main/{source_name}.cpp"
         source_path = ROOT / source
         name = row["name"]
         relocations = RELOCATION_OVERRIDES.get(address, relocation_data.get(address, []))
@@ -1857,7 +1898,7 @@ def main():
             "address": address,
             "name": name,
             "size": int(row["size"]),
-            "symbol": "_" + name,
+            "symbol": SYMBOL_OVERRIDES.get(address, "_" + name),
             "source": source,
             "source_sha256": sha256(source_path),
             "verified_by": marker,
