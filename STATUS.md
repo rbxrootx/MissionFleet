@@ -6,7 +6,7 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,401 verified matches
+identified code bytes across six report units. There are 6,402 verified matches
 totaling 1,882,853 bytes (17.9844%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -439,8 +439,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 268 / 8,474 functions and
-921,150 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 269 / 8,474 functions and
+924,939 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
@@ -481,6 +481,12 @@ The RTTI-identified `CPannelArmorControl` helper `FUN_58815e10` adds
 methods call it to refresh text/numeric controls from four fields in a referenced
 object and update child flags. The field and control meanings remain unresolved.
 See the [armor-control refresh evidence](docs/current-main-armor-control-refresh.md).
+
+The geometry helper `FUN_588d8d60` adds 3,789 bytes across three Ghidra ranges,
+with five mapped operand targets checked. It fills coordinate record arrays
+through 20-iteration, 120-iteration, and caller-sized loops from two lookup tables. Its
+only identified direct caller is `FUN_588e05c0`; class and rendered effect remain
+unknown. See the [geometry-helper evidence](docs/current-main-geometry-helper.md).
 `FUN_5876a570` adds a 4,160-byte prompt-handler
 match in one Ghidra range, with 266 mapped operands checked. Its callers pass
 many action codes; the communicator-configuration panel uses code 300 for the

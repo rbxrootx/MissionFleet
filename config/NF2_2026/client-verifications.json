@@ -202905,6 +202905,80 @@
         "behavior": "Updates child-control flags and text/numeric display calls using data reached through receiver +0x198. It reads four referenced slots at +0xCD0, +0xCD4, +0xCD8, and +0xCDC, values at +0x88 through +0x8E, and passes values to FUN_58907360 and FUN_58731CE0.",
         "uncertainty": "The semantic names of the selected data slots, numeric fields, display helpers, and child controls are not established. No runtime or visual test was performed."
       }
+    },
+    {
+      "address": "588D8D60",
+      "name": "FUN_588d8d60",
+      "size": 3789,
+      "symbol": "_FUN_588d8d60",
+      "source": "src/client-current/Main/FUN_588d8d60.cpp",
+      "source_sha256": "a8f4c65f73ede7394bdc630b2dee23c0cfd8fab81be7231e49420ad29a4111aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D8D60",
+          "size": 1117,
+          "symbol": "_FUN_588d8d60_segment_00",
+          "relocations": [
+            {
+              "offset": 1091,
+              "target_address": "588D8D80",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588D91C0",
+          "size": 882,
+          "symbol": "_FUN_588d8d60_segment_01",
+          "relocations": [
+            {
+              "offset": 787,
+              "target_address": "588D91C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 831,
+              "target_address": "588D9C34",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588D9540",
+          "size": 1790,
+          "symbol": "_FUN_588d8d60_segment_02",
+          "relocations": [
+            {
+              "offset": 1716,
+              "target_address": "588D9960",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1776,
+              "target_address": "588D9540",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra identifies no class name. The decompilation shows writes into fixed receiver-relative coordinate arrays and reads two global lookup tables.",
+        "called_by": "The only direct caller identified is FUN_588E05C0, with a call at 0x588E0969. Its high-level owner is not established.",
+        "behavior": "Computes table-driven coordinate pairs with fixed-point scaling, filling repeated record groups including 20-iteration and 120-iteration loops, then an additional caller-sized loop. The table index advances by 0x1E and wraps modulo 0xE10; these values and array writes are directly visible in Ghidra.",
+        "uncertainty": "The lookup table meanings, coordinate units, exact object represented, and user-visible rendering effect are unresolved. Interpreting the lookup coefficients as trigonometric data is an inference only. No runtime test was performed."
+      }
     }
   ]
 }
