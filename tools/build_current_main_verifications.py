@@ -46,7 +46,7 @@ ADDRESSES = (
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
-    "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "587D8840", "587D7B90", "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
@@ -80,7 +80,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "588F0460", "588EF260", "587B7400", "587D7820",
-    "587D8840", "588E65D0", "588EFF30", "588F0150", "58908170",
+    "587D8840", "587D7B90", "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 }
 SOURCE_COMPILER = {
@@ -1174,6 +1174,12 @@ EVIDENCE = {
         "called_by": "Directly called twice by CSpecBoard_Equip numeric helper 0x58907820; the mapped code matches a complete conversion routine through its return at 0x5897CD4A.",
         "behavior": "Converts an x87 floating-point value to a signed 64-bit integer using a fast SSE2 truncation path when the observed runtime flag and floating-point control word permit it, otherwise using an x87 rounding-and-correction path. The indexed extent was 145 bytes and cut an instruction; mapped code runs 171 bytes through leave/ret, followed by an int3 pad and the next indexed thunk at 0x5897CD4C.",
         "uncertainty": "The runtime flag at 0x58A289A4 and exact compiler-runtime symbol are unidentified. The corrected boundary follows decoded instruction boundaries, both terminating returns, the following int3, and the next indexed thunk.",
+    },
+    "587D7B90": {
+        "name_in_analysis": "FUN_587d7b90",
+        "called_by": "Directly called twice by the verified CPageFactory_ControlMenuScreen constructor 0x587DBA00; its results are stored at receiver offsets +0x504 and +0x584.",
+        "behavior": "Allocates a 0xD4-byte child object, initializes its primary region through 0x58794600, reads bounded values from three observed global record arrays, passes those values to child-control methods, sets flags at +0x24 and +0x26, and conditionally calls two release/cleanup helpers before returning the child pointer.",
+        "uncertainty": "The child class, global-record meanings, control roles, and contracts of the unmatched direct callees are unresolved. Description is limited to observed allocation size, fields, branches, and calls. The indexed 486-byte extent decodes continuously to its ret at 0x587D7D75.",
     },
 }
 
