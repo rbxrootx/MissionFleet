@@ -298,6 +298,11 @@ observed records; receiver class and field semantics remain unknown. See the
 ranges, with 475 operands checked; its state-dependent per-side totals,
 counter adjustments, and result labels are recorded in the
 [battle-statistics evidence](docs/current-main-battle-statistics.md).
+The caller `FUN_587fbcc0` adds a 3,303-byte battle-state helper across four
+Ghidra ranges, with 139 operands checked. It is called by the queue screen's
+vtable-backed update and calls the statistics helper on one path. Stage and
+team field semantics remain unresolved; see the
+[battle-state evidence](docs/current-main-battle-state-helper.md).
 The `CPannelCommunicatorConfigDiplomacyTab` constructor adds another 9,635-byte
 match across three Ghidra ranges, called by the parent communicator panel; its
 sprite path, child construction, and unowned jump-gap audit are documented in
@@ -459,8 +464,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 275 / 8,474 functions and
-946,765 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 276 / 8,474 functions and
+950,068 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
