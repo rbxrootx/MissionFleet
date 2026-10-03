@@ -191418,6 +191418,150 @@
         "behavior": "The __thiscall initializer creates sprite-backed child controls from the trade and market sprite tables, stores child pointers in receiver slots, and changes child flag bits. These are code and caller observations; individual resource indices, labels, and user-facing actions are not inferred.",
         "uncertainty": "The full receiver/base layouts, resource-table schemas, exact visual mapping, child labels/actions, and runtime appearance remain unresolved. Ghidra reports two body ranges totaling 4,536 bytes; the six-byte gap at 0x588C006A..0x588C006F contains no instructions and branches target the following range at 0x588C0070. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58756F80",
+      "name": "FUN_58756f80",
+      "size": 4528,
+      "symbol": "_FUN_58756f80",
+      "source": "src/client-current/Main/FUN_58756f80.cpp",
+      "source_sha256": "626a25c766ffd71866c22d8e5cc43e8a8d4d79be1d4490dcd5a4081319aa4980",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58756F80",
+          "size": 4528,
+          "symbol": "_FUN_58756f80_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3943,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3964,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3997,
+              "target_address": "588F3D70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4053,
+              "target_address": "587580BF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4078,
+              "target_address": "587580AE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4085,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4152,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4167,
+              "target_address": "587580AE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4184,
+              "target_address": "587580AE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4191,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4219,
+              "target_address": "58758082",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4229,
+              "target_address": "58A246AC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 4291,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4378,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4390,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4424,
+              "target_address": "58757F4B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4443,
+              "target_address": "58757F40",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra shows assignment of CCloudOpeningScreen::vftable at function entry. The body loads .\\SPR\\IMGDMM.spr and constructs child controls from a six-group, forty-slot per-group record traversal.",
+        "called_by": "Ghidra's direct-reference audit records one call from FUN_58791590 at 0x587918FC. That caller checks a 0x600-byte allocation, stores the returned pointer in DAT_58A24590, passes it to FUN_5874A7F0, invokes FUN_58731590 with 11000, calls FUN_58758150(1), and loads NFCOSFO.RPT.",
+        "behavior": "The __thiscall initializer sets the CCloudOpeningScreen vftable, loads IMGDMM.spr, and walks six group values across forty receiver records per group. Depending on observed record fields it constructs CSpriteDataScreen or FUN_58731C60 children from indexed sprite data and updates child flag bits. Record meanings, labels, and visible actions are not inferred.",
+        "uncertainty": "The receiver layout, 40-slot record schema, sprite index meanings, relationship of the caller's report load to this screen, and runtime appearance remain unresolved. Ghidra reports one contiguous body range of 4,528 bytes. No emulator runtime test was performed."
+      }
     }
   ]
 }
