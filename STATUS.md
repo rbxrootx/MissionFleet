@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,344
-identified code bytes across six report units. There are 6,461 verified matches
-totaling 2,037,014 bytes (19.4569%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,462 verified matches
+totaling 2,037,266 bytes (19.4593%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -203,6 +203,13 @@ non-null methods in its vtable, totaling 12,164 bytes; its separate
 `+0x10`, and `+0x14` methods and corrects the `+0x00` body to include its
 `ret 4` epilogue. No emulator interaction test was performed. See
 [the vtable coverage map](docs/current-main-control-menu-vtable.md).
+
+`FUN_5878AD50` adds the 252-byte observed setup caller for
+`CPannelMainControl_MenuScreen`: it checks the stored screen pointer, allocates
+and constructs the screen when absent, then applies the recorded child-list
+and state updates. ObjDiff checks all 16 mapped operands. The caller's class,
+field meanings, and runtime appearance remain unresolved. See
+[the caller evidence](docs/current-main-control-menu-setup-caller.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
