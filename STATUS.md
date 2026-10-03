@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,428 verified matches
-totaling 1,982,193 bytes (18.9333%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,429 verified matches
+totaling 1,985,101 bytes (18.9611%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -248,6 +248,12 @@ slot at `+0x1C`; the handler updates text/caret state and contains branches for
 the observed navigation and delete key values. The text encoding and several
 path-sensitive state meanings remain unknown. See
 [the key-handler evidence](docs/current-main-exedit-text-key-handler.md).
+
+`FUN_587e9a10` adds a 2,908-byte event payload builder, with 90 mapped operand
+targets checked. Its callers provide event codes, it forms coordinate- and
+slot-backed payloads, and one route sends message `0x80020500` through the
+verified outbound sender. Event schemas and server compatibility remain
+unresolved. See [the payload-builder evidence](docs/current-main-event-payload-builder.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
