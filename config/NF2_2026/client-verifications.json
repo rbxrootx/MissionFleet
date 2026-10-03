@@ -249467,6 +249467,560 @@
         "behavior": "Initializes the observed child object with vtable address point 0x589A2960, dispatches helper 0x5896CAE0, and performs a follow-up state call through 0x589075C0.",
         "uncertainty": "The vtable's class name, tested child state, and helper contracts remain unresolved. Its 116-byte body and five mapped operand targets are verified."
       }
+    },
+    {
+      "address": "5896C7D0",
+      "name": "FUN_5896c7d0",
+      "size": 65,
+      "symbol": "_FUN_5896c7d0",
+      "source": "src/client-current/Main/FUN_5896c7d0.cpp",
+      "source_sha256": "4948bba49afcf2513caad2b4bfe4925cf8147892b441edb4df72b7422bfae372",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "58909010",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "589A2E60",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896c7d0",
+        "called_by": "Directly called by the matched CMarketBoard child initializer 0x5890B900 twice.",
+        "behavior": "Constructs a child using verified base initializer 0x58909010, stores the supplied state at +0x58/+0x5C, installs vtable address point 0x589A2E60, and sets +0x60 to 2.",
+        "uncertainty": "The class name and meaning of state fields remain unknown. Its 65-byte body and two mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5896CAE0",
+      "name": "FUN_5896cae0",
+      "size": 78,
+      "symbol": "_FUN_5896cae0",
+      "source": "src/client-current/Main/FUN_5896cae0.cpp",
+      "source_sha256": "2736c8ab0142d8fb5e1611f9602e2a1e194466628104f45d5cb35c08510e7fa4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 5,
+          "target_address": "589A2E94",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 11,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58A284C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "5896C9A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58A28514",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896cae0",
+        "called_by": "Directly called by the matched CMarketBoard child initializer 0x58907AC0.",
+        "behavior": "Installs vtable address point 0x589A2E94, checks globals at 0x58A28534 and 0x58A28538, and calls 0x5896C9A0 when the observed setup conditions hold.",
+        "uncertainty": "The vtable class name and global flag meanings remain unresolved. Its 78-byte body and six mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "589075C0",
+      "name": "FUN_589075c0",
+      "size": 141,
+      "symbol": "_FUN_589075c0",
+      "source": "src/client-current/Main/FUN_589075c0.cpp",
+      "source_sha256": "c405b06d8305a4c5544f53b0cb5e20449a8dfef54031394582acdf1309adb0a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "589A3CD8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589075c0",
+        "called_by": "Directly called by the matched CMarketBoard child initializer 0x58907AC0.",
+        "behavior": "Checks observed shared globals 0x58A28534 and 0x58A28538, reads a child pointer through offset +0x14 on selected branches, and stores selected state at receiver offset +0x1C.",
+        "uncertainty": "The global tables, child object types, and receiver fields' semantics remain unresolved. Its 141-byte body and three mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "58907040",
+      "name": "FUN_58907040",
+      "size": 191,
+      "symbol": "_FUN_58907040",
+      "source": "src/client-current/Main/FUN_58907040.cpp",
+      "source_sha256": "7cf5156dbf5c195917125016aad571c5bea4cfaac85b8f9f3dac16bf68fded95",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58907040",
+        "called_by": "Directly called by the matched CMarketBoard constructor child path 0x58907100.",
+        "behavior": "Computes receiver state at +0xE8 from values observed at +0x5C/+0x60 using integer division-like sequences, then updates indexed entries at +0x68 with value 0xB when +0x60 is nonzero.",
+        "uncertainty": "The quotient units, indexed record schema, and meaning of value 0xB remain unknown. Its 191-byte body has no mapped relocation operands."
+      }
+    },
+    {
+      "address": "5896C9A0",
+      "name": "FUN_5896c9a0",
+      "size": 314,
+      "symbol": "_FUN_5896c9a0",
+      "source": "src/client-current/Main/FUN_5896c9a0.cpp",
+      "source_sha256": "5a62b33d2b6e58f092aed9be366a0e5aeb371acc8b4cbd331e9a3468bdd0ca18",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897E8AB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5896CAC6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5896CA6F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58A28534",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5897DABA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "58A28538",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "5897DAB4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 165,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 189,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "5890B5E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 237,
+          "target_address": "58A2853C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "58A2853C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896c9a0",
+        "called_by": "Directly called by the matched child initializer 0x5896CAE0.",
+        "behavior": "Coordinates setup through shared globals 0x58A28534, 0x58A28538, and 0x58A2853C; dispatches two mapped host-import thunks, uses the verified allocator, and constructs a child value through 0x5890B5E0.",
+        "uncertainty": "The setup protocol, import identities, global state meanings, and child data contract remain unresolved. Its 314-byte body and 21 mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5897DABA",
+      "name": "FUN_5897daba",
+      "size": 6,
+      "symbol": "_FUN_5897daba",
+      "source": "src/client-current/Main/FUN_5897daba.cpp",
+      "source_sha256": "4556b228d9267b04d7b49401a8fc1ab58da3bca0c8672f512a0194bb47c9e88c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C01C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897daba",
+        "called_by": "Directly called by the matched setup helper 0x5896C9A0.",
+        "behavior": "Six-byte tail-jump thunk through captured import pointer 0x5898C01C.",
+        "uncertainty": "Imported API identity and runtime behavior remain unknown; one mapped target is checked."
+      }
+    },
+    {
+      "address": "5897DAB4",
+      "name": "FUN_5897dab4",
+      "size": 6,
+      "symbol": "_FUN_5897dab4",
+      "source": "src/client-current/Main/FUN_5897dab4.cpp",
+      "source_sha256": "250843123ca689d97de5b3742248e8441deb66da0efdc0a157d0c298d8760b11",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C020",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897dab4",
+        "called_by": "Directly called by the matched setup helper 0x5896C9A0.",
+        "behavior": "Six-byte tail-jump thunk through captured import pointer 0x5898C020.",
+        "uncertainty": "Imported API identity and runtime behavior remain unknown; one mapped target is checked."
+      }
+    },
+    {
+      "address": "5890B5E0",
+      "name": "FUN_5890b5e0",
+      "size": 36,
+      "symbol": "_FUN_5890b5e0",
+      "source": "src/client-current/Main/FUN_5890b5e0.cpp",
+      "source_sha256": "2a316de22c4dd2539f2023bf4679764f0bc4a260a43b19eb613d9ef17c05329f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "589A2B34",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "5890B4C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890b5e0",
+        "called_by": "Directly called by the matched setup helper 0x5896C9A0.",
+        "behavior": "Initializes a value with vtable address point 0x589A2B34, zeroes four float fields and an integer field, calls 0x5890B4C0, and returns the receiver.",
+        "uncertainty": "The type name and field units remain unresolved. Its 36-byte body and two mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5890B4C0",
+      "name": "FUN_5890b4c0",
+      "size": 283,
+      "symbol": "_FUN_5890b4c0",
+      "source": "src/client-current/Main/FUN_5890b4c0.cpp",
+      "source_sha256": "532b8d204670ba592b7331a71f7946d164823efb64363d357ef79ddf719beac8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5890B5BF",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "58A28530",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5890B5C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "589A3CE8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 164,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 189,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 257,
+          "target_address": "58A28530",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890b4c0",
+        "called_by": "Directly called by the matched value initializer 0x5890B5E0.",
+        "behavior": "Runs the remaining setup on that value and invokes the verified security-cookie helper 0x5897CBDA on three observed paths.",
+        "uncertainty": "The value's full schema, purpose of setup branches, and semantics of stored fields remain unresolved. Its 283-byte body and 16 mapped operand targets are verified."
+      }
     }
   ]
 }
