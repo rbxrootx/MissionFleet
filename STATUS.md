@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,389 verified matches
-totaling 1,845,135 bytes (17.6242%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,390 verified matches
+totaling 1,849,471 bytes (17.6656%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,14 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 256 / 8,474 functions and
-871,717 / 2,353,390 bytes. The `CForce` constructor `FUN_5877cc30` adds a
+Current-build Main coverage is now 257 / 8,474 functions and
+876,053 / 2,353,390 bytes. `FUN_58798d60` adds a 4,336-byte state-update
+method match across three Ghidra ranges with 60 mapped operands checked.
+Ghidra shows nine calls from five functions; `FUN_587e3080` passes selectors
+1, 2, 3, and `0xD`. The receiver type, selector meanings, record schema, and
+control/resource semantics remain unknown. See the
+[state-update evidence](docs/current-main-state-update-method.md).
+The `CForce` constructor `FUN_5877cc30` adds a
 4,348-byte match in one Ghidra range, with 113 mapped operands checked. Ghidra
 shows five callers; each allocates `0x27C` bytes before constructing the object.
 The constructor copies 96 words from its input into the receiver and creates

@@ -193699,6 +193699,410 @@
         "behavior": "Copies 0x60 four-byte words from the second argument into the receiver at +0x50, XORs several receiver fields with 0xAA-derived masks, then creates sprite-backed children from shared tables. Ghidra shows CSpriteDataScreen and CSpriteBundleScreen child initialization.",
         "uncertainty": "The copied input record schema, XOR-affected field semantics, child identities/resources, and ownership/lifetime are unresolved. Ghidra reports one contiguous 4,348-byte function body. No runtime test was performed."
       }
+    },
+    {
+      "address": "58798D60",
+      "name": "FUN_58798d60",
+      "size": 4336,
+      "symbol": "_FUN_58798d60",
+      "source": "src/client-current/Main/FUN_58798d60.cpp",
+      "source_sha256": "ff12daa3132313626b0b844baafa9df7448a7c1059223040933860922ae83459",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58798D60",
+          "size": 256,
+          "symbol": "_FUN_58798d60_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 252,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58798E6A",
+          "size": 28,
+          "symbol": "_FUN_58798d60_segment_01",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58798E8F",
+          "size": 4052,
+          "symbol": "_FUN_58798d60_segment_02",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58799E5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 332,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "58799E5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 442,
+              "target_address": "58799446",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 484,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 578,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 702,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 717,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 731,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 748,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 767,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 861,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 994,
+              "target_address": "58799E5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1002,
+              "target_address": "5879904D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1013,
+              "target_address": "58799052",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1024,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1118,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1219,
+              "target_address": "58799168",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1230,
+              "target_address": "5879913C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1241,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1335,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1436,
+              "target_address": "5879904D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1470,
+              "target_address": "58799052",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1485,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1579,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1728,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1836,
+              "target_address": "58799E5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1887,
+              "target_address": "587996FF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2332,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2343,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2374,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2385,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2408,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2502,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2651,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3058,
+              "target_address": "58799B0E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3272,
+              "target_address": "58799E4B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3295,
+              "target_address": "58799E4B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3310,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3404,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3553,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3825,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3834,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3845,
+              "target_address": "58799E35",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3975,
+              "target_address": "58779C30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 3990,
+              "target_address": "58799DA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 4035,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 4040,
+              "target_address": "587B9A10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra decompiles a __thiscall method with a 16-bit selector, object/state arguments, and a switch over selectors 1, 2, 3, 5, 6, 0xB, 0xC, 0xD, and 0xE; no reliable C++ class name is assigned.",
+        "called_by": "Ghidra records nine call instructions across five callers, including four call sites from FUN_587E3080. The decompiled caller passes observed selector values 1, 2, 3, and 0xD.",
+        "behavior": "Resets per-object fields and child-control flags, releases existing state objects on a replacement path, then updates sprite-backed children and fields according to the selector. Several branches read shared sprite data and copy record values into child objects.",
+        "uncertainty": "The selector names, receiver class, record schemas, field semantics, resource identities, and full visible effects remain unknown. Ghidra reports three body ranges totaling 4,336 bytes; 10-byte and 9-byte gaps between them are not owned. No runtime test was performed."
+      }
     }
   ]
 }
