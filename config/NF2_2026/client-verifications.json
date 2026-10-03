@@ -217204,6 +217204,77 @@
         "behavior": "The function returns if receiver +0x10524 is null, then resets related state and selects a map filename. Its literal paths include CMFBT_Mission%d.CMF, CMFBT_OPCV%d.CMF, CMFBT%d.CMF, CMFBT2000.CMF, FlyHigh.CMF, HobbitWar.CMF, and faction-specific conq_war_*.CMF files. For conquest records it also loads harbor.spr and a faction-specific harbor_*.spr via FUN_588f3d70. It resolves map/layout records through FUN_58748270 and related helpers, initializes a large 400000-byte resource table with bounded indexed records, selects mode-specific layout/resource paths, updates the receiver's map dimensions, and invokes the child screen's virtual method at +0x20 with 1000. These constants, branches, and helper calls are visible in Ghidra.",
         "uncertainty": "The map identifier contract, mode names, binary CMF schema, faction/resource index meanings, the 400000-byte table's full consumer contract, and resulting visuals have not been recovered. No original-client runtime or visual comparison was performed."
       }
+    },
+    {
+      "address": "588A0450",
+      "name": "FUN_588a0450",
+      "size": 3049,
+      "symbol": "_FUN_588a0450",
+      "source": "src/client-current/Main/FUN_588a0450.cpp",
+      "source_sha256": "3a171856d95735c532d6b8a3aa07e1ff70c182e29dafd1fb245fbefd4a4d6a6a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588A0450",
+          "size": 3049,
+          "symbol": "_FUN_588a0450_segment_00",
+          "relocations": [
+            {
+              "offset": 115,
+              "target_address": "5889E970",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "5889E970",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "588A0465",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "5898C008",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "5898C010",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5898C00C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 3037,
+              "target_address": "5898C000",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra identifies FUN_588a0450 as the function stored at 0x589A0218, slot +0x18 of the vtable beginning at 0x589A0200. Its complete-object locator at 0x589A9424 references RTTI type descriptor .?AVCPannelOption@@. The registered values use the path SOFTWARE\\FleetMission\\FleetMissionCN\\CONFIGURATION_KEY.",
+        "called_by": "Ghidra records one direct call from FUN_588a3200 at 0x588A324D. In that caller's param_3 == 2 branch, matching control param_1[0x93] runs prerequisite routines, calls FUN_5889F0C0 and FUN_5889FCA0, then invokes this loader before a virtual call through the panel vtable. The caller's RTTI-backed table identifies it as CPannelOption; the semantic name of the event remains unknown.",
+        "behavior": "The loader validates 31 key codes stored from receiver +0x150, calls FUN_5889e970 for out-of-range or duplicate codes, then reads named values under the configuration registry path through host API function pointers. Visible value names include PortAllTurets, StarboardAllTurrets, PortTheTurret, StarboardTheTurret, GunElevationUp/Down, PreciseWeaponControl, Fire, SelectFrontWeapon, SelectRearWeapon, EngineAccelerate/Decelerate, ReturnToTheShip, Dive, Bombing, SmokeBomb, Submerging, CriticalSubmerging, and MapGridOnOff. It writes values back into receiver fields spanning +0x150 through +0x1C8 and closes the opened configuration handle through another host function pointer.",
+        "uncertainty": "The key-code meanings, default-binding schema, exact registry API contracts, configuration versioning, and runtime effects of restored settings remain unresolved. No original-client options interaction test was performed."
+      }
     }
   ]
 }

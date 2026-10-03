@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,421 verified matches
-totaling 1,961,323 bytes (18.7340%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,422 verified matches
+totaling 1,964,372 bytes (18.7631%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -202,6 +202,13 @@ mode-derived identifiers; the body selects observed CMF and faction harbor SPR
 paths and populates a large child buffer. The identifier contract, file schemas,
 and resulting layout remain unresolved. See
 [the initializer evidence](docs/current-main-map-resource-initializer.md).
+
+`FUN_588a0450` adds a 3,049-byte `CPannelOption` key-settings loader in one
+Ghidra range, with seven mapped operands checked. Its RTTI-backed `+0x18`
+vtable slot is called by the option-panel event path. It validates 31 key
+bindings and reads named values under the client configuration registry path;
+the key-code and defaults contracts remain unknown. See
+[the loader evidence](docs/current-main-option-key-settings-loader.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
