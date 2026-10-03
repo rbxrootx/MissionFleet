@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,386 verified matches
-totaling 1,831,793 bytes (17.4968%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,387 verified matches
+totaling 1,836,320 bytes (17.5400%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,14 +439,13 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 253 / 8,474 functions and
-858,375 / 2,353,390 bytes. `CCloudOpeningScreen` initializer `FUN_58756f80`
-adds a 4,528-byte match, with 19 relocation operands checked. Ghidra shows a
-six-by-forty receiver-record traversal and an `IMGDMM.spr` load; record meanings
-and visual mappings remain unknown. Its caller creates the screen in a state
-transition and separately loads `NFCOSFO.RPT`; their exact runtime relationship
-has not been tested. See the
-[initializer evidence](docs/current-main-cloud-opening-screen.md).
+Current-build Main coverage is now 254 / 8,474 functions and
+862,902 / 2,353,390 bytes. `CPannelForceCompositionManager` initializer
+`FUN_58868b40` adds a 4,527-byte match in one range, with 130 relocation
+operands checked. The `CPannelForceManager` caller allocates `0x2D4` bytes and
+stores the child at `+0xC4`; the sprite-table mappings and control meanings are
+unknown. See the
+[initializer evidence](docs/current-main-force-composition-manager.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
 its DLL entrypoint expands its protected image into native mapped code. Its
