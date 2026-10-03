@@ -248421,6 +248421,470 @@
         "behavior": "Branches on receiver mode 0xD, updates receiver state at +0x254, checks child values and bounds, and dispatches child update calls through 0x588804F0 on repeated paths.",
         "uncertainty": "The child record schema, bounds units, and meaning of mode 0xD remain unresolved. Its 1,234-byte body and nine mapped operand targets are verified."
       }
+    },
+    {
+      "address": "58778B20",
+      "name": "FUN_58778b20",
+      "size": 81,
+      "symbol": "_FUN_58778b20",
+      "source": "src/client-current/Main/FUN_58778b20.cpp",
+      "source_sha256": "0624fb7bd7e0ddac68ca6aea82ccb30425b691a8096b4be4811b73aa981612af",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778b20",
+        "called_by": "Direct callee of CMarketBoard child-event method 0x58798850 and child cleanup handler 0x58797610.",
+        "behavior": "Handles a short shared event/child operation and returns through two observed `ret 4` paths.",
+        "uncertainty": "The child/event contract is unresolved; the 81-byte leaf has no mapped relocation operands and is matched at its indexed extent."
+      }
+    },
+    {
+      "address": "58797610",
+      "name": "FUN_58797610",
+      "size": 100,
+      "symbol": "_FUN_58797610",
+      "source": "src/client-current/Main/FUN_58797610.cpp",
+      "source_sha256": "fe247a8feffc4fe15bfb545adf344f8c06f79bf7ce219989183c2af19b05e952",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "58778B20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "58A0B468",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "587B9FE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58797610",
+        "called_by": "Direct callee of CMarketBoard child-event method 0x58798850.",
+        "behavior": "Calls 0x58778B20, compares an observed child value against global 0x58A0B468, and dispatches through 0x587B9FE0 or existing input/message helpers on separate branches.",
+        "uncertainty": "The global's role, child state meaning, and branch/event contract remain unresolved. Its 100-byte body and seven mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "587986E0",
+      "name": "FUN_587986e0",
+      "size": 194,
+      "symbol": "_FUN_587986e0",
+      "source": "src/client-current/Main/FUN_587986e0.cpp",
+      "source_sha256": "ff0072aebc2fa32bd5b15594a762a546018191e8815caf2379a8e86a38517dfd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 95,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "587B9F70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 153,
+          "target_address": "587B9F70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587986e0",
+        "called_by": "Direct callee of CMarketBoard event methods 0x58798850 and 0x5879F810.",
+        "behavior": "Compares receiver bytes at +0x250/+0x251 and a word at +0x252 with supplied values; selected branches call 0x587B9F70, and an additional path dispatches existing message helpers.",
+        "uncertainty": "The receiver fields, comparison purpose, and branch payload meaning remain unresolved. Its 194-byte body and six mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "587987B0",
+      "name": "FUN_587987b0",
+      "size": 40,
+      "symbol": "_FUN_587987b0",
+      "source": "src/client-current/Main/FUN_587987b0.cpp",
+      "source_sha256": "a1915f480c4bbbfe848863076393e66602028ab7527cca0333a2c4be00823165",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "588AC1A0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587987b0",
+        "called_by": "Direct callee of CMarketBoard event method 0x58798850.",
+        "behavior": "Calls 0x588AC1A0 and returns the observed small result through its 40-byte body.",
+        "uncertainty": "The caller's expected result and helper contract remain unresolved. One mapped operand target is verified."
+      }
+    },
+    {
+      "address": "588804F0",
+      "name": "FUN_588804f0",
+      "size": 315,
+      "symbol": "_FUN_588804f0",
+      "source": "src/client-current/Main/FUN_588804f0.cpp",
+      "source_sha256": "da1926d8da960bec91820ef07240acc443496228fb6671ccef4826205660024b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 26,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "58880621",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "58880520",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 246,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 285,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588804f0",
+        "called_by": "Directly called from repeated child-update branches in CMarketBoard handlers 0x58797F10 and 0x58798850.",
+        "behavior": "Checks child and collection fields including +0xA8, +0xA4, +0x10, and +0x0C, then performs repeated indirect child updates through 0x5897CC72.",
+        "uncertainty": "The child collection schema, indirect virtual method, and checked values' units remain unresolved. Its 315-byte body and 15 mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "5890BC40",
+      "name": "FUN_5890bc40",
+      "size": 91,
+      "symbol": "_FUN_5890bc40",
+      "source": "src/client-current/Main/FUN_5890bc40.cpp",
+      "source_sha256": "30f2cfe0bc7ace0c79ae24eeb8654784b5ca7667b95662fea2f3fdc767eb86f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 42,
+          "target_address": "589A2B64",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5874BA60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "589A2B5C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "5874BA60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890bc40",
+        "called_by": "Direct callee of CMarketBoard child-event method 0x58798850.",
+        "behavior": "Dispatches the observed receiver/argument through helper 0x5874BA60 on two return paths.",
+        "uncertainty": "The callback contract and receiver meaning remain unresolved. Its 91-byte body and four mapped operand targets are verified."
+      }
+    },
+    {
+      "address": "58880630",
+      "name": "FUN_58880630",
+      "size": 280,
+      "symbol": "_FUN_58880630",
+      "source": "src/client-current/Main/FUN_58880630.cpp",
+      "source_sha256": "540be0f517d7cff190caa64219f944a5c9a367bf9b4ed51f8aa3d748e2a49de9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 26,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "5888073E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "58880660",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 240,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58880630",
+        "called_by": "Direct callee of CMarketBoard child-event method 0x58798850.",
+        "behavior": "Checks repeated child and collection fields including +0xA8, +0xA4, +0x10, and +0x0C, and applies the same observed indirect child-update helper 0x5897CC72 across the corresponding branches.",
+        "uncertainty": "The difference from nearby routine 0x588804F0, child schema, update contract, and units remain unresolved. Its 280-byte body and 13 mapped operand targets are verified."
+      }
     }
   ]
 }
