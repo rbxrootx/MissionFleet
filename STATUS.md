@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,392 verified matches
-totaling 1,858,098 bytes (17.7480%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,393 verified matches
+totaling 1,862,265 bytes (17.7878%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,15 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 259 / 8,474 functions and
-884,680 / 2,353,390 bytes. `FUN_587e3080` adds a 4,296-byte handler match
+Current-build Main coverage is now 260 / 8,474 functions and
+888,847 / 2,353,390 bytes. `FUN_58882d80` adds a 4,167-byte handler match
+across five Ghidra ranges, with 214 mapped operands checked. Its direct caller
+`FUN_587bb700` reaches it in the `0x8002C005` dispatch arm. The handler routes
+codes `0x8002C101` through `0x8002C104` into helper messages, payload copies,
+and state/control updates. Receiver and payload layouts and message meanings
+remain unresolved. See the
+[message-handler evidence](docs/current-main-message-handler.md).
+`FUN_587e3080` adds a 4,296-byte handler match
 across three Ghidra ranges with 217 mapped operands checked. It tests message
 and object state, resolves visible message keys for ship-reform, armor, engine,
 and dock-number paths, and calls the prior-slice state updater with selectors
