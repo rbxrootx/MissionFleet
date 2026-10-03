@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,459
-identified code bytes across six report units. There are 6,663 verified matches
-totaling 2,097,350 bytes (20.0330%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,668 verified matches
+totaling 2,100,932 bytes (20.0672%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -134,6 +134,12 @@ for 3,468 bytes and 149 mapped operand checks. The depth-three direct-call audit
 now reports no remaining unmatched indexed targets in this path. Child RTTI,
 resource identities, UI roles, and indirect runtime behavior remain uncertain.
 See [the warehouse child-path evidence](docs/current-main-warehouse-trade-panel-child-path.md).
+
+The `CPannelTrade` constructor's next nested-control layer adds five verified
+functions for 3,582 bytes and 116 operand checks. A three-level direct-call
+audit reports no remaining unmatched inventory-backed targets for this path.
+Nested RTTI identities, resource roles, and runtime trade behavior remain
+unresolved. See [the trade-panel child-path evidence](docs/current-main-trade-panel-child-path.md).
 
 `FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
 vtable label identifies `C2ndProtectionSystemManager`; the constructor loads
