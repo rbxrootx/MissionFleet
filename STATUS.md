@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,418 verified matches
-totaling 1,952,104 bytes (18.6459%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,419 verified matches
+totaling 1,955,207 bytes (18.6756%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -182,6 +182,13 @@ callers; the body selects checked resource records, updates child sprite
 controls and flags, and copies a bounded text field. The method name, record
 schemas, resource identities, control labels, and visible result remain
 unknown. See [the refresh evidence](docs/current-main-force-control-refresh.md).
+
+`FUN_587a4440` adds a 3,103-byte `CMine_MapObjectScreen` virtual update in one
+Ghidra range, with 128 mapped operands checked. RTTI identifies the vtable and
+slot `+0x0C`; the method advances a state machine and invokes observed
+effect/event helpers. The state and event meanings, timing and coordinate
+units, and concrete virtual call sites remain unknown. See
+[the update evidence](docs/current-main-mine-map-object-update.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
