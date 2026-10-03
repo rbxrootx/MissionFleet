@@ -252635,6 +252635,57 @@
         "behavior": "Matches the 50-byte indexed function extent from the mapped Main.dll image, emitted as literal bytes because Ghidra's instruction decoding does not cover the full extent.",
         "uncertainty": "This exact byte match does not recover instruction boundaries or the helper's semantics; no behavior is inferred from raw bytes."
       }
+    },
+    {
+      "address": "5897D05B",
+      "name": "`eh_vector_destructor_iterator'",
+      "size": 75,
+      "symbol": "_eh_vector_destructor_iterator",
+      "source": "src/client-current/Main/eh_vector_destructor_iterator.cpp",
+      "source_sha256": "649cc48fe0fc2e0f4051847fb2a49d6eab02bad617542b46989b0ec4b8f2528d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "589B6EB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "5897D7BC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5897D0A6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5897D801",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "`eh_vector_destructor_iterator'",
+        "called_by": "Directly called by the matched sprite-bundle destructor FUN_58903c60 at its array cleanup call site.",
+        "behavior": "Matches the 75-byte compiler-generated array-destruction helper, including its observed SEH prolog call and captured cleanup argument setup. A valid C alias is used for Ghidra's quoted label; the instruction bytes are unchanged.",
+        "uncertainty": "The element type and callback semantics are not independently recovered from this helper."
+      }
     }
   ]
 }

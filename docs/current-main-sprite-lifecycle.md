@@ -6,9 +6,9 @@ at `0x5890427c`; that helper calls the receiver's virtual slots `+0x0C` and
 `+0x10` with the same argument. The sprite bundle's mapped vtable entries at
 `0x589A2520` and `0x589A2528` point to `FUN_58903c60` and `FUN_58903ce0`.
 
-Six functions now have source spans that reproduce their mapped x86 bytes under
+Seven functions now have source spans that reproduce their mapped x86 bytes under
 the recorded VC6-compatible profile. ObjDiff 3.8.0 reports 100% for each
-function, covering 651 bytes and 15 audited relocation operands:
+function, covering 726 bytes and 19 audited relocation operands:
 
 | Address | Bytes | Evidence in the mapped function |
 | --- | ---: | --- |
@@ -18,6 +18,7 @@ function, covering 651 bytes and 15 audited relocation operands:
 | `0x58903C60` | 124 | Handles the bundle vector deleting-destructor path and its ordinary field cleanup; the element stride is `0x40`. |
 | `0x58903CE0` | 44 | Installs the `CSpriteData` vtable, releases its `+0x0C` field, and conditionally releases the receiver. |
 | `0x58903D30` | 35 | Calls virtual slots `+0x0C` and `+0x10` with one shared argument. |
+| `0x5897D05B` | 75 | Array-destruction iterator called directly by `0x58903C60`; its SEH setup and cleanup arguments match the installed image. |
 
 The initial Ghidra bodies for the file and bundle destructors omitted reachable
 instructions after allocator calls because the external release thunk was

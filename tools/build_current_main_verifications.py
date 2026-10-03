@@ -16,6 +16,7 @@ ADDRESSES = (
     "588F3D70", "58906DE0", "58903E40", "5897D53A", "58907A90",
     "589073B0", "5896C460", "5896C010", "5896BF10", "5897CD4C",
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
+    "5897D05B",
     "587750B0", "58731BD0",
     "5897CEC8", "58731500", "5897CE38",
     "5892DEF0", "58937510", "58943C70", "5894CC60", "589563E0",
@@ -90,9 +91,11 @@ SOURCE_NAME_OVERRIDES = {
     # Ghidra uses backtick quoting for this non-C identifier. The assembler
     # body is unchanged; use its valid plain function name as the object symbol.
     "5897D0BE": "eh_vector_constructor_iterator",
+    "5897D05B": "eh_vector_destructor_iterator",
 }
 SYMBOL_OVERRIDES = {
     "5897D0BE": "_eh_vector_constructor_iterator",
+    "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
@@ -101,7 +104,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
-    "5897D801", "5897CFFD",
+    "5897D801", "5897CFFD", "5897D05B",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
     "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
@@ -216,6 +219,12 @@ EVIDENCE = {
         "called_by": "Called at 0x5897D10B+0x13 by the array-construction cleanup helper.",
         "behavior": "Matches the 50-byte indexed function extent from the mapped Main.dll image, emitted as literal bytes because Ghidra's instruction decoding does not cover the full extent.",
         "uncertainty": "This exact byte match does not recover instruction boundaries or the helper's semantics; no behavior is inferred from raw bytes.",
+    },
+    "5897D05B": {
+        "name_in_analysis": "`eh_vector_destructor_iterator'",
+        "called_by": "Directly called by the matched sprite-bundle destructor FUN_58903c60 at its array cleanup call site.",
+        "behavior": "Matches the 75-byte compiler-generated array-destruction helper, including its observed SEH prolog call and captured cleanup argument setup. A valid C alias is used for Ghidra's quoted label; the instruction bytes are unchanged.",
+        "uncertainty": "The element type and callback semantics are not independently recovered from this helper.",
     },
     "5878D6D0": {
         "name_in_analysis": "FUN_5878d6d0",
