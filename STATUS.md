@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
-identified code bytes across six report units. There are 6,349 verified matches
-totaling 1,603,850 bytes (15.3196%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,350 verified matches
+totaling 1,612,298 bytes (15.4003%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -261,8 +261,13 @@ vtable entry identifies the class, and its collision branch invokes the
 byte-matched damage resolver; units, status meanings, and hit effects remain
 unresolved. See the
 [shell map-object update evidence](docs/current-main-shell-map-object-update.md).
-Current-build Main coverage is now 216 / 8,474 functions and
-630,432 / 2,353,354 bytes. See
+The `CPannelCommunicatorConfigManageFleetTab` constructor `FUN_58836b90` adds
+8,448 bytes across two Ghidra ranges with 414 mapped operands checked. Its
+parent creates it immediately before the separately matched Manage Squad tab;
+the child control meanings remain unresolved. See the
+[Manage Fleet tab evidence](docs/current-main-manage-fleet-tab-constructor.md).
+Current-build Main coverage is now 217 / 8,474 functions and
+638,880 / 2,353,354 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
