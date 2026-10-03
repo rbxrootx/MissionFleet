@@ -235875,6 +235875,69 @@
         "behavior": "Writes the CPannelJump_ControlMenuScreen vftable pointer, visits receiver pointer fields at +0x60, +0x64, +0x68, +0x6C (twice), +0x7C, +0x70, +0x80, +0x84, +0x8C, +0xAC, +0x90, +0x94, +0xB0, +0xB4, +0xF0, +0xF4, +0xF8, +0x78, +0xD4, +0xD8, +0xDC, +0xE0, +0xE4, +0xE8, and +0xFC. For each non-null pointer it calls the first entry in the pointed-to vtable with argument 1, then clears the field. It finally calls 0x58902C10 on the receiver.",
         "uncertainty": "Child ownership, the meaning of cleanup argument 1, the duplicate +0x6C cleanup, and the base helper contract are unresolved. The description follows the captured instruction sequence; no emulator destruction test was performed."
       }
+    },
+    {
+      "address": "588873b0",
+      "name": "FUN_588873b0",
+      "size": 338,
+      "symbol": "_FUN_588873b0",
+      "source": "src/client-current/Main/FUN_588873b0.cpp",
+      "source_sha256": "d24c8bebe5be6bcd9e47f1173842ab2808f176ee5dd4efe3c2896cc20dc4f0e4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "588874FE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "58887483",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "588874FE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 254,
+          "target_address": "587316C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 291,
+          "target_address": "587316C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 306,
+          "target_address": "587316C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588873B0 is called on each newly constructed CPannelJump_AddOn child pointer by the verified CPannelJump_ControlMenuScreen constructor FUN_58889640.",
+        "called_by": "The verified constructor FUN_58889640 calls this helper twice, immediately after constructing CPannelJump_AddOn children with FUN_58887760. Each call passes the returned child pointer as receiver and a distinct word selector.",
+        "behavior": "Accepts word values 0 through 2 and stores the value at receiver +0xE0; values above 2 return without changing that field. For value 1, resolves indexed pointers from receiver +0x60 resource state at thresholds 0x43 and 0x44, writes them to children at +0x6C and +0x70, and when non-null copies observed fields at +0x10, +0x14, and +0x18 through +0x24 into child fields beginning at +0x0C and +0x14. For value 2, resolves thresholded pointers for values 0x45 and 0x46 and passes them to helper 0x587316C0 for children +0x6C and +0x70. For value 0, clears the child +0x50 fields. Returns with ret 4.",
+        "uncertainty": "The selector names, resource schema at receiver +0x60, meanings of thresholds and copied child fields, and visible purpose of the two modes are unresolved. Behavior is described only from the matched constructor call sequence and this function disassembly; no emulator runtime test was performed."
+      }
     }
   ]
 }
