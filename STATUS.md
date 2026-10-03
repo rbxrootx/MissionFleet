@@ -125,6 +125,12 @@ operands checked. Its caller is the vtable-backed spatial-update method
 `FUN_587efd60`. Object identity and state meanings remain unknown. See
 [the state-helper evidence](docs/current-main-spatial-state-helper.md).
 
+`FUN_5873cee0` adds a 2,983-byte aircraft-control command handler with 128
+mapped operands checked. The matched ship-map handler dispatches payload tags
+0 and 1 here, and the spatial update dispatches code 5. Diagnostic strings
+name move, attack, and return-to-base paths; protocol and field meanings remain
+partly unresolved. See [the handler evidence](docs/current-main-aircraft-control-handler.md).
+
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
 The installed mapped `Core.dll` slice now also covers ship-node construction,
@@ -464,8 +470,8 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 276 / 8,474 functions and
-950,068 / 2,353,390 bytes. The `CPannelForceManager` constructor
+Current-build Main coverage is now 277 / 8,474 functions and
+953,051 / 2,353,390 bytes. The `CPannelForceManager` constructor
 `FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
 operands checked. Its parent stores the child at `+0xDB4`; the constructor
 creates known `CPannelForceInfo`, `CPannelShipTree`, and
