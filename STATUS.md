@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,395 verified matches
-totaling 1,870,586 bytes (17.8673%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,396 verified matches
+totaling 1,874,680 bytes (17.9064%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -439,8 +439,15 @@ two Ghidra ranges, with 192 operands checked. Its caller allocates `0x4D0` bytes
 and stores it at parent offset `+0xDBC`; the constructor creates resource-backed
 sprite and data controls. Exact labels and actions remain unknown. See the
 [equipment spec-board evidence](docs/current-main-spec-board-equipment-constructor.md).
-Current-build Main coverage is now 262 / 8,474 functions and
-897,168 / 2,353,390 bytes. `FUN_5876a570` adds a 4,160-byte prompt-handler
+Current-build Main coverage is now 263 / 8,474 functions and
+901,262 / 2,353,390 bytes. The `CPannelForceManager` constructor
+`FUN_58872030` adds a 4,094-byte match in one Ghidra range with 138 mapped
+operands checked. Its parent stores the child at `+0xDB4`; the constructor
+creates known `CPannelForceInfo`, `CPannelShipTree`, and
+`CPannelForceCompositionManager` children at receiver slots `+0x2D`, `+0x2F`,
+and `+0x31` respectively. Most other child meanings remain unresolved. See
+the [force-manager constructor evidence](docs/current-main-force-manager-constructor.md).
+`FUN_5876a570` adds a 4,160-byte prompt-handler
 match in one Ghidra range, with 266 mapped operands checked. Its callers pass
 many action codes; the communicator-configuration panel uses code 300 for the
 friend-deletion prompt, and `FUN_587bb700` passes codes 100, 600, and `0x15E`.
