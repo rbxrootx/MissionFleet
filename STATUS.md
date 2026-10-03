@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,417 verified matches
-totaling 1,949,000 bytes (18.6163%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,418 verified matches
+totaling 1,952,104 bytes (18.6459%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -175,6 +175,13 @@ stores the returned object after creating the parent from the global UI setup.
 The constructor builds `CSpriteDataScreen` children from shared records; sprite
 identities and layout meaning remain unknown. See
 [the constructor evidence](docs/current-main-help-screen-constructor.md).
+
+`FUN_5877b1f0` adds a 3,104-byte `CForce` control refresh in one Ghidra range,
+with 60 mapped operands checked. Its `CForce` constructor is one of six direct
+callers; the body selects checked resource records, updates child sprite
+controls and flags, and copies a bounded text field. The method name, record
+schemas, resource identities, control labels, and visible result remain
+unknown. See [the refresh evidence](docs/current-main-force-control-refresh.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.

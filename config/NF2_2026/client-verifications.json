@@ -213811,6 +213811,395 @@
         "behavior": "The constructor allocates repeated 0x54-byte CSpriteDataScreen children, selects shared sprite records through the table at DAT_58A24720+0x18C subject to the count at +0x164, copies six record words into each child, stores child pointers in the receiver, and updates child state through FUN_58902D20. These allocations, fields, and calls are directly visible in Ghidra.",
         "uncertainty": "The sprite resource identities, child-control roles, layout meaning, and resulting on-screen appearance remain unresolved. No emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "5877B1F0",
+      "name": "FUN_5877b1f0",
+      "size": 3104,
+      "symbol": "_FUN_5877b1f0",
+      "source": "src/client-current/Main/FUN_5877b1f0.cpp",
+      "source_sha256": "fe8f2a647c5f7a3fa83d4dc672e2afd3a21d07aa639534ff891dc87c23eee1da",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5877B1F0",
+          "size": 3104,
+          "symbol": "_FUN_5877b1f0_segment_00",
+          "relocations": [
+            {
+              "offset": 30,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58A24AE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5877B5FD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "5877B633",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5877B3B5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 214,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 264,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 398,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 415,
+              "target_address": "5877B4EB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 423,
+              "target_address": "5877B4EB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 435,
+              "target_address": "5877B4EB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "5877B4ED",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 455,
+              "target_address": "58A246C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 503,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "58A246C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 593,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 623,
+              "target_address": "58A246C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 683,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 725,
+              "target_address": "58A246C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 773,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 803,
+              "target_address": "58A24AE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 931,
+              "target_address": "58A24AE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1220,
+              "target_address": "5877E7A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1252,
+              "target_address": "5877E7A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1296,
+              "target_address": "5877E7A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1352,
+              "target_address": "5877E7A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1514,
+              "target_address": "5877B753",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1815,
+              "target_address": "5877B860",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1832,
+              "target_address": "5877BB8C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1844,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1936,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1949,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1962,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1979,
+              "target_address": "5877BB56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1984,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2079,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2095,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2108,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2125,
+              "target_address": "5877BB56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2130,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2225,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2241,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2254,
+              "target_address": "5877BB54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2271,
+              "target_address": "5877BB56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2276,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2368,
+              "target_address": "58A24730",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2636,
+              "target_address": "5877BDFB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2645,
+              "target_address": "5877BDFB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2661,
+              "target_address": "5877BCED",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2671,
+              "target_address": "5877BCED",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2676,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2779,
+              "target_address": "58779A40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2793,
+              "target_address": "5877BE0A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2824,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2926,
+              "target_address": "58779B80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2957,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "Ghidra labels this FUN_5877b1f0. Its direct call from FUN_5877cc30 occurs after that constructor assigns CForce::vftable; the precise C++ member name is not recovered.",
+        "called_by": "Ghidra records six direct callers: FUN_5877cc30, FUN_5877cb40, FUN_5877cbe0, FUN_5877dd30, FUN_58874960, and FUN_58882230. FUN_5877cc30 is independently identified as the CForce constructor. These references establish direct use from CForce-related setup paths but not a complete ownership model.",
+        "behavior": "The function updates sprite-backed controls from receiver fields and indexed client records. It derives a lookup index from offsets +0x5e and +0xa4, performs count-checked table lookups, installs resource records on children at +0x1e0 and +0x1e4, applies child flags, copies a bounded text field, selects additional records based on seven paired values beginning at +0x1a4, and updates children through FUN_5877e7a0. Later branches handle special values in +0xa4 and toggle or replace child resources. These operations and offsets are visible in the Ghidra body.",
+        "uncertainty": "The friendly names of the controls, record schemas, resource identities, exact semantic name of this method, and its visible result are unresolved. Ghidra lists six unique direct caller functions; no emulator runtime or visual comparison has been performed."
+      }
     }
   ]
 }
