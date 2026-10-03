@@ -251935,6 +251935,531 @@
         "behavior": "Initializes a child over CMenuScreen base 0x589031A0, installs observed vtable address point 0x589A14D0, and returns with ret 0x10.",
         "uncertainty": "The child class, resource identity, and rendering role remain unknown. Its 72-byte body and two mapped operand targets are verified."
       }
+    },
+    {
+      "address": "5897D53A",
+      "name": "FUN_5897d53a",
+      "size": 6,
+      "symbol": "_FUN_5897d53a",
+      "source": "src/client-current/Main/FUN_5897d53a.cpp",
+      "source_sha256": "51a5ca4b4e82237835592f9db7c7085a84d2040a60f2baa8878009aa99f42bc7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C30C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897d53a",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 on multiple malformed-header and payload error paths.",
+        "behavior": "Matches the six-byte helper body in the installed Main.dll capture; the parser call sites establish its error-path role, while this short wrapper delegates the actual operation through an indirect call.",
+        "uncertainty": "The indirect callback target and the user-facing meaning of its arguments are not identified."
+      }
+    },
+    {
+      "address": "58907A90",
+      "name": "FUN_58907a90",
+      "size": 45,
+      "symbol": "_FUN_58907a90",
+      "source": "src/client-current/Main/FUN_58907a90.cpp",
+      "source_sha256": "b5f3fc88574965744768d3f6e412b2cb01c42d42ee57ed5c9fd8aa00dc824838",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5896CAE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "589A2960",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907a90",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 and by 0x5896C460.",
+        "behavior": "Installs the observed object vtable/state and delegates to FUN_5896CAE0 with the constant flag 1; the parser call site places it in the format-2 handling path.",
+        "uncertainty": "The object type and semantic meaning of the flag are not established by the call sites alone."
+      }
+    },
+    {
+      "address": "589073B0",
+      "name": "FUN_589073b0",
+      "size": 510,
+      "symbol": "_FUN_589073b0",
+      "source": "src/client-current/Main/FUN_589073b0.cpp",
+      "source_sha256": "d45e9518168756bd6f6be37b4ebcd5932302e9cb282d9adda0d60c5d38009834",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5890759C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "5890752A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "58A2851C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "589074BE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "589074BE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "589A3CB8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "589A3CBC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "589A3CC4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 170,
+          "target_address": "589A3CC0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "58907599",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 215,
+          "target_address": "5890755E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "589A3CD8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "5890755E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "589A2EE4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 289,
+          "target_address": "589A2EE8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "589A2EF0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 313,
+          "target_address": "589A2EEC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 332,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 368,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 399,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 500,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589073b0",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 after its table lookup in the format-2 variant-0 path.",
+        "behavior": "Matches the 510-byte helper selected by that parser branch, including its observed argument forwarding and return behavior.",
+        "uncertainty": "The parser's binary table entry schema and the helper's high-level data-structure meaning remain unresolved."
+      }
+    },
+    {
+      "address": "5896C460",
+      "name": "FUN_5896c460",
+      "size": 71,
+      "symbol": "_FUN_5896c460",
+      "source": "src/client-current/Main/FUN_5896c460.cpp",
+      "source_sha256": "5943a23148739739b8aefb5b272b18b9073a790f82547ef6e171de3c3c18a9a6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58907A90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589A2E34",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "5898C1AC",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896c460",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in its format-2 variant-0 path.",
+        "behavior": "Matches the parser-selected 71-byte helper; it delegates through FUN_58907A90 before completing its observed state setup.",
+        "uncertainty": "The object field names and the semantic role of the delegated state flag remain unknown."
+      }
+    },
+    {
+      "address": "5896C010",
+      "name": "FUN_5896c010",
+      "size": 569,
+      "symbol": "_FUN_5896c010",
+      "source": "src/client-current/Main/FUN_5896c010.cpp",
+      "source_sha256": "6143a989524f3c0056ce550b6654b1432f94cf6d9e8873906970594c4686fac4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "5896C140",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "589A3CD8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 180,
+          "target_address": "5896C180",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 212,
+          "target_address": "589A2EE4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 217,
+          "target_address": "589A2EE8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "589A2EF0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 243,
+          "target_address": "589A2EEC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 294,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 308,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 326,
+          "target_address": "5896C0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 352,
+          "target_address": "5896C0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 358,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 364,
+          "target_address": "5896C0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 386,
+          "target_address": "589A3CC8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 399,
+          "target_address": "5896C0C8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 423,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 438,
+          "target_address": "5896C28F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 518,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896c010",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in the format-2 high-color variant path.",
+        "behavior": "Matches the 569-byte parser-selected helper from the installed Main.dll capture.",
+        "uncertainty": "The high-level interpretation of the helper's parser arguments and decoded records is not yet established."
+      }
+    },
+    {
+      "address": "5896BF10",
+      "name": "FUN_5896bf10",
+      "size": 22,
+      "symbol": "_FUN_5896bf10",
+      "source": "src/client-current/Main/FUN_5896bf10.cpp",
+      "source_sha256": "d606fbbf963fe5963221c7aa63c5e2c54ea7d4f78962d0d2110badb240fef210",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5896CAE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 12,
+          "target_address": "589A2E18",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5896bf10",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in a later format-2 payload path.",
+        "behavior": "Matches the 22-byte helper body selected by that parser branch.",
+        "uncertainty": "The payload field represented by its arguments is not established."
+      }
+    },
+    {
+      "address": "5897CD4C",
+      "name": "FUN_5897cd4c",
+      "size": 6,
+      "symbol": "_FUN_5897cd4c",
+      "source": "src/client-current/Main/FUN_5897cd4c.cpp",
+      "source_sha256": "ea51a4858bf45e89dc0c19c13b986f6c227d264abe44f3b7409ff262100775aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C22C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cd4c",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 on its format-3 handling path.",
+        "behavior": "Matches the six-byte indirect-call thunk used by the parser's format-3 path.",
+        "uncertainty": "The host callback target and format-specific operation are not identified."
+      }
     }
   ]
 }

@@ -13,7 +13,9 @@ ADDRESSES = (
     "5878D6D0", "587C75E0", "5897CBC2", "58793FF0", "58761090",
     "5890A5B0", "58748E40", "5875F420", "5875F0D0", "58907FD0",
     "5876E510", "5875B000", "58902CE0", "58902D20",
-    "588F3D70", "58906DE0", "58903E40", "587750B0", "58731BD0",
+    "588F3D70", "58906DE0", "58903E40", "5897D53A", "58907A90",
+    "589073B0", "5896C460", "5896C010", "5896BF10", "5897CD4C",
+    "587750B0", "58731BD0",
     "5897CEC8", "58731500", "5897CE38",
     "5892DEF0", "58937510", "58943C70", "5894CC60", "589563E0",
     "58962D40", "5891CD00", "5891FB10", "58926C10", "5890E600",
@@ -88,6 +90,8 @@ SOURCE_COMPILER_ADDRESSES = {
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58906EA0", "58907100", "58907180", "589071A0",
+    "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
+    "5896BF10", "5897CD4C",
     "58906F30", "58907380", "58907390",
     "587B67C0", "587B67F0", "587B69E0",
     "5884E690", "5884DD00", "5884E500", "5884DF70", "5884DD20",
@@ -131,6 +135,48 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5897D53A": {
+        "name_in_analysis": "FUN_5897d53a",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 on multiple malformed-header and payload error paths.",
+        "behavior": "Matches the six-byte helper body in the installed Main.dll capture; the parser call sites establish its error-path role, while this short wrapper delegates the actual operation through an indirect call.",
+        "uncertainty": "The indirect callback target and the user-facing meaning of its arguments are not identified.",
+    },
+    "58907A90": {
+        "name_in_analysis": "FUN_58907a90",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 and by 0x5896C460.",
+        "behavior": "Installs the observed object vtable/state and delegates to FUN_5896CAE0 with the constant flag 1; the parser call site places it in the format-2 handling path.",
+        "uncertainty": "The object type and semantic meaning of the flag are not established by the call sites alone.",
+    },
+    "589073B0": {
+        "name_in_analysis": "FUN_589073b0",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 after its table lookup in the format-2 variant-0 path.",
+        "behavior": "Matches the 510-byte helper selected by that parser branch, including its observed argument forwarding and return behavior.",
+        "uncertainty": "The parser's binary table entry schema and the helper's high-level data-structure meaning remain unresolved.",
+    },
+    "5896C460": {
+        "name_in_analysis": "FUN_5896c460",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in its format-2 variant-0 path.",
+        "behavior": "Matches the parser-selected 71-byte helper; it delegates through FUN_58907A90 before completing its observed state setup.",
+        "uncertainty": "The object field names and the semantic role of the delegated state flag remain unknown.",
+    },
+    "5896C010": {
+        "name_in_analysis": "FUN_5896c010",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in the format-2 high-color variant path.",
+        "behavior": "Matches the 569-byte parser-selected helper from the installed Main.dll capture.",
+        "uncertainty": "The high-level interpretation of the helper's parser arguments and decoded records is not yet established.",
+    },
+    "5896BF10": {
+        "name_in_analysis": "FUN_5896bf10",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 in a later format-2 payload path.",
+        "behavior": "Matches the 22-byte helper body selected by that parser branch.",
+        "uncertainty": "The payload field represented by its arguments is not established.",
+    },
+    "5897CD4C": {
+        "name_in_analysis": "FUN_5897cd4c",
+        "called_by": "Directly called by the installed sprite parser at 0x58903E40 on its format-3 handling path.",
+        "behavior": "Matches the six-byte indirect-call thunk used by the parser's format-3 path.",
+        "uncertainty": "The host callback target and format-specific operation are not identified.",
+    },
     "5878D6D0": {
         "name_in_analysis": "FUN_5878d6d0",
         "called_by": "Ghidra identifies the function as the CLogoControlMenuScreen constructor from its vtable writes. Its allocation/registration caller has not yet been traced.",
