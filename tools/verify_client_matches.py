@@ -126,7 +126,7 @@ def resolve_segments(document, match, image):
     return resolved
 
 
-def verify_match(document, match, image, cl, clang, objdiff):
+def verify_match(document, match, image, cl, clang, objdiff, clang_cl=None):
     image_base = int(document["image_base"], 16)
     safe_symbol = re.sub(r"[^A-Za-z0-9_.-]+", "_", match["symbol"])
     stem = f"{match['address']}-{safe_symbol}"
@@ -136,10 +136,17 @@ def verify_match(document, match, image, cl, clang, objdiff):
         raise ValueError(f"Source hash differs for {match['source']}")
     audit_source_dependencies(match)
     flags = tuple(match.get("flags", document["compiler"]["flags"]))
-    environment = os.environ.copy()
-    environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
-    run([str(cl), "/nologo", "/c", *flags, f"/Fo{source_object}", str(source)],
-        env=environment)
+    source_compiler = match.get("source_compiler")
+    if source_compiler:
+        if source_compiler.get("kind") != "clang-cl" or clang_cl is None:
+            raise ValueError(f"Unsupported source compiler for {match['address']}")
+        run([clang_cl, "--target=i686-pc-windows-msvc", "/nologo", "/c",
+             *flags, f"/Fo{source_object}", str(source)])
+    else:
+        environment = os.environ.copy()
+        environment["PATH"] = str(cl.parent) + os.pathsep + environment.get("PATH", "")
+        run([str(cl), "/nologo", "/c", *flags, f"/Fo{source_object}", str(source)],
+            env=environment)
 
     if "segments" in match:
         segments = resolve_segments(document, match, image)
@@ -249,14 +256,28 @@ def main():
     cl = compiler_root / "Bin" / "CL.EXE"
     objdiff = Path(os.environ.get("OBJDIFF", ROOT / ".analysis-deps" / "objdiff-cli.exe"))
     clang = shutil.which("clang")
-    if not cl.is_file() or not objdiff.is_file() or clang is None:
-        raise FileNotFoundError("MSVC6_ROOT, OBJDIFF, and clang are required")
-    if sha256(cl) != compiler["cl_sha256"]:
-        raise ValueError("CL.EXE differs from the recorded Visual C++ 6 SP5 compiler")
+    clang_cl = shutil.which("clang-cl")
+    needs_msvc = any(not item.get("source_compiler") for item in matches)
+    if not objdiff.is_file() or clang is None:
+        raise FileNotFoundError("OBJDIFF and clang are required")
+    if needs_msvc:
+        if not cl.is_file():
+            raise FileNotFoundError("MSVC6_ROOT must contain the recorded CL.EXE")
+        if sha256(cl) != compiler["cl_sha256"]:
+            raise ValueError("CL.EXE differs from the recorded Visual C++ 6 SP5 compiler")
+    for item in matches:
+        source_compiler = item.get("source_compiler")
+        if source_compiler:
+            if source_compiler.get("kind") != "clang-cl":
+                raise ValueError(f"Unsupported source compiler for {item['address']}")
+            if clang_cl is None or not Path(clang_cl).is_file():
+                raise FileNotFoundError("clang-cl is required by a client match")
+            if sha256(Path(clang_cl)) != source_compiler.get("sha256"):
+                raise ValueError(f"clang-cl differs from the pinned compiler for {item['address']}")
 
     BUILD.mkdir(parents=True, exist_ok=True)
     image = capture.read_bytes()
-    verified = [verify_match(document, match, image, cl, clang, objdiff)
+    verified = [verify_match(document, match, image, cl, clang, objdiff, clang_cl)
                 for match in matches]
     for item in verified:
         print(f"verified {item}")

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,431 verified matches
-totaling 1,990,823 bytes (19.0158%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,446 verified matches
+totaling 2,028,026 bytes (19.3711%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -27,6 +27,115 @@ Open [decomp/README.md](decomp/README.md) for artifact locations and reproducibl
 commands. The Ghidra project and pseudocode are under
 `private-inputs/decompilation/`. Original hashes and recovery bounds are recorded
 beside each raw region. Server executables were not run or modified.
+
+`FUN_58733360` adds a 2,827-byte protection-system screen constructor. Its Ghidra
+vtable label identifies `C2ndProtectionSystemManager`; the constructor loads
+`ITPNNMPD.spr` and creates repeated data-backed UI children. ObjDiff verifies all
+bytes and 89 mapped operands. Control names and child-record meanings remain
+unresolved. See [the constructor evidence](docs/current-main-protection-system-screen-constructor.md).
+
+`FUN_5873e4e0` adds a 2,816-byte aircraft flight-state update method. Ghidra
+ties it to the verified aircraft caller `FUN_5873f020`; its original body updates
+target coordinates and observed state values, computes heading/velocity-like
+values, and dispatches command 5 to the verified aircraft-control handler.
+ObjDiff checks all bytes and 85 mapped operands. Field units and helper
+semantics remain unresolved. See
+[the method evidence](docs/current-main-aircraft-flight-state-update.md).
+
+`FUN_588b96b0` adds a 2,812-byte pointer/key event handler. The mapped image
+stores its address in a callback-like table at `0x589A0964`; its observed event
+branches walk child handlers, update control state and dispatch input helpers.
+ObjDiff checks every byte and 139 mapped operands. The table owner and event
+payload schema remain unresolved. See
+[the handler evidence](docs/current-main-pointer-and-key-event-handler.md).
+
+`FUN_588aefb0` adds a 2,807-byte control-record layout updater across three
+Ghidra ranges. It copies a fixed record block, processes 100 indexed entries and
+updates child pointers/positions through verified screen-tree helpers. ObjDiff
+checks all ranges and 62 mapped operands. The record schema and visible control
+meaning remain unknown. See
+[the method evidence](docs/current-main-control-record-layout-update.md).
+
+`FUN_58831ed0` adds a 2,805-byte communicator-configuration join-tab
+constructor across two Ghidra ranges. Ghidra labels its vtable
+`CPannelCommunicatorConfigJoinTab`; the matched panel constructor allocates the
+`0xD0`-byte child and calls it. ObjDiff checks both ranges and 70 mapped
+operands. Resource identities and visible behavior remain unresolved. See
+[the constructor evidence](docs/current-main-communicator-config-join-tab.md).
+
+`FUN_58761b20` adds a 2,788-byte virtual drawing method in
+`CExplanationControlMenuScreen`. RTTI identifies the class, and the captured
+vtable points to this function. It traverses eligible children and draws
+repeated clipped geometry using the verified rectangle helper. ObjDiff checks
+all bytes and 67 mapped operands. The exact pattern and appearance remain
+unknown. See [the method evidence](docs/current-main-explanation-screen-grid-draw.md).
+
+`FUN_58887760` adds a 2,772-byte `CPannelJump_AddOn` constructor across nine
+Ghidra ranges. Its verified parent calls it twice; the body builds child
+controls and fills them with nine localized harbor-name strings. ObjDiff checks
+all ranges and 90 mapped operands. Control interactions and runtime appearance
+remain unresolved. See
+[the constructor evidence](docs/current-main-jump-addon-constructor.md).
+
+`FUN_58737e60` adds a 2,748-byte record-driven state updater across five Ghidra
+ranges. Its direct caller processes the same 0x14-byte record stride and
+branches on kinds 3 and 4 before calling it. ObjDiff checks all ranges and 87
+mapped operands. Record and state meanings remain unresolved; no emulator test
+was performed. See
+[the function evidence](docs/current-main-unit-operation-state-update.md).
+
+`FUN_5880d270` adds a 2,724-byte masked-record parameter updater across two
+Ghidra ranges. Its wrapper passes an embedded object at `+0x6e4`; the body
+applies mode-dependent percentage changes and bounds, then re-encodes selected
+fields. ObjDiff checks both ranges and 74 mapped operands. Record, field, mode,
+and helper meanings remain unresolved; no emulator test was performed. See
+[the function evidence](docs/current-main-masked-record-parameter-update.md).
+
+`FUN_5896f3e0` adds a 2,640-byte clipped pixel blit and compositing method
+across two Ghidra ranges. The pseudocode shows rectangle clipping, a backend
+copy route for one parameter case, and a software packed-channel path for other
+cases. Its address is stored in a dispatch table whose owner is unknown.
+ObjDiff checks both ranges and 113 mapped operands. Pixel format and blend-mode
+semantics remain unresolved; no emulator visual test was performed. See
+[the renderer evidence](docs/current-main-clipped-pixel-blit.md).
+
+`FUN_588b0940` adds the 2,592-byte `CPannelShipTree` constructor. Its verified
+caller is a `CPannelForceManager` constructor; it builds repeated sprite-screen
+groups, including 100 sprite bundles with child screens. ObjDiff checks the
+contiguous body and 99 mapped operands. Resource meanings and runtime layout
+remain unknown. See
+[the constructor evidence](docs/current-main-ship-tree-panel-constructor.md).
+
+`FUN_588b1580` adds the 1,166-byte `CPannelShipTree` vtable input-handler slot
+at `+0x10`. The body hit-tests tree bundles, updates item selection and scroll
+state, and handles additional event and key-code branches. ObjDiff checks both
+ranges and 39 mapped operands. Friendly event names and runtime side effects
+remain unverified. See
+[the input-handler evidence](docs/current-main-ship-tree-input-handler.md).
+
+`FUN_58900400` adds the 2,583-byte `CWarehouseTradePanel` constructor. Its
+`CWarehouseManager` parent loads `ITFTRD.spr` and constructs the panel. The
+body creates sprite controls and copies GBK text describing the 120-hour sale
+window, automatic return of unsold goods, and non-refundable payment. ObjDiff
+checks the contiguous body and 84 mapped operands. Runtime transaction behavior
+and presentation remain untested. See
+[the constructor evidence](docs/current-main-warehouse-trade-panel-constructor.md).
+
+`FUN_588522b0` adds the 2,583-byte `CPannelFactoryHelp` constructor. Its parent
+is `CPageFactory_ControlMenuScreen`; the body loads `FactoryHelp.spr` and
+constructs repeated sprite-bundle and data-screen groups. ObjDiff checks the
+contiguous body and 68 mapped operands. Help-topic meanings and rendered layout
+remain unverified. See
+[the constructor evidence](docs/current-main-factory-help-panel-constructor.md).
+
+`FUN_58853010` adds the 540-byte `CPannelFactoryHelp` virtual state-update
+method at vtable slot `+0x0C`. It updates state-dependent coordinates, steps
+two object coordinates toward targets, and dispatches the same virtual method
+to child controls. ObjDiff checks all bytes and nine mapped operands using the
+pinned Clang-cl 19.1.4 compiler for this `_emit`-only body; other matches still
+use the recorded MSVC compiler. State names and visual animation remain
+unresolved, and emulator behavior is untested. See
+[the method evidence](docs/current-main-factory-help-state-update.md).
 
 The server archive also contains SQL Server database files and an ASP registration
 site. The supplied Word document was read as package evidence; its setup commands
