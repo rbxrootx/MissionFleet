@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,324
-identified code bytes across six report units. There are 6,425 verified matches
-totaling 1,973,376 bytes (18.8491%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,426 verified matches
+totaling 1,976,333 bytes (18.8774%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -227,6 +227,14 @@ with 79 mapped operands checked. It allocates missing screen/control children,
 walks receiver-held counts, and checks a client registry version value. The
 owning class and callback-table contract remain unidentified. See
 [the initializer evidence](docs/current-main-lazy-child-initializer.md).
+
+`FUN_587c20e0` adds the 2,957-byte `CNavyFIELDScreen` destructor. Ghidra shows
+it installing the screen vtable, disposing and clearing global pointer slots,
+and finishing with `FUN_58902c10`; the direct caller is a bit-controlled
+deleting-destructor wrapper. ObjDiff 3.8.0 matches all bytes, with 243 mapped
+operand targets checked. Global slot ownership, indirect cleanup contracts,
+and runtime destruction effects remain unresolved. See
+[the destructor evidence](docs/current-main-navyfield-screen-destructor.md).
 
 The current-client ship path has confirmed 64-byte animation records, timed
 frame selection, anchor and parent offsets, and the final sprite-vtable call.
