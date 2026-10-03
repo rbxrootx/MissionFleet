@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,288
-identified code bytes across six report units. There are 6,347 verified matches
-totaling 1,586,505 bytes (15.1539%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,348 verified matches
+totaling 1,595,204 bytes (15.2370%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -250,8 +250,13 @@ The `CPannelCommunicatorConfigManageSquadTab` constructor `FUN_5883bbe0` adds
 8,711 bytes with 427 mapped operands checked. Its vtable, single parent call,
 `0x310`-byte parent allocation, and indexed sprite/control construction are
 recorded in the [Manage Squad tab evidence](docs/current-main-manage-squad-tab-constructor.md).
-Current-build Main coverage is now 214 / 8,474 functions and
-613,087 / 2,353,354 bytes. See
+The shared `CPannelForceInfo` constructor `FUN_5886dda0` adds 8,699 bytes and
+408 mapped operands. Five calling constructors identify its reuse in trade,
+force-management, item-management, and warehouse-info panels; its record and
+control semantics remain unresolved. See the
+[ForceInfo panel evidence](docs/current-main-force-info-panel.md).
+Current-build Main coverage is now 215 / 8,474 functions and
+621,786 / 2,353,354 bytes. See
 [the event-queue notes](docs/current-main-event-queue.md).
 
 The archived 2062 `Main.dll` can now be initialized in an isolated 32-bit host:
