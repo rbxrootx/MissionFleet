@@ -300460,6 +300460,32 @@
         "behavior": "Uses a 0x800-byte local buffer protected by the module's stack-cookie helper. It returns without updating when both leading input values are zero, or when either differs from globals 0x58A0B4A0/0x58A0B4A4. Otherwise it copies the supplied bytes through callback 0x5898C194, using a maximum bound of 0x800 or supplied bound +1, then calls 0x58770A80 on receiver +0x88 when the second value is nonzero, or receiver +0xA8 when it is zero. The complete 169-byte body has six mapped operand targets.",
         "uncertainty": "The four stack-argument roles, global key meanings, receiver/child types, copy callback contract, and visible text meaning remain unresolved. The two verified dispatcher callers establish record-derived update use but not a precise UI/domain label. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "5886B9B0",
+      "name": "FUN_5886b9b0",
+      "size": 169,
+      "symbol": "_FUN_5886b9b0",
+      "source": "src/client-current/Main/FUN_5886b9b0.cpp",
+      "source_sha256": "b06a47f1f3b45046d42f72a59be61b4e3cd1cc757b281cfe750eb0986f99b151",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5886b9b0 / three-pointer active-flag transition",
+        "called_by": "Called from verified control/update routine FUN_5886BA60 after it compares receiver fields +0x88 and +0x2A4, and twice from FUN_588B96B0 on the object at caller +0x16C after virtual calls.",
+        "behavior": "Compares receiver pointers at +0x88, +0x94, and +0x218, with a conditional check of bit 0x10000000 in the object at +0x84. Depending on those comparisons, it selects one of the pointers at +0x94, +0x218, or +0x2A4 into receiver +0x88. It sets low word flags 0xF at selected object's +0x24 and clears those low bits on the other observed objects at +0x24. The complete 169-byte body decodes and has no mapped operand targets.",
+        "uncertainty": "The pointed-to object types, role of the +0x84 guard bit, meaning of the flag bits, and higher-level state represented by +0x88/+0x94/+0x218/+0x2A4 remain unknown. Caller contexts support a control/update transition only; no runtime client or emulator test was performed."
+      }
     }
   ]
 }

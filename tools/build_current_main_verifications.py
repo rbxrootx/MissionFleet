@@ -155,6 +155,7 @@ ADDRESSES = (
     "587E7D40",
     "587BB160",
     "5882A680",
+    "5886B9B0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -240,7 +241,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4804,6 +4805,12 @@ EVIDENCE = {
         "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both pass record-derived arguments and a child receiver reached through global object 0x58A245B4 +0xDC +0x15C.",
         "behavior": "Uses a 0x800-byte local buffer protected by the module's stack-cookie helper. It returns without updating when both leading input values are zero, or when either differs from globals 0x58A0B4A0/0x58A0B4A4. Otherwise it copies the supplied bytes through callback 0x5898C194, using a maximum bound of 0x800 or supplied bound +1, then calls 0x58770A80 on receiver +0x88 when the second value is nonzero, or receiver +0xA8 when it is zero. The complete 169-byte body has six mapped operand targets.",
         "uncertainty": "The four stack-argument roles, global key meanings, receiver/child types, copy callback contract, and visible text meaning remain unresolved. The two verified dispatcher callers establish record-derived update use but not a precise UI/domain label. No runtime client or emulator test was performed.",
+    },
+    "5886B9B0": {
+        "name_in_analysis": "FUN_5886b9b0 / three-pointer active-flag transition",
+        "called_by": "Called from verified control/update routine FUN_5886BA60 after it compares receiver fields +0x88 and +0x2A4, and twice from FUN_588B96B0 on the object at caller +0x16C after virtual calls.",
+        "behavior": "Compares receiver pointers at +0x88, +0x94, and +0x218, with a conditional check of bit 0x10000000 in the object at +0x84. Depending on those comparisons, it selects one of the pointers at +0x94, +0x218, or +0x2A4 into receiver +0x88. It sets low word flags 0xF at selected object's +0x24 and clears those low bits on the other observed objects at +0x24. The complete 169-byte body decodes and has no mapped operand targets.",
+        "uncertainty": "The pointed-to object types, role of the +0x84 guard bit, meaning of the flag bits, and higher-level state represented by +0x88/+0x94/+0x218/+0x2A4 remain unknown. Caller contexts support a control/update transition only; no runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

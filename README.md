@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,215 matches cover 2,282,737 bytes (21.8028%) and are verified
+The current 7,216 matches cover 2,282,906 bytes (21.8044%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -38,6 +38,8 @@ The latest keyed-table message helper is documented in
 [the message-helper notes](docs/current-main-keyed-table-xor-message-587bb160.md).
 The latest guarded child text update is documented in
 [the child-text notes](docs/current-main-guarded-child-text-update-5882a680.md).
+The latest three-pointer active-flag transition is documented in
+[the flag-transition notes](docs/current-main-three-pointer-active-flag-transition-5886b9b0.md).
 The latest installed-client startup child branch is documented in
 [the startup child notes](docs/current-main-startup-child-path.md).
 The latest shared linked-chain traversal helper is documented in
