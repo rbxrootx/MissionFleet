@@ -32,6 +32,9 @@ The installed `Logo.spr` startup and login frames have a reproducible
 [RGB16 visual-path check](docs/current-client-logo-sprite-visual.md), including
 pixel agreement between two independent decoded/composited paths. It is
 asset-frame validation, not a bootable client or original-framebuffer comparison.
+A [native C++ RGB16 span path](docs/current-client-native-rgb16-span.md)
+now matches the portable framebuffer bytes on those frames and a clipped case.
+It is a semantic port of the opaque branch and is excluded from objdiff coverage.
 Its periodic movement and bounded two-list batch path are recorded in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
 The update path now has a portable receiver-local motion model with tested

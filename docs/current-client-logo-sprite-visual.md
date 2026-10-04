@@ -41,3 +41,7 @@ span path. They do not establish the complete logo/login screen composition,
 animation timing, text and controls, non-opaque effects, or a pixel-for-pixel
 comparison with a captured original-client framebuffer. The file's remaining
 186 image records and unparsed tail are outside this check.
+
+A [native C++ opaque-span implementation](current-client-native-rgb16-span.md)
+now produces the same raw RGB16 buffers for both frames and a clipped login
+case, with a separately checked malformed-input path.

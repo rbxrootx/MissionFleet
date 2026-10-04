@@ -65,6 +65,8 @@ The latest current Main.dll fixed-record copy path is documented in
 The original `Logo.spr` startup and login art now has a reproducible
 [RGB16 visual-path check](docs/current-client-logo-sprite-visual.md) against
 the installed asset and matched loader/compositor methods.
+A [native RGB16 span compositor](docs/current-client-native-rgb16-span.md)
+now reproduces those framebuffers byte for byte against the portable reference.
 The latest keyed 0x3C8-byte record refresh/insertion path is documented in
 [the keyed-record notes](docs/current-main-keyed-record-refresh-58786b40.md).
 The latest three-child state update path is documented in
