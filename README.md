@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,142 matches cover 2,260,234 bytes (21.5881%) and are verified
+The current 7,143 matches cover 2,260,280 bytes (21.5885%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
@@ -55,6 +55,8 @@ The communication battle-record route is documented in
 [the battle-record notes](docs/current-main-comm-battle-record-route.md).
 The companion state-2/3 branch is documented in
 [the state-transition notes](docs/current-main-comm-battle-record-state-2-3-route.md).
+The shared bounded record-pointer lookup is documented in
+[the accessor notes](docs/current-main-bounded-indexed-record-accessor.md).
 The latest linked-text update path is documented in
 [the linked-text notes](docs/current-main-linked-text-update.md).
 The latest progress-grid state update is documented in

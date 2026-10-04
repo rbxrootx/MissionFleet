@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,142 verified matches
-totaling 2,260,234 bytes (21.5881%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,143 verified matches
+totaling 2,260,280 bytes (21.5885%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -81,6 +81,11 @@ state; the record branch attempts an indexed lookup or copies the record string
 and dispatches a follow-up helper. Record fields, helper contracts, and visible
 effects remain unresolved; no emulator test was performed. See
 [`docs/current-main-comm-battle-record-state-2-3-route.md`](docs/current-main-comm-battle-record-state-2-3-route.md).
+The shared 46-byte indexed record accessor `FUN_58755FF0` is also matched, with
+four callers in the mapped call inventory. It enforces its receiver gate, index
+bound, and array-pointer checks before returning a slot or null. The collection
+and caller index semantics remain unknown; no runtime test was performed. See
+[`docs/current-main-bounded-indexed-record-accessor.md`](docs/current-main-bounded-indexed-record-accessor.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
