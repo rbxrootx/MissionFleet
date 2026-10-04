@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,843
-identified code bytes across six report units. There are 7,159 verified matches
-totaling 2,268,947 bytes (21.6713%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,160 verified matches
+totaling 2,269,337 bytes (21.6750%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1136,6 +1136,11 @@ bytes across two functions, tied to the message-list insertion and joined-fleet
 notice call paths. Their record schema and individual control/resource meanings
 remain unresolved; no emulator test was run. See
 [message-node construction evidence](docs/current-main-message-node-construction.md).
+
+`FUN_58814FD0` adds a 390-byte exact match. Both verified event handlers call
+it on event paths; its argument/flag branches select message-resource IDs and
+update a child object. Exact argument meanings and UI semantics remain unknown.
+See [event message dispatch evidence](docs/current-main-event-message-dispatch.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the

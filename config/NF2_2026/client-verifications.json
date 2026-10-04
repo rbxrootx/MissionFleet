@@ -296392,6 +296392,147 @@
         "behavior": "Constructs the 0xB4-byte message/list child: invokes base initializer FUN_589031A0 with seven caller arguments, installs observed vtables 0x5898C500 and 0x5898D7C0, initializes child pointers and fields, and conditionally creates resource-backed children using global resource descriptors and count gates. It creates text/control children through FUN_58731C60 and FUN_58733280, creates a child through FUN_58751E80 at receiver +0xB0, links that child back to the parent at +0x80, sets its observed timing/geometry fields, and copies four fields from the child at +0x6C into parent offsets +0x14..+0x20. The complete SEH-protected 1,077-byte body ends with ret 0x1C and has 34 mapped operand targets.",
         "uncertainty": "The concrete parent/child types, global resource table schemas, individual control roles, and the semantic meaning of timing/geometry fields remain unresolved. The constructor behavior is tied to two verified callers; no runtime client test was performed."
       }
+    },
+    {
+      "address": "58814FD0",
+      "name": "FUN_58814fd0",
+      "size": 390,
+      "symbol": "_FUN_58814fd0",
+      "source": "src/client-current/Main/FUN_58814fd0.cpp",
+      "source_sha256": "bacfabc567f573f22b03ae7908e7b5404950e427af229038cdaf19a80ad125ba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "5898C194",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "588490F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58842DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "5881513B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "5881513B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 209,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 255,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "5899D784",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 341,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 352,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 359,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 367,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 380,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58814fd0",
+        "called_by": "Called by verified event handlers FUN_587BB700 and FUN_588C1650. In FUN_588C1650 the call follows a global-object lookup through offsets +0xDC/+0x68 and is followed by a comparison of the event record field at +0x0C; the companion handler reaches the same helper from its event path.",
+        "behavior": "Takes a receiver in ECX and four stack arguments. It first invokes callback 0x5898C194 with two arguments and a stack-local record. When the observed third stack argument equals 1, it creates message resource 0x1C5 through FUN_5876BAF0/FUN_58764D30, passes a local record through global objects at 0x58A245B4 offsets +0xD8/+0xDC to FUN_588490F0 and FUN_58842DC0, then makes two virtual calls using the receiver's +0x30 child and vtable. For a zero-valued argument, it checks receiver word +0x24 under mask 0x1F00; matching values 0x100 or 0x200 choose message resources 0x1C6, 0x1C7, or 0x1C8 based on another argument. Other values use string pointer 0x5899D784 via callback 0x5898C030 and create a message resource through the same helper pair. The remaining path updates receiver child +0x58 through FUN_5875F940. The complete body is 390 bytes, ends with ret 0x10, and has 19 mapped operand targets.",
+        "uncertainty": "The four argument meanings, receiver/child types, callback contracts, flag meanings, resource IDs, and user-visible message semantics are not established. Caller evidence ties the routine to event dispatch, but no runtime client or emulator test was performed."
+      }
     }
   ]
 }
