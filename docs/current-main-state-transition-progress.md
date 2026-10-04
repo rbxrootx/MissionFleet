@@ -8,12 +8,11 @@ It decodes receiver fields `+0x398` and `+0xD98` with XOR `0xAAAAAAAA`,
 computes a ratio clamped to 0..100, stores it at `+0x1444`, and passes that
 value to `FUN_587B03A0`. When the decoded `+0x398` value is nonpositive, it
 resets that field to the encoded sentinel `0xAAAAAAAA` and calls
-`FUN_588DF450`. Active-object paths call `FUN_58895540` and `FUN_587A6E90`,
+`FUN_588DF450`, now reconstructed through its return before INT3 padding.
+Active-object paths call `FUN_58895540` and `FUN_587A6E90`,
 and may invoke `FUN_587F2870`. If receiver `+0x60B0` is zero, it increments a
 global counter, sets receiver flags and calls `FUN_587E8750`. With a nonzero
 flag argument it also calls `FUN_58749FA0` and can adjust global `+0x10A18`.
 
 ObjDiff verifies all 377 bytes, `ret 4`, and 19 operand targets. The fields'
-domain meanings and callbacks remain unknown; `FUN_588DF450` is called on the
-zero-state path, but its full extent has not yet been reconstructed. No
-emulator test was run.
+domain meanings and callbacks remain unknown. No emulator test was run.

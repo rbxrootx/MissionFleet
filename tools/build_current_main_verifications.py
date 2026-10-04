@@ -46,6 +46,7 @@ ADDRESSES = (
     "588E0260",
     "5884D630",
     "588DFFB0",
+    "588DF450",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
     "58770A80", "58908870", "587B9B30", "587BAF70", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0", "587DA120",
@@ -239,7 +240,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
-    "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0",
+    "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
@@ -412,6 +413,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra ended this body after pop edi and omitted its contiguous stack
     # cleanup/ret epilogue. The mapped epilogue precedes INT3 alignment.
     "5878A3A0": 545,
+    # Ghidra's indexed extent stopped two bytes into a mapped direct call.
+    # Include the full call, register restore, and ret before INT3 alignment.
+    "588DF450": 595,
 }
 EVIDENCE = {
     "587DA120": {
@@ -594,11 +598,17 @@ EVIDENCE = {
         "behavior": "Reads the first stack argument and adds it to receiver field +0xAC. While receiver byte +0x5C is below 0x18, it derives a progress value from +0xAC and +0xA8, updates indexed per-slot byte state and two parallel arrays of slot records from a global lookup table, and writes the resulting progress byte to +0x5C. It then checks a global state word; when it equals 0xF, computes and stores a value in the object at receiver +0xB0, and under additional field guards calls 0x587BA230 and sets receiver byte +0xCC. It cleans two stack arguments with ret 8; the second argument is not read in this function body.",
         "uncertainty": "The receiver type, units and meaning of the accumulated first argument, identity of the per-slot records, and the user-visible role of the global lookup/state are not resolved. The three callers establish repeated use in shared client paths but do not name the state machine. The complete 771-byte extent has 17 mapped operand targets.",
     },
+    "588DF450": {
+        "name_in_analysis": "FUN_588df450",
+        "called_by": "Called by verified transition routine FUN_588DFFB0 when decoded receiver +0x398 is nonpositive; it resets that field before calling this helper. Verified update routine FUN_587FD890 calls it on an active-object path after checking receiver state bits and a nonzero global condition. The call graph also lists verified caller FUN_587FAEC0.",
+        "behavior": "Clears receiver +0x80. Under global state gates, it invokes FUN_587BB160 or FUN_587BAF70 using receiver fields +0x100C or +0x350; it then clears eight child references via FUN_58782790 when the active-object and +0x63B8 conditions pass. It resets multiple child objects by calling FUN_58902EE0/FUN_58902F50, clears observed flag bits in their words at +0x24 and in six repeated receiver slots starting at +0x652C, sets receiver fields +0x6078/+0x6080/+0x6084 to 0xAAAAAAAA, +0x607C to 0xAAAAAAAB, and +0x60C4 to zero. It calls FUN_588DE5C0, may clear more active-object flag bits, then calls FUN_587EB340 and conditionally FUN_58776F20. The complete callable body is 595 bytes, ending with ret immediately before INT3 alignment; Ghidra's 589-byte extent cut into the final direct call. There are 20 mapped operand targets.",
+        "uncertainty": "The child types, exact meaning of the cleared flags and sentinel fields, resource ownership, and semantics of the two message/state helper calls are unresolved. Static caller evidence places this in a zero-state or active-object transition path, but no emulator test was performed.",
+    },
     "588DFFB0": {
         "name_in_analysis": "FUN_588dffb0",
         "called_by": "Called by verified update routines FUN_588E0260 and FUN_588E5150. FUN_588E0260 calls it with 0 after applying state changes; FUN_588E5150 calls it with 1 during its update path.",
         "behavior": "Decodes receiver fields +0x398 and +0xD98 with XOR 0xAAAAAAAA, computes a clamped 0..100 ratio from them, stores it at +0x1444, and calls FUN_587B03A0 with that value. If decoded +0x398 is nonpositive, it resets +0x398 to the encoded sentinel 0xAAAAAAAA and calls FUN_588DF450. For the active receiver it also calls FUN_58895540 and FUN_587A6E90, and invokes FUN_587F2870 when global +0x10558 points to this receiver. When receiver +0x60B0 is zero, it increments global +0x20D98, sets +0x60B0 to 0x40040000, sets +0x63B0, clears +0x6058, and calls FUN_587E8750. If the stack flag argument is nonzero, further paths call FUN_58749FA0 using receiver byte +0x354 and state at +0x100C; a final active-object condition adjusts global +0x10A18. The complete 377-byte body ends with ret 4 and has 19 mapped operand targets.",
-        "uncertainty": "The meanings of receiver fields, computed percentage, sentinel state, global counters, and callbacks remain unresolved. The zero-state call into FUN_588DF450 is directly visible, but that callee's full extent has not yet been reconstructed. No emulator test was performed.",
+        "uncertainty": "The meanings of receiver fields, computed percentage, sentinel state, global counters, and callbacks remain unresolved. The zero-state call into FUN_588DF450 is now byte-matched at its complete mapped callable extent. No emulator test was performed.",
     },
     "5884D630": {
         "name_in_analysis": "FUN_5884d630",
