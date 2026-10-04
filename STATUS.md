@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,102 verified matches
-totaling 2,241,972 bytes (21.4138%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,103 verified matches
+totaling 2,242,067 bytes (21.4147%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -95,6 +95,14 @@ per-slot byte state and two parallel arrays from a global lookup table, and
 uses a guarded global-state branch to update an object at `+0xB0`. The receiver
 type, argument units, and user-visible role remain unknown. All 17 mapped
 operand targets match under objdiff.
+
+The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
+called by three verified functions only after `FUN_588DD2A0` returns 1. When
+the receiver is the active global object and its state equals `0x40000000`, it
+clears global state and calls two reset helpers. It independently clears the
+receiver's same state and propagates zero to associated children when their
+field matches. The state's meaning and user-visible effect remain unknown;
+all seven mapped operand targets match under objdiff.
 
 The latest clipped buffer compositor is `FUN_587E5CB0`, a 338-byte routine
 called by three verified functions. It clips coordinate-derived source and

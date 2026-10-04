@@ -42,7 +42,7 @@ ADDRESSES = (
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
-    "58908750", "588DD2A0",
+    "58908750", "588DD2A0", "588DD310",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -233,7 +233,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
-    "588DD2A0",
+    "588DD2A0", "588DD310",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -398,6 +398,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588DD310": {
+        "name_in_analysis": "FUN_588dd310",
+        "called_by": "Directly called by three verified functions: 0x58856560, 0x588E4260, and 0x588E5150. Each caller invokes it only after 0x588DD2A0 returns 1.",
+        "behavior": "Takes no explicit stack arguments. When the active receiver matches the pointer at 0x58A247F8+4 and the global object at 0x58A245C4 has +0x2CC equal to 0x40000000, it clears that field, calls 0x58853570(global, 0), then finds the object at 0x58A2459C+0x20C9C and calls 0x587A6190(object, 0). Independently, if receiver +0x6094 equals 0x40000000, it calls 0x588D8100(receiver, 0), which clears +0x6094 and propagates zero to the +0x110/+0x114 fields of associated children. It returns normally.",
+        "uncertainty": "The meaning of state value 0x40000000, identities and ownership of the global objects, and user-visible effect of clearing the associated child fields remain unknown. Caller sequencing ties this routine to the prior Boolean predicate but does not identify the gameplay state. Its complete 95-byte extent has seven mapped operand targets.",
+    },
     "588DD2A0": {
         "name_in_analysis": "FUN_588dd2a0",
         "called_by": "Directly called by three verified functions: 0x58856560, 0x588E5150, and 0x588E4260. 0x58856560 contains repeated callsites.",
