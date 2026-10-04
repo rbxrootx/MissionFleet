@@ -10,6 +10,66 @@ MAIN_BASE = 0x58730000
 
 
 class CurrentMainFunctionExtentTests(unittest.TestCase):
+    def test_two_key_record_upsert_helper_extents_end_before_padding(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        by_address = {row["address"]: row for row in rows}
+        cases = (
+            ("58754c00", "58754cd0", 0xCE, 0x58754CCB, 0x18, 2),
+            ("58754a30", "58754ad0", 0x9E, 0x58754ACB, 4, 2),
+            ("58754890", "58754960", 0xCB, 0x58754958, 0x10, 5),
+            ("58753660", "58753690", 0x2E, 0x5875368D, None, 2),
+        )
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        for address, next_address, expected_size, ret_address, cleanup, padding_size in cases:
+            with self.subTest(address=address):
+                function = by_address[address]
+                start = int(function["address"], 16)
+                size = int(function["size"])
+                self.assertEqual(size, expected_size)
+                self.assertEqual(int(by_address[next_address]["address"], 16),
+                                 start + expected_size + padding_size)
+                function_bytes = image[start - MAIN_BASE:start - MAIN_BASE + size]
+                instructions = list(decoder.disasm(function_bytes, start))
+                ret = instructions[-1]
+                self.assertEqual((ret.address, ret.mnemonic), (ret_address, "ret"))
+                self.assertEqual(ret.address + ret.size, start + size)
+                if cleanup is None:
+                    self.assertEqual(len(ret.operands), 0)
+                else:
+                    self.assertEqual(ret.operands[0].imm, cleanup)
+                padding = image[start - MAIN_BASE + size:
+                                start - MAIN_BASE + size + padding_size]
+                self.assertEqual(padding, b"\xCC" * padding_size)
+
+    def test_48_byte_record_container_extent_includes_cookie_epilogue(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        function = next(row for row in rows if row["address"] == "587540c0")
+        catch_all = next(row for row in rows if row["address"] == "5875424f")
+        next_function = next(row for row in rows if row["address"] == "58754360")
+        start = int(function["address"], 16)
+        size = int(function["size"])
+        self.assertEqual(size, 0x295)
+        self.assertEqual(int(next_function["address"], 16), start + 0x2A0)
+        self.assertGreaterEqual(int(catch_all["address"], 16), start)
+        self.assertLess(int(catch_all["address"], 16), start + size)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        function_bytes = image[start - MAIN_BASE:start - MAIN_BASE + size]
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        instructions = list(decoder.disasm(function_bytes, start))
+        self.assertEqual(instructions[-1].address, 0x58754352)
+        self.assertEqual(instructions[-1].mnemonic, "ret")
+        self.assertEqual(instructions[-1].operands[0].imm, 0x10)
+        self.assertEqual(instructions[-1].address + instructions[-1].size, start + size)
+
+        padding = image[start - MAIN_BASE + size:start - MAIN_BASE + 0x2A0]
+        self.assertEqual(padding, b"\xCC" * 11)
+
     def test_bounded_linked_record_formatter_extent_stops_before_padding(self):
         with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))

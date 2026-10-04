@@ -36,3 +36,37 @@ message `0x80020F0C` record handling documented in
 [`current-main-squadron-fleet-join-proposal.md`](current-main-squadron-fleet-join-proposal.md).
 They do not prove the event's protocol meaning or whether the downstream call
 is local or network-facing.
+
+## Direct two-key update/insert path
+
+The same verified dispatchers also call `FUN_58754C00` directly, using global
+`0x58A245AC` as its receiver and six stack arguments. It passes the first two
+values to `FUN_58753BF0`, which searches the same observed 0x48-byte-stride
+collection described above. On a hit, the helper writes the third value to
+record `+8` and invokes callback `0x5898C198` for fields `+0x2D`, `+0x0C`, and
+`+0x24`. On a miss, it prepares a local record through the same callback and
+passes it to `FUN_58754A30` for insertion through collection subobject `+4`.
+The full helper is 206 bytes, ends with `ret 0x18`, and has seven mapped
+operands.
+
+The inserter observes collection begin/end/capacity pointers at `+0x0C`,
+`+0x10`, and `+0x14`, with a 0x48-byte entry stride. When capacity remains,
+`FUN_58753660` copies the 18-DWORD record into the next slot and the end pointer
+advances by 0x48. When full, `FUN_58754890` delegates the range insertion and
+buffer growth to `FUN_587540C0`. That SEH-protected routine grows the
+0x48-byte-stride buffer as needed, copies/moves the existing ranges through
+the mapped helpers, inserts the supplied range, releases the old allocation
+when replaced, and updates the three container pointers.
+
+The wrapper, copy helper, and growth path are exact matches: 158, 46, 203, and
+661 bytes respectively; their mapped operand counts are 3, 0, 6, and 20.
+The original index listed only 637 bytes for `FUN_587540C0`, ending in the
+middle of its stack-chain restore. The corrected extent includes the cookie
+check and `ret 0x10` at `0x58754352`, then stops before eleven `CC` bytes and
+`FUN_58754360`. Ghidra separately indexed the nine-byte catch-all block at
+`0x5875424F` inside this function range.
+
+The six argument meanings, record schema, callback/output contracts, vector
+ownership and growth policy, and event/protocol effect remain unresolved. The
+dispatchers establish packet/event use and shared receiver/key lookup, but not
+the collection's domain identity. No runtime or emulator test was performed.

@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,885
-identified code bytes across six report units. There are 7,194 verified matches
-totaling 2,278,254 bytes (21.7601%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,909
+identified code bytes across six report units. There are 7,199 verified matches
+totaling 2,279,528 bytes (21.7722%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -84,6 +84,11 @@ documented in
 [`docs/current-main-squadron-fleet-join-proposal.md`](docs/current-main-squadron-fleet-join-proposal.md).
 The identity lookup and zero-result forwarding path are detailed in
 [`docs/current-main-proposal-identity-lookup-fallback.md`](docs/current-main-proposal-identity-lookup-fallback.md).
+`FUN_58754C00` and the four helpers on its record-append/growth path now add
+1,274 exact bytes. The corrected 661-byte `FUN_587540C0` extent includes its
+cookie check and return after the earlier 637-byte index stopped mid-epilogue.
+Argument, record, callback, and ownership meanings remain unresolved; no
+emulator test was performed. See the same lookup notes for the full call path.
 The corrected extent and caller evidence for the case-`0x80020F12` update are
 in [`docs/current-main-message-80020f12-child-list-state-update.md`](docs/current-main-message-80020f12-child-list-state-update.md).
 The member squad-join proposal path and its callback/collection uncertainties
