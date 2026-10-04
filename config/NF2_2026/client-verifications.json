@@ -295879,6 +295879,99 @@
         "behavior": "Clears receiver +0x80. Under global state gates, it invokes FUN_587BB160 or FUN_587BAF70 using receiver fields +0x100C or +0x350; it then clears eight child references via FUN_58782790 when the active-object and +0x63B8 conditions pass. It resets multiple child objects by calling FUN_58902EE0/FUN_58902F50, clears observed flag bits in their words at +0x24 and in six repeated receiver slots starting at +0x652C, sets receiver fields +0x6078/+0x6080/+0x6084 to 0xAAAAAAAA, +0x607C to 0xAAAAAAAB, and +0x60C4 to zero. It calls FUN_588DE5C0, may clear more active-object flag bits, then calls FUN_587EB340 and conditionally FUN_58776F20. The complete callable body is 595 bytes, ending with ret immediately before INT3 alignment; Ghidra's 589-byte extent cut into the final direct call. There are 20 mapped operand targets.",
         "uncertainty": "The child types, exact meaning of the cleared flags and sentinel fields, resource ownership, and semantics of the two message/state helper calls are unresolved. Static caller evidence places this in a zero-state or active-object transition path, but no emulator test was performed."
       }
+    },
+    {
+      "address": "58752000",
+      "name": "FUN_58752000",
+      "size": 416,
+      "symbol": "_FUN_58752000",
+      "source": "src/client-current/Main/FUN_58752000.cpp",
+      "source_sha256": "49867fc8850e2f7880e4fa8dfa9dfb165452636328953115ba6d5439c8993446",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898498B",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "5875217F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "5875217F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 194,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5875A7E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 315,
+          "target_address": "5875A4B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 406,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58752000",
+        "called_by": "Called by verified handlers FUN_58890110 and FUN_588C1650. FUN_588C1650 invokes it in message/event dispatch, including event 0x80020F04; in a second path it adds a composed text buffer to the same receiver before walking related linked objects. FUN_58890110 calls it with a text pointer returned through FUN_58759EB0 when the `FUN_587522F0` lookup reports no existing match.",
+        "behavior": "Walks the receiver's linked list from +0x90 through node link +0x54 and compares each node's text pointer at +0x70/+0x6C with the input using two-byte character comparisons. It also compares the input against the global string at 0x58A0B450. If not already present and not equal to that global string, it allocates a 0xB4-byte object through FUN_5897CC4E, initializes it through FUN_5875A7E0, passes the input and a local buffer through callback 0x5898C198, and initializes its text/control data with FUN_5875A4B0. It clears observed bits in the new node's word at +0x24, appends the node using receiver head/tail fields +0x90/+0x94 and node links +0x50/+0x54, and increments receiver count +0xA0. The complete 416-byte body ends with ret 4 and has 11 mapped operand targets.",
+        "uncertainty": "The receiver/list and 0xB4-byte node types, callback contract, global-string policy, and exact user-visible message semantics are unresolved. Callers tie it to event/message text paths, but no live client test was performed."
+      }
     }
   ]
 }
