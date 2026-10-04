@@ -298781,6 +298781,57 @@
         "behavior": "Starts at receiver +0x6C and traverses nodes through +0x54, calling comparison callback 0x5898C1A4 with node key reached through +0x70/+0x6C and the supplied pointer. When a node compares equal, it rewires neighboring fields +0x50/+0x54, updates receiver anchors +0x6C/+0x70 and +0x100/+0x108 when they reference the removed node, conditionally calls FUN_5875A100 when node +0xA4 is nonzero, invokes the node's first virtual method with argument 1, decrements receiver word +0xF2, and returns. It returns without mutation when the starting node is null or no comparison matches. The body is 215 bytes with four mapped operand targets and returns with ret 4.",
         "uncertainty": "The receiver and node types, compared key schema, callback semantics, exact meaning of the four anchor fields, conditional helper contract, and caller-visible meaning of the count remain unresolved. The packet/event callers establish dispatcher use but do not identify a specific game-level record type or visual result. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58848530",
+      "name": "FUN_58848530",
+      "size": 215,
+      "symbol": "_FUN_58848530",
+      "source": "src/client-current/Main/FUN_58848530.cpp",
+      "source_sha256": "8511a3f487e477c6dc76e9e035383ab648a9307922e06dd78ac59de03087d2fd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58848602",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58848600",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 170,
+          "target_address": "5875A100",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58848530 / parallel linked-record removal helper",
+        "called_by": "Called twice by verified packet dispatcher FUN_587BB700 and twice by verified event dispatcher FUN_588C1650. Every call loads ECX from global object 0x58A245B4 plus 0xD8 and pushes one pointer argument from a register or local record value.",
+        "behavior": "Starts at receiver +0x64 and traverses nodes through +0x54, passing values reached through node +0x70/+0x6C and the supplied pointer to comparison callback 0x5898C1A4. On a match, rewires node links +0x50/+0x54, updates receiver anchors +0x64/+0x68 and +0xFC/+0x10C when they point to the removed node, conditionally calls FUN_5875A100 when node +0xA4 is nonzero, invokes the node's first virtual method with argument 1, decrements receiver word +0xF0, and returns. A null start or no match returns without these changes. The body is 215 bytes with four mapped operand targets and returns with ret 4.",
+        "uncertainty": "The receiver and node types, compared-key schema, callback contract, meaning of these four anchors, conditional helper contract, and count semantics remain unknown. Shared packet/event callers establish a parallel list-removal path but do not establish its record type or visible result. No runtime or emulator test was performed."
+      }
     }
   ]
 }

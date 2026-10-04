@@ -1,8 +1,8 @@
-# Shared linked-record removal helper
+# Shared linked-record removal helpers
 
-`FUN_58848450` is a 215-byte function in the installed, mapped `Main.dll`.
-ObjDiff 3.8.0 verifies its instruction stream byte-for-byte and checks all four
-mapped operand targets.
+`FUN_58848450` and `FUN_58848530` are parallel 215-byte functions in the
+installed, mapped `Main.dll`. ObjDiff 3.8.0 verifies both instruction streams
+byte-for-byte and checks all four mapped operand targets in each.
 
 ## Evidence from the original
 
@@ -24,8 +24,17 @@ first virtual method with argument `1`, decrements receiver word `+0xF2`, and
 returns. If the starting node is null or the walk finds no match, it returns
 without those changes. The body returns with `ret 4`.
 
+The parallel `FUN_58848530` has two calls in each dispatcher and receives the
+same owner at global object `0x58A245B4` plus `0xD8`. It follows the same node
+link fields and comparison callback, but starts from receiver `+0x64`, repairs
+receiver references at `+0x64`, `+0x68`, `+0xFC`, and `+0x10C`, and decrements
+receiver word `+0xF0`. It also conditionally calls `FUN_5875A100`, invokes the
+node's first virtual method with argument `1`, and returns with `ret 4`.
+Together, the two byte-matched helpers account for separate linked ranges in
+the same receiver; the original code does not name those ranges.
+
 ## Uncertainty and validation
 
 The receiver and node types, compared-key schema, callback contract, meaning
-of the four receiver references, `FUN_5875A100` contract, and count semantics
-remain unresolved. No client or emulator runtime test was performed.
+of the receiver references and counts, and `FUN_5875A100` contract remain
+unresolved. No client or emulator runtime test was performed.
