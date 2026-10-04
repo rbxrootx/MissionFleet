@@ -306151,6 +306151,32 @@
         "behavior": "Calls FUN_58849540 with the receiver in ECX. If bit 0 of its stack argument is set, passes the receiver to FUN_5897CC42. It then returns the receiver in EAX with ret 4. The complete body is 30 bytes with two mapped operand targets.",
         "uncertainty": "The precise host callback at FUN_5897CC42 and allocation ownership remain unresolved. The original 27-byte inventory stopped before ret 4; the mapped function ends at 0x588497FD and is followed by two CC alignment bytes. No runtime deletion test was performed."
       }
+    },
+    {
+      "address": "58908680",
+      "name": "FUN_58908680",
+      "size": 106,
+      "symbol": "_FUN_58908680",
+      "source": "src/client-current/Main/FUN_58908680.cpp",
+      "source_sha256": "03151891167c683448acea4ee4cfcdd244d07caedd66b49055f2026f3ad70e5b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58908680",
+        "called_by": "Verified FUN_5879D480 calls this helper at 0x5879D4AE and 0x5879D4C2; verified FUN_5879F810 calls it at 0x5879F889 and 0x5879F8A2.",
+        "behavior": "The mapped x86 body reads receiver +0x84. If null it copies +0x78 there and tail-jumps through vtable slot +0x3C. Otherwise it advances to the current node's +0x14 successor, stores that at +0x84, and returns if null. For a nonnull successor it walks from receiver +0x80 through node +0x14 links, adding receiver +0x5C for each preceding node. If this total exceeds receiver +0x20 minus +0x5C minus +0x18, it advances +0x80 by one node. It then tail-jumps through vtable slot +0x3C. The complete mapped body is 106 bytes with no mapped address operands.",
+        "uncertainty": "The receiver's class, list-item ownership, interpretation of the +0x18/+0x20/+0x5C measures, and effect of the indirect vtable call are not established. The exact instruction stream alone does not verify a visible UI transition."
+      }
     }
   ]
 }

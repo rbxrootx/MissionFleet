@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,057
-identified code bytes across six report units. There are 7,308 verified matches
-totaling 2,301,640 bytes (21.9831%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,309 verified matches
+totaling 2,301,746 bytes (21.9841%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -46,6 +46,11 @@ The same panel's vtable state-setup method is recorded in
 [the setup evidence](docs/current-main-communicator-id-setup-58848240.md).
 Its destructor wrapper, cleanup body, and linked-chain release are recorded
 in [the teardown evidence](docs/current-main-communicator-id-teardown-58849540.md).
+
+The current Main.dll linked-selection successor at `0x58908680` now matches
+all 106 original instruction bytes. Both verified callers' indexed direct
+targets are matched; the [function evidence](docs/current-main-list-successor-58908680.md)
+records the pointer walk and its unresolved indirect refresh behavior.
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
