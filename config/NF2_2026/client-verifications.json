@@ -306362,6 +306362,175 @@
         "behavior": "With receiver flag bit 1 at +0x24 set, optionally delegates through a parent/child callback at receiver +0x3C/+0x34, then routes message IDs 0x100, 0x102, 0x201, 0x202, 0x204, and 0x205 to receiver vtable slots +0x1C, +0x18, +0x34, +0x30, +0x2C, and +0x28 respectively. Other IDs return receiver +0x34; the flag-clear path does the same.",
         "uncertainty": "The message payload contract, parent callback's rejection meaning, and indirect virtual effects remain unresolved."
       }
+    },
+    {
+      "address": "58907F70",
+      "name": "FUN_58907f70",
+      "size": 6,
+      "symbol": "_FUN_58907f70",
+      "source": "src/client-current/Main/FUN_58907f70.cpp",
+      "source_sha256": "9fd3608c7047aca254a407891032728c1f68f10044be31ba52c37dff4da1cb36",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58907f70",
+        "called_by": "Original table 0x589A29CC points to this function at slot(s) +0x18, +0x20, +0x24, +0x28, +0x2C, +0x34.",
+        "behavior": "Returns receiver +0x34 with ret 4; no other state change is visible in this six-byte body.",
+        "uncertainty": "The returned field's meaning and all indirect callers remain unresolved."
+      }
+    },
+    {
+      "address": "589082E0",
+      "name": "FUN_589082e0",
+      "size": 41,
+      "symbol": "_FUN_589082e0",
+      "source": "src/client-current/Main/FUN_589082e0.cpp",
+      "source_sha256": "a3f08dd0ae0959432995dde7badda1e27e06a0f1f5f5e785b4e12fbc8d2da219",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_589082e0",
+        "called_by": "Original table 0x589A29CC points to this function at slot(s) +0x3C.",
+        "behavior": "If receiver +0x30 exists and bit 5 of that object's +0x24 flags is set, invokes its vtable slot +0x18 with receiver, 2, and 0. Returns receiver +0x34.",
+        "uncertainty": "The callback contract and returned field meaning remain unresolved."
+      }
+    },
+    {
+      "address": "589088B0",
+      "name": "FUN_589088b0",
+      "size": 30,
+      "symbol": "_FUN_589088b0",
+      "source": "src/client-current/Main/FUN_589088b0.cpp",
+      "source_sha256": "eb0e97b8af3795afcd6711023365de824d3b395729823bbe203160e81c4f10df",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58908050",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589088b0",
+        "called_by": "Original table 0x589A29CC points to this function at slot(s) +0x00.",
+        "behavior": "Calls lifecycle body FUN_58908050, then passes the receiver to FUN_5897CC42 if bit 0 of its stack argument is set; returns the receiver with ret 4 at 0x589088CB.",
+        "uncertainty": "This is consistent with a deleting-destructor wrapper, but exact allocation ownership is unresolved. The former 27-byte extent omitted ret 4; two CC bytes follow the complete 30-byte body."
+      }
+    },
+    {
+      "address": "58908AA0",
+      "name": "FUN_58908aa0",
+      "size": 79,
+      "symbol": "_FUN_58908aa0",
+      "source": "src/client-current/Main/FUN_58908aa0.cpp",
+      "source_sha256": "d5a80bd40e4e9cdbfc6788fd3a95c86d730e865e9f2993255dbff314449ee4c8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58908750",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58908aa0",
+        "called_by": "Original table 0x589A29CC points to this function at slot(s) +0x30.",
+        "behavior": "Reads two coordinates through global 0x58A284C8, tests them against the receiver's +0x14/+0x1C and +0x18/+0x20 bounds after position offsets, calls FUN_58908750 for an in-bounds point, and returns receiver +0x34.",
+        "uncertainty": "The global coordinate source, coordinate space, and FUN_58908750's visible effect remain unresolved."
+      }
+    },
+    {
+      "address": "58908AF0",
+      "name": "FUN_58908af0",
+      "size": 93,
+      "symbol": "_FUN_58908af0",
+      "source": "src/client-current/Main/FUN_58908af0.cpp",
+      "source_sha256": "abe3f5169d0da4d6288ac5908c10b7f1c9a7de0a8b7be9a63e30aed51293cda2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 40,
+          "target_address": "58908600",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58908680",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58908af0",
+        "called_by": "Original table 0x589A29CC points to this function at slot(s) +0x1C.",
+        "behavior": "Dispatches the integer at offset +8 of the first stack-argument pointer through original tables at 0x58908B50 and 0x58908B68: 0x0D invokes vtable slot +0x38; 0x23 selects receiver +0x7C; 0x24 selects +0x78; 0x26 calls FUN_58908600; 0x28 calls FUN_58908680. Other values return receiver +0x34.",
+        "uncertainty": "The key-message origin, callback effects, and exact screen transition remain unresolved. The jump-table entries are checked separately against the captured image."
+      }
     }
   ]
 }

@@ -1,4 +1,4 @@
-"""Check original Main.dll list-control vtable links and corrected extents."""
+"""Check original Main.dll list-control vtable, key table, and extents."""
 
 import hashlib
 import json
@@ -37,6 +37,31 @@ def verify():
             if pointer_at(table + offset) != expected:
                 raise ValueError(f"Unexpected vtable slot {table:08X}+{offset:02X}")
 
+    complete_table = [
+        0x589088B0, 0x58731770, 0x588A9ED0, 0x58903040,
+        0x58908520, 0x58908340, 0x58907F70, 0x58908AF0,
+        0x58907F70, 0x58907F70, 0x58907F70, 0x58907F70,
+        0x58908AA0, 0x58907F70, 0x58908310, 0x589082E0,
+    ]
+    verified = {int(item["address"], 16) for item in config["matches"]
+                if item.get("verified_by") == "objdiff-3.8.0-byte-identical"}
+    for slot, expected in enumerate(complete_table):
+        if pointer_at(0x589A29CC + slot * 4) != expected:
+            raise ValueError(f"Unexpected complete vtable slot +{slot * 4:02X}")
+        if expected not in verified:
+            raise ValueError(f"Unverified complete vtable target {expected:08X}")
+
+    jump_targets = [pointer_at(0x58908B50 + index * 4) for index in range(6)]
+    expected_keyboard = {
+        0x0D: 0x58908B0D, 0x23: 0x58908B42, 0x24: 0x58908B2B,
+        0x26: 0x58908B17, 0x28: 0x58908B21,
+    }
+    for index, selector in enumerate(data_at(0x58908B68, 28)):
+        key = index + 0x0D
+        expected = expected_keyboard.get(key, 0x58908B47)
+        if selector >= len(jump_targets) or jump_targets[selector] != expected:
+            raise ValueError(f"Unexpected keyboard jump-table route {key:02X}")
+
     # This body installs the first vtable, then finishes beyond its old extent.
     if data_at(0x5890807A, 6) != bytes.fromhex("c703cc299a58"):
         raise ValueError("Lifecycle body does not install observed vtable")
@@ -44,8 +69,13 @@ def verify():
         raise ValueError("Incorrect lifecycle return/padding boundary")
     if data_at(0x5890850E, 18) != b"\xC2\x0C\x00" + b"\xCC" * 15:
         raise ValueError("Incorrect draw return/padding boundary")
+    if data_at(0x589088CB, 5) != b"\xC2\x04\x00" + b"\xCC" * 2:
+        raise ValueError("Incorrect deleting-wrapper return/padding boundary")
     return {"vtable_slots": sum(len(values) for values in slots.values()),
-            "corrected_function_extents": {"58908050": 129, "58908340": 465}}
+            "complete_vtable_slots": len(complete_table),
+            "keyboard_routes": len(expected_keyboard),
+            "corrected_function_extents": {"58908050": 129, "58908340": 465,
+                                           "589088B0": 30}}
 
 
 if __name__ == "__main__":
