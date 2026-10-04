@@ -29,3 +29,6 @@ The instruction source is an exact x86 reconstruction, not recovered
 high-level C++. The nested control identities, resource descriptors,
 exception cleanup, interactions, and rendered appearance are not yet
 verified. No original-client runtime comparison was performed.
+
+The panel's vtable event slot `+0x18` has since been reconstructed in
+[the event-path evidence](current-main-communicator-id-event-58848bc0.md).

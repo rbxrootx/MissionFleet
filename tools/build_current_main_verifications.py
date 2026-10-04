@@ -266,7 +266,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -323,7 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -521,6 +521,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58848BC0": {
+        "name_in_analysis": "FUN_58848bc0 / CPannelCommunicatorIDPannel event dispatcher",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function pointer in slot +0x18, verified from the pinned mapped Main.dll.",
+        "behavior": "Returns zero for event types other than 2. For type 2, compares the target pointer with ID-panel child fields +0xD4/+0xD8/+0xDC/+0xCC/+0xD0/+0xE8/+0xEC/+0x118/+0x11C in that order. Branches invoke a helper on linked-list child actions, invoke virtual callbacks, call a global helper, toggle mode through verified FUN_588486E0, select resource helpers, or move one node backward/forward with signed 16-bit count bounds. The complete 663-byte body has 30 mapped operand targets and returns with ret 0xC.",
+        "uncertainty": "The event type's public meaning, resource identities, externally visible effects of the called helpers, pointer preconditions, and exception behavior remain unknown. The portable model covers the observed normal-path branches only; no original-client runtime comparison was performed.",
+    },
     "58849B70": {
         "name_in_analysis": "FUN_58849b70 / CPannelCommunicatorIDPannel constructor",
         "called_by": "FUN_5881DE10 allocates 0x120 bytes and calls this constructor for parent child +0xD8. The call supplies parent-derived coordinates and the final flag 0x40.",

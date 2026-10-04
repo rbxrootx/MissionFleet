@@ -305055,6 +305055,213 @@
         "behavior": "Calls base initializer FUN_589031A0, writes CMenuScreen vtable 0x5898C500 then the RTTI-backed CPannelCommunicatorIDPannel vtable 0x5899E780, initializes multiple child controls through observed allocation/constructor calls, and finishes with ret 0x18. The corrected complete extent is 2576 bytes and contains 86 mapped operand targets.",
         "uncertainty": "The identities and visual behavior of nested controls, resource descriptors, and exception cleanup remain unresolved. The Ghidra TSV originally omitted the three-byte ret 0x18 at 0x5884A57D; the next indexed function begins at 0x5884A580. No original-client runtime test was performed."
       }
+    },
+    {
+      "address": "58848BC0",
+      "name": "FUN_58848bc0",
+      "size": 663,
+      "symbol": "_FUN_58848bc0",
+      "source": "src/client-current/Main/FUN_58848bc0.cpp",
+      "source_sha256": "a7e03ab3d2878ef517d72420950d2d5c4b016d632df25af213653487e9e89910",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58848E51",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "58820F00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "58820F00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 140,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "587B91E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 217,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "58848B40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 273,
+          "target_address": "58A0B4A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 279,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "58848B40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 307,
+          "target_address": "58848D9F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 333,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 343,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 359,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 385,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 402,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 416,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 426,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 442,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 487,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 513,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 523,
+          "target_address": "58848E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 573,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 652,
+          "target_address": "588486E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58848bc0 / CPannelCommunicatorIDPannel event dispatcher",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function pointer in slot +0x18, verified from the pinned mapped Main.dll.",
+        "behavior": "Returns zero for event types other than 2. For type 2, compares the target pointer with ID-panel child fields +0xD4/+0xD8/+0xDC/+0xCC/+0xD0/+0xE8/+0xEC/+0x118/+0x11C in that order. Branches invoke a helper on linked-list child actions, invoke virtual callbacks, call a global helper, toggle mode through verified FUN_588486E0, select resource helpers, or move one node backward/forward with signed 16-bit count bounds. The complete 663-byte body has 30 mapped operand targets and returns with ret 0xC.",
+        "uncertainty": "The event type's public meaning, resource identities, externally visible effects of the called helpers, pointer preconditions, and exception behavior remain unknown. The portable model covers the observed normal-path branches only; no original-client runtime comparison was performed."
+      }
     }
   ]
 }

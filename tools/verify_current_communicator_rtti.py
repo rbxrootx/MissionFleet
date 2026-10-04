@@ -44,6 +44,10 @@ def main():
             raise AssertionError(f"{vtable:08X}: {actual_name!r} != {expected_name!r}")
         print(f"{vtable:08X}: {actual_name}")
 
+    if u32(0x5899E780 + 0x18) != 0x58848BC0:
+        raise AssertionError("ID-panel event vtable slot changed")
+    print("5899E798: FUN_58848BC0 (ID-panel event slot +0x18)")
+
 
 if __name__ == "__main__":
     main()
