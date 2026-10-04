@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,145 verified matches
-totaling 2,261,179 bytes (21.5971%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,146 verified matches
+totaling 2,261,720 bytes (21.6023%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1081,7 +1081,8 @@ including the 20-byte record header, optional checksum path, and Winsock error
 handling; see [the sender note](docs/current-main-network-sender.md).
 The sender's three-function socket-error cleanup path adds 174 bytes; see
 [the cleanup note](docs/current-main-socket-cleanup.md). The address parser,
-async socket opener, and handle-table insertion add 798 bytes; see
+async socket opener, handle-table insertion, and registry configuration loader
+`FUN_587B7990` now add 1,339 bytes; see
 [the connection note](docs/current-main-socket-connect.md). The nested
 `FUN_588C4210` handler and its `0x80023101`, `02`, `05`, and `07` helpers add
 7,908 verified bytes across nine body ranges for the `0x800231xx` event family.

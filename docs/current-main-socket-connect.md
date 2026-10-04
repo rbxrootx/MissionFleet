@@ -1,20 +1,31 @@
 # Current Main socket connection path
 
-This slice follows the installed current `Main.dll` from a textual server
-address to a registered asynchronous socket. Three Ghidra functions now match
-the mapped capture at 100.0% under objdiff 3.8.0, covering 798 bytes and 29
-audited operands:
+This slice follows the installed current `Main.dll` from registry-backed
+connection settings and a textual server address to a registered asynchronous
+socket. Four Ghidra functions now match the mapped capture at 100.0% under
+objdiff 3.8.0, covering 1,339 bytes and 57 audited operands:
 
 | Function | Ghidra body | Bytes |
 | --- | --- | ---: |
 | `FUN_58971070` | `0x58971070..0x5897111C`, `0x58971120..0x58971259` | 487 |
 | `FUN_58970f90` | `0x58970F90..0x5897106F` | 224 |
 | `FUN_58970f10` | `0x58970F10..0x58970F66` | 87 |
+| `FUN_587b7990` | `0x587B7990..0x587B7BAC` | 541 |
 
 The three bytes from `0x5897111D` through `0x5897111F` are outside the parser's
 Ghidra body and are excluded from its source match.
 
 ## Address parsing and connection setup
+
+`FUN_587b7990` connects the receiver's configuration path to this socket
+sequence. It is called by `FUN_587B83E0` when the observed short subcode is
+`-0x8000` and the following DWORD is `-0x7FFFFFFD`, and by `FUN_587BB700` for
+event code `0x8000B101`. It initializes receiver fields, calls through the
+captured registry API slots using `HKEY_LOCAL_MACHINE` (`0x80000002`) and
+subkey pointer `0x58997258`, then queries values through pointers `0x58997244`
+and `0x5899722C`. It passes the retrieved data to `FUN_58971070` with global
+object `0x58A2458C`. The exact names and types of those registry values and the
+meanings of the event conditions are unresolved.
 
 Ghidra references show `FUN_58971070` called from `FUN_58790560` at
 `0x58790727`, `FUN_587936d0` at `0x58793A06`, and `FUN_587b7990` at
@@ -93,7 +104,8 @@ meaning are unresolved. The string parser's port semantics, DNS result
 ownership, address validation, socket result contract, and all runtime/network
 effects remain untested.
 
-The exact mapped source is in [`FUN_58971070.cpp`](../src/client-current/Main/FUN_58971070.cpp),
+The exact mapped source is in [`FUN_587b7990.cpp`](../src/client-current/Main/FUN_587b7990.cpp),
+[`FUN_58971070.cpp`](../src/client-current/Main/FUN_58971070.cpp),
 [`FUN_58970f90.cpp`](../src/client-current/Main/FUN_58970f90.cpp), and
 [`FUN_58970f10.cpp`](../src/client-current/Main/FUN_58970f10.cpp). Their
 source hashes, segment ranges, compiler flags, and operand checks are pinned in

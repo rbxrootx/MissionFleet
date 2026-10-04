@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4902,6 +4902,12 @@ EVIDENCE = {
         "called_by": "Called by both verified current Main.dll methods FUN_5877EC80 and FUN_58782CF0. Each passes the byte at offset +0x354 of the selected object. Immediately before the call, both methods compare that byte with the active object's byte at +0x354 and may set a neighboring child flag when it changes.",
         "behavior": "Returns without rebuilding when receiver count/capacity fields at +0xAC and +0xA8 fail the observed unsigned condition or receiver byte +0xC4 is zero. Otherwise stores the input byte at +0xB8, clears receiver bookkeeping fields, and rebuilds state-associated child references using tables rooted at globals 0x58A245C4, 0x58A247F8, and 0x58A24640. The paths compare the requested byte with the active object's +0x354 byte and use checked table entries including indices 7, 8, 0xBB, and 0xBC. It copies four dwords from a selected record into child storage, updates pointer links, and clears a link field across eight receiver entries before returning. The body is 605 bytes, ends in ret 4, and has 18 operand targets.",
         "uncertainty": "The receiver and child types, meanings of the +0x354 selector, global tables, indices, count/capacity fields, and resulting UI or game effect remain unknown. Caller code establishes the selector source and a change-related flag update, but not the domain names of the states. No emulator test was performed.",
+    },
+    "587B7990": {
+        "name_in_analysis": "FUN_587b7990",
+        "called_by": "Called by verified event handlers FUN_587B83E0 and FUN_587BB700. The first dispatches here when the observed short subcode is -0x8000 and the following DWORD is -0x7FFFFFFD; the second calls it for event code 0x8000B101. The helper's final call is FUN_58971070, already matched and documented as Main's address parser/socket connector.",
+        "behavior": "Initializes receiver-owned connection fields and temporary buffers, then calls through the captured registry API slots with HKEY_LOCAL_MACHINE (0x80000002), subkey pointer 0x58997258, and value-name pointers including 0x58997244 and 0x5899722C. It passes retrieved configuration data to FUN_58971070 with global object 0x58A2458C; that verified helper parses a textual address and port and forwards the sockaddr to FUN_58970F90 for socket setup. The complete body is 541 bytes, ends in ret at 0x587B7BAC, and has 28 operand targets.",
+        "uncertainty": "The registry API slot prototypes, exact names/types of both values, purpose of the reset fields, meanings of the two triggering event conditions, and live connection result remain unverified. The downstream parser and socket routines are byte-matched, but no runtime connection test was performed.",
     },
 }
 
