@@ -286585,6 +286585,32 @@
         "behavior": "Initializes a two-word output pair, compares two input values against receiver offsets +0x0C/+0x10, conditionally calls 0x5897CC72, and when the second output differs from the supplied value computes a 4-byte-element count, calls 0x5897CC54, and updates receiver offset +0x10.",
         "uncertainty": "The receiver's data structure and element schema, helper contracts, and ownership semantics are unresolved. The full 143-byte body decodes; the two observed direct-call targets are separately verified."
       }
+    },
+    {
+      "address": "5877E7A0",
+      "name": "FUN_5877e7a0",
+      "size": 82,
+      "symbol": "_FUN_5877e7a0",
+      "source": "src/client-current/Main/FUN_5877e7a0.cpp",
+      "source_sha256": "c15fe596be0a406b43026e50ad78beda16fb73478e5c77043c351503edbb18a4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5877e7a0",
+        "called_by": "Called twice by FUN_588C78F0 at offsets 0x1A3 and 0x1B5 in the installed Main.dll during child cleanup/state update.",
+        "behavior": "Clamps the first integer argument to zero or greater and writes it to offsets +0x58/+0x5C of the object at receiver +0x70; writes 0x40000000 at that object's +0x60; clamps the minimum of the two arguments to at least one and writes it at receiver +0x54; then stores a signed division result derived from the embedded +0x58 value and receiver +0x68 at receiver +0x60.",
+        "uncertainty": "Receiver and embedded-object types, fields' semantic units, and this method's public contract remain unresolved. The complete 82-byte body has no operand relocations."
+      }
     }
   ]
 }
