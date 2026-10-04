@@ -10,6 +10,29 @@ MAIN_BASE = 0x58730000
 
 
 class CurrentMainFunctionExtentTests(unittest.TestCase):
+    def test_shared_resource_lifecycle_extent_includes_stack_restore_and_return(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        function = next(row for row in rows if row["address"] == "58756020")
+        next_function = next(row for row in rows if row["address"] == "58756100")
+        start = int(function["address"], 16)
+        size = int(function["size"])
+        self.assertEqual(size, 0xDD)
+        self.assertEqual(int(next_function["address"], 16), start + 0xE0)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        function_bytes = image[start - MAIN_BASE:start - MAIN_BASE + size]
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        instructions = list(decoder.disasm(function_bytes, start))
+        self.assertEqual(instructions[-1].address, 0x587560FA)
+        self.assertEqual(instructions[-1].mnemonic, "ret")
+        self.assertEqual(instructions[-1].operands[0].imm, 4)
+        self.assertEqual(instructions[-1].address + instructions[-1].size, start + size)
+
+        padding = image[start - MAIN_BASE + size:start - MAIN_BASE + 0xE0]
+        self.assertEqual(padding, b"\xCC" * 3)
+
     def test_tree_lookup_extent_contains_its_branch_tail_and_stops_before_padding(self):
         with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
