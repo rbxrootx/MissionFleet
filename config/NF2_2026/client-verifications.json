@@ -287206,6 +287206,102 @@
         "behavior": "Rewires node pointers at offsets +0/+4/+8, checks marker byte +0x15, and updates the receiver's header at +0x18 on the observed root-insertion branches; returns with ret 4.",
         "uncertainty": "The node/link schema and caller's branch meaning are unresolved. The complete 82-byte body decodes and has no mapped operand relocations."
       }
+    },
+    {
+      "address": "5890E400",
+      "name": "FUN_5890e400",
+      "size": 212,
+      "symbol": "_FUN_5890e400",
+      "source": "src/client-current/Main/FUN_5890e400.cpp",
+      "source_sha256": "ca690e689d1a1459d9a40bfd9549834371b2074ef243a82c1f349ab5b4a5ead9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 42,
+          "target_address": "5890E4BC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5890E4BC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "58A28504",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "5890E0B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890e400",
+        "called_by": "Called by sibling constructors 0x5890BF40, 0x5890BF70, 0x5890BFC0, and 0x5890BFF0 before each installs its own vtable.",
+        "behavior": "Stores the first and second stack arguments at receiver +0x1C/+0x20 and writes 0x01000000 at +0x18. If either stored argument is zero, clears receiver fields +4/+8/+0x0C/+0x10. Otherwise passes a 0x7C-byte local buffer, zero, and size 0x7C to 0x5897CC48; dispatches through slot +0x18 of the object reached via global 0x58A28504 while forwarding the third argument; calls 0x5890E0B0 with argument 1; and on the observed nonzero path dispatches through slot +0x80 of the selected object before returning 1.",
+        "uncertainty": "The 0x5897CC48 thunk's host contract is unresolved; zero-fill purpose is inferred only from its arguments. The global and vtable method contracts, field meanings, selected-object schema, and callback result semantics are also unresolved. The complete 212-byte body decodes; all five mapped operand targets are audited."
+      }
+    },
+    {
+      "address": "5890E0B0",
+      "name": "FUN_5890e0b0",
+      "size": 176,
+      "symbol": "_FUN_5890e0b0",
+      "source": "src/client-current/Main/FUN_5890e0b0.cpp",
+      "source_sha256": "5351a6962c70c17f8f9a9f29e2d07f244981a5830af60efd7d6bd4df0d226378",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "5890E156",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890e0b0",
+        "called_by": "Called by FUN_5890E400 at 0x5890E496 with argument 1.",
+        "behavior": "Reads receiver field +4, passes a 0x7C-byte local buffer, zero, and size 0x7C to 0x5897CC48, and dispatches through vtable slot +0x64 on the referenced object. It compares the returned value with 0x8876021C, may repeat the dispatch through a nested object, stores two resulting stack values at receiver +8/+0x0C, and returns with ret 4; the null-object path returns zero.",
+        "uncertainty": "The 0x5897CC48 thunk's host contract is unresolved; zero-fill purpose is inferred only from its arguments. The status code, callback slot contract, nested object type, output field meanings, and ownership behavior remain unresolved. The complete 176-byte body decodes; both mapped operand targets are checked."
+      }
     }
   ]
 }

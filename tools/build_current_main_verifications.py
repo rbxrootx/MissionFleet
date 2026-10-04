@@ -146,6 +146,7 @@ ADDRESSES = (
     "5890C720", "5890C600",
     "5890C020",
     "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
+    "5890E400", "5890E0B0",
     "5875F650", "5875F6B0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
@@ -380,6 +381,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5890C720", "5890C600",
     "5890C020",
     "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
+    "5890E400", "5890E0B0",
     "5875F650", "5875F6B0",
 }
 SOURCE_COMPILER = {
@@ -4491,6 +4493,18 @@ EVIDENCE = {
         "called_by": "Called by 0x5890C020 at instruction offset 411.",
         "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C50 and returns with ret 0xC.",
         "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
+    },
+    "5890E400": {
+        "name_in_analysis": "FUN_5890e400",
+        "called_by": "Called by sibling constructors 0x5890BF40, 0x5890BF70, 0x5890BFC0, and 0x5890BFF0 before each installs its own vtable.",
+        "behavior": "Stores the first and second stack arguments at receiver +0x1C/+0x20 and writes 0x01000000 at +0x18. If either stored argument is zero, clears receiver fields +4/+8/+0x0C/+0x10. Otherwise passes a 0x7C-byte local buffer, zero, and size 0x7C to 0x5897CC48; dispatches through slot +0x18 of the object reached via global 0x58A28504 while forwarding the third argument; calls 0x5890E0B0 with argument 1; and on the observed nonzero path dispatches through slot +0x80 of the selected object before returning 1.",
+        "uncertainty": "The 0x5897CC48 thunk's host contract is unresolved; zero-fill purpose is inferred only from its arguments. The global and vtable method contracts, field meanings, selected-object schema, and callback result semantics are also unresolved. The complete 212-byte body decodes; all five mapped operand targets are audited.",
+    },
+    "5890E0B0": {
+        "name_in_analysis": "FUN_5890e0b0",
+        "called_by": "Called by FUN_5890E400 at 0x5890E496 with argument 1.",
+        "behavior": "Reads receiver field +4, passes a 0x7C-byte local buffer, zero, and size 0x7C to 0x5897CC48, and dispatches through vtable slot +0x64 on the referenced object. It compares the returned value with 0x8876021C, may repeat the dispatch through a nested object, stores two resulting stack values at receiver +8/+0x0C, and returns with ret 4; the null-object path returns zero.",
+        "uncertainty": "The 0x5897CC48 thunk's host contract is unresolved; zero-fill purpose is inferred only from its arguments. The status code, callback slot contract, nested object type, output field meanings, and ownership behavior remain unresolved. The complete 176-byte body decodes; both mapped operand targets are checked.",
     },
     "5875F650": {
         "name_in_analysis": "FUN_5875f650",
