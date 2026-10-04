@@ -303885,6 +303885,39 @@
         "behavior": "Returns immediately for a null first stack argument or zero unsigned count in the third. Otherwise loops over count records at 0x60-byte strides. Leading byte zero searches the name at record +1 through verified FUN_58848380 (receiver list +0x6C); leading byte one uses verified FUN_588483D0 (list +0x64). Other tags skip lookup. A nonnull result is passed with the full record pointer to verified FUN_5875A4B0. The complete body is 92 bytes, three mapped direct-call targets, and ret 0x0C. It has the same control-flow shape as verified FUN_58843000 but uses a different receiver/list family.",
         "uncertainty": "The gate's type and meaning beyond its null check, record fields beyond tag/name, list ownership, and user-visible update effect remain unknown. No original-client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58847A50",
+      "name": "FUN_58847a50",
+      "size": 88,
+      "symbol": "_FUN_58847a50",
+      "source": "src/client-current/Main/FUN_58847a50.cpp",
+      "source_sha256": "95c4f21220731dff8c7a5497819cce0e1cc74d65c8d39533732e0424fbb6418c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 42,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58847a50 / conditional record-text and receiver-state update",
+        "called_by": "Called by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650 with a receiver in ECX and three stack arguments.",
+        "behavior": "When the first or second stack argument is nonzero, passes a pointer at third argument +0x0C to verified text copier FUN_58731CE0 on receiver child +0x94. Afterwards always sets receiver byte +0xA0 to one. It then reads receiver word +0x24, masks with 0x1F00, and if the result equals 0x0500 invokes the receiver's vtable slot +4. Without that call it returns 0x1F00; with it, the virtual call's result passes through EAX. The full body is 88 bytes, one mapped direct-call target, and ret 0x0C.",
+        "uncertainty": "The three argument meanings, child text role, flag bits, virtual callback contract, and visible UI effect remain unknown. No original-client or emulator runtime test was performed."
+      }
     }
   ]
 }
