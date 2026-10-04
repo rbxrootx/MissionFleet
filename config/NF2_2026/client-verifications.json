@@ -279062,6 +279062,1402 @@
         "behavior": "Prepares a stack-local structure and calls helpers 0x5875F650 and 0x5875F6B0 before restoring the stack and returning with ret 0x114.",
         "uncertainty": "The structure layout, input semantics, and helper contracts are unresolved. The complete 239-byte body includes a stack-cookie check."
       }
+    },
+    {
+      "address": "587FF3E0",
+      "name": "FUN_587ff3e0",
+      "size": 129,
+      "symbol": "_FUN_587ff3e0",
+      "source": "src/client-current/Main/FUN_587ff3e0.cpp",
+      "source_sha256": "27cb1b1cc7bb50c0927d758c69b8ace4552d1b79ba8c0d5b6a01169ddfe73ddc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898A548",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "587F8720",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ff3e0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Allocates an object through 0x5897CC4E and initializes it through helper 0x587F8720 before returning with ret 8.",
+        "uncertainty": "The object type, helper contract, and caller-visible role are unresolved. The complete 129-byte body decodes."
+      }
+    },
+    {
+      "address": "588D64F0",
+      "name": "FUN_588d64f0",
+      "size": 15,
+      "symbol": "_FUN_588d64f0",
+      "source": "src/client-current/Main/FUN_588d64f0.cpp",
+      "source_sha256": "0ab8aab4c0ea8195090b14303a70efd006cbfa96ca5b18bf1c58186927ba6128",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "589A0FC4",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d64f0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Installs vftable address 0x589A0FC4 on its receiver and returns.",
+        "uncertainty": "The class identity and role in the global setup graph are unresolved. The complete 15-byte body decodes."
+      }
+    },
+    {
+      "address": "587CCAA0",
+      "name": "FUN_587ccaa0",
+      "size": 57,
+      "symbol": "_FUN_587ccaa0",
+      "source": "src/client-current/Main/FUN_587ccaa0.cpp",
+      "source_sha256": "843eb6f2794cfa122d2d8812998b4785d920a66c38fa8281d18f6e5f08af2bf6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587ccaa0",
+        "called_by": "Directly called by 0x588011C0 and shared setup/cleanup functions including 0x587C42C0 and 0x587CCAE0.",
+        "behavior": "Traverses a linked chain rooted at receiver +4, invokes each entry's first virtual method, then clears receiver fields +4, +8, and +0x0C. Its 57-byte body includes the full pop/pop/ret epilogue; following int3 bytes are padding.",
+        "uncertainty": "The entry type, virtual cleanup contract, and ownership semantics are unresolved."
+      }
+    },
+    {
+      "address": "587B6470",
+      "name": "FUN_587b6470",
+      "size": 55,
+      "symbol": "_FUN_587b6470",
+      "source": "src/client-current/Main/FUN_587b6470.cpp",
+      "source_sha256": "c61dec4f74070753286bec8bedb7c1499981ba602d49492a6a97827d1e31097b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6470",
+        "called_by": "Called four times by 0x588011C0 during global setup.",
+        "behavior": "Stores its input values in receiver fields +0x64 and +0x68; when the selector is 1, it computes and stores an additional value in +0x74 using table address 0x58A0B4D8.",
+        "uncertainty": "The table units, field semantics, and selector contract are unresolved. The complete 55-byte body decodes."
+      }
+    },
+    {
+      "address": "588AD730",
+      "name": "FUN_588ad730",
+      "size": 406,
+      "symbol": "_FUN_588ad730",
+      "source": "src/client-current/Main/FUN_588ad730.cpp",
+      "source_sha256": "080eadf8ba22e13f8a707c413c1d831704de5705c7747d27557e5cbac51ea833",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58987F1E",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "589A080C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 180,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 313,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 338,
+          "target_address": "588AD800",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ad730",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Runs base initialization, installs vftable address 0x589A080C, and constructs repeated child objects through 0x58731C60 and mapped state helpers.",
+        "uncertainty": "The class, child schema, resource meanings, and user-visible role are unresolved. The complete 406-byte body decodes."
+      }
+    },
+    {
+      "address": "58788780",
+      "name": "FUN_58788780",
+      "size": 255,
+      "symbol": "_FUN_58788780",
+      "source": "src/client-current/Main/FUN_58788780.cpp",
+      "source_sha256": "6463f8e7cdf72261c3c260cd2de3e281a9bd92295d3f1f567bed57d3abb40d4b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897FAA2",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58996B24",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "58752830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "58752830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "588C60E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "58996B28",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58788780",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Installs vftable address 0x58996B24 and calls mapped setup/resource routines including 0x588FFDB0, 0x58752830, 0x588C60E0, and sprite loader 0x588F3D70.",
+        "uncertainty": "The class, loaded resources, and UI role are unresolved. The complete 255-byte body decodes."
+      }
+    },
+    {
+      "address": "587A5540",
+      "name": "FUN_587a5540",
+      "size": 94,
+      "symbol": "_FUN_587a5540",
+      "source": "src/client-current/Main/FUN_587a5540.cpp",
+      "source_sha256": "34a518e0f67c6c5636546df6afb18a40d0459ea1691c41bb85899f6acb0ed978",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58980B6B",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58999934",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58752830",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5540",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Installs vftable address 0x58999934 and invokes mapped setup routines 0x588FFDB0 and 0x58752830.",
+        "uncertainty": "The class identity, setup helper contracts, and UI role are unresolved. The complete 94-byte body decodes."
+      }
+    },
+    {
+      "address": "587C42C0",
+      "name": "FUN_587c42c0",
+      "size": 228,
+      "symbol": "_FUN_587c42c0",
+      "source": "src/client-current/Main/FUN_587c42c0.cpp",
+      "source_sha256": "718739e2fa90ee3329109a5c94607ef6f1c68f57b6c0c446b2a32d78c9094069",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58981263",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5890C1D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "5899AD48",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 173,
+          "target_address": "5899AD74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 187,
+          "target_address": "587CCAA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c42c0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Calls 0x5890C1D0, installs vftable 0x5899AD48, initializes a child using vftable 0x5899AD74, and calls shared cleanup routine 0x587CCAA0.",
+        "uncertainty": "The class, child role, helper contracts, and ownership rules are unresolved. The complete 228-byte body decodes."
+      }
+    },
+    {
+      "address": "5890D950",
+      "name": "FUN_5890d950",
+      "size": 278,
+      "symbol": "_FUN_5890d950",
+      "source": "src/client-current/Main/FUN_5890d950.cpp",
+      "source_sha256": "3be0c63807ab67d85e651faf171ab4233351ac9c684680269a1e5ef6a9f8dde9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 82,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 161,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 195,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 225,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 249,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890d950",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Uses allocator entry points 0x5897CC42, 0x5897CC4E, and 0x5897CC48. A branch at 0x5890D9DD reaches a second epilogue; the ret 8 ends at 0x5890DA66 and int3 padding follows. Its corrected extent is 278 bytes.",
+        "uncertainty": "The returned type, allocator semantics, and both-path object behavior are unresolved."
+      }
+    },
+    {
+      "address": "587A55C0",
+      "name": "FUN_587a55c0",
+      "size": 165,
+      "symbol": "_FUN_587a55c0",
+      "source": "src/client-current/Main/FUN_587a55c0.cpp",
+      "source_sha256": "30c7092113c5e368ffb63295ebbc0a8fb28cf7c483767428f9e32efba505deb4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "5899993C",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a55c0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Stores vftable address 0x5899993C at the receiver's first word and returns.",
+        "uncertainty": "The class identity and role in the setup sequence are unresolved. The complete 165-byte body decodes."
+      }
+    },
+    {
+      "address": "588B3B60",
+      "name": "FUN_588b3b60",
+      "size": 1198,
+      "symbol": "_FUN_588b3b60",
+      "source": "src/client-current/Main/FUN_588b3b60.cpp",
+      "source_sha256": "490a53445bc40d4a4105b53a7334b34270bbf813fbf87ba9eb4872f261d89062",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58988246",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "589A0920",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "589A093C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 245,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 263,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 317,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 334,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 352,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 406,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 423,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 441,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "58734A30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 510,
+          "target_address": "58734A30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 540,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 614,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 635,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 657,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 709,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 758,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 780,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 833,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 858,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 880,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 933,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 957,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 979,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1032,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1071,
+          "target_address": "588B3E50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1170,
+          "target_address": "588B3460",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b3b60",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Runs base initialization, installs vftable address 0x589A0920, loads a resource through 0x588F3D70, and constructs repeated children through 0x58731C60 and 0x58734A30.",
+        "uncertainty": "The class, loaded resource, child schema, and UI role are unresolved. The complete 1,198-byte body decodes."
+      }
+    },
+    {
+      "address": "58777DF0",
+      "name": "FUN_58777df0",
+      "size": 312,
+      "symbol": "_FUN_58777df0",
+      "source": "src/client-current/Main/FUN_58777df0.cpp",
+      "source_sha256": "af81ae2b7d5ba1941ab67dca68afcf198a8f401a1e3647dd82817b71289faa7a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897F254",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "589964E0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 202,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 225,
+          "target_address": "587A8EA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "587AB390",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58777df0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Runs base initialization at 0x589031A0, installs vftable address 0x589964E0, and calls setup routines 0x588FFDB0, 0x587A8EA0, and 0x587AB390.",
+        "uncertainty": "The class, helper semantics, and UI role are unresolved. The complete 312-byte body decodes."
+      }
+    },
+    {
+      "address": "587CCAE0",
+      "name": "FUN_587ccae0",
+      "size": 465,
+      "symbol": "_FUN_587ccae0",
+      "source": "src/client-current/Main/FUN_587ccae0.cpp",
+      "source_sha256": "35ee18cacef11159181e7c357b066ccf71bc5a8071ac754858305f202b1ba9c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58981932",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5899B2C4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "5899B2A4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "587CCAA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "5899B2AC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "587CCAA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "5899B2B4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 135,
+          "target_address": "587CCAA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "5899B2BC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "587CCAA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ccae0",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Installs vftable address 0x5899B2C4, initializes embedded vtables 0x5899B2A4/0x5899B2AC/0x5899B2B4/0x5899B2BC at receiver offsets +0x64/+0x74/+0x84/+0x94, and calls 0x587CCAA0 for each embedded object.",
+        "uncertainty": "The class identity and embedded interface contracts are unresolved. The complete 465-byte body decodes."
+      }
+    },
+    {
+      "address": "5875CA20",
+      "name": "FUN_5875ca20",
+      "size": 187,
+      "symbol": "_FUN_5875ca20",
+      "source": "src/client-current/Main/FUN_5875ca20.cpp",
+      "source_sha256": "02c1ce6da7691b70a2c442b19da74424fc994665414d9b4175cc6bad8f7973f1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898947B",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5898D91C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5898D904",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875ca20",
+        "called_by": "Directly called by 0x588011C0 during global setup.",
+        "behavior": "Installs vftable address 0x5898D91C, allocates via 0x5897CC4E, and loads a resource through sprite loader 0x588F3D70.",
+        "uncertainty": "The class, resource, allocation lifetime, and UI role are unresolved. The complete 187-byte body decodes."
+      }
+    },
+    {
+      "address": "587F8720",
+      "name": "FUN_587f8720",
+      "size": 55,
+      "symbol": "_FUN_587f8720",
+      "source": "src/client-current/Main/FUN_587f8720.cpp",
+      "source_sha256": "c12519cb81cd00e220304912ff9e581abec4f71abd856572a048e40936730ad9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587f8720",
+        "called_by": "Directly called by 0x587FF3E0 during global setup.",
+        "behavior": "Allocates 0x30 bytes through 0x5897CC4E, tests the result, and initializes its first word to zero on the non-null path.",
+        "uncertainty": "The object layout and why this allocation is used by its caller are unresolved. The complete 55-byte body decodes."
+      }
+    },
+    {
+      "address": "58752830",
+      "name": "FUN_58752830",
+      "size": 160,
+      "symbol": "_FUN_58752830",
+      "source": "src/client-current/Main/FUN_58752830.cpp",
+      "source_sha256": "e5a319eb16ec4362a9234053003e2108631995c607c47ce00cb70f050dc668e5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "588F6660",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "587AB430",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "5897CC54",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58752830",
+        "called_by": "Called by 0x58788780 and 0x587A5540 during global setup.",
+        "behavior": "Checks a supplied size against 0x3FFFFFFF, conditionally calls 0x588F6660, then uses helpers 0x587AB430 and 0x5897CC72/0x5897CC54/0x5897CC42 across allocation and cleanup paths.",
+        "uncertainty": "The helper contracts and exact error/ownership behavior are unresolved. The complete 160-byte body decodes."
+      }
+    },
+    {
+      "address": "5890C1D0",
+      "name": "FUN_5890c1d0",
+      "size": 62,
+      "symbol": "_FUN_5890c1d0",
+      "source": "src/client-current/Main/FUN_5890c1d0.cpp",
+      "source_sha256": "99f28d4be98eccfabef6744558effd5ea3c1ad08d5723e53f1039263db186972",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 36,
+          "target_address": "5890D0C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "589A2C78",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890c1d0",
+        "called_by": "Directly called by 0x587C42C0 during global setup.",
+        "behavior": "Reads several stack arguments, preserves its receiver, and delegates to 0x5890D0C0.",
+        "uncertainty": "The argument meanings and delegated operation are unresolved. The complete 62-byte body decodes."
+      }
+    },
+    {
+      "address": "588B3460",
+      "name": "FUN_588b3460",
+      "size": 670,
+      "symbol": "_FUN_588b3460",
+      "source": "src/client-current/Main/FUN_588b3460.cpp",
+      "source_sha256": "106f879ca06a5e428de073344e66f50640127f3c92f4614011ffced911df9192",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 93,
+          "target_address": "588B36F9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 261,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 402,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 472,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 539,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 609,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b3460",
+        "called_by": "Directly called by 0x588B3B60 during child setup.",
+        "behavior": "Contains eight entry paths that load distinct constants, pass the common receiver, call 0x58903290, and return with ret 4.",
+        "uncertainty": "The selector meanings, shared helper contract, and relationship to child fields at +0x70/+0xD0 are unresolved. The complete 670-byte body decodes."
+      }
+    },
+    {
+      "address": "587A8EA0",
+      "name": "FUN_587a8ea0",
+      "size": 96,
+      "symbol": "_FUN_587a8ea0",
+      "source": "src/client-current/Main/FUN_587a8ea0.cpp",
+      "source_sha256": "ab742756bc17af7639049b45362dcf8d9f4bfb47e32fa894d3a7bcd192b2e15b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58980ADB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "58999A70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a8ea0",
+        "called_by": "Directly called by 0x58777DF0 during global setup.",
+        "behavior": "Runs the mapped setup helper 0x588FFDB0 twice and installs vftable address 0x58999A70 on its receiver.",
+        "uncertainty": "The class, helper contract, and UI role are unresolved. The complete 96-byte body decodes."
+      }
+    },
+    {
+      "address": "587AB390",
+      "name": "FUN_587ab390",
+      "size": 89,
+      "symbol": "_FUN_587ab390",
+      "source": "src/client-current/Main/FUN_587ab390.cpp",
+      "source_sha256": "9cf85662f856d6d167e4291938ce1eac369071a7f051e7736c885ff28a09de37",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "58999D70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 21,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "587AEDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ab390",
+        "called_by": "Directly called by 0x58777DF0 during global setup.",
+        "behavior": "Calls 0x588FFDB0 and 0x587AEDB0, performs conditional allocator/free helper calls through 0x5897CC72, and installs vftable address 0x58999D70.",
+        "uncertainty": "The class, helper contracts, and ownership behavior are unresolved. The complete 89-byte body decodes."
+      }
     }
   ]
 }

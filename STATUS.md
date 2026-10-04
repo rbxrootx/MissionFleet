@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,690
-identified code bytes across six report units. There are 6,968 verified matches
-totaling 2,207,002 bytes (21.0799%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,711
+identified code bytes across six report units. There are 6,988 verified matches
+totaling 2,211,978 bytes (21.1274%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1155,13 +1155,12 @@ applies to original tools, not supplied binaries or their decompiled output.
 The public-safe decompilation project is published at
 `https://github.com/rbxrootx/MissionFleet`.
 
-The verified global setup routine's 28 direct indexed callees now match byte for
-byte: 19,277 bytes and 834 mapped operand targets checked. Their callsites and
-argument setup are visible in `FUN_5878af40`; five indexed function extents were
-corrected to include their complete epilogues, adding 35 identified code bytes.
-This closes the direct-callee layer only. A depth-two callgraph audit still
-finds unmatched nested helpers, and no original-client startup or visual test
-was performed. See [the direct-callee evidence](docs/current-main-global-ui-setup.md).
+The verified global setup branch rooted at `FUN_588011C0` now matches all
+indexed callees through depth two: 20 functions / 4,976 bytes and 143 mapped
+operand targets were added in this update. The two corrected extents add 21
+identified code bytes. A depth-two callgraph audit finds no unmatched indexed
+target in this branch; deeper and indirect calls remain open, and no original
+client startup or visual test was performed. See [the branch evidence](docs/current-main-global-ui-setup.md).
 
 The resource-backed initialization rooted at `FUN_588FB9B0` now has all
 inventory-backed direct calls and their next call layer matched: 13 new

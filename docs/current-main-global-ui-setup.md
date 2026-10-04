@@ -90,3 +90,21 @@ The mapped bodies establish repeated child construction, vtable writes,
 resource-helper calls, a cleanup traversal over 0x80 pointer slots, and a
 0x20-entry child loop. The data structures, class identities, resource names,
 and visual effect remain unresolved. No client was run for runtime validation.
+
+## `FUN_588011C0` object setup branch
+
+This branch now has all indexed direct callees and their indexed direct callees
+matched byte-for-byte. The final 20 functions contribute 4,976 verified bytes
+and 143 checked operand targets. Together with the branch's previous verified
+functions, the depth-two audit reports no unmatched indexed targets.
+
+The evidence connects the matched bodies to the parent callsites and preserves
+the observed vtable stores, allocation and cleanup paths, repeated child setup,
+and shared helper calls. `FUN_588B3460` contains eight selector-like entry paths
+that call the same helper and return with `ret 4`; their selector meanings remain
+unknown. Two corrected boundaries were required: `FUN_5890D950` includes its
+second reachable epilogue (+18 bytes), and `FUN_587CCAA0` includes its cleanup
+epilogue (+3 bytes). The additional descendants include an allocation wrapper,
+size-check/helper path, and small setup routines. Class identities, resource
+names, argument contracts, and user-visible behavior remain uncertain. No
+original-client launch or visual test was performed.
