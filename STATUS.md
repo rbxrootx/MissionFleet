@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,631
-identified code bytes across six report units. There are 6,846 verified matches
-totaling 2,149,639 bytes (20.5321%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,655
+identified code bytes across six report units. There are 6,899 verified matches
+totaling 2,163,960 bytes (20.6689%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -810,6 +810,11 @@ Its four child setup callsites now share the matched 103-byte helper
 `FUN_5875F0E0`, which allocates a 0x20-byte object and invokes the verified
 constructor `FUN_58907AC0`; all four direct call edges and both helper callees
 are verified.
+The connected `FUN_5873DAE0` initialization subsystem adds 53 exact matches
+totaling 14,321 bytes, including 296 checked mapped operands and five corrected
+function extents. Its depth-eight indexed callgraph has no unmatched callees;
+class identity, field meanings, and runtime behavior remain unresolved. See
+[the initializer evidence](docs/current-main-5873dae0-initialization-subsystem.md).
 The shared `FUN_58751BF0` text routine adds 655 bytes across one range and is
 called by the `0x80023107` notification path; its downstream
 `FUN_58751A60` helper adds 387 bytes across two ranges. Its paired tree-field
