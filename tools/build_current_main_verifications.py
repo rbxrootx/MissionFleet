@@ -138,6 +138,7 @@ ADDRESSES = (
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
+    "588B1FE0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -363,6 +364,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
+    "588B1FE0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4323,6 +4325,12 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58879D60 at 0x58879F65 during child-object initialization.",
         "behavior": "Clears receiver dwords +0xD0 through +0xE0; if receiver +0x84 is positive, loops that many entries across arrays beginning at +0xE4 and +0x108 and calls 0x58907360/0x58902D20 with constants 0 and -0x64 on their referenced objects.",
         "uncertainty": "The array schemas, referenced object roles, and the meaning of the reset values are unresolved. The full 156-byte body decodes.",
+    },
+    "588B1FE0": {
+        "name_in_analysis": "FUN_588b1fe0",
+        "called_by": "Directly called by 0x588B0940 at 0x588B12FD while constructing its child screen object.",
+        "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A08A0, sets fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60, 0x58734A30, 0x58902D20, and 0x58902CE0.",
+        "uncertainty": "The class identity, member and child roles, control flags, and screen-layout meaning remain unresolved. The full 1,533-byte body decodes.",
     },
 }
 
