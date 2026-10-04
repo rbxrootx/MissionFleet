@@ -42,6 +42,7 @@ ADDRESSES = (
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
+    "58908750",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -231,7 +232,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
-    "58780330", "5875ADB0", "587C4450", "587E5CB0",
+    "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -396,6 +397,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58908750": {
+        "name_in_analysis": "FUN_58908750",
+        "called_by": "Directly called by three verified functions: 0x5879D550, 0x588450B0, and 0x58890110. 0x588450B0 contains two callsites.",
+        "behavior": "Takes two stack coordinates and returns an item index or -1 with ret 8. It rejects coordinates outside horizontal bounds formed from receiver +4/+0x14/+0x1C and vertical bounds from +8/+0x18/+0x20. For in-bounds coordinates, it divides the vertical offset by the row size at +0x5C, walks row links from +0x80 until the corresponding node or boundary at +0x84, and returns the traversed index. If the resolved node differs from +0x84, it stores the new node and calls virtual slot +0x3C; if it is unchanged, it calls slot +0x38. Callers compare the result with -1 before using it.",
+        "uncertainty": "The receiver and linked-node types, meanings of the two callback slots, and the exact control represented by the rows remain unknown. Caller behavior supports coordinate hit selection but does not identify a particular list/tree widget. The complete 156-byte extent has one mapped operand target.",
+    },
     "587E5CB0": {
         "name_in_analysis": "FUN_587e5cb0",
         "called_by": "Directly called by three verified functions: 0x5873FE80, 0x588D4300, and 0x588E5150. 0x5873FE80 contains repeated callsites.",
