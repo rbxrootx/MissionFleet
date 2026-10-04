@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,843
-identified code bytes across six report units. There are 7,161 verified matches
-totaling 2,269,724 bytes (21.6787%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,162 verified matches
+totaling 2,270,109 bytes (21.6824%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1147,6 +1147,12 @@ See [event message dispatch evidence](docs/current-main-event-message-dispatch.m
 fields from packed receiver state and lookup tables; the table and child
 semantics remain uncertain. See
 [ship-map child refresh evidence](docs/current-main-ship-map-child-refresh.md).
+
+`FUN_5873C2E0` adds a 385-byte exact match in verified spatial-state and
+virtual-update paths. It dispatches on a caller-supplied mode and active-object
+subtype, with observed child flag and counter writes. Those values' meanings
+remain unresolved. See
+[spatial action dispatch evidence](docs/current-main-spatial-action-dispatch.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
