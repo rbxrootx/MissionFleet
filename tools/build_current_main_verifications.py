@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990", "5878A3A0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640", "587B7990", "5878A3A0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -401,6 +401,11 @@ SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
+}
+FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra ended this body after pop edi and omitted its contiguous stack
+    # cleanup/ret epilogue. The mapped epilogue precedes INT3 alignment.
+    "5878A3A0": 545,
 }
 EVIDENCE = {
     "587DA120": {
@@ -4909,6 +4914,12 @@ EVIDENCE = {
         "behavior": "Initializes receiver-owned connection fields and temporary buffers, then calls through the captured registry API slots with HKEY_LOCAL_MACHINE (0x80000002), subkey pointer 0x58997258, and value-name pointers including 0x58997244 and 0x5899722C. It passes retrieved configuration data to FUN_58971070 with global object 0x58A2458C; that verified helper parses a textual address and port and forwards the sockaddr to FUN_58970F90 for socket setup. The complete body is 541 bytes, ends in ret at 0x587B7BAC, and has 28 operand targets.",
         "uncertainty": "The registry API slot prototypes, exact names/types of both values, purpose of the reset fields, meanings of the two triggering event conditions, and live connection result remain unverified. The downstream parser and socket routines are byte-matched, but no runtime connection test was performed.",
     },
+    "5878A3A0": {
+        "name_in_analysis": "FUN_5878a3a0",
+        "called_by": "Called by the verified communicator-configuration memo handler FUN_58840890 and panel handler FUN_588450B0. The callers pass one of their receiver-owned list bases, a small mode/stride value (3 or 4), and a selected index; after the call they toggle the selection bit and return or refresh a child.",
+        "behavior": "Walks entries from the link at receiver +0x78, following each node's +0x14 pointer. It compares the payload pointers at node +4 byte-by-byte in two-byte steps until a mismatch or zero byte. When the comparison result is positive, it exchanges the observed node fields at +4, +8, and +0xC while repairing adjacent links and the receiver-owned entry table; it then continues through the chain. Ghidra's 539-byte extent ended after pop edi, omitting the contiguous mapped epilogue at 0x5878A5BB..0x5878A5C0 (`add esp, 0x18; ret 0xC`). The complete callable body is 545 bytes; fifteen INT3 bytes follow before the next indexed function at 0x5878A5D0. Nine operand targets are inventoried.",
+        "uncertainty": "The payload encoding, node/list types, meaning of the caller's mode and index arguments, and whether the ordering is user-visible or only internal remain unknown. The two-byte comparison stride and field/link mutations are directly visible in the mapped instructions. The extended extent includes the ABI cleanup/return immediately before INT3 alignment. No emulator test was performed.",
+    },
 }
 
 
@@ -4957,7 +4968,7 @@ def main():
         matches.append({
             "address": address,
             "name": name,
-            "size": int(row["size"]),
+            "size": FUNCTION_SIZE_OVERRIDES.get(address, int(row["size"])),
             "symbol": SYMBOL_OVERRIDES.get(address, "_" + name),
             "source": source,
             "source_sha256": sha256(source_path),

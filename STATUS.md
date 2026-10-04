@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,146 verified matches
-totaling 2,261,720 bytes (21.6023%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,837
+identified code bytes across six report units. There are 7,147 verified matches
+totaling 2,262,265 bytes (21.6075%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1083,7 +1083,12 @@ The sender's three-function socket-error cleanup path adds 174 bytes; see
 [the cleanup note](docs/current-main-socket-cleanup.md). The address parser,
 async socket opener, handle-table insertion, and registry configuration loader
 `FUN_587B7990` now add 1,339 bytes; see
-[the connection note](docs/current-main-socket-connect.md). The nested
+[the connection note](docs/current-main-socket-connect.md). The shared
+communicator-configuration helper `FUN_5878A3A0` adds a 545-byte exact match
+with nine operand targets checked. Its callable extent includes a six-byte
+stack-cleanup/return epilogue that Ghidra omitted before the INT3 padding. See
+[`the linked-payload ordering notes`](docs/current-main-linked-payload-ordering.md).
+The nested
 `FUN_588C4210` handler and its `0x80023101`, `02`, `05`, and `07` helpers add
 7,908 verified bytes across nine body ranges for the `0x800231xx` event family.
 The shared `FUN_58764D30` message/UI routine adds 18,901 bytes across two

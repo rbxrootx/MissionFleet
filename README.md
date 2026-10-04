@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,146 matches cover 2,261,720 bytes (21.6023%) and are verified
+The current 7,147 matches cover 2,262,265 bytes (21.6075%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
@@ -63,6 +63,8 @@ The selector-driven child rebuild shared by two state methods is documented in
 [the child-rebuild notes](docs/current-main-selector-state-child-rebuild.md).
 The registry-backed Main socket setup and parser handoff are documented in
 [the connection notes](docs/current-main-socket-connect.md).
+The shared communicator-configuration payload ordering helper is documented in
+[the ordering notes](docs/current-main-linked-payload-ordering.md).
 The latest linked-text update path is documented in
 [the linked-text notes](docs/current-main-linked-text-update.md).
 The latest progress-grid state update is documented in
