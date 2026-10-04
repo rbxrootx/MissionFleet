@@ -303005,6 +303005,45 @@
         "behavior": "Returns zero without mutation when signed receiver +0x64 is at or below signed lower bound +0x50. Otherwise clamps its signed step to current-lower when current-step falls below the lower bound, subtracts the applied step from +0x64, conditionally calls child +0x30 vtable slot +0x18 with stack arguments (receiver,2,0) when child word +0x24 bit five is set, calls verified digit-state helper FUN_58907040, and returns the applied step with ret 4. Complete body: 88 bytes and one mapped direct-call target.",
         "uncertainty": "The step unit, child callback contract, and 32-bit overflow cases remain unresolved. The child is not called when absent or flag bit five is clear. No runtime client test was performed."
       }
+    },
+    {
+      "address": "58907650",
+      "name": "FUN_58907650",
+      "size": 67,
+      "symbol": "_FUN_58907650",
+      "source": "src/client-current/Main/FUN_58907650.cpp",
+      "source_sha256": "49cd68570bb696f36262b0d69927d1cfca147f6610d011528f2fa70d8479a80c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "58A28534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "58A28538",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907650 / global-gated paired child release",
+        "called_by": "Called three times from verified airborne-state handlers FUN_5877EC80 and FUN_58782CF0 with their selected child object in ECX.",
+        "behavior": "Returns immediately when both global DWORDs 0x58A28534 and 0x58A28538 are zero. Otherwise, visits receiver +0x1C then +0x18. For each non-null pointer it loads that pointer's first DWORD, calls the function pointer at that DWORD +8 with the child pointer as its stack argument, and clears the receiver slot after the call. There is no caller-side stack adjustment after either indirect call, so the callbacks must clean their argument. It returns with plain ret. The complete body is 67 bytes with two absolute global operand targets.",
+        "uncertainty": "The global gate meaning, receiver and child types, precise callback ABI and ownership contract, and whether either call can fail or reenter remain unknown. No runtime client test was performed."
+      }
     }
   ]
 }
