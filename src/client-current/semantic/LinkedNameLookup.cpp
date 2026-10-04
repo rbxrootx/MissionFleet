@@ -44,3 +44,19 @@ extern "C" MissionFleetNameNode* MissionFleet_FindNameAt6C(
     void* context) noexcept {
     return MissionFleet_FindReceiverName(receiver->at6C, query, compare, context);
 }
+
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt130(
+    const MissionFleetTokenNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept {
+    return MissionFleet_FindReceiverName(receiver->at130, query, compare, context);
+}
+
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt138(
+    const MissionFleetTokenNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept {
+    return MissionFleet_FindReceiverName(receiver->at138, query, compare, context);
+}

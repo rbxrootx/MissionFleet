@@ -264,7 +264,7 @@ ADDRESSES = (
     "5875F940", "5888CC90", "587A2D40", "587B9870", "587626C0", "58762610",
     "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
-    "58843190", "58842EF0",
+    "58843190", "58842EF0", "58842FB0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -321,7 +321,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -519,6 +519,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58842FB0": {
+        "name_in_analysis": "FUN_58842fb0 / receiver +0x130 linked-name lookup",
+        "called_by": "Called by verified event dispatcher FUN_588C1650 with a child receiver loaded from 0x58A245B4->+0xDC and its query pointer in ESI.",
+        "behavior": "Reads list head at receiver +0x130 and returns null when empty. Otherwise traverses nodes through +0x54, obtains each nested string through node +0x70 then +0x6C, and calls the function pointer stored at absolute 0x5898C1A4 with query and node string. It returns the first node whose comparison result is zero, or null after the list. The complete body is 69 bytes with one absolute comparator operand target and ret 4. It differs from verified FUN_58842F60 only in the receiver head offset (+0x130 versus +0x138).",
+        "uncertainty": "The comparator's identity and collation, list ownership, and behavior for invalid strings remain unknown. No original-client or emulator runtime test was performed.",
+    },
     "58842EF0": {
         "name_in_analysis": "FUN_58842ef0 / counted reverse-linked token-list teardown",
         "called_by": "Called by verified semicolon parser FUN_58846B00 when the requested count is zero or disagrees with receiver word +0xF8.",

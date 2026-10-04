@@ -303561,6 +303561,39 @@
         "behavior": "If signed receiver word +0xF8 is nonpositive or tail +0x13C is null, returns without changing the list. Otherwise, starts at tail +0x13C, saves each node's +0x50 link before virtual slot-zero release with argument one, and increments a traversal count. On the first null saved link or when visited equals the signed word +0xF8, clears +0x140, +0x13C, +0x138, and +0xF8, then returns; a nonnull remainder is not traversed after the count limit. The complete mapped body is 104 bytes with no mapped operands; Ghidra omitted its final three-byte epilogue.",
         "uncertainty": "The node type, callback ownership, and meaning of receiver +0x140 remain unknown. No original-client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58842FB0",
+      "name": "FUN_58842fb0",
+      "size": 69,
+      "symbol": "_FUN_58842fb0",
+      "source": "src/client-current/Main/FUN_58842fb0.cpp",
+      "source_sha256": "233f979aa288ff55479773e13a9d84cad3657cf9c4e0e466530d525ae7e01f57",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58842fb0 / receiver +0x130 linked-name lookup",
+        "called_by": "Called by verified event dispatcher FUN_588C1650 with a child receiver loaded from 0x58A245B4->+0xDC and its query pointer in ESI.",
+        "behavior": "Reads list head at receiver +0x130 and returns null when empty. Otherwise traverses nodes through +0x54, obtains each nested string through node +0x70 then +0x6C, and calls the function pointer stored at absolute 0x5898C1A4 with query and node string. It returns the first node whose comparison result is zero, or null after the list. The complete body is 69 bytes with one absolute comparator operand target and ret 4. It differs from verified FUN_58842F60 only in the receiver head offset (+0x130 versus +0x138).",
+        "uncertainty": "The comparator's identity and collation, list ownership, and behavior for invalid strings remain unknown. No original-client or emulator runtime test was performed."
+      }
     }
   ]
 }

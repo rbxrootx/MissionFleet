@@ -69,6 +69,9 @@ including `ret 0x0C`, and has nine mapped operand targets.
 `FUN_58843190` and `FUN_58842ef0` have now been byte-matched. Their distinct
 list teardown behavior is
 recorded in [the linked-child teardown evidence](current-main-linked-child-teardown.md).
+The event dispatcher also uses byte-matched `FUN_58842fb0` to search the
+`+0x130` token list by nested name; its evidence is in
+[the linked-name lookup notes](current-main-linked-name-lookups.md).
 The relationship between these receivers and the earlier `+0xD8` parser pair,
 the token record schema, selector/count meanings, global
 suppression policy, and message callback's visible result remain unknown.

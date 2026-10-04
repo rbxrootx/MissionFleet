@@ -65,11 +65,28 @@ void dualReceiverHeadsStayDistinct() {
     assert(log.calls == 4);
 }
 
+void tokenReceiverHeadsStayDistinct() {
+    MissionFleetNameNode low{"Port", nullptr};
+    MissionFleetNameNode high{"Starboard", nullptr};
+    MissionFleetTokenNameLists lists{&low, &high};
+    CompareLog log;
+    assert(MissionFleet_FindNameAt130(&lists, "Port", compare, &log) == &low);
+    assert(MissionFleet_FindNameAt138(&lists, "Starboard", compare, &log) == &high);
+    assert(log.calls == 2);
+    assert(MissionFleet_FindNameAt130(&lists, "Starboard", compare, &log) == nullptr);
+    assert(MissionFleet_FindNameAt138(&lists, "Port", compare, &log) == nullptr);
+    assert(log.calls == 4);
+    lists.at130 = nullptr;
+    assert(MissionFleet_FindNameAt130(&lists, "Port", compare, &log) == nullptr);
+    assert(log.calls == 4);
+}
+
 }  // namespace
 
 int main() {
     globalSelection();
     receiverLookup();
     dualReceiverHeadsStayDistinct();
+    tokenReceiverHeadsStayDistinct();
     std::cout << "linked name lookup: passed\n";
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-// Portable node model for FUN_588A44A0 and FUN_58842F60. It does not
+// Portable node model for FUN_588A44A0, FUN_58842F60, and FUN_58842fb0. It does not
 // reproduce the original x86 node or receiver layouts.
 struct MissionFleetNameNode {
     const char* name;            // Original node +0x70 -> nested +0x6C.
@@ -18,6 +18,11 @@ struct MissionFleetNameManager {
 struct MissionFleetDualNameLists {
     MissionFleetNameNode* at64;  // Original receiver +0x64.
     MissionFleetNameNode* at6C;  // Original receiver +0x6C.
+};
+
+struct MissionFleetTokenNameLists {
+    MissionFleetNameNode* at130; // Original receiver +0x130.
+    MissionFleetNameNode* at138; // Original receiver +0x138.
 };
 
 using MissionFleetNameCompare = int (*)(const char* query,
@@ -40,6 +45,16 @@ extern "C" MissionFleetNameNode* MissionFleet_FindNameAt64(
     void* context) noexcept;
 extern "C" MissionFleetNameNode* MissionFleet_FindNameAt6C(
     const MissionFleetDualNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept;
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt130(
+    const MissionFleetTokenNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept;
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt138(
+    const MissionFleetTokenNameLists* receiver,
     const char* query,
     MissionFleetNameCompare compare,
     void* context) noexcept;
