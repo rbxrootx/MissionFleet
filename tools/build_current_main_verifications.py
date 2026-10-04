@@ -137,8 +137,8 @@ ADDRESSES = (
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
-    "58848450", "58848530", "588486E0", "588490F0", "58849360", "588F43F0",
-    "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
+    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "588F43F0",
+    "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58846B00", "58846BD0", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
@@ -236,7 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -382,7 +382,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
-    "58848450", "58848530", "588486E0", "588490F0", "58849360", "588F43F0",
+    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "588F43F0",
     "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
@@ -5178,6 +5178,18 @@ EVIDENCE = {
         "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both pass a data pointer, a length, and a third selector/mode value; the event path uses the receiver at global object 0x58A245B4+0xD8.",
         "behavior": "When the third stack argument is zero, calls FUN_58848610 on the receiver and dispatches callback message 0xEE49 through receiver subobject +0x30 vtable slot +0x18. Otherwise, it parses the byte string in the first stack argument up to the second argument's length, splitting on semicolon (0x3B). It zeroes a 24-byte local buffer for each token, compares that token with global string 0x58A0B450 through callback 0x5898C1A4, and for non-equal tokens calls FUN_58849210 with the receiver and token. After parsing, when global dword 0x58A0B4A0 is zero and the signed word at receiver +0xF0 differs from length-1, it calls FUN_58848610; it then dispatches message 0xEE49 through the same callback. The body is 242 bytes and returns with ret 0x0C.",
         "uncertainty": "The meaning of the third argument, exact token-length contract, global-string suppression policy, receiver class, callback message semantics, and whether all caller paths represent the same joined-fleet notice remain unresolved. The called append helper is documented for the localized joined-fleet text path, but this function's message-to-user effect was not runtime-tested.",
+    },
+    "58846B00": {
+        "name_in_analysis": "FUN_58846B00 / count-checked semicolon record batch update",
+        "called_by": "Called from both verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The shown call sites load ECX from global object 0x58A245B4 plus 0xD8 and pass three stack values; the event path passes fields +0x0C and +0x10 from its record plus a value from the dispatch frame.",
+        "behavior": "When the third stack argument is nonzero, scans the first argument's byte string to length minus one, splits on semicolons, clears a 24-byte local token buffer for each segment, and passes each token with the receiver to FUN_58842DC0. It bounds the token loop at 0x1000 iterations, compares the sign-extended receiver word +0xF8 against the requested count, and calls FUN_58842EF0 on mismatch. A zero requested count also calls FUN_58842EF0. Both paths dispatch message 0xEE49 through receiver child +0x30 vtable slot +0x18 with argument zero. The complete body is 205 bytes, has five mapped operand targets, and returns with ret 0x0C.",
+        "uncertainty": "The token schema, receiver type, requested-count contract, reset helper FUN_58842EF0 effect, token helper FUN_58842DC0 effect, and meaning of message 0xEE49 remain unresolved. The zero-count path does not parse input. Caller argument naming is inferred from register/stack use; no runtime or emulator test was performed.",
+    },
+    "58846BD0": {
+        "name_in_analysis": "FUN_58846BD0 / selector-based semicolon record update",
+        "called_by": "Called by verified event dispatcher FUN_588C1650. The shown call site loads ECX from global object 0x58A245B4 plus 0xDC and passes a pointer, a length, and a selector from the dispatcher frame.",
+        "behavior": "When the selector is zero, calls FUN_58843190 and dispatches message 0xEE49 through receiver child +0x30 vtable slot +0x18 with argument one. Otherwise it splits the input bytes up to length minus one at semicolons, clears a 24-byte local buffer per token, and compares tokens against global string 0x58A0B450 through callback 0x5898C1A4. Matching tokens are passed with the receiver to FUN_58843060. After parsing, when global dword 0x58A0B4A0 is zero and receiver signed word +0xFA differs from length minus one, it calls FUN_58843190. It then dispatches message 0xEE49 with argument one. The complete body is 242 bytes with nine mapped operand targets and returns with ret 0x0C.",
+        "uncertainty": "The selector contract, token schema, receiver type, global string suppression condition, comparison callback behavior, helper effects, and meaning of message 0xEE49 remain unresolved. The event caller establishes field passing but not game-level record meaning or visible result. No runtime or emulator test was performed.",
     },
     "58835A10": {
         "name_in_analysis": "FUN_58835a10 / keyed 0x54-byte record removal helper",

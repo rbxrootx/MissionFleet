@@ -44,3 +44,29 @@ before `FUN_58849440` at `0x58849440`. The corrected extent test checks the
 return and padding boundary. The exact token schema, `FUN_588490F0` and
 `FUN_58848680` contracts, requested-count meaning, and callback's visible
 effect remain unknown; no runtime test was performed.
+
+## Parallel dispatcher-fed batch path: `FUN_58846B00` and `FUN_58846BD0`
+
+The verified packet/message dispatcher `FUN_587BB700` and event dispatcher
+`FUN_588C1650` both call `FUN_58846B00` with receiver `0x58A245B4+0xD8`.
+It splits a length-bounded byte string on semicolons into cleared 24-byte
+buffers, passes each token to `FUN_58842DC0`, and compares receiver word
+`+0xF8` with the caller's requested count. A zero count skips parsing; a
+mismatch or zero count calls `FUN_58842EF0`. It then sends message `0xEE49`
+through receiver child `+0x30`, vtable slot `+0x18`, with argument zero.
+The complete function is 205 bytes, including its `ret 0x0C`, and has five
+mapped operand targets.
+
+The event dispatcher also calls `FUN_58846BD0` with receiver
+`0x58A245B4+0xDC`. A zero selector calls `FUN_58843190`; otherwise it parses
+semicolon-delimited tokens, compares each with global string `0x58A0B450`
+through callback `0x5898C1A4`, and sends matching tokens to `FUN_58843060`.
+When global `0x58A0B4A0` is zero, it compares receiver word `+0xFA` with
+input length minus one and resets through `FUN_58843190` on mismatch. Both
+paths dispatch `0xEE49` with argument one. The complete function is 242 bytes,
+including `ret 0x0C`, and has nine mapped operand targets.
+
+The relationship between these receivers and the earlier `+0xD8` parser pair,
+the token record schema, selector/count meanings, helper effects, global
+suppression policy, and message callback's visible result remain unknown.
+These functions have not been exercised at runtime or in the emulator.
