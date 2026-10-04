@@ -67,6 +67,9 @@ The original `Logo.spr` startup and login art now has a reproducible
 the installed asset and matched loader/compositor methods.
 A [native RGB16 span compositor](docs/current-client-native-rgb16-span.md)
 now reproduces those framebuffers byte for byte against the portable reference.
+A [native v3.3 sprite index](docs/current-client-native-sangduck-v33.md) now
+reads the installed `Logo.spr` directly, checks all 188 image records, and
+feeds its first two frames to that compositor.
 The latest keyed 0x3C8-byte record refresh/insertion path is documented in
 [the keyed-record notes](docs/current-main-keyed-record-refresh-58786b40.md).
 The latest three-child state update path is documented in

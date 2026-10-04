@@ -41,3 +41,7 @@ model on these real and clipped inputs. It does not prove the original game
 selects this particular color/effect branch for either frame, nor compare
 against an original-client framebuffer. The client window, controls, other
 sprite formats, blends, and game render scheduling remain outside this port.
+
+The [native v3.3 sprite index](current-client-native-sangduck-v33.md) now feeds
+the same C++ compositor directly from the original `Logo.spr` bytes and
+reproduces both pinned framebuffers without Python extracting their payloads.

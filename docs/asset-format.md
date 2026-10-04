@@ -18,7 +18,7 @@ binary; these addresses are not valid assumptions about another version.
 | 84–85 | Two version bytes; this parser accepts `(3, 2)` and `(3, 3)` |
 | 92–95 | Little-endian image count |
 | 104–107 | Little-endian embedded sound record count |
-| 132–135 | Extra v3 field, semantics unresolved |
+| 132–135 | V3 header check value; on installed `Logo.spr`, the signed-byte sum of the preceding 132 bytes |
 | 136 onward | Image records, when the sound count is zero |
 
 Each image record contains a 112-byte header, a 4-byte field and a payload.
@@ -30,13 +30,18 @@ Each image record contains a 112-byte header, a 4-byte field and a payload.
 | 48–51 | Payload size in bytes |
 | 52–55 | Width |
 | 56–59 | Height |
-| 112–115 | Extra field, semantics unresolved |
+| 112–115 | V3 image-record check value; on installed `Logo.spr`, the signed-byte sum of the preceding 112 bytes |
 | 116 onward | Payload |
 
 Advancing by these sizes successfully indexes every image-only file in this
 installation (1,626 files, 367,391 records). The parser records any remaining
 tail bytes without assigning animation/palette semantics. It rejects the 23
 files containing sound records and does not scan around them heuristically.
+The signed-byte check rule is supported by the installed `ITNTL.dll` loader's
+resource branch and all 188 records of the hash-pinned installed `Logo.spr`;
+the [native v3.3 index](current-client-native-sangduck-v33.md) verifies it for
+that file. The file-path branch reads these fields, but its rejection behavior
+on a mismatch remains unverified.
 
 ## Experimental literal-run RGB565 preview
 

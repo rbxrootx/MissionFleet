@@ -45,3 +45,6 @@ comparison with a captured original-client framebuffer. The file's remaining
 A [native C++ opaque-span implementation](current-client-native-rgb16-span.md)
 now produces the same raw RGB16 buffers for both frames and a clipped login
 case, with a separately checked malformed-input path.
+The [native v3.3 sprite index](current-client-native-sangduck-v33.md) now
+locates those image payloads in the original file and validates all 188 image
+records and their check values before rendering the first two frames.
