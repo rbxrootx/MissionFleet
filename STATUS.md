@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,790
-identified code bytes across six report units. There are 7,125 verified matches
-totaling 2,249,774 bytes (21.4882%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,126 verified matches
+totaling 2,249,780 bytes (21.4883%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -28,14 +28,14 @@ The selector dispatcher is documented in
 The linked-record text walk and corrected return extent are documented in
 [`docs/current-main-linked-record-text-walk.md`](docs/current-main-linked-record-text-walk.md).
 
-The latest addition, `FUN_587DA120`, is a linked-record text-processing routine
-called by two verified functions. It extracts a word from each record, invokes a
-function pointer with fixed string data, performs bounded buffer copies, and
-passes buffers to parser/formatter helpers. Its original 1,301-byte index cut
-through the stack-cookie epilogue; the corrected 1,314-byte extent now includes
-the cookie check and return before alignment padding. All 44 mapped operands
-match; string/API meanings remain unknown and no runtime behavior test was
-performed.
+The 6-byte import trampoline used by 11 call sites is documented in
+[`docs/current-main-import-thunk-5897ce44.md`](docs/current-main-import-thunk-5897ce44.md).
+
+The latest addition, `FUN_5897CE44`, is a 6-byte import trampoline reached by 11
+call sites in three verified functions. It tail-jumps through the slot at
+`0x5898C254`; the slot target and API meaning remain unknown. All six bytes and
+the mapped operand match. No runtime behavior test was performed. The preceding
+linked-record text walk and its corrected return extent are documented above.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed

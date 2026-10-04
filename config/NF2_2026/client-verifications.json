@@ -291132,6 +291132,39 @@
         "behavior": "Allocates bounded local text buffers, obtains the linked-record head at global 0x58A247F4 +4, and walks records through each record's +0xCE4 field. Per record it reads the word at +0x6E and passes it with fixed key 0x5898D18C and a local buffer to the function pointer at 0x5898C3C4. It performs bounded, null-terminated copies; when record +0xCE4 is nonzero it processes another string path. It then invokes formatter/parser helpers including 0x5897CE4A. Its complete audited extent is 1,314 bytes, including the mapped stack-cookie check call at 0x587DA636 and ret at 0x587DA641; there are 44 mapped operand targets.",
         "uncertainty": "The linked-record and buffer types, fixed key/string meanings, function-pointer API, and purpose of the parsing/formatting path are unknown. The original 1,301-byte inventory entry ended inside the two-byte xor at 0x587DA634; the contiguous cookie-check epilogue through the ret is included before alignment padding and the next function at 0x587DA650. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "5897CE44",
+      "name": "FUN_5897ce44",
+      "size": 6,
+      "symbol": "_FUN_5897ce44",
+      "source": "src/client-current/Main/FUN_5897ce44.cpp",
+      "source_sha256": "48144c57dd9f161686bea14df78a99db36ade0d1d5b256249bef2445281e761c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C254",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ce44",
+        "called_by": "Called 8 times from 0x587BB700, once from 0x587DA120, and twice from 0x588C4210 in the indexed current Main.dll listing.",
+        "behavior": "Six-byte x86 import trampoline: tail-jumps through the pointer stored at 0x5898C254. The complete instruction is `jmp dword ptr [0x5898C254]`; it does not adjust the stack or alter arguments.",
+        "uncertainty": "The import slot's resolved target and runtime API contract are unknown. Callers push values before invoking it, but those call patterns do not identify the target API. The trampoline bytes match exactly."
+      }
     }
   ]
 }
