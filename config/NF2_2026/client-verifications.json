@@ -292512,6 +292512,213 @@
         "behavior": "Uses the ECX object. If receiver +0x18 is nonnull, compares the pointed object's +0x5C value with receiver +8, raises the pointed value to that receiver value when needed, then advances receiver +0x18 by 0x88. It skips row processing when receiver +0x0C is zero. Otherwise writes a local 0x4D42 marker, allocates/copies payload data through 0x5897152E, 0x5897CC48, and 0x5897CD4C, iterates 16-byte records, updates indexed receiver state, and calls FUN_587B9530 for selected entries. The verified extent is 932 bytes, ending with add esp,0x54; ret at 0x58755510..13.",
         "uncertainty": "The object's class, +0x18/+0x0C field roles, row schema, ownership rules, and exact output meaning remain unknown. The 0x4D42 marker is consistent with a BMP-style header, but the image/resource interpretation is unconfirmed. Helper contracts and runtime-visible effects are unresolved; this is static caller and instruction evidence, with no emulator test."
       }
+    },
+    {
+      "address": "58847770",
+      "name": "FUN_58847770",
+      "size": 718,
+      "symbol": "_FUN_58847770",
+      "source": "src/client-current/Main/FUN_58847770.cpp",
+      "source_sha256": "ae9a80cd8b1e7f9f8daafed0e50083fc1149dd4ec8468414a53b6a2b1cd64cd6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58847988",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "58847959",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "5884796D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 347,
+          "target_address": "5884796D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 365,
+          "target_address": "5884796D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 490,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 515,
+          "target_address": "58A0B4A0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 532,
+          "target_address": "58847A22",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 546,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 557,
+          "target_address": "58848380",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 569,
+          "target_address": "58A245B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 575,
+          "target_address": "587522F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 581,
+          "target_address": "58A245B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 588,
+          "target_address": "58752340",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 604,
+          "target_address": "5875A440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 622,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 633,
+          "target_address": "588483D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 645,
+          "target_address": "5875A440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 659,
+          "target_address": "58A245B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 664,
+          "target_address": "587522F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 680,
+          "target_address": "5875A440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 693,
+          "target_address": "588471E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 708,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58847770",
+        "called_by": "Called from verified dispatchers FUN_587bb700 and FUN_588c1650 for message case 0x80020F02. Each loads ECX from the nested object at [0x58A245B4+0xE0], pushes one event value, and calls this method; the complete body ends with ret 4.",
+        "behavior": "Passes the event value plus one and 0x58A0B450 through indirect call 0x5898C1A4. In one result path, reads a table at [0x58A247F4]+0x30, scans eight 16-byte slots beginning at that object's +0x9A8, follows four pointer fields per slot, extracts ((word at pointer+0x5E >> 4) & 0xFF) XOR 0xAA, retains the maximum, and maps it through fixed thresholds from 0x11 to 0x7D into selectors 0..10. It copies nine dwords from 0x58A0B4A0 and forwards a local record to FUN_588471E0; other branches classify the event value's first byte and select resources through global objects and helpers. The complete 718-byte body includes a cookie check and ret 4; 30 mapped operands are checked.",
+        "uncertainty": "The event value format, indirect-call contract, selector bucket meanings, receiver/table ownership, encoded +0x5E field semantics, local record schema, resource identities, and resulting UI/state effect are unresolved. Caller evidence links it to case 0x80020F02, but no runtime behavior test was performed."
+      }
     }
   ]
 }
