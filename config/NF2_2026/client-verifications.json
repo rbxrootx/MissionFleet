@@ -288891,6 +288891,32 @@
         "behavior": "Takes three 32-bit stack arguments. It zero-extends the low words of arguments 2 and 3, packs argument 2 into the high 16 bits and argument 3 into the low 16 bits, then calls 0x58970C70 with selector 0x80015000, argument 1, the packed value, and three zero arguments. It returns after cleaning its 12 bytes of stack arguments.",
         "uncertainty": "The semantic meaning of selector 0x80015000, the three argument roles, and the API operation are unknown. The callers establish only the observed tuples. The complete 40-byte extent has one mapped call target."
       }
+    },
+    {
+      "address": "588F4090",
+      "name": "FUN_588f4090",
+      "size": 41,
+      "symbol": "_FUN_588f4090",
+      "source": "src/client-current/Main/FUN_588f4090.cpp",
+      "source_sha256": "9e3452748b59bdf9a793b4a44a80ea34280a574a51566af59d8c7093bcdcd599",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588f4090",
+        "called_by": "Directly called by three verified functions: 0x587BB700, 0x58864FD0, and 0x58882D80. The first and third contain repeated lookups.",
+        "behavior": "Takes one pointer argument. It starts at the list head in receiver +0x14; each node's +0x08 points to the next node and +0x0C points to a payload. It compares payload +0x50 with the argument, returning the matching payload pointer or null. The function returns with ret 4. The audited 41-byte extent includes the mapped ret 4 at +0x26, which the original 38-byte indexed extent omitted after mov eax, edx.",
+        "uncertainty": "The receiver/list type, payload type, meaning of payload +0x50, and higher-level use remain unknown. The verified callers use the result for subsequent object processing but do not establish domain labels. The complete audited extent has no mapped operand targets."
+      }
     }
   ]
 }

@@ -5,12 +5,15 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,114 verified matches
-totaling 2,242,677 bytes (21.4205%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,777
+identified code bytes across six report units. There are 7,115 verified matches
+totaling 2,242,718 bytes (21.4209%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
+
+The latest current Main.dll subsystem increment is documented in
+[`docs/current-main-linked-payload-lookup.md`](docs/current-main-linked-payload-lookup.md).
 
 The latest current Main.dll subsystem is `FUN_589081C0`, a 32-byte linked-chain
 distance helper called by eight verified functions. It follows node links at

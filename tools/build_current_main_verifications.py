@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30",
+    "58770A80", "58908870", "587B9B30", "588F4090",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30",
+    "58770A80", "58908870", "587B9B30", "588F4090",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588F4090": {
+        "name_in_analysis": "FUN_588f4090",
+        "called_by": "Directly called by three verified functions: 0x587BB700, 0x58864FD0, and 0x58882D80. The first and third contain repeated lookups.",
+        "behavior": "Takes one pointer argument. It starts at the list head in receiver +0x14; each node's +0x08 points to the next node and +0x0C points to a payload. It compares payload +0x50 with the argument, returning the matching payload pointer or null. The function returns with ret 4. The audited 41-byte extent includes the mapped ret 4 at +0x26, which the original 38-byte indexed extent omitted after mov eax, edx.",
+        "uncertainty": "The receiver/list type, payload type, meaning of payload +0x50, and higher-level use remain unknown. The verified callers use the result for subsequent object processing but do not establish domain labels. The complete audited extent has no mapped operand targets.",
+    },
     "587B9B30": {
         "name_in_analysis": "FUN_587b9b30",
         "called_by": "Directly called by three verified functions: 0x587F2DD0, 0x587FAEC0, and 0x588E5150. Their observed argument tuples are (10, 0, 0), (12, 0, 0), and (1, 0, 0), respectively.",
