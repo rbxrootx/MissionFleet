@@ -298166,6 +298166,75 @@
         "behavior": "Scans the receiver's active pointer range from +0x228 to +0x22C in four-byte steps, comparing each pointed-to value with the input through callback pointer 0x5898C1A4. On the first zero comparison, it shifts the remaining pointer entries left with 0x5897CC54, reduces the end pointer at +0x22C by four, and returns 1. It returns 0 when no entry compares equal or the active range is empty. The mapped body is 236 bytes and returns with ret 4.",
         "uncertainty": "The receiver/container and element types, comparator contract, ownership/lifetime rules, and domain meaning of the removed string are unresolved. The callers' selector 3 path and local buffer contents do not establish the user-visible operation. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "587B81A0",
+      "name": "FUN_587b81a0",
+      "size": 226,
+      "symbol": "_FUN_587b81a0",
+      "source": "src/client-current/Main/FUN_587b81a0.cpp",
+      "source_sha256": "91be4c228748c935f049e6574d8483c7a8a8e252eab094c7c969e813bc2fea6a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "587B7BD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 196,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b81a0 / chat text prefilter and three-slot dispatch",
+        "called_by": "Called by verified chat input/dispatch routines FUN_587FC9C0 and FUN_58890110. The latter supplies a 0x30-byte event record, a second pointer, and selector 1; both set ECX to global object 0x58A2458C.",
+        "behavior": "Calls FUN_587A2D40 with the string at first_argument +0x30; a nonzero result returns 0 immediately. Otherwise it copies 0x30 bytes from the first argument and compares the null-terminated byte sequence at copied offset +0x18 against strings beginning in up to three receiver slots at +0x130, spaced by 0x18 bytes. If a slot matches, it calls FUN_587B7BD0 with the third argument. When that helper returns nonzero, it calls FUN_58970C70 with selector 0x80020A00, flags 0x20000 and 0x50000, the first and second arguments, and a zero field. All non-early-return paths return 1. The complete mapped extent is 226 bytes with ret 0x0C.",
+        "uncertainty": "The 0x30-byte record schema, three slot meanings, +0x130 owner, purpose of FUN_587B7BD0, and user-visible meaning of message selector 0x80020A00 remain unresolved. FUN_587A2D40 delegates non-null, non-slash-prefixed text to a host callback, but its result's policy meaning is unknown. Static caller evidence associates this with chat input; runtime behavior was not tested."
+      }
     }
   ]
 }
