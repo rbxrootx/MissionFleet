@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,909
-identified code bytes across six report units. There are 7,214 verified matches
-totaling 2,282,568 bytes (21.8012%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,215 verified matches
+totaling 2,282,737 bytes (21.8028%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -44,6 +44,8 @@ The three-child state-flag update and notification path is documented in
 [`docs/current-main-three-child-state-update-587e7d40.md`](docs/current-main-three-child-state-update-587e7d40.md).
 The keyed-table XOR message helper is documented in
 [`docs/current-main-keyed-table-xor-message-587bb160.md`](docs/current-main-keyed-table-xor-message-587bb160.md).
+The guarded child text update is documented in
+[`docs/current-main-guarded-child-text-update-5882a680.md`](docs/current-main-guarded-child-text-update-5882a680.md).
 The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in

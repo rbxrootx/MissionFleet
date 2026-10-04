@@ -154,6 +154,7 @@ ADDRESSES = (
     "58786A50", "58786B40",
     "587E7D40",
     "587BB160",
+    "5882A680",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -239,7 +240,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4797,6 +4798,12 @@ EVIDENCE = {
         "called_by": "Called by verified routines FUN_587ECAB0 and FUN_588DF450 with the sender object in ECX. The former passes selector 0 and a packed pair; the latter passes selector 3 and a value read from its update path.",
         "behavior": "For selectors 0..3, loads one of four fixed 32-bit constants; other selector values pass through unchanged. It reads a table descriptor from the receiver's +0x40 pointer, computes ((receiver +0x58) * 13) modulo descriptor count +4, and fetches three DWORDs at that same table index. The fetched values are XORed with the observed stack/global values and submitted through 0x58970C70 under message 0x80013112 with trailing arguments 4 and 0. The complete 178-byte body decodes; both mapped operand targets are audited.",
         "uncertainty": "The receiver/table schemas, selector meanings, XOR inputs' semantic roles, message payload contract, and protocol meaning of 0x80013112 remain unknown. Callers show a packed-pair path and an update path, but no server or emulator packet exchange was performed.",
+    },
+    "5882A680": {
+        "name_in_analysis": "FUN_5882a680 / guarded bounded text-to-child update",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both pass record-derived arguments and a child receiver reached through global object 0x58A245B4 +0xDC +0x15C.",
+        "behavior": "Uses a 0x800-byte local buffer protected by the module's stack-cookie helper. It returns without updating when both leading input values are zero, or when either differs from globals 0x58A0B4A0/0x58A0B4A4. Otherwise it copies the supplied bytes through callback 0x5898C194, using a maximum bound of 0x800 or supplied bound +1, then calls 0x58770A80 on receiver +0x88 when the second value is nonzero, or receiver +0xA8 when it is zero. The complete 169-byte body has six mapped operand targets.",
+        "uncertainty": "The four stack-argument roles, global key meanings, receiver/child types, copy callback contract, and visible text meaning remain unresolved. The two verified dispatcher callers establish record-derived update use but not a precise UI/domain label. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",
