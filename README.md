@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,018 matches cover 2,222,954 bytes (21.2322%) and are verified
+The current 7,023 matches cover 2,225,098 bytes (21.2526%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).

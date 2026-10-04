@@ -158,3 +158,18 @@ three fields and installs vtable `0x589A29C4`. These callsites support the
 control-construction path, but class names, resource identities, field meaning,
 and actual appearance are still unknown. The depth-two result does not cover
 other startup branches or indirect dispatch; no runtime/visual test was run.
+
+## `FUN_587783B0` repeated-control branch
+
+The two shared helpers called from `FUN_587783B0` are now byte-matched along
+with their three direct descendants: five functions, 2,144 bytes, and 37
+checked operand targets. The depth-two audit finds no unmatched indexed target
+under this root. The parent calls the first helper 14 times and the second 27
+times, so these matches cover many repeated setup callsites.
+
+The mapped bodies show allocator/registration helpers, a repeated object setup
+path, and three subordinate routines that share `FUN_5875B090`. This evidence
+ties the functions to the original caller and preserves their arguments and
+call targets. The control type, helper semantics, resource identities, and
+visual behavior remain unresolved; other global-startup branches remain open,
+and no client runtime/visual test was performed.

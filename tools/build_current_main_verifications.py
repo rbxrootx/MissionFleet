@@ -120,6 +120,8 @@ ADDRESSES = (
     "587CECC0", "58789620",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
+    "587781D0", "5875BA80",
+    "5875B770", "5875B3F0", "5875B5C0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -327,6 +329,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "587CECC0", "58789620",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
+    "587781D0", "5875BA80",
+    "5875B770", "5875B3F0", "5875B5C0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4071,6 +4075,36 @@ EVIDENCE = {
         "called_by": "Called twice by 0x589088D0 at 0x5890895C and 0x589089AE, reachable from the 0x58883F80 startup subtree.",
         "behavior": "Installs vtable address 0x589A29C4 and stores supplied values in receiver fields +0x0C, +0x10, and +0x14 before returning with ret 0x0C.",
         "uncertainty": "The object class, constructor purpose, and field meanings are unresolved. The complete 40-byte body decodes.",
+    },
+    "587781D0": {
+        "name_in_analysis": "FUN_587781d0",
+        "called_by": "Called 14 times by 0x587783B0 while constructing its repeated child/control group.",
+        "behavior": "Uses allocator helpers 0x5897CC42/0x5897CD4C, setup routines 0x5875B770/0x587750B0, and registration/helper 0x58970AE0, then returns with ret 0x1C.",
+        "uncertainty": "The allocated object's class, child fields, registration semantics, and visual role are unresolved. The complete 464-byte body decodes.",
+    },
+    "5875BA80": {
+        "name_in_analysis": "FUN_5875ba80",
+        "called_by": "Called 27 times by 0x587783B0 across the same repeated group setup.",
+        "behavior": "Delegates to helpers 0x5875B090, 0x5875B3F0, and 0x5875B5C0 along its argument-dependent paths; observed exits return with ret 0x0C.",
+        "uncertainty": "The branch condition, arguments, and helper contracts are unresolved. The complete 89-byte body decodes.",
+    },
+    "5875B770": {
+        "name_in_analysis": "FUN_5875b770",
+        "called_by": "Directly called by 0x587781D0 during repeated control setup.",
+        "behavior": "Delegates to 0x5875B090, helper 0x5897152E, and child setup 0x5875B5C0, and uses allocator/free helper 0x5897CC42 on its cleanup path.",
+        "uncertainty": "The control type, argument contract, and allocation lifetime are unresolved. The complete 757-byte body decodes.",
+    },
+    "5875B3F0": {
+        "name_in_analysis": "FUN_5875b3f0",
+        "called_by": "Directly called by 0x5875BA80 on an argument-dependent path.",
+        "behavior": "Forwards data to shared helper 0x5875B090 and returns through the observed branches.",
+        "uncertainty": "The branch condition, data meaning, and helper contract are unresolved. The complete 436-byte body decodes.",
+    },
+    "5875B5C0": {
+        "name_in_analysis": "FUN_5875b5c0",
+        "called_by": "Called by 0x5875BA80 and by 0x5875B770 during repeated control setup.",
+        "behavior": "Passes receiver and caller arguments to shared helper 0x5875B090 and returns through the observed control-flow paths.",
+        "uncertainty": "The object type, argument meanings, and shared helper contract are unresolved. The complete 398-byte body decodes.",
     },
 }
 

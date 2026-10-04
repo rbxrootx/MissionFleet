@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,748
-identified code bytes across six report units. There are 7,018 verified matches
-totaling 2,222,954 bytes (21.2322%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,023 verified matches
+totaling 2,225,098 bytes (21.2526%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1208,3 +1208,10 @@ The audit reports no unmatched indexed target beneath this root at that depth.
 The instruction evidence shows repeated control construction, parent-field
 initialization, and a shared vtable-backed helper. Class/resource meanings and
 visual behavior remain unresolved; no client was launched.
+
+The `FUN_587783B0` repeated-control branch now has all indexed callees through
+depth two matched. Five functions add 2,144 byte-identical bytes and check 37
+operand targets; the callgraph audit finds no unmatched indexed target beneath
+the root at that depth. Two helpers are reached 14 and 27 times respectively;
+their mapped instructions delegate to three newly matched helpers. Class and
+control meanings remain uncertain, and no runtime/visual test was performed.

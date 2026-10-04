@@ -282878,6 +282878,363 @@
         "behavior": "Installs vtable address 0x589A29C4 and stores supplied values in receiver fields +0x0C, +0x10, and +0x14 before returning with ret 0x0C.",
         "uncertainty": "The object class, constructor purpose, and field meanings are unresolved. The complete 40-byte body decodes."
       }
+    },
+    {
+      "address": "587781D0",
+      "name": "FUN_587781d0",
+      "size": 464,
+      "symbol": "_FUN_587781d0",
+      "source": "src/client-current/Main/FUN_587781d0.cpp",
+      "source_sha256": "f04319826be1d886a604c7c0740ce528ec192d64c1c3e8148260fedc165c4282",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 5,
+          "target_address": "58A24814",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "5875B770",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5877837A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "5877836E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 337,
+          "target_address": "5898C3C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 357,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 407,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 428,
+          "target_address": "58A247F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 436,
+          "target_address": "587750B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 442,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 447,
+          "target_address": "58970AE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 455,
+          "target_address": "5898C3C8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587781d0",
+        "called_by": "Called 14 times by 0x587783B0 while constructing its repeated child/control group.",
+        "behavior": "Uses allocator helpers 0x5897CC42/0x5897CD4C, setup routines 0x5875B770/0x587750B0, and registration/helper 0x58970AE0, then returns with ret 0x1C.",
+        "uncertainty": "The allocated object's class, child fields, registration semantics, and visual role are unresolved. The complete 464-byte body decodes."
+      }
+    },
+    {
+      "address": "5875BA80",
+      "name": "FUN_5875ba80",
+      "size": 89,
+      "symbol": "_FUN_5875ba80",
+      "source": "src/client-current/Main/FUN_5875ba80.cpp",
+      "source_sha256": "0769b271c132c42000bdbe207836a8358ffbe3ea0c382f0b2cead0fd09cd7fc3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "5875B090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "5875B3F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5875B5C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875ba80",
+        "called_by": "Called 27 times by 0x587783B0 across the same repeated group setup.",
+        "behavior": "Delegates to helpers 0x5875B090, 0x5875B3F0, and 0x5875B5C0 along its argument-dependent paths; observed exits return with ret 0x0C.",
+        "uncertainty": "The branch condition, arguments, and helper contracts are unresolved. The complete 89-byte body decodes."
+      }
+    },
+    {
+      "address": "5875B770",
+      "name": "FUN_5875b770",
+      "size": 757,
+      "symbol": "_FUN_5875b770",
+      "source": "src/client-current/Main/FUN_5875b770.cpp",
+      "source_sha256": "d47abc8b30d3a91c5da31563b3b8667d87062bf34e733fc47daf85a28916d22f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 36,
+          "target_address": "5898C180",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5898C184",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5875B090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "5898C18C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 135,
+          "target_address": "5898C190",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "5898C184",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 366,
+          "target_address": "5875BA5F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 735,
+          "target_address": "5875B5C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 753,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875b770",
+        "called_by": "Directly called by 0x587781D0 during repeated control setup.",
+        "behavior": "Delegates to 0x5875B090, helper 0x5897152E, and child setup 0x5875B5C0, and uses allocator/free helper 0x5897CC42 on its cleanup path.",
+        "uncertainty": "The control type, argument contract, and allocation lifetime are unresolved. The complete 757-byte body decodes."
+      }
+    },
+    {
+      "address": "5875B3F0",
+      "name": "FUN_5875b3f0",
+      "size": 436,
+      "symbol": "_FUN_5875b3f0",
+      "source": "src/client-current/Main/FUN_5875b3f0.cpp",
+      "source_sha256": "a439126228f17b1b05555bb860275008c8e2cec7f9539b5c96af05d93c315cf4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "5875B59E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "5875B090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "5875B59E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5875B508",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 276,
+          "target_address": "5875B440",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875b3f0",
+        "called_by": "Directly called by 0x5875BA80 on an argument-dependent path.",
+        "behavior": "Forwards data to shared helper 0x5875B090 and returns after its local state/cleanup sequence.",
+        "uncertainty": "The branch condition, data meaning, and helper contract are unresolved. The complete 436-byte body decodes."
+      }
+    },
+    {
+      "address": "5875B5C0",
+      "name": "FUN_5875b5c0",
+      "size": 398,
+      "symbol": "_FUN_5875b5c0",
+      "source": "src/client-current/Main/FUN_5875b5c0.cpp",
+      "source_sha256": "d9a025b14d5213c9350d329382ede5d2ba04292c6bdbc6adedc00a7a1e8cbfbe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "5875B74C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "5875B090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "5875B74C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 372,
+          "target_address": "5875B680",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 389,
+          "target_address": "5875B680",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875b5c0",
+        "called_by": "Called by 0x5875BA80 and by 0x5875B770 during repeated control setup.",
+        "behavior": "Passes receiver and caller arguments to shared helper 0x5875B090 and returns through the observed control-flow paths.",
+        "uncertainty": "The object type, argument meanings, and shared helper contract are unresolved. The complete 398-byte body decodes."
+      }
     }
   ]
 }
