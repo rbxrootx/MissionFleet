@@ -303129,6 +303129,32 @@
         "behavior": "Writes zero to payload DWORD +0x470, five to +0x4C8, and three to +0x31C, in that order, then returns. The complete 31-byte body has no mapped operand targets and now compiles from ordinary C++ to the exact original bytes.",
         "uncertainty": "The payload type and three field meanings remain unknown. A null payload would fault; caller invariants are not established. No runtime client test was performed."
       }
+    },
+    {
+      "address": "5873A300",
+      "name": "FUN_5873a300",
+      "size": 102,
+      "symbol": "_FUN_5873a300",
+      "source": "src/client-current/Main/FUN_5873a300.cpp",
+      "source_sha256": "6662ee8898e5b8030668a1556f9de7460f1a3a25655191ad1453292a1e710e77",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5873A300 / bounded scalar percentage adjustment",
+        "called_by": "Called by verified FUN_5873F020 and FUN_5873FE80 with their receiver in ECX.",
+        "behavior": "Reads signed DWORD receiver +0x230 and zero-extended WORD +0x2DE. If current exceeds the bound, stores signed truncation toward zero of the 32-bit-wrapped product current*99 divided by 100; otherwise stores the bound. It reloads +0x230 and, if below the bound, stores signed truncation of the wrapped product current*101 divided by 100; otherwise stores the bound. Complete body is 102 bytes without mapped operand targets.",
+        "uncertainty": "The scalar's unit and bound meaning, and whether signed multiplication overflow is reachable in normal play, are unknown. The second adjustment is reachable both just above the bound and after a wrapped first product. No runtime client test was performed."
+      }
     }
   ]
 }

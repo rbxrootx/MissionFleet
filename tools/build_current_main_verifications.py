@@ -200,6 +200,7 @@ ADDRESSES = (
     "58782790",
     "588DE5C0",
     "5873A370",
+    "5873A300",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -311,7 +312,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -504,6 +505,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "5873A300": {
+        "name_in_analysis": "FUN_5873A300 / bounded scalar percentage adjustment",
+        "called_by": "Called by verified FUN_5873F020 and FUN_5873FE80 with their receiver in ECX.",
+        "behavior": "Reads signed DWORD receiver +0x230 and zero-extended WORD +0x2DE. If current exceeds the bound, stores signed truncation toward zero of the 32-bit-wrapped product current*99 divided by 100; otherwise stores the bound. It reloads +0x230 and, if below the bound, stores signed truncation of the wrapped product current*101 divided by 100; otherwise stores the bound. Complete body is 102 bytes without mapped operand targets.",
+        "uncertainty": "The scalar's unit and bound meaning, and whether signed multiplication overflow is reachable in normal play, are unknown. The second adjustment is reachable both just above the bound and after a wrapped first product. No runtime client test was performed.",
+    },
     "5873A370": {
         "name_in_analysis": "FUN_5873A370 / linked-node payload field reset",
         "called_by": "Called from the first pass of verified FUN_588DE5C0 with each linked node's +0xC payload pointer in ECX.",
