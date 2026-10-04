@@ -303840,6 +303840,51 @@
         "behavior": "Calls verified outbound sender FUN_58970C70 with receiver unchanged in ECX, message 0x8001312B, the stack argument as first sender value, and four zero arguments. Returns the sender result with ret 4. The full body is 26 bytes with one mapped direct-call target.",
         "uncertainty": "The scalar's domain meaning, message meaning, and live wire behavior remain unknown. No original-client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58848A00",
+      "name": "FUN_58848a00",
+      "size": 92,
+      "symbol": "_FUN_58848a00",
+      "source": "src/client-current/Main/FUN_58848a00.cpp",
+      "source_sha256": "3bc43a14ba5445755d1176847cf3d5988efba4031ef851c2e6185cd4e996eaba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 45,
+          "target_address": "58848380",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "588483D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5875A4B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58848a00 / tagged 0x60-byte dual-list record application",
+        "called_by": "Called by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The event path loads its child receiver from 0x58A245B4->+0xD8 and passes a gate, record base, and count.",
+        "behavior": "Returns immediately for a null first stack argument or zero unsigned count in the third. Otherwise loops over count records at 0x60-byte strides. Leading byte zero searches the name at record +1 through verified FUN_58848380 (receiver list +0x6C); leading byte one uses verified FUN_588483D0 (list +0x64). Other tags skip lookup. A nonnull result is passed with the full record pointer to verified FUN_5875A4B0. The complete body is 92 bytes, three mapped direct-call targets, and ret 0x0C. It has the same control-flow shape as verified FUN_58843000 but uses a different receiver/list family.",
+        "uncertainty": "The gate's type and meaning beyond its null check, record fields beyond tag/name, list ownership, and user-visible update effect remain unknown. No original-client or emulator runtime test was performed."
+      }
     }
   ]
 }

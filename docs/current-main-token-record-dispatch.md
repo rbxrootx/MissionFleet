@@ -26,3 +26,20 @@ the byte-identical instruction source.
 The first argument's type and meaning beyond its null check, the rest of the
 record schema, string encoding, and user-visible result remain unknown. This
 path has not been exercised in the installed client or emulator.
+
+## Dual-list sibling at `0x58848A00`
+
+Verified packet and event dispatchers call `FUN_58848a00` with a selected
+receiver; the event path loads it from `0x58A245B4->+0xD8`. Its 92-byte
+[instruction source](../src/client-current/Main/FUN_58848a00.cpp) matches
+the pinned image under objdiff 3.8.0 with three mapped direct-call targets.
+The null gate and zero-count exits, 0x60-byte record stride, tag handling,
+and successful-record application have the same control-flow shape as
+`FUN_58843000`. Its tag-zero lookup instead uses verified `FUN_58848380`
+at receiver head `+0x6C`; tag one uses verified `FUN_588483D0` at `+0x64`.
+It applies a found node through the same verified `FUN_5875A4B0`.
+
+The shared native test also checks these two head routes, gate/count exits,
+unsupported tags, a miss, stride, and the full record pointer. The receiver
+types and purpose of the two list families remain unresolved. No original
+client or emulator runtime test has been performed.

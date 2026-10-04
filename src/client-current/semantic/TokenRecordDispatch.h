@@ -16,3 +16,13 @@ void MissionFleet_ApplyTokenRecords(const MissionFleetTokenNameLists* receiver,
                                     MissionFleetNameCompare compare,
                                     MissionFleetApplyTokenRecord apply,
                                     void* context) noexcept;
+
+// Normal-path sibling FUN_58848a00: tag zero searches +0x6C and tag one
+// searches +0x64 on a different receiver family.
+void MissionFleet_ApplyDualTokenRecords(const MissionFleetDualNameLists* receiver,
+                                        const void* gate,
+                                        const unsigned char* records,
+                                        std::uint32_t count,
+                                        MissionFleetNameCompare compare,
+                                        MissionFleetApplyTokenRecord apply,
+                                        void* context) noexcept;

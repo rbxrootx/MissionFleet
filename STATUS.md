@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,955
-identified code bytes across six report units. There are 7,291 verified matches
-totaling 2,291,976 bytes (21.8910%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,292 verified matches
+totaling 2,292,068 bytes (21.8919%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.

@@ -56,4 +56,26 @@ int main() {
            log.applied[0].second == records.data());
     assert(log.applied[1].first == &at130 &&
            log.applied[1].second == records.data() + 0x60);
+
+    MissionFleetNameNode at64{"Beta", nullptr};
+    MissionFleetNameNode at6C{"Alpha", nullptr};
+    MissionFleetDualNameLists dual{&at64, &at6C};
+    std::array<unsigned char, 4 * 0x60> otherRecords{};
+    setRecord(otherRecords.data() + 0 * 0x60, 0, "Alpha");
+    setRecord(otherRecords.data() + 1 * 0x60, 1, "Beta");
+    setRecord(otherRecords.data() + 2 * 0x60, 2, "Alpha");
+    setRecord(otherRecords.data() + 3 * 0x60, 0, "Beta");
+    Log otherLog;
+    MissionFleet_ApplyDualTokenRecords(&dual, nullptr, otherRecords.data(), 4,
+                                       compare, apply, &otherLog);
+    MissionFleet_ApplyDualTokenRecords(&dual, &dual, otherRecords.data(), 0,
+                                       compare, apply, &otherLog);
+    assert(otherLog.comparisons == 0 && otherLog.applied.empty());
+    MissionFleet_ApplyDualTokenRecords(&dual, &dual, otherRecords.data(), 4,
+                                       compare, apply, &otherLog);
+    assert(otherLog.comparisons == 3 && otherLog.applied.size() == 2);
+    assert(otherLog.applied[0].first == &at6C &&
+           otherLog.applied[0].second == otherRecords.data());
+    assert(otherLog.applied[1].first == &at64 &&
+           otherLog.applied[1].second == otherRecords.data() + 0x60);
 }
