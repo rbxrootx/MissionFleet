@@ -302094,6 +302094,144 @@
         "behavior": "Branches on its selector, traverses a counted child-pointer collection reached through global 0x58A247F8 and active-object count +0x141C, compares a supplied byte against per-child bytes at +0x1FC and sometimes +0x21C, and conditionally updates child fields including +0x108 and +0x124. Return paths derive a word from receiver fields at +0x90/+0x92. The indexed 1799-byte extent stops before 21 bytes of live shared epilogue; the complete mapped body is 1820 bytes through ret 8 at 0x587A6189, followed by four INT3 alignment bytes. All 53 mapped operand targets are inventoried.",
         "uncertainty": "The selector meanings, child/receiver types, per-child byte schema, mutation semantics, and resulting user-visible state remain unknown. The size correction is established by contiguous decoded mapped instructions and return before alignment, not by the indexed Ghidra extent. No runtime client test was performed."
       }
+    },
+    {
+      "address": "587A5840",
+      "name": "FUN_587a5840",
+      "size": 311,
+      "symbol": "_FUN_587a5840",
+      "source": "src/client-current/Main/FUN_587a5840.cpp",
+      "source_sha256": "dff03edbf843004e8ef94c097cedbaf56ea16edf8d368bfb30c6c830f75cd349",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "587A594C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5840 / selected child enumeration",
+        "called_by": "Called by verified FUN_587EAE10 at 0x587EAECD; it pairs with the all-child enumeration helper FUN_587A5980.",
+        "behavior": "Zeros an output count byte, scans receiver child pointers beginning at +8 up to the active-object count at global 0x58A247F8->+4+0x141C, and filters by active-object masks +0x44C and +0x344, per-index byte +0x1FC equal to +0x340, and category byte +0x21C under supplied 0x10/0x20 flags. It selects the requested qualifying index, returns -2 when that child's +0xF4 is zero and -1 when exhausted, otherwise calls the child's virtual method at vtable +0x40 with output buffer +1 and returns the resulting length plus one. The complete body is 311 bytes with five operand targets and ret 0x0C.",
+        "uncertainty": "The child type, mask/category semantics, output format and virtual method contract remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A5980",
+      "name": "FUN_587a5980",
+      "size": 227,
+      "symbol": "_FUN_587a5980",
+      "source": "src/client-current/Main/FUN_587a5980.cpp",
+      "source_sha256": "a720eea13a612398793a39ff5ee46b53616e1f98e42009aaca957a0947fd0476",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "587A5A5B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "587A5A41",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 136,
+          "target_address": "58A24900",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 189,
+          "target_address": "58A24900",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 195,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "587A59B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5980 / all-child enumeration",
+        "called_by": "Called by verified FUN_587EAE10 at 0x587EB00F; it pairs with selected-child helper FUN_587A5840.",
+        "behavior": "Zeros an output count byte and scans receiver child pointers beginning at +8 up to active-object count at global 0x58A247F8->+4+0x141C. It filters by active-object mask +0x44C, per-index byte +0x1FC equal to +0x340, and category byte +0x21C under supplied 0x10/0x20 flags; unlike FUN_587A5840, it does not combine mask +0x344. For each qualifying child, calls its virtual method at vtable +0x40 with the current output position +1. Positive results increment the output count byte and global 0x58A24900 and extend the accumulated length. Returns accumulated length plus one. The complete body is 227 bytes with nine operand targets and ret 8.",
+        "uncertainty": "The child type, mask/category semantics, output format and virtual method contract remain unknown. No runtime client test was performed."
+      }
     }
   ]
 }
