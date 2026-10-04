@@ -303918,6 +303918,132 @@
         "behavior": "When the first or second stack argument is nonzero, passes a pointer at third argument +0x0C to verified text copier FUN_58731CE0 on receiver child +0x94. Afterwards always sets receiver byte +0xA0 to one. It then reads receiver word +0x24, masks with 0x1F00, and if the result equals 0x0500 invokes the receiver's vtable slot +4. Without that call it returns 0x1F00; with it, the virtual call's result passes through EAX. The full body is 88 bytes, one mapped direct-call target, and ret 0x0C.",
         "uncertainty": "The three argument meanings, child text role, flag bits, virtual callback contract, and visible UI effect remain unknown. No original-client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588338E0",
+      "name": "FUN_588338e0",
+      "size": 69,
+      "symbol": "_FUN_588338e0",
+      "source": "src/client-current/Main/FUN_588338e0.cpp",
+      "source_sha256": "664a80dc8d149e0ed498e1a8bb650aecd71eaa7a5233b9a56d01e858b6be85ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588338e0 / first paired record-text controls",
+        "called_by": "Called by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650 with a receiver in ECX and one record pointer.",
+        "behavior": "For a nonnull record, copies text from record +0x2D to receiver child +0x6C and from record +0x0C to child +0x70 through verified FUN_58731CE0. For a null record it passes global pointer 0x5898C922 to both children instead. The first child is always updated before the second. The complete body is 69 bytes, six mapped operand targets (four direct calls and two fallback pointers), and ret 4.",
+        "uncertainty": "The record schema, fallback bytes, child UI roles, and visible effect remain unknown. No original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58833930",
+      "name": "FUN_58833930",
+      "size": 69,
+      "symbol": "_FUN_58833930",
+      "source": "src/client-current/Main/FUN_58833930.cpp",
+      "source_sha256": "d088616e6e5451abf8dd733f5d5f8d259f97de84a715f4a223cc592f221f8760",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58833930 / second paired record-text controls",
+        "called_by": "Called by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650 with a receiver in ECX and one record pointer.",
+        "behavior": "For a nonnull record, copies text from record +0x2D to receiver child +0x74 and from record +0x0C to child +0x78 through verified FUN_58731CE0. For a null record it passes global pointer 0x5898C922 to both children instead. The first child is always updated before the second. The complete body is 69 bytes, six mapped operand targets (four direct calls and two fallback pointers), and ret 4. Its control flow matches FUN_588338E0 while selecting different child offsets.",
+        "uncertainty": "The record schema, fallback bytes, child UI roles, and visible effect remain unknown. No original-client or emulator runtime test was performed."
+      }
     }
   ]
 }

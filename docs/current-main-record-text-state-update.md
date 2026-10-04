@@ -25,3 +25,7 @@ separate from the byte-identical instruction source.
 The argument fields, text's UI role, receiver flag meanings, and virtual
 callback contract remain unknown. No installed-client or emulator runtime
 test has been performed.
+
+Two adjacent dispatcher-called helpers update paired receiver text children
+from record `+0x2D/+0x0C` or a global fallback. Their separate evidence is in
+[the paired record-text note](current-main-paired-record-text.md).
