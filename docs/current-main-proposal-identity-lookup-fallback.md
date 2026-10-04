@@ -49,6 +49,11 @@ passes it to `FUN_58754A30` for insertion through collection subobject `+4`.
 The full helper is 206 bytes, ends with `ret 0x18`, and has seven mapped
 operands.
 
+The dispatchers also use [two verified batch wrappers](current-main-six-field-record-ingestion.md)
+to feed this helper from 0x54- and 0x84-byte source records. Each wrapper
+passes the same first three DWORD fields and pointers to three text-like
+fields for every record in its counted input array.
+
 The inserter observes collection begin/end/capacity pointers at `+0x0C`,
 `+0x10`, and `+0x14`, with a 0x48-byte entry stride. When capacity remains,
 `FUN_58753660` copies the 18-DWORD record into the next slot and the end pointer

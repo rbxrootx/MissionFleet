@@ -206,6 +206,7 @@ ADDRESSES = (
     "588AA0D0", "588AA120",
     "588A44A0", "58842F60",
     "58848380", "588483D0",
+    "58754CD0", "58754D10",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -321,6 +322,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588AA0D0", "588AA120",
     "588A44A0", "58842F60",
     "58848380", "588483D0",
+    "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -513,6 +515,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58754CD0": {
+        "name_in_analysis": "FUN_58754CD0 / 0x54-stride six-field record ingestion",
+        "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 with global receiver 0x58A245AC, a count, and a source-record pointer.",
+        "behavior": "For each unsigned count entry at 0x54-byte strides, reads DWORDs at source +0, +4, and +8, and passes those plus pointers to source +0x0C, +0x24, and +0x2D as six arguments to verified two-key update-or-insert FUN_58754C00. Zero count skips the loop. Complete body is 62 bytes with one mapped direct-call target and ret 8.",
+        "uncertainty": "The incoming record type, field encodings, and protocol role remain unknown. The callee's observed two-key collection behavior is matched, but no runtime client test was performed.",
+    },
+    "58754D10": {
+        "name_in_analysis": "FUN_58754D10 / 0x84-stride six-field record ingestion",
+        "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 with global receiver 0x58A245AC, a count, and a source-record pointer.",
+        "behavior": "For each unsigned count entry at 0x84-byte strides, reads DWORDs at source +0, +4, and +8, and passes those plus pointers to source +0x0C, +0x24, and +0x2D as six arguments to verified two-key update-or-insert FUN_58754C00. Zero count skips the loop. Complete body is 65 bytes with one mapped direct-call target and ret 8.",
+        "uncertainty": "The incoming record type, field encodings, and protocol role remain unknown. The callee's observed two-key collection behavior is matched, but no runtime client test was performed.",
+    },
     "58848380": {
         "name_in_analysis": "FUN_58848380 / receiver +0x6C linked-name lookup",
         "called_by": "Called by verified FUN_5881E2E0 and FUN_58847770 with a selected child receiver in ECX and one stack query pointer.",
@@ -5285,7 +5299,7 @@ EVIDENCE = {
     },
     "58754C00": {
         "name_in_analysis": "FUN_58754c00 / two-key record update-or-insert",
-        "called_by": "Called directly from verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both use global object 0x58A245AC as receiver and pass six stack arguments; the first two are also passed to verified lookup FUN_58753BF0.",
+        "called_by": "Called directly from verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650, and once per source record by verified stride wrappers FUN_58754CD0 and FUN_58754D10. All observed paths use global object 0x58A245AC as receiver and pass six arguments; the first two are also used by verified lookup FUN_58753BF0.",
         "behavior": "Looks up the first two arguments in the receiver's 0x48-byte record collection through FUN_58753BF0. On a hit it writes the third argument to record +8 and calls callback 0x5898C198 three times to update text-like fields at +0x2D, +0x0C, and +0x24 from other arguments. On a miss it lays out a local record from the key/value inputs, uses the same callback to fill three local fields, and passes that record to FUN_58754A30 with receiver subobject +4. The complete SEH-protected body is 206 bytes, ends in ret 0x18 at 0x58754CCB, and has seven mapped operand targets.",
         "uncertainty": "The six argument meanings, record schema, callback contract, collection ownership, and visible/protocol effect are unresolved. The shared lookup and receiver establish a two-key update/insert path, but not the domain identity of the records. No runtime or emulator test was performed.",
     },

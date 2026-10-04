@@ -299508,7 +299508,7 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_58754c00 / two-key record update-or-insert",
-        "called_by": "Called directly from verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both use global object 0x58A245AC as receiver and pass six stack arguments; the first two are also passed to verified lookup FUN_58753BF0.",
+        "called_by": "Called directly from verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650, and once per source record by verified stride wrappers FUN_58754CD0 and FUN_58754D10. All observed paths use global object 0x58A245AC as receiver and pass six arguments; the first two are also used by verified lookup FUN_58753BF0.",
         "behavior": "Looks up the first two arguments in the receiver's 0x48-byte record collection through FUN_58753BF0. On a hit it writes the third argument to record +8 and calls callback 0x5898C198 three times to update text-like fields at +0x2D, +0x0C, and +0x24 from other arguments. On a miss it lays out a local record from the key/value inputs, uses the same callback to fill three local fields, and passes that record to FUN_58754A30 with receiver subobject +4. The complete SEH-protected body is 206 bytes, ends in ret 0x18 at 0x58754CCB, and has seven mapped operand targets.",
         "uncertainty": "The six argument meanings, record schema, callback contract, collection ownership, and visible/protocol effect are unresolved. The shared lookup and receiver establish a two-key update/insert path, but not the domain identity of the records. No runtime or emulator test was performed."
       }
@@ -303442,6 +303442,72 @@
         "called_by": "Called by verified FUN_5881E2E0 and FUN_58847770 with a selected child receiver in ECX and one stack query pointer.",
         "behavior": "Reads list head at receiver +0x64 and returns null when empty. Otherwise follows node +0x54 links, reads nested name through node +0x70 then +0x6C, and calls function pointer at absolute 0x5898C1A4 with query and name. It returns the first node when the comparison result is zero, or null after the list. The complete body is 69 bytes with one absolute comparator operand target and ret 4.",
         "uncertainty": "The list's role, comparator collation, ownership, and invalid-pointer behavior remain unknown. The helper is instruction-identical to FUN_58848380 except for the receiver head offset. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "58754CD0",
+      "name": "FUN_58754cd0",
+      "size": 62,
+      "symbol": "_FUN_58754cd0",
+      "source": "src/client-current/Main/FUN_58754cd0.cpp",
+      "source_sha256": "8c98f00c5a45fa6cdc1ef05a59fce5abfe6d35532470faf4918b7b43ebfd162d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "58754C00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58754CD0 / 0x54-stride six-field record ingestion",
+        "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 with global receiver 0x58A245AC, a count, and a source-record pointer.",
+        "behavior": "For each unsigned count entry at 0x54-byte strides, reads DWORDs at source +0, +4, and +8, and passes those plus pointers to source +0x0C, +0x24, and +0x2D as six arguments to verified two-key update-or-insert FUN_58754C00. Zero count skips the loop. Complete body is 62 bytes with one mapped direct-call target and ret 8.",
+        "uncertainty": "The incoming record type, field encodings, and protocol role remain unknown. The callee's observed two-key collection behavior is matched, but no runtime client test was performed."
+      }
+    },
+    {
+      "address": "58754D10",
+      "name": "FUN_58754d10",
+      "size": 65,
+      "symbol": "_FUN_58754d10",
+      "source": "src/client-current/Main/FUN_58754d10.cpp",
+      "source_sha256": "5cbf847f27da05a6840a1d6111f052478861c92c7b4cf9c2c6d4868a77577ca6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "58754C00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58754D10 / 0x84-stride six-field record ingestion",
+        "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 with global receiver 0x58A245AC, a count, and a source-record pointer.",
+        "behavior": "For each unsigned count entry at 0x84-byte strides, reads DWORDs at source +0, +4, and +8, and passes those plus pointers to source +0x0C, +0x24, and +0x2D as six arguments to verified two-key update-or-insert FUN_58754C00. Zero count skips the loop. Complete body is 65 bytes with one mapped direct-call target and ret 8.",
+        "uncertainty": "The incoming record type, field encodings, and protocol role remain unknown. The callee's observed two-key collection behavior is matched, but no runtime client test was performed."
       }
     }
   ]
