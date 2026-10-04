@@ -161,6 +161,7 @@ ADDRESSES = (
     "587D6DB0",
     "58836AF0",
     "588DCF50",
+    "587B4990",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -246,7 +247,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4846,6 +4847,12 @@ EVIDENCE = {
         "called_by": "Called by verified resource/object routines FUN_5877EC80 and FUN_58782CF0, which pass their computed step values as the single stack argument.",
         "behavior": "Computes an encoded threshold from receiver +0x398 XOR 0xAAAAAAAA, scales it by two, and scales by four instead when global mode word 0x58A2459C +0x105F0 is 0xF and receiver +0x63B8 is zero while +0x63BC is nonzero. It clips the supplied delta so receiver +0x63C4 does not advance beyond that threshold, then adds and returns the accepted delta. If the receiver is the active object at 0x58A247F8 +4 and the accepted delta is zero, it calls 0x587ECCA0 with the shared state object and zero. The full 150-byte body has four mapped operand targets.",
         "uncertainty": "The encoded threshold's domain meaning, mode/field roles, units of the accumulator and delta, and purpose of the zero-delta callback remain unknown. Caller evidence places it in two resource/object update paths; no runtime client or emulator test was performed.",
+    },
+    "587B4990": {
+        "name_in_analysis": "FUN_587b4990 / 0x14-byte linked-entry append",
+        "called_by": "Called by verified handlers FUN_587B4B70 and FUN_588D4300. Both set ECX to a collection at a receiver-derived +0x94 offset and pass a supplied pointer on the stack.",
+        "behavior": "Allocates a 0x14-byte entry, installs vtable address 0x58999FC0, stores the input pointer at entry +0x0C, and initializes entry fields +4/+8/+0x10. It links the new entry after the collection tail at +8 (or sets both head +4 and tail +8 for an empty collection) and increments collection count +0x0C. The 147-byte body has four mapped operand targets.",
+        "uncertainty": "The collection/entry types, vtable method contract, stored pointer meaning, and list ownership are unknown. The nonempty allocation-failure branch proceeds into link writes with a null new entry, so its failure behavior is not assigned a safe semantic interpretation. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

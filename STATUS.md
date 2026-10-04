@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,909
-identified code bytes across six report units. There are 7,221 verified matches
-totaling 2,283,691 bytes (21.8119%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,222 verified matches
+totaling 2,283,838 bytes (21.8134%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -56,6 +56,8 @@ The 0x54-byte record append/growth helper is documented in
 [`docs/current-main-54-byte-record-append-58836af0.md`](docs/current-main-54-byte-record-append-58836af0.md).
 The bounded progress-delta update is documented in
 [`docs/current-main-bounded-progress-delta-588dcf50.md`](docs/current-main-bounded-progress-delta-588dcf50.md).
+The linked-entry append helper is documented in
+[`docs/current-main-linked-entry-append-587b4990.md`](docs/current-main-linked-entry-append-587b4990.md).
 The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in
