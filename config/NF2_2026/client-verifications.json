@@ -288598,6 +288598,32 @@
         "behavior": "Takes a value pointer and returns void with ret 4. If the value is non-null, it scans the list headed at receiver +4, following node +8 links, for a node whose +0x0C field equals the value. On a match it unlinks the node using its +4 previous and +8 next pointers, updates the list head at +4 or tail at +8 when removing an endpoint, and decrements the count at +0x0C. It does not free the node. A null value or missing match leaves the list unchanged.",
         "uncertainty": "The list owner and payload type remain unidentified, and callers do not establish what the payloads represent. The complete 85-byte extent has no mapped operand targets."
       }
+    },
+    {
+      "address": "58908600",
+      "name": "FUN_58908600",
+      "size": 68,
+      "symbol": "_FUN_58908600",
+      "source": "src/client-current/Main/FUN_58908600.cpp",
+      "source_sha256": "77f811dc5cf062e45f3ef1275fa885dcacc677913b520e71723fcfe5fb76f1b3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58908600",
+        "called_by": "Directly called by three verified functions: 0x5879D3F0, 0x5879F810, and 0x5879DD90. All three contain repeated calls while iterating six object slots.",
+        "behavior": "Takes no explicit stack arguments. If receiver +0x84 is null, it copies receiver +0x7C into +0x84 and tail-dispatches virtual slot +0x3C. Otherwise, if the current node's +0x10 link is non-null, it advances receiver +0x84 to that next node; when the old current node was also the head at +0x80, it advances +0x80 as well. It then tail-dispatches virtual slot +0x3C. A null next link returns without changing state.",
+        "uncertainty": "The receiver, linked-node, and +0x7C/+0x80/+0x84 field meanings are unresolved. Callers show repeated application across six associated objects, but do not establish the user-visible effect. The complete 68-byte extent has no mapped operand targets."
+      }
     }
   ]
 }

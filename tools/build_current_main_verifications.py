@@ -43,6 +43,7 @@ ADDRESSES = (
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
+    "58908600",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -233,7 +234,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
-    "588DD2A0", "588DD310", "58778DC0", "588F5120",
+    "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -398,6 +399,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58908600": {
+        "name_in_analysis": "FUN_58908600",
+        "called_by": "Directly called by three verified functions: 0x5879D3F0, 0x5879F810, and 0x5879DD90. All three contain repeated calls while iterating six object slots.",
+        "behavior": "Takes no explicit stack arguments. If receiver +0x84 is null, it copies receiver +0x7C into +0x84 and tail-dispatches virtual slot +0x3C. Otherwise, if the current node's +0x10 link is non-null, it advances receiver +0x84 to that next node; when the old current node was also the head at +0x80, it advances +0x80 as well. It then tail-dispatches virtual slot +0x3C. A null next link returns without changing state.",
+        "uncertainty": "The receiver, linked-node, and +0x7C/+0x80/+0x84 field meanings are unresolved. Callers show repeated application across six associated objects, but do not establish the user-visible effect. The complete 68-byte extent has no mapped operand targets.",
+    },
     "588F5120": {
         "name_in_analysis": "FUN_588f5120",
         "called_by": "Directly called by three verified functions: 0x587A4440, 0x588D4300, and 0x588F55C0. 0x588D4300 contains repeated callsites.",
