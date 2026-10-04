@@ -12,6 +12,12 @@ stores the result back to that global. It next calls `FUN_5888D110` with
 conditional calls through fields at `+0x40` and `+0x30`. The observed return
 value is one when the stored pointer is nonnull and zero otherwise.
 
+The setup helper's two direct callees now also match: `FUN_58895090` (140 bytes,
+three audited operands) and `FUN_58895060` (11 bytes, one audited operand).
+The latter loads the field at receiver `+0x8C` and tail-jumps to `FUN_58907360`.
+Both calls originate in `FUN_5888D110`, itself selected by this setup path.
+The `FUN_5878AD50` call-graph audit through depth five has no unmatched callees.
+
 The allocation size, constructor arguments, direct calls, field offsets, and
 branches come from the captured Ghidra body and mapped instruction stream. The
 containing class, global ownership, purpose of the `0xFA0` field value, child
