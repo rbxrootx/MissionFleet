@@ -36,3 +36,5 @@ Its virtual input method and external jump table are recorded in
 [the input-path evidence](current-main-communicator-id-input-5884ab90.md).
 Its periodic update and linked-list batch helper are recorded in
 [the update-path evidence](current-main-communicator-id-periodic-58848e60.md).
+Its gated state-setup vtable method is recorded in
+[the setup-path evidence](current-main-communicator-id-setup-58848240.md).

@@ -266,7 +266,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -323,7 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -521,6 +521,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58848240": {
+        "name_in_analysis": "FUN_58848240 / CPannelCommunicatorIDPannel gated state-setup method",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this method at slot +0x04. The panel's event method invokes the same virtual slot on a separate child at receiver +0x114, but this does not establish a direct call to this override.",
+        "behavior": "Returns immediately unless the byte at [0x58A245B4]+0xD0 equals 0x0F. On that path it sets bits 0 and 2 of receiver word +0x24, replaces its masked state with 0x0100, writes 0xC8 to receiver +0x58, and calls FUN_58902D20 on child +0xA4 with argument -0x101. It checks global [0x58A246D8] fields +0x170 > 0x2F and +0x194 nonzero before obtaining a pointer at +0x194/+0xBC; otherwise the pointer is zero. It passes global 0x58A248F8 to FUN_58907990 with that pointer as receiver, then calls virtual slot +0x04 through the same pointer. For receiver mode word +0xF6 equal to zero it calls FUN_58902D20 on children +0xB4 and +0xB8 with -0x101 and +0x101, clears the low flag nibble on +0xB0, and sets it on +0xAC; for mode one it clears the nibble on +0xAC and sets it on +0xB0. Finally it writes 1 to child +0xD8 field +0x50 if global 0x58A0B4A0 is nonzero, otherwise zero. The complete body is 310 bytes with 10 mapped operand targets and two return sites.",
+        "uncertainty": "The method's game/UI meaning, validity of the global pointer chain, indirect virtual-call contract, child identities, reason for the -0x101 and +0x101 values, and visible result are unresolved. This is an exact x86 instruction reconstruction, not a portable implementation or runtime comparison.",
+    },
     "58848E60": {
         "name_in_analysis": "FUN_58848e60 / CPannelCommunicatorIDPannel periodic update",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this method at slot +0x0C.",

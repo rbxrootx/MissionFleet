@@ -305912,6 +305912,93 @@
         "behavior": "Passes a 0xF0-byte stack buffer to FUN_5897CC48 with a zero argument, then traverses up to ten nodes from receiver list +0x6C using signed word count +0xF2 and up to ten nodes from list +0x64 using signed word count +0xF0. Each channel advances through node +0x54 and wraps to its list head, calls through pointer 0x5898C3C4 with destination slots 0x18 bytes apart, format pointer 0x5898D0D4, and a value from node +0x70/+0x6C. When nonempty it calls FUN_587B91B0 with the stack buffer, count, and channel 0 or 1. The corrected complete body is 353 bytes with 12 mapped operand targets, including add esp 0xF4 and ret.",
         "uncertainty": "The formatted value schema, callback contract, shared helper effect, and list preconditions remain unknown. The original 347-byte index stopped one byte into the epilogue instruction; the next function starts at 0x588489E0 after 15 CC bytes. No runtime comparison was performed."
       }
+    },
+    {
+      "address": "58848240",
+      "name": "FUN_58848240",
+      "size": 310,
+      "symbol": "_FUN_58848240",
+      "source": "src/client-current/Main/FUN_58848240.cpp",
+      "source_sha256": "732a719c1ec4886128fd74b654cf33488d2df9e0d4dd7af851af606c26200545",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "58848374",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 196,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 212,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 273,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58848240 / CPannelCommunicatorIDPannel gated state-setup method",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this method at slot +0x04. The panel's event method invokes the same virtual slot on a separate child at receiver +0x114, but this does not establish a direct call to this override.",
+        "behavior": "Returns immediately unless the byte at [0x58A245B4]+0xD0 equals 0x0F. On that path it sets bits 0 and 2 of receiver word +0x24, replaces its masked state with 0x0100, writes 0xC8 to receiver +0x58, and calls FUN_58902D20 on child +0xA4 with argument -0x101. It checks global [0x58A246D8] fields +0x170 > 0x2F and +0x194 nonzero before obtaining a pointer at +0x194/+0xBC; otherwise the pointer is zero. It passes global 0x58A248F8 to FUN_58907990 with that pointer as receiver, then calls virtual slot +0x04 through the same pointer. For receiver mode word +0xF6 equal to zero it calls FUN_58902D20 on children +0xB4 and +0xB8 with -0x101 and +0x101, clears the low flag nibble on +0xB0, and sets it on +0xAC; for mode one it clears the nibble on +0xAC and sets it on +0xB0. Finally it writes 1 to child +0xD8 field +0x50 if global 0x58A0B4A0 is nonzero, otherwise zero. The complete body is 310 bytes with 10 mapped operand targets and two return sites.",
+        "uncertainty": "The method's game/UI meaning, validity of the global pointer chain, indirect virtual-call contract, child identities, reason for the -0x101 and +0x101 values, and visible result are unresolved. This is an exact x86 instruction reconstruction, not a portable implementation or runtime comparison."
+      }
     }
   ]
 }
