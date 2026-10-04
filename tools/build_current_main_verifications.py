@@ -177,6 +177,13 @@ ADDRESSES = (
     "588D8100",
     "588D8150",
     "58736080",
+    "58853570",
+    "58909B00",
+    "58793DA0",
+    "587A5720",
+    "587A5790",
+    "587A57E0",
+    "587A5A70",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -266,7 +273,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -439,6 +446,9 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # The indexed body stops after a live load at 0x587A6171. Its 21-byte
+    # shared epilogue continues through ret 8, before four INT3 padding bytes.
+    "587A5A70": 1820,
     # Ghidra ended this body after pop edi and omitted its contiguous stack
     # cleanup/ret epilogue. The mapped epilogue precedes INT3 alignment.
     "5878A3A0": 545,
@@ -5306,6 +5316,48 @@ EVIDENCE = {
         "called_by": "Called repeatedly from verified selector dispatcher FUN_587A75E0 with receiver pointers obtained from active child state.",
         "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
         "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed.",
+    },
+    "58853570": {
+        "name_in_analysis": "FUN_58853570 / paired child-state activation helper",
+        "called_by": "Called by verified state-clear routine FUN_588DD310 with argument zero, using global object 0x58A245C4 as receiver.",
+        "behavior": "For argument 0x40000000, reads the +0x5C status of child pointers at receiver +0x2B0 and +0x2B4 through FUN_58909B00, and calls FUN_58793DA0(child, 1) for each status not equal to one. For argument zero, it calls FUN_58793DA0(child, 0) for each nonzero status. Other arguments return without child calls. The complete mapped body is 140 bytes with eight operand targets and ret 4.",
+        "uncertainty": "The receiver and child types, meaning of 0x40000000 and user-visible effect of child status changes are unresolved. No runtime client test was performed.",
+    },
+    "58909B00": {
+        "name_in_analysis": "FUN_58909b00 / child status field accessor",
+        "called_by": "Called four times by verified paired-child helper FUN_58853570; other mapped callers also reference it.",
+        "behavior": "Returns the DWORD at receiver +0x5C. The complete body is four bytes (mov eax,[ecx+0x5c]; ret), with no external operand targets.",
+        "uncertainty": "The numeric field meaning and object type remain unknown. The byte match does not establish user-visible behavior.",
+    },
+    "58793DA0": {
+        "name_in_analysis": "FUN_58793da0 / child status set and position refresh",
+        "called_by": "Called four times from verified paired-child helper FUN_58853570, with observed arguments zero and one; other verified callers also target it.",
+        "behavior": "Sets receiver +0x5C to 2 and +0x58 to one when its argument is nonzero, otherwise -1. If receiver +0x64 is non-null, invokes that child's virtual method at vtable +8, then calls FUN_587B7400 with receiver coordinate +4 minus 0x190, 0x12C minus receiver coordinate +8, and global value 0x58A248F8. The complete body is 84 bytes, with two mapped operand targets, and ret 4.",
+        "uncertainty": "The receiver/child types, virtual method contract, coordinate units, and user-visible effect remain unknown. No runtime rendering test was performed.",
+    },
+    "587A5720": {
+        "name_in_analysis": "FUN_587a5720 / paired child table-entry assignment",
+        "called_by": "Called at three sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x243EC to one. It reads entry 5 of the table reached through global 0x58A246A4, guarded by table count +0x164 greater than five and non-null pointer +0x18C, and writes that entry or zero to receiver +0x244FC. It reloads the global and performs a separate guarded read of entry 5 for receiver +0x24500. The full body is 103 bytes with two mapped absolute targets.",
+        "uncertainty": "The table, receiver fields, value one and any selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed.",
+    },
+    "587A5790": {
+        "name_in_analysis": "FUN_587a5790 / child table-entry selector",
+        "called_by": "Called at five sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x3910 to two. It selects table index 6 when receiver +0xF4 is nonzero and index 7 otherwise, reads it through global table object 0x58A246A4 when count +0x164 and pointer +0x18C permit, and stores the entry or zero in receiver +0x3A54. The full body is 75 bytes with one mapped absolute target.",
+        "uncertainty": "The table entry, receiver fields, value two and selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed.",
+    },
+    "587A57E0": {
+        "name_in_analysis": "FUN_587a57e0 / child fixed table-entry assignment",
+        "called_by": "Called at three sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x3910 to one, then reads table entry 5 through global object 0x58A246A4 when count +0x164 is greater than five and pointer +0x18C is non-null. It stores the entry or zero in receiver +0x3A54. The full body is 58 bytes with one mapped absolute target.",
+        "uncertainty": "The table entry, receiver fields, value one and selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed.",
+    },
+    "587A5A70": {
+        "name_in_analysis": "FUN_587a5a70 / child selector and counted-state updater",
+        "called_by": "Called at seven sites from verified selector dispatcher FUN_587A75E0. The caller passes a child-state receiver, selector values including 0x14 and 0x15, and a byte read from the active object at +0x340.",
+        "behavior": "Branches on its selector, traverses a counted child-pointer collection reached through global 0x58A247F8 and active-object count +0x141C, compares a supplied byte against per-child bytes at +0x1FC and sometimes +0x21C, and conditionally updates child fields including +0x108 and +0x124. Return paths derive a word from receiver fields at +0x90/+0x92. The indexed 1799-byte extent stops before 21 bytes of live shared epilogue; the complete mapped body is 1820 bytes through ret 8 at 0x587A6189, followed by four INT3 alignment bytes. All 53 mapped operand targets are inventoried.",
+        "uncertainty": "The selector meanings, child/receiver types, per-child byte schema, mutation semantics, and resulting user-visible state remain unknown. The size correction is established by contiguous decoded mapped instructions and return before alignment, not by the indexed Ghidra extent. No runtime client test was performed.",
     },
     "588DCC10": {
         "name_in_analysis": "FUN_588dcc10 / record-to-child text update",

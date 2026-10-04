@@ -1,6 +1,6 @@
 # Current Main.dll child table and mode updates
 
-Three functions in the verified child-state path now match the installed
+Six functions in the verified child-state path now match the installed
 `Main.dll` byte for byte under objdiff 3.8.0. The matched instruction bodies
 and their callers establish these operations:
 
@@ -20,6 +20,17 @@ and their callers establish these operations:
   `+0xB40 + index*4`, returning its first byte zero-extended when non-null or
   zero otherwise. Verified `FUN_587A75E0` calls it repeatedly. The function
   itself has no index bounds check.
+- `FUN_587A5720` (103 bytes, two mapped absolute targets) writes one to
+  receiver `+0x243EC`, then independently reads guarded table entry 5 into
+  receiver `+0x244FC` and `+0x24500`, substituting zero for an unavailable
+  entry. Verified `FUN_587A75E0` calls it at three sites.
+- `FUN_587A5790` (75 bytes, one mapped absolute target) writes two to
+  receiver `+0x3910`, selects entry 6 when receiver `+0xF4` is nonzero or
+  entry 7 otherwise, and writes the guarded entry or zero to `+0x3A54`.
+  Verified `FUN_587A75E0` calls it at five sites.
+- `FUN_587A57E0` (58 bytes, one mapped absolute target) writes one to
+  receiver `+0x3910` and guarded table entry 5 or zero to `+0x3A54`.
+  Verified `FUN_587A75E0` calls it at three sites.
 
 The table and child types, selector names, state values and user-visible
 effects remain unresolved. No runtime client test was performed.

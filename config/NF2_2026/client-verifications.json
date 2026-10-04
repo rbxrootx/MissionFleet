@@ -301504,6 +301504,596 @@
         "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
         "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed."
       }
+    },
+    {
+      "address": "58853570",
+      "name": "FUN_58853570",
+      "size": 140,
+      "symbol": "_FUN_58853570",
+      "source": "src/client-current/Main/FUN_58853570.cpp",
+      "source_sha256": "b098d45a0176c3d44f6ff5c52b94aa80187d6b77e15e8727c99a25c269778c64",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "58793DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "58793DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "58793DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58793DA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58853570 / paired child-state activation helper",
+        "called_by": "Called by verified state-clear routine FUN_588DD310 with argument zero, using global object 0x58A245C4 as receiver.",
+        "behavior": "For argument 0x40000000, reads the +0x5C status of child pointers at receiver +0x2B0 and +0x2B4 through FUN_58909B00, and calls FUN_58793DA0(child, 1) for each status not equal to one. For argument zero, it calls FUN_58793DA0(child, 0) for each nonzero status. Other arguments return without child calls. The complete mapped body is 140 bytes with eight operand targets and ret 4.",
+        "uncertainty": "The receiver and child types, meaning of 0x40000000 and user-visible effect of child status changes are unresolved. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "58909B00",
+      "name": "FUN_58909b00",
+      "size": 4,
+      "symbol": "_FUN_58909b00",
+      "source": "src/client-current/Main/FUN_58909b00.cpp",
+      "source_sha256": "9b43323fe202ae3fcebd4e730ab2199b50513f90e0719f6e0ae7017044a718e4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58909b00 / child status field accessor",
+        "called_by": "Called four times by verified paired-child helper FUN_58853570; other mapped callers also reference it.",
+        "behavior": "Returns the DWORD at receiver +0x5C. The complete body is four bytes (mov eax,[ecx+0x5c]; ret), with no external operand targets.",
+        "uncertainty": "The numeric field meaning and object type remain unknown. The byte match does not establish user-visible behavior."
+      }
+    },
+    {
+      "address": "58793DA0",
+      "name": "FUN_58793da0",
+      "size": 84,
+      "symbol": "_FUN_58793da0",
+      "source": "src/client-current/Main/FUN_58793da0.cpp",
+      "source_sha256": "531e8c852817911280d4f9082eddac572cab805da3da2b45c1f54d23fa95a267",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 49,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58793da0 / child status set and position refresh",
+        "called_by": "Called four times from verified paired-child helper FUN_58853570, with observed arguments zero and one; other verified callers also target it.",
+        "behavior": "Sets receiver +0x5C to 2 and +0x58 to one when its argument is nonzero, otherwise -1. If receiver +0x64 is non-null, invokes that child's virtual method at vtable +8, then calls FUN_587B7400 with receiver coordinate +4 minus 0x190, 0x12C minus receiver coordinate +8, and global value 0x58A248F8. The complete body is 84 bytes, with two mapped operand targets, and ret 4.",
+        "uncertainty": "The receiver/child types, virtual method contract, coordinate units, and user-visible effect remain unknown. No runtime rendering test was performed."
+      }
+    },
+    {
+      "address": "587A5720",
+      "name": "FUN_587a5720",
+      "size": 103,
+      "symbol": "_FUN_587a5720",
+      "source": "src/client-current/Main/FUN_587a5720.cpp",
+      "source_sha256": "977428e7ba1d9149dc6938a2225f26f7522706dda91ffb55cb90826a05601a3d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5720 / paired child table-entry assignment",
+        "called_by": "Called at three sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x243EC to one. It reads entry 5 of the table reached through global 0x58A246A4, guarded by table count +0x164 greater than five and non-null pointer +0x18C, and writes that entry or zero to receiver +0x244FC. It reloads the global and performs a separate guarded read of entry 5 for receiver +0x24500. The full body is 103 bytes with two mapped absolute targets.",
+        "uncertainty": "The table, receiver fields, value one and any selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A5790",
+      "name": "FUN_587a5790",
+      "size": 75,
+      "symbol": "_FUN_587a5790",
+      "source": "src/client-current/Main/FUN_587a5790.cpp",
+      "source_sha256": "754e31a6b60a1d3800808cf3151f2f957727767c503843b27fd1a51575ad599c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5790 / child table-entry selector",
+        "called_by": "Called at five sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x3910 to two. It selects table index 6 when receiver +0xF4 is nonzero and index 7 otherwise, reads it through global table object 0x58A246A4 when count +0x164 and pointer +0x18C permit, and stores the entry or zero in receiver +0x3A54. The full body is 75 bytes with one mapped absolute target.",
+        "uncertainty": "The table entry, receiver fields, value two and selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A57E0",
+      "name": "FUN_587a57e0",
+      "size": 58,
+      "symbol": "_FUN_587a57e0",
+      "source": "src/client-current/Main/FUN_587a57e0.cpp",
+      "source_sha256": "4089b35e3a5682e3cb690944ed599b3663c3f316bab948d5dcccb7bbd7177d73",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a57e0 / child fixed table-entry assignment",
+        "called_by": "Called at three sites from verified selector dispatcher FUN_587A75E0.",
+        "behavior": "Sets receiver +0x3910 to one, then reads table entry 5 through global object 0x58A246A4 when count +0x164 is greater than five and pointer +0x18C is non-null. It stores the entry or zero in receiver +0x3A54. The full body is 58 bytes with one mapped absolute target.",
+        "uncertainty": "The table entry, receiver fields, value one and selector-level meaning remain unknown. The global object itself is dereferenced without a null guard. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A5A70",
+      "name": "FUN_587a5a70",
+      "size": 1820,
+      "symbol": "_FUN_587a5a70",
+      "source": "src/client-current/Main/FUN_587a5a70.cpp",
+      "source_sha256": "195ea18763eb01dea46398ae7319aef42cf8851037f3d453d49906e87075189e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "587A6025",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "587A6025",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "587A5E1A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "587A5E1A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "587A5C43",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 164,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 202,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 273,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 336,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 371,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 377,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 394,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 437,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 472,
+          "target_address": "587A5D83",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 510,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 588,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 605,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 656,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 691,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 697,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 714,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 757,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 797,
+          "target_address": "587A6181",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 821,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 838,
+          "target_address": "587A616D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 914,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 934,
+          "target_address": "587A616D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 976,
+          "target_address": "587A5EDC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 982,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 999,
+          "target_address": "587A6006",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1082,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1136,
+          "target_address": "587A5F85",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1141,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1158,
+          "target_address": "587A6006",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1251,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1307,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1411,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1494,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1511,
+          "target_address": "587A616D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1565,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1585,
+          "target_address": "587A616D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1596,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1613,
+          "target_address": "587A616D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1670,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1699,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1770,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5a70 / child selector and counted-state updater",
+        "called_by": "Called at seven sites from verified selector dispatcher FUN_587A75E0. The caller passes a child-state receiver, selector values including 0x14 and 0x15, and a byte read from the active object at +0x340.",
+        "behavior": "Branches on its selector, traverses a counted child-pointer collection reached through global 0x58A247F8 and active-object count +0x141C, compares a supplied byte against per-child bytes at +0x1FC and sometimes +0x21C, and conditionally updates child fields including +0x108 and +0x124. Return paths derive a word from receiver fields at +0x90/+0x92. The indexed 1799-byte extent stops before 21 bytes of live shared epilogue; the complete mapped body is 1820 bytes through ret 8 at 0x587A6189, followed by four INT3 alignment bytes. All 53 mapped operand targets are inventoried.",
+        "uncertainty": "The selector meanings, child/receiver types, per-child byte schema, mutation semantics, and resulting user-visible state remain unknown. The size correction is established by contiguous decoded mapped instructions and return before alignment, not by the indexed Ghidra extent. No runtime client test was performed."
+      }
     }
   ]
 }

@@ -10,6 +10,31 @@ MAIN_BASE = 0x58730000
 
 
 class CurrentMainFunctionExtentTests(unittest.TestCase):
+    def test_child_selector_extent_includes_shared_epilogue(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        by_address = {row["address"]: row for row in rows}
+        function = by_address["587a5a70"]
+        next_function = by_address["587a6190"]
+        start = int(function["address"], 16)
+        size = int(function["size"])
+        self.assertEqual(size, 0x71C)
+        self.assertEqual(int(next_function["address"], 16), start + size + 4)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        code = image[start - MAIN_BASE:start - MAIN_BASE + size]
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        instructions = list(decoder.disasm(code, start))
+        self.assertEqual(instructions[-1].address, 0x587A6189)
+        self.assertEqual(instructions[-1].mnemonic, "ret")
+        self.assertEqual(instructions[-1].operands[0].imm, 8)
+        self.assertEqual(instructions[-1].address + instructions[-1].size, start + size)
+        branch = next(item for item in instructions if item.address == 0x587A5B12)
+        self.assertEqual(branch.operands[0].imm, 0x587A6181)
+        self.assertEqual(image[start - MAIN_BASE + size:start - MAIN_BASE + size + 4],
+                         b"\xCC" * 4)
+
     def test_two_key_record_upsert_helper_extents_end_before_padding(self):
         with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
