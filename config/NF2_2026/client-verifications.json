@@ -300888,6 +300888,75 @@
         "behavior": "Uses the second stack argument as an index into receiver arrays at +0x10 and +0x20, bounded by count +0x0C. On an in-range index, a non-null existing pointer at +0x20[index] is passed to callback thunk 0x5897CC42 and cleared. It then marks +0x10[index] as 1, obtains a replacement through 0x5897152E using the fourth stack argument, stores it at +0x20[index], and dispatches the replacement and supplied values through thunk 0x5897CD4C. The out-of-range path also marks the status, allocates/stores a replacement, and dispatches it. The complete mapped body is 156 bytes with five operand targets and ends in ret 0x10.",
         "uncertainty": "The receiver arrays' roles, status value meaning, allocation size/ownership, replacement object type, callback contracts, and domain purpose of the index remain unknown. Both verified callers establish message/event update contexts but not server-side semantics. The Ghidra extent was 143 bytes and ended on the first byte of a direct call; the corrected extent includes the call tail and full epilogue through 0x587555BB before INT3 padding. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "587B8110",
+      "name": "FUN_587b8110",
+      "size": 142,
+      "symbol": "_FUN_587b8110",
+      "source": "src/client-current/Main/FUN_587b8110.cpp",
+      "source_sha256": "3fa5038411cf81d3cf8d6be2a95a69c909753b22cf4f0ca679bbc6de341b2229",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "587B7BD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b8110 / guarded chat-message dispatcher",
+        "called_by": "Called by verified routines FUN_587FC9C0 and FUN_58890110; each sets ECX to global object 0x58A2458C and supplies a text-bearing record and scalar values.",
+        "behavior": "Calls 0x587A2D40 with the string at the third stack argument +0x30 and length derived from the fourth argument minus 0x30. A nonzero filter result returns 0. Otherwise it calls 0x587B7BD0 with the fifth argument; a zero result skips dispatch but returns 1. A nonzero result packs the low words of stack arguments 1 and 2 into one DWORD, derives an extra 0x10000 flag when global object 0x58A24580 equals either 0x58A245A8 or 0x58A2459C, and sends selector 0x80020A00 through 0x58970C70 with the observed record/scalar arguments. The full 142-byte body has seven mapped operand targets and returns with ret 0x14.",
+        "uncertainty": "The callback policy, validator 0x587B7BD0 contract, argument schemas, optional 0x10000 flag meaning, and protocol/user-visible semantics of 0x80020A00 remain unresolved. Callers establish chat/event dispatch use; no runtime client or emulator test was performed."
+      }
     }
   ]
 }

@@ -164,6 +164,7 @@ ADDRESSES = (
     "587B4990",
     "588AEEF0",
     "58755520",
+    "587B8110",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -249,7 +250,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -5215,6 +5216,12 @@ EVIDENCE = {
         "called_by": "Called by verified chat input/dispatch routines FUN_587FC9C0 and FUN_58890110. The latter supplies a 0x30-byte event record, a second pointer, and selector 1; both set ECX to global object 0x58A2458C.",
         "behavior": "Calls FUN_587A2D40 with the string at first_argument +0x30; a nonzero result returns 0 immediately. Otherwise it copies 0x30 bytes from the first argument and compares the null-terminated byte sequence at copied offset +0x18 against strings beginning in up to three receiver slots at +0x130, spaced by 0x18 bytes. If a slot matches, it calls FUN_587B7BD0 with the third argument. When that helper returns nonzero, it calls FUN_58970C70 with selector 0x80020A00, flags 0x20000 and 0x50000, the first and second arguments, and a zero field. All non-early-return paths return 1. The complete mapped extent is 226 bytes with ret 0x0C.",
         "uncertainty": "The 0x30-byte record schema, three slot meanings, +0x130 owner, purpose of FUN_587B7BD0, and user-visible meaning of message selector 0x80020A00 remain unresolved. FUN_587A2D40 delegates non-null, non-slash-prefixed text to a host callback, but its result's policy meaning is unknown. Static caller evidence associates this with chat input; runtime behavior was not tested.",
+    },
+    "587B8110": {
+        "name_in_analysis": "FUN_587b8110 / guarded chat-message dispatcher",
+        "called_by": "Called by verified routines FUN_587FC9C0 and FUN_58890110; each sets ECX to global object 0x58A2458C and supplies a text-bearing record and scalar values.",
+        "behavior": "Calls 0x587A2D40 with the string at the third stack argument +0x30 and length derived from the fourth argument minus 0x30. A nonzero filter result returns 0. Otherwise it calls 0x587B7BD0 with the fifth argument; a zero result skips dispatch but returns 1. A nonzero result packs the low words of stack arguments 1 and 2 into one DWORD, derives an extra 0x10000 flag when global object 0x58A24580 equals either 0x58A245A8 or 0x58A2459C, and sends selector 0x80020A00 through 0x58970C70 with the observed record/scalar arguments. The full 142-byte body has seven mapped operand targets and returns with ret 0x14.",
+        "uncertainty": "The callback policy, validator 0x587B7BD0 contract, argument schemas, optional 0x10000 flag meaning, and protocol/user-visible semantics of 0x80020A00 remain unresolved. Callers establish chat/event dispatch use; no runtime client or emulator test was performed.",
     },
     "588DCC10": {
         "name_in_analysis": "FUN_588dcc10 / record-to-child text update",
