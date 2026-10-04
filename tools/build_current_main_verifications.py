@@ -135,6 +135,9 @@ ADDRESSES = (
     "587AC9A0", "587867E0", "58786150", "58786250",
     "58778D00", "58779780", "587797C0",
     "58786750",
+    "5881B960", "5881B500", "5890E5A0", "587CEB00",
+    "58879D60", "5875ACD0",
+    "58879CC0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -357,6 +360,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "587AC9A0", "587867E0", "58786150", "58786250",
     "58778D00", "58779780", "587797C0",
     "58786750",
+    "5881B960", "5881B500", "5890E5A0", "587CEB00",
+    "58879D60", "5875ACD0",
+    "58879CC0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4275,6 +4281,48 @@ EVIDENCE = {
         "called_by": "Directly called by 0x587867E0 at 0x587867F6.",
         "behavior": "Reads the receiver's +0x18 node and its +4 child, follows node links while checking byte +0x15 and range values at +8/+0xC, and writes the selected pair through two caller-provided output pointers; may delegate cleanup to 0x5897CC72.",
         "uncertainty": "The node structure, range ordering, output roles, and cleanup ownership are unresolved. The complete 138-byte body decodes.",
+    },
+    "5881B960": {
+        "name_in_analysis": "FUN_5881b960",
+        "called_by": "Called twice by 0x588A7310 while creating sibling child controls.",
+        "behavior": "Runs an SEH-protected base setup through 0x589031A0, allocates a 0x54-byte member through 0x5897CC4E, installs vtable pointer 0x5899D914, initializes receiver fields +0x50/+0x54/+0x58/+0x5C, and conditionally calls 0x58731C60 on the allocation.",
+        "uncertainty": "The control class, member schema, and role of the 0x58731C60 arguments are unresolved. The full 253-byte body decodes.",
+    },
+    "5881B500": {
+        "name_in_analysis": "FUN_5881b500",
+        "called_by": "Directly called by 0x588A7310 while creating a child control.",
+        "behavior": "Runs an SEH-protected base setup through 0x589031A0, allocates a 0x58-byte member, installs vtable pointer 0x5899D8F4, initializes child pointers and flags, and conditionally calls 0x58734A30 on the allocated member.",
+        "uncertainty": "The control class, member schema, and flag meanings are unresolved. The full 287-byte body decodes.",
+    },
+    "5890E5A0": {
+        "name_in_analysis": "FUN_5890e5a0",
+        "called_by": "Called four times by 0x588A7310 for separate child objects.",
+        "behavior": "Forwards five stack arguments and the receiver to 0x58734A30, installs vtable pointer 0x589A2D3C, returns the receiver, and removes 0x14 argument bytes.",
+        "uncertainty": "The class identity and forwarded argument meanings are unresolved. The complete 47-byte body decodes.",
+    },
+    "587CEB00": {
+        "name_in_analysis": "FUN_587ceb00",
+        "called_by": "Called twice by 0x588A7310 while creating child controls.",
+        "behavior": "Calls base setup 0x58734A30 with four arguments, masks and adds bits in receiver word +0x24, clears dwords +0x50/+0x58, and installs vtable pointer 0x5899B450.",
+        "uncertainty": "The control class and flag meanings are unresolved. The full 76-byte body decodes.",
+    },
+    "58879D60": {
+        "name_in_analysis": "FUN_58879d60",
+        "called_by": "Directly called by 0x588A7310 during construction of a child object, with a 0x10 selector argument.",
+        "behavior": "Calls setup helper 0x5876E890, installs vtable pointer 0x5899F0EC, stores a caller value at +0x180 and 7 at +0x84, then performs repeated 0xFC-byte allocations and calls 0x58907100 using state read from globals +0x160/+0x190.",
+        "uncertainty": "The class, allocation ownership, global-state fields, and meaning of the selector are unresolved. The full 546-byte body decodes.",
+    },
+    "5875ACD0": {
+        "name_in_analysis": "FUN_5875acd0",
+        "called_by": "Directly called by 0x588A7310 while creating a child control.",
+        "behavior": "Selects either null or global context pointer +0x190/+0x140 according to context field +0x160, calls base setup 0x58734A30, installs vtable pointer 0x5898D7E0, and clears receiver dwords +0x50/+0x58.",
+        "uncertainty": "The global context, class identity, and field roles are unresolved. The complete 92-byte body decodes.",
+    },
+    "58879CC0": {
+        "name_in_analysis": "FUN_58879cc0",
+        "called_by": "Directly called by 0x58879D60 at 0x58879F65 during child-object initialization.",
+        "behavior": "Clears receiver dwords +0xD0 through +0xE0; if receiver +0x84 is positive, loops that many entries across arrays beginning at +0xE4 and +0x108 and calls 0x58907360/0x58902D20 with constants 0 and -0x64 on their referenced objects.",
+        "uncertainty": "The array schemas, referenced object roles, and the meaning of the reset values are unresolved. The full 156-byte body decodes.",
     },
 }
 

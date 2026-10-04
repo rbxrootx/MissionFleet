@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,047 matches cover 2,228,225 bytes (21.2825%) and are verified
+The current 7,054 matches cover 2,229,682 bytes (21.2964%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -21,6 +21,8 @@ The 66-byte startup object initializer is documented in
 [the initializer notes](docs/current-main-startup-object-initializer.md).
 The startup record-processing subtree is documented in
 [the record-processing notes](docs/current-main-startup-record-processing.md).
+The screen's child-control constructors are documented in
+[the child-control notes](docs/current-main-startup-child-controls.md).
 
 ```powershell
 python tools/generate_progress.py
