@@ -283175,7 +283175,7 @@
       "evidence": {
         "name_in_analysis": "FUN_5875b3f0",
         "called_by": "Directly called by 0x5875BA80 on an argument-dependent path.",
-        "behavior": "Forwards data to shared helper 0x5875B090 and returns after its local state/cleanup sequence.",
+        "behavior": "Forwards data to shared helper 0x5875B090 and returns through the observed branches.",
         "uncertainty": "The branch condition, data meaning, and helper contract are unresolved. The complete 436-byte body decodes."
       }
     },
@@ -283234,6 +283234,84 @@
         "called_by": "Called by 0x5875BA80 and by 0x5875B770 during repeated control setup.",
         "behavior": "Passes receiver and caller arguments to shared helper 0x5875B090 and returns through the observed control-flow paths.",
         "uncertainty": "The object type, argument meanings, and shared helper contract are unresolved. The complete 398-byte body decodes."
+      }
+    },
+    {
+      "address": "5889E8A0",
+      "name": "FUN_5889e8a0",
+      "size": 111,
+      "symbol": "_FUN_5889e8a0",
+      "source": "src/client-current/Main/FUN_5889e8a0.cpp",
+      "source_sha256": "901e495c184d2e0584e295203b35418f0ad21b393c902ff5c923425bf8d29160",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 40,
+          "target_address": "5898C004",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C010",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "5898C00C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889e8a0",
+        "called_by": "Called 27 times by 0x5889F960 and 31 times by 0x5889FFE0 while setting up their repeated entries.",
+        "behavior": "Makes two indirect calls through global slots 0x5898C004 and 0x5898C010 with caller-supplied values and observed constants 0x80, 0x80000002, and 0xF003F, then returns with ret 0x10.",
+        "uncertainty": "The indirect API contracts, stored data semantics, and reason for the constants are unresolved. The complete 111-byte body decodes."
+      }
+    },
+    {
+      "address": "5889E970",
+      "name": "FUN_5889e970",
+      "size": 332,
+      "symbol": "_FUN_5889e970",
+      "source": "src/client-current/Main/FUN_5889e970.cpp",
+      "source_sha256": "2fafd2c235f0c8efd645b7795710d7cb333dd5783beb8c63f3666c0a76cd5aa1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889e970",
+        "called_by": "Called twice by 0x5889FFE0 during repeated-entry setup.",
+        "behavior": "Allocates 0x7C bytes through 0x5897CC48 and stores fixed small-integer values into receiver fields beginning at +0x154 and continuing through the following mapping fields.",
+        "uncertainty": "The class, mapping values' meanings, and their relationship to the repeated entries are unresolved. The complete 332-byte body decodes."
       }
     }
   ]

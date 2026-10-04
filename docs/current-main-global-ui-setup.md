@@ -173,3 +173,19 @@ ties the functions to the original caller and preserves their arguments and
 call targets. The control type, helper semantics, resource identities, and
 visual behavior remain unresolved; other global-startup branches remain open,
 and no client runtime/visual test was performed.
+
+## Shared `FUN_5889E8A0` startup-entry helper
+
+The unmatched helper shared by `FUN_5889F960` and `FUN_5889FFE0` now matches
+byte for byte, together with the adjacent initializer called by `FUN_5889FFE0`:
+two functions, 443 bytes, and four operand targets. The first routine is called
+27 times by `FUN_5889F960` and 31 times by `FUN_5889FFE0`; the second is called
+twice. Depth-two audits for both roots now find no unmatched indexed callees.
+
+The small routine makes two indirect calls through globals `0x5898C004` and
+`0x5898C010` using observed constants including `0x80000002` and `0xF003F`.
+The neighboring initializer allocates 0x7C bytes and stores a sequence of fixed
+small integers in fields beginning at +0x154. These facts are recorded from
+the mapped instructions; the indirect APIs, constants, and key-like values are
+not assigned meanings without callsite or data evidence. No runtime/visual
+test was performed, and unrelated startup branches remain open.

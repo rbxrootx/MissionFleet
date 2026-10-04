@@ -122,6 +122,7 @@ ADDRESSES = (
     "58907F80",
     "587781D0", "5875BA80",
     "5875B770", "5875B3F0", "5875B5C0",
+    "5889E8A0", "5889E970",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -331,6 +332,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58907F80",
     "587781D0", "5875BA80",
     "5875B770", "5875B3F0", "5875B5C0",
+    "5889E8A0", "5889E970",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4105,6 +4107,18 @@ EVIDENCE = {
         "called_by": "Called by 0x5875BA80 and by 0x5875B770 during repeated control setup.",
         "behavior": "Passes receiver and caller arguments to shared helper 0x5875B090 and returns through the observed control-flow paths.",
         "uncertainty": "The object type, argument meanings, and shared helper contract are unresolved. The complete 398-byte body decodes.",
+    },
+    "5889E8A0": {
+        "name_in_analysis": "FUN_5889e8a0",
+        "called_by": "Called 27 times by 0x5889F960 and 31 times by 0x5889FFE0 while setting up their repeated entries.",
+        "behavior": "Makes two indirect calls through global slots 0x5898C004 and 0x5898C010 with caller-supplied values and observed constants 0x80, 0x80000002, and 0xF003F, then returns with ret 0x10.",
+        "uncertainty": "The indirect API contracts, stored data semantics, and reason for the constants are unresolved. The complete 111-byte body decodes.",
+    },
+    "5889E970": {
+        "name_in_analysis": "FUN_5889e970",
+        "called_by": "Called twice by 0x5889FFE0 during repeated-entry setup.",
+        "behavior": "Allocates 0x7C bytes through 0x5897CC48 and stores fixed small-integer values into receiver fields beginning at +0x154 and continuing through the following mapping fields.",
+        "uncertainty": "The class, mapping values' meanings, and their relationship to the repeated entries are unresolved. The complete 332-byte body decodes.",
     },
 }
 
