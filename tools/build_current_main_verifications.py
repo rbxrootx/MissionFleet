@@ -203,6 +203,7 @@ ADDRESSES = (
     "5873A300",
     "5884D870",
     "587B5F50",
+    "588AA0D0", "588AA120",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -315,6 +316,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
+    "588AA0D0", "588AA120",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -507,6 +509,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "588AA0D0": {
+        "name_in_analysis": "FUN_588AA0D0 / CPannelRule text-window backward step",
+        "called_by": "Called by verified CPannelRule event handlers FUN_588AA610 and FUN_588AA640.",
+        "behavior": "Returns if base text pointer +0xA0 or current pointer +0xA4 is null. Otherwise computes current-0x47 and compares it unsigned with base. It stores base when that step would precede base, otherwise stores current-0x47, then passes the stored pointer to verified text-buffer update FUN_58770A80 using child receiver +0xA8. Complete body is 72 bytes with two mapped direct-call operands to the same target.",
+        "uncertainty": "The displayed text's exact content, pointer lifetime, and why a 0x47-byte step is used remain unknown. The unsigned pointer comparison is observed on x86; a portable model covers valid in-buffer pointers only. No runtime client test was performed.",
+    },
+    "588AA120": {
+        "name_in_analysis": "FUN_588AA120 / CPannelRule text-window forward step",
+        "called_by": "Called by verified CPannelRule event handlers FUN_588AA610 and FUN_588AA640.",
+        "behavior": "Returns if base text pointer +0xA0 or current pointer +0xA4 is null. Otherwise scans the NUL-terminated string from current and, if at least 0x545 bytes remain, advances current +0xA4 by 0x47. It then passes the stored current pointer to verified text-buffer update FUN_58770A80 using child receiver +0xA8, including when no advance occurred. Complete body is 83 bytes with one mapped direct-call target.",
+        "uncertainty": "The buffer capacity, text ownership, and meaning of the 0x545 threshold and 0x47 step remain unknown. The original scan assumes a reachable NUL terminator. No runtime client test was performed.",
+    },
     "587B5F50": {
         "name_in_analysis": "FUN_587B5F50 / panel-base guarded child teardown",
         "called_by": "Called by verified CPannelLaunchedShip cleanup FUN_5888A840 and verified CPannelRule cleanup FUN_588A9DA0 with their receiver in ECX.",
@@ -731,9 +745,9 @@ EVIDENCE = {
     },
     "58770A80": {
         "name_in_analysis": "FUN_58770a80",
-        "called_by": "Directly called by three verified functions: 0x587B83E0, 0x58890110, and 0x588A9F20. Ghidra evidence for 0x587B83E0 shows the argument comes from the localized key MESSAGESTRING_ALL_CHATTING; 0x58890110 contains repeated calls with stack-built text values.",
+        "called_by": "Directly called by five verified functions: 0x587B83E0, 0x58890110, 0x588A9F20, 0x588AA0D0, and 0x588AA120. Ghidra evidence for 0x587B83E0 shows the argument comes from localized key MESSAGESTRING_ALL_CHATTING; the last two callers pass adjacent positions within a text buffer.",
         "behavior": "Takes one source-string pointer. It reads the destination pointer from receiver +0x80, calls the indirect routine at 0x5898C198 with destination then source, scans the resulting NUL-terminated destination to count bytes before the terminator, stores that count at receiver +0x8C and +0x94, and returns with ret 4.",
-        "uncertainty": "The exact identity of the indirect copy routine, destination buffer ownership/capacity, and the roles of the two length fields are not established. Caller evidence proves localized text and stack-built strings are supplied, but not the displayed control or text purpose. The complete 57-byte extent has one mapped operand target.",
+        "uncertainty": "The exact identity of the indirect copy routine, destination buffer ownership/capacity, and the roles of the two length fields are not established. Callers supply localized text, stack-built strings, and CPannelRule text-window positions, but the final on-screen appearance is unverified. The complete 57-byte extent has one mapped operand target.",
     },
     "588DCE50": {
         "name_in_analysis": "FUN_588dce50",

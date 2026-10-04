@@ -26,7 +26,7 @@ masks through `0x58902D20` and `0x58902CE0`.
 | `+0x0C` | `FUN_588A9F20` | 430 | When receiver flag bit 2 is set, processes modes `0x100`, `0x200`, `0x400`, and `0x500`; interpolates target coordinates through `0x58902E10`, changes state at settled positions, then dispatches child slot `+0x0C` from the list at receiver `+0x3C`. |
 | `+0x10` | `FUN_588AA640` | 173 | With receiver flag bit 1 set, searches the child list and dispatches slot `+0x10`; in mode `0x200`, branches on observed event values `0x100`, `0x201`, `0x202`, and `0x20A`. |
 | `+0x14` | `FUN_58902FE0` | 94 | Previously byte-verified shared method. |
-| `+0x18` | `FUN_588AA610` | 47 | For event value 2, compares the supplied child pointer with receiver fields `+0x98` and `+0x9C`, calls the corresponding helper, and returns with `ret 0x0C`. |
+| `+0x18` | `FUN_588AA610` | 47 | For event value 2, compares the supplied child pointer with receiver fields `+0x98` and `+0x9C`, calls the [backward or forward text-window helper](current-main-rule-text-window.md), and returns with `ret 0x0C`. |
 
 The 245-byte cleanup body writes the class vtable, visits fields `+0x84`,
 `+0x88`, `+0x90`, `+0x8C`, `+0x94`, `+0x98`, `+0x9C`, and `+0xA8`, calls the
