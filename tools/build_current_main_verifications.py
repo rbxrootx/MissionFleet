@@ -137,7 +137,7 @@ ADDRESSES = (
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
-    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "588F43F0",
+    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "588F43F0",
     "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58846B00", "58846BD0", "58843060", "58842DC0", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
@@ -236,7 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -382,7 +382,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
-    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "588F43F0",
+    "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "588F43F0",
     "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
@@ -5202,6 +5202,12 @@ EVIDENCE = {
         "called_by": "Called by count-checked parser FUN_58846B00 with a cleared local token buffer, and by event-message helper FUN_58814FD0 with a local record after its observed message-resource path.",
         "behavior": "Requests a 0xB4-byte object through FUN_5897CC4E and initializes it from receiver fields +4, +8, and +0xCC through FUN_5875A7E0. It passes its input pointer and a stack-local record through callback 0x5898C198 and FUN_5875A4B0, clears masks 0x8000 and 1 on the new object's word +0x24, and inserts the node into the receiver list rooted at +0x138 with tail +0x13C using node links +0x54/+0x50. It increments receiver word +0xF8 and updates the tail. The complete SEH-protected body is 293 bytes, has eight mapped operand targets, and returns with ret 4.",
         "uncertainty": "The receiver and node types, callback and helper contracts, token/input record schema, list-field meanings, flag meanings, and higher-level effect remain unknown. No runtime or emulator test was performed.",
+    },
+    "58831D50": {
+        "name_in_analysis": "FUN_58831D50 / bounded dispatcher text update",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both enter this path after checking that the child at receiver +0x154 has mode bits 2, then pass record-derived values and the child receiver.",
+        "behavior": "Copies the supplied source bytes to an 0x800-byte stack buffer through callback 0x5898C194, limiting the copy to 0x800 bytes or the supplied bound plus one. If receiver fields +0xC8 and +0xCC already match the compared input values, it returns without updating the child. Otherwise a null source takes the branch through global object 0x58A245AC and FUN_587538B0, then calls FUN_58731CE0 with receiver field +0xB4 and updates the string child at +0xA4 through FUN_58770A80. A nonnull source calls FUN_587538B0 with receiver field +0x7C, calls FUN_58731CE0, and updates child +0x78 through FUN_58770A80. The complete SEH-protected body is 203 bytes, has ten mapped operand targets, and returns with ret 0x10.",
+        "uncertainty": "The four argument roles beyond the observed source/bound and comparison use, callback 0x5898C194 semantics, global string/resource lookup meaning, child object types, and user-visible effect remain unresolved. Dispatcher evidence establishes the mode-gated call and record-derived values, but not the text's domain meaning. No runtime or emulator test was performed.",
     },
     "58835A10": {
         "name_in_analysis": "FUN_58835a10 / keyed 0x54-byte record removal helper",

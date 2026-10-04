@@ -299797,6 +299797,93 @@
         "behavior": "Requests a 0xB4-byte object through FUN_5897CC4E and initializes it from receiver fields +4, +8, and +0xCC through FUN_5875A7E0. It passes its input pointer and a stack-local record through callback 0x5898C198 and FUN_5875A4B0, clears masks 0x8000 and 1 on the new object's word +0x24, and inserts the node into the receiver list rooted at +0x138 with tail +0x13C using node links +0x54/+0x50. It increments receiver word +0xF8 and updates the tail. The complete SEH-protected body is 293 bytes, has eight mapped operand targets, and returns with ret 4.",
         "uncertainty": "The receiver and node types, callback and helper contracts, token/input record schema, list-field meanings, flag meanings, and higher-level effect remain unknown. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58831D50",
+      "name": "FUN_58831d50",
+      "size": 203,
+      "symbol": "_FUN_58831d50",
+      "source": "src/client-current/Main/FUN_58831d50.cpp",
+      "source_sha256": "8fb20e1e99096faa3138be5da436dc6c9a97c8cf8fcdad0fe6e14c99fa4c6b36",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5898C194",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "58A245AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "587538B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "58A245AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 153,
+          "target_address": "587538B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "58770A80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58831D50 / bounded dispatcher text update",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both enter this path after checking that the child at receiver +0x154 has mode bits 2, then pass record-derived values and the child receiver.",
+        "behavior": "Copies the supplied source bytes to an 0x800-byte stack buffer through callback 0x5898C194, limiting the copy to 0x800 bytes or the supplied bound plus one. If receiver fields +0xC8 and +0xCC already match the compared input values, it returns without updating the child. Otherwise a null source takes the branch through global object 0x58A245AC and FUN_587538B0, then calls FUN_58731CE0 with receiver field +0xB4 and updates the string child at +0xA4 through FUN_58770A80. A nonnull source calls FUN_587538B0 with receiver field +0x7C, calls FUN_58731CE0, and updates child +0x78 through FUN_58770A80. The complete SEH-protected body is 203 bytes, has ten mapped operand targets, and returns with ret 0x10.",
+        "uncertainty": "The four argument roles beyond the observed source/bound and comparison use, callback 0x5898C194 semantics, global string/resource lookup meaning, child object types, and user-visible effect remain unresolved. Dispatcher evidence establishes the mode-gated call and record-derived values, but not the text's domain meaning. No runtime or emulator test was performed."
+      }
     }
   ]
 }
