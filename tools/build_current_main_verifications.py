@@ -163,6 +163,7 @@ ADDRESSES = (
     "588DCF50",
     "587B4990",
     "588AEEF0",
+    "58755520",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -248,7 +249,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -434,6 +435,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra stopped after pop edi and omitted the remaining register restores
     # and ret 8; the mapped epilogue ends before INT3 padding.
     "588AEEF0": 151,
+    # Ghidra stopped inside a direct call. Include its remaining displacement,
+    # callback/stack cleanup, register restores, and ret before INT3 padding.
+    "58755520": 156,
 }
 EVIDENCE = {
     "587DA120": {
@@ -4863,6 +4867,12 @@ EVIDENCE = {
         "called_by": "Called repeatedly by verified routines FUN_588AEFB0 and FUN_588B1580. They supply a per-call value and a second argument that controls whether receiver field +0x70 is processed.",
         "behavior": "Passes receiver pointers at +0x68 and +0x88 to 0x58902E60 with the first stack argument. When the second argument's low byte equals 1, it also processes +0x70. It then processes 100 pointers from +0x20F8, eight pointers from +0x8C, and three pointers from +0x2418, passing the same first argument to 0x58902E60 for each. Mapped bytes establish a complete 151-byte body ending with pop edi/esi/ebp/ebx and ret 8; four operand targets are checked.",
         "uncertainty": "The helper 0x58902E60 contract, pointer-array element types, first-argument semantics, and meaning of the optional +0x70 path remain unknown. The indexed Ghidra extent was 145 bytes and omitted the six-byte epilogue; raw mapped bytes at 0x588AEF80..0x588AEF86 establish the remaining restores and ret 8 before INT3 alignment. No runtime client or emulator test was performed.",
+    },
+    "58755520": {
+        "name_in_analysis": "FUN_58755520 / indexed object refresh and callback dispatch",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both set ECX to global object 0x58A245E0 and pass record-derived values.",
+        "behavior": "Uses the second stack argument as an index into receiver arrays at +0x10 and +0x20, bounded by count +0x0C. On an in-range index, a non-null existing pointer at +0x20[index] is passed to callback thunk 0x5897CC42 and cleared. It then marks +0x10[index] as 1, obtains a replacement through 0x5897152E using the fourth stack argument, stores it at +0x20[index], and dispatches the replacement and supplied values through thunk 0x5897CD4C. The out-of-range path also marks the status, allocates/stores a replacement, and dispatches it. The complete mapped body is 156 bytes with five operand targets and ends in ret 0x10.",
+        "uncertainty": "The receiver arrays' roles, status value meaning, allocation size/ownership, replacement object type, callback contracts, and domain purpose of the index remain unknown. Both verified callers establish message/event update contexts but not server-side semantics. The Ghidra extent was 143 bytes and ended on the first byte of a direct call; the corrected extent includes the call tail and full epilogue through 0x587555BB before INT3 padding. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

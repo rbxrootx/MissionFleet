@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,915
-identified code bytes across six report units. There are 7,223 verified matches
-totaling 2,283,989 bytes (21.8148%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,928
+identified code bytes across six report units. There are 7,224 verified matches
+totaling 2,284,145 bytes (21.8162%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -60,6 +60,8 @@ The linked-entry append helper is documented in
 [`docs/current-main-linked-entry-append-587b4990.md`](docs/current-main-linked-entry-append-587b4990.md).
 The corrected bulk pointer cleanup extent is documented in
 [`docs/current-main-bulk-pointer-cleanup-588aeef0.md`](docs/current-main-bulk-pointer-cleanup-588aeef0.md).
+The corrected indexed-object refresh extent is documented in
+[`docs/current-main-indexed-object-refresh-58755520.md`](docs/current-main-indexed-object-refresh-58755520.md).
 The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in
