@@ -227,6 +227,12 @@ checked. Ghidra's decompilation shows the base setup followed by writes to
 constructions and field/flag initialization. Its parameter types, child
 layouts, and helper contracts remain uncertain, and there is no runtime visual
 capture. See [`FUN_58763890.cpp`](../src/client-current/Main/FUN_58763890.cpp).
+Its four child-setup sites call the now matched 103-byte helper
+`FUN_5875F0E0`. The helper requests 0x20 bytes through `FUN_5897CC4E`, calls
+the already matched constructor `FUN_58907AC0` for a successful allocation,
+and stores the returned pointer at its receiver's `+0x180` field. Its exact
+bytes and all four call edges are verified; the child class and field role are
+still unknown.
 Its shared child constructor, `FUN_58731C60`, now matches its single
 95-byte Ghidra range, with one relocation operand checked. Ghidra records 402
 direct-call references, including two calls from `FUN_58763890`. Its body calls

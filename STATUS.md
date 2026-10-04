@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,631
-identified code bytes across six report units. There are 6,845 verified matches
-totaling 2,149,536 bytes (20.5312%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,846 verified matches
+totaling 2,149,639 bytes (20.5321%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -806,6 +806,10 @@ The cached `FUN_5876BAF0` initializer adds 233 bytes and has 662 direct-call
 references across 166 callers, including that message path.
 Its directly called `FUN_58763890` constructor adds 1,757 bytes across one
 contiguous range.
+Its four child setup callsites now share the matched 103-byte helper
+`FUN_5875F0E0`, which allocates a 0x20-byte object and invokes the verified
+constructor `FUN_58907AC0`; all four direct call edges and both helper callees
+are verified.
 The shared `FUN_58751BF0` text routine adds 655 bytes across one range and is
 called by the `0x80023107` notification path; its downstream
 `FUN_58751A60` helper adds 387 bytes across two ranges. Its paired tree-field

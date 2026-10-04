@@ -74,6 +74,7 @@ ADDRESSES = (
     "58735110", "588996D0", "58748180",
     "58791E20", "58901AE0", "5897CC84",
     "58901790", "5873EFE0", "58901A10", "58901AB0", "5873C470", "58901A40",
+    "5875F0E0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -235,6 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58735110", "588996D0", "58748180",
     "58791E20", "58901AE0", "5897CC84",
     "58901790", "5873EFE0", "58901A10", "58901AB0", "5873C470", "58901A40",
+    "5875F0E0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -2941,6 +2943,12 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58901AE0.",
         "behavior": "Moves eight-byte elements backward in place to make room in the buffer, copying each element's two words.",
         "uncertainty": "The element schema and caller-level insertion conditions are unresolved. The 62-byte body returns with ret.",
+    },
+    "5875F0E0": {
+        "name_in_analysis": "FUN_5875f0e0",
+        "called_by": "Called four times by the matched initializer 0x58763890 at distinct Ghidra callsites.",
+        "behavior": "Allocates a 0x20-byte object through 0x5897CC4E, invokes constructor 0x58907AC0 with the supplied value when allocation succeeds, then stores the resulting pointer at receiver offset +0x180.",
+        "uncertainty": "The child object's class name and field role remain unresolved. The complete 103-byte body decodes through ret 4.",
     },
 }
 
