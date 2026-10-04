@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4848,6 +4848,18 @@ EVIDENCE = {
         "called_by": "Called from message-dispatch case 0x80020F0C in verified handlers FUN_587BB700 and FUN_588C1650 when packet identity matches DAT_58A0B4A0 and the global state is 5 or 6. Both paths allocate and zero a 0x54-byte record, copy two packet words into its first two fields, and pass it here. The formatting path uses the mapped string key MESSAGESTRING__SQAUDRON_FLEET_JOIN_PROPOSE at 0x5899E2DC.",
         "behavior": "Calls FUN_58753BF0 with the record's first two dwords and global 0x58A245AC. On a zero result it sets receiver byte +0x321 to 6 and calls FUN_587B9290 with the same pair and global 0x58A24588. Otherwise it formats text from incoming record +0x24 using the key at 0x5899E2DC and dispatches it through FUN_5881E2E0. It then searches receiver-owned pointer and 0x54-byte-record collections, comparing bytes at record +0x2D through callback 0x5898C1A4; on the observed insertion path it calls FUN_58849980 and FUN_58836AF0. If receiver flags at +0x24 masked by 0x1F00 equal 0x200, it invokes FUN_589088D0 on receiver fields +0x24C/+0x250/+0x254 and updates +0x220 using collection counts. The complete mapped extent is 649 bytes ending in ret 4, followed by seven INT3 bytes before the next indexed function; 38 operand targets are checked.",
         "uncertainty": "The meanings of packet fields, the lookup helper's result, collection roles, key at record +0x2D, flag 0x200, callback contract, and user-visible state effects remain partly unknown. The resource key supports a squadron/fleet-join proposal notification label, but does not establish the full protocol semantics. No emulator test was performed.",
+    },
+    "58753BF0": {
+        "name_in_analysis": "FUN_58753bf0",
+        "called_by": "Directly called by verified handlers FUN_587BB700 and FUN_588C1650 and by FUN_58839460. In the proposal path, FUN_58839460 supplies the two dwords from the incoming 0x54-byte record and uses global 0x58A245AC as the receiver.",
+        "behavior": "Walks receiver storage rooted at +4 between the observed begin/end pointers at +4 and +0x10, using 0x48-byte element strides. It compares the first two dwords of each element with the two supplied values and returns the matching element address; it returns zero when the end is reached without a match. It checks the observed pointer/capacity relationships through 0x5897CC72. The mapped body is 197 bytes and ends in ret 8; objdiff compares all bytes and reports no separate relocation entries for this function.",
+        "uncertainty": "The receiver's container type, record schema, field meanings, and the distinction represented by a failed lookup are unknown. No standard-library identity is assigned; no runtime test was performed.",
+    },
+    "587B9290": {
+        "name_in_analysis": "FUN_587b9290",
+        "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 in state-7 paths and by FUN_58839460 after the lookup at FUN_58753BF0 returns zero, where the caller first sets receiver byte +0x321 to 6.",
+        "behavior": "Forwards the two stack arguments, three zero values, and constant event code 0x80010F06 to FUN_58970C70, then returns with ret 8. Its complete mapped body is 29 bytes and has one operand target.",
+        "uncertainty": "The contract of FUN_58970C70 and the protocol meaning of event code 0x80010F06 are not identified; the callers' state changes do not establish whether the event is local, network-facing, or user-visible. No runtime test was performed.",
     },
 }
 
