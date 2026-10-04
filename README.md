@@ -62,6 +62,9 @@ The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
 The latest current Main.dll fixed-record copy path is documented in
 [the Main record-copy notes](docs/current-main-record-copy.md).
+The original `Logo.spr` startup and login art now has a reproducible
+[RGB16 visual-path check](docs/current-client-logo-sprite-visual.md) against
+the installed asset and matched loader/compositor methods.
 The latest keyed 0x3C8-byte record refresh/insertion path is documented in
 [the keyed-record notes](docs/current-main-keyed-record-refresh-58786b40.md).
 The latest three-child state update path is documented in

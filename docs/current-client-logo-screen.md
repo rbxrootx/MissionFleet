@@ -15,6 +15,9 @@ base, `CMenuScreen`, and logo-screen vtables; it loads `Logo.spr`, `IMGLDN.spr`,
 the controls below. The caller that allocates/registers this screen is not yet
 traced. Sprite parsing for the `Logo.spr` path is documented separately in
 [`current-client-sprite-loader.md`](current-client-sprite-loader.md).
+The first two installed `Logo.spr` frames are rendered and cross-checked
+through the opaque RGB16 path in
+[the visual-path evidence](current-client-logo-sprite-visual.md).
 
 The direct constructor/helper slice is:
 

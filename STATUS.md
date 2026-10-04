@@ -28,6 +28,10 @@ Its portable event model now checks the linked-action callback order and
 the reset's resulting position and flag changes together.
 The ID-panel input method and its separately verified key jump table are
 recorded in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
+The installed `Logo.spr` startup and login frames have a reproducible
+[RGB16 visual-path check](docs/current-client-logo-sprite-visual.md), including
+pixel agreement between two independent decoded/composited paths. It is
+asset-frame validation, not a bootable client or original-framebuffer comparison.
 Its periodic movement and bounded two-list batch path are recorded in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
 The update path now has a portable receiver-local motion model with tested
