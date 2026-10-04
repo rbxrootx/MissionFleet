@@ -307603,6 +307603,318 @@
         "behavior": "Scans up to 0x200 records at 0x18-byte stride from +0x1820 and examines the difference between fields at +0x182C and +0x1830. On nonempty paths it adjusts record ranges with FUN_5897CC72 and retrieves indexed pointers through FUN_588EAF30.",
         "uncertainty": "The return value and exact record-ready predicate have not been exercised at runtime; only the original branch and call structure are recorded."
       }
+    },
+    {
+      "address": "588E9590",
+      "name": "FUN_588e9590",
+      "size": 39,
+      "symbol": "_FUN_588e9590",
+      "source": "src/client-current/Main/FUN_588e9590.cpp",
+      "source_sha256": "38d5ea77e45a8cf53b379e3007d5576f179aa4927ba0b61be5c1ee75d3a138df",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 32,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9590 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this same receiver method at eight case sites: 0x587E055B, 0x587E0579, 0x587E067D, 0x587E069B, 0x587E074F, 0x587E0781, 0x587E0876, and 0x587E089F.",
+        "behavior": "Computes a word destination from two stack indices and stores the third stack value there; when the fourth argument is nonzero, calls FUN_588E8570 to refresh the receiver. Returns with ret 0x10.",
+        "uncertainty": "The destination fields appear within the receiver block at +0xAC0 and onward; the indices and word payload meaning remain unresolved."
+      }
+    },
+    {
+      "address": "588E9700",
+      "name": "FUN_588e9700",
+      "size": 156,
+      "symbol": "_FUN_588e9700",
+      "source": "src/client-current/Main/FUN_588e9700.cpp",
+      "source_sha256": "1ee06ab297747c58731fcb4153743220ca177efc3d7ade933021ef3ebef5a7a2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58778F30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58778D60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58778D00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9700 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this method from dispatcher cases at 0x587E044E, 0x587E0509, 0x587E0597, 0x587E0637, 0x587E0866, and 0x587E08E0.",
+        "behavior": "Dispatches key values 5, 6, and 13 to global helper calls 0x58778D00, 0x58778D60, and 0x58778F30, storing the returned pointer at receiver +0xB40 plus index*4; other keys clear that entry. It clears related per-index pointer entries at +0xBC0/+0xBC4, writes 0xAA to per-index words at +0xAC0/+0xAC2, optionally refreshes through FUN_588E8570, and returns with ret 0x0C.",
+        "uncertainty": "Key meanings and the resolved pointer types are unknown; the notes preserve the original branch constants and receiver offsets."
+      }
+    },
+    {
+      "address": "588E97A0",
+      "name": "FUN_588e97a0",
+      "size": 124,
+      "symbol": "_FUN_588e97a0",
+      "source": "src/client-current/Main/FUN_588e97a0.cpp",
+      "source_sha256": "7cdf8cf19f13e8c092af67b9bf4086572e4a82e0479623c04377af2b510cf2b9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 46,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58778E20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e97a0 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this method from dispatcher cases at 0x587E054A, 0x587E0568, 0x587E066C, 0x587E068A, 0x587E073F, and 0x587E07B0.",
+        "behavior": "Dispatches key values 11 and 12 to global helper calls 0x58778DC0 and 0x58778E20, storing the returned pointer in an indexed receiver field rooted at +0xBC0; other keys clear that field. Optionally refreshes through FUN_588E8570 and returns with ret 0x10.",
+        "uncertainty": "The two key values, index dimensions, and pointer types have not been identified."
+      }
+    },
+    {
+      "address": "588E9820",
+      "name": "FUN_588e9820",
+      "size": 43,
+      "symbol": "_FUN_588e9820",
+      "source": "src/client-current/Main/FUN_588e9820.cpp",
+      "source_sha256": "a4e886a87cf598bbe2b78f6a06e28fa8187572602d5b55663cf9918c3c14f6b4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 15,
+          "target_address": "58778BE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9820 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this method at 0x587E06B2 and 0x587E06FE.",
+        "behavior": "Passes one stack argument to global helper 0x58778BE0, stores the result at receiver +0xCC8, optionally calls FUN_588E8570, and returns with ret 8.",
+        "uncertainty": "The input and result types and the optional refresh flag meaning are unresolved."
+      }
+    },
+    {
+      "address": "588E9850",
+      "name": "FUN_588e9850",
+      "size": 43,
+      "symbol": "_FUN_588e9850",
+      "source": "src/client-current/Main/FUN_588e9850.cpp",
+      "source_sha256": "af4b59455586c7d5e71854c8e78b467acb93e888db4fde3eec30585e0176b335",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 15,
+          "target_address": "58778CA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9850 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this method at 0x587E039E and 0x587E041F.",
+        "behavior": "Passes one stack argument to global helper 0x58778CA0, stores the result at receiver +0xCCC, optionally calls FUN_588E8570, and returns with ret 8.",
+        "uncertainty": "The input and result types and the optional refresh flag meaning are unresolved."
+      }
+    },
+    {
+      "address": "588E9880",
+      "name": "FUN_588e9880",
+      "size": 82,
+      "symbol": "_FUN_588e9880",
+      "source": "src/client-current/Main/FUN_588e9880.cpp",
+      "source_sha256": "a590a59e8394fbebbfa993b44df0835c18345546746c202182fcde90a730ad47",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 27,
+          "target_address": "5877C660",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "588ECEA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "588730F0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9880 / FUN_587E0090 tag-dispatch helper",
+        "called_by": "FUN_587E0090 calls this method at 0x587E026D and 0x587E0349.",
+        "behavior": "Walks 32 pointer fields beginning at receiver +0x9A4 and calls FUN_5877C660 with arguments 0 and -1 for each nonnull entry; refreshes through FUN_588E8570; then calls FUN_588ECEA0 on global receiver 0x58A24598 field +0xDAC and tail-jumps to FUN_588730F0 with that receiver field +0xDB4.",
+        "uncertainty": "The 32 pointer fields and child receiver meanings are not established; behavior is limited to observed call order and offsets."
+      }
     }
   ]
 }
