@@ -52,10 +52,24 @@ void receiverLookup() {
     assert(log.calls == 4);
 }
 
+void dualReceiverHeadsStayDistinct() {
+    MissionFleetNameNode low{"Alpha", nullptr};
+    MissionFleetNameNode high{"Bravo", nullptr};
+    MissionFleetDualNameLists lists{&low, &high};
+    CompareLog log;
+    assert(MissionFleet_FindNameAt64(&lists, "Alpha", compare, &log) == &low);
+    assert(MissionFleet_FindNameAt6C(&lists, "Bravo", compare, &log) == &high);
+    assert(log.calls == 2);
+    assert(MissionFleet_FindNameAt64(&lists, "Bravo", compare, &log) == nullptr);
+    assert(MissionFleet_FindNameAt6C(&lists, "Alpha", compare, &log) == nullptr);
+    assert(log.calls == 4);
+}
+
 }  // namespace
 
 int main() {
     globalSelection();
     receiverLookup();
+    dualReceiverHeadsStayDistinct();
     std::cout << "linked name lookup: passed\n";
 }

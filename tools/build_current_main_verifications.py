@@ -205,6 +205,7 @@ ADDRESSES = (
     "587B5F50",
     "588AA0D0", "588AA120",
     "588A44A0", "58842F60",
+    "58848380", "588483D0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -319,6 +320,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
     "588A44A0", "58842F60",
+    "58848380", "588483D0",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -511,6 +513,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58848380": {
+        "name_in_analysis": "FUN_58848380 / receiver +0x6C linked-name lookup",
+        "called_by": "Called by verified FUN_5881E2E0 and FUN_58847770 with a selected child receiver in ECX and one stack query pointer.",
+        "behavior": "Reads list head at receiver +0x6C and returns null when empty. Otherwise follows node +0x54 links, reads nested name through node +0x70 then +0x6C, and calls function pointer at absolute 0x5898C1A4 with query and name. It returns the first node when the comparison result is zero, or null after the list. The complete body is 69 bytes with one absolute comparator operand target and ret 4.",
+        "uncertainty": "The list's role, comparator collation, ownership, and invalid-pointer behavior remain unknown. The helper is instruction-identical to FUN_588483D0 except for the receiver head offset. No runtime client test was performed.",
+    },
+    "588483D0": {
+        "name_in_analysis": "FUN_588483D0 / receiver +0x64 linked-name lookup",
+        "called_by": "Called by verified FUN_5881E2E0 and FUN_58847770 with a selected child receiver in ECX and one stack query pointer.",
+        "behavior": "Reads list head at receiver +0x64 and returns null when empty. Otherwise follows node +0x54 links, reads nested name through node +0x70 then +0x6C, and calls function pointer at absolute 0x5898C1A4 with query and name. It returns the first node when the comparison result is zero, or null after the list. The complete body is 69 bytes with one absolute comparator operand target and ret 4.",
+        "uncertainty": "The list's role, comparator collation, ownership, and invalid-pointer behavior remain unknown. The helper is instruction-identical to FUN_58848380 except for the receiver head offset. No runtime client test was performed.",
+    },
     "588A44A0": {
         "name_in_analysis": "FUN_588A44A0 / global linked-name selection",
         "called_by": "Called by verified FUN_588450B0 and FUN_58890110 with one stack query pointer and a receiver in ECX.",

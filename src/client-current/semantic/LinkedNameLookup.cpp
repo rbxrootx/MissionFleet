@@ -28,3 +28,19 @@ extern "C" MissionFleetNameNode* MissionFleet_FindReceiverName(
     }
     return nullptr;
 }
+
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt64(
+    const MissionFleetDualNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept {
+    return MissionFleet_FindReceiverName(receiver->at64, query, compare, context);
+}
+
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt6C(
+    const MissionFleetDualNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept {
+    return MissionFleet_FindReceiverName(receiver->at6C, query, compare, context);
+}

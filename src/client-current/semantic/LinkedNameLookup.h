@@ -15,6 +15,11 @@ struct MissionFleetNameManager {
     MissionFleetNameNode* head;  // Original global manager +0x90.
 };
 
+struct MissionFleetDualNameLists {
+    MissionFleetNameNode* at64;  // Original receiver +0x64.
+    MissionFleetNameNode* at6C;  // Original receiver +0x6C.
+};
+
 using MissionFleetNameCompare = int (*)(const char* query,
                                          const char* candidate,
                                          void* context) noexcept;
@@ -25,6 +30,16 @@ extern "C" void MissionFleet_SelectGlobalName(
     const char* query) noexcept;
 extern "C" MissionFleetNameNode* MissionFleet_FindReceiverName(
     MissionFleetNameNode* head,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept;
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt64(
+    const MissionFleetDualNameLists* receiver,
+    const char* query,
+    MissionFleetNameCompare compare,
+    void* context) noexcept;
+extern "C" MissionFleetNameNode* MissionFleet_FindNameAt6C(
+    const MissionFleetDualNameLists* receiver,
     const char* query,
     MissionFleetNameCompare compare,
     void* context) noexcept;

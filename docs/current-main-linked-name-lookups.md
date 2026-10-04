@@ -21,10 +21,21 @@ modifying the receiver. Its
 [instruction source](../src/client-current/Main/FUN_58842f60.cpp) matches
 all 69 bytes, including the absolute comparator-pointer target.
 
+Verified `FUN_5881E2E0` and `FUN_58847770` call two more lookups on their
+selected child. [`FUN_58848380`](../src/client-current/Main/FUN_58848380.cpp)
+reads the list head at child `+0x6C`, while
+[`FUN_588483D0`](../src/client-current/Main/FUN_588483d0.cpp) reads `+0x64`.
+Both then follow the same node links and call the same comparator with query
+and nested name, returning the first equal node or null. Each complete body
+matches 69 bytes with the comparator pointer at `0x5898C1A4` checked. The
+two original byte sequences differ only at byte offset 3: `0x6C` versus
+`0x64` for the head field.
+
 The [portable C++ model](../src/client-current/semantic/LinkedNameLookup.cpp)
 and [native cases](../tests/native/linked_name_lookup_test.cpp) check match,
-miss, null-query and empty-list behavior, receiver mutation, and comparator
-argument order. Run `python tools/verify_linked_name_lookup.py`. The model
+miss, null-query and empty-list behavior, receiver mutation, comparator
+argument order, and distinct `+0x64`/`+0x6C` heads. Run
+`python tools/verify_linked_name_lookup.py`. The model
 uses `strcmp` for the inline equality path and an injected comparator for the
 indirect path; it is not a byte-identical source. The comparator's identity,
 string encoding, object roles, and invalid-pointer behavior remain unknown.
