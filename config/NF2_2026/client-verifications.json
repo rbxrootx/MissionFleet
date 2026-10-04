@@ -298505,6 +298505,69 @@
         "behavior": "Clears a local 0x48-byte buffer. When a text pointer read from the caller's surrounding stack data is non-null, it copies up to 0x17 non-NUL bytes into the buffer at offset +0x30 and terminates the result. It clears a 0x49-byte local area, copies the full 0x48-byte buffer into it, and calls FUN_58970C70 with selector 0x8001B111, zero, the first stack argument, and the local payload. If the text pointer is null, it calls FUN_58970C70 with the same selector and the first stack argument alongside zero fields. It returns with ret 8; the complete extent is 220 bytes.",
         "uncertainty": "The text and caller-frame record layouts, meaning of the three flag masks, receiver type, payload schema, and user-visible meaning of selector 0x8001B111 are unknown. The event caller's branch values do not establish domain labels. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "587E98A0",
+      "name": "FUN_587e98a0",
+      "size": 216,
+      "symbol": "_FUN_587e98a0",
+      "source": "src/client-current/Main/FUN_587e98a0.cpp",
+      "source_sha256": "d63abadfbb6ca0fdbdb2e66f1362069496863959725704f56be422d6aadf9809",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 32,
+          "target_address": "58788620",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "58902C20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58902C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e98a0 / nested renderer-state cleanup helper",
+        "called_by": "Called by mapped resource initializer FUN_58800360 after both 0x58902C20/0x58902C70 child operations, and by battle-object update FUN_587FD890 after a virtual update call. Both callers set ECX to the owning receiver.",
+        "behavior": "When receiver +0x218C4 is zero and receiver word +0x105F0 equals 0x0F, invokes 0x58788620 on the child at +0x21C4C. Calls 0x58902C20 and 0x58902C70 on child +0x10524. If nested state +0x218A4 exists, iterates count +0x2179C in 0xD4-byte steps, frees each non-null entry pointer at element +0xCC through 0x5897CC42, clears each slot, then frees and clears the containing allocation. It also frees and clears +0x218A8. Finally, if child +0x10524 has a nested object at +0x3C, compares its +0x38 field against owner +0x104F8+0x3C and conditionally invokes that nested object's first vtable slot with argument 1. The indexed body is 216 bytes and has six mapped operand targets.",
+        "uncertainty": "The owner class, +0x10524 child roles, meaning of +0x218A4/+0x218A8 allocations, nested vtable contract, and lifecycle trigger are unresolved; caller context shows resource initialization and battle update but does not prove a render-visible effect. A branch targets shared code at 0x587E9980 outside the indexed 216-byte extent. No runtime or emulator test was performed."
+      }
     }
   ]
 }
