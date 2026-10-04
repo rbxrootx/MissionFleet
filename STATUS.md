@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,817
-identified code bytes across six report units. There are 7,134 verified matches
-totaling 2,257,354 bytes (21.5606%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,135 verified matches
+totaling 2,257,575 bytes (21.5627%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -42,9 +42,10 @@ weapon-fire paths), `FUN_58755170` (a 932-byte handler for message
 `FUN_58847770` (a 718-byte handler called for message `0x80020F02`), and
 `FUN_5877adc0` (a 700-byte selector-driven `CForce` child setup method), and
 `FUN_588391b0` (a 677-byte two-collection update called after the fleet-join
-proposal notification path). Together, the six functions add 5,021
-byte-matched bytes. Their field and helper meanings remain partially unknown;
-no emulator test was performed. See
+proposal notification path), and `FUN_588ebfa0` (a 221-byte ranged selector
+update used by three verified state handlers). Together, the seven functions
+add 5,242 byte-matched bytes. Their field and helper meanings remain partially
+unknown; no emulator test was performed. See
 [`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
 [`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md),
 [`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md),
@@ -53,6 +54,8 @@ no emulator test was performed. See
 The corrected function extent, mapped epilogue, and remaining uncertainties
 for `FUN_588391b0` are recorded in
 [`docs/current-main-fleet-join-proposal-record-update.md`](docs/current-main-fleet-join-proposal-record-update.md).
+The selector's caller values and verified control flow are recorded in
+[`docs/current-main-ranged-selector-update.md`](docs/current-main-ranged-selector-update.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
