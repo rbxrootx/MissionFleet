@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5873A2E0": {
+        "name_in_analysis": "FUN_5873a2e0",
+        "called_by": "Called twice by 0x587E0090, twice by 0x587E3080, and once by 0x588B1580. Callers pass a pointer in one stack argument and preserve their receiver in ECX.",
+        "behavior": "Reads two DWORDs from argument offsets +0 and +4, pushes them in the order expected by 0x58903290, and calls it with the incoming ECX receiver. The mapped callee stores the values at receiver offsets +4 and +8, computes deltas against prior values, then conditionally traverses the linked objects at receiver +0x3C and invokes 0x58902E10 for nodes whose word at +0x24 has bit 0x2000 set. The wrapper returns with ret 4.",
+        "uncertainty": "The input record type, receiver type, meanings of the updated fields and flag, and domain-level effect are unresolved. Caller contexts show only that the values are produced from larger object operations. The complete 19-byte wrapper has one mapped call target; no runtime test was performed.",
+    },
     "587E0090": {
         "name_in_analysis": "FUN_587e0090",
         "called_by": "Called 13 times from 0x587BB700 and 7 times from 0x588C4210. Both callers load receiver 0x58A24598 into ECX; 0x588C4210 visibly supplies six stack arguments, consistent with the callee's ret 0x18.",

@@ -289884,6 +289884,39 @@
         "behavior": "Saves the receiver, performs an indirect call through the object at receiver +0xDB0 using its vtable slot +0x08, then dispatches on a byte selector from the stack argument tuple. Selector values 1 through 14 enter the corresponding jump-table body; other values take the default path. The function cleans six 32-bit stack arguments on return. Candidate extent: 2,297 bytes with 135 mapped operand targets.",
         "uncertainty": "The selector's domain name, the meanings of all 14 cases, stack argument types, the +0xDB0 subobject type, and higher-level effect are unresolved. Cases call many helpers and access global state; no gameplay labels are inferred from that alone. The external jump/selector tables are referenced by the function but lie outside its indexed body. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "5873A2E0",
+      "name": "FUN_5873a2e0",
+      "size": 19,
+      "symbol": "_FUN_5873a2e0",
+      "source": "src/client-current/Main/FUN_5873a2e0.cpp",
+      "source_sha256": "c85f04c6a56a55542f082b56184148addf11143380590d6853bc83d51db8e193",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873a2e0",
+        "called_by": "Called twice by 0x587E0090, twice by 0x587E3080, and once by 0x588B1580. Callers pass a pointer in one stack argument and preserve their receiver in ECX.",
+        "behavior": "Reads two DWORDs from argument offsets +0 and +4, pushes them in the order expected by 0x58903290, and calls it with the incoming ECX receiver. The mapped callee stores the values at receiver offsets +4 and +8, computes deltas against prior values, then conditionally traverses the linked objects at receiver +0x3C and invokes 0x58902E10 for nodes whose word at +0x24 has bit 0x2000 set. The wrapper returns with ret 4.",
+        "uncertainty": "The input record type, receiver type, meanings of the updated fields and flag, and domain-level effect are unresolved. Caller contexts show only that the values are produced from larger object operations. The complete 19-byte wrapper has one mapped call target; no runtime test was performed."
+      }
     }
   ]
 }
