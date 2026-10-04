@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,109 verified matches
-totaling 2,242,438 bytes (21.4182%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,111 verified matches
+totaling 2,242,526 bytes (21.4190%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -136,6 +136,15 @@ zeros `+0x78`, and clears bit `0x4` in the word at `+0x24`. A neighboring
 six-byte helper sets that bit. Callers apply the clear across child groups;
 field and flag meanings remain unknown. The complete body matches with no
 mapped operand targets.
+
+The latest paired accumulator update is `FUN_588DCE50` plus its tail-call
+helper `FUN_587E7920`, verified for 59 and 29 bytes respectively. The first
+applies a 32-bit delta to the receiver's XOR-encoded field at `+0x126C`; when
+the receiver matches the active-object pointer at global `0x58A247F8+4`, it
+forwards the same delta to `0x587E7920`, which updates the global object's
+XOR-encoded field at `+0x21CA8` using its `+0x21C94` salt. The first body's
+three mapped operands and the complete helper body match. Both accumulators'
+semantic roles remain unknown.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

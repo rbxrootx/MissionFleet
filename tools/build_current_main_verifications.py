@@ -43,7 +43,8 @@ ADDRESSES = (
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
-    "58908600", "587CC700", "58731590", "5875F320",
+    "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
+    "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -235,7 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
-    "587CC700", "58731590", "5875F320",
+    "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -400,6 +401,18 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588DCE50": {
+        "name_in_analysis": "FUN_588dce50",
+        "called_by": "Directly called by three verified functions: 0x5873F020, 0x587A90D0, and 0x587EFD60. The last contains three callsites; observed deltas include zero and values read from caller-owned fields. Other callers pass a computed value and 100 times a caller value, respectively.",
+        "behavior": "Takes one 32-bit delta. It updates receiver +0x126C as ((oldValue XOR 0xAAAAAAAA) + delta) XOR 0xAAAAAAAA. If receiver equals the +4 field of the object at 0x58A247F8, it loads 0x58A2459C and tail-jumps to 0x587E7920 with the same delta. That helper updates its receiver +0x21CA8 as ((oldValue XOR receiver +0x21C94) + delta) XOR receiver +0x21C94. Both arithmetic updates wrap as 32-bit operations.",
+        "uncertainty": "The meanings and units of both accumulators, the receiver class, and the global object's role are unknown. Caller evidence shows computed and field-sourced deltas but does not identify a resource, score, or gameplay label. The complete 59-byte extent has three mapped operand targets.",
+    },
+    "587E7920": {
+        "name_in_analysis": "FUN_587e7920",
+        "called_by": "Tail-called by 0x588DCE50 only when that routine's receiver equals the +4 field of the object at 0x58A247F8.",
+        "behavior": "Takes one 32-bit delta and updates receiver +0x21CA8 as ((oldValue XOR receiver +0x21C94) + delta) XOR receiver +0x21C94, then returns with ret 4. The arithmetic uses 32-bit wrapping.",
+        "uncertainty": "The receiver class and semantic meaning or units of the encoded accumulator and salt field +0x21C94 are unknown. The complete 29-byte extent has no mapped operand targets.",
+    },
     "5875F320": {
         "name_in_analysis": "FUN_5875f320",
         "called_by": "Directly called by four verified functions: 0x587977B0, 0x5879B3B0, 0x5879D630, and 0x5879DD90. The first caller iterates a 40-control group, 0x5879B3B0 loops over 48 entries, and 0x5879DD90 has repeated calls in its child path.",
