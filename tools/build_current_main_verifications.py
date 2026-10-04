@@ -130,6 +130,7 @@ ADDRESSES = (
     "58743A10",
     "5888B990",
     "5897CE4A", "5897CE56", "5897CE3E",
+    "5875F4B0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -347,6 +348,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58743A10",
     "5888B990",
     "5897CE4A", "5897CE56", "5897CE3E",
+    "5875F4B0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4205,6 +4207,12 @@ EVIDENCE = {
         "called_by": "Directly called by 0x5888B990 at 0x5888BA17 during child setup; also called by other installed-client functions.",
         "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C250.",
         "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
+    },
+    "5875F4B0": {
+        "name_in_analysis": "FUN_5875f4b0",
+        "called_by": "Directly called by 0x5881C730 at 0x5881CBD6 while constructing a startup child object.",
+        "behavior": "Calls 0x58907100 on the receiver, XORs receiver fields +0x60/+0x50/+0x64 with one stack argument, stores another argument at +0xFC, installs vtable pointer 0x5898DA70, returns the receiver, and removes 0x18 argument bytes.",
+        "uncertainty": "The object's class, the roles of the mutated fields and stack arguments, and vtable method identities are unresolved. The complete 66-byte body decodes.",
     },
 }
 

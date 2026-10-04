@@ -283948,6 +283948,45 @@
         "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C250.",
         "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly."
       }
+    },
+    {
+      "address": "5875F4B0",
+      "name": "FUN_5875f4b0",
+      "size": 66,
+      "symbol": "_FUN_5875f4b0",
+      "source": "src/client-current/Main/FUN_5875f4b0.cpp",
+      "source_sha256": "5c9c615323f68bc88e4851bac81714f8b5ea60ef10988b568afde6bf483221ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "58907100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5898DA70",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875f4b0",
+        "called_by": "Directly called by 0x5881C730 at 0x5881CBD6 while constructing a startup child object.",
+        "behavior": "Calls 0x58907100 on the receiver, XORs receiver fields +0x60/+0x50/+0x64 with one stack argument, stores another argument at +0xFC, installs vtable pointer 0x5898DA70, returns the receiver, and removes 0x18 argument bytes.",
+        "uncertainty": "The object's class, the roles of the mutated fields and stack arguments, and vtable method identities are unresolved. The complete 66-byte body decodes."
+      }
     }
   ]
 }
