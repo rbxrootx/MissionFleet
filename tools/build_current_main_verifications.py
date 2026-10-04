@@ -39,7 +39,7 @@ ADDRESSES = (
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
-    "5877ABA0", "588EBEB0", "5890BD90",
+    "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -227,7 +227,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90",
+    "588EBEB0", "5890BD90", "588DCDD0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -392,6 +392,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588DCDD0": {
+        "name_in_analysis": "FUN_588dcdd0",
+        "called_by": "Directly called by five verified functions: 0x5877EC80, 0x58782CF0, 0x587A90D0, 0x587EFD60, and 0x587F2DD0. The first, second, fourth, and fifth contain repeated callsites.",
+        "behavior": "Takes selector and signed delta arguments. For selectors 0 and 1, subtracts the delta from receiver offsets +0x128C and +0x1290; for selectors 2 through 5, adds it to +0x1294, +0x1298, +0x129C, and +0x12A0 respectively. Selectors above 5 skip the local field update. It then compares receiver with the +4 field of the object at 0x58A247F8; on equality, it loads receiver 0x58A2459C and tail-jumps to 0x587E7710 with the original two arguments. Otherwise returns with ret 8.",
+        "uncertainty": "The receiver class, meaning and units of the six fields, selector names, and purpose of the conditional forwarding are unresolved. Caller evidence confirms numeric selectors and deltas but does not identify the fields' domain semantics. The complete 101-byte Ghidra extent is decoded.",
+    },
     "5890BD90": {
         "name_in_analysis": "FUN_5890bd90",
         "called_by": "Directly called by five verified functions: 0x587B83E0, 0x587EFD60, 0x587FAEC0, 0x587FC9C0, and 0x587FD890. Several callers contain repeated callsites.",

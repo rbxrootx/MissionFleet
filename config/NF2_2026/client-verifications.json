@@ -287519,6 +287519,51 @@
         "behavior": "Computes the signed quotient of (receiver +0x20 minus receiver +0x18) divided by receiver +0x5C. It compares receiver +0x88 against that quotient and receiver +0x98; when the observed out-of-range branches are taken, it calls 0x58902E10 with receiver and values derived from +0x5C, subtracts +0x5C from +0x20, calls 0x589081E0 with zero, invokes the function pointer at 0x5898C42C, and stores its return at +0x94. It then calls 0x58902E10 with the negated +0x5C, restores +0x20 by +0x5C, calls the same function pointer with the second stack argument, and passes that argument and callback result to 0x589088D0. Returns with ret 8.",
         "uncertainty": "The receiver's class, units and roles of fields +0x18/+0x20/+0x5C/+0x88/+0x94/+0x98, callback identity, and visible effect are not established. The 121-byte extent is fully covered by decoded instructions; direct callee semantics are only used where separately evidenced, and no runtime client test was performed."
       }
+    },
+    {
+      "address": "588DCDD0",
+      "name": "FUN_588dcdd0",
+      "size": 101,
+      "symbol": "_FUN_588dcdd0",
+      "source": "src/client-current/Main/FUN_588dcdd0.cpp",
+      "source_sha256": "70281ccb0c17536f97612bce2f0713b1b7fb2e8ed7c3e7085d05ab61ba928997",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 69,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "587E7710",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588dcdd0",
+        "called_by": "Directly called by five verified functions: 0x5877EC80, 0x58782CF0, 0x587A90D0, 0x587EFD60, and 0x587F2DD0. The first, second, fourth, and fifth contain repeated callsites.",
+        "behavior": "Takes selector and signed delta arguments. For selectors 0 and 1, subtracts the delta from receiver offsets +0x128C and +0x1290; for selectors 2 through 5, adds it to +0x1294, +0x1298, +0x129C, and +0x12A0 respectively. Selectors above 5 skip the local field update. It then compares receiver with the +4 field of the object at 0x58A247F8; on equality, it loads receiver 0x58A2459C and tail-jumps to 0x587E7710 with the original two arguments. Otherwise returns with ret 8.",
+        "uncertainty": "The receiver class, meaning and units of the six fields, selector names, and purpose of the conditional forwarding are unresolved. Caller evidence confirms numeric selectors and deltas but does not identify the fields' domain semantics. The complete 101-byte Ghidra extent is decoded."
+      }
     }
   ]
 }

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,088 verified matches
-totaling 2,238,510 bytes (21.3807%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,089 verified matches
+totaling 2,238,611 bytes (21.3817%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -37,6 +37,12 @@ five verified functions. It calculates a signed quotient from receiver fields,
 checks indexed state bounds, conditionally updates the receiver and calls three
 observed helpers/callbacks. Field units and the visible effect remain unknown;
 its five relocations match under objdiff.
+
+The latest six-field delta dispatcher is `FUN_588DCDD0`, a 101-byte helper
+called by five verified functions. Selectors 0–1 subtract a delta from fields
+`+0x128C/+0x1290`; selectors 2–5 add it to `+0x1294..+0x12A0`. It forwards to
+`FUN_587E7710` for the observed designated receiver. The fields' domain meaning
+remains unknown; all three relocations match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
