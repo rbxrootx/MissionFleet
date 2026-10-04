@@ -40,10 +40,17 @@ def verify():
         raise ValueError("Incorrect destructor return/padding boundary")
     if data_at(0x588EA54B, 5) != b"\xC2\x04\x00\xCC\xCC":
         raise ValueError("Incorrect deleting-wrapper return/padding boundary")
+    if data_at(0x588EAE15, 6) != bytes.fromhex("C70768149A58"):
+        raise ValueError("Constructor does not install the observed vtable")
+    if data_at(0x588EAF26, 10) != b"\xC3" + b"\xCC" * 9:
+        raise ValueError("Incorrect constructor return/padding boundary")
     return {"class_name": "CShipSpriteFileManager",
             "vtable_slots_checked": 1,
+            "constructor_extent": 327,
             "destructor_extent": 266,
-            "deleting_wrapper_extent": 27}
+            "deleting_wrapper_extent": 27,
+            "storage_methods": {"588EA580": 479, "588EA770": 220,
+                                "588EA850": 133}}
 
 
 if __name__ == "__main__":

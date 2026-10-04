@@ -253155,10 +253155,10 @@
     {
       "address": "588EADE0",
       "name": "FUN_588eade0",
-      "size": 316,
+      "size": 327,
       "symbol": "_FUN_588eade0",
       "source": "src/client-current/Main/FUN_588eade0.cpp",
-      "source_sha256": "b552571ca802d0229d1e5545651020ff942cc15556538fb7466d5b2a052292ad",
+      "source_sha256": "44fd08146337fe8fc72d93b1e5ae65b886e4dcda1d50de790a0679348e93e28e",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -253170,12 +253170,109 @@
         "version": "19.1.4",
         "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
       },
-      "relocations": [],
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898994F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "589A1468",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "587536C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "588FFDB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5897D0BE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "589A14BC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 169,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 194,
+          "target_address": "589A14AC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 228,
+          "target_address": "58752830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 277,
+          "target_address": "58752830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "588EA770",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
       "evidence": {
-        "name_in_analysis": "FUN_588eade0",
-        "called_by": "Directly called at 0x587C3C0F by the matched AllocScreen constructor FUN_587C35A0 after its observed condition check.",
-        "behavior": "Matches the 316-byte Ghidra-indexed function extent in the mapped Main.dll image, emitted as literal bytes because the full extent does not decode contiguously.",
-        "uncertainty": "The exact instruction boundaries and high-level behavior are not recovered; this record establishes only byte identity for the indexed extent."
+        "name_in_analysis": "FUN_588eade0 / CShipSpriteFileManager storage lifecycle",
+        "called_by": "The mapped screen constructor FUN_587C35A0 calls this routine. This routine installs the RTTI-backed CShipSpriteFileManager vtable 0x589A1468, and its state is released by verified destructor FUN_588EA420.",
+        "behavior": "Calls FUN_588FFDB0 on embedded state at +0x1808; initializes 0x200 records of 0x18 bytes at +0x1820 through FUN_5897D0BE; creates and stores two objects at +0x4830 and +0x4834 through FUN_588F3D70; initializes two 0x200-entry arrays at +0x808 and +0x1008 through FUN_58752830; then calls FUN_588EA770 to reset manager state.",
+        "uncertainty": "The meanings and ownership of the two created objects and record fields remain unresolved. The prior 316-byte inventory ended before the stack-restore epilogue and ret; the complete body is 327 bytes through 0x588EAF26, followed by nine CC bytes."
       }
     },
     {
@@ -306779,6 +306876,261 @@
         "called_by": "RTTI-backed CShipSpriteFileManager vtable 0x589A1468 points to this deleting wrapper at slot +0.",
         "behavior": "Calls FUN_588EA420, optionally passes the receiver to FUN_5897CC42 when argument bit 0 is set, and returns the receiver with ret 4 at 0x588EA54B.",
         "uncertainty": "Whether the optional delete helper frees the complete manager allocation has not been confirmed at runtime. The wrapper ends at 0x588EA54C with two following CC bytes."
+      }
+    },
+    {
+      "address": "588EA580",
+      "name": "FUN_588ea580",
+      "size": 479,
+      "symbol": "_FUN_588ea580",
+      "source": "src/client-current/Main/FUN_588ea580.cpp",
+      "source_sha256": "ad6c366cc90986309f252928c952e7e3b2b61eb89ffc981b148f19c94b3091ac",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 34,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "5897CC54",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "588EA75D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 293,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 338,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "588EA75D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 355,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 367,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 384,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 396,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 440,
+          "target_address": "5897CC54",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ea580 / CShipSpriteFileManager storage lifecycle",
+        "called_by": "The routine operates on the manager record block at +0x1820 and adjacent state fields that FUN_588EADE0 initializes and FUN_588EA420 releases.",
+        "behavior": "Uses its index argument to update one 0x18-byte record group based at +0x1820, adjusts the associated entry count at +8, and updates pointer ranges and backing storage through FUN_5897CC72/FUN_5897CC54 plus indirect virtual callbacks. It also handles related state rooted at +0x1808 and +0x1814.",
+        "uncertainty": "No direct code caller was identified in the captured references; its external invocation and the index and record semantics remain unknown. Behavior description stays at observed offsets and calls."
+      }
+    },
+    {
+      "address": "588EA770",
+      "name": "FUN_588ea770",
+      "size": 220,
+      "symbol": "_FUN_588ea770",
+      "source": "src/client-current/Main/FUN_588ea770.cpp",
+      "source_sha256": "a5585fd3e95ff0aa6a8ab961447b86d0953760d73970d68d8723e35a1b8aedf1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "5898C184",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 140,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "587AEDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ea770 / CShipSpriteFileManager storage lifecycle",
+        "called_by": "FUN_588EADE0 calls this reset routine after initializing the CShipSpriteFileManager fields.",
+        "behavior": "Releases the object at +0x4820 through function pointer 0x5898C184, resets +0x4820/+0x4828 to zero and +0x482C to -1, then walks 0x200 entries in arrays rooted at +0x808 and +0x1830 and releases their allocated ranges.",
+        "uncertainty": "The purpose of the index and per-entry buffers is not established; cleanup calls and loops are recorded from the instruction stream."
+      }
+    },
+    {
+      "address": "588EA850",
+      "name": "FUN_588ea850",
+      "size": 133,
+      "symbol": "_FUN_588ea850",
+      "source": "src/client-current/Main/FUN_588ea850.cpp",
+      "source_sha256": "47797c5d82f39d6a2de83b6f19cbbee4820816a8c7ea89e8a5b06dfd8d2c9959",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 42,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "587AEDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ea850 / CShipSpriteFileManager storage lifecycle",
+        "called_by": "It reads the active index at +0x482C and the same record groups rooted at +0x1820 that FUN_588EADE0 initializes and FUN_588EA420 releases.",
+        "behavior": "Uses +0x482C to select a 0x18-byte record group, checks and adjusts its stored ranges through FUN_5897CC72, sets manager state +0x4828 to 1, then calls FUN_587AEDB0, FUN_5876BAF0, and FUN_58764D30.",
+        "uncertainty": "No direct code caller was identified in the captured references; the meaning of the selected record and three follow-up calls remains unresolved."
       }
     }
   ]
