@@ -197,6 +197,7 @@ ADDRESSES = (
     "5877EBB0", "5877EC00", "5877EC30",
     "589072A0", "58907300",
     "58907650",
+    "58782790",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -308,7 +309,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -501,6 +502,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58782790": {
+        "name_in_analysis": "FUN_58782790 / selected object child-flag reset",
+        "called_by": "Called by verified FUN_58782CF0 with its selected object in ECX; verified FUN_588DF450 calls it from a loop over object pointers.",
+        "behavior": "Clears receiver +0x24 word bits 2 and 0, sets DWORDs +0x50 and +0xE8 to zero, then clears bit 0 of each non-null child flag word +0x24 in three pointers at receiver +0xBC..+0xC4 and two at +0xC8..+0xCC. Finally clears bit 0 of the flag word in the pointer at +0xD0 without a null check. The complete body is 123 bytes, with no mapped operand targets.",
+        "uncertainty": "Flag meanings, child ownership, and the precondition guaranteeing non-null receiver +0xD0 are unresolved. No runtime client test was performed; a separate portable model covers observed field mutations.",
+    },
     "58907650": {
         "name_in_analysis": "FUN_58907650 / global-gated paired child release",
         "called_by": "Called three times from verified airborne-state handlers FUN_5877EC80 and FUN_58782CF0 with their selected child object in ECX.",
