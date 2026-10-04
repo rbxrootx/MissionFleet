@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,085 matches cover 2,238,000 bytes (21.3758%) and are verified
+The current 7,086 matches cover 2,238,151 bytes (21.3773%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -19,6 +19,8 @@ The latest installed-client startup child branch is documented in
 [the startup child notes](docs/current-main-startup-child-path.md).
 The latest shared linked-chain traversal helper is documented in
 [the linked-chain notes](docs/current-main-linked-chain-distance.md).
+The latest bounded client record insertion helper is documented in
+[the record insertion notes](docs/current-main-bounded-record-insertion.md).
 The latest startup range-update helper is documented in
 [the range-update notes](docs/current-main-startup-range-update.md).
 The child state and division helper is documented in

@@ -39,6 +39,7 @@ ADDRESSES = (
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
+    "5877ABA0",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -225,7 +226,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
-    "5897D801", "5897CFFD", "5897D05B", "589081C0",
+    "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -390,6 +391,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5877ABA0": {
+        "name_in_analysis": "FUN_5877aba0",
+        "called_by": "Directly called by six verified functions: 0x5873FE80, 0x587EFD60, 0x58853C20, 0x58856560, 0x588E4260, and 0x588E5150.",
+        "behavior": "Returns when the collection at receiver +0x264 already has at least 0x7F entries. Otherwise allocates a 0x88-byte record, copies the first argument into its first 0x80 bytes with the observed bounded-copy path for strings of length at least 0x80, and stores the second and third arguments at record offsets +0x80 and +0x84. It advances the collection index at +0x0C modulo the bound at +0x04; if the next index does not equal +0x10, it stores the new record pointer in the pointer array at +0x14 and increments the count at +0x08.",
+        "uncertainty": "The collection and record types, semantic roles of the two metadata arguments and collection indices, behavior when the next index equals +0x10, and identities of the three imported string callbacks remain unresolved. The body was recovered from its complete 151-byte Ghidra extent; caller evidence includes repeated string-like values and integer arguments but does not identify their UI meaning.",
+    },
     "5897D53A": {
         "name_in_analysis": "FUN_5897d53a",
         "called_by": "Directly called by the installed sprite parser at 0x58903E40 on multiple malformed-header and payload error paths.",
