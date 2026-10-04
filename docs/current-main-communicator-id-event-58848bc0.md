@@ -38,6 +38,12 @@ bounds. Run `python tools/verify_communicator_id_event.py` for the model and
 config/NF2_2026/client-verifications.json --only 58848BC0` for the exact
 code match.
 
+The `+0xD4` test now composes the callback with the separately recovered
+[position-and-flag reset](current-main-communicator-id-reset-58848b90.md),
+so the linked-list action order and resulting state change are checked
+together. The model retains an injected callback because the original
+dispatch is virtual.
+
 The numeric event type, resource contents, callback side effects, invalid
 pointer behavior, and rendered interaction are not established. The model is
 not byte-identical source and has not been compared with a running client.

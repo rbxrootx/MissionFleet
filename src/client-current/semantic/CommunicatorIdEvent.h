@@ -11,6 +11,12 @@ struct MissionFleetCommunicatorIdNode {
 };
 
 struct MissionFleetCommunicatorIdEventState {
+    std::uint32_t position4 = 0;
+    std::uint32_t position8 = 0;
+    std::uint16_t flags24 = 0;
+    std::uint32_t target50 = 0;
+    std::uint32_t target54 = 0;
+    std::uint32_t target58 = 0;
     void* controlD4 = nullptr;
     void* controlD8 = nullptr;
     void* controlDC = nullptr;
@@ -35,6 +41,9 @@ struct MissionFleetCommunicatorIdEventState {
     const void* resource4A0 = nullptr;
     const void* resource4A4 = nullptr;
 };
+
+// Normal-path behavior of the panel's exact-matched vtable slot +0x08.
+void missionFleetResetCommunicatorIdPosition(MissionFleetCommunicatorIdEventState& state);
 
 struct MissionFleetCommunicatorIdEventHooks {
     void (*invokeNodeAction)(void* action, void* context);

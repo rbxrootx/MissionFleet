@@ -16,6 +16,7 @@ void invokeNodeAction(void* action, void* context) {
     static_cast<Fixture*>(context)->events.push_back({'N', action, nullptr, 0});
 }
 void selfVirtual08(MissionFleetCommunicatorIdEventState* state, void* context) {
+    missionFleetResetCommunicatorIdPosition(*state);
     static_cast<Fixture*>(context)->events.push_back({'S', state, nullptr, 0});
 }
 void childVirtual04(void* child, void* context) {
@@ -50,6 +51,12 @@ int main() {
     state.resource450 = &resources[0];
     state.resource4A0 = &resources[1];
     state.resource4A4 = &resources[2];
+    state.position4 = 0x12345678u;
+    state.position8 = 0x87654321u;
+    state.target50 = 9;
+    state.target54 = 10;
+    state.target58 = 0xC8;
+    state.flags24 = 0x1805;
     Fixture fixture;
     const MissionFleetCommunicatorIdEventHooks hooks{
         invokeNodeAction, selfVirtual08, childVirtual04, globalDispatch,
@@ -63,6 +70,8 @@ int main() {
     fire(state.controlD4, 1);
     fire(&unknown);
     assert(fixture.events.empty());
+    assert(state.target50 == 9 && state.target54 == 10);
+    assert(state.target58 == 0xC8 && state.flags24 == 0x1805);
 
     MissionFleetCommunicatorIdNode first{}, second{}, third{};
     first.next54 = &second;
@@ -75,6 +84,8 @@ int main() {
     assert(fixture.events[0].kind == 'N' && fixture.events[0].first == &actions[0]);
     assert(fixture.events[1].kind == 'N' && fixture.events[1].first == &actions[1]);
     assert(fixture.events[2].kind == 'S' && fixture.events[2].first == &state);
+    assert(state.target50 == state.position4 && state.target54 == state.position8);
+    assert(state.target58 == 0 && state.flags24 == 0x0405);
 
     fixture.events.clear();
     fire(state.controlD8);

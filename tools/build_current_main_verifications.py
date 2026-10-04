@@ -567,7 +567,7 @@ EVIDENCE = {
         "name_in_analysis": "FUN_58848b90 / communicator ID panel position-and-flag reset",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function at slot +0x08. Verified event handler FUN_58848BC0 invokes that virtual slot after traversing two linked action lists for the +0xD4 control.",
         "behavior": "Copies receiver DWORD +4 to +0x50 and +8 to +0x54; clears receiver DWORD +0x58; transforms the receiver word at +0x24 to (old & 0xE4FF) | 0x0400; then returns. The complete 44-byte body contains no mapped operands and ends with ret.",
-        "uncertainty": "The meaning of the coordinate copies and flag bits, and the visible effect of this reset after the +0xD4 event, remain unknown. No original-client runtime comparison has been performed.",
+        "uncertainty": "The meaning of the coordinate copies and flag bits, and the visible effect of this reset after the +0xD4 event, remain unknown. A separate portable normal-path model now composes this reset with the event callback and tests the field transition, but it is excluded from the byte-match count and has not been compared with a running client.",
     },
     "58848B40": {
         "name_in_analysis": "FUN_58848b40 / communicator ID linked-pair guard and message path",

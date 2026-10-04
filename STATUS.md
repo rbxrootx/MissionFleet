@@ -24,6 +24,8 @@ The event path's linked-pair guard and message ID `0x208` are recorded in
 [the pair-guard evidence](docs/current-main-communicator-id-pair-guard-58848b40.md).
 The ID-panel vtable reset callback is recorded in
 [the reset evidence](docs/current-main-communicator-id-reset-58848b90.md).
+Its portable event model now checks the linked-action callback order and
+the reset's resulting position and flag changes together.
 The ID-panel input method and its separately verified key jump table are
 recorded in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
 Its periodic movement and bounded two-list batch path are recorded in

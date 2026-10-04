@@ -1,5 +1,12 @@
 #include "CommunicatorIdEvent.h"
 
+void missionFleetResetCommunicatorIdPosition(MissionFleetCommunicatorIdEventState& state) {
+    state.target50 = state.position4;
+    state.target54 = state.position8;
+    state.target58 = 0;
+    state.flags24 = static_cast<std::uint16_t>((state.flags24 & 0xE4FFu) | 0x0400u);
+}
+
 namespace {
 void visitListActions(MissionFleetCommunicatorIdNode* node,
                       const MissionFleetCommunicatorIdEventHooks& hooks,

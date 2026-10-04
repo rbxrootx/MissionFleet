@@ -21,6 +21,15 @@ match. A semantically equivalent ordinary C++ expression did not reproduce
 the original instruction selection under the available compiler, so the
 byte-matched source remains explicit x86 assembly.
 
+The [portable event model](../src/client-current/semantic/CommunicatorIdEvent.cpp)
+now includes `missionFleetResetCommunicatorIdPosition`. Its event test routes
+the `+0xD4` control through the observed virtual callback, checks that the
+two linked action lists run first, and verifies that the reset copies both
+position fields, clears `+0x58`, and applies the flag mask. The test also
+checks that other event types leave those fields alone. Run
+`python tools/verify_communicator_id_event.py` to reproduce it. This model
+uses separate typed fields and is excluded from the byte-match count.
+
 The meanings of the copied coordinates and flag bits, and the visible result
 of the preceding event, remain unresolved. No running-client comparison was
 performed.
