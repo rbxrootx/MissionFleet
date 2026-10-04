@@ -128,6 +128,8 @@ ADDRESSES = (
     "58751E80",
     "587A0C30", "58786680",
     "58743A10",
+    "5888B990",
+    "5897CE4A", "5897CE56", "5897CE3E",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -343,6 +345,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "58751E80",
     "587A0C30", "58786680",
     "58743A10",
+    "5888B990",
+    "5897CE4A", "5897CE56", "5897CE3E",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4177,6 +4181,30 @@ EVIDENCE = {
         "called_by": "Directly called by 0x587A0C30 during child allocation and initialization.",
         "behavior": "Allocates 0x18 bytes through 0x5897CC4E, clears the first word of the new object and other non-null referenced words, then sets object bytes +0x14 to 1 and +0x15 to 0.",
         "uncertainty": "The object class, referenced-word roles, and marker semantics are unresolved. The complete 55-byte body decodes.",
+    },
+    "5888B990": {
+        "name_in_analysis": "FUN_5888b990",
+        "called_by": "Directly called by 0x5888BA30 at 0x5888BDB3 during startup child construction.",
+        "behavior": "Calls mapped runtime helpers 0x5897CE4A/0x5897CE56/0x5897CE3E and child setup 0x5875F940, reads receiver field +0x80, and stores resulting values in +0x8C/+0x94.",
+        "uncertainty": "The runtime helper contracts, receiver class, child/resource meaning, and field semantics are unresolved. The complete 149-byte body decodes.",
+    },
+    "5897CE4A": {
+        "name_in_analysis": "FUN_5897ce4a",
+        "called_by": "Directly called by 0x5888B990 at 0x5888B9A3 during child setup; also called by other installed-client functions.",
+        "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C258.",
+        "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
+    },
+    "5897CE56": {
+        "name_in_analysis": "FUN_5897ce56",
+        "called_by": "Directly called by 0x5888B990 at 0x5888B9CD during child setup.",
+        "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C260.",
+        "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
+    },
+    "5897CE3E": {
+        "name_in_analysis": "FUN_5897ce3e",
+        "called_by": "Directly called by 0x5888B990 at 0x5888BA17 during child setup; also called by other installed-client functions.",
+        "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C250.",
+        "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
     },
 }
 
