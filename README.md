@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,133 matches cover 2,256,677 bytes (21.5541%) and are verified
+The current 7,134 matches cover 2,257,354 bytes (21.5606%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
@@ -38,6 +38,8 @@ The latest five-argument constructor wrapper is documented in
 [the constructor notes](docs/current-main-unknown-vtable-constructor.md).
 The latest conditional child-constructor path is documented in
 [the child-constructor notes](docs/current-main-unknown-child-constructor.md).
+The latest fleet-join proposal record update path is documented in
+[the fleet-join notes](docs/current-main-fleet-join-proposal-record-update.md).
 The latest linked-text update path is documented in
 [the linked-text notes](docs/current-main-linked-text-update.md).
 The latest progress-grid state update is documented in

@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4830,6 +4830,12 @@ EVIDENCE = {
         "called_by": "Called by 0x5884F210 at 0x5884F2D4 on the object returned by 0x5875F650.",
         "behavior": "SEH-protected routine calling 0x58902B60, 0x58902030, 0x58902090, and 0x589023B0; accesses callback pointers at 0x5898C198/0x5898C1A4 with string pointer 0x5898D0D4 and updates object fields +0x18/+0x1C.",
         "uncertainty": "The callback API contracts, object ownership, and meanings of the updated fields remain unresolved. The complete 253-byte body decodes.",
+    },
+    "588391B0": {
+        "name_in_analysis": "FUN_588391b0",
+        "called_by": "Called by verified message/control paths FUN_587BB700 and FUN_588C1650. FUN_588C1650 selects this helper after formatting the localized fleet-join proposal message for state 5 or 6; both callers pass two stack values and load the same nested receiver path from 0x58A245B4.",
+        "behavior": "Checks receiver-owned collections at +0x190/+0x19C/+0x1A0 and +0x258/+0x264/+0x268. It searches 0x54-byte records by a byte at +0x2D and removes a match by shifting subsequent records left and shrinking the first collection. It searches pointer entries in the second collection and may append through FUN_588F6890. When receiver flags at +0x24 masked by 0x1F00 equal 0x200, it calls helpers using receiver fields +0x24C/+0x250/+0x254 and updates +0x220 from collection counts. Mapped bytes show the complete 677-byte body and ret 8; 29 operand targets are inventoried.",
+        "uncertainty": "The collections' semantic types, record key meaning, flag meaning, helper contracts, and user-visible effect are not established. The fleet-join message context is proven in FUN_588C1650, but the precise event/state relationship and runtime behavior need further evidence; no emulator test was performed.",
     },
 }
 

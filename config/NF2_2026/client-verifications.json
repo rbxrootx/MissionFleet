@@ -292914,6 +292914,207 @@
         "behavior": "Inspects receiver field +0xA4, clears or initializes child pointers at +0x1D0/+0x1D4, and invokes child virtual methods at slots 0 and +0x0C on guarded paths. Requests a 0x20-byte block through 0x5897CC4E, reads a selector-indexed shared table at [0x58A248D0]+0x194 subject to count at +0x170, maps selector/range cases through FUN_587B7350, and stores or forwards the resulting child/resource values. The 700-byte extent contains two ret 4 paths and ends with the complete epilogue at 0x5877B079..7B, followed by four bytes before the next indexed function at 0x5877B080.",
         "uncertainty": "The selector groups, resource/control identities, receiver and child types, table schema, allocator contract, ownership/lifetime rules for +0x1D0/+0x1D4, and exact event effect remain unresolved. The CForce relation is supported by its verified constructor call; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588391B0",
+      "name": "FUN_588391b0",
+      "size": 677,
+      "symbol": "_FUN_588391b0",
+      "source": "src/client-current/Main/FUN_588391b0.cpp",
+      "source_sha256": "5025ac2d347ae1cbdc414e194ea5125c2af6ffc5349899cc60aab2a71950ac97",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "5898C194",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "588392C9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 158,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 183,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 306,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 344,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 359,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 375,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 393,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "5883944B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 410,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 426,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 499,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 520,
+          "target_address": "588F6890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 565,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 583,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 588,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 606,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 611,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 663,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588391b0",
+        "called_by": "Called by verified message/control paths FUN_587BB700 and FUN_588C1650. FUN_588C1650 selects this helper after formatting the localized fleet-join proposal message for state 5 or 6; both callers pass two stack values and load the same nested receiver path from 0x58A245B4.",
+        "behavior": "Checks receiver-owned collections at +0x190/+0x19C/+0x1A0 and +0x258/+0x264/+0x268. It searches 0x54-byte records by a byte at +0x2D and removes a match by shifting subsequent records left and shrinking the first collection. It searches pointer entries in the second collection and may append through FUN_588F6890. When receiver flags at +0x24 masked by 0x1F00 equal 0x200, it calls helpers using receiver fields +0x24C/+0x250/+0x254 and updates +0x220 from collection counts. Mapped bytes show the complete 677-byte body and ret 8; 29 operand targets are inventoried.",
+        "uncertainty": "The collections' semantic types, record key meaning, flag meaning, helper contracts, and user-visible effect are not established. The fleet-join message context is proven in FUN_588C1650, but the precise event/state relationship and runtime behavior need further evidence; no emulator test was performed."
+      }
     }
   ]
 }
