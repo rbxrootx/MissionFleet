@@ -305301,6 +305301,32 @@
         "behavior": "Walks receiver list +0x64 through node link +0x54, looking for a node whose fields +0x78/+0x7C equal the two stack arguments and whose word +0x9E is nonzero. If any qualifies, returns zero without message dispatch. Otherwise it calls verified FUN_5876BAF0, then verified FUN_58764D30 with message ID 0x208 and three zero arguments, returning the dispatch result. The complete body is 77 bytes, has two mapped direct-call targets, and ends with ret 8.",
         "uncertainty": "The two pointers' semantic types, node +0x9E meaning, message text for ID 0x208, and visible UI effect remain unknown. The portable model covers well-formed linked lists; no original-client runtime comparison was performed."
       }
+    },
+    {
+      "address": "58848B90",
+      "name": "FUN_58848b90",
+      "size": 44,
+      "symbol": "_FUN_58848b90",
+      "source": "src/client-current/Main/FUN_58848b90.cpp",
+      "source_sha256": "d5e16ac37f9f9a828ff838f1edba9b03c2890d0d43b6e1b4e84a19468fe22510",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58848b90 / communicator ID panel position-and-flag reset",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function at slot +0x08. Verified event handler FUN_58848BC0 invokes that virtual slot after traversing two linked action lists for the +0xD4 control.",
+        "behavior": "Copies receiver DWORD +4 to +0x50 and +8 to +0x54; clears receiver DWORD +0x58; transforms the receiver word at +0x24 to (old & 0xE4FF) | 0x0400; then returns. The complete 44-byte body contains no mapped operands and ends with ret.",
+        "uncertainty": "The meaning of the coordinate copies and flag bits, and the visible effect of this reset after the +0xD4 event, remain unknown. No original-client runtime comparison has been performed."
+      }
     }
   ]
 }

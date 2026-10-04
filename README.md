@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,300 matches cover 2,297,766 bytes (21.9463%) and are verified
+The current 7,301 matches cover 2,297,810 bytes (21.9467%) and are verified
 individually at 100.0% by objdiff.
 The latest parent UI-child constructor match is documented in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
@@ -21,6 +21,8 @@ Its vtable event dispatcher and normal-path model are documented in
 [the ID-panel event evidence](docs/current-main-communicator-id-event-58848bc0.md).
 Its linked-pair guard and message path are documented in
 [the pair-guard evidence](docs/current-main-communicator-id-pair-guard-58848b40.md).
+The ID panel's vtable reset callback is documented in
+[the reset evidence](docs/current-main-communicator-id-reset-58848b90.md).
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
 room-message formatting, outbound state reporting, encoded-state progress,

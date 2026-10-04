@@ -14,7 +14,7 @@ receiver controls in this order:
 
 - `+0xD4`: visit linked chains headed at `+0x6C` then `+0x64`, calling
   `FUN_58820F00` for each nonnull node `+0xA4` pointer, then call the panel's
-  virtual slot `+0x08`.
+  [virtual slot `+0x08`](current-main-communicator-id-reset-58848b90.md).
 - `+0xD8`: call virtual slot `+0x04` on receiver child `+0x114`.
 - `+0xDC`: call `FUN_587B91E0` using global receiver `DAT_58A24588`,
   resource pointer `0x58A0B450`, and zero.
