@@ -194,6 +194,7 @@ ADDRESSES = (
     "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
     "58853B90", "588542A0",
     "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40",
+    "5877EBB0", "5877EC00", "5877EC30",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -253,6 +254,16 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
+    "5877EC00": [
+        {"offset": offset, "target_address": "58907360", "kind": "relative",
+         "symbol": "_FUN_58907360", "audit_only": False}
+        for offset in (18, 39)
+    ],
+    "5877EC30": [
+        {"offset": offset, "target_address": "58907360", "kind": "relative",
+         "symbol": "_FUN_58907360", "audit_only": False}
+        for offset in (18, 39)
+    ],
     # Preserve the direct-call relocation as a symbolic target in both object
     # files; the mapped destination is still audited independently.
     "587956B0": [
@@ -283,7 +294,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -476,6 +487,24 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "5877EC00": {
+        "name_in_analysis": "FUN_5877ec00 / first paired-child value propagation",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
+        "behavior": "Reads child pointer receiver +0x10BD4 and its DWORD +0x64; calls verified FUN_58907360 on that child with value plus delta. Reloads receiver +0x10BD4 and its now-current +0x64 after the call, then calls FUN_58907360 on child receiver +0x10BE8 with that value. Returns with ret 4. Complete body: 47 bytes and two direct-call targets.",
+        "uncertainty": "The child types, value unit and helper side effects are unresolved; the reload after the first call must be preserved. No runtime client test was performed.",
+    },
+    "5877EC30": {
+        "name_in_analysis": "FUN_5877ec30 / second paired-child value propagation",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
+        "behavior": "Reads child pointer receiver +0x10BE0 and its DWORD +0x64; calls verified FUN_58907360 on that child with value plus delta. Reloads receiver +0x10BE0 and its now-current +0x64 after the call, then calls FUN_58907360 on child receiver +0x10BF4 with that value. Returns with ret 4. Complete body: 47 bytes and two direct-call targets.",
+        "uncertainty": "The child types, value unit and helper side effects are unresolved; the reload after the first call must be preserved. No runtime client test was performed.",
+    },
+    "5877EBB0": {
+        "name_in_analysis": "FUN_5877ebb0 / XOR-encoded accumulator update",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one stack delta and the owning receiver in ECX.",
+        "behavior": "Decodes DWORD receiver +0x1264 by XOR with 0xAAAAAAAA, adds the supplied DWORD delta modulo 2^32, XOR-encodes the result with the same mask, stores it at +0x1264, and returns the encoded value with ret 4. The complete body is 29 bytes with no external operands.",
+        "uncertainty": "The accumulator's game-level unit and reason for XOR encoding remain unknown. No runtime client test was performed.",
+    },
     "587AFE40": {
         "name_in_analysis": "FUN_587afe40 / set receiver state one",
         "called_by": "Called by verified FUN_588E4260 and FUN_588E5150. The latter chooses this helper on a negative value path.",

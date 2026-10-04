@@ -6,6 +6,14 @@ from tools.rank_current_main_frontier import collect_frontier
 
 
 class DirectCallParserTests(unittest.TestCase):
+    def test_reads_semantic_cpp_calls_without_treating_declarations_as_calls(self):
+        source = "\n".join([
+            'extern "C" void FUN_58907360(unsigned char*, unsigned int);',
+            '    FUN_58907360(first, value);',
+            '    return FUN_58907360(second, value);',
+        ])
+        self.assertEqual(direct_targets(source), {"58907360": [2, 3]})
+
     def test_reads_call_and_tail_jump_comments_but_not_indirect_calls(self):
         source = "\n".join([
             "// 0x1000: call 0x00002000",

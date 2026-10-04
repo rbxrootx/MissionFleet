@@ -14,6 +14,7 @@ CLIENT_CONFIG = ROOT / "config/NF2_2026/client-verifications.json"
 CLIENT_INVENTORY = ROOT / "config/NF2_2026/client-functions.tsv"
 SOURCE_DIR = ROOT / "src/client-current/Main"
 DIRECT_TARGET = re.compile(r"\b(?:call|jmp)\s+(?:dword\s+ptr\s+)?(0x[0-9a-f]{8})\b", re.I)
+SOURCE_CALL = re.compile(r"^\s*(?:return\s+)?FUN_([0-9a-f]{8})\s*\(", re.I)
 
 
 def direct_targets(source: str) -> dict[str, list[int]]:
@@ -22,6 +23,9 @@ def direct_targets(source: str) -> dict[str, list[int]]:
     for line_number, line in enumerate(source.splitlines(), 1):
         for match in DIRECT_TARGET.finditer(line):
             found[match.group(1)[2:].upper()].append(line_number)
+        call = SOURCE_CALL.match(line)
+        if call:
+            found[call.group(1).upper()].append(line_number)
     return dict(found)
 
 

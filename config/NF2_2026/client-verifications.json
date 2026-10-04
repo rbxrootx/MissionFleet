@@ -302828,6 +302828,114 @@
         "behavior": "Returns the DWORD at receiver +0x20 with no stack arguments. The complete body is four bytes with no external operands; ordinary C++ recompiles to those same bytes.",
         "uncertainty": "The receiver type, field meaning, coordinate units, and signedness are not established by these callers. No runtime client test was performed."
       }
+    },
+    {
+      "address": "5877EBB0",
+      "name": "FUN_5877ebb0",
+      "size": 29,
+      "symbol": "_FUN_5877ebb0",
+      "source": "src/client-current/Main/FUN_5877ebb0.cpp",
+      "source_sha256": "83ac3cafee03906b163fc61785e3358e17b0718abf30d1b1b148deb6609d3541",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5877ebb0 / XOR-encoded accumulator update",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one stack delta and the owning receiver in ECX.",
+        "behavior": "Decodes DWORD receiver +0x1264 by XOR with 0xAAAAAAAA, adds the supplied DWORD delta modulo 2^32, XOR-encodes the result with the same mask, stores it at +0x1264, and returns the encoded value with ret 4. The complete body is 29 bytes with no external operands.",
+        "uncertainty": "The accumulator's game-level unit and reason for XOR encoding remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "5877EC00",
+      "name": "FUN_5877ec00",
+      "size": 47,
+      "symbol": "_FUN_5877ec00",
+      "source": "src/client-current/Main/FUN_5877ec00.cpp",
+      "source_sha256": "3523eafdd75767ef7823bdfbc61e228773f83f7cd413e52326953e06698b0008",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58907360",
+          "kind": "relative",
+          "symbol": "_FUN_58907360",
+          "audit_only": false
+        },
+        {
+          "offset": 39,
+          "target_address": "58907360",
+          "kind": "relative",
+          "symbol": "_FUN_58907360",
+          "audit_only": false
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877ec00 / first paired-child value propagation",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
+        "behavior": "Reads child pointer receiver +0x10BD4 and its DWORD +0x64; calls verified FUN_58907360 on that child with value plus delta. Reloads receiver +0x10BD4 and its now-current +0x64 after the call, then calls FUN_58907360 on child receiver +0x10BE8 with that value. Returns with ret 4. Complete body: 47 bytes and two direct-call targets.",
+        "uncertainty": "The child types, value unit and helper side effects are unresolved; the reload after the first call must be preserved. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "5877EC30",
+      "name": "FUN_5877ec30",
+      "size": 47,
+      "symbol": "_FUN_5877ec30",
+      "source": "src/client-current/Main/FUN_5877ec30.cpp",
+      "source_sha256": "7ab4e40d4ab21fadb21d1ba746915ee1e13703324a5abf796fdb00c5ad971b57",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "58907360",
+          "kind": "relative",
+          "symbol": "_FUN_58907360",
+          "audit_only": false
+        },
+        {
+          "offset": 39,
+          "target_address": "58907360",
+          "kind": "relative",
+          "symbol": "_FUN_58907360",
+          "audit_only": false
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877ec30 / second paired-child value propagation",
+        "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
+        "behavior": "Reads child pointer receiver +0x10BE0 and its DWORD +0x64; calls verified FUN_58907360 on that child with value plus delta. Reloads receiver +0x10BE0 and its now-current +0x64 after the call, then calls FUN_58907360 on child receiver +0x10BF4 with that value. Returns with ret 4. Complete body: 47 bytes and two direct-call targets.",
+        "uncertainty": "The child types, value unit and helper side effects are unresolved; the reload after the first call must be preserved. No runtime client test was performed."
+      }
     }
   ]
 }
