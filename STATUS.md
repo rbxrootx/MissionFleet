@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,169 verified matches
-totaling 2,272,193 bytes (21.7022%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,170 verified matches
+totaling 2,272,496 bytes (21.7051%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -164,12 +164,13 @@ pointer list for matching entries, and falls back to three helper comparisons.
 The receiver and record schemas and return-code meanings remain unresolved;
 all 28 relocations match under objdiff.
 
-The latest conditional child-constructor path is `FUN_587B7260`, a 234-byte,
-nine-argument initializer called by four verified functions. It forwards
-arguments 4–8 to `0x58734A30`, initializes receiver fields, and conditionally
-allocates a child using a manager/index pair before calling `0x587B7350`. Its
-class, field meanings, and child type remain unresolved. All eight operand
-targets match the mapped image under objdiff.
+The latest conditional child-constructor path is `FUN_587B7130`, a 303-byte,
+seven-argument initializer called by verified spatial-state and shell-map
+update routines. It shares vtable address point `0x5899A118` with the previously
+matched `FUN_587B7260`, forwards arguments to `0x58734A30`, initializes receiver
+fields, and conditionally creates and initializes a child through
+`0x587B7350`. Its class, argument meanings, and child type remain unresolved.
+All 14 operand targets match the mapped image under objdiff.
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at

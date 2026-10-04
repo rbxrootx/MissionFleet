@@ -21,3 +21,26 @@ the purpose of vtable address point `0x5899A118` remain unresolved. Caller
 sites establish the calling shape and live context, but do not justify stronger
 semantic labels. Byte identity verifies this captured function body; it does
 not establish runtime correctness or a playable-client milestone.
+
+## Shared-vtable variant `FUN_587B7130`
+
+`FUN_587B7130` is a second initializer for the same observed vtable address
+point, `0x5899A118`. The verified spatial-state routine `FUN_5873F020` and
+shell map-object update `FUN_588D4300` call it in their update paths. Its full
+303-byte extent matches the mapped installed-client bytes at 100% under
+objdiff, including all 14 mapped operand targets.
+
+The function forwards its seven stack arguments to `FUN_58734A30`, installs
+the shared vtable, stores observed constructor values at receiver offsets
+`+4` and `+8`, and initializes a child pointer at `+0x58` and a `-1` sentinel
+at `+0x5C`. On the conditional path it allocates a 0x20-byte child, obtains an
+auxiliary value either through manager global `0x58A248D0` and `FUN_58731810`
+or from a bounds-checked indexed entry in global object `0x58A246DC`, then
+calls `FUN_587B7350` and `FUN_587B70A0`. Failed bounds and pointer checks pass
+null. The function returns the receiver and uses `ret 0x1C`.
+
+The shared vtable and overlapping caller contexts support treating this as a
+constructor variant alongside `FUN_587B7260`; they do not identify a domain
+class. The argument meanings, global manager/table schemas, child type,
+sentinel meaning, and user-visible update effect remain unresolved. No runtime
+or emulator test was performed.
