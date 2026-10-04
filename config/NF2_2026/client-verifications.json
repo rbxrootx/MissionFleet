@@ -295192,6 +295192,141 @@
         "behavior": "Dispatches on its second stack argument, accepting selectors 0 through 5; the first stack argument is used as an input record and the third as an optional auxiliary value. It obtains text resources through indirect callbacks at 0x5898C030 and 0x5898C3C4 using keys embedded at 0x5899FDA0 (MESSAGESTRING__ROOM_MESSAGE_6), 0x5899FD78 (ROOM_MESSAGE_1), 0x5899FD58 (ROOM_MESSAGE_7), 0x5899FD38 (ROOM_MESSAGE_2), 0x5899FD18 (ROOM_MESSAGE_3), 0x5899FCF8 (ROOM_MESSAGE_4), and 0x5899FCD8 (ROOM_MESSAGE_5); one path also uses the mapped `%s   %s` template at 0x5899FD98. Selector 1 copies 25 DWORDs from the input record to receiver +0x198, builds text in stack buffers, and passes the resulting text with color 0xFFFF00 to FUN_5888D250. Other selector paths format or retrieve a room-message string and also reach FUN_5888D250. The full 521-byte body returns with ret 0xC and has 38 mapped operand targets.",
         "uncertainty": "The callback contracts, exact packet/record schema, formatting behavior of the indirect calls, and when each room-message resource is displayed are not fully recovered. Static resource names and the two event callsites support identifying this as a room-message formatting/display helper, but no runtime chat test was performed."
       }
+    },
+    {
+      "address": "587BAF70",
+      "name": "FUN_587baf70",
+      "size": 469,
+      "symbol": "_FUN_587baf70",
+      "source": "src/client-current/Main/FUN_587baf70.cpp",
+      "source_sha256": "8f052699abe23dfae6c6fa9a5e89c39b923ba898d1f29021902f89430a2a2056",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 158,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 312,
+          "target_address": "58A0B1C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 324,
+          "target_address": "58A0B1C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 337,
+          "target_address": "58A0B1C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 354,
+          "target_address": "58A0B1C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 371,
+          "target_address": "58A0B1C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 384,
+          "target_address": "58A0B1C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 397,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 405,
+          "target_address": "588D66E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 426,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 448,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 454,
+          "target_address": "5897CE26",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587baf70",
+        "called_by": "The indexed call graph lists verified callers FUN_587F21E0 and FUN_588E5150. In the available mapped decompilation, FUN_588E5150 calls this routine with the 16-bit value at its object +0x350 and selector 0 when global and receiver state predicates pass; it then sets receiver +0x63C0 to 1.",
+        "behavior": "Builds a variable-length payload for message 0x80013111 and submits it through verified network sender FUN_58970C70. It combines the 16-bit input with a high-word constant selected from the active object's byte +0x354, derives a second value from selector 0..3 (or passes other values through), and mixes those with a table entry selected from receiver fields +0x40 and +0x58. It allocates a buffer using size 3*shared_state_dword + 10, writes a leading byte and zero bytes, then appends encoded per-node values while walking the list rooted at global 0x58A247F8 +0xC. It adds summary counters and bytes derived from node fields +0x64F0, +0x64F4, +0x64F8, +0x78, and global state at 0x58A0B1C4/0x58A0B1C8; it also records a boolean returned by FUN_588D66E0. The sender receives the message id, derived values, buffer, and computed length. The buffer is then released through FUN_5897CE26. The complete 469-byte body ends with ret 8 and has 18 mapped operand targets.",
+        "uncertainty": "The transmitted schema, table/key meanings, node identity and units, selector meanings, allocator contract, and server-side interpretation of message 0x80013111 remain unresolved. The sender is byte-verified and the caller context shows a state-gated send followed by a local flag update, but no server or emulator packet exchange was available for validation."
+      }
     }
   ]
 }
