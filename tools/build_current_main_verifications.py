@@ -72,6 +72,8 @@ ADDRESSES = (
     "58791F30", "5878D590", "58901A80", "5897D186", "58735360",
     "5897CC60", "588F6660", "5878D5F0", "58792120", "588995E0",
     "58735110", "588996D0", "58748180",
+    "58791E20", "58901AE0", "5897CC84",
+    "58901790", "5873EFE0", "58901A10", "58901AB0", "5873C470", "58901A40",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -231,6 +233,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "58791F30", "5878D590", "58901A80", "5897D186", "58735360",
     "5897CC60", "588F6660", "5878D5F0", "58792120", "588995E0",
     "58735110", "588996D0", "58748180",
+    "58791E20", "58901AE0", "5897CC84",
+    "58901790", "5873EFE0", "58901A10", "58901AB0", "5873C470", "58901A40",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -2883,6 +2887,60 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58902440.",
         "behavior": "When the receiver's field at +0x18 is at least 0x10, releases the value at +4 through 0x5897CC42, then resets fields at +0x18, +0x14, and +4.",
         "uncertainty": "The receiver type and field meanings are unresolved. The extent was corrected from a truncated instruction to include the complete 38-byte body and ret.",
+    },
+    "58791E20": {
+        "name_in_analysis": "FUN_58791e20",
+        "called_by": "Called by the cleanup paths in 0x58791F30 and 0x588995E0.",
+        "behavior": "Conditionally releases the value at element field +4 through 0x5897CC42, then resets element fields at +0x18, +0x14, and +4.",
+        "uncertainty": "The element type and field meanings are unresolved. The indexed extent omitted the trailing ret 4; the verified body is 42 bytes.",
+    },
+    "58901AE0": {
+        "name_in_analysis": "FUN_58901ae0",
+        "called_by": "Directly called by 0x58901D30.",
+        "behavior": "Inserts a requested range into an eight-byte-element buffer held at receiver offsets +0x0C, +0x10, and +0x14. The body grows storage when required, transfers existing and inserted elements through helper calls, updates the three buffer pointers, and has a separate in-place insertion path.",
+        "uncertainty": "The element schema, helper contracts, and ownership semantics are unresolved. The indexed body ended mid-call; the corrected 589-byte extent now includes the decoded cleanup and ret 0x10 at 0x58901D2A, before int3 padding and the next function at 0x58901D30.",
+    },
+    "5897CC84": {
+        "name_in_analysis": "FUN_5897cc84",
+        "called_by": "Directly called by 0x58735360.",
+        "behavior": "Tail-jumps through the callback pointer stored at 0x5898C224.",
+        "uncertainty": "The callback target is runtime supplied. The six-byte indirect-jump thunk is fully decoded.",
+    },
+    "58901790": {
+        "name_in_analysis": "FUN_58901790",
+        "called_by": "Directly called by the range-insertion method 0x58901AE0.",
+        "behavior": "Computes storage for a requested number of eight-byte elements through allocator thunk 0x5897CC4E and routes the allocation-failure path through the observed callback and throw helpers.",
+        "uncertainty": "Allocator policy and failure semantics are unresolved. The 90-byte indexed extent decodes through its final helper call.",
+    },
+    "5873EFE0": {
+        "name_in_analysis": "FUN_5873efe0",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Forwards a range of eight-byte elements through 0x58901A80 and returns the computed destination end pointer.",
+        "uncertainty": "The copied element schema and pointer contracts are unresolved. The 54-byte body returns with ret 0x0C.",
+    },
+    "58901A10": {
+        "name_in_analysis": "FUN_58901a10",
+        "called_by": "Directly called by 0x58901AE0 and 0x58901AB0.",
+        "behavior": "Copies pairs of 32-bit words from an eight-byte-element range to a destination, advancing source and destination by eight bytes; a null destination skips the stores.",
+        "uncertainty": "The element schema and null-destination use are unresolved. The 43-byte body returns with ret.",
+    },
+    "58901AB0": {
+        "name_in_analysis": "FUN_58901ab0",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Adjusts an element range and delegates its copy to 0x58901A10.",
+        "uncertainty": "The wrapper's pointer adjustments and element ownership are unresolved. The 44-byte body returns with ret 0x0C.",
+    },
+    "5873C470": {
+        "name_in_analysis": "FUN_5873c470",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Copies pairs of 32-bit words across an eight-byte-element range until the destination reaches the supplied end pointer.",
+        "uncertainty": "The source/destination aliasing assumptions and element schema are unresolved. The 36-byte body returns with ret.",
+    },
+    "58901A40": {
+        "name_in_analysis": "FUN_58901a40",
+        "called_by": "Directly called by 0x58901AE0.",
+        "behavior": "Moves eight-byte elements backward in place to make room in the buffer, copying each element's two words.",
+        "uncertainty": "The element schema and caller-level insertion conditions are unresolved. The 62-byte body returns with ret.",
     },
 }
 

@@ -263712,6 +263712,408 @@
         "behavior": "When the receiver's field at +0x18 is at least 0x10, releases the value at +4 through 0x5897CC42, then resets fields at +0x18, +0x14, and +4.",
         "uncertainty": "The receiver type and field meanings are unresolved. The extent was corrected from a truncated instruction to include the complete 38-byte body and ret."
       }
+    },
+    {
+      "address": "58791E20",
+      "name": "FUN_58791e20",
+      "size": 42,
+      "symbol": "_FUN_58791e20",
+      "source": "src/client-current/Main/FUN_58791e20.cpp",
+      "source_sha256": "1f8c526fa6f77862249613367852d290fce8f5c39adf8ca12ddd174f9e39100a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58791e20",
+        "called_by": "Called by the cleanup paths in 0x58791F30 and 0x588995E0.",
+        "behavior": "Conditionally releases the value at element field +4 through 0x5897CC42, then resets element fields at +0x18, +0x14, and +4.",
+        "uncertainty": "The element type and field meanings are unresolved. The indexed extent omitted the trailing ret 4; the verified body is 42 bytes."
+      }
+    },
+    {
+      "address": "58901AE0",
+      "name": "FUN_58901ae0",
+      "size": 589,
+      "symbol": "_FUN_58901ae0",
+      "source": "src/client-current/Main/FUN_58901ae0.cpp",
+      "source_sha256": "9cba108a4fc4acb935d86d548178f25a9f93107b0aa9e7cd782d008394ecaaeb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5898A710",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58901D19",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "588F6660",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "58901C4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "58901790",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "5873EFE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "58901A10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 272,
+          "target_address": "58901A10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 298,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 348,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "5897CC78",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 410,
+          "target_address": "58901AB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 443,
+          "target_address": "5873EFE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "5873C470",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 529,
+          "target_address": "58901AB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 543,
+          "target_address": "58901A40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "5873C470",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58901ae0",
+        "called_by": "Directly called by 0x58901D30.",
+        "behavior": "Inserts a requested range into an eight-byte-element buffer held at receiver offsets +0x0C, +0x10, and +0x14. The body grows storage when required, transfers existing and inserted elements through helper calls, updates the three buffer pointers, and has a separate in-place insertion path.",
+        "uncertainty": "The element schema, helper contracts, and ownership semantics are unresolved. The indexed body ended mid-call; the corrected 589-byte extent now includes the decoded cleanup and ret 0x10 at 0x58901D2A, before int3 padding and the next function at 0x58901D30."
+      }
+    },
+    {
+      "address": "5897CC84",
+      "name": "FUN_5897cc84",
+      "size": 6,
+      "symbol": "_FUN_5897cc84",
+      "source": "src/client-current/Main/FUN_5897cc84.cpp",
+      "source_sha256": "466686936f752fd4538806e9dcb477a9510df3274f725a48fdb9dc3adac71281",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C224",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cc84",
+        "called_by": "Directly called by 0x58735360.",
+        "behavior": "Tail-jumps through the callback pointer stored at 0x5898C224.",
+        "uncertainty": "The callback target is runtime supplied. The six-byte indirect-jump thunk is fully decoded."
+      }
+    },
+    {
+      "address": "58901790",
+      "name": "FUN_58901790",
+      "size": 90,
+      "symbol": "_FUN_58901790",
+      "source": "src/client-current/Main/FUN_58901790.cpp",
+      "source_sha256": "425f2f200d0ed10f9433a18b77d50024d6418bc4e6e9caf5499fc85036140f31",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5897CC60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "589ABD70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "5898CA90",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "5897CC78",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58901790",
+        "called_by": "Directly called by the range-insertion method 0x58901AE0.",
+        "behavior": "Computes storage for a requested number of eight-byte elements through allocator thunk 0x5897CC4E and routes the allocation-failure path through the observed callback and throw helpers.",
+        "uncertainty": "Allocator policy and failure semantics are unresolved. The 90-byte indexed extent decodes through its final helper call."
+      }
+    },
+    {
+      "address": "5873EFE0",
+      "name": "FUN_5873efe0",
+      "size": 54,
+      "symbol": "_FUN_5873efe0",
+      "source": "src/client-current/Main/FUN_5873efe0.cpp",
+      "source_sha256": "d7fbbc81c9487a8ee59adff1cdd541347a9c030df3b8b9c629bfbf5a879999ce",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 38,
+          "target_address": "58901A80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873efe0",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Forwards a range of eight-byte elements through 0x58901A80 and returns the computed destination end pointer.",
+        "uncertainty": "The copied element schema and pointer contracts are unresolved. The 54-byte body returns with ret 0x0C."
+      }
+    },
+    {
+      "address": "58901A10",
+      "name": "FUN_58901a10",
+      "size": 43,
+      "symbol": "_FUN_58901a10",
+      "source": "src/client-current/Main/FUN_58901a10.cpp",
+      "source_sha256": "37c4ad57548af952ed4e2c8b83f952811e6565a8fee105e7c03857cbd6acb99a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58901a10",
+        "called_by": "Directly called by 0x58901AE0 and 0x58901AB0.",
+        "behavior": "Copies pairs of 32-bit words from an eight-byte-element range to a destination, advancing source and destination by eight bytes; a null destination skips the stores.",
+        "uncertainty": "The element schema and null-destination use are unresolved. The 43-byte body returns with ret."
+      }
+    },
+    {
+      "address": "58901AB0",
+      "name": "FUN_58901ab0",
+      "size": 44,
+      "symbol": "_FUN_58901ab0",
+      "source": "src/client-current/Main/FUN_58901ab0.cpp",
+      "source_sha256": "1162b40fed9ad1dafdd5f0c68fa497d9899945ff3c633d933c87db1f759eec6d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 34,
+          "target_address": "58901A10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58901ab0",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Adjusts an element range and delegates its copy to 0x58901A10.",
+        "uncertainty": "The wrapper's pointer adjustments and element ownership are unresolved. The 44-byte body returns with ret 0x0C."
+      }
+    },
+    {
+      "address": "5873C470",
+      "name": "FUN_5873c470",
+      "size": 36,
+      "symbol": "_FUN_5873c470",
+      "source": "src/client-current/Main/FUN_5873c470.cpp",
+      "source_sha256": "769cdb12426e4e8e0087effa2d019e8a3cb5db8bfd5651f27fcc387f496ce784",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5873c470",
+        "called_by": "Directly called twice by 0x58901AE0.",
+        "behavior": "Copies pairs of 32-bit words across an eight-byte-element range until the destination reaches the supplied end pointer.",
+        "uncertainty": "The source/destination aliasing assumptions and element schema are unresolved. The 36-byte body returns with ret."
+      }
+    },
+    {
+      "address": "58901A40",
+      "name": "FUN_58901a40",
+      "size": 62,
+      "symbol": "_FUN_58901a40",
+      "source": "src/client-current/Main/FUN_58901a40.cpp",
+      "source_sha256": "0ec99f8fc2a138da8869b1d8059cb599caedfded83a1a0a480c30a4635f2f5b8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58901a40",
+        "called_by": "Directly called by 0x58901AE0.",
+        "behavior": "Moves eight-byte elements backward in place to make room in the buffer, copying each element's two words.",
+        "uncertainty": "The element schema and caller-level insertion conditions are unresolved. The 62-byte body returns with ret."
+      }
     }
   ]
 }

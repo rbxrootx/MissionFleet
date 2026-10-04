@@ -116,7 +116,22 @@ candidate was rebuilt and passed objdiff byte comparison. One additional
 candidate, `FUN_58901A80`, was rechecked as part of the frontier and was already
 in the verified inventory.
 
+The vector-style range-insertion path under `FUN_58901AE0` adds nine matches
+(966 bytes) and checks 27 mapped operand targets. `FUN_58901D30` calls the
+insertion routine; it transfers eight-byte elements through the matched
+allocation, copy, move, and element-lifecycle helpers. The verified edge set
+includes `FUN_58901790`, `FUN_5873EFE0`, `FUN_58901A10`, `FUN_58901AB0`,
+`FUN_5873C470`, and `FUN_58901A40`, plus the shared `FUN_58791E20` cleanup
+routine and callback thunk `FUN_5897CC84` elsewhere in the same descendant
+branch.
+
+Two extents were corrected from the original decoded bytes. `FUN_58791E20`
+ends with `ret 4` at `0x58791E47`; padding starts at `0x58791E4A`. The
+`FUN_58901AE0` body continues through its `ret 0x10` at `0x58901D2A`; three
+`int3` bytes follow before `FUN_58901D30`. All nine new candidates passed
+objdiff comparison at 100%. A depth-12 audit of the `FUN_58764D30` callgraph
+finds no remaining unmatched indexed calls in this branch.
+
 The matches establish machine instructions and caller/callee relationships.
-They do not identify the UI labels, object types, record schema, or visible
-state changes. Other high-fan-out descendants and runtime behavior remain
-unresolved and untested.
+They do not establish UI labels, object types, record schema, visible state
+changes, or runtime behavior; those remain unresolved and untested.
