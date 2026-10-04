@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,166 verified matches
-totaling 2,271,224 bytes (21.6930%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,167 verified matches
+totaling 2,271,566 bytes (21.6963%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1166,6 +1166,12 @@ indexed global resource entries and applies observed word masks; slot and
 resource semantics remain unresolved. Its shared 41-byte linked-node accessor
 `FUN_58908140` is now also matched and used by three verified callers. See
 [indexed child-resource refresh evidence](docs/current-main-indexed-child-resource-refresh.md).
+
+`FUN_5873B540` adds a 342-byte exact match called by the verified spatial-state
+handler and virtual update. It filters linked candidates by state/key and
+returns the candidate with the lowest observed distance score; units and
+selector meaning are unresolved. See
+[spatial candidate selection evidence](docs/current-main-spatial-candidate-selection.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
