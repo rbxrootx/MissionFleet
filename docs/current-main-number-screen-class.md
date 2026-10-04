@@ -24,6 +24,16 @@ writes 11 into the sign slot at `+0x64`. These are observed numeric codes;
 their visual glyphs are not established. The absolute-value operation uses
 32-bit negation, so the `INT_MIN` edge case needs separate runtime validation.
 
+A portable [C++ behavior model](../src/client-current/semantic/CNumberScreenDigits.cpp)
+implements this observed digit construction, including the x86 `INT_MIN`
+negation result. The [native cases](../tests/native/number_screen_digits_test.cpp)
+cover inferred width, fixed width, zero, negative values, and `INT_MIN`.
+They pass locally. This model does **not** compile to the original 191 bytes
+and is not credited as a new byte match. The exact-match source remains the
+instruction stream in `FUN_58907040.cpp`; executing the original function
+against the model remains outstanding. Re-run the model cases with
+`python tools/verify_number_screen_digits.py`.
+
 ## Constructor, cleanup, and vtable
 
 The 142-byte cleanup body `FUN_58906EA0` is called by the scalar-deleting

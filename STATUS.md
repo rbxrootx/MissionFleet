@@ -5,7 +5,7 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,949
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,952
 identified code bytes across six report units. There are 7,265 verified matches
 totaling 2,289,925 bytes (21.8714%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
@@ -16,9 +16,14 @@ Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
 28 original bytes. This improves source reconstruction without changing the
 matched-function count.
+
 The `FUN_58907360` number-state setter now also uses C++ with its direct call
 to `FUN_58907040` symbolically matched; this is a source-quality improvement
 and does not increase coverage.
+
+A portable C++ behavior model for the 191-byte `FUN_58907040` digit formatter
+is recorded separately with six passing edge cases. It is not byte-identical
+and is excluded from the match count.
 
 Recent current Main.dll helper evidence is documented in
 [`docs/current-main-encoded-paired-child-update.md`](docs/current-main-encoded-paired-child-update.md),
