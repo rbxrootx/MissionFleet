@@ -29,3 +29,28 @@ verification recompiles the source and compares the function body and mapped
 operand targets to the pinned original. The exact meanings of the record
 schema, control/resource types, resource counts, flag, setting, and geometry
 remain unknown. No emulator runtime test has been performed.
+
+## Shared record append path: `FUN_588490F0`
+
+The count-checked semicolon parser `FUN_58849360` passes this helper each
+zeroed token buffer. Event-message helper `FUN_58814FD0` also passes it a local
+record in the observed message-resource path. At both call sites, the receiver
+is in ECX and the record pointer is the single stack argument. The distinct
+callers establish two uses of the append path, but do not prove both buffers
+share one semantic schema.
+
+The helper requests a 0xB4-byte object through `FUN_5897CC4E`. On the observed
+non-null path, it initializes that object through `FUN_5875A7E0`, taking values
+from receiver offsets +4, +8, and +0xAC. It calls callback `0x5898C198` with
+the input pointer and a stack-local buffer, passes the resulting local record
+to `FUN_5875A4B0`, and applies mask `0x7FFF` to the new object's word at +0x24.
+For the first object it stores the node at receiver +0x6C and +0x100. Later
+objects are linked from the prior tail through +0x54 and back through the new
+node's +0x50. It increments receiver word +0xF2, stores the new tail at +0x70,
+and calls `FUN_588486E0`.
+
+The complete SEH-protected body is 283 bytes with nine mapped operand targets;
+it returns with `ret 4` at `0x58849208`, followed by five `CC` bytes before
+`FUN_58849210` at `0x58849210`. The receiver and node types, input schema,
+callback contract, field meanings, allocation-failure behavior, and effect of
+`FUN_588486E0` remain unresolved. No runtime or emulator test was performed.
