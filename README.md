@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,343 matches cover 2,307,973 bytes (22.0433%) and are verified
+The current 7,352 matches cover 2,309,571 bytes (22.0586%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
@@ -29,6 +29,8 @@ Its linked-pair guard and message path are documented in
 [the pair-guard evidence](docs/current-main-communicator-id-pair-guard-58848b40.md).
 The ID panel's vtable reset callback is documented in
 [the reset evidence](docs/current-main-communicator-id-reset-58848b90.md).
+The communicator configuration/memo handler's nine verified direct helpers
+are documented in [the helper evidence](docs/current-main-communicator-config-memo-helpers.md).
 The ID panel's virtual input method and eight-entry key jump table are
 documented in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
 Its periodic movement and linked-list batch helper are documented in

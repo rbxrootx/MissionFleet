@@ -308446,6 +308446,548 @@
         "behavior": "For key 12, scans the global collection at receiver +0x104 using count +0xF8 and 0xB4-byte record stride; it tests record bytes against the key and second input byte, then compares a word field and returns the matching record address or zero. Returns with ret 4.",
         "uncertainty": "The collection class and record fields have not been identified."
       }
+    },
+    {
+      "address": "5883F0E0",
+      "name": "FUN_5883f0e0",
+      "size": 587,
+      "symbol": "_FUN_5883f0e0",
+      "source": "src/client-current/Main/FUN_5883f0e0.cpp",
+      "source_sha256": "96b0503b772b48df5f2c1ab9c97e8a34a4611b785d5451be36c504fbebf6e7b7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5883EB90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "5883F1CA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "5899E3C8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "5899E394",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "5883F2B5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 307,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 322,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 371,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 386,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 430,
+          "target_address": "5898C0BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 461,
+          "target_address": "5883F200",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 503,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 536,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 577,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883f0e0 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this method six times with the same receiver.",
+        "behavior": "Checks elapsed time through the global function pointer at 0x5898C1A8; after a 500-unit threshold it copies two strings from 0x5899E3C8/0x5899E394 and appends them through FUN_589088D0. It resets receiver +0xE0, then scans the supplied text, splits at byte 0x0D and at 0x46-byte spans, and appends each segment through FUN_589088D0.",
+        "uncertainty": "The clock units, text encoding, messages, and meaning of receiver fields remain unresolved. Inventory size was corrected from 580 to 587 bytes; the body ends with ret 4 at 0x5883F328 and has five following CC bytes."
+      }
+    },
+    {
+      "address": "5883EAB0",
+      "name": "FUN_5883eab0",
+      "size": 137,
+      "symbol": "_FUN_5883eab0",
+      "source": "src/client-current/Main/FUN_5883eab0.cpp",
+      "source_sha256": "72fc186cefab14f99c7a8513f6fa48c0f9c3940c485823a2467b215e7e13099a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "58789DF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58789F80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883eab0 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper five times with receiver in ecx.",
+        "behavior": "Branches on receiver +0xF0. State 2 updates child fields +0xC0/+0xBC/+0xB8 through FUN_589080E0 and invokes FUN_58789DF0/FUN_58789F80 on child +0xDC; state 1 updates children +0xA8/+0xA4/+0xA0. Other states return zero.",
+        "uncertainty": "The state labels and child field meanings are unresolved."
+      }
+    },
+    {
+      "address": "5883F330",
+      "name": "FUN_5883f330",
+      "size": 35,
+      "symbol": "_FUN_5883f330",
+      "source": "src/client-current/Main/FUN_5883f330.cpp",
+      "source_sha256": "22a4b57cc87326d8c478325867497b0ecc3b2684f6d8887c1a64c26a15d59c79",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5883f330 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper three times with receiver in ecx.",
+        "behavior": "Divides receiver +0x110 by 10 and writes the quotient to child +0x108 field +0x50 and remainder to child +0x104 field +0x50.",
+        "uncertainty": "The two child fields purpose is unknown."
+      }
+    },
+    {
+      "address": "587BA3F0",
+      "name": "FUN_587ba3f0",
+      "size": 58,
+      "symbol": "_FUN_587ba3f0",
+      "source": "src/client-current/Main/FUN_587ba3f0.cpp",
+      "source_sha256": "5d8c03f096372d730e31a1df168fa82c93217e35c5f9ba345746d4bf2659d5a6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba3f0 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper three times from its command paths.",
+        "behavior": "Allocates 12 bytes, copies three dwords from its argument object, and passes the record to FUN_58970C70 with command 0x80010A03. Returns with ret 4.",
+        "uncertainty": "The copied record type and command meaning are unresolved."
+      }
+    },
+    {
+      "address": "58789DF0",
+      "name": "FUN_58789df0",
+      "size": 392,
+      "symbol": "_FUN_58789df0",
+      "source": "src/client-current/Main/FUN_58789df0.cpp",
+      "source_sha256": "c122b32fc6c4eb081a3181da28772a791a174ecd011668c2adb119b7b70dbfb7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58789F64",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "58789EBB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "58789F5A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "58789F5A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "58789F51",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 182,
+          "target_address": "58789F51",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "58789F56",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "58789F5A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 368,
+          "target_address": "58789E10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789df0 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this list-search helper twice; FUN_5883EAB0 also calls it on a child at +0xDC.",
+        "behavior": "Traverses a singly linked list from receiver +8, comparing three argument strings against node fields. Mode 1 compares node offsets +0x2A2, +0x0C, and +0x2BA; mode 2 compares +0x2DA, +0x0C, and +0x2BA. The byte comparisons advance two bytes at a time. Returns node +8 on a match or -1, with ret 0x10.",
+        "uncertainty": "String encoding and the stored key fields meaning remain unresolved. Inventory size was corrected from 389 to 392 bytes to include ret 0x10 at 0x58789F75; seven CC bytes follow."
+      }
+    },
+    {
+      "address": "587BA430",
+      "name": "FUN_587ba430",
+      "size": 26,
+      "symbol": "_FUN_587ba430",
+      "source": "src/client-current/Main/FUN_587ba430.cpp",
+      "source_sha256": "1088ee67fdd4ad03c854ccd2d8d820587a0551c70ec66118ade1385d6bb0e0d1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba430 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper twice.",
+        "behavior": "Passes the supplied value and command 0x80010A02 to FUN_58970C70 with the other observed arguments zero; returns with ret 4.",
+        "uncertainty": "The command meaning and argument type are unknown."
+      }
+    },
+    {
+      "address": "587BA450",
+      "name": "FUN_587ba450",
+      "size": 26,
+      "symbol": "_FUN_587ba450",
+      "source": "src/client-current/Main/FUN_587ba450.cpp",
+      "source_sha256": "191dd4441524b1b8b4700645eba10d6d4394ef77678d1bc2d50a451e33d408e5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba450 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper twice.",
+        "behavior": "Passes the supplied value and command 0x80010A04 to FUN_58970C70 with the other observed arguments zero; returns with ret 4.",
+        "uncertainty": "The command meaning and argument type are unknown."
+      }
+    },
+    {
+      "address": "5883F360",
+      "name": "FUN_5883f360",
+      "size": 166,
+      "symbol": "_FUN_5883f360",
+      "source": "src/client-current/Main/FUN_5883f360.cpp",
+      "source_sha256": "78a82227ee6a56fcceb26f978d0e04e2d3bdf766faa546519c073dca74c31c57",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "5883F403",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58908650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883f360 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper once on receiver ecx.",
+        "behavior": "When receiver +0xE0 is positive, decrements it, calls FUN_58908650 on child +0xC4, updates fields +0x50 on children +0xE4/+0xE8 according to the index and child +0x88 bound, then computes a position from the child height using stride 0x8C and calls FUN_58903360.",
+        "uncertainty": "The index unit, child field meanings, and visible effect have not been runtime checked."
+      }
+    },
+    {
+      "address": "5883F410",
+      "name": "FUN_5883f410",
+      "size": 171,
+      "symbol": "_FUN_5883f410",
+      "source": "src/client-current/Main/FUN_5883f410.cpp",
+      "source_sha256": "1a839e8f3b95a7ea6e60698174614f2bf7c0fe814ec874bc5950757084cfd0d3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "5883F4B9",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "589086F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 164,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883f410 / CPannelCommunicatorConfigMemoManage handler helper",
+        "called_by": "FUN_58840890 calls this helper once on receiver ecx.",
+        "behavior": "If receiver +0xE0 is below child +0xC4 field +0x88 minus 8, increments it, calls FUN_589086F0, updates fields +0x50 on children +0xE4/+0xE8, computes a position from the child height using stride 0x8C, and calls FUN_58903360.",
+        "uncertainty": "The index unit, child field meanings, and visible effect have not been runtime checked."
+      }
     }
   ]
 }
