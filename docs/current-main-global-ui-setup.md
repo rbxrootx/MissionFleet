@@ -108,3 +108,20 @@ epilogue (+3 bytes). The additional descendants include an allocation wrapper,
 size-check/helper path, and small setup routines. Class identities, resource
 names, argument contracts, and user-visible behavior remain uncertain. No
 original-client launch or visual test was performed.
+
+## `FUN_58854A00` startup object branch
+
+The installed `FUN_58854A00` constructor branch now has all indexed callees
+through depth two matched: 16 new functions add 5,873 byte-identical bytes and
+check 145 mapped operand targets. The depth-two callgraph audit reports no
+unmatched indexed target from this root.
+
+The mapped bodies show repeated child construction, embedded objects with
+observed vtable stores, groups of receiver-field initialization, a helper that
+copies three 16-bit and two 32-bit arguments to fixed offsets, and a loop that
+updates a field for each pointer in a receiver array. The evidence records
+callers, helper targets, field offsets, constants, and exact vtable values.
+Class identities, ownership, field schemas, and user-visible meaning remain
+unresolved. The audit covers indexed direct calls through two edges; indirect
+dispatch and deeper paths are still open, and no runtime or visual test was
+performed.
