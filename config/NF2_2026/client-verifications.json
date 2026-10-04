@@ -299983,6 +299983,131 @@
         "behavior": "Walks receiver range pointers +0x10 through +0x14 in 0x48-byte steps, checking the range and the receiver's secondary pointer invariant through 0x5897CC72. It compares each record's first two DWORDs against the two stack keys and returns a pointer to record +0x0C on the first match. If the range is empty or no record matches, it returns null. The complete 198-byte body has 12 mapped operand targets and returns with ret 8.",
         "uncertainty": "The receiver and record types, key meanings, pointer invariant, and semantic role of record field +0x0C remain unknown. The observed caller use suggests the returned pointer is passed into FUN_58731CE0, but its effect is not established here. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58834190",
+      "name": "FUN_58834190",
+      "size": 188,
+      "symbol": "_FUN_58834190",
+      "source": "src/client-current/Main/FUN_58834190.cpp",
+      "source_sha256": "28e8f2a8fa6bafff785f81b607498890f74b3f113c921df8c9ee014b002d1c4d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58834190 / parallel collection selection update A",
+        "called_by": "Called from both verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The observed sites pass a local record pointer and load the receiver collection from global object 0x58A245B4 plus 0x160.",
+        "behavior": "Scans the receiver collection at +0x24C, using its +0x88 count and string lookup via FUN_589080E0 plus callback 0x5898C1A4 to compare each entry with the supplied pointer. An existing match returns immediately. If no entry matches, it performs a second lookup in collection +0x250 using the scan index and a text pointer resolved from 0x5899E1B0; a match passes the decremented value from child +0x218+0x64 to FUN_58907360. It then calls FUN_589081E0 with the scan index for collections +0x24C, +0x250, and +0x254 and finishes through FUN_58834030. The complete body is 188 bytes with 12 mapped operand targets and returns with ret 4.",
+        "uncertainty": "The collection and entry types, lookup callback contract, meaning of resource text 0x5899E1B0, index semantics, refresh-helper effects, and visible result remain unknown. Dispatcher call sites establish the receiver path and local-pointer argument but not a domain-level feature name. No runtime or emulator test was performed."
+      }
+    },
+    {
+      "address": "58839890",
+      "name": "FUN_58839890",
+      "size": 188,
+      "symbol": "_FUN_58839890",
+      "source": "src/client-current/Main/FUN_58839890.cpp",
+      "source_sha256": "1c9562204c8b7c5147dd91f8591c03a9f749f991c308c214d26e26a0ac9b515b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "58839947",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "5899E1B0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "589081E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 158,
+          "target_address": "589081E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 170,
+          "target_address": "589081E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 177,
+          "target_address": "58839730",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58839890 / parallel collection selection update B",
+        "called_by": "Called from both verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The observed sites pass a local record pointer and load the receiver collection from global object 0x58A245B4 plus 0x164.",
+        "behavior": "Mirrors FUN_58834190 on receiver collections +0x210, +0x214, and +0x218. It scans +0x210 using its +0x88 count and compares entry text obtained through FUN_589080E0 with the supplied pointer through callback 0x5898C1A4. If absent, it checks +0x214 using the scan index and text resolved from 0x5899E1B0; a match passes the decremented value from child +0x1DC+0x64 to FUN_58907360. It then calls FUN_589081E0 with the scan index for collections +0x210, +0x214, and +0x218 before FUN_58839730. The full body is 188 bytes with 12 mapped operand targets and returns with ret 4.",
+        "uncertainty": "The collection and entry types, lookup callback contract, meaning of resource text 0x5899E1B0, index semantics, refresh-helper effects, relationship to FUN_58834190, and visible result remain unresolved. No runtime or emulator test was performed."
+      }
     }
   ]
 }
