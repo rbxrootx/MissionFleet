@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,470,131
-identified code bytes across six report units. There are 7,335 verified matches
-totaling 2,306,193 bytes (22.0264%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,162
+identified code bytes across six report units. There are 7,343 verified matches
+totaling 2,307,973 bytes (22.0433%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -15,6 +15,8 @@ The current Main.dll sprite file manager cleanup and deleting wrapper are
 recorded in [the lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are recorded
 in [the helper evidence](docs/current-main-tag-dispatch-helper-methods.md).
+The remaining direct dispatcher callees and their corrected boundaries are
+recorded in [the case helper evidence](docs/current-main-tag-dispatch-remaining-callees.md).
 
 The latest current-client parent UI-child constructor is recorded in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
