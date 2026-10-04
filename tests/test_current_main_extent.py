@@ -59,6 +59,27 @@ class CurrentMainFunctionExtentTests(unittest.TestCase):
         padding = image[start - MAIN_BASE + size:start - MAIN_BASE + 0x170]
         self.assertEqual(padding, b"\xCC" * 4)
 
+    def test_aggregate_refresh_extent_includes_truncated_store_and_return(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        function = next(row for row in rows if row["address"] == "587e7e00")
+        next_function = next(row for row in rows if row["address"] == "587e7f20")
+        start = int(function["address"], 16)
+        size = int(function["size"])
+        self.assertEqual(size, 0x119)
+        self.assertEqual(int(next_function["address"], 16), start + 0x120)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        function_bytes = image[start - MAIN_BASE:start - MAIN_BASE + size]
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        instructions = list(decoder.disasm(function_bytes, start))
+        self.assertEqual(instructions[-1].address, 0x587E7F18)
+        self.assertEqual(instructions[-1].mnemonic, "ret")
+        self.assertEqual(instructions[-1].address + instructions[-1].size, start + size)
+
+        padding = image[start - MAIN_BASE + size:start - MAIN_BASE + 0x120]
+        self.assertEqual(padding, b"\xCC" * 7)
+
 
 if __name__ == "__main__":
     unittest.main()

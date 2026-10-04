@@ -297672,6 +297672,57 @@
         "behavior": "Checks receiver status field +0x0C indexed by the stack argument; if already 1, returns 2. Otherwise opens a source through helper 0x589714B8; open failure returns 3. It reads 0x128 bytes through 0x589714B2 into a local record, then scans the receiver's pointer array at +4 using its count at +8. For each entry it compares the string at entry +0x38 with the loaded record through callback 0x5898C1A4. On a match it derives a bounded string from entry +8 and dispatches message 0x80025004 through 0x58970C70, passing the requested index; it then marks that indexed status as 1. Read-failure and no-match paths close the source through 0x5898C184 and return 0. The complete 273-byte body has 11 mapped operand targets and returns with ret 4.",
         "uncertainty": "The source/file identity, record schema, meanings of the entry strings and index values, exact return contract of 0x58970C70, and user-visible effect of message 0x80025004 remain unknown. Caller contexts establish packet initialization and scene/object-update use, but no runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "587E7E00",
+      "name": "FUN_587e7e00",
+      "size": 281,
+      "symbol": "_FUN_587e7e00",
+      "source": "src/client-current/Main/FUN_587e7e00.cpp",
+      "source_sha256": "23fb6e7de7893651bbc5f433dfa1d9e4773791675672a47850f6ddc66a259e33",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 8,
+          "target_address": "58A24900",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 251,
+          "target_address": "588B3720",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e7e00 / aggregate and child-state refresh routine",
+        "called_by": "Directly called by verified setup/update routine FUN_587E8A40 and battle-object update FUN_587FD890. The latter calls it when receiver flags masked by 0x1F00 equal 0x0700.",
+        "behavior": "Clears global dword 0x58A24900. Unless receiver byte +0x20D64 is set, resets +0x10A18, walks the chain rooted at global object 0x58A247F8+0x0C, and accumulates child +0x60 values at receiver +0x10A18 when the child's byte +0x354 differs from the global reference child's byte +0x354 and child +0x100C is nonnull. It then zeroes 20 consecutive receiver dwords from +0x124 through +0x170. If +0x218E4 is zero, it calls FUN_588B3720 for up to eight child pointers starting at +0x218F0 (bounded by count +0x104D0), sets +0x218E4 to one, and returns. The corrected extent is 281 bytes: the indexed Ghidra size of 273 bytes ended in the middle of the final store instruction and omitted its immediate, register restores, and ret. Seven following bytes are 0xCC padding before the next indexed function. The full function has four mapped operand targets.",
+        "uncertainty": "The receiver class, global chain type, field units and meanings, child-state callback behavior, and user-visible result remain unresolved. The extent correction is supported by the mapped bytes ending in ret at 0x587E7F18 and 0xCC padding through the next function at 0x587E7F20. No runtime or emulator test was performed."
+      }
     }
   ]
 }

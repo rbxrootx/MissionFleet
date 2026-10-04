@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,172 verified matches
-totaling 2,273,044 bytes (21.7104%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,861
+identified code bytes across six report units. There are 7,173 verified matches
+totaling 2,273,325 bytes (21.7130%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -187,6 +187,15 @@ from a scene/object update. It honors a per-index completion flag, reads a
 and dispatches message `0x80025004` on a match. File and record identities and
 the message's visible effect remain unknown. All 11 operand targets match the
 mapped image; see [the indexed-dispatch evidence](docs/current-main-indexed-file-record-dispatch.md).
+
+The latest aggregate and child-state refresh is `FUN_587E7E00`. Its indexed
+extent was corrected from 273 to 281 bytes after the old boundary was found to
+cut through the final store; the recovered body now includes its register
+restores and `ret`, with seven padding bytes before the following function.
+The routine recomputes receiver field `+0x10A18` from a linked object chain,
+clears twenty dwords at `+0x124..+0x170`, and conditionally refreshes up to eight
+children through `FUN_588B3720`. Its class and field meanings remain unknown.
+All four operand targets match; see [the extent and behavior notes](docs/current-main-aggregate-child-refresh.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
