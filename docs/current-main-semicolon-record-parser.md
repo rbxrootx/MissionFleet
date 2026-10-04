@@ -70,3 +70,27 @@ The relationship between these receivers and the earlier `+0xD8` parser pair,
 the token record schema, selector/count meanings, helper effects, global
 suppression policy, and message callback's visible result remain unknown.
 These functions have not been exercised at runtime or in the emulator.
+
+## Token record insertion helpers: `FUN_58842DC0` and `FUN_58843060`
+
+The count-checked parser `FUN_58846B00` passes its cleared 24-byte token buffer
+to `FUN_58842DC0`. That helper requests a 0xB4-byte object, initializes it
+from receiver fields `+4`, `+8`, and `+0xCC`, prepares its record through
+callback `0x5898C198` and `FUN_5875A4B0`, then appends it to the list with head
+`+0x138`, tail `+0x13C`, and node links `+0x54/+0x50`. It increments receiver
+word `+0xF8`. Its full SEH-protected body is 293 bytes, including `ret 4`,
+with eight operand targets.
+
+The selector parser `FUN_58846BD0` calls `FUN_58843060` for tokens that match
+global string `0x58A0B450`; `FUN_588C1650` also calls it directly with a local
+record. It similarly requests a 0xB4-byte object and prepares it through the
+same callback/helper pair, using receiver field `+0x90`. It appends through
+head `+0x130`, tail `+0x134`, and increments receiver word `+0xFA`. Its full
+SEH-protected body is 295 bytes, including `ret 4`, with eight operand
+targets. Both helpers clear observed bits in the node word at `+0x24` and link
+through node fields `+0x54/+0x50`.
+
+The node class, prepared-record schema, callback/helper contracts, list field
+roles, and semantic relationship between the two receiver objects remain
+unidentified. Their caller data shows token and message paths, but no runtime
+or emulator behavior has been verified.
