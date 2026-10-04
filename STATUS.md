@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,090 verified matches
-totaling 2,238,708 bytes (21.3826%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,091 verified matches
+totaling 2,238,773 bytes (21.3832%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -50,6 +50,12 @@ bounds-checks the resulting indices, and returns a pointer to a 0x14-byte
 record in a column-major table. Both step fields must equal 18. The record and
 coordinate meanings remain unknown; the complete body matches with no
 relocations.
+
+The latest child-parameter helper is `FUN_587B6020`, a 65-byte routine called
+by five verified functions. It stores two arguments, writes the fixed value
+`0x40000000`, and, if a child pointer is present, calls `FUN_587B7400` with
+derived values and global `0x58A248F8`. The field units and child behavior
+remain unknown; both relocations match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |

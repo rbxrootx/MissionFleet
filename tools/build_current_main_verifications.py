@@ -40,6 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
+    "587B6020",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -227,7 +228,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -392,6 +393,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587B6020": {
+        "name_in_analysis": "FUN_587b6020",
+        "called_by": "Directly called by five verified functions: 0x58853870, 0x58853C20, 0x5888A9C0, 0x5888AA70, and 0x5888AFC0. 0x58853870 and 0x58853C20 contain multiple callsites.",
+        "behavior": "Stores its two stack arguments at receiver offsets +0x6C and +0x70, then writes 0x40000000 at +0x5C. If receiver +0x74 is nonzero, derives two further values from receiver +4 and +8 and calls 0x587B7400 on the child with those values and global 0x58A248F8. Returns with ret 8.",
+        "uncertainty": "The receiver and child classes, meanings and units of fields +0x5C/+0x6C/+0x70, roles of the derived child arguments, and the global's contract are unresolved. Caller evidence shows varied numeric/pointer values and is insufficient to name the visible control or behavior. The complete 65-byte extent decodes with two mapped operand targets.",
+    },
     "587C3D60": {
         "name_in_analysis": "FUN_587c3d60",
         "called_by": "Directly called by five verified functions: 0x5877EC80, 0x58782CF0, 0x587A4440, 0x588D4300, and 0x588F55C0. The first two callers contain repeated callsites.",
