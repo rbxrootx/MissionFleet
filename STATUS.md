@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,101 verified matches
-totaling 2,241,864 bytes (21.4127%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,102 verified matches
+totaling 2,241,972 bytes (21.4138%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -108,6 +108,13 @@ receiver bounds, maps the vertical position to a linked row, returns its index
 or `-1`, and invokes one of two virtual slots depending on whether the resolved
 node changed. The control and callback meanings remain unresolved; its single
 mapped operand target matches under objdiff.
+
+The latest encoded-field predicate is `FUN_588DD2A0`, a 108-byte routine
+called by three verified functions. It checks a masked type value and a clear
+receiver flag, converts an XOR-decoded field through a floating scale, and
+returns 1 when a second XOR-decoded field is below the converted value. The
+type, fields, scale, and gameplay meaning remain unknown. All three mapped
+operand targets match under objdiff.
 
 The latest resource-backed child construction path is `FUN_5875ADB0`, a
 366-byte SEH-protected initializer called by three verified functions. It
