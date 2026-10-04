@@ -139,6 +139,7 @@ ADDRESSES = (
     "58879D60", "5875ACD0",
     "58879CC0",
     "588B1FE0",
+    "587C9D40", "5889DD30", "588A9650",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -365,6 +366,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58879D60", "5875ACD0",
     "58879CC0",
     "588B1FE0",
+    "587C9D40", "5889DD30", "588A9650",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4331,6 +4333,24 @@ EVIDENCE = {
         "called_by": "Directly called by 0x588B0940 at 0x588B12FD while constructing its child screen object.",
         "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A08A0, sets fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60, 0x58734A30, 0x58902D20, and 0x58902CE0.",
         "uncertainty": "The class identity, member and child roles, control flags, and screen-layout meaning remain unresolved. The full 1,533-byte body decodes.",
+    },
+    "587C9D40": {
+        "name_in_analysis": "FUN_587c9d40",
+        "called_by": "Called three times by 0x58868B40 at indexed instruction offsets 1432, 1643, and 1854.",
+        "behavior": "Forwards five stack values and the receiver to 0x58907100, installs vtable pointer 0x5899B044, stores another argument at receiver +0xFC, returns the receiver, and removes 0x18 argument bytes.",
+        "uncertainty": "The class identity and the roles of the forwarded arguments and +0xFC field are unresolved. The complete 57-byte body decodes.",
+    },
+    "5889DD30": {
+        "name_in_analysis": "FUN_5889dd30",
+        "called_by": "Directly called by 0x58868B40 at indexed instruction offset 2337.",
+        "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A01E0, initializes fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60 and 0x58902D20.",
+        "uncertainty": "The class identity, member and child roles, control flags, and layout meanings are unresolved. The full 1,357-byte body decodes.",
+    },
+    "588A9650": {
+        "name_in_analysis": "FUN_588a9650",
+        "called_by": "Directly called by 0x58868B40 at indexed instruction offset 2377.",
+        "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A06E0, initializes fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60 and 0x58902D20.",
+        "uncertainty": "The class identity, member and child roles, control flags, and layout meanings are unresolved. The full 1,286-byte body decodes.",
     },
 }
 
