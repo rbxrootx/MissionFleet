@@ -297891,6 +297891,32 @@
         "behavior": "When the third stack argument is zero, calls FUN_58848610 on the receiver and dispatches callback message 0xEE49 through receiver subobject +0x30 vtable slot +0x18. Otherwise, it parses the byte string in the first stack argument up to the second argument's length, splitting on semicolon (0x3B). It zeroes a 24-byte local buffer for each token, compares that token with global string 0x58A0B450 through callback 0x5898C1A4, and for non-equal tokens calls FUN_58849210 with the receiver and token. After parsing, when global dword 0x58A0B4A0 is zero and the signed word at receiver +0xF0 differs from length-1, it calls FUN_58848610; it then dispatches message 0xEE49 through the same callback. The body is 242 bytes and returns with ret 0x0C.",
         "uncertainty": "The meaning of the third argument, exact token-length contract, global-string suppression policy, receiver class, callback message semantics, and whether all caller paths represent the same joined-fleet notice remain unresolved. The called append helper is documented for the localized joined-fleet text path, but this function's message-to-user effect was not runtime-tested."
       }
+    },
+    {
+      "address": "58848610",
+      "name": "FUN_58848610",
+      "size": 97,
+      "symbol": "_FUN_58848610",
+      "source": "src/client-current/Main/FUN_58848610.cpp",
+      "source_sha256": "f9756d87feefacf358e78ed6e5e8be663afce2ce51ea543ebf33c3aefa157b07",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58848610 / linked-node clear helper",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700, event dispatcher FUN_588C1650, and semicolon parser FUN_58849440. The parser calls it when its third argument is zero and on its conditional post-parse reset path.",
+        "behavior": "Starts at receiver tail pointer +0x68 and walks each node's previous-link field +0x50. For every node it calls the function at the first vtable slot with the node as ECX and stack argument 1. It increments a local visited count and, when the previous link is null or the count equals the signed word at receiver +0xF0, clears receiver fields +0x10C, +0x68, +0x64, and +0xF0 before continuing/ending the walk. On exit it clears +0x68, +0x64, +0xFC, and +0xF0 and returns with ret. Empty-list flow reaches the final stores without the inner +0x10C clear. The 97-byte extent is complete and has no mapped relocation operands.",
+        "uncertainty": "The receiver and node classes, first-slot callback's exact contract, reason for the count comparison, and semantics of fields +0x10C/+0xFC/+0xF0 remain unknown. Caller evidence establishes repeated clear/reset use but no runtime or emulator behavior was tested."
+      }
     }
   ]
 }
