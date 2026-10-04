@@ -39,7 +39,7 @@ ADDRESSES = (
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
-    "5877ABA0",
+    "5877ABA0", "588EBEB0",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -227,6 +227,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
+    "588EBEB0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -391,6 +392,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588EBEB0": {
+        "name_in_analysis": "FUN_588ebeb0",
+        "called_by": "Directly called by five verified functions: 0x5873FE80, 0x587EFD60, 0x588D4300, 0x588E5150, and 0x588F55C0. 0x5873FE80 and 0x588E5150 contain repeated callsites.",
+        "behavior": "Returns 0 unless global 0x589C9074 equals 2. It reads the current value from receiver slot +8+(first argument*8), resolves that value through the object table reached from receiver +4, and calls the resolved object's virtual method at +0x14. A nonzero result returns 1. Otherwise it uses the return value of 0x5897CC36 modulo the derived range (third argument minus second argument plus 2), rejects one boundary case, and stores the resulting offset plus the second argument in the receiver slot. It then calls 0x58907990 with the resolved object and global 0x58A248FC, calls that object's virtual method at +4 with argument 0, and returns 1.",
+        "uncertainty": "The receiver's class and table layouts, meanings of the selector/range arguments, identities of 0x5897CC36 and the two virtual methods, and higher-level purpose of the selected option remain unresolved. Callers pass selector/range triples such as (0x0A, 0x38, 0x3B), (1, 6, 0x0B), and (0x0B, 0x3C, 0x3F); those values are recorded without assigning semantic labels.",
+    },
     "5877ABA0": {
         "name_in_analysis": "FUN_5877aba0",
         "called_by": "Directly called by six verified functions: 0x5873FE80, 0x587EFD60, 0x58853C20, 0x58856560, 0x588E4260, and 0x588E5150.",

@@ -287411,6 +287411,57 @@
         "behavior": "Returns when the collection at receiver +0x264 already has at least 0x7F entries. Otherwise allocates a 0x88-byte record, copies the first argument into its first 0x80 bytes with the observed bounded-copy path for strings of length at least 0x80, and stores the second and third arguments at record offsets +0x80 and +0x84. It advances the collection index at +0x0C modulo the bound at +0x04; if the next index does not equal +0x10, it stores the new record pointer in the pointer array at +0x14 and increments the count at +0x08.",
         "uncertainty": "The collection and record types, semantic roles of the two metadata arguments and collection indices, behavior when the next index equals +0x10, and identities of the three imported string callbacks remain unresolved. The body was recovered from its complete 151-byte Ghidra extent; caller evidence includes repeated string-like values and integer arguments but does not identify their UI meaning."
       }
+    },
+    {
+      "address": "588EBEB0",
+      "name": "FUN_588ebeb0",
+      "size": 238,
+      "symbol": "_FUN_588ebeb0",
+      "source": "src/client-current/Main/FUN_588ebeb0.cpp",
+      "source_sha256": "1b3116ff1fc085c0e013187602fed6e88cda3b2229aadbb776c5d7e0f0e69867",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "5897CC36",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "589C9074",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ebeb0",
+        "called_by": "Directly called by five verified functions: 0x5873FE80, 0x587EFD60, 0x588D4300, 0x588E5150, and 0x588F55C0. 0x5873FE80 and 0x588E5150 contain repeated callsites.",
+        "behavior": "Returns 0 unless global 0x589C9074 equals 2. It reads the current value from receiver slot +8+(first argument*8), resolves that value through the object table reached from receiver +4, and calls the resolved object's virtual method at +0x14. A nonzero result returns 1. Otherwise it uses the return value of 0x5897CC36 modulo the derived range (third argument minus second argument plus 2), rejects one boundary case, and stores the resulting offset plus the second argument in the receiver slot. It then calls 0x58907990 with the resolved object and global 0x58A248FC, calls that object's virtual method at +4 with argument 0, and returns 1.",
+        "uncertainty": "The receiver's class and table layouts, meanings of the selector/range arguments, identities of 0x5897CC36 and the two virtual methods, and higher-level purpose of the selected option remain unresolved. Callers pass selector/range triples such as (0x0A, 0x38, 0x3B), (1, 6, 0x0B), and (0x0B, 0x3C, 0x3F); those values are recorded without assigning semantic labels."
+      }
     }
   ]
 }

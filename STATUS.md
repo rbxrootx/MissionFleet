@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,086 verified matches
-totaling 2,238,151 bytes (21.3773%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,087 verified matches
+totaling 2,238,389 bytes (21.3796%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -24,6 +24,13 @@ called by six verified functions. It copies a supplied string into a fixed
 0x80-byte field, stores two additional words, and updates a bounded pointer
 array. The collection semantics and metadata meanings are not yet identified;
 the original byte sequence and five relocations match under objdiff.
+
+The latest shared option-selection helper is `FUN_588EBEB0`, a 238-byte routine
+called from five verified functions. It gates on global `0x589C9074`, queries
+the selected child through virtual slot `+0x14`, and on the observed fallback
+stores a derived value and dispatches two more updates. The option labels and
+meaning of the mode value remain unresolved; its four relocations match under
+objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
