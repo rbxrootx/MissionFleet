@@ -31,7 +31,8 @@ masks through `0x58902D20` and `0x58902CE0`.
 The 245-byte cleanup body writes the class vtable, visits fields `+0x84`,
 `+0x88`, `+0x90`, `+0x8C`, `+0x94`, `+0x98`, `+0x9C`, and `+0xA8`, calls the
 first vtable entry of each non-null child with argument 1, clears each field,
-then calls `0x587B5F50` on the receiver.
+then calls the now matched [panel-base teardown](current-main-panel-base-teardown.md)
+at `0x587B5F50` on the receiver.
 
 The six newly matched virtual methods, constructor, and cleanup body account
 for **2,168 bytes across eight functions**, with 61 mapped operands checked by

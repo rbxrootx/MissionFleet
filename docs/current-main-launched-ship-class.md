@@ -33,7 +33,8 @@ The RTTI-backed vtable entries are:
 The scalar deleting destructor calls `FUN_5888A840`, the 347-byte cleanup
 body. It installs the class vtable, visits individual child pointer fields,
 loops over three 32-entry pointer ranges, calls each non-null child's first
-vtable method with argument 1, clears the field, then calls `0x587B5F50`.
+vtable method with argument 1, clears the field, then calls the now matched
+[panel-base teardown](current-main-panel-base-teardown.md) at `0x587B5F50`.
 
 The five previously open vtable entries, constructor, and cleanup body now
 match **2,312 bytes across seven functions**, with 71 mapped operands checked
