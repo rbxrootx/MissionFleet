@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,112 verified matches
-totaling 2,242,583 bytes (21.4196%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,113 verified matches
+totaling 2,242,637 bytes (21.4201%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -154,6 +154,15 @@ destination buffer pointed to by receiver `+0x80` through indirect routine
 `MESSAGESTRING_ALL_CHATTING`. The copy routine's exact identity and the length
 fields' roles remain unknown; the complete body matches with one mapped
 operand target checked.
+
+The latest linked-list end-position helper is `FUN_58908870`, a 54-byte
+routine called by three verified functions. Starting at the node at `+0x7C`,
+it computes the signed quotient of `(+0x20 - +0x18) / +0x5C`, walks quotient
+minus one `+0x10` links (stopping at the head for a nonpositive position or at
+the last reachable node), and stores the selected pointer at `+0x80`. One
+caller repeats this across four contexts; another invokes it at a list-count
+threshold. Field units and the visible list behavior remain unknown. The full
+extent matches with no mapped operands.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

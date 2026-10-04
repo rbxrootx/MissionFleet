@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80",
+    "58770A80", "58908870",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80",
+    "58770A80", "58908870",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58908870": {
+        "name_in_analysis": "FUN_58908870",
+        "called_by": "Directly called by three verified functions: 0x588450B0, 0x5888D250, and 0x58890110. 0x588450B0 iterates four contexts; 0x5888D250 recalculates its context boundary when its count reaches a caller-derived threshold.",
+        "behavior": "Takes no explicit stack arguments. If receiver +0x7C is null, it returns unchanged. Otherwise it computes signed quotient ((receiver +0x20) - (receiver +0x18)) / receiver +0x5C, subtracts one, and walks forward from the +0x7C node through +0x10 links that many positions. A nonpositive position selects the head; a null link stops at the last reachable node. It stores the selected node at receiver +0x80 and returns.",
+        "uncertainty": "The meaning and units of receiver fields +0x18, +0x20, and +0x5C, the linked-node type, and the visible list/scroll behavior remain unresolved. Callers establish repeated-context use and a count-threshold path, but not control labels. The complete 54-byte extent has no mapped operand targets.",
+    },
     "58770A80": {
         "name_in_analysis": "FUN_58770a80",
         "called_by": "Directly called by three verified functions: 0x587B83E0, 0x58890110, and 0x588A9F20. Ghidra evidence for 0x587B83E0 shows the argument comes from the localized key MESSAGESTRING_ALL_CHATTING; 0x58890110 contains repeated calls with stack-built text values.",

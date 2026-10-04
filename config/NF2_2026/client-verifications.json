@@ -288832,6 +288832,32 @@
         "behavior": "Takes one source-string pointer. It reads the destination pointer from receiver +0x80, calls the indirect routine at 0x5898C198 with destination then source, scans the resulting NUL-terminated destination to count bytes before the terminator, stores that count at receiver +0x8C and +0x94, and returns with ret 4.",
         "uncertainty": "The exact identity of the indirect copy routine, destination buffer ownership/capacity, and the roles of the two length fields are not established. Caller evidence proves localized text and stack-built strings are supplied, but not the displayed control or text purpose. The complete 57-byte extent has one mapped operand target."
       }
+    },
+    {
+      "address": "58908870",
+      "name": "FUN_58908870",
+      "size": 54,
+      "symbol": "_FUN_58908870",
+      "source": "src/client-current/Main/FUN_58908870.cpp",
+      "source_sha256": "ed379d76818192d609a757d2a50685dd6b353d5c2793deed5aafa22b807fc65c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58908870",
+        "called_by": "Directly called by three verified functions: 0x588450B0, 0x5888D250, and 0x58890110. 0x588450B0 iterates four contexts; 0x5888D250 recalculates its context boundary when its count reaches a caller-derived threshold.",
+        "behavior": "Takes no explicit stack arguments. If receiver +0x7C is null, it returns unchanged. Otherwise it computes signed quotient ((receiver +0x20) - (receiver +0x18)) / receiver +0x5C, subtracts one, and walks forward from the +0x7C node through +0x10 links that many positions. A nonpositive position selects the head; a null link stops at the last reachable node. It stores the selected node at receiver +0x80 and returns.",
+        "uncertainty": "The meaning and units of receiver fields +0x18, +0x20, and +0x5C, the linked-node type, and the visible list/scroll behavior remain unresolved. Callers establish repeated-context use and a count-threshold path, but not control labels. The complete 54-byte extent has no mapped operand targets."
+      }
     }
   ]
 }
