@@ -17,3 +17,11 @@ All 236 bytes match at 100% under objdiff 3.8.0, with all 11 operand targets
 checked. The container and element types, comparator contract, ownership rules,
 and meaning of the removed text remain unknown. The callers' message branches
 do not prove a user-visible operation. No runtime behavior test was performed.
+
+The same two dispatchers call `FUN_5883B3B0` on an AX==3 path when the caller's
+field at `+0x0C` is positive. This companion helper performs the same first
+match erase against a different receiver range, `+0x228..+0x22C`; the helper
+above uses `+0x264..+0x268`. Both receive local text buffers and use the same
+comparator and shift callbacks. `FUN_5883B3B0` independently matches all 236
+mapped bytes, including its 11 operand targets. The separate ranges' contents
+and user-visible roles are unknown.

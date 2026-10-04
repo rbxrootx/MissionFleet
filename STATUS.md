@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
-identified code bytes across six report units. There are 7,178 verified matches
-totaling 2,274,415 bytes (21.7234%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,179 verified matches
+totaling 2,274,651 bytes (21.7257%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -232,6 +232,12 @@ the verified packet and event dispatchers. It compares each entry with the
 caller's text pointer, removes the first comparator-equal entry, shifts the
 remaining pointers, and returns whether it erased one. The container and
 string semantics remain unknown; see [the erase evidence](docs/current-main-matching-pointer-vector-erase.md).
+
+Its companion `FUN_5883B3B0` erases from a second pointer range at receiver
+`+0x228..+0x22C`; the first helper uses `+0x264..+0x268`. Both are called by the
+same verified packet and event dispatchers under separate observed guards, and
+both match all 236 bytes. The collections' contents and roles remain unknown;
+see [the paired erase evidence](docs/current-main-matching-pointer-vector-erase.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
