@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,878
-identified code bytes across six report units. There are 7,191 verified matches
-totaling 2,277,448 bytes (21.7524%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,885
+identified code bytes across six report units. There are 7,192 verified matches
+totaling 2,277,838 bytes (21.7561%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -109,7 +109,9 @@ was performed. See
 Its shared 283-byte append helper, `FUN_588490F0`, is now matched from both
 the count-checked semicolon parser and an event-message path. It builds a
 0xB4-byte node, updates the observed `+0x6C/+0x70` links and `+0xF2` count, and
-calls `FUN_588486E0`; record and callback semantics remain uncertain. See
+calls the matched 390-byte `FUN_588486E0` refresh helper. That helper's indexed
+extent was corrected to include its conditional branch and return; record,
+state, and callback semantics remain uncertain. See
 [`docs/current-main-message-node-construction.md`](docs/current-main-message-node-construction.md).
 The shared 605-byte `FUN_58780640` child rebuild now matches with 18 operand
 targets checked. Two verified state methods pass it an object's byte at `+0x354`;

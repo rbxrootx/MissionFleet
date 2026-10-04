@@ -10,6 +10,31 @@ MAIN_BASE = 0x58730000
 
 
 class CurrentMainFunctionExtentTests(unittest.TestCase):
+    def test_shared_record_list_update_extent_includes_truncated_branch_and_return(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        function = next(row for row in rows if row["address"] == "588486e0")
+        next_function = next(row for row in rows if row["address"] == "58848870")
+        start = int(function["address"], 16)
+        size = int(function["size"])
+        self.assertEqual(size, 0x186)
+        self.assertEqual(int(next_function["address"], 16), start + 0x190)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        function_bytes = image[start - MAIN_BASE:start - MAIN_BASE + size]
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        instructions = list(decoder.disasm(function_bytes, start))
+        self.assertEqual(instructions[-1].address, 0x58848863)
+        self.assertEqual(instructions[-1].mnemonic, "ret")
+        self.assertEqual(instructions[-1].operands[0].imm, 4)
+        self.assertEqual(instructions[-1].address + instructions[-1].size, start + size)
+        branch = next(item for item in instructions if item.address == 0x5884885E)
+        self.assertEqual((branch.mnemonic, branch.operands[0].imm), ("jne", 0x58848850))
+
+        padding = image[start - MAIN_BASE + size:start - MAIN_BASE + 0x190]
+        self.assertEqual(padding, b"\xCC" * 10)
+
     def test_shared_record_append_extent_stops_before_padding(self):
         with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))

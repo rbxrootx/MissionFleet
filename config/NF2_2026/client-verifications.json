@@ -298970,6 +298970,51 @@
         "behavior": "Requests a 0xB4-byte object through FUN_5897CC4E. On the observed non-null initialization path it calls FUN_5875A7E0 using receiver fields +4, +8, and +0xAC, invokes callback 0x5898C198 with the input pointer and a stack-local buffer, then passes a prepared local record and the new object to FUN_5875A4B0. It clears mask 0x8000 on the object's word +0x24, links the first object through receiver +0x6C and +0x100 or appends later objects through prior-object +0x54 and new-object +0x50, increments receiver word +0xF2, stores the new tail at receiver +0x70, and calls FUN_588486E0. The complete body is 283 bytes, ends in ret 4 at 0x58849208, and contains nine mapped operand targets.",
         "uncertainty": "The receiver and node types, input schema, callback contract, list-field meanings, allocation-failure behavior, and effect of FUN_588486E0 remain unresolved. The callers establish both token-batch and event-message uses, but not that their input records share a semantic schema. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "588486E0",
+      "name": "FUN_588486e0",
+      "size": 390,
+      "symbol": "_FUN_588486e0",
+      "source": "src/client-current/Main/FUN_588486e0.cpp",
+      "source_sha256": "0a3ea9a01da96ba259d68919d584cd5e2a38aeed7b30394bf860b89b0d41c0f6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 116,
+          "target_address": "58848860",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "58848860",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588486e0 / linked-record state refresh helper",
+        "called_by": "Called directly by both record appenders FUN_588490F0 and FUN_58849210 after each links a new 0xB4-byte node, updates its tail pointer, and increments its receiver count. Both mapped call sites pass zero as the sole stack argument, so those paths request a refresh without toggling receiver word +0xF6.",
+        "behavior": "With receiver in ECX and one stack mode argument, a nonzero argument toggles receiver word +0xF6 between 0 and 1 when currently in either of those states; other state values are preserved. State 0 selects receiver node pointer +0x6C and words +0xFA/+0xF2; state 1 selects +0x64 and words +0xF8/+0xF0. For active nodes it clears/sets observed masks in node word +0x24, computes up to five 0x1C-spaced values below 0x8C, calls FUN_58903290 with receiver coordinates from +4/+8 and the computed offset, and follows node link +0x54 while state +0xF6 is 1. It then walks relevant nodes to clear mask 0xFFFE. The corrected body is 390 bytes, ends with ret 4 at 0x58848863, has three mapped operand targets, and is followed by ten CC bytes before FUN_58848870.",
+        "uncertainty": "The receiver/node types, meanings of the two head pointers and paired count words, state values, 0x1C-spaced offsets, node flag masks, and FUN_58903290's effect remain unresolved. The two append callers prove only their zero-argument refresh path; no runtime or emulator test was performed. The prior 383-byte inventory extent ended after the first byte of a conditional branch; the mapped function continues through its epilogue and return."
+      }
     }
   ]
 }

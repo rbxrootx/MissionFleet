@@ -52,5 +52,27 @@ and calls `FUN_588486E0`.
 The complete SEH-protected body is 283 bytes with nine mapped operand targets;
 it returns with `ret 4` at `0x58849208`, followed by five `CC` bytes before
 `FUN_58849210` at `0x58849210`. The receiver and node types, input schema,
-callback contract, field meanings, allocation-failure behavior, and effect of
-`FUN_588486E0` remain unresolved. No runtime or emulator test was performed.
+callback contract, field meanings, and allocation-failure behavior remain
+unresolved. No runtime or emulator test was performed.
+
+## Post-append linked-record refresh: `FUN_588486E0`
+
+Both appenders call this helper after storing their new tail and incrementing
+their respective receiver counts. They pass zero, so these observed paths do
+not toggle the receiver's word at +0xF6. With a nonzero argument, the helper
+toggles +0xF6 between 0 and 1 only when its current value is one of those two;
+other values are left unchanged. State 0 uses receiver pointer +0x6C and words
++0xFA/+0xF2, while state 1 uses pointer +0x64 and words +0xF8/+0xF0.
+
+For active nodes it changes masks in node word +0x24, computes up to five
+0x1C-spaced offsets below 0x8C, calls `FUN_58903290` with receiver coordinates
+from +4/+8 and each offset, and follows node link +0x54 while +0xF6 is 1. The
+remaining loops clear mask 0xFFFE on the applicable nodes. These operations
+are visible in the mapped instructions; the UI meaning of the states, node
+flags, offsets, and helper call is not established.
+
+The corrected body is 390 bytes with three mapped operand targets and returns
+with `ret 4` at `0x58848863`. Its previous 383-byte catalog extent stopped
+after the first byte of a conditional branch. The corrected extent includes
+that branch and the epilogue, then stops before ten `CC` bytes and the next
+function at `0x58848870`. No client runtime or emulator test was performed.
