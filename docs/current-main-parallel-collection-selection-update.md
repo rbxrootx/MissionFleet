@@ -25,3 +25,23 @@ The collection and entry types, callback and helper contracts, resource text
 meaning, index roles, and visible result remain unresolved. The dispatcher
 calls prove the receiver paths and local-pointer inputs, but not the feature's
 domain meaning. No runtime client or emulator test was performed.
+
+## Indexed collection support
+
+`FUN_589080E0` is the indexed getter used by these handlers. It starts at
+receiver head `+0x78`, follows `+0x14` next pointers for a positive index
+(nonpositive indices select the head), and returns the selected node's DWORD
+at `+4`, or null if traversal fails. It is a 40-byte function with no mapped
+operand targets and returns with `ret 4`.
+
+`FUN_589081E0` removes an indexed node. It follows the same head/next chain,
+repairs previous/next links `+0x10/+0x14`, updates receiver head/tail
+`+0x78/+0x7C` and current-node pointers `+0x80/+0x84`, and decrements count
+`+0x88`. If the child at `+0x30` has bit 5 set in word `+0x24`, it dispatches
+message 2 through vtable slot `+0x18`; it then invokes the removed node's first
+virtual method with argument 1. Negative indices and failed traversals return
+without mutation. The body is 201 bytes, including `ret 4`, with three mapped
+operand targets.
+
+The node's DWORD at `+4`, receiver pointer roles, callback effect, and removed
+node's virtual method remain unidentified; no runtime behavior test was run.

@@ -138,7 +138,7 @@ ADDRESSES = (
     "58754650", "58754770",
     "58753360", "587533C0",
     "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "588F43F0",
-    "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58846B00", "58846BD0", "58843060", "58842DC0", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020", "58834190", "58839890",
+    "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58846B00", "58846BD0", "58843060", "58842DC0", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020", "58834190", "58839890", "589081E0", "589080E0",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
@@ -236,7 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -244,7 +244,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
-    "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "58834190", "58839890",
+    "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "58834190", "58839890", "589081E0", "589080E0",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
     "58770A80", "58908870", "587B9B30", "587BAF70", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0", "587DA120",
@@ -5226,6 +5226,18 @@ EVIDENCE = {
         "called_by": "Called from both verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The observed sites pass a local record pointer and load the receiver collection from global object 0x58A245B4 plus 0x164.",
         "behavior": "Mirrors FUN_58834190 on receiver collections +0x210, +0x214, and +0x218. It scans +0x210 using its +0x88 count and compares entry text obtained through FUN_589080E0 with the supplied pointer through callback 0x5898C1A4. If absent, it checks +0x214 using the scan index and text resolved from 0x5899E1B0; a match passes the decremented value from child +0x1DC+0x64 to FUN_58907360. It then calls FUN_589081E0 with the scan index for collections +0x210, +0x214, and +0x218 before FUN_58839730. The full body is 188 bytes with 12 mapped operand targets and returns with ret 4.",
         "uncertainty": "The collection and entry types, lookup callback contract, meaning of resource text 0x5899E1B0, index semantics, refresh-helper effects, relationship to FUN_58834190, and visible result remain unresolved. No runtime or emulator test was performed.",
+    },
+    "589080E0": {
+        "name_in_analysis": "FUN_589080E0 / indexed linked-entry value getter",
+        "called_by": "Called by verified parallel selection handlers FUN_58834190 and FUN_58839890, and by FUN_5879B3B0. The selection handlers pass a receiver collection in ECX and a zero-based index on the stack.",
+        "behavior": "Starts from receiver node pointer +0x78 and follows node next pointers at +0x14 for a positive requested index; for index zero or negative it selects the head directly. It returns the selected node's DWORD at +4, or null when the head/traversal node is null. The full body is 40 bytes with no mapped operand targets and returns with ret 4.",
+        "uncertainty": "The collection/node types, semantic meaning of node field +4, and behavior expected for negative indices remain unknown. No runtime or emulator test was performed.",
+    },
+    "589081E0": {
+        "name_in_analysis": "FUN_589081E0 / indexed linked-entry removal",
+        "called_by": "Called by both verified parallel selection handlers FUN_58834190 and FUN_58839890 for the scan index, and by FUN_5890BD90.",
+        "behavior": "For a nonnegative index, starts at receiver head +0x78 and follows next links at node +0x14 to the selected entry. It unlinks that node through previous/next links +0x10/+0x14, updates receiver head/tail +0x78/+0x7C and current-entry pointers +0x80/+0x84 when necessary, conditionally dispatches message 2 through receiver child +0x30 when that child's word +0x24 has bit 5 set, invokes the removed node's first virtual method with argument 1, and decrements receiver count +0x88. Negative indices and failed traversals return without mutation. The complete body is 201 bytes with three mapped operand targets and returns with ret 4.",
+        "uncertainty": "The receiver and node types, current-entry pointer meanings, child callback behavior, virtual method contract, and caller-visible meaning of removal remain unresolved. No runtime or emulator test was performed.",
     },
     "58835A10": {
         "name_in_analysis": "FUN_58835a10 / keyed 0x54-byte record removal helper",
