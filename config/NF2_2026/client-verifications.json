@@ -300486,6 +300486,57 @@
         "behavior": "Compares receiver pointers at +0x88, +0x94, and +0x218, with a conditional check of bit 0x10000000 in the object at +0x84. Depending on those comparisons, it selects one of the pointers at +0x94, +0x218, or +0x2A4 into receiver +0x88. It sets low word flags 0xF at selected object's +0x24 and clears those low bits on the other observed objects at +0x24. The complete 169-byte body decodes and has no mapped operand targets.",
         "uncertainty": "The pointed-to object types, role of the +0x84 guard bit, meaning of the flag bits, and higher-level state represented by +0x88/+0x94/+0x218/+0x2A4 remain unknown. Caller contexts support a control/update transition only; no runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "58831AE0",
+      "name": "FUN_58831ae0",
+      "size": 163,
+      "symbol": "_FUN_58831ae0",
+      "source": "src/client-current/Main/FUN_58831ae0.cpp",
+      "source_sha256": "4aa9e6bac3f121255690ccee1fefad0d7ab09483273a28cd4d5bd0c716384317",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58831B7E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58831ae0 / unique-string record fanout",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both supply an input record and receiver collection at global object 0x58A245B4 +0xDC +0x154.",
+        "behavior": "For a non-null record, obtains indexed entry strings from the collection at receiver +0x98 through 0x589080E0 and compares each byte sequence against record text at +0x2D. An exact match exits without adding either entry. If no match exists, it calls 0x589088D0 on collection +0x98 with record text +0x2D, record DWORD 0, and constant 0x83ADD7; it then calls the same helper on collection +0x9C with the string pointer at record +0x0C, DWORD at record +4, and the same constant. The complete 163-byte body has four mapped operand targets.",
+        "uncertainty": "The record schema, collection and entry types, key/hash meaning of 0x83ADD7, and domain purpose of the two strings/IDs remain unknown. Static dispatcher callers establish message/event ingestion but not a higher-level identity. No runtime client or emulator test was performed."
+      }
     }
   ]
 }
