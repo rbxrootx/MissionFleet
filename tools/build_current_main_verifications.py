@@ -40,7 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
-    "587B6020", "58907C80",
+    "587B6020", "58907C80", "5873A540",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -229,7 +229,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
-    "58907C80",
+    "58907C80", "5873A540",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -394,6 +394,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5873A540": {
+        "name_in_analysis": "FUN_5873a540",
+        "called_by": "Directly called by five verified functions: 0x5874FA60, 0x58782CF0, 0x587BB700, 0x587DEB30, and 0x587E3080. 0x5874FA60 and 0x587DEB30 contain repeated callsites.",
+        "behavior": "Reads the low bit of its stack argument, clears mask 0x4 from the receiver's 16-bit field at +0x24, then sets that bit to the argument's low-bit value while preserving all other bits. Returns with ret 4.",
+        "uncertainty": "The semantic name of bit 0x4 and the higher-level state it controls are unresolved. Callers use both zero and one, confirming the set/clear contract without identifying the user-facing effect. The complete 40-byte Ghidra extent decodes with no mapped operand targets.",
+    },
     "58907C80": {
         "name_in_analysis": "FUN_58907c80",
         "called_by": "Directly called by five verified functions: 0x5873FE80, 0x587A4440, 0x587E9A10, 0x588D4300, and 0x588F55C0. 0x587A4440, 0x588D4300, and 0x588F55C0 contain repeated callsites.",
