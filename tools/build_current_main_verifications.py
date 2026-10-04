@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80", "58755FF0", "58849210", "58780640",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4896,6 +4896,12 @@ EVIDENCE = {
         "called_by": "Called by both verified event handlers FUN_587BB700 and FUN_588C1650. In their joined-fleet notice path, they format MESSAGESTRING__SQUADRON_JOINED_FLEET using packet text and pass the companion text pointer at packet/temporary +0x2D to this routine; Ghidra shows multiple call sites in FUN_588C1650.",
         "behavior": "Takes the receiver in ECX and a text pointer on the stack. It requests a 0xB4-byte object through FUN_5897CC4E; when allocation succeeds, initializes fields using receiver offsets +4, +8, and +0xB0 through FUN_5875A7E0, and passes the text through callback 0x5898C198 and FUN_5875A4B0. It clears observed flag bits on the new object's word at +0x24. The first object is stored in receiver fields +0x64 and +0xFC; later objects are linked after the previous object at receiver +0x68 using links at +0x54 and +0x50. It increments receiver word +0xF0, updates +0x68 to the new object, then calls FUN_588486E0. The full body is 294 bytes, ends in ret 4 at 0x58849333, and contains nine operand targets.",
         "uncertainty": "The receiver and 0xB4-byte object types, allocator/callback/helper contracts, field and flag meanings, and precise UI or protocol effect remain unknown. The joined-fleet localized caller context ties the text input to that event path, but does not establish a domain type for the appended objects. No emulator test was performed.",
+    },
+    "58780640": {
+        "name_in_analysis": "FUN_58780640",
+        "called_by": "Called by both verified current Main.dll methods FUN_5877EC80 and FUN_58782CF0. Each passes the byte at offset +0x354 of the selected object. Immediately before the call, both methods compare that byte with the active object's byte at +0x354 and may set a neighboring child flag when it changes.",
+        "behavior": "Returns without rebuilding when receiver count/capacity fields at +0xAC and +0xA8 fail the observed unsigned condition or receiver byte +0xC4 is zero. Otherwise stores the input byte at +0xB8, clears receiver bookkeeping fields, and rebuilds state-associated child references using tables rooted at globals 0x58A245C4, 0x58A247F8, and 0x58A24640. The paths compare the requested byte with the active object's +0x354 byte and use checked table entries including indices 7, 8, 0xBB, and 0xBC. It copies four dwords from a selected record into child storage, updates pointer links, and clears a link field across eight receiver entries before returning. The body is 605 bytes, ends in ret 4, and has 18 operand targets.",
+        "uncertainty": "The receiver and child types, meanings of the +0x354 selector, global tables, indices, count/capacity fields, and resulting UI or game effect remain unknown. Caller code establishes the selector source and a change-related flag update, but not the domain names of the states. No emulator test was performed.",
     },
 }
 

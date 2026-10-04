@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,144 matches cover 2,260,574 bytes (21.5913%) and are verified
+The current 7,145 matches cover 2,261,179 bytes (21.5971%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
@@ -59,6 +59,8 @@ The shared bounded record-pointer lookup is documented in
 [the accessor notes](docs/current-main-bounded-indexed-record-accessor.md).
 The joined-fleet event's receiver-owned record append is documented in
 [the record-append notes](docs/current-main-squadron-joined-fleet-record-append.md).
+The selector-driven child rebuild shared by two state methods is documented in
+[the child-rebuild notes](docs/current-main-selector-state-child-rebuild.md).
 The latest linked-text update path is documented in
 [the linked-text notes](docs/current-main-linked-text-update.md).
 The latest progress-grid state update is documented in

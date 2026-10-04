@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,144 verified matches
-totaling 2,260,574 bytes (21.5913%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,145 verified matches
+totaling 2,261,179 bytes (21.5971%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -92,6 +92,12 @@ and pass packet text to a helper that initializes and links a receiver-owned
 record. Object meaning and callback contracts remain unknown; no emulator test
 was performed. See
 [`docs/current-main-squadron-joined-fleet-record-append.md`](docs/current-main-squadron-joined-fleet-record-append.md).
+The shared 605-byte `FUN_58780640` child rebuild now matches with 18 operand
+targets checked. Two verified state methods pass it an object's byte at `+0x354`;
+the helper resets receiver bookkeeping, performs bounded global-table lookups,
+copies selected record fields, and clears links across eight entries. Selector
+labels and runtime effects remain unresolved; no emulator test was performed.
+See [`docs/current-main-selector-state-child-rebuild.md`](docs/current-main-selector-state-child-rebuild.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
