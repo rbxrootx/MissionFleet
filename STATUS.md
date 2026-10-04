@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,817
-identified code bytes across six report units. There are 7,135 verified matches
-totaling 2,257,575 bytes (21.5627%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,136 verified matches
+totaling 2,258,224 bytes (21.5689%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -43,9 +43,10 @@ weapon-fire paths), `FUN_58755170` (a 932-byte handler for message
 `FUN_5877adc0` (a 700-byte selector-driven `CForce` child setup method), and
 `FUN_588391b0` (a 677-byte two-collection update called after the fleet-join
 proposal notification path), and `FUN_588ebfa0` (a 221-byte ranged selector
-update used by three verified state handlers). Together, the seven functions
-add 5,242 byte-matched bytes. Their field and helper meanings remain partially
-unknown; no emulator test was performed. See
+update used by three verified state handlers), and `FUN_58839460` (a 649-byte
+record path reached from message case `0x80020F0C`). Together, the eight
+functions add 5,891 byte-matched bytes. Their field and helper meanings remain
+partially unknown; no emulator test was performed. See
 [`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
 [`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md),
 [`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md),
@@ -56,6 +57,9 @@ for `FUN_588391b0` are recorded in
 [`docs/current-main-fleet-join-proposal-record-update.md`](docs/current-main-fleet-join-proposal-record-update.md).
 The selector's caller values and verified control flow are recorded in
 [`docs/current-main-ranged-selector-update.md`](docs/current-main-ranged-selector-update.md).
+The `0x80020F0C` record handling and its embedded proposal message key are
+documented in
+[`docs/current-main-squadron-fleet-join-proposal.md`](docs/current-main-squadron-fleet-join-proposal.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed

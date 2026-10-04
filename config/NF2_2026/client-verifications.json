@@ -293166,6 +293166,261 @@
         "behavior": "Returns 0 unless global 0x589C9074 equals 2. It reads the current value from receiver slot +8+(selector*8) and resolves it through the object table reached from receiver +4. If an in-range object's virtual method at +0x14 returns nonzero, it returns 1. Otherwise it computes a remainder from 0x5897CC36 using the inclusive interval formed by the second and third arguments, stores the offset plus the lower argument in the selected slot, resolves that object, calls 0x58907990 with the object and global 0x58A248FC, then calls the object's virtual method at +4 with argument 0 and returns 1. The complete mapped extent is 221 bytes ending in ret 0x0C; three INT3 bytes precede the next indexed function; four operand targets are checked.",
         "uncertainty": "The receiver/table layouts, selector and range semantics, identities of 0x5897CC36 and both virtual methods, and higher-level effect remain unresolved. It is closely related in observed control flow to FUN_588EBEB0, but no stronger semantic label is justified. No emulator test was performed."
       }
+    },
+    {
+      "address": "58839460",
+      "name": "FUN_58839460",
+      "size": 649,
+      "symbol": "_FUN_58839460",
+      "source": "src/client-current/Main/FUN_58839460.cpp",
+      "source_sha256": "f83838bb5817735d9403a8a5793f872dab23dd7d00115e4988cc488d50cf453e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "58A245AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "58753BF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "587B9290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "588396D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "5899E2DC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 145,
+          "target_address": "5881E2E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 214,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 226,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 243,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 268,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 295,
+          "target_address": "58849980",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 345,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 385,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 403,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 411,
+          "target_address": "588396CE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 420,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 432,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 467,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 475,
+          "target_address": "58836AF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 520,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 543,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 561,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 566,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 618,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 636,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58839460",
+        "called_by": "Called from message-dispatch case 0x80020F0C in verified handlers FUN_587BB700 and FUN_588C1650 when packet identity matches DAT_58A0B4A0 and the global state is 5 or 6. Both paths allocate and zero a 0x54-byte record, copy two packet words into its first two fields, and pass it here. The formatting path uses the mapped string key MESSAGESTRING__SQAUDRON_FLEET_JOIN_PROPOSE at 0x5899E2DC.",
+        "behavior": "Calls FUN_58753BF0 with the record's first two dwords and global 0x58A245AC. On a zero result it sets receiver byte +0x321 to 6 and calls FUN_587B9290 with the same pair and global 0x58A24588. Otherwise it formats text from incoming record +0x24 using the key at 0x5899E2DC and dispatches it through FUN_5881E2E0. It then searches receiver-owned pointer and 0x54-byte-record collections, comparing bytes at record +0x2D through callback 0x5898C1A4; on the observed insertion path it calls FUN_58849980 and FUN_58836AF0. If receiver flags at +0x24 masked by 0x1F00 equal 0x200, it invokes FUN_589088D0 on receiver fields +0x24C/+0x250/+0x254 and updates +0x220 using collection counts. The complete mapped extent is 649 bytes ending in ret 4, followed by seven INT3 bytes before the next indexed function; 38 operand targets are checked.",
+        "uncertainty": "The meanings of packet fields, the lookup helper's result, collection roles, key at record +0x2D, flag 0x200, callback contract, and user-visible state effects remain partly unknown. The resource key supports a squadron/fleet-join proposal notification label, but does not establish the full protocol semantics. No emulator test was performed."
+      }
     }
   ]
 }

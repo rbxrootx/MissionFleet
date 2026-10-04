@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4842,6 +4842,12 @@ EVIDENCE = {
         "called_by": "Directly called by verified state handlers FUN_587EAE10, FUN_587EFD60, and FUN_588E5150. FUN_587EAE10 has repeated callsites using selectors 0x12 and 0x13 with ranges 0x5C..0x5F and 0x60..0x61; the other handlers pass (0x15, 0x66, 0x69), (0x14, 0x62, 0x65), and (0x1D, 0x7C, 0x7D).",
         "behavior": "Returns 0 unless global 0x589C9074 equals 2. It reads the current value from receiver slot +8+(selector*8) and resolves it through the object table reached from receiver +4. If an in-range object's virtual method at +0x14 returns nonzero, it returns 1. Otherwise it computes a remainder from 0x5897CC36 using the inclusive interval formed by the second and third arguments, stores the offset plus the lower argument in the selected slot, resolves that object, calls 0x58907990 with the object and global 0x58A248FC, then calls the object's virtual method at +4 with argument 0 and returns 1. The complete mapped extent is 221 bytes ending in ret 0x0C; three INT3 bytes precede the next indexed function; four operand targets are checked.",
         "uncertainty": "The receiver/table layouts, selector and range semantics, identities of 0x5897CC36 and both virtual methods, and higher-level effect remain unresolved. It is closely related in observed control flow to FUN_588EBEB0, but no stronger semantic label is justified. No emulator test was performed.",
+    },
+    "58839460": {
+        "name_in_analysis": "FUN_58839460",
+        "called_by": "Called from message-dispatch case 0x80020F0C in verified handlers FUN_587BB700 and FUN_588C1650 when packet identity matches DAT_58A0B4A0 and the global state is 5 or 6. Both paths allocate and zero a 0x54-byte record, copy two packet words into its first two fields, and pass it here. The formatting path uses the mapped string key MESSAGESTRING__SQAUDRON_FLEET_JOIN_PROPOSE at 0x5899E2DC.",
+        "behavior": "Calls FUN_58753BF0 with the record's first two dwords and global 0x58A245AC. On a zero result it sets receiver byte +0x321 to 6 and calls FUN_587B9290 with the same pair and global 0x58A24588. Otherwise it formats text from incoming record +0x24 using the key at 0x5899E2DC and dispatches it through FUN_5881E2E0. It then searches receiver-owned pointer and 0x54-byte-record collections, comparing bytes at record +0x2D through callback 0x5898C1A4; on the observed insertion path it calls FUN_58849980 and FUN_58836AF0. If receiver flags at +0x24 masked by 0x1F00 equal 0x200, it invokes FUN_589088D0 on receiver fields +0x24C/+0x250/+0x254 and updates +0x220 using collection counts. The complete mapped extent is 649 bytes ending in ret 4, followed by seven INT3 bytes before the next indexed function; 38 operand targets are checked.",
+        "uncertainty": "The meanings of packet fields, the lookup helper's result, collection roles, key at record +0x2D, flag 0x200, callback contract, and user-visible state effects remain partly unknown. The resource key supports a squadron/fleet-join proposal notification label, but does not establish the full protocol semantics. No emulator test was performed.",
     },
 }
 
