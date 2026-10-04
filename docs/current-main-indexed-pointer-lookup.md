@@ -15,3 +15,13 @@ are not established by the available caller evidence. The callers perform
 larger object/resource operations around the lookup, but that context does not
 identify what the returned pointer represents. No runtime behavior test was
 performed.
+
+## Sibling accessor at `0x58731810`
+
+The adjacent `FUN_58731810` has the same mapped control flow and 37-byte
+extent, with its count at receiver `+0x170` and table pointer at `+0x194`.
+Its callers are `0x5873FE80`, `0x5877EC80`, and `0x588D4300`; the first adds
+`0x13` to its computed index and checks the returned pointer for null. The
+matching behavior is verified independently. The available evidence does not
+prove that the two helpers share a receiver type or identify either table's
+domain meaning.

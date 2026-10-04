@@ -288943,6 +288943,32 @@
         "behavior": "Reads the signed index argument, compares it with the signed count at receiver +0x164, rejects index < 0, and rejects a null pointer table at receiver +0x18C. Otherwise returns the DWORD pointer at table[index]. Both return paths clean the single stack argument with ret 4.",
         "uncertainty": "The receiver type, count/table field meanings, pointed-to element type, and domain role are unknown. Caller contexts show these values are used during larger object/resource processing but do not identify their semantics. The mapped 37-byte extent has no external operand targets; no runtime test was performed."
       }
+    },
+    {
+      "address": "58731810",
+      "name": "FUN_58731810",
+      "size": 37,
+      "symbol": "_FUN_58731810",
+      "source": "src/client-current/Main/FUN_58731810.cpp",
+      "source_sha256": "e345e4901bbf1c8835e9a64f35b198513970bffb28f7030a061bb75e5adcec43",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58731810",
+        "called_by": "Called from 0x5873FE80, 0x5877EC80, and 0x588D4300. The first caller adds 0x13 to its computed index before the lookup and checks the returned pointer for null; the other callers pass computed indices during object processing.",
+        "behavior": "Reads the signed index argument, compares it with the signed count at receiver +0x170, rejects index < 0, and rejects a null pointer table at receiver +0x194. Otherwise returns the DWORD pointer at table[index]. Both return paths clean the single stack argument with ret 4.",
+        "uncertainty": "The receiver type, count/table field meanings, pointed-to element type, and relationship to the similarly shaped accessor at 0x587317B0 are unproven. Caller contexts show indexed object processing but do not establish domain semantics. The mapped 37-byte extent has no external operand targets; no runtime test was performed."
+      }
     }
   ]
 }

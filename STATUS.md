@@ -6,22 +6,22 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,777
-identified code bytes across six report units. There are 7,116 verified matches
-totaling 2,242,755 bytes (21.4212%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,117 verified matches
+totaling 2,242,792 bytes (21.4216%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
 
-The latest current Main.dll subsystem increments are documented in
+Recent current Main.dll helper evidence is documented in
 [`docs/current-main-linked-payload-lookup.md`](docs/current-main-linked-payload-lookup.md)
 and [`docs/current-main-indexed-pointer-lookup.md`](docs/current-main-indexed-pointer-lookup.md).
 
-The latest current Main.dll subsystem is `FUN_589081C0`, a 32-byte linked-chain
-distance helper called by eight verified functions. It follows node links at
-offset `+0x14` from the receiver's start pointer at `+0x78` toward its boundary
-pointer at `+0x84`, returning the number of traversed links or `-1` on a null
-path. Its exact container type and the caller-level meaning of the count remain
-unknown. The reconstruction matches the captured bytes at 100.0% under objdiff.
+The latest addition, `FUN_58731810`, is a 37-byte signed bounds-checked pointer
+table lookup called by three verified functions (four call sites). It reads the
+count at receiver `+0x170` and the table at `+0x194`, returning `table[index]`
+for a nonnegative in-range index and non-null table. Its receiver and table
+semantics remain unknown. It matches the complete captured extent at 100.0%
+under objdiff; no runtime behavior test was performed.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed

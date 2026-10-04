@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58731810": {
+        "name_in_analysis": "FUN_58731810",
+        "called_by": "Called from 0x5873FE80, 0x5877EC80, and 0x588D4300. The first caller adds 0x13 to its computed index before the lookup and checks the returned pointer for null; the other callers pass computed indices during object processing.",
+        "behavior": "Reads the signed index argument, compares it with the signed count at receiver +0x170, rejects index < 0, and rejects a null pointer table at receiver +0x194. Otherwise returns the DWORD pointer at table[index]. Both return paths clean the single stack argument with ret 4.",
+        "uncertainty": "The receiver type, count/table field meanings, pointed-to element type, and relationship to the similarly shaped accessor at 0x587317B0 are unproven. Caller contexts show indexed object processing but do not establish domain semantics. The mapped 37-byte extent has no external operand targets; no runtime test was performed.",
+    },
     "587317B0": {
         "name_in_analysis": "FUN_587317b0",
         "called_by": "Called from 0x587A90D0, 0x58866880, and 0x588D4300; the last function contains two call sites. At each observed call the receiver is placed in ECX and the index is passed as one stack argument.",
