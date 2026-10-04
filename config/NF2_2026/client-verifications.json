@@ -299084,6 +299084,81 @@
         "behavior": "Requests a 0x27C-byte object through FUN_5897CC4E. On allocation success it passes the input pointer to FUN_5877CC30, which initializes the new CForce object, then calls FUN_5877B130 with the object and receiver subobject +0x10. If the new object's dword +0xB8 is not -1, it walks the receiver chain starting at +4 and follows each object's +0xCE4 link, comparing (dword +0x48 >> 10) with the child key. On a match it reads the child word +0x5E >> 12, stores the child pointer into the matching object's array at +0x9A4 + index*4, calls FUN_588E8570, and returns the child. If no key matches, it writes -1 to child +0xB8 and registers the child through receiver subobject +0x20. The complete body is 210 bytes, ends with a short jump to 0x588F4485 at 0x588F44C0, and has seven mapped operand targets.",
         "uncertainty": "The receiver type, input-record schema, key/index meanings, +0x10/+0x20 collection contracts, +0xCE4 chain role, and effect of FUN_588E8570 remain unresolved. CForce identity is supported by the constructor's observed CForce::vftable assignment. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58752340",
+      "name": "FUN_58752340",
+      "size": 206,
+      "symbol": "_FUN_58752340",
+      "source": "src/client-current/Main/FUN_58752340.cpp",
+      "source_sha256": "c2dc46110830f594effdea0439bc6a5819cdb30e945e04d957652c99aa8f3faa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "587523F8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "5898D0D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 172,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 177,
+          "target_address": "587B91B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 195,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58752340 / bounded linked-record text batch builder",
+        "called_by": "Called by verified handler FUN_58847770 after its record acquisition path and by verified event dispatcher FUN_588C1650. Both use the object at global 0x58A245B0 as ECX and pass no stack arguments.",
+        "behavior": "Returns immediately when receiver +0x90 is null. Otherwise it prepares a 0xF0-byte stack buffer, starts from receiver pointer +0x98 (initializing it from +0x90 when null), and processes at most ten entries while the loop index remains below receiver dword +0xA0. Per entry it reads dword +0x70 from the current record, then dword +0x6C from that object, and passes the resulting pointer, fixed key 0x5898D0D4, and the next 0x18-byte buffer slot to callback 0x5898C3C4. It advances through record link +0x54, falling back to receiver +0x90 when the link is null, and stores the cursor at receiver +0x98. When one or more entries were processed, it calls FUN_587B91B0 on global object 0x58A24588 with the populated buffer, processed count, and -1. The complete body is 206 bytes, ends with ret at 0x5875240D, and has eight mapped operand targets.",
+        "uncertainty": "The receiver and record types, +0xA0 limit semantics, callback key and output-slot schema, behavior of FUN_587B91B0, cursor reset/lifetime, and user-visible effect remain unknown. The two verified caller paths establish shared dispatch use but do not identify the batch's domain meaning. No runtime or emulator test was performed."
+      }
     }
   ]
 }
