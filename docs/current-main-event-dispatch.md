@@ -60,6 +60,11 @@ documented in that event-queue note.
 The shared 11-byte setter used by `0x80000300` is also byte-matched; the
 meaning of `+0x384` remains unknown.
 
+Two state-dispatch paths in this handler call the 1,279-byte
+[`FUN_58838cb0`](current-main-stateful-record-refresh-58838cb0.md) record
+refresh method. Its bounded text copies and state branches are now byte matched;
+the record schema and user-visible effect remain unknown.
+
 The `0x80011035` route calls `FUN_587d6a60` at `0x587BB845`, passing a value
 through one stack argument while loading the receiver from `0x58A24598` into
 ECX. Ghidra identifies one other direct call, from `FUN_58871de0` at

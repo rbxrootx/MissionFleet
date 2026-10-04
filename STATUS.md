@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,790
-identified code bytes across six report units. There are 7,127 verified matches
-totaling 2,251,054 bytes (21.5005%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,128 verified matches
+totaling 2,252,333 bytes (21.5127%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -29,15 +29,18 @@ The linked-record text walk and corrected return extent are documented in
 [`docs/current-main-linked-record-text-walk.md`](docs/current-main-linked-record-text-walk.md).
 The control-menu child-layout refresh is documented in
 [`docs/current-main-control-menu-layout-refresh.md`](docs/current-main-control-menu-layout-refresh.md).
+The stateful record refresh and corrected epilogue extent are documented in
+[`docs/current-main-stateful-record-refresh-58838cb0.md`](docs/current-main-stateful-record-refresh-58838cb0.md).
 
 The 6-byte import trampoline used by 11 call sites is documented in
 [`docs/current-main-import-thunk-5897ce44.md`](docs/current-main-import-thunk-5897ce44.md).
 
-The latest addition, `FUN_588ED750`, is a 1,274-byte control-menu child-layout
-refresh called by the verified entry and rebuild paths. It updates six child
-flag words, selects shared record fields, and calls the matched position helper
-30 times. All 38 mapped operands match. Receiver/control types, record meanings,
-and visible effects remain unknown; no runtime behavior test was performed.
+The latest addition, `FUN_58838CB0`, is a state-dependent record refresh called
+by two verified dispatchers. The inventory's original 1,262-byte extent ended
+before its register restore and return; it now covers 1,279 bytes through `ret 4`,
+excluding the following alignment byte. All 64 mapped operands match. Record,
+state, and control meanings remain unknown; no runtime behavior test was
+performed.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
