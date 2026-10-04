@@ -296899,6 +296899,105 @@
         "behavior": "Takes a record count and record pointer, and only performs this update when receiver byte +0x321 equals 5; it then resets that byte to zero. For counts from 1 through 5 it iterates records at stride 0x54, sets bit 0 on two receiver-referenced objects, copies up to 0x80 bytes from each record +0x0C string into a child-associated buffer, and sets the paired child +0x50 field according to whether global word 0x58A0B4A8 equals 6. If fewer than five records are supplied, it clears bit 0 on the remaining paired objects, fills remaining child buffers from string 0x5898C922, and clears child +0x50. The function ends with ret 8 at 0x58834515; mapped code continues through that return at 0x58834518, followed by eight INT3 bytes before the next function at 0x58834520. The corrected body is 360 bytes with 6 mapped operand targets.",
         "uncertainty": "The record schema, object and buffer identities, global mode meaning, state byte, child-field purpose, and user-visible/protocol effect remain unresolved. The handler call paths establish only message case and selected-child conditions. No emulator test was performed."
       }
+    },
+    {
+      "address": "5888CEE0",
+      "name": "FUN_5888cee0",
+      "size": 347,
+      "symbol": "_FUN_5888cee0",
+      "source": "src/client-current/Main/FUN_5888cee0.cpp",
+      "source_sha256": "96dfd6d65517cac1140e5407cae6fad0a8b22c375d1612709be2f52ac3adc300",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "5888D039",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "5888D039",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "5888D016",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "58908140",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5888CFFB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 153,
+          "target_address": "58908140",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 300,
+          "target_address": "5888CF42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888cee0",
+        "called_by": "Called by verified routines FUN_58890110 and FUN_58893860 at multiple update sites. Each call uses the receiver in ECX; the helper has no stack arguments and returns with ret.",
+        "behavior": "Returns immediately when receiver byte +0xAC equals 8 or 9. Otherwise it obtains a count from the object at receiver +0x4CC via FUN_58908170, caps the processed count at six, and loops over receiver child pointers +0x4D0 onward. For each active index it obtains the corresponding source entry through FUN_58908140, reads a resource entry at index +0x68E from global object 0x58A246A4 only when its count/pointer checks pass, and stores that resource pointer into child +0x50. A non-null resource causes six observed DWORDs at resource +0x10..+0x24 to be copied into the child fields beginning +0x0C; otherwise child +0x50 is cleared. If receiver dword +0x15C equals 0x120000 it sets mask 0x000F in each active child's word +0x24; otherwise it clears mask 0xFFF0. Remaining slots through six have mask 0xFFF0 cleared. The complete 347-byte body ends with ret and has 12 mapped operand targets.",
+        "uncertainty": "The receiver, container, six child-slot, and resource-entry types; helper contracts; resource table meaning; state byte values; and child flag masks remain unresolved. The two verified callers establish repeated update-path use but not the visible meaning of the entries. No client runtime or emulator test was performed."
+      }
     }
   ]
 }
