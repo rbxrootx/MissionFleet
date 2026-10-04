@@ -159,6 +159,7 @@ ADDRESSES = (
     "58831AE0",
     "58831B90",
     "587D6DB0",
+    "58836AF0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -244,7 +245,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4832,6 +4833,12 @@ EVIDENCE = {
         "called_by": "Called by verified routines FUN_587E3080 and FUN_588889F0. The first clears receiver +0x500 before the call; the second sets +0x500 to 0 or 1 in separate branches before calling it.",
         "behavior": "When receiver +0x500 is zero, clears bit 0 on child words at receiver +0x4D4/+0x4D8, clears low four bits on +0x4DC, and clears bit 0 on the five child words in the pointer array +0x4E0..+0x4F0. When +0x500 is nonzero, sets bit 0 on +0x4D4/+0x4D8 and all five array children; on +0x4DC it sets low four bits if global 0x58A24568 is zero, otherwise clears them. The complete 160-byte body has one mapped operand target.",
         "uncertainty": "The child classes, meaning of receiver +0x500 and global 0x58A24568, and semantic role of these flags remain unresolved. Callers establish a mode-gated update path only. No runtime client or emulator test was performed.",
+    },
+    "58836AF0": {
+        "name_in_analysis": "FUN_58836af0 / 0x54-byte record append or growth",
+        "called_by": "Called by verified record handlers FUN_58838CB0 and FUN_58839460, which pass a record-derived pointer and set ECX to the corresponding collection object.",
+        "behavior": "Uses collection pointers at +0x0C/+0x10/+0x14 as start, used-end, and capacity-end values; record slots are 0x54 bytes. If used count is below capacity, it calls 0x58834AD0 to initialize a record at the current end and advances +0x10 by 0x54. When capacity is full, it checks the start/end relationship through 0x5897CC72 when inconsistent and delegates the growth path to 0x58836A20 with the collection, end pointer, incoming record, and a local output address. The complete 158-byte body has three mapped operand targets.",
+        "uncertainty": "The collection schema, exact 0x58834AD0 initialization contract, 0x58836A20 growth/output contract, allocation ownership, and record meaning are not established. Caller contexts show record-handler use, but no runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,909
-identified code bytes across six report units. There are 7,219 verified matches
-totaling 2,283,383 bytes (21.8090%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,220 verified matches
+totaling 2,283,541 bytes (21.8105%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -52,6 +52,8 @@ The paired unique-string fanout helpers from both dispatchers are documented in
 [`docs/current-main-unique-string-fanout-58831ae0.md`](docs/current-main-unique-string-fanout-58831ae0.md).
 The mode-gated child flag update is documented in
 [`docs/current-main-mode-gated-child-flags-587d6db0.md`](docs/current-main-mode-gated-child-flags-587d6db0.md).
+The 0x54-byte record append/growth helper is documented in
+[`docs/current-main-54-byte-record-append-58836af0.md`](docs/current-main-54-byte-record-append-58836af0.md).
 The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in
