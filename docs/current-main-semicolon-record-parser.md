@@ -72,6 +72,9 @@ recorded in [the linked-child teardown evidence](current-main-linked-child-teard
 The event dispatcher also uses byte-matched `FUN_58842fb0` to search the
 `+0x130` token list by nested name; its evidence is in
 [the linked-name lookup notes](current-main-linked-name-lookups.md).
+Its byte-matched `FUN_58843000` batch helper applies 0x60-byte tagged
+records through the two list lookups and `FUN_5875A4B0`; the route and
+normal-path cases are in [the token-record dispatch evidence](current-main-token-record-dispatch.md).
 The relationship between these receivers and the earlier `+0xD8` parser pair,
 the token record schema, selector/count meanings, global
 suppression policy, and message callback's visible result remain unknown.
