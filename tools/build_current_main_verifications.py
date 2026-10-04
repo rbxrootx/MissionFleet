@@ -140,6 +140,10 @@ ADDRESSES = (
     "58879CC0",
     "588B1FE0",
     "587C9D40", "5889DD30", "588A9650",
+    "5890D0C0",
+    "5890C720", "5890C600",
+    "5890C020",
+    "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -367,6 +371,10 @@ SOURCE_COMPILER_ADDRESSES = {
     "58879CC0",
     "588B1FE0",
     "587C9D40", "5889DD30", "588A9650",
+    "5890D0C0",
+    "5890C720", "5890C600",
+    "5890C020",
+    "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4351,6 +4359,54 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58868B40 at indexed instruction offset 2377.",
         "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A06E0, initializes fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60 and 0x58902D20.",
         "uncertainty": "The class identity, member and child roles, control flags, and layout meanings are unresolved. The full 1,286-byte body decodes.",
+    },
+    "5890D0C0": {
+        "name_in_analysis": "FUN_5890d0c0",
+        "called_by": "Directly called by 0x5890C1D0 at 0x5890C1F3 before the caller installs its own vtable pointer.",
+        "behavior": "SEH-protected constructor calling 0x5890C720 and 0x5890C600, installing vtable pointer 0x589A2CDC, zeroing fields +0x104/+0x108/+0x11C/+0x120, setting +0x114 to 1000, initializing +0x124/+0x128, and allocating a member through 0x5897CC4E.",
+        "uncertainty": "The class, timer-like value at +0x114, member ownership, and caller vtable override semantics are unresolved. The full 317-byte body decodes.",
+    },
+    "5890C720": {
+        "name_in_analysis": "FUN_5890c720",
+        "called_by": "Directly called by 0x5890D0C0 during object initialization.",
+        "behavior": "Calls base setup 0x589031A0, zeros fields +0xEC/+0x50/+0x54/+0xF0, sets fields +0x58/+0x5C to -100 and +0x60/+0x64 to 100, installs vtable pointer 0x589A2A48, and returns with ret 0x18.",
+        "uncertainty": "The class identity, meaning of these five fields, and forwarded argument roles are unresolved. The complete 94-byte body decodes.",
+    },
+    "5890C600": {
+        "name_in_analysis": "FUN_5890c600",
+        "called_by": "Directly called by 0x5890D0C0 during object initialization.",
+        "behavior": "SEH-protected base setup through 0x589031A0, clears receiver fields +0x50/+0x54, calls 0x5890C020 with forwarded values, installs vtable pointer 0x589A2CA0, and returns with ret 0x1C.",
+        "uncertainty": "The class, member schema, and forwarded argument meanings are unresolved. The full 148-byte body decodes.",
+    },
+    "5890C020": {
+        "name_in_analysis": "FUN_5890c020",
+        "called_by": "Directly called by 0x5890C600 at 0x5890C678.",
+        "behavior": "SEH-protected routine allocating four 0x40-byte members, dispatching their setup through 0x5890BF40/0x5890BF70/0x5890BFC0/0x5890BFF0, storing the selected result at receiver +0x50, and calling 0x58903290.",
+        "uncertainty": "The selector mapping, member roles, and ownership semantics remain unresolved. The complete 405-byte body decodes.",
+    },
+    "5890BF40": {
+        "name_in_analysis": "FUN_5890bf40",
+        "called_by": "Called by 0x5890C020 at instruction offset 183.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2BD8 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
+    },
+    "5890BF70": {
+        "name_in_analysis": "FUN_5890bf70",
+        "called_by": "Called by 0x5890C020 at instruction offset 257.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C00 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
+    },
+    "5890BFC0": {
+        "name_in_analysis": "FUN_5890bfc0",
+        "called_by": "Called by 0x5890C020 at instruction offset 334.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C28 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
+    },
+    "5890BFF0": {
+        "name_in_analysis": "FUN_5890bff0",
+        "called_by": "Called by 0x5890C020 at instruction offset 411.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C50 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
     },
 }
 

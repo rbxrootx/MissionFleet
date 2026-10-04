@@ -285922,6 +285922,480 @@
         "behavior": "SEH-protected constructor that calls base setup 0x589031A0, installs vtable pointer 0x589A06E0, initializes fields +0x50/+0x54/+0x58/+0x5C, allocates multiple members through 0x5897CC4E, and initializes child controls through 0x58731C60 and 0x58902D20.",
         "uncertainty": "The class identity, member and child roles, control flags, and layout meanings are unresolved. The full 1,286-byte body decodes."
       }
+    },
+    {
+      "address": "5890D0C0",
+      "name": "FUN_5890d0c0",
+      "size": 317,
+      "symbol": "_FUN_5890d0c0",
+      "source": "src/client-current/Main/FUN_5890d0c0.cpp",
+      "source_sha256": "629c9699e3117795a31577d947a1cb21a3cc691624477eeaf8fc997d44bcf705",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898AC03",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "5890C720",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "589A2CDC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 199,
+          "target_address": "5890C600",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890d0c0",
+        "called_by": "Directly called by 0x5890C1D0 at 0x5890C1F3 before the caller installs its own vtable pointer.",
+        "behavior": "SEH-protected constructor calling 0x5890C720 and 0x5890C600, installing vtable pointer 0x589A2CDC, zeroing fields +0x104/+0x108/+0x11C/+0x120, setting +0x114 to 1000, initializing +0x124/+0x128, and allocating a member through 0x5897CC4E.",
+        "uncertainty": "The class, timer-like value at +0x114, member ownership, and caller vtable override semantics are unresolved. The full 317-byte body decodes."
+      }
+    },
+    {
+      "address": "5890C720",
+      "name": "FUN_5890c720",
+      "size": 94,
+      "symbol": "_FUN_5890c720",
+      "source": "src/client-current/Main/FUN_5890c720.cpp",
+      "source_sha256": "1f1891c983cd42c7a5e6c7a49c313accc1a4564b3b230e7397d281032bee84ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 36,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "589A2A48",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890c720",
+        "called_by": "Directly called by 0x5890D0C0 during object initialization.",
+        "behavior": "Calls base setup 0x589031A0, zeros fields +0xEC/+0x50/+0x54/+0xF0, sets fields +0x58/+0x5C to -100 and +0x60/+0x64 to 100, installs vtable pointer 0x589A2A48, and returns with ret 0x18.",
+        "uncertainty": "The class identity, meaning of these five fields, and forwarded argument roles are unresolved. The complete 94-byte body decodes."
+      }
+    },
+    {
+      "address": "5890C600",
+      "name": "FUN_5890c600",
+      "size": 148,
+      "symbol": "_FUN_5890c600",
+      "source": "src/client-current/Main/FUN_5890c600.cpp",
+      "source_sha256": "1e0bc23a16b3f926ef4315671ef6d60b04fb6df1deb8a0a10db7824646ffd077",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898AB68",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "589A2CA0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "5890C020",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890c600",
+        "called_by": "Directly called by 0x5890D0C0 during object initialization.",
+        "behavior": "SEH-protected base setup through 0x589031A0, clears receiver fields +0x50/+0x54, calls 0x5890C020 with forwarded values, installs vtable pointer 0x589A2CA0, and returns with ret 0x1C.",
+        "uncertainty": "The class, member schema, and forwarded argument meanings are unresolved. The full 148-byte body decodes."
+      }
+    },
+    {
+      "address": "5890C020",
+      "name": "FUN_5890c020",
+      "size": 405,
+      "symbol": "_FUN_5890c020",
+      "source": "src/client-current/Main/FUN_5890c020.cpp",
+      "source_sha256": "7625b112d3416cf0fc15ec71a3e439299aff10edaf3a930d54fd1889486fb614",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898AB3C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "589CDFF0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "5890C168",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "589CDFFC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58A284FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "5890C15B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "5890BF40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5890C15D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5890C15B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 195,
+          "target_address": "5890BF70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 209,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "5890BFC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 266,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 309,
+          "target_address": "5890BFF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 343,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890c020",
+        "called_by": "Directly called by 0x5890C600 at 0x5890C678.",
+        "behavior": "SEH-protected routine allocating four 0x40-byte members, dispatching their setup through 0x5890BF40/0x5890BF70/0x5890BFC0/0x5890BFF0, storing the selected result at receiver +0x50, and calling 0x58903290.",
+        "uncertainty": "The selector mapping, member roles, and ownership semantics remain unresolved. The complete 405-byte body decodes."
+      }
+    },
+    {
+      "address": "5890BF40",
+      "name": "FUN_5890bf40",
+      "size": 43,
+      "symbol": "_FUN_5890bf40",
+      "source": "src/client-current/Main/FUN_5890bf40.cpp",
+      "source_sha256": "e1586d9922e62bef5f1bd5f8788dd9743394636ecfddc51d812edeb5a1a9eb68",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "589A2BB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5890E400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589A2BD8",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890bf40",
+        "called_by": "Called by 0x5890C020 at instruction offset 183.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2BD8 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes."
+      }
+    },
+    {
+      "address": "5890BF70",
+      "name": "FUN_5890bf70",
+      "size": 43,
+      "symbol": "_FUN_5890bf70",
+      "source": "src/client-current/Main/FUN_5890bf70.cpp",
+      "source_sha256": "3a800e72393024d9f1817aa422ed5b9cc384842ce468411887e74035493282a4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "589A2BB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5890E400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589A2C00",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890bf70",
+        "called_by": "Called by 0x5890C020 at instruction offset 257.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C00 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes."
+      }
+    },
+    {
+      "address": "5890BFC0",
+      "name": "FUN_5890bfc0",
+      "size": 43,
+      "symbol": "_FUN_5890bfc0",
+      "source": "src/client-current/Main/FUN_5890bfc0.cpp",
+      "source_sha256": "df6975cddba9d9e77331f303f922ec0f34ad345bf5ca371a04565f0570af9286",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "589A2BB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5890E400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589A2C28",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890bfc0",
+        "called_by": "Called by 0x5890C020 at instruction offset 334.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C28 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes."
+      }
+    },
+    {
+      "address": "5890BFF0",
+      "name": "FUN_5890bff0",
+      "size": 43,
+      "symbol": "_FUN_5890bff0",
+      "source": "src/client-current/Main/FUN_5890bff0.cpp",
+      "source_sha256": "4e3ca5498bc25131797577b9a5badf9f32d4b50ff6c8f96c10775e16094aa5f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "589A2BB0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "5890E400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 33,
+          "target_address": "589A2C50",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5890bff0",
+        "called_by": "Called by 0x5890C020 at instruction offset 411.",
+        "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C50 and returns with ret 0xC.",
+        "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes."
+      }
     }
   ]
 }
