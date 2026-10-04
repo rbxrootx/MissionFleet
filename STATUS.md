@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,098 verified matches
-totaling 2,241,006 bytes (21.4046%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
+identified code bytes across six report units. There are 7,099 verified matches
+totaling 2,241,370 bytes (21.4080%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -103,6 +103,15 @@ checks global resource entry `0xCD`, installs vtable address point
 receiver state, allocates a 0xFC-byte child, and stores it at receiver `+0x118`.
 The class, resource label, argument meanings, and child role remain unknown.
 All 14 mapped operand targets match under objdiff.
+
+The latest linked-entry hit dispatch path is `FUN_587C4450`, a 364-byte routine
+called by three verified functions. It walks linked entries, invokes virtual
+tests, and follows direct and squared-distance branches into a shared hit/update
+helper. Its receiver and record types, virtual method meanings, and user-facing
+effect remain unresolved. The original 352-byte index extent ended midway
+through a conditional branch; the corrected extent includes the loop branch
+and `ret 0x14` and stops before four `INT3` padding bytes. All 13 mapped
+operand targets match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
