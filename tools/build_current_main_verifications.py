@@ -40,7 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
-    "587B6020",
+    "587B6020", "58907C80",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -229,6 +229,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
+    "58907C80",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -393,6 +394,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58907C80": {
+        "name_in_analysis": "FUN_58907c80",
+        "called_by": "Directly called by five verified functions: 0x5873FE80, 0x587A4440, 0x587E9A10, 0x588D4300, and 0x588F55C0. 0x587A4440, 0x588D4300, and 0x588F55C0 contain repeated callsites.",
+        "behavior": "Forwards its five stack arguments, in order, and the receiver in ECX to 0x58734A30. It then installs vtable address point 0x589A2988 at receiver offset +0, returns the receiver in EAX, and cleans the five stack arguments with ret 0x14.",
+        "uncertainty": "The receiver class and constructor purpose are not identified; the vtable address point 0x589A2988 has no recovered RTTI name in the current evidence. The forwarded arguments' roles are also unknown. The complete 47-byte Ghidra extent has two mapped operand targets.",
+    },
     "587B6020": {
         "name_in_analysis": "FUN_587b6020",
         "called_by": "Directly called by five verified functions: 0x58853870, 0x58853C20, 0x5888A9C0, 0x5888AA70, and 0x5888AFC0. 0x58853870 and 0x58853C20 contain multiple callsites.",
