@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,143 verified matches
-totaling 2,260,280 bytes (21.5885%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,144 verified matches
+totaling 2,260,574 bytes (21.5913%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -86,6 +86,12 @@ four callers in the mapped call inventory. It enforces its receiver gate, index
 bound, and array-pointer checks before returning a slot or null. The collection
 and caller index semantics remain unknown; no runtime test was performed. See
 [`docs/current-main-bounded-indexed-record-accessor.md`](docs/current-main-bounded-indexed-record-accessor.md).
+`FUN_58849210` adds a 294-byte exact match for the joined-fleet notification
+path. Its two verified callers format `MESSAGESTRING__SQUADRON_JOINED_FLEET`
+and pass packet text to a helper that initializes and links a receiver-owned
+record. Object meaning and callback contracts remain unknown; no emulator test
+was performed. See
+[`docs/current-main-squadron-joined-fleet-record-append.md`](docs/current-main-squadron-joined-fleet-record-append.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
