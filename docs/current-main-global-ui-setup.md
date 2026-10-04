@@ -45,3 +45,19 @@ and include the observed stack restores, exception cleanup, cookie check, and
 returns. The root's depth-two callgraph still contains unmatched nested
 helpers, so this does not close the full setup branch. No client was launched
 for visual or runtime validation.
+
+## Resource-backed initializer branch
+
+`FUN_588FB9B0` directly calls the eight functions matched in this update:
+`FUN_588FEC60`, `FUN_588FFE10`, `FUN_588F7B70`, `FUN_588FEF50`,
+`FUN_588F6110`, `FUN_588F6130`, `FUN_588FE520`, and `FUN_588FEAB0`. Five
+additional callees below those routines complete the next indexed layer:
+`FUN_588FD970`, `FUN_588F84E0`, `FUN_588FB570`, `FUN_588FA1C0`, and
+`FUN_588FAC00`. Together the branch adds 13 functions and 4,883 byte-matched
+bytes; objdiff checked 160 mapped operand targets.
+
+The recovered instructions show repeated child setup, bounded 0x80-byte data
+copies, vtable installation, and a 100-record zeroing loop with 0x18-byte
+stride. The callgraph audit finds no unmatched inventory-backed target through
+depth two from `FUN_588FB9B0`. Deeper indirect behavior, resource identities,
+class names, and record meanings remain unresolved. No original client was run.
