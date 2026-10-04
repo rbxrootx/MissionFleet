@@ -153,6 +153,7 @@ ADDRESSES = (
     "58786750",
     "58786A50", "58786B40",
     "587E7D40",
+    "587BB160",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -238,7 +239,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4790,6 +4791,12 @@ EVIDENCE = {
         "called_by": "Called by setup/update routine FUN_587E8A40 and battle-object update FUN_587FD890; both pass the receiver in ECX without stack arguments.",
         "behavior": "Checks the receiver's word at +0x105A2 against 7. For non-7 mode it writes 0x100 and 0x40000000 to fields +0x7C/+0x74 on child pointers +0x10C00 and +0x10C04, then calls each child object's vtable slot +4. It clears receiver DWORDs +0x218E4/+0x218E8; for mode 7 it sets low flag bits 0xF on the third child word +0x24, otherwise it clears mask 0xF from all three child words +0x24. Finally it dispatches message 0x80020600 through global object 0x58A24588 with five zero arguments. The full 183-byte body decodes and both mapped operand targets are audited.",
         "uncertainty": "The receiver/child classes, mode 7 meaning, fields +0x74/+0x7C semantics, vtable call contract, low flag bits, and notification meaning remain unresolved. Callers establish setup/update use only; no runtime client or emulator test was performed.",
+    },
+    "587BB160": {
+        "name_in_analysis": "FUN_587bb160 / keyed-table XOR message builder",
+        "called_by": "Called by verified routines FUN_587ECAB0 and FUN_588DF450 with the sender object in ECX. The former passes selector 0 and a packed pair; the latter passes selector 3 and a value read from its update path.",
+        "behavior": "For selectors 0..3, loads one of four fixed 32-bit constants; other selector values pass through unchanged. It reads a table descriptor from the receiver's +0x40 pointer, computes ((receiver +0x58) * 13) modulo descriptor count +4, and fetches three DWORDs at that same table index. The fetched values are XORed with the observed stack/global values and submitted through 0x58970C70 under message 0x80013112 with trailing arguments 4 and 0. The complete 178-byte body decodes; both mapped operand targets are audited.",
+        "uncertainty": "The receiver/table schemas, selector meanings, XOR inputs' semantic roles, message payload contract, and protocol meaning of 0x80013112 remain unknown. Callers show a packed-pair path and an update path, but no server or emulator packet exchange was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",
