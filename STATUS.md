@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
-identified code bytes across six report units. There are 7,176 verified matches
-totaling 2,273,942 bytes (21.7189%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,177 verified matches
+totaling 2,274,179 bytes (21.7212%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -219,6 +219,13 @@ tail `+0x68` through node link `+0x50`, invokes each node's first vtable method
 with argument 1, and clears receiver list/count fields. Its full body matches
 with no relocations; callback and field semantics remain unresolved. See [the
 clear-helper evidence](docs/current-main-linked-node-clear.md).
+
+`FUN_588DD1B0` is a 237-byte predicate called from aircraft-flight-state and
+ship-object update paths. It scans linked rectangle records and returns 1 when
+the receiver coordinates fall inside a record's half-open bounds. Its optional
+argument excludes a receiver with the same `+0x354` byte as the global object.
+All six operand targets match. The rectangle collection's game meaning is
+unknown; see [the predicate evidence](docs/current-main-registered-rectangle-predicate.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
