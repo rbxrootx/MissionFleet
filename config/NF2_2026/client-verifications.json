@@ -290841,6 +290841,297 @@
         "behavior": "Requires the object at global 0x58A247F8 +4 to be non-null, then dispatches a one-byte stack selector. Values 1 through 47 use a two-stage table lookup; other values take a default return path. The case bodies update receiver fields and word flags, traverse receiver-owned arrays/objects, and call helper routines. Returns with ret 4. The full body is 1,654 bytes with 92 mapped operand targets.",
         "uncertainty": "The receiver/global object types, selector names, per-case semantics, field/flag meanings, and domain-level effect remain unknown. The selector and jump tables are referenced outside the indexed body. Caller-provided numeric values do not establish user-visible action names. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "587DA120",
+      "name": "FUN_587da120",
+      "size": 1314,
+      "symbol": "_FUN_587da120",
+      "source": "src/client-current/Main/FUN_587da120.cpp",
+      "source_sha256": "cec08c96797607e815d7ccdb892b5cb85a4f0f41ac371a3d1c1923172752ca06",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "587DA28D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5898D18C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 300,
+          "target_address": "5899AAE4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "587DA190",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 456,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 486,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 506,
+          "target_address": "5899AB48",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 525,
+          "target_address": "5898C008",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "5899AB3C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 558,
+          "target_address": "5898C004",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 569,
+          "target_address": "5898C000",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 581,
+          "target_address": "5899AB2C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 587,
+          "target_address": "5897CEE6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 598,
+          "target_address": "587DA5CA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 615,
+          "target_address": "5899AB28",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 621,
+          "target_address": "5897CEBC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 631,
+          "target_address": "5899AB28",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 638,
+          "target_address": "5897CEBC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 656,
+          "target_address": "5899AB1C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 664,
+          "target_address": "5898C110",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 760,
+          "target_address": "5898C114",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 769,
+          "target_address": "587DA5CA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 822,
+          "target_address": "5899BA60",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 867,
+          "target_address": "5898C148",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 934,
+          "target_address": "5899BA54",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1033,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1126,
+          "target_address": "5899AAFC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1170,
+          "target_address": "5899BA50",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1185,
+          "target_address": "5897CE4A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1197,
+          "target_address": "5899BA44",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1203,
+          "target_address": "5898C148",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1208,
+          "target_address": "58A0B450",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1213,
+          "target_address": "5899AAE8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1228,
+          "target_address": "5874BA60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1233,
+          "target_address": "5899BA50",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1248,
+          "target_address": "5897CE4A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1273,
+          "target_address": "5897CE44",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1283,
+          "target_address": "5897CE3E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1303,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587da120",
+        "called_by": "Called once from 0x587E0090 and once from 0x587E3080, both with their receiver in ECX.",
+        "behavior": "Allocates bounded local text buffers, obtains the linked-record head at global 0x58A247F4 +4, and walks records through each record's +0xCE4 field. Per record it reads the word at +0x6E and passes it with fixed key 0x5898D18C and a local buffer to the function pointer at 0x5898C3C4. It performs bounded, null-terminated copies; when record +0xCE4 is nonzero it processes another string path. It then invokes formatter/parser helpers including 0x5897CE4A. Its complete audited extent is 1,314 bytes, including the mapped stack-cookie check call at 0x587DA636 and ret at 0x587DA641; there are 44 mapped operand targets.",
+        "uncertainty": "The linked-record and buffer types, fixed key/string meanings, function-pointer API, and purpose of the parsing/formatting path are unknown. The original 1,301-byte inventory entry ended inside the two-byte xor at 0x587DA634; the contiguous cookie-check epilogue through the ret is included before alignment padding and the next function at 0x587DA650. No runtime behavior test was performed."
+      }
     }
   ]
 }

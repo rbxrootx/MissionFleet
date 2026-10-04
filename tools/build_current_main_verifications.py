@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0", "587DA120",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0", "587DA120",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587DA120": {
+        "name_in_analysis": "FUN_587da120",
+        "called_by": "Called once from 0x587E0090 and once from 0x587E3080, both with their receiver in ECX.",
+        "behavior": "Allocates bounded local text buffers, obtains the linked-record head at global 0x58A247F4 +4, and walks records through each record's +0xCE4 field. Per record it reads the word at +0x6E and passes it with fixed key 0x5898D18C and a local buffer to the function pointer at 0x5898C3C4. It performs bounded, null-terminated copies; when record +0xCE4 is nonzero it processes another string path. It then invokes formatter/parser helpers including 0x5897CE4A. Its complete audited extent is 1,314 bytes, including the mapped stack-cookie check call at 0x587DA636 and ret at 0x587DA641; there are 44 mapped operand targets.",
+        "uncertainty": "The linked-record and buffer types, fixed key/string meanings, function-pointer API, and purpose of the parsing/formatting path are unknown. The original 1,301-byte inventory entry ended inside the two-byte xor at 0x587DA634; the contiguous cookie-check epilogue through the ret is included before alignment padding and the next function at 0x587DA650. No runtime behavior test was performed.",
+    },
     "587A75E0": {
         "name_in_analysis": "FUN_587a75e0",
         "called_by": "Called twice by 0x587E8A40 and 16 times by 0x58856560. Observed selector arguments include 3, 1, 2, 0x17, 0x24, 0x25, and 0x26.",

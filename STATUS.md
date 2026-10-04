@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,777
-identified code bytes across six report units. There are 7,124 verified matches
-totaling 2,248,460 bytes (21.4757%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,790
+identified code bytes across six report units. There are 7,125 verified matches
+totaling 2,249,774 bytes (21.4882%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -25,12 +25,17 @@ The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in
 [`docs/current-main-selector-dispatch-587a75e0.md`](docs/current-main-selector-dispatch-587a75e0.md).
+The linked-record text walk and corrected return extent are documented in
+[`docs/current-main-linked-record-text-walk.md`](docs/current-main-linked-record-text-walk.md).
 
-The latest addition, `FUN_587A75E0`, is a 1,654-byte selector dispatcher called
-18 times by two verified functions. It requires a global object, then routes
-byte selectors 1 through 47 to case bodies that update receiver fields and
-invoke helpers. Case labels and meanings remain unknown. The complete extent
-and 92 operands match under objdiff; no runtime behavior test was performed.
+The latest addition, `FUN_587DA120`, is a linked-record text-processing routine
+called by two verified functions. It extracts a word from each record, invokes a
+function pointer with fixed string data, performs bounded buffer copies, and
+passes buffers to parser/formatter helpers. Its original 1,301-byte index cut
+through the stack-cookie epilogue; the corrected 1,314-byte extent now includes
+the cookie check and return before alignment padding. All 44 mapped operands
+match; string/API meanings remain unknown and no runtime behavior test was
+performed.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
