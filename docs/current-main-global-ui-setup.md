@@ -28,6 +28,24 @@ The resource-loading and callback behavior are statically established from the
 mapped code. No original-client startup, visual, or interaction test was
 performed.
 
+## `FUN_587D26C0` startup object branch
+
+All indexed callees from `FUN_587D26C0` through two direct-call edges now match
+byte for byte. Ten new functions add 3,935 matched bytes and 82 operand targets
+checked; the depth-two graph has no unmatched indexed target for this root.
+The root is reached directly from `FUN_5878AF40` during startup setup.
+
+The callsites connect grouped receiver-field initializers, embedded-object
+helpers, the sprite loader, a repeated child/object initializer, and a linked
+entry cleanup routine. `FUN_587D1F10`'s inventory extent was 12 bytes short: the
+complete body ends at `ret` at `0x587D2621`, followed by 14 int3 padding bytes
+before the next indexed function. `FUN_587CECC0` and `FUN_58789620` also needed
+complete returns added, for 37 corrected inventory bytes total. The three
+extents now stop before their observed int3 padding. The methods' class names,
+field schemas, resource identities, ownership rules, and visual behavior remain
+unresolved. Deeper and indirect paths elsewhere in startup are still open; no
+original-client runtime or visual test was performed.
+
 ## Direct setup callees
 
 All 28 unique indexed functions called directly by `FUN_5878af40` are now

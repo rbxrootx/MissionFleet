@@ -281762,6 +281762,762 @@
         "behavior": "Installs vtable address 0x5898D9A8 and forwards several arguments to mapped helper 0x5875DDA0.",
         "uncertainty": "The repeated entry schema, argument meanings, and helper contract are unresolved. The complete 57-byte body decodes."
       }
+    },
+    {
+      "address": "587CF6D0",
+      "name": "FUN_587cf6d0",
+      "size": 192,
+      "symbol": "_FUN_587cf6d0",
+      "source": "src/client-current/Main/FUN_587cf6d0.cpp",
+      "source_sha256": "4cc46daab59eba227165bfb728451ef4492ae2f22c23b531cf895a14849b3ee4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf6d0",
+        "called_by": "Directly called by 0x587D26C0 during setup of the initialized object.",
+        "behavior": "Copies arguments into receiver fields spanning +0x68 through +0xC0 and calls shared helper 0x587CECC0.",
+        "uncertainty": "The argument-to-field mapping and helper contract are unresolved. The complete 192-byte body decodes."
+      }
+    },
+    {
+      "address": "587CF790",
+      "name": "FUN_587cf790",
+      "size": 138,
+      "symbol": "_FUN_587cf790",
+      "source": "src/client-current/Main/FUN_587cf790.cpp",
+      "source_sha256": "8dbda5b9294aa1f223e7442a04242acaf92400ff4a231e1b030f4214ecb052ea",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf790",
+        "called_by": "Directly called by 0x587D26C0 during setup of the initialized object.",
+        "behavior": "Calls 0x587CECC0, helper 0x5897152E, and allocator/free helper 0x5897CC48 before returning with ret 8.",
+        "uncertainty": "The resource/ownership contract and argument meanings are unresolved. The complete 138-byte body decodes."
+      }
+    },
+    {
+      "address": "587CEB60",
+      "name": "FUN_587ceb60",
+      "size": 182,
+      "symbol": "_FUN_587ceb60",
+      "source": "src/client-current/Main/FUN_587ceb60.cpp",
+      "source_sha256": "ef03ce73ad4914246fc4864fccc0013aef33a3b166a83e122b4cb66690873c99",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587ceb60",
+        "called_by": "Directly called by 0x587D26C0 during object initialization.",
+        "behavior": "Initializes numerous receiver fields from +0x88 through +0xA10, including fixed offsets and widths, and calls allocator/free helper 0x5897CC48.",
+        "uncertainty": "The receiver layout, field meanings, and ownership operation are unresolved. The complete 182-byte body decodes."
+      }
+    },
+    {
+      "address": "587CFCE0",
+      "name": "FUN_587cfce0",
+      "size": 364,
+      "symbol": "_FUN_587cfce0",
+      "source": "src/client-current/Main/FUN_587cfce0.cpp",
+      "source_sha256": "65669d2c207ea5ed2763afa1f3262ad40900e34fa4ae511bb4fa3b227801b6b0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cfce0",
+        "called_by": "Directly called by 0x587D26C0 during object setup.",
+        "behavior": "Sets observed field +0x9E8 to 0x30, uses allocation helpers, and calls mapped state helpers 0x5876E890 and 0x58902D20 while initializing fields including +0x70/+0x78.",
+        "uncertainty": "The object type, field meanings, and state/helper contracts are unresolved. The complete 364-byte body decodes."
+      }
+    },
+    {
+      "address": "58789750",
+      "name": "FUN_58789750",
+      "size": 32,
+      "symbol": "_FUN_58789750",
+      "source": "src/client-current/Main/FUN_58789750.cpp",
+      "source_sha256": "2258d9499bb9117ceab6ecff012d6c596fb085dfd08f6a689cfa80eef6685a40",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58789750",
+        "called_by": "Directly called by 0x587D26C0 during setup of a child object.",
+        "behavior": "Installs vtable address 0x58996B78 and calls helper 0x58789620.",
+        "uncertainty": "The class identity and helper contract are unresolved. The complete 32-byte body decodes."
+      }
+    },
+    {
+      "address": "587CF610",
+      "name": "FUN_587cf610",
+      "size": 119,
+      "symbol": "_FUN_587cf610",
+      "source": "src/client-current/Main/FUN_587cf610.cpp",
+      "source_sha256": "873e61c8cea928882d8c439007e949116e746b2acbad1f0f1b74847c467310e6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf610",
+        "called_by": "Directly called by 0x587D26C0 during resource setup.",
+        "behavior": "Allocates through 0x5897CC4E and passes the resulting object/resource arguments to sprite loader 0x588F3D70.",
+        "uncertainty": "The resource identity and allocation lifetime are unresolved. The complete 119-byte body decodes."
+      }
+    },
+    {
+      "address": "587D1F10",
+      "name": "FUN_587d1f10",
+      "size": 1810,
+      "symbol": "_FUN_587d1f10",
+      "source": "src/client-current/Main/FUN_587d1f10.cpp",
+      "source_sha256": "d56874f20b9fac077893e4e178e6ea8c072fbc82fc44a836cde222c7bbcf4f90",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58981BAD",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "587D259F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 286,
+          "target_address": "58A24778",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 344,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 351,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 361,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 389,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 414,
+          "target_address": "587D2144",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 427,
+          "target_address": "58A24778",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 502,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 513,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 586,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 611,
+          "target_address": "587D2210",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 624,
+          "target_address": "58A24778",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 699,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 710,
+          "target_address": "5898CA74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 790,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 815,
+          "target_address": "587D22D5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 828,
+          "target_address": "58A24778",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 903,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 914,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 987,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1045,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1052,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1087,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1148,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1155,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1202,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1239,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1276,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1313,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1354,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1379,
+          "target_address": "587D2504",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1390,
+          "target_address": "58A24778",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1462,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1468,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1587,
+          "target_address": "587D2457",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1615,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1640,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1667,
+          "target_address": "587D2451",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1786,
+          "target_address": "587D2000",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d1f10",
+        "called_by": "Directly called by 0x587D26C0 during repeated child/object initialization.",
+        "behavior": "Builds repeated object groups using allocation and setup helpers 0x5897CC4E, 0x589031A0, and 0x58902D20; the body installs observed vtables 0x5898C55C and 0x5898CA74 and iterates over fixed-stride child groups.",
+        "uncertainty": "The group schema, index semantics, object roles, and helper contracts are unresolved. The original indexed extent ended inside the `mov fs:[0], ecx` exception epilogue; the corrected 1,810-byte extent includes the full epilogue through `ret` at 0x587D2621, excluding 14 following int3 padding bytes before 0x587D2630."
+      }
+    },
+    {
+      "address": "5881A8B0",
+      "name": "FUN_5881a8b0",
+      "size": 634,
+      "symbol": "_FUN_5881a8b0",
+      "source": "src/client-current/Main/FUN_5881a8b0.cpp",
+      "source_sha256": "6844a985fb94669926906d9d9cc54ecff1123c0df9a149965ffbaf9710e53cf0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898349F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "5899D850",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "5899D86C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 225,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 231,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 257,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 331,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 337,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 361,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 383,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 389,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 404,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 428,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 441,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 458,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 484,
+          "target_address": "58A24730",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 554,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5881a8b0",
+        "called_by": "Directly called by 0x587D26C0 during child/resource setup.",
+        "behavior": "Runs base initialization and sprite loader 0x588F3D70, installs vtable addresses 0x5898C500 and 0x5899D850 plus embedded vtable 0x5898C55C, and calls mapped state/resource helpers.",
+        "uncertainty": "The class, loaded resource, embedded-object contracts, and UI role are unresolved. The complete 634-byte body decodes."
+      }
+    },
+    {
+      "address": "587CECC0",
+      "name": "FUN_587cecc0",
+      "size": 370,
+      "symbol": "_FUN_587cecc0",
+      "source": "src/client-current/Main/FUN_587cecc0.cpp",
+      "source_sha256": "b99501a936795ff42670cb983cc6f67677085de8cbc9271ba14bd5e21aa37083",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "587CEE28",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 356,
+          "target_address": "587CEDA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cecc0",
+        "called_by": "Directly called by 0x587CF6D0 and 0x587CF790 during object field setup.",
+        "behavior": "Uses allocator helper 0x5897CC42 and helper 0x5897152E while preparing the caller-supplied fields, then returns with ret 0x0C. Its corrected 370-byte extent includes this complete epilogue; following int3 bytes are padding.",
+        "uncertainty": "The delegated resource/ownership operation and argument schema are unresolved."
+      }
+    },
+    {
+      "address": "58789620",
+      "name": "FUN_58789620",
+      "size": 94,
+      "symbol": "_FUN_58789620",
+      "source": "src/client-current/Main/FUN_58789620.cpp",
+      "source_sha256": "332511866cbe717906de45ebac38d6a474f11193403bb40e1288f637aa60c1bd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 61,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789620",
+        "called_by": "Directly called by 0x58789750 during child setup.",
+        "behavior": "Walks receiver-linked entries, performs two indirect virtual calls on each entry, calls free helper 0x5897CC42, and clears receiver fields +4 through +0x10. Its corrected 94-byte extent includes the complete ret; two following int3 bytes are padding.",
+        "uncertainty": "The virtual methods' semantics and ownership/lifetime contract are unresolved."
+      }
     }
   ]
 }

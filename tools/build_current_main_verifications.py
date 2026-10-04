@@ -115,6 +115,9 @@ ADDRESSES = (
     "587C7ED0", "587C7CE0", "58896D50",
     "58857F30", "587C7AE0", "587C7BA0", "5875EF70", "5875EE30",
     "588587C0", "58742F50", "5875DEE0",
+    "587CF6D0", "587CF790", "587CEB60", "587CFCE0", "58789750",
+    "587CF610", "587D1F10", "5881A8B0",
+    "587CECC0", "58789620",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -317,6 +320,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "587C7ED0", "587C7CE0", "58896D50",
     "58857F30", "587C7AE0", "587C7BA0", "5875EF70", "5875EE30",
     "588587C0", "58742F50", "5875DEE0",
+    "587CF6D0", "587CF790", "587CEB60", "587CFCE0", "58789750",
+    "587CF610", "587D1F10", "5881A8B0",
+    "587CECC0", "58789620",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -3977,6 +3983,66 @@ EVIDENCE = {
         "called_by": "Called nine times by 0x5885D380 while configuring repeated entries.",
         "behavior": "Installs vtable address 0x5898D9A8 and forwards several arguments to mapped helper 0x5875DDA0.",
         "uncertainty": "The repeated entry schema, argument meanings, and helper contract are unresolved. The complete 57-byte body decodes.",
+    },
+    "587CF6D0": {
+        "name_in_analysis": "FUN_587cf6d0",
+        "called_by": "Directly called by 0x587D26C0 during setup of the initialized object.",
+        "behavior": "Copies arguments into receiver fields spanning +0x68 through +0xC0 and calls shared helper 0x587CECC0.",
+        "uncertainty": "The argument-to-field mapping and helper contract are unresolved. The complete 192-byte body decodes.",
+    },
+    "587CF790": {
+        "name_in_analysis": "FUN_587cf790",
+        "called_by": "Directly called by 0x587D26C0 during setup of the initialized object.",
+        "behavior": "Calls 0x587CECC0, helper 0x5897152E, and allocator/free helper 0x5897CC48 before returning with ret 8.",
+        "uncertainty": "The resource/ownership contract and argument meanings are unresolved. The complete 138-byte body decodes.",
+    },
+    "587CEB60": {
+        "name_in_analysis": "FUN_587ceb60",
+        "called_by": "Directly called by 0x587D26C0 during object initialization.",
+        "behavior": "Initializes numerous receiver fields from +0x88 through +0xA10, including fixed offsets and widths, and calls allocator/free helper 0x5897CC48.",
+        "uncertainty": "The receiver layout, field meanings, and ownership operation are unresolved. The complete 182-byte body decodes.",
+    },
+    "587CFCE0": {
+        "name_in_analysis": "FUN_587cfce0",
+        "called_by": "Directly called by 0x587D26C0 during object setup.",
+        "behavior": "Sets observed field +0x9E8 to 0x30, uses allocation helpers, and calls mapped state helpers 0x5876E890 and 0x58902D20 while initializing fields including +0x70/+0x78.",
+        "uncertainty": "The object type, field meanings, and state/helper contracts are unresolved. The complete 364-byte body decodes.",
+    },
+    "58789750": {
+        "name_in_analysis": "FUN_58789750",
+        "called_by": "Directly called by 0x587D26C0 during setup of a child object.",
+        "behavior": "Installs vtable address 0x58996B78 and calls helper 0x58789620.",
+        "uncertainty": "The class identity and helper contract are unresolved. The complete 32-byte body decodes.",
+    },
+    "587CF610": {
+        "name_in_analysis": "FUN_587cf610",
+        "called_by": "Directly called by 0x587D26C0 during resource setup.",
+        "behavior": "Allocates through 0x5897CC4E and passes the resulting object/resource arguments to sprite loader 0x588F3D70.",
+        "uncertainty": "The resource identity and allocation lifetime are unresolved. The complete 119-byte body decodes.",
+    },
+    "587D1F10": {
+        "name_in_analysis": "FUN_587d1f10",
+        "called_by": "Directly called by 0x587D26C0 during repeated child/object initialization.",
+        "behavior": "Builds repeated object groups using allocation and setup helpers 0x5897CC4E, 0x589031A0, and 0x58902D20; the body installs observed vtables 0x5898C55C and 0x5898CA74 and iterates over fixed-stride child groups.",
+        "uncertainty": "The group schema, index semantics, object roles, and helper contracts are unresolved. The original indexed extent ended inside the `mov fs:[0], ecx` exception epilogue; the corrected 1,810-byte extent includes the full epilogue through `ret` at 0x587D2621, excluding 14 following int3 padding bytes before 0x587D2630.",
+    },
+    "5881A8B0": {
+        "name_in_analysis": "FUN_5881a8b0",
+        "called_by": "Directly called by 0x587D26C0 during child/resource setup.",
+        "behavior": "Runs base initialization and sprite loader 0x588F3D70, installs vtable addresses 0x5898C500 and 0x5899D850 plus embedded vtable 0x5898C55C, and calls mapped state/resource helpers.",
+        "uncertainty": "The class, loaded resource, embedded-object contracts, and UI role are unresolved. The complete 634-byte body decodes.",
+    },
+    "587CECC0": {
+        "name_in_analysis": "FUN_587cecc0",
+        "called_by": "Directly called by 0x587CF6D0 and 0x587CF790 during object field setup.",
+        "behavior": "Uses allocator helper 0x5897CC42 and helper 0x5897152E while preparing the caller-supplied fields, then returns with ret 0x0C. Its corrected 370-byte extent includes this complete epilogue; following int3 bytes are padding.",
+        "uncertainty": "The delegated resource/ownership operation and argument schema are unresolved.",
+    },
+    "58789620": {
+        "name_in_analysis": "FUN_58789620",
+        "called_by": "Directly called by 0x58789750 during child setup.",
+        "behavior": "Walks receiver-linked entries, performs two indirect virtual calls on each entry, calls free helper 0x5897CC42, and clears receiver fields +4 through +0x10. Its corrected 94-byte extent includes the complete ret; two following int3 bytes are padding.",
+        "uncertainty": "The virtual methods' semantics and ownership/lifetime contract are unresolved.",
     },
 }
 
