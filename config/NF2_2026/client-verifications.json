@@ -301302,6 +301302,208 @@
         "behavior": "Filters the null-terminated text at record +0x30 through 0x587A2D40 using length minus 0x30. A nonzero filter result returns 0. Otherwise it calls FUN_587B7BD0 with receiver state; if allowed and receiver +0x190 is nonnegative, it dispatches selector 0x80020A00 through 0x58970C70, passing 0x20000 and receiver +0x190 ORed with 0x40000 as flags, along with the record, length, and zero. Other non-filtered paths return 1. The full mapped body is 108 bytes and returns with ret 0x0C.",
         "uncertainty": "The filter callback policy, +0x190 field semantics, flag meaning, message record schema and protocol meaning of 0x80020A00 are unresolved. Static callers establish chat/event use; runtime behavior was not tested."
       }
+    },
+    {
+      "address": "587A6190",
+      "name": "FUN_587a6190",
+      "size": 132,
+      "symbol": "_FUN_587a6190",
+      "source": "src/client-current/Main/FUN_587a6190.cpp",
+      "source_sha256": "d4f30d679c3cd6de61887327f0948bc9a734d96fb9c66e285ff72f171f58ff6f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587a6190 / child scalar propagation",
+        "called_by": "Called by verified selector dispatcher FUN_587A75E0 and verified state-clear routine FUN_588DD310. The latter passes zero through a global object at 0x58A2459C+0x20C9C.",
+        "behavior": "Copies its one stack argument to receiver +0x94, then visits eight 16-byte groups of four child pointers beginning at receiver +8. For each non-null pointer, it copies the stored value to child fields +0x114 and +0x110. It returns with ret 4 after the complete 132-byte mapped body; no external operand targets are present.",
+        "uncertainty": "The receiver/child types, the scalar's domain meaning, and the effect of the paired child fields are unknown. One verified caller clears them with zero, but this does not establish all nonzero cases. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A7110",
+      "name": "FUN_587a7110",
+      "size": 132,
+      "symbol": "_FUN_587a7110",
+      "source": "src/client-current/Main/FUN_587a7110.cpp",
+      "source_sha256": "b6c5093ace73c2853a8279ed3f14135c82708210e3f00412bd2438a6c34d9983",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587a7110 / companion child scalar propagation",
+        "called_by": "Called twice from verified selector dispatcher FUN_587A75E0, with observed arguments 0x40000000 and zero.",
+        "behavior": "Copies its one stack argument to receiver +0x98, then visits eight 16-byte groups of four child pointers beginning at receiver +8. For each non-null pointer, it copies the stored value to child fields +0x11C and +0x118. The complete body is 132 bytes, has no external operand targets, and ends in ret 4.",
+        "uncertainty": "The child type, meaning of 0x40000000 and the paired field roles remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A56A0",
+      "name": "FUN_587a56a0",
+      "size": 117,
+      "symbol": "_FUN_587a56a0",
+      "source": "src/client-current/Main/FUN_587a56a0.cpp",
+      "source_sha256": "f549ca3af4c4a6591409b6e88e005232650e57c56c26567edae54fffc3c4d521",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a56a0 / guarded child-state table refresh",
+        "called_by": "Called five times from verified FUN_587A75E0 and once from verified FUN_587A6220.",
+        "behavior": "Sets receiver +0x243EC to 2. It reads global table object 0x58A246A4, selects index 6 when receiver +0xF4 is nonzero and index 7 otherwise, and stores that table entry into receiver +0x244FC only when the count at table +0x164 and pointer at +0x18C permit the read; otherwise it stores zero. It similarly writes table entry 9 or zero to receiver +0x24500. The full body is 117 bytes and has two mapped absolute operand targets.",
+        "uncertainty": "The receiver and global-table types, meaning of field +0xF4 and the selected entries, and effect of state value 2 are unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587A7310",
+      "name": "FUN_587a7310",
+      "size": 230,
+      "symbol": "_FUN_587a7310",
+      "source": "src/client-current/Main/FUN_587a7310.cpp",
+      "source_sha256": "1fa2f9ac88899c1090ac0ce53977b45f24f76748c6847e26f088a43d98462312",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 219,
+          "target_address": "587A7325",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a7310 / child state transition fanout",
+        "called_by": "Called three times from verified selector dispatcher FUN_587A75E0, with observed arguments one and zero.",
+        "behavior": "Walks eight groups of four child pointers beginning at receiver +8. For each non-null child, reads +0x14C: value zero copies the argument to child +0x148; value one writes one; value two writes zero; other values leave +0x148 unchanged. The complete mapped body is 230 bytes and ends in ret 4.",
+        "uncertainty": "The child mode/state meaning, role of +0x148 and selector-level action names remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "588D8100",
+      "name": "FUN_588d8100",
+      "size": 73,
+      "symbol": "_FUN_588d8100",
+      "source": "src/client-current/Main/FUN_588d8100.cpp",
+      "source_sha256": "e705fbc4f5f76b8a2311b037709dae2289f934cc6cc8843344a3567f24e73b9b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588d8100 / counted child scalar propagation",
+        "called_by": "Called by verified state-clear routine FUN_588DD310, which supplies zero, and at two sites in verified FUN_588E4260.",
+        "behavior": "Stores its one argument to receiver +0x6094 and iterates the count at +0x141C over pointers beginning at receiver +0x17C. For each non-null pointer it writes the stored scalar to child +0x114 and +0x110. The complete body is 73 bytes with no external operand targets and ret 4.",
+        "uncertainty": "The receiver/child types, count capacity, scalar meaning and paired field roles remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "588D8150",
+      "name": "FUN_588d8150",
+      "size": 73,
+      "symbol": "_FUN_588d8150",
+      "source": "src/client-current/Main/FUN_588d8150.cpp",
+      "source_sha256": "e9906ddcf646e05e9ebf1e1ecebdcad03f199755ad45493bb113082d9ff8296e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588d8150 / counted companion child scalar propagation",
+        "called_by": "Called at two mapped direct sites within verified FUN_588E4260.",
+        "behavior": "Stores its one argument to receiver +0x6098 and iterates the count at +0x141C over pointers beginning at receiver +0x17C. For each non-null pointer it writes the stored scalar to child +0x11C and +0x118. The complete body is 73 bytes with no external operand targets and ret 4.",
+        "uncertainty": "The receiver/child types, count capacity, scalar meaning and paired field roles remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "58736080",
+      "name": "FUN_58736080",
+      "size": 26,
+      "symbol": "_FUN_58736080",
+      "source": "src/client-current/Main/FUN_58736080.cpp",
+      "source_sha256": "e87ef0ce3afa2d9125a36c55454deeb2ae99b6bd486e4ef31f36a29420bd7485",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58736080 / indexed child byte getter",
+        "called_by": "Called repeatedly from verified selector dispatcher FUN_587A75E0 with receiver pointers obtained from active child state.",
+        "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
+        "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed."
+      }
     }
   ]
 }
