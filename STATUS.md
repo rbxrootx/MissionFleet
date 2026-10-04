@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
-identified code bytes across six report units. There are 7,181 verified matches
-totaling 2,275,102 bytes (21.7300%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,183 verified matches
+totaling 2,275,522 bytes (21.7340%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -250,6 +250,13 @@ receiver buffers, then updates a child text/control object according to the
 copied word at receiver `+0x1338`. Four packet/event dispatcher call sites
 support this path. Its 225 bytes and seven operand targets match; field and
 callback meanings remain unresolved. See [the record-to-child update evidence](docs/current-main-record-to-child-text-update.md).
+
+The table-backed effect emitter `FUN_588F5040` and initializer `FUN_5876BE10`
+match 420 bytes across 14 operands. The emitter loops over `0x84`-byte
+allocations and selects optional `0x40`-stride table entries; the initializer
+copies the entry fields and computes three thunk-derived object values. The
+host thunk, object class, table schema, and visible effect are unknown. See
+[the effect-emission evidence](docs/current-main-randomized-effect-object-emission.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at

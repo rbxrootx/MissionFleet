@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,181 matches cover 2,275,102 bytes (21.7300%) and are verified
+The current 7,183 matches cover 2,275,522 bytes (21.7340%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -19,8 +19,8 @@ linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
 and initializer functions, message handlers, `CForce` child setup, and a
 registered-rectangle predicate and matching pointer-vector erase helpers in
-[the subsystem docs](docs/), plus the chat text prefilter and record-to-child
-text update paths.
+[the subsystem docs](docs/), plus the chat text prefilter, record-to-child
+text update paths, and a table-backed effect-object emitter/initializer.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
 The latest current Main.dll fixed-record copy path is documented in
