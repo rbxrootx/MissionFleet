@@ -9,10 +9,10 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,117 matches cover 2,242,792 bytes (21.4216%) and are verified
+The current 7,118 matches cover 2,242,809 bytes (21.4217%) and are verified
 individually at 100.0% by objdiff.
-Recent Main.dll helper notes cover the linked-payload lookup and the pair of
-indexed-pointer lookups in [the subsystem evidence docs](docs/).
+Recent Main.dll helper notes cover the linked-payload lookup, indexed-pointer
+lookups, and a null-safe pointer getter in [the subsystem evidence docs](docs/).
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
 The latest current Main.dll fixed-record copy path is documented in

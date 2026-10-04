@@ -288969,6 +288969,32 @@
         "behavior": "Reads the signed index argument, compares it with the signed count at receiver +0x170, rejects index < 0, and rejects a null pointer table at receiver +0x194. Otherwise returns the DWORD pointer at table[index]. Both return paths clean the single stack argument with ret 4.",
         "uncertainty": "The receiver type, count/table field meanings, pointed-to element type, and relationship to the similarly shaped accessor at 0x587317B0 are unproven. Caller contexts show indexed object processing but do not establish domain semantics. The mapped 37-byte extent has no external operand targets; no runtime test was performed."
       }
+    },
+    {
+      "address": "58759EB0",
+      "name": "FUN_58759eb0",
+      "size": 17,
+      "symbol": "_FUN_58759eb0",
+      "source": "src/client-current/Main/FUN_58759eb0.cpp",
+      "source_sha256": "bee6d42a0e8bca744da037f6faa2c2e55f4b211951d00d1d2e66084152158400",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58759eb0",
+        "called_by": "Called by 0x58840890 at six sites, 0x588450B0 at two sites, and 0x58890110 at twelve sites. The 0x588450B0 caller checks the returned value for null; 0x58840890 chains repeated calls using different receiver fields.",
+        "behavior": "Takes its receiver in ECX, loads the DWORD at receiver +0x84, and returns null if that pointer is null. Otherwise it returns the DWORD at that pointed-to object's +0x04. Both branches use plain ret; there are no stack arguments to clean.",
+        "uncertainty": "The receiver and nested object types, fields at +0x84 and +0x04, and domain purpose are unknown. Callers consume the result as a pointer and in some paths test it for null, but do not establish a semantic label. The complete mapped 17-byte extent has no external operand targets; no runtime test was performed."
+      }
     }
   ]
 }
