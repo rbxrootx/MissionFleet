@@ -157,6 +157,7 @@ ADDRESSES = (
     "5882A680",
     "5886B9B0",
     "58831AE0",
+    "58831B90",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -242,7 +243,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4818,6 +4819,12 @@ EVIDENCE = {
         "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. Both supply an input record and receiver collection at global object 0x58A245B4 +0xDC +0x154.",
         "behavior": "For a non-null record, obtains indexed entry strings from the collection at receiver +0x98 through 0x589080E0 and compares each byte sequence against record text at +0x2D. An exact match exits without adding either entry. If no match exists, it calls 0x589088D0 on collection +0x98 with record text +0x2D, record DWORD 0, and constant 0x83ADD7; it then calls the same helper on collection +0x9C with the string pointer at record +0x0C, DWORD at record +4, and the same constant. The complete 163-byte body has four mapped operand targets.",
         "uncertainty": "The record schema, collection and entry types, key/hash meaning of 0x83ADD7, and domain purpose of the two strings/IDs remain unknown. Static dispatcher callers establish message/event ingestion but not a higher-level identity. No runtime client or emulator test was performed.",
+    },
+    "58831B90": {
+        "name_in_analysis": "FUN_58831b90 / parallel unique-string record fanout",
+        "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650, each with a record and receiver at global object 0x58A245B4 +0xDC +0x154. It mirrors FUN_58831AE0 using a separate pair of collections.",
+        "behavior": "For a non-null record, compares record text at +0x2D against indexed strings from collection receiver +0x6C using 0x589080E0. An exact match exits unchanged. On a miss it calls 0x589088D0 for collection +0x6C with that text, DWORD at record +0, and constant 0x83ADD7; it then adds the string pointer at record +0x0C and DWORD at +4 to collection +0x70 using the same helper and constant. The complete 154-byte body has four mapped operand targets; its traversal and comparison mirror FUN_58831AE0, with the collection offsets changed to +0x6C/+0x70.",
+        "uncertainty": "The record schema, collection and entry types, key/hash meaning of 0x83ADD7, and domain purpose of the two strings/IDs remain unknown. Static callers establish packet/event dispatch use only. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

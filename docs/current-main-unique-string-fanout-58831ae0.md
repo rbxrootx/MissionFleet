@@ -1,4 +1,4 @@
-# Current Main.dll unique-string fanout
+# Current Main.dll unique-string dispatcher fanout
 
 `FUN_58831AE0` receives an input record and a collection owner from both the
 verified packet/message dispatcher `FUN_587BB700` and event dispatcher
@@ -14,6 +14,13 @@ at record `+4`, and the same constant. The record layout, collection types,
 constant's role, and domain meaning of the associated strings and IDs remain
 unresolved.
 
-The complete 163-byte function matches mapped `Main.dll` under objdiff 3.8.0;
-all four mapped operand targets were checked. No runtime client or emulator
-test was performed.
+The adjacent peer `FUN_58831B90` performs the same null guard, indexed string
+comparison, and no-duplicate path, but uses collections at receiver `+0x6C`
+and `+0x70` instead of `+0x98` and `+0x9C`. It uses the same record offsets
+and constant `0x83ADD7` for the two `FUN_589088D0` calls. Both verified
+dispatchers call it with the receiver at global object
+`0x58A245B4 +0xDC +0x154`.
+
+The complete 163-byte `FUN_58831AE0` and 154-byte `FUN_58831B90` bodies match
+mapped `Main.dll` under objdiff 3.8.0; all four mapped operand targets in each
+body were checked. No runtime client or emulator test was performed.
