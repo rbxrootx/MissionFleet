@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,246 matches cover 2,288,663 bytes (21.8594%) and are verified
+The current 7,251 matches cover 2,289,152 bytes (21.8640%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -27,7 +27,9 @@ child scalar propagation ([evidence](docs/current-main-child-scalar-propagation.
 child table/mode updates ([evidence](docs/current-main-child-state-table-and-mode.md)),
 paired child activation ([evidence](docs/current-main-paired-child-activation.md)),
 and a counted child selector updater ([evidence](docs/current-main-child-selector-updater.md)),
-paired child enumeration ([evidence](docs/current-main-child-enumeration.md)), a scaled child
+paired child enumeration ([evidence](docs/current-main-child-enumeration.md)),
+selector flag/latch handling ([evidence](docs/current-main-selector-state-flags.md))
+and status dispatch ([evidence](docs/current-main-selector-status-dispatch.md)), a scaled child
 position updater ([evidence](docs/current-main-scaled-child-position.md)), record-to-child
 text update paths, a table-backed effect-object emitter/initializer, and a
 bounded text-notification builder, a shared nested-state cleanup helper, its

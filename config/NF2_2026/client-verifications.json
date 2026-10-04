@@ -302232,6 +302232,221 @@
         "behavior": "Zeros an output count byte and scans receiver child pointers beginning at +8 up to active-object count at global 0x58A247F8->+4+0x141C. It filters by active-object mask +0x44C, per-index byte +0x1FC equal to +0x340, and category byte +0x21C under supplied 0x10/0x20 flags; unlike FUN_587A5840, it does not combine mask +0x344. For each qualifying child, calls its virtual method at vtable +0x40 with the current output position +1. Positive results increment the output count byte and global 0x58A24900 and extend the accumulated length. Returns accumulated length plus one. The complete body is 227 bytes with nine operand targets and ret 8.",
         "uncertainty": "The child type, mask/category semantics, output format and virtual method contract remain unknown. No runtime client test was performed."
       }
+    },
+    {
+      "address": "587E5AC0",
+      "name": "FUN_587e5ac0",
+      "size": 132,
+      "symbol": "_FUN_587e5ac0",
+      "source": "src/client-current/Main/FUN_587e5ac0.cpp",
+      "source_sha256": "4964c295a8929bacf5afe063a006b0b6a812f4e0d03fa4a009a61998f996bc78",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5ac0 / state flags and latch update",
+        "called_by": "Called repeatedly by verified dispatcher FUN_58856560 with observed selector, mask and mode arguments.",
+        "behavior": "If receiver +0x20D5C is nonzero, selectors 8, 9 and 0x1C return early. With mode zero and latch byte +0x10484 zero, clears the supplied mask from flags +0x394 and writes selector +0x1F to the latch. With mode 0x40000000, when the mask is not already fully set and the latch is zero, ORs the mask into +0x394 and writes the selector byte to the latch. Other modes leave these fields unchanged. The complete body is 132 bytes, no external operand targets, ret 0x0C.",
+        "uncertainty": "Selector names, mask bits, latch meaning and user-visible state are unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587E5B50",
+      "name": "FUN_587e5b50",
+      "size": 73,
+      "symbol": "_FUN_587e5b50",
+      "source": "src/client-current/Main/FUN_587e5b50.cpp",
+      "source_sha256": "115ddcdb196bbb3cbd4754ef08d21e17943db1ea65ecd46b81dda6265771696d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5b50 / six-bit state clear",
+        "called_by": "Called by verified FUN_587A75E0 and twice by verified FUN_588E4260.",
+        "behavior": "Clears bits 0x80, 0x100, 0x800, 0x1000, 0x200 and 0x400 from receiver flags +0x394 using six OR/XOR pairs, then returns. The complete body is 73 bytes with no external operand targets.",
+        "uncertainty": "The individual bit meanings and effect of clearing the combined 0x1F80 mask remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587E5C10",
+      "name": "FUN_587e5c10",
+      "size": 22,
+      "symbol": "_FUN_587e5c10",
+      "source": "src/client-current/Main/FUN_587e5c10.cpp",
+      "source_sha256": "50adcc8f17a26d909e96ec755c92b44a6166abc952611988eb5d191620d07806",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5c10 / write-once state latch",
+        "called_by": "Called at six sites from verified dispatcher FUN_58856560.",
+        "behavior": "Writes the low byte of its one stack argument to receiver +0x10484 only when that byte is currently zero, then returns with ret 4. The complete body is 22 bytes with no external operand targets.",
+        "uncertainty": "The latch's domain meaning and permitted argument values remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587E5BA0",
+      "name": "FUN_587e5ba0",
+      "size": 25,
+      "symbol": "_FUN_587e5ba0",
+      "source": "src/client-current/Main/FUN_587e5ba0.cpp",
+      "source_sha256": "0882c4c3edd60139b9b142eab9e6c7ca5f6e88f9a5c839f986f5055a14a9f11d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5ba0 / adjacent state initializer",
+        "called_by": "Called by verified FUN_587BB700 in its client event/control path.",
+        "behavior": "Writes one to receiver +0x1048C, zero to byte +0x10C10, and one to receiver +0x20C10. The complete body is 25 bytes with no external operand targets.",
+        "uncertainty": "The three field roles and their relationship to latch +0x10484 are unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587EBCB0",
+      "name": "FUN_587ebcb0",
+      "size": 237,
+      "symbol": "_FUN_587ebcb0",
+      "source": "src/client-current/Main/FUN_587ebcb0.cpp",
+      "source_sha256": "8e50b3a17fc8bbe4287d0159b616d528431ddf337017bcfb2fb82c3f2d4a4b90",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "587EBD87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58A247FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "58A247FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 161,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "58A247FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 194,
+          "target_address": "58A247FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 204,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 217,
+          "target_address": "58A247FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "588C0DA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ebcb0 / selector-dependent status dispatch",
+        "called_by": "Called from verified FUN_587A75E0 with a word index and a second subentry/lane selector.",
+        "behavior": "When global object 0x58A2459C field +0x21C34 is nonzero, dispatches value 0x12C through FUN_588C0DA0 and returns one. Otherwise reads a pointer indexed by the first argument at global 0x58A247F8 active object +0xE8C. A non-null pointer whose first byte is six dispatches 0x3EF and returns one. For first byte five, it selects a subentry using the second argument at +0xF0C; a non-null subentry dispatches 0x3E9 when its +0x9B low nibble is one, otherwise 0x3EC, and returns one. A missing subentry dispatches 0x12C and returns zero; other pointer states dispatch 0x12C and return one. The complete body is 237 bytes with 14 mapped operand targets.",
+        "uncertainty": "The object and subentry types, selector bounds, dispatched numeric values and UI/game semantics remain unknown. No runtime client test was performed."
+      }
     }
   ]
 }
