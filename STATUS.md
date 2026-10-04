@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,809
-identified code bytes across six report units. There are 7,132 verified matches
-totaling 2,255,977 bytes (21.5475%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,133 verified matches
+totaling 2,256,677 bytes (21.5541%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -38,14 +38,16 @@ The 6-byte import trampoline used by 11 call sites is documented in
 The latest verified additions are `FUN_587eae10` (a 1,079-byte stateful
 update/dispatch), `FUN_5875be60` (a 915-byte initializer reached from shell and
 weapon-fire paths), `FUN_58755170` (a 932-byte handler for message
-`0x80020FA2` whose Ghidra extent omitted two epilogue bytes), and
-`FUN_58847770` (a 718-byte handler called for message `0x80020F02`). Together,
-the four functions add 3,644 byte-matched bytes. Their field and helper
-meanings remain partially unknown; no emulator test was performed. See
+`0x80020FA2` whose Ghidra extent omitted two epilogue bytes),
+`FUN_58847770` (a 718-byte handler called for message `0x80020F02`), and
+`FUN_5877adc0` (a 700-byte selector-driven `CForce` child setup method).
+Together, the five functions add 4,344 byte-matched bytes. Their field and
+helper meanings remain partially unknown; no emulator test was performed. See
 [`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
-[`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md), and
-[`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md), and
-[`docs/current-main-message-80020f02-handler.md`](docs/current-main-message-80020f02-handler.md).
+[`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md),
+[`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md),
+[`docs/current-main-message-80020f02-handler.md`](docs/current-main-message-80020f02-handler.md), and
+[`docs/current-main-cforce-selector-child-setup.md`](docs/current-main-cforce-selector-child-setup.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
