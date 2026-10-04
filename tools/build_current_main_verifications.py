@@ -162,6 +162,7 @@ ADDRESSES = (
     "58836AF0",
     "588DCF50",
     "587B4990",
+    "588AEEF0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -247,7 +248,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -430,6 +431,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra's indexed extent stopped two bytes into a mapped direct call.
     # Include the full call, register restore, and ret before INT3 alignment.
     "588DF450": 595,
+    # Ghidra stopped after pop edi and omitted the remaining register restores
+    # and ret 8; the mapped epilogue ends before INT3 padding.
+    "588AEEF0": 151,
 }
 EVIDENCE = {
     "587DA120": {
@@ -4853,6 +4857,12 @@ EVIDENCE = {
         "called_by": "Called by verified handlers FUN_587B4B70 and FUN_588D4300. Both set ECX to a collection at a receiver-derived +0x94 offset and pass a supplied pointer on the stack.",
         "behavior": "Allocates a 0x14-byte entry, installs vtable address 0x58999FC0, stores the input pointer at entry +0x0C, and initializes entry fields +4/+8/+0x10. It links the new entry after the collection tail at +8 (or sets both head +4 and tail +8 for an empty collection) and increments collection count +0x0C. The 147-byte body has four mapped operand targets.",
         "uncertainty": "The collection/entry types, vtable method contract, stored pointer meaning, and list ownership are unknown. The nonempty allocation-failure branch proceeds into link writes with a null new entry, so its failure behavior is not assigned a safe semantic interpretation. No runtime client or emulator test was performed.",
+    },
+    "588AEEF0": {
+        "name_in_analysis": "FUN_588aeef0 / bulk object-pointer cleanup pass",
+        "called_by": "Called repeatedly by verified routines FUN_588AEFB0 and FUN_588B1580. They supply a per-call value and a second argument that controls whether receiver field +0x70 is processed.",
+        "behavior": "Passes receiver pointers at +0x68 and +0x88 to 0x58902E60 with the first stack argument. When the second argument's low byte equals 1, it also processes +0x70. It then processes 100 pointers from +0x20F8, eight pointers from +0x8C, and three pointers from +0x2418, passing the same first argument to 0x58902E60 for each. Mapped bytes establish a complete 151-byte body ending with pop edi/esi/ebp/ebx and ret 8; four operand targets are checked.",
+        "uncertainty": "The helper 0x58902E60 contract, pointer-array element types, first-argument semantics, and meaning of the optional +0x70 path remain unknown. The indexed Ghidra extent was 145 bytes and omitted the six-byte epilogue; raw mapped bytes at 0x588AEF80..0x588AEF86 establish the remaining restores and ret 8 before INT3 alignment. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

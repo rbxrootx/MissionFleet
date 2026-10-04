@@ -300768,6 +300768,69 @@
         "behavior": "Allocates a 0x14-byte entry, installs vtable address 0x58999FC0, stores the input pointer at entry +0x0C, and initializes entry fields +4/+8/+0x10. It links the new entry after the collection tail at +8 (or sets both head +4 and tail +8 for an empty collection) and increments collection count +0x0C. The 147-byte body has four mapped operand targets.",
         "uncertainty": "The collection/entry types, vtable method contract, stored pointer meaning, and list ownership are unknown. The nonempty allocation-failure branch proceeds into link writes with a null new entry, so its failure behavior is not assigned a safe semantic interpretation. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "588AEEF0",
+      "name": "FUN_588aeef0",
+      "size": 151,
+      "symbol": "_FUN_588aeef0",
+      "source": "src/client-current/Main/FUN_588aeef0.cpp",
+      "source_sha256": "2463facc543401a97625c7443cca6786714134484023e3d2b647f893de53ce3e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 27,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588aeef0 / bulk object-pointer cleanup pass",
+        "called_by": "Called repeatedly by verified routines FUN_588AEFB0 and FUN_588B1580. They supply a per-call value and a second argument that controls whether receiver field +0x70 is processed.",
+        "behavior": "Passes receiver pointers at +0x68 and +0x88 to 0x58902E60 with the first stack argument. When the second argument's low byte equals 1, it also processes +0x70. It then processes 100 pointers from +0x20F8, eight pointers from +0x8C, and three pointers from +0x2418, passing the same first argument to 0x58902E60 for each. Mapped bytes establish a complete 151-byte body ending with pop edi/esi/ebp/ebx and ret 8; four operand targets are checked.",
+        "uncertainty": "The helper 0x58902E60 contract, pointer-array element types, first-argument semantics, and meaning of the optional +0x70 path remain unknown. The indexed Ghidra extent was 145 bytes and omitted the six-byte epilogue; raw mapped bytes at 0x588AEF80..0x588AEF86 establish the remaining restores and ret 8 before INT3 alignment. No runtime client or emulator test was performed."
+      }
     }
   ]
 }
