@@ -21,3 +21,17 @@ The three-byte span `5878F2FD..5878F2FF` contains no instructions and is
 excluded between the two Ghidra ranges. Virtual-dispatch call sites, exact
 member names, region-slot meanings, runtime effects, and appearance remain
 uncertain. No emulator runtime test was performed.
+
+Four direct helper callees of the 5,707-byte `FUN_5878E2D0` method now also
+match at 100%, adding 1,297 bytes and 19 audited operand targets:
+
+| Address | Bytes | Call-site evidence |
+| --- | ---: | --- |
+| `0x5878ABF0` | 158 | Directly selected near the method's entry path. |
+| `0x5875B090` | 820 | Called with observed argument `0x58997740`. |
+| `0x58731B60` | 111 | Called 24 times with successive receiver-record pointers and size `0x20`. |
+| `0x5878CC90` | 208 | Directly called in the method's later processing path. |
+
+The call-graph audit for `FUN_5878E2D0` through depth five now has no unmatched
+callees. The roles of the receiver records and helper operations remain
+uncertain; no emulator visual test was performed.
