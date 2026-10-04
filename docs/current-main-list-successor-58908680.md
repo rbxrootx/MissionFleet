@@ -35,3 +35,7 @@ not establish the receiver's class, the exact UI meaning of its linked nodes
 and measures, or the indirect vtable target's effects. No runtime UI
 transition was captured. The source is an exact x86 instruction reconstruction,
 not a portable high-level implementation or a bootable-client test.
+
+The adjacent [control table and drawing path](current-main-list-control-vtable.md)
+now establish that the same `+0x80`/`+0x84` linked nodes participate in a
+clipped drawing body. The callback's exact visual result remains unverified.

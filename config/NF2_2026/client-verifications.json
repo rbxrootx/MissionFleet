@@ -306177,6 +306177,191 @@
         "behavior": "The mapped x86 body reads receiver +0x84. If null it copies +0x78 there and tail-jumps through vtable slot +0x3C. Otherwise it advances to the current node's +0x14 successor, stores that at +0x84, and returns if null. For a nonnull successor it walks from receiver +0x80 through node +0x14 links, adding receiver +0x5C for each preceding node. If this total exceeds receiver +0x20 minus +0x5C minus +0x18, it advances +0x80 by one node. It then tail-jumps through vtable slot +0x3C. The complete mapped body is 106 bytes with no mapped address operands.",
         "uncertainty": "The receiver's class, list-item ownership, interpretation of the +0x18/+0x20/+0x5C measures, and effect of the indirect vtable call are not established. The exact instruction stream alone does not verify a visible UI transition."
       }
+    },
+    {
+      "address": "58908050",
+      "name": "FUN_58908050",
+      "size": 129,
+      "symbol": "_FUN_58908050",
+      "source": "src/client-current/Main/FUN_58908050.cpp",
+      "source_sha256": "9fd934bcdd81b8988c48ea8ae6833b8ddc499cc44abae2e70d9e655aee48445c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898AA18",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "589A29CC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "58903450",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58908050",
+        "called_by": "The body itself installs vtable 0x589A29CC; a direct caller is not established by the current instruction-source index.",
+        "behavior": "The mapped body installs vtable 0x589A29CC, follows receiver +0x78 through node +0x14 links, calls FUN_5897CC42 on each node's +4 field, invokes each node's vtable slot +0x00 with argument 1, then calls FUN_58903450 and returns at 0x589080D0.",
+        "uncertainty": "The host thunk's exact resource ownership and the receiver class remain unresolved. The previous 112-byte inventory extent stopped in an instruction; the complete 129-byte body excludes 15 following CC bytes."
+      }
+    },
+    {
+      "address": "58908310",
+      "name": "FUN_58908310",
+      "size": 41,
+      "symbol": "_FUN_58908310",
+      "source": "src/client-current/Main/FUN_58908310.cpp",
+      "source_sha256": "3099cef2f84688e61f71acb1ac7a92942d6c14cac5de11f3996b5b7dffa95580",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58908310",
+        "called_by": "The mapped image stores this entry at vtable 0x589A29CC+0x38, 0x589A1430+0x2C, and 0x589A2B70+0x34.",
+        "behavior": "Reads receiver +0x30; when nonnull and bit 5 of that object's +0x24 flags is set, calls its vtable slot +0x18 with receiver, 1, and 0. Returns receiver +0x34.",
+        "uncertainty": "The pointer roles, callback contract, and returned field meaning remain unresolved."
+      }
+    },
+    {
+      "address": "58908340",
+      "name": "FUN_58908340",
+      "size": 465,
+      "symbol": "_FUN_58908340",
+      "source": "src/client-current/Main/FUN_58908340.cpp",
+      "source_sha256": "3aaf686fd364a53d620bd9b4c76d0c8ddf9a8eaec98b99615bd81c319212eade",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "5890850A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "589084EA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 211,
+          "target_address": "589084E2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "589084E2",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "589084E6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 264,
+          "target_address": "589084E6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 412,
+          "target_address": "58908440",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58908340",
+        "called_by": "The mapped image stores this entry at vtable 0x589A29CC+0x14, 0x589A1430+0x08, and 0x589A2B70+0x10.",
+        "behavior": "If receiver flag bit 0 at +0x24 is set, it traverses a child chain at +0x4C, computes and clips a rectangle against the stack-supplied bounds, walks receiver +0x80 through node +0x14 links, and invokes a virtual drawing callback on receiver +0x50 with different arguments for the selected +0x84 node and other nodes. It then traverses the +0x4C child chain again, calling each child's vtable slot +0x14. Returns with ret 0x0C at 0x5890850E.",
+        "uncertainty": "Exact drawing callback behavior, field meanings, and runtime pixels remain unresolved. The previous 454-byte extent stopped at the first byte of a conditional jump; the full 465-byte body excludes 15 following CC bytes."
+      }
+    },
+    {
+      "address": "58908520",
+      "name": "FUN_58908520",
+      "size": 209,
+      "symbol": "_FUN_58908520",
+      "source": "src/client-current/Main/FUN_58908520.cpp",
+      "source_sha256": "c4b06772e67effd44e91d6746327a995c77d31dd6bea879584f67bce13d84d61",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "589085EA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58908520",
+        "called_by": "The mapped image stores this entry at vtable 0x589A29CC+0x10, 0x589A1430+0x04, and 0x589A2B70+0x0C.",
+        "behavior": "With receiver flag bit 1 at +0x24 set, optionally delegates through a parent/child callback at receiver +0x3C/+0x34, then routes message IDs 0x100, 0x102, 0x201, 0x202, 0x204, and 0x205 to receiver vtable slots +0x1C, +0x18, +0x34, +0x30, +0x2C, and +0x28 respectively. Other IDs return receiver +0x34; the flag-clear path does the same.",
+        "uncertainty": "The message payload contract, parent callback's rejection meaning, and indirect virtual effects remain unresolved."
+      }
     }
   ]
 }

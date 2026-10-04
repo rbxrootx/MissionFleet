@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,470,057
-identified code bytes across six report units. There are 7,309 verified matches
-totaling 2,301,746 bytes (21.9841%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,085
+identified code bytes across six report units. There are 7,313 verified matches
+totaling 2,302,590 bytes (21.9921%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -51,6 +51,9 @@ The current Main.dll linked-selection successor at `0x58908680` now matches
 all 106 original instruction bytes. Both verified callers' indexed direct
 targets are matched; the [function evidence](docs/current-main-list-successor-58908680.md)
 records the pointer walk and its unresolved indirect refresh behavior.
+Four related [list-control methods](docs/current-main-list-control-vtable.md)
+now add 844 exact bytes across lifecycle, callback, clipped drawing, and event
+dispatch. Nine original table slots and two corrected body extents are checked.
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
