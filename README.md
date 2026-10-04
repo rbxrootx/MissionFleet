@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,226 matches cover 2,284,598 bytes (21.8206%) and are verified
+The current 7,227 matches cover 2,284,734 bytes (21.8219%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -21,7 +21,8 @@ stateful record refresh, stateful update
 and initializer functions, message handlers, `CForce` child setup, and a
 registered-rectangle predicate and matching pointer-vector erase helpers in
 [the subsystem docs](docs/), plus the chat text prefilter, staged chat dispatch
-gate ([evidence](docs/current-main-chat-staged-dispatch-gate.md)), record-to-child
+gate ([evidence](docs/current-main-chat-staged-dispatch-gate.md)), a scaled child
+position updater ([evidence](docs/current-main-scaled-child-position.md)), record-to-child
 text update paths, a table-backed effect-object emitter/initializer, and a
 bounded text-notification builder, a shared nested-state cleanup helper, its
 child-state reset/release routine, a corrected resource-object lifecycle

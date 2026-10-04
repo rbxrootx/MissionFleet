@@ -301092,6 +301092,63 @@
         "behavior": "Calls the function pointer at 0x5898C42C, compares its return value against receiver fields +0x194/+0x198/+0x19C, and uses absolute deltas of 0x3E8 and 0x1D4C0 to update a staged counter/active flag. On the observed active and threshold-crossing paths it formats the fixed string at 0x5899A1C0 with color 0x6464FF and passes the result to 0x5888D250; when global 0x58A24580 equals 0x58A2459C it also calls 0x5890BD90 with field +0x20D34. Returns 0 on the staged-message path and 1 on inactive/reset or invalid-input paths. Full mapped extent is 311 bytes and ends in ret 4.",
         "uncertainty": "The function pointer at 0x5898C42C may provide a clock-like value, but its unit and semantics are unverified. The meaning of receiver fields, literal thresholds, string at 0x5899A1C0, color, and helper callbacks remain unresolved. Chat usage is established by verified callers; no runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "587B70A0",
+      "name": "FUN_587b70a0",
+      "size": 136,
+      "symbol": "_FUN_587b70a0",
+      "source": "src/client-current/Main/FUN_587b70a0.cpp",
+      "source_sha256": "85d02f234f908663854998f1346336600c2c906d66c19a86414cc086d4e12f6e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "589C8EDC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 13,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b70a0 / scaled child-position updater",
+        "called_by": "Called by verified constructors FUN_587B7130 and FUN_587B7260 after setting up child state at receiver +0x58.",
+        "behavior": "When global gate 0x589C8EDC is nonzero, reads horizontal and vertical spans from global object 0x58A24580, halves each span, multiplies by 1000, and divides by the value at shared object +0x10524. It subtracts those scaled values and shared offsets +0x50/+0x54 from receiver coordinates +4/+8. If receiver +0x58 is nonnull, it calls 0x587B7400 with the computed coordinates and receiver +0x5C, substituting global value 0x58A248F8 when that field is -1. Whether the gate is set or not, it writes 0x101 to receiver +0x2C and returns. The complete mapped body is 136 bytes with five mapped operand targets.",
+        "uncertainty": "The shared gate, global coordinate bounds, divisor and offsets are established from direct memory accesses, but their higher-level units/meaning are not. The contract of 0x587B7400 and receiver field roles are not fully resolved; constructors establish child setup context only. No runtime rendering test was performed."
+      }
     }
   ]
 }
