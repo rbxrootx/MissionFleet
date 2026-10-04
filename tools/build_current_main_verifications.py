@@ -40,7 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
-    "587B6020", "58907C80", "5873A540",
+    "587B6020", "58907C80", "5873A540", "58775980",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -229,7 +229,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
-    "58907C80", "5873A540",
+    "58907C80", "5873A540", "58775980",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -394,6 +394,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58775980": {
+        "name_in_analysis": "FUN_58775980",
+        "called_by": "Directly called by four verified functions: 0x5873FE80, 0x587A90D0, 0x587EFD60, and 0x587F8760.",
+        "behavior": "Takes two object pointers. If the global byte at 0x58A2459C+0x105A8 has bit 0 set, compares the objects' bytes at +0x354 and returns 1 when equal or 3 when different. Otherwise equal words at +0x350 return 1. For differing words, scans the pointer list at receiver +0x54 (begin at list +0, end at +0x0C, capacity at +0x10), matching each entry's word +8 against the first object's +0x350. Depending on the second object's +0x6070 flag, it tests further fields at entry +0x18/+0x10/+0x14 against the second object's +0x350/+0x1334/+0x1338/+0x354; a matching entry returns its +0x0C value. If no entry matches, it runs helpers 0x587756F0, 0x587754E0, and 0x587752D0 in sequence, continuing when each result equals 3.",
+        "uncertainty": "The receiver/class and list-entry schemas, meanings of return values 1/3 and entry +0x0C, semantic roles of compared fields, and purposes of the fallback helpers remain unresolved. The four callers test returned values such as 1 and 3 but do not name the comparison domain. The complete 656-byte Ghidra extent has 28 mapped operand targets.",
+    },
     "5873A540": {
         "name_in_analysis": "FUN_5873a540",
         "called_by": "Directly called by five verified functions: 0x5874FA60, 0x58782CF0, 0x587BB700, 0x587DEB30, and 0x587E3080. 0x5874FA60 and 0x587DEB30 contain repeated callsites.",

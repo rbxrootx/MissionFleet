@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,093 verified matches
-totaling 2,238,860 bytes (21.3841%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,094 verified matches
+totaling 2,239,516 bytes (21.3903%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -67,6 +67,12 @@ The latest shared state-bit setter is `FUN_5873A540`, a 40-byte helper called
 by five verified functions. It assigns receiver word `+0x24` bit `0x4` from the
 argument's low bit while preserving the other bits. The bit's meaning is
 unknown; its complete body matches with no relocations.
+
+The latest record-comparison path is `FUN_58775980`, a 656-byte routine called
+by four verified functions. It compares fields at fixed offsets, scans a
+pointer list for matching entries, and falls back to three helper comparisons.
+The receiver and record schemas and return-code meanings remain unresolved;
+all 28 relocations match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
