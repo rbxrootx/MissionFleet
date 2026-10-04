@@ -131,6 +131,10 @@ ADDRESSES = (
     "5888B990",
     "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
+    "5897CEDA",
+    "587AC9A0", "587867E0", "58786150", "58786250",
+    "58778D00", "58779780", "587797C0",
+    "58786750",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -349,6 +353,10 @@ SOURCE_COMPILER_ADDRESSES = {
     "5888B990",
     "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
+    "5897CEDA",
+    "587AC9A0", "587867E0", "58786150", "58786250",
+    "58778D00", "58779780", "587797C0",
+    "58786750",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4213,6 +4221,60 @@ EVIDENCE = {
         "called_by": "Directly called by 0x5881C730 at 0x5881CBD6 while constructing a startup child object.",
         "behavior": "Calls 0x58907100 on the receiver, XORs receiver fields +0x60/+0x50/+0x64 with one stack argument, stores another argument at +0xFC, installs vtable pointer 0x5898DA70, returns the receiver, and removes 0x18 argument bytes.",
         "uncertainty": "The object's class, the roles of the mutated fields and stack arguments, and vtable method identities are unresolved. The complete 66-byte body decodes.",
+    },
+    "5897CEDA": {
+        "name_in_analysis": "FUN_5897ceda",
+        "called_by": "Called twice by 0x587AF6D0 at 0x587AF843 and 0x587AF84D during a repeated 0x30-byte stride path.",
+        "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C298.",
+        "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
+    },
+    "587AC9A0": {
+        "name_in_analysis": "FUN_587ac9a0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1056 during its record-processing path.",
+        "behavior": "SEH-protected routine that allocates a 0xBC-byte object through 0x5897CC4E, performs subordinate allocation/setup through 0x5897152E, 0x5897CD4C, and 0x588FFDB0, and recursively calls itself while building linked data stored at the new object's offsets +0xA0/+0xA4/+0xA8.",
+        "uncertainty": "The record schema, allocation ownership, recursive termination condition, and import contract remain unresolved. The full 498-byte body decodes.",
+    },
+    "587867E0": {
+        "name_in_analysis": "FUN_587867e0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1121.",
+        "behavior": "Uses 0x58786750 to obtain two values from the receiver's +4 object, conditionally invokes 0x5897CC72 while comparing linked entries, then stores the selected entry's +0x10 value at receiver offset +8 and returns with ret 4.",
+        "uncertainty": "The linked-entry type and 0x5897CC72 ownership semantics are unresolved. The full 99-byte body decodes.",
+    },
+    "58786150": {
+        "name_in_analysis": "FUN_58786150",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1141.",
+        "behavior": "When receiver +8 is nonzero, clears six words at +0x34 through +0x3E, iterates the global four-byte table from 0x360 through 0x3BC, looks up each value through 0x58778B20, and increments one selected receiver word according to the returned record's low five type bits.",
+        "uncertainty": "The global table, returned record types, and receiver field meanings are unresolved. The full 138-byte body decodes.",
+    },
+    "58786250": {
+        "name_in_analysis": "FUN_58786250",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1154.",
+        "behavior": "Returns the 16-bit word stored at receiver offset +0x3E in AX.",
+        "uncertainty": "The semantic name and units of the returned field are unresolved. The complete five-byte body matches.",
+    },
+    "58778D00": {
+        "name_in_analysis": "FUN_58778d00",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1474 and by 0x587797C0.",
+        "behavior": "For query type 5, scans the receiver's +0x78 array using count +0x6C and 0xB4-byte records; compares the record's byte +1 and word +2 to the query and returns a matching record address, otherwise zero.",
+        "uncertainty": "The record schema and query field meanings are unresolved. The full 81-byte body decodes.",
+    },
+    "58779780": {
+        "name_in_analysis": "FUN_58779780",
+        "called_by": "Called four times by 0x587AD4B0 at instruction offsets 1687, 1705, 1723, and 1741.",
+        "behavior": "Scans the receiver's +0x64 array using count +0x58 and 0x9C-byte records, compares the requested word with each record's word +6, and returns the matching record address or zero.",
+        "uncertainty": "The array's record schema and requested identifier meaning are unresolved. The full 62-byte body decodes.",
+    },
+    "587797C0": {
+        "name_in_analysis": "FUN_587797c0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 2032.",
+        "behavior": "Uses 0x58778D00 to resolve a record, then scans the receiver's +0xE4 array for +0xF0 entries of 0xAC bytes, matching word +0xA2 and applying a low-nibble filter from byte +0x9B before returning or zero.",
+        "uncertainty": "The entry types and meaning of the filter argument are unresolved. The complete 114-byte body decodes.",
+    },
+    "58786750": {
+        "name_in_analysis": "FUN_58786750",
+        "called_by": "Directly called by 0x587867E0 at 0x587867F6.",
+        "behavior": "Reads the receiver's +0x18 node and its +4 child, follows node links while checking byte +0x15 and range values at +8/+0xC, and writes the selected pair through two caller-provided output pointers; may delegate cleanup to 0x5897CC72.",
+        "uncertainty": "The node structure, range ordering, output roles, and cleanup ownership are unresolved. The complete 138-byte body decodes.",
     },
 }
 

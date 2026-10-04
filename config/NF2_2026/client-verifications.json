@@ -283987,6 +283987,372 @@
         "behavior": "Calls 0x58907100 on the receiver, XORs receiver fields +0x60/+0x50/+0x64 with one stack argument, stores another argument at +0xFC, installs vtable pointer 0x5898DA70, returns the receiver, and removes 0x18 argument bytes.",
         "uncertainty": "The object's class, the roles of the mutated fields and stack arguments, and vtable method identities are unresolved. The complete 66-byte body decodes."
       }
+    },
+    {
+      "address": "5897CEDA",
+      "name": "FUN_5897ceda",
+      "size": 6,
+      "symbol": "_FUN_5897ceda",
+      "source": "src/client-current/Main/FUN_5897ceda.cpp",
+      "source_sha256": "8307de9bb5b4378c663cce844fb0df9b678f32dd17bdc0a10260c869eceb6d5f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C298",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ceda",
+        "called_by": "Called twice by 0x587AF6D0 at 0x587AF843 and 0x587AF84D during a repeated 0x30-byte stride path.",
+        "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C298.",
+        "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly."
+      }
+    },
+    {
+      "address": "587AC9A0",
+      "name": "FUN_587ac9a0",
+      "size": 498,
+      "symbol": "_FUN_587ac9a0",
+      "source": "src/client-current/Main/FUN_587ac9a0.cpp",
+      "source_sha256": "7d851388e6208946857a118ec9c30297a6d2a95cdb7661e8791d9877ecbf02c7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58980BDB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 135,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 235,
+          "target_address": "587ACB1E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "587AC9A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 322,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 343,
+          "target_address": "588F6890",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 378,
+          "target_address": "587ACA90",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ac9a0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1056 during its record-processing path.",
+        "behavior": "SEH-protected routine that allocates a 0xBC-byte object through 0x5897CC4E, performs subordinate allocation/setup through 0x5897152E, 0x5897CD4C, and 0x588FFDB0, and recursively calls itself while building linked data stored at the new object's offsets +0xA0/+0xA4/+0xA8.",
+        "uncertainty": "The record schema, allocation ownership, recursive termination condition, and import contract remain unresolved. The full 498-byte body decodes."
+      }
+    },
+    {
+      "address": "587867E0",
+      "name": "FUN_587867e0",
+      "size": 99,
+      "symbol": "_FUN_587867e0",
+      "source": "src/client-current/Main/FUN_587867e0.cpp",
+      "source_sha256": "b0cf9fc641d0934b792c98a48171f4893d36d7b74c44152768cf8523e273b17b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58786750",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587867e0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1121.",
+        "behavior": "Uses 0x58786750 to obtain two values from the receiver's +4 object, conditionally invokes 0x5897CC72 while comparing linked entries, then stores the selected entry's +0x10 value at receiver offset +8 and returns with ret 4.",
+        "uncertainty": "The linked-entry type and 0x5897CC72 ownership semantics are unresolved. The full 99-byte body decodes."
+      }
+    },
+    {
+      "address": "58786150",
+      "name": "FUN_58786150",
+      "size": 138,
+      "symbol": "_FUN_58786150",
+      "source": "src/client-current/Main/FUN_58786150.cpp",
+      "source_sha256": "368cfab62fece9ddfa0308a98bf4c40167e63ee405390506b86d22c8b05f90ff",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 58,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "58778B20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786150",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1141.",
+        "behavior": "When receiver +8 is nonzero, clears six words at +0x34 through +0x3E, iterates the global four-byte table from 0x360 through 0x3BC, looks up each value through 0x58778B20, and increments one selected receiver word according to the returned record's low five type bits.",
+        "uncertainty": "The global table, returned record types, and receiver field meanings are unresolved. The full 138-byte body decodes."
+      }
+    },
+    {
+      "address": "58786250",
+      "name": "FUN_58786250",
+      "size": 5,
+      "symbol": "_FUN_58786250",
+      "source": "src/client-current/Main/FUN_58786250.cpp",
+      "source_sha256": "3761d0e78ec4ca71651934a8b0eac285db502c7a2b265abe987eeda8209358cf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58786250",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1154.",
+        "behavior": "Returns the 16-bit word stored at receiver offset +0x3E in AX.",
+        "uncertainty": "The semantic name and units of the returned field are unresolved. The complete five-byte body matches."
+      }
+    },
+    {
+      "address": "58778D00",
+      "name": "FUN_58778d00",
+      "size": 81,
+      "symbol": "_FUN_58778d00",
+      "source": "src/client-current/Main/FUN_58778d00.cpp",
+      "source_sha256": "c55cb5e6eff1992237bc62d109cbce9242df6f9237bd4a4710e143e45c37b30f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778d00",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 1474 and by 0x587797C0.",
+        "behavior": "For query type 5, scans the receiver's +0x78 array using count +0x6C and 0xB4-byte records; compares the record's byte +1 and word +2 to the query and returns a matching record address, otherwise zero.",
+        "uncertainty": "The record schema and query field meanings are unresolved. The full 81-byte body decodes."
+      }
+    },
+    {
+      "address": "58779780",
+      "name": "FUN_58779780",
+      "size": 62,
+      "symbol": "_FUN_58779780",
+      "source": "src/client-current/Main/FUN_58779780.cpp",
+      "source_sha256": "9330c7987467c3694f238f057dad747f7a3de8cd5b48e2c09aad4574d1af37e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58779780",
+        "called_by": "Called four times by 0x587AD4B0 at instruction offsets 1687, 1705, 1723, and 1741.",
+        "behavior": "Scans the receiver's +0x64 array using count +0x58 and 0x9C-byte records, compares the requested word with each record's word +6, and returns the matching record address or zero.",
+        "uncertainty": "The array's record schema and requested identifier meaning are unresolved. The full 62-byte body decodes."
+      }
+    },
+    {
+      "address": "587797C0",
+      "name": "FUN_587797c0",
+      "size": 114,
+      "symbol": "_FUN_587797c0",
+      "source": "src/client-current/Main/FUN_587797c0.cpp",
+      "source_sha256": "c3188dc59af8a2371396c1b975777c0dacdb2d53f32eec3966b6151130b8c4ca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58778D00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587797c0",
+        "called_by": "Directly called by 0x587AD4B0 at instruction offset 2032.",
+        "behavior": "Uses 0x58778D00 to resolve a record, then scans the receiver's +0xE4 array for +0xF0 entries of 0xAC bytes, matching word +0xA2 and applying a low-nibble filter from byte +0x9B before returning or zero.",
+        "uncertainty": "The entry types and meaning of the filter argument are unresolved. The complete 114-byte body decodes."
+      }
+    },
+    {
+      "address": "58786750",
+      "name": "FUN_58786750",
+      "size": 138,
+      "symbol": "_FUN_58786750",
+      "source": "src/client-current/Main/FUN_58786750.cpp",
+      "source_sha256": "f225844aa0dd9e6a73fe799ef9867945910425a4fc4c354b2cbf1a10e8d71b16",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 75,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786750",
+        "called_by": "Directly called by 0x587867E0 at 0x587867F6.",
+        "behavior": "Reads the receiver's +0x18 node and its +4 child, follows node links while checking byte +0x15 and range values at +8/+0xC, and writes the selected pair through two caller-provided output pointers; may delegate cleanup to 0x5897CC72.",
+        "uncertainty": "The node structure, range ordering, output roles, and cleanup ownership are unresolved. The complete 138-byte body decodes."
+      }
     }
   ]
 }
