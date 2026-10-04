@@ -42,3 +42,23 @@ the compared dword, the meaning of mode value 3, the selection pointer's
 purpose, and the UI or protocol effect remain unknown. The original extent
 required correction because it cut through an instruction operand and omitted
 the epilogue. No emulator test was performed.
+
+## Sibling selected-list update
+
+The sibling helper `FUN_588343B0` is also reached from message case
+`0x80020F12`, when the selected child at receiver path `+0x160` has mode bits
+2. It accepts a count and record pointer and updates only when receiver byte
+`+0x321` equals 5, then resets that byte to zero. For counts 1–5, it walks
+0x54-byte records, sets bit 0 on two paired objects, copies each record's
+`+0x0C` string into an associated buffer (up to 0x80 bytes), and sets the
+paired child `+0x50` according to whether global word `0x58A0B4A8` equals 6.
+When fewer than five records are supplied, it clears remaining object flags,
+fills remaining buffers from `0x5898C922`, and clears those child fields.
+
+The indexed extent had stopped at `0x5883450E`, in the middle of the final
+string-copy instruction. The original stream continues through register
+restores and `ret 8` at `0x58834515`, ending at `0x58834518`; eight `INT3` bytes
+separate it from the next function at `0x58834520`. The corrected complete
+360-byte body matches with six mapped operands. The record schema, object and
+buffer roles, mode meaning, and visible effect remain unresolved; no emulator
+test was performed.
