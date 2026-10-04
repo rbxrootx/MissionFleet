@@ -77,3 +77,16 @@ resolve all deeper indirect dispatches or all global setup branches. The
 observed vtable addresses, child constructors, repeated field writes, and
 callsites are preserved in the per-function evidence. Class names, data
 schemas, and user-visible meanings remain unknown, and the client was not run.
+
+## `FUN_5880DD80` resource and child tree
+
+The next verified initializer branch, `FUN_5880DD80`, now has its unmatched
+indexed callees reconstructed through two call levels. Nine functions add
+6,798 byte-matched bytes and check 236 mapped operand targets; two shared
+helpers in the graph were already verified. The depth-two callgraph audit now
+reports no unmatched indexed targets in this branch.
+
+The mapped bodies establish repeated child construction, vtable writes,
+resource-helper calls, a cleanup traversal over 0x80 pointer slots, and a
+0x20-entry child loop. The data structures, class identities, resource names,
+and visual effect remain unresolved. No client was run for runtime validation.

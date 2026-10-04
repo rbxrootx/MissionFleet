@@ -103,6 +103,9 @@ ADDRESSES = (
     "588BAA20", "588AD020", "588EA0B0", "5890E020", "5876CF20",
     "5886A690", "5886B340", "5877E180", "5877DF10", "588C08E0",
     "58874420", "58819C70", "5890A230", "5890A300",
+    "58793E90", "58793E20", "588708B0", "588C7A50",
+    "5877E540", "58809790", "5884FD30",
+    "588C78F0", "5884F210",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -293,6 +296,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "588BAA20", "588AD020", "588EA0B0", "5890E020", "5876CF20",
     "5886A690", "5886B340", "5877E180", "5877DF10", "588C08E0",
     "58874420", "58819C70", "5890A230", "5890A300",
+    "58793E90", "58793E20", "588708B0", "588C7A50",
+    "5877E540", "58809790", "5884FD30",
+    "588C78F0", "5884F210",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -3683,6 +3689,60 @@ EVIDENCE = {
         "called_by": "Directly called by 0x5890A3F0 as part of its checked setup path.",
         "behavior": "Uses indirect dispatch through mapped slots, walks a bounded sequence of returned entries, and performs cleanup through indirect methods on error and completion paths.",
         "uncertainty": "The interface identity, entry format, and ownership contract are unresolved. The complete 225-byte body includes stack-cookie checks and returns with ret 4.",
+    },
+    "58793E90": {
+        "name_in_analysis": "FUN_58793e90",
+        "called_by": "Directly called by 0x5880DD80 during object initialization.",
+        "behavior": "Allocates an observed 0x20-byte subobject through 0x5897CC4E, initializes it through 0x587B7350, and stores the result at receiver offset +0x64.",
+        "uncertainty": "The subobject type and field meanings are unresolved. The complete 100-byte exception-protected body returns with ret 4.",
+    },
+    "58793E20": {
+        "name_in_analysis": "FUN_58793e20",
+        "called_by": "Directly called by 0x5880DD80 during object initialization.",
+        "behavior": "Allocates an observed 0x20-byte subobject through 0x5897CC4E, initializes it through 0x587B7350, and stores the result at the receiver field established by its caller.",
+        "uncertainty": "The subobject type and field meanings are unresolved. The complete 100-byte exception-protected body returns with ret 4.",
+    },
+    "588708B0": {
+        "name_in_analysis": "FUN_588708b0",
+        "called_by": "Directly called by 0x5880DD80 during global UI setup.",
+        "behavior": "Runs base and child setup, installs vftable address 0x5899EDF8, and configures repeated children through 0x58731C60, 0x5875DDA0, and mapped state helpers.",
+        "uncertainty": "The class identity, child-record schema, and resource meanings are unresolved. The complete 2,521-byte body decodes.",
+    },
+    "588C7A50": {
+        "name_in_analysis": "FUN_588c7a50",
+        "called_by": "Directly called by 0x5880DD80 during global UI setup.",
+        "behavior": "Runs base initialization, installs vftable address 0x589A0C18, and creates repeated child controls through 0x58731C60 and mapped state/resource helpers.",
+        "uncertainty": "The class identity, repeated child schema, and resource meanings are unresolved. The complete 1,936-byte body decodes.",
+    },
+    "5877E540": {
+        "name_in_analysis": "FUN_5877e540",
+        "called_by": "Directly called by 0x5880DD80 during object initialization.",
+        "behavior": "Stores the constant 1 in receiver field +0x6C and returns.",
+        "uncertainty": "The receiver type and field meaning are unresolved. The complete 8-byte body decodes.",
+    },
+    "58809790": {
+        "name_in_analysis": "FUN_58809790",
+        "called_by": "Directly called by 0x5880DD80 during child cleanup and state reset.",
+        "behavior": "Visits 0x80 pointer slots beginning at +0xD4 and releases non-null entries through their first virtual method; it also clears a bounded child list and calls 0x588C78F0 across 0x20 entries.",
+        "uncertainty": "The owner class, list bounds, and virtual cleanup contract are unresolved. The complete 148-byte body decodes.",
+    },
+    "5884FD30": {
+        "name_in_analysis": "FUN_5884fd30",
+        "called_by": "Directly called by 0x5880DD80 during global UI setup.",
+        "behavior": "Runs base initialization, installs vftable address 0x5899E8A0, loads a resource through 0x588F3D70, and constructs repeated children with state/resource helpers.",
+        "uncertainty": "The class, loaded resource, child schema, and user-visible role are unresolved. The complete 1,406-byte body decodes.",
+    },
+    "588C78F0": {
+        "name_in_analysis": "FUN_588c78f0",
+        "called_by": "Directly called by 0x58809790 at 0x58809812 and by 0x588C7A50 at 0x588C81C3.",
+        "behavior": "Runs the shared child cleanup path through alloc/free helpers 0x5897CC48, state helper 0x58907360, and child methods 0x58731CE0/0x5877E7A0.",
+        "uncertainty": "The child type, ownership rules, and helper contracts are unresolved. The complete 340-byte body decodes.",
+    },
+    "5884F210": {
+        "name_in_analysis": "FUN_5884f210",
+        "called_by": "Directly called by 0x5884FD30 at 0x5884FE03.",
+        "behavior": "Prepares a stack-local structure and calls helpers 0x5875F650 and 0x5875F6B0 before restoring the stack and returning with ret 0x114.",
+        "uncertainty": "The structure layout, input semantics, and helper contracts are unresolved. The complete 239-byte body includes a stack-cookie check.",
     },
 }
 
