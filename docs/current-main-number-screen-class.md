@@ -10,6 +10,20 @@ constructor initializes the base through `FUN_589031A0`, installs the
 `CNumberScreen` vtable, stores its supplied values and observed state fields,
 and calls `FUN_58907040`.
 
+`FUN_58907360` now has a C++ match source: it writes its argument to `+0x64`
+and `+0x60`, then calls `FUN_58907040`. Objdiff verifies its original 18 bytes
+and the symbolic direct-call target. The two paired-child update helpers also
+call this setter.
+
+The mapped `FUN_58907040` body uses signed `+0x60` as a number. Positive
+`+0x5C` supplies a width at `+0xE8`; otherwise it counts decimal digits of
+the magnitude, with zero yielding count zero. It writes decimal remainders
+from right to left into DWORD slots beginning at `+0x68`, using value 10 for
+unused leading slots below the top slot. For a negative original value it
+writes 11 into the sign slot at `+0x64`. These are observed numeric codes;
+their visual glyphs are not established. The absolute-value operation uses
+32-bit negation, so the `INT_MIN` edge case needs separate runtime validation.
+
 ## Constructor, cleanup, and vtable
 
 The 142-byte cleanup body `FUN_58906EA0` is called by the scalar-deleting

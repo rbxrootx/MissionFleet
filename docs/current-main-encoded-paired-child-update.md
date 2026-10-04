@@ -17,7 +17,9 @@ the call it reloads the first child and its current `+0x64`, and calls
 `FUN_5877EC30` uses first child `+0x10BE0` and second child `+0x10BF4`.
 `FUN_58907360` writes its argument to child fields `+0x64` and `+0x60` and
 then calls `FUN_58907040`; its effects are not reduced to a plain assignment
-here. Each propagation helper is 47 bytes and has two audited direct calls.
+here. Its own 18-byte body now recompiles from C++ with its direct call
+symbolically matched. Each propagation helper is 47 bytes and has two audited
+direct calls.
 
 Both propagation sources express the pointer reads and calls in C++. Register
 constraints preserve the original second-load order; one two-byte move in

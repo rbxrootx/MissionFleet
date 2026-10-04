@@ -254,6 +254,10 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
+    "58907360": [
+        {"offset": 11, "target_address": "58907040", "kind": "relative",
+         "symbol": "_FUN_58907040", "audit_only": False},
+    ],
     "5877EC00": [
         {"offset": offset, "target_address": "58907360", "kind": "relative",
          "symbol": "_FUN_58907360", "audit_only": False}
@@ -3075,9 +3079,9 @@ EVIDENCE = {
     },
     "58907360": {
         "name_in_analysis": "FUN_58907360",
-        "called_by": "Directly called by warehouse-panel child initializers 0x587C9340 and 0x587C8960.",
-        "behavior": "Delegates its receiver to matched state helper 0x58907040 and returns with ret 4.",
-        "uncertainty": "The argument contract and purpose of the shared state update remain unknown. Its 18-byte body and one mapped operand target are verified.",
+        "called_by": "Directly called by verified paired-child helpers 0x5877EC00 and 0x5877EC30, warehouse-panel child initializers 0x587C9340 and 0x587C8960, and other verified child-state paths.",
+        "behavior": "Copies its sole DWORD stack argument to receiver fields +0x64 and +0x60, then calls matched state helper 0x58907040 on the same receiver and returns with ret 4. Its 18-byte body has one audited direct-call target.",
+        "uncertainty": "The value's unit, child type, and meaning of the derived state remain unknown. No runtime client test was performed.",
     },
     "587C9A20": {
         "name_in_analysis": "FUN_587c9a20",
@@ -3123,9 +3127,9 @@ EVIDENCE = {
     },
     "58907040": {
         "name_in_analysis": "FUN_58907040",
-        "called_by": "Directly called by the matched CMarketBoard constructor child path 0x58907100.",
-        "behavior": "Computes receiver state at +0xE8 from values observed at +0x5C/+0x60 using integer division-like sequences, then updates indexed entries at +0x68 with value 0xB when +0x60 is nonzero.",
-        "uncertainty": "The quotient units, indexed record schema, and meaning of value 0xB remain unknown. Its 191-byte body has no mapped relocation operands.",
+        "called_by": "Directly called by matched child-state setter FUN_58907360 and CNumberScreen-compatible initializer FUN_58907100.",
+        "behavior": "Loads the signed value at receiver +0x60 and negates it when negative. Sets receiver +0xE8 to positive width +0x5C, or otherwise to the count of decimal digits obtained by repeatedly dividing that magnitude by ten (zero gives count zero). Starting at index count-1, writes the signed remainder modulo ten to DWORD slots at receiver +0x68+4*index, dividing the magnitude by ten after each write; when the remaining magnitude is zero below the top slot, writes 10 instead. If the original +0x60 was negative, writes 11 at receiver +0x64 after the loop. Its complete body is 191 bytes with no mapped relocation operands.",
+        "uncertainty": "The display glyph meanings of 10 and 11, width bounds, and two's-complement INT_MIN edge behavior remain unresolved. The body is byte-matched but still represented by an instruction stream; no runtime client test was performed.",
     },
     "5896C9A0": {
         "name_in_analysis": "FUN_5896c9a0",

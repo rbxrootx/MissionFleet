@@ -16,6 +16,9 @@ Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
 28 original bytes. This improves source reconstruction without changing the
 matched-function count.
+The `FUN_58907360` number-state setter now also uses C++ with its direct call
+to `FUN_58907040` symbolically matched; this is a source-quality improvement
+and does not increase coverage.
 
 Recent current Main.dll helper evidence is documented in
 [`docs/current-main-encoded-paired-child-update.md`](docs/current-main-encoded-paired-child-update.md),

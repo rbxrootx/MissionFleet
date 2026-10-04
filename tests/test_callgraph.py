@@ -6,6 +6,11 @@ from tools.rank_current_main_frontier import collect_frontier
 
 
 class DirectCallParserTests(unittest.TestCase):
+    def test_number_setter_semantic_source_retains_derived_state_call(self):
+        source = (Path(__file__).resolve().parents[1]
+                  / "src/client-current/Main/FUN_58907360.cpp").read_text(encoding="utf-8")
+        self.assertIn("58907040", direct_targets(source))
+
     def test_reads_semantic_cpp_calls_without_treating_declarations_as_calls(self):
         source = "\n".join([
             'extern "C" void FUN_58907360(unsigned char*, unsigned int);',
