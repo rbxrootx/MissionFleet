@@ -303155,6 +303155,39 @@
         "behavior": "Reads signed DWORD receiver +0x230 and zero-extended WORD +0x2DE. If current exceeds the bound, stores signed truncation toward zero of the 32-bit-wrapped product current*99 divided by 100; otherwise stores the bound. It reloads +0x230 and, if below the bound, stores signed truncation of the wrapped product current*101 divided by 100; otherwise stores the bound. Complete body is 102 bytes without mapped operand targets.",
         "uncertainty": "The scalar's unit and bound meaning, and whether signed multiplication overflow is reachable in normal play, are unknown. The second adjustment is reachable both just above the bound and after a wrapped first product. No runtime client test was performed."
       }
+    },
+    {
+      "address": "5884D870",
+      "name": "FUN_5884d870",
+      "size": 118,
+      "symbol": "_FUN_5884d870",
+      "source": "src/client-current/Main/FUN_5884d870.cpp",
+      "source_sha256": "16ba688511d7103dc64c3ee8fad2ab8e22ea602cf2fd6fecb775bbec50d2427c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5884D870 / two-index metadata selection and copy",
+        "called_by": "Called by verified FUN_587A90D0 and FUN_587F8760, each with a receiver in ECX and one stack selector argument.",
+        "behavior": "Reads child at receiver +0x80 and returns if null; also returns if global manager pointer 0x58A246A4 is null. Selects table index 0x20A when the stack argument is zero, otherwise 0x209. If manager signed count +0x164 exceeds the index and table pointer +0x18C exists, loads its entry; otherwise treats it as null. Stores the resulting entry pointer in child +0x50 and returns if null. For a non-null entry, copies six DWORDs from entry +0x10..+0x24 to child +0xC..+0x20. The complete body is 118 bytes with one absolute global operand target and ret 4.",
+        "uncertainty": "The child, manager, and entry types and the meaning of the two selector values remain unknown. No runtime client test was performed; a portable model validates the observed gating and copies."
+      }
     }
   ]
 }
