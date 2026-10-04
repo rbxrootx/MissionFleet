@@ -204,6 +204,7 @@ ADDRESSES = (
     "5884D870",
     "587B5F50",
     "588AA0D0", "588AA120",
+    "588A44A0", "58842F60",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -317,6 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
+    "588A44A0", "58842F60",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -509,6 +511,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "588A44A0": {
+        "name_in_analysis": "FUN_588A44A0 / global linked-name selection",
+        "called_by": "Called by verified FUN_588450B0 and FUN_58890110 with one stack query pointer and a receiver in ECX.",
+        "behavior": "Returns without changing receiver +0xF0 when the query is null or the list at global manager 0x58A245B0 +0x90 is empty. Otherwise traverses nodes through +0x54, compares query bytes with each node's nested string at node +0x70 then +0x6C, clears receiver +0xF0 on mismatches, and stores the matching node there on equality. Thus a nonempty unsuccessful search leaves +0xF0 null. Complete body is 114 bytes, one absolute global operand target, and ret 4.",
+        "uncertainty": "The list and receiver roles, string encoding, and consequences of an invalid manager or unterminated name remain unknown. No runtime client test was performed; a portable model covers valid NUL-terminated strings.",
+    },
+    "58842F60": {
+        "name_in_analysis": "FUN_58842F60 / receiver linked-name lookup",
+        "called_by": "Called repeatedly by verified FUN_588450B0 and FUN_58890110 with one stack query pointer and a receiver in ECX.",
+        "behavior": "Reads list head at receiver +0x138 and returns null when empty. Otherwise traverses nodes through +0x54, obtains each nested string through node +0x70 then +0x6C, and calls the function pointer stored at absolute 0x5898C1A4 with query and node string. It returns the first node for which that comparator returns zero, or null after the list. Complete body is 69 bytes, one absolute comparator operand target, and ret 4.",
+        "uncertainty": "The comparator's exact identity and string collation, list ownership, and behavior for null or unterminated strings remain unknown. No runtime client test was performed; a portable equality model covers observed branching.",
+    },
     "588AA0D0": {
         "name_in_analysis": "FUN_588AA0D0 / CPannelRule text-window backward step",
         "called_by": "Called by verified CPannelRule event handlers FUN_588AA610 and FUN_588AA640.",

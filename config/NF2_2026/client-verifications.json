@@ -303311,6 +303311,72 @@
         "behavior": "Returns if base text pointer +0xA0 or current pointer +0xA4 is null. Otherwise scans the NUL-terminated string from current and, if at least 0x545 bytes remain, advances current +0xA4 by 0x47. It then passes the stored current pointer to verified text-buffer update FUN_58770A80 using child receiver +0xA8, including when no advance occurred. Complete body is 83 bytes with one mapped direct-call target.",
         "uncertainty": "The buffer capacity, text ownership, and meaning of the 0x545 threshold and 0x47 step remain unknown. The original scan assumes a reachable NUL terminator. No runtime client test was performed."
       }
+    },
+    {
+      "address": "588A44A0",
+      "name": "FUN_588a44a0",
+      "size": 114,
+      "symbol": "_FUN_588a44a0",
+      "source": "src/client-current/Main/FUN_588a44a0.cpp",
+      "source_sha256": "2d63c9de183f4f266a471ef3ef03a0d3dfaaeda16dee2463cd2d77f0e313283c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "58A245B0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588A44A0 / global linked-name selection",
+        "called_by": "Called by verified FUN_588450B0 and FUN_58890110 with one stack query pointer and a receiver in ECX.",
+        "behavior": "Returns without changing receiver +0xF0 when the query is null or the list at global manager 0x58A245B0 +0x90 is empty. Otherwise traverses nodes through +0x54, compares query bytes with each node's nested string at node +0x70 then +0x6C, clears receiver +0xF0 on mismatches, and stores the matching node there on equality. Thus a nonempty unsuccessful search leaves +0xF0 null. Complete body is 114 bytes, one absolute global operand target, and ret 4.",
+        "uncertainty": "The list and receiver roles, string encoding, and consequences of an invalid manager or unterminated name remain unknown. No runtime client test was performed; a portable model covers valid NUL-terminated strings."
+      }
+    },
+    {
+      "address": "58842F60",
+      "name": "FUN_58842f60",
+      "size": 69,
+      "symbol": "_FUN_58842f60",
+      "source": "src/client-current/Main/FUN_58842f60.cpp",
+      "source_sha256": "cd240656d94a15d580cea2fc9c24253988fa8f83b3bc032a0bc20f43eb6462b3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58842F60 / receiver linked-name lookup",
+        "called_by": "Called repeatedly by verified FUN_588450B0 and FUN_58890110 with one stack query pointer and a receiver in ECX.",
+        "behavior": "Reads list head at receiver +0x138 and returns null when empty. Otherwise traverses nodes through +0x54, obtains each nested string through node +0x70 then +0x6C, and calls the function pointer stored at absolute 0x5898C1A4 with query and node string. It returns the first node for which that comparator returns zero, or null after the list. Complete body is 69 bytes, one absolute comparator operand target, and ret 4.",
+        "uncertainty": "The comparator's exact identity and string collation, list ownership, and behavior for null or unterminated strings remain unknown. No runtime client test was performed; a portable equality model covers observed branching."
+      }
     }
   ]
 }
