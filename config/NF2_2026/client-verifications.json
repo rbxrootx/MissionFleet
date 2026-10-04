@@ -256544,6 +256544,424 @@
         "behavior": "Matches the 2,188-byte helper body and all 122 mapped operand targets.",
         "uncertainty": "The meaning of the constant and the affected object/state remain unidentified."
       }
+    },
+    {
+      "address": "5876CF90",
+      "name": "FUN_5876cf90",
+      "size": 60,
+      "symbol": "_FUN_5876cf90",
+      "source": "src/client-current/Main/FUN_5876cf90.cpp",
+      "source_sha256": "1d88977f90c21c89c7302ebc1762855e7762e3dba2123943eacf456908ade93b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C160",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876cf90",
+        "called_by": "Directly called by FUN_587E0E40 after loading receiver field +0xA8 at source line 41.",
+        "behavior": "Matches the 60-byte helper body and its one mapped operand target.",
+        "uncertainty": "The callback target and receiver field's semantic type remain unresolved."
+      }
+    },
+    {
+      "address": "5875DD20",
+      "name": "FUN_5875dd20",
+      "size": 114,
+      "symbol": "_FUN_5875dd20",
+      "source": "src/client-current/Main/FUN_5875dd20.cpp",
+      "source_sha256": "b1e7aeadad3854a2337d39e29e5d36e4b2a0448a9bd81c8019c1faf9e57f2cd9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 87,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875dd20",
+        "called_by": "Called repeatedly by FUN_587E0E40 for child fields +0x58C and +0x590, with mode values 1 and 7.",
+        "behavior": "Matches the 114-byte helper body and its one mapped operand target.",
+        "uncertainty": "The child fields and mode values have no confirmed high-level names."
+      }
+    },
+    {
+      "address": "5876D1E0",
+      "name": "FUN_5876d1e0",
+      "size": 333,
+      "symbol": "_FUN_5876d1e0",
+      "source": "src/client-current/Main/FUN_5876d1e0.cpp",
+      "source_sha256": "3b57385ca59400e7bd48acd89131da3005a9526fb8db8a45fcbc2d6ac0175795",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897EF13",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "58995B78",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 231,
+          "target_address": "58A246D8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "58907AC0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876d1e0",
+        "called_by": "Called by FUN_587E0E40 at source lines 1317 and 3123 after preparing the receiver and three stack arguments.",
+        "behavior": "Matches the 333-byte helper body and eight mapped operand targets.",
+        "uncertainty": "The allocated/configured object and arguments' semantic roles remain unresolved."
+      }
+    },
+    {
+      "address": "5877EAA0",
+      "name": "FUN_5877eaa0",
+      "size": 54,
+      "symbol": "_FUN_5877eaa0",
+      "source": "src/client-current/Main/FUN_5877eaa0.cpp",
+      "source_sha256": "acaf1e0b942914e740c9b10bc9fc594d991811c14e58cd3bbad35484dfdd4a4f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "589969EC",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877eaa0",
+        "called_by": "Called twice by FUN_587E0E40 with the same receiver and prepared object arguments.",
+        "behavior": "Matches the 54-byte helper body and two mapped operand targets.",
+        "uncertainty": "The helper's object relationship and state effect remain unidentified."
+      }
+    },
+    {
+      "address": "5876D040",
+      "name": "FUN_5876d040",
+      "size": 83,
+      "symbol": "_FUN_5876d040",
+      "source": "src/client-current/Main/FUN_5876d040.cpp",
+      "source_sha256": "864712cf86e7e39bfa57331492841790e508df77dbad3c1012a2f16f2eac578a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5876d040",
+        "called_by": "Called by FUN_587E0E40 with receiver field +0xD84 at source lines 1970 and 3627.",
+        "behavior": "Matches the 83-byte helper body and has no mapped operand targets.",
+        "uncertainty": "The receiver field's type and helper's operation remain unresolved."
+      }
+    },
+    {
+      "address": "5876D800",
+      "name": "FUN_5876d800",
+      "size": 118,
+      "symbol": "_FUN_5876d800",
+      "source": "src/client-current/Main/FUN_5876d800.cpp",
+      "source_sha256": "98a44d8306588c6bce4b50ecbc44a349118b799dea348c4a14572483fed7e3fb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 34,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 88,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 106,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "5876D350",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876d800",
+        "called_by": "Called by FUN_587E0E40 with receiver field +0xD84 at source lines 1977 and 3634.",
+        "behavior": "Matches the 118-byte helper body and six mapped operand targets.",
+        "uncertainty": "The helper's state transition remains unidentified; it calls FUN_5876D350, also matched in this batch."
+      }
+    },
+    {
+      "address": "5896FE40",
+      "name": "FUN_5896fe40",
+      "size": 3,
+      "symbol": "_FUN_5896fe40",
+      "source": "src/client-current/Main/FUN_5896fe40.cpp",
+      "source_sha256": "0568aced05473d63b1aedd7e3423d94bf155018b752fdc8a77e6c56c62e75236",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5896fe40",
+        "called_by": "Called twice by FUN_587E0E40 after pushing four style/geometry constants and a pointer argument.",
+        "behavior": "Matches the three-byte `ret 0x18` cleanup helper.",
+        "uncertainty": "The six stack arguments' semantic contract is not identified."
+      }
+    },
+    {
+      "address": "587D9070",
+      "name": "FUN_587d9070",
+      "size": 126,
+      "symbol": "_FUN_587d9070",
+      "source": "src/client-current/Main/FUN_587d9070.cpp",
+      "source_sha256": "7c35ede027e100c730669e6e6f082d799eed5a0ff90141b3dc162719f3a75ae1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "587D8EF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "587D8EF0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d9070",
+        "called_by": "Called by FUN_587E0E40 with the method receiver and child field +0xD78 at source lines 2045 and 4260.",
+        "behavior": "Matches the 126-byte helper body and three mapped operand targets.",
+        "uncertainty": "The null-guarded state update and child field's meaning remain unknown; it calls FUN_587D8EF0, also matched in this batch."
+      }
+    },
+    {
+      "address": "5876D350",
+      "name": "FUN_5876d350",
+      "size": 98,
+      "symbol": "_FUN_5876d350",
+      "source": "src/client-current/Main/FUN_5876d350.cpp",
+      "source_sha256": "5473a1616950e634afdccd4d147a17017c0c9154422d100734bb19318b0d07f9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 27,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876d350",
+        "called_by": "Directly called by FUN_5876D800, one of FUN_587E0E40's child helpers.",
+        "behavior": "Matches the 98-byte nested helper body and three mapped operand targets.",
+        "uncertainty": "Its role within the +0xD84 child-state path is not semantically identified."
+      }
+    },
+    {
+      "address": "587D8EF0",
+      "name": "FUN_587d8ef0",
+      "size": 74,
+      "symbol": "_FUN_587d8ef0",
+      "source": "src/client-current/Main/FUN_587d8ef0.cpp",
+      "source_sha256": "c8873ed65f7fac683028103c1d163531067de9d4aa8a661b2e999eacd5eee1c1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8ef0",
+        "called_by": "Directly called from FUN_587D9070, one of FUN_587E0E40's child helpers.",
+        "behavior": "Matches the 74-byte nested helper body and one mapped operand target.",
+        "uncertainty": "Its contribution to the +0xD78 child update remains unknown."
+      }
     }
   ]
 }

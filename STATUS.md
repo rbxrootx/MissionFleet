@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,459
-identified code bytes across six report units. There are 6,720 verified matches
-totaling 2,116,163 bytes (20.2127%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,730 verified matches
+totaling 2,117,226 bytes (20.2229%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -77,6 +77,13 @@ three bytes to include `ret 4`; two following `int3` bytes are padding. The
 verified control-menu factory's `FUN_587D7B90` child path now has every direct
 callee matched. Field meanings and UI actions remain unresolved. See the
 [factory-child and class evidence](docs/current-main-control-menu-factory-child-initializer.md).
+
+The `FUN_587E0E40` update branch adds ten byte-matched callees: eight direct
+helpers and two nested helpers in the `+0xD84` and `+0xD78` child paths. The
+batch adds 1,063 exact bytes and checks 25 relocation targets. The parent
+callsites establish argument and field relationships, while the fields' UI
+meanings remain unknown. Other unmatched descendants remain under neighboring
+helpers. See [the branch evidence](docs/current-main-control-menu-update-helper-branch.md).
 
 The RTTI-backed `CPannelSetNameOfNewShip` constructor and six-slot event
 surface now match byte for byte. Its verified `CMarketBoard` caller stores the
