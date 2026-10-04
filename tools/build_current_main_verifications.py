@@ -39,7 +39,7 @@ ADDRESSES = (
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
-    "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0",
+    "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -227,7 +227,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -392,6 +392,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587C3D60": {
+        "name_in_analysis": "FUN_587c3d60",
+        "called_by": "Directly called by five verified functions: 0x5877EC80, 0x58782CF0, 0x587A4440, 0x588D4300, and 0x588F55C0. The first two callers contain repeated callsites.",
+        "behavior": "Takes two stack arguments and divides each by the receiver's corresponding step field (+0x1D78 and +0x1D7C). It returns zero unless both step fields equal 0x12 and the resulting indices are in bounds against receiver fields +0x1D70 and +0x1D74. Otherwise it returns a pointer into the table at +0x1DB4 using column-major index (second_index * +0x1D70 + first_index) and 0x14-byte records. The body ends with ret 8.",
+        "uncertainty": "The receiver type, coordinate units, row/column labels, dimensions' semantic roles, and the record contents are unknown. Callers pass values obtained from separate receiver fields and test the returned pointer/record, supporting a grid-record lookup but not identifying what the records represent. The complete 97-byte Ghidra extent decodes with no mapped operand targets.",
+    },
     "588DCDD0": {
         "name_in_analysis": "FUN_588dcdd0",
         "called_by": "Directly called by five verified functions: 0x5877EC80, 0x58782CF0, 0x587A90D0, 0x587EFD60, and 0x587F2DD0. The first, second, fourth, and fifth contain repeated callsites.",
