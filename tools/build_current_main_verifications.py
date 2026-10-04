@@ -137,6 +137,7 @@ ADDRESSES = (
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
+    "58848450",
     "58751E80", "58752000", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
@@ -381,6 +382,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
+    "58848450",
     "58751E80", "58752000", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020",
     "587A0C30", "58786680", "587A1160", "587A1330",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
@@ -5098,6 +5100,12 @@ EVIDENCE = {
         "called_by": "Called twice each from verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650, within the message 0x80020FA2 path also containing FUN_58755170. All four callsites load ECX from shared object 0x58A245E0 and pass observed selector values 0 or 1.",
         "behavior": "With selector 0 and receiver +8 equal to zero, calls the first virtual method on non-null receiver +4 with argument 1 and clears +4. On other paths, validates non-null entries in the pointer array at +0x10 up to count +8; selector 1 also calls FUN_58755CF0. It releases and clears +0x10 through FUN_5897CC42. If +4 is null, allocates 0x198 bytes through FUN_5897CC4E, then calls sprite-file wrapper FUN_588F3D70 with address 0x5898D6A4 and observed arguments 0/1; the returned pointer is stored at +4. The common continuation dispatches through vtable offset +0x30 of global object 0x58A24594. Returns with ret 4. The corrected body is 221 bytes and has eight mapped operand targets.",
         "uncertainty": "The receiver type, selector semantics, pointer-array element schema, behavior of FUN_58755CF0, string at 0x5898D6A4, allocated object's exact class, and global callback contract remain unknown. The function table originally ended after pop esi at 0x587560F6, omitting add esp,0x0C; ret 4 at 0x587560F7..0x587560FC. Three CC padding bytes lead to the next indexed function at 0x58756100. No runtime or emulator test was performed.",
+    },
+    "58848450": {
+        "name_in_analysis": "FUN_58848450 / shared linked-record removal helper",
+        "called_by": "Called three times by verified packet dispatcher FUN_587BB700 and twice by verified event dispatcher FUN_588C1650. Every call loads ECX from global object 0x58A245B4 plus 0xD8 and pushes one pointer argument from the caller's record, register, or local stack data.",
+        "behavior": "Starts at receiver +0x6C and traverses nodes through +0x54, calling comparison callback 0x5898C1A4 with node key reached through +0x70/+0x6C and the supplied pointer. When a node compares equal, it rewires neighboring fields +0x50/+0x54, updates receiver anchors +0x6C/+0x70 and +0x100/+0x108 when they reference the removed node, conditionally calls FUN_5875A100 when node +0xA4 is nonzero, invokes the node's first virtual method with argument 1, decrements receiver word +0xF2, and returns. It returns without mutation when the starting node is null or no comparison matches. The body is 215 bytes with four mapped operand targets and returns with ret 4.",
+        "uncertainty": "The receiver and node types, compared key schema, callback semantics, exact meaning of the four anchor fields, conditional helper contract, and caller-visible meaning of the count remain unresolved. The packet/event callers establish dispatcher use but do not identify a specific game-level record type or visual result. No runtime or emulator test was performed.",
     },
     "58849440": {
         "name_in_analysis": "FUN_58849440 / semicolon-delimited record update parser",
