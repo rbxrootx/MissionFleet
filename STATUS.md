@@ -24,6 +24,9 @@ and does not increase coverage.
 A portable C++ behavior model for the 191-byte `FUN_58907040` digit formatter
 is recorded separately with six passing edge cases. It is not byte-identical
 and is excluded from the match count.
+The two `CNumberScreen` bounded-step helpers likewise have a portable C++
+behavior model with four passing scenarios; their byte-identical instruction
+sources remain the counted matches.
 
 Recent current Main.dll helper evidence is documented in
 [`docs/current-main-number-screen-bounded-step.md`](docs/current-main-number-screen-bounded-step.md),

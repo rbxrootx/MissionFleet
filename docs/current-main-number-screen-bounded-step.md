@@ -23,5 +23,16 @@ already matched digit-state helper `FUN_58907040`. The early-return paths
 skip both calls. The two helper bodies remain instruction-stream match
 sources, totaling 175 bytes; their direct calls to `FUN_58907040` are audited.
 
-The step's game unit, child's role, callback contract, and signed-overflow
-behavior remain unresolved. No runtime client test was performed.
+The step's game unit, child's role, callback contract, and reachability of
+overflow inputs remain unresolved. No runtime client test was performed.
+
+A separate [portable C++ model](../src/client-current/semantic/CNumberScreenSteps.cpp)
+implements the observed bound checks, 32-bit wrapping arithmetic, callback
+gate, and digit rebuild through the existing semantic formatter. Its callback
+adapter is not the original x86 child ABI. Four [native scenarios](../tests/native/number_screen_steps_test.cpp)
+pass locally, including saturation, early return, zero and opposite-direction
+steps, callback gating, and overflow; rerun them with
+`python tools/verify_number_screen_steps.py`. The model does not byte-match
+the two helpers and is excluded from the progress count. A compiler-only C++
+candidate for `FUN_589072A0` produced different branch and register code, so
+the original exact-match instruction stream remains authoritative.
