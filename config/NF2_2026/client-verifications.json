@@ -294937,6 +294937,261 @@
         "behavior": "Divides the second integer argument by the first as an x87 floating-point ratio. It selects a coarse index in 50-unit increments using the thresholds at 0x58998530..0x589984B0, then refines that candidate by comparing against the qword table at 0x589C96D8 + index*8. It returns a refined index below 0x384, or -1 when the candidate reaches that bound. The callers use the result as a shared index into paired component tables to form a scaled vector. The complete 458-byte body ends with ret and has 28 mapped operand targets.",
         "uncertainty": "The mathematical units and exact threshold/table-generation rules are not yet established. The first-quadrant direction/angle interpretation is supported by the callers' absolute vector inputs, paired component lookups, and sign restoration, but the table's named domain and runtime behavior remain unverified. No emulator test was performed."
       }
+    },
+    {
+      "address": "5888D390",
+      "name": "FUN_5888d390",
+      "size": 521,
+      "symbol": "_FUN_5888d390",
+      "source": "src/client-current/Main/FUN_5888d390.cpp",
+      "source_sha256": "b755f651ed473c44f8e74821328dfe44e1c478693a650b0fd072de8f5840089d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "5888D56D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5899FDA0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5888D56D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "5899FD98",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 155,
+          "target_address": "5898D0D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 180,
+          "target_address": "588D28A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "588D2820",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "5899FD78",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 222,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "5888D56D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "5899FD58",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 280,
+          "target_address": "5888D250",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 285,
+          "target_address": "5888D56D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "5899FD38",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 296,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 308,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 316,
+          "target_address": "5888D56D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 325,
+          "target_address": "5899FD18",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 331,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 356,
+          "target_address": "5899FCF8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 362,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 374,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 380,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 413,
+          "target_address": "588A6E30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 434,
+          "target_address": "5899FCD8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 440,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 452,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 457,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "588A5390",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 490,
+          "target_address": "5888D250",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 508,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888d390",
+        "called_by": "Called by verified event handlers FUN_587B83E0 and FUN_587BB700. Both pass a receiver-owned context as the first stack argument, a 16-bit value from the packet at +0xC as the second argument, and zero as the third. FUN_587B83E0 reaches it under the observed short subevent condition; FUN_587BB700 dispatches message event 0x8002011C when the packet word at +0xE is 1.",
+        "behavior": "Dispatches on its second stack argument, accepting selectors 0 through 5; the first stack argument is used as an input record and the third as an optional auxiliary value. It obtains text resources through indirect callbacks at 0x5898C030 and 0x5898C3C4 using keys embedded at 0x5899FDA0 (MESSAGESTRING__ROOM_MESSAGE_6), 0x5899FD78 (ROOM_MESSAGE_1), 0x5899FD58 (ROOM_MESSAGE_7), 0x5899FD38 (ROOM_MESSAGE_2), 0x5899FD18 (ROOM_MESSAGE_3), 0x5899FCF8 (ROOM_MESSAGE_4), and 0x5899FCD8 (ROOM_MESSAGE_5); one path also uses the mapped `%s   %s` template at 0x5899FD98. Selector 1 copies 25 DWORDs from the input record to receiver +0x198, builds text in stack buffers, and passes the resulting text with color 0xFFFF00 to FUN_5888D250. Other selector paths format or retrieve a room-message string and also reach FUN_5888D250. The full 521-byte body returns with ret 0xC and has 38 mapped operand targets.",
+        "uncertainty": "The callback contracts, exact packet/record schema, formatting behavior of the indirect calls, and when each room-message resource is displayed are not fully recovered. Static resource names and the two event callsites support identifying this as a room-message formatting/display helper, but no runtime chat test was performed."
+      }
     }
   ]
 }
