@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,087 verified matches
-totaling 2,238,389 bytes (21.3796%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,088 verified matches
+totaling 2,238,510 bytes (21.3807%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -31,6 +31,12 @@ the selected child through virtual slot `+0x14`, and on the observed fallback
 stores a derived value and dispatches two more updates. The option labels and
 meaning of the mode value remain unresolved; its four relocations match under
 objdiff.
+
+The latest screen-state helper is `FUN_5890BD90`, a 121-byte routine called by
+five verified functions. It calculates a signed quotient from receiver fields,
+checks indexed state bounds, conditionally updates the receiver and calls three
+observed helpers/callbacks. Field units and the visible effect remain unknown;
+its five relocations match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |

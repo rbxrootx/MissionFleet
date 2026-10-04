@@ -39,7 +39,7 @@ ADDRESSES = (
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
-    "5877ABA0", "588EBEB0",
+    "5877ABA0", "588EBEB0", "5890BD90",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -227,7 +227,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0",
+    "588EBEB0", "5890BD90",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -392,6 +392,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5890BD90": {
+        "name_in_analysis": "FUN_5890bd90",
+        "called_by": "Directly called by five verified functions: 0x587B83E0, 0x587EFD60, 0x587FAEC0, 0x587FC9C0, and 0x587FD890. Several callers contain repeated callsites.",
+        "behavior": "Computes the signed quotient of (receiver +0x20 minus receiver +0x18) divided by receiver +0x5C. It compares receiver +0x88 against that quotient and receiver +0x98; when the observed out-of-range branches are taken, it calls 0x58902E10 with receiver and values derived from +0x5C, subtracts +0x5C from +0x20, calls 0x589081E0 with zero, invokes the function pointer at 0x5898C42C, and stores its return at +0x94. It then calls 0x58902E10 with the negated +0x5C, restores +0x20 by +0x5C, calls the same function pointer with the second stack argument, and passes that argument and callback result to 0x589088D0. Returns with ret 8.",
+        "uncertainty": "The receiver's class, units and roles of fields +0x18/+0x20/+0x5C/+0x88/+0x94/+0x98, callback identity, and visible effect are not established. The 121-byte extent is fully covered by decoded instructions; direct callee semantics are only used where separately evidenced, and no runtime client test was performed.",
+    },
     "588EBEB0": {
         "name_in_analysis": "FUN_588ebeb0",
         "called_by": "Directly called by five verified functions: 0x5873FE80, 0x587EFD60, 0x588D4300, 0x588E5150, and 0x588F55C0. 0x5873FE80 and 0x588E5150 contain repeated callsites.",
