@@ -22,7 +22,9 @@ config/NF2_2026/client-verifications.json --only 58847AB0` checks all 1,850
 bytes and 61 mapped operands. The parent caller's decompilation is preserved
 locally at `var/current-main-next/5881de10-ghidra.c`.
 
-The concrete UI class, resource descriptors, child roles, exception/unwind
-semantics, and rendered appearance remain unknown. No original-client or
+The vtable `0x5899E518` resolves through original MSVC RTTI to
+`CPannelCommunicatorDetailedUserInfo`; the concrete child roles, resource
+descriptors, exception/unwind semantics, and rendered appearance remain
+unknown. No original-client or
 emulator runtime test has been performed, so this match alone does not establish
 a bootable client or visible screen.

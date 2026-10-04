@@ -12,7 +12,9 @@ The Ghidra decompilation in `var/current-main-next/5881de10-ghidra.c` and the
 mapped instructions show this sequence:
 
 1. Copy receiver `+0x64` to `+0x70` and `+0x74` to `+0x80`.
-2. If `+0xD8` is null, allocate `0x120` bytes, call `FUN_58849B70` with the
+2. If `+0xD8` is null, allocate `0x120` bytes, call the
+   [communicator ID panel constructor](current-main-communicator-id-panel-58849b70.md)
+   `FUN_58849B70` with the
    parent pointer, `(parent +0x4)+0x37`, `(parent +0x8)-0xA0`, `0, 0, 0x40`,
    and store its result at `+0xD8`. Allocation failure stores null.
 3. If `+0xDC` is null, allocate `0x18C` bytes, call the already matched
@@ -32,6 +34,7 @@ and `python tools/verify_client_matches.py --config
 config/NF2_2026/client-verifications.json --only 5881DE10` for the exact
 instruction match.
 
-The parent class and the purpose of the `+0xD8` and `+0xE0` panels are not
-established. The model does not cover the original SEH cleanup or prove how
+RTTI identifies the `+0xD8` child as `CPannelCommunicatorIDPannel` and the
+`+0xE0` child as `CPannelCommunicatorDetailedUserInfo`. The parent class is
+not established. The model does not cover the original SEH cleanup or prove how
 these panels render. No original-client runtime comparison has been performed.
