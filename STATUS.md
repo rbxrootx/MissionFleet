@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,141 verified matches
-totaling 2,259,878 bytes (21.5847%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,142 verified matches
+totaling 2,260,234 bytes (21.5881%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -73,8 +73,14 @@ in [`docs/current-main-message-80020f12-child-list-state-update.md`](docs/curren
 The member squad-join proposal path and its callback/collection uncertainties
 are documented in
 [`docs/current-main-member-squad-join-proposal.md`](docs/current-main-member-squad-join-proposal.md).
-The battle-record resource path and state transitions are documented in
+The battle-record resource path is documented in
 [`docs/current-main-comm-battle-record-route.md`](docs/current-main-comm-battle-record-route.md).
+Its state-2/3 continuation now has a 356-byte exact match with 15 operand
+targets checked. The null-record branches clear child flags and reset receiver
+state; the record branch attempts an indexed lookup or copies the record string
+and dispatches a follow-up helper. Record fields, helper contracts, and visible
+effects remain unresolved; no emulator test was performed. See
+[`docs/current-main-comm-battle-record-state-2-3-route.md`](docs/current-main-comm-battle-record-state-2-3-route.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed

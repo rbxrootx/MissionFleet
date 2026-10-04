@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0", "58839B80",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4878,6 +4878,12 @@ EVIDENCE = {
         "called_by": "Called from case 0x80020F06 in verified handlers FUN_587BB700 and FUN_588C1650 when the selected child mode bits are 1 or 2 and its state byte +0x2E5 is not 2 or 3. The callers pass null when packet field +0x10 is zero, otherwise the incoming record pointer.",
         "behavior": "Runs only when receiver byte +0x2E5 equals 1. A null record dispatches helper FUN_5876BAF0 with selector 0x24C and zero values, then calls FUN_58764D30 and a virtual method on the shared receiver. For a record, it updates flags on receiver-referenced objects according to byte +0x2E4; passes record strings at +0x0C and +0x2D through FUN_58731CE0 into receiver buffers +0xC4 and +0xC8; formats resource key STRING_COMM_BATTLE_RECORD using words at record +0x46/+0x48/+0x4A and writes the result to +0xCC. If global 0x58A0B4A0 is nonzero, it sets receiver byte +0x2E5 to 3 and forwards that global plus zero through FUN_587B9290. Otherwise it sets the byte to 0, selects values through receiver object +0x90, updates fields +0xBC/+0xC0 via FUN_587316C0 and state helpers, stores record dword +0x50 at receiver +0x30C, and passes it to FUN_58907360. The complete mapped body is 471 bytes ending in ret 4, followed by nine INT3 bytes before FUN_58839B80; 23 operand targets are inventoried.",
         "uncertainty": "The record schema, object identities, flags, meanings of global 0x58A0B4A0 and the selected values, null-record dispatch semantics, and exact screen effect remain unresolved. The embedded resource key supports a communication battle-record context but does not prove the full protocol meaning. No emulator test was performed.",
+    },
+    "58839B80": {
+        "name_in_analysis": "FUN_58839b80",
+        "called_by": "Called from case 0x80020F06 in verified handlers FUN_587BB700 and FUN_588C1650 when the selected child mode bits are 1 or 2 and its state byte +0x2E5 is 2 or 3. The callers pass null when packet field +0x10 is zero, otherwise the incoming record pointer.",
+        "behavior": "For state 2 or 3 with a null record, clears mask 0xFFF0 on the state-selected child pointer (+0x158 or +0x140) and resets receiver byte +0x2E5 to zero. For state 3 with a non-null record, it first attempts an indexed lookup using record dword +8 and global 0x58A245E0; on a successful lookup it updates receiver fields +0xBC/+0xC0 and returns through FUN_587315F0. The fallback selects paired receiver values through the object at +0x90, applies state helpers, copies record string +0x0C into receiver +0x14C, sets byte +0x2E5 to 5, and calls FUN_587B92B0 with global 0x58A24588 and record fields +0x5A/+0x5C. The complete body is 356 bytes ending in ret 4 at 0x58839CE1, followed by twelve INT3 bytes before the next indexed function at 0x58839CF0; 15 operand targets are inventoried.",
+        "uncertainty": "The record schema, indexed lookup contract, child identities, meanings of the state mask and paired values, helper contracts, and exact display/protocol effect remain unresolved. The recovered caller establishes only the state and null/non-null dispatch conditions. No emulator test was performed.",
     },
 }
 
