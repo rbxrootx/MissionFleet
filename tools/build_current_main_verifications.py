@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587A75E0": {
+        "name_in_analysis": "FUN_587a75e0",
+        "called_by": "Called twice by 0x587E8A40 and 16 times by 0x58856560. Observed selector arguments include 3, 1, 2, 0x17, 0x24, 0x25, and 0x26.",
+        "behavior": "Requires the object at global 0x58A247F8 +4 to be non-null, then dispatches a one-byte stack selector. Values 1 through 47 use a two-stage table lookup; other values take a default return path. The case bodies update receiver fields and word flags, traverse receiver-owned arrays/objects, and call helper routines. Returns with ret 4. The full body is 1,654 bytes with 92 mapped operand targets.",
+        "uncertainty": "The receiver/global object types, selector names, per-case semantics, field/flag meanings, and domain-level effect remain unknown. The selector and jump tables are referenced outside the indexed body. Caller-provided numeric values do not establish user-visible action names. No runtime behavior test was performed.",
+    },
     "587F21E0": {
         "name_in_analysis": "FUN_587f21e0",
         "called_by": "Called twice from 0x587FAEC0 and once from 0x587FD890. The callers pass an object pointer as the first stack argument and two scalar control values; 0x587FD890 passes 0x40000000 as one control value.",
