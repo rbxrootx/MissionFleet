@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,094 matches cover 2,239,516 bytes (21.3903%) and are verified
+The current 7,095 matches cover 2,239,750 bytes (21.3926%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -33,6 +33,8 @@ The latest child-parameter helper is documented in
 [the child-parameter notes](docs/current-main-child-parameter-update.md).
 The latest five-argument constructor wrapper is documented in
 [the constructor notes](docs/current-main-unknown-vtable-constructor.md).
+The latest conditional child-constructor path is documented in
+[the child-constructor notes](docs/current-main-unknown-child-constructor.md).
 The latest shared state-bit setter is documented in
 [the state-bit notes](docs/current-main-state-bit-setter.md).
 The latest record-comparison path is documented in

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,094 verified matches
-totaling 2,239,516 bytes (21.3903%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,095 verified matches
+totaling 2,239,750 bytes (21.3926%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -73,6 +73,13 @@ by four verified functions. It compares fields at fixed offsets, scans a
 pointer list for matching entries, and falls back to three helper comparisons.
 The receiver and record schemas and return-code meanings remain unresolved;
 all 28 relocations match under objdiff.
+
+The latest conditional child-constructor path is `FUN_587B7260`, a 234-byte,
+nine-argument initializer called by four verified functions. It forwards
+arguments 4–8 to `0x58734A30`, initializes receiver fields, and conditionally
+allocates a child using a manager/index pair before calling `0x587B7350`. Its
+class, field meanings, and child type remain unresolved. All eight operand
+targets match the mapped image under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |

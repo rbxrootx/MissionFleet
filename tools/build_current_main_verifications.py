@@ -40,7 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
-    "587B6020", "58907C80", "5873A540", "58775980",
+    "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -229,7 +229,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
-    "58907C80", "5873A540", "58775980",
+    "58907C80", "5873A540", "58775980", "587B7260",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -394,6 +394,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587B7260": {
+        "name_in_analysis": "FUN_587b7260",
+        "called_by": "Directly called by four verified functions: 0x5873F020, 0x587A4440, 0x588D4300, and 0x588F55C0. 0x587A4440 and 0x588F55C0 contain repeated callsites.",
+        "behavior": "Runs an SEH-protected nine-argument initialization path. It forwards stack arguments 4 through 8 to 0x58734A30 with the receiver, installs vtable address point 0x5899A118, stores argument 6 at receiver +4, argument 7 at +8, and argument 9 at +0x5C. If argument 1 is zero, allocates a 0x20-byte child; using argument 2 as a manager and argument 3 as an index, it selects a pointer from manager +0x194 when the index is in range at +0x170, otherwise uses null. It initializes the child through 0x587B7350, stores it at receiver +0x58, calls 0x587B70A0 on the receiver, and returns the receiver with ret 0x24.",
+        "uncertainty": "The constructor's class name, the meaning of its nine arguments and receiver fields, the child type, and the purpose of vtable 0x5899A118 are unresolved. The four callers establish the call shape but do not identify the object. Its full 234-byte extent has eight mapped operand targets.",
+    },
     "58775980": {
         "name_in_analysis": "FUN_58775980",
         "called_by": "Directly called by four verified functions: 0x5873FE80, 0x587A90D0, 0x587EFD60, and 0x587F8760.",

@@ -287889,6 +287889,81 @@
         "behavior": "Takes two object pointers. If the global byte at 0x58A2459C+0x105A8 has bit 0 set, compares the objects' bytes at +0x354 and returns 1 when equal or 3 when different. Otherwise equal words at +0x350 return 1. For differing words, scans the pointer list at receiver +0x54 (begin at list +0, end at +0x0C, capacity at +0x10), matching each entry's word +8 against the first object's +0x350. Depending on the second object's +0x6070 flag, it tests further fields at entry +0x18/+0x10/+0x14 against the second object's +0x350/+0x1334/+0x1338/+0x354; a matching entry returns its +0x0C value. If no entry matches, it runs helpers 0x587756F0, 0x587754E0, and 0x587752D0 in sequence, continuing when each result equals 3.",
         "uncertainty": "The receiver/class and list-entry schemas, meanings of return values 1/3 and entry +0x0C, semantic roles of compared fields, and purposes of the fallback helpers remain unresolved. The four callers test returned values such as 1 and 3 but do not name the comparison domain. The complete 656-byte Ghidra extent has 28 mapped operand targets."
       }
+    },
+    {
+      "address": "587B7260",
+      "name": "FUN_587b7260",
+      "size": 234,
+      "symbol": "_FUN_587b7260",
+      "source": "src/client-current/Main/FUN_587b7260.cpp",
+      "source_sha256": "caa445a5738bf59639680484cf562fb48ece9c099b15cf246edfb4d39eb63d0f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58981073",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58734A30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5899A118",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "587B7350",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "587B7350",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "587B70A0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b7260",
+        "called_by": "Directly called by four verified functions: 0x5873F020, 0x587A4440, 0x588D4300, and 0x588F55C0. 0x587A4440 and 0x588F55C0 contain repeated callsites.",
+        "behavior": "Runs an SEH-protected nine-argument initialization path. It forwards stack arguments 4 through 8 to 0x58734A30 with the receiver, installs vtable address point 0x5899A118, stores argument 6 at receiver +4, argument 7 at +8, and argument 9 at +0x5C. If argument 1 is zero, allocates a 0x20-byte child; using argument 2 as a manager and argument 3 as an index, it selects a pointer from manager +0x194 when the index is in range at +0x170, otherwise uses null. It initializes the child through 0x587B7350, stores it at receiver +0x58, calls 0x587B70A0 on the receiver, and returns the receiver with ret 0x24.",
+        "uncertainty": "The constructor's class name, the meaning of its nine arguments and receiver fields, the child type, and the purpose of vtable 0x5899A118 are unresolved. The four callers establish the call shape but do not identify the object. Its full 234-byte extent has eight mapped operand targets."
+      }
     }
   ]
 }
