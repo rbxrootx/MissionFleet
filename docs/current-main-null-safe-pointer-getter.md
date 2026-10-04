@@ -13,3 +13,7 @@ with plain `ret`; the byte verifier confirms all 17 bytes with zero relocations.
 The receiver and nested object types, meanings of offsets `+0x84` and `+0x04`,
 and higher-level purpose remain unknown. Caller use as a pointer does not
 identify its domain role. No runtime behavior test was performed.
+
+The match source is now ordinary C++ with a `thiscall` receiver argument and
+a nullable nested pointer. Clang-cl recompiles that expression to the exact
+original 17 bytes without an emitted instruction stream.

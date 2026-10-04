@@ -9,3 +9,7 @@ unchanged. The complete extent matches with zero relocations. The receiver and
 field types and the value's domain meaning remain unknown; null checks alone
 do not prove that the field is a pointer. No runtime behavior test was
 performed.
+
+The match source is now ordinary C++: a `thiscall` getter reading the unsigned
+DWORD at `receiver + 4`. Clang-cl recompiles it to the exact original four
+bytes without an emitted instruction stream.

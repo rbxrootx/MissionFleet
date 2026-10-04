@@ -12,6 +12,11 @@ verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
 
+Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
+`FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
+28 original bytes. This improves source reconstruction without changing the
+matched-function count.
+
 Recent current Main.dll helper evidence is documented in
 [`docs/current-main-eight-child-mode-refresh.md`](docs/current-main-eight-child-mode-refresh.md),
 [`docs/current-main-child-list-lookups.md`](docs/current-main-child-list-lookups.md),

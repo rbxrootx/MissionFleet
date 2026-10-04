@@ -10,3 +10,7 @@ it unchanged. The complete extent matches with zero relocations. The available
 evidence does not establish the receiver class, field type, or meaning of the
 value; caller checks describe consumption only. No runtime behavior test was
 performed.
+
+The match source is now ordinary C++: a `thiscall` getter reading the unsigned
+DWORD at `receiver + 0x6088`. Clang-cl recompiles it to the exact original
+seven bytes without an emitted instruction stream.
