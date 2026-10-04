@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,111 verified matches
-totaling 2,242,526 bytes (21.4190%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,112 verified matches
+totaling 2,242,583 bytes (21.4196%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -145,6 +145,15 @@ forwards the same delta to `0x587E7920`, which updates the global object's
 XOR-encoded field at `+0x21CA8` using its `+0x21C94` salt. The first body's
 three mapped operands and the complete helper body match. Both accumulators'
 semantic roles remain unknown.
+
+The latest text-buffer update helper is `FUN_58770A80`, a 57-byte routine
+called by three verified functions. It copies a supplied string into the
+destination buffer pointed to by receiver `+0x80` through indirect routine
+`0x5898C198`, counts bytes up to the terminating NUL, and writes that count to
+`+0x8C` and `+0x94`. One verified caller passes the localized key
+`MESSAGESTRING_ALL_CHATTING`. The copy routine's exact identity and the length
+fields' roles remain unknown; the complete body matches with one mapped
+operand target checked.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

@@ -44,6 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
+    "58770A80",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -237,6 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
+    "58770A80",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -401,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58770A80": {
+        "name_in_analysis": "FUN_58770a80",
+        "called_by": "Directly called by three verified functions: 0x587B83E0, 0x58890110, and 0x588A9F20. Ghidra evidence for 0x587B83E0 shows the argument comes from the localized key MESSAGESTRING_ALL_CHATTING; 0x58890110 contains repeated calls with stack-built text values.",
+        "behavior": "Takes one source-string pointer. It reads the destination pointer from receiver +0x80, calls the indirect routine at 0x5898C198 with destination then source, scans the resulting NUL-terminated destination to count bytes before the terminator, stores that count at receiver +0x8C and +0x94, and returns with ret 4.",
+        "uncertainty": "The exact identity of the indirect copy routine, destination buffer ownership/capacity, and the roles of the two length fields are not established. Caller evidence proves localized text and stack-built strings are supplied, but not the displayed control or text purpose. The complete 57-byte extent has one mapped operand target.",
+    },
     "588DCE50": {
         "name_in_analysis": "FUN_588dce50",
         "called_by": "Directly called by three verified functions: 0x5873F020, 0x587A90D0, and 0x587EFD60. The last contains three callsites; observed deltas include zero and values read from caller-owned fields. Other callers pass a computed value and 100 times a caller value, respectively.",
