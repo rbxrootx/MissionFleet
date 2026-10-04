@@ -66,8 +66,10 @@ input length minus one and resets through `FUN_58843190` on mismatch. Both
 paths dispatch `0xEE49` with argument one. The complete function is 242 bytes,
 including `ret 0x0C`, and has nine mapped operand targets.
 
+`FUN_58843190` has now been byte-matched and its list teardown behavior is
+recorded in [the linked-child teardown evidence](current-main-linked-child-teardown.md).
 The relationship between these receivers and the earlier `+0xD8` parser pair,
-the token record schema, selector/count meanings, helper effects, global
+the token record schema, selector/count meanings, global
 suppression policy, and message callback's visible result remain unknown.
 These functions have not been exercised at runtime or in the emulator.
 

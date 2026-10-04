@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,952
-identified code bytes across six report units. There are 7,282 verified matches
-totaling 2,291,344 bytes (21.8850%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,283 verified matches
+totaling 2,291,450 bytes (21.8860%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -33,6 +33,7 @@ with passing insert, update, and second-key-miss cases. It is excluded from
 the byte-match count.
 
 Recent current Main.dll helper evidence is documented in
+[`docs/current-main-linked-child-teardown.md`](docs/current-main-linked-child-teardown.md),
 [`docs/current-main-six-field-record-ingestion.md`](docs/current-main-six-field-record-ingestion.md),
 [`docs/current-main-linked-name-lookups.md`](docs/current-main-linked-name-lookups.md),
 [`docs/current-main-rule-text-window.md`](docs/current-main-rule-text-window.md),
