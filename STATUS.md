@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,790
-identified code bytes across six report units. There are 7,128 verified matches
-totaling 2,252,333 bytes (21.5127%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,809
+identified code bytes across six report units. There are 7,131 verified matches
+totaling 2,255,259 bytes (21.5406%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -35,12 +35,16 @@ The stateful record refresh and corrected epilogue extent are documented in
 The 6-byte import trampoline used by 11 call sites is documented in
 [`docs/current-main-import-thunk-5897ce44.md`](docs/current-main-import-thunk-5897ce44.md).
 
-The latest addition, `FUN_58838CB0`, is a state-dependent record refresh called
-by two verified dispatchers. The inventory's original 1,262-byte extent ended
-before its register restore and return; it now covers 1,279 bytes through `ret 4`,
-excluding the following alignment byte. All 64 mapped operands match. Record,
-state, and control meanings remain unknown; no runtime behavior test was
-performed.
+The latest verified additions are `FUN_587eae10` (a 1,079-byte stateful
+update/dispatch), `FUN_5875be60` (a 915-byte initializer reached from shell and
+weapon-fire paths), and `FUN_58755170` (a 932-byte handler for message
+`0x80020FA2`). Its Ghidra extent omitted two epilogue bytes; mapped code
+establishes `add esp,0x54; ret`, followed by twelve alignment bytes. Together,
+the three functions add 2,926 byte-matched bytes. Their field and helper
+meanings remain partially unknown; no emulator test was performed. See
+[`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
+[`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md), and
+[`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
