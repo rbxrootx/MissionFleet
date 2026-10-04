@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,748
-identified code bytes across six report units. There are 7,030 verified matches
-totaling 2,226,614 bytes (21.2671%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,759
+identified code bytes across six report units. There are 7,033 verified matches
+totaling 2,226,851 bytes (21.2694%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1234,3 +1234,10 @@ The `FUN_5881F3D0` startup branch now has its 372-byte direct child matched at
 vtable addresses, initializes receiver fields, and calls shared setup/resource
 helpers. Its depth-two audit has no unmatched indexed callees; class, resource,
 and UI meaning remain unresolved, and no client was launched.
+
+The shared child setup branch rooted at `FUN_587A1670` and `FUN_58786C00` now
+matches through depth two: three functions / 237 bytes and seven operand
+targets. The 129-byte initializer is shared by both roots. Its recursive entry
+cleanup helper's extent was extended by 11 bytes to include `ret 4`, excluding
+11 following int3 padding bytes. Both depth-two audits now have no unmatched
+indexed callees. Object identity and marker/ownership semantics remain unknown.

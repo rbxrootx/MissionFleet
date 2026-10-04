@@ -28,6 +28,21 @@ The resource-loading and callback behavior are statically established from the
 mapped code. No original-client startup, visual, or interaction test was
 performed.
 
+## Shared `FUN_587A0C30` startup child path
+
+The shared child initializer and its direct helpers now match through two call
+edges from both `FUN_587A1670` and `FUN_58786C00`: three functions, 237 bytes,
+and seven operand targets. The depth-two audits find no unmatched indexed
+callees under either root.
+
+`FUN_587A0C30` allocates a child through `FUN_58743A10`, stores it at receiver
+offset +0x18, and sets an observed marker byte. `FUN_58786680` recursively
+walks child and next-entry pointers and releases processed nodes. Its indexed
+extent was 11 bytes short; the corrected 53-byte body includes the complete
+`ret 4` and excludes the following 11 int3 padding bytes. The classes, marker
+meaning, and ownership rules remain unresolved; no runtime or visual test was
+performed.
+
 ## `FUN_5881F3D0` startup object branch
 
 The previously unmatched child `FUN_58751E80` now matches byte for byte: 372

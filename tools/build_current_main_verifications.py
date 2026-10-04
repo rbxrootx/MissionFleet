@@ -126,6 +126,8 @@ ADDRESSES = (
     "58754650", "58754770",
     "58753360", "587533C0",
     "58751E80",
+    "587A0C30", "58786680",
+    "58743A10",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -339,6 +341,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "58754650", "58754770",
     "58753360", "587533C0",
     "58751E80",
+    "587A0C30", "58786680",
+    "58743A10",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4155,6 +4159,24 @@ EVIDENCE = {
         "called_by": "Directly called by 0x5881F3D0 at 0x5881F8CB during startup object setup.",
         "behavior": "Runs base initialization 0x589031A0, installs vtable addresses 0x5898C500 and 0x5898D600, updates receiver fields including +0x50/+0x54/+0x58/+0x5C, and calls shared setup/resource helpers 0x58902F50, 0x58902EE0, 0x5897152E, and child initializer 0x58733280.",
         "uncertainty": "The object class, loaded resource, field schema, and UI role are unresolved. The complete 372-byte body decodes.",
+    },
+    "587A0C30": {
+        "name_in_analysis": "FUN_587a0c30",
+        "called_by": "Called twice by 0x587A1670 and once by 0x58786C00 during startup setup.",
+        "behavior": "Allocates via 0x5897CC4E, calls helper 0x58743A10, stores the result in receiver field +0x18, sets a byte at +0x15, clears +0x1C, and returns with ret 8.",
+        "uncertainty": "The class, allocated child/resource, field meanings, and helper contract are unresolved. The complete 129-byte body decodes.",
+    },
+    "58786680": {
+        "name_in_analysis": "FUN_58786680",
+        "called_by": "Called twice by 0x587A1670 during child cleanup.",
+        "behavior": "Recurses through a child pointer at +8 while the entry marker byte +0x15 is zero, follows the next-entry pointer at +0, and releases processed entries through 0x5897CC42. The corrected 53-byte extent includes the full ret 4; 11 following int3 bytes are padding.",
+        "uncertainty": "The entry structure, marker semantics, ownership rules, and cleanup trigger are unresolved.",
+    },
+    "58743A10": {
+        "name_in_analysis": "FUN_58743a10",
+        "called_by": "Directly called by 0x587A0C30 during child allocation and initialization.",
+        "behavior": "Allocates 0x18 bytes through 0x5897CC4E, clears the first word of the new object and other non-null referenced words, then sets object bytes +0x14 to 1 and +0x15 to 0.",
+        "uncertainty": "The object class, referenced-word roles, and marker semantics are unresolved. The complete 55-byte body decodes.",
     },
 }
 
