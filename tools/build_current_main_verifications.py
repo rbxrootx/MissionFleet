@@ -191,6 +191,7 @@ ADDRESSES = (
     "587E5C10",
     "587E5BA0",
     "587EBCB0",
+    "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -280,7 +281,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -470,6 +471,30 @@ FUNCTION_SIZE_OVERRIDES = {
     "58755520": 156,
 }
 EVIDENCE = {
+    "587D8E70": {
+        "name_in_analysis": "FUN_587d8e70 / filtered global child-list count",
+        "called_by": "Called by FUN_588EC5D0 with a selector and two filter arguments.",
+        "behavior": "Uses the low byte of its first argument as a selector, substituting receiver +0x61 when it is 0xFF. Walks the list at global 0x58A247F4 +4 through node +0xCE4. Counts nodes whose child at +0xCC0 has byte +0x35C matching the selector. When the second argument is zero it skips nodes whose +0xEC equals one; when the third argument is zero it skips children whose word +4 bits 5..9 encode three or five. Returns the count with ret 0x0C. The complete body is 120 bytes with one mapped operand target.",
+        "uncertainty": "The list and child types, selector domain, filtered category meanings, and caller-visible use of the count remain unknown. No runtime client test was performed.",
+    },
+    "587D8F40": {
+        "name_in_analysis": "FUN_587d8f40 / global sibling-list lookup",
+        "called_by": "Called by FUN_587D8FF0 when its root argument is null and its fallback argument is nonzero.",
+        "behavior": "Uses the low byte of its argument as a selector, substituting receiver +0x61 when it is 0xFF. Walks the list at global 0x58A247F4 +8 through node +0xCE0 and returns the first node whose child at +0xCC0 has byte +0x35C matching the selector and whose node +0xEC equals zero; otherwise returns null with ret 4. The complete body is 74 bytes with one mapped operand target.",
+        "uncertainty": "The list/node types and selector semantics remain unknown. No runtime client test was performed.",
+    },
+    "587D8F90": {
+        "name_in_analysis": "FUN_587d8f90 / root sibling-list lookup",
+        "called_by": "Called by FUN_587DAC20 and FUN_587E0090.",
+        "behavior": "For a null root, returns null when the fallback argument is zero, otherwise calls verified FUN_587D8EF0 with selector 0xFF. For a non-null root, walks root +0xCE0 using node +0xCE0 and returns the first node with child +0xCC0 byte +0x35C equal to receiver +0x61 and node +0xEC equal to zero. Returns with ret 8. The complete body is 90 bytes with one mapped operand target.",
+        "uncertainty": "The root and node types, selector role, and higher-level fallback meaning remain unknown. No runtime client test was performed.",
+    },
+    "587D8FF0": {
+        "name_in_analysis": "FUN_587d8ff0 / validated root child-list lookup",
+        "called_by": "Called by FUN_587DAD80 and FUN_587E0090.",
+        "behavior": "For a null root, returns null when the fallback argument is zero, otherwise calls FUN_587D8F40 with selector 0xFF. For a non-null root, walks root +0xCE4 through node +0xCE4, filtering for child +0xCC0 byte +0x35C equal to receiver +0x61 and node +0xEC equal to zero. Calls verified FUN_5876C8B0 on the candidate pointer, including null on the no-match path, and returns the candidate only when that helper returns nonzero; otherwise returns null with ret 8. The complete body is 120 bytes with three mapped operand targets.",
+        "uncertainty": "The helper's contract and possible side effect on a null candidate, list types, and meaning of accepted nodes remain unknown. No runtime client test was performed.",
+    },
     "587DA120": {
         "name_in_analysis": "FUN_587da120",
         "called_by": "Called once from 0x587E0090 and once from 0x587E3080, both with their receiver in ECX.",

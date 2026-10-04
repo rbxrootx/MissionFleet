@@ -302447,6 +302447,150 @@
         "behavior": "When global object 0x58A2459C field +0x21C34 is nonzero, dispatches value 0x12C through FUN_588C0DA0 and returns one. Otherwise reads a pointer indexed by the first argument at global 0x58A247F8 active object +0xE8C. A non-null pointer whose first byte is six dispatches 0x3EF and returns one. For first byte five, it selects a subentry using the second argument at +0xF0C; a non-null subentry dispatches 0x3E9 when its +0x9B low nibble is one, otherwise 0x3EC, and returns one. A missing subentry dispatches 0x12C and returns zero; other pointer states dispatch 0x12C and return one. The complete body is 237 bytes with 14 mapped operand targets.",
         "uncertainty": "The object and subentry types, selector bounds, dispatched numeric values and UI/game semantics remain unknown. No runtime client test was performed."
       }
+    },
+    {
+      "address": "587D8E70",
+      "name": "FUN_587d8e70",
+      "size": 120,
+      "symbol": "_FUN_587d8e70",
+      "source": "src/client-current/Main/FUN_587d8e70.cpp",
+      "source_sha256": "a2b254a001f139d62166f038a05816cda3355f92d8570e3a1962029e8070799d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8e70 / filtered global child-list count",
+        "called_by": "Called by FUN_588EC5D0 with a selector and two filter arguments.",
+        "behavior": "Uses the low byte of its first argument as a selector, substituting receiver +0x61 when it is 0xFF. Walks the list at global 0x58A247F4 +4 through node +0xCE4. Counts nodes whose child at +0xCC0 has byte +0x35C matching the selector. When the second argument is zero it skips nodes whose +0xEC equals one; when the third argument is zero it skips children whose word +4 bits 5..9 encode three or five. Returns the count with ret 0x0C. The complete body is 120 bytes with one mapped operand target.",
+        "uncertainty": "The list and child types, selector domain, filtered category meanings, and caller-visible use of the count remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587D8F40",
+      "name": "FUN_587d8f40",
+      "size": 74,
+      "symbol": "_FUN_587d8f40",
+      "source": "src/client-current/Main/FUN_587d8f40.cpp",
+      "source_sha256": "87781f99bbcb216d06f9e7beaf2745f3b08b1d89fe4135035ceeef63a4223aed",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8f40 / global sibling-list lookup",
+        "called_by": "Called by FUN_587D8FF0 when its root argument is null and its fallback argument is nonzero.",
+        "behavior": "Uses the low byte of its argument as a selector, substituting receiver +0x61 when it is 0xFF. Walks the list at global 0x58A247F4 +8 through node +0xCE0 and returns the first node whose child at +0xCC0 has byte +0x35C matching the selector and whose node +0xEC equals zero; otherwise returns null with ret 4. The complete body is 74 bytes with one mapped operand target.",
+        "uncertainty": "The list/node types and selector semantics remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587D8F90",
+      "name": "FUN_587d8f90",
+      "size": 90,
+      "symbol": "_FUN_587d8f90",
+      "source": "src/client-current/Main/FUN_587d8f90.cpp",
+      "source_sha256": "ea15c678a4babdfdce29bcdc28617af11e293c812f2944422d620b0dd7d6cf7d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "587D8EF0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8f90 / root sibling-list lookup",
+        "called_by": "Called by FUN_587DAC20 and FUN_587E0090.",
+        "behavior": "For a null root, returns null when the fallback argument is zero, otherwise calls verified FUN_587D8EF0 with selector 0xFF. For a non-null root, walks root +0xCE0 using node +0xCE0 and returns the first node with child +0xCC0 byte +0x35C equal to receiver +0x61 and node +0xEC equal to zero. Returns with ret 8. The complete body is 90 bytes with one mapped operand target.",
+        "uncertainty": "The root and node types, selector role, and higher-level fallback meaning remain unknown. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "587D8FF0",
+      "name": "FUN_587d8ff0",
+      "size": 120,
+      "symbol": "_FUN_587d8ff0",
+      "source": "src/client-current/Main/FUN_587d8ff0.cpp",
+      "source_sha256": "84b324101bd9e657cfd28358d1c3023146acf2dce766a3bf697a7be13f7af17a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "587D8F40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5876C8B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5876C8B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8ff0 / validated root child-list lookup",
+        "called_by": "Called by FUN_587DAD80 and FUN_587E0090.",
+        "behavior": "For a null root, returns null when the fallback argument is zero, otherwise calls FUN_587D8F40 with selector 0xFF. For a non-null root, walks root +0xCE4 through node +0xCE4, filtering for child +0xCC0 byte +0x35C equal to receiver +0x61 and node +0xEC equal to zero. Calls verified FUN_5876C8B0 on the candidate pointer, including null on the no-match path, and returns the candidate only when that helper returns nonzero; otherwise returns null with ret 8. The complete body is 120 bytes with three mapped operand targets.",
+        "uncertainty": "The helper's contract and possible side effect on a null candidate, list types, and meaning of accepted nodes remain unknown. No runtime client test was performed."
+      }
     }
   ]
 }
