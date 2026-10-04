@@ -288624,6 +288624,45 @@
         "behavior": "Takes no explicit stack arguments. If receiver +0x84 is null, it copies receiver +0x7C into +0x84 and tail-dispatches virtual slot +0x3C. Otherwise, if the current node's +0x10 link is non-null, it advances receiver +0x84 to that next node; when the old current node was also the head at +0x80, it advances +0x80 as well. It then tail-dispatches virtual slot +0x3C. A null next link returns without changing state.",
         "uncertainty": "The receiver, linked-node, and +0x7C/+0x80/+0x84 field meanings are unresolved. Callers show repeated application across six associated objects, but do not establish the user-visible effect. The complete 68-byte extent has no mapped operand targets."
       }
+    },
+    {
+      "address": "587CC700",
+      "name": "FUN_587cc700",
+      "size": 66,
+      "symbol": "_FUN_587cc700",
+      "source": "src/client-current/Main/FUN_587cc700.cpp",
+      "source_sha256": "b44d2d3e61b7a0589f5da42483a195637eabfa79686ec00a8702386080b3d0dd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 31,
+          "target_address": "587C9F30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "587C9F30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cc700",
+        "called_by": "Directly called by three verified functions: 0x587EFD60, 0x587FAEC0, and 0x587FD890. 0x587FD890 contains two callsites. All observed callsites pass argument 2.",
+        "behavior": "Takes one byte argument and uses the nested object at receiver +0x24. If that object's byte +0x74 is already 1, it returns without changes. For argument 1 or 2, it calls 0x587C9F30(nestedObject, 1, 0), then stores 2 or 1 respectively at nestedObject +0x75. Other argument values return without changes. The function cleans the argument with ret 4.",
+        "uncertainty": "The meanings of nested-object bytes +0x74/+0x75, helper mode (1,0), and the user-visible state transition remain unknown. The three callers pass 2, establishing their exact branch but not the state label. The complete 66-byte extent has two mapped operand targets."
+      }
     }
   ]
 }

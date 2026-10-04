@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,106 verified matches
-totaling 2,242,307 bytes (21.4170%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,107 verified matches
+totaling 2,242,373 bytes (21.4176%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -114,6 +114,13 @@ pointer from `+0x7C` when empty; otherwise it advances `+0x84` through the
 current node's `+0x10` link, also advancing head `+0x80` when it pointed at
 that node, then dispatches virtual slot `+0x3C`. The field and callback roles
 remain unknown; its complete body matches with no relocations.
+
+The latest nested-state transition helper is `FUN_587CC700`, a 66-byte routine
+called by three verified functions (with two callsites in one caller). It
+checks the nested object's byte at `+0x74`, then for arguments 1 or 2 calls
+`0x587C9F30(nestedObject, 1, 0)` and stores 2 or 1 at `+0x75`. Every observed
+caller passes 2. The byte-field roles and user-visible state remain unknown;
+the full extent matches with two mapped operand targets.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

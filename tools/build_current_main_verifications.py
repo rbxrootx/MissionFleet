@@ -43,7 +43,7 @@ ADDRESSES = (
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
-    "58908600",
+    "58908600", "587CC700",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -235,6 +235,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
+    "587CC700",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -399,6 +400,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587CC700": {
+        "name_in_analysis": "FUN_587cc700",
+        "called_by": "Directly called by three verified functions: 0x587EFD60, 0x587FAEC0, and 0x587FD890. 0x587FD890 contains two callsites. All observed callsites pass argument 2.",
+        "behavior": "Takes one byte argument and uses the nested object at receiver +0x24. If that object's byte +0x74 is already 1, it returns without changes. For argument 1 or 2, it calls 0x587C9F30(nestedObject, 1, 0), then stores 2 or 1 respectively at nestedObject +0x75. Other argument values return without changes. The function cleans the argument with ret 4.",
+        "uncertainty": "The meanings of nested-object bytes +0x74/+0x75, helper mode (1,0), and the user-visible state transition remain unknown. The three callers pass 2, establishing their exact branch but not the state label. The complete 66-byte extent has two mapped operand targets.",
+    },
     "58908600": {
         "name_in_analysis": "FUN_58908600",
         "called_by": "Directly called by three verified functions: 0x5879D3F0, 0x5879F810, and 0x5879DD90. All three contain repeated calls while iterating six object slots.",
