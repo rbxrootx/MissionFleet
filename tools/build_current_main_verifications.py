@@ -125,6 +125,7 @@ ADDRESSES = (
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
+    "58751E80",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -337,6 +338,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5889E8A0", "5889E970",
     "58754650", "58754770",
     "58753360", "587533C0",
+    "58751E80",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4147,6 +4149,12 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58754770 during child initialization.",
         "behavior": "Uses helpers 0x5897CC4E, 0x5897CC60, and 0x5897CC78 while preparing a stack-local argument block that includes address 0x5898CA90.",
         "uncertainty": "The helper contracts and local structure meaning are unresolved. The complete 91-byte body decodes.",
+    },
+    "58751E80": {
+        "name_in_analysis": "FUN_58751e80",
+        "called_by": "Directly called by 0x5881F3D0 at 0x5881F8CB during startup object setup.",
+        "behavior": "Runs base initialization 0x589031A0, installs vtable addresses 0x5898C500 and 0x5898D600, updates receiver fields including +0x50/+0x54/+0x58/+0x5C, and calls shared setup/resource helpers 0x58902F50, 0x58902EE0, 0x5897152E, and child initializer 0x58733280.",
+        "uncertainty": "The object class, loaded resource, field schema, and UI role are unresolved. The complete 372-byte body decodes.",
     },
 }
 

@@ -28,6 +28,19 @@ The resource-loading and callback behavior are statically established from the
 mapped code. No original-client startup, visual, or interaction test was
 performed.
 
+## `FUN_5881F3D0` startup object branch
+
+The previously unmatched child `FUN_58751E80` now matches byte for byte: 372
+bytes with 11 checked operand targets. The depth-two audit finds no unmatched
+indexed callees beneath `FUN_5881F3D0`.
+
+At callsite `0x5881F8CB`, the parent initializes the child, whose mapped body
+runs base setup, installs observed vtable addresses `0x5898C500` and
+`0x5898D600`, writes fields including +0x50 through +0x5C, and calls mapped
+state/resource helpers. The object class, resource identity, field meanings,
+and visual role remain unknown. This closes only this indexed branch; no
+runtime or visual test was performed.
+
 ## `FUN_587D26C0` startup object branch
 
 All indexed callees from `FUN_587D26C0` through two direct-call edges now match
