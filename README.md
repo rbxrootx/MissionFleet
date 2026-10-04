@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,171 matches cover 2,272,771 bytes (21.7078%) and are verified
+The current 7,172 matches cover 2,273,044 bytes (21.7104%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -44,6 +44,8 @@ The latest conditional child-constructor path is documented in
 [the child-constructor notes](docs/current-main-unknown-child-constructor.md).
 The latest keyed record insert/refresh helper is documented in
 [the record-refresh notes](docs/current-main-keyed-record-refresh.md).
+The latest indexed file-record dispatch helper is documented in
+[the indexed-dispatch notes](docs/current-main-indexed-file-record-dispatch.md).
 The latest fleet-join proposal record update path is documented in
 [the fleet-join notes](docs/current-main-fleet-join-proposal-record-update.md).
 The latest ranged selector update helper is documented in
