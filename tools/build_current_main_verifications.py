@@ -43,7 +43,7 @@ ADDRESSES = (
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
-    "58908600", "587CC700",
+    "58908600", "587CC700", "58731590",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -235,7 +235,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
-    "587CC700",
+    "587CC700", "58731590",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -400,6 +400,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58731590": {
+        "name_in_analysis": "FUN_58731590",
+        "called_by": "Directly called by four verified functions: 0x5873E4E0, 0x587A90D0, 0x587E9A10, and 0x588E4260. Their observed arguments are 1000, 1000, 400, and 20000 respectively. Existing Ghidra cross-reference evidence also records a call from 0x58791590 at 0x587918FC with argument 11000.",
+        "behavior": "Takes a 16-bit stack argument, stores it at receiver +0x26, then conditionally calls 0x58902F50 when receiver +0x40 is non-null and 0x58902EE0 when receiver +0x30 is non-null. Both helpers remove and reinsert the receiver into their corresponding linked structure using the updated +0x26 key; their observed insertion comparisons maintain ascending key order. The function returns with ret 4.",
+        "uncertainty": "The semantic role of the key and the two linked structures is unknown. Caller evidence establishes five observed values and helper order, but not a visible timer, priority, or gameplay meaning. The complete 42-byte extent has two mapped call targets.",
+    },
     "587CC700": {
         "name_in_analysis": "FUN_587cc700",
         "called_by": "Directly called by three verified functions: 0x587EFD60, 0x587FAEC0, and 0x587FD890. 0x587FD890 contains two callsites. All observed callsites pass argument 2.",
