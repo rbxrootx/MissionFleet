@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,843
-identified code bytes across six report units. There are 7,160 verified matches
-totaling 2,269,337 bytes (21.6750%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,161 verified matches
+totaling 2,269,724 bytes (21.6787%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1141,6 +1141,12 @@ remain unresolved; no emulator test was run. See
 it on event paths; its argument/flag branches select message-resource IDs and
 update a child object. Exact argument meanings and UI semantics remain unknown.
 See [event message dispatch evidence](docs/current-main-event-message-dispatch.md).
+
+`FUN_588D7460` adds a 387-byte exact match called by the verified
+`CShip_MapObjectScreen` constructor and virtual update. It refreshes child
+fields from packed receiver state and lookup tables; the table and child
+semantics remain uncertain. See
+[ship-map child refresh evidence](docs/current-main-ship-map-child-refresh.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
