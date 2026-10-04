@@ -193,6 +193,7 @@ ADDRESSES = (
     "587EBCB0",
     "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
     "58853B90", "588542A0",
+    "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -282,7 +283,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -475,6 +476,36 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "587AFE40": {
+        "name_in_analysis": "FUN_587afe40 / set receiver state one",
+        "called_by": "Called by verified FUN_588E4260 and FUN_588E5150. The latter chooses this helper on a negative value path.",
+        "behavior": "Stores DWORD value one at receiver +8 and returns. The complete body is eight bytes with no external operands; the ordinary C++ thiscall setter recompiles to those same bytes.",
+        "uncertainty": "The receiver class and state field meaning remain unknown. No runtime client test was performed.",
+    },
+    "587AFE50": {
+        "name_in_analysis": "FUN_587afe50 / set receiver state two",
+        "called_by": "Called by verified FUN_588E4260 and FUN_588E5150. The latter chooses this helper on a positive value path.",
+        "behavior": "Stores DWORD value two at receiver +8 and returns. The complete body is eight bytes with no external operands; the ordinary C++ thiscall setter recompiles to those same bytes.",
+        "uncertainty": "The receiver class and state field meaning remain unknown. No runtime client test was performed.",
+    },
+    "587AFE60": {
+        "name_in_analysis": "FUN_587afe60 / set receiver state four",
+        "called_by": "Called by verified FUN_588E4260 and FUN_588E5150. The latter chooses this helper on a zero value path.",
+        "behavior": "Stores DWORD value four at receiver +8 and returns. The complete body is eight bytes with no external operands; the ordinary C++ thiscall setter recompiles to those same bytes.",
+        "uncertainty": "The receiver class and state field meaning remain unknown. No runtime client test was performed.",
+    },
+    "58907F30": {
+        "name_in_analysis": "FUN_58907f30 / first clipping-extent getter",
+        "called_by": "Called by verified FUN_5896CF50 and FUN_5896E150; both subtract its result during their first coordinate clipping pass.",
+        "behavior": "Returns the DWORD at receiver +0x1C with no stack arguments. The complete body is four bytes with no external operands; ordinary C++ recompiles to those same bytes.",
+        "uncertainty": "The receiver type, field meaning, coordinate units, and signedness are not established by these callers. No runtime client test was performed.",
+    },
+    "58907F40": {
+        "name_in_analysis": "FUN_58907f40 / second clipping-extent getter",
+        "called_by": "Called by verified FUN_5896CF50 and FUN_5896E150; both subtract its result during their second coordinate clipping pass.",
+        "behavior": "Returns the DWORD at receiver +0x20 with no stack arguments. The complete body is four bytes with no external operands; ordinary C++ recompiles to those same bytes.",
+        "uncertainty": "The receiver type, field meaning, coordinate units, and signedness are not established by these callers. No runtime client test was performed.",
+    },
     "58853B90": {
         "name_in_analysis": "FUN_58853b90 / gated selector and state refresh",
         "called_by": "Called by verified FUN_588561F0 when receiver +0x2CC compares equal to its zero-valued register, and by verified FUN_58856560 when FUN_588DD2A0 returns zero.",
