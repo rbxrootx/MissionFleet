@@ -41,7 +41,7 @@ ADDRESSES = (
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
-    "5888D250",
+    "5888D250", "58780330",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -231,6 +231,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
+    "58780330",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -395,6 +396,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "58780330": {
+        "name_in_analysis": "FUN_58780330",
+        "called_by": "Directly called by three verified functions: 0x5877EC80, 0x587808A0, and 0x58782CF0. 0x5877EC80 and 0x58782CF0 contain repeated callsites.",
+        "behavior": "Reads the first stack argument and adds it to receiver field +0xAC. While receiver byte +0x5C is below 0x18, it derives a progress value from +0xAC and +0xA8, updates indexed per-slot byte state and two parallel arrays of slot records from a global lookup table, and writes the resulting progress byte to +0x5C. It then checks a global state word; when it equals 0xF, computes and stores a value in the object at receiver +0xB0, and under additional field guards calls 0x587BA230 and sets receiver byte +0xCC. It cleans two stack arguments with ret 8; the second argument is not read in this function body.",
+        "uncertainty": "The receiver type, units and meaning of the accumulated first argument, identity of the per-slot records, and the user-visible role of the global lookup/state are not resolved. The three callers establish repeated use in shared client paths but do not name the state machine. The complete 771-byte extent has 17 mapped operand targets.",
+    },
     "5888D250": {
         "name_in_analysis": "FUN_5888d250",
         "called_by": "Directly called by four verified functions: 0x587B83E0, 0x587BB700, 0x587FC9C0, and 0x58890110. 0x587B83E0 and 0x58890110 contain repeated callsites.",
