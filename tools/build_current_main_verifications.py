@@ -41,7 +41,7 @@ ADDRESSES = (
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
-    "5888D250", "58780330",
+    "5888D250", "58780330", "5875ADB0",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -231,7 +231,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
-    "58780330",
+    "58780330", "5875ADB0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -396,6 +396,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5875ADB0": {
+        "name_in_analysis": "FUN_5875adb0",
+        "called_by": "Directly called by three verified functions: 0x5877EC80, 0x58782CF0, and 0x587EFD60. 0x587EFD60 contains repeated callsites.",
+        "behavior": "Runs under SEH and cleans seven stack arguments with ret 0x1C. It checks the global resource manager at 0x58A246A4 for entry 0xCD and selects that entry's data at +0x190+0x3340 when present. It calls 0x58907100 to initialize the receiver, writes 0x4E20 at receiver +0x26, installs vtable address point 0x5898D7FC, conditionally releases existing objects at +0x40 and +0x30, and applies state value 0xFFFFFEFF through 0x58902D20. It then calls 0x58907360 with the first stack argument, allocates a 0xFC-byte child, initializes it through 0x58907100, stores it at receiver +0x118, assigns the same argument to the child through 0x58907360, and applies state value 0x101 through 0x58902D20. It initializes receiver fields +0x100, +0x108, +0x10C, +0x110, +0x114, and +0xFC from stack arguments, constants, and the result of 0x5897CC36.",
+        "uncertainty": "The receiver class, purpose of vtable 0x5898D7FC, semantic name of resource entry 0xCD, meanings of the seven arguments and initialized fields, and child object's role remain unresolved. The callers establish a shared composite-object construction path but not its user-visible identity. The complete 366-byte extent has 14 mapped operand targets.",
+    },
     "58780330": {
         "name_in_analysis": "FUN_58780330",
         "called_by": "Directly called by three verified functions: 0x5877EC80, 0x587808A0, and 0x58782CF0. 0x5877EC80 and 0x58782CF0 contain repeated callsites.",
