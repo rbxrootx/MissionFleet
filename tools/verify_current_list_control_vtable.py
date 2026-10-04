@@ -58,8 +58,11 @@ def verify():
     roll_table = list(complete_table)
     roll_table[0] = 0x5890BEA0
     roll_table[3] = 0x5890BE10
+    auto_table = list(complete_table)
+    auto_table[0] = 0x588EA100
     for table, entries in ((0x589A29CC, complete_table),
-                           (0x589A2B6C, roll_table)):
+                           (0x589A2B6C, roll_table),
+                           (0x589A1424, auto_table)):
         for slot, expected in enumerate(entries):
             if pointer_at(table + slot * 4) != expected:
                 raise ValueError(f"Unexpected table {table:08X} slot +{slot * 4:02X}")
@@ -92,13 +95,20 @@ def verify():
         raise ValueError("Roll-list wrapper does not install observed vtable")
     if data_at(0x5890BEC1, 15) != b"\xC2\x04\x00" + b"\xCC" * 12:
         raise ValueError("Incorrect roll-list wrapper return/padding boundary")
+    if data_at(0x588EA0F1, 6) != b"\xC7\x06\x24\x14\x9A\x58":
+        raise ValueError("Auto-line constructor does not install observed vtable")
+    if data_at(0x588EA103, 6) != b"\xC7\x06\x24\x14\x9A\x58":
+        raise ValueError("Auto-line wrapper does not install observed vtable")
+    if data_at(0x588EA121, 15) != b"\xC2\x04\x00" + b"\xCC" * 12:
+        raise ValueError("Incorrect auto-line wrapper return/padding boundary")
     return {"vtable_slots": sum(len(values) for values in slots.values()),
             "complete_vtable_slots": len(complete_table),
-            "complete_vtables": 2,
+            "complete_vtables": 3,
             "rtti_names": len(rtti_names),
             "keyboard_routes": len(expected_keyboard),
             "corrected_function_extents": {"58908050": 129, "58908340": 465,
-                                           "589088B0": 30, "5890BEA0": 36}}
+                                           "589088B0": 30, "5890BEA0": 36,
+                                           "588EA100": 36}}
 
 
 if __name__ == "__main__":

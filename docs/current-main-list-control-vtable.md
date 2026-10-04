@@ -50,11 +50,11 @@ callback, last node (`+0x7C`), first node (`+0x78`), previous-selection
 other codes in the table take the default return path.
 
 [`verify_current_list_control_vtable.py`](../tools/verify_current_list_control_vtable.py)
-hash-pins the mapped image, checks all 16 slots in the `CListTextScreen` and
-[`CRollListTextScreen`](current-main-roll-list-text-screen.md) tables against
-verified functions, nine slots shared among all three tables, three RTTI names,
-all 28 jump-table entries, the installed table value, and four
-return/padding boundaries. Reproduce:
+hash-pins the mapped image, checks all 16 slots in the `CListTextScreen`,
+[`CRollListTextScreen`](current-main-roll-list-text-screen.md), and
+[`CListTextAutoLineScreen`](current-main-list-text-autoline-screen.md) tables
+against verified functions, three RTTI names, all 28 jump-table entries, the
+installed table values, and five return/padding boundaries. Reproduce:
 
 ```text
 python tools/verify_current_list_control_vtable.py
