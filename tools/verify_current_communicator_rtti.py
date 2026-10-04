@@ -50,7 +50,10 @@ def main():
         raise AssertionError("ID-panel reset vtable slot changed")
     if u32(0x5899E780 + 0x10) != 0x5884AB90:
         raise AssertionError("ID-panel input vtable slot changed")
+    if u32(0x5899E780 + 0x0C) != 0x58848E60:
+        raise AssertionError("ID-panel periodic vtable slot changed")
     print("5899E788: FUN_58848B90 (ID-panel reset slot +0x08)")
+    print("5899E78C: FUN_58848E60 (ID-panel periodic slot +0x0C)")
     print("5899E790: FUN_5884AB90 (ID-panel input slot +0x10)")
     print("5899E798: FUN_58848BC0 (ID-panel event slot +0x18)")
 

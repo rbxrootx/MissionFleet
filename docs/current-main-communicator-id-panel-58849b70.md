@@ -34,3 +34,5 @@ The panel's vtable event slot `+0x18` has since been reconstructed in
 [the event-path evidence](current-main-communicator-id-event-58848bc0.md).
 Its virtual input method and external jump table are recorded in
 [the input-path evidence](current-main-communicator-id-input-5884ab90.md).
+Its periodic update and linked-list batch helper are recorded in
+[the update-path evidence](current-main-communicator-id-periodic-58848e60.md).
