@@ -43,7 +43,7 @@ ADDRESSES = (
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
-    "58908600", "587CC700", "58731590",
+    "58908600", "587CC700", "58731590", "5875F320",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -235,7 +235,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
-    "587CC700", "58731590",
+    "587CC700", "58731590", "5875F320",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -400,6 +400,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5875F320": {
+        "name_in_analysis": "FUN_5875f320",
+        "called_by": "Directly called by four verified functions: 0x587977B0, 0x5879B3B0, 0x5879D630, and 0x5879DD90. The first caller iterates a 40-control group, 0x5879B3B0 loops over 48 entries, and 0x5879DD90 has repeated calls in its child path.",
+        "behavior": "Takes no explicit stack arguments. It stores zero to the byte pointed to by receiver +0x6C, clears receiver +0x78, and clears bit 0x4 in the 16-bit field at receiver +0x24, then returns. Neighboring function 0x5875F310 sets that same bit.",
+        "uncertainty": "The pointee at +0x6C, field +0x78, and bit 0x4's semantic roles are unknown. Callers show use in repeated child/control paths, but not a user-visible meaning. The complete 23-byte extent has no mapped operand targets.",
+    },
     "58731590": {
         "name_in_analysis": "FUN_58731590",
         "called_by": "Directly called by four verified functions: 0x5873E4E0, 0x587A90D0, 0x587E9A10, and 0x588E4260. Their observed arguments are 1000, 1000, 400, and 20000 respectively. Existing Ghidra cross-reference evidence also records a call from 0x58791590 at 0x587918FC with argument 11000.",

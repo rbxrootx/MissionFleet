@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,108 verified matches
-totaling 2,242,415 bytes (21.4180%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,109 verified matches
+totaling 2,242,438 bytes (21.4182%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -129,6 +129,13 @@ Ghidra cross-reference evidence records a fifth call with 11000. It stores the
 receiver into each linked structure at `+0x40` and `+0x30`, using the new key
 for ascending-order insertion. The structures' roles remain unknown. Both
 mapped helper-call targets were checked and the complete body matches.
+
+The latest child-state clear helper is `FUN_5875F320`, a 23-byte routine called
+by four verified functions. It clears the byte pointed to by receiver `+0x6C`,
+zeros `+0x78`, and clears bit `0x4` in the word at `+0x24`. A neighboring
+six-byte helper sets that bit. Callers apply the clear across child groups;
+field and flag meanings remain unknown. The complete body matches with no
+mapped operand targets.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

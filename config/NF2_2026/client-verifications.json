@@ -288702,6 +288702,32 @@
         "behavior": "Takes a 16-bit stack argument, stores it at receiver +0x26, then conditionally calls 0x58902F50 when receiver +0x40 is non-null and 0x58902EE0 when receiver +0x30 is non-null. Both helpers remove and reinsert the receiver into their corresponding linked structure using the updated +0x26 key; their observed insertion comparisons maintain ascending key order. The function returns with ret 4.",
         "uncertainty": "The semantic role of the key and the two linked structures is unknown. Caller evidence establishes five observed values and helper order, but not a visible timer, priority, or gameplay meaning. The complete 42-byte extent has two mapped call targets."
       }
+    },
+    {
+      "address": "5875F320",
+      "name": "FUN_5875f320",
+      "size": 23,
+      "symbol": "_FUN_5875f320",
+      "source": "src/client-current/Main/FUN_5875f320.cpp",
+      "source_sha256": "0b658f326565c5ef6117312c3f44d94aaa1870454af236fb5c626db555fff30b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5875f320",
+        "called_by": "Directly called by four verified functions: 0x587977B0, 0x5879B3B0, 0x5879D630, and 0x5879DD90. The first caller iterates a 40-control group, 0x5879B3B0 loops over 48 entries, and 0x5879DD90 has repeated calls in its child path.",
+        "behavior": "Takes no explicit stack arguments. It stores zero to the byte pointed to by receiver +0x6C, clears receiver +0x78, and clears bit 0x4 in the 16-bit field at receiver +0x24, then returns. Neighboring function 0x5875F310 sets that same bit.",
+        "uncertainty": "The pointee at +0x6C, field +0x78, and bit 0x4's semantic roles are unknown. Callers show use in repeated child/control paths, but not a user-visible meaning. The complete 23-byte extent has no mapped operand targets."
+      }
     }
   ]
 }
