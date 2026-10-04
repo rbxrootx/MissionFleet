@@ -298442,6 +298442,69 @@
         "behavior": "Calls base initializer FUN_58734A30, installs vtable 0x58995AFC, stores incoming values at object +0x04/+0x08/+0x54/+0x78/+0x7C, and clears fields +0x50/+0x58/+0x5C/+0x60/+0x64/+0x68. If the optional table entry is non-null, copies six dwords from its +0x18..+0x2C region to object +0x0C..+0x20. Three calls through thunk 0x5897CC36 derive object fields +0x74 and +0x70 as 0xB4 minus signed remainder modulo 0x168, and +0x6C as signed remainder modulo 0x96 plus 0x50. It returns the initialized object pointer in EAX; extent 196 bytes.",
         "uncertainty": "The object class behind vtable 0x58995AFC, base-initializer contract, optional table-entry schema, input field meanings, and semantics/units of the three derived values remain unknown. The thunk is a host-indirect jump whose target operation is not identified. No runtime behavior test was performed."
       }
+    },
+    {
+      "address": "587B7D90",
+      "name": "FUN_587b7d90",
+      "size": 220,
+      "symbol": "_FUN_587b7d90",
+      "source": "src/client-current/Main/FUN_587b7d90.cpp",
+      "source_sha256": "a9af4d7e41e24816258e27dac77ba5a7c9180e1800ea42b24a69fb574eda090f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b7d90 / bounded text notification builder",
+        "called_by": "Called three times from verified event handler FUN_587B83E0 with one receiver and two stack values; the first caller varies an observed 16-bit value decorated with 0x40000, 0x20000, or 0x10000 and supplies zero as the other value. FUN_588C1650 also calls it at multiple sites from event dispatch, with ECX set to global object 0x58A2458C.",
+        "behavior": "Clears a local 0x48-byte buffer. When a text pointer read from the caller's surrounding stack data is non-null, it copies up to 0x17 non-NUL bytes into the buffer at offset +0x30 and terminates the result. It clears a 0x49-byte local area, copies the full 0x48-byte buffer into it, and calls FUN_58970C70 with selector 0x8001B111, zero, the first stack argument, and the local payload. If the text pointer is null, it calls FUN_58970C70 with the same selector and the first stack argument alongside zero fields. It returns with ret 8; the complete extent is 220 bytes.",
+        "uncertainty": "The text and caller-frame record layouts, meaning of the three flag masks, receiver type, payload schema, and user-visible meaning of selector 0x8001B111 are unknown. The event caller's branch values do not establish domain labels. No runtime behavior test was performed."
+      }
     }
   ]
 }
