@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,885
-identified code bytes across six report units. There are 7,192 verified matches
-totaling 2,277,838 bytes (21.7561%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,193 verified matches
+totaling 2,278,048 bytes (21.7581%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1585,6 +1585,12 @@ The constructor copies 96 words from its input into the receiver and creates
 sprite-backed child objects from shared data tables. The input schema and child
 field/resource meanings remain unresolved. See the
 [CForce constructor evidence](docs/current-main-force-constructor.md).
+The 210-byte factory `FUN_588F43F0` is now an exact match with seven mapped
+operands. Two verified callers pass it record pointers; it builds a `CForce`,
+places it into the observed owner collections, and registers keyed children in
+the `+0x9A4` array when a chain key matches. Record, key, and ownership
+semantics remain unresolved; no emulator test was performed. Details are in
+the [factory evidence](docs/current-main-force-constructor.md).
 `CPageChannelBattle_ControlMenuScreen` initializer
 `FUN_587d26c0` adds a 4,467-byte match across two Ghidra ranges, with 97 mapped
 operands checked. The startup initializer `FUN_5878af40` allocates `0xAE4`

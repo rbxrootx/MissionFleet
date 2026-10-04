@@ -13,6 +13,31 @@ using values from shared tables at `DAT_58A246C4`, `DAT_58A2478C`, and
 record schema, field meanings, control identities, and resource labels are not
 known.
 
+## Repeated-record child factory: `FUN_588F43F0`
+
+The verified packet/message dispatcher `FUN_587BB700` and verified routine
+`FUN_58882D80` both call this helper with receiver `0x58A247F4` and one input
+pointer. `FUN_58882D80` makes the call only when its source pointer in EDI is
+nonzero. The factory allocates `0x27C` bytes and passes the input pointer to
+`FUN_5877CC30`, whose `CForce::vftable` assignment identifies the constructed
+object as a `CForce` child.
+
+After construction, it calls `FUN_5877B130` with the new object and receiver
+subobject `+0x10`. If the child's dword `+0xB8` is not `-1`, the factory walks
+the receiver chain beginning at `+4`, following each object's `+0xCE4` link,
+and compares the object's dword `+0x48 >> 10` with the child key. A match uses
+the child's word `+0x5E >> 12` as an index into the matched object's pointer
+array at `+0x9A4`, stores the child there, calls `FUN_588E8570`, and returns
+the child. If the key finds no match, the factory writes `-1` to the child at
+`+0xB8` and passes it to `FUN_5877B130` through receiver subobject `+0x20`.
+
+The complete body is 210 bytes with seven mapped operand targets. Its first
+return path is at `0x588F44AA`; the alternate path ends with a short jump back
+to the shared epilogue at `0x588F4485`. Fourteen `CC` bytes follow before the
+next indexed function at `0x588F44D0`. The input record, key and index
+meanings, collection contracts, chain ownership, and refresh helper's visible
+effect remain unresolved. No emulator runtime test was performed.
+
 ## Caller evidence
 
 Ghidra's direct-reference audit records five callers:
