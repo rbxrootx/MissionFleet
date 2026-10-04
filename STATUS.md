@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,470,088
-identified code bytes across six report units. There are 7,318 verified matches
-totaling 2,302,839 bytes (21.9945%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,091
+identified code bytes across six report units. There are 7,320 verified matches
+totaling 2,303,015 bytes (21.9961%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -57,6 +57,9 @@ dispatch. Nine original table slots and two corrected body extents are checked.
 Five more methods add 249 exact bytes and complete the same table's 16 verified
 slots, including its jump-table input path. The deleting wrapper's corrected
 extent adds the missing three-byte `ret 4`.
+The RTTI-backed `CRollListTextScreen` [update and lifecycle](docs/current-main-roll-list-text-screen.md)
+add 176 exact bytes. Its constructor and all 16 table entries now have verified
+instruction matches; the update's clock units and visible motion remain open.
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all

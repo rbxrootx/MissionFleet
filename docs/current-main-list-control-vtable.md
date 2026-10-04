@@ -1,10 +1,11 @@
 # Current Main.dll linked-list control methods
 
-The pinned installed `Main.mapped.bin` stores three tables that share a
-message-dispatch body at `0x58908520`, drawing body at `0x58908340`, and callback
-body at `0x58908310`. At table `0x589A29CC` they occupy slots `+0x10`, `+0x14`,
-and `+0x38`; at `0x589A1430`, slots `+0x04`, `+0x08`, and `+0x2C`; at
-`0x589A2B70`, slots `+0x0C`, `+0x10`, and `+0x34`. The lifecycle body at
+The pinned installed `Main.mapped.bin` stores three RTTI-backed vtables:
+`CListTextScreen` at `0x589A29CC`, `CListTextAutoLineScreen` at `0x589A1424`,
+and `CRollListTextScreen` at `0x589A2B6C`. They share a message-dispatch body
+at `0x58908520`, drawing body at `0x58908340`, and callback body at
+`0x58908310`, occupying slots `+0x10`, `+0x14`, and `+0x38` in each table.
+The lifecycle body at
 `0x58908050` installs `0x589A29CC` into its receiver. The adjacent
 [selection-successor method](current-main-list-successor-58908680.md) advances
 the same receiver's `+0x84` linked node and may shift the first visible node
@@ -49,9 +50,11 @@ callback, last node (`+0x7C`), first node (`+0x78`), previous-selection
 other codes in the table take the default return path.
 
 [`verify_current_list_control_vtable.py`](../tools/verify_current_list_control_vtable.py)
-hash-pins the mapped image, checks all 16 table slots against verified
-functions, nine slots shared with two other tables, all 28 jump-table entries,
-the installed table value, and three return/padding boundaries. Reproduce:
+hash-pins the mapped image, checks all 16 slots in the `CListTextScreen` and
+[`CRollListTextScreen`](current-main-roll-list-text-screen.md) tables against
+verified functions, nine slots shared among all three tables, three RTTI names,
+all 28 jump-table entries, the installed table value, and four
+return/padding boundaries. Reproduce:
 
 ```text
 python tools/verify_current_list_control_vtable.py
@@ -60,9 +63,9 @@ python tools/generate_progress.py --check
 ```
 
 The table entries and instructions establish these dispatch and traversal
-paths. Class names, linked-node ownership, input-message origin and payload
-meaning, the indirect drawing and child callbacks, and visible pixels remain
-unresolved.
+paths. The RTTI establishes class names; linked-node ownership, input-message
+origin and payload meaning, the indirect drawing and child callbacks, and
+visible pixels remain unresolved.
 Ghidra's local headless launch did not complete during this check, so these
 behavior notes are derived from the captured mapped instructions and table
 bytes, not new pseudocode. No original-client runtime comparison was made.

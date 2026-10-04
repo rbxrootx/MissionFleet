@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,318 matches cover 2,302,839 bytes (21.9945%) and are verified
+The current 7,320 matches cover 2,303,015 bytes (21.9961%) and are verified
 individually at 100.0% by objdiff.
 The latest parent UI-child constructor match is documented in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
