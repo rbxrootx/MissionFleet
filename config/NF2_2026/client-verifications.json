@@ -287964,6 +287964,63 @@
         "behavior": "Runs an SEH-protected nine-argument initialization path. It forwards stack arguments 4 through 8 to 0x58734A30 with the receiver, installs vtable address point 0x5899A118, stores argument 6 at receiver +4, argument 7 at +8, and argument 9 at +0x5C. If argument 1 is zero, allocates a 0x20-byte child; using argument 2 as a manager and argument 3 as an index, it selects a pointer from manager +0x194 when the index is in range at +0x170, otherwise uses null. It initializes the child through 0x587B7350, stores it at receiver +0x58, calls 0x587B70A0 on the receiver, and returns the receiver with ret 0x24.",
         "uncertainty": "The constructor's class name, the meaning of its nine arguments and receiver fields, the child type, and the purpose of vtable 0x5899A118 are unresolved. The four callers establish the call shape but do not identify the object. Its full 234-byte extent has eight mapped operand targets."
       }
+    },
+    {
+      "address": "5888D250",
+      "name": "FUN_5888d250",
+      "size": 119,
+      "symbol": "_FUN_5888d250",
+      "source": "src/client-current/Main/FUN_5888d250.cpp",
+      "source_sha256": "a2860741bae561dece0fd6da13c8bd082ec97b79751036795053517de409a624",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "589088D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58908870",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58908830",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "5890BD90",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888d250",
+        "called_by": "Directly called by four verified functions: 0x587B83E0, 0x587BB700, 0x587FC9C0, and 0x58890110. 0x587B83E0 and 0x58890110 contain repeated callsites.",
+        "behavior": "Takes a receiver and two stack arguments. It passes the first argument, -1, and the second argument to the linked-node helper at receiver +0x4C4; that helper scans the first argument to its null terminator and rebuilds linked storage. It counts nodes through 0x58908170 and, when the count equals receiver-context field +0x88 minus 10, recalculates the context boundary with 0x58908870 and selects count-1 with 0x58908830. It then passes both arguments to 0x5890BD90 on the second context at receiver +0x4C0, stores the second argument at that context's +0x6C, clears +0x70, and returns with ret 8.",
+        "uncertainty": "The receiver class, meanings of the two explicit arguments, significance of the 10-node threshold, and user-visible behavior remain unresolved. The helper evidence establishes null-terminated input and linked-node operations but not whether the context represents a particular text, log, or list control. The complete 119-byte extent has five mapped call targets."
+      }
     }
   ]
 }

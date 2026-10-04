@@ -41,6 +41,7 @@ ADDRESSES = (
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
+    "5888D250",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -229,7 +230,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
-    "58907C80", "5873A540", "58775980", "587B7260",
+    "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -394,6 +395,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "5888D250": {
+        "name_in_analysis": "FUN_5888d250",
+        "called_by": "Directly called by four verified functions: 0x587B83E0, 0x587BB700, 0x587FC9C0, and 0x58890110. 0x587B83E0 and 0x58890110 contain repeated callsites.",
+        "behavior": "Takes a receiver and two stack arguments. It passes the first argument, -1, and the second argument to the linked-node helper at receiver +0x4C4; that helper scans the first argument to its null terminator and rebuilds linked storage. It counts nodes through 0x58908170 and, when the count equals receiver-context field +0x88 minus 10, recalculates the context boundary with 0x58908870 and selects count-1 with 0x58908830. It then passes both arguments to 0x5890BD90 on the second context at receiver +0x4C0, stores the second argument at that context's +0x6C, clears +0x70, and returns with ret 8.",
+        "uncertainty": "The receiver class, meanings of the two explicit arguments, significance of the 10-node threshold, and user-visible behavior remain unresolved. The helper evidence establishes null-terminated input and linked-node operations but not whether the context represents a particular text, log, or list control. The complete 119-byte extent has five mapped call targets.",
+    },
     "587B7260": {
         "name_in_analysis": "FUN_587b7260",
         "called_by": "Directly called by four verified functions: 0x5873F020, 0x587A4440, 0x588D4300, and 0x588F55C0. 0x587A4440 and 0x588F55C0 contain repeated callsites.",

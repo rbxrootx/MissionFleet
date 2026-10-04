@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,095 verified matches
-totaling 2,239,750 bytes (21.3926%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,096 verified matches
+totaling 2,239,869 bytes (21.3937%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -80,6 +80,13 @@ arguments 4–8 to `0x58734A30`, initializes receiver fields, and conditionally
 allocates a child using a manager/index pair before calling `0x587B7350`. Its
 class, field meanings, and child type remain unresolved. All eight operand
 targets match the mapped image under objdiff.
+
+The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
+by four verified functions. It rebuilds linked storage in the context at
+receiver `+0x4C4` from a null-terminated argument, adjusts its boundary at a
+count-minus-ten condition, then updates the companion context at `+0x4C0`.
+The exact control type, argument semantics, and user-visible effect are still
+unknown. All five call relocations match under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |
