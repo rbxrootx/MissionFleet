@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,958
-identified code bytes across six report units. There are 7,301 verified matches
-totaling 2,297,810 bytes (21.9467%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,302 verified matches
+totaling 2,299,546 bytes (21.9633%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -24,6 +24,8 @@ The event path's linked-pair guard and message ID `0x208` are recorded in
 [the pair-guard evidence](docs/current-main-communicator-id-pair-guard-58848b40.md).
 The ID-panel vtable reset callback is recorded in
 [the reset evidence](docs/current-main-communicator-id-reset-58848b90.md).
+The ID-panel input method and its separately verified key jump table are
+recorded in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all

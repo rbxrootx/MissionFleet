@@ -266,7 +266,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -323,7 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -521,6 +521,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "5884AB90": {
+        "name_in_analysis": "FUN_5884ab90 / CPannelCommunicatorIDPannel input method",
+        "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function at slot +0x10, verified directly from the pinned mapped Main.dll.",
+        "behavior": "Tests bit 1 of receiver word +0x24, walks a parent/child chain via virtual slot +0x10, then reads DWORD +4 from its single stack pointer argument and dispatches numeric message values including 0x100, 0x201, and 0x203. Several branches update the receiver's selected-node pointers +0x100/+0xFC and word positions +0xFA/+0xF8, then call verified FUN_588486E0. Other branches call input/UI helpers and child virtual functions. The complete 1736-byte body has 59 mapped operand targets and ends with ret 4.",
+        "uncertainty": "The argument resembles a Windows message record but its ABI, each message branch's user-visible effect, indirect-callback contracts, and rendering behavior remain unconfirmed. This is an exact instruction reconstruction, not a semantic C++ port; no original-client runtime comparison was performed.",
+    },
     "58848B90": {
         "name_in_analysis": "FUN_58848b90 / communicator ID panel position-and-flag reset",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function at slot +0x08. Verified event handler FUN_58848BC0 invokes that virtual slot after traversing two linked action lists for the +0xD4 control.",

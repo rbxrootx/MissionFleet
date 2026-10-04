@@ -32,3 +32,5 @@ verified. No original-client runtime comparison was performed.
 
 The panel's vtable event slot `+0x18` has since been reconstructed in
 [the event-path evidence](current-main-communicator-id-event-58848bc0.md).
+Its virtual input method and external jump table are recorded in
+[the input-path evidence](current-main-communicator-id-input-5884ab90.md).
