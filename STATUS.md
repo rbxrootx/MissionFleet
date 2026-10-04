@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
-identified code bytes across six report units. There are 7,180 verified matches
-totaling 2,274,877 bytes (21.7278%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,181 verified matches
+totaling 2,275,102 bytes (21.7300%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -244,6 +244,12 @@ The chat path helper `FUN_587B81A0` checks text through host callback wrapper
 conditionally dispatches selector `0x80020A00`. Its 226 bytes and seven
 operand targets match. The slot schema, policy meaning, and message effect
 remain unknown; see [the chat prefilter evidence](docs/current-main-chat-text-prefilter.md).
+
+`FUN_588DCC10` copies message-record fields and transformed text into two
+receiver buffers, then updates a child text/control object according to the
+copied word at receiver `+0x1338`. Four packet/event dispatcher call sites
+support this path. Its 225 bytes and seven operand targets match; field and
+callback meanings remain unresolved. See [the record-to-child update evidence](docs/current-main-record-to-child-text-update.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
