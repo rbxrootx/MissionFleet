@@ -20,7 +20,8 @@ receiver controls in this order:
   resource pointer `0x58A0B450`, and zero.
 - `+0xCC/+0xD0`: call the already matched `FUN_588486E0` with argument `1`
   only when receiver word `+0xF6` is respectively `0` or `1`.
-- `+0xE8/+0xEC`: call `FUN_58848B40` with resource pointer(s) loaded from
+- `+0xE8/+0xEC`: call the [linked-pair guard](current-main-communicator-id-pair-guard-58848b40.md)
+  `FUN_58848B40` with resource pointer(s) loaded from
   `0x58A0B4A0` and, for `+0xEC`, `0x58A0B4A4`.
 - `+0x118/+0x11C`: move the selected linked node backward through `+0x50`
   or forward through `+0x54`, using the active mode's selected pointer and

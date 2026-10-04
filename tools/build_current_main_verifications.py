@@ -266,7 +266,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -323,7 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -521,6 +521,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58848B40": {
+        "name_in_analysis": "FUN_58848b40 / communicator ID linked-pair guard and message path",
+        "called_by": "The verified CPannelCommunicatorIDPannel event handler FUN_58848BC0 calls this helper for child targets +0xE8 and +0xEC, passing a pointer from global 0x58A0B4A0 and either zero or a pointer from 0x58A0B4A4.",
+        "behavior": "Walks receiver list +0x64 through node link +0x54, looking for a node whose fields +0x78/+0x7C equal the two stack arguments and whose word +0x9E is nonzero. If any qualifies, returns zero without message dispatch. Otherwise it calls verified FUN_5876BAF0, then verified FUN_58764D30 with message ID 0x208 and three zero arguments, returning the dispatch result. The complete body is 77 bytes, has two mapped direct-call targets, and ends with ret 8.",
+        "uncertainty": "The two pointers' semantic types, node +0x9E meaning, message text for ID 0x208, and visible UI effect remain unknown. The portable model covers well-formed linked lists; no original-client runtime comparison was performed.",
+    },
     "58848BC0": {
         "name_in_analysis": "FUN_58848bc0 / CPannelCommunicatorIDPannel event dispatcher",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this function pointer in slot +0x18, verified from the pinned mapped Main.dll.",

@@ -305262,6 +305262,45 @@
         "behavior": "Returns zero for event types other than 2. For type 2, compares the target pointer with ID-panel child fields +0xD4/+0xD8/+0xDC/+0xCC/+0xD0/+0xE8/+0xEC/+0x118/+0x11C in that order. Branches invoke a helper on linked-list child actions, invoke virtual callbacks, call a global helper, toggle mode through verified FUN_588486E0, select resource helpers, or move one node backward/forward with signed 16-bit count bounds. The complete 663-byte body has 30 mapped operand targets and returns with ret 0xC.",
         "uncertainty": "The event type's public meaning, resource identities, externally visible effects of the called helpers, pointer preconditions, and exception behavior remain unknown. The portable model covers the observed normal-path branches only; no original-client runtime comparison was performed."
       }
+    },
+    {
+      "address": "58848B40",
+      "name": "FUN_58848b40",
+      "size": 77,
+      "symbol": "_FUN_58848b40",
+      "source": "src/client-current/Main/FUN_58848b40.cpp",
+      "source_sha256": "da7637557ba471d53b0b1dac2143cdeb9f17f6b28907aa03cd8108937901f37e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 63,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58848b40 / communicator ID linked-pair guard and message path",
+        "called_by": "The verified CPannelCommunicatorIDPannel event handler FUN_58848BC0 calls this helper for child targets +0xE8 and +0xEC, passing a pointer from global 0x58A0B4A0 and either zero or a pointer from 0x58A0B4A4.",
+        "behavior": "Walks receiver list +0x64 through node link +0x54, looking for a node whose fields +0x78/+0x7C equal the two stack arguments and whose word +0x9E is nonzero. If any qualifies, returns zero without message dispatch. Otherwise it calls verified FUN_5876BAF0, then verified FUN_58764D30 with message ID 0x208 and three zero arguments, returning the dispatch result. The complete body is 77 bytes, has two mapped direct-call targets, and ends with ret 8.",
+        "uncertainty": "The two pointers' semantic types, node +0x9E meaning, message text for ID 0x208, and visible UI effect remain unknown. The portable model covers well-formed linked lists; no original-client runtime comparison was performed."
+      }
     }
   ]
 }
