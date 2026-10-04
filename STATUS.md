@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,861
-identified code bytes across six report units. There are 7,173 verified matches
-totaling 2,273,325 bytes (21.7130%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
+identified code bytes across six report units. There are 7,174 verified matches
+totaling 2,273,603 bytes (21.7157%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -196,6 +196,14 @@ The routine recomputes receiver field `+0x10A18` from a linked object chain,
 clears twenty dwords at `+0x124..+0x170`, and conditionally refreshes up to eight
 children through `FUN_588B3720`. Its class and field meanings remain unknown.
 All four operand targets match; see [the extent and behavior notes](docs/current-main-aggregate-child-refresh.md).
+
+The latest keyed record removal helper is `FUN_58835A10`. Its corrected extent
+is 278 bytes; the previous 270-byte index ended inside `xor eax,eax` and omitted
+the remaining return sequence. It searches 0x54-byte entries by comparing the
+bytes at `+0x2D`, shifts later entries down after a match, shortens the end
+pointer, and returns 1; no match returns 0. Ten operand targets match, with ten
+`0xCC` padding bytes before the next function. Record and key meanings remain
+unknown; see [the removal evidence](docs/current-main-keyed-record-removal.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
