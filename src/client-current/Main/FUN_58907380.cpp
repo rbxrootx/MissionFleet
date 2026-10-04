@@ -1,23 +1,9 @@
-// Instruction stream reconstructed from Ghidra and the pinned mapped Main.dll.
-// Ghidra extent: 0x58907380 .. +0xD bytes.
-extern "C" __declspec(naked) void FUN_58907380() {
-    __asm {
-        // 0x58907380: mov eax, dword ptr [ecx + 0xec]
-        __asm _emit 0x8B
-        __asm _emit 0x81
-        __asm _emit 0xEC
-        __asm _emit 0x00
-        __asm _emit 0x00
-        __asm _emit 0x00
-        // 0x58907386: push eax
-        __asm _emit 0x50
-        // 0x58907387: call 0x589072a0
-        __asm _emit 0xE8
-        __asm _emit 0x14
-        __asm _emit 0xFF
-        __asm _emit 0xFF
-        __asm _emit 0xFF
-        // 0x5890738C: ret
-        __asm _emit 0xC3
-    }
+// CNumberScreen vtable +0x18: forward its configured step to the upper bound.
+extern "C" int __attribute__((thiscall)) FUN_589072a0(
+    unsigned char* receiver, int step);
+
+extern "C" int __attribute__((thiscall)) FUN_58907380(unsigned char* receiver) {
+    int step = *reinterpret_cast<int*>(receiver + 0xEC);
+    __asm__ __volatile__("" : "+a"(step));  // Preserve the original load/push order.
+    return FUN_589072a0(receiver, step);
 }

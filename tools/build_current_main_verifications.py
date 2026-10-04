@@ -195,6 +195,7 @@ ADDRESSES = (
     "58853B90", "588542A0",
     "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40",
     "5877EBB0", "5877EC00", "5877EC30",
+    "589072A0", "58907300",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -254,6 +255,14 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
 )
 RELOCATION_OVERRIDES = {
+    "58907380": [
+        {"offset": 8, "target_address": "589072A0", "kind": "relative",
+         "symbol": "_FUN_589072a0", "audit_only": False},
+    ],
+    "58907390": [
+        {"offset": 8, "target_address": "58907300", "kind": "relative",
+         "symbol": "_FUN_58907300", "audit_only": False},
+    ],
     "58907360": [
         {"offset": 11, "target_address": "58907040", "kind": "relative",
          "symbol": "_FUN_58907040", "audit_only": False},
@@ -298,7 +307,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -491,6 +500,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "589072A0": {
+        "name_in_analysis": "FUN_589072a0 / upper-bounded CNumberScreen step",
+        "called_by": "Called directly by CNumberScreen vtable +0x18 forwarder FUN_58907380, which passes receiver field +0xEC as the step.",
+        "behavior": "Returns zero without mutation when signed receiver +0x64 is at or above signed upper bound +0x54. Otherwise clamps its signed step to upper-current when current+step exceeds the upper bound, adds the applied step to +0x64, conditionally calls child +0x30 vtable slot +0x18 with stack arguments (receiver,2,0) when child word +0x24 bit five is set, calls verified digit-state helper FUN_58907040, and returns the applied step with ret 4. Complete body: 87 bytes and one mapped direct-call target.",
+        "uncertainty": "The step unit, child callback contract, and 32-bit overflow cases remain unresolved. The child is not called when absent or flag bit five is clear. No runtime client test was performed.",
+    },
+    "58907300": {
+        "name_in_analysis": "FUN_58907300 / lower-bounded CNumberScreen step",
+        "called_by": "Called directly by CNumberScreen vtable +0x1C forwarder FUN_58907390, which passes receiver field +0xEC as the step.",
+        "behavior": "Returns zero without mutation when signed receiver +0x64 is at or below signed lower bound +0x50. Otherwise clamps its signed step to current-lower when current-step falls below the lower bound, subtracts the applied step from +0x64, conditionally calls child +0x30 vtable slot +0x18 with stack arguments (receiver,2,0) when child word +0x24 bit five is set, calls verified digit-state helper FUN_58907040, and returns the applied step with ret 4. Complete body: 88 bytes and one mapped direct-call target.",
+        "uncertainty": "The step unit, child callback contract, and 32-bit overflow cases remain unresolved. The child is not called when absent or flag bit five is clear. No runtime client test was performed.",
+    },
     "5877EC00": {
         "name_in_analysis": "FUN_5877ec00 / first paired-child value propagation",
         "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
@@ -2492,14 +2513,14 @@ EVIDENCE = {
     "58907380": {
         "name_in_analysis": "FUN_58907380",
         "called_by": "Vtable slot +0x18 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
-        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x589072A0.",
-        "uncertainty": "The field and helper contract are unresolved.",
+        "behavior": "Loads signed step field receiver +0xEC, calls upper-bounded helper FUN_589072A0 on the same receiver, and returns that helper's result. Its 13-byte C++ source matches the original call/return and target relocation.",
+        "uncertainty": "The field's unit and vtable caller-visible meaning remain unresolved. No runtime client test was performed.",
     },
     "58907390": {
         "name_in_analysis": "FUN_58907390",
         "called_by": "Vtable slot +0x1C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
-        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x58907300.",
-        "uncertainty": "The field and helper contract are unresolved.",
+        "behavior": "Loads signed step field receiver +0xEC, calls lower-bounded helper FUN_58907300 on the same receiver, and returns that helper's result. Its 13-byte C++ source matches the original call/return and target relocation.",
+        "uncertainty": "The field's unit and vtable caller-visible meaning remain unresolved. No runtime client test was performed.",
     },
     "587B69E0": {
         "name_in_analysis": "FUN_587b69e0",

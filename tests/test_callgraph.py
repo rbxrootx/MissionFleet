@@ -6,6 +6,14 @@ from tools.rank_current_main_frontier import collect_frontier
 
 
 class DirectCallParserTests(unittest.TestCase):
+    def test_number_screen_cpp_forwarders_keep_bounded_step_edges(self):
+        source_dir = Path(__file__).resolve().parents[1] / "src/client-current/Main"
+        for source_name, target in (("FUN_58907380.cpp", "589072A0"),
+                                    ("FUN_58907390.cpp", "58907300")):
+            with self.subTest(source=source_name):
+                source = (source_dir / source_name).read_text(encoding="utf-8")
+                self.assertIn(target, direct_targets(source))
+
     def test_number_setter_semantic_source_retains_derived_state_call(self):
         source = (Path(__file__).resolve().parents[1]
                   / "src/client-current/Main/FUN_58907360.cpp").read_text(encoding="utf-8")

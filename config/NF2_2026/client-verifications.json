@@ -237961,7 +237961,7 @@
       "size": 13,
       "symbol": "_FUN_58907380",
       "source": "src/client-current/Main/FUN_58907380.cpp",
-      "source_sha256": "930c2bee121be2d327fdc3e56662f678ef0341786de283bd56c3c19dad4e401f",
+      "source_sha256": "89b390f7d4bac6e00b2ebfdda59799efb4d4f5a4e58eb4e296419838e2d7085c",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -237978,14 +237978,15 @@
           "offset": 8,
           "target_address": "589072A0",
           "kind": "relative",
-          "audit_only": true
+          "symbol": "_FUN_589072a0",
+          "audit_only": false
         }
       ],
       "evidence": {
         "name_in_analysis": "FUN_58907380",
         "called_by": "Vtable slot +0x18 at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
-        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x589072A0.",
-        "uncertainty": "The field and helper contract are unresolved."
+        "behavior": "Loads signed step field receiver +0xEC, calls upper-bounded helper FUN_589072A0 on the same receiver, and returns that helper's result. Its 13-byte C++ source matches the original call/return and target relocation.",
+        "uncertainty": "The field's unit and vtable caller-visible meaning remain unresolved. No runtime client test was performed."
       }
     },
     {
@@ -237994,7 +237995,7 @@
       "size": 13,
       "symbol": "_FUN_58907390",
       "source": "src/client-current/Main/FUN_58907390.cpp",
-      "source_sha256": "afb1db7cc170f45778e531d0ed7e0614a09282637cd1f8356bc0eb98ed44a8c5",
+      "source_sha256": "59bc468b3907392a316f443a348f2a0fe664ec6f08ca6dc2ed5bdf10133e329e",
       "verified_by": "objdiff-3.8.0-byte-identical",
       "flags": [
         "/O2",
@@ -238011,14 +238012,15 @@
           "offset": 8,
           "target_address": "58907300",
           "kind": "relative",
-          "audit_only": true
+          "symbol": "_FUN_58907300",
+          "audit_only": false
         }
       ],
       "evidence": {
         "name_in_analysis": "FUN_58907390",
         "called_by": "Vtable slot +0x1C at 0x589A2938 for RTTI type .?AVCNumberScreen@@.",
-        "behavior": "Loads the receiver field at +0xEC and forwards it to helper 0x58907300.",
-        "uncertainty": "The field and helper contract are unresolved."
+        "behavior": "Loads signed step field receiver +0xEC, calls lower-bounded helper FUN_58907300 on the same receiver, and returns that helper's result. Its 13-byte C++ source matches the original call/return and target relocation.",
+        "uncertainty": "The field's unit and vtable caller-visible meaning remain unresolved. No runtime client test was performed."
       }
     },
     {
@@ -302936,6 +302938,72 @@
         "called_by": "Called by verified FUN_5877EC80 and FUN_58782CF0, each with one computed delta in a stack argument.",
         "behavior": "Reads child pointer receiver +0x10BE0 and its DWORD +0x64; calls verified FUN_58907360 on that child with value plus delta. Reloads receiver +0x10BE0 and its now-current +0x64 after the call, then calls FUN_58907360 on child receiver +0x10BF4 with that value. Returns with ret 4. Complete body: 47 bytes and two direct-call targets.",
         "uncertainty": "The child types, value unit and helper side effects are unresolved; the reload after the first call must be preserved. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "589072A0",
+      "name": "FUN_589072a0",
+      "size": 87,
+      "symbol": "_FUN_589072a0",
+      "source": "src/client-current/Main/FUN_589072a0.cpp",
+      "source_sha256": "a276f88573d0ac415cf90879b15c4952adac42b8e7924f709b35481abcd17af3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 70,
+          "target_address": "58907040",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589072a0 / upper-bounded CNumberScreen step",
+        "called_by": "Called directly by CNumberScreen vtable +0x18 forwarder FUN_58907380, which passes receiver field +0xEC as the step.",
+        "behavior": "Returns zero without mutation when signed receiver +0x64 is at or above signed upper bound +0x54. Otherwise clamps its signed step to upper-current when current+step exceeds the upper bound, adds the applied step to +0x64, conditionally calls child +0x30 vtable slot +0x18 with stack arguments (receiver,2,0) when child word +0x24 bit five is set, calls verified digit-state helper FUN_58907040, and returns the applied step with ret 4. Complete body: 87 bytes and one mapped direct-call target.",
+        "uncertainty": "The step unit, child callback contract, and 32-bit overflow cases remain unresolved. The child is not called when absent or flag bit five is clear. No runtime client test was performed."
+      }
+    },
+    {
+      "address": "58907300",
+      "name": "FUN_58907300",
+      "size": 88,
+      "symbol": "_FUN_58907300",
+      "source": "src/client-current/Main/FUN_58907300.cpp",
+      "source_sha256": "2b4c2fe644a235a3d689eb9813c3dbdde53e6dc288473cd12211be2125d5020f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 71,
+          "target_address": "58907040",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907300 / lower-bounded CNumberScreen step",
+        "called_by": "Called directly by CNumberScreen vtable +0x1C forwarder FUN_58907390, which passes receiver field +0xEC as the step.",
+        "behavior": "Returns zero without mutation when signed receiver +0x64 is at or below signed lower bound +0x50. Otherwise clamps its signed step to current-lower when current-step falls below the lower bound, subtracts the applied step from +0x64, conditionally calls child +0x30 vtable slot +0x18 with stack arguments (receiver,2,0) when child word +0x24 bit five is set, calls verified digit-state helper FUN_58907040, and returns the applied step with ret 4. Complete body: 88 bytes and one mapped direct-call target.",
+        "uncertainty": "The step unit, child callback contract, and 32-bit overflow cases remain unresolved. The child is not called when absent or flag bit five is clear. No runtime client test was performed."
       }
     }
   ]

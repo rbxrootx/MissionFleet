@@ -49,8 +49,8 @@ calls the `CScreen` cleanup helper `FUN_58902D60`.
 | `+0x0C` | `FUN_589071A0` | 243 | Advances the value at `+0x60` toward `+0x64` using observed thresholds and step sizes when receiver flag bit 2 is set, then updates the child list at `+0x3C` through slot `+0x0C`. |
 | `+0x10` | `FUN_5873B360` | 69 | Previously byte-verified shared method. |
 | `+0x14` | `FUN_58906F30` | 265 | With receiver flag bit 0 set, visits the child list at `+0x4C`, calls child slot `+0x14` for observed eligible entries, uses helper `0x5873A5D0`, then visits the list again. |
-| `+0x18` | `FUN_58907380` | 13 | Forwards the receiver field at `+0xEC` to helper `0x589072A0`. |
-| `+0x1C` | `FUN_58907390` | 13 | Forwards the receiver field at `+0xEC` to helper `0x58907300`. |
+| `+0x18` | `FUN_58907380` | 13 | Forwards the step at `+0xEC` to the [upper-bounded path](current-main-number-screen-bounded-step.md). |
+| `+0x1C` | `FUN_58907390` | 13 | Forwards the step at `+0xEC` to the [lower-bounded path](current-main-number-screen-bounded-step.md). |
 
 Objdiff 3.8.0 verifies the seven newly matched functions: **822 bytes and 18
 mapped operands**. Together with the three previously verified shared slots,
