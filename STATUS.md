@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,517
-identified code bytes across six report units. There are 6,764 verified matches
-totaling 2,137,565 bytes (20.4170%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,520
+identified code bytes across six report units. There are 6,788 verified matches
+totaling 2,143,705 bytes (20.4757%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -78,12 +78,12 @@ verified control-menu factory's `FUN_587D7B90` child path now has every direct
 callee matched. Field meanings and UI actions remain unresolved. See the
 [factory-child and class evidence](docs/current-main-control-menu-factory-child-initializer.md).
 
-The connected `FUN_587DF580` control-menu path adds 34 exact matches totaling
-20,339 bytes and 295 checked relocation entries. Four function-body extents
+The connected `FUN_587DF580` control-menu path adds 58 exact matches totaling
+26,479 bytes and 481 checked relocation entries. Five function-body extents
 were corrected using reachable branch targets and complete return sequences,
-adding 58 identified bytes. The direct callsites and nested helper links are
-recorded; remaining unmatched descendants are explicitly listed in the branch
-evidence. See [the update-path evidence](docs/current-main-control-menu-factory-update-path.md).
+adding 61 identified bytes. The direct callsites and nested helper links are
+recorded; the high-fan-out `FUN_58764D30` branch remains unmatched. See
+[the update-path evidence](docs/current-main-control-menu-factory-update-path.md).
 
 The `FUN_587E0E40` update branch adds ten byte-matched callees: eight direct
 helpers and two nested helpers in the `+0xD84` and `+0xD78` child paths. The

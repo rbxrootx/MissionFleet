@@ -50,6 +50,39 @@ them. All 34 functions now match the captured mapped `Main.dll` byte for byte:
 | `5874FCC0` | 15 | `FUN_587D8470`, five calls. |
 | `588E6B60` | 1,992 | `FUN_588E7C10`. |
 
+## Additional nested update helpers
+
+The next two callgraph layers add 24 more exact matches totaling 6,140 bytes.
+`588E75E0` is shared by two parents and `588EFDB0` by three; each shared body
+was verified once while retaining each caller relationship.
+
+| Address | Bytes | Parent evidence |
+| --- | ---: | --- |
+| `587799F0` | 70 | `FUN_588E7700` |
+| `587799B0` | 50 | `FUN_588E7700` |
+| `588E75E0` | 96 | `FUN_588E7700` and `FUN_587DAF90` |
+| `5877B080` | 111 | `FUN_588E7700` |
+| `588E7660` | 81 | `FUN_588E7700` |
+| `588F0EE0` | 631 | `FUN_588F13B0` |
+| `588F0BB0` | 808 | `FUN_588F13B0` |
+| `588F07C0` | 996 | `FUN_588F13B0` |
+| `589089E0` | 182 | `FUN_588F13B0` |
+| `58908110` | 39 | `FUN_588F13B0` |
+| `5877A9B0` | 284 | `FUN_588730F0` |
+| `5877AAD0` | 206 | `FUN_588730F0` |
+| `58873030` | 187 | `FUN_588730F0` |
+| `587316C0` | 54 | `FUN_587DAF90` |
+| `587DA650` | 189 | `FUN_587DAF90` |
+| `589082B0` | 39 | `FUN_588EF5F0` |
+| `588E67E0` | 403 | `FUN_588E6B60` |
+| `58779C30` | 83 | `FUN_5877B080` |
+| `588EFDB0` | 376 | Shared by `FUN_588F0EE0`, `FUN_588F0BB0`, and `FUN_588F07C0` |
+| `588E6770` | 81 | `FUN_588E67E0` |
+| `588E6680` | 193 | `FUN_588E67E0` |
+| `588EF860` | 444 | `FUN_588EFDB0` |
+| `588EF790` | 194 | `FUN_588EFDB0` |
+| `588EF620` | 343 | `FUN_588EFDB0` |
+
 ## Corrected function extents
 
 Four old inventory extents ended inside reachable instructions. Their branch
@@ -62,11 +95,11 @@ next indexed function or padding follows each return.
 | `587DF010` | 1,361 | 1,379 | The loop back-edge targets `587DF560`; the complete epilogue returns at `587DF572`. |
 | `587D8110` | 852 | 862 | The truncated near conditional at `587D8460` resolves to `jb 587D8160`; stack restoration ends at `ret` `587D846D`. |
 | `588E6B60` | 1,985 | 1,992 | `je 588E7317` enters the alternate cleanup block, which returns at `588E7327`. |
+| `589089E0` | 179 | 182 | `je 58908A8F` targets the completed `mov ecx, 0x80070057` error path and `jmp 58908A43`; `int3` padding follows at `58908A96`. |
 
 These matches establish the machine instructions and parent/child argument
 relationships. They do not identify the UI labels, object types, record schema,
-or visible state changes. A depth-five audit still finds unmatched descendants
-below several newly matched helpers, including the branches under
-`FUN_588E7700`, `FUN_588F13B0`, `FUN_588730F0`, `FUN_587DAF90`, and
-`FUN_58764D30`; those remain for later subsystem work. Runtime behavior remains
+or visible state changes. A depth-seven audit now shows the outstanding
+high-fan-out descendants under `FUN_58764D30`, plus the other explicitly
+reported callgraph branches, as remaining work. Runtime behavior remains
 untested.
