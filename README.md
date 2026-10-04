@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,119 matches cover 2,242,816 bytes (21.4218%) and are verified
+The current 7,120 matches cover 2,242,820 bytes (21.4219%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll helper notes cover the linked-payload lookup, indexed-pointer
 lookups, and pointer/field getters in [the subsystem evidence docs](docs/).

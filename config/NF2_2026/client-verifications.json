@@ -289021,6 +289021,32 @@
         "behavior": "Takes its receiver in ECX, loads and returns the DWORD at receiver +0x6088, then returns with plain ret. It has no stack arguments.",
         "uncertainty": "The receiver type and the meaning or type of field +0x6088 are unknown. Caller null and sentinel checks show only how the value is consumed, not its domain semantics. The complete mapped 7-byte extent has no external operand targets; no runtime test was performed."
       }
+    },
+    {
+      "address": "587453A0",
+      "name": "FUN_587453a0",
+      "size": 4,
+      "symbol": "_FUN_587453a0",
+      "source": "src/client-current/Main/FUN_587453a0.cpp",
+      "source_sha256": "653151e20fbefb946c9afd13c0224456d644197f82b31c62648994a8b01b8442",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587453a0",
+        "called_by": "Called from 0x5896CF50, 0x5896E150, and 0x5896F3E0. Each function tests at least one returned value for null before the subsequent path proceeds.",
+        "behavior": "Takes its receiver in ECX, loads and returns the DWORD at receiver +0x04, then returns with plain ret. It has no stack arguments.",
+        "uncertainty": "The receiver type and the field's type or domain meaning are unknown. Caller null checks are compatible with a pointer field but do not prove it. The complete mapped four-byte extent has no external operand targets; no runtime test was performed."
+      }
     }
   ]
 }
