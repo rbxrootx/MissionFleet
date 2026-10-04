@@ -199,6 +199,7 @@ ADDRESSES = (
     "58907650",
     "58782790",
     "588DE5C0",
+    "5873A370",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -310,7 +311,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -503,11 +504,17 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "5873A370": {
+        "name_in_analysis": "FUN_5873A370 / linked-node payload field reset",
+        "called_by": "Called from the first pass of verified FUN_588DE5C0 with each linked node's +0xC payload pointer in ECX.",
+        "behavior": "Writes zero to payload DWORD +0x470, five to +0x4C8, and three to +0x31C, in that order, then returns. The complete 31-byte body has no mapped operand targets and now compiles from ordinary C++ to the exact original bytes.",
+        "uncertainty": "The payload type and three field meanings remain unknown. A null payload would fault; caller invariants are not established. No runtime client test was performed.",
+    },
     "588DE5C0": {
         "name_in_analysis": "FUN_588DE5C0 / eight-slot two-pass linked-node cleanup",
         "called_by": "Called by verified FUN_588DF450 during state reset and by verified FUN_587BB700 with a returned object in ECX.",
         "behavior": "For eight 16-byte slots beginning at receiver +0x1390, traverses the non-null head chain using node +8 links. First pass calls FUN_5873A370 on each node's +0xC payload pointer in ECX. It then reloads the slot head and traverses again, saving node +8 before invoking the node vtable's first function with stack argument 1. Finally zeros the slot DWORDs +0, +4, and +8, leaves +0xC unchanged, and advances to the next slot. Complete body is 86 bytes with one mapped direct-call target.",
-        "uncertainty": "The payload release semantics, node destructor contract, slot field meanings, and whether first-pass callbacks can mutate links are unknown. No runtime client test was performed; a separate portable model validates the observed traversal and zeroing.",
+        "uncertainty": "The payload reset's three field meanings, node destructor contract, slot field meanings, and whether first-pass callbacks can mutate links are unknown. The direct callee FUN_5873A370 is now byte-matched from C++. No runtime client test was performed; a separate portable model validates the observed traversal and zeroing.",
     },
     "58782790": {
         "name_in_analysis": "FUN_58782790 / selected object child-flag reset",

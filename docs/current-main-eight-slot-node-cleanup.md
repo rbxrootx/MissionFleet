@@ -8,7 +8,8 @@ all 86 original bytes; the direct call to `FUN_5873A370` is target-checked.
 The receiver contains eight 16-byte slots starting at `+0x1390`. Within each
 slot, the routine follows the head pointer at `+0` through node `+8` links.
 It first calls `FUN_5873A370` with each node's `+0xC` payload pointer in
-`ECX`. It then reloads the slot head and traverses again. On this pass it
+`ECX`. That callee [resets three payload fields](current-main-linked-node-payload-reset.md).
+It then reloads the slot head and traverses again. On this pass it
 saves the next pointer before invoking the first function in each node's
 vtable with stack argument `1`. Finally it zeroes slot DWORDs `+0`, `+4`,
 and `+8`, leaves `+0xC` untouched, and advances to the next slot.
@@ -21,6 +22,6 @@ reload, and exact slot zeroing. Run `python tools/verify_eight_slot_node_cleanup
 The model is not byte-identical and does not assume the original x86 pointer
 layout; the instruction source is the counted match.
 
-The payload release behavior of `FUN_5873A370`, node destructor contract,
-slot field meanings, and callback mutation rules are still unknown. No
-runtime client test was performed.
+The payload fields' meanings, node destructor contract, slot field meanings,
+and callback mutation rules are still unknown. No runtime client test was
+performed.
