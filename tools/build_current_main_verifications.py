@@ -123,6 +123,8 @@ ADDRESSES = (
     "587781D0", "5875BA80",
     "5875B770", "5875B3F0", "5875B5C0",
     "5889E8A0", "5889E970",
+    "58754650", "58754770",
+    "58753360", "587533C0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -333,6 +335,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "587781D0", "5875BA80",
     "5875B770", "5875B3F0", "5875B5C0",
     "5889E8A0", "5889E970",
+    "58754650", "58754770",
+    "58753360", "587533C0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4119,6 +4123,30 @@ EVIDENCE = {
         "called_by": "Called twice by 0x5889FFE0 during repeated-entry setup.",
         "behavior": "Allocates 0x7C bytes through 0x5897CC48 and stores fixed small-integer values into receiver fields beginning at +0x154 and continuing through the following mapping fields.",
         "uncertainty": "The class, mapping values' meanings, and their relationship to the repeated entries are unresolved. The complete 332-byte body decodes.",
+    },
+    "58754650": {
+        "name_in_analysis": "FUN_58754650",
+        "called_by": "Directly called by 0x58754B80 at 0x58754BD8 during startup object setup.",
+        "behavior": "Uses helper 0x588F6660, subroutines 0x58753360 and 0x58753590, and allocator/free helpers 0x5897CC72/0x5897CC42 while reading and updating receiver fields +0x0C/+0x10/+0x14.",
+        "uncertainty": "The object role, resource semantics, ownership behavior, and field meanings are unresolved. The complete 257-byte body decodes.",
+    },
+    "58754770": {
+        "name_in_analysis": "FUN_58754770",
+        "called_by": "Directly called by 0x58754B80 at 0x58754BE4 during startup object setup.",
+        "behavior": "Uses helper 0x588F6660, subroutines 0x587533C0 and 0x587535C0, and allocator/free helpers 0x5897CC72/0x5897CC42 while reading and updating receiver fields +0x0C/+0x10/+0x14.",
+        "uncertainty": "The object role, resource semantics, ownership behavior, and field meanings are unresolved. The complete 261-byte body decodes.",
+    },
+    "58753360": {
+        "name_in_analysis": "FUN_58753360",
+        "called_by": "Directly called by 0x58754650 during child initialization.",
+        "behavior": "Uses helpers 0x5897CC4E, 0x5897CC60, and 0x5897CC78 while preparing a stack-local argument block that includes address 0x5898CA90.",
+        "uncertainty": "The helper contracts and local structure meaning are unresolved. The complete 92-byte body decodes.",
+    },
+    "587533C0": {
+        "name_in_analysis": "FUN_587533c0",
+        "called_by": "Directly called by 0x58754770 during child initialization.",
+        "behavior": "Uses helpers 0x5897CC4E, 0x5897CC60, and 0x5897CC78 while preparing a stack-local argument block that includes address 0x5898CA90.",
+        "uncertainty": "The helper contracts and local structure meaning are unresolved. The complete 91-byte body decodes.",
     },
 }
 

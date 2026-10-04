@@ -189,3 +189,17 @@ small integers in fields beginning at +0x154. These facts are recorded from
 the mapped instructions; the indirect APIs, constants, and key-like values are
 not assigned meanings without callsite or data evidence. No runtime/visual
 test was performed, and unrelated startup branches remain open.
+
+## `FUN_58754B80` startup object branch
+
+This branch is matched through two direct-call edges: four functions add 701
+byte-identical bytes and check 28 mapped operand targets. The depth-two audit
+finds no unmatched indexed callee under `FUN_58754B80`.
+
+The root calls `FUN_58754650` and `FUN_58754770`; each uses its paired helper
+(`FUN_58753360` or `FUN_587533C0`) together with mapped allocation, cleanup,
+and setup routines. Both small helpers pass a local argument block containing
+`0x5898CA90` through the same helper sequence. These relationships are tied to
+the mapped callsites and field accesses. Object identity, ownership, resource
+meaning, and visible behavior remain unresolved; no runtime/visual test was
+performed.
