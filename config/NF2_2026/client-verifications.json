@@ -300205,6 +300205,120 @@
         "behavior": "Forwards its constructor values to FUN_589031A0, installs final vtable pointer 0x5899A0E8, sets receiver flag bit 0x20, and initializes fields +0x50/+0x54 from two arguments, +0x58 to 0x100, and +0x5C to zero. It initializes fields +0x64 through +0x70 to zero when the observed optional pointer is null, or copies four DWORDs from that pointer otherwise. It stores additional argument values at +0x60/+0x61, zeroes +0x78/+0x7C/+0x80/+0x84, masks receiver word +0x24 with 0xE5FF and sets bits 0x0500, and stores two arguments at +0x88/+0x8C. The complete body is 201 bytes with three mapped operand targets and returns with ret 0x24.",
         "uncertainty": "The constructor argument names, receiver/class layout, meanings of initialized fields and flag bits, and roles of the two child-tab callers remain uncertain beyond their observed ManageSquadTab/ManageFleetTab construction paths. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58786A50",
+      "name": "FUN_58786a50",
+      "size": 238,
+      "symbol": "_FUN_58786a50",
+      "source": "src/client-current/Main/FUN_58786a50.cpp",
+      "source_sha256": "bd2d48e1ae4a03af34d5df010bce3b2456010148f9c8bbd09298770ea84fe470",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 92,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "587A0950",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786a50 / keyed record tree insertion helper",
+        "called_by": "Called by FUN_58786B40 after that routine allocates and copies a 0x3C8-byte record with no existing matching entry.",
+        "behavior": "Starts from the receiver's tree state at +0x18 and follows child links at node +0/+8 while comparing the supplied 32-bit key against node +0x0C and checking marker byte +0x15. It dispatches the selected insertion path through 0x58786850 or 0x587A0950, then updates the caller-provided two-word result record and its byte flag. The full 238-byte body is decoded; all four mapped operand targets are audited.",
+        "uncertainty": "The tree/node schema, helper contracts, ownership semantics, and result-record meaning remain unknown; no balancing or named container type is asserted. No runtime client or emulator test was performed."
+      }
+    },
+    {
+      "address": "58786B40",
+      "name": "FUN_58786b40",
+      "size": 187,
+      "symbol": "_FUN_58786b40",
+      "source": "src/client-current/Main/FUN_58786b40.cpp",
+      "source_sha256": "c57c1eadbf8c50bbba47f783da1a19513d4e3c1cee67de506f8703092d80b41b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 35,
+          "target_address": "58786750",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 173,
+          "target_address": "58786A50",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786b40 / 0x3C8-byte keyed record refresh or insertion",
+        "called_by": "Called by FUN_587BB700 while processing 0x3C8-byte records from global object 0x58A245B8, and by FUN_588C4210 with a stack-local 0x3C8-byte record.",
+        "behavior": "Reads a 16-bit key from the record's first word and searches through the receiver at +4 using 0x58786750. When a matching entry is found, it copies all 0x3C8 bytes into the entry payload at +0x10. When no entry is found, it allocates 0x3C8 bytes, copies the record, and calls 0x58786A50 with the extracted key and new record pointer. The complete 187-byte body decodes; all six mapped operand targets are audited.",
+        "uncertainty": "The key's domain meaning, record schema, collection type, and allocation ownership are unknown. Callers establish repeated batch processing and a local-record path, but not user-visible semantics. No runtime client or emulator test was performed."
+      }
     }
   ]
 }

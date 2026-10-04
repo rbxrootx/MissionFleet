@@ -151,6 +151,7 @@ ADDRESSES = (
     "587AC9A0", "587867E0", "58786150", "58786250",
     "58778D00", "58779780", "587797C0",
     "58786750",
+    "58786A50", "58786B40",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -236,7 +237,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4770,6 +4771,18 @@ EVIDENCE = {
         "called_by": "Directly called by 0x587867E0 at 0x587867F6.",
         "behavior": "Reads the receiver's +0x18 node and its +4 child, follows node links while checking byte +0x15 and range values at +8/+0xC, and writes the selected pair through two caller-provided output pointers; may delegate cleanup to 0x5897CC72.",
         "uncertainty": "The node structure, range ordering, output roles, and cleanup ownership are unresolved. The complete 138-byte body decodes.",
+    },
+    "58786A50": {
+        "name_in_analysis": "FUN_58786a50 / keyed record tree insertion helper",
+        "called_by": "Called by FUN_58786B40 after that routine allocates and copies a 0x3C8-byte record with no existing matching entry.",
+        "behavior": "Starts from the receiver's tree state at +0x18 and follows child links at node +0/+8 while comparing the supplied 32-bit key against node +0x0C and checking marker byte +0x15. It dispatches the selected insertion path through 0x58786850 or 0x587A0950, then updates the caller-provided two-word result record and its byte flag. The full 238-byte body is decoded; all four mapped operand targets are audited.",
+        "uncertainty": "The tree/node schema, helper contracts, ownership semantics, and result-record meaning remain unknown; no balancing or named container type is asserted. No runtime client or emulator test was performed.",
+    },
+    "58786B40": {
+        "name_in_analysis": "FUN_58786b40 / 0x3C8-byte keyed record refresh or insertion",
+        "called_by": "Called by FUN_587BB700 while processing 0x3C8-byte records from global object 0x58A245B8, and by FUN_588C4210 with a stack-local 0x3C8-byte record.",
+        "behavior": "Reads a 16-bit key from the record's first word and searches through the receiver at +4 using 0x58786750. When a matching entry is found, it copies all 0x3C8 bytes into the entry payload at +0x10. When no entry is found, it allocates 0x3C8 bytes, copies the record, and calls 0x58786A50 with the extracted key and new record pointer. The complete 187-byte body decodes; all six mapped operand targets are audited.",
+        "uncertainty": "The key's domain meaning, record schema, collection type, and allocation ownership are unknown. Callers establish repeated batch processing and a local-record path, but not user-visible semantics. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

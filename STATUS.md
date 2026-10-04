@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,909
-identified code bytes across six report units. There are 7,210 verified matches
-totaling 2,281,782 bytes (21.7937%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,212 verified matches
+totaling 2,282,207 bytes (21.7978%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -38,6 +38,8 @@ and [`docs/current-main-indexed-pointer-lookup.md`](docs/current-main-indexed-po
 and [`docs/current-main-tag-dispatch-587e0090.md`](docs/current-main-tag-dispatch-587e0090.md).
 The two-word update thunk is documented in
 [`docs/current-main-pair-update-thunk.md`](docs/current-main-pair-update-thunk.md).
+The keyed 0x3C8-byte record refresh/insertion path is documented in
+[`docs/current-main-keyed-record-refresh-58786b40.md`](docs/current-main-keyed-record-refresh-58786b40.md).
 The state-update handler is documented in
 [`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 The selector dispatcher is documented in
