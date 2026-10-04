@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,099 verified matches
-totaling 2,241,370 bytes (21.4080%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,100 verified matches
+totaling 2,241,708 bytes (21.4112%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -95,6 +95,12 @@ per-slot byte state and two parallel arrays from a global lookup table, and
 uses a guarded global-state branch to update an object at `+0xB0`. The receiver
 type, argument units, and user-visible role remain unknown. All 17 mapped
 operand targets match under objdiff.
+
+The latest clipped buffer compositor is `FUN_587E5CB0`, a 338-byte routine
+called by three verified functions. It clips coordinate-derived source and
+destination ranges to receiver bounds, then ORs source bytes into a destination
+buffer. The receiver type, argument units, buffer format, and visual feature
+remain unknown. Its single mapped operand target matches under objdiff.
 
 The latest resource-backed child construction path is `FUN_5875ADB0`, a
 366-byte SEH-protected initializer called by three verified functions. It

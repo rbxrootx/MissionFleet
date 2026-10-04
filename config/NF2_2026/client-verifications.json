@@ -288366,6 +288366,39 @@
         "behavior": "Iterates linked entries rooted at receiver +0x1DB8, follows each entry's +8 link, and processes the object at entry +0x0C when its +0xAC field is nonzero. It invokes that object's virtual slot +0x18 with two stack arguments; one path forwards a six-word record from another argument to 0x5874A010 and, on success, invokes virtual slot +0x24. The alternate path compares squared coordinate differences against the square of another argument, calls 0x5897CC90/0x5897CCA0 and 0x5876BF80 to derive further values, and makes a second 0x5874A010 call before the same virtual callback. Certain successful entries with record tag 0x0B also call 0x588D6C90. Entries with object field +0xA4 set may be passed to 0x587C4250. The function cleans five stack arguments with ret 0x14.",
         "uncertainty": "The receiver and entry types, meanings of the virtual methods and five arguments, semantics of the record, and user-visible effect are unresolved. The squared-distance and linked-entry checks are directly visible, but the function's higher-level role is not identified. Its corrected complete extent is 364 bytes, including the branch at 0x587C45AE and return at 0x587C45B9; all 13 mapped operand targets match."
       }
+    },
+    {
+      "address": "587E5CB0",
+      "name": "FUN_587e5cb0",
+      "size": 338,
+      "symbol": "_FUN_587e5cb0",
+      "source": "src/client-current/Main/FUN_587e5cb0.cpp",
+      "source_sha256": "caaf171b262588fb203de7ce004ac9b35991b9321234929e14648ffdff5f24bf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 190,
+          "target_address": "587E5DF8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5cb0",
+        "called_by": "Directly called by three verified functions: 0x5873FE80, 0x588D4300, and 0x588E5150. 0x5873FE80 contains repeated callsites.",
+        "behavior": "Takes four stack arguments and returns with ret 0x10. It scales two arguments with signed multiply/divide sequences, temporarily decodes receiver bounds at +0x1054C and +0x10550 by XOR with 0xAAAAAAAA, computes a base address from receiver +0x10548, and clips source/destination coordinates against those bounds. Its nested row/byte loops OR each in-range source byte into the destination byte, skip reads for negative source coordinates, restore the encoded bounds, and return. The callsites provide coordinate-like values; the exact units and surface format are not established.",
+        "uncertainty": "The receiver class, four argument roles and units, buffer pixel/plane format, and exact visual feature remain unresolved. The bytewise OR and clipping are directly visible, but the callers do not prove a particular rendering format. The complete 338-byte extent has one mapped operand target."
+      }
     }
   ]
 }

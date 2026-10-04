@@ -41,7 +41,7 @@ ADDRESSES = (
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
-    "5888D250", "58780330", "5875ADB0", "587C4450",
+    "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
     "5874FCC0", "588E6B60",
@@ -231,7 +231,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
-    "58780330", "5875ADB0", "587C4450",
+    "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -396,6 +396,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587E5CB0": {
+        "name_in_analysis": "FUN_587e5cb0",
+        "called_by": "Directly called by three verified functions: 0x5873FE80, 0x588D4300, and 0x588E5150. 0x5873FE80 contains repeated callsites.",
+        "behavior": "Takes four stack arguments and returns with ret 0x10. It scales two arguments with signed multiply/divide sequences, temporarily decodes receiver bounds at +0x1054C and +0x10550 by XOR with 0xAAAAAAAA, computes a base address from receiver +0x10548, and clips source/destination coordinates against those bounds. Its nested row/byte loops OR each in-range source byte into the destination byte, skip reads for negative source coordinates, restore the encoded bounds, and return. The callsites provide coordinate-like values; the exact units and surface format are not established.",
+        "uncertainty": "The receiver class, four argument roles and units, buffer pixel/plane format, and exact visual feature remain unresolved. The bytewise OR and clipping are directly visible, but the callers do not prove a particular rendering format. The complete 338-byte extent has one mapped operand target.",
+    },
     "587C4450": {
         "name_in_analysis": "FUN_587c4450",
         "called_by": "Directly called by three verified functions: 0x587A4440, 0x588D4300, and 0x588F55C0.",
