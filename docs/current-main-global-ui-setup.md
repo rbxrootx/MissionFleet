@@ -61,3 +61,19 @@ copies, vtable installation, and a 100-record zeroing loop with 0x18-byte
 stride. The callgraph audit finds no unmatched inventory-backed target through
 depth two from `FUN_588FB9B0`. Deeper indirect behavior, resource identities,
 class names, and record meanings remain unresolved. No original client was run.
+
+## Global-object initialization tree
+
+The mapped setup function `FUN_587DBA00` directly calls the ten newly matched
+initializers and field helpers recorded for this batch. Their deeper paths add
+nine more functions, including the repeated child branch under `FUN_58872030`
+and interface-backed field setup called by `FUN_5890A3F0`. Across both levels,
+19 functions add 12,084 byte-matched bytes and 411 mapped operand targets are
+checked.
+
+The depth-two callgraph audit finds no unmatched indexed callee in this tree.
+That result covers indexed direct calls two edges from the root; it does not
+resolve all deeper indirect dispatches or all global setup branches. The
+observed vtable addresses, child constructors, repeated field writes, and
+callsites are preserved in the per-function evidence. Class names, data
+schemas, and user-visible meanings remain unknown, and the client was not run.

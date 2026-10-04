@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,690
-identified code bytes across six report units. There are 6,940 verified matches
-totaling 2,188,120 bytes (20.8996%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 6,959 verified matches
+totaling 2,200,204 bytes (21.0150%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1169,3 +1169,11 @@ functions, 4,883 bytes, and 160 mapped operand targets checked. The depth-two
 callgraph audit found no unmatched indexed callees in that slice. This verifies
 machine code, not resource meanings or visual behavior; no client runtime test
 was performed. See [the resource setup evidence](docs/current-main-global-ui-setup.md).
+
+The `FUN_587DBA00` global-object initialization tree adds 19 exact matches
+covering 12,084 bytes, with 411 mapped operand targets checked. A depth-two
+callgraph audit found no unmatched indexed calls in that tree. Vtable values,
+call edges, repeated child setup, and field writes are recorded from mapped
+instructions; class names and visible control meanings remain unresolved. No
+runtime client test was performed. See
+[the initialization evidence](docs/current-main-global-ui-setup.md).
