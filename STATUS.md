@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,655
-identified code bytes across six report units. There are 6,899 verified matches
-totaling 2,163,960 bytes (20.6689%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,690
+identified code bytes across six report units. There are 6,927 verified matches
+totaling 2,183,237 bytes (20.8529%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1154,3 +1154,11 @@ Recovered code/assets remain local and Git-ignored. The workspace MIT license
 applies to original tools, not supplied binaries or their decompiled output.
 The public-safe decompilation project is published at
 `https://github.com/rbxrootx/MissionFleet`.
+
+The verified global setup routine's 28 direct indexed callees now match byte for
+byte: 19,277 bytes and 834 mapped operand targets checked. Their callsites and
+argument setup are visible in `FUN_5878af40`; five indexed function extents were
+corrected to include their complete epilogues, adding 35 identified code bytes.
+This closes the direct-callee layer only. A depth-two callgraph audit still
+finds unmatched nested helpers, and no original-client startup or visual test
+was performed. See [the direct-callee evidence](docs/current-main-global-ui-setup.md).

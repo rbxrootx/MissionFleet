@@ -27,3 +27,21 @@ jump skips the gap, so it remains outside the corrected function extent.
 The resource-loading and callback behavior are statically established from the
 mapped code. No original-client startup, visual, or interaction test was
 performed.
+
+## Direct setup callees
+
+All 28 unique indexed functions called directly by `FUN_5878af40` are now
+reconstructed from their mapped instruction streams and verified at 100.0% by
+objdiff 3.8.0. This layer adds 19,277 bytes and checks 834 mapped operand
+targets. The original parent provides direct callsite and argument evidence;
+the callees include repeated child initializers, shared resource setup, and
+small vtable-backed object setup. Exact class identities and field meanings are
+not inferred from these instruction matches alone.
+
+Five Ghidra extents were extended to include complete epilogues after boundary
+decoding: `FUN_58806150` (+6 bytes), `FUN_5889c8d0` (+6), `FUN_5881f3d0` (+6),
+`FUN_587af6d0` (+8), and `FUN_588ebdd0` (+9). The extent edits total 35 bytes
+and include the observed stack restores, exception cleanup, cookie check, and
+returns. The root's depth-two callgraph still contains unmatched nested
+helpers, so this does not close the full setup branch. No client was launched
+for visual or runtime validation.
