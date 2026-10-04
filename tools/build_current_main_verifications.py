@@ -265,6 +265,7 @@ ADDRESSES = (
     "588E65D0", "588EFF30", "588F0150", "58908170",
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
+    "587B9190", "587B9270", "587B9E10",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -321,7 +322,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -519,6 +520,24 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "587B9190": {
+        "name_in_analysis": "FUN_587b9190 / empty 0x80010F01 sender",
+        "called_by": "Called repeatedly by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650.",
+        "behavior": "Calls verified outbound sender FUN_58970C70 with receiver unchanged in ECX, message 0x80010F01, and five zero stack arguments. Returns the sender result with plain ret. The full body is 21 bytes with one mapped direct-call target.",
+        "uncertainty": "The message's protocol meaning and live wire behavior remain unknown. No original-client or emulator runtime test was performed.",
+    },
+    "587B9270": {
+        "name_in_analysis": "FUN_587b9270 / two-DWORD 0x80010F06 sender",
+        "called_by": "Called by verified packet dispatcher FUN_587BB700 and event dispatcher FUN_588C1650 with one pointer argument.",
+        "behavior": "Reads DWORDs +0 and +4 from the pointer argument and calls verified outbound sender FUN_58970C70 with receiver unchanged in ECX, message 0x80010F06, those two DWORDs as the first two sender values, and three zero arguments. Returns the sender result with ret 4. The full body is 30 bytes with one mapped direct-call target.",
+        "uncertainty": "The record's semantic fields, null-pointer precondition, message meaning, and live wire behavior remain unknown. No original-client or emulator runtime test was performed.",
+    },
+    "587B9E10": {
+        "name_in_analysis": "FUN_587b9e10 / one-value 0x8001312B sender",
+        "called_by": "Called by verified FUN_588450B0 and FUN_588C4210 with one scalar argument.",
+        "behavior": "Calls verified outbound sender FUN_58970C70 with receiver unchanged in ECX, message 0x8001312B, the stack argument as first sender value, and four zero arguments. Returns the sender result with ret 4. The full body is 26 bytes with one mapped direct-call target.",
+        "uncertainty": "The scalar's domain meaning, message meaning, and live wire behavior remain unknown. No original-client or emulator runtime test was performed.",
+    },
     "587B9760": {
         "name_in_analysis": "FUN_587b9760 / masked-word selector message sender",
         "called_by": "Called by verified state handlers FUN_587EFD60 and FUN_587FD890 with a receiver in ECX and five stack arguments.",
