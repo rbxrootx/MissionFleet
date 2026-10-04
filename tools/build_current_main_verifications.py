@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "588D66D0": {
+        "name_in_analysis": "FUN_588d66d0",
+        "called_by": "Called by 0x587EFD60 once, 0x587FAEC0 twice, and 0x587FD890 once. The first caller tests the result for null; 0x587FD890 compares it against sentinel 0x40000000.",
+        "behavior": "Takes its receiver in ECX, loads and returns the DWORD at receiver +0x6088, then returns with plain ret. It has no stack arguments.",
+        "uncertainty": "The receiver type and the meaning or type of field +0x6088 are unknown. Caller null and sentinel checks show only how the value is consumed, not its domain semantics. The complete mapped 7-byte extent has no external operand targets; no runtime test was performed.",
+    },
     "58759EB0": {
         "name_in_analysis": "FUN_58759eb0",
         "called_by": "Called by 0x58840890 at six sites, 0x588450B0 at two sites, and 0x58890110 at twelve sites. The 0x588450B0 caller checks the returned value for null; 0x58840890 chains repeated calls using different receiver fields.",
