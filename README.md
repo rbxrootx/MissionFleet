@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,104 matches cover 2,242,154 bytes (21.4155%) and are verified
+The current 7,105 matches cover 2,242,239 bytes (21.4163%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -53,6 +53,8 @@ The linked state-reset continuation is documented in
 [the state-reset notes](docs/current-main-predicate-state-reset.md).
 The latest packed-record lookup is documented in
 [the record-lookup notes](docs/current-main-packed-record-lookup.md).
+The latest intrusive-list removal helper is documented in
+[the list-removal notes](docs/current-main-intrusive-list-removal.md).
 The latest shared state-bit setter is documented in
 [the state-bit notes](docs/current-main-state-bit-setter.md).
 The latest record-comparison path is documented in

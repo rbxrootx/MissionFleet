@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,104 verified matches
-totaling 2,242,154 bytes (21.4155%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,105 verified matches
+totaling 2,242,239 bytes (21.4163%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -101,6 +101,12 @@ by three verified functions. It scans `+0xE4` records at `+0xF0`, comparing a
 packed key's low byte, next byte, and upper word against record offsets 0, 1,
 and 2; it returns the matching record pointer or null. The record and key
 semantics remain unknown. Its complete body matches with no relocations.
+
+The latest intrusive-list removal helper is `FUN_588F5120`, an 85-byte
+routine called by three verified functions. It finds a node by payload, repairs
+neighbor/head/tail links, and decrements the list count without freeing the
+node. The list owner and payload meanings remain unknown; the full extent
+matches with no relocations.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When

@@ -288572,6 +288572,32 @@
         "behavior": "Takes one packed 32-bit key and searches the receiver's array at +0xF0 for the count at +0xE4, using a 0xAC-byte stride. It requires key byte 0 to equal 0x0B, record byte +1 to equal key byte 1, and record word +2 to equal key word +2. On a full match it returns the record address; otherwise it returns null. The function cleans its single stack argument with ret 4.",
         "uncertainty": "The array owner/type and meanings of the key fields and 0xAC-byte records remain unresolved. Callers use the returned pointer for subsequent record processing but do not establish domain names. The complete 87-byte extent has no mapped operand targets."
       }
+    },
+    {
+      "address": "588F5120",
+      "name": "FUN_588f5120",
+      "size": 85,
+      "symbol": "_FUN_588f5120",
+      "source": "src/client-current/Main/FUN_588f5120.cpp",
+      "source_sha256": "512ab6bae4159f5e76389c03b38c2249a8763f2d91a3fb65d7474fbdad273b1f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588f5120",
+        "called_by": "Directly called by three verified functions: 0x587A4440, 0x588D4300, and 0x588F55C0. 0x588D4300 contains repeated callsites.",
+        "behavior": "Takes a value pointer and returns void with ret 4. If the value is non-null, it scans the list headed at receiver +4, following node +8 links, for a node whose +0x0C field equals the value. On a match it unlinks the node using its +4 previous and +8 next pointers, updates the list head at +4 or tail at +8 when removing an endpoint, and decrements the count at +0x0C. It does not free the node. A null value or missing match leaves the list unchanged.",
+        "uncertainty": "The list owner and payload type remain unidentified, and callers do not establish what the payloads represent. The complete 85-byte extent has no mapped operand targets."
+      }
     }
   ]
 }
