@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587F21E0": {
+        "name_in_analysis": "FUN_587f21e0",
+        "called_by": "Called twice from 0x587FAEC0 and once from 0x587FD890. The callers pass an object pointer as the first stack argument and two scalar control values; 0x587FD890 passes 0x40000000 as one control value.",
+        "behavior": "Takes three stack arguments and a receiver. It clears bit 0 in the word at first_argument +0x24, reads a 16-bit value at first_argument +0x350, and compares it with receiver +0x104C8. On equality it copies a value from global object 0x58A247F8's +4 object +0x350, clears receiver state fields +0x10554/+0x10558/+0x10568, and calls 0x587EAC40. It then examines eight global words at +0x64 for flag bits 0 and 1, adjusts a count, and updates additional receiver state through several branches and helper calls. The full extent is 1,670 bytes with 53 mapped operand targets.",
+        "uncertainty": "The receiver and input-object types, meanings of the 16-bit identifier, control parameters, global flag sources, receiver state fields, and higher-level purpose are unresolved. Branch mechanics are visible but do not establish the corresponding game concepts. No runtime behavior test was performed.",
+    },
     "5873A2E0": {
         "name_in_analysis": "FUN_5873a2e0",
         "called_by": "Called twice by 0x587E0090, twice by 0x587E3080, and once by 0x588B1580. Callers pass a pointer in one stack argument and preserve their receiver in ECX.",

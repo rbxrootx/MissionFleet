@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,777
-identified code bytes across six report units. There are 7,122 verified matches
-totaling 2,245,136 bytes (21.4440%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,123 verified matches
+totaling 2,246,806 bytes (21.4599%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -21,12 +21,15 @@ and [`docs/current-main-indexed-pointer-lookup.md`](docs/current-main-indexed-po
 and [`docs/current-main-tag-dispatch-587e0090.md`](docs/current-main-tag-dispatch-587e0090.md).
 The two-word update thunk is documented in
 [`docs/current-main-pair-update-thunk.md`](docs/current-main-pair-update-thunk.md).
+The state-update handler is documented in
+[`docs/current-main-state-update-587f21e0.md`](docs/current-main-state-update-587f21e0.md).
 
-The latest addition, `FUN_5873A2E0`, is a 19-byte thunk called five times by
-three verified functions. It unpacks two DWORDs and calls `0x58903290`; that
-callee writes receiver fields `+4/+8` and conditionally propagates deltas through
-linked objects. Names and domain meaning remain unresolved. The full extent and
-its call target match under objdiff; no runtime behavior test was performed.
+The latest addition, `FUN_587F21E0`, is a 1,670-byte state handler called three
+times by two verified functions. It clears an input-object flag, compares a
+16-bit value with receiver state, scans eight global status words, and updates
+additional receiver fields through multiple helper paths. Field and flag
+meanings remain unknown. Its full extent and 53 operands match under objdiff;
+no runtime behavior test was performed.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
