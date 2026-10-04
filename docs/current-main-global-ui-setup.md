@@ -143,3 +143,18 @@ Class identities, ownership, field schemas, and user-visible meaning remain
 unresolved. The audit covers indexed direct calls through two edges; indirect
 dispatch and deeper paths are still open, and no runtime or visual test was
 performed.
+
+## `FUN_58883F80` startup-control branch
+
+All indexed callees from `FUN_58883F80` through depth two are now matched. Four
+new functions add 1,168 byte-identical bytes and check 42 mapped operand
+targets; the depth-two audit reports no unmatched indexed target under this
+root.
+
+The caller's mapped instructions install observed vtables, repeatedly construct
+controls through `FUN_588C5F30` and `FUN_588C5FD0`, and initialize a larger
+control through `FUN_58814A10`. The nested helper `FUN_58907F80` initializes
+three fields and installs vtable `0x589A29C4`. These callsites support the
+control-construction path, but class names, resource identities, field meaning,
+and actual appearance are still unknown. The depth-two result does not cover
+other startup branches or indirect dispatch; no runtime/visual test was run.

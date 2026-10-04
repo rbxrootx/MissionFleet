@@ -118,6 +118,8 @@ ADDRESSES = (
     "587CF6D0", "587CF790", "587CEB60", "587CFCE0", "58789750",
     "587CF610", "587D1F10", "5881A8B0",
     "587CECC0", "58789620",
+    "588C5F30", "588C5FD0", "58814A10",
+    "58907F80",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -323,6 +325,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "587CF6D0", "587CF790", "587CEB60", "587CFCE0", "58789750",
     "587CF610", "587D1F10", "5881A8B0",
     "587CECC0", "58789620",
+    "588C5F30", "588C5FD0", "58814A10",
+    "58907F80",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4043,6 +4047,30 @@ EVIDENCE = {
         "called_by": "Directly called by 0x58789750 during child setup.",
         "behavior": "Walks receiver-linked entries, performs two indirect virtual calls on each entry, calls free helper 0x5897CC42, and clears receiver fields +4 through +0x10. Its corrected 94-byte extent includes the complete ret; two following int3 bytes are padding.",
         "uncertainty": "The virtual methods' semantics and ownership/lifetime contract are unresolved.",
+    },
+    "588C5F30": {
+        "name_in_analysis": "FUN_588c5f30",
+        "called_by": "Called twice by 0x58883F80 during startup control construction.",
+        "behavior": "Runs base initializer 0x589031A0, installs vtable address 0x589A0BCC, initializes receiver fields through +0x80, and calls shared setup helper 0x588FFDB0 before returning with ret 0x1C.",
+        "uncertainty": "The class, field semantics, and helper contract are unresolved. The complete 148-byte body decodes.",
+    },
+    "588C5FD0": {
+        "name_in_analysis": "FUN_588c5fd0",
+        "called_by": "Called five times by 0x58883F80 while constructing repeated controls.",
+        "behavior": "Allocates child storage through 0x5897CC4E, invokes setup helper 0x5875DDA0 and control helper 0x587A54D0, then returns with ret 8.",
+        "uncertainty": "The child type, resource semantics, and helper contracts are unresolved. The complete 150-byte body decodes.",
+    },
+    "58814A10": {
+        "name_in_analysis": "FUN_58814a10",
+        "called_by": "Directly called by 0x58883F80 during startup control construction.",
+        "behavior": "Runs base initialization, installs vtable addresses 0x5898C500 and 0x5899D6F4, then constructs repeated child objects through allocator, state, and widget helpers.",
+        "uncertainty": "The class identity, resource/child schema, and UI role are unresolved. The complete 830-byte body decodes.",
+    },
+    "58907F80": {
+        "name_in_analysis": "FUN_58907f80",
+        "called_by": "Called twice by 0x589088D0 at 0x5890895C and 0x589089AE, reachable from the 0x58883F80 startup subtree.",
+        "behavior": "Installs vtable address 0x589A29C4 and stores supplied values in receiver fields +0x0C, +0x10, and +0x14 before returning with ret 0x0C.",
+        "uncertainty": "The object class, constructor purpose, and field meanings are unresolved. The complete 40-byte body decodes.",
     },
 }
 

@@ -282518,6 +282518,366 @@
         "behavior": "Walks receiver-linked entries, performs two indirect virtual calls on each entry, calls free helper 0x5897CC42, and clears receiver fields +4 through +0x10. Its corrected 94-byte extent includes the complete ret; two following int3 bytes are padding.",
         "uncertainty": "The virtual methods' semantics and ownership/lifetime contract are unresolved."
       }
+    },
+    {
+      "address": "588C5F30",
+      "name": "FUN_588c5f30",
+      "size": 148,
+      "symbol": "_FUN_588c5f30",
+      "source": "src/client-current/Main/FUN_588c5f30.cpp",
+      "source_sha256": "3726e99447db17a14d5147f5e76209668503634ddcf1df78660e2f980887c86c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58988A28",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "589A0BCC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c5f30",
+        "called_by": "Called twice by 0x58883F80 during startup control construction.",
+        "behavior": "Runs base initializer 0x589031A0, installs vtable address 0x589A0BCC, initializes receiver fields through +0x80, and calls shared setup helper 0x588FFDB0 before returning with ret 0x1C.",
+        "uncertainty": "The class, field semantics, and helper contract are unresolved. The complete 148-byte body decodes."
+      }
+    },
+    {
+      "address": "588C5FD0",
+      "name": "FUN_588c5fd0",
+      "size": 150,
+      "symbol": "_FUN_588c5fd0",
+      "source": "src/client-current/Main/FUN_588c5fd0.cpp",
+      "source_sha256": "249e82788dd9f7076638bc0cbb988ad0fa5116c2edb186556cdc53e59f3e23a2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "589899EB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "587A54D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c5fd0",
+        "called_by": "Called five times by 0x58883F80 while constructing repeated controls.",
+        "behavior": "Allocates child storage through 0x5897CC4E, invokes setup helper 0x5875DDA0 and control helper 0x587A54D0, then returns with ret 8.",
+        "uncertainty": "The child type, resource semantics, and helper contracts are unresolved. The complete 150-byte body decodes."
+      }
+    },
+    {
+      "address": "58814A10",
+      "name": "FUN_58814a10",
+      "size": 830,
+      "symbol": "_FUN_58814a10",
+      "source": "src/client-current/Main/FUN_58814a10.cpp",
+      "source_sha256": "645f92b58814de47b9b3b9da1f5c917c4d08e7c7ffb559a371943cf67d6c04d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898313F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "5899D6F4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "58A24610",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "58A24610",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 300,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "58731C60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 353,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 378,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 420,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 439,
+          "target_address": "58733280",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 482,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 495,
+          "target_address": "58902EE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 514,
+          "target_address": "58814B87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 524,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 546,
+          "target_address": "58A24610",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 612,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 619,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 629,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 654,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 676,
+          "target_address": "58A24610",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 735,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 749,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 759,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58814a10",
+        "called_by": "Directly called by 0x58883F80 during startup control construction.",
+        "behavior": "Runs base initialization, installs vtable addresses 0x5898C500 and 0x5899D6F4, then constructs repeated child objects through allocator, state, and widget helpers.",
+        "uncertainty": "The class identity, resource/child schema, and UI role are unresolved. The complete 830-byte body decodes."
+      }
+    },
+    {
+      "address": "58907F80",
+      "name": "FUN_58907f80",
+      "size": 40,
+      "symbol": "_FUN_58907f80",
+      "source": "src/client-current/Main/FUN_58907f80.cpp",
+      "source_sha256": "7894a7cd00ba5ccf4fa0ea93854bf1bf68652904950ac4ffc782334452306571",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 27,
+          "target_address": "589A29C4",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58907f80",
+        "called_by": "Called twice by 0x589088D0 at 0x5890895C and 0x589089AE, reachable from the 0x58883F80 startup subtree.",
+        "behavior": "Installs vtable address 0x589A29C4 and stores supplied values in receiver fields +0x0C, +0x10, and +0x14 before returning with ret 0x0C.",
+        "uncertainty": "The object class, constructor purpose, and field meanings are unresolved. The complete 40-byte body decodes."
+      }
     }
   ]
 }
