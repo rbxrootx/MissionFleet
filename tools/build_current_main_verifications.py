@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4860,6 +4860,12 @@ EVIDENCE = {
         "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 in state-7 paths and by FUN_58839460 after the lookup at FUN_58753BF0 returns zero, where the caller first sets receiver byte +0x321 to 6.",
         "behavior": "Forwards the two stack arguments, three zero values, and constant event code 0x80010F06 to FUN_58970C70, then returns with ret 8. Its complete mapped body is 29 bytes and has one operand target.",
         "uncertainty": "The contract of FUN_58970C70 and the protocol meaning of event code 0x80010F06 are not identified; the callers' state changes do not establish whether the event is local, network-facing, or user-visible. No runtime test was performed.",
+    },
+    "58839CF0": {
+        "name_in_analysis": "FUN_58839cf0",
+        "called_by": "Reached from case 0x80020F12 in verified dispatchers FUN_587BB700 and FUN_588C1650. In FUN_588C1650, action value 0 calls FUN_58754CD0 first, then dispatches here only when the child at the observed +0x164 path has mode bits equal to 2; the other child mode calls FUN_588343B0.",
+        "behavior": "Runs only when receiver byte +0x2E5 equals 5, then sets it to 4. For input counts from 1 through 5, it iterates records of stride 0x54, toggles bit 0 in two receiver-referenced objects, copies bounded strings from each record's +0x0C field into object-associated 0x80-byte buffers, and compares record field +4 with global 0x58A0B4A4 to retain a matching index. Counts above 5 branch past that copy loop; counts below 5 cause bit 0 to be cleared on remaining entries and corresponding string slots to be filled from pointer 0x5898C922. If global 0x58A0B4A8 equals 3, it sets fields/flags on receiver child objects and dispatches through FUN_58903360 and FUN_5875D890; otherwise it clears observed state bits and a child field. The mapped body is 573 bytes, ends in ret 8 at 0x58839F2A, and is followed by three INT3 bytes before the next indexed function. Eleven operand targets are inventoried.",
+        "uncertainty": "The input record schema, identities of the two arrays/objects, matching field meaning, global mode meanings, string role, and resulting UI or protocol effect remain unresolved. The original inventory recorded only 559 bytes and cut through the immediate operand of a mov instruction; the 573-byte extent is supported by contiguous mapped instructions and the ret/alignment boundary. No emulator test was performed.",
     },
 }
 

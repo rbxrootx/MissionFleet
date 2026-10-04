@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,817
-identified code bytes across six report units. There are 7,138 verified matches
-totaling 2,258,450 bytes (21.5711%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
+identified code bytes across six report units. There are 7,139 verified matches
+totaling 2,259,023 bytes (21.5765%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -46,9 +46,11 @@ proposal notification path), and `FUN_588ebfa0` (a 221-byte ranged selector
 update used by three verified state handlers), and `FUN_58839460` (a 649-byte
 record path reached from message case `0x80020F0C`), `FUN_58753bf0` (a
 197-byte two-key lookup used by that path), and `FUN_587b9290` (a 29-byte
-wrapper forwarding event `0x80010F06`). Together, the ten functions add 6,117
-byte-matched bytes. Their field and helper meanings remain partially unknown;
-no emulator test was performed. See
+wrapper forwarding event `0x80010F06`), and `FUN_58839cf0` (a 573-byte
+case-`0x80020F12` state update whose inventory extent was corrected from 559
+bytes). Together, the eleven functions add 6,690 byte-matched bytes. Their
+field and helper meanings remain partially unknown; no emulator test was
+performed. See
 [`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
 [`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md),
 [`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md),
@@ -64,6 +66,8 @@ documented in
 [`docs/current-main-squadron-fleet-join-proposal.md`](docs/current-main-squadron-fleet-join-proposal.md).
 The identity lookup and zero-result forwarding path are detailed in
 [`docs/current-main-proposal-identity-lookup-fallback.md`](docs/current-main-proposal-identity-lookup-fallback.md).
+The corrected extent and caller evidence for the case-`0x80020F12` update are
+in [`docs/current-main-message-80020f12-child-list-state-update.md`](docs/current-main-message-80020f12-child-list-state-update.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed

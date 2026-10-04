@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,138 matches cover 2,258,450 bytes (21.5711%) and are verified
+The current 7,139 matches cover 2,259,023 bytes (21.5765%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
@@ -46,6 +46,9 @@ The latest message `0x80020F0C` record path is documented in
 [the proposal notes](docs/current-main-squadron-fleet-join-proposal.md).
 The proposal identity lookup and fallback event forwarding are documented in
 [the lookup notes](docs/current-main-proposal-identity-lookup-fallback.md).
+The corrected `0x80020F12` child-list update extent and observed state changes
+are documented in
+[the state-update notes](docs/current-main-message-80020f12-child-list-state-update.md).
 The latest linked-text update path is documented in
 [the linked-text notes](docs/current-main-linked-text-update.md).
 The latest progress-grid state update is documented in
