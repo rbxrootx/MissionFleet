@@ -6,11 +6,18 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,762
-identified code bytes across six report units. There are 7,084 verified matches
-totaling 2,237,968 bytes (21.3755%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,085 verified matches
+totaling 2,238,000 bytes (21.3758%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
+
+The latest current Main.dll subsystem is `FUN_589081C0`, a 32-byte linked-chain
+distance helper called by eight verified functions. It follows node links at
+offset `+0x14` from the receiver's start pointer at `+0x78` toward its boundary
+pointer at `+0x84`, returning the number of traversed links or `-1` on a null
+path. Its exact container type and the caller-level meaning of the count remain
+unknown. The reconstruction matches the captured bytes at 100.0% under objdiff.
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |

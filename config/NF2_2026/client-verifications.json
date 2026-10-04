@@ -287328,6 +287328,32 @@
         "behavior": "Reads the low byte of its stack argument, masks it to the low four bits, preserves bits 4..15 of the receiver's word at +0x24, merges the argument nibble into bits 0..3, stores the word, and returns with ret 4.",
         "uncertainty": "The receiver class and meaning of the +0x24 low-bit field and supplied nibble are unresolved. The complete 34-byte body decodes and contains no mapped operand targets."
       }
+    },
+    {
+      "address": "589081C0",
+      "name": "FUN_589081c0",
+      "size": 32,
+      "symbol": "_FUN_589081c0",
+      "source": "src/client-current/Main/FUN_589081c0.cpp",
+      "source_sha256": "758a616ceecce6b242404fbb2cad9781be0a283024f7fcbc17172cc540de83b6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_589081c0",
+        "called_by": "Directly called by eight verified functions: 0x58797960, 0x5879B3B0, 0x5879D3F0, 0x5879D480, 0x5879DD90, 0x58840890, 0x588450B0, and 0x588B96B0.",
+        "behavior": "Starts from the pointer at receiver +0x78 and boundary pointer at +0x84, follows each node's +0x14 link, and increments EAX for each step. Returns -1 if the start or an intermediate link is null; otherwise returns the number of steps when the boundary pointer is reached.",
+        "uncertainty": "The receiver/container type and meaning of the returned traversal count remain unidentified. The full 32-byte body decodes with no mapped operand targets."
+      }
     }
   ]
 }
