@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,326 matches cover 2,304,187 bytes (22.0072%) and are verified
+The current 7,329 matches cover 2,305,706 bytes (22.0217%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).

@@ -307132,6 +307132,477 @@
         "behavior": "Uses +0x482C to select a 0x18-byte record group, checks and adjusts its stored ranges through FUN_5897CC72, sets manager state +0x4828 to 1, then calls FUN_587AEDB0, FUN_5876BAF0, and FUN_58764D30.",
         "uncertainty": "No direct code caller was identified in the captured references; the meaning of the selected record and three follow-up calls remains unresolved."
       }
+    },
+    {
+      "address": "588EAB30",
+      "name": "FUN_588eab30",
+      "size": 677,
+      "symbol": "_FUN_588eab30",
+      "source": "src/client-current/Main/FUN_588eab30.cpp",
+      "source_sha256": "ef1bcf32fe2704da2f2fc2ae6ab407337b0ad2d6c67a480a467271aa58e5b27a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "588EACF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "588EAC71",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 192,
+          "target_address": "588DB440",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 217,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "588EAB80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 272,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 291,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 313,
+          "target_address": "587AEDB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 422,
+          "target_address": "5898C184",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 457,
+          "target_address": "588EADCD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 487,
+          "target_address": "588EADCD",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 500,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 510,
+          "target_address": "588EADAC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 515,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 527,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 572,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 588,
+          "target_address": "58849980",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 602,
+          "target_address": "588EA8E0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 610,
+          "target_address": "5898C130",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 624,
+          "target_address": "5898C1B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 649,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 665,
+          "target_address": "58849980",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588eab30 / CShipSpriteFileManager indexed record access",
+        "called_by": "This manager method reads the active state at +0x4828/+0x482C, per-index pointers at +0x808/+0x1008, and 0x18-byte records at +0x1820, all initialized or released by verified CShipSpriteFileManager lifecycle methods.",
+        "behavior": "Processes the selected record group and its begin/end fields at stride 0x18, updates pointer ranges through FUN_5897CC72, obtains a related buffer through FUN_588DB440, invokes FUN_587AEDB0 on a branch, and clears or updates selected-index state and its associated pointers on other branches.",
+        "uncertainty": "No direct call site was identified in the captured code references. The external trigger, index meaning, and record semantics remain unresolved."
+      }
+    },
+    {
+      "address": "588EAF30",
+      "name": "FUN_588eaf30",
+      "size": 510,
+      "symbol": "_FUN_588eaf30",
+      "source": "src/client-current/Main/FUN_588eaf30.cpp",
+      "source_sha256": "eea87337de889196d2f78257153da03be9b67bfa8721d26b2296c9e0a395b105",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 110,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 155,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "587A54D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 285,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 302,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 317,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 330,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 342,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 372,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 445,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 466,
+          "target_address": "588F6890",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588eaf30 / CShipSpriteFileManager indexed record access",
+        "called_by": "The verified table scan FUN_588EB130 directly calls this accessor at 0x588EB232.",
+        "behavior": "Takes an index, increments its count at +8, checks that index in pointer arrays at +0x808 and +0x1008, and when both entries exist writes them to the two caller-provided output pointers. Other paths adjust associated ranges in the 0x18-byte records at +0x1820 and call FUN_587A54D0 and FUN_588F6890.",
+        "uncertainty": "The pointer payload types, count meaning, and conditions for the additional range-update paths remain unknown."
+      }
+    },
+    {
+      "address": "588EB130",
+      "name": "FUN_588eb130",
+      "size": 332,
+      "symbol": "_FUN_588eb130",
+      "source": "src/client-current/Main/FUN_588eb130.cpp",
+      "source_sha256": "88aa618113f2f575c1cb8e89ebade531110501d05a90ff571a6d2369c03444ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 78,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 108,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "588EB272",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "588EB258",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 141,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "588EB25F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 162,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 174,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 236,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 259,
+          "target_address": "588EAF30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 268,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 280,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "588EB184",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "588EB1B7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 306,
+          "target_address": "588EB1D8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588eb130 / CShipSpriteFileManager indexed record access",
+        "called_by": "This table scan directly calls FUN_588EAF30 at 0x588EB232 to retrieve per-index pointers.",
+        "behavior": "Scans up to 0x200 records at 0x18-byte stride from +0x1820 and examines the difference between fields at +0x182C and +0x1830. On nonempty paths it adjusts record ranges with FUN_5897CC72 and retrieves indexed pointers through FUN_588EAF30.",
+        "uncertainty": "The return value and exact record-ready predicate have not been exercised at runtime; only the original branch and call structure are recorded."
+      }
     }
   ]
 }
