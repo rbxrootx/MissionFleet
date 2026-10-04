@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,520
-identified code bytes across six report units. There are 6,788 verified matches
-totaling 2,143,705 bytes (20.4757%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,469,604
+identified code bytes across six report units. There are 6,836 verified matches
+totaling 2,148,570 bytes (20.5220%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -81,8 +81,11 @@ callee matched. Field meanings and UI actions remain unresolved. See the
 The connected `FUN_587DF580` control-menu path adds 58 exact matches totaling
 26,479 bytes and 481 checked relocation entries. Five function-body extents
 were corrected using reachable branch targets and complete return sequences,
-adding 61 identified bytes. The direct callsites and nested helper links are
-recorded; the high-fan-out `FUN_58764D30` branch remains unmatched. See
+adding 61 identified bytes. A further 12 functions in the `FUN_58764D30`
+descendant branch now match 952 bytes with 36 relocation targets checked; three
+truncated function extents were corrected from decoded control flow and return
+sequences. Their direct callsites and nested helper links are recorded, while
+the remaining high-fan-out descendants are still unmatched. See
 [the update-path evidence](docs/current-main-control-menu-factory-update-path.md).
 
 The `FUN_587E0E40` update branch adds ten byte-matched callees: eight direct

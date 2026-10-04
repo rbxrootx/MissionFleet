@@ -98,8 +98,25 @@ next indexed function or padding follows each return.
 | `589089E0` | 179 | 182 | `je 58908A8F` targets the completed `mov ecx, 0x80070057` error path and `jmp 58908A43`; `int3` padding follows at `58908A96`. |
 
 These matches establish the machine instructions and parent/child argument
-relationships. They do not identify the UI labels, object types, record schema,
-or visible state changes. A depth-seven audit now shows the outstanding
-high-fan-out descendants under `FUN_58764D30`, plus the other explicitly
-reported callgraph branches, as remaining work. Runtime behavior remains
-untested.
+relationships. The next `FUN_58764D30` frontier adds 12 new functions (952
+bytes), with 36 mapped operand targets checked. The callgraph audit ties the
+new leaves to their callers: `0x589028C0`→`0x58791F30`, `0x58902800`→
+`0x5878D590`, `0x58901DE0`→`0x58901A80`/`0x58901D30`,
+`0x589016D0`→`0x5897D186`, `0x587353D0` and `0x58743B80`→`0x58735360`,
+`0x58734C80`→`0x5897CC60`, and `0x58902440`→
+`0x588F6660`, `0x5878D5F0`, `0x58792120`, `0x588995E0`,
+`0x58735110`, `0x588996D0`, and `0x58748180`.
+
+Three extents were corrected against decoded instructions and adjacent
+functions. `FUN_58791F30` now spans 176 bytes through its cleanup handler and
+`ret` at `0x58791FDF`; `FUN_588995E0` spans 178 bytes through its cleanup
+handler and `ret` at `0x58899691`; `FUN_58748180` spans 38 bytes through the
+previously truncated final store and `ret` at `0x587481A5`. Each corrected
+candidate was rebuilt and passed objdiff byte comparison. One additional
+candidate, `FUN_58901A80`, was rechecked as part of the frontier and was already
+in the verified inventory.
+
+The matches establish machine instructions and caller/callee relationships.
+They do not identify the UI labels, object types, record schema, or visible
+state changes. Other high-fan-out descendants and runtime behavior remain
+unresolved and untested.
