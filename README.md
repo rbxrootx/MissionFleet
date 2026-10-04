@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,305 matches cover 2,300,861 bytes (21.9758%) and are verified
+The current 7,308 matches cover 2,301,640 bytes (21.9831%) and are verified
 individually at 100.0% by objdiff.
 The latest parent UI-child constructor match is documented in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
@@ -29,6 +29,8 @@ Its periodic movement and linked-list batch helper are documented in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
 Its gated state setup is documented in
 [the setup evidence](docs/current-main-communicator-id-setup-58848240.md).
+Its destructor and linked-chain cleanup are documented in
+[the teardown evidence](docs/current-main-communicator-id-teardown-58849540.md).
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
 room-message formatting, outbound state reporting, encoded-state progress,

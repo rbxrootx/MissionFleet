@@ -5,9 +5,9 @@ game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,469,964
-identified code bytes across six report units. There are 7,305 verified matches
-totaling 2,300,861 bytes (21.9758%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,057
+identified code bytes across six report units. There are 7,308 verified matches
+totaling 2,301,640 bytes (21.9831%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -30,6 +30,8 @@ Its periodic movement and bounded two-list batch path are recorded in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
 The same panel's vtable state-setup method is recorded in
 [the setup evidence](docs/current-main-communicator-id-setup-58848240.md).
+Its destructor wrapper, cleanup body, and linked-chain release are recorded
+in [the teardown evidence](docs/current-main-communicator-id-teardown-58849540.md).
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all

@@ -305999,6 +305999,158 @@
         "behavior": "Returns immediately unless the byte at [0x58A245B4]+0xD0 equals 0x0F. On that path it sets bits 0 and 2 of receiver word +0x24, replaces its masked state with 0x0100, writes 0xC8 to receiver +0x58, and calls FUN_58902D20 on child +0xA4 with argument -0x101. It checks global [0x58A246D8] fields +0x170 > 0x2F and +0x194 nonzero before obtaining a pointer at +0x194/+0xBC; otherwise the pointer is zero. It passes global 0x58A248F8 to FUN_58907990 with that pointer as receiver, then calls virtual slot +0x04 through the same pointer. For receiver mode word +0xF6 equal to zero it calls FUN_58902D20 on children +0xB4 and +0xB8 with -0x101 and +0x101, clears the low flag nibble on +0xB0, and sets it on +0xAC; for mode one it clears the nibble on +0xAC and sets it on +0xB0. Finally it writes 1 to child +0xD8 field +0x50 if global 0x58A0B4A0 is nonzero, otherwise zero. The complete body is 310 bytes with 10 mapped operand targets and two return sites.",
         "uncertainty": "The method's game/UI meaning, validity of the global pointer chain, indirect virtual-call contract, child identities, reason for the -0x101 and +0x101 values, and visible result are unresolved. This is an exact x86 instruction reconstruction, not a portable implementation or runtime comparison."
       }
+    },
+    {
+      "address": "58848680",
+      "name": "FUN_58848680",
+      "size": 90,
+      "symbol": "_FUN_58848680",
+      "source": "src/client-current/Main/FUN_58848680.cpp",
+      "source_sha256": "d4d1845309ed50522b7c3806893872e4c21e4b1bee19e1b0dadfca8596df078d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58848680 / ID-panel second linked-chain release",
+        "called_by": "The CPannelCommunicatorIDPannel cleanup routine FUN_58849540 calls this helper immediately after the already matched parallel helper FUN_58848610.",
+        "behavior": "Only when signed receiver word +0xF2 is positive and tail pointer +0x70 is nonnull, follows each node's +0x50 link, calls the node's first virtual slot with argument 1, and stops on a null next link or when the visited count equals +0xF2. It then zeroes receiver cursor +0x108, tail +0x70, head +0x6C, and count +0xF2. The complete 90-byte function has no mapped operand targets and ends in ret at 0x588486D9.",
+        "uncertainty": "The node class, first-slot callback contract, list ownership, and behavior under inconsistent count/link state are unknown. The zeroing path is conditional; no running-client test was performed."
+      }
+    },
+    {
+      "address": "58849540",
+      "name": "FUN_58849540",
+      "size": 659,
+      "symbol": "_FUN_58849540",
+      "source": "src/client-current/Main/FUN_58849540.cpp",
+      "source_sha256": "00949ab3fd8edd5dac0e0cd008252b6a44e4c987f8c5a21eb2a8118c4e576d01",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58984D01",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "5899E780",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "58848610",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 183,
+          "target_address": "58848680",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 535,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 568,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 587,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 617,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 635,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58849540 / CPannelCommunicatorIDPannel cleanup body",
+        "called_by": "The CPannelCommunicatorIDPannel vtable entry +0x00 points to wrapper FUN_588497E0, which calls this body directly. The constructor at FUN_58849B70 installs the same panel vtable.",
+        "behavior": "Installs the ID-panel vtable, invokes first-slot virtual callbacks with stack argument 1 on nonnull child pointers at +0xA4/+0xA8, paired arrays +0xB4..+0xC0, and individual fields +0xCC/+0xD0/+0xD4/+0xE0/+0xE4/+0xE8/+0xEC/+0xB0/+0xAC/+0x114/+0xD8/+0xDC/+0x118/+0x11C, clearing each released field. Between those groups it calls FUN_58848610 and FUN_58848680 for two linked chains. It passes receiver-owned buffers at +0x98 (when nonnull), +0x8C, +0x80 (when nonnull), and +0x74 to thunk FUN_5897CC42, zeros corresponding bookkeeping triples, and delegates to verified base teardown FUN_58902C10. The corrected complete body is 659 bytes with 10 mapped operand targets and ret at 0x588497D2.",
+        "uncertainty": "The callback slot and host thunk strongly suggest destruction/deallocation, but exact ownership and behavior for shared aliases or invalid pointers are not established. The Ghidra inventory stopped in the middle of the call at 0x58849777; the mapped epilogue continues to 0x588497D2, followed by 13 CC bytes before the wrapper. No runtime lifecycle comparison was performed."
+      }
+    },
+    {
+      "address": "588497E0",
+      "name": "FUN_588497e0",
+      "size": 30,
+      "symbol": "_FUN_588497e0",
+      "source": "src/client-current/Main/FUN_588497e0.cpp",
+      "source_sha256": "2b8c7b720a7e110bcc53e6df74f0589384876f62fbffcc7f2c05dd1bb3069ad5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58849540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588497E0 / CPannelCommunicatorIDPannel deleting-destructor wrapper",
+        "called_by": "Entry +0x00 of the RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 points here.",
+        "behavior": "Calls FUN_58849540 with the receiver in ECX. If bit 0 of its stack argument is set, passes the receiver to FUN_5897CC42. It then returns the receiver in EAX with ret 4. The complete body is 30 bytes with two mapped operand targets.",
+        "uncertainty": "The precise host callback at FUN_5897CC42 and allocation ownership remain unresolved. The original 27-byte inventory stopped before ret 4; the mapped function ends at 0x588497FD and is followed by two CC alignment bytes. No runtime deletion test was performed."
+      }
     }
   ]
 }

@@ -38,3 +38,5 @@ Its periodic update and linked-list batch helper are recorded in
 [the update-path evidence](current-main-communicator-id-periodic-58848e60.md).
 Its gated state-setup vtable method is recorded in
 [the setup-path evidence](current-main-communicator-id-setup-58848240.md).
+Its destructor wrapper, cleanup body, and linked-chain release are recorded
+in [the teardown evidence](current-main-communicator-id-teardown-58849540.md).

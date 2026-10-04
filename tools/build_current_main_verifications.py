@@ -266,7 +266,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -323,7 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
     "588AA0D0", "588AA120",
-    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240",
+    "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
@@ -521,6 +521,24 @@ FUNCTION_SIZE_OVERRIDES = {
     "588542A0": 84,
 }
 EVIDENCE = {
+    "58848680": {
+        "name_in_analysis": "FUN_58848680 / ID-panel second linked-chain release",
+        "called_by": "The CPannelCommunicatorIDPannel cleanup routine FUN_58849540 calls this helper immediately after the already matched parallel helper FUN_58848610.",
+        "behavior": "Only when signed receiver word +0xF2 is positive and tail pointer +0x70 is nonnull, follows each node's +0x50 link, calls the node's first virtual slot with argument 1, and stops on a null next link or when the visited count equals +0xF2. It then zeroes receiver cursor +0x108, tail +0x70, head +0x6C, and count +0xF2. The complete 90-byte function has no mapped operand targets and ends in ret at 0x588486D9.",
+        "uncertainty": "The node class, first-slot callback contract, list ownership, and behavior under inconsistent count/link state are unknown. The zeroing path is conditional; no running-client test was performed.",
+    },
+    "58849540": {
+        "name_in_analysis": "FUN_58849540 / CPannelCommunicatorIDPannel cleanup body",
+        "called_by": "The CPannelCommunicatorIDPannel vtable entry +0x00 points to wrapper FUN_588497E0, which calls this body directly. The constructor at FUN_58849B70 installs the same panel vtable.",
+        "behavior": "Installs the ID-panel vtable, invokes first-slot virtual callbacks with stack argument 1 on nonnull child pointers at +0xA4/+0xA8, paired arrays +0xB4..+0xC0, and individual fields +0xCC/+0xD0/+0xD4/+0xE0/+0xE4/+0xE8/+0xEC/+0xB0/+0xAC/+0x114/+0xD8/+0xDC/+0x118/+0x11C, clearing each released field. Between those groups it calls FUN_58848610 and FUN_58848680 for two linked chains. It passes receiver-owned buffers at +0x98 (when nonnull), +0x8C, +0x80 (when nonnull), and +0x74 to thunk FUN_5897CC42, zeros corresponding bookkeeping triples, and delegates to verified base teardown FUN_58902C10. The corrected complete body is 659 bytes with 10 mapped operand targets and ret at 0x588497D2.",
+        "uncertainty": "The callback slot and host thunk strongly suggest destruction/deallocation, but exact ownership and behavior for shared aliases or invalid pointers are not established. The Ghidra inventory stopped in the middle of the call at 0x58849777; the mapped epilogue continues to 0x588497D2, followed by 13 CC bytes before the wrapper. No runtime lifecycle comparison was performed.",
+    },
+    "588497E0": {
+        "name_in_analysis": "FUN_588497E0 / CPannelCommunicatorIDPannel deleting-destructor wrapper",
+        "called_by": "Entry +0x00 of the RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 points here.",
+        "behavior": "Calls FUN_58849540 with the receiver in ECX. If bit 0 of its stack argument is set, passes the receiver to FUN_5897CC42. It then returns the receiver in EAX with ret 4. The complete body is 30 bytes with two mapped operand targets.",
+        "uncertainty": "The precise host callback at FUN_5897CC42 and allocation ownership remain unresolved. The original 27-byte inventory stopped before ret 4; the mapped function ends at 0x588497FD and is followed by two CC alignment bytes. No runtime deletion test was performed.",
+    },
     "58848240": {
         "name_in_analysis": "FUN_58848240 / CPannelCommunicatorIDPannel gated state-setup method",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this method at slot +0x04. The panel's event method invokes the same virtual slot on a separate child at receiver +0x114, but this does not establish a direct call to this override.",
