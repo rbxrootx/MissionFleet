@@ -549,7 +549,7 @@ EVIDENCE = {
         "name_in_analysis": "FUN_58848e60 / CPannelCommunicatorIDPannel periodic update",
         "called_by": "The RTTI-backed CPannelCommunicatorIDPannel vtable at 0x5899E780 contains this method at slot +0x0C.",
         "behavior": "When a global byte at [0x58A245B4]+0xD0 equals 0xF, advances receiver word +0x106 until 0x12C, then resets it and calls FUN_58848870; otherwise resets the counter. With receiver flag bit 0x4 and an allowed masked state, steps receiver position toward +0x50/+0x54 using signed deltas of one, half, or quarter size and calls verified FUN_58902E10. It steps receiver fields +0x28/+0x2C toward targets +0x58/+0x5C by at most 0x20 through verified setters FUN_58902CE0/FUN_58902D20. Once all four fields reach targets, it changes observed flag masks and may call verified FUN_588486E0 or a parent virtual callback. The complete body is 652 bytes with 13 mapped operands.",
-        "uncertainty": "The global-byte meaning, update frequency, flag state names, parent callback contract, and rendered result remain unresolved. No portable implementation or running-client comparison was performed; the verified artifact is an exact x86 instruction reconstruction.",
+        "uncertainty": "The global-byte meaning, update frequency, flag state names, parent callback contract, and rendered result remain unresolved. A separate portable normal-path model covers receiver-local motion, counter, completion flags, and callback order, while delegating nested child propagation and unknown callbacks to hooks. It is excluded from the byte-match count; no running-client comparison was performed.",
     },
     "58848870": {
         "name_in_analysis": "FUN_58848870 / communicator ID linked-list batch helper",

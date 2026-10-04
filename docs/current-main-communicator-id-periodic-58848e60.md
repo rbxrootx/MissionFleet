@@ -40,6 +40,20 @@ node `+0x54`, and wraps to its head at a null link. It calls through pointer
 `ret` at `0x588489D0` (353 bytes); fifteen `CC` bytes precede the next
 indexed function at `0x588489E0`.
 
+The [portable motion model](../src/client-current/semantic/CommunicatorIdMotion.cpp)
+now reproduces the receiver-local counter, signed coordinate steps, capped
+size updates, completion-state flag changes, and order of child tick calls.
+It composes with the [reset model](../src/client-current/semantic/CommunicatorIdEvent.cpp):
+the native test resets the target fields, then checks the next periodic step
+toward the new target. Boundary cases cover deltas of 3, 7, and 8 in both
+directions, the 32-unit size limit, the counter at 299/300 and its signed
+wrap, the three completion states, and circular child iteration. Run
+`python tools/verify_communicator_id_motion.py` to reproduce these tests.
+The model exposes hooks for the two-list batch, recursive setter effects,
+refresh, and parent callback; their full behavior is not claimed by this
+receiver-local test. The portable source is excluded from the byte-match
+count.
+
 Reproduce the static checks with:
 
 ```text
@@ -49,6 +63,7 @@ python tools/generate_progress.py --check
 ```
 
 The global byte, flag state names, formatter and batch callback contracts,
-exact update frequency, and visible result remain unknown. The instruction
-match and RTTI check do not establish a running client or a faithful portable
-renderer. No original-client runtime comparison was performed.
+exact update frequency, nested child effects, and visible result remain
+unknown. The instruction match, RTTI check, and portable model do not
+establish a running client or a faithful renderer. No original-client
+runtime comparison was performed.

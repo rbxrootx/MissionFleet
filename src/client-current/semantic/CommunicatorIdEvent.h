@@ -10,6 +10,8 @@ struct MissionFleetCommunicatorIdNode {
     void* actionA4 = nullptr;
 };
 
+struct MissionFleetCommunicatorIdMotionChild;
+
 struct MissionFleetCommunicatorIdEventState {
     std::uint32_t position4 = 0;
     std::uint32_t position8 = 0;
@@ -17,6 +19,12 @@ struct MissionFleetCommunicatorIdEventState {
     std::uint32_t target50 = 0;
     std::uint32_t target54 = 0;
     std::uint32_t target58 = 0;
+    std::uint32_t width28 = 0;
+    std::uint32_t height2C = 0;
+    std::uint32_t targetHeight5C = 0;
+    std::uint16_t counter106 = 0;
+    void* transitionC8 = nullptr;
+    MissionFleetCommunicatorIdMotionChild* children3C = nullptr;
     void* controlD4 = nullptr;
     void* controlD8 = nullptr;
     void* controlDC = nullptr;

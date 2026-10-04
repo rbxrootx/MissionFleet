@@ -27,6 +27,8 @@ The ID panel's virtual input method and eight-entry key jump table are
 documented in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
 Its periodic movement and linked-list batch helper are documented in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
+The update evidence also covers the tested portable motion model and its
+limits around nested child effects and rendering.
 Its gated state setup is documented in
 [the setup evidence](docs/current-main-communicator-id-setup-58848240.md).
 Its destructor and linked-chain cleanup are documented in

@@ -30,6 +30,8 @@ The ID-panel input method and its separately verified key jump table are
 recorded in [the input evidence](docs/current-main-communicator-id-input-5884ab90.md).
 Its periodic movement and bounded two-list batch path are recorded in
 [the update evidence](docs/current-main-communicator-id-periodic-58848e60.md).
+The update path now has a portable receiver-local motion model with tested
+counter, position, size, completion-state, and child-callback behavior.
 The same panel's vtable state-setup method is recorded in
 [the setup evidence](docs/current-main-communicator-id-setup-58848240.md).
 Its destructor wrapper, cleanup body, and linked-chain release are recorded
