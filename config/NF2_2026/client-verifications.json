@@ -301149,6 +301149,159 @@
         "behavior": "When global gate 0x589C8EDC is nonzero, reads horizontal and vertical spans from global object 0x58A24580, halves each span, multiplies by 1000, and divides by the value at shared object +0x10524. It subtracts those scaled values and shared offsets +0x50/+0x54 from receiver coordinates +4/+8. If receiver +0x58 is nonnull, it calls 0x587B7400 with the computed coordinates and receiver +0x5C, substituting global value 0x58A248F8 when that field is -1. Whether the gate is set or not, it writes 0x101 to receiver +0x2C and returns. The complete mapped body is 136 bytes with five mapped operand targets.",
         "uncertainty": "The shared gate, global coordinate bounds, divisor and offsets are established from direct memory accesses, but their higher-level units/meaning are not. The contract of 0x587B7400 and receiver field roles are not fully resolved; constructors establish child setup context only. No runtime rendering test was performed."
       }
+    },
+    {
+      "address": "587B8290",
+      "name": "FUN_587b8290",
+      "size": 108,
+      "symbol": "_FUN_587b8290",
+      "source": "src/client-current/Main/FUN_587b8290.cpp",
+      "source_sha256": "2c331ca426e89da5f5bad21738b135347f86f4a90b9927c04c45e90bb53e03d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "587B7BD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b8290 / chat-category dispatch variant 1",
+        "called_by": "Called from verified client chat/event paths FUN_587FC9C0 and FUN_58890110; these callers supply a text-bearing record and scalar arguments.",
+        "behavior": "Filters the null-terminated text at record +0x30 through 0x587A2D40 using length minus 0x30. A nonzero filter result returns 0. Otherwise it calls FUN_587B7BD0 with receiver state; if allowed and receiver +0x188 is nonnegative, it dispatches selector 0x80020A00 through 0x58970C70, passing 0x20000 and receiver +0x188 ORed with 0x20000 as flags, along with the record, length, and zero. Other non-filtered paths return 1. The full mapped body is 108 bytes and returns with ret 0x0C.",
+        "uncertainty": "The filter callback policy, +0x188 field semantics, flag meaning, message record schema and protocol meaning of 0x80020A00 are unresolved. Static callers establish chat/event use; runtime behavior was not tested."
+      }
+    },
+    {
+      "address": "587B8300",
+      "name": "FUN_587b8300",
+      "size": 108,
+      "symbol": "_FUN_587b8300",
+      "source": "src/client-current/Main/FUN_587b8300.cpp",
+      "source_sha256": "9f3e2cf49517ae99d0ca3abc9f474df72ccd0faf33c09a6316749a9465295022",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "587B7BD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b8300 / chat-category dispatch variant 2",
+        "called_by": "Called from verified client chat/event paths FUN_587FC9C0 and FUN_58890110; these callers supply a text-bearing record and scalar arguments.",
+        "behavior": "Filters the null-terminated text at record +0x30 through 0x587A2D40 using length minus 0x30. A nonzero filter result returns 0. Otherwise it calls FUN_587B7BD0 with receiver state; if allowed and receiver +0x18C is nonnegative, it dispatches selector 0x80020A00 through 0x58970C70, passing 0x20000 and receiver +0x18C ORed with 0x30000 as flags, along with the record, length, and zero. Other non-filtered paths return 1. The full mapped body is 108 bytes and returns with ret 0x0C.",
+        "uncertainty": "The filter callback policy, +0x18C field semantics, flag meaning, message record schema and protocol meaning of 0x80020A00 are unresolved. Static callers establish chat/event use; runtime behavior was not tested."
+      }
+    },
+    {
+      "address": "587B8370",
+      "name": "FUN_587b8370",
+      "size": 108,
+      "symbol": "_FUN_587b8370",
+      "source": "src/client-current/Main/FUN_587b8370.cpp",
+      "source_sha256": "da0f61d745bc731afc7c15c8a6b0bc5fbb9e1f1bfe1650cfbd0b638920b031a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "587B7BD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b8370 / chat-category dispatch variant 3",
+        "called_by": "Called from verified client chat/event paths FUN_587FC9C0 and FUN_58890110; these callers supply a text-bearing record and scalar arguments.",
+        "behavior": "Filters the null-terminated text at record +0x30 through 0x587A2D40 using length minus 0x30. A nonzero filter result returns 0. Otherwise it calls FUN_587B7BD0 with receiver state; if allowed and receiver +0x190 is nonnegative, it dispatches selector 0x80020A00 through 0x58970C70, passing 0x20000 and receiver +0x190 ORed with 0x40000 as flags, along with the record, length, and zero. Other non-filtered paths return 1. The full mapped body is 108 bytes and returns with ret 0x0C.",
+        "uncertainty": "The filter callback policy, +0x190 field semantics, flag meaning, message record schema and protocol meaning of 0x80020A00 are unresolved. Static callers establish chat/event use; runtime behavior was not tested."
+      }
     }
   ]
 }
