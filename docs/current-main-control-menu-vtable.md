@@ -19,3 +19,7 @@ The seven vtable bodies total 12,164 byte-matched bytes. The separate
 12,589-byte constructor is also verified, for 24,753 matched bytes across the
 class constructor and its vtable methods. This is function-byte coverage; the
 event meanings, control names, and in-game behavior remain partly unresolved.
+
+The menu's entry method calls the separately matched
+[`FUN_588ed750` layout refresh](current-main-control-menu-layout-refresh.md);
+the rebuild routine is its other verified caller.

@@ -17,3 +17,7 @@ matches all 502 bytes at 100.0% and checks 23 mapped operands.
 
 The state meaning, child roles, helper effects, and visible transition remain
 unknown. No emulator test was performed.
+
+Its child-layout update call at `0x587E2ED1` reaches
+[`FUN_588ed750`](current-main-control-menu-layout-refresh.md), which is also
+called from the verified control-rebuild path.
