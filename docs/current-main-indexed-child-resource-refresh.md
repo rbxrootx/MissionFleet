@@ -19,3 +19,14 @@ The complete 347-byte body and all 12 mapped operand targets match the pinned
 original. The container and resource-entry contracts, child-slot roles, and
 flag-mask meanings remain unresolved. No runtime client or emulator test was
 performed.
+
+## Shared indexed-node accessor
+
+The helper's `FUN_58908140` dependency is now independently matched. That
+41-byte routine takes a signed index, starts at receiver `+0x78`, follows
+next-pointers at node `+0x14` for positive indices, and returns the selected
+node's DWORD at `+8`. A null node returns `-1`; zero and negative indices use
+the head without advancing. Three verified routines call it, including the
+six-slot refresh above. Its list/node types, ownership, and negative-index
+policy remain unresolved. ObjDiff checked the full body; it contains no mapped
+operand targets.

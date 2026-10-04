@@ -296998,6 +296998,32 @@
         "behavior": "Returns immediately when receiver byte +0xAC equals 8 or 9. Otherwise it obtains a count from the object at receiver +0x4CC via FUN_58908170, caps the processed count at six, and loops over receiver child pointers +0x4D0 onward. For each active index it obtains the corresponding source entry through FUN_58908140, reads a resource entry at index +0x68E from global object 0x58A246A4 only when its count/pointer checks pass, and stores that resource pointer into child +0x50. A non-null resource causes six observed DWORDs at resource +0x10..+0x24 to be copied into the child fields beginning +0x0C; otherwise child +0x50 is cleared. If receiver dword +0x15C equals 0x120000 it sets mask 0x000F in each active child's word +0x24; otherwise it clears mask 0xFFF0. Remaining slots through six have mask 0xFFF0 cleared. The complete 347-byte body ends with ret and has 12 mapped operand targets.",
         "uncertainty": "The receiver, container, six child-slot, and resource-entry types; helper contracts; resource table meaning; state byte values; and child flag masks remain unresolved. The two verified callers establish repeated update-path use but not the visible meaning of the entries. No client runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58908140",
+      "name": "FUN_58908140",
+      "size": 41,
+      "symbol": "_FUN_58908140",
+      "source": "src/client-current/Main/FUN_58908140.cpp",
+      "source_sha256": "fb6292f4f216dd09100953fcf274a667c4b710716a1f399862a217e48b66fae5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58908140",
+        "called_by": "Called by verified routines FUN_588290F0, FUN_588450B0, and FUN_5888CEE0. In the six-slot child refresh, it supplies indexed items from the object at receiver +0x4CC.",
+        "behavior": "Takes a receiver in ECX and one signed stack index. It begins at the node pointer in receiver +0x78; for a positive index it follows next pointers at node +0x14 until the index reaches zero, returning -1 if a null node is encountered. For zero or negative indices it does not advance. If the selected node is non-null, it returns the DWORD at node +8; otherwise it returns -1. The complete 41-byte body ends with ret 4 and contains no mapped operand targets.",
+        "uncertainty": "The receiver/list/node types, ownership and lifetime, whether negative indices are intentionally treated as the head, and caller-specific index meaning remain unknown. The traversal and return behavior are directly visible in the original instructions; no runtime test was performed."
+      }
     }
   ]
 }

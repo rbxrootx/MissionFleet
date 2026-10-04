@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,165 verified matches
-totaling 2,271,183 bytes (21.6926%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,166 verified matches
+totaling 2,271,224 bytes (21.6930%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1163,7 +1163,8 @@ initializes a child object. Counter and control semantics remain unknown. See
 `FUN_5888CEE0` adds a 347-byte exact match used by verified update routines
 `FUN_58890110` and `FUN_58893860`. It refreshes up to six child slots from
 indexed global resource entries and applies observed word masks; slot and
-resource semantics remain unresolved. See
+resource semantics remain unresolved. Its shared 41-byte linked-node accessor
+`FUN_58908140` is now also matched and used by three verified callers. See
 [indexed child-resource refresh evidence](docs/current-main-indexed-child-resource-refresh.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
