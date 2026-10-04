@@ -1,10 +1,10 @@
 # Current Main.dll semicolon-delimited record parser
 
-`FUN_58849440` is a 242-byte routine in the hash-pinned mapped installed-client
-`Main.dll`. Verified callers are packet/message dispatcher `FUN_587BB700` and
-event dispatcher `FUN_588C1650`; both pass a pointer, a length, and a third
-selector value. The complete function extent matches at 100% under objdiff,
-including all nine mapped operand targets.
+`FUN_58849360` and `FUN_58849440` are paired routines in the hash-pinned mapped
+installed-client `Main.dll`. The first is 216 bytes with five operand targets;
+the second is 242 bytes with nine operand targets. Both are byte-matched under
+objdiff and reached through verified packet/message dispatcher
+`FUN_587BB700` and event dispatcher `FUN_588C1650`.
 
 When the third argument is zero, the function calls `FUN_58848610` on its
 receiver and then invokes receiver subobject `+0x30`, vtable slot `+0x18`, with
@@ -23,3 +23,24 @@ receiver `+0xF0` differs from input length minus one, it calls
 receiver type, third-argument meaning, global-string suppression policy,
 callback contract, and visible message effect remain unknown. No runtime or
 emulator test was performed.
+
+## Count-checked token batch path: `FUN_58849360`
+
+Both dispatchers load the receiver from global object `0x58A245B4` plus
+`0xD8` and pass three stack values used by the routine as input pointer, input
+length, and requested record count. It clears receiver word `+0xF2`. A zero
+requested count skips token parsing and calls `FUN_58848680` before dispatch.
+Otherwise it scans to input length minus one, splits on semicolon, copies each
+segment into a zeroed 24-byte local buffer, and passes the buffer with the
+receiver to `FUN_588490F0`. It stops at the mapped `0x1000` iteration bound.
+After parsing, it compares the sign-extended word at receiver `+0xF2` with the
+requested count and calls `FUN_58848680` on mismatch. It then dispatches
+`0xEE49` through receiver child `+0x30`, vtable slot `+0x18`, with a zero
+argument.
+
+The function table previously ended after `add esp,0x20` at `0x58849432`,
+omitting `ret 0x0C` at `0x58849435..0x58849437`. Eight `CC` padding bytes follow
+before `FUN_58849440` at `0x58849440`. The corrected extent test checks the
+return and padding boundary. The exact token schema, `FUN_588490F0` and
+`FUN_58848680` contracts, requested-count meaning, and callback's visible
+effect remain unknown; no runtime test was performed.
