@@ -286611,6 +286611,601 @@
         "behavior": "Clamps the first integer argument to zero or greater and writes it to offsets +0x58/+0x5C of the object at receiver +0x70; writes 0x40000000 at that object's +0x60; clamps the minimum of the two arguments to at least one and writes it at receiver +0x54; then stores a signed division result derived from the embedded +0x58 value and receiver +0x68 at receiver +0x60.",
         "uncertainty": "Receiver and embedded-object types, fields' semantic units, and this method's public contract remain unresolved. The complete 82-byte body has no operand relocations."
       }
+    },
+    {
+      "address": "587A15E0",
+      "name": "FUN_587a15e0",
+      "size": 87,
+      "symbol": "_FUN_587a15e0",
+      "source": "src/client-current/Main/FUN_587a15e0.cpp",
+      "source_sha256": "78a35ec8e62e5feab2a4cf9e3c552fced06c954e09551d879987a7136634ea1b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "587A1330",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "5898C120",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "587A1330",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "587A1330",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "587A1330",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a15e0",
+        "called_by": "Called inside the repeated-entry loop of FUN_588587C0 at 0x58858910 with ECX loaded from global address 0x58A245FC and two loop values passed on the stack.",
+        "behavior": "Calls 0x587A1330 four times with receiver pointers derived from its receiver and stack-local argument storage, calls through function-pointer slot 0x5898C120, stores returned values through pointers, and XORs a returned dword into another pointed-to dword before returning with ret 8.",
+        "uncertainty": "The callback slot contract, object types, and data meanings remain unresolved. The complete 87-byte body matches; all five encoded operand targets are checked."
+      }
+    },
+    {
+      "address": "587A1160",
+      "name": "FUN_587a1160",
+      "size": 462,
+      "symbol": "_FUN_587a1160",
+      "source": "src/client-current/Main/FUN_587a1160.cpp",
+      "source_sha256": "802b73c5f762fa969e469d0b9f69e4971f6bda616775f7868b48e15f0c21d326",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 32,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "587A1309",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 170,
+          "target_address": "587A1309",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "587A0950",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 279,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 332,
+          "target_address": "587A09E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "58743680",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 390,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 411,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 434,
+          "target_address": "587A0F90",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a1160",
+        "called_by": "Called by FUN_587A1330 at 0x587A13A8 with receiver and a stack-local key/node record.",
+        "behavior": "Processes the receiver's tree state at +0/+0x18 and the stored key field at node +0x0C, compares supplied key values, and dispatches to helpers 0x58786850, 0x587A0950, 0x587A09E0, 0x58743680, and 0x587A0F90 across its branches. Several paths return a supplied record with ret 0x10.",
+        "uncertainty": "The helper contracts, node/container schema, key type, and operation semantics remain unresolved. The full 462-byte body decodes; all 15 encoded operand targets are audited by objdiff."
+      }
+    },
+    {
+      "address": "587A1330",
+      "name": "FUN_587a1330",
+      "size": 165,
+      "symbol": "_FUN_587a1330",
+      "source": "src/client-current/Main/FUN_587a1330.cpp",
+      "source_sha256": "542633edfc9bff22ca43976f40238c563bfed30bc76324a149e68ac32ccb6ed6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 71,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "587A1160",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 135,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a1330",
+        "called_by": "Called four times by FUN_587A15E0 using receiver pointers derived from the caller's receiver and stack-local argument storage.",
+        "behavior": "Traverses node links through fields at +0/+8, compares 32-bit values at node +0x0C, and checks a byte at node +0x15 while searching from the tree header at receiver +0x18. On one path it calls 0x587A1160 with a prepared stack record; it also manages a receiver field at +0 and returns the address derived from a node at +0x10. The captured extent is 165 bytes, including the branch target and loop tail at 0x587A13D1..0x587A13D4.",
+        "uncertainty": "The container/key/value types and ownership semantics are not identified. The original indexed extent ended one byte into the instruction at 0x587A13D1; direct branch evidence and mapped bytes establish the three-byte extension through 0x587A13D4 before int3 padding and the next indexed function at 0x587A13E0."
+      }
+    },
+    {
+      "address": "58786850",
+      "name": "FUN_58786850",
+      "size": 511,
+      "symbol": "_FUN_58786850",
+      "source": "src/client-current/Main/FUN_58786850.cpp",
+      "source_sha256": "345eeab733a1eda4443ae1e32cf81d3bc073699758529f033f798aba23d0d987",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897E078",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5898CECC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 81,
+          "target_address": "58735000",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "58735360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "589ABEA8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "5898CAA8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "5897CC78",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "587A0A50",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "58786A25",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 279,
+          "target_address": "58786A15",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 294,
+          "target_address": "58747980",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 324,
+          "target_address": "58743720",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 370,
+          "target_address": "58743720",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 465,
+          "target_address": "58786940",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786850",
+        "called_by": "Called seven times by FUN_587A1160 and twice by FUN_587A0F90 while processing tree state.",
+        "behavior": "Builds an exception-protected stack frame, checks receiver field +0x1C against 0x1FFFFFFE, and calls observed helpers 0x58735000, 0x58735360, 0x587A0A50, 0x58747980, and 0x58743720 on its branches; returns with ret 0x10 on its normal path.",
+        "uncertainty": "The receiver type, checked field's unit, helper contracts, exception meaning, and mutation semantics are unresolved. The complete 511-byte body decodes and its 15 mapped operand references are verified."
+      }
+    },
+    {
+      "address": "587A0950",
+      "name": "FUN_587a0950",
+      "size": 137,
+      "symbol": "_FUN_587a0950",
+      "source": "src/client-current/Main/FUN_587a0950.cpp",
+      "source_sha256": "1a2bb3f21b2d6d7c9dc89bf030ec122f4c18194328eea6fa6cc39c8b4c6ee866",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a0950",
+        "called_by": "Called by FUN_587A1160 at 0x587A123B and FUN_587A0F90 at 0x587A1022.",
+        "behavior": "Reads a two-word receiver record, conditionally calls 0x5897CC72, then follows node links at offsets +0/+8 while checking the marker byte at +0x15 and updates the record's second word at +4.",
+        "uncertainty": "The record's type and ownership contract are not established; the observed marker and link behavior is described without assigning container semantics. The complete 137-byte body decodes with three mapped operand references."
+      }
+    },
+    {
+      "address": "587A09E0",
+      "name": "FUN_587a09e0",
+      "size": 99,
+      "symbol": "_FUN_587a09e0",
+      "source": "src/client-current/Main/FUN_587a09e0.cpp",
+      "source_sha256": "cbad5f92ed9fdf4e63c31a65a9dfa7833f21a7f8e4b08dc22c327dd0780b3562",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a09e0",
+        "called_by": "Called by FUN_587A1160 at 0x587A12AB.",
+        "behavior": "Reads a two-word receiver record, conditionally calls 0x5897CC72, follows node links at offsets +0/+8 while checking the marker byte at +0x15, and stores a traversed node at receiver +4.",
+        "uncertainty": "The record's type, traversal direction's meaning, and ownership contract are unresolved. The complete 99-byte body decodes with two mapped operand references."
+      }
+    },
+    {
+      "address": "58743680",
+      "name": "FUN_58743680",
+      "size": 41,
+      "symbol": "_FUN_58743680",
+      "source": "src/client-current/Main/FUN_58743680.cpp",
+      "source_sha256": "c99565ea18ba74bafa9766ab4a39bbd9e84eadf7f5c3614315779af3265f9aaa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58743680",
+        "called_by": "Called by FUN_587A1160 at 0x587A12B9.",
+        "behavior": "Compares both dwords of a supplied pair against the two dwords at the receiver, conditionally passes the receiver's first dword to 0x5897CC72, and returns the second-dword equality as a Boolean in AL.",
+        "uncertainty": "The pair type and ownership meaning of the conditional helper call remain unresolved. The complete 41-byte body decodes with one mapped operand reference."
+      }
+    },
+    {
+      "address": "587A0F90",
+      "name": "FUN_587a0f90",
+      "size": 238,
+      "symbol": "_FUN_587a0f90",
+      "source": "src/client-current/Main/FUN_587a0f90.cpp",
+      "source_sha256": "1d0d09411c7413c6d659ed514c204402e46c1e1bcf9ae00e301c3c1c17adab6d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 92,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "587A0950",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "58786850",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a0f90",
+        "called_by": "Called by FUN_587A1160 at 0x587A1311.",
+        "behavior": "Traverses a receiver tree rooted at +0x18 by comparing the supplied dword key with node +0x0C and marker byte +0x15; on observed branches calls insertion helper 0x58786850 and record-advance helper 0x587A0950.",
+        "uncertainty": "The receiver/container schema, key type, helper contracts, and operation semantics are unresolved. The complete 238-byte body decodes with four mapped operand references."
+      }
+    },
+    {
+      "address": "587A0A50",
+      "name": "FUN_587a0a50",
+      "size": 63,
+      "symbol": "_FUN_587a0a50",
+      "source": "src/client-current/Main/FUN_587a0a50.cpp",
+      "source_sha256": "08d5df1bc1473ef2add19fa513877e3f22936ca64841d6286b5b18b78dbff494",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a0a50",
+        "called_by": "Called by FUN_58786850 at 0x587868DF while it prepares a tree node.",
+        "behavior": "Allocates 0x18 bytes through 0x5897CC4E, copies five supplied values into allocated offsets +0/+4/+8/+0x0C/+0x10, stores a byte at +0x14, clears marker byte +0x15, and returns with ret 0x14.",
+        "uncertainty": "The field meanings and allocation ownership contract remain unresolved. The complete 63-byte body decodes with one mapped allocation target."
+      }
+    },
+    {
+      "address": "58747980",
+      "name": "FUN_58747980",
+      "size": 78,
+      "symbol": "_FUN_58747980",
+      "source": "src/client-current/Main/FUN_58747980.cpp",
+      "source_sha256": "4178946c3629b51e880376e69946b347f13fe80456f5bf6b559489bd540698ee",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58747980",
+        "called_by": "Called by FUN_58786850 at 0x58786975.",
+        "behavior": "Rewires node pointers at offsets +0/+4/+8 and updates the receiver's header at +0x18 on the observed root-insertion branches; returns with ret 4.",
+        "uncertainty": "The node/link schema and caller's branch meaning are unresolved. The complete 78-byte body decodes and has no mapped operand relocations."
+      }
+    },
+    {
+      "address": "58743720",
+      "name": "FUN_58743720",
+      "size": 82,
+      "symbol": "_FUN_58743720",
+      "source": "src/client-current/Main/FUN_58743720.cpp",
+      "source_sha256": "547b36764d1bfaefa793676f59ed3db09c5546ada318e8f0c899553f380413ac",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58743720",
+        "called_by": "Called twice by FUN_58786850 at 0x58786993 and 0x587869C1.",
+        "behavior": "Rewires node pointers at offsets +0/+4/+8, checks marker byte +0x15, and updates the receiver's header at +0x18 on the observed root-insertion branches; returns with ret 4.",
+        "uncertainty": "The node/link schema and caller's branch meaning are unresolved. The complete 82-byte body decodes and has no mapped operand relocations."
+      }
     }
   ]
 }

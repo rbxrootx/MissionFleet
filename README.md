@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,070 matches cover 2,235,583 bytes (21.3528%) and are verified
+The current 7,081 matches cover 2,237,546 bytes (21.3715%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -21,6 +21,8 @@ The latest startup range-update helper is documented in
 [the range-update notes](docs/current-main-startup-range-update.md).
 The child state and division helper is documented in
 [the child-state notes](docs/current-main-child-state-division.md).
+The startup map-entry loop and its tree helpers are documented in
+[the map-entry notes](docs/current-main-map-entry-loop.md).
 The 66-byte startup object initializer is documented in
 [the initializer notes](docs/current-main-startup-object-initializer.md).
 The startup record-processing subtree is documented in
