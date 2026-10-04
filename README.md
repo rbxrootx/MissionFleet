@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,174 matches cover 2,273,603 bytes (21.7157%) and are verified
+The current 7,175 matches cover 2,273,845 bytes (21.7180%) and are verified
 individually at 100.0% by objdiff.
 Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
 update amount handling, resource-state selection, vector direction lookup,
@@ -50,6 +50,8 @@ The aggregate and child-state refresh, including a corrected function extent,
 is documented in [the refresh notes](docs/current-main-aggregate-child-refresh.md).
 The keyed 0x54-byte record removal helper, including its corrected extent, is
 documented in [the removal notes](docs/current-main-keyed-record-removal.md).
+The semicolon-delimited joined-fleet token parser is documented in
+[the parser notes](docs/current-main-semicolon-record-parser.md).
 The latest fleet-join proposal record update path is documented in
 [the fleet-join notes](docs/current-main-fleet-join-proposal-record-update.md).
 The latest ranged selector update helper is documented in

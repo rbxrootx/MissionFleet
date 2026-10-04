@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,869
-identified code bytes across six report units. There are 7,174 verified matches
-totaling 2,273,603 bytes (21.7157%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,175 verified matches
+totaling 2,273,845 bytes (21.7180%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -204,6 +204,14 @@ bytes at `+0x2D`, shifts later entries down after a match, shortens the end
 pointer, and returns 1; no match returns 0. Ten operand targets match, with ten
 `0xCC` padding bytes before the next function. Record and key meanings remain
 unknown; see [the removal evidence](docs/current-main-keyed-record-removal.md).
+
+The latest semicolon-delimited token parser is `FUN_58849440`, a 242-byte
+routine called by both packet and event dispatchers. It skips tokens matching
+global string `0x58A0B450`, sends other tokens to the verified joined-fleet
+notice append helper `FUN_58849210`, conditionally resets receiver-owned nodes,
+then dispatches callback message `0xEE49`. The token format and selector
+semantics are not fully resolved. All nine operand targets match; see [the
+parser evidence](docs/current-main-semicolon-record-parser.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
