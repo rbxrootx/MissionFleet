@@ -297111,6 +297111,159 @@
         "behavior": "Returns null unless receiver fields +0x4CC and +0x4D8 are non-null and encoded selector +0x4DC is not -1. It decodes the selector's low byte and four-bit field at bits 16\u201319, checks the corresponding record at +0x1398 in the object at receiver +0x4D8, and starts a linked traversal at +0x1390 plus selector*16. For each node, it obtains the candidate object from node +0x0C, skipping candidates with nonzero +0x460 or whose +0x78 key differs from the decoded low byte. It computes an integer score from the absolute receiver/candidate delta at +4 and the difference of values at +0x4B0 after the original multiply/shift scaling and factor-2 adjustment; two arithmetic helpers finalize the score. Starting from threshold 0x05F5E100, it retains the candidate with the lowest score and returns its pointer, or null when none qualify. The full 342-byte body ends with ret and has 10 mapped operand targets.",
         "uncertainty": "The selector encoding, receiver/list/candidate types, field units, multiply/shift scaling, arithmetic-helper contracts, threshold meaning, and candidate domain remain unknown. Callers establish use in spatial updates but no visible target-selection semantics or runtime outcome. No emulator test was performed."
       }
+    },
+    {
+      "address": "588BA8E0",
+      "name": "FUN_588ba8e0",
+      "size": 318,
+      "symbol": "_FUN_588ba8e0",
+      "source": "src/client-current/Main/FUN_588ba8e0.cpp",
+      "source_sha256": "14359fb57cb2f4a5ec906fca28c306e95ced072ad5ad749ff88cc67d5333b68a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "588BAA1A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 179,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 187,
+          "target_address": "588BA910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 204,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "588BA910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 244,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 259,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "588BA910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 287,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 302,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 310,
+          "target_address": "588BA910",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ba8e0",
+        "called_by": "Called by verified control-menu event handler FUN_587DEB30 and verified selection-refresh routine FUN_587E3080. Both consume the returned boolean-like value in their event/update paths.",
+        "behavior": "Returns 0 immediately unless receiver word +0x24 has bit 1 set. It then checks eight child pointers at receiver offsets +0x68, +0x6C, +0x70, +0x74, +0x78, +0x7C, +0x80, and +0x84. For each child whose word +0x24 has bit 0 set, it calls FUN_58731540 with the point pointer at global 0x58A284C8+4; that helper returns whether the point is inside the child's bounds derived from offsets +0x14/+0x18 and +0x1C/+0x20 with the observed origin offsets. The first hit returns 1; if no active child contains the point, it returns 0. The complete 318-byte body ends with ret and has 21 mapped operand targets.",
+        "uncertainty": "The parent/child types, meaning of parent bit 1 and child bit 0, coordinate space, shared point source, and caller interpretation remain unresolved. Caller contexts tie it to event handling and selection refresh, but no runtime or emulator test was performed."
+      }
     }
   ]
 }
