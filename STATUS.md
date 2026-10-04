@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,168 verified matches
-totaling 2,271,884 bytes (21.6993%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,169 verified matches
+totaling 2,272,193 bytes (21.7022%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1178,6 +1178,12 @@ event handler and selection refresh. It tests up to eight active child bounds
 against the shared point and returns on the first hit; point space and flag
 meanings remain unknown. See
 [multi-child point test evidence](docs/current-main-multi-child-point-test.md).
+
+`FUN_588DAA20` adds a 309-byte exact match called from mission-event and
+fleet/battle screen update paths. It updates observed child color fields and
+copies selected resource records based on global state; color and resource
+meanings remain unresolved. See
+[event-state child refresh evidence](docs/current-main-event-state-child-refresh.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
