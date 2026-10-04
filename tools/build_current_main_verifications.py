@@ -192,6 +192,7 @@ ADDRESSES = (
     "587E5BA0",
     "587EBCB0",
     "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
+    "58853B90", "588542A0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -281,7 +282,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
-    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0",
+    "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0",
     "587ECAB0", "587ECCA0", "587A0740", "588E0260", "5884D630", "588DFFB0", "588DF450",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250", "5888D390",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
@@ -469,8 +470,23 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra stopped inside a direct call. Include its remaining displacement,
     # callback/stack cleanup, register restores, and ret before INT3 padding.
     "58755520": 156,
+    # Ghidra stopped after pop ebx; the contiguous ret 4 is at
+    # 0x588542F1..0x588542F3, before 12 INT3 alignment bytes.
+    "588542A0": 84,
 }
 EVIDENCE = {
+    "58853B90": {
+        "name_in_analysis": "FUN_58853b90 / gated selector and state refresh",
+        "called_by": "Called by verified FUN_588561F0 when receiver +0x2CC compares equal to its zero-valued register, and by verified FUN_58856560 when FUN_588DD2A0 returns zero.",
+        "behavior": "Reads global 0x58A2459C byte +0x74 and acts only for values zero or one. When receiver +0x2CC equals 0x40000000, calls verified FUN_587A75E0 with 0x2F on global child +0x20C9C, calls verified FUN_587E5C10 with 0x2F on the global object, clears receiver +0x2CC, and passes the new value to verified FUN_58853570. Otherwise it repeats those calls with 0x10, sets receiver +0x2CC to 0x40000000, and passes that value to FUN_58853570. The complete body is 130 bytes with nine mapped operand targets.",
+        "uncertainty": "The receiver type, state field meaning, global mode meaning, and selector values' domain are unresolved. No runtime client test was performed.",
+    },
+    "588542A0": {
+        "name_in_analysis": "FUN_588542a0 / eight-child bit-one setter",
+        "called_by": "Called by verified FUN_587EAE10 with observed arguments zero and a register value, and by verified FUN_588561F0 with argument one.",
+        "behavior": "Masks the low byte of its argument to one bit, shifts it left once, then visits eight non-null-assumed child pointers at receiver offsets +0x7C through +0x98 in four pairs. For each child it clears bit one of word +0x24 and ORs in the shifted bit. Returns with ret 4. The complete body is 84 bytes with no mapped operand targets.",
+        "uncertainty": "The child class, meaning of flag bit one, and whether callers guarantee all eight pointers are non-null remain unresolved. The indexed 81-byte extent ended after pop ebx; mapped bytes contain ret 4 at 0x588542F1..0x588542F3 and then INT3 padding. No runtime client test was performed.",
+    },
     "587D8E70": {
         "name_in_analysis": "FUN_587d8e70 / filtered global child-list count",
         "called_by": "Called by FUN_588EC5D0 with a selector and two filter arguments.",

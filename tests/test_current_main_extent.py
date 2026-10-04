@@ -10,6 +10,26 @@ MAIN_BASE = 0x58730000
 
 
 class CurrentMainFunctionExtentTests(unittest.TestCase):
+    def test_eight_child_flag_setter_extent_includes_ret_before_padding(self):
+        with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        by_address = {row["address"]: row for row in rows}
+        start = 0x588542A0
+        size = int(by_address["588542a0"]["size"])
+        self.assertEqual(size, 84)
+        self.assertEqual(int(by_address["58854300"]["address"], 16), start + size + 12)
+
+        image = (ROOT / "reports/unpacked-current-main/Main.mapped.bin").read_bytes()
+        decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        decoder.detail = True
+        instructions = list(decoder.disasm(image[start - MAIN_BASE:start - MAIN_BASE + size], start))
+        ret = instructions[-1]
+        self.assertEqual((ret.address, ret.mnemonic), (0x588542F1, "ret"))
+        self.assertEqual(ret.operands[0].imm, 4)
+        self.assertEqual(ret.address + ret.size, start + size)
+        self.assertEqual(image[start - MAIN_BASE + size:start - MAIN_BASE + size + 12],
+                         b"\xCC" * 12)
+
     def test_child_selector_extent_includes_shared_epilogue(self):
         with (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
