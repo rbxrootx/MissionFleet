@@ -299567,7 +299567,7 @@
         "name_in_analysis": "FUN_58846B00 / count-checked semicolon record batch update",
         "called_by": "Called from both verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650. The shown call sites load ECX from global object 0x58A245B4 plus 0xD8 and pass three stack values; the event path passes fields +0x0C and +0x10 from its record plus a value from the dispatch frame.",
         "behavior": "When the third stack argument is nonzero, scans the first argument's byte string to length minus one, splits on semicolons, clears a 24-byte local token buffer for each segment, and passes each token with the receiver to FUN_58842DC0. It bounds the token loop at 0x1000 iterations, compares the sign-extended receiver word +0xF8 against the requested count, and calls FUN_58842EF0 on mismatch. A zero requested count also calls FUN_58842EF0. Both paths dispatch message 0xEE49 through receiver child +0x30 vtable slot +0x18 with argument zero. The complete body is 205 bytes, has five mapped operand targets, and returns with ret 0x0C.",
-        "uncertainty": "The token schema, receiver type, requested-count contract, reset helper FUN_58842EF0 effect, token helper FUN_58842DC0 effect, and meaning of message 0xEE49 remain unresolved. The zero-count path does not parse input. Caller argument naming is inferred from register/stack use; no runtime or emulator test was performed."
+        "uncertainty": "The token schema, receiver type, requested-count contract, token helper FUN_58842DC0 effect, and meaning of message 0xEE49 remain unresolved. The zero-count path does not parse input. Caller argument naming is inferred from register/stack use; no runtime or emulator test was performed."
       }
     },
     {
@@ -303534,6 +303534,32 @@
         "called_by": "Called by verified selector parser FUN_58846BD0 on a zero selector or count mismatch; verified event dispatcher FUN_588C1650 also calls it with the selected child receiver at 0x58A245B4+0xDC.",
         "behavior": "Begins at receiver +0x134, saves each node's +0x50 link before invoking vtable slot zero with argument one, and continues through those saved links. After each callback it clears receiver +0x144, +0x134, +0x130, and signed word +0xFA when the next link is null or the traversal count equals +0xFA. It always clears +0x134, +0x130, and +0xFA at exit and returns zero. An initially empty list leaves +0x144 unchanged. The complete body is 106 bytes with no mapped operands.",
         "uncertainty": "The node type, ownership, callback effects, and meaning of +0x144 remain unknown. No original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58842EF0",
+      "name": "FUN_58842ef0",
+      "size": 104,
+      "symbol": "_FUN_58842ef0",
+      "source": "src/client-current/Main/FUN_58842ef0.cpp",
+      "source_sha256": "79a75d806007215a329b9c86be95fd2cc7df2f405c9ce2eabd98f4074142cc1b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58842ef0 / counted reverse-linked token-list teardown",
+        "called_by": "Called by verified semicolon parser FUN_58846B00 when the requested count is zero or disagrees with receiver word +0xF8.",
+        "behavior": "If signed receiver word +0xF8 is nonpositive or tail +0x13C is null, returns without changing the list. Otherwise, starts at tail +0x13C, saves each node's +0x50 link before virtual slot-zero release with argument one, and increments a traversal count. On the first null saved link or when visited equals the signed word +0xF8, clears +0x140, +0x13C, +0x138, and +0xF8, then returns; a nonnull remainder is not traversed after the count limit. The complete mapped body is 104 bytes with no mapped operands; Ghidra omitted its final three-byte epilogue.",
+        "uncertainty": "The node type, callback ownership, and meaning of receiver +0x140 remain unknown. No original-client or emulator runtime test was performed."
       }
     }
   ]

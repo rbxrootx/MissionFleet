@@ -26,3 +26,24 @@ last-node clearing, and traversal after a callback mutates the node link.
 The original node type, field `+0x144` role, and callback ownership semantics
 are unknown. The native tests validate the reconstructed normal path, not the
 installed client's runtime or emulator behavior.
+
+## Counted sibling at `0x58842EF0`
+
+Verified parser `FUN_58846B00` calls `FUN_58842ef0` for zero requested count
+or a mismatch with receiver word `+0xF8`. The mapped function is 104 bytes
+through the `ret` at `0x58842F57`; Ghidra's 101-byte inventory extent omitted
+the final `pop esi; pop ebx; ret`. The next eight bytes are `INT3` padding.
+The complete 104 bytes match objdiff 3.8.0 with no mapped operands.
+
+This sibling starts from receiver tail `+0x13C`, follows saved node `+0x50`
+links, and releases each visited node through virtual slot zero with argument
+`1`. Its guard and stopping rule differ from `FUN_58843190`: if signed word
+`+0xF8` is nonpositive or tail `+0x13C` is null, it returns without changing
+any receiver fields. Otherwise it stops as soon as the saved link is null or
+the visit count reaches `+0xF8`; it does not release a nonnull remainder.
+It then clears `+0x140`, `+0x13C`, `+0x138`, and `+0xF8` and returns.
+The shared native model tests cover both guard paths, count-limited release,
+terminal-link release, and the saved-link behavior.
+
+The sibling node type, callback ownership, and receiver `+0x140` role remain
+unknown. No installed-client or emulator runtime test has been performed.

@@ -23,3 +23,26 @@ int missionFleetTeardownLinkedChildren(MissionFleetLinkedChildList& list,
     list.count = 0;
     return 0;
 }
+
+void missionFleetTeardownCountedChildren(MissionFleetCountedChildList& list,
+                                          MissionFleetReleaseLinkedChild release,
+                                          void* context) {
+    if (list.count <= 0 || list.tail == nullptr) {
+        return;
+    }
+    auto* node = list.tail;
+    int visited = 0;
+    for (;;) {
+        auto* previous = node->previous;
+        release(node, 1, context);
+        ++visited;
+        if (previous == nullptr || visited == list.count) {
+            list.field140 = nullptr;
+            list.tail = nullptr;
+            list.head = nullptr;
+            list.count = 0;
+            return;
+        }
+        node = previous;
+    }
+}

@@ -21,3 +21,16 @@ using MissionFleetReleaseLinkedChild =
 int missionFleetTeardownLinkedChildren(MissionFleetLinkedChildList& list,
                                        MissionFleetReleaseLinkedChild release,
                                        void* context);
+
+// Sibling receiver used by FUN_58842ef0. Unlike the function above, this
+// variant is guarded by a positive count and stops at that count.
+struct MissionFleetCountedChildList {
+    MissionFleetLinkedChildNode* head; // receiver +0x138
+    MissionFleetLinkedChildNode* tail; // receiver +0x13C
+    void* field140;                     // receiver +0x140, role unknown
+    std::int16_t count;                 // receiver +0xF8
+};
+
+void missionFleetTeardownCountedChildren(MissionFleetCountedChildList& list,
+                                          MissionFleetReleaseLinkedChild release,
+                                          void* context);

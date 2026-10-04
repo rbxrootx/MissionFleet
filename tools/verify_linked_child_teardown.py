@@ -1,4 +1,4 @@
-"""Build and run the normal-path model for Main.dll FUN_58843190."""
+"""Build and run normal-path models for two Main.dll linked-child teardowns."""
 
 import os
 from pathlib import Path
