@@ -300666,6 +300666,57 @@
         "behavior": "Uses collection pointers at +0x0C/+0x10/+0x14 as start, used-end, and capacity-end values; record slots are 0x54 bytes. If used count is below capacity, it calls 0x58834AD0 to initialize a record at the current end and advances +0x10 by 0x54. When capacity is full, it checks the start/end relationship through 0x5897CC72 when inconsistent and delegates the growth path to 0x58836A20 with the collection, end pointer, incoming record, and a local output address. The complete 158-byte body has three mapped operand targets.",
         "uncertainty": "The collection schema, exact 0x58834AD0 initialization contract, 0x58836A20 growth/output contract, allocation ownership, and record meaning are not established. Caller contexts show record-handler use, but no runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "588DCF50",
+      "name": "FUN_588dcf50",
+      "size": 150,
+      "symbol": "_FUN_588dcf50",
+      "source": "src/client-current/Main/FUN_588dcf50.cpp",
+      "source_sha256": "630ade1bcecde794ae9250feb2c2ab86ca1106fa3bdc2e7d04683a285c90f797",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "587ECCA0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588dcf50 / bounded progress-delta update",
+        "called_by": "Called by verified resource/object routines FUN_5877EC80 and FUN_58782CF0, which pass their computed step values as the single stack argument.",
+        "behavior": "Computes an encoded threshold from receiver +0x398 XOR 0xAAAAAAAA, scales it by two, and scales by four instead when global mode word 0x58A2459C +0x105F0 is 0xF and receiver +0x63B8 is zero while +0x63BC is nonzero. It clips the supplied delta so receiver +0x63C4 does not advance beyond that threshold, then adds and returns the accepted delta. If the receiver is the active object at 0x58A247F8 +4 and the accepted delta is zero, it calls 0x587ECCA0 with the shared state object and zero. The full 150-byte body has four mapped operand targets.",
+        "uncertainty": "The encoded threshold's domain meaning, mode/field roles, units of the accumulator and delta, and purpose of the zero-delta callback remain unknown. Caller evidence places it in two resource/object update paths; no runtime client or emulator test was performed."
+      }
     }
   ]
 }
