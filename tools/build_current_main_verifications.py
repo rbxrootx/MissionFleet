@@ -139,7 +139,7 @@ ADDRESSES = (
     "58753360", "587533C0",
     "58848450", "58848530", "588486E0", "588490F0", "58849360", "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "588F43F0",
     "58751E80", "58752000", "58752340", "58753660", "587540C0", "58754890", "58754A30", "58754C00", "5875A4B0", "5875A7E0", "58814FD0", "588D7460", "5873C2E0", "588D9E10", "588343B0", "5888CEE0", "58908140", "5873B540", "588BA8E0", "588DAA20", "587B7130", "58754D60", "587C45C0", "587E7E00", "58835A10", "58849440", "58846B00", "58846BD0", "58843060", "58842DC0", "58848610", "588DD1B0", "58835920", "5883B3B0", "587B81A0", "588DCC10", "588F5040", "5876BE10", "587B7D90", "587E98A0", "58788620", "58756020", "58834190", "58839890", "589081E0", "589080E0",
-    "587A0C30", "58786680", "587A1160", "587A1330",
+    "587A0C30", "58786680", "587A1160", "587A1330", "587B6DD0",
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "587A0740",
@@ -236,7 +236,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -5238,6 +5238,12 @@ EVIDENCE = {
         "called_by": "Called by both verified parallel selection handlers FUN_58834190 and FUN_58839890 for the scan index, and by FUN_5890BD90.",
         "behavior": "For a nonnegative index, starts at receiver head +0x78 and follows next links at node +0x14 to the selected entry. It unlinks that node through previous/next links +0x10/+0x14, updates receiver head/tail +0x78/+0x7C and current-entry pointers +0x80/+0x84 when necessary, conditionally dispatches message 2 through receiver child +0x30 when that child's word +0x24 has bit 5 set, invokes the removed node's first virtual method with argument 1, and decrements receiver count +0x88. Negative indices and failed traversals return without mutation. The complete body is 201 bytes with three mapped operand targets and returns with ret 4.",
         "uncertainty": "The receiver and node types, current-entry pointer meanings, child callback behavior, virtual method contract, and caller-visible meaning of removal remain unresolved. No runtime or emulator test was performed.",
+    },
+    "587B6DD0": {
+        "name_in_analysis": "FUN_587B6DD0 / shared sprite-data screen base constructor",
+        "called_by": "Called with the receiver in ECX by verified constructors FUN_58836B90 and FUN_5883BBE0 for ManageSquadTab and ManageFleetTab. Both callers forward the same constructor argument shape to this shared base initializer before configuring their own child controls.",
+        "behavior": "Forwards its constructor values to FUN_589031A0, installs final vtable pointer 0x5899A0E8, sets receiver flag bit 0x20, and initializes fields +0x50/+0x54 from two arguments, +0x58 to 0x100, and +0x5C to zero. It initializes fields +0x64 through +0x70 to zero when the observed optional pointer is null, or copies four DWORDs from that pointer otherwise. It stores additional argument values at +0x60/+0x61, zeroes +0x78/+0x7C/+0x80/+0x84, masks receiver word +0x24 with 0xE5FF and sets bits 0x0500, and stores two arguments at +0x88/+0x8C. The complete body is 201 bytes with three mapped operand targets and returns with ret 0x24.",
+        "uncertainty": "The constructor argument names, receiver/class layout, meanings of initialized fields and flag bits, and roles of the two child-tab callers remain uncertain beyond their observed ManageSquadTab/ManageFleetTab construction paths. No runtime or emulator test was performed.",
     },
     "58835A10": {
         "name_in_analysis": "FUN_58835a10 / keyed 0x54-byte record removal helper",
