@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,066 matches cover 2,235,051 bytes (21.3477%) and are verified
+The current 7,068 matches cover 2,235,358 bytes (21.3506%) and are verified
 individually at 100.0% by objdiff.
 The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
@@ -29,6 +29,8 @@ The `FUN_58868B40` child-construction path is documented in
 [the sibling-control notes](docs/current-main-sibling-controls.md).
 The `FUN_5890C1D0` constructor subtree is documented in
 [the nested-constructor notes](docs/current-main-nested-constructor.md).
+The `FUN_5884F210` record-initialization path is documented in
+[the record-initializer notes](docs/current-main-record-initializer.md).
 
 ```powershell
 python tools/generate_progress.py

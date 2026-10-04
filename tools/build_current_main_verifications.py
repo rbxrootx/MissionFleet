@@ -144,6 +144,7 @@ ADDRESSES = (
     "5890C720", "5890C600",
     "5890C020",
     "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
+    "5875F650", "5875F6B0",
     "5891CD20", "5891CD60", "5891E820", "5891FB30", "5891FB70",
     "58923DC0", "58926C30", "58926C70", "5892AFD0",
     "5890E620", "5890E650", "5890FA20",
@@ -375,6 +376,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5890C720", "5890C600",
     "5890C020",
     "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
+    "5875F650", "5875F6B0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -4407,6 +4409,18 @@ EVIDENCE = {
         "called_by": "Called by 0x5890C020 at instruction offset 411.",
         "behavior": "Forwards three stack arguments and the receiver to 0x5890E400, then installs vtable pointer 0x589A2C50 and returns with ret 0xC.",
         "uncertainty": "The initialized class and forwarded argument roles are unresolved. The complete 43-byte body decodes.",
+    },
+    "5875F650": {
+        "name_in_analysis": "FUN_5875f650",
+        "called_by": "Directly called by 0x5884F210 at 0x5884F29B before its result is stored in the indexed array at receiver +0x1D0.",
+        "behavior": "Sets vtable pointer 0x5898DBAC, clears fields +0x18/+0x1C, copies five stack arguments into receiver fields +4/+8/+0xC/+0x10/+0x14, and returns with ret 0x14.",
+        "uncertainty": "The object class and copied field meanings are unresolved. The complete 54-byte body decodes.",
+    },
+    "5875F6B0": {
+        "name_in_analysis": "FUN_5875f6b0",
+        "called_by": "Called by 0x5884F210 at 0x5884F2D4 on the object returned by 0x5875F650.",
+        "behavior": "SEH-protected routine calling 0x58902B60, 0x58902030, 0x58902090, and 0x589023B0; accesses callback pointers at 0x5898C198/0x5898C1A4 with string pointer 0x5898D0D4 and updates object fields +0x18/+0x1C.",
+        "uncertainty": "The callback API contracts, object ownership, and meanings of the updated fields remain unresolved. The complete 253-byte body decodes.",
     },
 }
 
