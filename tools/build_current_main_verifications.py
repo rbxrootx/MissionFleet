@@ -158,6 +158,7 @@ ADDRESSES = (
     "5886B9B0",
     "58831AE0",
     "58831B90",
+    "587D6DB0",
     "5881B960", "5881B500", "5890E5A0", "587CEB00",
     "58879D60", "5875ACD0",
     "58879CC0",
@@ -243,7 +244,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "58906EA0", "58907100", "58907180", "589071A0",
+    "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
@@ -4825,6 +4826,12 @@ EVIDENCE = {
         "called_by": "Called by verified packet/message dispatcher FUN_587BB700 and event dispatcher FUN_588C1650, each with a record and receiver at global object 0x58A245B4 +0xDC +0x154. It mirrors FUN_58831AE0 using a separate pair of collections.",
         "behavior": "For a non-null record, compares record text at +0x2D against indexed strings from collection receiver +0x6C using 0x589080E0. An exact match exits unchanged. On a miss it calls 0x589088D0 for collection +0x6C with that text, DWORD at record +0, and constant 0x83ADD7; it then adds the string pointer at record +0x0C and DWORD at +4 to collection +0x70 using the same helper and constant. The complete 154-byte body has four mapped operand targets; its traversal and comparison mirror FUN_58831AE0, with the collection offsets changed to +0x6C/+0x70.",
         "uncertainty": "The record schema, collection and entry types, key/hash meaning of 0x83ADD7, and domain purpose of the two strings/IDs remain unknown. Static callers establish packet/event dispatch use only. No runtime client or emulator test was performed.",
+    },
+    "587D6DB0": {
+        "name_in_analysis": "FUN_587d6db0 / mode-gated child flag update",
+        "called_by": "Called by verified routines FUN_587E3080 and FUN_588889F0. The first clears receiver +0x500 before the call; the second sets +0x500 to 0 or 1 in separate branches before calling it.",
+        "behavior": "When receiver +0x500 is zero, clears bit 0 on child words at receiver +0x4D4/+0x4D8, clears low four bits on +0x4DC, and clears bit 0 on the five child words in the pointer array +0x4E0..+0x4F0. When +0x500 is nonzero, sets bit 0 on +0x4D4/+0x4D8 and all five array children; on +0x4DC it sets low four bits if global 0x58A24568 is zero, otherwise clears them. The complete 160-byte body has one mapped operand target.",
+        "uncertainty": "The child classes, meaning of receiver +0x500 and global 0x58A24568, and semantic role of these flags remain unresolved. Callers establish a mode-gated update path only. No runtime client or emulator test was performed.",
     },
     "5881B960": {
         "name_in_analysis": "FUN_5881b960",

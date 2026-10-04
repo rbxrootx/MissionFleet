@@ -300588,6 +300588,39 @@
         "behavior": "For a non-null record, compares record text at +0x2D against indexed strings from collection receiver +0x6C using 0x589080E0. An exact match exits unchanged. On a miss it calls 0x589088D0 for collection +0x6C with that text, DWORD at record +0, and constant 0x83ADD7; it then adds the string pointer at record +0x0C and DWORD at +4 to collection +0x70 using the same helper and constant. The complete 154-byte body has four mapped operand targets; its traversal and comparison mirror FUN_58831AE0, with the collection offsets changed to +0x6C/+0x70.",
         "uncertainty": "The record schema, collection and entry types, key/hash meaning of 0x83ADD7, and domain purpose of the two strings/IDs remain unknown. Static callers establish packet/event dispatch use only. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "587D6DB0",
+      "name": "FUN_587d6db0",
+      "size": 160,
+      "symbol": "_FUN_587d6db0",
+      "source": "src/client-current/Main/FUN_587d6db0.cpp",
+      "source_sha256": "b91dfec3c1818e6c0bbbcad08873281466150c026b31b1ad76cf5bd3ad5560f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 103,
+          "target_address": "58A24568",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d6db0 / mode-gated child flag update",
+        "called_by": "Called by verified routines FUN_587E3080 and FUN_588889F0. The first clears receiver +0x500 before the call; the second sets +0x500 to 0 or 1 in separate branches before calling it.",
+        "behavior": "When receiver +0x500 is zero, clears bit 0 on child words at receiver +0x4D4/+0x4D8, clears low four bits on +0x4DC, and clears bit 0 on the five child words in the pointer array +0x4E0..+0x4F0. When +0x500 is nonzero, sets bit 0 on +0x4D4/+0x4D8 and all five array children; on +0x4DC it sets low four bits if global 0x58A24568 is zero, otherwise clears them. The complete 160-byte body has one mapped operand target.",
+        "uncertainty": "The child classes, meaning of receiver +0x500 and global 0x58A24568, and semantic role of these flags remain unresolved. Callers establish a mode-gated update path only. No runtime client or emulator test was performed."
+      }
     }
   ]
 }
