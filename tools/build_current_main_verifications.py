@@ -137,7 +137,7 @@ ADDRESSES = (
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -378,7 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58786850", "587A0950", "587A09E0", "58743680", "587A0F90",
     "587A0A50", "58747980", "58743720",
     "58743A10",
-    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0",
+    "5888B990", "58838CB0", "588ED750", "587EAE10", "5875BE60", "58755170", "58847770", "5877ADC0", "588391B0", "588EBFA0", "58839460", "58753BF0", "587B9290", "58839CF0", "5883DDF0", "588399A0",
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
@@ -4872,6 +4872,12 @@ EVIDENCE = {
         "called_by": "Called by verified dispatchers FUN_587BB700 and FUN_588C1650 on their state-3 branch after formatting and displaying the localized key MESSAGESTRING__MEMBER_SQUAD_JOIN_PROPOSE. The callers pass two values derived from the incoming message fields.",
         "behavior": "Calls 0x5897152E with size 0x18, then calls through callback slot 0x5898C194 using the helper result and the two incoming values. It compares the resulting pointer against entries in receiver collection +0x21C through callback 0x5898C1A4. An existing match returns without insertion; otherwise it appends the pointer, growing the collection through FUN_588F6890 when needed. If receiver flags at +0x24 masked by 0x1F00 equal 0x200, it invokes FUN_589088D0 on receiver fields +0x210/+0x214/+0x218 and updates +0x1E4 from the collection count through FUN_58907360. The complete body is 384 bytes ending in ret 8; 19 operand targets are inventoried.",
         "uncertainty": "The callback contracts, receiver collection type, values' identities, whether the comparison is string equality, and the meaning of the flag and resulting UI/state update are not fully established. The localized caller path identifies a squad-join proposal context but not the exact domain action. No emulator test was performed.",
+    },
+    "588399A0": {
+        "name_in_analysis": "FUN_588399a0",
+        "called_by": "Called from case 0x80020F06 in verified handlers FUN_587BB700 and FUN_588C1650 when the selected child mode bits are 1 or 2 and its state byte +0x2E5 is not 2 or 3. The callers pass null when packet field +0x10 is zero, otherwise the incoming record pointer.",
+        "behavior": "Runs only when receiver byte +0x2E5 equals 1. A null record dispatches helper FUN_5876BAF0 with selector 0x24C and zero values, then calls FUN_58764D30 and a virtual method on the shared receiver. For a record, it updates flags on receiver-referenced objects according to byte +0x2E4; passes record strings at +0x0C and +0x2D through FUN_58731CE0 into receiver buffers +0xC4 and +0xC8; formats resource key STRING_COMM_BATTLE_RECORD using words at record +0x46/+0x48/+0x4A and writes the result to +0xCC. If global 0x58A0B4A0 is nonzero, it sets receiver byte +0x2E5 to 3 and forwards that global plus zero through FUN_587B9290. Otherwise it sets the byte to 0, selects values through receiver object +0x90, updates fields +0xBC/+0xC0 via FUN_587316C0 and state helpers, stores record dword +0x50 at receiver +0x30C, and passes it to FUN_58907360. The complete mapped body is 471 bytes ending in ret 4, followed by nine INT3 bytes before FUN_58839B80; 23 operand targets are inventoried.",
+        "uncertainty": "The record schema, object identities, flags, meanings of global 0x58A0B4A0 and the selected values, null-record dispatch semantics, and exact screen effect remain unresolved. The embedded resource key supports a communication battle-record context but does not prove the full protocol meaning. No emulator test was performed.",
     },
 }
 

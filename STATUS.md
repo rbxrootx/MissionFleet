@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,831
-identified code bytes across six report units. There are 7,140 verified matches
-totaling 2,259,407 bytes (21.5802%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,141 verified matches
+totaling 2,259,878 bytes (21.5847%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -49,9 +49,10 @@ record path reached from message case `0x80020F0C`), `FUN_58753bf0` (a
 wrapper forwarding event `0x80010F06`), `FUN_58839cf0` (a 573-byte
 case-`0x80020F12` state update whose inventory extent was corrected from 559
 bytes), and `FUN_5883ddf0` (a 384-byte helper called after the localized member
-squad-join proposal notice). Together, the twelve functions add 7,074
-byte-matched bytes. Their field and helper meanings remain partially unknown;
-no emulator test was performed. See
+squad-join proposal notice), and `FUN_588399a0` (a 471-byte message
+`0x80020F06` handler using the `STRING_COMM_BATTLE_RECORD` resource). Together,
+the thirteen functions add 7,545 byte-matched bytes. Their field and helper
+meanings remain partially unknown; no emulator test was performed. See
 [`docs/current-main-stateful-dispatch-587eae10.md`](docs/current-main-stateful-dispatch-587eae10.md),
 [`docs/current-main-shared-object-initializer-5875be60.md`](docs/current-main-shared-object-initializer-5875be60.md),
 [`docs/current-main-message-80020fa2-helper.md`](docs/current-main-message-80020fa2-helper.md),
@@ -72,6 +73,8 @@ in [`docs/current-main-message-80020f12-child-list-state-update.md`](docs/curren
 The member squad-join proposal path and its callback/collection uncertainties
 are documented in
 [`docs/current-main-member-squad-join-proposal.md`](docs/current-main-member-squad-join-proposal.md).
+The battle-record resource path and state transitions are documented in
+[`docs/current-main-comm-battle-record-route.md`](docs/current-main-comm-battle-record-route.md).
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
