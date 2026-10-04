@@ -295327,6 +295327,123 @@
         "behavior": "Builds a variable-length payload for message 0x80013111 and submits it through verified network sender FUN_58970C70. It combines the 16-bit input with a high-word constant selected from the active object's byte +0x354, derives a second value from selector 0..3 (or passes other values through), and mixes those with a table entry selected from receiver fields +0x40 and +0x58. It allocates a buffer using size 3*shared_state_dword + 10, writes a leading byte and zero bytes, then appends encoded per-node values while walking the list rooted at global 0x58A247F8 +0xC. It adds summary counters and bytes derived from node fields +0x64F0, +0x64F4, +0x64F8, +0x78, and global state at 0x58A0B1C4/0x58A0B1C8; it also records a boolean returned by FUN_588D66E0. The sender receives the message id, derived values, buffer, and computed length. The buffer is then released through FUN_5897CE26. The complete 469-byte body ends with ret 8 and has 18 mapped operand targets.",
         "uncertainty": "The transmitted schema, table/key meanings, node identity and units, selector meanings, allocator contract, and server-side interpretation of message 0x80013111 remain unresolved. The sender is byte-verified and the caller context shows a state-gated send followed by a local flag update, but no server or emulator packet exchange was available for validation."
       }
+    },
+    {
+      "address": "588E0260",
+      "name": "FUN_588e0260",
+      "size": 420,
+      "symbol": "_FUN_588e0260",
+      "source": "src/client-current/Main/FUN_588e0260.cpp",
+      "source_sha256": "09eeeb4c5d6091808011994d92fe4c3a757ddeccd7f8c2dfde3e220d5219ea2b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 163,
+          "target_address": "5884D630",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 169,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "58895860",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 213,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "58895860",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 241,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 253,
+          "target_address": "58895560",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 262,
+          "target_address": "588DFFB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "588E03FB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "589C8EDC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 310,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 322,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 376,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 396,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e0260",
+        "called_by": "Called by verified update routines FUN_587EFD60 and FUN_588E5150. FUN_588E5150 calls it with selector 5 and arguments `(iVar9, iVar9, iVar9/3, 0)` when receiver word +0x164 is 6, and with selector 4 and `(1, 1, 1, 0)` on a separate +0x60C4-gated path. FUN_587EFD60 passes values derived from its current update arguments and computed state.",
+        "behavior": "Updates encoded receiver fields +0x1438 and +0x143C using the 0xAAAAAAAA mask, the first three numeric arguments, and selector-specific logic; also adjusts +0xDAC, +0xDD4, and +0x398. It calls FUN_5884D630 with the updated +0x398 value. When the receiver is the active object, it forwards the updated +0x1438/+0x143C and +0xDAC values through FUN_58895860 and FUN_58895560. It then calls FUN_588DFFB0. If receiver +0x60B0 is nonzero and selector is neither 4 nor 5, it sets +0x60B4 to 0x40000000 and, when global 0x589C8EDC is nonzero, derives scaled coordinates from global dimensions and receiver offsets before calling FUN_587B7400. The complete 420-byte body ends with ret 0x14 and has 15 mapped operand targets.",
+        "uncertainty": "The encoded fields, numeric units, selector meanings, active-object callback effects, and coordinate transform's visual/gameplay role remain unresolved. Caller paths establish update inputs and special selectors 4 and 5, but do not establish field names. No emulator test was performed."
+      }
     }
   ]
 }
