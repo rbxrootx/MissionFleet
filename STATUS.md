@@ -6,14 +6,16 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,955
-identified code bytes across six report units. There are 7,296 verified matches
-totaling 2,294,144 bytes (21.9117%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,297 verified matches
+totaling 2,294,450 bytes (21.9146%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
 
 The latest current-client parent UI-child constructor is recorded in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
+Its three-child parent initializer and portable normal-path model are recorded
+in [the initializer evidence](docs/current-main-three-child-parent-initializer-5881de10.md).
 
 Three current-client pointer getters (`FUN_587453A0`, `FUN_588D66D0`, and
 `FUN_58759EB0`) have been rewritten as ordinary C++ and still compile to all
