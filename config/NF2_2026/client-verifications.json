@@ -288858,6 +288858,39 @@
         "behavior": "Takes no explicit stack arguments. If receiver +0x7C is null, it returns unchanged. Otherwise it computes signed quotient ((receiver +0x20) - (receiver +0x18)) / receiver +0x5C, subtracts one, and walks forward from the +0x7C node through +0x10 links that many positions. A nonpositive position selects the head; a null link stops at the last reachable node. It stores the selected node at receiver +0x80 and returns.",
         "uncertainty": "The meaning and units of receiver fields +0x18, +0x20, and +0x5C, the linked-node type, and the visible list/scroll behavior remain unresolved. Callers establish repeated-context use and a count-threshold path, but not control labels. The complete 54-byte extent has no mapped operand targets."
       }
+    },
+    {
+      "address": "587B9B30",
+      "name": "FUN_587b9b30",
+      "size": 40,
+      "symbol": "_FUN_587b9b30",
+      "source": "src/client-current/Main/FUN_587b9b30.cpp",
+      "source_sha256": "8c4562d2fee5016b875d05f21fa809c1ef9faace839e8856376013c060d501df",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 33,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9b30",
+        "called_by": "Directly called by three verified functions: 0x587F2DD0, 0x587FAEC0, and 0x588E5150. Their observed argument tuples are (10, 0, 0), (12, 0, 0), and (1, 0, 0), respectively.",
+        "behavior": "Takes three 32-bit stack arguments. It zero-extends the low words of arguments 2 and 3, packs argument 2 into the high 16 bits and argument 3 into the low 16 bits, then calls 0x58970C70 with selector 0x80015000, argument 1, the packed value, and three zero arguments. It returns after cleaning its 12 bytes of stack arguments.",
+        "uncertainty": "The semantic meaning of selector 0x80015000, the three argument roles, and the API operation are unknown. The callers establish only the observed tuples. The complete 40-byte extent has one mapped call target."
+      }
     }
   ]
 }

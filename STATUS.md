@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,774
-identified code bytes across six report units. There are 7,113 verified matches
-totaling 2,242,637 bytes (21.4201%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,114 verified matches
+totaling 2,242,677 bytes (21.4205%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -163,6 +163,14 @@ the last reachable node), and stores the selected pointer at `+0x80`. One
 caller repeats this across four contexts; another invokes it at a list-count
 threshold. Field units and the visible list behavior remain unknown. The full
 extent matches with no mapped operands.
+
+The latest selector wrapper is `FUN_587B9B30`, a 40-byte routine called by
+three verified functions with observed argument tuples `(10, 0, 0)`,
+`(12, 0, 0)`, and `(1, 0, 0)`. It packs the low 16 bits of arguments 2 and 3
+into one 32-bit value, then forwards selector `0x80015000`, argument 1, the
+packed value, and three zeros to `0x58970C70`. The selector's operation and
+argument meanings remain unknown. The complete body matches with one mapped
+call target checked.
 
 The latest predicate-linked state reset is `FUN_588DD310`, a 95-byte routine
 called by three verified functions only after `FUN_588DD2A0` returns 1. When
