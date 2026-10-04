@@ -44,7 +44,7 @@ ADDRESSES = (
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
     "58908600", "587CC700", "58731590", "5875F320", "588DCE50",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090",
     "587E7920",
     "588F13B0", "58908830", "587E6E80", "587D90F0",
     "588730F0", "587DAF90", "588EF5F0", "5876BFA0",
@@ -238,7 +238,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
-    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0",
+    "58770A80", "58908870", "587B9B30", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090",
     "589728D0", "5890B370", "587B66E0", "588C60E0",
     "58972850", "5897CC3C", "5897CC36",
     "589724B0", "58972500",
@@ -403,6 +403,12 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 EVIDENCE = {
+    "587E0090": {
+        "name_in_analysis": "FUN_587e0090",
+        "called_by": "Called 13 times from 0x587BB700 and 7 times from 0x588C4210. Both callers load receiver 0x58A24598 into ECX; 0x588C4210 visibly supplies six stack arguments, consistent with the callee's ret 0x18.",
+        "behavior": "Saves the receiver, performs an indirect call through the object at receiver +0xDB0 using its vtable slot +0x08, then dispatches on a byte selector from the stack argument tuple. Selector values 1 through 14 enter the corresponding jump-table body; other values take the default path. The function cleans six 32-bit stack arguments on return. Candidate extent: 2,297 bytes with 135 mapped operand targets.",
+        "uncertainty": "The selector's domain name, the meanings of all 14 cases, stack argument types, the +0xDB0 subobject type, and higher-level effect are unresolved. Cases call many helpers and access global state; no gameplay labels are inferred from that alone. The external jump/selector tables are referenced by the function but lie outside its indexed body. No runtime behavior test was performed.",
+    },
     "587453A0": {
         "name_in_analysis": "FUN_587453a0",
         "called_by": "Called from 0x5896CF50, 0x5896E150, and 0x5896F3E0. Each function tests at least one returned value for null before the subsequent path proceeds.",

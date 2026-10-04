@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,777
-identified code bytes across six report units. There are 7,120 verified matches
-totaling 2,242,820 bytes (21.4219%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,121 verified matches
+totaling 2,245,117 bytes (21.4438%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -17,13 +17,14 @@ Recent current Main.dll helper evidence is documented in
 and [`docs/current-main-indexed-pointer-lookup.md`](docs/current-main-indexed-pointer-lookup.md),
 [`docs/current-main-null-safe-pointer-getter.md`](docs/current-main-null-safe-pointer-getter.md),
 [`docs/current-main-field-getter-6088.md`](docs/current-main-field-getter-6088.md),
-and [`docs/current-main-field-getter-0004.md`](docs/current-main-field-getter-0004.md).
+[`docs/current-main-field-getter-0004.md`](docs/current-main-field-getter-0004.md),
+and [`docs/current-main-tag-dispatch-587e0090.md`](docs/current-main-tag-dispatch-587e0090.md).
 
-The latest addition, `FUN_587453A0`, is a four-byte field getter called by three
-verified functions. It returns the DWORD at receiver `+0x04`; callers test the
-result for null, but the receiver and field semantics remain unknown. It
-matches the complete captured extent at 100.0% under objdiff; no runtime
-behavior test was performed.
+The latest addition, `FUN_587E0090`, is a 2,297-byte handler called at 20 sites
+from two verified functions. It performs an indirect call through receiver
+`+0xDB0`, then dispatches selector values 1 through 14 to a jump table. Its
+case and argument semantics remain unknown. The entire extent and 135 mapped
+operands match under objdiff; no runtime behavior test was performed.
 
 The latest bounded client record helper is `FUN_5877ABA0`, a 151-byte routine
 called by six verified functions. It copies a supplied string into a fixed
