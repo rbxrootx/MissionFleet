@@ -294514,6 +294514,159 @@
         "behavior": "Walks entries from the link at receiver +0x78, following each node's +0x14 pointer. It compares the payload pointers at node +4 byte-by-byte in two-byte steps until a mismatch or zero byte. When the comparison result is positive, it exchanges the observed node fields at +4, +8, and +0xC while repairing adjacent links and the receiver-owned entry table; it then continues through the chain. Ghidra's 539-byte extent ended after pop edi, omitting the contiguous mapped epilogue at 0x5878A5BB..0x5878A5C0 (`add esp, 0x18; ret 0xC`). The complete callable body is 545 bytes; fifteen INT3 bytes follow before the next indexed function at 0x5878A5D0. Nine operand targets are inventoried.",
         "uncertainty": "The payload encoding, node/list types, meaning of the caller's mode and index arguments, and whether the ordering is user-visible or only internal remain unknown. The two-byte comparison stride and field/link mutations are directly visible in the mapped instructions. The extended extent includes the ABI cleanup/return immediately before INT3 alignment. No emulator test was performed."
       }
+    },
+    {
+      "address": "587ECAB0",
+      "name": "FUN_587ecab0",
+      "size": 492,
+      "symbol": "_FUN_587ecab0",
+      "source": "src/client-current/Main/FUN_587ecab0.cpp",
+      "source_sha256": "32a222339b7a5e86fe7639c31e98bde30054d408fd7263cc3ae19c5cf27d14f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898253B",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 59,
+          "target_address": "587ECC86",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58A0AE1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58A0AE1C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "5898D788",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "58996AA0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "58A24914",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "58A2491C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "58996AD8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 173,
+          "target_address": "5898D788",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "587ECC86",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 313,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 318,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 379,
+          "target_address": "5897CC36",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 411,
+          "target_address": "5875ADB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 441,
+          "target_address": "5877E740",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 458,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 466,
+          "target_address": "587BB160",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ecab0",
+        "called_by": "Called from the alternative branches of verified handlers FUN_5877EC80 and FUN_58782CF0. Those callers pass selector values 2 and 1 respectively, together with a selected object/record pointer; both then call FUN_58780330.",
+        "behavior": "Checks receiver field +0x218C4, then derives an integer limit from global 0x58A0AE1C, global data rooted at 0x58A2459C and 0x58A2491C, and constants at 0x58996AA0 and 0x58996AD8. A floating comparison can halve the requested value; selector branches derive factors 100, 50, or 70, and subtract the resulting value from receiver +0x218D0 with a zero floor. It then requests a 0x11C-byte object through FUN_5897CC4E and, on success, reads resource fields around global object 0x58A246A4 and calls FUN_5875ADB0 with the selected pointer and derived values. Finally, it calls FUN_5877E740 and FUN_587BB160, packing zero-extended 16-bit values into one DWORD. The complete 492-byte body ends with ret 0xC and contains 21 mapped operand targets.",
+        "uncertainty": "The receiver, allocated object, global tables and units, selector meanings, helper contracts, and visible or gameplay effect of the packed value are unresolved. Caller evidence places the function in the shared selected-object child update path, but does not establish whether its arithmetic represents rate, cost, capacity, or another quantity. No runtime/emulator test was performed."
+      }
     }
   ]
 }

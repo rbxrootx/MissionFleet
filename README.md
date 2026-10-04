@@ -9,9 +9,10 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,147 matches cover 2,262,265 bytes (21.6075%) and are verified
+The current 7,148 matches cover 2,262,757 bytes (21.6122%) and are verified
 individually at 100.0% by objdiff.
-Recent Main.dll evidence includes the tag/selector dispatchers, linked-record
+Recent Main.dll evidence includes the tag/selector dispatchers, selected-object
+update amount handling, linked-record
 text walk, control-menu layout refresh, stateful record refresh, stateful update
 and initializer functions, message handlers, and `CForce` child setup in [the subsystem docs](docs/).
 The latest runtime-error entry slice is documented in

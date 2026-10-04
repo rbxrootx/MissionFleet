@@ -40,6 +40,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
+    "587ECAB0",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "58908750", "588DD2A0", "588DD310", "58778DC0", "588F5120",
@@ -234,6 +235,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020",
+    "587ECAB0",
     "58907C80", "5873A540", "58775980", "587B7260", "5888D250",
     "58780330", "5875ADB0", "587C4450", "587E5CB0", "58908750",
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
@@ -4901,6 +4903,12 @@ EVIDENCE = {
         "called_by": "Called by both verified event handlers FUN_587BB700 and FUN_588C1650. In their joined-fleet notice path, they format MESSAGESTRING__SQUADRON_JOINED_FLEET using packet text and pass the companion text pointer at packet/temporary +0x2D to this routine; Ghidra shows multiple call sites in FUN_588C1650.",
         "behavior": "Takes the receiver in ECX and a text pointer on the stack. It requests a 0xB4-byte object through FUN_5897CC4E; when allocation succeeds, initializes fields using receiver offsets +4, +8, and +0xB0 through FUN_5875A7E0, and passes the text through callback 0x5898C198 and FUN_5875A4B0. It clears observed flag bits on the new object's word at +0x24. The first object is stored in receiver fields +0x64 and +0xFC; later objects are linked after the previous object at receiver +0x68 using links at +0x54 and +0x50. It increments receiver word +0xF0, updates +0x68 to the new object, then calls FUN_588486E0. The full body is 294 bytes, ends in ret 4 at 0x58849333, and contains nine operand targets.",
         "uncertainty": "The receiver and 0xB4-byte object types, allocator/callback/helper contracts, field and flag meanings, and precise UI or protocol effect remain unknown. The joined-fleet localized caller context ties the text input to that event path, but does not establish a domain type for the appended objects. No emulator test was performed.",
+    },
+    "587ECAB0": {
+        "name_in_analysis": "FUN_587ecab0",
+        "called_by": "Called from the alternative branches of verified handlers FUN_5877EC80 and FUN_58782CF0. Those callers pass selector values 2 and 1 respectively, together with a selected object/record pointer; both then call FUN_58780330.",
+        "behavior": "Checks receiver field +0x218C4, then derives an integer limit from global 0x58A0AE1C, global data rooted at 0x58A2459C and 0x58A2491C, and constants at 0x58996AA0 and 0x58996AD8. A floating comparison can halve the requested value; selector branches derive factors 100, 50, or 70, and subtract the resulting value from receiver +0x218D0 with a zero floor. It then requests a 0x11C-byte object through FUN_5897CC4E and, on success, reads resource fields around global object 0x58A246A4 and calls FUN_5875ADB0 with the selected pointer and derived values. Finally, it calls FUN_5877E740 and FUN_587BB160, packing zero-extended 16-bit values into one DWORD. The complete 492-byte body ends with ret 0xC and contains 21 mapped operand targets.",
+        "uncertainty": "The receiver, allocated object, global tables and units, selector meanings, helper contracts, and visible or gameplay effect of the packed value are unresolved. Caller evidence places the function in the shared selected-object child update path, but does not establish whether its arithmetic represents rate, cost, capacity, or another quantity. No runtime/emulator test was performed.",
     },
     "58780640": {
         "name_in_analysis": "FUN_58780640",
