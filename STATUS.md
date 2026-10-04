@@ -27,6 +27,10 @@ and is excluded from the match count.
 The two `CNumberScreen` bounded-step helpers likewise have a portable C++
 behavior model with four passing scenarios; their byte-identical instruction
 sources remain the counted matches.
+The matched two-key record update and its 0x54/0x84-stride wrappers now have
+a [portable end-to-end model](docs/current-main-two-key-record-update-model.md)
+with passing insert, update, and second-key-miss cases. It is excluded from
+the byte-match count.
 
 Recent current Main.dll helper evidence is documented in
 [`docs/current-main-six-field-record-ingestion.md`](docs/current-main-six-field-record-ingestion.md),

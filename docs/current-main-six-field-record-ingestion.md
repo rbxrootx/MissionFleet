@@ -21,5 +21,9 @@ zero count, two-record traversal at both strides, field values, pointer
 offsets, and call order. Run `python tools/verify_six_field_record_ingestion.py`.
 The model is not counted as a byte match.
 
+A separate [two-key update model](current-main-two-key-record-update-model.md)
+now receives this callback and tests a complete insert, update, and second-key
+miss through both batch wrappers.
+
 The incoming record types, text encodings, and protocol role remain unknown.
 No runtime client or emulator test was performed.
