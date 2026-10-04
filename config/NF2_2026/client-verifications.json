@@ -297456,6 +297456,129 @@
         "behavior": "Runs under SEH, forwards constructor arguments to base initializer FUN_58734A30, installs vtable address point 0x5899A118, stores observed constructor values at receiver +4/+8, and initializes child pointer +0x58 and sentinel +0x5C. Depending on the first constructor value it may allocate a 0x20-byte child, resolve an auxiliary value through either global manager 0x58A248D0 and FUN_58731810 or a bounded indexed entry in global object 0x58A246DC, then initialize the child through FUN_587B7350; failed bounds/pointer checks pass null. It finishes by calling FUN_587B70A0 and returns the receiver with ret 0x1C. The full 303-byte body has 14 mapped operand targets.",
         "uncertainty": "The class name and relationship between the two constructor signatures, argument meanings, manager/table schemas, child type, sentinel semantics, and precise update effect remain unknown. Shared vtable address point and caller contexts support grouping these constructors but do not establish a domain class name. No runtime or emulator test was performed."
       }
+    },
+    {
+      "address": "58754D60",
+      "name": "FUN_58754d60",
+      "size": 275,
+      "symbol": "_FUN_58754d60",
+      "source": "src/client-current/Main/FUN_58754d60.cpp",
+      "source_sha256": "14f76d1c10b88fc4ee68a3842f1fe57ca8fd1f75c5c07887ac7b202ff5d098e5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "58753CC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "58754AD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "58754E69",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 124,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 136,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 145,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 193,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 209,
+          "target_address": "5898C194",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 245,
+          "target_address": "58754DC0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58754d60 / keyed 0x808-byte record insert-or-refresh helper",
+        "called_by": "Called twice by verified packet/message dispatcher FUN_587BB700 and twice by verified event dispatcher FUN_588C1650. Both callers construct a record with two leading DWORDs and a 0x800-byte payload before passing it to this routine.",
+        "behavior": "Reads the record's first two DWORDs and calls FUN_58753CC0 on the receiver to test for that key pair. If absent, it passes the complete record to FUN_58754AD0 on the receiver's embedded container at +0x1C. If present, it traverses the receiver's records at +0x1C and for each 0x808-byte entry whose second DWORD equals the incoming second DWORD, copies 0x800 payload bytes from incoming +8 to entry +8 through the indirect copy routine at 0x5898C194. Pointer/count consistency checks route invalid states to 0x5897CC72. The 275-byte body returns with ret 4 and has 16 mapped operand targets.",
+        "uncertainty": "The semantic meanings of the two key DWORDs, payload bytes, receiver/container fields, indirect copy import, and the reason an existing pair refreshes all entries sharing only the second DWORD remain unknown. Caller contexts establish packet and event-dispatch use, but no runtime or emulator test was performed."
+      }
     }
   ]
 }

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,469,853
-identified code bytes across six report units. There are 7,170 verified matches
-totaling 2,272,496 bytes (21.7051%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,171 verified matches
+totaling 2,272,771 bytes (21.7078%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -171,6 +171,14 @@ matched `FUN_587B7260`, forwards arguments to `0x58734A30`, initializes receiver
 fields, and conditionally creates and initializes a child through
 `0x587B7350`. Its class, argument meanings, and child type remain unresolved.
 All 14 operand targets match the mapped image under objdiff.
+
+The latest keyed record insert/refresh helper is `FUN_58754D60`, a 275-byte
+routine called from packet/message and event dispatch paths. It uses the first
+two DWORDs of an incoming record to choose between inserting a complete
+0x808-byte record and refreshing the 0x800-byte payload of existing entries
+sharing the second DWORD. The names and semantics of those fields and the
+reason for the refresh rule remain unknown. All 16 operand targets match the
+mapped image; see [the record-refresh evidence](docs/current-main-keyed-record-refresh.md).
 
 The latest linked-text update path is `FUN_5888D250`, a 119-byte routine called
 by four verified functions. It rebuilds linked storage in the context at
