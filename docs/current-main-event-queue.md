@@ -94,6 +94,10 @@ result each time. Before the second read it checks queue count `+0x104A8` and
 calls `FUN_587e95c0`. These are observed field accesses and call order; their
 screen/update semantics remain unresolved.
 
+On a separate stage-6 branch, this update also calls `FUN_5875CD10`; the
+conditional global-pointer forwarding and ship-map caller are documented in
+[the forwarder notes](current-main-ship-map-conditional-forwarder.md).
+
 The producer, reader, constructor, cleanup, and update evidence is static. The
 vtable reference does not confirm a live call path. No live client queue traffic
 has been captured, and the callback contract, event schema, drop behavior when

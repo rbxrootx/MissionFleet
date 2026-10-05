@@ -309693,6 +309693,51 @@
         "behavior": "Reads the low word of its stack argument. For 0x0B, adds 8 to receiver dword +0x1428 and returns with ret 4. Otherwise, for 0x0C, adds 8 to receiver dword +0x142C. Other values leave the receiver unchanged. The complete indexed body is 37 bytes, ending with ret 4 at 0x588D6CB2..0x588D6CB4; the next indexed function begins at 0x588D6CC0.",
         "uncertainty": "The receiver type and meanings of fields +0x1428/+0x142C, the reason for increment 8, and their visible effect remain unresolved. The verified callers observed here pass only 0x0B. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "5875CD10",
+      "name": "FUN_5875cd10",
+      "size": 30,
+      "symbol": "_FUN_5875cd10",
+      "source": "src/client-current/Main/FUN_5875cd10.cpp",
+      "source_sha256": "967d9ae1b9e117e700ae36cd2e955744d2b235e3c200649185cb0c1e5113c8e2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "587BA550",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875cd10",
+        "called_by": "Verified CShip_MapObjectScreen update FUN_588E5150 calls at 0x588E6047 after checking [0x58A2459C]+0x105F0 == 6 and loading ECX from [this+0x21F08]. Verified update FUN_587FD890 calls at 0x587FEC68 after checking its +0x105F0 word == 6 and loading ECX from [this+0x21F08]. Caller evidence is in src/client-current/Main/FUN_588e5150.cpp and FUN_587fd890.cpp, plus var/current-main-next/588e5150-ghidra.c and 587fd890-ghidra.c.",
+        "behavior": "With receiver in ECX, loads the dword at [0x58A247F8]+4. If it equals receiver +0x50 or receiver +0x54, loads ECX from 0x58A24588 and tail-jumps to FUN_587BA550. Otherwise returns. The complete indexed body is 30 bytes, including ret at 0x5875CD2D; the next indexed function starts at 0x5875CD30.",
+        "uncertainty": "The meanings and types of the global pointers and receiver fields, why the callers gate on stage 6, the tail-called function's behavior, and the runtime-visible effect remain unresolved. The tail target FUN_587BA550 is not yet byte-verified. No runtime client or emulator test was performed."
+      }
     }
   ]
 }

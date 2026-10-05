@@ -24,3 +24,6 @@ and produces different machine code. No emulator runtime test was performed.
 Its two calls to `FUN_588D6600` update child position values; the complete
 callee and its corrected boundary are documented in the
 [child position update notes](current-main-ship-map-child-position-update.md).
+The stage-6 update path also invokes the conditional forwarder
+[`FUN_5875CD10`](current-main-ship-map-conditional-forwarder.md) through the
+object stored at `+0x21F08`.
