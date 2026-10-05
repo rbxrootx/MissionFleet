@@ -309524,6 +309524,45 @@
         "behavior": "Reads the second stack argument as an item count and multiplies it by 0x18 to form a byte length. It forwards message ID 0x80010F03, the third stack argument, the count, the first stack argument, the computed byte length, and zero to FUN_58970C70. The complete body is 40 bytes and ends with ret 0x0C. The transport callee is independently byte-verified; this helper's call contract is recorded from its pushes and the three verified caller paths.",
         "uncertainty": "The semantic type and lifetime of the caller buffers, the meaning of the count and third argument across all paths, the server-side meaning of message 0x80010F03, and the user-visible effect remain unresolved. No runtime client/server comparison was performed."
       }
+    },
+    {
+      "address": "58895860",
+      "name": "FUN_58895860",
+      "size": 94,
+      "symbol": "_FUN_58895860",
+      "source": "src/client-current/Main/FUN_58895860.cpp",
+      "source_sha256": "af37724d16a55f787710a0fca86cc9ceb8035befdbecace0544a811c6b04fa2d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 55,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58895860",
+        "called_by": "Verified FUN_588E0260 calls at 0x588E0328 and 0x588E0344 with selectors 0 and 1 and values decoded from receiver fields +0x1438/+0x143C. Verified FUN_588E5150 calls it at 0x588E5516 with selector 0 and a decoded +0x1438 value. Existing caller behavior is documented in docs/current-main-encoded-state-update.md.",
+        "behavior": "Reads selector and value from its two stack arguments. It clamps a negative value to zero and writes it to receiver +0x94 + selector*4. It then reads both receiver fields +0x94/+0x98; for each, it computes signed (value*0x373)/receiver[+0xA8] + 0x7E and calls FUN_589032E0 on the associated objects at receiver +0x68 and +0x6C. The complete 94-byte body ends with ret 8 and has two mapped call targets.",
+        "uncertainty": "The receiver and child types, selector domain beyond observed 0/1, scaling divisor/constant units, fields' semantic roles, and visible effect remain unresolved. The 94-byte body and both calls match statically; no emulator runtime test was performed."
+      }
     }
   ]
 }
