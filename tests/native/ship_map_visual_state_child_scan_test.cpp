@@ -2,21 +2,12 @@
 
 #include <cassert>
 #include <cstdint>
+#include <cstring>
 #include <new>
 #include <utility>
 #include <vector>
 
 namespace {
-struct CandidateCall {
-    void* allocated;
-    const void* owner;
-    const std::uint8_t* resource;
-    std::uint32_t x;
-    std::uint32_t y;
-    std::uint16_t variant;
-    MissionFleetShipMapVisualCandidateRef result;
-};
-
 struct SecondaryCall {
     void* allocated;
     const void* owner;
@@ -50,14 +41,12 @@ struct Fixture {
     std::vector<void*> allocations;
     std::array<MissionFleetShipMapVisualNode, 3> candidateNodes{};
     MissionFleetShipMapVisualNode secondaryNode{};
-    std::vector<CandidateCall> candidateCalls;
     std::vector<SecondaryCall> secondaryCalls;
     std::vector<DrawCall> drawCalls;
     std::vector<RouteCall> routeCalls;
     std::vector<std::pair<std::uint32_t, void*>> allocationCalls;
     std::size_t randomCall = 0;
     std::size_t allocationCall = 0;
-    std::size_t candidateCall = 0;
 };
 
 void notify(std::uint32_t argument, void* context) {
@@ -77,20 +66,18 @@ void* allocate(std::uint32_t bytes, void* context) {
     auto& fixture = *static_cast<Fixture*>(context);
     void* result = fixture.allocations.at(fixture.allocationCall++);
     fixture.allocationCalls.emplace_back(bytes, result);
-    fixture.order.push_back(bytes == 0x58 ? 'A' : 'B');
+    fixture.order.push_back('B');
     return result;
 }
 
-MissionFleetShipMapVisualCandidateRef initializeCandidate(
-    MissionFleetShipMapVisualStateChildScan&, void* allocated,
-    const void* owner, const std::uint8_t* resource, std::uint32_t x,
-    std::uint32_t y, std::uint16_t variant, void* context) {
+MissionFleetShipMapVisualNode* allocateCandidateStorage(
+    std::uint32_t nativeBytes, void* context) {
     auto& fixture = *static_cast<Fixture*>(context);
-    auto* object = &fixture.candidateNodes.at(fixture.candidateCall++);
-    fixture.candidateCalls.push_back(
-        {allocated, owner, resource, x, y, variant, {object, x, y, variant}});
-    fixture.order.push_back('I');
-    return {object, x, y, variant};
+    assert(nativeBytes == 0x58u);
+    void* const storage = fixture.allocations.at(fixture.allocationCall++);
+    fixture.allocationCalls.emplace_back(nativeBytes, storage);
+    fixture.order.push_back('A');
+    return static_cast<MissionFleetShipMapVisualNode*>(storage);
 }
 
 void drawEffect(void* target, std::uint32_t x, std::uint32_t y,
@@ -122,14 +109,74 @@ void drawRoute(MissionFleetShipMapVisualStateChildScan&, std::uint32_t x,
 }
 
 const MissionFleetShipMapVisualStateChildScanHooks hooks{
-    notify, randValue, allocate, initializeCandidate, drawEffect,
+    notify, randValue, allocateCandidateStorage, allocate, drawEffect,
     initializeSecondary, drawRoute};
+
+void setRecordFields(std::uint8_t* record, std::uint32_t base) {
+    for (std::size_t i = 0; i < 6; ++i) {
+        const std::uint32_t value = base + static_cast<std::uint32_t>(i);
+        std::memcpy(record + 0x18 + i * sizeof(value), &value, sizeof(value));
+    }
+}
 
 void checkMsvc90RandSequence() {
     MissionFleetMsvc90RandState state{};
     assert(missionFleetMsvc90Rand(state) == 41);
     assert(missionFleetMsvc90Rand(state) == 18467);
     assert(missionFleetMsvc90Rand(state) == 6334);
+}
+
+void checkCandidateConstructorAndSortedOwnerLists() {
+    MissionFleetShipMapVisualNodeListOwner owner{};
+    MissionFleetShipMapVisualNode nodes[4]{};
+    nodes[0].flags24 = 0xFFFFu;
+    const std::int16_t keys[4] = {5, -2, 5, 1};
+    std::uint8_t record[0x40]{};
+    setRecordFields(record, 700);
+
+    for (std::size_t i = 0; i < 4; ++i) {
+        auto* const result = missionFleetConstructShipMapVisualCandidate(
+            nodes[i], &owner, i == 0 ? record : nullptr,
+            static_cast<std::uint32_t>(100 + i),
+            static_cast<std::uint32_t>(200 + i),
+            static_cast<std::uint16_t>(keys[i]));
+        assert(result == &nodes[i]);
+        assert(nodes[i].vtable00 == 0x589A2988u);
+        assert(nodes[i].counter50 == 0 && nodes[i].value28 == 0x100u);
+        assert(nodes[i].mode2C == 0 && nodes[i].flags24 == 0xE00Fu);
+        assert(nodes[i].firstChild3C == nullptr &&
+               nodes[i].firstChild4C == nullptr);
+        assert(nodes[i].value04 == 100u + i && nodes[i].value08 == 200u + i);
+        assert(nodes[i].word26 == static_cast<std::uint16_t>(keys[i]));
+    }
+
+    assert(owner.circularHead3C == &nodes[1]);
+    assert(nodes[1].next38 == &nodes[3] && nodes[3].next38 == &nodes[0]);
+    assert(nodes[0].next38 == &nodes[2] && nodes[2].next38 == &nodes[1]);
+    assert(nodes[1].previous34 == &nodes[2] && nodes[2].previous34 == &nodes[0]);
+    assert(nodes[0].previous34 == &nodes[3] && nodes[3].previous34 == &nodes[1]);
+    assert(owner.linearHead4C == &nodes[1]);
+    assert(nodes[1].previous44 == nullptr && nodes[1].next48 == &nodes[3]);
+    assert(nodes[3].previous44 == &nodes[1] && nodes[3].next48 == &nodes[0]);
+    assert(nodes[0].previous44 == &nodes[3] && nodes[0].next48 == &nodes[2]);
+    assert(nodes[2].previous44 == &nodes[0] && nodes[2].next48 == nullptr);
+    for (const auto& node : nodes) {
+        assert(node.owner30 == &owner && node.owner40 == &owner);
+    }
+    assert(nodes[0].record54 == record);
+    for (std::size_t i = 0; i < 6; ++i) {
+        assert(nodes[0].copiedFields0CTo20[i] == 700u + i);
+    }
+
+    MissionFleetShipMapVisualNode unowned{};
+    missionFleetConstructShipMapVisualCandidate(
+        unowned, nullptr, nullptr, 123u, 456u, 7u);
+    assert(unowned.owner30 == nullptr && unowned.owner40 == nullptr);
+    assert(unowned.previous34 == &unowned && unowned.next38 == &unowned);
+    assert(unowned.copiedFields0CTo20[0] == 0 &&
+           unowned.copiedFields0CTo20[4] == 0u - 123u &&
+           unowned.copiedFields0CTo20[5] == 0u - 456u);
+    assert(unowned.record54 == nullptr);
 }
 
 void checkProximitySelectionAndNoGateAdvance() {
@@ -191,47 +238,24 @@ void checkCandidateScanAndPostScanConstruction() {
     state.resourceTableCount246F0 = 24;
     state.resourceTable246F4 = table246F4;
     state.resourceTableCount246F4 = 4;
-    state.globalRecord10524 = reinterpret_cast<void*>(0x9990u);
+    setRecordFields(table246F0 + 0x480, 1000);
+    setRecordFields(table246F4 + 0x80, 2000);
+    MissionFleetShipMapVisualNodeListOwner globalOwnerLists{};
+    state.globalRecord10524 = &globalOwnerLists;
 
     Fixture fixture;
     // Phase gate; three entry gates; y/x jitter for slots 7 and 31;
     // post-scan table choice; FUN_58789040's rand()%6.
     fixture.randomValues = {2, 0, 1, 10, 19, 3, 4, 5, 6, 17};
-    fixture.allocations = {reinterpret_cast<void*>(0xA0u),
-                           reinterpret_cast<void*>(0xB0u),
-                           reinterpret_cast<void*>(0xC0u),
+    fixture.allocations = {&fixture.candidateNodes[0],
+                           &fixture.candidateNodes[1],
+                           &fixture.candidateNodes[2],
                            reinterpret_cast<void*>(0xD0u)};
-    MissionFleetShipMapVisualNode flaggedChild{};
-    MissionFleetShipMapVisualNode unflaggedSibling{};
-    MissionFleetShipMapVisualNode nestedFlaggedChild{};
-    fixture.candidateNodes[0].firstChild3C = &flaggedChild;
-    flaggedChild.flags24 = 0x8000u;
-    flaggedChild.next38 = &unflaggedSibling;
-    flaggedChild.firstChild3C = &nestedFlaggedChild;
-    nestedFlaggedChild.flags24 = 0x8000u;
-    nestedFlaggedChild.next38 = &nestedFlaggedChild;
-    unflaggedSibling.mode2C = 0xDEADBEEFu;
-    unflaggedSibling.next38 = &flaggedChild;
 
     assert(missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture) ==
            MissionFleetShipMapVisualStateChildScanResult::ScanCompleted);
     assert(state.counter6058 == 4 && state.state60B0 == 0x01040000u);
     assert(fixture.randomCall == 10 && fixture.allocationCall == 4);
-    assert(fixture.candidateCalls.size() == 3);
-
-    const auto& first = fixture.candidateCalls[0];
-    const auto& last = fixture.candidateCalls[1];
-    const auto& postScan = fixture.candidateCalls[2];
-    assert(first.allocated == reinterpret_cast<void*>(0xA0u));
-    assert(first.owner == &state && first.resource == table246F0 + 0x480);
-    assert(first.x == 91 && first.y == 200 && first.variant == 90);
-    assert(last.allocated == reinterpret_cast<void*>(0xB0u));
-    assert(last.owner == &state && last.resource == table246F0 + 0x480);
-    assert(last.x == 305 && last.y == 406 && last.variant == 90);
-    assert(postScan.allocated == reinterpret_cast<void*>(0xC0u));
-    assert(postScan.owner == state.globalRecord10524);
-    assert(postScan.resource == table246F4 + 0x80);
-    assert(postScan.x == 305 && postScan.y == 406 && postScan.variant == 91);
 
     assert(fixture.allocationCalls.size() == 4);
     assert(fixture.allocationCalls[0].first == 0x58);
@@ -246,9 +270,44 @@ void checkCandidateScanAndPostScanConstruction() {
     assert(secondary.x == 305 && secondary.y == 401 && secondary.word26 == 90);
     assert(secondary.randomRemainder6 == 5);
 
+    const auto& first = fixture.candidateNodes[0];
+    const auto& last = fixture.candidateNodes[1];
+    const auto& postScan = fixture.candidateNodes[2];
+    assert(first.value04 == 91 && first.value08 == 200 && first.word26 == 90);
+    assert(last.value04 == 305 && last.value08 == 406 && last.word26 == 90);
+    assert(postScan.value04 == 305 && postScan.value08 == 406 &&
+           postScan.word26 == 91);
+    assert(first.vtable00 == 0x589A2988u && last.vtable00 == 0x589A2988u &&
+           postScan.vtable00 == 0x589A2988u);
+    assert(first.counter50 == 0 && last.counter50 == 0 && postScan.counter50 == 0);
+    assert(first.record54 == table246F0 + 0x480 &&
+           last.record54 == table246F0 + 0x480 &&
+           postScan.record54 == table246F4 + 0x80);
+    for (std::size_t i = 0; i < 6; ++i) {
+        assert(first.copiedFields0CTo20[i] == 1000u + i);
+        assert(last.copiedFields0CTo20[i] == 1000u + i);
+        assert(postScan.copiedFields0CTo20[i] == 2000u + i);
+    }
+    assert(first.owner30 == &state.ownerLists && first.owner40 == &state.ownerLists);
+    assert(last.owner30 == &state.ownerLists && last.owner40 == &state.ownerLists);
+    assert(state.ownerLists.circularHead3C == &first);
+    assert(first.next38 == &last && last.next38 == &first);
+    assert(first.previous34 == &last && last.previous34 == &first);
+    assert(state.ownerLists.linearHead4C == &first);
+    assert(first.next48 == &last && last.previous44 == &first &&
+           last.next48 == nullptr);
+    assert(postScan.owner30 == &globalOwnerLists &&
+           postScan.owner40 == &globalOwnerLists);
+    assert(globalOwnerLists.circularHead3C == &postScan &&
+           postScan.next38 == &postScan && postScan.previous34 == &postScan);
+    assert(globalOwnerLists.linearHead4C == &postScan &&
+           postScan.next48 == nullptr && postScan.previous44 == nullptr);
+
     assert(fixture.candidateNodes[0].mode2C == 0x102u);
-    assert(flaggedChild.mode2C == 0x102u && nestedFlaggedChild.mode2C == 0x102u);
-    assert(unflaggedSibling.mode2C == 0xDEADBEEFu);
+    assert(first.flags24 == 0xE00Fu && last.flags24 == 0xE00Fu &&
+           postScan.flags24 == 0xE00Fu);
+    assert(first.firstChild3C == nullptr && last.firstChild3C == nullptr &&
+           postScan.firstChild3C == nullptr);
     assert(fixture.candidateNodes[1].mode2C == 0x102u);
     assert(fixture.candidateNodes[2].mode2C == 0x102u);
     assert(fixture.secondaryNode.mode2C == 0xFFFFFEFFu);
@@ -274,8 +333,8 @@ void checkOptionalEffectsProjectionAndRouteArguments() {
 
     Fixture fixture;
     fixture.randomValues = {1, 1, 0, 0, 3, 2, 17};
-    fixture.allocations = {reinterpret_cast<void*>(0xC0u),
-                           reinterpret_cast<void*>(0xC1u),
+    fixture.allocations = {&fixture.candidateNodes[0],
+                           &fixture.candidateNodes[1],
                            reinterpret_cast<void*>(0xC2u)};
 
     assert(missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture) ==
@@ -309,16 +368,17 @@ void checkResourceTableRequiresMoreThanEighteenRecords() {
     state.resourceTable246F0 = resourceTable;
     state.resourceTableCount246F0 = 18;
     Fixture fixture;
-    fixture.randomValues = {1, 1, 0, 0};
-    fixture.allocations = {reinterpret_cast<void*>(0xD0u)};
-    fixture.allocations = {reinterpret_cast<void*>(0xA0u),
-                           reinterpret_cast<void*>(0xA1u),
+    fixture.allocations = {&fixture.candidateNodes[0],
+                           &fixture.candidateNodes[1],
                            reinterpret_cast<void*>(0xA2u)};
     fixture.randomValues = {1, 1, 0, 0, 0, 0};
 
     (void)missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture);
-    assert(fixture.candidateCalls.size() == 2);
-    assert(fixture.candidateCalls[0].resource == nullptr);
+    assert(fixture.candidateNodes[0].record54 == nullptr);
+    assert(fixture.candidateNodes[1].record54 == nullptr);
+    assert(fixture.candidateNodes[0].copiedFields0CTo20[0] == 0);
+    assert(fixture.candidateNodes[0].copiedFields0CTo20[4] == 0u - 20u);
+    assert(fixture.candidateNodes[0].copiedFields0CTo20[5] == 0u - 30u);
     assert(fixture.randomCall == 6);
 }
 
@@ -386,6 +446,7 @@ void checkCounterTransitionAndWord164Gate() {
 
 int main() {
     checkMsvc90RandSequence();
+    checkCandidateConstructorAndSortedOwnerLists();
     checkProximitySelectionAndNoGateAdvance();
     checkThrottleSkipsScanButAdvancesCounter();
     checkCandidateScanAndPostScanConstruction();

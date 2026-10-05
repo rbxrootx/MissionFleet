@@ -11,9 +11,12 @@ The body forwards the five arguments, in their original order, to
 `0x589A2988` at receiver offset `+0`, returns the receiver in EAX, and removes
 the five arguments with `ret 0x14`.
 
-This is the full behavior supported by the mapped instructions. The class name
-for vtable address point `0x589A2988`, constructor purpose, and argument roles
-remain unresolved in the current RTTI and callsite evidence. The source at
+This is the full behavior supported by the mapped instructions alone. The
+class name and general constructor purpose remain unresolved. In the ship-map
+update's call chain, the shared base initializer and use sites identify the
+arguments as owner, resource record, x, y, and sort key; see
+[`the candidate-construction evidence`](current-main-ship-map-visual-candidate-construction.md).
+The source at
 `src/client-current/Main/FUN_58907c80.cpp` matches the complete indexed extent;
 objdiff 3.8.0 reports 47/47 identical bytes and checks both mapped operands.
 No original-client runtime test was performed.

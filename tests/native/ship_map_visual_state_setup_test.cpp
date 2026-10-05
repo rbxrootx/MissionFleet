@@ -35,13 +35,20 @@ void checkIndexedResourceSetupAndFlagClears() {
     for (std::uint32_t i = 0; i < 10; ++i) fillRecord(firstRecords[i], 100 + i * 10);
     for (std::uint32_t i = 0; i < 3; ++i) fillRecord(secondRecords[i], 500 + i * 10);
 
-    MissionFleetShipMapVisualAnimationNode routeNodes[4]{{0xFFFF}, {0x1235},
-                                                          {0x8001}, {0xABCD}};
-    MissionFleetShipMapVisualAnimationNode node60FC{0xFFFF};
-    MissionFleetShipMapVisualAnimationNode flaggedChild{0x8001};
-    MissionFleetShipMapVisualAnimationNode unflaggedChild{0};
-    MissionFleetShipMapVisualAnimationNode node12F4{0xFFFF};
-    MissionFleetShipMapVisualAnimationNode node12F8{0xFFFF};
+    MissionFleetShipMapVisualAnimationNode routeNodes[4]{};
+    routeNodes[0].flags24 = 0xFFFFu;
+    routeNodes[1].flags24 = 0x1235u;
+    routeNodes[2].flags24 = 0x8001u;
+    routeNodes[3].flags24 = 0xABCDu;
+    MissionFleetShipMapVisualAnimationNode node60FC{};
+    node60FC.flags24 = 0xFFFFu;
+    MissionFleetShipMapVisualAnimationNode flaggedChild{};
+    flaggedChild.flags24 = 0x8001u;
+    MissionFleetShipMapVisualAnimationNode unflaggedChild{};
+    MissionFleetShipMapVisualAnimationNode node12F4{};
+    node12F4.flags24 = 0xFFFFu;
+    MissionFleetShipMapVisualAnimationNode node12F8{};
+    node12F8.flags24 = 0xFFFFu;
     node60FC.firstChild3C = &flaggedChild;
     flaggedChild.next38 = &unflaggedChild;
     flaggedChild.mode2C = 0xAAAAAAAAu;

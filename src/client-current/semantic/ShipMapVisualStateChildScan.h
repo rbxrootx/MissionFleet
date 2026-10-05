@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ShipMapVisualNodeMode.h"
+#include "ShipMapVisualCandidateConstruction.h"
 
 #include <array>
 #include <cstddef>
@@ -8,13 +8,6 @@
 #include <optional>
 
 struct MissionFleetShipMapVisualCandidateEntry {
-    std::uint32_t value04 = 0;
-    std::uint32_t value08 = 0;
-    std::uint16_t word26 = 0;
-};
-
-struct MissionFleetShipMapVisualCandidateRef {
-    MissionFleetShipMapVisualNode* object = nullptr;
     std::uint32_t value04 = 0;
     std::uint32_t value08 = 0;
     std::uint16_t word26 = 0;
@@ -62,7 +55,10 @@ struct MissionFleetShipMapVisualStateChildScan {
     std::int32_t resourceTableCount246F0 = 0;
     const std::uint8_t* resourceTable246F4 = nullptr;
     std::int32_t resourceTableCount246F4 = 0;
-    const void* globalRecord10524 = nullptr;
+    // Semantic views of the two owner objects passed to FUN_58907C80. Each
+    // view models only the child heads at offsets +0x3C and +0x4C.
+    MissionFleetShipMapVisualNodeListOwner ownerLists{};
+    MissionFleetShipMapVisualNodeListOwner* globalRecord10524 = nullptr;
     MissionFleetShipMapVisualProjection projection{};
     const void* const* effectTargetTable31810 = nullptr;
     std::int32_t effectTargetCount31810 = 0;
@@ -79,15 +75,13 @@ struct MissionFleetShipMapVisualStateChildScanHooks {
     // Both call sites at 0x588DB6A1 and 0x588DB6E4 resolve through
     // DAT_5898C1F0 to the zero-argument MSVCR90 rand() export.
     std::int32_t (*rand5897CC36)(void* context) = nullptr;
+    // The native request is 0x58 bytes, but the host semantic node contains
+    // host-width pointers. This adapter returns semantic storage for that
+    // request; constructor behavior is modeled directly below.
+    MissionFleetShipMapVisualNode* (*allocateCandidateStorage5897CC4E)(
+        std::uint32_t nativeBytes, void* context) = nullptr;
     // DAT_5898C200 resolves to MSVCR90 operator new(unsigned int).
     void* (*operatorNew5897CC4E)(std::uint32_t bytes, void* context) = nullptr;
-    // FUN_58907C80 initializes the freshly allocated 0x58-byte candidate.
-    // x/y are raw 32-bit values after the observed rand()%20 jitter.
-    MissionFleetShipMapVisualCandidateRef (*initializeCandidate58907C80)(
-        MissionFleetShipMapVisualStateChildScan& receiver, void* allocated,
-        const void* constructionOwner, const std::uint8_t* selectedResourceRecord,
-        std::uint32_t x04, std::uint32_t y08, std::uint16_t variant,
-        void* context) = nullptr;
     // FUN_587B7400 receives this target with projected x/y and the observed
     // global effect color. The renderer's visual output remains external.
     void (*drawEffect587B7400)(void* target, std::uint32_t x,

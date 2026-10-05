@@ -23,6 +23,7 @@ def main():
     subprocess.run([
         compiler, "-std=c++17", "-O2",
         str(ROOT / "src/client-current/semantic/ShipMapVisualNodeMode.cpp"),
+        str(ROOT / "src/client-current/semantic/ShipMapVisualCandidateConstruction.cpp"),
         str(ROOT / "src/client-current/semantic/ShipMapVisualStateChildScan.cpp"),
         str(ROOT / "tests/native/ship_map_visual_state_child_scan_test.cpp"),
         "-o", str(executable),

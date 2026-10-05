@@ -317,8 +317,9 @@ remain unknown; both relocations match under objdiff.
 The latest five-argument constructor wrapper is `FUN_58907C80`, a 47-byte
 routine called by five verified functions. It forwards the receiver and all
 five arguments to `FUN_58734A30`, installs vtable address `0x589A2988`, and
-returns the receiver. The class and argument roles remain unidentified; both
-relocations match under objdiff.
+returns the receiver. The class and general purpose remain unidentified; the
+ship-map call chain resolves the arguments for that use as owner, resource
+record, x, y, and sort key. Both relocations match under objdiff.
 
 The latest shared state-bit setter is `FUN_5873A540`, a 40-byte helper called
 by five verified functions. It assigns receiver word `+0x24` bit `0x4` from the
@@ -1453,13 +1454,15 @@ the index+2 resource lookup and flagged descendant helper remain open. See the
 and [route-child evidence](docs/current-main-ship-map-route-child-update-588dbf10.md).
 The visual-state helper's `0x040000` through `0xFF0000` phases now have tested
 C++ models for the scan controller, indexed resource setup, frame counters,
-callbacks, and state writes. The per-entry child/effect construction still
-uses evidence-bound hooks while the indirect targets remain unidentified. See the
-[phase model evidence](docs/current-main-ship-map-visual-state-update-588db610.md).
+callbacks, and state writes. The `0x58` candidate path now directly models the
+constructor fields, six-DWORD resource copy, and insertion into both sorted
+owner lists; allocation and the `0x68` secondary object remain hooks. See the
+[phase model evidence](docs/current-main-ship-map-visual-state-update-588db610.md)
+and [candidate-construction evidence](docs/current-main-ship-map-visual-candidate-construction.md).
 The shared `FUN_58902D20` mode write and `0x8000`-gated recursion now has a
 direct semantic model used by both visual-state paths. The setup model also
 mutates the observed `+0x60FC` child instead of treating the helper as a
-pointer lookup. Candidate constructors and visible rendering remain open. See
+pointer lookup. The secondary constructor and visible rendering remain open. See
 [the helper evidence](docs/current-main-ship-map-visual-node-mode-58902d20.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
