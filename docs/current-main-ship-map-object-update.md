@@ -21,3 +21,6 @@ Ghidra's direct-reference audit records the method through vtable slot
 `test` instructions use explicitly emitted original bytes (`84 D3` and
 `84 CB`) because the compiler otherwise selects the opposite register order
 and produces different machine code. No emulator runtime test was performed.
+Its two calls to `FUN_588D6600` update child position values; the complete
+callee and its corrected boundary are documented in the
+[child position update notes](current-main-ship-map-child-position-update.md).

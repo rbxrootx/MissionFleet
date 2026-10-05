@@ -21,3 +21,5 @@ encoded explicitly. ObjDiff 3.8.0 reports 100% for all six compiled segments;
 This establishes a byte match and static control-flow facts. The constructor was
 not exercised in the original client, and the decompiler output does not
 establish the original high-level source or runtime visual result.
+Its call to `FUN_588D6600` now has a verified complete boundary and is described
+in the [child position update notes](current-main-ship-map-child-position-update.md).

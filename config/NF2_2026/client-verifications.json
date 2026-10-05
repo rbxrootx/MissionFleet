@@ -309589,6 +309589,39 @@
         "behavior": "Reads one stack argument, adds 0x32, applies a modulo-like signed wrap in 0xE10 increments, adds 0xE10 if the intermediate result is negative, then uses a signed multiply-high sequence equivalent on observed values to division by 100. Stores the result at receiver +0xA0. The complete 70-byte body ends with ret 4 and has no mapped operand targets.",
         "uncertainty": "The input/output field types, meaning and units of the 0x32 bias, wrap period 0xE10, and divide-by-100 result, and the visible purpose remain unresolved. The modular description summarizes the mapped arithmetic and caller adjustments; no runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "588D6600",
+      "name": "FUN_588d6600",
+      "size": 109,
+      "symbol": "_FUN_588d6600",
+      "source": "src/client-current/Main/FUN_588d6600.cpp",
+      "source_sha256": "ce3630e6a50e701bde8a46fb80a614644b8d0b83667f350e732294e33fbcce9b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 86,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d6600",
+        "called_by": "Verified CShip_MapObjectScreen constructor FUN_588E05C0 and verified update FUN_588E5150 both call this helper. FUN_588E5150 has two sites and passes its receiver +4/+8 pair; the constructor passes two local values. Caller behavior is documented in docs/current-main-ship-map-screen-constructor.md and docs/current-main-ship-map-object-update.md.",
+        "behavior": "For each index below receiver +0x141C, skips null child pointers in the array at +0x17C. For nonnull children it derives two values using the supplied pair, receiver data at +0x605C, indexed fields at +0x1C9C, and table words at +0x1D1C/+0x1D20, then calls FUN_58903290 on the child. The verified setter stores the values at child +4/+8 and propagates their deltas to flagged descendants. The corrected complete extent is 109 bytes, including the loop branch at 0x588D6664 and ret 8 at 0x588D666A; three CC bytes follow through the next indexed function at 0x588D6670.",
+        "uncertainty": "The meaning and units of the input pair, receiver arrays and +0x605C selector, child ownership, and visible map effect remain unresolved. The 101-byte inventory extent was incomplete: it ended on the first byte of a reachable short branch. No client runtime or emulator test was performed."
+      }
     }
   ]
 }
