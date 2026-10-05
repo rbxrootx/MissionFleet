@@ -38,3 +38,31 @@ compiled by clang-cl 19.1.4, whose executable hash is pinned in the verification
 inventory for this function. The bundled VC6 compiler could not launch on this
 Windows host, so this result proves the candidate's byte match under the pinned
 clang-cl path; it does not test a complete client link or emulator runtime.
+
+## Readable tail-phase model
+
+[`ShipMapVisualStateTail.cpp`](../src/client-current/semantic/ShipMapVisualStateTail.cpp)
+ports the directly observed tail phases `0x100000`, `0x200000`, `0x400000`,
+and `0xFF0000` into ordinary C++. It preserves the phase masks and call order:
+the `0x100000` phase clears the two observed fields, dispatches the selected
+global handler with the word at `+0x350`, and advances to `0x200000`; the tick
+phase wraps three frame counters and chooses selector `0x4F` only when
+`(+0x100C+4)&0x1F == 9` and `+0x164` is nonzero; the finish phase calls the
+child reset and global finalizer before OR-ing `0x00FF0000`; the terminal phase
+applies the three observed guards before writing `+0x6090` and clearing
+`+0x6648`.
+
+Direct calls whose implementations or game meaning remain open are exposed as
+hooks with their observed receiver/arguments. This model intentionally does
+not claim the `0x040000` child/effect loop or the `0x080000` indexed-resource
+setup phase; those remain the next work in this function. The bounded handler
+table is supplied by the test harness, and invalid test input fails closed
+where the original assumes valid memory. Run:
+
+```powershell
+rtk run python tools/verify_ship_map_visual_state_tail.py
+```
+
+The native tests cover all four modeled phases, wraparound, callback order and
+arguments, and the terminal guard. The model is not included in objdiff totals
+and has not been integrated into a complete client or exercised in the emulator.
