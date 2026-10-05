@@ -9,12 +9,14 @@ import shutil
 import subprocess
 
 try:
+    from .ship_sprite_runtime import Rect, blit_ship_rgb565_effect_spans
     from .sprite_index import index_sprite
     from .sprite_gallery import rgb16_to_rgba
     from .sprite_preview import write_png
     from .verify_logo_sprite_visual import EXPECTED_SHA256, FRAMES
     from .verify_native_logo_blit import EXPECTED_FRAMEBUFFER_SHA256
 except ImportError:
+    from ship_sprite_runtime import Rect, blit_ship_rgb565_effect_spans
     from sprite_index import index_sprite
     from sprite_gallery import rgb16_to_rgba
     from sprite_preview import write_png
@@ -51,6 +53,7 @@ def verify(source, output_dir):
         compiler, "-std=c++17", "-O2", "-Wall", "-Wextra",
         str(ROOT / "src/client-current/semantic/SangduckSpriteV33.cpp"),
         str(ROOT / "src/client-current/semantic/Rgb16OpaqueSpan.cpp"),
+        str(ROOT / "src/client-current/semantic/CoreRgb16SpriteSlot1.cpp"),
         str(ROOT / "tests/native/sangduck_sprite_v33_cli.cpp"),
         "-o", str(executable),
     ], check=True, cwd=ROOT, env=environment)
@@ -91,6 +94,36 @@ def verify(source, output_dir):
         write_png(png, dimensions[0], dimensions[1], rgb16_to_rgba(pixels))
         results.append({"ordinal": ordinal, "source_name": name,
                         "framebuffer_sha256": digest, "png": str(png.resolve())})
+        if ordinal == 0:
+            effect_path = output_dir / "logo-frame-0-rgb565-effect.rgb16"
+            effected = run(executable, source, environment, ordinal,
+                           effect_path, "ship-effect")
+            if effected.returncode != 0:
+                raise ValueError(f"Native slot-1 effect render failed: {effected.stderr}")
+            effect_count = int(effected.stdout.splitlines()[-1].split("\t")[-1])
+            effect_pixels = effect_path.read_bytes()
+            ref_frame = reference["frames"][ordinal]
+            payload = data[ref_frame["payload_offset"]:
+                           ref_frame["payload_offset"] + ref_frame["payload_size"]]
+            reference_effect = bytearray(dimensions[0] * dimensions[1] * 2)
+            reference_count = blit_ship_rgb565_effect_spans(
+                payload, dimensions[0], dimensions[1], reference_effect,
+                dimensions[0] * 2, dimensions[1], 0, 0,
+                Rect(0, 0, dimensions[0], dimensions[1]))
+            if effect_count != reference_count or effect_pixels != reference_effect:
+                raise ValueError("Native indexed RGB565 effect output differs from Python")
+            effect_png = output_dir / "logo-frame-0-rgb565-effect.png"
+            write_png(effect_png, dimensions[0], dimensions[1],
+                      rgb16_to_rgba(effect_pixels))
+            results.append({
+                "ordinal": ordinal,
+                "mode": "ship-effect",
+                "color": "0x80",
+                "effect": "0x101",
+                "written_pixels": effect_count,
+                "framebuffer_sha256": hashlib.sha256(effect_pixels).hexdigest(),
+                "png": str(effect_png.resolve()),
+            })
 
     def expect_rejection(label, changed, needle):
         path = output_dir / f"{label}.spr"
@@ -115,6 +148,8 @@ def verify(source, output_dir):
                 "rendered": results,
                 "limitations": ["Only Sangduck v3.3 image-record indexing is implemented.",
                                 "Animation, effects, audio, and the record tail remain unparsed.",
+                                "The alternate mask-specialized compositor is unported.",
+                                "Ship setter traces do not prove one sprite receives the tested color/effect pair.",
                                 "No original-client framebuffer comparison."]}
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

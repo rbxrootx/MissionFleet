@@ -58,6 +58,9 @@ against the hash-pinned mapped image and builds an end-to-end framebuffer test.
 against the existing Python model on installed Logo.spr payloads. These checks
 validate the semantic model; they do not establish pixel identity against a
 running game frame or replace the independent byte-match verification below.
+The native v3.3 index path in `tools/verify_native_logo_index.py` now reaches
+the same slot-1 bridge directly from original file bytes and compares its full
+effect render against the Python model.
 
 Both bodies traverse the span stream at `this+0x0C` and write to the target
 pixel buffer. The first body contains an opaque copy branch and masked 16-bit

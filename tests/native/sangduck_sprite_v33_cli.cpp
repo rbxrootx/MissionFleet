@@ -1,5 +1,5 @@
 #include "../../src/client-current/semantic/SangduckSpriteV33.h"
-#include "../../src/client-current/semantic/Rgb16OpaqueSpan.h"
+#include "../../src/client-current/semantic/CoreRgb16SpriteSlot1.h"
 
 #include <cstdint>
 #include <fstream>
@@ -22,8 +22,9 @@ std::string hex(const std::uint8_t* data, std::size_t size) {
 }
 
 int main(int argc, char** argv) {
-    // Input sprite; optionally an image ordinal and a raw RGB16 output path.
-    if (argc != 2 && argc != 4) return 2;
+    // Input sprite; optionally an image ordinal, raw RGB16 output path, and
+    // rendering mode (`opaque` or the observed `ship-effect` branch).
+    if (argc != 2 && argc != 4 && argc != 5) return 2;
     std::ifstream stream(argv[1], std::ios::binary);
     if (!stream) return 2;
     std::vector<std::uint8_t> bytes(
@@ -45,7 +46,7 @@ int main(int argc, char** argv) {
                   << image.recordOffset << '\t' << image.payloadOffset << '\t'
                   << image.payloadSize << '\t' << image.checksum << '\n';
     }
-    if (argc == 4) {
+    if (argc >= 4) {
         try {
             const auto ordinal = std::stoul(argv[2]);
             if (ordinal >= index.images.size()) return 2;
@@ -56,19 +57,41 @@ int main(int argc, char** argv) {
                 return 2;
             const auto width = static_cast<int>(image.width);
             const auto height = static_cast<int>(image.height);
+            std::uint32_t color = 0x100;
+            std::uint32_t effect = 0;
+            if (argc == 5) {
+                if (std::string(argv[4]) == "ship-effect") {
+                    color = 0x80;
+                    effect = 0x101;
+                } else if (std::string(argv[4]) != "opaque") {
+                    return 2;
+                }
+            }
             std::vector<std::uint8_t> framebuffer(
                 static_cast<std::size_t>(width) * height * 2);
-            const auto result = missionFleetBlitOpaqueRgb16Spans(
+            MissionFleetCoreRgb16SpriteView sprite{
+                MissionFleetCoreRgb16MaskFamily::firstFormat2Family,
                 bytes.data() + image.payloadOffset, image.payloadSize,
-                width, height, framebuffer.data(), framebuffer.size(),
-                width * 2, height, 0, 0, {0, 0, width, height});
-            if (result.error != MissionFleetRgb16BlitError::none) return 3;
+                width, height};
+            MissionFleetCoreRgb16TargetBinding target{
+                framebuffer.size(), width * 2, height,
+                {MissionFleetRgb16BlitError::invalidGeometry, 0}};
+            const MissionFleetCoreRenderRect clip{{
+                0, 0, static_cast<std::uint32_t>(width),
+                static_cast<std::uint32_t>(height),
+            }};
+            missionFleetCoreRgb16SpriteSlot1Dispatch(
+                &sprite,
+                framebuffer.data(), 0, 0, clip, color, effect, &target);
+            if (target.lastResult.error != MissionFleetRgb16BlitError::none)
+                return 3;
             std::ofstream output(argv[3], std::ios::binary);
             if (!output) return 2;
             output.write(reinterpret_cast<const char*>(framebuffer.data()),
                          static_cast<std::streamsize>(framebuffer.size()));
             if (!output) return 2;
-            std::cout << "R\t" << ordinal << '\t' << result.copiedPixels << '\n';
+            std::cout << "R\t" << ordinal << '\t'
+                      << target.lastResult.copiedPixels << '\n';
         } catch (const std::exception&) {
             return 2;
         }

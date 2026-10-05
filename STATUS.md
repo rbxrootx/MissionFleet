@@ -51,7 +51,10 @@ pixel agreement between two independent decoded/composited paths. It is
 asset-frame validation, not a bootable client or original-framebuffer comparison.
 A [native C++ RGB16 span path](docs/current-client-native-rgb16-span.md)
 now matches the portable framebuffer bytes on those frames and a clipped case.
-It is a semantic port of the opaque branch and is excluded from objdiff coverage.
+It includes the opaque copy and observed RGB565 effect branches, and is excluded
+from objdiff coverage. The native v3.3 index now feeds original `Logo.spr`
+payloads through that same slot-1 bridge, including a full-frame effect check.
+These are semantic-model comparisons, not live-client framebuffer captures.
 A [native v3.3 sprite index](docs/current-client-native-sangduck-v33.md) now
 validates all 188 installed `Logo.spr` image records and renders the first two
 directly from original file bytes. It is also outside objdiff coverage.
