@@ -1,6 +1,7 @@
 #include "ShipMapVisualCandidateConstruction.h"
 
 #include <cstring>
+#include <stdexcept>
 
 namespace {
 std::int32_t signedWord(std::uint16_t bits) {
@@ -118,6 +119,22 @@ void initializeNodeBase(MissionFleetShipMapVisualNode& node,
         insertLinear(*owner, node);
     }
 }
+
+void initializeBaseAndRecord(MissionFleetShipMapVisualNode& node,
+                             MissionFleetShipMapVisualNodeListOwner* owner,
+                             const std::uint8_t* resourceRecord,
+                             std::uint32_t x04, std::uint32_t y08,
+                             std::uint16_t word26) {
+    // FUN_58734A30 forwards these bounds and arguments to FUN_589031A0.
+    initializeNodeBase(node, owner, x04, y08, 0, 0, word26);
+    node.vtable00 = 0x5898CA74u;
+    node.counter50 = 0;
+    node.record54 = resourceRecord;
+    if (resourceRecord != nullptr) {
+        std::memcpy(node.copiedFields0CTo20, resourceRecord + 0x18,
+                    sizeof(node.copiedFields0CTo20));
+    }
+}
 }
 
 MissionFleetShipMapVisualNode* missionFleetConstructShipMapVisualCandidate(
@@ -125,17 +142,52 @@ MissionFleetShipMapVisualNode* missionFleetConstructShipMapVisualCandidate(
     MissionFleetShipMapVisualNodeListOwner* owner,
     const std::uint8_t* resourceRecord, std::uint32_t x04,
     std::uint32_t y08, std::uint16_t word26) {
-    // FUN_58734A30 forwards owner/x/y/0/0/word26 to FUN_589031A0.
-    initializeNodeBase(storage, owner, x04, y08, 0, 0, word26);
-    storage.vtable00 = 0x5898CA74u;
-    storage.counter50 = 0;
-    storage.record54 = resourceRecord;
-    if (resourceRecord != nullptr) {
-        std::memcpy(storage.copiedFields0CTo20, resourceRecord + 0x18,
-                    sizeof(storage.copiedFields0CTo20));
-    }
+    initializeBaseAndRecord(storage, owner, resourceRecord, x04, y08,
+                            word26);
 
     // FUN_58907C80 installs the derived object's vtable after the base helper.
     storage.vtable00 = 0x589A2988u;
+    return &storage;
+}
+
+MissionFleetShipMapVisualNode* missionFleetConstructShipMapVisualSecondary(
+    MissionFleetShipMapVisualNode& storage,
+    MissionFleetShipMapVisualNodeListOwner* owner,
+    const std::uint8_t* resourceRecord, std::uint32_t x04,
+    std::uint32_t y08, std::uint16_t word26,
+    MissionFleetShipMapVisualRand randFunction, void* context) {
+    initializeBaseAndRecord(storage, owner, resourceRecord, x04, y08,
+                            word26);
+
+    // The mapped constructor writes this derived vtable and repeats the base
+    // fields before copying the six record DWORDs a second time.
+    storage.vtable00 = 0x58996B40u;
+    storage.counter50 = 0;
+    storage.record54 = resourceRecord;
+
+    std::uint16_t divisorBits = 0;
+    if (resourceRecord != nullptr) {
+        std::memcpy(storage.copiedFields0CTo20, resourceRecord + 0x18,
+                    sizeof(storage.copiedFields0CTo20));
+        std::memcpy(&divisorBits, resourceRecord + 0x0C,
+                    sizeof(divisorBits));
+    }
+    if (divisorBits == 0) {
+        // The client executes x86 DIV with this zero divisor and raises a
+        // divide error before calling rand() or writing the trailing fields.
+        throw std::domain_error(
+            "FUN_58789040 divides by the zero word at record +0x0C");
+    }
+
+    storage.value64 = 0x80 / static_cast<std::int32_t>(divisorBits);
+    const std::int32_t randomValue =
+        randFunction != nullptr ? randFunction(context) : 0;
+    storage.value60 = -3;
+    storage.value5C = 1;
+    storage.value58 = 0;
+    storage.mode2C = 0xFFFFFEFFu;
+    storage.value64 += randomValue % 6;
+    storage.flags24 = static_cast<std::uint16_t>(storage.flags24 & 0xBFFFu);
+    storage.flags24 = static_cast<std::uint16_t>(storage.flags24 & 0xDFFFu);
     return &storage;
 }

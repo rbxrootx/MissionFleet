@@ -31,6 +31,10 @@ struct MissionFleetShipMapVisualNode {
     MissionFleetShipMapVisualNode* firstChild4C = nullptr;
     std::uint32_t counter50 = 0;
     const std::uint8_t* record54 = nullptr;
+    std::uint32_t value58 = 0;
+    std::uint32_t value5C = 0;
+    std::int32_t value60 = 0;
+    std::int32_t value64 = 0;
 };
 
 // Writes mode2C on the receiver and recursively on linked children whose

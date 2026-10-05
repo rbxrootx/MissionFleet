@@ -75,19 +75,6 @@ void selectSetupPhase(MissionFleetShipMapVisualStateChildScan& state) {
     state.state60B0 = (state.state60B0 & 0xFF08FFFFu) | kPhaseSetup;
 }
 
-void* allocateOrThrow(const MissionFleetShipMapVisualStateChildScanHooks& hooks,
-                      std::uint32_t bytes, void* context) {
-    if (hooks.operatorNew5897CC4E == nullptr) {
-        throw std::logic_error("ship-map scan requires the mapped allocator");
-    }
-    void* const allocation = hooks.operatorNew5897CC4E(bytes, context);
-    if (allocation == nullptr) {
-        // The resolved target is MSVCR90's throwing operator new(unsigned int).
-        throw std::bad_alloc();
-    }
-    return allocation;
-}
-
 MissionFleetShipMapVisualNode* allocateCandidateOrThrow(
     const MissionFleetShipMapVisualStateChildScanHooks& hooks, void* context) {
     if (hooks.allocateCandidateStorage5897CC4E == nullptr) {
@@ -96,6 +83,20 @@ MissionFleetShipMapVisualNode* allocateCandidateOrThrow(
     MissionFleetShipMapVisualNode* const storage =
         hooks.allocateCandidateStorage5897CC4E(0x58u, context);
     if (storage == nullptr) {
+        throw std::bad_alloc();
+    }
+    return storage;
+}
+
+MissionFleetShipMapVisualNode* allocateSecondaryOrThrow(
+    const MissionFleetShipMapVisualStateChildScanHooks& hooks, void* context) {
+    if (hooks.allocateSecondaryStorage5897CC4E == nullptr) {
+        throw std::logic_error("ship-map scan requires secondary semantic storage");
+    }
+    MissionFleetShipMapVisualNode* const storage =
+        hooks.allocateSecondaryStorage5897CC4E(0x68u, context);
+    if (storage == nullptr) {
+        // FUN_5897CC4E resolves to the client's throwing operator new.
         throw std::bad_alloc();
     }
     return storage;
@@ -263,24 +264,16 @@ MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualState
                 lastCandidate->value04, lastCandidate->value08, variant);
         applyConstructedNodeMode(extraCandidate, 0x102u);
 
-        if (hooks.initializeSecondary58789040 == nullptr) {
-            throw std::logic_error("ship-map scan requires the mapped secondary constructor");
-        }
-
-        void* const allocatedSecondary = allocateOrThrow(hooks, 0x68u, context);
-        const std::int32_t randomValue = hooks.rand5897CC36 != nullptr
-                                             ? hooks.rand5897CC36(context)
-                                             : 0;
-        const std::uint32_t randomRemainder6 =
-            static_cast<std::uint32_t>(randomValue % 6);
+        MissionFleetShipMapVisualNode* const secondaryStorage =
+            allocateSecondaryOrThrow(hooks, context);
         MissionFleetShipMapVisualNode* const secondary =
-            hooks.initializeSecondary58789040(
-                allocatedSecondary, state.globalRecord10524,
+            missionFleetConstructShipMapVisualSecondary(
+                *secondaryStorage, state.globalRecord10524,
                 lookupResourceRecord(state.resourceTable246F0,
                                      state.resourceTableCount246F0, 0x17),
                 lastCandidate->value04,
                 lastCandidate->value08 - 5u, lastCandidate->word26,
-                randomRemainder6, context);
+                hooks.rand5897CC36, context);
         applyConstructedNodeMode(secondary, 0xFFFFFEFFu);
 
         if (state.drawCandidateEffects589C8EDC) {

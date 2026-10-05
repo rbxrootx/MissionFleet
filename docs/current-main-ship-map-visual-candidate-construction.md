@@ -40,8 +40,10 @@ The C++ node and owner types are semantic host-side views, not binary-layout
 replacements for the original x86 classes. The owner view contains only the
 two observed list heads. The class name, the purpose of the copied record
 fields, and the full object hierarchy remain unknown. The `0x68`-byte
-`FUN_58789040` object and visible effect/route rendering remain hooks; these
-tests do not launch the client or validate a rendered frame.
+`FUN_58789040` constructor is now modeled in
+[the secondary-construction note](current-main-ship-map-visual-secondary-construction.md);
+visible effect/route rendering remains external. These tests do not launch the
+client or validate a rendered frame.
 
 The instruction-level sources for `FUN_58907C80`, `FUN_58734A30`,
 `FUN_589031A0`, and the two list-insertion helpers retain their separate

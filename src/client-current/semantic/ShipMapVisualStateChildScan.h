@@ -80,20 +80,15 @@ struct MissionFleetShipMapVisualStateChildScanHooks {
     // request; constructor behavior is modeled directly below.
     MissionFleetShipMapVisualNode* (*allocateCandidateStorage5897CC4E)(
         std::uint32_t nativeBytes, void* context) = nullptr;
-    // DAT_5898C200 resolves to MSVCR90 operator new(unsigned int).
-    void* (*operatorNew5897CC4E)(std::uint32_t bytes, void* context) = nullptr;
+    // The native request is 0x68 bytes. The adapter maps it to host-side
+    // semantic storage, just as the candidate adapter does for its 0x58 bytes.
+    MissionFleetShipMapVisualNode* (*allocateSecondaryStorage5897CC4E)(
+        std::uint32_t nativeBytes, void* context) = nullptr;
     // FUN_587B7400 receives this target with projected x/y and the observed
     // global effect color. The renderer's visual output remains external.
     void (*drawEffect587B7400)(void* target, std::uint32_t x,
                                std::uint32_t y, std::uint32_t color,
                                void* context) = nullptr;
-    // FUN_58789040 constructs the 0x68-byte post-scan object. The model passes
-    // the rand()%6 value consumed by its constructor.
-    MissionFleetShipMapVisualNode* (*initializeSecondary58789040)(
-        void* allocated, const void* constructionOwner,
-        const std::uint8_t* selectedResourceRecord, std::uint32_t x04,
-        std::uint32_t y08, std::uint16_t word26,
-        std::uint32_t randomRemainder6, void* context) = nullptr;
     // FUN_588D7DC0 receives the final candidate coordinates and child frame.
     void (*drawRouteEffect588D7DC0)(
         MissionFleetShipMapVisualStateChildScan& receiver,
