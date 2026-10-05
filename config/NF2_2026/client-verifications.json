@@ -309738,6 +309738,39 @@
         "behavior": "With receiver in ECX, loads the dword at [0x58A247F8]+4. If it equals receiver +0x50 or receiver +0x54, loads ECX from 0x58A24588 and tail-jumps to FUN_587BA550. Otherwise returns. The complete indexed body is 30 bytes, including ret at 0x5875CD2D; the next indexed function starts at 0x5875CD30.",
         "uncertainty": "The meanings and types of the global pointers and receiver fields, why the callers gate on stage 6, the tail-called function's behavior, and the runtime-visible effect remain unresolved. The tail target FUN_587BA550 is not yet byte-verified. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "587BA550",
+      "name": "FUN_587ba550",
+      "size": 21,
+      "symbol": "_FUN_587ba550",
+      "source": "src/client-current/Main/FUN_587ba550.cpp",
+      "source_sha256": "cd485ea6c80dbbae74026359f84d3b3e0f6500f033786e7041b8cf047322e080",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba550",
+        "called_by": "Verified FUN_5875CD10 tail-jumps here at 0x5875CD28 when the current-object comparisons succeed, loading ECX from global 0x58A24588; see docs/current-main-ship-map-conditional-forwarder.md. This helper calls the verified outbound record sender FUN_58970C70 at 0x587BA55F.",
+        "behavior": "Pushes five zero stack arguments and message value 0x80011000, calls FUN_58970C70 with the context already in ECX, then returns. The sender returns with ret 0x18, cleaning all six stack arguments. Under the sender's observed parameter layout, the two extra values, payload pointer, payload length, and flags are zero, so this is a zero-payload call. The indexed body is 21 bytes, ends with ret at 0x587BA564, and the next indexed function starts at 0x587BA570.",
+        "uncertainty": "Protocol routing requires message 0x80011000 payload length equal to parameter1 times 0x38; here the relevant supplied value and payload length are both zero. The selector's protocol meaning and visible effect remain unknown, and no runtime packet/client/server round trip was tested."
+      }
     }
   ]
 }

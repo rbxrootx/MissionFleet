@@ -12,8 +12,9 @@ update path is in
 With that object in ECX, the helper loads the dword at `[0x58A247F8]+4`. If it
 matches either receiver dword at `+0x50` or `+0x54`, the helper loads ECX from
 `0x58A24588` and tail-jumps to `FUN_587BA550`. If neither comparison matches,
-it returns. The `+0x50/+0x54` values, global pointer meanings, stage gate, and
-tail-call contract are not identified; `FUN_587BA550` is not yet byte-verified.
+it returns. The `+0x50/+0x54` values, global pointer meanings, and stage gate
+remain unidentified. The tail target is a verified fixed-message sender thunk;
+its evidence is in [the stage-six sender notes](current-main-stage-six-signal-sender.md).
 
 The indexed body is 30 bytes, ending with `ret` at `0x5875CD2D`; the next
 indexed function starts at `0x5875CD30`; two `INT3` padding bytes occupy
