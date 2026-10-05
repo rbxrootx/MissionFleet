@@ -308988,6 +308988,129 @@
         "behavior": "If receiver +0xE0 is below child +0xC4 field +0x88 minus 8, increments it, calls FUN_589086F0, updates fields +0x50 on children +0xE4/+0xE8, computes a position from the child height using stride 0x8C, and calls FUN_58903360.",
         "uncertainty": "The index unit, child field meanings, and visible effect have not been runtime checked."
       }
+    },
+    {
+      "address": "58778BE0",
+      "name": "FUN_58778be0",
+      "size": 81,
+      "symbol": "_FUN_58778be0",
+      "source": "src/client-current/Main/FUN_58778be0.cpp",
+      "source_sha256": "a633072fc8398fba90fdaa7dc06d564165ef6edf8189c22fabfe1f3de232a7c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778be0",
+        "called_by": "Called once by each byte-verified caller FUN_5879DD90, FUN_588E9940, and FUN_588E9820. The dispatcher callers pass this helper from the query-type-2 case; mapped callsites include 0x588E99D5 and 0x588E982E.",
+        "behavior": "For query type 2, scans the receiver's array using count +0x30, pointer +0x3C, and 0xAC-byte records. It compares the query type byte and following key bytes/word with the record prefix and returns the matching record address, or zero.",
+        "uncertainty": "The receiver type, record schema, key meaning, and caller-visible effect remain unresolved. The complete indexed 81-byte body decodes; no runtime or emulator test was performed."
+      }
+    },
+    {
+      "address": "58778CA0",
+      "name": "FUN_58778ca0",
+      "size": 81,
+      "symbol": "_FUN_58778ca0",
+      "source": "src/client-current/Main/FUN_58778ca0.cpp",
+      "source_sha256": "c0dae03291bcdb137ad19cada7daa4765a6b87815a3c8a6723551c3a4eda2bfb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778ca0",
+        "called_by": "Called once by each byte-verified caller FUN_5879DD90, FUN_588E9940, and FUN_588E9850. The dispatcher callers pass this helper from the query-type-3 case; mapped callsites include 0x588E99EA and 0x588E985E.",
+        "behavior": "For query type 3, scans the receiver's array using count +0x44, pointer +0x50, and 0xA4-byte records. It compares the query type byte and following key bytes/word with the record prefix and returns the matching record address, or zero.",
+        "uncertainty": "The receiver type, record schema, key meaning, and caller-visible effect remain unresolved. The complete indexed 81-byte body decodes; no runtime or emulator test was performed."
+      }
+    },
+    {
+      "address": "58778D60",
+      "name": "FUN_58778d60",
+      "size": 87,
+      "symbol": "_FUN_58778d60",
+      "source": "src/client-current/Main/FUN_58778d60.cpp",
+      "source_sha256": "8bf063e248ee37df5d9a1ed5249035ea889ede280f884fb877dcc478b52c4308",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778d60",
+        "called_by": "Called once by each byte-verified caller FUN_5879DD90, FUN_588E9940, and FUN_588E9700. The dispatcher callers pass this helper from the query-type-6 case; mapped callsites include 0x588E9AEA and 0x588E973F.",
+        "behavior": "For query type 6, scans the receiver's array using count +0x80, pointer +0x8C, and 0xA8-byte records. It compares the query type byte and following key bytes/word with the record prefix and returns the matching record address, or zero.",
+        "uncertainty": "The receiver type, record schema, key meaning, and caller-visible effect remain unresolved. The complete indexed 87-byte body decodes; no runtime or emulator test was performed."
+      }
+    },
+    {
+      "address": "58778F30",
+      "name": "FUN_58778f30",
+      "size": 130,
+      "symbol": "_FUN_58778f30",
+      "source": "src/client-current/Main/FUN_58778f30.cpp",
+      "source_sha256": "7a523fa4aa99ad6048b861a4c2373825f61ca4efc2584499d625234f1490ea67",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "58996840",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "589967B0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 34,
+          "target_address": "5897CECE",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58778f30",
+        "called_by": "Called once by each byte-verified caller FUN_5879DD90, FUN_588E9940, and FUN_588E9700. The dispatcher callers pass this helper from the query-type-13 case; mapped callsites include 0x588E9ADC and 0x588E9731.",
+        "behavior": "For query type 13, uses the receiver's count at +0x10C, record pointer at +0x118, and 0xD4-byte stride. It compares a three-byte key against each record and returns the matching record address or zero. Before scanning, a nonzero, non-CR first key byte follows the observed helper call to 0x5897CECE with constants rooted at 0x589967B0 and 0x58996840.",
+        "uncertainty": "The record schema, key meaning, and purpose of the pre-scan helper and its constants remain unresolved. The complete indexed 130-byte body decodes; no runtime or emulator test was performed."
+      }
     }
   ]
 }

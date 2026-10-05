@@ -19,6 +19,26 @@ The matched helpers and the behavior visible in their captured instructions are:
 | `58779780` | 62 | Scans `+0x64` using count `+0x58` and 0x9C-byte records, matching the word at record `+6`. |
 | `587797C0` | 114 | Resolves a record through `58778D00`, then scans `+0xE4` using count `+0xF0` and 0xAC-byte entries, comparing word `+0xA2` and a low-nibble condition from byte `+0x9B`. |
 
+The same query-type lookup family is extended by four additional exact matches,
+each called once by three byte-verified callers (`FUN_5879DD90` and the
+corresponding `FUN_588E...` dispatch/update functions):
+
+| Address | Bytes | Instruction-level behavior |
+| --- | ---: | --- |
+| `58778BE0` | 81 | Query type 2; scans count `+0x30`, pointer `+0x3C`, with 0xAC-byte records. |
+| `58778CA0` | 81 | Query type 3; scans count `+0x44`, pointer `+0x50`, with 0xA4-byte records. |
+| `58778D60` | 87 | Query type 6; scans count `+0x80`, pointer `+0x8C`, with 0xA8-byte records. |
+| `58778F30` | 130 | Query type 13; scans count `+0x10C`, pointer `+0x118`, with 0xD4-byte records; a nonzero, non-CR key byte takes an observed helper call before the scan. |
+
+The mapped call sites are `588E982E` to `58778BE0`, `588E985E` to
+`58778CA0`, and from `588E9700`/`588E9940` to the type-6 and type-13 helpers;
+`5879DD90` also calls each helper once. All four candidates match their
+complete indexed extents; the `58778F30` body has three relocated operands,
+all checked, while the other three bodies have no relocated operands.
+The exact record schemas, key meanings, and user-visible effects remain
+unresolved; this evidence establishes instruction identity and call behavior,
+not runtime behavior.
+
 The direct callers and exact instruction ranges are recorded in the match
 evidence alongside each source file. The record schemas, import target, node
 ownership, selector meanings, and receiver class identities remain unresolved.
