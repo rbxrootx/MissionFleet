@@ -19,6 +19,12 @@ object's virtual slot `+0x10`. Code `0x462` routes to `0x5882D710` when global
 one. The cleanup routine and its guarded resource-scene cleanup helper are
 detailed in [the exit-cleanup notes](current-core-client-shutdown.md).
 
+The scene-specific draw branch is now tied to this loop: when global
+`0x589660C4` is non-null, the loop calls `0x587B5430` at `0x5882E1A3`; that
+wrapper dispatches the scene vtable's `+0x14` target, `0x587B5320`. The target
+walks and renders the resource scene's children as documented in the
+[resource-scene render traversal](current-core-resource-scene-render.md).
+
 This is static control-flow evidence for timer sampling, queued-event dispatch,
 and two cleanup/return paths. Callback identities and contracts, timer units,
 event-record structure and symbolic event names, and the stored dispatch
