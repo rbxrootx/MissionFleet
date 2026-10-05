@@ -1451,10 +1451,11 @@ readable C++ normal-path model for its four phases and position propagation;
 the index+2 resource lookup and flagged descendant helper remain open. See the
 [visual-state evidence](docs/current-main-ship-map-visual-state-update-588db610.md)
 and [route-child evidence](docs/current-main-ship-map-route-child-update-588dbf10.md).
-The visual-state helper's `0x100000` through `0xFF0000` tail phases now also
-have a tested C++ model with exact callback arguments and observed state
-writes; its earlier child/effect and resource-setup phases remain open. See the
-[tail-phase model evidence](docs/current-main-ship-map-visual-state-update-588db610.md).
+The visual-state helper's `0x040000` through `0xFF0000` phases now have tested
+C++ models for the scan controller, indexed resource setup, frame counters,
+callbacks, and state writes. The per-entry child/effect construction still
+uses evidence-bound hooks while the indirect targets remain unidentified. See the
+[phase model evidence](docs/current-main-ship-map-visual-state-update-588db610.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
