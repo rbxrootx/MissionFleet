@@ -44,6 +44,21 @@ documented in [the client render trace](client-render-path.md). This accounts
 for the indirect dispatch: a lack of direct code references to the compositor
 entrypoints does not indicate that they are unused.
 
+The first class now has a bounded semantic slot-1 bridge in
+`src/client-current/semantic/CoreRgb16SpriteSlot1.cpp`. It connects the
+existing scene → node → screen dispatch path to the RGB16 span writer and
+supports the directly reconstructed `color=0x100/effect=0` copy case and the
+first class's observed `color=0x80/effect=0x101` RGB565 branch. The emulator
+supplies target pitch and capacity because the captured dispatcher passes the
+pixel pointer alone. The bridge rejects unknown parameter pairs and the
+alternate class rather than applying untraced masks.
+`tools/verify_core_rgb16_sprite_slot1.py` checks the slot-1 vtable targets
+against the hash-pinned mapped image and builds an end-to-end framebuffer test.
+`tools/verify_native_logo_blit.py` also compares both supported branches
+against the existing Python model on installed Logo.spr payloads. These checks
+validate the semantic model; they do not establish pixel identity against a
+running game frame or replace the independent byte-match verification below.
+
 Both bodies traverse the span stream at `this+0x0C` and write to the target
 pixel buffer. The first body contains an opaque copy branch and masked 16-bit
 blend branches. The observed ship draw sets color to `0x80` and effect to

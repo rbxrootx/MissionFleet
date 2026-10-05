@@ -1,4 +1,4 @@
-#include "../../src/client-current/semantic/Rgb16OpaqueSpan.h"
+#include "../../src/client-current/semantic/CoreRgb16SpriteSlot1.h"
 
 #include <algorithm>
 #include <cstdint>
@@ -10,8 +10,8 @@
 
 int main(int argc, char** argv) {
     // payload, output, sprite width/height, surface width/height, x/y,
-    // clip left/top/right/bottom, initial byte value.
-    if (argc != 14) return 2;
+    // clip left/top/right/bottom, initial byte value, optional color/effect.
+    if (argc != 14 && argc != 16) return 2;
     try {
         const int width = std::stoi(argv[3]);
         const int height = std::stoi(argv[4]);
@@ -24,6 +24,12 @@ int main(int argc, char** argv) {
             std::stoi(argv[11]), std::stoi(argv[12]),
         };
         const int seed = std::stoi(argv[13]);
+        const std::uint32_t color = argc == 16
+            ? static_cast<std::uint32_t>(std::stoul(argv[14], nullptr, 0))
+            : 0x100;
+        const std::uint32_t effect = argc == 16
+            ? static_cast<std::uint32_t>(std::stoul(argv[15], nullptr, 0))
+            : 0;
         if (targetWidth <= 0 || targetHeight <= 0 || targetWidth > 16384 ||
             targetHeight > 16384 || seed < 0 || seed > 255) return 2;
         std::ifstream input(argv[1], std::ios::binary);
@@ -33,10 +39,20 @@ int main(int argc, char** argv) {
         std::vector<std::uint8_t> framebuffer(
             static_cast<std::size_t>(targetWidth) * targetHeight * 2,
             static_cast<std::uint8_t>(seed));
-        const auto result = missionFleetBlitOpaqueRgb16Spans(
-            payload.data(), payload.size(), width, height,
-            framebuffer.data(), framebuffer.size(), targetWidth * 2,
-            targetHeight, x, y, clip);
+        const MissionFleetCoreRgb16SpriteView sprite{
+            MissionFleetCoreRgb16MaskFamily::firstFormat2Family,
+            payload.data(), payload.size(), width, height};
+        const MissionFleetCoreRgb16TargetBinding target{
+            framebuffer.size(), targetWidth * 2, targetHeight,
+            {MissionFleetRgb16BlitError::invalidGeometry, 0}};
+        const MissionFleetCoreRenderRect slotClip{{
+            static_cast<std::uint32_t>(clip.left),
+            static_cast<std::uint32_t>(clip.top),
+            static_cast<std::uint32_t>(clip.right),
+            static_cast<std::uint32_t>(clip.bottom),
+        }};
+        const auto result = missionFleetBlitCoreRgb16SpriteSlot1(
+            &sprite, framebuffer.data(), x, y, slotClip, color, effect, target);
         if (result.error != MissionFleetRgb16BlitError::none) {
             std::cerr << "invalid RGB16 span input\n";
             return 3;

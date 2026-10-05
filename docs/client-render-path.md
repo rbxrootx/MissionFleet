@@ -84,7 +84,7 @@ descriptive names assigned by this project because original symbols are absent.
 Other color/effect combinations and all non-ship render-node subclasses still
 require separate traces.
 
-## Opaque RGB16 compositor path
+## RGB16 slot-1 compositor path
 
 The slot-1 call belongs to the selected sprite object, with the render target
 passed as its first stack argument. In `0x587BA830`, `param_1` is the sprite's
@@ -110,9 +110,12 @@ source by five header bytes, and copies the RGB16 words unchanged. `-1` starts
 the next row and `-2` ends the image. The byte at span offset `+2` is ignored,
 matching the loader evidence.
 
-`blit_opaque_rgb16_spans` reconstructs this normal opaque path, including the
-separate horizontal-clipping behavior, skipped-pixel transparency and target
-pitch.
+The portable C++ slot-1 bridge in
+[`CoreRgb16SpriteSlot1.cpp`](../src/client-current/semantic/CoreRgb16SpriteSlot1.cpp)
+connects this dispatcher to the first format-2 RGB16 class. Its bounded target
+view receives pitch and capacity from the emulator because the captured
+dispatcher forwards only the pixel pointer. The opaque primitive preserves
+skipped-pixel transparency and clipped writes.
 
 The ship scene constructor at `0x58525B10` calls color setter `0x587B5540`
 (node `+0x28`) and effect setter `0x587B55B0` (node `+0x2C`) with values
@@ -133,15 +136,17 @@ src_g  = (((src & 0x07E0) * source_scale) >> 5) & 0x07E0
 out    = ((dst_rb | dst_g) + (src_rb | src_g)) & 0xFFFF
 ```
 
-`blit_ship_rgb565_effect_spans` implements this caller-specific RGB565 span
-path, including skipped pixels, clipping and target pitch. The formulas and
-operation order come from the decompiled branch. The mask specialization is
-RGB565 red/blue `0xF81F` and green `0x07E0`, matching the RGB565 target used by
-the current visual pipeline. A runtime
-pixel-for-pixel comparison against the original client has not been made, so
-the output is not independently validated against a live client frame. The
-same-node color/effect pairing also remains unresolved; see the
-[ship node-effect setup evidence](current-core-ship-node-effects.md).
+The C++ slot-1 bridge implements this observed RGB565 effect branch alongside
+the existing Python model, including skipped pixels, clipping and supplied
+target pitch. A native composition test reaches it through scene → node →
+screen dispatch and checks a hand-calculated pixel. The installed `Logo.spr`
+payloads also match the Python model for complete and clipped effect draws.
+There is still no pixel-for-pixel comparison against a live original-client
+frame, and the setter evidence does not establish that one sprite receives
+this color/effect pair together; see the
+[ship node-effect setup evidence](current-core-ship-node-effects.md). The
+alternate mask-specialized class at `0x5880D420` remains unsupported by this
+semantic port.
 
 As an integration check, all 12 bottom/top layers used by the generated ship
 board were rendered into RGB16 surfaces through this path and compared with the

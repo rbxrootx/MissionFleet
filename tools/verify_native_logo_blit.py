@@ -1,4 +1,4 @@
-"""Compare the portable C++ RGB16 span blitter with pinned original Logo.spr frames."""
+"""Compare Core slot-1 C++ RGB16 paths with pinned original Logo.spr frames."""
 
 import argparse
 import hashlib
@@ -9,13 +9,17 @@ import shutil
 import subprocess
 
 try:
-    from .ship_sprite_runtime import Rect, blit_opaque_rgb16_spans
+    from .ship_sprite_runtime import (
+        Rect, blit_opaque_rgb16_spans, blit_ship_rgb565_effect_spans,
+    )
     from .sprite_gallery import rgb16_to_rgba
     from .sprite_index import index_sprite
     from .sprite_preview import write_png
     from .verify_logo_sprite_visual import EXPECTED_SHA256, FRAMES
 except ImportError:
-    from ship_sprite_runtime import Rect, blit_opaque_rgb16_spans
+    from ship_sprite_runtime import (
+        Rect, blit_opaque_rgb16_spans, blit_ship_rgb565_effect_spans,
+    )
     from sprite_gallery import rgb16_to_rgba
     from sprite_index import index_sprite
     from sprite_preview import write_png
@@ -41,6 +45,7 @@ def build(output_dir):
     subprocess.run([
         compiler, "-std=c++17", "-O2", "-Wall", "-Wextra",
         str(ROOT / "src/client-current/semantic/Rgb16OpaqueSpan.cpp"),
+        str(ROOT / "src/client-current/semantic/CoreRgb16SpriteSlot1.cpp"),
         str(ROOT / "tests/native/rgb16_opaque_span_cli.cpp"),
         "-o", str(executable),
     ], check=True, cwd=ROOT, env=environment)
@@ -48,7 +53,7 @@ def build(output_dir):
 
 
 def compare_case(executable, environment, output_dir, name, payload, source_size,
-                 target_size, position, clip, seed):
+                 target_size, position, clip, seed, color=0x100, effect=0):
     source_width, source_height = source_size
     target_width, target_height = target_size
     payload_path = output_dir / f"{name}.span"
@@ -58,15 +63,24 @@ def compare_case(executable, environment, output_dir, name, payload, source_size
                str(source_width), str(source_height), str(target_width),
                str(target_height), str(position[0]), str(position[1]),
                str(clip.left), str(clip.top), str(clip.right), str(clip.bottom),
-               str(seed)]
+               str(seed), hex(color), hex(effect)]
     run = subprocess.run(command, cwd=ROOT, env=environment, check=True,
                          text=True, capture_output=True)
     native_count = int(run.stdout.strip())
     native_pixels = framebuffer_path.read_bytes()
     reference = bytearray([seed]) * (target_width * target_height * 2)
-    reference_count = blit_opaque_rgb16_spans(
-        payload, source_width, source_height, reference, target_width * 2,
-        target_height, position[0], position[1], clip)
+    if (color, effect) == (0x100, 0):
+        reference_count = blit_opaque_rgb16_spans(
+            payload, source_width, source_height, reference, target_width * 2,
+            target_height, position[0], position[1], clip)
+    elif (color, effect) == (0x80, 0x101):
+        reference_count = blit_ship_rgb565_effect_spans(
+            payload, source_width, source_height, reference, target_width * 2,
+            target_height, position[0], position[1], clip)
+    else:
+        raise ValueError(
+            f"No evidence-backed reference for color/effect {color:#x}/{effect:#x}"
+        )
     if native_count != reference_count or native_pixels != reference:
         raise ValueError(f"Native/reference RGB16 mismatch in {name}")
     return native_count, native_pixels
@@ -107,6 +121,18 @@ def verify(source, output_dir):
                         "literal_pixels": copied,
                         "framebuffer_sha256": framebuffer_hash,
                         "png": str(png_path.resolve())})
+        if ordinal == 0:
+            blended, effect_pixels = compare_case(
+                executable, environment, output_dir, "logo-rgb565-effect",
+                payload, dimensions, dimensions, (0, 0),
+                Rect(0, 0, width, height), 0x5A, 0x80, 0x101)
+            results.append({
+                "case": "logo-rgb565-effect",
+                "color": "0x80",
+                "effect": "0x101",
+                "blended_pixels": blended,
+                "framebuffer_sha256": hashlib.sha256(effect_pixels).hexdigest(),
+            })
         if ordinal == 1:
             clipped, _ = compare_case(
                 executable, environment, output_dir, "login-clipped", payload,
@@ -114,6 +140,13 @@ def verify(source, output_dir):
             if clipped != 3710:
                 raise ValueError(f"Unexpected clipped native pixel count: {clipped}")
             results.append({"case": "login-clipped", "literal_pixels": clipped})
+
+            effect_clipped, _ = compare_case(
+                executable, environment, output_dir, "login-effect-clipped",
+                payload, dimensions, (360, 260), (-80, -100),
+                Rect(20, 10, 340, 240), 0x5A, 0x80, 0x101)
+            results.append({"case": "login-effect-clipped",
+                            "blended_pixels": effect_clipped})
 
             malformed_path = output_dir / "login-truncated.span"
             malformed_path.write_bytes(payload[:-1])
@@ -127,10 +160,11 @@ def verify(source, output_dir):
                 raise ValueError("Native blitter accepted truncated payload")
 
     manifest = {"schema": 1, "source_sha256": digest,
-                "scope": "portable C++ opaque RGB16 span path vs Python model",
+                "scope": "Core slot-1 C++ opaque and observed RGB565 effect paths vs Python model",
                 "results": results,
                 "limitations": ["No original-client framebuffer comparison.",
-                                "Only opaque/effect-zero RGB16 branch is implemented."]}
+                                "Ship setter traces do not prove that one node receives color 0x80 and effect 0x101.",
+                                "The alternate mask-specialized RGB16 class is not implemented."]}
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest_path, results
