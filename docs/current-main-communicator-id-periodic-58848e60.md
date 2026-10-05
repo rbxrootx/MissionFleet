@@ -40,6 +40,13 @@ node `+0x54`, and wraps to its head at a null link. It calls through pointer
 `ret` at `0x588489D0` (353 bytes); fifteen `CC` bytes precede the next
 indexed function at `0x588489E0`.
 
+Both nonempty chains call the matched 40-byte `FUN_587B91B0` wrapper before
+returning to the periodic update. That wrapper computes `count * 0x18` and
+forwards the channel (0 for the first chain, 1 for the second), count, and
+record buffer through `FUN_58970C70` with message `0x80010F03`. The meaning of
+that message and the server's response remain unknown; byte identity alone
+does not validate the protocol behavior.
+
 The [portable motion model](../src/client-current/semantic/CommunicatorIdMotion.cpp)
 now reproduces the receiver-local counter, signed coordinate steps, capped
 size updates, completion-state flag changes, and order of child tick calls.

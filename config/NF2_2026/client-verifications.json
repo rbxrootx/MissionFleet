@@ -309491,6 +309491,39 @@
         "behavior": "Returns null for an empty receiver list. Otherwise walks from receiver +0x90 through each node's +0x54 link, obtains the node value through +0x70/+0x6C, and invokes the callback pointer stored at 0x5898C1A4 with that value and the supplied argument. Returns the first node for which the callback returns zero, or null when traversal ends. The complete 69-byte body ends with ret 4 and has one mapped absolute operand target.",
         "uncertainty": "The receiver/node types, callback signature and comparison semantics, stored value representation, and user-visible effects remain unresolved. Caller evidence supports reuse detection in a text insertion path, but the callback's exact equality and encoding rules are unknown. No emulator test was performed."
       }
+    },
+    {
+      "address": "587B91B0",
+      "name": "FUN_587b91b0",
+      "size": 40,
+      "symbol": "_FUN_587b91b0",
+      "source": "src/client-current/Main/FUN_587b91b0.cpp",
+      "source_sha256": "e8838b0b035328c847450cb159fd40cbb0f8048fefe11d3f46b0a4d0a444842a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 33,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b91b0",
+        "called_by": "Verified FUN_58752340 calls this at 0x587523F0 after building up to ten 0x18-byte linked-record slots, passing count, local buffer, and channel -1. Verified FUN_58848870 calls it at 0x58848918 and 0x588489B3 for its two nonempty panel batches, with channels 0 and 1 respectively. Their observed caller behavior is documented in docs/current-main-bounded-linked-record-batch.md and docs/current-main-communicator-id-periodic-58848e60.md.",
+        "behavior": "Reads the second stack argument as an item count and multiplies it by 0x18 to form a byte length. It forwards message ID 0x80010F03, the third stack argument, the count, the first stack argument, the computed byte length, and zero to FUN_58970C70. The complete body is 40 bytes and ends with ret 0x0C. The transport callee is independently byte-verified; this helper's call contract is recorded from its pushes and the three verified caller paths.",
+        "uncertainty": "The semantic type and lifetime of the caller buffers, the meaning of the count and third argument across all paths, the server-side meaning of message 0x80010F03, and the user-visible effect remain unresolved. No runtime client/server comparison was performed."
+      }
     }
   ]
 }
