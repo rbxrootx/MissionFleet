@@ -1,4 +1,4 @@
-# Native decompilation status — 4 October 2026
+# Native decompilation status — 5 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,180
-identified code bytes across six report units. There are 7,369 verified matches
-totaling 2,311,477 bytes (22.0768%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,371 verified matches
+totaling 2,314,212 bytes (22.1029%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -1443,6 +1443,14 @@ fleet/battle screen update paths. It updates observed child color fields and
 copies selected resource records based on global state; color and resource
 meanings remain unresolved. See
 [event-state child refresh evidence](docs/current-main-event-state-child-refresh.md).
+
+The ship-map update's visual-state helper (`FUN_588DB610`) and route-child
+helper (`FUN_588DBF10`) add 2,735 exact bytes called by the verified
+`CShip_MapObjectScreen` update. The route-child helper now also has a tested,
+readable C++ normal-path model for its four phases and position propagation;
+the index+2 resource lookup and flagged descendant helper remain open. See the
+[visual-state evidence](docs/current-main-ship-map-visual-state-update-588db610.md)
+and [route-child evidence](docs/current-main-ship-map-route-child-update-588dbf10.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
