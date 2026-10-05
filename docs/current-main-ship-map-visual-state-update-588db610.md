@@ -150,9 +150,13 @@ and post-scan object sequence. Candidate construction is modeled directly from
 `FUN_58789040` also has a normal-path model. Allocation uses adapters for the
 native storage requests. The recursive state helper is modeled directly, and
 the `FUN_58788F90` secondary animation/update and `FUN_589038C0` sprite-bundle
-traversal now have focused semantic models; the deleting destructor, leaf
-rendering backend, and route/effect output remain hooks. See
-[`the secondary update note`](current-main-ship-map-visual-secondary-update.md)
+traversal now have focused semantic models. The secondary visual's child-list
+teardown and derived/base destructor chain also have a tested semantic model;
+the destructor's indexed extent/ObjDiff record and the external release-thunk
+target/effect remain unresolved. Leaf rendering backend and route/effect output
+remain hooks. See
+[`the secondary update note`](current-main-ship-map-visual-secondary-update.md),
+[`the secondary destruction note`](current-main-ship-map-visual-secondary-destruction.md),
 and [`the sprite-bundle render note`](current-main-ship-map-visual-sprite-bundle-render.md).
 Run
 `rtk python tools/verify_ship_map_visual_state_child_scan.py` for the native

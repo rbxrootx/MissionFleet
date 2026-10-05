@@ -32,9 +32,11 @@ Its tests cover the flag gate, null-record ticking, frame cadence, random x
 drift, recursively filtered x/y deltas, child update order, expiry/unlink/
 destructor order, and the `IDIV` zero-divisor fault. The original constructor
 sets `+0x5C` to 1; the divide fault is kept explicit for corrupted or
-uninitialized inputs. The semantic model does not implement arbitrary child
-vtable bodies, the deleting destructor's full cleanup, the outer scheduler,
-or rendered output.
+uninitialized inputs. The observed derived/base destructor chain now has a
+separate semantic model for child and receiver list cleanup; its release-thunk
+target remains unresolved. Arbitrary child vtable bodies, the outer scheduler,
+and rendered output are still outside this model. See the
+[`secondary destruction note`](current-main-ship-map-visual-secondary-destruction.md).
 
 The function's indexed 172-byte extent is listed in
 [`client-functions.tsv`](../config/NF2_2026/client-functions.tsv), and its

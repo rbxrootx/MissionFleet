@@ -1,4 +1,5 @@
 #include "../../src/client-current/semantic/ShipMapVisualSecondaryUpdate.h"
+#include "../../src/client-current/semantic/ShipMapVisualSecondaryDestruction.h"
 
 #include <array>
 #include <cassert>
@@ -15,6 +16,7 @@ struct Fixture {
     MissionFleetShipMapVisualNodeListOwner* expectedOwner = nullptr;
     MissionFleetShipMapVisualNode* expectedRemoved = nullptr;
     std::uint32_t deleteCalls = 0;
+    std::uint32_t releaseCalls = 0;
 };
 
 std::int32_t randValue(void* context) {
@@ -28,18 +30,33 @@ void updateChild(MissionFleetShipMapVisualNode& child, void* context) {
     fixture.order.push_back(static_cast<char>(child.value28));
 }
 
+void releaseThunk(MissionFleetShipMapVisualNode& receiver, void* context) {
+    auto& fixture = *static_cast<Fixture*>(context);
+    assert(&receiver == fixture.expectedRemoved);
+    assert(receiver.vtable00 == 0x589A24E4u);
+    assert(receiver.owner30 == nullptr && receiver.owner40 == nullptr);
+    assert(receiver.previous34 == &receiver && receiver.next38 == &receiver);
+    assert(receiver.previous44 == nullptr && receiver.next48 == nullptr);
+    assert(fixture.expectedOwner->circularHead3C != &receiver);
+    assert(fixture.expectedOwner->linearHead4C != &receiver);
+    ++fixture.releaseCalls;
+    fixture.order.push_back('F');
+}
+
 void deleteSelf(MissionFleetShipMapVisualNode& receiver,
                 std::uint32_t deletingFlag, void* context) {
     auto& fixture = *static_cast<Fixture*>(context);
     assert(&receiver == fixture.expectedRemoved);
     assert(deletingFlag == 1u);
     assert(receiver.owner30 == nullptr && receiver.owner40 == nullptr);
-    assert(receiver.previous34 == &receiver && receiver.next38 == &receiver);
-    assert(receiver.previous44 == nullptr && receiver.next48 == nullptr);
     assert(fixture.expectedOwner->circularHead3C != &receiver);
     assert(fixture.expectedOwner->linearHead4C != &receiver);
     ++fixture.deleteCalls;
     fixture.order.push_back('X');
+    const MissionFleetShipMapVisualSecondaryDestructionHooks destroyHooks{
+        releaseThunk};
+    missionFleetDestroyShipMapVisualSecondary(receiver, deletingFlag,
+                                              destroyHooks, context);
 }
 
 const MissionFleetShipMapVisualSecondaryUpdateHooks hooks{
@@ -153,7 +170,8 @@ void checkExpiryUnlinksBeforeDeletingDestructor() {
         root, hooks, &fixture);
     assert(result == MissionFleetShipMapVisualSecondaryUpdateResult::Removed);
     assert(fixture.deleteCalls == 1);
-    assert((fixture.order == std::vector<char>{'X'}));
+    assert(fixture.releaseCalls == 1);
+    assert((fixture.order == std::vector<char>{'X', 'F'}));
     assert(owner.circularHead3C == &peer && peer.previous34 == &peer &&
            peer.next38 == &peer);
     assert(owner.linearHead4C == &peer && peer.previous44 == nullptr &&
