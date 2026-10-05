@@ -139,3 +139,25 @@ The input handlers' field meanings, the eight IDs' schema and payload bounds,
 the global list types, and the effects of `0x588DB3A0` remain unresolved. The
 caller offsets and helper instructions are static Ghidra and mapped-image
 evidence; this event path has not been exercised at runtime.
+
+## Shared queue-dispatch helper at `0x588C6090`
+
+The queue reset at `0x587E8A94` and queue reader at `0x587FAF3C` both call
+`FUN_588c6090` with `ECX = 0x58A24910`. The reset clears the event queue's
+producer index, consumer index, and count, then passes `(0x22B, 0)`. The reader
+loads the current 16-byte queue slot and passes its second DWORD followed by
+zero. This ties the helper to both reset and dispatch paths without identifying
+the global object's type or the meaning of `0x22B`.
+
+The 75-byte body at `0x588C6090..0x588C60DA` selects its loop bound from the
+second argument when that unsigned value is positive, otherwise from
+`[this+4]`. It forwards the first argument to the import thunk `0x5897CC3C`,
+then calls `0x5897CC36` once per selected entry and stores each result in the
+pointer table at `[this+0x0C]`. Both return paths write zero to `[this+0x10]`.
+Both observed callers provide a zero second argument, so their loop bound comes
+from `[this+4]`. These steps follow the decoded instructions; the import
+targets' contracts and the fields' types remain unknown. The source preserves
+the full instruction stream in
+[`FUN_588c6090.cpp`](../src/client-current/Main/FUN_588c6090.cpp), and
+`objdiff` validates it against the pinned mapped image. No live queue dispatch
+has been captured.

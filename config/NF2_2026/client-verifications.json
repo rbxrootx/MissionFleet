@@ -310291,6 +310291,45 @@
         "uncertainty": "Resource-record schema, FUN_587317E0 and FUN_58902E10 contracts, and user-visible effect remain unresolved. The source preserves instruction bytes rather than claiming original high-level C++ recovery; no emulator runtime was performed."
       },
       "verified_by": "objdiff-3.8.0-byte-identical"
+    },
+    {
+      "address": "588C6090",
+      "name": "FUN_588c6090",
+      "size": 75,
+      "symbol": "_FUN_588c6090",
+      "source": "src/client-current/Main/FUN_588c6090.cpp",
+      "source_sha256": "9f52025cedc5e524a8dc4b019ad4001a9c35619be185e3911c97e2a778ed9b50",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "5897CC3C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "5897CC36",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c6090",
+        "called_by": "Called at 0x587E8A94 by the queue-reset path and at 0x587FAF3C by the queue reader; both callers set ECX to 0x58A24910 and pass zero as the second stack argument.",
+        "behavior": "The 75-byte body forwards its first stack argument to 0x5897CC3C, chooses a loop bound from the second argument or [this+4], fills the pointer table at [this+0x0C] with results from 0x5897CC36, and writes zero to [this+0x10]. Both direct-call paths are visible in the matched queue code.",
+        "uncertainty": "The host callback targets, global object's type, pointer-table element type, and the meaning of the first argument remain unresolved."
+      }
     }
   ]
 }
