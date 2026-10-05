@@ -20,3 +20,17 @@ appends the node through receiver head/tail fields `+0x90/+0x94` and node links
 ObjDiff verifies all 416 bytes, `ret 4`, and 11 mapped operand targets. The
 receiver/node types, callback, global-string policy, and visible message
 semantics remain uncertain. No live client test was run.
+
+The existing-match check has now also been matched in
+[`FUN_587522F0.cpp`](../src/client-current/Main/FUN_587522F0.cpp). This 69-byte
+helper walks receiver list `+0x90` via node link `+0x54`, passes the nested
+node value at `+0x70/+0x6C` and the supplied argument to the callback pointer at
+`0x5898C1A4`, and returns the first node for which that callback returns zero.
+It returns null for an empty list or when traversal finds no such node. The
+complete body and its one mapped operand match under objdiff 3.8.0. The callback
+contract and comparison/encoding rules remain unresolved.
+Verified `FUN_58847770` calls the helper at `0x588479AE` and `0x58847A07`.
+Verified `FUN_58890110` calls it at `0x5889320E`, `0x588932FA`, `0x58893357`,
+and `0x5889338D`; the first path inserts on a null result, while the other
+paths read fields `+0x9E` or `+0x80` from returned nodes. Those field meanings
+are still unknown.
