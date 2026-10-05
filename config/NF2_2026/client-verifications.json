@@ -309667,6 +309667,32 @@
         "behavior": "Takes one stack argument and a receiver in ECX. Searches the linked list rooted at receiver +0x68 for a node whose +0x18 dword equals the argument. If found and the node word at +0x2C has bit 0 clear, sets that bit. It then tests bit 0 of the byte at [global 0x58A2459C]+0x105A8: when set, calls FUN_5878A160(argument) and decrements receiver +0x60 only if the returned object's +0x438 dword is zero; when clear, decrements directly. If receiver +0x60 is zero at the final check, sets bit 1 in receiver word +0x64. If the node's bit 0 was already set, the count-update path is skipped but the final zero-count check remains. A miss returns without mutation. The indexed function extent is 100 bytes, ending after ret 4 at 0x58789933; the next indexed function begins at 0x58789940.",
         "uncertainty": "The list-node key and flag meanings, receiver count/state fields, global-state guard, helper contract, and visible effect remain unresolved. Callers establish event-queue context but not the protocol semantics. No runtime client or emulator test was performed."
       }
+    },
+    {
+      "address": "588D6C90",
+      "name": "FUN_588d6c90",
+      "size": 37,
+      "symbol": "_FUN_588d6c90",
+      "source": "src/client-current/Main/FUN_588d6c90.cpp",
+      "source_sha256": "d9dfbd44f4d267d64ae0b591ae7c800534db53fb34046d85439eff95b0006d29",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588d6c90",
+        "called_by": "Verified FUN_587C4450 passes tag 0x0B to this helper on its successful tagged-entry path. Verified shell-map object update FUN_588D4300 also pushes 0x0B and calls it after a nonnull-object check. Caller behavior is described in docs/current-main-linked-entry-hit-dispatch.md and docs/current-main-shell-map-object-update.md.",
+        "behavior": "Reads the low word of its stack argument. For 0x0B, adds 8 to receiver dword +0x1428 and returns with ret 4. Otherwise, for 0x0C, adds 8 to receiver dword +0x142C. Other values leave the receiver unchanged. The complete indexed body is 37 bytes, ending with ret 4 at 0x588D6CB2..0x588D6CB4; the next indexed function begins at 0x588D6CC0.",
+        "uncertainty": "The receiver type and meanings of fields +0x1428/+0x142C, the reason for increment 8, and their visible effect remain unresolved. The verified callers observed here pass only 0x0B. No runtime client or emulator test was performed."
+      }
     }
   ]
 }

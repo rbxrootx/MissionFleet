@@ -15,7 +15,9 @@ compares their sum with the square of another argument, then on the in-range
 branch calls `0x5897CC90`, `0x5897CCA0`, and `0x5876BF80` to derive values for a
 second `0x5874A010` call. Success again invokes virtual slot `+0x24`. A
 successful entry tagged `0x0B` may also call `0x588D6C90`; entries with object
-field `+0xA4` set may be passed to `0x587C4250`. It returns with `ret 0x14`.
+field `+0xA4` set may be passed to `0x587C4250`. The tag helper's receiver
+updates and byte match are documented in [the shell-map tag-counter notes](current-main-shell-map-tag-counter.md).
+It returns with `ret 0x14`.
 
 The receiver and entry types, meanings of the virtual slots and five stack
 arguments, semantics of the record, and user-visible effect remain unknown.

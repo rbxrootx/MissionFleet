@@ -28,3 +28,6 @@ state values, collision-helper behavior, effect identities, and the boundary
 between client visuals and server-authoritative outcomes remain unknown. This
 is static byte-match evidence; there has been no original-client or emulator
 test of a shell hit.
+Its call to `FUN_588D6C90` with tag `0x0B` updates a receiver counter; see the
+[tag-counter notes](current-main-shell-map-tag-counter.md) for the exact fields
+and remaining uncertainties.
