@@ -3,12 +3,45 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <optional>
 
 struct MissionFleetShipMapVisualCandidateEntry {
     std::uint32_t value04 = 0;
     std::uint32_t value08 = 0;
     std::uint16_t word26 = 0;
 };
+
+struct MissionFleetShipMapVisualCandidateRef {
+    void* object = nullptr;
+    std::uint32_t value04 = 0;
+    std::uint32_t value08 = 0;
+    std::uint16_t word26 = 0;
+};
+
+struct MissionFleetShipMapVisualProjection {
+    std::int32_t left14 = 0;
+    std::int32_t top18 = 0;
+    std::int32_t right1C = 0;
+    std::int32_t bottom20 = 0;
+    std::int32_t scale114 = 1;
+    std::int32_t referenceX50 = 0;
+    std::int32_t referenceY54 = 0;
+    std::uint32_t effectColor = 0;
+};
+
+struct MissionFleetShipMapProjectedPoint {
+    std::uint32_t x = 0;
+    std::uint32_t y = 0;
+};
+
+// MSVCR90.dll's rand() implementation used by the installed client. The
+// caller owns the seed because the original stores this state per CRT thread
+// and may change it through srand().
+struct MissionFleetMsvc90RandState {
+    std::uint32_t holdRand = 1;
+};
+
+std::int32_t missionFleetMsvc90Rand(MissionFleetMsvc90RandState& state);
 
 // Evidence-backed control-flow model for phase 0x040000 in
 // Main.dll FUN_588DB610. Fields retain source offsets where meanings are open.
@@ -22,31 +55,60 @@ struct MissionFleetShipMapVisualStateChildScan {
     std::uint32_t referenceX50 = 0;
     std::uint32_t referenceY54 = 0;
     bool selectedByGlobal58A247F8 = false;
+    std::int16_t value42AC = 0;
+    const std::uint8_t* resourceTable246F0 = nullptr;
+    std::int32_t resourceTableCount246F0 = 0;
+    const std::uint8_t* resourceTable246F4 = nullptr;
+    std::int32_t resourceTableCount246F4 = 0;
+    const void* globalRecord10524 = nullptr;
+    MissionFleetShipMapVisualProjection projection{};
+    const void* const* effectTargetTable31810 = nullptr;
+    std::int32_t effectTargetCount31810 = 0;
+    void* postScanEffectTarget604C = nullptr;
+    std::uint16_t child60D8Word26 = 0;
+    bool drawCandidateEffects589C8EDC = false;
+    bool drawRouteEffect589C9040 = false;
     std::array<const MissionFleetShipMapVisualCandidateEntry*, 32> entries17C{};
 };
 
 struct MissionFleetShipMapVisualStateChildScanHooks {
     // FUN_587E5A60 is called with the single observed argument 0x19.
     void (*notify587E5A60)(std::uint32_t argument, void* context) = nullptr;
-    // The indirect call at 0x588DB6A1 gates the scan by signed remainder / 3.
-    std::int32_t (*sampleIndirectState5897CC36)(
-        MissionFleetShipMapVisualStateChildScan& receiver, void* context) = nullptr;
-    // The no-stack-argument thunk at 0x588DB6E4 is used only through bit 0.
-    // Entry/index are test-adapter context; the thunk's runtime receiver/target
-    // is still unresolved from the mapped callsite.
-    std::uint32_t (*entryGate5897CC36)(
+    // Both call sites at 0x588DB6A1 and 0x588DB6E4 resolve through
+    // DAT_5898C1F0 to the zero-argument MSVCR90 rand() export.
+    std::int32_t (*rand5897CC36)(void* context) = nullptr;
+    // DAT_5898C200 resolves to MSVCR90 operator new(unsigned int).
+    void* (*operatorNew5897CC4E)(std::uint32_t bytes, void* context) = nullptr;
+    // FUN_58907C80 initializes the freshly allocated 0x58-byte candidate.
+    // x/y are raw 32-bit values after the observed rand()%20 jitter.
+    MissionFleetShipMapVisualCandidateRef (*initializeCandidate58907C80)(
+        MissionFleetShipMapVisualStateChildScan& receiver, void* allocated,
+        const void* constructionOwner, const std::uint8_t* selectedResourceRecord,
+        std::uint32_t x04, std::uint32_t y08, std::uint16_t variant,
+        void* context) = nullptr;
+    // FUN_58902D20(candidate, 0x102) runs after every passing entry gate,
+    // including allocation failure where candidate is null.
+    void (*finishCandidate58902D20)(void* candidate, std::uint32_t argument,
+                                    void* context) = nullptr;
+    // FUN_587B7400 receives this target with projected x/y and the observed
+    // global effect color. The renderer's visual output remains external.
+    void (*drawEffect587B7400)(void* target, std::uint32_t x,
+                               std::uint32_t y, std::uint32_t color,
+                               void* context) = nullptr;
+    // FUN_58789040 constructs the 0x68-byte post-scan object. The model passes
+    // the rand()%6 value consumed by its constructor.
+    void* (*initializeSecondary58789040)(
+        void* allocated, const void* constructionOwner,
+        const std::uint8_t* selectedResourceRecord, std::uint32_t x04,
+        std::uint32_t y08, std::uint16_t word26,
+        std::uint32_t randomRemainder6, void* context) = nullptr;
+    // FUN_588D7DC0 receives the final candidate coordinates and child frame.
+    void (*drawRouteEffect588D7DC0)(
         MissionFleetShipMapVisualStateChildScan& receiver,
-        const MissionFleetShipMapVisualCandidateEntry& entry,
-        std::size_t index, void* context) = nullptr;
-    // Models the opaque construction/update block after an entry passes its
-    // low-bit gate. The block includes runtime-resolved callbacks.
-    void* (*processCandidate)(MissionFleetShipMapVisualStateChildScan& receiver,
-                              const MissionFleetShipMapVisualCandidateEntry& entry,
-                              std::size_t index, void* context) = nullptr;
-    // Runs only when the last produced candidate pointer remains non-null and
-    // +0x164 is still zero after the scan.
-    void (*processLastCandidate)(MissionFleetShipMapVisualStateChildScan& receiver,
-                                 void* candidate, void* context) = nullptr;
+        std::uint32_t x04, std::uint32_t y08, std::uint32_t width,
+        std::uint32_t height, std::uint32_t firstMode,
+        std::uint32_t secondMode, std::uint16_t childFrame,
+        void* context) = nullptr;
 };
 
 enum class MissionFleetShipMapVisualStateChildScanResult {
@@ -55,7 +117,12 @@ enum class MissionFleetShipMapVisualStateChildScanResult {
     ScanDeferred,
     ScanCompleted,
     AdvancedToSetup,
+    InvalidProjection,
 };
+
+std::optional<MissionFleetShipMapProjectedPoint> missionFleetProjectShipMapVisualPosition(
+    const MissionFleetShipMapVisualProjection& projection,
+    std::uint32_t objectX, std::uint32_t objectY);
 
 MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualStateChildren(
     MissionFleetShipMapVisualStateChildScan& state,

@@ -27,9 +27,82 @@ std::uint32_t incrementBits(std::uint32_t value) {
     return value + 1u;
 }
 
+std::uint32_t jitteredCoordinate(std::uint32_t value, std::int32_t randomValue) {
+    // The installed code performs 32-bit SUB / ADD, so preserve wraparound.
+    return value - static_cast<std::uint32_t>(randomValue % 20) + 10u;
+}
+
+std::int32_t arithmeticShiftRightOne(std::int32_t value) {
+    std::uint32_t bits = static_cast<std::uint32_t>(value);
+    bits = (bits >> 1) | (bits & 0x80000000u);
+    return signedBits(bits);
+}
+
+std::optional<std::int32_t> wrappedMultiplyThenDivide(std::int32_t value,
+                                                     std::int32_t divisor) {
+    if (divisor == 0) {
+        return std::nullopt;
+    }
+    const std::uint32_t productBits = static_cast<std::uint32_t>(value) * 1000u;
+    const std::int32_t product = signedBits(productBits);
+    if (product == INT32_MIN && divisor == -1) {
+        return std::nullopt;
+    }
+    return product / divisor;
+}
+
+const std::uint8_t* lookupResourceRecord(const std::uint8_t* table,
+                                         std::int32_t count,
+                                         std::int32_t index) {
+    if (table == nullptr || index < 0 || index >= count) {
+        return nullptr;
+    }
+    return table + static_cast<std::size_t>(index) * 0x40u;
+}
+
+const void* effectTarget(const MissionFleetShipMapVisualStateChildScan& state,
+                         std::uint32_t index) {
+    if (state.effectTargetTable31810 == nullptr ||
+        static_cast<std::int64_t>(index) >= state.effectTargetCount31810) {
+        return nullptr;
+    }
+    return state.effectTargetTable31810[index];
+}
+
 void selectSetupPhase(MissionFleetShipMapVisualStateChildScan& state) {
     state.state60B0 = (state.state60B0 & 0xFF08FFFFu) | kPhaseSetup;
 }
+}
+
+std::int32_t missionFleetMsvc90Rand(MissionFleetMsvc90RandState& state) {
+    state.holdRand = state.holdRand * 214013u + 2531011u;
+    return static_cast<std::int32_t>((state.holdRand >> 16) & 0x7FFFu);
+}
+
+std::optional<MissionFleetShipMapProjectedPoint> missionFleetProjectShipMapVisualPosition(
+    const MissionFleetShipMapVisualProjection& projection,
+    std::uint32_t objectX, std::uint32_t objectY) {
+    const std::int32_t width = signedBits(
+        static_cast<std::uint32_t>(projection.right1C) -
+        static_cast<std::uint32_t>(projection.left14));
+    const std::int32_t height = signedBits(
+        static_cast<std::uint32_t>(projection.bottom20) -
+        static_cast<std::uint32_t>(projection.top18));
+    const auto offsetX = wrappedMultiplyThenDivide(
+        arithmeticShiftRightOne(width), projection.scale114);
+    const auto offsetY = wrappedMultiplyThenDivide(
+        arithmeticShiftRightOne(height), projection.scale114);
+    if (!offsetX || !offsetY) {
+        return std::nullopt;
+    }
+
+    const std::uint32_t projectedX =
+        objectX - static_cast<std::uint32_t>(*offsetX) -
+        static_cast<std::uint32_t>(projection.referenceX50);
+    const std::uint32_t projectedY =
+        static_cast<std::uint32_t>(*offsetY) - objectY +
+        static_cast<std::uint32_t>(projection.referenceY54);
+    return MissionFleetShipMapProjectedPoint{projectedX, projectedY};
 }
 
 MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualStateChildren(
@@ -53,11 +126,11 @@ MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualState
         return MissionFleetShipMapVisualStateChildScanResult::AdvancedToSetup;
     }
 
-    const std::int32_t indirectValue = hooks.sampleIndirectState5897CC36 != nullptr
-                                           ? hooks.sampleIndirectState5897CC36(state, context)
-                                           : 0;
-    // x86 IDIV by 3 uses a signed remainder; a zero remainder skips the array.
-    const bool scanEntries = indirectValue % 3 != 0 && state.word164 == 0;
+    const std::int32_t gateValue = hooks.rand5897CC36 != nullptr
+                                       ? hooks.rand5897CC36(context)
+                                       : 0;
+    // rand() is nonnegative and at most 0x7FFF in this MSVCR90 build.
+    const bool scanEntries = gateValue % 3 != 0 && state.word164 == 0;
     if (!scanEntries) {
         state.counter6058 = incrementBits(state.counter6058);
         const std::int32_t counter = signedBits(state.counter6058);
@@ -69,27 +142,141 @@ MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualState
         return MissionFleetShipMapVisualStateChildScanResult::ScanDeferred;
     }
 
-    void* lastCandidate = nullptr;
+    MissionFleetShipMapVisualCandidateRef lastCandidate{};
     for (std::size_t i = 0; i < state.entries17C.size(); ++i) {
         const auto* entry = state.entries17C[i];
         if (entry == nullptr) {
             continue;
         }
-        const std::uint32_t entryFlags = hooks.entryGate5897CC36 != nullptr
-                                             ? hooks.entryGate5897CC36(state, *entry, i,
-                                                                       context)
+        const std::int32_t entryRandom = hooks.rand5897CC36 != nullptr
+                                             ? hooks.rand5897CC36(context)
                                              : 0;
-        if ((entryFlags & 1u) == 0) {
+        // The native AND mask is 0x80000001; MSVCR90 rand() never sets bit 31.
+        if ((static_cast<std::uint32_t>(entryRandom) & 1u) == 0) {
             continue;
         }
-        lastCandidate = hooks.processCandidate != nullptr
-                            ? hooks.processCandidate(state, *entry, i, context)
-                            : nullptr;
+
+        void* allocated = hooks.operatorNew5897CC4E != nullptr
+                              ? hooks.operatorNew5897CC4E(0x58u, context)
+                              : nullptr;
+        MissionFleetShipMapVisualCandidateRef candidate{};
+        if (allocated != nullptr && hooks.initializeCandidate58907C80 != nullptr) {
+            const std::uint8_t* selectedResourceRecord =
+                lookupResourceRecord(state.resourceTable246F0,
+                                     state.resourceTableCount246F0, 0x12);
+
+            const std::int32_t yRandom = hooks.rand5897CC36 != nullptr
+                                             ? hooks.rand5897CC36(context)
+                                             : 0;
+            const std::int32_t xRandom = hooks.rand5897CC36 != nullptr
+                                             ? hooks.rand5897CC36(context)
+                                             : 0;
+            const std::uint32_t candidateY = jitteredCoordinate(entry->value08, yRandom);
+            const std::uint32_t candidateX = jitteredCoordinate(entry->value04, xRandom);
+            const std::uint16_t variant = static_cast<std::uint16_t>(
+                static_cast<std::uint16_t>(state.value42AC) + 100u);
+
+            candidate = hooks.initializeCandidate58907C80(
+                state, allocated, &state, selectedResourceRecord, candidateX, candidateY,
+                variant, context);
+        }
+
+        if (hooks.finishCandidate58902D20 != nullptr) {
+            hooks.finishCandidate58902D20(candidate.object, 0x102u, context);
+        }
+        lastCandidate = candidate;
+
+        if (state.drawCandidateEffects589C8EDC) {
+            const auto projected = missionFleetProjectShipMapVisualPosition(
+                state.projection, state.objectX4, state.objectY8);
+            if (!projected) {
+                return MissionFleetShipMapVisualStateChildScanResult::InvalidProjection;
+            }
+            const std::int32_t effectRandom = hooks.rand5897CC36 != nullptr
+                                                  ? hooks.rand5897CC36(context)
+                                                  : 0;
+            // The native mask is 0x80000003 plus signed normalization. Bit 31
+            // is unreachable for MSVCR90 rand(), leaving the low two bits.
+            const std::uint32_t effectSelector =
+                (static_cast<std::uint32_t>(effectRandom) & 3u) + 7u;
+            if (hooks.drawEffect587B7400 != nullptr) {
+                hooks.drawEffect587B7400(
+                    const_cast<void*>(effectTarget(state, effectSelector)),
+                    projected->x, projected->y, state.projection.effectColor,
+                    context);
+            }
+        }
     }
 
-    if (lastCandidate != nullptr && state.word164 == 0 &&
-        hooks.processLastCandidate != nullptr) {
-        hooks.processLastCandidate(state, lastCandidate, context);
+    if (lastCandidate.object != nullptr && state.word164 == 0) {
+        void* allocatedCandidate = hooks.operatorNew5897CC4E != nullptr
+                                       ? hooks.operatorNew5897CC4E(0x58u, context)
+                                       : nullptr;
+        MissionFleetShipMapVisualCandidateRef extraCandidate{};
+        if (allocatedCandidate != nullptr &&
+            hooks.initializeCandidate58907C80 != nullptr) {
+            const std::int32_t resourceRandom = hooks.rand5897CC36 != nullptr
+                                                    ? hooks.rand5897CC36(context)
+                                                    : 0;
+            const std::uint32_t resourceIndex =
+                static_cast<std::uint32_t>(resourceRandom) & 3u;
+            const std::uint16_t variant = static_cast<std::uint16_t>(
+                lastCandidate.word26 + 1u);
+            extraCandidate = hooks.initializeCandidate58907C80(
+                state, allocatedCandidate, state.globalRecord10524,
+                lookupResourceRecord(state.resourceTable246F4,
+                                     state.resourceTableCount246F4,
+                                     static_cast<std::int32_t>(resourceIndex)),
+                lastCandidate.value04, lastCandidate.value08, variant, context);
+        }
+        if (hooks.finishCandidate58902D20 != nullptr) {
+            hooks.finishCandidate58902D20(extraCandidate.object, 0x102u, context);
+        }
+
+        void* allocatedSecondary = hooks.operatorNew5897CC4E != nullptr
+                                       ? hooks.operatorNew5897CC4E(0x68u, context)
+                                       : nullptr;
+        void* secondary = nullptr;
+        if (allocatedSecondary != nullptr &&
+            hooks.initializeSecondary58789040 != nullptr) {
+            const std::int32_t randomValue = hooks.rand5897CC36 != nullptr
+                                                 ? hooks.rand5897CC36(context)
+                                                 : 0;
+            const std::uint32_t randomRemainder6 =
+                static_cast<std::uint32_t>(randomValue % 6);
+            secondary = hooks.initializeSecondary58789040(
+                allocatedSecondary, state.globalRecord10524,
+                lookupResourceRecord(state.resourceTable246F0,
+                                     state.resourceTableCount246F0, 0x17),
+                lastCandidate.value04,
+                lastCandidate.value08 - 5u, lastCandidate.word26,
+                randomRemainder6, context);
+        }
+        if (hooks.finishCandidate58902D20 != nullptr) {
+            hooks.finishCandidate58902D20(secondary, 0xFFFFFEFFu, context);
+        }
+
+        if (state.drawCandidateEffects589C8EDC) {
+            const auto projected = missionFleetProjectShipMapVisualPosition(
+                state.projection, state.objectX4, state.objectY8);
+            if (!projected) {
+                return MissionFleetShipMapVisualStateChildScanResult::InvalidProjection;
+            }
+            if (hooks.drawEffect587B7400 != nullptr) {
+                hooks.drawEffect587B7400(
+                    state.postScanEffectTarget604C, projected->x, projected->y,
+                    state.projection.effectColor, context);
+            }
+        }
+
+        if (state.drawRouteEffect589C9040 &&
+            hooks.drawRouteEffect588D7DC0 != nullptr) {
+            const std::uint16_t childFrame = static_cast<std::uint16_t>(
+                state.child60D8Word26 + 1u);
+            hooks.drawRouteEffect588D7DC0(
+                state, lastCandidate.value04, lastCandidate.value08,
+                10u, 0x28u, 3u, 7u, childFrame, context);
+        }
     }
 
     state.counter6058 = incrementBits(state.counter6058);
