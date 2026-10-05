@@ -30,12 +30,16 @@ record-install helper: it stores a pointer at child `+0x54` and, when non-null,
 copies six DWORDs from record offsets `+0x18..+0x2C` to child offsets
 `+0x0C..+0x20`.
 
-The 0x40-byte table's full schema, meaning of the record word at `+0x0C`, the
-purpose of `FUN_587317E0`'s `index+2` result, the game meaning of the
-`0x2000` descendant flag, and the user-visible animation or effect are not
-identified. The state and copied fields are therefore described by offsets
-and observed operations rather than assigned game-design names. No live client
-or emulator execution was observed.
+`FUN_587317E0`'s mapped body compares its stack index and receiver count as
+signed DWORDs, rejects negative or out-of-range indices and a null table, then
+returns `table + index*0x40`. At the `0x70000000` route phase, the caller adds 2
+to the selection index and passes that value to the helper with the global
+record-table object. The table's full schema, meaning of the record word at
+`+0x0C`, the game purpose of the `index+2` choice, the meaning of descendant
+flag `0x2000`, and the user-visible animation or effect are not identified.
+The state and copied fields are therefore described by offsets and observed
+operations rather than assigned game-design names. No live client or emulator
+execution was observed.
 
 The matching instruction-level candidate is
 [`FUN_588dbf10.cpp`](../src/client-current/Main/FUN_588dbf10.cpp). It preserves
@@ -48,13 +52,14 @@ does not establish a complete-client link or emulator runtime behavior.
 The separate readable C++ normal-path model is
 [`ShipMapRouteChildUpdate.cpp`](../src/client-current/semantic/ShipMapRouteChildUpdate.cpp),
 with offset-named state and child records in its header. Its tests exercise all
-four phase transitions, table bounds and null-record copies, the injected
-`index+2` resolver, coordinate wrapping, and recursive movement through flagged
-descendants while traversing circular and null-terminated lists. The model adds
-a safe bounds guard around captured route-offset input; the original directly
-indexes that table. The `FUN_587317E0` record lookup remains a hook because its
-selection semantics are not established. Descendant movement now uses the
-readable normal-path port of `FUN_58902E10` in
+four phase transitions, signed table bounds and null-record copies,
+`index+2` record selection, coordinate wrapping, and recursive movement through
+flagged descendants while traversing circular and null-terminated lists. The
+model adds safe capacity guards around captured table and route-offset input;
+the original checks the record count but directly indexes the route-offset
+table. `FUN_587317E0` now has a direct normal-path model in the route updater,
+including its signed index checks and 0x40-byte stride. Descendant movement
+uses the readable normal-path port of `FUN_58902E10` in
 [`ShipMapRouteDescendantMovement.cpp`](../src/client-current/semantic/ShipMapRouteDescendantMovement.cpp):
 it adds the wrapped DWORD deltas to the selected node and recursively follows
 its `+0x3C/+0x38` chain, recursing only when a node's `+0x24` flags contain

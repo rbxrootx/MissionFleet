@@ -10,8 +10,11 @@ std::int64_t signedDword(std::uint32_t value) {
                                 : static_cast<std::int64_t>(value) - 0x100000000LL;
 }
 
-const MissionFleetShipMapRouteRecord* recordAt(
+const MissionFleetShipMapRouteRecord* lookupRecord587317E0(
     const MissionFleetShipMapRouteChildState& state, std::uint32_t index) {
+    // FUN_587317E0 compares index and count as signed DWORDs, rejects negative
+    // indices and null table pointers, then returns base + index * 0x40. The
+    // capacity bound is a harness guard; the native helper has no such field.
     const auto signedIndex = signedDword(index);
     if (state.records190 == nullptr || signedIndex < 0 ||
         signedDword(state.recordCount160) <= signedIndex ||
@@ -59,15 +62,14 @@ void moveChild(MissionFleetShipMapRouteVisual& child, std::uint32_t targetX,
 }
 
 void missionFleetUpdateShipMapRouteChild(
-    MissionFleetShipMapRouteChildState& state,
-    const MissionFleetShipMapRouteChildHooks& hooks, void* context) {
+    MissionFleetShipMapRouteChildState& state) {
     // FUN_588DBF10 performs one phase branch per invocation and always reaches
     // the child-position update afterward.
     switch (state.phase609C) {
     case 0:
         if (state.selection23C.flag34 != 0) {
             installRecord(*state.child146C,
-                          recordAt(state, state.selection23C.index68));
+                          lookupRecord587317E0(state, state.selection23C.index68));
             state.child146C->counter50 = 0;
             state.phase609C = kPhaseRecordAnimation;
         }
@@ -77,7 +79,8 @@ void missionFleetUpdateShipMapRouteChild(
         if (state.child146C->counter50 == terminalCounter(*state.child146C)) {
             // The x86 INC wraps the index before its signed bounds checks.
             const std::uint32_t nextIndex = state.selection23C.index68 + 1u;
-            installRecord(*state.child146C, recordAt(state, nextIndex));
+            installRecord(*state.child146C,
+                          lookupRecord587317E0(state, nextIndex));
             state.phase609C = kPhaseResolveFollowingResource;
         } else {
             ++state.child146C->counter50;
@@ -87,8 +90,7 @@ void missionFleetUpdateShipMapRouteChild(
     case kPhaseResolveFollowingResource:
         if (state.selection23C.flag34 == 0) {
             const std::uint32_t nextIndex = state.selection23C.index68 + 2u;
-            const auto* record = hooks.resolveIndexPlusTwo == nullptr
-                ? nullptr : hooks.resolveIndexPlusTwo(nextIndex, context);
+            const auto* record = lookupRecord587317E0(state, nextIndex);
             installRecord(*state.child146C, record);
             state.child146C->counter50 = 0;
             state.phase609C = kPhaseFinalAnimation;

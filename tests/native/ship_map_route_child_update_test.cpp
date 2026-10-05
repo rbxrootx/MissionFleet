@@ -2,41 +2,19 @@
 
 #include <cassert>
 #include <cstdint>
-#include <vector>
 
 namespace {
-struct Event {
-    char kind;
-    std::uint32_t first;
-};
-
-struct Fixture {
-    std::vector<Event> events;
-    const MissionFleetShipMapRouteRecord* resolvedRecord = nullptr;
-};
-
-const MissionFleetShipMapRouteRecord* resolve(std::uint32_t index, void* context) {
-    auto& fixture = *static_cast<Fixture*>(context);
-    fixture.events.push_back({'L', index});
-    return fixture.resolvedRecord;
-}
-
-const MissionFleetShipMapRouteChildHooks hooks{resolve};
-
 void checkPhasesAndPositionPropagation() {
-    MissionFleetShipMapRouteRecord records[3]{};
+    MissionFleetShipMapRouteRecord records[4]{};
     records[0].word0C = 1;
     records[1].word0C = 2;
     records[2].word0C = 1;
     for (std::uint32_t i = 0; i < 6; ++i) {
         records[1].copiedFields18To2C[i] = 20 + i;
         records[2].copiedFields18To2C[i] = 30 + i;
+        records[3].copiedFields18To2C[i] = 40 + i;
     }
-    MissionFleetShipMapRouteRecord resolved{};
-    resolved.word0C = 1;
-    for (std::uint32_t i = 0; i < 6; ++i) {
-        resolved.copiedFields18To2C[i] = 40 + i;
-    }
+    records[3].word0C = 1;
 
     MissionFleetShipMapRouteDescendant flagged{5, 6, 0x2000, nullptr, nullptr};
     MissionFleetShipMapRouteDescendant unflagged{100, 200, 0, nullptr, nullptr};
@@ -60,21 +38,19 @@ void checkPhasesAndPositionPropagation() {
     state.selection23C = {1, 1};
     state.routeOffsetIndex605C = 1;
     state.records190 = records;
-    state.recordCount160 = 3;
-    state.availableRecordCapacity = 3;
+    state.recordCount160 = 4;
+    state.availableRecordCapacity = 4;
     state.routeOffsets17BC = offsets;
     state.availableRouteOffsetCount = 2;
     state.child146C = &child;
 
-    Fixture fixture;
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x50000000u && child.counter50 == 0);
     assert(child.record54 == &records[1]);
     for (std::uint32_t i = 0; i < 6; ++i) {
         assert(child.copiedFields0CTo20[i] == 20 + i);
     }
     assert(child.position4 == 1035 && child.position8 == 1950);
-    assert(fixture.events.empty());
     assert(flagged.position4 == 940 && flagged.position8 == 1756);
     assert(unflagged.position4 == 100 && unflagged.position8 == 200);
     assert(nestedUnflagged.position4 == 300 && nestedUnflagged.position8 == 400);
@@ -83,36 +59,28 @@ void checkPhasesAndPositionPropagation() {
     // word +0x0C is tested at exactly word*3-1; the next record is installed,
     // but the counter is retained when phase 0x50000000 advances.
     child.counter50 = 5;
-    fixture.events.clear();
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x70000000u && child.counter50 == 5);
     assert(child.record54 == &records[2] && child.copiedFields0CTo20[0] == 30);
-    assert(fixture.events.empty());
     assert(flagged.position4 == 940 && flagged.position8 == 1756);
     assert(nestedFlagged.position4 == 942 && nestedFlagged.position8 == 1758);
 
     // While the selection flag is set, phase 0x70000000 only increments.
-    fixture.events.clear();
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x70000000u && child.counter50 == 6);
-    assert(fixture.events.empty());
 
-    // Clearing the flag calls the unresolved index+2 resource lookup.
+    // Clearing the flag loads selection index+2 through FUN_587317E0.
     state.selection23C.flag34 = 0;
-    fixture.resolvedRecord = &resolved;
-    fixture.events.clear();
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
-    assert(fixture.events.size() == 1 && fixture.events[0].kind == 'L');
-    assert(fixture.events[0].first == 3);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x60000000u && child.counter50 == 0);
-    assert(child.record54 == &resolved && child.copiedFields0CTo20[0] == 40);
+    assert(child.record54 == &records[3] && child.copiedFields0CTo20[0] == 40);
 
     // The final phase takes three calls for word=1: 0->1->2, then clears.
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x60000000u && child.counter50 == 1);
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x60000000u && child.counter50 == 2);
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0 && child.counter50 == 2);
 }
 
@@ -136,15 +104,14 @@ void checkNullRecordsUnknownPhaseAndWrappedCoordinates() {
     state.routeOffsetIndex605C = 0;
     state.child146C = &child;
 
-    Fixture fixture;
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x50000000u && child.counter50 == 0);
     assert(child.record54 == nullptr);
     assert(child.copiedFields0CTo20[0] == 0xAABBCCDDu);
 
     // A null record reads as word zero, whose x86 32-bit terminal value is -1.
     child.counter50 = 0xFFFFFFFFu;
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x70000000u);
     assert(child.counter50 == 0xFFFFFFFFu && child.record54 == nullptr);
     assert(child.copiedFields0CTo20[0] == 0xAABBCCDDu);
@@ -161,13 +128,22 @@ void checkNullRecordsUnknownPhaseAndWrappedCoordinates() {
     // isolates the wrapped delta supplied by the final call.
     wrappedDescendant.position4 = 0xFFFFFFFCu;
     wrappedDescendant.position8 = 0x20u;
-    fixture.events.clear();
-    missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
+    missionFleetUpdateShipMapRouteChild(state);
     assert(state.phase609C == 0x12340000u);
     assert(child.position4 == 19 && child.position8 == 0xFFFFFFD3u);
-    assert(fixture.events.empty());
     assert(wrappedDescendant.position4 == 5 &&
            wrappedDescendant.position8 == 0xFFFFFFE9u);
+
+    // The +2 DWORD addition wraps. FUN_587317E0 then rejects the signed
+    // negative index without changing the child's copied fields.
+    state.phase609C = 0x70000000u;
+    state.selection23C.index68 = 0xFFFFFFFDu;
+    state.child146C->record54 = &record;
+    state.child146C->counter50 = 77;
+    missionFleetUpdateShipMapRouteChild(state);
+    assert(state.phase609C == 0x60000000u && child.counter50 == 0);
+    assert(child.record54 == nullptr &&
+           child.copiedFields0CTo20[0] == 0xAABBCCDDu);
 }
 }
 

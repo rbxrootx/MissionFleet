@@ -53,13 +53,5 @@ struct MissionFleetShipMapRouteChildState {
     MissionFleetShipMapRouteVisual* child146C = nullptr;
 };
 
-struct MissionFleetShipMapRouteChildHooks {
-    // FUN_587317E0's resource lookup semantics are unresolved. This hook
-    // exposes its observed index+2 call without guessing how it resolves.
-    const MissionFleetShipMapRouteRecord* (*resolveIndexPlusTwo)(
-        std::uint32_t index, void* context) = nullptr;
-};
-
 void missionFleetUpdateShipMapRouteChild(
-    MissionFleetShipMapRouteChildState& state,
-    const MissionFleetShipMapRouteChildHooks& hooks, void* context);
+    MissionFleetShipMapRouteChildState& state);
