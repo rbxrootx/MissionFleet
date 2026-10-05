@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,172
-identified code bytes across six report units. There are 7,356 verified matches
-totaling 2,309,950 bytes (22.0622%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,357 verified matches
+totaling 2,310,042 bytes (22.0631%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -225,6 +225,8 @@ The selector's caller values and verified control flow are recorded in
 The `0x80020F0C` record handling and its embedded proposal message key are
 documented in
 [`docs/current-main-squadron-fleet-join-proposal.md`](docs/current-main-squadron-fleet-join-proposal.md).
+Its shared collection range helper and three verified callers are documented
+in [`docs/current-main-shared-collection-range-helper.md`](docs/current-main-shared-collection-range-helper.md).
 The identity lookup and zero-result forwarding path are detailed in
 [`docs/current-main-proposal-identity-lookup-fallback.md`](docs/current-main-proposal-identity-lookup-fallback.md).
 `FUN_58754C00` and the four helpers on its record-append/growth path now add

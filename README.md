@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,356 matches cover 2,309,950 bytes (22.0622%) and are verified
+The current 7,357 matches cover 2,310,042 bytes (22.0631%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
@@ -144,6 +144,8 @@ The latest ranged selector update helper is documented in
 [the selector notes](docs/current-main-ranged-selector-update.md).
 The latest message `0x80020F0C` record path is documented in
 [the proposal notes](docs/current-main-squadron-fleet-join-proposal.md).
+Its shared collection range helper is documented in
+[the helper notes](docs/current-main-shared-collection-range-helper.md).
 The proposal identity lookup and fallback event forwarding are documented in
 [the lookup notes](docs/current-main-proposal-identity-lookup-fallback.md).
 The related two-key update/insert path and its 0x48-byte container growth chain

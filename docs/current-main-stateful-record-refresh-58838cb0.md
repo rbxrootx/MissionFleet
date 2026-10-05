@@ -26,6 +26,9 @@ referenced at receiver `+0x190` and `+0x258`, and calls insertion/update helpers
 when entries match. It then updates receiver field `+0x220` through verified
 `FUN_58907360` and clears `+0x321`.
 
+The shared range helper reached while processing the `+0x258` collection is
+documented in [the helper notes](current-main-shared-collection-range-helper.md).
+
 ## Corrected function boundary
 
 The original 1,262-byte inventory extent ends after `pop ebp` at `0x5883919D`,

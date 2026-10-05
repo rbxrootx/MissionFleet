@@ -28,6 +28,9 @@ flags at `+0x24`, masked with `0x1F00`, equal `0x200`, the function calls
 `FUN_589088D0` for fields `+0x24C`, `+0x250`, and `+0x254`, then updates
 `+0x220` from the collection counts.
 
+The exact byte-matched range helper shared with the stateful refresh path is
+documented in [the helper notes](current-main-shared-collection-range-helper.md).
+
 ## Uncertainties
 
 The packet field meanings, lookup-helper result, collection roles, key at
