@@ -33,7 +33,9 @@ meaning is not yet established. Vtable `0x58996B40` is recovered directly from
 the mapped constructor bytes; no byte-match claim is made for the semantic
 model. The `0x68`-byte allocation adapter maps to the larger host node type, so
 the semantic type is not a native-layout replacement. Renderer output is still
-not validated by a live client frame.
+not validated by a live client frame. The derived `+0x0C` animation method is
+modeled in
+[`the secondary update note`](current-main-ship-map-visual-secondary-update.md).
 
 Run `rtk python tools/verify_ship_map_visual_state_child_scan.py` for the
 portable constructor and scan tests. The previous byte-match records for the

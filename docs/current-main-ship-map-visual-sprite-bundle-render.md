@@ -28,7 +28,9 @@ The two indirect destinations remain hooks. `FUN_5873A5D0` and its clipping
 helper `FUN_58903D60` have separate exact-byte matches, but their renderer
 backend and actual visible output have not been recovered. The mapped call
 chain shows how this vtable slot can be invoked; a live frame using this
-secondary object has not yet been captured.
+secondary object has not yet been captured. Its animation/update path is
+documented in
+[`the secondary update note`](current-main-ship-map-visual-secondary-update.md).
 
 Run `rtk python tools/verify_ship_map_visual_sprite_bundle_render.py` for the
 focused native semantic tests. Run
