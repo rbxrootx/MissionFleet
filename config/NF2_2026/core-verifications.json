@@ -3440,9 +3440,9 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_587ba830",
-        "called_by": "Directly called by animation-frame wrapper 0x5849C770 from the ship render-node draw path at 0x587B5DB0.",
-        "behavior": "Ghidra shows viewport-edge clamping, screen-origin subtraction for draw position and clip edges, target-buffer retrieval, and indirect dispatch through sprite vtable slot 1. Readable ITNTL.dll independently supports slot 1 receiving the buffer, local geometry, color, and effect.",
-        "uncertainty": "Core Ghidra pseudocode misattributes arguments around the buffer accessor and indirect call, so the exact Core ABI is not established from pseudocode alone. No explicit rejection of an inverted clip is visible; downstream handling is unverified. Pixel output is not yet compared against a live original-client frame."
+        "called_by": "Directly called by animation-frame wrapper 0x5849C770 from the ship render-node draw path at 0x587B5DB0 and by generic render-node draw callback 0x587B5F40.",
+        "behavior": "The emitted x86 body clamps all four clip edges to the screen viewport, subtracts screen origin from position and clip edges, obtains the target pixel pointer at screen +0x50, and dispatches sprite vtable slot 1. Its stack sequence supplies buffer, local x/y, four local clip edges, color, and effect (nine DWORDs); the compositor slot's ret 0x24 and readable ITNTL wrapper independently corroborate that contract.",
+        "uncertainty": "The dispatcher contains no inverted- or empty-clip rejection; resulting pixels depend on the concrete sprite slot-1 implementation. The port has not been compared against a live original-client framebuffer."
       }
     },
     {

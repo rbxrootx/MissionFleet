@@ -13,7 +13,12 @@ struct MissionFleetCoreRenderOrigin {
 // Semantic views of the objects passed through Core.dll's scene draw path.
 // These are portable test models, not declarations of the original ABI.
 struct MissionFleetCoreRenderContext {
+    // Portable screen view: viewport relative to the screen origin, followed
+    // by the fields read at +0x04, +0x08, and +0x50. Not an ABI layout.
     MissionFleetCoreRenderRect fallbackClipAt14;
+    std::int32_t originX04 = 0;
+    std::int32_t originY08 = 0;
+    void* targetPixels50 = nullptr;
 };
 
 struct MissionFleetCoreResourceSceneChild;

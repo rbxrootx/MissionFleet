@@ -17,17 +17,18 @@ and effect through `0x587BA830`. That dispatcher calls slot 1 on the sprite
 object. Readable `ITNTL.dll` independently confirms the screen-buffer and
 geometry argument boundary at `0x100EB530` and the node call at `0x100EA3D0`.
 
-The 272-byte dispatcher at `0x587BA830` is byte-matched too. Its Ghidra body
-reads screen origin and viewport through screen accessors, clamps the requested
-rectangle, translates position and clip coordinates into screen space, retrieves
-the target buffer, and dispatches indirectly through sprite vtable slot 1. The
-Core pseudocode misattributes arguments around the buffer accessor and virtual
-call, so it does not establish the exact Core ABI on its own. Readable ITNTL
-code independently supports the slot-1 argument order: buffer, local position,
-clipped rectangle, color, and effect. No explicit inverted-clip rejection is
-visible in the dispatcher, and downstream no-op behavior has not been checked.
-This ties frame selection to the compositor methods without relying on guessed
-direct-call references to the virtual slot.
+The 272-byte dispatcher at `0x587BA830` is byte-matched too. Its instruction
+stream reads the screen origin and viewport, clamps the requested rectangle,
+translates position and clip coordinates into screen-local space, gets the
+target buffer at screen `+0x50`, and dispatches through sprite vtable slot 1.
+The exact virtual call arguments follow from the emitted x86 stack sequence:
+buffer, x, y, four clipped edges, color, and effect (nine DWORDs); the concrete
+slot-1 methods clean those nine arguments with `ret 0x24`. Readable ITNTL code
+independently confirms the same contract. The portable dispatcher and its
+native integration test are in
+`src/client-current/semantic/CoreSpriteScreenDispatch.cpp` and
+`tests/native/core_sprite_screen_dispatch_test.cpp`. No inverted-clip reject
+is present here; any no-op behavior belongs to the concrete sprite method.
 
 For a 16-bit target and compressed format byte 2, the current Core loader
 constructs one of two sprite types according to the display masks:
