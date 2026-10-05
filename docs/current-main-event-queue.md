@@ -42,7 +42,10 @@ ring-buffer interpretation follows the increment, wrap, comparison, and
 16-byte stride; the field names are provisional.
 
 The matching queue reader is `FUN_587faec0`, called from `FUN_587fd890` at
-`0x587fef80` and `0x587fefcb`. Its 2,378 bytes verify at 100.0% across the
+`0x587fef80` and `0x587fefcb`. Its list helper `FUN_587898d0` and the verified
+queue-reader/update call sites are documented in
+[the event-queue list-helper notes](current-main-event-queue-list-helper.md).
+The reader's 2,378 bytes verify at 100.0% across the
 Ghidra ranges `0x587faec0..0x587fb7f0` and `0x587fb7f4..0x587fb80c`. The source
 keeps those ranges as separate symbols and excludes the four intervening bytes.
 Because Ghidra reports unsettled type propagation and the method combines the
