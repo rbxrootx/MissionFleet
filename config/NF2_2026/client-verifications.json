@@ -309563,6 +309563,32 @@
         "behavior": "Reads selector and value from its two stack arguments. It clamps a negative value to zero and writes it to receiver +0x94 + selector*4. It then reads both receiver fields +0x94/+0x98; for each, it computes signed (value*0x373)/receiver[+0xA8] + 0x7E and calls FUN_589032E0 on the associated objects at receiver +0x68 and +0x6C. The complete 94-byte body ends with ret 8 and has two mapped call targets.",
         "uncertainty": "The receiver and child types, selector domain beyond observed 0/1, scaling divisor/constant units, fields' semantic roles, and visible effect remain unresolved. The 94-byte body and both calls match statically; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587B0630",
+      "name": "FUN_587b0630",
+      "size": 70,
+      "symbol": "_FUN_587b0630",
+      "source": "src/client-current/Main/FUN_587b0630.cpp",
+      "source_sha256": "498abaf3c81d93b1277321ccc2cf580305edc32662bf57782b2f69162a37a152",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b0630",
+        "called_by": "Verified FUN_587A6220 calls at 0x587A6B98 while building its record-backed 32-child table. Verified weapon-fire handler FUN_587B4B70 calls at 0x587B4E4F and 0x587B512B around adjustments by 0xE10. Caller paths are documented in docs/current-main-record-backed-32-slot-builder.md and docs/current-main-weapon-fire-event.md.",
+        "behavior": "Reads one stack argument, adds 0x32, applies a modulo-like signed wrap in 0xE10 increments, adds 0xE10 if the intermediate result is negative, then uses a signed multiply-high sequence equivalent on observed values to division by 100. Stores the result at receiver +0xA0. The complete 70-byte body ends with ret 4 and has no mapped operand targets.",
+        "uncertainty": "The input/output field types, meaning and units of the 0x32 bias, wrap period 0xE10, and divide-by-100 result, and the visible purpose remain unresolved. The modular description summarizes the mapped arithmetic and caller adjustments; no runtime client or emulator test was performed."
+      }
     }
   ]
 }

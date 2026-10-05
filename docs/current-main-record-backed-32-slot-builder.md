@@ -27,6 +27,8 @@ A second 32-entry pass applies fields to each non-null result, including values
 from the selected record, coordinate helpers, and special handling for the
 observed discriminators. It sets bits `0x10` or `0x20` in the byte at
 `param_1+0x93`, then stores that byte as a 16-bit value at `param_1+0x90`.
+The coordinate normalization helper called at `0x587A6B98` is now matched and
+documented in [its helper notes](current-main-child-coordinate-normalization.md).
 
 The source preserves the instructions from those exact three Ghidra ranges and
 was compared against the pinned mapped image with ObjDiff 3.8.0. Local analysis

@@ -27,3 +27,9 @@ contains a diagnostic format string for `Fire -> %s` with the argument `Torpe`,
 alongside `VH`, `VX`, `VY`, position, `FireAngle`, and platform fields. The packed
 event schema and the meanings of its flags and numeric branches are unknown.
 No emulator runtime or visual test was performed.
+
+Two calls in this handler, at `0x587B4E4F` and `0x587B512B`, invoke the matched
+`FUN_587B0630` after adjustments by `0xE10`. Its observed modulo-like
+normalization and `+0xA0` write are recorded in the
+[child-coordinate helper notes](current-main-child-coordinate-normalization.md);
+the units and meaning of that field remain unknown.
