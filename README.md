@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,358 matches cover 2,310,691 bytes (22.0693%) and are verified
+The current 7,360 matches cover 2,310,907 bytes (22.0713%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
@@ -19,6 +19,8 @@ The remaining direct dispatcher callees and their corrected boundaries are
 documented in [the case helper evidence](docs/current-main-tag-dispatch-remaining-callees.md).
 The 32-slot child update invoked by one dispatcher helper is documented in
 [the child-update evidence](docs/current-main-32-slot-child-update-helper.md).
+Its direct linked-list registration and removal helpers are documented in
+[the link-primitive evidence](docs/current-main-child-link-primitives.md).
 The latest parent UI-child constructor match is documented in
 [the constructor evidence](docs/current-main-parent-ui-child-constructor-58847ab0.md).
 Its three-child parent initializer is documented in

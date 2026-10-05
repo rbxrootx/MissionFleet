@@ -30,3 +30,6 @@ record fields and packed bits, packet-word semantics, and visible/gameplay
 effects remain unresolved. The 32-entry count is established by the verified
 caller; domain labels for those entries are not. No emulator runtime test was
 performed.
+
+Its direct linked-node registration and removal helpers are documented in
+[the link-primitive notes](current-main-child-link-primitives.md).
