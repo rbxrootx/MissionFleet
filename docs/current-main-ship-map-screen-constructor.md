@@ -23,3 +23,28 @@ not exercised in the original client, and the decompiler output does not
 establish the original high-level source or runtime visual result.
 Its call to `FUN_588D6600` now has a verified complete boundary and is described
 in the [child position update notes](current-main-ship-map-child-position-update.md).
+
+## State construction at `0x588D84D0`
+
+At `0x588E0978`, this constructor calls `FUN_588d84d0` after the verified
+coordinate-array helper `FUN_588d8d60`. It pushes two values loaded from its
+stack frame at `+0x70` and `+0x74`. Ghidra decompiles the target as a
+`__thiscall` method with those two stack arguments; their names and units are
+not established.
+
+The mapped instructions clear three 32-DWORD receiver-relative ranges beginning
+at `+0x17C`, `+0x240`, and `+0x2C0`, along with an eight-DWORD range at `+0x60DC`.
+The decompiled body then processes map-derived entries in bounded loops, calls
+helpers `0x587B4060`, `0x587B3090`, `0x587B0830`, `0x587B0860`, `0x587B0910`,
+and other `0x587B*` routines, and writes selected-entry fields at `+0x120`,
+`+0xCC`, and `+0xA8`. Near the end it requests `0x74` bytes, calls
+`0x587B04B0` when allocation succeeds, and stores that call's result at
+`+0x23C`. This is static initialization evidence; it does not prove what the
+fields represent or what becomes visible on screen.
+
+Ghidra's indexed 2,178-byte body ends immediately after a call to
+`0x5897CBDA`. The mapped instructions continue with `mov esp, ebp; pop ebp;
+ret 8` at `0x588D8D52..0x588D8D57`, followed by eight `INT3` bytes. The complete
+callable extent is therefore 2,184 bytes. The reconstructed source preserves
+that epilogue and audits 40 mapped operands against the installed image. ObjDiff
+confirms the byte match; no emulator runtime test was performed.

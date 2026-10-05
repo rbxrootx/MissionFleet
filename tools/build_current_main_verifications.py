@@ -17,7 +17,7 @@ ADDRESSES = (
     "589073B0", "5896C460", "5896C010", "5896BF10", "5897CD4C",
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
-    "589728D0", "5890B370", "587B66E0", "588C60E0",
+    "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -333,7 +333,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588DD2A0", "588DD310", "58778DC0", "588F5120", "58908600",
     "587CC700", "58731590", "5875F320", "588DCE50", "587E7920",
     "58770A80", "58908870", "587B9B30", "587BAF70", "588F4090", "587317B0", "58731810", "58759EB0", "588D66D0", "587453A0", "587E0090", "5873A2E0", "587F21E0", "587A75E0", "587DA120",
-    "589728D0", "5890B370", "587B66E0", "588C60E0",
+    "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -519,6 +519,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra stopped after pop ebx; the contiguous ret 4 is at
     # 0x588542F1..0x588542F3, before 12 INT3 alignment bytes.
     "588542A0": 84,
+    # Ghidra ended at the stack-cookie call. Include the mapped frame restore
+    # and ret 8 before the eight INT3 alignment bytes.
+    "588D84D0": 2184,
 }
 EVIDENCE = {
     "58848680": {
@@ -1240,6 +1243,12 @@ EVIDENCE = {
         "called_by": "Called by FUN_5875B000 on the matched logo/control-menu screen construction path.",
         "behavior": "Matches the 143-byte helper and all four mapped operand targets.",
         "uncertainty": "The helper's broader object contract and semantic meaning of the arguments remain unresolved.",
+    },
+    "588D84D0": {
+        "name_in_analysis": "FUN_588d84d0 / ship-map state initializer",
+        "called_by": "Called at 0x588E0978 by the byte-matched CShip_MapObjectScreen constructor FUN_588e05c0, after it invokes the verified coordinate-array helper FUN_588d8d60 and loads two values from its constructor stack frame.",
+        "behavior": "The Ghidra body clears 32 DWORD entries at receiver offsets +0x17C, +0x240, and +0x2C0 plus the eight-DWORD block at +0x60DC, processes map-derived records in bounded loops, calls the observed 0x587B* helpers, and stores a 0x74-byte helper result at +0x23C. The mapped frame restore and ret 8 after the Ghidra extent make the callable body 2,184 bytes; 40 mapped operands are audited.",
+        "uncertainty": "The receiver field types, record and table schemas, coordinate units, helper contracts, and resulting visual behavior remain unresolved. Static constructor evidence does not establish runtime execution or rendered output.",
     },
     "588C6090": {
         "name_in_analysis": "FUN_588c6090",
