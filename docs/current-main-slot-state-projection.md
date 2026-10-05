@@ -23,3 +23,6 @@ Ghidra records 18 direct call references across 15 callers. Those include
 `FUN_587df580`, the selector-driven control refresh, and repeated calls from
 `FUN_5877c660` and `FUN_588f43f0`. The other callers and the receiver's owning
 class have not been identified. No emulator runtime test was performed.
+
+The verified state transitions and call paths of `FUN_5877c660` are recorded in
+[the 32-slot child-update evidence](current-main-32-slot-child-update-helper.md).

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,172
-identified code bytes across six report units. There are 7,357 verified matches
-totaling 2,310,042 bytes (22.0631%), each at 100.0% under objdiff 3.8.0. A
+identified code bytes across six report units. There are 7,358 verified matches
+totaling 2,310,691 bytes (22.0693%), each at 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
 the active decomp.dev project.
@@ -17,6 +17,8 @@ The six methods called from the current Main.dll tag dispatcher are recorded
 in [the helper evidence](docs/current-main-tag-dispatch-helper-methods.md).
 The remaining direct dispatcher callees and their corrected boundaries are
 recorded in [the case helper evidence](docs/current-main-tag-dispatch-remaining-callees.md).
+The 32-slot child update called from a tag-dispatch helper is documented in
+[the child-update evidence](docs/current-main-32-slot-child-update-helper.md).
 Four query-type record lookups extend the existing startup record-processing
 matches; their three verified callers and per-type array layouts are recorded
 in [the record-processing evidence](docs/current-main-startup-record-processing.md).

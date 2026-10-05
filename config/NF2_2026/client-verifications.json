@@ -309150,6 +309150,237 @@
         "behavior": "Uses receiver fields +0x0C and +0x10 with caller-supplied pointers to compute a remaining range, conditionally calls 0x5897CC54, decrements the +0x10 field by four, initializes an output dword to zero, applies a bounds check that can call 0x5897CC72, then copies two receiver/caller values into the output pair. The instructions support a four-byte range-compaction/update operation; they do not identify the collection type.",
         "uncertainty": "The receiver and output types, collection ownership, exact contracts of 0x5897CC54/0x5897CC72, and gameplay/UI meaning are unresolved. Evidence is static and caller-based; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5877C660",
+      "name": "FUN_5877c660",
+      "size": 649,
+      "symbol": "_FUN_5877c660",
+      "source": "src/client-current/Main/FUN_5877c660.cpp",
+      "source_sha256": "2fd364e9e2628f6d4104632726cd1116aed5835ebab85075b78e354a2db4b7b7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "5877C71D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "5877C8E1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "588F4060",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "5877C8E1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5877B130",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 91,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 116,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 127,
+          "target_address": "588730F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 133,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "58A0ADAC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "588F4060",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "5877C8E1",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 233,
+          "target_address": "588F4060",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 268,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 310,
+          "target_address": "587C4250",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "5877C833",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 421,
+          "target_address": "58A247F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 430,
+          "target_address": "5877B130",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 502,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 511,
+          "target_address": "5877A9B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 525,
+          "target_address": "588E8570",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 563,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 574,
+          "target_address": "588730F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 580,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 599,
+          "target_address": "58A0ADAC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 610,
+          "target_address": "587B7400",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877c660",
+        "called_by": "FUN_588E9880 calls at 0x588E989A from its loop over 32 nonnull pointers at receiver +0x9A4, passing -1 and 0. FUN_587BB700 calls from the verified event-dispatch path at mapped callsite 0x587BC73B after resolving an incoming record through FUN_588F4090; it passes two sign-extended packet words. Both callers are byte-verified.",
+        "behavior": "Uses receiver fields +0x5E and +0xB8 and reads a lookup-manager pointer from global 0x58A247F4. Separately, caller FUN_588E9880 establishes a 32-pointer table at its receiver +0x9A4. The -1 argument path clears an existing table link when present, resets the receiver's +0x5E high bits and +0xB8 sentinel, refreshes through FUN_588E8570, and returns 1. The other path resolves a slot object through FUN_588F4060, reconciles old/new table links, updates packed +0x5E bits and +0xB8, calls FUN_58903290/FUN_5877A9B0, refreshes, and returns a status.",
+        "uncertainty": "The receiver and table owner classes, 32 slot meanings, packet-word semantics, packed-bit contracts, and visible/gameplay effects are unresolved. This is static instruction and caller evidence; no emulator runtime test was performed."
+      }
     }
   ]
 }

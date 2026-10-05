@@ -24,6 +24,10 @@ field updates. The domain of the selector, argument types, global pointer
 types, and visible game meaning remain unresolved; no runtime or framebuffer
 comparison was made.
 
+The 649-byte child-update helper invoked by `0x588E9880` is now also matched;
+its 32-entry reset caller and message-dispatch caller are documented in
+[the helper evidence](current-main-32-slot-child-update-helper.md).
+
 Reproduce:
 
 ```text
