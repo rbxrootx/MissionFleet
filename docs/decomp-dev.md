@@ -52,13 +52,14 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 6,056 functions totaling 1,355,990 bytes (12.9526% of indexed code),
-each verified at 100.0% by objdiff 3.8.0. This includes 151 archived 2062
-`Main.dll` functions totaling 453,111 bytes; their local verifier is
-`tools/verify_client_matches.py` and its hash-pinned input capture is not
-committed. The installed 2026 `Main.dll` inventory has 107 exact function
-matches totaling 405,190 bytes. Its latest class slice covers the three
-parser-selected `CType2MMXAlphaSpriteData` virtual methods. The sibling
+credits 7,371 of 42,461 functions and 2,314,212 of 10,470,180 bytes (17.36% by
+functions and 22.1029% by bytes); every counted function match is verified at
+100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
+totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
+and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
+inventory has 1,238 exact function matches totaling 1,340,794 bytes. The
+parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
+separately. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and
 [`CType1MMXAlphaSpriteData`](current-client-alpha-type1-methods.md) and
 [`CType2MMXAlphaSpriteData`](current-client-alpha-type2-methods.md) reports
@@ -71,8 +72,8 @@ trampolines, and logo/control screen construction. The three
 export bodies have independent evidence: the `InitCGCDLL` call target is
 audited at its relocation, and `GetUserId` is recorded as returning a pointer
 to `0x58A0B450`. A separate
-capture-specific profile indexes 13,031 functions / 3,996,397
-bytes from installed `Core.dll`; 247 functions match 310,803 bytes, including
+capture-specific profile indexes 13,032 functions / 3,996,593
+bytes from installed `Core.dll`; 431 functions match 333,421 bytes, including
 122 ship-path functions matching 280,539
 bytes, covering the dispatcher, eight sprite classes, ship animation and draw
 path, the render-node constructors and ordered child lists, and the cache/loader/parser.
