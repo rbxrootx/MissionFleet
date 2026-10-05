@@ -38,8 +38,7 @@ std::uint32_t terminalCounter(const MissionFleetShipMapRouteVisual& child) {
 }
 
 void moveChild(MissionFleetShipMapRouteVisual& child, std::uint32_t targetX,
-               std::uint32_t targetY,
-               const MissionFleetShipMapRouteChildHooks& hooks, void* context) {
+               std::uint32_t targetY) {
     // FUN_58903290 subtracts the old coordinates as 32-bit values, stores the
     // targets, then propagates those wrapped deltas through the +0x3C list.
     const std::uint32_t dx = targetX - child.position4;
@@ -49,9 +48,8 @@ void moveChild(MissionFleetShipMapRouteVisual& child, std::uint32_t targetX,
 
     auto* const head = child.descendants3C;
     for (auto* descendant = head; descendant != nullptr;) {
-        if ((descendant->flags24 & 0x2000u) != 0 &&
-            hooks.descendantPositionDelta != nullptr) {
-            hooks.descendantPositionDelta(*descendant, dx, dy, context);
+        if ((descendant->flags24 & 0x2000u) != 0) {
+            missionFleetApplyShipMapRouteDescendantDelta(*descendant, dx, dy);
         }
         auto* const next = descendant->next38;
         if (next == head) break;
@@ -121,5 +119,5 @@ void missionFleetUpdateShipMapRouteChild(
     const auto& offset = state.routeOffsets17BC[state.routeOffsetIndex605C];
     const std::uint32_t targetX = state.objectX4 + offset.x17BC;
     const std::uint32_t targetY = state.objectY8 - offset.y17C0;
-    moveChild(*state.child146C, targetX, targetY, hooks, context);
+    moveChild(*state.child146C, targetX, targetY);
 }

@@ -22,6 +22,7 @@ def main():
         environment[name] = str(output_dir)
     subprocess.run([
         compiler, "-std=c++17", "-O2",
+        str(ROOT / "src/client-current/semantic/ShipMapRouteDescendantMovement.cpp"),
         str(ROOT / "src/client-current/semantic/ShipMapRouteChildUpdate.cpp"),
         str(ROOT / "tests/native/ship_map_route_child_update_test.cpp"),
         "-o", str(executable),

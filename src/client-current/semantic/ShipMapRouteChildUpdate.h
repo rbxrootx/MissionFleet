@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ShipMapRouteDescendantMovement.h"
+
 #include <cstddef>
 #include <cstdint>
 
@@ -17,11 +19,6 @@ static_assert(sizeof(MissionFleetShipMapRouteRecord) == 0x40,
 static_assert(offsetof(MissionFleetShipMapRouteRecord, word0C) == 0x0C &&
               offsetof(MissionFleetShipMapRouteRecord, copiedFields18To2C) == 0x18,
               "route-record fields retain the observed offsets");
-
-struct MissionFleetShipMapRouteDescendant {
-    std::uint16_t flags24 = 0;
-    MissionFleetShipMapRouteDescendant* next38 = nullptr;
-};
 
 struct MissionFleetShipMapRouteVisual {
     const MissionFleetShipMapRouteRecord* record54 = nullptr;
@@ -61,11 +58,6 @@ struct MissionFleetShipMapRouteChildHooks {
     // exposes its observed index+2 call without guessing how it resolves.
     const MissionFleetShipMapRouteRecord* (*resolveIndexPlusTwo)(
         std::uint32_t index, void* context) = nullptr;
-    // FUN_58902E10's child behavior is unresolved; the caller and deltas are
-    // observed, so the model reports those calls here.
-    void (*descendantPositionDelta)(MissionFleetShipMapRouteDescendant& child,
-                                    std::uint32_t dx, std::uint32_t dy,
-                                    void* context) = nullptr;
 };
 
 void missionFleetUpdateShipMapRouteChild(

@@ -20,6 +20,12 @@ delta through `FUN_58902e10`. Ghidra records ten direct calls from
 include the recursive call, `FUN_58903290`, `FUN_5890bd90`, `FUN_5890b900`,
 `FUN_5890be10`, and `FUN_5890c020`.
 
+The portable normal-path model in
+[`ShipMapRouteDescendantMovement.cpp`](../src/client-current/semantic/ShipMapRouteDescendantMovement.cpp)
+implements this helper and is used directly by the ship-map route-child model.
+Native tests check nested flag filtering, circular and null-terminated child
+chains, and 32-bit coordinate wraparound.
+
 ObjDiff 3.8.0 reports 100% for all three complete contiguous bodies: 195 bytes
 and four relocation operands checked. The client’s semantic names for these
 fields and masks, coordinate units, and callback contract remain unknown. No

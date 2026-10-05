@@ -31,10 +31,11 @@ copies six DWORDs from record offsets `+0x18..+0x2C` to child offsets
 `+0x0C..+0x20`.
 
 The 0x40-byte table's full schema, meaning of the record word at `+0x0C`, the
-purpose of `FUN_587317E0`'s `index+2` result, the helper at `FUN_58902E10`, and
-the user-visible animation or effect are not identified. The state and copied
-fields are therefore described by offsets and observed operations rather than
-assigned game-design names. No live client or emulator execution was observed.
+purpose of `FUN_587317E0`'s `index+2` result, the game meaning of the
+`0x2000` descendant flag, and the user-visible animation or effect are not
+identified. The state and copied fields are therefore described by offsets
+and observed operations rather than assigned game-design names. No live client
+or emulator execution was observed.
 
 The matching instruction-level candidate is
 [`FUN_588dbf10.cpp`](../src/client-current/Main/FUN_588dbf10.cpp). It preserves
@@ -48,11 +49,18 @@ The separate readable C++ normal-path model is
 [`ShipMapRouteChildUpdate.cpp`](../src/client-current/semantic/ShipMapRouteChildUpdate.cpp),
 with offset-named state and child records in its header. Its tests exercise all
 four phase transitions, table bounds and null-record copies, the injected
-`index+2` resolver, coordinate wrapping, and `0x2000`-filtered descendant
-calls. The model adds a safe bounds guard around captured route-offset input;
-the original directly indexes that table. The `FUN_587317E0` resource lookup
-and `FUN_58902E10` descendant behavior remain injected because their semantics
-are not yet established. Build and execute the native test from the repository
+`index+2` resolver, coordinate wrapping, and recursive movement through flagged
+descendants while traversing circular and null-terminated lists. The model adds
+a safe bounds guard around captured route-offset input; the original directly
+indexes that table. The `FUN_587317E0` record lookup remains a hook because its
+selection semantics are not established. Descendant movement now uses the
+readable normal-path port of `FUN_58902E10` in
+[`ShipMapRouteDescendantMovement.cpp`](../src/client-current/semantic/ShipMapRouteDescendantMovement.cpp):
+it adds the wrapped DWORD deltas to the selected node and recursively follows
+its `+0x3C/+0x38` chain, recursing only when a node's `+0x24` flags contain
+`0x2000`. This behavior follows the mapped 71-byte helper body. The model
+assumes valid nodes and list shapes, and the semantic field names and coordinate
+units remain unknown. Build and execute the native test from the repository
 root with:
 
 ```powershell

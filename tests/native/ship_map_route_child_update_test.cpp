@@ -8,8 +8,6 @@ namespace {
 struct Event {
     char kind;
     std::uint32_t first;
-    std::uint32_t second;
-    const MissionFleetShipMapRouteDescendant* child;
 };
 
 struct Fixture {
@@ -19,16 +17,11 @@ struct Fixture {
 
 const MissionFleetShipMapRouteRecord* resolve(std::uint32_t index, void* context) {
     auto& fixture = *static_cast<Fixture*>(context);
-    fixture.events.push_back({'L', index, 0, nullptr});
+    fixture.events.push_back({'L', index});
     return fixture.resolvedRecord;
 }
 
-void descendantDelta(MissionFleetShipMapRouteDescendant& child,
-                     std::uint32_t dx, std::uint32_t dy, void* context) {
-    static_cast<Fixture*>(context)->events.push_back({'D', dx, dy, &child});
-}
-
-const MissionFleetShipMapRouteChildHooks hooks{resolve, descendantDelta};
+const MissionFleetShipMapRouteChildHooks hooks{resolve};
 
 void checkPhasesAndPositionPropagation() {
     MissionFleetShipMapRouteRecord records[3]{};
@@ -45,10 +38,14 @@ void checkPhasesAndPositionPropagation() {
         resolved.copiedFields18To2C[i] = 40 + i;
     }
 
-    MissionFleetShipMapRouteDescendant flagged{0x2000, nullptr};
-    MissionFleetShipMapRouteDescendant unflagged{0, nullptr};
+    MissionFleetShipMapRouteDescendant flagged{5, 6, 0x2000, nullptr, nullptr};
+    MissionFleetShipMapRouteDescendant unflagged{100, 200, 0, nullptr, nullptr};
+    MissionFleetShipMapRouteDescendant nestedUnflagged{300, 400, 0, nullptr, nullptr};
+    MissionFleetShipMapRouteDescendant nestedFlagged{7, 8, 0x2000, nullptr, nullptr};
     flagged.next38 = &unflagged;
     unflagged.next38 = &flagged;
+    flagged.firstChild3C = &nestedUnflagged;
+    nestedUnflagged.next38 = &nestedFlagged;
 
     MissionFleetShipMapRouteVisual child{};
     child.position4 = 100;
@@ -77,9 +74,11 @@ void checkPhasesAndPositionPropagation() {
         assert(child.copiedFields0CTo20[i] == 20 + i);
     }
     assert(child.position4 == 1035 && child.position8 == 1950);
-    assert(fixture.events.size() == 1 && fixture.events[0].kind == 'D');
-    assert(fixture.events[0].child == &flagged);
-    assert(fixture.events[0].first == 935 && fixture.events[0].second == 1750);
+    assert(fixture.events.empty());
+    assert(flagged.position4 == 940 && flagged.position8 == 1756);
+    assert(unflagged.position4 == 100 && unflagged.position8 == 200);
+    assert(nestedUnflagged.position4 == 300 && nestedUnflagged.position8 == 400);
+    assert(nestedFlagged.position4 == 942 && nestedFlagged.position8 == 1758);
 
     // word +0x0C is tested at exactly word*3-1; the next record is installed,
     // but the counter is retained when phase 0x50000000 advances.
@@ -88,25 +87,23 @@ void checkPhasesAndPositionPropagation() {
     missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
     assert(state.phase609C == 0x70000000u && child.counter50 == 5);
     assert(child.record54 == &records[2] && child.copiedFields0CTo20[0] == 30);
-    assert(fixture.events.size() == 1 && fixture.events[0].kind == 'D');
-    assert(fixture.events[0].first == 0 && fixture.events[0].second == 0);
+    assert(fixture.events.empty());
+    assert(flagged.position4 == 940 && flagged.position8 == 1756);
+    assert(nestedFlagged.position4 == 942 && nestedFlagged.position8 == 1758);
 
     // While the selection flag is set, phase 0x70000000 only increments.
     fixture.events.clear();
     missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
     assert(state.phase609C == 0x70000000u && child.counter50 == 6);
-    assert(fixture.events.size() == 1 && fixture.events[0].kind == 'D');
-    assert(fixture.events[0].first == 0 && fixture.events[0].second == 0);
+    assert(fixture.events.empty());
 
     // Clearing the flag calls the unresolved index+2 resource lookup.
     state.selection23C.flag34 = 0;
     fixture.resolvedRecord = &resolved;
     fixture.events.clear();
     missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
-    assert(fixture.events.size() == 2 && fixture.events[0].kind == 'L');
+    assert(fixture.events.size() == 1 && fixture.events[0].kind == 'L');
     assert(fixture.events[0].first == 3);
-    assert(fixture.events[1].kind == 'D' && fixture.events[1].first == 0 &&
-           fixture.events[1].second == 0);
     assert(state.phase609C == 0x60000000u && child.counter50 == 0);
     assert(child.record54 == &resolved && child.copiedFields0CTo20[0] == 40);
 
@@ -122,8 +119,11 @@ void checkPhasesAndPositionPropagation() {
 void checkNullRecordsUnknownPhaseAndWrappedCoordinates() {
     MissionFleetShipMapRouteRecord record{};
     record.copiedFields18To2C[0] = 0x12345678u;
+    MissionFleetShipMapRouteDescendant wrappedDescendant{
+        0xFFFFFFFCu, 0x20u, 0x2000u, nullptr, nullptr};
     MissionFleetShipMapRouteVisual child{};
     child.copiedFields0CTo20[0] = 0xAABBCCDDu;
+    child.descendants3C = &wrappedDescendant;
     MissionFleetShipMapRouteOffset offset{35, 50};
     MissionFleetShipMapRouteChildState state{};
     state.phase609C = 0;
@@ -157,11 +157,17 @@ void checkNullRecordsUnknownPhaseAndWrappedCoordinates() {
     state.selection23C.flag34 = 0;
     child.position4 = 10;
     child.position8 = 10;
+    // Reset after the earlier setup-phase route updates so this assertion
+    // isolates the wrapped delta supplied by the final call.
+    wrappedDescendant.position4 = 0xFFFFFFFCu;
+    wrappedDescendant.position8 = 0x20u;
     fixture.events.clear();
     missionFleetUpdateShipMapRouteChild(state, hooks, &fixture);
     assert(state.phase609C == 0x12340000u);
     assert(child.position4 == 19 && child.position8 == 0xFFFFFFD3u);
     assert(fixture.events.empty());
+    assert(wrappedDescendant.position4 == 5 &&
+           wrappedDescendant.position8 == 0xFFFFFFE9u);
 }
 }
 
