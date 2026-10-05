@@ -25,6 +25,11 @@ with the object at `+0x50` as the receiver. The callback takes three explicit
 arguments and returns with `ret 0x0C`. The source reconstruction preserves the
 captured x86 instruction stream and verified call relocations.
 
+The behavioral C++ port of this callback and its composition with the live
+scene wrapper is documented in
+[`current-core-render-node-draw.md`](current-core-render-node-draw.md). The
+sprite target `0x587BA830` remains an injected renderer boundary in that model.
+
 ## Uncertainties
 
 The list walk compares the DWORD at each cursor with `0x10000` to recognize

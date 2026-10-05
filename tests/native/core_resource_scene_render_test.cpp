@@ -40,12 +40,12 @@ struct ChildData {
 };
 
 void drawChild(MissionFleetCoreResourceSceneChild& child,
-               MissionFleetCoreRenderContext& renderContext,
+               MissionFleetCoreRenderContext* renderContext,
                MissionFleetCoreRenderRect* clipRect,
                MissionFleetCoreRenderOrigin* origin,
                void* userData) {
     auto& data = *static_cast<ChildData*>(userData);
-    require(&renderContext == data.log->expectedContext);
+    require(renderContext == data.log->expectedContext);
     require(clipRect == data.log->expectedClip);
     require(origin == data.log->expectedOrigin);
     require(child.userData == userData);

@@ -7,7 +7,7 @@ namespace {
 constexpr std::uint32_t kMinimumValidChildVtable = 0x00010000u;
 
 void drawChild(MissionFleetCoreResourceSceneChild& child,
-               MissionFleetCoreRenderContext& renderContext,
+               MissionFleetCoreRenderContext* renderContext,
                MissionFleetCoreRenderRect* clipRect,
                MissionFleetCoreRenderOrigin* origin) {
     if (child.drawSlot14 == nullptr) {
@@ -77,7 +77,7 @@ missionFleetRenderCoreResourceSceneChildren(
             break;
         }
 
-        drawChild(*child, *renderContext, clipRect, origin);
+        drawChild(*child, renderContext, clipRect, origin);
         dispatched = true;
 
         // The mapped code obtains child +0x48 after the virtual call. Keep
@@ -91,7 +91,7 @@ missionFleetRenderCoreResourceSceneChildren(
             break;
         }
 
-        drawChild(*child, *renderContext, clipRect, origin);
+        drawChild(*child, renderContext, clipRect, origin);
         dispatched = true;
         child = child->next48;
     }

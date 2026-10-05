@@ -20,7 +20,7 @@ struct MissionFleetCoreResourceSceneChild;
 
 using MissionFleetCoreResourceSceneChildDraw = void (*)(
     MissionFleetCoreResourceSceneChild& child,
-    MissionFleetCoreRenderContext& renderContext,
+    MissionFleetCoreRenderContext* renderContext,
     MissionFleetCoreRenderRect* clipRect,
     MissionFleetCoreRenderOrigin* origin,
     void* userData);
