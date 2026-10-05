@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ShipMapVisualNodeMode.h"
+#include "ShipMapVisualNodeUpdateDispatch.h"
 
 #include <cstdint>
 
@@ -8,8 +9,7 @@ struct MissionFleetShipMapVisualSecondaryUpdateHooks {
     // FUN_58788F90 samples the MSVCR90 rand() thunk after each frame advance.
     std::int32_t (*randValue)(void* context) = nullptr;
     // The mapped parent walker invokes each circular child through vtable +0x0C.
-    void (*updateChild)(MissionFleetShipMapVisualNode& child,
-                        void* context) = nullptr;
+    MissionFleetShipMapVisualChildUpdate updateChild = nullptr;
     // FUN_58788F90 ends expiration by calling the receiver's vtable +0x00
     // with argument 1 (the deleting-destructor path).
     void (*deleteSelf)(MissionFleetShipMapVisualNode& receiver,

@@ -1,4 +1,4 @@
-"""Build and run tests for the FUN_58788F90 semantic update model."""
+"""Build and test the FUN_58903040 child-update dispatch semantic model."""
 
 import os
 from pathlib import Path
@@ -13,12 +13,12 @@ def main():
     compiler = shutil.which("clang++")
     if compiler is None:
         raise FileNotFoundError("clang++ is required")
-    output_dir = ROOT / "build" / "ship-map-visual-secondary-update"
+    output_dir = ROOT / "build" / "ship-map-visual-node-update-dispatch"
     output_dir.mkdir(parents=True, exist_ok=True)
     executable = output_dir / (
-        "ship_map_visual_secondary_update_test.exe"
+        "ship_map_visual_node_update_dispatch_test.exe"
         if os.name == "nt"
-        else "ship_map_visual_secondary_update_test"
+        else "ship_map_visual_node_update_dispatch_test"
     )
     environment = os.environ.copy()
     for name in ("TMP", "TEMP", "TMPDIR"):
@@ -29,9 +29,7 @@ def main():
             "-std=c++17",
             "-O2",
             str(ROOT / "src/client-current/semantic/ShipMapVisualNodeUpdateDispatch.cpp"),
-            str(ROOT / "src/client-current/semantic/ShipMapVisualSecondaryUpdate.cpp"),
-            str(ROOT / "src/client-current/semantic/ShipMapVisualSecondaryDestruction.cpp"),
-            str(ROOT / "tests/native/ship_map_visual_secondary_update_test.cpp"),
+            str(ROOT / "tests/native/ship_map_visual_node_update_dispatch_test.cpp"),
             "-o",
             str(executable),
         ],
@@ -40,7 +38,7 @@ def main():
         env=environment,
     )
     subprocess.run([str(executable)], check=True, cwd=ROOT, env=environment)
-    print("ship-map visual secondary-update tests passed")
+    print("ship-map visual node-update dispatch tests passed")
 
 
 if __name__ == "__main__":

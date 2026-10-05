@@ -1,5 +1,7 @@
 #include "ShipMapVisualSecondaryUpdate.h"
 
+#include "ShipMapVisualNodeUpdateDispatch.h"
+
 #include <cstring>
 #include <limits>
 #include <stdexcept>
@@ -105,26 +107,6 @@ void unlinkLinear(MissionFleetShipMapVisualNode& node) {
     node.next48 = nullptr;
 }
 
-void updateCircularChildren(
-    MissionFleetShipMapVisualNode& receiver,
-    const MissionFleetShipMapVisualSecondaryUpdateHooks& hooks,
-    void* context) {
-    auto* const head = receiver.firstChild3C;
-    auto* child = head;
-    while (child != nullptr) {
-        // FUN_58903040 captures the next link before its virtual call.
-        auto* const next = child->next38;
-        if (hooks.updateChild == nullptr) {
-            throw std::logic_error(
-                "FUN_58788F90 requires a child vtable +0x0C hook");
-        }
-        hooks.updateChild(*child, context);
-        if (next == head || next == nullptr) {
-            return;
-        }
-        child = next;
-    }
-}
 }
 
 MissionFleetShipMapVisualSecondaryUpdateResult
@@ -173,6 +155,7 @@ missionFleetUpdateShipMapVisualSecondary(
     }
 
     addY(receiver, static_cast<std::uint32_t>(receiver.value60));
-    updateCircularChildren(receiver, hooks, context);
+    (void)missionFleetDispatchShipMapVisualNodeUpdates(
+        receiver, hooks.updateChild, context);
     return MissionFleetShipMapVisualSecondaryUpdateResult::Updated;
 }

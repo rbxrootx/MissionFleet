@@ -38,6 +38,13 @@ target remains unresolved. Arbitrary child vtable bodies, the outer scheduler,
 and rendered output are still outside this model. See the
 [`secondary destruction note`](current-main-ship-map-visual-secondary-destruction.md).
 
+Its child-update walk shares the tested semantic traversal used for the owner
+dispatcher `FUN_58903040`, preserving the captured-next-before-callback order.
+The two original functions have separate loops; this is model-level reuse and
+does not imply a direct native call edge. Run
+`rtk python tools/verify_ship_map_visual_node_update_dispatch.py` alongside the
+secondary updater test to exercise both owner dispatch and expiry/update flow.
+
 The function's indexed 172-byte extent is listed in
 [`client-functions.tsv`](../config/NF2_2026/client-functions.tsv), and its
 field accesses and branches, including the 32-bit multiply/subtract and
