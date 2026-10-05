@@ -310597,6 +310597,81 @@
         "behavior": "The Ghidra body clears 32 DWORD entries at receiver offsets +0x17C, +0x240, and +0x2C0 plus the eight-DWORD block at +0x60DC, processes map-derived records in bounded loops, calls the observed 0x587B* helpers, and stores a 0x74-byte helper result at +0x23C. The mapped frame restore and ret 8 after the Ghidra extent make the callable body 2,184 bytes; 40 mapped operands are audited.",
         "uncertainty": "The receiver field types, record and table schemas, coordinate units, helper contracts, and resulting visual behavior remain unresolved. Static constructor evidence does not establish runtime execution or rendered output."
       }
+    },
+    {
+      "address": "587B2A40",
+      "name": "FUN_587b2a40",
+      "size": 592,
+      "symbol": "_FUN_587b2a40",
+      "source": "src/client-current/Main/FUN_587b2a40.cpp",
+      "source_sha256": "0f74c07f67dfa0351cef689622d40d6efde5a813d5a633d59f8569d0becaddb4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 308,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "58854230",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 385,
+          "target_address": "587B1850",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 422,
+          "target_address": "587B08C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 429,
+          "target_address": "587B1B70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 545,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 551,
+          "target_address": "58778D00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B2A40 / type-0x05 record-backed child-state initializer",
+        "called_by": "Verified FUN_587A6220 calls it in its observed type-0x05 record path after preparing the child; verified FUN_588D84D0 calls it at 0x588D88B4 while populating map-derived child state, then invokes virtual slot +0x30. Both pass a 0x2D-DWORD record pointer, an entry index, and a word read from +0x350.",
+        "behavior": "Copies 0x2D DWORDs to receiver +0x18C and stores the entry index at +0x138. It sets +0x25C from the copied record's observed leading byte, byte +1, 16-bit field +2, and a threshold field at source +0xA0. It resolves a 0x40-byte-stride entry from receiver +0x150 using the copied 16-bit field at +0x190, stores that pointer under child state +0x3D8+0x54, and conditionally copies six DWORDs from entry offsets +0x18..+0x2C to child offsets +0x0C..+0x20. It sets bit 0x8000 in the child-state word +0x24; derives two XOR-0xAAAAAAAA encoded values at receiver +0x154/+0x158, with a global-context check and FUN_58854230 result selecting the latter source; calls FUN_587B1850, FUN_587B08C0, and FUN_587B1B70 after deriving fields from copied offsets +0x224..+0x22C; stores the caller word at +0x24C; assigns +0x254 categories 0..3 across observed 500, 1000, and 1500 thresholds; writes 0x15 at +0x258 and zero at +0x243E4; then stores a lookup result's 16-bit field at +0x9E into +0x243E8, or zero when lookup FUN_58778D00 returns null. The mapped function is exactly 592 bytes, ends in ret 0xC, and has 8 mapped operand targets.",
+        "uncertainty": "The copied record schema, all field names and units, meaning of discriminator 0x05 and the tested IDs, global-context semantics, helper contracts, ownership, and runtime visual effect are unknown. This is an exact instruction reconstruction with Ghidra and caller evidence, not a portable behavioral model; no emulator runtime test was performed."
+      }
     }
   ]
 }

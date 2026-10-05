@@ -18,6 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
+    "587B2A40",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -491,6 +492,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5890BF40", "5890BF70", "5890BFC0", "5890BFF0",
     "5890E400", "5890E0B0",
     "5875F650", "5875F6B0",
+    "587B2A40",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -524,6 +526,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B2A40": {
+        "name_in_analysis": "FUN_587B2A40 / type-0x05 record-backed child-state initializer",
+        "called_by": "Verified FUN_587A6220 calls it in its observed type-0x05 record path after preparing the child; verified FUN_588D84D0 calls it at 0x588D88B4 while populating map-derived child state, then invokes virtual slot +0x30. Both pass a 0x2D-DWORD record pointer, an entry index, and a word read from +0x350.",
+        "behavior": "Copies 0x2D DWORDs to receiver +0x18C and stores the entry index at +0x138. It sets +0x25C from the copied record's observed leading byte, byte +1, 16-bit field +2, and a threshold field at source +0xA0. It resolves a 0x40-byte-stride entry from receiver +0x150 using the copied 16-bit field at +0x190, stores that pointer under child state +0x3D8+0x54, and conditionally copies six DWORDs from entry offsets +0x18..+0x2C to child offsets +0x0C..+0x20. It sets bit 0x8000 in the child-state word +0x24; derives two XOR-0xAAAAAAAA encoded values at receiver +0x154/+0x158, with a global-context check and FUN_58854230 result selecting the latter source; calls FUN_587B1850, FUN_587B08C0, and FUN_587B1B70 after deriving fields from copied offsets +0x224..+0x22C; stores the caller word at +0x24C; assigns +0x254 categories 0..3 across observed 500, 1000, and 1500 thresholds; writes 0x15 at +0x258 and zero at +0x243E4; then stores a lookup result's 16-bit field at +0x9E into +0x243E8, or zero when lookup FUN_58778D00 returns null. The mapped function is exactly 592 bytes, ends in ret 0xC, and has 8 mapped operand targets.",
+        "uncertainty": "The copied record schema, all field names and units, meaning of discriminator 0x05 and the tested IDs, global-context semantics, helper contracts, ownership, and runtime visual effect are unknown. This is an exact instruction reconstruction with Ghidra and caller evidence, not a portable behavioral model; no emulator runtime test was performed.",
+    },
     "58848680": {
         "name_in_analysis": "FUN_58848680 / ID-panel second linked-chain release",
         "called_by": "The CPannelCommunicatorIDPannel cleanup routine FUN_58849540 calls this helper immediately after the already matched parallel helper FUN_58848610.",
