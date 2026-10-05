@@ -56,9 +56,10 @@ class layout. The `0x58` candidate constructor now has a direct semantic model
 for its observed fields, resource copy, and two sorted owner lists; its evidence
 and limits are recorded in
 [`the candidate-construction note`](current-main-ship-map-visual-candidate-construction.md).
-The `0x68` secondary constructor, effect rendering, and route rendering remain
-hooks because their full source object layouts or visible renderer behavior are
-not recovered. The 32-entry array's semantic element type, meaning of the scene
+Effect rendering and route rendering remain hooks because their visible
+renderer behavior is not recovered. The `0x68` secondary constructor now has a
+normal-path semantic model, while its allocator remains an adapter to host
+storage. The 32-entry array's semantic element type, meaning of the scene
 modes, and player-visible effect names remain unknown. The `srand()` seed
 source is also unresolved, so deterministic tests supply their own seed/RNG
 callback. `FUN_588D65C0` receives `0x400000` as its second argument at both
@@ -145,10 +146,12 @@ It uses the resolved MSVCR90 `rand()` sequence and the observed
 `operator new` call target to model the scan throttle, per-entry gate,
 allocation request sizes and call order, jitter, projection, record selection,
 and post-scan object sequence. Candidate construction is modeled directly from
-`FUN_58907C80`, `FUN_58734A30`, and `FUN_589031A0`; allocation and the
-`FUN_58789040` secondary constructor remain hooks. The recursive state helper
-is modeled directly, while the two rendering helpers remain hooks because
-their visible output is not recovered.
+`FUN_58907C80`, `FUN_58734A30`, and `FUN_589031A0`; the secondary constructor
+`FUN_58789040` also has a normal-path model. Allocation uses adapters for the
+native storage requests. The recursive state helper is modeled directly, and
+the `FUN_589038C0` sprite-bundle traversal now has a focused semantic model;
+the leaf rendering backend and route/effect output remain hooks. See
+[`the sprite-bundle render note`](current-main-ship-map-visual-sprite-bundle-render.md).
 Run
 `rtk python tools/verify_ship_map_visual_state_child_scan.py` for the native
 tests. All semantic models remain test harnesses and are not linked into a full

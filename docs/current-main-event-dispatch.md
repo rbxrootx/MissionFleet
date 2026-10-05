@@ -269,13 +269,15 @@ five receiver fields. Ghidra lists three direct-call sites, including the
 relationship are still uncertain. See
 [`FUN_58909010.cpp`](../src/client-current/Main/FUN_58909010.cpp).
 The renderer at the `CButtonSpriteBundleScreen` vtable's `+0x14` slot,
-`FUN_589038C0`, now matches its 189-byte Ghidra range with three relocation
-operands checked. Ghidra references the function from `0x589A2A28`, four bytes
-per slot after the vtable address `0x589A2A14` installed by `FUN_58909010`.
-Its body walks child controls and calls their matching `+0x14` methods; it
-also computes a point from object fields and calls `FUN_5873A5D0`. This ties
-the slot to visual traversal, though the coordinate/flag meanings and draw
-helper contract remain uncertain, and no runtime frame was captured. See
+`FUN_589038C0`, matches its 189-byte Ghidra range with three relocation
+operands checked. The same function is present at `+0x14` in the
+`0x58996B40` vtable installed by `FUN_58789040`. Its body dispatches the
+negative-key child prefix, computes a point from object fields, calls
+`FUN_5873A5D0`, then dispatches the remaining children. The readable semantic
+model and argument-level tests are in
+[`the ship-map sprite-bundle render note`](current-main-ship-map-visual-sprite-bundle-render.md).
+Coordinate/flag meanings and the renderer backend remain uncertain, and no
+runtime frame was captured. See
 [`FUN_589038c0.cpp`](../src/client-current/Main/FUN_589038c0.cpp).
 The next two drawing helpers now match their complete Ghidra bodies:
 `FUN_5873A5D0` (155 bytes) selects a frame using the supplied value, interval,
