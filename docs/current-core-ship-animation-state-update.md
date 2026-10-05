@@ -91,3 +91,42 @@ All seven functions match the capture at 100% with the repository's VC6
 byte-emission toolchain and objdiff 3.8.0. They total 1,690 bytes, and all 46
 captured operand targets are checked. Byte identity validates the emitted
 functions, not the remaining field names or live behavior.
+
+## C++ state port
+
+[`CoreShipAnimationStateUpdate.cpp`](../src/client-current/semantic/CoreShipAnimationStateUpdate.cpp)
+ports the state writes in `0x58534D30` and `0x58534E80`, plus the update
+callback `0x58534B00`. It preserves bit-2 gating, one signed counter step per
+active update, forward and reverse endpoint comparisons, terminal state values
+1 and 0, and the child-update walk after state processing. The child cursor's
+next link is captured before its virtual slot `+0x0C` call, matching the
+instruction order. Counter arithmetic uses x86 DWORD wrap.
+
+Unknown virtual slot `+0x08` receivers and the fixed coordinate helper
+`0x5856DBC0` are injected callbacks; their object types and downstream effects
+remain unresolved. The selector at `0x58962090` is supplied by the caller.
+The circular child list is assumed well formed, as in the original routine.
+The update cadence remains unknown, so this port treats the counter as a
+discrete update value and makes no wall-clock claim.
+
+Run the native state and render integration check:
+
+```text
+python tools/verify_core_ship_animation_state_update.py
+```
+
+It pins the mapped Core image and verifies the derived node's update and draw
+vtable targets. Native cases cover reset/start direction, forward and reverse
+steps and endpoints, optional callback order and coordinates, flag gating,
+zero direction, circular child traversal and sentinel handling, x86 counter
+wrap, and the updated counter selecting actual RGB16 frames in the framebuffer.
+The three original state functions and their caller/helpers remain checked
+against the mapped image with:
+
+```text
+python tools/verify_client_matches.py --config config/NF2_2026/core-verifications.json --only 58534900 --only 58534B00 --only 58534D30 --only 58534E80 --only 5852D160 --only 584B5140 --only 584C9DE0 --only 58495610 --only 5856DBC0
+```
+
+This validates the semantic model against the pinned instructions and a
+synthetic framebuffer path. It does not capture the live client's callback
+cadence or rendered animation.
