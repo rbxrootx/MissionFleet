@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ShipMapVisualNodeMode.h"
+
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -12,7 +14,7 @@ struct MissionFleetShipMapVisualCandidateEntry {
 };
 
 struct MissionFleetShipMapVisualCandidateRef {
-    void* object = nullptr;
+    MissionFleetShipMapVisualNode* object = nullptr;
     std::uint32_t value04 = 0;
     std::uint32_t value08 = 0;
     std::uint16_t word26 = 0;
@@ -86,10 +88,6 @@ struct MissionFleetShipMapVisualStateChildScanHooks {
         const void* constructionOwner, const std::uint8_t* selectedResourceRecord,
         std::uint32_t x04, std::uint32_t y08, std::uint16_t variant,
         void* context) = nullptr;
-    // FUN_58902D20(candidate, 0x102) runs after every passing entry gate,
-    // including allocation failure where candidate is null.
-    void (*finishCandidate58902D20)(void* candidate, std::uint32_t argument,
-                                    void* context) = nullptr;
     // FUN_587B7400 receives this target with projected x/y and the observed
     // global effect color. The renderer's visual output remains external.
     void (*drawEffect587B7400)(void* target, std::uint32_t x,
@@ -97,7 +95,7 @@ struct MissionFleetShipMapVisualStateChildScanHooks {
                                void* context) = nullptr;
     // FUN_58789040 constructs the 0x68-byte post-scan object. The model passes
     // the rand()%6 value consumed by its constructor.
-    void* (*initializeSecondary58789040)(
+    MissionFleetShipMapVisualNode* (*initializeSecondary58789040)(
         void* allocated, const void* constructionOwner,
         const std::uint8_t* selectedResourceRecord, std::uint32_t x04,
         std::uint32_t y08, std::uint16_t word26,

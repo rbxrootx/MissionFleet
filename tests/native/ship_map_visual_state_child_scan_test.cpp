@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cstdint>
+#include <new>
 #include <utility>
 #include <vector>
 
@@ -47,13 +48,13 @@ struct Fixture {
     std::vector<char> order;
     std::vector<std::int32_t> randomValues;
     std::vector<void*> allocations;
-    std::vector<void*> candidateObjects;
+    std::array<MissionFleetShipMapVisualNode, 3> candidateNodes{};
+    MissionFleetShipMapVisualNode secondaryNode{};
     std::vector<CandidateCall> candidateCalls;
     std::vector<SecondaryCall> secondaryCalls;
     std::vector<DrawCall> drawCalls;
     std::vector<RouteCall> routeCalls;
     std::vector<std::pair<std::uint32_t, void*>> allocationCalls;
-    std::vector<std::pair<void*, std::uint32_t>> stateCalls;
     std::size_t randomCall = 0;
     std::size_t allocationCall = 0;
     std::size_t candidateCall = 0;
@@ -85,17 +86,11 @@ MissionFleetShipMapVisualCandidateRef initializeCandidate(
     const void* owner, const std::uint8_t* resource, std::uint32_t x,
     std::uint32_t y, std::uint16_t variant, void* context) {
     auto& fixture = *static_cast<Fixture*>(context);
-    void* object = fixture.candidateObjects.at(fixture.candidateCall++);
+    auto* object = &fixture.candidateNodes.at(fixture.candidateCall++);
     fixture.candidateCalls.push_back(
         {allocated, owner, resource, x, y, variant, {object, x, y, variant}});
     fixture.order.push_back('I');
     return {object, x, y, variant};
-}
-
-void finishCandidate(void* candidate, std::uint32_t argument, void* context) {
-    auto& fixture = *static_cast<Fixture*>(context);
-    fixture.stateCalls.emplace_back(candidate, argument);
-    fixture.order.push_back(argument == 0x102 ? 'F' : 'f');
 }
 
 void drawEffect(void* target, std::uint32_t x, std::uint32_t y,
@@ -105,7 +100,7 @@ void drawEffect(void* target, std::uint32_t x, std::uint32_t y,
     fixture.order.push_back('D');
 }
 
-void* initializeSecondary(void* allocated, const void* owner,
+MissionFleetShipMapVisualNode* initializeSecondary(void* allocated, const void* owner,
                           const std::uint8_t* resource, std::uint32_t x,
                           std::uint32_t y, std::uint16_t word26,
                           std::uint32_t randomRemainder6, void* context) {
@@ -113,7 +108,7 @@ void* initializeSecondary(void* allocated, const void* owner,
     fixture.secondaryCalls.push_back(
         {allocated, owner, resource, x, y, word26, randomRemainder6});
     fixture.order.push_back('S');
-    return reinterpret_cast<void*>(0x4040u);
+    return &fixture.secondaryNode;
 }
 
 void drawRoute(MissionFleetShipMapVisualStateChildScan&, std::uint32_t x,
@@ -127,8 +122,8 @@ void drawRoute(MissionFleetShipMapVisualStateChildScan&, std::uint32_t x,
 }
 
 const MissionFleetShipMapVisualStateChildScanHooks hooks{
-    notify, randValue, allocate, initializeCandidate, finishCandidate,
-    drawEffect, initializeSecondary, drawRoute};
+    notify, randValue, allocate, initializeCandidate, drawEffect,
+    initializeSecondary, drawRoute};
 
 void checkMsvc90RandSequence() {
     MissionFleetMsvc90RandState state{};
@@ -206,9 +201,17 @@ void checkCandidateScanAndPostScanConstruction() {
                            reinterpret_cast<void*>(0xB0u),
                            reinterpret_cast<void*>(0xC0u),
                            reinterpret_cast<void*>(0xD0u)};
-    fixture.candidateObjects = {reinterpret_cast<void*>(0x1010u),
-                                reinterpret_cast<void*>(0x2020u),
-                                reinterpret_cast<void*>(0x3030u)};
+    MissionFleetShipMapVisualNode flaggedChild{};
+    MissionFleetShipMapVisualNode unflaggedSibling{};
+    MissionFleetShipMapVisualNode nestedFlaggedChild{};
+    fixture.candidateNodes[0].firstChild3C = &flaggedChild;
+    flaggedChild.flags24 = 0x8000u;
+    flaggedChild.next38 = &unflaggedSibling;
+    flaggedChild.firstChild3C = &nestedFlaggedChild;
+    nestedFlaggedChild.flags24 = 0x8000u;
+    nestedFlaggedChild.next38 = &nestedFlaggedChild;
+    unflaggedSibling.mode2C = 0xDEADBEEFu;
+    unflaggedSibling.next38 = &flaggedChild;
 
     assert(missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture) ==
            MissionFleetShipMapVisualStateChildScanResult::ScanCompleted);
@@ -243,15 +246,12 @@ void checkCandidateScanAndPostScanConstruction() {
     assert(secondary.x == 305 && secondary.y == 401 && secondary.word26 == 90);
     assert(secondary.randomRemainder6 == 5);
 
-    assert(fixture.stateCalls.size() == 4);
-    assert(fixture.stateCalls[0] == std::make_pair(
-        reinterpret_cast<void*>(0x1010u), 0x102u));
-    assert(fixture.stateCalls[1] == std::make_pair(
-        reinterpret_cast<void*>(0x2020u), 0x102u));
-    assert(fixture.stateCalls[2] == std::make_pair(
-        reinterpret_cast<void*>(0x3030u), 0x102u));
-    assert(fixture.stateCalls[3] == std::make_pair(
-        reinterpret_cast<void*>(0x4040u), 0xFFFFFEFFu));
+    assert(fixture.candidateNodes[0].mode2C == 0x102u);
+    assert(flaggedChild.mode2C == 0x102u && nestedFlaggedChild.mode2C == 0x102u);
+    assert(unflaggedSibling.mode2C == 0xDEADBEEFu);
+    assert(fixture.candidateNodes[1].mode2C == 0x102u);
+    assert(fixture.candidateNodes[2].mode2C == 0x102u);
+    assert(fixture.secondaryNode.mode2C == 0xFFFFFEFFu);
 }
 
 void checkOptionalEffectsProjectionAndRouteArguments() {
@@ -277,8 +277,6 @@ void checkOptionalEffectsProjectionAndRouteArguments() {
     fixture.allocations = {reinterpret_cast<void*>(0xC0u),
                            reinterpret_cast<void*>(0xC1u),
                            reinterpret_cast<void*>(0xC2u)};
-    fixture.candidateObjects = {reinterpret_cast<void*>(0xC3u),
-                                reinterpret_cast<void*>(0xC4u)};
 
     assert(missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture) ==
            MissionFleetShipMapVisualStateChildScanResult::ScanCompleted);
@@ -313,15 +311,18 @@ void checkResourceTableRequiresMoreThanEighteenRecords() {
     Fixture fixture;
     fixture.randomValues = {1, 1, 0, 0};
     fixture.allocations = {reinterpret_cast<void*>(0xD0u)};
-    fixture.candidateObjects = {nullptr};
+    fixture.allocations = {reinterpret_cast<void*>(0xA0u),
+                           reinterpret_cast<void*>(0xA1u),
+                           reinterpret_cast<void*>(0xA2u)};
+    fixture.randomValues = {1, 1, 0, 0, 0, 0};
 
     (void)missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture);
-    assert(fixture.candidateCalls.size() == 1);
+    assert(fixture.candidateCalls.size() == 2);
     assert(fixture.candidateCalls[0].resource == nullptr);
-    assert(fixture.randomCall == 4); // no post-scan block without a result
+    assert(fixture.randomCall == 6);
 }
 
-void checkAllocationFailureStillRunsTheObservedFollowup() {
+void checkAllocationFailureMatchesThrowingOperatorNew() {
     MissionFleetShipMapVisualStateChildScan state{};
     state.state60B0 = 0x00040000u;
     state.gateValue60B4 = 1;
@@ -331,11 +332,31 @@ void checkAllocationFailureStillRunsTheObservedFollowup() {
     fixture.randomValues = {1, 1};
     fixture.allocations = {nullptr};
 
-    (void)missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture);
-    assert(fixture.stateCalls.size() == 1);
-    assert(fixture.stateCalls[0].first == nullptr &&
-           fixture.stateCalls[0].second == 0x102u);
+    bool threwBadAlloc = false;
+    try {
+        (void)missionFleetScanShipMapVisualStateChildren(state, hooks, &fixture);
+    } catch (const std::bad_alloc&) {
+        threwBadAlloc = true;
+    }
+    assert(threwBadAlloc);
     assert(fixture.randomCall == 2);
+}
+
+void checkModeUpdateTraversesNullTerminatedFlaggedChildren() {
+    MissionFleetShipMapVisualNode root{};
+    MissionFleetShipMapVisualNode flagged{};
+    MissionFleetShipMapVisualNode unflagged{};
+    root.firstChild3C = &flagged;
+    flagged.flags24 = 0x8000u;
+    flagged.next38 = &unflagged;
+    flagged.mode2C = 0x11111111u;
+    unflagged.next38 = nullptr;
+    unflagged.mode2C = 0x22222222u;
+
+    missionFleetSetShipMapVisualNodeMode(root, 0xFFFFFEFFu);
+    assert(root.mode2C == 0xFFFFFEFFu);
+    assert(flagged.mode2C == 0xFFFFFEFFu);
+    assert(unflagged.mode2C == 0x22222222u);
 }
 
 void checkCounterTransitionAndWord164Gate() {
@@ -370,6 +391,7 @@ int main() {
     checkCandidateScanAndPostScanConstruction();
     checkOptionalEffectsProjectionAndRouteArguments();
     checkResourceTableRequiresMoreThanEighteenRecords();
-    checkAllocationFailureStillRunsTheObservedFollowup();
+    checkAllocationFailureMatchesThrowingOperatorNew();
+    checkModeUpdateTraversesNullTerminatedFlaggedChildren();
     checkCounterTransitionAndWord164Gate();
 }

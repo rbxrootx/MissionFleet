@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ShipMapVisualNodeMode.h"
+
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -19,9 +21,7 @@ struct MissionFleetShipMapVisualResourceList {
     const MissionFleetShipMapVisualResourceRecord* records190 = nullptr;
 };
 
-struct MissionFleetShipMapVisualAnimationNode {
-    std::uint16_t flags24 = 0;
-};
+using MissionFleetShipMapVisualAnimationNode = MissionFleetShipMapVisualNode;
 
 struct MissionFleetShipMapVisualChild {
     const MissionFleetShipMapVisualResourceRecord* record54 = nullptr;
@@ -51,7 +51,7 @@ struct MissionFleetShipMapVisualStateSetup {
     MissionFleetShipMapVisualChild child1470{};
     MissionFleetShipMapVisualChild child178{};
 
-    void* child60FC = nullptr;
+    MissionFleetShipMapVisualNode* child60FC = nullptr;
     MissionFleetShipMapVisualAnimationNode* child12F4 = nullptr;
     MissionFleetShipMapVisualAnimationNode* child12F8 = nullptr;
     void* selectedReceiver58A247F8 = nullptr;
@@ -61,9 +61,6 @@ struct MissionFleetShipMapVisualStateSetupHooks {
     // FUN_588D9C40 is called with this receiver and argument 0 before setup.
     void (*refresh588D9C40)(MissionFleetShipMapVisualStateSetup& receiver,
                             std::uint32_t argument, void* context) = nullptr;
-    // FUN_58902D20 is called with child +0x60FC and argument 0x101.
-    MissionFleetShipMapVisualAnimationNode* (*lookup58902D20)(
-        void* child, std::uint32_t argument, void* context) = nullptr;
 };
 
 enum class MissionFleetShipMapVisualStateSetupResult {

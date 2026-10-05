@@ -92,11 +92,10 @@ MissionFleetShipMapVisualStateSetupResult missionFleetSetupShipMapVisualState(
         // In this branch the native code does not write child +0x178.
     }
 
-    MissionFleetShipMapVisualAnimationNode* animation101 = nullptr;
-    if (hooks.lookup58902D20 != nullptr) {
-        animation101 = hooks.lookup58902D20(state.child60FC, 0x101u, context);
+    if (state.child60FC != nullptr) {
+        missionFleetSetShipMapVisualNodeMode(*state.child60FC, 0x101u);
+        clearLowBit(state.child60FC);
     }
-    clearLowBit(animation101);
     if (state.selectedReceiver58A247F8 != &state) {
         clearLowNibble(state.child12F4);
     }

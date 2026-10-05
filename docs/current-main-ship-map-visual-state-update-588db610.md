@@ -36,8 +36,8 @@ this client.
 The same `operator new` export calls `malloc`, runs the configured new-handler
 path on failure, and throws if allocation still fails. The semantic harness
 keeps allocation as a hook to record native request sizes and call order; its
-null-allocation cases describe the observed conditional branches and are not
-the normal failure behavior of that throwing CRT export.
+null result raises `std::bad_alloc`, reflecting the mapped throwing allocator's
+outward failure behavior; its exact new-handler retry path remains external.
 
 The mapped helper bytes also identify `FUN_58907C80` as the constructor for
 the allocated candidate: it calls `FUN_58734A30`, installs vtable
@@ -49,10 +49,12 @@ projection arithmetic, counter transition, and observed helper arguments.
 For the optional effect path, the mapped arithmetic is
 `x = objectX - (((right-left)>>1)*1000)/scale - referenceX` and
 `y = (((bottom-top)>>1)*1000)/scale - objectY + referenceY`, retaining the
-x86 32-bit wrap, signed division, and arithmetic shift. Constructors, the
-recursive helper, effect rendering, and route rendering remain hooks because
-their full source object layouts or visible renderer behavior are not
-recovered. The 32-entry array's semantic element type, meaning of the scene
+x86 32-bit wrap, signed division, and arithmetic shift. The recursive helper
+now has a direct normal-path C++ model used by both scan and setup phases; its
+semantic node view retains observed offsets without claiming the original
+class layout. Candidate constructors, effect rendering, and route rendering
+remain hooks because their full source object layouts or visible renderer
+behavior are not recovered. The 32-entry array's semantic element type, meaning of the scene
 modes, and player-visible effect names remain unknown. The `srand()` seed
 source is also unresolved, so deterministic tests supply their own seed/RNG
 callback. `FUN_588D65C0` receives `0x400000` as its second argument at both
@@ -120,12 +122,13 @@ the `+0x60D8` and `+0x1470` frame values are the quotient times `0x32`; the
 pointer but leave the six copied fields as they were, matching the instruction
 path's conditional copies.
 
-The model then preserves the two observed callback boundaries for
-`FUN_58902D20(this+0x60FC, 0x101)` and clears only the observed low flag bits.
-Finally it zeros `+0x603C/+0x6040` and selects phase `0x100000` using the
+The model calls `FUN_58902D20(this+0x60FC, 0x101)` directly, then rereads the
+same child and clears only its low flag bit. The helper also recursively writes
+`0x101` to linked children selected by flag `0x8000`. Finally it zeros
+`+0x603C/+0x6040` and selects phase `0x100000` using the
 observed `AND 0xFF10FFFF / OR 0x00100000` sequence. Resource-list and child
-field names remain offset-based; the two helper contracts and the actual game
-meaning of each record field remain unknown. Inputs that would trap the native
+field names remain offset-based; the helper's mode and flag meanings, and the
+actual game meaning of each record field remain unknown. Inputs that would trap the native
 signed divide are reported as `InvalidSignedDivision`; valid client divisors
 are assumed for normal-path equivalence.
 
@@ -137,10 +140,13 @@ The `0x040000` child/effect phase has a tested readable model in
 It uses the resolved MSVCR90 `rand()` sequence and the observed
 `operator new` call target to model the scan throttle, per-entry gate,
 allocation request sizes and call order, jitter, projection, record selection,
-and post-scan object sequence. The allocator itself remains a hook; candidate
-constructors, the recursive state helper, and the two rendering helpers remain
-hooks where source object layouts or renderer behavior need further recovery.
+and post-scan object sequence. The allocator and candidate constructors remain
+hooks; the recursive state helper is modeled directly, while the two rendering
+helpers remain hooks because their visible output is not recovered.
 Run
 `rtk run python tools/verify_ship_map_visual_state_child_scan.py` for the native
 tests. All semantic models remain test harnesses and are not linked into a full
 client or tested on the emulator.
+
+The shared recursive mode setter is described in
+[`current-main-ship-map-visual-node-mode-58902d20.md`](current-main-ship-map-visual-node-mode-58902d20.md).

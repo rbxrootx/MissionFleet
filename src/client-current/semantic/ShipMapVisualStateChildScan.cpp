@@ -1,6 +1,8 @@
 #include "ShipMapVisualStateChildScan.h"
 
 #include <cstring>
+#include <new>
+#include <stdexcept>
 
 namespace {
 constexpr std::uint32_t kPhaseMask = 0x00FF0000u;
@@ -71,6 +73,27 @@ const void* effectTarget(const MissionFleetShipMapVisualStateChildScan& state,
 
 void selectSetupPhase(MissionFleetShipMapVisualStateChildScan& state) {
     state.state60B0 = (state.state60B0 & 0xFF08FFFFu) | kPhaseSetup;
+}
+
+void* allocateOrThrow(const MissionFleetShipMapVisualStateChildScanHooks& hooks,
+                      std::uint32_t bytes, void* context) {
+    if (hooks.operatorNew5897CC4E == nullptr) {
+        throw std::logic_error("ship-map scan requires the mapped allocator");
+    }
+    void* const allocation = hooks.operatorNew5897CC4E(bytes, context);
+    if (allocation == nullptr) {
+        // The resolved target is MSVCR90's throwing operator new(unsigned int).
+        throw std::bad_alloc();
+    }
+    return allocation;
+}
+
+void applyConstructedNodeMode(MissionFleetShipMapVisualNode* node,
+                              std::uint32_t mode) {
+    if (node == nullptr) {
+        throw std::logic_error("mapped ship-map constructor returned null");
+    }
+    missionFleetSetShipMapVisualNodeMode(*node, mode);
 }
 }
 
@@ -156,34 +179,30 @@ MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualState
             continue;
         }
 
-        void* allocated = hooks.operatorNew5897CC4E != nullptr
-                              ? hooks.operatorNew5897CC4E(0x58u, context)
-                              : nullptr;
-        MissionFleetShipMapVisualCandidateRef candidate{};
-        if (allocated != nullptr && hooks.initializeCandidate58907C80 != nullptr) {
-            const std::uint8_t* selectedResourceRecord =
-                lookupResourceRecord(state.resourceTable246F0,
-                                     state.resourceTableCount246F0, 0x12);
-
-            const std::int32_t yRandom = hooks.rand5897CC36 != nullptr
-                                             ? hooks.rand5897CC36(context)
-                                             : 0;
-            const std::int32_t xRandom = hooks.rand5897CC36 != nullptr
-                                             ? hooks.rand5897CC36(context)
-                                             : 0;
-            const std::uint32_t candidateY = jitteredCoordinate(entry->value08, yRandom);
-            const std::uint32_t candidateX = jitteredCoordinate(entry->value04, xRandom);
-            const std::uint16_t variant = static_cast<std::uint16_t>(
-                static_cast<std::uint16_t>(state.value42AC) + 100u);
-
-            candidate = hooks.initializeCandidate58907C80(
-                state, allocated, &state, selectedResourceRecord, candidateX, candidateY,
-                variant, context);
+        void* const allocated = allocateOrThrow(hooks, 0x58u, context);
+        if (hooks.initializeCandidate58907C80 == nullptr) {
+            throw std::logic_error("ship-map scan requires the mapped candidate constructor");
         }
 
-        if (hooks.finishCandidate58902D20 != nullptr) {
-            hooks.finishCandidate58902D20(candidate.object, 0x102u, context);
-        }
+        const std::uint8_t* selectedResourceRecord =
+            lookupResourceRecord(state.resourceTable246F0,
+                                 state.resourceTableCount246F0, 0x12);
+        const std::int32_t yRandom = hooks.rand5897CC36 != nullptr
+                                         ? hooks.rand5897CC36(context)
+                                         : 0;
+        const std::int32_t xRandom = hooks.rand5897CC36 != nullptr
+                                         ? hooks.rand5897CC36(context)
+                                         : 0;
+        const std::uint32_t candidateY = jitteredCoordinate(entry->value08, yRandom);
+        const std::uint32_t candidateX = jitteredCoordinate(entry->value04, xRandom);
+        const std::uint16_t variant = static_cast<std::uint16_t>(
+            static_cast<std::uint16_t>(state.value42AC) + 100u);
+        const MissionFleetShipMapVisualCandidateRef candidate =
+            hooks.initializeCandidate58907C80(
+                state, allocated, &state, selectedResourceRecord, candidateX,
+                candidateY, variant, context);
+        applyConstructedNodeMode(candidate.object, 0x102u);
+
         lastCandidate = candidate;
 
         if (state.drawCandidateEffects589C8EDC) {
@@ -209,52 +228,46 @@ MissionFleetShipMapVisualStateChildScanResult missionFleetScanShipMapVisualState
     }
 
     if (lastCandidate.object != nullptr && state.word164 == 0) {
-        void* allocatedCandidate = hooks.operatorNew5897CC4E != nullptr
-                                       ? hooks.operatorNew5897CC4E(0x58u, context)
-                                       : nullptr;
-        MissionFleetShipMapVisualCandidateRef extraCandidate{};
-        if (allocatedCandidate != nullptr &&
-            hooks.initializeCandidate58907C80 != nullptr) {
-            const std::int32_t resourceRandom = hooks.rand5897CC36 != nullptr
-                                                    ? hooks.rand5897CC36(context)
-                                                    : 0;
-            const std::uint32_t resourceIndex =
-                static_cast<std::uint32_t>(resourceRandom) & 3u;
-            const std::uint16_t variant = static_cast<std::uint16_t>(
-                lastCandidate.word26 + 1u);
-            extraCandidate = hooks.initializeCandidate58907C80(
+        void* const allocatedCandidate = allocateOrThrow(hooks, 0x58u, context);
+        if (hooks.initializeCandidate58907C80 == nullptr) {
+            throw std::logic_error("ship-map scan requires the mapped candidate constructor");
+        }
+
+        const std::int32_t resourceRandom = hooks.rand5897CC36 != nullptr
+                                                ? hooks.rand5897CC36(context)
+                                                : 0;
+        const std::uint32_t resourceIndex =
+            static_cast<std::uint32_t>(resourceRandom) & 3u;
+        const std::uint16_t variant = static_cast<std::uint16_t>(
+            lastCandidate.word26 + 1u);
+        const MissionFleetShipMapVisualCandidateRef extraCandidate =
+            hooks.initializeCandidate58907C80(
                 state, allocatedCandidate, state.globalRecord10524,
                 lookupResourceRecord(state.resourceTable246F4,
                                      state.resourceTableCount246F4,
                                      static_cast<std::int32_t>(resourceIndex)),
                 lastCandidate.value04, lastCandidate.value08, variant, context);
-        }
-        if (hooks.finishCandidate58902D20 != nullptr) {
-            hooks.finishCandidate58902D20(extraCandidate.object, 0x102u, context);
+        applyConstructedNodeMode(extraCandidate.object, 0x102u);
+
+        if (hooks.initializeSecondary58789040 == nullptr) {
+            throw std::logic_error("ship-map scan requires the mapped secondary constructor");
         }
 
-        void* allocatedSecondary = hooks.operatorNew5897CC4E != nullptr
-                                       ? hooks.operatorNew5897CC4E(0x68u, context)
-                                       : nullptr;
-        void* secondary = nullptr;
-        if (allocatedSecondary != nullptr &&
-            hooks.initializeSecondary58789040 != nullptr) {
-            const std::int32_t randomValue = hooks.rand5897CC36 != nullptr
-                                                 ? hooks.rand5897CC36(context)
-                                                 : 0;
-            const std::uint32_t randomRemainder6 =
-                static_cast<std::uint32_t>(randomValue % 6);
-            secondary = hooks.initializeSecondary58789040(
+        void* const allocatedSecondary = allocateOrThrow(hooks, 0x68u, context);
+        const std::int32_t randomValue = hooks.rand5897CC36 != nullptr
+                                             ? hooks.rand5897CC36(context)
+                                             : 0;
+        const std::uint32_t randomRemainder6 =
+            static_cast<std::uint32_t>(randomValue % 6);
+        MissionFleetShipMapVisualNode* const secondary =
+            hooks.initializeSecondary58789040(
                 allocatedSecondary, state.globalRecord10524,
                 lookupResourceRecord(state.resourceTable246F0,
                                      state.resourceTableCount246F0, 0x17),
                 lastCandidate.value04,
                 lastCandidate.value08 - 5u, lastCandidate.word26,
                 randomRemainder6, context);
-        }
-        if (hooks.finishCandidate58902D20 != nullptr) {
-            hooks.finishCandidate58902D20(secondary, 0xFFFFFEFFu, context);
-        }
+        applyConstructedNodeMode(secondary, 0xFFFFFEFFu);
 
         if (state.drawCandidateEffects589C8EDC) {
             const auto projected = missionFleetProjectShipMapVisualPosition(

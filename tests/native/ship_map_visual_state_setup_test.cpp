@@ -13,7 +13,6 @@ struct Event {
 
 struct Fixture {
     std::vector<Event> events;
-    MissionFleetShipMapVisualAnimationNode* lookupResult = nullptr;
 };
 
 void refresh(MissionFleetShipMapVisualStateSetup&, std::uint32_t argument,
@@ -21,15 +20,7 @@ void refresh(MissionFleetShipMapVisualStateSetup&, std::uint32_t argument,
     static_cast<Fixture*>(context)->events.push_back({'R', nullptr, argument});
 }
 
-MissionFleetShipMapVisualAnimationNode* lookup(void* child,
-                                               std::uint32_t argument,
-                                               void* context) {
-    auto& fixture = *static_cast<Fixture*>(context);
-    fixture.events.push_back({'L', child, argument});
-    return fixture.lookupResult;
-}
-
-const MissionFleetShipMapVisualStateSetupHooks hooks{refresh, lookup};
+const MissionFleetShipMapVisualStateSetupHooks hooks{refresh};
 
 void fillRecord(MissionFleetShipMapVisualResourceRecord& record,
                 std::uint32_t base) {
@@ -46,10 +37,15 @@ void checkIndexedResourceSetupAndFlagClears() {
 
     MissionFleetShipMapVisualAnimationNode routeNodes[4]{{0xFFFF}, {0x1235},
                                                           {0x8001}, {0xABCD}};
-    MissionFleetShipMapVisualAnimationNode node101{0xFFFF};
+    MissionFleetShipMapVisualAnimationNode node60FC{0xFFFF};
+    MissionFleetShipMapVisualAnimationNode flaggedChild{0x8001};
+    MissionFleetShipMapVisualAnimationNode unflaggedChild{0};
     MissionFleetShipMapVisualAnimationNode node12F4{0xFFFF};
     MissionFleetShipMapVisualAnimationNode node12F8{0xFFFF};
-    int child60FC{};
+    node60FC.firstChild3C = &flaggedChild;
+    flaggedChild.next38 = &unflaggedChild;
+    flaggedChild.mode2C = 0xAAAAAAAAu;
+    unflaggedChild.mode2C = 0xBBBBBBBBu;
 
     MissionFleetShipMapVisualStateSetup state{};
     state.state60B0 = 0x400800BBu;
@@ -63,7 +59,7 @@ void checkIndexedResourceSetupAndFlagClears() {
     state.child1470.frameValue50 = 998;
     state.child178.frameValue50 = 997;
     state.child178.copiedFields0CTo20[0] = 1234;
-    state.child60FC = &child60FC;
+    state.child60FC = &node60FC;
     state.nodes60DC[0] = &routeNodes[0];
     state.nodes60DC[1] = &routeNodes[1];
     state.child12F4 = &node12F4;
@@ -72,14 +68,11 @@ void checkIndexedResourceSetupAndFlagClears() {
     state.value6040 = 8;
 
     Fixture fixture;
-    fixture.lookupResult = &node101;
     const auto result = missionFleetSetupShipMapVisualState(state, hooks, &fixture);
 
     assert(result == MissionFleetShipMapVisualStateSetupResult::Applied);
-    assert(fixture.events.size() == 2);
+    assert(fixture.events.size() == 1);
     assert(fixture.events[0].kind == 'R' && fixture.events[0].argument == 0);
-    assert(fixture.events[1].kind == 'L' && fixture.events[1].pointer == &child60FC &&
-           fixture.events[1].argument == 0x101);
     assert(state.pageIndex6054 == 1);
     assert(state.child60D8.record54 == &firstRecords[3]);
     assert(state.child60D8.frameValue50 == 50);
@@ -90,7 +83,9 @@ void checkIndexedResourceSetupAndFlagClears() {
     assert(state.child178.frameValue50 == 997 &&
            state.child178.copiedFields0CTo20[0] == 1234);
     assert(routeNodes[0].flags24 == 0xFFFE && routeNodes[1].flags24 == 0x1234);
-    assert(node101.flags24 == 0xFFFE);
+    assert(node60FC.flags24 == 0xFFFE && node60FC.mode2C == 0x101u);
+    assert(flaggedChild.flags24 == 0x8001u && flaggedChild.mode2C == 0x101u);
+    assert(unflaggedChild.mode2C == 0xBBBBBBBBu);
     assert(node12F4.flags24 == 0xFFF0 && node12F8.flags24 == 0xFFF0);
     assert(state.value603C == 0 && state.value6040 == 0);
     assert(state.state60B0 == 0x401000BBu);

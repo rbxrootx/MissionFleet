@@ -22,6 +22,7 @@ def main():
         environment[name] = str(output_dir)
     subprocess.run([
         compiler, "-std=c++17", "-O2",
+        str(ROOT / "src/client-current/semantic/ShipMapVisualNodeMode.cpp"),
         str(ROOT / "src/client-current/semantic/ShipMapVisualStateSetup.cpp"),
         str(ROOT / "tests/native/ship_map_visual_state_setup_test.cpp"),
         "-o", str(executable),

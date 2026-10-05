@@ -1456,6 +1456,11 @@ C++ models for the scan controller, indexed resource setup, frame counters,
 callbacks, and state writes. The per-entry child/effect construction still
 uses evidence-bound hooks while the indirect targets remain unidentified. See the
 [phase model evidence](docs/current-main-ship-map-visual-state-update-588db610.md).
+The shared `FUN_58902D20` mode write and `0x8000`-gated recursion now has a
+direct semantic model used by both visual-state paths. The setup model also
+mutates the observed `+0x60FC` child instead of treating the helper as a
+pointer lookup. Candidate constructors and visible rendering remain open. See
+[the helper evidence](docs/current-main-ship-map-visual-node-mode-58902d20.md).
 
 The current screen hierarchy and child-render dispatcher add seven functions
 / 173 bytes; see the
