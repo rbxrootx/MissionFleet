@@ -337,6 +337,7 @@ ADDRESSES = (
     "588F7C00",
     "588F7D40",
     "588F7EF0",
+    "588F7FE0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -389,6 +390,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F7C00",
     "588F7D40",
     "588F7EF0",
+    "588F7FE0",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -699,6 +701,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F7D40": 30,
 }
 EVIDENCE = {
+    "588F7FE0": {
+        "name_in_analysis": "FUN_588F7FE0 / warehouse-item child-state method",
+        "called_by": "Ghidra finds no direct code callers. Data references place this method at slot +0x0C of the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x0C of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C; another reference at 0x589A21E0 belongs to a third table whose owner is unresolved.",
+        "behavior": "Ghidra confirms one contiguous 140-byte body [0x588F7FE0,0x588F806C), with complete instruction coverage. If receiver word +0x24 has bit 2 set, it walks the linked child list rooted at receiver +0x3C, calling each child's virtual slot +0x0C, and stops when it reaches the list head. When receiver byte +0x98 is not 1, it tests FUN_58731540(DAT_58A284C8+4): on success it dispatches child method +0x18 with mode 3 and the receiver counter at +0x9C, then increments that counter; otherwise a nonzero counter triggers mode 4 with value 0. The counter is then reset to zero. Literal instruction emission verifies the full body and audits both operand targets.",
+        "uncertainty": "The child-list roles, state-bit meanings, receiver counter semantics, gate helper, global state, third vtable owner, and concrete virtual dispatch sites remain unresolved. Exact bytes match the installed Main.dll capture, but runtime behavior has not been exercised in the emulator.",
+    },
     "588F7EF0": {
         "name_in_analysis": "FUN_588F7EF0 / warehouse-item virtual message and child-state handler",
         "called_by": "Ghidra finds no direct code callers. Data references place this method at slot +0x10 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x10 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C; another reference at 0x589A21E4 belongs to a third table whose owner is unresolved.",
