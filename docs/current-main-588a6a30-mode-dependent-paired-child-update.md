@@ -47,8 +47,9 @@ and [`0x587B9620` notes](current-main-587b9620-fixed-code-message-wrapper.md).
 
 The receiver and child types, state meaning, flag meaning, global roles,
 message-code meanings, virtual method contracts, and visible effect are not
-established by this function. `FUN_58807E80`'s direct checks at
-`FUN_588044A0` and `FUN_58805D90`, and the identified caller, remain unmatched.
-Ghidra did not recover a jump table at `0x588A6C06` and treated the indirect
-tail jump as a call in its pseudocode; the literal source retains the original
-instruction bytes. No emulator runtime test has been performed.
+established by this function. `FUN_58807E80` and its direct checks at
+`FUN_588044A0` and `FUN_58805D90` now match their observed mechanics; the
+identified caller remains unmatched. Ghidra did not recover a jump table at
+`0x588A6C06` and treated the indirect tail jump as a call in its pseudocode;
+the literal source retains the original instruction bytes. No emulator runtime
+test has been performed.

@@ -17,22 +17,26 @@ to reach that threshold.
 
 State 12 walks the linked chain rooted at `[0x58A247F8+0x0C]`, following each
 node's `+0x78` link. It counts nodes by whether byte `+0x354` is zero and
-requires at least ten in each group. State 6 calls `FUN_588044A0` with the
-initial `FUN_58789FB0` result and 16; states 13 through 16 use 14 as the
-second argument. Those states fail if `FUN_588044A0` returns zero.
+requires at least ten in each group. State 6 calls byte-matched
+`FUN_588044A0` with the initial `FUN_58789FB0` result and 16; states 13
+through 16 use 14 as the second argument. `FUN_588044A0` returns 1 when its
+first argument is greater than or equal to its second as an unsigned value;
+when it is smaller, the helper sends notification `0x1D6` and returns 0. The
+states 6 and 13 through 16 fail if this check returns zero.
 
-Passing state paths call `FUN_58805D90`; a nonzero result returns 1. If that
-check returns zero, the code sends notification `0x1D7` through matched
+Passing state paths call byte-matched `FUN_58805D90`. It walks the same root
+list and returns 0 if a visited record has both dwords `+0x6074` and `+0x608C`
+equal to zero; reaching the end, including an empty list, returns 1. If that
+check returns zero, the caller sends notification `0x1D7` through matched
 `FUN_5876BAF0` and `FUN_58764D30`, then returns 0. Failed threshold and list
 count checks send notification `0x1D6` through the same matched helpers and
 return 0. Other states return 0 directly.
 
 ## Unresolved details
 
-The meanings of state `+0x110`, the global fields, list-node fields, thresholds,
-notification codes, and helper return values are unknown. `FUN_587AEE40`,
-`FUN_588044A0`, and `FUN_58805D90` are still unmatched. The emitted instruction
-stream preserves the absolute switch-table bases `0x58808038` and `0x5880806C`
-at offsets `0x24` and `0x90`; the table contents lie outside this function
-extent and are not covered by this function's match record. No emulator
-runtime test has been performed.
+The domain meanings of state `+0x110`, the global fields, list-node fields,
+thresholds, and notification codes remain unknown. `FUN_587AEE40` remains
+unmatched. The emitted instruction stream preserves the absolute
+switch-table bases `0x58808038` and `0x5880806C` at offsets `0x24` and `0x90`;
+the table contents lie outside this function extent and are not covered by
+this function's match record. No emulator runtime test has been performed.
