@@ -209,7 +209,7 @@ ADDRESSES = (
     "588D8100",
     "588D8150",
     "58736080",
-    "58853570",
+    "58853570", "588536C0",
     "58909B00",
     "58793DA0",
     "587A5720",
@@ -347,6 +347,7 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "588536C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -6241,6 +6242,12 @@ EVIDENCE = {
         "called_by": "Called repeatedly from verified selector dispatcher FUN_587A75E0 with receiver pointers obtained from active child state.",
         "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
         "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed.",
+    },
+    "588536C0": {
+        "name_in_analysis": "FUN_588536c0 / child-state cleanup and reset helper",
+        "called_by": "Ghidra references and an independent mapped .text scan find exactly two direct calls, both from byte-matched functions: FUN_587FD890 at 0x587FE089 and FUN_58857020 at 0x5885703A. The first call follows a nonzero FUN_588D66E0 guard and clears bit 2 in the active child's +0x24 word; it loads ECX from 0x58A245C4. The second is the first helper call after FUN_58857020 saves its incoming ECX receiver. Neither call has stack arguments.",
+        "behavior": "Ghidra assigns 414 body bytes to three ranges: [0x588536C0,0x588537A9), [0x588537B0,0x588537DD), and [0x588537E0,0x58853868). It initializes receiver fields +0x2C4 to -1 and +0x2CC/+0x2D0/+0x2D4 to zero, calls FUN_588804F0(2,6,0) using global object 0x58A245E4, then sets or clears the low four bits of child +0x24 words reached through receiver fields +0x2F4/+0x2F8 according to that result. It clears fields on the object at +0x2B8 and on a 32-pointer array at +0x108, zeros 0x80 bytes at +0x1A8, then iterates four child pairs at receiver offsets +0x7C/+0x80, +0x84/+0x88, +0x8C/+0x90, and +0x94/+0x98. The loop clears observed fields and calls helpers including each child's virtual slot at vtable +0x20. It calls FUN_588587C0 and the mapped epilogue tail-jumps to FUN_5885EE90. The 10 bytes between Ghidra body ranges are alignment NOPs and are excluded from the match.",
+        "uncertainty": "The receiver, child and list types, field and flag meanings, the reset policy selected by FUN_588804F0, the virtual slot +0x20 contract, and the effects of unmatched callees FUN_587C7C80, FUN_5885C240, FUN_58863460 and FUN_5885EE90 remain unresolved. Ghidra renders the final transfer as call-and-return, while the mapped bytes show a tail JMP. No emulator runtime test was performed.",
     },
     "58853570": {
         "name_in_analysis": "FUN_58853570 / paired child-state activation helper",

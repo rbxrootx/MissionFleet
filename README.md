@@ -9,8 +9,10 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,450 matches cover 2,341,626 bytes (22.3646%) and are verified
+The current 7,451 matches cover 2,342,040 bytes (22.3686%) and are verified
 individually at 100.0% by objdiff.
+The current Main.dll child-state reset helper is documented in
+[its Ghidra-backed evidence](docs/current-main-588536c0-child-state-reset.md).
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are documented

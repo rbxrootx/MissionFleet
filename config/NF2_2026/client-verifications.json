@@ -318580,6 +318580,139 @@
         "behavior": "Ghidra confirms one contiguous six-byte body, [0x5897CECE, 0x5897CED4). The mapped bytes are `FF 25 90 C2 98 58`, an unconditional `jmp dword ptr [0x5898C290]`; the thunk leaves the caller's stack arguments intact. In this capture, the dword at alias slot 0x5898C290 is 0x59882E0C, equal to the mapped value in Main.dll's MSVCR90.dll!_wassert IAT entry at VA 0x58D69354 (RVA 0x639354). Thus the alias resolves to `_wassert` for the captured load. The only encoded operand is the absolute pointer-slot address at offset 2; objdiff verifies the six-byte stream exactly.",
         "uncertainty": "The alias slot is in Main.dll .rdata and is not itself an IAT slot; only its captured value matches the `_wassert` IAT value. The imported routine's implementation body and loaded module base are outside this Main-only capture. The 12 unmatched callers' higher-level assertion conditions have not been reconstructed, and no emulator runtime comparison was performed."
       }
+    },
+    {
+      "address": "588536C0",
+      "name": "FUN_588536c0",
+      "size": 414,
+      "symbol": "_FUN_588536c0",
+      "source": "src/client-current/Main/FUN_588536c0.cpp",
+      "source_sha256": "825ab964882861e9bb4b93a9a31fd65280c54e351af943cd3e2ee60180331816",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588536C0",
+          "size": 233,
+          "symbol": "_FUN_588536c0_segment_00",
+          "relocations": [
+            {
+              "offset": 44,
+              "target_address": "58A245E4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "588804F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "587C7C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 200,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588537B0",
+          "size": 45,
+          "symbol": "_FUN_588536c0_segment_01",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588537E0",
+          "size": 136,
+          "symbol": "_FUN_588536c0_segment_02",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "58857EC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58857EC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "5885C240",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58863460",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "588587C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "5885EE90",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588536c0 / child-state cleanup and reset helper",
+        "called_by": "Ghidra references and an independent mapped .text scan find exactly two direct calls, both from byte-matched functions: FUN_587FD890 at 0x587FE089 and FUN_58857020 at 0x5885703A. The first call follows a nonzero FUN_588D66E0 guard and clears bit 2 in the active child's +0x24 word; it loads ECX from 0x58A245C4. The second is the first helper call after FUN_58857020 saves its incoming ECX receiver. Neither call has stack arguments.",
+        "behavior": "Ghidra assigns 414 body bytes to three ranges: [0x588536C0,0x588537A9), [0x588537B0,0x588537DD), and [0x588537E0,0x58853868). It initializes receiver fields +0x2C4 to -1 and +0x2CC/+0x2D0/+0x2D4 to zero, calls FUN_588804F0(2,6,0) using global object 0x58A245E4, then sets or clears the low four bits of child +0x24 words reached through receiver fields +0x2F4/+0x2F8 according to that result. It clears fields on the object at +0x2B8 and on a 32-pointer array at +0x108, zeros 0x80 bytes at +0x1A8, then iterates four child pairs at receiver offsets +0x7C/+0x80, +0x84/+0x88, +0x8C/+0x90, and +0x94/+0x98. The loop clears observed fields and calls helpers including each child's virtual slot at vtable +0x20. It calls FUN_588587C0 and the mapped epilogue tail-jumps to FUN_5885EE90. The 10 bytes between Ghidra body ranges are alignment NOPs and are excluded from the match.",
+        "uncertainty": "The receiver, child and list types, field and flag meanings, the reset policy selected by FUN_588804F0, the virtual slot +0x20 contract, and the effects of unmatched callees FUN_587C7C80, FUN_5885C240, FUN_58863460 and FUN_5885EE90 remain unresolved. Ghidra renders the final transfer as call-and-return, while the mapped bytes show a tail JMP. No emulator runtime test was performed."
+      }
     }
   ]
 }

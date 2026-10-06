@@ -19,6 +19,8 @@ def main():
                         help="Ghidra function entry address (repeatable, hexadecimal)")
     parser.add_argument("--raw-extent", action="append", default=[],
                         help="emit a function's complete indexed byte extent literally when decoding is incomplete")
+    parser.add_argument("--segment", action="append", default=[], metavar="ADDRESS:SIZE",
+                        help="emit one exact Ghidra body segment for the sole --address; repeat in address order")
     args = parser.parse_args()
 
     rows = {row["address"].upper(): row for row in csv.DictReader(
@@ -31,6 +33,24 @@ def main():
     decoder.detail = True
 
     raw_extents = {f"{int(value, 16):08X}" for value in args.raw_extent}
+    segment_specs = []
+    if args.segment:
+        if len(args.address) != 1:
+            parser.error("--segment requires exactly one --address")
+        for value in args.segment:
+            try:
+                segment_address, segment_size = value.split(":", 1)
+                segment_specs.append((int(segment_address, 16), int(segment_size, 0)))
+            except (ValueError, TypeError):
+                parser.error(f"invalid --segment {value!r}; expected ADDRESS:SIZE")
+        previous_end = None
+        for segment_start, segment_size in segment_specs:
+            segment_end = segment_start + segment_size
+            if (segment_size <= 0 or segment_start < BASE
+                    or segment_end > BASE + len(image)
+                    or (previous_end is not None and segment_start < previous_end)):
+                parser.error("--segment ranges must be positive, ordered, non-overlapping, and inside Main.dll")
+            previous_end = segment_end
     seen = set()
     for supplied in args.address:
         address = f"{int(supplied, 16):08X}"
@@ -40,17 +60,87 @@ def main():
         row = rows[address]
         start = int(address, 16)
         size = int(row["size"])
-        code = image[start - BASE:start - BASE + size]
-        instructions = list(decoder.disasm(code, start))
-        fully_decoded = bool(instructions) and instructions[-1].address + instructions[-1].size == start + size
-        if not fully_decoded and address not in raw_extents:
-            raise ValueError(f"Ghidra extent is not fully decoded: {address}")
-
         source_name = row["name"]
         if source_name.startswith("`") and source_name.endswith("'"):
             source_name = source_name[1:-1]
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", source_name):
             raise ValueError(f"Function label is not a C identifier: {row['name']!r}")
+
+        if segment_specs:
+            if segment_specs[0][0] != start:
+                raise ValueError(f"First body segment must start at {address}")
+            if sum(segment_size for _, segment_size in segment_specs) != size:
+                raise ValueError(f"Segment byte total does not match indexed extent for {address}")
+            segments = []
+            lines = [
+                "// Instruction stream reconstructed from Ghidra body ranges and the pinned mapped Main.dll.",
+                f"// Ghidra body size: {size} bytes in {len(segment_specs)} discontiguous ranges.",
+                f"// Source symbol alias: {source_name}.",
+            ]
+            for index, (segment_start, segment_size) in enumerate(segment_specs):
+                segment_address = f"{segment_start:08X}"
+                segment_end = segment_start + segment_size
+                code = image[segment_start - BASE:segment_end - BASE]
+                instructions = list(decoder.disasm(code, segment_start))
+                fully_decoded = bool(instructions) and instructions[-1].address + instructions[-1].size == segment_end
+                if not fully_decoded:
+                    raise ValueError(f"Ghidra body segment is not fully decoded: {segment_address} +0x{segment_size:X}")
+                segment_name = f"{source_name}_segment_{index:02d}"
+                segment_relocations = []
+                lines.extend([
+                    "",
+                    f"// Ghidra body range 0x{segment_start:08X}..0x{segment_end:08X}; {segment_size} mapped bytes.",
+                    f'extern "C" __declspec(naked) void {segment_name}() {{',
+                    "    __asm {",
+                ])
+                for insn in instructions:
+                    lines.append(f"        // 0x{insn.address:08X}: {insn.mnemonic} {insn.op_str}".rstrip())
+                    for byte in insn.bytes:
+                        lines.append(f"        __asm _emit 0x{byte:02X}")
+                    for operand in insn.operands:
+                        if (operand.type == X86_OP_IMM
+                                and (insn.id == X86_INS_CALL or insn.group(CS_GRP_JUMP))):
+                            if insn.size >= 5 and insn.encoding.imm_size == 4:
+                                segment_relocations.append({
+                                    "offset": insn.address - segment_start + insn.encoding.imm_offset,
+                                    "target_address": f"{operand.imm & 0xFFFFFFFF:08X}",
+                                    "kind": "relative",
+                                })
+                        elif operand.type == X86_OP_MEM:
+                            mem = operand.mem
+                            if (mem.base == X86_REG_INVALID and mem.index == X86_REG_INVALID
+                                    and insn.encoding.disp_size == 4
+                                    and BASE <= mem.disp < BASE + len(image)):
+                                segment_relocations.append({
+                                    "offset": insn.address - segment_start + insn.encoding.disp_offset,
+                                    "target_address": f"{mem.disp & 0xFFFFFFFF:08X}",
+                                    "kind": "absolute",
+                                })
+                        elif (operand.type == X86_OP_IMM and insn.encoding.imm_size == 4
+                              and BASE <= operand.imm < BASE + len(image)):
+                            segment_relocations.append({
+                                "offset": insn.address - segment_start + insn.encoding.imm_offset,
+                                "target_address": f"{operand.imm & 0xFFFFFFFF:08X}",
+                                "kind": "immediate",
+                            })
+                lines.extend(["    }", "}"])
+                segments.append({
+                    "address": segment_address,
+                    "size": segment_size,
+                    "symbol": f"_{segment_name}",
+                    "relocations": segment_relocations,
+                })
+            source = ROOT / "src/client-current/Main" / f"{source_name}.cpp"
+            source.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+            relocations_by_function[address] = {"size": size, "segments": segments}
+            print(f"{address}: emitted {size} bytes in {len(segments)} exact body ranges")
+            continue
+
+        code = image[start - BASE:start - BASE + size]
+        instructions = list(decoder.disasm(code, start))
+        fully_decoded = bool(instructions) and instructions[-1].address + instructions[-1].size == start + size
+        if not fully_decoded and address not in raw_extents:
+            raise ValueError(f"Ghidra extent is not fully decoded: {address}")
 
         evidence = []
         lines = [
