@@ -323,6 +323,7 @@ ADDRESSES = (
     "58858BD0",
     "5884D420",
     "587A6FB0",
+    "588955A0",
     "588958C0",
 )
 RELOCATION_OVERRIDES = {
@@ -398,6 +399,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58858BD0",
     "5884D420",
     "587A6FB0",
+    "588955A0",
     "588958C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
@@ -6786,6 +6788,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra records exactly two direct incoming calls, both byte-matched: FUN_588DEB30 at 0x588DF125 and FUN_588E5150 at 0x588E6369. Both set ECX from [0x58A2459C+0x20C9C] and pass no stack arguments; the target ends with plain `ret`.",
         "behavior": "Ghidra confirms one contiguous 339-byte body, [0x587A6FB0,0x587A7103), ending in `ret` at 0x587A7102. The routine reads the current object from [0x58A247F8+4] and loops over its count at +0x141C. It filters entries whose pointer at +0xE8C+i*4 is nonnull and begins with byte 5 or 6. For each, it reads a child from receiver +8+i*4; when the child's +0xF8 value is 0x40000000, it calls FUN_58853A00(index, child+0x9C-child+0x98). It accumulates maxima of child +0xAC into six local values selected by the current object's byte arrays at +0x21C and +0x1FC, and for entries with the latter byte zero it also stores child +0xA8 into the first two values. It passes the six results to FUN_58853A30. The candidate emits the mapped stream and records 12 operand targets.",
         "uncertainty": "The two byte-array classifications, six bucket meanings, entry and child field semantics, and effects of FUN_58853A00/FUN_58853A30 remain unknown. Ghidra's loop dereferences the selected child without a visible null check; the population invariant is not established. The summary/aggregation interpretation follows the observed maxima and six-value helper call but has not been visually or at runtime confirmed. No emulator test was performed.",
+    },
+    "588955A0": {
+        "name_in_analysis": "FUN_588955a0 / range and progress control initializer",
+        "called_by": "Fresh Ghidra lists exactly two direct callers, both byte-matched: FUN_588DEB30 at 0x588DF15F and FUN_58857020 at 0x58857096. Both pass ECX as the child/control pointer and three stack arguments, right-to-left: arg3 from [global+4]+0xDAC, arg2 from [global+4]+0xD98 XOR 0xAAAAAAAA, then arg1 from [global+4]+0x398 XOR 0xAAAAAAAA. FUN_588DEB30's receiver is [0x58A245C4]+0xC4; FUN_58857020's is [ESI+0xC4]. The target's `ret 0x0C` confirms thiscall with three stack arguments.",
+        "behavior": "Ghidra confirms one contiguous 257-byte body, [0x588955A0,0x588956A1), ending in `ret 0x0C` at 0x5889569E. The routine stores arg3 as a range/denominator at receiver +0xA8 and derives one, two, and three fifths at +0xC0/+0xBC/+0xB8. It initializes numeric child values from arg1/arg2, sets three child controls with FUN_5877E7A0 (including an arg3-to-10000 fallback for one child), copies arg1 into fields +0x94 through +0xA0, and calls FUN_589032E0 twice with ratios `((arg1 or +0x98) * 0x373) / arg3 + 0x7E`. The candidate emits the exact mapped stream and records seven operand targets.",
+        "uncertainty": "The control's exact visual/gameplay role, resource labels, field names, and helper contracts remain uncertain. The ratio calculations divide by arg3; callers also pass arg3 as the range at +0xDAC, but the nonzero invariant is not established despite the separate zero fallback used for one child. No emulator runtime test was performed.",
     },
 }
 
