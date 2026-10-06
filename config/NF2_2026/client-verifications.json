@@ -316947,7 +316947,40 @@
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
         "called_by": "Ghidra records four direct calls from three byte-matched functions: FUN_58805880 at 0x588058A9 passes its stack predicate directly; FUN_588058D0 at 0x58805909 calls on the +0x350 equality path with its first stack argument; FUN_58807910 calls at 0x58807C8D with iVar3 < 3 and at 0x58807CAE with 0 in its state-1 branch. The first two callers are also reached from the byte-matched queue dispatcher for ID 0x20.",
         "behavior": "As a __thiscall helper, branches on its one stack argument and receiver word +0x9C. For a zero argument it clears receiver +0x200 and sets +0xA0, then uses observed state values and selected-object dword +0x608C to choose embedded-child vtable calls and low-bit updates. States 4, 5, 6, 10, 11, 13, 14, and 16, plus state 15 when [0x58A245A8 + 0x1B8] is zero, run the captured reset/configuration path; state 12 sets receiver +0xA8 and runs a separate pair of child updates; other states run the generic child reset path. In the configuration path, receiver +0xA8 selects between calls through child fields +0x188/+0x1A8/+0x18C/+0x198 and +0x18C/+0x1AC, while selected-object state 0x40000000 or 0 selects further updates to child fields +0x194/+0x198/+0x1A8. States 8 and 9 recompute child +0x50 from the optional descriptor product word[descriptor+0x0C]*dword[descriptor+8], or zero, then call the child vtable slot at +8. For a nonzero argument, state 12 sets +0xA8, calls child +0x11C vtable slot +8, clears +0xA4, and returns; other states recompute +0x50 from that descriptor product, call the same slot, clear +0xA0, and return. The two direct helpers are FUN_587B95E0(1) and FUN_587B9620 with receiver words +0x94/+0x96. The complete indexed extent is 709 contiguous bytes through 0x588A69E4.",
-        "uncertainty": "The receiver and child types, meanings of the +0x9C state values and selected-object +0x608C value, indirect vtable contracts, descriptor units, and visible effect remain unknown. FUN_587B95E0 and FUN_587B9620 are unmatched, and no emulator runtime test was performed."
+        "uncertainty": "The receiver and child types, meanings of the +0x9C state values and selected-object +0x608C value, indirect vtable contracts, descriptor units, and visible effect remain unknown. FUN_587B9620 is unmatched, and no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587B95E0",
+      "name": "FUN_587b95e0",
+      "size": 26,
+      "symbol": "_FUN_587b95e0",
+      "source": "src/client-current/Main/FUN_587b95e0.cpp",
+      "source_sha256": "8a3d2d8d9df65592c423db9b1c73f2d87640dc21cf6356f557ea4e70cd1c681b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 19,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b95e0 / fixed-code message wrapper",
+        "called_by": "Ghidra records seven calls from three functions: byte-matched FUN_588A6720 calls at 0x588A6885 and 0x588A68BB with argument 1; unmatched FUN_588A6A30 calls at 0x588A6AC0 and 0x588A6C1A; unmatched FUN_588A8A70 calls at 0x588A8AE1, 0x588A8C51, and 0x588A8D1F. Other callers' surrounding behavior is not established.",
+        "behavior": "Loads its one stack argument, then calls byte-matched FUN_58970C70 with arguments (0x80010034, stack_argument, 0, 0, 0, 0) and returns with ret 4. The complete indexed extent is 26 contiguous bytes through 0x587B95F9.",
+        "uncertainty": "The meaning of code 0x80010034, the forwarded argument, and the four zero-valued fields is unknown. Three of its direct callers are unmatched, and no emulator runtime test was performed."
       }
     }
   ]

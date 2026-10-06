@@ -44,5 +44,6 @@ complete contiguous 709-byte extent from `0x588A6720` through `0x588A69E4`.
 
 The receiver and embedded-child types, state meanings, object `+0x608C` meaning,
 descriptor units, virtual method contracts, and visible effect are unknown.
-The direct helpers `FUN_587B95E0` and `FUN_587B9620` are not byte-matched. No
-emulator runtime test has been performed.
+`FUN_587B95E0` now matches byte-for-byte; its fixed code and forwarded argument
+are documented in the [wrapper notes](current-main-587b95e0-fixed-code-message-wrapper.md).
+`FUN_587B9620` remains unmatched. No emulator runtime test has been performed.
