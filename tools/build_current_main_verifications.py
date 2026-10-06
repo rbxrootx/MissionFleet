@@ -339,6 +339,9 @@ ADDRESSES = (
     "588F7EF0",
     "588F7FE0",
     "588F8620",
+    "588F9B00",
+    "588F9900",
+    "588F9C90",
     "5897CE32",
     "588F7D30",
 )
@@ -395,6 +398,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F7EF0",
     "588F7FE0",
     "588F8620",
+    "588F9B00",
+    "588F9900",
+    "588F9C90",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -707,6 +713,24 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F7D40": 30,
 }
 EVIDENCE = {
+    "588F9900": {
+        "name_in_analysis": "FUN_588F9900 / CWarehouseItemInfo destructor body",
+        "called_by": "Ghidra shows a direct call from the CWarehouseItemInfo deleting wrapper FUN_588F9B00 at 0x588F9B03. This destructor stores the RTTI-backed CWarehouseItemInfo vtable address 0x589A213C at 0x588F992B; its complete-object locator resolves through 0x589CDD48 to .?AVCWarehouseItemInfo@@.",
+        "behavior": "Ghidra confirms one contiguous 312-byte body [0x588F9900,0x588F9A38), fully covered by 115 instructions. It conditionally invokes child virtual slot 0 with delete flag 1 and clears pointers at receiver offsets +0x70, +0x74, +0x98, +0x9C, +0xA0, and +0xA4. A three-iteration loop releases and clears the nine pointer fields +0xA8 through +0xC8. If +0x64 is nonzero, it calls FUN_5897CE26 then clears that field. It finally calls FUN_58902C10 at 0x588F9A1F and restores the saved exception-list state. Literal instruction emission verifies the full body and audits five operands.",
+        "uncertainty": "The roles and ownership rules for these receiver fields, the helper contracts for FUN_5897CE26 and FUN_58902C10, and runtime behavior remain unknown. FUN_5897CE26 is an indirect host-call thunk whose ultimate target is unresolved; no emulator behavior has been tested.",
+    },
+    "588F9C90": {
+        "name_in_analysis": "FUN_588F9C90 / CWarehouseItemInfo vtable state-bit clearer",
+        "called_by": "Ghidra reports one incoming data reference from slot +0x04 at 0x589A2140 in the RTTI-backed seven-entry CWarehouseItemInfo vtable at 0x589A213C. No direct code callers are listed.",
+        "behavior": "Ghidra confirms a contiguous 24-byte body [0x588F9C90,0x588F9CA8), fully covered by seven instructions. It reads the 16-bit field at offset +0x24 from the pointer stored in DAT_58A24820, masks it with 0xFFFE, and writes it back, clearing bit 0 while preserving the other bits. Literal instruction emission verifies all 24 bytes and audits the global pointer operand.",
+        "uncertainty": "The global's identity, the cleared bit's meaning, when virtual dispatch reaches this method, and runtime behavior are unresolved. No emulator behavior has been tested.",
+    },
+    "588F9B00": {
+        "name_in_analysis": "FUN_588F9B00 / CWarehouseItemInfo deleting-destructor wrapper",
+        "called_by": "Ghidra finds no direct code callers and one data reference at the +0x00 slot 0x589A213C of the RTTI-backed CWarehouseItemInfo vtable. The complete-object locator at 0x589A2138 resolves through 0x589CDD48 to .?AVCWarehouseItemInfo@@. The matched constructor FUN_588FA1C0 stores this vtable at 0x588FA236; the destructor body FUN_588F9900 reinstalls it at 0x588F992B.",
+        "behavior": "Ghidra indexes 27 bytes in ranges [0x588F9B00,0x588F9B15) and [0x588F9B18,0x588F9B1E). The contiguous mapped wrapper spans 30 executable bytes [0x588F9B00,0x588F9B1E), including the three-byte add esp,4 continuation after the helper call, and is followed by two INT3 padding bytes. It calls FUN_588F9900, tests bit 0 of its stack flag, conditionally calls FUN_5897CC42 with this, then returns this with ret 4. Literal instruction emission verifies the complete mapped stream and audits both call targets.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion and return behavior are unknown. That helper is a thunk through pointer slot 0x5898C1F8, and Ghidra marks the call non-returning; the cleanup continuation has not been runtime-confirmed. No emulator behavior has been tested.",
+    },
     "588F8620": {
         "name_in_analysis": "FUN_588F8620 / CWarehouseItemFactory deleting-destructor wrapper",
         "called_by": "Ghidra finds no direct code callers and one data reference at the vtable slot 0x589A2104. The preceding complete-object locator at 0x589A2100 resolves to RTTI type .?AVCWarehouseItemFactory@@, and this is its sole address-point slot. The matched constructor FUN_588F84E0 writes the same vtable pointer at 0x588F8507 and is called by FUN_588FFE10 at 0x588FFEED.",
