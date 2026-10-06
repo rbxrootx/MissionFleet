@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "5888CE00",
     "5887A3F0",
     "588B3B30",
     "587E7F20",
@@ -363,6 +364,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587E7F20",
     "588B3B30",
     "5887A3F0",
+    "5888CE00",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -630,6 +632,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "5888CE00": {
+        "name_in_analysis": "FUN_5888ce00 / subobject cleanup and constant update wrapper",
+        "called_by": "Ghidra's complete reference dump identifies exactly two direct callers: byte-matched FUN_587FC9C0 at 0x587FD636 and byte-matched FUN_58890110 at 0x5889281D. In both matched instruction streams, the caller loads ECX from global [0x58A245C0] immediately before the call and pushes no stack arguments.",
+        "behavior": "The complete body is 32 contiguous bytes, [0x5888CE00,0x5888CE20), with a plain ret at 0x5888CE1F. It preserves the incoming receiver in ESI, calls FUN_589087F0 with ECX=[this+0x4C4], then calls FUN_58903360 with ECX=[this+0x4A4] and stack argument 0x2C0 before restoring ESI. The first callee is itself byte-matched and walks child links before clearing receiver fields +0x78 through +0x88. The second byte-matched callee writes its argument to receiver +8 and propagates the resulting delta through flagged entries in its circular list. The target's emitted source preserves all 32 mapped bytes and both relative-call operands.",
+        "uncertainty": "The owning receiver type, the meanings and nullability of fields +0x4A4/+0x4C4, and the semantic meaning of value 0x2C0 are unknown. The effects beyond those shown by the two matched callees have not been runtime-tested in the emulator.",
+    },
     "5887A3F0": {
         "name_in_analysis": "FUN_5887a3f0 / receiver-gated identifier dispatcher",
         "called_by": "Ghidra's complete direct-reference dump records 30 calls from seven callers: FUN_5887A500 at 0x5887A734; FUN_587BB700 at 0x587C14EE; FUN_5887AE70 at 0x5887AEA1, 0x5887AEAE, 0x5887AEBB, 0x5887AED8, 0x5887AEE5, 0x5887AEF2, 0x5887AF0F, 0x5887AF1C, 0x5887AF3E, 0x5887AF4B, 0x5887AF58, 0x5887AF65, 0x5887AF72, 0x5887AF7F, 0x5887AF8C, 0x5887AF99, 0x5887AFA6, and 0x5887AFB3; FUN_58882D80 at 0x58882E18, 0x58882EB3, 0x58882F1F, 0x58882F30, 0x58882F3F, 0x58883924, and 0x58883C7F; FUN_58881E30 at 0x58881F7F; FUN_58881C90 at 0x58881DE9; and FUN_58881680 at 0x58881AA7. The catalog verifies callers FUN_587BB700 and FUN_58882D80 byte-identically; their matched sources confirm this call family includes stack identifiers such as 0x0FA0, 0x1004, 0x1068, 0x10CC, 0x10CF, 0x0FA2, and 0x1139. The other five callers are not byte-matched.",

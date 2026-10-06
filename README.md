@@ -9,8 +9,10 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,460 matches cover 2,344,316 bytes (22.3903%) and are verified
+The current 7,461 matches cover 2,344,348 bytes (22.3906%) and are verified
 individually at 100.0% by objdiff.
+The subobject cleanup and constant update wrapper are documented in
+[its Main.dll evidence](docs/current-main-5888ce00-subobject-update.md).
 The receiver-gated identifier dispatcher is documented in
 [its Main.dll evidence](docs/current-main-5887a3f0-identifier-dispatcher.md).
 The current Main.dll child-state reset helper is documented in

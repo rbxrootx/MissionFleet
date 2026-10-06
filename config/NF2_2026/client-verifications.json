@@ -319396,6 +319396,45 @@
         "behavior": "The complete contiguous function body is 32 bytes, [0x5887A3F0,0x5887A410), and returns with ret 4 at 0x5887A40D. It is a __thiscall taking one stack argument. If the dword at receiver +0x68 is zero, it returns without further calls. Otherwise it calls FUN_5876BAF0(argument, 0, 0, 0), moves that helper's EAX result to ECX, and calls FUN_58764D30(). The emitted source preserves the mapped instruction bytes literally, including both relative-call operands.",
         "uncertainty": "The receiver type and +0x68 field role, stack identifier meanings, and contracts/effects of FUN_5876BAF0 and FUN_58764D30 remain unknown. Five callers are not byte-matched, so their surrounding setup is supported only by Ghidra analysis. The helper's `this` setup at the FUN_587BB700 call has not been separately interpreted, although that caller's complete instruction stream is byte-matched. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5888CE00",
+      "name": "FUN_5888ce00",
+      "size": 32,
+      "symbol": "_FUN_5888ce00",
+      "source": "src/client-current/Main/FUN_5888ce00.cpp",
+      "source_sha256": "98fa3efd47b4242820d29c05b976eb38ec9594dfe991fa2ceea1595733db1e6e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "589087F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888ce00 / subobject cleanup and constant update wrapper",
+        "called_by": "Ghidra's complete reference dump identifies exactly two direct callers: byte-matched FUN_587FC9C0 at 0x587FD636 and byte-matched FUN_58890110 at 0x5889281D. In both matched instruction streams, the caller loads ECX from global [0x58A245C0] immediately before the call and pushes no stack arguments.",
+        "behavior": "The complete body is 32 contiguous bytes, [0x5888CE00,0x5888CE20), with a plain ret at 0x5888CE1F. It preserves the incoming receiver in ESI, calls FUN_589087F0 with ECX=[this+0x4C4], then calls FUN_58903360 with ECX=[this+0x4A4] and stack argument 0x2C0 before restoring ESI. The first callee is itself byte-matched and walks child links before clearing receiver fields +0x78 through +0x88. The second byte-matched callee writes its argument to receiver +8 and propagates the resulting delta through flagged entries in its circular list. The target's emitted source preserves all 32 mapped bytes and both relative-call operands.",
+        "uncertainty": "The owning receiver type, the meanings and nullability of fields +0x4A4/+0x4C4, and the semantic meaning of value 0x2C0 are unknown. The effects beyond those shown by the two matched callees have not been runtime-tested in the emulator."
+      }
     }
   ]
 }
