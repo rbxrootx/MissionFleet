@@ -36,6 +36,20 @@ def require_direct_call(body, start_address, instruction, target):
         )
 
 
+def require_call_at(image, instruction_address, target):
+    instruction = read_va(image, instruction_address, 5)
+    if instruction[0] != 0xE8:
+        raise ValueError(f"expected a direct call at {instruction_address:08X}")
+    actual_target = (
+        instruction_address + 5 + struct.unpack_from("<i", instruction, 1)[0]
+    ) & 0xFFFFFFFF
+    if actual_target != target:
+        raise ValueError(
+            f"call at {instruction_address:08X} targets {actual_target:08X}, "
+            f"expected {target:08X}"
+        )
+
+
 def verify_original_evidence():
     if not CAPTURE.is_file():
         raise FileNotFoundError(f"the mapped Core capture is required: {CAPTURE}")
@@ -51,6 +65,9 @@ def verify_original_evidence():
     require_direct_call(
         ship_node_draw, 0x587B5DB0, bytes.fromhex("E8 A5 68 CE FF"), 0x5849C770
     )
+    require_call_at(image, 0x587B5E23, 0x58495710)
+    require_call_at(image, 0x587B5E4D, 0x58495870)
+    require_call_at(image, 0x587B5F20, 0x58495870)
 
     if struct.unpack("<I", read_va(image, 0x58894C94 + 0x14, 4))[0] != 0x587B5DB0:
         raise ValueError("ship render-node vtable slot +0x14 no longer targets 0x587B5DB0")

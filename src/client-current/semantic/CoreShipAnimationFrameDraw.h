@@ -28,8 +28,29 @@ struct MissionFleetCoreShipAnimationView {
     std::size_t frameSpriteCount;
 };
 
-// The sprite-related fields read from Core's ship render node. The linked
-// child callbacks around the sprite arm are outside this view.
+struct MissionFleetCoreShipRenderChildView;
+
+using MissionFleetCoreShipRenderChildDraw = void (*)(
+    MissionFleetCoreShipRenderChildView& child,
+    MissionFleetCoreRenderContext* screen,
+    const MissionFleetCoreRenderRect* clipRect,
+    const MissionFleetCoreRenderOrigin* parentOrigin,
+    void* userData);
+
+// Semantic view of the fields read from one linked child by 0x587B5DB0.
+// firstWord is the DWORD tested against 0x10000; its identity is unknown.
+// key26 and next48 correspond to values returned by the original +0x26 and
+// +0x48 accessors. This is not the original C++ object layout.
+struct MissionFleetCoreShipRenderChildView {
+    std::uint32_t firstWord;
+    std::int16_t signedOrderKey26;
+    MissionFleetCoreShipRenderChildView* next48;
+    MissionFleetCoreShipRenderChildDraw drawSlot14;
+    void* userData;
+};
+
+// Semantic view of sprite fields and the child-list head read from Core's ship
+// render node. This is not a declaration of the original object layout.
 struct MissionFleetCoreShipRenderNodeView {
     std::uint16_t flags24;
     std::int32_t positionX04;
@@ -40,6 +61,7 @@ struct MissionFleetCoreShipRenderNodeView {
     std::uint32_t color28;
     std::uint32_t effect2C;
     const MissionFleetCoreShipAnimationView* animation54;
+    MissionFleetCoreShipRenderChildView* firstChild4C = nullptr;
 };
 
 enum class MissionFleetCoreShipFrameDrawStatus {
@@ -77,11 +99,11 @@ MissionFleetCoreShipFrameDrawOutcome missionFleetDrawCoreShipAnimationFrame(
     MissionFleetCoreSpriteSlot1Dispatch dispatchSlot1,
     void* userData);
 
-// Models the sprite arm of Core.dll!0x587B5DB0: flag/time gates, parent plus
-// node/anchor position, and dispatch through the timed frame wrapper above.
-// The source's linked child callbacks before and after this arm are not run.
+// Semantic port of Core.dll!0x587B5DB0: dispatches the negative-key linked
+// child prefix, the attached timed sprite, then the remaining child list.
+// Child callbacks receive the original screen, clip, and parent-origin pointers.
 MissionFleetCoreShipFrameDrawOutcome missionFleetDrawCoreShipNodeSprite(
-    const MissionFleetCoreShipRenderNodeView* node,
+    MissionFleetCoreShipRenderNodeView* node,
     MissionFleetCoreRenderContext* screen,
     const MissionFleetCoreRenderRect* inheritedClip,
     const MissionFleetCoreRenderOrigin* parentOrigin,

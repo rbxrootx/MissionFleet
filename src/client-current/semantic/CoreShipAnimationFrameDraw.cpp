@@ -1,8 +1,11 @@
 #include "CoreShipAnimationFrameDraw.h"
 
 #include <cstring>
+#include <stdexcept>
 
 namespace {
+
+constexpr std::uint32_t kMinimumValidChildFirstWord = 0x00010001u;
 
 std::int32_t signedBits(std::uint32_t bits) {
     std::int32_t value;
@@ -20,6 +23,21 @@ MissionFleetCoreShipFrameDrawOutcome result(
     MissionFleetCoreShipFrameDrawStatus status,
     std::uint16_t frameIndex = 0) {
     return {status, frameIndex, {0, 0, {{0, 0, 0, 0}}}};
+}
+
+bool validChild(const MissionFleetCoreShipRenderChildView& child) {
+    return child.firstWord >= kMinimumValidChildFirstWord;
+}
+
+void dispatchChild(MissionFleetCoreShipRenderChildView& child,
+                   MissionFleetCoreRenderContext* screen,
+                   const MissionFleetCoreRenderRect* clipRect,
+                   const MissionFleetCoreRenderOrigin* parentOrigin) {
+    if (child.drawSlot14 == nullptr) {
+        throw std::logic_error(
+            "Core ship-node draw requires a child vtable +0x14 target");
+    }
+    child.drawSlot14(child, screen, clipRect, parentOrigin, child.userData);
 }
 
 }  // namespace
@@ -83,7 +101,7 @@ MissionFleetCoreShipFrameDrawOutcome missionFleetDrawCoreShipAnimationFrame(
 }
 
 MissionFleetCoreShipFrameDrawOutcome missionFleetDrawCoreShipNodeSprite(
-    const MissionFleetCoreShipRenderNodeView* node,
+    MissionFleetCoreShipRenderNodeView* node,
     MissionFleetCoreRenderContext* screen,
     const MissionFleetCoreRenderRect* inheritedClip,
     const MissionFleetCoreRenderOrigin* parentOrigin,
@@ -99,26 +117,54 @@ MissionFleetCoreShipFrameDrawOutcome missionFleetDrawCoreShipNodeSprite(
         return result(
             MissionFleetCoreShipFrameDrawStatus::skippedByNegativeNodeTime);
     }
-    if (node->animation54 == nullptr ||
-        reinterpret_cast<std::uintptr_t>(node->animation54) < 0x100u) {
-        return result(MissionFleetCoreShipFrameDrawStatus::missingNodeAnimation);
-    }
-    if (screen == nullptr) {
-        return result(MissionFleetCoreShipFrameDrawStatus::emptyOrMissingScreen);
-    }
-    if (parentOrigin == nullptr) {
-        return result(MissionFleetCoreShipFrameDrawStatus::invalidInputs);
+    auto* child = node->firstChild4C;
+    if (child != nullptr && !validChild(*child)) {
+        node->firstChild4C = nullptr;
+        child = nullptr;
     }
 
-    const std::int32_t position[2]{
-        addX86(addX86(node->positionX04, node->anchorX0C),
-               signedBits(parentOrigin->words[0])),
-        addX86(addX86(node->positionY08, node->anchorY10),
-               signedBits(parentOrigin->words[1])),
-    };
-    std::int32_t mutablePosition[2]{position[0], position[1]};
-    return missionFleetDrawCoreShipAnimationFrame(
-        node->animation54, screen, mutablePosition, inheritedClip,
-        node->elapsed50, node->color28, node->effect2C, dispatchSlot1,
-        userData);
+    // Core tests the signed key before dispatch, then fetches +0x48 only after
+    // the callback returns. A callback can therefore replace the next link.
+    while (child != nullptr) {
+        if (!validChild(*child)) {
+            child = nullptr;
+            break;
+        }
+        if (child->signedOrderKey26 >= 0) break;
+        dispatchChild(*child, screen, inheritedClip, parentOrigin);
+        child = child->next48;
+    }
+
+    MissionFleetCoreShipFrameDrawOutcome outcome =
+        result(MissionFleetCoreShipFrameDrawStatus::missingNodeAnimation);
+    if (node->animation54 != nullptr &&
+        reinterpret_cast<std::uintptr_t>(node->animation54) >= 0x100u) {
+        if (screen == nullptr) {
+            outcome = result(
+                MissionFleetCoreShipFrameDrawStatus::emptyOrMissingScreen);
+        } else if (parentOrigin == nullptr) {
+            outcome = result(MissionFleetCoreShipFrameDrawStatus::invalidInputs);
+        } else {
+            const std::int32_t position[2]{
+                addX86(addX86(node->positionX04, node->anchorX0C),
+                       signedBits(parentOrigin->words[0])),
+                addX86(addX86(node->positionY08, node->anchorY10),
+                       signedBits(parentOrigin->words[1])),
+            };
+            std::int32_t mutablePosition[2]{position[0], position[1]};
+            outcome = missionFleetDrawCoreShipAnimationFrame(
+                node->animation54, screen, mutablePosition, inheritedClip,
+                node->elapsed50, node->color28, node->effect2C, dispatchSlot1,
+                userData);
+        }
+    }
+
+    // The suffix pass does not inspect child keys. It stops at the first
+    // invalid receiver and also reads each next link after its callback.
+    while (child != nullptr) {
+        if (!validChild(*child)) break;
+        dispatchChild(*child, screen, inheritedClip, parentOrigin);
+        child = child->next48;
+    }
+    return outcome;
 }

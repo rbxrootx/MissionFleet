@@ -51,16 +51,27 @@ helper semantics, and pixel-for-pixel live frame output remain unverified.
 ## C++ semantic port and validation
 
 [`CoreShipAnimationFrameDraw.cpp`](../src/client-current/semantic/CoreShipAnimationFrameDraw.cpp)
-implements the valid sprite path of `0x5849C770` and the sprite arm of
-`0x587B5DB0`. The port keeps the two frame tables separate, applies x86
-32-bit-wrapped node, anchor, parent, and frame-offset sums, preserves the node
-flag and negative-time gates, and sends the selected sprite through the
-existing screen dispatcher and RGB16 slot-1 implementation. It does not run
-the ship node's surrounding linked-child callbacks; those callback loops
-remain outside this sprite-path slice. The portable view also checks table
-lengths and returns a status for malformed input, while native code assumes
-those tables are valid. A nonpositive period is rejected safely here; the
-original signed divide would fault for zero and assumes positive data.
+implements the valid timed-frame path of `0x5849C770` and the ship-node draw
+callback `0x587B5DB0`. The port keeps the two frame tables separate, applies
+x86 32-bit-wrapped node, anchor, parent, and frame-offset sums, and preserves
+the node flag and negative-time gates. The node callback walks linked children
+with negative signed keys before its sprite, then drains the remaining list
+afterward. It calls each child's virtual slot `+0x14` with the original
+screen, clip, and parent-origin pointers, then reads the child's `+0x48` next
+link after the callback; accessor `0x58495710` reads `+0x26`, and accessor
+`0x58495870` reads `+0x48`. The selected sprite continues through the existing
+screen dispatcher and RGB16 slot-1 implementation. The portable view checks
+table lengths and returns a status for malformed input, while native code
+assumes those tables are valid. A nonpositive period is rejected safely here;
+the original signed divide would fault for zero and assumes positive data.
+
+The child view is a semantic test boundary, not a recovered object layout. The
+Core listing compares the first child DWORD with `0x10000`; treating it as a
+vtable pointer is unproven. The user-facing meanings of the child order key and
+callback classes remain unknown. For malformed host-side views, the wrapper
+maps a null node to an input status, rejects a null parent origin on the sprite
+path, and throws `logic_error` for a missing child callback. Native Core assumes
+valid pointers and may fault instead.
 
 Run the native integration check:
 
@@ -73,11 +84,22 @@ the timed-frame wrapper and from that wrapper to the screen dispatcher, checks
 the ship-node vtable slots, and renders selected frames into a real test
 framebuffer. Cases cover the first frame, a frame boundary, wraparound,
 per-frame sprite selection and offsets, parent/anchor position, clipping,
-negative time, invalid records, x86 coordinate wrap, and color/effect
-forwarding. The original naked functions remain separately byte-verified with:
+negative time, invalid records, x86 coordinate wrap, color/effect forwarding,
+child-before-sprite-after ordering, prefix callback mutation, sprite-dispatch
+mutation of the retained continuation, suffix callback mutation, flag/time
+gate suppression, invalid child-head clearing, invalid suffix stopping, and a
+real sprite write between child callbacks. The verifier also pins the child-accessor call sites
+in `0x587B5DB0`. The original naked functions remain separately
+byte-verified with:
 
 ```text
 python tools/verify_client_matches.py --config config/NF2_2026/core-verifications.json --only 5849C770 --only 587B5DB0
+```
+
+The child accessors can be checked in the same byte-match inventory with:
+
+```text
+python tools/verify_client_matches.py --config config/NF2_2026/core-verifications.json --only 58495710 --only 58495870
 ```
 
 The tests use synthetic, source-shaped RGB16 sprite payloads. They validate
