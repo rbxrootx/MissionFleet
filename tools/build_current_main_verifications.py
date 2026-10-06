@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "588B3B30",
     "587E7F20",
     "587A5080",
     "588D28A0",
@@ -359,6 +360,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588D28A0",
     "587A5080",
     "587E7F20",
+    "588B3B30",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -626,6 +628,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588B3B30": {
+        "name_in_analysis": "FUN_588b3b30 / conditional receiver field and low-flag setter",
+        "called_by": "Fresh Ghidra references identify five unconditional calls across three callers. Byte-matched FUN_587FD890 calls at 0x587FDF95 with ECX=[EDI] and stack argument zero. Byte-matched FUN_587EF910 calls at 0x587EFBCC with ECX=[EDI] and EBX pushed as the stack argument. Unmatched FUN_587E7B90 calls at 0x587E7BAE, 0x587E7BD4, and 0x587E7BF2 with ECX=[ESI] and stack arguments 0, 1, and 1 respectively; in that loop ESI points into the child-pointer array rooted at receiver +0x218F0.",
+        "behavior": "The complete 34-byte body is contiguous, [0x588B3B30,0x588B3B52), and has ret 4 exits at 0x588B3B43 and 0x588B3B4F. It is a __thiscall taking one stack argument. It stores the argument at receiver +0x128. If nonzero, it ORs 0x000F into the word at receiver +0x24; if zero, it ANDs that word with 0xFFF0, clearing only the low four bits. The emitted source preserves all mapped bytes and objdiff verifies them identical.",
+        "uncertainty": "The receiver type, meanings of fields +0x128 and +0x24, and the role of the low four bits are unresolved. The EBX value at FUN_587EF910's call is not fully traced here. One caller, FUN_587E7B90, is unmatched, so its wider behavior is not yet byte-verified. No emulator runtime test was performed.",
+    },
     "587E7F20": {
         "name_in_analysis": "FUN_587e7f20 / object-and-global flag predicate",
         "called_by": "Fresh Ghidra references identify exactly two unconditional calls, both from byte-matched callers. FUN_58853C20 calls at 0x58853CDB with ECX=[0x58A2459C] and no stack arguments. FUN_58856560 calls at 0x58856612 with the same ECX value and no stack arguments; both callers' match records are verified in the current catalog.",
