@@ -331,6 +331,7 @@ ADDRESSES = (
     "58804A40",
     "588F8EA0",
     "588F8840",
+    "588F7D10",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -378,6 +379,7 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "588F7D10",
     "588F8840",
     "58804A40",
     "588F8EA0",
@@ -681,6 +683,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588F7D10": {
+        "name_in_analysis": "FUN_588F7D10 / CWarehouseItemForce two-field byte predicate",
+        "called_by": "Ghidra's reference audit finds no direct code callers. One data reference at 0x589A2134 places this function in slot +0x28 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. A second data reference at 0x589A20FC belongs to a static table whose owning class is unresolved. The function has no direct outgoing calls.",
+        "behavior": "Ghidra confirms one contiguous 30-byte body [0x588F7D10,0x588F7D2E) with 10 instructions and complete byte coverage. It returns 1 exactly when the byte at receiver +0x6A equals its first 32-bit stack argument and the byte at +0x6B equals its second 32-bit stack argument; otherwise it returns 0. The source expresses the two comparisons in inline x86 mnemonics and matches the mapped body.",
+        "uncertainty": "The semantic meanings of the two receiver bytes and arguments remain unknown. The second static-table reference is not attributed to a class, and concrete virtual dispatch sites have not been found. Runtime behavior has not been exercised in the emulator.",
+    },
     "588F8840": {
         "name_in_analysis": "FUN_588F8840 / CWarehouseItemForce child flag setter",
         "called_by": "Ghidra's reference audit finds one data reference at 0x589A212C, slot +0x20 in the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. No direct code callers were found, so the virtual dispatch sites are unknown.",

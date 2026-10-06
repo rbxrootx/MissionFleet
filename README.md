@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,485 matches cover 2,369,990 bytes (22.6355%) and are verified
+The current 7,486 matches cover 2,370,020 bytes (22.6358%) and are verified
 individually at 100.0% by objdiff.
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).
@@ -25,6 +25,8 @@ The `CWarehouseItemForce` virtual resource and child-state updater is documented
 in [its Main.dll evidence](docs/current-main-588f8ea0-warehouse-item-force-update.md).
 Its child flag setter at vtable slot +0x20 is documented in
 [the flag-setter evidence](docs/current-main-588f8840-warehouse-child-flag-setter.md).
+The pair predicate at vtable slot +0x28 is documented in
+[its Main.dll evidence](docs/current-main-588f7d10-warehouse-pair-predicate.md).
 Its allocation and aircraft-object initialization path is documented in
 [the CAircraft constructor evidence](docs/current-main-58741c20-aircraft-constructor.md).
 The aircraft record/stat initializer called from that launch path is documented

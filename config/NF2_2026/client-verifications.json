@@ -325589,6 +325589,32 @@
         "behavior": "Ghidra confirms one contiguous 47-byte body [0x588F8840,0x588F886F) with 12 instructions and no gaps. Its one-byte stack argument selects a child at receiver +0xC0: value 0 sets bit 0 in the child's 16-bit word at +0x24; value 1 clears that bit; other values leave the word unchanged. The method has no direct outgoing calls. The source expresses the original branches and 16-bit flag operations in inline x86 mnemonics and byte-matches the mapped body.",
         "uncertainty": "The child/control's semantic role and the argument's user-visible labels are unresolved. The vtable confirms the virtual method belongs to CWarehouseItemForce, but no concrete runtime dispatch site was found. The exact code match has not been exercised in the emulator."
       }
+    },
+    {
+      "address": "588F7D10",
+      "name": "FUN_588f7d10",
+      "size": 30,
+      "symbol": "_FUN_588f7d10",
+      "source": "src/client-current/Main/FUN_588f7d10.cpp",
+      "source_sha256": "53216cf33fc2c0b6f2a3b3696b6d25fb3f2baaeb1398d7ff6d101174d0a2ec88",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7D10 / CWarehouseItemForce two-field byte predicate",
+        "called_by": "Ghidra's reference audit finds no direct code callers. One data reference at 0x589A2134 places this function in slot +0x28 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. A second data reference at 0x589A20FC belongs to a static table whose owning class is unresolved. The function has no direct outgoing calls.",
+        "behavior": "Ghidra confirms one contiguous 30-byte body [0x588F7D10,0x588F7D2E) with 10 instructions and complete byte coverage. It returns 1 exactly when the byte at receiver +0x6A equals its first 32-bit stack argument and the byte at +0x6B equals its second 32-bit stack argument; otherwise it returns 0. The source expresses the two comparisons in inline x86 mnemonics and matches the mapped body.",
+        "uncertainty": "The semantic meanings of the two receiver bytes and arguments remain unknown. The second static-table reference is not attributed to a class, and concrete virtual dispatch sites have not been found. Runtime behavior has not been exercised in the emulator."
+      }
     }
   ]
 }
