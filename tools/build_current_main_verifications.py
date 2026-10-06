@@ -317,6 +317,7 @@ ADDRESSES = (
     "5873A7C0",
     "587B7500",
     "588D75F0",
+    "588DEB30",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -385,6 +386,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5873A7C0",
     "587B7500",
     "588D75F0",
+    "588DEB30",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6730,6 +6732,12 @@ EVIDENCE = {
         "called_by": "All four Ghidra-recorded direct calls are from byte-matched FUN_588E4260: 0x588E43F9 (action 5), 0x588E4539 (action 7), 0x588E465F (action 0x15), and 0x588E467C (action 0x14). They pass the indexed value at [ESI+0x340]. At 43F9, 4539, and 467C, ECX=ESI; at 465F the caller does not explicitly reload ECX immediately before the call, so receiver setup on that path is unresolved. Ghidra decompilation places the calls in switch cases 5, 7, 0x23/0x24, and 0x25/0x26/0x29/0x2A, respectively.",
         "behavior": "Ghidra confirms 1,477 body bytes across [0x588D75F0,0x588D76BA), [0x588D76C0,0x588D78E7), and [0x588D78F0,0x588D7BC4). The omitted 6-byte gap is `lea ebx,[ebx]`; the omitted 9-byte gap is `lea esp,[esp]; mov edi,edi`. Unconditional jumps bridge both gaps. Action values 4/5 update matching child +0x128 by +/-1 and mark +0x10C; 6/7 update +0x124 and mark +0x108; 10/11 update +0x124 with sign selected by a per-entry byte and mark +0x108. Actions 0x14/0x15 clear matching child state at +0x108/+0x10C, subject to parent filter bits and reset conditions. The loops scan the count at this+0x141C, match item IDs at this+0x1FC against the supplied value, and skip null child pointers in the array at this+0x17C. The caller stores returned state bits at this+0x60B8 for actions 5/7 and toggles bits there for actions 0x14/0x15. The exact three body ranges are emitted literally and their mapped operand targets are recorded.",
         "uncertainty": "The owning type and the semantic identities of the indexed child, item IDs, filter flags, and state fields are not established. The ECX receiver at 0x588E465F is not explicitly loaded in the matched caller and remains unresolved. The byte-matched caller's switch cases establish where these actions are selected, but child rendering/gameplay effects have not been runtime-tested. No emulator runtime test was performed.",
+    },
+    "588DEB30": {
+        "name_in_analysis": "FUN_588deb30 / CShip_MapObjectScreen state and child-resource refresh",
+        "called_by": "Ghidra records two direct calls: matched CShip_MapObjectScreen update method FUN_588E5150 at 0x588E64AF, and unmatched FUN_587CD000 at 0x587CD203. The matched update reaches it in state 0x60000 when its +0x664C counter is zero, and pushes 1. It decrements +0x664C instead when nonzero. The mapped call does not explicitly reload ECX immediately before the call; the object-base register and exact ABI are unresolved because Ghidra's caller/target prototypes disagree with the observed `ret 4` and ECX-based field accesses.",
+        "behavior": "Ghidra confirms 1,858 body bytes in [0x588DEB30,0x588DEDEE) and [0x588DEDF0,0x588DF274), with the two-byte alignment gap `8B FF` (`mov edi,edi`) excluded. The second range ends with `ret 4` at 0x588DF271. The routine sets an observed state value 0x50000 at object +0x6090, resets related flags/counters, copies selected resource-record fields into child objects at +0x60D8/+0x1470 and other conditional children, and scans 32 resource/text slots dispatching on first-byte values 5, 6, and carriage return. It refreshes progress/status fields; when the object equals the global current object, it also follows a battle/rejoin UI path. It calls FUN_587EC270, then based on the stack flag calls FUN_588DE5C0 or drains eight child lists through a child vtable method with argument 1. The candidate emits both exact body ranges literally and records mapped operand targets.",
+        "uncertainty": "The object-base ABI and stack-flag meaning are unresolved; the matched caller pushes 1 without an explicit ECX reload, while Ghidra models a one-argument fastcall and the target bytes use ECX as an object base and return with `ret 4`. Child/resource field meanings, helper contracts, and visible UI results are not established. FUN_587CD000 is an unmatched caller. No emulator runtime test was performed.",
     },
 }
 
