@@ -1,0 +1,40 @@
+# Current Main component-record update helper
+
+`FUN_58806F60` is a 1,032-byte `__thiscall` helper in the installed `Main.dll`.
+The byte-matched event handler `FUN_58807910` calls it once per variable-size
+record at `0x58807A65`, passing the current record, its `+0x114` subrecord, and
+a boolean derived from the optional record mask. Ghidra records another caller
+at `0x5880786C` in `FUN_588075E0`; that path has not been fully traced.
+
+## Behavior supported by the original code
+
+The handler checks that byte `record + 0x68` is `1`. Otherwise it formats a
+diagnostic with the record's `+6` string and reports
+`SetNewPlayerData_TypeOfComponent is 0` through the captured error callbacks.
+It derives a count from
+`((DWORD at record + 0x44) >> 1) & 0x1F` and uses the supplied `record + 0x114`
+region with an 0x18-byte stride.
+
+When the boolean argument is nonzero, it passes the record range to
+`FUN_587AF1F0`, calls `FUN_588A6410` with byte `record + 2`, and walks the linked
+list rooted at `[0x58A247F8] + 0xC`. It compares the record's string at `+6` to
+each node key at `+0x356`. A matching node reaches `FUN_58778B20` and
+`FUN_58731CE0`, then sets bit 0 in fields at `+0x24` on two child objects.
+
+When the boolean is zero, the helper calls `FUN_58789FE0` to obtain an object
+from the record and supplied region. It then makes record-derived update calls,
+branches on subtype values `0x1C3`, `0x6F`, `0x13E`, and `0x1C5`, reads a pair
+from a table selected with the object's byte at `+0x354` and word at `+0x352`,
+updates flag fields, and increments receiver counters for observed subtype
+groups 8 and 6/7. The complete indexed stream ends with `ret 0xC`. The literal
+instruction source at
+[`FUN_58806F60.cpp`](../src/client-current/Main/FUN_58806F60.cpp) is verified
+against the pinned mapped image with the repository's pinned clang-cl compiler.
+
+## Unresolved details
+
+The record and object types, semantic names for fields, the meaning of the
+count/subtype values, the boolean's alternate-path meaning, the linked-node
+identity, and gameplay/UI effects remain unknown. Most called update helpers
+are not matched, and the second caller `FUN_588075E0` needs its own trace. This
+is a static byte match; no emulator runtime test has been performed.

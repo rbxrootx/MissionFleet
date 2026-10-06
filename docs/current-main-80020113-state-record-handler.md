@@ -17,6 +17,8 @@ diagnostic `ShipContentsNumberOfWaeponSetSerials != /sizeof_WeaponSetSerials`
 and enters a fatal/error callback path. When the receiver's mask flag is set,
 one bit per record is read from the copied four-DWORD mask and passed as a
 boolean to `FUN_58806F60(record, record + 0x114, flag)`.
+The matched helper's observed branches are documented in
+[the component-record updater notes](current-main-58806f60-component-record-updater.md).
 
 The next record address advances by `0x114`, the record's 16-bit value at
 `+0x10A`, and `0x20` times its byte at `+0x100`. After the loop, the handler
@@ -36,6 +38,6 @@ compiler. Its evidence record is in
 
 The event-record structure, meanings of the `+0x100` and `+0x10A` fields,
 mask-bit semantics, receiver/global object types, and visible effect are
-unknown. `FUN_58806F60` and multiple later scene/map/UI callees are still
-unmatched. Ghidra leaves some register-derived state as `unaff_*`. This is a
-static byte match; no emulator runtime test has been performed.
+unknown. Multiple later scene/map/UI callees are still unmatched. Ghidra leaves
+some register-derived state as `unaff_*`. This is a static byte match; no
+emulator runtime test has been performed.

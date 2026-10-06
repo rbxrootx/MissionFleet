@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "58807910",
+    "58806F60",
     "587962C0", "587C35A0", "587956B0", "58796310", "58907CE0",
     "58902C20", "58902C70", "58902EE0", "58902F50", "589031A0",
     "58733280", "58731700", "5897CC4E", "5897CC48", "58731CE0",
@@ -321,6 +322,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58807910",
+    "58806F60",
     "587D6BD0",
     "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
@@ -544,11 +546,17 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58806F60": {
+        "name_in_analysis": "FUN_58806F60 / variable-record component update",
+        "called_by": "Byte-matched FUN_58807910 calls this per event record at 0x58807A65 with ECX=the record owner, the current record pointer, a pointer to record +0x114, and a boolean derived from the caller's optional four-DWORD mask. Ghidra also records a call from FUN_588075E0 at 0x5880786C; that separate caller's higher-level meaning remains unverified.",
+        "behavior": "Requires byte [record +0x68] to equal 1; otherwise it formats the record name from +6 with the diagnostic `SetNewPlayerData_TypeOfComponent is 0` and enters the captured fatal/error callback path. Derives a count as ((DWORD [record +0x44] >> 1) & 0x1F), used with the supplied +0x114 pointer and stride 0x18. With the boolean argument nonzero, it calls FUN_587AF1F0 for the record range, calls FUN_588A6410 with byte [record +2], then scans the linked list rooted at [0x58A247F8]+0xC by comparing the record name at +6 with each node's +0x356 key. A match reaches FUN_58778B20/FUN_58731CE0 and sets bit 0 in two fields of that node's child objects. With the boolean zero, it obtains an object through FUN_58789FE0, makes record-derived update calls, selects further calls by the observed subtype values 0x1C3, 0x6F, 0x13E, and 0x1C5, updates table-selected values and receiver flags, and increments receiver counters for subtype groups 8 and 6/7. The full 1,032-byte stream ends with ret 0xC; the literal-x86 source passed mapped-image comparison using pinned clang-cl.",
+        "uncertainty": "The record and object structures, meanings of the count and subtype fields, meaning of the boolean's alternate path, linked-node identity, and gameplay/UI effect are unknown. Most update helpers are not yet matched, so their contracts are not inferred. The second Ghidra-recorded caller FUN_588075E0 has not been semantically traced. No emulator runtime test was performed.",
+    },
     "58807910": {
         "name_in_analysis": "FUN_58807910 / 0x80020113 variable-record update handler",
         "called_by": "Byte-matched event dispatcher FUN_587BB700 calls this in switch case 0x80020113 at the two call instructions 0x587BCEF9 and 0x587BCF17. The case first checks the event count and updates shared state. Its param_3[0xF] bit 0 selects the record/mask pointer form passed to this handler; the receiver flag at +0x1BC bit 0 controls whether the optional four-DWORD mask is read. Ghidra call-site labels the two paths 0x587BCEFE and 0x587BCF1C (post-call/control-flow labels, not call instruction starts).",
         "behavior": "For each event record, copies 0x2E DWORDs from record +0x44, then checks that the 16-bit byte-count at +0x10A equals (((DWORD at +0x44) >> 1) & 0x1F) * 0x18. A mismatch reports the literal diagnostic `ShipContentsNumberOfWaeponSetSerials != /sizeof_WeaponSetSerials` and reaches the captured fatal/error callback path. For matching records, derives a boolean from the optional four-DWORD bit mask and calls FUN_58806F60 with the record and record +0x114. The next record is addressed by adding 0x114, the +0x10A byte-count, and 0x20 times the byte at +0x100. After the loop it calls FUN_58907990, selects the record pointer at [0x58A247F8]+0x10 into +4, and calls byte-matched FUN_587A6220 with that pointer. It then updates receiver fields and forwards selected-record fields through additional scene/map/UI helpers. The full instruction extent is 1,070 bytes (0x58807910..0x58807D3E); the generated literal-x86 source passed the mapped-image comparison with clang-cl.",
-        "uncertainty": "The event record type, meaning of the +0x100/+0x10A fields, semantics of the mask bits, receiver/global object types, and user-visible effect are not established. FUN_58806F60 and multiple later scene/map/UI callees remain unmatched, so their behavior is not inferred here. Ghidra's prototype also leaves some register-derived state as `unaff_*`; no runtime/emulator test was performed.",
+        "uncertainty": "The event record type, meaning of the +0x100/+0x10A fields, semantics of the mask bits, receiver/global object types, and user-visible effect are not established. Multiple later scene/map/UI callees remain unmatched, so their behavior is not inferred here. Ghidra's prototype also leaves some register-derived state as `unaff_*`; no runtime/emulator test was performed.",
     },
     "5875BAE0": {
         "name_in_analysis": "FUN_5875BAE0 / paired initializer-field assignment",
