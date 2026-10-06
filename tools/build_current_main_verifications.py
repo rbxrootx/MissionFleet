@@ -370,6 +370,9 @@ ADDRESSES = (
     "588FC830",
     "588FD180",
     "588FD520",
+    "58900E20",
+    "58900E50",
+    "58900E80",
     "5897CE32",
     "588F7D30",
 )
@@ -457,6 +460,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "588FC830",
     "588FD180",
     "588FD520",
+    "58900E20",
+    "58900E50",
+    "58900E80",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -780,6 +786,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra indexes 27 bytes around the imported delete call and omits the
     # reachable add esp,4 continuation. Match through ret 4 before INT3 padding.
     "58900250": 30,
+    # Ghidra splits this deleting wrapper around reachable stack cleanup;
+    # include add esp,4 through ret 4 at 0x58900E71.
+    "58900E50": 36,
 }
 EVIDENCE = {
     "58900040": {
@@ -811,6 +820,24 @@ EVIDENCE = {
         "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x18 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
         "behavior": "The contiguous 188-byte body [0x58900340,0x589003FC) handles only event argument 2. It compares another argument with receiver fields +0x98 and +0xA0, checks child values at +0x74/+0x78, and follows different virtual update paths; one path sends value 0x11 through FUN_588F74C0/FUN_588F7580. It returns zero with ret 0x0C. Literal instruction emission checks the full body and its mapped operands.",
         "uncertainty": "The argument meanings, child values, message code, helper contracts, and user-visible effect are unresolved. No emulator event test has been run.",
+    },
+    "58900E20": {
+        "name_in_analysis": "FUN_58900E20 / CWarfogOnFight constructor",
+        "called_by": "The caller at 0x587EF639 directly calls this constructor. It installs the six-entry RTTI-backed vtable at 0x589A24A8; that table's locator resolves through 0x589AAE68 to TypeDescriptor 0x589CDED4, named .?AVCWarfogOnFight@@.",
+        "behavior": "The contiguous 47-byte constructor body [0x58900E20,0x58900E4F) calls FUN_589031A0 with param_2, four zero arguments, and param_4; installs vtable 0x589A24A8; stores param_3 at receiver offset +0x50; and returns this with ret 0x0C. Literal instruction emission checks every byte.",
+        "uncertainty": "The constructor helper's initialization contract and the field at +0x50 are unresolved. The class name is taken verbatim from mapped RTTI; no runtime constructor test has been run.",
+    },
+    "58900E50": {
+        "name_in_analysis": "FUN_58900E50 / CWarfogOnFight deleting-destructor wrapper",
+        "called_by": "This is slot +0x00 of the six-entry RTTI-backed CWarfogOnFight vtable at 0x589A24A8, installed by matched constructor FUN_58900E20. The wrapper directly calls FUN_58902D60 at 0x58900E58.",
+        "behavior": "The complete mapped wrapper is 36 bytes [0x58900E50,0x58900E74). It reinstalls vtable 0x589A24A8, calls FUN_58902D60, tests bit 0 of its stack flag, conditionally calls FUN_5897CC42(this), restores the stack after that call, and returns this with ret 4. Ghidra indexes 33 bytes in split ranges and omits reachable add esp,4 at 0x58900E6B; literal instruction emission verifies through ret 4 at 0x58900E71.",
+        "uncertainty": "The stack flag's caller-level meaning and the deletion thunk's ultimate target are unresolved; Ghidra marks the thunk non-returning although the mapped wrapper has a cleanup and return continuation. No runtime deletion test has been run.",
+    },
+    "58900E80": {
+        "name_in_analysis": "FUN_58900E80 / CWarfogOnFight vtable method +0x14",
+        "called_by": "This method occupies slot +0x14 of the six-entry RTTI-backed CWarfogOnFight vtable at 0x589A24A8, installed by matched constructor FUN_58900E20. No direct code caller was identified.",
+        "behavior": "The contiguous 1,888-byte body [0x58900E80,0x589015E0) first gates on bit 0 of receiver word +0x24. When enabled, it derives grid dimensions and indices from the object at DAT_58A2459C+0x10524, scans the byte grid rooted at DAT_58A2459C+0x10548, and builds an eight-neighbor mask by comparing nearby grid values with 2. Depending on the current cell and mask, it calls FUN_5873A5D0 or FUN_58903D60 to emit/update map tiles, then calls FUN_58906EA0 and restores exception state. This is a combat fog-grid rendering/update path; all mapped instructions are emitted literally.",
+        "uncertainty": "The meanings of grid values below 2, mask bits, coordinate units, helper arguments, and DAT_58A2459C remain unresolved. Ghidra reports unsettled type propagation and a jump table at 0x589015E0 immediately after the function; no emulator render comparison has been run.",
     },
     "588F9900": {
         "name_in_analysis": "FUN_588F9900 / CWarehouseItemInfo destructor body",
