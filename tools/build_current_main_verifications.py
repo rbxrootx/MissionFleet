@@ -21,6 +21,7 @@ ADDRESSES = (
     "58879FB0",
     "588A69F0",
     "588A6C70",
+    "588A6CD0",
     "588A6D60",
     "588A70F0",
     "588A6E30",
@@ -361,6 +362,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58879FB0",
     "588A69F0",
     "588A6C70",
+    "588A6CD0",
     "588A6D60",
     "588A70F0",
     "588A6E30",
@@ -6523,6 +6525,12 @@ EVIDENCE = {
         "called_by": "The Ghidra reference dump and a scan of the installed mapped Main.dll find one direct E8 call, at 0x587C04DE, from byte-matched FUN_587BB700. At the call site, ECX is loaded from [0x58A245A8]+0x174 and no stack argument is pushed. The call is in the caller's observed branch where the word at event-record +0x0A equals 1; FUN_588A6D60 follows it.",
         "behavior": "Ghidra confirms one contiguous 86-byte body, [0x588A6C70, 0x588A6CC6), with one mapped operand target: absolute address 0x58A247F8 at offset 1. It reads dword +0x6074 from the object at [0x58A247F8]+4. When nonzero, it calls vtable slot +8 on receiver child +0x1A8, then slot +4 on child +0x1AC, then slot +4 on child +0x18C. Regardless of that condition, it calls slot +8 on child +0x198, restores ESI, and tail-jumps through slot +8 on child +0x19C. The terminal instruction is `pop esi; jmp eax`, preserved literally.",
         "uncertainty": "The record/child types, meaning of record field +0x6074, semantics of the event branch, and contracts/effects of the indirect vtable methods are unknown. Ghidra reports an unresolved jump table at the terminal indirect transfer and models it as a call/return; the bytes show a tail jump. The direct caller is verified, but the indirect method behaviors and emulator-visible result have not been tested.",
+    },
+    "588A6CD0": {
+        "name_in_analysis": "FUN_588a6cd0 / message-0x80021104 child refresh",
+        "called_by": "Ghidra's function-reference dump and an independent scan of the installed mapped Main.dll find one direct E8 call, at 0x587C057E, from byte-matched FUN_587BB700. The matched dispatcher places this call in message case 0x80021104, loads ECX from [0x58A245A8]+0x174, and pushes no stack arguments.",
+        "behavior": "Ghidra and the mapped instruction stream give one contiguous 136-byte body, [0x588A6CD0, 0x588A6D58), with an absolute operand at offset 0x0E targeting 0x58A247F8. The helper stores 1 at receiver +0xA8, then tests dword +0x6074 on the object at [0x58A247F8]+4. If nonzero, it invokes vtable slot +8 on receiver children +0x190, +0x188, and +0x19C, then restores ESI and tail-jumps through slot +8 on child +0x1A8. If zero, it invokes slot +8 on children +0x18C, +0x190, and +0x198, then restores ESI and tail-jumps through slot +8 on child +0x19C. The final transfers are literal `pop esi; jmp eax` sequences in both branches.",
+        "uncertainty": "The receiver and child types, global record schema, meaning of field +0x6074, and contracts/effects of the indirect slot +8 methods are unresolved. Ghidra reports both terminal indirect jumps as unrecovered jumptables and models them as calls followed by return; the mapped bytes establish the actual tail jumps. The direct caller is byte-matched, but neither the indirect methods nor the emulator-visible result have been runtime-tested.",
     },
     "588A6D60": {
         "name_in_analysis": "FUN_588a6d60 / event-gated child state refresh",

@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,447 matches cover 2,341,456 bytes (22.3630%) and are verified
+The current 7,448 matches cover 2,341,592 bytes (22.3643%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
@@ -17,6 +17,8 @@ The six methods called from the current Main.dll tag dispatcher are documented
 in [the dispatcher helper evidence](docs/current-main-tag-dispatch-helper-methods.md).
 The remaining direct dispatcher callees and their corrected boundaries are
 documented in [the case helper evidence](docs/current-main-tag-dispatch-remaining-callees.md).
+The message 0x80021104 child refresh helper and its two branch-specific tail
+dispatches are documented in [the refresh evidence](docs/current-main-message-21104-child-refresh.md).
 The 32-slot child update invoked by one dispatcher helper is documented in
 [the child-update evidence](docs/current-main-32-slot-child-update-helper.md).
 Its direct linked-list registration and removal helpers are documented in

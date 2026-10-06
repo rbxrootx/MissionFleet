@@ -318481,6 +318481,39 @@
         "behavior": "Ghidra confirms one contiguous 312-byte body, [0x588A6E30, 0x588A6F68). It initializes receiver dword +0xAC to 0 and continues only when `(word at +0x24 & 0x1F00) == 0x0200`. It calls matched FUN_588EB130 with ECX=0x58A24810. A zero result sets +0xAC to 1 and returns. A nonzero result selects children from the global object at 0x58A246D8: when its +0x170 dword exceeds 2 and +0x194 is nonzero, the child at +8 receives matched FUN_58907990 with ECX=that child and stack value 0x58A248F8, then its vtable slot +4 is called with 0; similarly, when +0x170 exceeds 7, the child at +0x1C receives FUN_58907990 with stack value 0x58A248FC and then its slot +4 is called with 0. It calls matched FUN_587B9600 with receiver words +0x96 and +0x94 in that order, clears the low four bits of the word at child +0x194 +0x24, then restores ESI and tail-jumps through child +0x188 vtable slot +8. Ghidra's decompiler treats the final indirect jump as a call/return; the bytes show `pop esi; jmp eax`.",
         "uncertainty": "The meaning of the 0x200 flag test, receiver +0xAC, global child counts/indices, and indirect vtable contracts are unknown. When the global child-count/pointer guards fail, the captured machine code zeros ECX before the following indirect slot call; the invariant that prevents a null dereference is not established. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588A6CD0",
+      "name": "FUN_588a6cd0",
+      "size": 136,
+      "symbol": "_FUN_588a6cd0",
+      "source": "src/client-current/Main/FUN_588a6cd0.cpp",
+      "source_sha256": "3866bacc4c65b0e4414b63a83e00a4b0bbeb930031580f0699ffb1fccd650d67",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a6cd0 / message-0x80021104 child refresh",
+        "called_by": "Ghidra's function-reference dump and an independent scan of the installed mapped Main.dll find one direct E8 call, at 0x587C057E, from byte-matched FUN_587BB700. The matched dispatcher places this call in message case 0x80021104, loads ECX from [0x58A245A8]+0x174, and pushes no stack arguments.",
+        "behavior": "Ghidra and the mapped instruction stream give one contiguous 136-byte body, [0x588A6CD0, 0x588A6D58), with an absolute operand at offset 0x0E targeting 0x58A247F8. The helper stores 1 at receiver +0xA8, then tests dword +0x6074 on the object at [0x58A247F8]+4. If nonzero, it invokes vtable slot +8 on receiver children +0x190, +0x188, and +0x19C, then restores ESI and tail-jumps through slot +8 on child +0x1A8. If zero, it invokes slot +8 on children +0x18C, +0x190, and +0x198, then restores ESI and tail-jumps through slot +8 on child +0x19C. The final transfers are literal `pop esi; jmp eax` sequences in both branches.",
+        "uncertainty": "The receiver and child types, global record schema, meaning of field +0x6074, and contracts/effects of the indirect slot +8 methods are unresolved. Ghidra reports both terminal indirect jumps as unrecovered jumptables and models them as calls followed by return; the mapped bytes establish the actual tail jumps. The direct caller is byte-matched, but neither the indirect methods nor the emulator-visible result have been runtime-tested."
+      }
     }
   ]
 }
