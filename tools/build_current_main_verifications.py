@@ -8,7 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "587B95E0",
+    "587B9600",
     "587B9620",
+    "588A6A30",
     "58805880",
     "588058D0",
     "588A6720",
@@ -333,7 +335,9 @@ SOURCE_COMPILER_ADDRESSES = {
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "587B95E0",
+    "587B9600",
     "587B9620",
+    "588A6A30",
     "58805880",
     "588058D0",
     "588A6720",
@@ -589,6 +593,18 @@ EVIDENCE = {
         "called_by": "Ghidra records four calls: byte-matched FUN_588A6720 at 0x588A68FE and 0x588A693F, unmatched FUN_588A6A30 at 0x588A6C37, and unmatched FUN_588A8A70 at 0x588A8C6E. The first two matched calls pass receiver words +0x96 and +0x94, in that order. The latter two callers' behavior is not established; argument setup at 0x588A8C6E was not inspected.",
         "behavior": "Loads its two stack arguments and calls byte-matched FUN_58970C70 with arguments (0x80010021, first_stack_argument, second_stack_argument, 0, 0, 0), then returns with ret 8. Ghidra's contiguous function extent is 29 bytes through 0x587B963C.",
         "uncertainty": "The meaning of code 0x80010021, the meanings and units of the forwarded words, and the three zero-valued fields are unknown. Two direct callers are unmatched, and no emulator runtime test was performed.",
+    },
+    "587B9600": {
+        "name_in_analysis": "FUN_587b9600 / fixed-code message wrapper",
+        "called_by": "Ghidra records four calls: byte-matched FUN_588A6A30 at 0x588A6BD9, unmatched FUN_588A6E30 at 0x588A6F3A, unmatched FUN_588A8A70 at 0x588A8BE3, and unmatched FUN_588060F0 at 0x58806139.",
+        "behavior": "Loads two stack arguments and calls byte-matched FUN_58970C70 with arguments (0x80010019, first_stack_argument, second_stack_argument, 0, 0, 0), then returns with ret 8. The indexed extent is 29 contiguous bytes through 0x587B961C.",
+        "uncertainty": "The meaning of code 0x80010019, the meanings and units of the forwarded words, and the three zero-valued fields are unknown. Three of its four direct callers are unmatched, and no emulator runtime test was performed.",
+    },
+    "588A6A30": {
+        "name_in_analysis": "FUN_588a6a30 / mode-dependent paired-child update",
+        "called_by": "Ghidra records one direct call from FUN_58808AD0 at 0x58808CFD; that caller is currently unmatched, so its surrounding state and queue context are not established.",
+        "behavior": "The complete Ghidra extent is 567 contiguous bytes from 0x588A6A30 through 0x588A6C66. The function enters its update paths only when bit 0 differs between the words at +0x24 of receiver child pointers +0x194 and +0x198. Nested branches test receiver state word +0x9C and return values from FUN_588EB130 or FUN_58807E80. The captured paths call fixed-code message helpers with values from receiver words +0x96/+0x94, invoke matched FUN_58907990 or FUN_587315C0 with observed global/constant arguments, call child vtable slots through receiver fields +0x188/+0x18C, and clear low four bits in selected child +0x24 words at receiver fields +0x198, +0x194, +0x1A0, or +0x1A4. One branch ends with an indirect tail jump through a child vtable slot.",
+        "uncertainty": "The receiver and child types, meaning of state +0x9C, bit-0 flags, message codes, globals, indirect vtable contracts, and visible effect are unresolved. FUN_58807E80 and the only identified caller FUN_58808AD0 are unmatched. Ghidra did not recover the indirect jump table at 0x588A6C06; the literal source preserves the original bytes. No emulator runtime test was performed.",
     },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
