@@ -64,6 +64,8 @@ def main():
         raise AssertionError("ID-panel destructor vtable slot changed")
     if u32(0x5899DB64 + 0x10) != 0x58823950:
         raise AssertionError("ClanMessage input vtable slot changed")
+    if u32(0x5899DB64 + 0x0C) != 0x58822F10:
+        raise AssertionError("ClanMessage geometry-update vtable slot changed")
     print("5899E788: FUN_58848B90 (ID-panel reset slot +0x08)")
     print("5899E78C: FUN_58848E60 (ID-panel periodic slot +0x0C)")
     print("5899E784: FUN_58848240 (ID-panel state-setup slot +0x04)")
@@ -71,6 +73,7 @@ def main():
     print("5899E790: FUN_5884AB90 (ID-panel input slot +0x10)")
     print("5899E798: FUN_58848BC0 (ID-panel event slot +0x18)")
     print("5899DB74: FUN_58823950 (ClanMessage input slot +0x10)")
+    print("5899DB70: FUN_58822F10 (ClanMessage geometry-update slot +0x0C)")
 
 
 if __name__ == "__main__":
