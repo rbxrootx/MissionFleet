@@ -37,6 +37,12 @@ respectively. That helper stores the argument and toggles bit 0 on two
 referenced child words; the meaning of those fields remains unknown. See the
 [paired child-bit helper notes](current-main-588d6cc0-paired-child-bit-helper.md).
 
+On the `cVar8 == 2` path, the handler calls `FUN_588d6d10` at `0x58807CC5`
+with ECX pointing to the active object and argument `1`. This sibling helper
+sets bit 0 on a different pair of referenced child words; its field meanings
+are also unresolved. See the
+[sibling child-bit helper notes](current-main-588d6d10-paired-child-bit-helper.md).
+
 The next record address advances by `0x114`, the record's 16-bit value at
 `+0x10A`, and `0x20` times its byte at `+0x100`. After the loop, the handler
 calls `FUN_58907990`, moves the selected pointer from `[0x58A247F8]+0x10` to

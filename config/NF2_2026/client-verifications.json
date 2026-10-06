@@ -316290,6 +316290,32 @@
         "behavior": "As a __thiscall helper, stores its one stack argument at receiver +0x6074. When the argument is nonzero, it sets bit 0 in the 16-bit value at +0x24 of each object pointed to by receiver fields +0x12B8 and +0x12BC. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 66-byte indexed extent at 0x588D6CC0..0x588D6D01.",
         "uncertainty": "The receiver fields, referenced child-object types, and meaning of the stored value and flags are unknown. Callers show where the helper is used and what values they pass, but not the user-visible effect. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588D6D10",
+      "name": "FUN_588d6d10",
+      "size": 59,
+      "symbol": "_FUN_588d6d10",
+      "source": "src/client-current/Main/FUN_588d6d10.cpp",
+      "source_sha256": "221732e956b974ca0e7a116864f915c1b5f710bfb32b1006a65adda0ca620c6a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588d6d10 / paired child-bit update",
+        "called_by": "Byte-matched FUN_58806F60 calls at 0x588071A6 and 0x58807242 with ECX=ESI and stack arguments 0 and 1. Byte-matched FUN_58807910 calls at 0x58807CC5 with ECX=[0x58A247F8]+4 and stack argument 1. Ghidra also records a call from unmatched FUN_58805940 at 0x58805969.",
+        "behavior": "As a __thiscall helper, it tests its one stack argument. When nonzero, it sets bit 0 in the 16-bit word at +0x24 of each object pointed to by receiver fields +0x12C0 and +0x12C4. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 59-byte indexed extent at 0x588D6D10..0x588D6D4A.",
+        "uncertainty": "The receiver fields, referenced child-object types, and meaning of these flags are unknown. Callers show usage and passed values, but not the user-visible effect. No emulator runtime test was performed."
+      }
     }
   ]
 }

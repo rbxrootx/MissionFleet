@@ -40,6 +40,9 @@ Its three calls to `FUN_588d6cc0` at `0x5880719D`, `0x588071D0`, and
 `0x58807207` use ECX=ESI and pass `0`, `1`, and `1`; the target's paired bit
 updates are described in the
 [child-bit helper notes](current-main-588d6cc0-paired-child-bit-helper.md).
+The same control flow calls sibling `FUN_588d6d10` at `0x588071A6` with `0`
+and at `0x58807242` with `1`, again using ECX=ESI; see the
+[sibling helper notes](current-main-588d6d10-paired-child-bit-helper.md).
 
 ## Unresolved details
 
