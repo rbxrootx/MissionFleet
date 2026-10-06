@@ -4,8 +4,8 @@
 `FUN_588d6cc0`. Byte-matched `FUN_58806F60` calls it at `0x588071A6` and
 `0x58807242`, with ECX=ESI and stack arguments `0` and `1`. Byte-matched
 `FUN_58807910` calls it at `0x58807CC5` with ECX=`[0x58A247F8]+4` and argument
-`1`. Ghidra also records a call from `FUN_58805940` at `0x58805969`; that
-caller is not yet byte-matched.
+`1`. Byte-matched `FUN_58805940` also calls it at `0x58805969` with
+ECX=`[0x58A247F8]+4` and argument `1`.
 
 ## Behavior supported by the original code
 

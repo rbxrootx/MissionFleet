@@ -5,8 +5,10 @@
 `0x58807207`, with ECX=ESI and stack arguments `0`, `1`, and `1`. The
 byte-matched `FUN_58807910` calls it at `0x58807C81` and `0x58807CA1` with
 ECX equal to `[0x58A247F8]+4`; the first passes a derived boolean and the
-second passes `1`. Ghidra also records direct calls from `FUN_58805940`,
-`FUN_58805880`, and `FUN_588058D0`; those callers are not yet byte-matched.
+second passes `1`. Byte-matched `FUN_58805940` also calls it at `0x58805988`
+with ECX=the return from `FUN_5878A160` and argument `1`. Ghidra also records
+calls from `FUN_58805880` and `FUN_588058D0`; those callers are not yet
+byte-matched.
 
 ## Behavior supported by the original code
 

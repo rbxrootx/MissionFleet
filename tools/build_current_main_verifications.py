@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "58805940",
     "588D6CC0",
     "588D6D10",
     "58805BA0",
@@ -325,6 +326,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "58805940",
     "588D6CC0",
     "588D6D10",
     "58805BA0",
@@ -561,15 +563,21 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58805940": {
+        "name_in_analysis": "FUN_58805940 / selected-value paired child update",
+        "called_by": "Ghidra records one direct caller: unmatched FUN_588075E0 at 0x588077F9. Within this helper, the equality path calls byte-matched FUN_588D6D10 at 0x58805969 with ECX=[0x58A247F8]+4 and argument 1; the other path calls byte-matched FUN_588D6CC0 at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1.",
+        "behavior": "Compares the selected object's word at +0x350 with the second stack argument. If equal, sets bit 1 in receiver dword +0x78, invokes FUN_588D6D10(1) on the selected object, then calls FUN_588A69F0 with the first stack argument. If unequal, calls FUN_5878A160 with the compared value and invokes FUN_588D6CC0(1) with its return value as ECX. Both paths then set bit 1 in the word at +0x24 of the object referenced by receiver +0x174, write 400 to receiver +0x300, and return with ret 8. The complete indexed body is 102 bytes through 0x588059A5.",
+        "uncertainty": "The meaning of the compared +0x350 word, receiver flags, referenced child objects, and the effects of FUN_588A69F0/FUN_5878A160 are unknown. Its only recorded direct caller FUN_588075E0 is not byte-matched, so that call's broader purpose is unverified. No emulator runtime test was performed.",
+    },
     "588D6D10": {
         "name_in_analysis": "FUN_588d6d10 / paired child-bit update",
-        "called_by": "Byte-matched FUN_58806F60 calls at 0x588071A6 and 0x58807242 with ECX=ESI and stack arguments 0 and 1. Byte-matched FUN_58807910 calls at 0x58807CC5 with ECX=[0x58A247F8]+4 and stack argument 1. Ghidra also records a call from unmatched FUN_58805940 at 0x58805969.",
+        "called_by": "Byte-matched FUN_58806F60 calls at 0x588071A6 and 0x58807242 with ECX=ESI and stack arguments 0 and 1. Byte-matched FUN_58807910 calls at 0x58807CC5 with ECX=[0x58A247F8]+4 and stack argument 1. Byte-matched FUN_58805940 also calls it at 0x58805969 with ECX=[0x58A247F8]+4 and stack argument 1.",
         "behavior": "As a __thiscall helper, it tests its one stack argument. When nonzero, it sets bit 0 in the 16-bit word at +0x24 of each object pointed to by receiver fields +0x12C0 and +0x12C4. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 59-byte indexed extent at 0x588D6D10..0x588D6D4A.",
         "uncertainty": "The receiver fields, referenced child-object types, and meaning of these flags are unknown. Callers show usage and passed values, but not the user-visible effect. No emulator runtime test was performed.",
     },
     "588D6CC0": {
         "name_in_analysis": "FUN_588d6cc0 / paired child bit update",
-        "called_by": "Byte-matched FUN_58806F60 calls at 0x5880719D, 0x588071D0, and 0x58807207 with ECX=ESI and stack arguments 0, 1, and 1. Byte-matched FUN_58807910 calls at 0x58807C81 and 0x58807CA1 with ECX=[0x58A247F8]+4; Ghidra decompiles their arguments as (iVar3 >= 3) and 1. Ghidra also records calls from unmatched FUN_58805940 at 0x58805988, FUN_58805880 at 0x5880589D, and FUN_588058D0 at 0x588058F9 and 0x58805918.",
+        "called_by": "Byte-matched FUN_58806F60 calls at 0x5880719D, 0x588071D0, and 0x58807207 with ECX=ESI and stack arguments 0, 1, and 1. Byte-matched FUN_58807910 calls at 0x58807C81 and 0x58807CA1 with ECX=[0x58A247F8]+4; Ghidra decompiles their arguments as (iVar3 >= 3) and 1. Byte-matched FUN_58805940 calls it at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1. Ghidra also records calls from FUN_58805880 at 0x5880589D and FUN_588058D0 at 0x588058F9 and 0x58805918; those callers are not byte-matched.",
         "behavior": "As a __thiscall helper, stores its one stack argument at receiver +0x6074. When the argument is nonzero, it sets bit 0 in the 16-bit value at +0x24 of each object pointed to by receiver fields +0x12B8 and +0x12BC. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 66-byte indexed extent at 0x588D6CC0..0x588D6D01.",
         "uncertainty": "The receiver fields, referenced child-object types, and meaning of the stored value and flags are unknown. Callers show where the helper is used and what values they pass, but not the user-visible effect. No emulator runtime test was performed.",
     },
