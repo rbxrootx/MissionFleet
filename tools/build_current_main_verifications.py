@@ -21,6 +21,7 @@ ADDRESSES = (
     "58879FB0",
     "588A69F0",
     "588A6C70",
+    "588A6D60",
     "58805880",
     "588058D0",
     "588A6720",
@@ -358,6 +359,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58879FB0",
     "588A69F0",
     "588A6C70",
+    "588A6D60",
     "58805880",
     "588058D0",
     "588A6720",
@@ -6517,6 +6519,12 @@ EVIDENCE = {
         "called_by": "The Ghidra reference dump and a scan of the installed mapped Main.dll find one direct E8 call, at 0x587C04DE, from byte-matched FUN_587BB700. At the call site, ECX is loaded from [0x58A245A8]+0x174 and no stack argument is pushed. The call is in the caller's observed branch where the word at event-record +0x0A equals 1; FUN_588A6D60 follows it.",
         "behavior": "Ghidra confirms one contiguous 86-byte body, [0x588A6C70, 0x588A6CC6), with one mapped operand target: absolute address 0x58A247F8 at offset 1. It reads dword +0x6074 from the object at [0x58A247F8]+4. When nonzero, it calls vtable slot +8 on receiver child +0x1A8, then slot +4 on child +0x1AC, then slot +4 on child +0x18C. Regardless of that condition, it calls slot +8 on child +0x198, restores ESI, and tail-jumps through slot +8 on child +0x19C. The terminal instruction is `pop esi; jmp eax`, preserved literally.",
         "uncertainty": "The record/child types, meaning of record field +0x6074, semantics of the event branch, and contracts/effects of the indirect vtable methods are unknown. Ghidra reports an unresolved jump table at the terminal indirect transfer and models it as a call/return; the bytes show a tail jump. The direct caller is verified, but the indirect method behaviors and emulator-visible result have not been tested.",
+    },
+    "588A6D60": {
+        "name_in_analysis": "FUN_588a6d60 / event-gated child state refresh",
+        "called_by": "Ghidra's reference dump and a scan of the installed mapped Main.dll find one direct E8 call, at 0x587C04EF, from byte-matched FUN_587BB700. The caller loads ECX from [0x58A245A8]+0x174 and pushes no stack argument. It reaches the helper in its observed event-record +0x0A == 1 branch, after FUN_588A6C70.",
+        "behavior": "Ghidra confirms one contiguous 141-byte body, [0x588A6D60, 0x588A6DED), with mapped operand targets 0x58A247F8 and FUN_58902CE0. If byte +0x354 of the object at [0x58A247F8]+4 is not 1, receiver state word +0x9C selects whether dword +0x50 on child +0xB8 is set to 0 (state 0x10) or 1 (other states). It then calls byte-matched FUN_58902CE0(0x100). If receiver state is not 0x10, it ORs bit 0 into the word at child +0x1E4 +0x24. It stores 2 at receiver +0x98, ORs 0xF into the word at child +0x160 +0x24, stores byte 1 at that child +0x100, and ORs bit 0 into the word at child +0xD8 +0x24.",
+        "uncertainty": "The receiver/child types, global record schema, meanings of record byte +0x354 and state +0x9C, field +0x98, and flag effects remain unresolved. The visible result of the indirect child updates has not been tested in the emulator.",
     },
 }
 
