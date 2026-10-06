@@ -332,6 +332,8 @@ ADDRESSES = (
     "588F8EA0",
     "588F8840",
     "588F7D10",
+    "588F8640",
+    "588F8820",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -379,6 +381,8 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "588F8640",
+    "588F8820",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -681,8 +685,23 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra ended at the stack-cookie call. Include the mapped frame restore
     # and ret 8 before the eight INT3 alignment bytes.
     "588D84D0": 2184,
+    # Ghidra's split 27-byte body excludes the reachable add esp,4 continuation
+    # at 0x588F8835..0x588F8838. Include it with the existing ret 4 before INT3.
+    "588F8820": 30,
 }
 EVIDENCE = {
+    "588F8640": {
+        "name_in_analysis": "FUN_588F8640 / CWarehouseItemForce destructor body",
+        "called_by": "Ghidra records one direct incoming call from FUN_588F8820 at 0x588F8823. This body has no direct vtable or data reference of its own; the RTTI-backed CWarehouseItemForce table points to the scalar-deleting-shaped wrapper at slot +0x00.",
+        "behavior": "Ghidra confirms a contiguous 470-byte body [0x588F8640,0x588F8816) with all 155 instructions covered. It installs CWarehouseItemForce::vftable, then conditionally releases and clears child pointers at receiver byte offsets +0xAC, +0xB0, +0xC0, and +0xCC through +0xFC by invoking each child's vtable slot 0 with delete flag 1; one child release also passes an additional argument. It calls FUN_588F7C00 at 0x588F87FF, restores the saved exception-list state, and returns. The emitted instruction source verifies the complete mapped extent and checks its operand targets.",
+        "uncertainty": "The semantic identities and ownership rules for the 16 child fields, the callback/deletion contract, and the runtime behavior remain unresolved. The evidence supports a CWarehouseItemForce destructor body because it installs that vtable and is called by its deleting-destructor-shaped wrapper; this contract has not been runtime-tested.",
+    },
+    "588F8820": {
+        "name_in_analysis": "FUN_588F8820 / CWarehouseItemForce scalar-deleting-destructor-shaped wrapper",
+        "called_by": "Ghidra finds one incoming data reference at 0x589A210C, slot +0x00 of the RTTI-backed CWarehouseItemForce vtable. No direct code callers were found.",
+        "behavior": "Ghidra records 27 body bytes in [0x588F8820,0x588F8835) and [0x588F8838,0x588F883E), while the mapped stream contains a 3-byte add esp,4 cleanup continuation at 0x588F8835..0x588F8838 between those ranges. FUN_5897CC42 is an indirect IAT jump thunk despite Ghidra marking it non-returning, so the cleanup path may continue to the final ret 4 at 0x588F883B. The complete contiguous 30-byte stream calls destructor body FUN_588F8640, checks the deleting flag bit, conditionally calls FUN_5897CC42(this), then returns this. Exact mapped code is emitted and checked with the two direct-call targets audited.",
+        "uncertainty": "The imported callback's deletion semantics and whether it returns in the target runtime are not confirmed. Ghidra excludes the 3-byte cleanup from its function body because it marks FUN_5897CC42 non-returning; the contiguous mapped instructions and existing thunk evidence support including it. No emulator runtime test has been performed.",
+    },
     "588F7D10": {
         "name_in_analysis": "FUN_588F7D10 / CWarehouseItemForce two-field byte predicate",
         "called_by": "Ghidra's reference audit finds no direct code callers. One data reference at 0x589A2134 places this function in slot +0x28 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. A second data reference at 0x589A20FC belongs to a static table whose owning class is unresolved. The function has no direct outgoing calls.",

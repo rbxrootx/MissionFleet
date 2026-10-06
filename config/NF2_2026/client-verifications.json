@@ -325615,6 +325615,96 @@
         "behavior": "Ghidra confirms one contiguous 30-byte body [0x588F7D10,0x588F7D2E) with 10 instructions and complete byte coverage. It returns 1 exactly when the byte at receiver +0x6A equals its first 32-bit stack argument and the byte at +0x6B equals its second 32-bit stack argument; otherwise it returns 0. The source expresses the two comparisons in inline x86 mnemonics and matches the mapped body.",
         "uncertainty": "The semantic meanings of the two receiver bytes and arguments remain unknown. The second static-table reference is not attributed to a class, and concrete virtual dispatch sites have not been found. Runtime behavior has not been exercised in the emulator."
       }
+    },
+    {
+      "address": "588F8640",
+      "name": "FUN_588f8640",
+      "size": 470,
+      "symbol": "_FUN_588f8640",
+      "source": "src/client-current/Main/FUN_588f8640.cpp",
+      "source_sha256": "857d55ce8e1583ba9da26a1e020bbb9439d0aa793bd99d087acf207d26114582",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898A088",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "589A210C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 448,
+          "target_address": "588F7C00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F8640 / CWarehouseItemForce destructor body",
+        "called_by": "Ghidra records one direct incoming call from FUN_588F8820 at 0x588F8823. This body has no direct vtable or data reference of its own; the RTTI-backed CWarehouseItemForce table points to the scalar-deleting-shaped wrapper at slot +0x00.",
+        "behavior": "Ghidra confirms a contiguous 470-byte body [0x588F8640,0x588F8816) with all 155 instructions covered. It installs CWarehouseItemForce::vftable, then conditionally releases and clears child pointers at receiver byte offsets +0xAC, +0xB0, +0xC0, and +0xCC through +0xFC by invoking each child's vtable slot 0 with delete flag 1; one child release also passes an additional argument. It calls FUN_588F7C00 at 0x588F87FF, restores the saved exception-list state, and returns. The emitted instruction source verifies the complete mapped extent and checks its operand targets.",
+        "uncertainty": "The semantic identities and ownership rules for the 16 child fields, the callback/deletion contract, and the runtime behavior remain unresolved. The evidence supports a CWarehouseItemForce destructor body because it installs that vtable and is called by its deleting-destructor-shaped wrapper; this contract has not been runtime-tested."
+      }
+    },
+    {
+      "address": "588F8820",
+      "name": "FUN_588f8820",
+      "size": 30,
+      "symbol": "_FUN_588f8820",
+      "source": "src/client-current/Main/FUN_588f8820.cpp",
+      "source_sha256": "7bc5c59ae19e4278add51e430282d1d2896d84d9acfd2fb4a07236099ce83a55",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588F8640",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F8820 / CWarehouseItemForce scalar-deleting-destructor-shaped wrapper",
+        "called_by": "Ghidra finds one incoming data reference at 0x589A210C, slot +0x00 of the RTTI-backed CWarehouseItemForce vtable. No direct code callers were found.",
+        "behavior": "Ghidra records 27 body bytes in [0x588F8820,0x588F8835) and [0x588F8838,0x588F883E), while the mapped stream contains a 3-byte add esp,4 cleanup continuation at 0x588F8835..0x588F8838 between those ranges. FUN_5897CC42 is an indirect IAT jump thunk despite Ghidra marking it non-returning, so the cleanup path may continue to the final ret 4 at 0x588F883B. The complete contiguous 30-byte stream calls destructor body FUN_588F8640, checks the deleting flag bit, conditionally calls FUN_5897CC42(this), then returns this. Exact mapped code is emitted and checked with the two direct-call targets audited.",
+        "uncertainty": "The imported callback's deletion semantics and whether it returns in the target runtime are not confirmed. Ghidra excludes the 3-byte cleanup from its function body because it marks FUN_5897CC42 non-returning; the contiguous mapped instructions and existing thunk evidence support including it. No emulator runtime test has been performed."
+      }
     }
   ]
 }
