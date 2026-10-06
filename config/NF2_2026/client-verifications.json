@@ -319259,6 +319259,45 @@
         "behavior": "The full body is 110 contiguous bytes, [0x588D28A0,0x588D290E), a __thiscall taking one stack argument and returning via ret 4 on both exits. It checks whether the receiver C-string at +0x6C is empty. If empty, it calls FUN_58731CE0(argument), then obtains the object at receiver +0x50 and calls its vtable slot +4 with (argument, result of indirect function pointer 0x5898C1A8(argument, receiver+0x8C)). If the string is nonempty, it writes 1 to receiver +0x88 and calls indirect function pointer 0x5898C198(receiver+0x84, argument).",
         "uncertainty": "The receiver type, meanings of fields +0x6C/+0x50/+0x84/+0x88/+0x8C, contracts of FUN_58731CE0 and the indirect callbacks, and resulting UI behavior are unknown. One of three incoming callers, FUN_5888FFB0, is unmatched, so its higher-level context is incomplete. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587A5080",
+      "name": "FUN_587a5080",
+      "size": 48,
+      "symbol": "_FUN_587a5080",
+      "source": "src/client-current/Main/FUN_587a5080.cpp",
+      "source_sha256": "f21a3a26fb1a939055b26d759d1191d5a8a65f673663fdfbd4fa33f8dcf88c10",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 35,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5080 / possible bounded-cursor validation helper",
+        "called_by": "Fresh Ghidra DumpFunctionRefs evidence records 80 unconditional call references across 11 callers. Byte-matched FUN_58775980 has seven sites (0x58775AAB, 0x58775AC6, 0x58775ADA, 0x58775AF0, 0x58775B06, 0x58775B48, 0x58775B58); byte-matched FUN_587A90D0 has thirteen (0x587A9256, 0x587A926E, 0x587A9294, 0x587A92BE, 0x587A9387, 0x587A9814, 0x587A98E6, 0x587A9942, 0x587A9E53, 0x587A9E70, 0x587A9E88, 0x587A9EC4, 0x587A9F15). Both matched callers pass a descriptor address in ECX and no stack arguments. The other 60 references are from currently unmatched FUN_58739740 (13), FUN_587752D0 (7), FUN_587754E0 (10), FUN_587756F0 (8), FUN_587A88A0 (1), FUN_587A5120 (1), FUN_587AAA50 (15), FUN_587AA5D0 (3), and FUN_58754E80 (2); their surrounding argument setup has not been independently audited.",
+        "behavior": "The complete Ghidra/mapped body is 48 contiguous bytes, [0x587A5080,0x587A50B0), with a plain ret at 0x587A50AF. It receives one pointer in ECX and no stack arguments. It reads the descriptor's first dword as a pointer; when null, it calls FUN_5897CC72 and reloads the field. It then compares the descriptor's second dword with the dword at offset +0x10 of the dereferenced first-field object. If the comparison finds the second dword at or beyond that bound, it calls FUN_5897CC72. On both normal return paths, it returns the descriptor's second dword unchanged.",
+        "uncertainty": "The descriptor and referenced object types, the meaning of the +0x10 bound, and the contract of FUN_5897CC72 are unknown. If the first dword remains null after FUN_5897CC72 returns, the mapped path proceeds to read address 0x10; the helper may initialize state or fail without returning, but this was not established. Only the two matched callers' ECX setup was checked in context. No emulator runtime test was performed."
+      }
     }
   ]
 }

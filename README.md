@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,456 matches cover 2,344,168 bytes (22.3889%) and are verified
+The current 7,457 matches cover 2,344,216 bytes (22.3894%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll child-state reset helper is documented in
 [its Ghidra-backed evidence](docs/current-main-588536c0-child-state-reset.md).
@@ -23,6 +23,8 @@ The validation-gated string report helper is documented in
 [its Main.dll evidence](docs/current-main-58752410-string-report.md).
 The conditional display-text update helper is documented in
 [its Main.dll evidence](docs/current-main-588d28a0-display-text-update.md).
+The possible bounded-cursor validation helper is documented in
+[its Main.dll evidence](docs/current-main-587a5080-bounded-cursor-validation.md).
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are documented

@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "587A5080",
     "588D28A0",
     "58752410",
     "587B95E0",
@@ -355,6 +356,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58789FE0",
     "58752410",
     "588D28A0",
+    "587A5080",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -622,6 +624,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587A5080": {
+        "name_in_analysis": "FUN_587a5080 / possible bounded-cursor validation helper",
+        "called_by": "Fresh Ghidra DumpFunctionRefs evidence records 80 unconditional call references across 11 callers. Byte-matched FUN_58775980 has seven sites (0x58775AAB, 0x58775AC6, 0x58775ADA, 0x58775AF0, 0x58775B06, 0x58775B48, 0x58775B58); byte-matched FUN_587A90D0 has thirteen (0x587A9256, 0x587A926E, 0x587A9294, 0x587A92BE, 0x587A9387, 0x587A9814, 0x587A98E6, 0x587A9942, 0x587A9E53, 0x587A9E70, 0x587A9E88, 0x587A9EC4, 0x587A9F15). Both matched callers pass a descriptor address in ECX and no stack arguments. The other 60 references are from currently unmatched FUN_58739740 (13), FUN_587752D0 (7), FUN_587754E0 (10), FUN_587756F0 (8), FUN_587A88A0 (1), FUN_587A5120 (1), FUN_587AAA50 (15), FUN_587AA5D0 (3), and FUN_58754E80 (2); their surrounding argument setup has not been independently audited.",
+        "behavior": "The complete Ghidra/mapped body is 48 contiguous bytes, [0x587A5080,0x587A50B0), with a plain ret at 0x587A50AF. It receives one pointer in ECX and no stack arguments. It reads the descriptor's first dword as a pointer; when null, it calls FUN_5897CC72 and reloads the field. It then compares the descriptor's second dword with the dword at offset +0x10 of the dereferenced first-field object. If the comparison finds the second dword at or beyond that bound, it calls FUN_5897CC72. On both normal return paths, it returns the descriptor's second dword unchanged.",
+        "uncertainty": "The descriptor and referenced object types, the meaning of the +0x10 bound, and the contract of FUN_5897CC72 are unknown. If the first dword remains null after FUN_5897CC72 returns, the mapped path proceeds to read address 0x10; the helper may initialize state or fail without returning, but this was not established. Only the two matched callers' ECX setup was checked in context. No emulator runtime test was performed.",
+    },
     "588D28A0": {
         "name_in_analysis": "FUN_588d28a0 / conditional display-text update helper",
         "called_by": "Fresh Ghidra references identify exactly three incoming direct calls. Byte-matched FUN_5888D390 calls at 0x5888D443 with ECX=[EBP+0x194] and a formatted local-buffer pointer; byte-matched FUN_5888E450 calls at 0x5888E51E with ECX=[ESI+0x194] and its formatted local-buffer pointer. Unmatched FUN_5888FFB0 calls at 0x58890072 with ECX=[ESI+0x4FC] and EAX returned by the preceding indirect call through 0x5898C030 as the argument.",
