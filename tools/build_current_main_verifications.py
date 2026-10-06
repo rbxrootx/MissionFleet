@@ -314,6 +314,7 @@ ADDRESSES = (
     "58833E40", "587BAA60", "5881DBE0", "58842780", "5875BAE0",
     "588E3AE0",
     "58741C20",
+    "5873A7C0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -379,6 +380,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58893E80",
     "588E3AE0",
     "58741C20",
+    "5873A7C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6706,6 +6708,12 @@ EVIDENCE = {
         "called_by": "Ghidra finds exactly two direct calls and no data refs. Byte-matched FUN_588E3AE0 calls at 0x588E3CE5 after allocating a 0x560-byte object; it places that allocation in ECX and pushes nine arguments (in right-to-left order: 10000, 0, 0, 0, [screen+8], [screen+4], [0x58A2459C+0x10524], loop index, and screen this). This is the aircraft-launch creation path. Unmatched FUN_588D2480 calls at 0x588D24B2 with ECX=ESI and nine stack arguments.",
         "behavior": "Ghidra confirms one contiguous 2,378-byte body, [0x58741C20,0x5874256A), decoded through `ret 0x24` at 0x58742567. The constructor calls FUN_587C3C60, writes the CAircraft vftable, initializes coordinate-, count-, and state-like fields, and allocates several 0x58-byte CSpriteBundleScreen children plus other child/control objects. It uses resource-table bounds and selected global entries to initialize children, clears captured flag bits, stores the owning object and a byte read from its +0x354 field, and returns the constructed pointer. The exact mapped stream is emitted literally and its 69 mapped operand targets are checked.",
         "uncertainty": "The precise meanings and units of most fields, resource identifiers, child controls, and global tables are unknown; child creation behavior has not been runtime-tested. The second caller FUN_588D2480 is unmatched. The observed constructor identity and aircraft-launch call path are supported by the vftable write, Ghidra references, and the byte-matched caller, but no emulator construction test has been performed.",
+    },
+    "5873A7C0": {
+        "name_in_analysis": "FUN_5873a7c0 / CAircraft state, stat, and child-resource initializer",
+        "called_by": "Ghidra finds one incoming direct call and no data refs: byte-matched FUN_588E3AE0 at 0x588E3D72. The caller loads ECX from EDI (the CAircraft object) and pushes five arguments right-to-left: time `(DWORD[this+0x6060] + 900) % 0xE10`, pointer `[ESI+EBP*4+0xE8C]`, EBX index, boolean `(type low five bits == 8)`, and pointer `[ESI+EBX*4+0x6324]`. The target's `ret 0x14` confirms five stack arguments.",
+        "behavior": "Ghidra confirms one contiguous 2,176-byte body, [0x5873A7C0,0x5873B040), decoded through `ret 0x14` at 0x5873B03D. It clears receiver flag bits and counters, copies 0x35 DWORDs (0xD4 bytes) from its third argument into receiver +0x234, and applies observed state/type-dependent percentage scaling to fields including +0x2CE, +0x2D8, and +0x2E2, using values from the fifth stack argument. It derives further values at +0xB0/+0xB4/+0x54C, updates sprite-child visibility/resource fields from bounded global tables, stores the supplied index and record pointer, copies coordinates from the parent at receiver +0x74, resets captured state fields, and creates/clears an effect-related buffer using dimensions derived from +0x2E2. The final selected-state path stores one of globals 0x58A248E0/0x58A248E4/0x58A248E8/0x58A248EC at +0x558 and sets +0x55C to 3. The literal stream has 37 mapped operand targets checked.",
+        "uncertainty": "The copied record schema, field meanings/units, scaling inputs and gameplay interpretation, resource-table identity, child/effect semantics, and visible launch behavior remain uncertain. Ghidra's prototype and the matched caller agree on five stack arguments, but the names and types are still inferred. No runtime replay or emulator test was performed.",
     },
 }
 

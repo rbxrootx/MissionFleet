@@ -322537,6 +322537,255 @@
         "behavior": "Ghidra confirms one contiguous 2,378-byte body, [0x58741C20,0x5874256A), decoded through `ret 0x24` at 0x58742567. The constructor calls FUN_587C3C60, writes the CAircraft vftable, initializes coordinate-, count-, and state-like fields, and allocates several 0x58-byte CSpriteBundleScreen children plus other child/control objects. It uses resource-table bounds and selected global entries to initialize children, clears captured flag bits, stores the owning object and a byte read from its +0x354 field, and returns the constructed pointer. The exact mapped stream is emitted literally and its 69 mapped operand targets are checked.",
         "uncertainty": "The precise meanings and units of most fields, resource identifiers, child controls, and global tables are unknown; child creation behavior has not been runtime-tested. The second caller FUN_588D2480 is unmatched. The observed constructor identity and aircraft-launch call path are supported by the vftable write, Ghidra references, and the byte-matched caller, but no emulator construction test has been performed."
       }
+    },
+    {
+      "address": "5873A7C0",
+      "name": "FUN_5873a7c0",
+      "size": 2176,
+      "symbol": "_FUN_5873a7c0",
+      "source": "src/client-current/Main/FUN_5873a7c0.cpp",
+      "source_sha256": "3e524a404f788064776020b6fec2a2a7b098034d2a0e15a59780234b0fb43773",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897DCDB",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "5873A8EE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "5898CB40",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 204,
+          "target_address": "5898CB38",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 406,
+          "target_address": "5877E7A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 426,
+          "target_address": "5877E7A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 571,
+          "target_address": "5873AAC7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 896,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 902,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 948,
+          "target_address": "58A246A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1070,
+          "target_address": "58A24648",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1169,
+          "target_address": "58A24648",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1269,
+          "target_address": "58A24648",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1547,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1558,
+          "target_address": "587B7500",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1571,
+          "target_address": "5873AE78",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1618,
+          "target_address": "589C9048",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1627,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1648,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1690,
+          "target_address": "587B7350",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1702,
+          "target_address": "587B7350",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1732,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1777,
+          "target_address": "587B7500",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1820,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1845,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1867,
+          "target_address": "5876C7E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1884,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1909,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1978,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2009,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2040,
+          "target_address": "5876C7E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2062,
+          "target_address": "58A248E4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2091,
+          "target_address": "58A248E0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2119,
+          "target_address": "58A248EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2138,
+          "target_address": "58A248E8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873a7c0 / CAircraft state, stat, and child-resource initializer",
+        "called_by": "Ghidra finds one incoming direct call and no data refs: byte-matched FUN_588E3AE0 at 0x588E3D72. The caller loads ECX from EDI (the CAircraft object) and pushes five arguments right-to-left: time `(DWORD[this+0x6060] + 900) % 0xE10`, pointer `[ESI+EBP*4+0xE8C]`, EBX index, boolean `(type low five bits == 8)`, and pointer `[ESI+EBX*4+0x6324]`. The target's `ret 0x14` confirms five stack arguments.",
+        "behavior": "Ghidra confirms one contiguous 2,176-byte body, [0x5873A7C0,0x5873B040), decoded through `ret 0x14` at 0x5873B03D. It clears receiver flag bits and counters, copies 0x35 DWORDs (0xD4 bytes) from its third argument into receiver +0x234, and applies observed state/type-dependent percentage scaling to fields including +0x2CE, +0x2D8, and +0x2E2, using values from the fifth stack argument. It derives further values at +0xB0/+0xB4/+0x54C, updates sprite-child visibility/resource fields from bounded global tables, stores the supplied index and record pointer, copies coordinates from the parent at receiver +0x74, resets captured state fields, and creates/clears an effect-related buffer using dimensions derived from +0x2E2. The final selected-state path stores one of globals 0x58A248E0/0x58A248E4/0x58A248E8/0x58A248EC at +0x558 and sets +0x55C to 3. The literal stream has 37 mapped operand targets checked.",
+        "uncertainty": "The copied record schema, field meanings/units, scaling inputs and gameplay interpretation, resource-table identity, child/effect semantics, and visible launch behavior remain uncertain. Ghidra's prototype and the matched caller agree on five stack arguments, but the names and types are still inferred. No runtime replay or emulator test was performed."
+      }
     }
   ]
 }
