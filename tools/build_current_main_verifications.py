@@ -286,6 +286,7 @@ ADDRESSES = (
     "588ECCC0", "588ECD00", "588EC5D0", "58889020",
     "588EF600", "588EFC40", "588EFD00", "588EFA20", "588F1160",
     "5880AF30", "5880FC50", "5880C0B0", "5880F950",
+    "58809890", "5880C1B0", "5880C4E0", "5880B450",
     "588F0460", "588EF260", "587B7400", "587D7820",
     "587D8840", "587D7B90", "58794600", "58794240", "587943A0", "587944B0",
     "587940D0", "58794110", "58794150", "587941A0", "587941E0", "587945C0", "588A5380",
@@ -4244,6 +4245,30 @@ EVIDENCE = {
         "called_by": "RTTI identifies this as CSpecBoard_Equip vtable slot +0x14 at address point 0x589A1758.",
         "behavior": "Runs a short receiver-state branch and returns with ret 0x0C; its 91-byte body contains no mapped operand targets.",
         "uncertainty": "The event meaning and returned state are unresolved.",
+    },
+    "58809890": {
+        "name_in_analysis": "FUN_58809890 / CPageResultOfBattle_ControlMenuScreen vtable slot +0x00",
+        "called_by": "Ghidra finds only a data reference from vtable address point 0x5899D5F4, whose complete-object locator and TypeDescriptor identify CPageResultOfBattle_ControlMenuScreen. No direct code callers were identified.",
+        "behavior": "Ghidra assigns a 27-byte body in ranges [0x58809890,0x588098A5) and [0x588098A8,0x588098AE). It calls FUN_588092F0; when the second parameter has bit 0 set it calls FUN_5897CC42 with the receiver, otherwise it returns the receiver. The slot and flag pattern are consistent with a scalar-deleting destructor wrapper.",
+        "uncertainty": "The effect of FUN_5897CC42 depends on an unresolved external callback slot, so actual deletion behavior is not established. Ghidra marks the call non-returning; no runtime test has confirmed this path.",
+    },
+    "5880C1B0": {
+        "name_in_analysis": "FUN_5880C1B0 / CPageResultOfBattle_ControlMenuScreen vtable slot +0x04",
+        "called_by": "Ghidra finds only a data reference from slot +0x04 at 0x5899D5F8 in the RTTI-backed CPageResultOfBattle_ControlMenuScreen table. No direct code callers were identified.",
+        "behavior": "The contiguous 815-byte body resets receiver and child-control flags, releases the current child at +0x60, selects result data using receiver field +0x84 and global result tables, copies selected record fields into the child at +0x3FC, updates observed selection globals, and calls screen update helpers.",
+        "uncertainty": "The receiver fields, global tables, and child-control identities have not been semantically named; the two observed result-selection branches are established from the decompilation. No runtime test has been performed.",
+    },
+    "5880C4E0": {
+        "name_in_analysis": "FUN_5880C4E0 / CPageResultOfBattle_ControlMenuScreen vtable slot +0x08",
+        "called_by": "Ghidra finds only a data reference from slot +0x08 at 0x5899D5FC in the RTTI-backed CPageResultOfBattle_ControlMenuScreen table. No direct code callers were identified.",
+        "behavior": "The contiguous 551-byte body clears result/control fields at +0x8E4 through +0x8F0, clears child state bits for controls beginning at +0x8F4 and +0x434, resets screen flags and transition fields, then calls UI, resource, and global-state helpers before updating children at +0x8B8 and +0x8CC through +0x8D4.",
+        "uncertainty": "Ghidra could not recover a jump table at 0x5880C705 and represented the final indirect control transfer as a call. The associated child roles and transition meaning remain unresolved; no runtime test has been performed.",
+    },
+    "5880B450": {
+        "name_in_analysis": "FUN_5880B450 / CPageResultOfBattle_ControlMenuScreen vtable slot +0x1C",
+        "called_by": "Ghidra finds only a data reference from slot +0x1C at 0x5899D610 in the RTTI-backed CPageResultOfBattle_ControlMenuScreen table. No direct code callers were identified.",
+        "behavior": "The contiguous 649-byte body resets receiver and child flags, selects a result record through the global result table, marks indexed children at +0x374 with observed values 1 and 5, and chooses between FUN_58809AF0 and FUN_5880B0D0 using the global mode byte at DAT_58A2459C+0x20D64. It then refreshes or releases the active child at +0x60.",
+        "uncertainty": "The global mode, child indices, helper roles, and visible selection meaning remain unresolved. No runtime test has been performed.",
     },
     "5880FC50": {
         "name_in_analysis": "FUN_5880fc50 / CPageResultOfBattle_ControlMenuScreen virtual method +0x0C",
