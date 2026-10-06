@@ -318221,6 +318221,32 @@
         "behavior": "The 982-byte function is emitted as two literal mapped-code segments, preserving the Ghidra ranges and excluding 0x58879FF8..0x58879FFF; 45 mapped call/data operand targets are recorded for audit. Ghidra shows it calls FUN_58879CC0, loops over the count at record +0x84 to call FUN_589032E0 with record-derived values (using 0xFF and 0x112 when global state word +0x204 is 16 and record byte +0x100 is zero), and sets or clears bit 0 of ushort +0x24 in objects referenced by the pointer array at record +0xE4 under the same condition. It copies 18 dwords from its third argument to record +0x88 and stores other arguments at +0xD0, +0xD4, +0xD8, +0xDC, and +0xE0. It folds ten signed record bytes into seven display slots with mapping {0:5, 1:5, 2:4, 3:3, 4:2, 5:2, 6:0, 7:0, 8:1, 9:6}. In state 16 it combines or clears auxiliary bytes at record +0x92 and +0x9C. When global byte +0x1BC bit 0 is set and FUN_587AEE40(0xF4241) returns an object whose +0x6C is nonzero, it adds the indexed 0x48-byte auxiliary block at lookup result +0x19C + argument-index*0x48. It sends the folded values to FUN_58907360 and reports zero-valued fields with FUN_58902D20(-100). When the final flag is nonzero, it maps the active object's field at +0x100C+4 (masked with 0x1F) to a display slot, decrements that slot, sends it to FUN_58907360, and reports -100 if the corresponding object at record +0x104+slot*8 has a zero dword at +100.",
         "uncertainty": "The record, pointer-array, and auxiliary-block types; semantic labels for the ten inputs and seven display slots; global state meaning; lookup key 0xF4241; and the value/status setter contracts are not identified. Ghidra found one direct incoming reference; indirect call paths are not ruled out. The argument prototype and state effects have not been runtime-validated."
       }
+    },
+    {
+      "address": "588A69F0",
+      "name": "FUN_588a69f0",
+      "size": 41,
+      "symbol": "_FUN_588a69f0",
+      "source": "src/client-current/Main/FUN_588a69f0.cpp",
+      "source_sha256": "9b1c452c9ced0a2a121ea8a5aad4625c552890a8454029705f72715ee5eef1fe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588a69f0 / state-12 child refresh",
+        "called_by": "Ghidra records direct calls from byte-matched FUN_58805940 at 0x58805979 and byte-matched FUN_58807910 at 0x58807CD2. FUN_58807910 reaches the call in its observed event-value-2 branch, passing zero and loading ECX from its receiver +0x174; FUN_58805940 reaches it in an equality branch with ECX likewise loaded from receiver +0x174. The complete caller paths are documented in their matched sources.",
+        "behavior": "Ghidra's contiguous function extent is 41 bytes, [0x588A69F0, 0x588A6A19). The function compares receiver word +0x9C with 0x000C. If equal, it calls the function at child [receiver +0x188]'s vtable slot +4, then ORs 0x000F into the word at child [receiver +0x194] +0x24. Otherwise it performs no child update. The body saves/restores ESI and returns with ret 4; Ghidra's recovered __fastcall prototype does not describe this full observed ABI because the code uses ECX as receiver and callee-cleans one stack slot.",
+        "uncertainty": "The receiver/child types, semantics of state 0x0C, purpose of vtable slot +4, and meaning of the low four child flag bits are unresolved. The direct callers are byte-matched, but neither the indirect method contract nor the visible effect has been runtime-tested in the emulator."
+      }
     }
   ]
 }

@@ -19,6 +19,7 @@ ADDRESSES = (
     "588A9240",
     "588A6410",
     "58879FB0",
+    "588A69F0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -354,6 +355,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588A9240",
     "588A6410",
     "58879FB0",
+    "588A69F0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -6501,6 +6503,12 @@ EVIDENCE = {
         "called_by": "The direct caller is byte-matched packet/message dispatcher FUN_587BB700 at 0x587C1550 in switch case 0x8002C010. The dispatcher prepares multiple stack words from the event record and calls this function with two words exposed by Ghidra; its six-word callee cleanup is visible as ret 0x18.",
         "behavior": "Stores four 16-bit values from its stack arguments at receiver offsets +0x21CCC, +0x21CCE, +0x21CD0, and +0x21CD2. The first stored value selects state paths 0, 1, 2, or 3. Those paths update visibility bit 0 on child objects rooted at +0x21CAC through +0x21CE0, select resource pointers from objects rooted at globals 0x58A24728 and its +0x18C child, copy six DWORDs from a selected resource into child fields, and call FUN_587315F0/FUN_587316C0 where observed. The state comparisons also consult [0x58A245A8]+0x1B6 and skip updates for values 3, 8, and 9. The complete 2,069-byte indexed stream at 0x587EC290..0x587ECAA4 is instruction-decoded and emitted literally; it returns with ret 0x18 and has 43 mapped operand targets.",
         "uncertainty": "The event payload schema, meanings of the four stored words, child types, resource indices/offsets, state values, global object schemas, and visible effect remain unknown. Ghidra recovers fewer stack parameters than the ret 0x18 cleanup and the verified caller's setup; the raw six-word stack contract is retained without assigning unsupported types or names. Although the selected resources are copied into child fields and visibility bits are changed, no visual result or emulator behavior has been tested.",
+    },
+    "588A69F0": {
+        "name_in_analysis": "FUN_588a69f0 / state-12 child refresh",
+        "called_by": "Ghidra records direct calls from byte-matched FUN_58805940 at 0x58805979 and byte-matched FUN_58807910 at 0x58807CD2. FUN_58807910 reaches the call in its observed event-value-2 branch, passing zero and loading ECX from its receiver +0x174; FUN_58805940 reaches it in an equality branch with ECX likewise loaded from receiver +0x174. The complete caller paths are documented in their matched sources.",
+        "behavior": "Ghidra's contiguous function extent is 41 bytes, [0x588A69F0, 0x588A6A19). The function compares receiver word +0x9C with 0x000C. If equal, it calls the function at child [receiver +0x188]'s vtable slot +4, then ORs 0x000F into the word at child [receiver +0x194] +0x24. Otherwise it performs no child update. The body saves/restores ESI and returns with ret 4; Ghidra's recovered __fastcall prototype does not describe this full observed ABI because the code uses ECX as receiver and callee-cleans one stack slot.",
+        "uncertainty": "The receiver/child types, semantics of state 0x0C, purpose of vtable slot +4, and meaning of the low four child flag bits are unresolved. The direct callers are byte-matched, but neither the indirect method contract nor the visible effect has been runtime-tested in the emulator.",
     },
 }
 
