@@ -209,7 +209,7 @@ ADDRESSES = (
     "588D8100",
     "588D8150",
     "58736080",
-    "58853570", "588536C0",
+    "58853570", "588536C0", "5885EE90",
     "58909B00",
     "58793DA0",
     "587A5720",
@@ -348,6 +348,7 @@ SYMBOL_OVERRIDES = {
 }
 SOURCE_COMPILER_ADDRESSES = {
     "588536C0",
+    "5885EE90",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -6242,6 +6243,12 @@ EVIDENCE = {
         "called_by": "Called repeatedly from verified selector dispatcher FUN_587A75E0 with receiver pointers obtained from active child state.",
         "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
         "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed.",
+    },
+    "5885EE90": {
+        "name_in_analysis": "FUN_5885ee90 / receiver-state initializer and table selection",
+        "called_by": "Ghidra references and an independent disassembly of the inventory functions find exactly two incoming transfers, both from byte-matched callers: FUN_588536C0 tail-jumps at 0x58853863 after loading ECX from [ESI+0xA0], and FUN_58857020 calls at 0x588572DF after the same ECX load. Neither transfer has stack arguments.",
+        "behavior": "The 1,277-byte body occupies [0x5885EE90,0x5885F198) and [0x5885F1A0,0x5885F395); eight intervening alignment bytes are excluded. Ghidra shows extensive zero-initialization of receiver fields and child-related arrays, five calls to FUN_587A15E0 for entries beginning at +0x120, constant initialization of eight words beginning at +0x184, clearing 0x424 bytes at +0x1AC, five calls to FUN_58907360(0), and child flag/field resets. It then reads shared-object fields and scans records in the table rooted at 0x58A247F8 in 0x20-byte steps from offset 0xA0 through below 0x400. The scan compares observed type/category bytes and encoded values using constants including 0x5898CB10 and 0x5899EB20, selects and stores values at receiver +0xB4/+0xB8/+0xBC/+0xC4, and performs final child-field updates. Ghidra's final call to FUN_58793E00 is encoded in the mapped image as a tail JMP at 0x5885F390; the complete mapped instruction ends at 0x5885F395.",
+        "uncertainty": "Receiver, child and table types, meanings of the cleared fields, constants, encoded values, selection policy and helper contracts remain unresolved. Ghidra warns that block 0x5885F26F is unreachable; the byte-matched source preserves the complete mapped body ranges. No emulator runtime test was performed.",
     },
     "588536C0": {
         "name_in_analysis": "FUN_588536c0 / child-state cleanup and reset helper",
