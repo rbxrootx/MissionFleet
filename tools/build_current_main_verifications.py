@@ -338,6 +338,8 @@ ADDRESSES = (
     "588F7D40",
     "588F7EF0",
     "588F7FE0",
+    "5897CE32",
+    "588F7D30",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -391,6 +393,8 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F7D40",
     "588F7EF0",
     "588F7FE0",
+    "5897CE32",
+    "588F7D30",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -701,6 +705,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F7D40": 30,
 }
 EVIDENCE = {
+    "5897CE32": {
+        "name_in_analysis": "FUN_5897CE32 / CWarehouseItem virtual tail-jump",
+        "called_by": "Ghidra finds no direct code callers. RTTI-backed CWarehouseItem vtable 0x589A20D4 points slots +0x1C and +0x20 at this function (data references 0x589A20F0 and 0x589A20F4). Additional data references at 0x5898D038, 0x5898D03C, 0x58996BE8, 0x58999EA0, 0x589A2288, 0x589A228C, 0x589A2290, 0x589A2294, 0x589A252C, 0x589A2530, 0x589A2E98, 0x589A2EA0, 0x589A2EA4, and 0x589A2EA8 have unresolved table owners. The RTTI-backed CWarehouseItemForce table overrides these slots, so this is not attributed to that class.",
+        "behavior": "Ghidra confirms a contiguous six-byte body [0x5897CE32,0x5897CE38), fully covered by one instruction: `jmp dword ptr [0x5898C248]`. Literal instruction emission verifies all six bytes and audits the absolute pointer operand.",
+        "uncertainty": "The pointer slot's destination identity and behavior, the meanings of the virtual slots, other table owners, and runtime dispatch are unresolved. The target Main.dll function bytes match exactly; emulator behavior has not been exercised.",
+    },
+    "588F7D30": {
+        "name_in_analysis": "FUN_588F7D30 / warehouse-item virtual true return",
+        "called_by": "Ghidra finds no direct code callers. Data references place the method at slot +0x24 in the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x24 in the RTTI-backed CWarehouseItemForce vtable at 0x589A210C.",
+        "behavior": "Ghidra confirms a contiguous five-byte body [0x588F7D30,0x588F7D35), fully covered by `mov al,1; ret 4`. It sets AL to 1 and returns while removing four stack bytes; no claim is made about the upper EAX bits. Literal instruction emission verifies all five bytes.",
+        "uncertainty": "The virtual method's purpose and contract, concrete dispatch sites, and runtime behavior remain unknown. Both vtable references support the class/slot attribution, but no direct callers or emulator behavior have been confirmed.",
+    },
     "588F7FE0": {
         "name_in_analysis": "FUN_588F7FE0 / warehouse-item child-state method",
         "called_by": "Ghidra finds no direct code callers. Data references place this method at slot +0x0C of the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x0C of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C; another reference at 0x589A21E0 belongs to a third table whose owner is unresolved.",
