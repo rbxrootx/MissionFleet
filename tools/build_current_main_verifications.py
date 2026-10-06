@@ -353,6 +353,7 @@ ADDRESSES = (
     "588FB510",
     "588FB6E0",
     "588FBED0",
+    "588F8100",
     "588FC640",
     "588FC770",
     "588FC830",
@@ -428,6 +429,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588FB510",
     "588FB6E0",
     "588FBED0",
+    "588F8100",
     "588FC640",
     "588FC770",
     "588FC830",
@@ -838,6 +840,12 @@ EVIDENCE = {
         "called_by": "FUN_588FF420 directly calls this helper at 0x588FF436 after loading the receiver from parent field +0x7C; that caller then iterates the associated item-pointer range at +0x70..+0x74. FUN_588FB570 constructs the RTTI-confirmed CWarehouseLockedSlotSprite at 0x589A2204 and initializes child fields +0x60/+0x64.",
         "behavior": "For selector 0 the helper sets bit 0 in each child's word at +0x24; selector 1 clears that bit in child +0x60 and sets it in child +0x64; selector 2 clears it in both. The helper returns with ret 4 and is not a vtable entry.",
         "uncertainty": "The child meanings, flag meaning, and selector names are unknown; the caller and helper assume valid child pointers. No runtime UI behavior has been tested.",
+    },
+    "588F8100": {
+        "name_in_analysis": "FUN_588F8100 / CWarehouseItem constructor",
+        "called_by": "The byte-verified CWarehouseItemShip constructor FUN_588FB0E0 directly calls this function at 0x588FB12B. This function installs the RTTI-backed CWarehouseItem vtable at 0x589A20D4; its Complete Object Locator at 0x589A20D0 resolves through 0x589AA9D0 to TypeDescriptor 0x589CDCE0 (.?AVCWarehouseItem@@). All seven entries in that vtable, plus the class destructor body and deleting wrapper, are byte-verified.",
+        "behavior": "The contiguous 985-byte constructor spans [0x588F8100,0x588F84D9) and returns this with ret 0x18. It calls base initializer FUN_589031A0, installs the observed base vtable 0x5898C500 followed by the CWarehouseItem vtable 0x589A20D4, copies two stack arguments into fields +0x50/+0x54, sets +0x58 to 0x100 and +0x68 to 10, clears its child pointers/state fields, and constructs child controls through FUN_5897CC4E, FUN_58902D20, FUN_58733280, FUN_58731C60, and FUN_58734A30. Resource-dependent child parameters are read from globals including 0x58A24734.",
+        "uncertainty": "The six constructor argument meanings, child roles, allocation/helper contracts, resource-global layout, and UI-visible behavior are unresolved. No emulator runtime test has been performed.",
     },
     "588FC640": {
         "name_in_analysis": "FUN_588FC640 / CWarehouseManager virtual method +0x04",
