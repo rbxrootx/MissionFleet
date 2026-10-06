@@ -313,6 +313,7 @@ ADDRESSES = (
     "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
     "58833E40", "587BAA60", "5881DBE0", "58842780", "5875BAE0",
     "588E3AE0",
+    "58741C20",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -377,6 +378,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5888D5C0",
     "58893E80",
     "588E3AE0",
+    "58741C20",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6698,6 +6700,12 @@ EVIDENCE = {
         "called_by": "Ghidra records calls from FUN_58738940 at 0x58738BD4 and 0x58738C34, and from byte-matched command handler FUN_588E4260 at 0x588E4943. The matched command handler retains its incoming receiver in ECX and pushes EDI as the payload pointer immediately before the call. The two unmatched FUN_58738940 callsites load ECX from [ESI+0x0C] and push EAX or EDX as the payload pointer.",
         "behavior": "Ghidra confirms 1,894 body bytes across [0x588E3AE0,0x588E3C9E), [0x588E3CA0,0x588E3FED), and [0x588E3FF0,0x588E424B). The omitted two-byte and three-byte gaps are alignment instructions (`mov edi,edi` and `lea ecx,[ecx]`), excluded from the body; the last range includes stack cleanup and `ret 4`. The handler reads a low-five-bit receiver-entry index and proceeds on entries whose string starts with carriage return; the upper three payload bits select an aircraft event mode. Mode 0 processes Aircraft Launch records, validates reported counts, and includes the literal class labels `Scouter`, `Fighter`, `Torpedo Bomber`, and `Dive Bomber`; modes 1 and 2 process Aircraft Return records, with mode 2 taking an additional local-player/target path. The candidate emits all three exact ranges literally and records mapped operand targets.",
         "uncertainty": "The full packet schema, meanings of receiver fields and aircraft-class identifiers, side effects of several unmatched helpers, and mode-2 target action remain unresolved. Ghidra shows an error-code-5 path through FUN_587B9B30 followed by FUN_58970AE0, whose shutdown behavior is separately byte-matched, but the game-level reason for that report is not established. FUN_58738940 is not byte-matched. No runtime replay or emulator test was performed.",
+    },
+    "58741C20": {
+        "name_in_analysis": "FUN_58741c20 / CAircraft constructor and sprite-child initialization",
+        "called_by": "Ghidra finds exactly two direct calls and no data refs. Byte-matched FUN_588E3AE0 calls at 0x588E3CE5 after allocating a 0x560-byte object; it places that allocation in ECX and pushes nine arguments (in right-to-left order: 10000, 0, 0, 0, [screen+8], [screen+4], [0x58A2459C+0x10524], loop index, and screen this). This is the aircraft-launch creation path. Unmatched FUN_588D2480 calls at 0x588D24B2 with ECX=ESI and nine stack arguments.",
+        "behavior": "Ghidra confirms one contiguous 2,378-byte body, [0x58741C20,0x5874256A), decoded through `ret 0x24` at 0x58742567. The constructor calls FUN_587C3C60, writes the CAircraft vftable, initializes coordinate-, count-, and state-like fields, and allocates several 0x58-byte CSpriteBundleScreen children plus other child/control objects. It uses resource-table bounds and selected global entries to initialize children, clears captured flag bits, stores the owning object and a byte read from its +0x354 field, and returns the constructed pointer. The exact mapped stream is emitted literally and its 69 mapped operand targets are checked.",
+        "uncertainty": "The precise meanings and units of most fields, resource identifiers, child controls, and global tables are unknown; child creation behavior has not been runtime-tested. The second caller FUN_588D2480 is unmatched. The observed constructor identity and aircraft-launch call path are supported by the vftable write, Ghidra references, and the byte-matched caller, but no emulator construction test has been performed.",
     },
 }
 
