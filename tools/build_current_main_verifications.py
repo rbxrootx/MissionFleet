@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -496,6 +496,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B4A30",
     "587B1850",
     "587B08C0",
+    "587B21F0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -529,6 +530,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B21F0": {
+        "name_in_analysis": "FUN_587B21F0 / record-pair scaling and masked state update",
+        "called_by": "Verified FUN_587A6220 calls it after reading and XOR-decoding two selected-record words; verified ship-map builder FUN_588D84D0 calls it at 0x588D88FB with the words read from child +0xBCC and +0xBCE, each XORed with 0xAA.",
+        "behavior": "Multiplies the first input by the low byte of receiver word +0x308 and the second input by the low byte of receiver word +0x3BC. It first stores the products at +0x31C and +0x3D0. If the first product is zero, it writes 0xAAAAAAAA to +0x104 and clears +0xF8. It then XORs both products with 0xAAAAAAAA and stores those encoded results back at +0x31C and +0x3D0. When receiver +0x88 equals the pointer at [0x58A247F8]+4, it calls FUN_587A15E0 with address/value pairs for +0x104, +0x31C, and +0x3D0. The mapped function is 161 bytes, ends in ret 8 at 0x587B228E, and has 7 mapped operand targets.",
+        "uncertainty": "The coefficients' and inputs' units, purposes of the XOR encoding and zero-product reset, meanings of receiver +0x104/+0xF8/+0x31C/+0x3D0, global-context condition, and FUN_587A15E0 callback contract remain unresolved. This exact instruction reconstruction is grounded in two verified child-builder callers; no emulator runtime comparison was performed.",
+    },
     "587B08C0": {
         "name_in_analysis": "FUN_587B08C0 / shared scaled child-state update",
         "called_by": "Verified FUN_587B2A40 calls it at 0x587B2BE5 with bits 4..10 of the copied word at +0x226. Verified FUN_587A6220 and FUN_588D84D0 call it in their second child-update passes only when the child field +0x100 equals 0x40000000; those callers derive the argument from two bytes of the selected record through a stack-local lookup table.",
