@@ -320,6 +320,7 @@ ADDRESSES = (
     "588DEB30",
     "588628D0",
     "58859DD0",
+    "58858BD0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -391,6 +392,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588DEB30",
     "588628D0",
     "58859DD0",
+    "58858BD0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6754,6 +6756,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra references identify two direct calls: byte-matched FUN_588DEB30 at 0x588DF1D4 and byte-matched FUN_588E5150 at 0x588E6358. At both sites the caller loads [0x58A245C4] into EAX, sets ECX to [EAX+0x9C], and passes no stack arguments. Each path selects this function when the current record's low five type bits are not 9; the type-9 branch selects matched FUN_588628D0 with ECX=[0x58A245C4+0xA0].",
         "behavior": "Ghidra confirms one contiguous 1,099-byte body, [0x58859DD0,0x5885A21B), ending with `ret` at 0x5885A21A. The routine scans the count at receiver +0xF0 and processes entries whose +0x40 state is 2. It updates timer/state fields and XOR-0xAA encoded per-entry values using FUN_587A1640, FUN_587A15E0, and FUN_58907360; completion selects observed states 1 or 4 and toggles child flags. It accumulates timer values, derives a resource-relative value using a ushort at resource +0x0C, refreshes a seconds display via FUN_5877E740, and after the observed six-second threshold copies resource fields from a global table entry at +0x580 to a child at receiver +0xA7C. A latch path polls FUN_58793E10 and, on completion, invokes FUN_58858BD0(0), FUN_588EBEB0(0x0F,0x54,0x57), FUN_58907990, and an indirect child-vtable operation. The instruction-stream candidate records 41 mapped operand targets.",
         "uncertainty": "Receiver and record layouts, timer units, encoded-value meaning, resource-table identity, child visibility/state semantics, helper contracts, and vtable behavior remain unresolved. Ghidra's zero-resource branch sets the divisor to zero before a modulo operation; the runtime invariant that prevents a divide-by-zero is not established. The function is structurally parallel to type-9 handler FUN_588628D0 but uses different receiver offsets and calls FUN_58858BD0; no emulator runtime test was performed.",
+    },
+    "58858BD0": {
+        "name_in_analysis": "FUN_58858bd0 / ship-map resource and child selection helper",
+        "called_by": "Fresh Ghidra refs identify 13 direct calls. The matched FUN_58859DD0 calls at 0x5885A078, 0x5885A08A, and 0x5885A15B set ECX=EBX and push 0. Matched FUN_5873FE80 calls at 0x5874121C with ECX=[0x58A245C4+0x9C] and a path-dependent EAX or EBX stack argument. Ten further direct references are from currently unmatched callers FUN_5885A220, FUN_58859BB0, FUN_58859CC0, FUN_5885A340, FUN_588592C0, FUN_58859070, FUN_58859AA0, FUN_5885A460, and FUN_5885BAF0; their receiver and stack setups are documented in the Ghidra refs artifact.",
+        "behavior": "Ghidra confirms one contiguous 533-byte body, [0x58858BD0,0x58858DE5), ending in `ret 4` at 0x58858DE2. The thiscall routine clears bit 0 on children at receiver +0xA90 and +0xA94, then dispatches on the selected entry code at receiver +0x138 + index*4 (index from +0xF4). Codes 1, 2, 4, 0x10, and 0x40 select observed resource IDs 600, 0x259/0x25A, argument-selected 0x25B–0x260, or 0x580 and update related timer/number/child flags. It bounds-checks the selected ID against the resource table count at receiver +0xA88 +0x164, then installs the selected resource on child +0xA8C and copies six resource fields. The function calls FUN_5877E7A0, FUN_5877E770, FUN_58734920, and FUN_58907360. The candidate emits the exact mapped stream and records its 18 operand targets.",
+        "uncertainty": "The dispatch values' semantic names, resource table identity, child roles, timer/display meaning, and visible effects are unknown. The direct-call ABI has one DWORD stack argument, but some matched call paths choose that value conditionally and multiple unmatched callers remain to be confirmed. No emulator runtime test was performed.",
     },
 }
 

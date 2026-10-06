@@ -324038,6 +324038,141 @@
         "behavior": "Ghidra confirms one contiguous 1,099-byte body, [0x58859DD0,0x5885A21B), ending with `ret` at 0x5885A21A. The routine scans the count at receiver +0xF0 and processes entries whose +0x40 state is 2. It updates timer/state fields and XOR-0xAA encoded per-entry values using FUN_587A1640, FUN_587A15E0, and FUN_58907360; completion selects observed states 1 or 4 and toggles child flags. It accumulates timer values, derives a resource-relative value using a ushort at resource +0x0C, refreshes a seconds display via FUN_5877E740, and after the observed six-second threshold copies resource fields from a global table entry at +0x580 to a child at receiver +0xA7C. A latch path polls FUN_58793E10 and, on completion, invokes FUN_58858BD0(0), FUN_588EBEB0(0x0F,0x54,0x57), FUN_58907990, and an indirect child-vtable operation. The instruction-stream candidate records 41 mapped operand targets.",
         "uncertainty": "Receiver and record layouts, timer units, encoded-value meaning, resource-table identity, child visibility/state semantics, helper contracts, and vtable behavior remain unresolved. Ghidra's zero-resource branch sets the divisor to zero before a modulo operation; the runtime invariant that prevents a divide-by-zero is not established. The function is structurally parallel to type-9 handler FUN_588628D0 but uses different receiver offsets and calls FUN_58858BD0; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58858BD0",
+      "name": "FUN_58858bd0",
+      "size": 533,
+      "symbol": "_FUN_58858bd0",
+      "source": "src/client-current/Main/FUN_58858bd0.cpp",
+      "source_sha256": "4ec7acbcfbad21d51a9f095b2b6349dc1251c331f1e96df7b4565eb60a5daac5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 54,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "5877E7A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "58A246A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 159,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 193,
+          "target_address": "5877E770",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 198,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "5877E7A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 223,
+          "target_address": "58A246A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 264,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "58858D87",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 362,
+          "target_address": "58A246A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 407,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858bd0 / ship-map resource and child selection helper",
+        "called_by": "Fresh Ghidra refs identify 13 direct calls. The matched FUN_58859DD0 calls at 0x5885A078, 0x5885A08A, and 0x5885A15B set ECX=EBX and push 0. Matched FUN_5873FE80 calls at 0x5874121C with ECX=[0x58A245C4+0x9C] and a path-dependent EAX or EBX stack argument. Ten further direct references are from currently unmatched callers FUN_5885A220, FUN_58859BB0, FUN_58859CC0, FUN_5885A340, FUN_588592C0, FUN_58859070, FUN_58859AA0, FUN_5885A460, and FUN_5885BAF0; their receiver and stack setups are documented in the Ghidra refs artifact.",
+        "behavior": "Ghidra confirms one contiguous 533-byte body, [0x58858BD0,0x58858DE5), ending in `ret 4` at 0x58858DE2. The thiscall routine clears bit 0 on children at receiver +0xA90 and +0xA94, then dispatches on the selected entry code at receiver +0x138 + index*4 (index from +0xF4). Codes 1, 2, 4, 0x10, and 0x40 select observed resource IDs 600, 0x259/0x25A, argument-selected 0x25B\u20130x260, or 0x580 and update related timer/number/child flags. It bounds-checks the selected ID against the resource table count at receiver +0xA88 +0x164, then installs the selected resource on child +0xA8C and copies six resource fields. The function calls FUN_5877E7A0, FUN_5877E770, FUN_58734920, and FUN_58907360. The candidate emits the exact mapped stream and records its 18 operand targets.",
+        "uncertainty": "The dispatch values' semantic names, resource table identity, child roles, timer/display meaning, and visible effects are unknown. The direct-call ABI has one DWORD stack argument, but some matched call paths choose that value conditionally and multiple unmatched callers remain to be confirmed. No emulator runtime test was performed."
+      }
     }
   ]
 }

@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,474 matches cover 2,361,789 bytes (22.5572%) and are verified
+The current 7,475 matches cover 2,362,322 bytes (22.5623%) and are verified
 individually at 100.0% by objdiff.
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).
@@ -29,6 +29,8 @@ The ship-map update's state-0x60000 child/resource refresh is documented in
 [the refresh evidence](docs/current-main-588deb30-ship-map-refresh.md).
 Its type-9 and other-type timer/child refresh handlers are documented in
 [their Main.dll evidence](docs/current-main-58859dd0-non-type9-timer-refresh.md).
+The resource and child selection helper called by those timer paths is
+documented in [its Main.dll evidence](docs/current-main-58858bd0-resource-selection.md).
 The child-coordinate update and linked-entry calculations are documented in
 [its Main.dll evidence](docs/current-main-5888d5c0-child-coordinate-update.md).
 The chat formatter and whisper history routine are documented in
