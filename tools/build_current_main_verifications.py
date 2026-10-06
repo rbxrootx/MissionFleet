@@ -138,6 +138,7 @@ ADDRESSES = (
     "5873CB20", "5873CCB0",
     "58749A30", "5876BEE0", "588D73A0", "5875BB10", "587B7350",
     "587871C0", "5877FAA0", "588D3A60", "588D2AB0", "588D3E50",
+    "58787400",
     "5873BD60", "587A3B40", "587A2E30", "587A2F30", "587A55A0",
     "5873BEA0",
     "58907950", "587E5E10", "587C3C60", "588DA4D0", "588D6670",
@@ -374,6 +375,7 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "58787400",
     "588536C0",
     "5885EE90",
     "5888E450",
@@ -673,6 +675,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58787400": {
+        "name_in_analysis": "FUN_58787400 / HCB sprite-resource and child initializer",
+        "called_by": "Ghidra records two unconditional calls from mapped, byte-matched FUN_58800360 at 0x58800BB5 and 0x58800C2B. Before the calls the caller prepares the target receiver's +0x914 child-resource field from its own +0x10524 field; exact class and field names remain unproven.",
+        "behavior": "Ghidra records three discontiguous body ranges: [0x58787400,0x58787819) (1,049 bytes), [0x58787820,0x58787AAF) (655 bytes), and [0x58787AB0,0x58787B6D) (189 bytes), totaling 1,893 instruction bytes. The 7-byte and 1-byte gaps are excluded alignment bytes. It loads .\\\\SPR\\\\HCB.spr, .\\\\SPR\\\\HCBEFF.spr, and .\\\\SPR\\\\HCBSND.spr through FUN_588F3D70, then selects initialization logic using the short at [0x58A245A8+0x204]. In the value-0x0F branch it resets receiver fields, writes fixed coordinate pairs, allocates a pointer list at +0x910, and creates 0xDC-byte child objects through FUN_587808A0; it also calls FUN_58902F50/FUN_58902EE0 conditionally and invokes FUN_58903290 for positions. Otherwise it scans 0x742-byte records from 0x589BAAB0 up to 0x589C2D54, selects the record matching 0x58A0ADD0, reads a byte count, copies coordinate pairs, and creates that many child objects. Three separately emitted literal instruction ranges match all 1,893 mapped instruction bytes; 47 operand targets are checked.",
+        "uncertainty": "The asset roles, table schema, global field meanings, coordinate units, and semantic meaning of child value 499 are unresolved. In the value-0x0F branch, the decompilation shows a 0x18-byte pointer-list allocation while the loop appears to write seven entries; this allocation/count relationship needs stronger data-layout evidence. Exact body ranges are checked against the installed Main.dll capture, but no emulator runtime behavior has been tested.",
+    },
     "587E6670": {
         "name_in_analysis": "FUN_587e6670 / state consistency validator and report gate",
         "called_by": "Ghidra's complete reference dump finds one direct call, at 0x587FE71F from byte-matched FUN_587FD890. The caller passes its receiver in ECX with no stack arguments and invokes this helper only when caller byte +0x20E40 is zero; it then advances that byte. The caller is installed at slot +0x0C of mapped vtable 0x5899D180.",

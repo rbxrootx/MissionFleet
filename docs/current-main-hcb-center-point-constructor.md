@@ -4,6 +4,8 @@
 stores `CHCB_CenterPoint::vftable` at the start of the object, and its direct
 caller, `FUN_58787400`, allocates `0xDC` bytes before calling it. The caller
 references this constructor at `0x5878785D` and `0x58787AFB`.
+The caller's full resource-selection and child-initialization path is recorded
+in [the `FUN_58787400` evidence](current-main-58787400-hcb-child-initializer.md).
 
 The caller loads `.\\SPR\\HCB.spr`, `.\\SPR\\HCBEFF.spr`, and
 `.\\SPR\\HCBSND.spr`. It builds a pointer list at receiver offset `+0x910`

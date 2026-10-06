@@ -17,6 +17,8 @@ The motion callback and its child-state path are documented in
 [its Main.dll evidence](docs/current-main-58893430-control-state-callback.md).
 The ship-map aircraft launch/return event handler is documented in
 [its Main.dll evidence](docs/current-main-588e3ae0-aircraft-launch-return.md).
+The current-client HCB resource and child initializer is documented in
+[its Main.dll evidence](docs/current-main-58787400-hcb-child-initializer.md).
 Its allocation and aircraft-object initialization path is documented in
 [the CAircraft constructor evidence](docs/current-main-58741c20-aircraft-constructor.md).
 The aircraft record/stat initializer called from that launch path is documented
