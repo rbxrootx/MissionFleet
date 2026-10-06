@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "5887A3F0",
     "588B3B30",
     "587E7F20",
     "587A5080",
@@ -361,6 +362,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587A5080",
     "587E7F20",
     "588B3B30",
+    "5887A3F0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -628,6 +630,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "5887A3F0": {
+        "name_in_analysis": "FUN_5887a3f0 / receiver-gated identifier dispatcher",
+        "called_by": "Ghidra's complete direct-reference dump records 30 calls from seven callers: FUN_5887A500 at 0x5887A734; FUN_587BB700 at 0x587C14EE; FUN_5887AE70 at 0x5887AEA1, 0x5887AEAE, 0x5887AEBB, 0x5887AED8, 0x5887AEE5, 0x5887AEF2, 0x5887AF0F, 0x5887AF1C, 0x5887AF3E, 0x5887AF4B, 0x5887AF58, 0x5887AF65, 0x5887AF72, 0x5887AF7F, 0x5887AF8C, 0x5887AF99, 0x5887AFA6, and 0x5887AFB3; FUN_58882D80 at 0x58882E18, 0x58882EB3, 0x58882F1F, 0x58882F30, 0x58882F3F, 0x58883924, and 0x58883C7F; FUN_58881E30 at 0x58881F7F; FUN_58881C90 at 0x58881DE9; and FUN_58881680 at 0x58881AA7. The catalog verifies callers FUN_587BB700 and FUN_58882D80 byte-identically; their matched sources confirm this call family includes stack identifiers such as 0x0FA0, 0x1004, 0x1068, 0x10CC, 0x10CF, 0x0FA2, and 0x1139. The other five callers are not byte-matched.",
+        "behavior": "The complete contiguous function body is 32 bytes, [0x5887A3F0,0x5887A410), and returns with ret 4 at 0x5887A40D. It is a __thiscall taking one stack argument. If the dword at receiver +0x68 is zero, it returns without further calls. Otherwise it calls FUN_5876BAF0(argument, 0, 0, 0), moves that helper's EAX result to ECX, and calls FUN_58764D30(). The emitted source preserves the mapped instruction bytes literally, including both relative-call operands.",
+        "uncertainty": "The receiver type and +0x68 field role, stack identifier meanings, and contracts/effects of FUN_5876BAF0 and FUN_58764D30 remain unknown. Five callers are not byte-matched, so their surrounding setup is supported only by Ghidra analysis. The helper's `this` setup at the FUN_587BB700 call has not been separately interpreted, although that caller's complete instruction stream is byte-matched. No emulator runtime test was performed.",
+    },
     "588B3B30": {
         "name_in_analysis": "FUN_588b3b30 / conditional receiver field and low-flag setter",
         "called_by": "Fresh Ghidra references identify five unconditional calls across three callers. Byte-matched FUN_587FD890 calls at 0x587FDF95 with ECX=[EDI] and stack argument zero. Byte-matched FUN_587EF910 calls at 0x587EFBCC with ECX=[EDI] and EBX pushed as the stack argument. Unmatched FUN_587E7B90 calls at 0x587E7BAE, 0x587E7BD4, and 0x587E7BF2 with ECX=[ESI] and stack arguments 0, 1, and 1 respectively; in that loop ESI points into the child-pointer array rooted at receiver +0x218F0.",

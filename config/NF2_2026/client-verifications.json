@@ -319357,6 +319357,45 @@
         "behavior": "The complete 34-byte body is contiguous, [0x588B3B30,0x588B3B52), and has ret 4 exits at 0x588B3B43 and 0x588B3B4F. It is a __thiscall taking one stack argument. It stores the argument at receiver +0x128. If nonzero, it ORs 0x000F into the word at receiver +0x24; if zero, it ANDs that word with 0xFFF0, clearing only the low four bits. The emitted source preserves all mapped bytes and objdiff verifies them identical.",
         "uncertainty": "The receiver type, meanings of fields +0x128 and +0x24, and the role of the low four bits are unresolved. The EBX value at FUN_587EF910's call is not fully traced here. One caller, FUN_587E7B90, is unmatched, so its wider behavior is not yet byte-verified. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5887A3F0",
+      "name": "FUN_5887a3f0",
+      "size": 32,
+      "symbol": "_FUN_5887a3f0",
+      "source": "src/client-current/Main/FUN_5887a3f0.cpp",
+      "source_sha256": "0f116a0f6ea118562f9f6c36f84dd79959d570d3f60f37b77c8d47839aed25d6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 18,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 25,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a3f0 / receiver-gated identifier dispatcher",
+        "called_by": "Ghidra's complete direct-reference dump records 30 calls from seven callers: FUN_5887A500 at 0x5887A734; FUN_587BB700 at 0x587C14EE; FUN_5887AE70 at 0x5887AEA1, 0x5887AEAE, 0x5887AEBB, 0x5887AED8, 0x5887AEE5, 0x5887AEF2, 0x5887AF0F, 0x5887AF1C, 0x5887AF3E, 0x5887AF4B, 0x5887AF58, 0x5887AF65, 0x5887AF72, 0x5887AF7F, 0x5887AF8C, 0x5887AF99, 0x5887AFA6, and 0x5887AFB3; FUN_58882D80 at 0x58882E18, 0x58882EB3, 0x58882F1F, 0x58882F30, 0x58882F3F, 0x58883924, and 0x58883C7F; FUN_58881E30 at 0x58881F7F; FUN_58881C90 at 0x58881DE9; and FUN_58881680 at 0x58881AA7. The catalog verifies callers FUN_587BB700 and FUN_58882D80 byte-identically; their matched sources confirm this call family includes stack identifiers such as 0x0FA0, 0x1004, 0x1068, 0x10CC, 0x10CF, 0x0FA2, and 0x1139. The other five callers are not byte-matched.",
+        "behavior": "The complete contiguous function body is 32 bytes, [0x5887A3F0,0x5887A410), and returns with ret 4 at 0x5887A40D. It is a __thiscall taking one stack argument. If the dword at receiver +0x68 is zero, it returns without further calls. Otherwise it calls FUN_5876BAF0(argument, 0, 0, 0), moves that helper's EAX result to ECX, and calls FUN_58764D30(). The emitted source preserves the mapped instruction bytes literally, including both relative-call operands.",
+        "uncertainty": "The receiver type and +0x68 field role, stack identifier meanings, and contracts/effects of FUN_5876BAF0 and FUN_58764D30 remain unknown. Five callers are not byte-matched, so their surrounding setup is supported only by Ghidra analysis. The helper's `this` setup at the FUN_587BB700 call has not been separately interpreted, although that caller's complete instruction stream is byte-matched. No emulator runtime test was performed."
+      }
     }
   ]
 }
