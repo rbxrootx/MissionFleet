@@ -33,6 +33,9 @@ groups 8 and 6/7. The complete indexed stream ends with `ret 0xC`. The literal
 instruction source at
 [`FUN_58806F60.cpp`](../src/client-current/Main/FUN_58806F60.cpp) is verified
 against the pinned mapped image with the repository's pinned clang-cl compiler.
+When receiver `+0x1B6` equals `2`, this function also calls the shared
+[`FUN_58805ba0` eight-slot refresh helper](current-main-58805ba0-eight-slot-refresh.md)
+at `0x58807260` with ECX=receiver.
 
 ## Unresolved details
 

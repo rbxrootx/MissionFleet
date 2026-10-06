@@ -26,6 +26,11 @@ and cargo refresh helper with `ECX=[0x58A245C4]` and the word at
 [selected-object refresh notes](current-main-58857020-selected-object-refresh.md)
 for the observed slot/cargo loops and their unresolved field meanings.
 
+At `0x58807B9D`, when receiver `+0x1B6` equals `2`, it calls the shared
+eight-slot refresh helper `FUN_58805ba0` with ECX=receiver. Its linked-list
+scan, x87 accumulation, and unresolved field meanings are documented in the
+[eight-slot refresh notes](current-main-58805ba0-eight-slot-refresh.md).
+
 The next record address advances by `0x114`, the record's 16-bit value at
 `+0x10A`, and `0x20` times its byte at `+0x100`. After the loop, the handler
 calls `FUN_58907990`, moves the selected pointer from `[0x58A247F8]+0x10` to

@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "58805BA0",
     "58807910",
     "58806F60",
     "58857020",
@@ -322,6 +323,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "58805BA0",
     "58807910",
     "58806F60",
     "58857020",
@@ -522,6 +524,9 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra counts 488 bytes across two disjoint ranges. Include the
+    # contiguous 8-byte register/frame restore and ret epilogue at 0x58805D88.
+    "58805BA0": 496,
     # Ghidra counts 2,070 bytes across three disjoint code ranges and omits
     # unreachable alignment instructions and the contiguous stack-cookie /
     # ret epilogue. Match the complete linear body through ret 4 at 0x5885784A.
@@ -552,6 +557,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58805BA0": {
+        "name_in_analysis": "FUN_58805ba0 / eight-slot value refresh",
+        "called_by": "Ghidra records calls from byte-matched FUN_58806F60 at 0x58807260 (ECX=its receiver) and byte-matched FUN_58807910 at 0x58807B9D (ECX=its receiver). It also records a call from unmatched FUN_58807370 at 0x58807542; that caller is contextual evidence only.",
+        "behavior": "Returns when [0x58A247F8]+4 is null. Otherwise it clears eight DWORD accumulators at receiver +0x290..+0x2AC, then for each index 0..7 walks the linked list rooted at [0x58A247F8]+0x0C through node +0x78, selecting nodes whose byte +0x354 equals the index. For each match it reads the DWORD at [node+0x100C]+0x74 and accumulates a rounded x87 result using receiver ushort +0x1C4, FUN_5897CC90, and qword constant 0x5898CF20. It computes another rounded base quantity from receiver +0x1C4 and those same operands, sums the seven accumulator values whose index differs from the active object's byte +0x354, multiplies by the base quantity, and divides by the accumulator selected by that byte. The result is written at +0x64 of the object reached through [0x58A245C0]+0x4A0 and passed to FUN_58907360. Finally, eight calls to FUN_588A5400 pass each index and accumulator, with ECX=[receiver+0x174]. Ghidra's 488-byte body has two ranges and omits the contiguous restore/ret at 0x58805D88..0x58805D8F; the matched linear extent is 496 bytes through that ret.",
+        "uncertainty": "The receiver, linked-node, and eight-slot field meanings are unknown, as are the semantic units of the arithmetic and the effects of FUN_58907360/FUN_588A5400. The implementation preserves the original x87 instruction stream; its runtime numeric behavior has not been emulator-tested.",
+    },
     "58857020": {
         "name_in_analysis": "FUN_58857020 / selected-object component and cargo refresh",
         "called_by": "The byte-matched event handler FUN_58807910 has the sole Ghidra-recorded callsite at 0x58807C06. It loads ECX from [0x58A245C4] and passes the word at selectedObject +0x350 as the stack argument. FUN_58807910 is reached from verified dispatcher FUN_587BB700 in event case 0x80020113.",
