@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "58807910",
     "58806F60",
+    "58857020",
     "587962C0", "587C35A0", "587956B0", "58796310", "58907CE0",
     "58902C20", "58902C70", "58902EE0", "58902F50", "589031A0",
     "58733280", "58731700", "5897CC4E", "5897CC48", "58731CE0",
@@ -323,6 +324,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58807910",
     "58806F60",
+    "58857020",
     "587D6BD0",
     "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
@@ -520,6 +522,10 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra counts 2,070 bytes across three disjoint code ranges and omits
+    # unreachable alignment instructions and the contiguous stack-cookie /
+    # ret epilogue. Match the complete linear body through ret 4 at 0x5885784A.
+    "58857020": 2091,
     # Ghidra omitted pop esi, pop ebx, and ret from the indexed extent;
     # the mapped function ends immediately before INT3 alignment padding.
     "58842EF0": 104,
@@ -546,6 +552,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58857020": {
+        "name_in_analysis": "FUN_58857020 / selected-object component and cargo refresh",
+        "called_by": "The byte-matched event handler FUN_58807910 has the sole Ghidra-recorded callsite at 0x58807C06. It loads ECX from [0x58A245C4] and passes the word at selectedObject +0x350 as the stack argument. FUN_58807910 is reached from verified dispatcher FUN_587BB700 in event case 0x80020113.",
+        "behavior": "Initializes the receiver's selected value and state counters, then reads the active object from [0x58A247F8]+4. It walks the object's slot count encoded in word [+0x100C]+0x0C (bits 10..14), resolves each slot's descriptor at object +0xE8C, and updates the corresponding receiver child at +0x108+4*index. Descriptor first-byte values 0 and carriage return clear its flag; values 5 and 6 call FUN_58857EC0 and increment separate per-slot counters. Other nonempty descriptor values still request a computed resource through FUN_589032E0 and set the child flag. It then processes ten observed cargo positions, checks descriptor identity/enable/capacity fields, logs the literal `Cargo%d : %d(%d)`, decodes two packed 10-bit values using XOR masks, and dispatches updates through different helpers when the active object's low-five-bit type is 9. A later pass updates four word-valued slots. The tail initializes a buffer with `submarine_temp`, chooses resource requests and state writes using observed type 9, cargo-count, and global state branches, calls FUN_588597F0 (and FUN_58862460 for type 9), then dispatches a final update and clears receiver counters +0x2CC/+0x2D0. The compiler inventory's 2,070-byte Ghidra instruction count omitted unreachable alignment bytes and the mapped epilogue; the matched linear extent is 2,091 bytes through `ret 4` at 0x5885784A.",
+        "uncertainty": "The receiver and active-object types, slot/cargo schemas, meaning of the XOR-encoded values and type codes, resource IDs, and visible/gameplay effects are not established. Most resource and update helpers remain unmatched, and no emulator runtime test was performed.",
+    },
     "58806F60": {
         "name_in_analysis": "FUN_58806F60 / variable-record component update",
         "called_by": "Byte-matched FUN_58807910 calls this per event record at 0x58807A65 with ECX=the record owner, the current record pointer, a pointer to record +0x114, and a boolean derived from the caller's optional four-DWORD mask. The mapped code for FUN_588075E0 also calls it at 0x5880786C after copying a 0x13C-byte queue item to local storage and dispatching IDs 0x04000008/0x04000009; those routes pass boolean 0/1 respectively. The broader meaning of that queue dispatch is unverified.",
@@ -555,7 +567,7 @@ EVIDENCE = {
     "58807910": {
         "name_in_analysis": "FUN_58807910 / 0x80020113 variable-record update handler",
         "called_by": "Byte-matched event dispatcher FUN_587BB700 calls this in switch case 0x80020113 at the two call instructions 0x587BCEF9 and 0x587BCF17. The case first checks the event count and updates shared state. Its param_3[0xF] bit 0 selects the record/mask pointer form passed to this handler; the receiver flag at +0x1BC bit 0 controls whether the optional four-DWORD mask is read. Ghidra call-site labels the two paths 0x587BCEFE and 0x587BCF1C (post-call/control-flow labels, not call instruction starts).",
-        "behavior": "For each event record, copies 0x2E DWORDs from record +0x44, then checks that the 16-bit byte-count at +0x10A equals (((DWORD at +0x44) >> 1) & 0x1F) * 0x18. A mismatch reports the literal diagnostic `ShipContentsNumberOfWaeponSetSerials != /sizeof_WeaponSetSerials` and reaches the captured fatal/error callback path. For matching records, derives a boolean from the optional four-DWORD bit mask and calls FUN_58806F60 with the record and record +0x114. The next record is addressed by adding 0x114, the +0x10A byte-count, and 0x20 times the byte at +0x100. After the loop it calls FUN_58907990, selects the record pointer at [0x58A247F8]+0x10 into +4, and calls byte-matched FUN_587A6220 with that pointer. It then updates receiver fields and forwards selected-record fields through additional scene/map/UI helpers. The full instruction extent is 1,070 bytes (0x58807910..0x58807D3E); the generated literal-x86 source passed the mapped-image comparison with clang-cl.",
+        "behavior": "For each event record, copies 0x2E DWORDs from record +0x44, then checks that the 16-bit byte-count at +0x10A equals (((DWORD at +0x44) >> 1) & 0x1F) * 0x18. A mismatch reports the literal diagnostic `ShipContentsNumberOfWaeponSetSerials != /sizeof_WeaponSetSerials` and reaches the captured fatal/error callback path. For matching records, derives a boolean from the optional four-DWORD bit mask and calls FUN_58806F60 with the record and record +0x114. The next record is addressed by adding 0x114, the +0x10A byte-count, and 0x20 times the byte at +0x100. After the loop it calls FUN_58907990, selects the record pointer at [0x58A247F8]+0x10 into +4, and calls byte-matched FUN_587A6220 with that pointer. At 0x58807C06 it calls byte-matched FUN_58857020 with ECX=[0x58A245C4] and the word at selectedObject +0x350; that helper's evidence is recorded separately. It then updates receiver fields and forwards selected-record fields through additional scene/map/UI helpers. The full instruction extent is 1,070 bytes (0x58807910..0x58807D3E); the generated literal-x86 source passed the mapped-image comparison with clang-cl.",
         "uncertainty": "The event record type, meaning of the +0x100/+0x10A fields, semantics of the mask bits, receiver/global object types, and user-visible effect are not established. Multiple later scene/map/UI callees remain unmatched, so their behavior is not inferred here. Ghidra's prototype also leaves some register-derived state as `unaff_*`; no runtime/emulator test was performed.",
     },
     "5875BAE0": {
@@ -6346,6 +6358,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mark-verified", action="store_true",
                         help="record objdiff verification after verify_client_matches.py passes")
+    parser.add_argument("--only", action="append", metavar="ADDRESS",
+                        help="update only this address (repeatable); default is the full rolling set")
     args = parser.parse_args()
     old_config = json.loads((ROOT / "config/NF2_2062/client-verifications.json").read_text(encoding="utf-8"))
     manifest_path = ROOT / "reports/unpacked-current-main/manifest.json"
@@ -6357,8 +6371,13 @@ def main():
         inventory = {row["address"].upper(): row for row in csv.DictReader(stream, delimiter="\t")}
     relocation_data = json.loads((ROOT / "var/current-main-relocations.json").read_text(encoding="utf-8"))
     marker = "objdiff-3.8.0-byte-identical" if args.mark_verified else "candidate-not-yet-verified"
+    addresses = ([f"{int(value, 16):08X}" for value in args.only]
+                 if args.only else list(ADDRESSES))
+    unknown = sorted(set(addresses) - set(ADDRESSES))
+    if unknown:
+        raise ValueError(f"Address is outside the rolling verification set: {', '.join(unknown)}")
     matches = []
-    for address in ADDRESSES:
+    for address in addresses:
         row = inventory[address]
         source_name = SOURCE_NAME_OVERRIDES.get(address, row["name"])
         source = f"src/client-current/Main/{source_name}.cpp"

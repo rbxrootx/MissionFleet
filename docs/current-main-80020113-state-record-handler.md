@@ -20,6 +20,12 @@ boolean to `FUN_58806F60(record, record + 0x114, flag)`.
 The matched helper's observed branches are documented in
 [the component-record updater notes](current-main-58806f60-component-record-updater.md).
 
+At `0x58807C06`, the handler also calls the matched selected-object component
+and cargo refresh helper with `ECX=[0x58A245C4]` and the word at
+`selectedObject + 0x350`. See the
+[selected-object refresh notes](current-main-58857020-selected-object-refresh.md)
+for the observed slot/cargo loops and their unresolved field meanings.
+
 The next record address advances by `0x114`, the record's 16-bit value at
 `+0x10A`, and `0x20` times its byte at `+0x100`. After the loop, the handler
 calls `FUN_58907990`, moves the selected pointer from `[0x58A247F8]+0x10` to
