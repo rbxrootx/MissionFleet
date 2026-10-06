@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "587E6670",
     "5888CE00",
     "5887A3F0",
     "588B3B30",
@@ -365,6 +366,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588B3B30",
     "5887A3F0",
     "5888CE00",
+    "587E6670",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -632,6 +634,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587E6670": {
+        "name_in_analysis": "FUN_587e6670 / state consistency validator and report gate",
+        "called_by": "Ghidra's complete reference dump finds one direct call, at 0x587FE71F from byte-matched FUN_587FD890. The caller passes its receiver in ECX with no stack arguments and invokes this helper only when caller byte +0x20E40 is zero; it then advances that byte. The caller is installed at slot +0x0C of mapped vtable 0x5899D180.",
+        "behavior": "The complete Ghidra body has 2,046 mapped bytes in two ranges, [0x587E6670,0x587E6C18) and [0x587E6C20,0x587E6E76); the excluded 8-byte interval is alignment (`lea esp,[esp]` plus `nop`). It returns immediately when dword [0x58A247F8+4] is zero. Otherwise it validates groups of global configuration fields against fixed constants, derives and compares runtime values, and walks up to ((object +0x394) >> 1) & 0x1F selected 0x18-byte records, comparing resolved record fields. On mismatches it calls FUN_587B9B30 with observed report codes 2, 3, 4, 7, or 8 and the corresponding status values, then calls FUN_58970AE0. Both helpers are byte-matched: FUN_587B9B30 forwards a packed status via selector 0x80015000, and FUN_58970AE0 performs the confirmed socket shutdown/close cleanup. Literal emission records 158 mapped operand targets across the two exact Ghidra ranges.",
+        "uncertainty": "The global configuration fields, object/record schemas, numeric defaults, and individual report-code meanings are not named. FUN_58778D00/FUN_58778D60/FUN_58778DC0/FUN_58778E20 lookup contracts and the precise relationship between a detected mismatch and the eventual socket cleanup remain unresolved. The caller's byte +0x20E40 role is observed but unnamed. No emulator runtime test was performed.",
+    },
     "5888CE00": {
         "name_in_analysis": "FUN_5888ce00 / subobject cleanup and constant update wrapper",
         "called_by": "Ghidra's complete reference dump identifies exactly two direct callers: byte-matched FUN_587FC9C0 at 0x587FD636 and byte-matched FUN_58890110 at 0x5889281D. In both matched instruction streams, the caller loads ECX from global [0x58A245C0] immediately before the call and pushes no stack arguments.",
