@@ -175,6 +175,7 @@ ADDRESSES = (
     "587CF610", "587D1F10", "5881A8B0",
     "587CECC0", "58789620",
     "587D3840", "587D0940", "587D5B20", "587D51D0", "587D1460",
+    "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -6178,6 +6179,30 @@ EVIDENCE = {
         "called_by": "RTTI maps this method from slot +0x18 at 0x5899B4AC in the CPageChannelBattle_ControlMenuScreen vtable. Ghidra finds no direct code callers.",
         "behavior": "The contiguous 588-byte body handles selectors 2, 3, 4, 0x0C, and 0xEEAC. Selector 2 scans nine entries, follows linked global records, reads or writes the registry key SOFTWARE\\FleetMission\\FleetMissionCN value Harbor through observed registry APIs, and updates DAT_58A24598+0x60. Selector 0x0C dispatches methods on DAT_58A24780; selector 0xEEAC stores its value at receiver +0xAD8.",
         "uncertainty": "The selectors, registry value, linked records, and global selected-object role remain unresolved. No runtime test has been performed.",
+    },
+    "588E0240": {
+        "name_in_analysis": "FUN_588e0240 / CShip_MapObjectScreen vtable slot +0x00",
+        "called_by": "Ghidra records the RTTI-backed vtable data reference at 0x589A10EC; the matched constructor FUN_588E05C0 writes that vtable at 0x588E064D. No direct code callers were found.",
+        "behavior": "The 27-byte deleting-wrapper-shaped function occupies [0x588E0240,0x588E0255) and [0x588E0258,0x588E025E). It calls cleanup body FUN_588DF9B0, conditionally calls thunk FUN_5897CC42 when the second argument's low bit is set, and otherwise returns the receiver.",
+        "uncertainty": "Ghidra marks FUN_5897CC42 non-returning and the thunk target is outside this image. The 3-byte gap between body ranges and delete-path return behavior are not resolved; no runtime destruction test was performed.",
+    },
+    "588DF6B0": {
+        "name_in_analysis": "FUN_588df6b0 / CShip_MapObjectScreen vtable slot +0x14",
+        "called_by": "Ghidra maps this target from vtable entry 0x589A1100 in the RTTI-identified CShip_MapObjectScreen table at 0x589A10EC. Ghidra reports no direct code callers; it is reached through virtual dispatch.",
+        "behavior": "The 745-byte body occupies [0x588DF6B0,0x588DF868) and [0x588DF870,0x588DF9A1). It traverses the child list at receiver +0x4C and dispatches child vslot +0x14 in observed states 0x40000 and 0x50000. The 0x50000 path updates sentinel fields +0x6078 and +0x6084, conditionally emits geometry through FUN_58903D60 from bounded record data, and calls FUN_588DD1B0, FUN_588DF280, FUN_588DDA60, and FUN_58903D60.",
+        "uncertainty": "The state labels, sentinel meaning, geometry units, and helper contracts remain unresolved. This is static analysis; no original-client or emulator visual test was performed.",
+    },
+    "588D81D0": {
+        "name_in_analysis": "FUN_588d81d0 / CShip_MapObjectScreen vtable slot +0x18",
+        "called_by": "Ghidra maps this target from vtable entry 0x589A1104 in the RTTI-identified CShip_MapObjectScreen table at 0x589A10EC. Ghidra reports no direct code callers; it is reached through virtual dispatch.",
+        "behavior": "The contiguous 93-byte body [0x588D81D0,0x588D822D) gates on receiver +0x80 equaling 0x40000000, then sets fields +0x6108, +0x6314, and +0x610C. When the supplied length is between 1 and 0x1FF, it copies that many bytes through FUN_5897CD4C to receiver +0x610D and records the length at +0x6310.",
+        "uncertainty": "The payload's type, field roles, and FUN_5897CD4C contract remain unresolved. No runtime behavior test was performed.",
+    },
+    "5874DDD0": {
+        "name_in_analysis": "FUN_5874ddd0 / shared one-byte no-op in CShip_MapObjectScreen vtable slot +0x1C",
+        "called_by": "Ghidra and the raw mapped image place this one-byte RET target at vtable entry 0x589A1108. The same target is shared by other vtables and unrelated direct callsites; it is not class-exclusive.",
+        "behavior": "The one-byte Ghidra body [0x5874DDD0,0x5874DDD1) contains only RET.",
+        "uncertainty": "The inherited slot's semantic purpose is unknown. The byte match establishes the shared no-op implementation, not ownership by CShip_MapObjectScreen.",
     },
     "588C5F30": {
         "name_in_analysis": "FUN_588c5f30",

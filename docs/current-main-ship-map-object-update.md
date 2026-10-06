@@ -6,7 +6,8 @@ descriptor `0x589B92E0`, named `.?AVCShip_MapObjectScreen@@`. The existing
 [constructor notes](current-main-ship-map-screen-constructor.md) identify the
 same class. This method has one contiguous 5,014-byte body range. ObjDiff 3.8.0
 verifies it against the captured mapped client at 100%, with 221 relocation
-operands checked.
+operands checked. All eight targets in this screen's RTTI-backed vtable now
+have exact-match records; see the [vtable coverage](current-main-ship-map-vtable.md).
 
 The routine gates on object flags and an active field, then branches on the
 state at object offset `+0x6090`. In state `0x40000`, it calls movement/control
