@@ -209,7 +209,7 @@ ADDRESSES = (
     "588D8100",
     "588D8150",
     "58736080",
-    "58853570", "588536C0", "5885EE90",
+    "58853570", "588536C0", "5885EE90", "5888E450",
     "58909B00",
     "58793DA0",
     "587A5720",
@@ -349,6 +349,7 @@ SYMBOL_OVERRIDES = {
 SOURCE_COMPILER_ADDRESSES = {
     "588536C0",
     "5885EE90",
+    "5888E450",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -6243,6 +6244,12 @@ EVIDENCE = {
         "called_by": "Called repeatedly from verified selector dispatcher FUN_587A75E0 with receiver pointers obtained from active child state.",
         "behavior": "Reads a pointer at receiver +0xB40 plus four times the stack index. If non-null it returns the zero-extended first byte; otherwise it returns zero. The complete body is 26 bytes, has no external operand targets, and ends in ret 4. No local bounds check is present.",
         "uncertainty": "The pointer array's type, valid index range and byte meaning are unresolved. No runtime client test was performed.",
+    },
+    "5888E450": {
+        "name_in_analysis": "FUN_5888e450 / matched-list entry formatter and conditional host notice",
+        "called_by": "Ghidra references and an inventory-wide direct-call scan find exactly three call sites from two byte-matched callers. FUN_58806F60 calls at 0x588071FC and 0x58807233 with ECX=[0x58A245C0], the short ID from [ESI+0x350], and second argument zero. FUN_587BB700 calls at 0x587BD4D5 with the same ECX, the short ID from [EBP+8], and second argument one.",
+        "behavior": "The complete Ghidra extent is 330 contiguous bytes, [0x5888E450,0x5888E59A), ending with ret 8 at 0x5888E597. It allocates a 0x300-byte local formatting buffer and walks the list headed by [0x58A247F8]+0x0C, following node link +0x78 until it finds a short ID at node +0x350 equal to its first stack argument. On a match, it formats either \"%s (%s)    %s\" when [0x58A245A8]+0x204 equals 7, or \"%s (%s)\" otherwise, using receiver strings +0x198/+0x298 and the matched node string at +0x12E8+0x6C; it passes the result to FUN_588D28A0. When its second argument is one and the observed status is not 0, 1, or 3, it checks the active object at [0x58A247F8]+4; if that object's +0x350 ID matches, it resolves MESSAGESTRING__YOU_HAVE_BECAME_THE_NEW_HOST through indirect slot 0x5898C030 and calls FUN_5876BAF0(0x28,text) followed by FUN_58764D30. It verifies the stack cookie and returns.",
+        "uncertainty": "The object/list schemas, ID and status meanings, string callback and UI helper contracts, and visible effect remain uncertain. The ‘new host’ description is inferred from the observed localization token and the caller's argument value, not from runtime behavior. No emulator test was performed.",
     },
     "5885EE90": {
         "name_in_analysis": "FUN_5885ee90 / receiver-state initializer and table selection",

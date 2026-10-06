@@ -318947,6 +318947,135 @@
         "behavior": "The 1,277-byte body occupies [0x5885EE90,0x5885F198) and [0x5885F1A0,0x5885F395); eight intervening alignment bytes are excluded. Ghidra shows extensive zero-initialization of receiver fields and child-related arrays, five calls to FUN_587A15E0 for entries beginning at +0x120, constant initialization of eight words beginning at +0x184, clearing 0x424 bytes at +0x1AC, five calls to FUN_58907360(0), and child flag/field resets. It then reads shared-object fields and scans records in the table rooted at 0x58A247F8 in 0x20-byte steps from offset 0xA0 through below 0x400. The scan compares observed type/category bytes and encoded values using constants including 0x5898CB10 and 0x5899EB20, selects and stores values at receiver +0xB4/+0xB8/+0xBC/+0xC4, and performs final child-field updates. Ghidra's final call to FUN_58793E00 is encoded in the mapped image as a tail JMP at 0x5885F390; the complete mapped instruction ends at 0x5885F395.",
         "uncertainty": "Receiver, child and table types, meanings of the cleared fields, constants, encoded values, selection policy and helper contracts remain unresolved. Ghidra warns that block 0x5885F26F is unreachable; the byte-matched source preserves the complete mapped body ranges. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5888E450",
+      "name": "FUN_5888e450",
+      "size": 330,
+      "symbol": "_FUN_5888e450",
+      "source": "src/client-current/Main/FUN_5888e450.cpp",
+      "source_sha256": "022f426deb5c50b512171e8089bd634ab94902d4268a1368adbd65be0ccedf06",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "5888E523",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5899FF58",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 150,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "5899FF50",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "588D28A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 223,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 277,
+          "target_address": "5899FF24",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 294,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 317,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888e450 / matched-list entry formatter and conditional host notice",
+        "called_by": "Ghidra references and an inventory-wide direct-call scan find exactly three call sites from two byte-matched callers. FUN_58806F60 calls at 0x588071FC and 0x58807233 with ECX=[0x58A245C0], the short ID from [ESI+0x350], and second argument zero. FUN_587BB700 calls at 0x587BD4D5 with the same ECX, the short ID from [EBP+8], and second argument one.",
+        "behavior": "The complete Ghidra extent is 330 contiguous bytes, [0x5888E450,0x5888E59A), ending with ret 8 at 0x5888E597. It allocates a 0x300-byte local formatting buffer and walks the list headed by [0x58A247F8]+0x0C, following node link +0x78 until it finds a short ID at node +0x350 equal to its first stack argument. On a match, it formats either \"%s (%s)    %s\" when [0x58A245A8]+0x204 equals 7, or \"%s (%s)\" otherwise, using receiver strings +0x198/+0x298 and the matched node string at +0x12E8+0x6C; it passes the result to FUN_588D28A0. When its second argument is one and the observed status is not 0, 1, or 3, it checks the active object at [0x58A247F8]+4; if that object's +0x350 ID matches, it resolves MESSAGESTRING__YOU_HAVE_BECAME_THE_NEW_HOST through indirect slot 0x5898C030 and calls FUN_5876BAF0(0x28,text) followed by FUN_58764D30. It verifies the stack cookie and returns.",
+        "uncertainty": "The object/list schemas, ID and status meanings, string callback and UI helper contracts, and visible effect remain uncertain. The \u2018new host\u2019 description is inferred from the observed localization token and the caller's argument value, not from runtime behavior. No emulator test was performed."
+      }
     }
   ]
 }
