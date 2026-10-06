@@ -316,6 +316,7 @@ ADDRESSES = (
     "58741C20",
     "5873A7C0",
     "587B7500",
+    "588D75F0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -383,6 +384,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58741C20",
     "5873A7C0",
     "587B7500",
+    "588D75F0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6722,6 +6724,12 @@ EVIDENCE = {
         "called_by": "Ghidra finds five direct calls and no data refs. Byte-matched FUN_5873A7C0 calls at 0x5873ADD5 and 0x5873AEB0 with ECX=[EBP+0x520], and byte-matched FUN_5873FE80 calls at 0x58740849 with ECX=[ESI+0x520] after a nonnull check. Each matched site pushes three values. Unmatched FUN_587CB6B0 and FUN_587CBE00 call at 0x587CB8DF and 0x587CC0E8.",
         "behavior": "The contiguous body is 124 bytes, [0x587B7500,0x587B757C), and returns with `ret 0xC` at 0x587B7579; four CC padding bytes precede the next function. It converts two integer inputs using qword constant 0x5898CF08, obtains a third scaled float from FUN_5897CC90 and constant 0x5899A158, and passes three float values to FUN_58907820. It then calls the receiver's vtable slot +0x14; if that returns zero, it calls slot +4 with argument 1. The literal stream preserves the x87 operations and checks all five mapped operand targets.",
         "uncertainty": "The child object identity, coordinate/scale units, meaning of the two virtual slots, and visible graphics effect are unknown. Ghidra's prototype exposes only two stack parameters, but the three matched callers each push three and the machine code ends in `ret 0xC`; the exact semantic argument mapping is therefore unresolved. Two callers are not byte-matched. No emulator runtime test was performed.",
+    },
+    "588D75F0": {
+        "name_in_analysis": "FUN_588d75f0 / ship-map indexed child action and state handler",
+        "called_by": "All four Ghidra-recorded direct calls are from byte-matched FUN_588E4260: 0x588E43F9 (action 5), 0x588E4539 (action 7), 0x588E465F (action 0x15), and 0x588E467C (action 0x14). They pass the indexed value at [ESI+0x340]. At 43F9, 4539, and 467C, ECX=ESI; at 465F the caller does not explicitly reload ECX immediately before the call, so receiver setup on that path is unresolved. Ghidra decompilation places the calls in switch cases 5, 7, 0x23/0x24, and 0x25/0x26/0x29/0x2A, respectively.",
+        "behavior": "Ghidra confirms 1,477 body bytes across [0x588D75F0,0x588D76BA), [0x588D76C0,0x588D78E7), and [0x588D78F0,0x588D7BC4). The omitted 6-byte gap is `lea ebx,[ebx]`; the omitted 9-byte gap is `lea esp,[esp]; mov edi,edi`. Unconditional jumps bridge both gaps. Action values 4/5 update matching child +0x128 by +/-1 and mark +0x10C; 6/7 update +0x124 and mark +0x108; 10/11 update +0x124 with sign selected by a per-entry byte and mark +0x108. Actions 0x14/0x15 clear matching child state at +0x108/+0x10C, subject to parent filter bits and reset conditions. The loops scan the count at this+0x141C, match item IDs at this+0x1FC against the supplied value, and skip null child pointers in the array at this+0x17C. The caller stores returned state bits at this+0x60B8 for actions 5/7 and toggles bits there for actions 0x14/0x15. The exact three body ranges are emitted literally and their mapped operand targets are recorded.",
+        "uncertainty": "The owning type and the semantic identities of the indexed child, item IDs, filter flags, and state fields are not established. The ECX receiver at 0x588E465F is not explicitly loaded in the matched caller and remains unresolved. The byte-matched caller's switch cases establish where these actions are selected, but child rendering/gameplay effects have not been runtime-tested. No emulator runtime test was performed.",
     },
 }
 
