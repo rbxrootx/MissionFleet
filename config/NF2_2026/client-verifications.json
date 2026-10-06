@@ -314798,6 +314798,32 @@
         "behavior": "When the object at receiver +0xD0 has a positive count at +0x88, scans its indexed items with verified FUN_589080E0 and the callback pointer slot 0x5898C1A4. On the first callback result equal to zero, calls verified FUN_589081E0 on four consecutive array descriptors beginning at receiver +0xD0, using the matched index. It then scans nodes from receiver +0x138 through node +0x54, comparing the NUL-terminated string reached through node +0x70 then +0x6C against the argument. For the first equal string, repairs the linked-list head/tail and neighboring links, calls the node's first virtual method with argument 1, and returns with ret 4. If no linked node matches, it returns without unlinking one. The complete 343-byte body has four mapped operand targets.",
         "uncertainty": "The comparison callback target, array and node schemas, four descriptor roles, virtual deletion contract, and key meaning are unresolved. The indexed-array scan and explicit byte-by-byte NUL comparison are visible in the mapped instructions; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5875BAE0",
+      "name": "FUN_5875bae0",
+      "size": 35,
+      "symbol": "_FUN_5875bae0",
+      "source": "src/client-current/Main/FUN_5875bae0.cpp",
+      "source_sha256": "fa227728de351a048ae0b26654b03bfd515b3285f01b79fc06da73a37603c15c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5875BAE0 / paired initializer-field assignment",
+        "called_by": "Verified weapon-fire handler FUN_587B4B70 calls it at 0x587B533D with ECX loaded from a local receiver, and verified shell-map update FUN_588D4300 calls it at 0x588D6179 with ECX=EDI. Both callsites push two values, then continue initializing the same receiver at +0x198. The shared-object initializer FUN_5875BE60 is also byte-matched and is called earlier in both paths; its returned object is subsequently passed to this helper.",
+        "behavior": "Copies the first stack argument into receiver offsets +0x164 and +0x16C, copies the second stack argument into +0x168 and +0x170, and returns with ret 8. The complete 35-byte body has no mapped operand targets.",
+        "uncertainty": "The four field meanings, why each argument is duplicated into a pair of adjacent fields, and the resulting visual/gameplay effect remain unknown. The instruction writes and caller argument setup are directly visible in byte-matched code; no emulator runtime test was performed."
+      }
     }
   ]
 }

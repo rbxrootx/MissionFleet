@@ -10,10 +10,21 @@ mapped address operands.
 
 Two verified callers reach this method. The `CShell_MapObjectScreen` update
 `FUN_588d4300` and weapon-fire handler `FUN_587b4b70` each pass the receiver in
-`ECX` and 13 stack values. Both use the returned pointer-like value in a
-following `FUN_5875BAE0` call and store it at receiver offset `+0x198`. The
-caller context links this helper to shell-screen and weapon-fire paths, but
-does not prove the exact object or effect.
+`ECX` and 13 stack values. Both later pass the returned object pointer from
+`FUN_5875BE60` as the `ECX` receiver to `FUN_5875BAE0`. After that setter
+returns, they write a separate DWORD to the initialized object's `+0x198`
+field: the weapon-fire path reads it from `[ESI+0x88]`, and the shell-map path
+from `[ESI+0x23C]`. These call paths connect the helpers to shell-screen and
+weapon-fire behavior, but do not establish the field's meaning.
+
+The 35-byte [follow-up helper](../src/client-current/Main/FUN_5875bae0.cpp)
+copies its first argument to receiver offsets `+0x164` and `+0x16C`, and its
+second argument to `+0x168` and `+0x170`, then returns with `ret 8`. The
+weapon-fire caller reaches it at `0x587B533D`; the shell-map update reaches it
+at `0x588D6179`. Both callsites set up two stack values and subsequently store
+another DWORD at `+0x198`. The weapon-fire path reads it from `[ESI+0x88]`,
+while the shell-map path reads it from `[ESI+0x23C]`. These writes are
+byte-verified; the field names and why each pair is mirrored remain unknown.
 
 The body saves `ECX` as the receiver, forwards caller values to `FUN_5875BB10`,
 initializes receiver fields including offsets `+0x12C` through `+0x180`, calls
