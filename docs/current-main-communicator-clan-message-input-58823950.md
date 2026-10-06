@@ -23,3 +23,6 @@ instruction source matches all 926 bytes, with 59 operand targets checked.
 Nested child types, field meanings, scroll units, callback contracts, and the
 rendered interaction remain unresolved. No emulator input or visual test was
 performed.
+
+Its four direct helper callees shared with the notification handler are
+documented in [the event-helper notes](current-main-communicator-clan-message-event-helpers.md).

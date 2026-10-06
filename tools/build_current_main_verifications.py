@@ -267,7 +267,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -318,7 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40",
+    "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40", "58823110", "58823210", "588231A0", "588231D0", "587B9820",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
@@ -582,6 +582,36 @@ EVIDENCE = {
         "behavior": "Uses ECX as a context object, stack arg 1 as a subject object, and stack arg 2 as a mode; it returns with ret 8. It returns immediately if subject +0x100C is null. Modes 0-4 and 6 select corresponding MESSAGESTRING keys for sunk, out-of-field, wiped-out, lost-connection, retreated, and forced-retreat notices, formatting the subject's +0x12E8/+0x6C value into subject +0x3A0. Mode 5 formats MESSAGESTRING__START_OBSERVE into a stack buffer. The notice path passes 0xFFFF or 0xFFFF00 to FUN_5890BD90 according to subject +0x1258, calls FUN_58907990 with [0x58A248F8], and then attempts a virtual call through slot +4 of an object derived from DAT_58A246D8: when [DAT_58A246D8]+0x170 > 0x1D and +0x194 is nonzero, the object pointer is read from [[DAT_58A246D8]+0x194]+0x74; otherwise the decompilation leaves the local pointer zero before the dereference. Further state changes run only when context +0x105F0 equals 7: nonzero modes can write subject +0x664C=10000 and, for the active subject, update DAT_58A245A4+0x8D8 and context child +0xAC (1 for modes 1/4, otherwise 0); mode 0 calls FUN_587CC700(1) when subject +0x6648 is nonzero and sets subject +0x664C to 75, 125, 200, or 250 from the low five bits at [subject +0x100C]+4. The 722-byte extent ends at 0x587E8A22.",
         "uncertainty": "The message keys' localized text, subject/context object schemas, offsets +0x100C/+0x12E8/+0x6648/+0x664C, meaning of the conditional values, FUN_5890BD90/FUN_58907990/FUN_587CC700 contracts, and selected virtual method remain unresolved. Ghidra shows a null local pointer on one virtual-call selection path followed by an unconditional dereference; the runtime invariant that prevents this path from failing is not known. Known byte-matched callers exercise modes 0, 1, and 5; other switch cases are reconstructed from Ghidra output and mapped instructions but do not yet have caller evidence. No emulator runtime test was performed.",
     },
+    "587B9820": {
+        "name_in_analysis": "FUN_587b9820 / ClanMessage text request gate",
+        "called_by": "Byte-matched ClanMessage helper FUN_58823110 calls this at 0x5882316B with ECX=[0x58A24588], first argument equal to the child text pointer [[this+0x70]+0x80], and second argument equal to its measured length plus one.",
+        "behavior": "Calls FUN_587A2D40 with ECX=[0x58A24578] and the text pointer/length. If that helper returns nonzero, returns 0. Otherwise it calls FUN_58970C70 with ECX equal to its incoming context and six stack arguments (0x8001AA01, 0, 0, text pointer, length, 0), then returns 1 using ret 8. The complete 69-byte body is decoded through the return.",
+        "uncertainty": "The global context types, gate/helper contracts, meaning of key 0x8001AA01, and external effect of FUN_58970C70 are unknown. The call from the ClanMessage text helper is verified, but the end-user result has not been observed in the emulator.",
+    },
+    "58823110": {
+        "name_in_analysis": "FUN_58823110 / ClanMessage child text and helper dispatch",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x588239C9; byte-matched notification handler FUN_58823EB0 calls it at 0x58823EF2. These direct call instructions and the callee target are in the pinned Main.dll image.",
+        "behavior": "Passes the string pointer at [[this+0x70]+0x80] to the function pointer at 0x5898C1A8 and returns if its result is nonpositive. It then tests ([0x58A0B468] XOR 0xAAAAAAAA) against 0x3E8. The lower branch calls FUN_5876BAF0 with four zero arguments and passes its result to FUN_58764D30 before returning. The other branch passes the string and its measured length to FUN_587B9820 with ECX=[0x58A24588]; on a zero result it calls the indirect helper at 0x5898C030 with text pointer 0x5899C598 and color 0x006464FF, then calls FUN_5888D250 with [0x58A245C0]. This branch ends by tail-jumping to FUN_5875F940 with ECX=[this+0x70]. The full 142-byte extent ends in that tail jump.",
+        "uncertainty": "The function-pointer contracts, string content, global fields, threshold condition, and effects of the dispatch helpers are unresolved. Direct call evidence ties this helper to both verified ClanMessage handlers, but no UI/runtime test was performed.",
+    },
+    "58823210": {
+        "name_in_analysis": "FUN_58823210 / ClanMessage bounded value update",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823CD3; byte-matched notification handler FUN_58823EB0 calls it at 0x58823EE2, 0x58823F0C, and 0x58823F26. The original direct call sites are checked as part of those caller matches.",
+        "behavior": "Reads child [this+0x74] and its +0x88 value, subtracts 7 to get a span, and starts with [this+8]+0x25. When the span is positive, it calls FUN_58908170, scales the result by 0x46, divides by the span, and adds that result. It clamps the value to [this+8]+0x25 through [this+8]+0x6B, then calls FUN_58903360 with ECX=[this+0x98] and the clamped value. The full 93-byte extent returns normally.",
+        "uncertainty": "The child +0x88 unit, FUN_58908170 distribution, receiver +0x98 object type, and FUN_58903360 effect are not established. The observed arithmetic supports bounded value selection but not a named UI behavior; no runtime test was performed.",
+    },
+    "588231A0": {
+        "name_in_analysis": "FUN_588231a0 / ClanMessage decrement child value",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823AB5 and 0x58823CC5; byte-matched notification handler FUN_58823EB0 calls it at 0x58823F05.",
+        "behavior": "Reads the current value from child [this+0x74] through FUN_58908170. If the value is positive and child +0x88 exceeds 7, it reads the current value again, subtracts one, and passes the result to FUN_58908190 with ECX=[this+0x74]. Otherwise it performs no update. The complete function is 44 bytes and returns normally.",
+        "uncertainty": "The meanings of the child +0x88 field and the getter/setter helpers are unknown. The decrement condition and passed value are directly observable, but the user-visible behavior is untested.",
+    },
+    "588231D0": {
+        "name_in_analysis": "FUN_588231d0 / ClanMessage increment child value",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823AFA and 0x58823CCC; byte-matched notification handler FUN_58823EB0 calls this at 0x58823F1F.",
+        "behavior": "Reads child [this+0x74], computes its +0x88 value minus 7, and reads the current value through FUN_58908170. If the current value is below that maximum and +0x88 exceeds 7, it reads the current value again, adds one, and passes the result to FUN_58908190 with ECX=[this+0x74]. Otherwise it performs no update. The complete function is 55 bytes and returns normally.",
+        "uncertainty": "The meanings of child +0x88 and the getter/setter helpers remain unknown. The increment limit and passed value are observable, but the user-visible behavior is untested.",
+    },
     "58822D20": {
         "name_in_analysis": "FUN_58822d20 / CPannelCommunicatorClanMessage destructor",
         "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this function in slot +0x00. Verified constructor FUN_58823270 installs that vtable and verified parent FUN_58849B70 stores the object at +0x114. Direct delete call sites are unresolved.",
@@ -616,7 +646,7 @@ EVIDENCE = {
         "name_in_analysis": "FUN_58823950 / CPannelCommunicatorClanMessage input handler",
         "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 contains FUN_58823950 in slot +0x10. Verified constructor FUN_58823270 installs this vtable at receiver +0 and the ID-panel constructor FUN_58849B70 stores this object at child slot +0x114. The exact original vtable pointer is checked by verify_current_communicator_rtti.py.",
         "behavior": "Checks receiver state bit 0x0002, forwards the stack event pointer through a nested child chain using each child's virtual slot +0x10, then dispatches on the DWORD at event +4. The observed paths include values 0x102, 0x200, and 0x201 through 0x20A. They update receiver state and position fields including +0x50/+0x54/+0x84/+0x88/+0x8C/+0x90/+0x94, call child/scroll helpers FUN_58823110/FUN_588231A0/FUN_588231D0, and invoke control state helpers. The 926-byte body returns with ret 4 and contains 59 mapped operand targets.",
-        "uncertainty": "The event structure and ABI are not proven despite values resembling Windows keyboard/mouse messages. The nested child types, state/position field meanings, scroll units, indirect callback contracts, and rendered interaction remain unresolved. Several called methods in this class are still unmatched, and no emulator input or visual test was performed.",
+        "uncertainty": "The event structure and ABI are not proven despite values resembling Windows keyboard/mouse messages. The nested child types, state/position field meanings, scroll units, indirect callback contracts, and rendered interaction remain unresolved. The byte-matched direct helper calls are documented separately; no emulator input or visual test was performed.",
     },
     "58823270": {
         "name_in_analysis": "FUN_58823270 / CPannelCommunicatorClanMessage constructor",

@@ -313536,7 +313536,7 @@
         "name_in_analysis": "FUN_58823950 / CPannelCommunicatorClanMessage input handler",
         "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 contains FUN_58823950 in slot +0x10. Verified constructor FUN_58823270 installs this vtable at receiver +0 and the ID-panel constructor FUN_58849B70 stores this object at child slot +0x114. The exact original vtable pointer is checked by verify_current_communicator_rtti.py.",
         "behavior": "Checks receiver state bit 0x0002, forwards the stack event pointer through a nested child chain using each child's virtual slot +0x10, then dispatches on the DWORD at event +4. The observed paths include values 0x102, 0x200, and 0x201 through 0x20A. They update receiver state and position fields including +0x50/+0x54/+0x84/+0x88/+0x8C/+0x90/+0x94, call child/scroll helpers FUN_58823110/FUN_588231A0/FUN_588231D0, and invoke control state helpers. The 926-byte body returns with ret 4 and contains 59 mapped operand targets.",
-        "uncertainty": "The event structure and ABI are not proven despite values resembling Windows keyboard/mouse messages. The nested child types, state/position field meanings, scroll units, indirect callback contracts, and rendered interaction remain unresolved. Several called methods in this class are still unmatched, and no emulator input or visual test was performed."
+        "uncertainty": "The event structure and ABI are not proven despite values resembling Windows keyboard/mouse messages. The nested child types, state/position field meanings, scroll units, indirect callback contracts, and rendered interaction remain unresolved. The byte-matched direct helper calls are documented separately; no emulator input or visual test was performed."
       }
     },
     {
@@ -313858,6 +313858,279 @@
         "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this function in slot +0x04. Verified constructor FUN_58823270 installs that vtable and verified parent FUN_58849B70 stores the object at +0x114. Direct virtual-call sites remain unresolved.",
         "behavior": "Sets receiver flag bits 0x0001 and 0x0004, replaces state bits selected by mask 0x1E00 with 0x0100, and writes receiver fields +0x58=0xDC, +0x50=0x130, and +0x54=0x14A before calling FUN_58903290. It updates child flags at +0x70/+0x74 and calls FUN_5875F940; a global condition selects a different string source and child +0x7C state. Both paths compute a byte-string length into child +0x70 fields +0x8C/+0x94, set receiver +0x84=1 and +0x88=0, and call slot +0x18 on the object at [0x58A24584]+0x30 with stack arguments (receiver, 0x64, 0). The corrected 370-byte extent includes the stack-cookie epilogue, add esp,0x84, and ret at 0x58822EB1; 14 CC bytes precede FUN_58822EC0.",
         "uncertainty": "The receiver and child field semantics, global condition, string contents, helper contracts, and indirect notification meaning remain unverified. The original 367-byte index cut through the add-ESP epilogue; the corrected extent follows complete instruction decoding through ret and the padding before the next vtable function. No emulator visual or state test was performed."
+      }
+    },
+    {
+      "address": "58823110",
+      "name": "FUN_58823110",
+      "size": 142,
+      "symbol": "_FUN_58823110",
+      "source": "src/client-current/Main/FUN_58823110.cpp",
+      "source_sha256": "b5a6751d2001f7e203e264b2b7ce7984dfbb74cfeec6e1fd931ae239356a42eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58A0B468",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 92,
+          "target_address": "587B9820",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5899C598",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "58A245C0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "5888D250",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58823110 / ClanMessage child text and helper dispatch",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x588239C9; byte-matched notification handler FUN_58823EB0 calls it at 0x58823EF2. These direct call instructions and the callee target are in the pinned Main.dll image.",
+        "behavior": "Passes the string pointer at [[this+0x70]+0x80] to the function pointer at 0x5898C1A8 and returns if its result is nonpositive. It then tests ([0x58A0B468] XOR 0xAAAAAAAA) against 0x3E8. The lower branch calls FUN_5876BAF0 with four zero arguments and passes its result to FUN_58764D30 before returning. The other branch passes the string and its measured length to FUN_587B9820 with ECX=[0x58A24588]; on a zero result it calls the indirect helper at 0x5898C030 with text pointer 0x5899C598 and color 0x006464FF, then calls FUN_5888D250 with [0x58A245C0]. This branch ends by tail-jumping to FUN_5875F940 with ECX=[this+0x70]. The full 142-byte extent ends in that tail jump.",
+        "uncertainty": "The function-pointer contracts, string content, global fields, threshold condition, and effects of the dispatch helpers are unresolved. Direct call evidence ties this helper to both verified ClanMessage handlers, but no UI/runtime test was performed."
+      }
+    },
+    {
+      "address": "58823210",
+      "name": "FUN_58823210",
+      "size": 93,
+      "symbol": "_FUN_58823210",
+      "source": "src/client-current/Main/FUN_58823210.cpp",
+      "source_sha256": "c744d028987d658821697edf5f4ad5585b50f243f910b23da7650d03d16c42d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58823210 / ClanMessage bounded value update",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823CD3; byte-matched notification handler FUN_58823EB0 calls it at 0x58823EE2, 0x58823F0C, and 0x58823F26. The original direct call sites are checked as part of those caller matches.",
+        "behavior": "Reads child [this+0x74] and its +0x88 value, subtracts 7 to get a span, and starts with [this+8]+0x25. When the span is positive, it calls FUN_58908170, scales the result by 0x46, divides by the span, and adds that result. It clamps the value to [this+8]+0x25 through [this+8]+0x6B, then calls FUN_58903360 with ECX=[this+0x98] and the clamped value. The full 93-byte extent returns normally.",
+        "uncertainty": "The child +0x88 unit, FUN_58908170 distribution, receiver +0x98 object type, and FUN_58903360 effect are not established. The observed arithmetic supports bounded value selection but not a named UI behavior; no runtime test was performed."
+      }
+    },
+    {
+      "address": "588231A0",
+      "name": "FUN_588231a0",
+      "size": 44,
+      "symbol": "_FUN_588231a0",
+      "source": "src/client-current/Main/FUN_588231a0.cpp",
+      "source_sha256": "8348946a2a1bd4d8dd965dd9ff284c0e14b984b2a023accae0db48a8890268c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "58908190",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588231a0 / ClanMessage decrement child value",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823AB5 and 0x58823CC5; byte-matched notification handler FUN_58823EB0 calls it at 0x58823F05.",
+        "behavior": "Reads the current value from child [this+0x74] through FUN_58908170. If the value is positive and child +0x88 exceeds 7, it reads the current value again, subtracts one, and passes the result to FUN_58908190 with ECX=[this+0x74]. Otherwise it performs no update. The complete function is 44 bytes and returns normally.",
+        "uncertainty": "The meanings of the child +0x88 field and the getter/setter helpers are unknown. The decrement condition and passed value are directly observable, but the user-visible behavior is untested."
+      }
+    },
+    {
+      "address": "588231D0",
+      "name": "FUN_588231d0",
+      "size": 55,
+      "symbol": "_FUN_588231d0",
+      "source": "src/client-current/Main/FUN_588231d0.cpp",
+      "source_sha256": "6539e117bcb1661795579bca956a722819db460f34556458c2e97ef0233c85e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 38,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "58908190",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588231d0 / ClanMessage increment child value",
+        "called_by": "Byte-matched ClanMessage input handler FUN_58823950 calls this at 0x58823AFA and 0x58823CCC; byte-matched notification handler FUN_58823EB0 calls this at 0x58823F1F.",
+        "behavior": "Reads child [this+0x74], computes its +0x88 value minus 7, and reads the current value through FUN_58908170. If the current value is below that maximum and +0x88 exceeds 7, it reads the current value again, adds one, and passes the result to FUN_58908190 with ECX=[this+0x74]. Otherwise it performs no update. The complete function is 55 bytes and returns normally.",
+        "uncertainty": "The meanings of child +0x88 and the getter/setter helpers remain unknown. The increment limit and passed value are observable, but the user-visible behavior is untested."
+      }
+    },
+    {
+      "address": "587B9820",
+      "name": "FUN_587b9820",
+      "size": 69,
+      "symbol": "_FUN_587b9820",
+      "source": "src/client-current/Main/FUN_587b9820.cpp",
+      "source_sha256": "ee51899315e1e1a7704ba51f34fb8e40d360c91305774aee621b097c717e1bf7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "58A24578",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 22,
+          "target_address": "587A2D40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 54,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9820 / ClanMessage text request gate",
+        "called_by": "Byte-matched ClanMessage helper FUN_58823110 calls this at 0x5882316B with ECX=[0x58A24588], first argument equal to the child text pointer [[this+0x70]+0x80], and second argument equal to its measured length plus one.",
+        "behavior": "Calls FUN_587A2D40 with ECX=[0x58A24578] and the text pointer/length. If that helper returns nonzero, returns 0. Otherwise it calls FUN_58970C70 with ECX equal to its incoming context and six stack arguments (0x8001AA01, 0, 0, text pointer, length, 0), then returns 1 using ret 8. The complete 69-byte body is decoded through the return.",
+        "uncertainty": "The global context types, gate/helper contracts, meaning of key 0x8001AA01, and external effect of FUN_58970C70 are unknown. The call from the ClanMessage text helper is verified, but the end-user result has not been observed in the emulator."
       }
     }
   ]
