@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "588075E0",
     "58805940",
     "588D6CC0",
     "588D6D10",
@@ -326,6 +327,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "588075E0",
     "58805940",
     "588D6CC0",
     "588D6D10",
@@ -530,6 +532,9 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra counts 708 bytes across disjoint ranges, omitting add esp,4 at
+    # 0x58807882 and the frame epilogue through ret at 0x588078A6.
+    "588075E0": 711,
     # Ghidra counts 488 bytes across two disjoint ranges. Include the
     # contiguous 8-byte register/frame restore and ret epilogue at 0x58805D88.
     "58805BA0": 496,
@@ -563,11 +568,17 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588075E0": {
+        "name_in_analysis": "FUN_588075e0 / queued component-record dispatcher",
+        "called_by": "Ghidra records direct calls from FUN_58807D50 at 0x58807E57 and FUN_58808080 at 0x588080A6; those callers are not yet byte-matched.",
+        "behavior": "Consumes 0x13C-byte records from a ring buffer rooted at receiver +0x260, using queue count/index fields +0x254/+0x25C, capacity +0x250, and boundary/index +0x258. It copies 0x4F DWORDs to a local record and dispatches on its first DWORD. Observed IDs are 1, 3, 4, 0x10, 0x20, 0x40, 0x50, 0x70, 0x100, 0x400, 0x04000008, and 0x04000009. ID 0x70 calls byte-matched FUN_58805940 when receiver +0x114 is zero; IDs 0x04000008/09 call byte-matched FUN_58806F60 with boolean 0/1 and a local record/subrecord pointer. Other cases call the helpers recorded in the Ghidra decompilation. It repeats until the queue count is empty and performs the captured cookie check/return path. Ghidra's 708-byte disjoint body omits the mapped stack cleanup at 0x58807882..0x58807884 and the frame restore/ret at 0x588078A4..0x588078A6; the complete contiguous extent is 711 bytes.",
+        "uncertainty": "The queue schema and semantic meaning of its IDs and fields are not established. Several other dispatch callees remain unmatched, and the direct callers FUN_58807D50/FUN_58808080 are not byte-matched. No emulator runtime test was performed.",
+    },
     "58805940": {
         "name_in_analysis": "FUN_58805940 / selected-value paired child update",
-        "called_by": "Ghidra records one direct caller: unmatched FUN_588075E0 at 0x588077F9. Within this helper, the equality path calls byte-matched FUN_588D6D10 at 0x58805969 with ECX=[0x58A247F8]+4 and argument 1; the other path calls byte-matched FUN_588D6CC0 at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1.",
+        "called_by": "Byte-matched FUN_588075E0 calls this in case 0x70 at 0x588077F9 when receiver +0x114 is zero, passing the two 16-bit values described below. Within this helper, the equality path calls byte-matched FUN_588D6D10 at 0x58805969 with ECX=[0x58A247F8]+4 and argument 1; the other path calls byte-matched FUN_588D6CC0 at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1.",
         "behavior": "Compares the selected object's word at +0x350 with the second stack argument. If equal, sets bit 1 in receiver dword +0x78, invokes FUN_588D6D10(1) on the selected object, then calls FUN_588A69F0 with the first stack argument. If unequal, calls FUN_5878A160 with the compared value and invokes FUN_588D6CC0(1) with its return value as ECX. Both paths then set bit 1 in the word at +0x24 of the object referenced by receiver +0x174, write 400 to receiver +0x300, and return with ret 8. The complete indexed body is 102 bytes through 0x588059A5.",
-        "uncertainty": "The meaning of the compared +0x350 word, receiver flags, referenced child objects, and the effects of FUN_588A69F0/FUN_5878A160 are unknown. Its only recorded direct caller FUN_588075E0 is not byte-matched, so that call's broader purpose is unverified. No emulator runtime test was performed.",
+        "uncertainty": "The meaning of the compared +0x350 word, receiver flags, referenced child objects, and the effects of FUN_588A69F0/FUN_5878A160 are unknown. FUN_588075E0 is now byte-matched, but its callers FUN_58807D50/FUN_58808080 remain unmatched, so the broader invocation context is unverified. No emulator runtime test was performed.",
     },
     "588D6D10": {
         "name_in_analysis": "FUN_588d6d10 / paired child-bit update",
@@ -595,9 +606,9 @@ EVIDENCE = {
     },
     "58806F60": {
         "name_in_analysis": "FUN_58806F60 / variable-record component update",
-        "called_by": "Byte-matched FUN_58807910 calls this per event record at 0x58807A65 with ECX=the record owner, the current record pointer, a pointer to record +0x114, and a boolean derived from the caller's optional four-DWORD mask. The mapped code for FUN_588075E0 also calls it at 0x5880786C after copying a 0x13C-byte queue item to local storage and dispatching IDs 0x04000008/0x04000009; those routes pass boolean 0/1 respectively. The broader meaning of that queue dispatch is unverified.",
+        "called_by": "Byte-matched FUN_58807910 calls this per event record at 0x58807A65 with ECX=the record owner, the current record pointer, a pointer to record +0x114, and a boolean derived from the caller's optional four-DWORD mask. Byte-matched FUN_588075E0 calls it at 0x5880786C after copying a 0x13C-byte queue item; IDs 0x04000008/09 pass boolean 0/1 respectively. The broader semantic meaning of the queue dispatch remains unknown.",
         "behavior": "Requires byte [record +0x68] to equal 1; otherwise it formats the record name from +6 with the diagnostic `SetNewPlayerData_TypeOfComponent is 0` and enters the captured fatal/error callback path. Derives a count as ((DWORD [record +0x44] >> 1) & 0x1F), used with the supplied +0x114 pointer and stride 0x18. With the boolean argument nonzero, it calls FUN_587AF1F0 for the record range, calls FUN_588A6410 with byte [record +2], then scans the linked list rooted at [0x58A247F8]+0xC by comparing the record name at +6 with each node's +0x356 key. A match reaches FUN_58778B20/FUN_58731CE0 and sets bit 0 in two fields of that node's child objects. With the boolean zero, it obtains an object through FUN_58789FE0, makes record-derived update calls, selects further calls by the observed subtype values 0x1C3, 0x6F, 0x13E, and 0x1C5, updates table-selected values and receiver flags, and increments receiver counters for subtype groups 8 and 6/7. The full 1,032-byte stream ends with ret 0xC; the literal-x86 source passed mapped-image comparison using pinned clang-cl.",
-        "uncertainty": "The record and object structures, meanings of the count and subtype fields, meaning of the boolean's alternate path, linked-node identity, and gameplay/UI effect are unknown. Most update helpers are not yet matched, so their contracts are not inferred. Although FUN_588075E0's two queue IDs and boolean arguments are visible in mapped instructions, the broader meaning of that dispatch is unverified. No emulator runtime test was performed.",
+        "uncertainty": "The record and object structures, meanings of the count and subtype fields, meaning of the boolean's alternate path, linked-node identity, and gameplay/UI effect are unknown. Most update helpers are not yet matched, so their contracts are not inferred. The semantic meaning of FUN_588075E0's queue dispatch is still unknown. No emulator runtime test was performed.",
     },
     "58807910": {
         "name_in_analysis": "FUN_58807910 / 0x80020113 variable-record update handler",

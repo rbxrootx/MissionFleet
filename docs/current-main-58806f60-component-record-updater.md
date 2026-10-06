@@ -4,10 +4,11 @@
 The byte-matched event handler `FUN_58807910` calls it once per variable-size
 record at `0x58807A65`, passing the current record, its `+0x114` subrecord, and
 a boolean derived from the optional record mask. A second caller,
-`FUN_588075E0`, calls it at `0x5880786C` after copying a 0x13C-byte queue record
-to local storage. That caller dispatches IDs `0x04000008` and `0x04000009`,
-passing boolean 0 and 1 respectively. Those callsite bytes are in the pinned
-mapped image, but the queue's broader purpose is still unknown.
+byte-matched `FUN_588075E0`, calls it at `0x5880786C` after copying a
+0x13C-byte queue record to local storage. It dispatches IDs `0x04000008` and
+`0x04000009`, passing boolean 0 and 1 respectively. The queue contents and
+broader purpose remain unknown; the dispatcher's observed branches are
+documented in the [queue dispatcher notes](current-main-588075e0-queue-dispatcher.md).
 
 ## Behavior supported by the original code
 
@@ -49,6 +50,6 @@ and at `0x58807242` with `1`, again using ECX=ESI; see the
 The record and object types, semantic names for fields, the meaning of the
 count/subtype values, the boolean's alternate-path meaning, the linked-node
 identity, and gameplay/UI effects remain unknown. Most called update helpers
-are not matched, and the broader role of the `FUN_588075E0` queue dispatch
+are not matched, and the semantic role of the `FUN_588075E0` queue dispatch
 remains unknown. This is a static byte match; no emulator runtime test has been
 performed.

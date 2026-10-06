@@ -1,8 +1,10 @@
 # Current Main selected-value paired update
 
-`FUN_58805940` is a 102-byte `__thiscall` helper. Ghidra records one direct
-caller, `FUN_588075E0` at `0x588077F9`; that caller is not yet byte-matched.
-This helper connects the two byte-matched paired-child helpers:
+`FUN_58805940` is a 102-byte `__thiscall` helper. Byte-matched queue dispatcher
+`FUN_588075E0` calls it at `0x588077F9` for queue ID `0x70`, when receiver
+`+0x114` is zero. The dispatcher is called by `FUN_58807D50` and
+`FUN_58808080`, which are not yet byte-matched. This helper connects the two
+byte-matched paired-child helpers:
 `FUN_588D6D10` at `0x58805969` and `FUN_588D6CC0` at `0x58805988`.
 
 ## Behavior supported by the original code
@@ -24,6 +26,6 @@ complete indexed extent through `0x588059A5`.
 
 The meaning of the compared `+0x350` word, receiver flags, and referenced
 objects is unknown. The effects of `FUN_588A69F0` and `FUN_5878A160` are also
-unresolved. Its only recorded direct caller, `FUN_588075E0`, remains
-unmatched, so the wider dispatch path is not established. No emulator runtime
-test has been performed.
+unresolved. The wider invocation paths through `FUN_58807D50` and
+`FUN_58808080` are not established. No emulator runtime test has been
+performed.
