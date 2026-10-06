@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0830", "587B0860", "587B0910", "587B1310", "58778AD0",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0830", "587B0860", "587B0910", "587B1310", "588DA9E0", "58778AD0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -502,6 +502,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B0860",
     "587B0910",
     "587B1310",
+    "588DA9E0",
     "58778AD0",
 }
 SOURCE_COMPILER = {
@@ -565,6 +566,12 @@ EVIDENCE = {
         "called_by": "Verified FUN_587A6220 calls it at 0x587A6699 and 0x587A69A2 with the pointer at [0x58A247F8]+4. Verified ship-map builder FUN_588D84D0 calls it at 0x588D8BD6 with param_1. The caller outputs expose these arguments and paths.",
         "behavior": "Stores the input pointer at receiver +0x88. It then reads the pointer at receiver +0x168; when nonnull, it copies the DWORD at input +0x6060 into child +0xA4. When the child pointer is null, that copy is skipped. The 35-byte function ends with ret 4 and has no mapped operand targets.",
         "uncertainty": "The input and receiver/child types, meanings of offsets +0x88/+0x168/input +0x6060/child +0xA4, and runtime effect remain unknown. The code dereferences the input when the child is nonnull, but whether callers guarantee a valid input in that case is not established. Caller edges are supported by byte-matched FUN_587A6220 and FUN_588D84D0; no emulator runtime test was performed.",
+    },
+    "588DA9E0": {
+        "name_in_analysis": "FUN_588DA9E0 / state reset and mode routing",
+        "called_by": "Verified FUN_587FAEC0 calls it at 0x587FB056 with ECX=ESI on the path where CL equals 0x40. Verified FUN_587FD890 calls it at 0x587FE06E with ECX loaded from [0x58A247F8]+4. Its Ghidra output places the latter call under the receiver-state test (+0x24 & 0x1F00)==0x200, after receiver +0x218E0 and FUN_588D66E0 checks both succeed.",
+        "behavior": "Clears bit 0 in the receiver's word at +0x24 and zeros its DWORD at +0x6088. It loads the pointer at 0x58A2459C and tests the DWORD at that object +0x218E0. When nonzero, calls FUN_587E8750 with (receiver, 5); otherwise calls it with (receiver, 1). The complete 54-byte body ends at 0x588DAA16 and contains three mapped operand targets: the global pointer and two relative calls.",
+        "uncertainty": "The meaning of bit 0 and receiver +0x6088, the global field +0x218E0, the distinction between mode arguments 1 and 5, and FUN_587E8750's state-transition contract remain unknown. The code dereferences the global pointer without a null check. Caller evidence comes from two byte-matched handlers and the recorded Ghidra path; no emulator runtime test was performed.",
     },
     "587B1F90": {
         "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",
