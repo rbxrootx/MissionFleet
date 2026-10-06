@@ -17,6 +17,7 @@ ADDRESSES = (
     "58805D90",
     "588059B0",
     "588A9240",
+    "588A6410",
     "58805880",
     "588058D0",
     "588A6720",
@@ -350,6 +351,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58805D90",
     "588059B0",
     "588A9240",
+    "588A6410",
     "58805880",
     "588058D0",
     "588A6720",
@@ -653,6 +655,12 @@ EVIDENCE = {
         "called_by": "Ghidra's direct-reference dump finds exactly two calls, both from byte-matched functions: FUN_588059B0 at 0x58805A2D and FUN_58807910 at 0x58807D1A. Each caller loads ECX from its receiver's +0x174 child field. FUN_588059B0 reaches the call when the selected object's +0x350 word equals its second argument; FUN_58807910 reaches it immediately after the 0x04000000-gated FUN_588059B0 call.",
         "behavior": "The complete contiguous body is 188 bytes, [0x588A9240,0x588A92FC). Ghidra identifies one __fastcall parameter in ECX and no stack arguments. It sets dword +0x68 of the child at receiver +0x17C to 1 and invokes that child's vtable slot +4 without stack arguments. Unless receiver word +0x9C is 8 or 9, it conditionally selects [0x58A246D8+0x194]+0x3C in ECX when global dword +0x170 is greater than 15 and +0x194 is nonnull (otherwise ECX is cleared), calls FUN_58907990 with [0x58A248F8], repeats the same selection, then calls the selected object's vtable slot +4 with argument 0. Finally it clears dwords +0x58 and +0x50 in the object at receiver +0x154, then stores the zero-extended byte [0x58A247F8+4]+0x354 at that object's +0x58.",
         "uncertainty": "The receiver/child types, meanings of state values 8 and 9, global object fields, selected-object byte +0x354, and effects/contracts of both vtable calls and FUN_58907990 are unknown. The direct callers establish ECX as receiver +0x174 but not the feature-level purpose or visible result. No emulator runtime test was performed.",
+    },
+    "588A6410": {
+        "name_in_analysis": "FUN_588a6410 / indexed record timer and state refresh",
+        "called_by": "Ghidra's complete reference dump finds six direct calls from four functions. The byte-matched FUN_58806F60 calls it at 0x5880706F and 0x588072D6; the byte-matched FUN_58807910 calls it at 0x58807B88. The other references are FUN_58805260 at 0x58805386 and FUN_58807370 at 0x5880751F/0x58807531; those callers are not yet byte-matched in this catalog. The verified callers establish that this helper participates in the component-record update path, while the call arguments' feature-level meaning remains unknown.",
+        "behavior": "The complete contiguous body is 365 bytes, [0x588A6410,0x588A657D), and returns with ret 8. Ghidra's decompilation and mapped instructions show it derives an index from the first argument and accesses the corresponding entry in the table at 0x58A0B1C4. It sets a flag when the selected object's byte +0x354 equals that index while [0x58A245A8]+0x114 and [0x58A247F8]+4 are nonzero, then calls FUN_58879FB0 with the index, indexed entry fields, and flag. It reads the indexed entry's +0x54 value; when global byte [0x58A245A8]+0x1BC bit 0 is set, it calls FUN_587AEE40(0xF4241) and, if the returned object's +0x6C is nonzero, adds the indexed dword at +0x3DC. If the second argument or [0x58A245A8]+0x114 is nonzero, it subtracts FUN_58789940() from that value. For global state word [0x58A245A8]+0x204 in {4, 5, 6, 10, 11, 14, 15, 16}, it passes FUN_58789790() to FUN_58907360 and makes a second FUN_58789790() call. For other states it passes the adjusted value divided by 1000 to FUN_58907360; a zero result triggers FUN_58902D20(-100) and an early return. Remaining paths call FUN_58902D20(0). The candidate emits the original mapped instruction stream literally and records its 17 mapped call/data operand targets.",
+        "uncertainty": "The table-entry and selected-object types, meanings of the index, +0x54/+0x3DC fields, global state values, 0xF4241 lookup, and timer conversions remain unknown. Called functions' contracts and user-visible effects are not established by these references. Two caller functions in the full xref set are not yet byte-matched. No emulator runtime test was performed.",
     },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",

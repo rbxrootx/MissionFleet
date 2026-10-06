@@ -20,7 +20,8 @@ It derives a count from
 region with an 0x18-byte stride.
 
 When the boolean argument is nonzero, it passes the record range to
-`FUN_587AF1F0`, calls `FUN_588A6410` with byte `record + 2`, and walks the linked
+`FUN_587AF1F0`, calls [the indexed record state refresh helper](current-main-588a6410-indexed-record-state-refresh.md)
+with byte `record + 2`, and walks the linked
 list rooted at `[0x58A247F8] + 0xC`. It compares the record's string at `+6` to
 each node key at `+0x356`. A matching node reaches `FUN_58778B20` and
 `FUN_58731CE0`, then sets bit 0 in fields at `+0x24` on two child objects.
