@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,479 matches cover 2,363,791 bytes (22.5763%) and are verified
+The current 7,480 matches cover 2,364,001 bytes (22.5783%) and are verified
 individually at 100.0% by objdiff.
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).
@@ -39,6 +39,8 @@ The six-value ship-map summary aggregation called from both update paths is
 documented in [its Main.dll evidence](docs/current-main-587a6fb0-summary-refresh.md).
 The three-input range/progress control initializer is documented in
 [its Main.dll evidence](docs/current-main-588955a0-control-initializer.md).
+The child flag-bit propagation helper is documented in
+[its Main.dll evidence](docs/current-main-588d9c40-child-flag-propagation.md).
 The child-coordinate update and linked-entry calculations are documented in
 [its Main.dll evidence](docs/current-main-5888d5c0-child-coordinate-update.md).
 The chat formatter and whisper history routine are documented in

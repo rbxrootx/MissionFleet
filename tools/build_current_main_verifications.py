@@ -324,6 +324,7 @@ ADDRESSES = (
     "5884D420",
     "587A6FB0",
     "588955A0",
+    "588D9C40",
     "588958C0",
 )
 RELOCATION_OVERRIDES = {
@@ -400,6 +401,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5884D420",
     "587A6FB0",
     "588955A0",
+    "588D9C40",
     "588958C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
@@ -6794,6 +6796,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra lists exactly two direct callers, both byte-matched: FUN_588DEB30 at 0x588DF15F and FUN_58857020 at 0x58857096. Both pass ECX as the child/control pointer and three stack arguments, right-to-left: arg3 from [global+4]+0xDAC, arg2 from [global+4]+0xD98 XOR 0xAAAAAAAA, then arg1 from [global+4]+0x398 XOR 0xAAAAAAAA. FUN_588DEB30's receiver is [0x58A245C4]+0xC4; FUN_58857020's is [ESI+0xC4]. The target's `ret 0x0C` confirms thiscall with three stack arguments.",
         "behavior": "Ghidra confirms one contiguous 257-byte body, [0x588955A0,0x588956A1), ending in `ret 0x0C` at 0x5889569E. The routine stores arg3 as a range/denominator at receiver +0xA8 and derives one, two, and three fifths at +0xC0/+0xBC/+0xB8. It initializes numeric child values from arg1/arg2, sets three child controls with FUN_5877E7A0 (including an arg3-to-10000 fallback for one child), copies arg1 into fields +0x94 through +0xA0, and calls FUN_589032E0 twice with ratios `((arg1 or +0x98) * 0x373) / arg3 + 0x7E`. The candidate emits the exact mapped stream and records seven operand targets.",
         "uncertainty": "The control's exact visual/gameplay role, resource labels, field names, and helper contracts remain uncertain. The ratio calculations divide by arg3; callers also pass arg3 as the range at +0xDAC, but the nonzero invariant is not established despite the separate zero fallback used for one child. No emulator runtime test was performed.",
+    },
+    "588D9C40": {
+        "name_in_analysis": "FUN_588d9c40 / child flag-bit propagation",
+        "called_by": "Fresh Ghidra refs identify exactly two direct callers, both byte-matched: FUN_588DB610 at 0x588DBA88 and FUN_588DEB30 at 0x588DED80. Both use ECX as the receiver and pass one DWORD; DB610 passes 0 on its state-0x80000 path, while DEB30 passes 1 with ECX=ESI. The target's `ret 4` confirms the thiscall ABI.",
+        "behavior": "Ghidra confirms one contiguous 210-byte body, [0x588D9C40,0x588D9D12), ending in `ret 4` at 0x588D9D0F. The routine sets or clears only bit 0 of child flag words at child +0x24, preserving other bits. It first updates the low-bit flags for up to `(*(ushort*)(this+0x100C+0x0A) & 7)` pointers beginning at this +0x60DC, then always updates children at this +0x1470 and +0x1474. Unless the argument is 1 and this equals the global current object, it also walks the child-pointer list at this +0x17C for the count at this +0x141C, skips null entries, and applies the same flag update. The candidate emits the exact mapped stream and records its one operand target.",
+        "uncertainty": "The meaning of flag bit 0 and the child roles remain unknown; calling it visibility or enabled state is only a hypothesis. The initial pointer array has no visible null checks, and the invariant that its entries are populated is not established. No emulator runtime test was performed.",
     },
 }
 
