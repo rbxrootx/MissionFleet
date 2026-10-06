@@ -318319,6 +318319,57 @@
         "behavior": "Ghidra confirms one contiguous 141-byte body, [0x588A6D60, 0x588A6DED), with mapped operand targets 0x58A247F8 and FUN_58902CE0. If byte +0x354 of the object at [0x58A247F8]+4 is not 1, receiver state word +0x9C selects whether dword +0x50 on child +0xB8 is set to 0 (state 0x10) or 1 (other states). It then calls byte-matched FUN_58902CE0(0x100). If receiver state is not 0x10, it ORs bit 0 into the word at child +0x1E4 +0x24. It stores 2 at receiver +0x98, ORs 0xF into the word at child +0x160 +0x24, stores byte 1 at that child +0x100, and ORs bit 0 into the word at child +0xD8 +0x24.",
         "uncertainty": "The receiver/child types, global record schema, meanings of record byte +0x354 and state +0x9C, field +0x98, and flag effects remain unresolved. The visible result of the indirect child updates has not been tested in the emulator."
       }
+    },
+    {
+      "address": "588A70F0",
+      "name": "FUN_588a70f0",
+      "size": 216,
+      "symbol": "_FUN_588a70f0",
+      "source": "src/client-current/Main/FUN_588a70f0.cpp",
+      "source_sha256": "c73a9ac2bc2f06d3add7a8685282604e56a11c156e51aa46bc9087f14cd95097",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 53,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 100,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 183,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a70f0 / state-16 child-entry refresh",
+        "called_by": "Ghidra's reference dump and a scan of executable sections in the installed mapped Main.dll find one direct E8 call, at 0x587C0509, from byte-matched FUN_587BB700. The caller checks [0x58A245A8]+0x204 == 0x10, loads ECX from [0x58A245A8]+0x174, and pushes no stack argument. The call is in observed message case 0x80021103, event-record +0x0A == 1, after FUN_588A6C70 and FUN_588A6D60.",
+        "behavior": "Ghidra and the mapped bytes give one contiguous 216-byte body, [0x588A70F0, 0x588A71C8), ending in RET. It branches on receiver byte +0x1DC. When zero, it walks eight dword pointers from +0x1BC and calls matched FUN_58903290 for each with ECX=array entry and stack values (selector, 8); selectors are 0x101, 0x113, 0x125, 0x137, 0x151, 0x163, 0x175, 0x187. When nonzero, it first walks pointer entries +0x1CC through +0x1D8 with the first four selectors, then entries +0x1BC through +0x1C8 with the last four selectors. Matched FUN_58903290 stores those supplied values at receiver +4/+8 and applies the observed child update path. After either branch, the function ORs bit 0 into the word at child +0xD4 +0x24, calls matched FUN_58902CE0 with ECX=child +0xD4 and argument 0x100, ORs 0xF into the word at child +0x15C +0x24, and sets byte child +0x15C +0x100 to 1.",
+        "uncertainty": "The receiver/child types, meaning of byte +0x1DC, pointer-entry roles and selector meanings are unknown. The matched callees' local mechanics are documented, but the combined visual/game effect and emulator behavior have not been tested."
+      }
     }
   ]
 }
