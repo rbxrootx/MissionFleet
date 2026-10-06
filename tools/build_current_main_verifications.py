@@ -360,6 +360,11 @@ ADDRESSES = (
     "588F8870",
     "588FFFE0",
     "588FBEF0",
+    "58900040",
+    "58900250",
+    "58900270",
+    "589002B0",
+    "58900340",
     "588FC640",
     "588FC770",
     "588FC830",
@@ -442,6 +447,11 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F8870",
     "588FFFE0",
     "588FBEF0",
+    "58900040",
+    "58900250",
+    "58900270",
+    "589002B0",
+    "58900340",
     "588FC640",
     "588FC770",
     "588FC830",
@@ -767,8 +777,41 @@ FUNCTION_SIZE_OVERRIDES = {
     "588FBED0": 30,
     # Ghidra's deleting wrapper stops after pop esi; include ret 4 at 0x588FB50B.
     "588FB4F0": 30,
+    # Ghidra indexes 27 bytes around the imported delete call and omits the
+    # reachable add esp,4 continuation. Match through ret 4 before INT3 padding.
+    "58900250": 30,
 }
 EVIDENCE = {
+    "58900040": {
+        "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x00 to deleting wrapper FUN_58900250, which directly calls this body at 0x58900253. This body installs the same vtable at 0x58900069. The locator referenced at 0x589A23E0 resolves to TypeDescriptor 0x589CDEB0, named .?AVCWarehouseTradePanel@@; matched constructor FUN_58900400 installs that table.",
+        "behavior": "The contiguous 428-byte body [0x58900040,0x589001EC) installs the panel vtable, conditionally invokes child virtual slot 0 with delete flag 1 and clears receiver pointers at +0x64, +0x68, +0x6C, +0x70, +0x74, +0x78, +0x7C, +0x98, +0x9C, +0xA0, +0xA4, +0x80, +0x84, +0x88, +0x8C, and +0x90. It then calls FUN_58902C10 and restores the saved exception-list state. The emitted instruction stream checks the complete mapped body.",
+        "uncertainty": "The child fields' roles and ownership, FUN_58902C10's contract, and the imported child-deletion target's runtime behavior remain unresolved. No emulator destruction test has been run.",
+    },
+    "58900250": {
+        "name_in_analysis": "FUN_58900250 / CWarehouseTradePanel deleting-destructor wrapper",
+        "called_by": "The wrapper is slot +0x00 of the seven-entry RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4. It directly calls destructor body FUN_58900040 at 0x58900253; matched constructor FUN_58900400 installs the same table.",
+        "behavior": "Ghidra indexes 27 bytes in [0x58900250,0x58900265) and [0x58900268,0x5890026E). The complete mapped wrapper is 30 bytes through ret 4 at 0x5890026B, including reachable add esp,4 at 0x58900265; two INT3 bytes follow before FUN_58900270. It tests bit 0 of its stack flag, conditionally calls FUN_5897CC42(this), preserves this in EAX, and returns with ret 4. The emitted instruction stream checks all 30 bytes.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion behavior are unresolved; Ghidra marks that thunk non-returning despite the mapped cleanup continuation. No emulator deletion test has been run.",
+    },
+    "58900270": {
+        "name_in_analysis": "FUN_58900270 / CWarehouseTradePanel vtable method +0x04",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x04 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 61-byte body [0x58900270,0x589002AD) calls FUN_58903400, invokes virtual slot +0x18 through the object at DAT_58A24584+0x30 with this and value 0x64, resets child controls at receiver +0x74 and +0x78 through FUN_587C96A0, then tail-jumps to FUN_5875F940 using child +0x7C. Literal instruction emission checks all bytes and mapped call targets.",
+        "uncertainty": "The meaning of value 0x64, the global object's identity, child roles, geometry units, and helper contracts are unresolved. No panel interaction test has been run.",
+    },
+    "589002B0": {
+        "name_in_analysis": "FUN_589002B0 / CWarehouseTradePanel vtable method +0x10",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x10 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 133-byte body [0x589002B0,0x58900335) gates on bit 1 of receiver word +0x24. It queries children +0x74 and +0x78 through virtual slot +0x28 using each child's +0x60 value, then clears or sets bit 0 in child +0x80. It walks the structure rooted at +0x3C through child virtual slot +0x10, passing its stack argument, and returns either the stored +0x34 value or zero. Literal instruction emission checks the body and its mapped targets.",
+        "uncertainty": "The child and list-node types, flag meanings, callback contract, and method result semantics remain unknown. No runtime dispatch test has been run.",
+    },
+    "58900340": {
+        "name_in_analysis": "FUN_58900340 / CWarehouseTradePanel vtable method +0x18",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x18 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 188-byte body [0x58900340,0x589003FC) handles only event argument 2. It compares another argument with receiver fields +0x98 and +0xA0, checks child values at +0x74/+0x78, and follows different virtual update paths; one path sends value 0x11 through FUN_588F74C0/FUN_588F7580. It returns zero with ret 0x0C. Literal instruction emission checks the full body and its mapped operands.",
+        "uncertainty": "The argument meanings, child values, message code, helper contracts, and user-visible effect are unresolved. No emulator event test has been run.",
+    },
     "588F9900": {
         "name_in_analysis": "FUN_588F9900 / CWarehouseItemInfo destructor body",
         "called_by": "Ghidra shows a direct call from the CWarehouseItemInfo deleting wrapper FUN_588F9B00 at 0x588F9B03. This destructor stores the RTTI-backed CWarehouseItemInfo vtable address 0x589A213C at 0x588F992B; its complete-object locator resolves through 0x589CDD48 to .?AVCWarehouseItemInfo@@.",

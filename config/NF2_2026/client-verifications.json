@@ -328495,6 +328495,267 @@
         "behavior": "The 346-byte routine returns early when (word[this+0x24] & 0x1F00) is 0x400 or 0x500. Otherwise it updates children +0x78/+0x7C, walks the supplied records using a 0x38-byte stride, looks up an existing object through FUN_588FF0F0, applies records to existing objects through FUN_588F8070, or creates/appends missing objects through FUN_588FFFE0. It then stores the record count at +0x90 and dispatches additional child/list updates through FUN_588FF530, FUN_588FE9C0, FUN_588FF420, FUN_588FEB70, and FUN_588FE9D0 before returning with ret 0x14.",
         "uncertainty": "The receiver class, state values, record schema, stride contents, child roles, lookup/list contracts, and meanings of the follow-up updates remain unresolved. No emulator population test has been run."
       }
+    },
+    {
+      "address": "58900040",
+      "name": "FUN_58900040",
+      "size": 428,
+      "symbol": "_FUN_58900040",
+      "source": "src/client-current/Main/FUN_58900040.cpp",
+      "source_sha256": "4f74d54cc7f37a02762b992615791c4707a9bbb525a4326685168143591edd4d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58988648",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "589A23E4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "FFFFFFFF",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 406,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x00 to deleting wrapper FUN_58900250, which directly calls this body at 0x58900253. This body installs the same vtable at 0x58900069. The locator referenced at 0x589A23E0 resolves to TypeDescriptor 0x589CDEB0, named .?AVCWarehouseTradePanel@@; matched constructor FUN_58900400 installs that table.",
+        "behavior": "The contiguous 428-byte body [0x58900040,0x589001EC) installs the panel vtable, conditionally invokes child virtual slot 0 with delete flag 1 and clears receiver pointers at +0x64, +0x68, +0x6C, +0x70, +0x74, +0x78, +0x7C, +0x98, +0x9C, +0xA0, +0xA4, +0x80, +0x84, +0x88, +0x8C, and +0x90. It then calls FUN_58902C10 and restores the saved exception-list state. The emitted instruction stream checks the complete mapped body.",
+        "uncertainty": "The child fields' roles and ownership, FUN_58902C10's contract, and the imported child-deletion target's runtime behavior remain unresolved. No emulator destruction test has been run."
+      }
+    },
+    {
+      "address": "58900250",
+      "name": "FUN_58900250",
+      "size": 30,
+      "symbol": "_FUN_58900250",
+      "source": "src/client-current/Main/FUN_58900250.cpp",
+      "source_sha256": "301bdc1724db305da94afefac8eddf09cd8e0216a75184d37118ca7b54306731",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58900040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58900250 / CWarehouseTradePanel deleting-destructor wrapper",
+        "called_by": "The wrapper is slot +0x00 of the seven-entry RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4. It directly calls destructor body FUN_58900040 at 0x58900253; matched constructor FUN_58900400 installs the same table.",
+        "behavior": "Ghidra indexes 27 bytes in [0x58900250,0x58900265) and [0x58900268,0x5890026E). The complete mapped wrapper is 30 bytes through ret 4 at 0x5890026B, including reachable add esp,4 at 0x58900265; two INT3 bytes follow before FUN_58900270. It tests bit 0 of its stack flag, conditionally calls FUN_5897CC42(this), preserves this in EAX, and returns with ret 4. The emitted instruction stream checks all 30 bytes.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion behavior are unresolved; Ghidra marks that thunk non-returning despite the mapped cleanup continuation. No emulator deletion test has been run."
+      }
+    },
+    {
+      "address": "58900270",
+      "name": "FUN_58900270",
+      "size": 61,
+      "symbol": "_FUN_58900270",
+      "source": "src/client-current/Main/FUN_58900270.cpp",
+      "source_sha256": "2cbda3e18d21fa6d2f297aeaf1fca23b52523f89358df72ae14502f28bd493f0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58903400",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 9,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "587C96A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "587C96A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "5875F940",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58900270 / CWarehouseTradePanel vtable method +0x04",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x04 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 61-byte body [0x58900270,0x589002AD) calls FUN_58903400, invokes virtual slot +0x18 through the object at DAT_58A24584+0x30 with this and value 0x64, resets child controls at receiver +0x74 and +0x78 through FUN_587C96A0, then tail-jumps to FUN_5875F940 using child +0x7C. Literal instruction emission checks all bytes and mapped call targets.",
+        "uncertainty": "The meaning of value 0x64, the global object's identity, child roles, geometry units, and helper contracts are unresolved. No panel interaction test has been run."
+      }
+    },
+    {
+      "address": "589002B0",
+      "name": "FUN_589002b0",
+      "size": 133,
+      "symbol": "_FUN_589002b0",
+      "source": "src/client-current/Main/FUN_589002b0.cpp",
+      "source_sha256": "77470d43f34c63ec8a256218dfaaf7d4d1f7a535e51029e60e523ee0089b09c8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 55,
+          "target_address": "0000FFFE",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589002B0 / CWarehouseTradePanel vtable method +0x10",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x10 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 133-byte body [0x589002B0,0x58900335) gates on bit 1 of receiver word +0x24. It queries children +0x74 and +0x78 through virtual slot +0x28 using each child's +0x60 value, then clears or sets bit 0 in child +0x80. It walks the structure rooted at +0x3C through child virtual slot +0x10, passing its stack argument, and returns either the stored +0x34 value or zero. Literal instruction emission checks the body and its mapped targets.",
+        "uncertainty": "The child and list-node types, flag meanings, callback contract, and method result semantics remain unknown. No runtime dispatch test has been run."
+      }
+    },
+    {
+      "address": "58900340",
+      "name": "FUN_58900340",
+      "size": 188,
+      "symbol": "_FUN_58900340",
+      "source": "src/client-current/Main/FUN_58900340.cpp",
+      "source_sha256": "0d9c671a595403cef8b57ead30bd04f8a64af419c5d2cf6c8762121ef0390ebc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "589003F6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "00000014",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "588F74C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 57,
+          "target_address": "588F7580",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "0000EE48",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 175,
+          "target_address": "0000EE48",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58900340 / CWarehouseTradePanel vtable method +0x18",
+        "called_by": "The RTTI-backed CWarehouseTradePanel vtable at 0x589A23E4 points slot +0x18 to this method. Matched constructor FUN_58900400 installs the table; no direct code caller was identified.",
+        "behavior": "The contiguous 188-byte body [0x58900340,0x589003FC) handles only event argument 2. It compares another argument with receiver fields +0x98 and +0xA0, checks child values at +0x74/+0x78, and follows different virtual update paths; one path sends value 0x11 through FUN_588F74C0/FUN_588F7580. It returns zero with ret 0x0C. Literal instruction emission checks the full body and its mapped operands.",
+        "uncertainty": "The argument meanings, child values, message code, helper contracts, and user-visible effect are unresolved. No emulator event test has been run."
+      }
     }
   ]
 }
