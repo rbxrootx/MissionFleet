@@ -26,3 +26,7 @@ The class's vtable `+0x10` input method is documented in
 [the clan-message input notes](current-main-communicator-clan-message-input-58823950.md).
 Its vtable `+0x18` notification handler is documented in
 [the notification-handler notes](current-main-communicator-clan-message-notification-58823eb0.md).
+The state-reset handler at vtable `+0x08` is documented in
+[the state-reset notes](current-main-communicator-clan-message-state-reset-58822ec0.md).
+The destructor at `+0x00` and the state/child update at `+0x04` are documented
+in [the lifecycle notes](current-main-communicator-clan-message-lifecycle-58822d20-58822d40.md).

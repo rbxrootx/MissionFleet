@@ -1,4 +1,4 @@
-"""Verify the three communicator panel names from the pinned Main.dll RTTI."""
+"""Verify communicator panel RTTI names and original vtable slots."""
 
 from pathlib import Path
 import struct
@@ -64,6 +64,14 @@ def main():
         raise AssertionError("ID-panel destructor vtable slot changed")
     if u32(0x5899DB64 + 0x10) != 0x58823950:
         raise AssertionError("ClanMessage input vtable slot changed")
+    if u32(0x5899DB64 + 0x14) != 0x58902FE0:
+        raise AssertionError("ClanMessage action vtable slot changed")
+    if u32(0x5899DB64 + 0x08) != 0x58822EC0:
+        raise AssertionError("ClanMessage state-reset vtable slot changed")
+    if u32(0x5899DB64 + 0x00) != 0x58822D20:
+        raise AssertionError("ClanMessage destructor vtable slot changed")
+    if u32(0x5899DB64 + 0x04) != 0x58822D40:
+        raise AssertionError("ClanMessage state-update vtable slot changed")
     if u32(0x5899DB64 + 0x0C) != 0x58822F10:
         raise AssertionError("ClanMessage geometry-update vtable slot changed")
     if u32(0x5899DB64 + 0x18) != 0x58823EB0:
@@ -75,6 +83,10 @@ def main():
     print("5899E790: FUN_5884AB90 (ID-panel input slot +0x10)")
     print("5899E798: FUN_58848BC0 (ID-panel event slot +0x18)")
     print("5899DB74: FUN_58823950 (ClanMessage input slot +0x10)")
+    print("5899DB78: FUN_58902FE0 (ClanMessage action slot +0x14)")
+    print("5899DB6C: FUN_58822EC0 (ClanMessage state-reset slot +0x08)")
+    print("5899DB64: FUN_58822D20 (ClanMessage destructor slot +0x00)")
+    print("5899DB68: FUN_58822D40 (ClanMessage state-update slot +0x04)")
     print("5899DB70: FUN_58822F10 (ClanMessage geometry-update slot +0x0C)")
     print("5899DB7C: FUN_58823EB0 (ClanMessage notification-handler slot +0x18)")
 

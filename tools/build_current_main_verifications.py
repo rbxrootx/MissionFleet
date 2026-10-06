@@ -267,7 +267,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822F10", "58823EB0", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -318,7 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0",
+    "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
@@ -581,6 +581,24 @@ EVIDENCE = {
         "called_by": "Verified FUN_588DA9E0 calls it at 0x588DAA07 and 0x588DAA10 with ECX=[0x58A2459C], first stack argument equal to its receiver, and mode 5 or 1. Verified FUN_588DFFB0 calls it at 0x588E009C with the same ECX context, ESI as the first stack argument, and mode 0; the mode-zero push is at 0x588E0075. Ghidra function references and caller instruction streams agree.",
         "behavior": "Uses ECX as a context object, stack arg 1 as a subject object, and stack arg 2 as a mode; it returns with ret 8. It returns immediately if subject +0x100C is null. Modes 0-4 and 6 select corresponding MESSAGESTRING keys for sunk, out-of-field, wiped-out, lost-connection, retreated, and forced-retreat notices, formatting the subject's +0x12E8/+0x6C value into subject +0x3A0. Mode 5 formats MESSAGESTRING__START_OBSERVE into a stack buffer. The notice path passes 0xFFFF or 0xFFFF00 to FUN_5890BD90 according to subject +0x1258, calls FUN_58907990 with [0x58A248F8], and then attempts a virtual call through slot +4 of an object derived from DAT_58A246D8: when [DAT_58A246D8]+0x170 > 0x1D and +0x194 is nonzero, the object pointer is read from [[DAT_58A246D8]+0x194]+0x74; otherwise the decompilation leaves the local pointer zero before the dereference. Further state changes run only when context +0x105F0 equals 7: nonzero modes can write subject +0x664C=10000 and, for the active subject, update DAT_58A245A4+0x8D8 and context child +0xAC (1 for modes 1/4, otherwise 0); mode 0 calls FUN_587CC700(1) when subject +0x6648 is nonzero and sets subject +0x664C to 75, 125, 200, or 250 from the low five bits at [subject +0x100C]+4. The 722-byte extent ends at 0x587E8A22.",
         "uncertainty": "The message keys' localized text, subject/context object schemas, offsets +0x100C/+0x12E8/+0x6648/+0x664C, meaning of the conditional values, FUN_5890BD90/FUN_58907990/FUN_587CC700 contracts, and selected virtual method remain unresolved. Ghidra shows a null local pointer on one virtual-call selection path followed by an unconditional dereference; the runtime invariant that prevents this path from failing is not known. Known byte-matched callers exercise modes 0, 1, and 5; other switch cases are reconstructed from Ghidra output and mapped instructions but do not yet have caller evidence. No emulator runtime test was performed.",
+    },
+    "58822D20": {
+        "name_in_analysis": "FUN_58822d20 / CPannelCommunicatorClanMessage destructor",
+        "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this function in slot +0x00. Verified constructor FUN_58823270 installs that vtable and verified parent FUN_58849B70 stores the object at +0x114. Direct delete call sites are unresolved.",
+        "behavior": "Preserves the receiver, calls base cleanup FUN_58822B00, tests bit 0 of the first stack argument, and when set calls FUN_5897CC42 with the receiver. It returns the receiver using ret 4. The corrected body is 30 bytes: the original 27-byte index stopped before ret 4 at 0x58822D3B; two CC padding bytes follow before FUN_58822D40 at 0x58822D40.",
+        "uncertainty": "The base-cleanup and conditional deallocation contracts and the deleting-destructor flag ABI have not been independently confirmed. The vtable establishes the destructor slot, but no emulator object-destruction test was performed.",
+    },
+    "58822D40": {
+        "name_in_analysis": "FUN_58822d40 / CPannelCommunicatorClanMessage state and child update",
+        "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this function in slot +0x04. Verified constructor FUN_58823270 installs that vtable and verified parent FUN_58849B70 stores the object at +0x114. Direct virtual-call sites remain unresolved.",
+        "behavior": "Sets receiver flag bits 0x0001 and 0x0004, replaces state bits selected by mask 0x1E00 with 0x0100, and writes receiver fields +0x58=0xDC, +0x50=0x130, and +0x54=0x14A before calling FUN_58903290. It updates child flags at +0x70/+0x74 and calls FUN_5875F940; a global condition selects a different string source and child +0x7C state. Both paths compute a byte-string length into child +0x70 fields +0x8C/+0x94, set receiver +0x84=1 and +0x88=0, and call slot +0x18 on the object at [0x58A24584]+0x30 with stack arguments (receiver, 0x64, 0). The corrected 370-byte extent includes the stack-cookie epilogue, add esp,0x84, and ret at 0x58822EB1; 14 CC bytes precede FUN_58822EC0.",
+        "uncertainty": "The receiver and child field semantics, global condition, string contents, helper contracts, and indirect notification meaning remain unverified. The original 367-byte index cut through the add-ESP epilogue; the corrected extent follows complete instruction decoding through ret and the padding before the next vtable function. No emulator visual or state test was performed.",
+    },
+    "58822EC0": {
+        "name_in_analysis": "FUN_58822ec0 / CPannelCommunicatorClanMessage state reset",
+        "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this method in slot +0x08. Verified handler FUN_58823EB0 reaches that virtual slot when its first stack argument equals receiver child pointer +0x80; the handler itself is byte-matched and the original vtable slot is checked by verify_current_communicator_rtti.py. Constructor FUN_58823270 installs the vtable and parent FUN_58849B70 stores the object at +0x114.",
+        "behavior": "Clears receiver state bits selected by mask 0x1B00 and sets 0x0400 in word +0x24. It zeros receiver +0x58, clears bit 0 in the words at +0x24 of the child objects referenced by receiver +0x74 and +0x70, then calls the indirect function at vtable slot +0x18 of the object at [0x58A24584]+0x30 with stack arguments (the global object, 0x64, 0). The complete indexed body is 73 bytes and returns at 0x58822F08.",
+        "uncertainty": "The state values, child identities, global object schema, indirect method contract, and user-visible effect are not identified. Its dispatch through the notification handler is verified, but no emulator interaction test was performed.",
     },
     "58823EB0": {
         "name_in_analysis": "FUN_58823eb0 / CPannelCommunicatorClanMessage notification handler",
