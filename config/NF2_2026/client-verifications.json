@@ -325962,6 +325962,45 @@
         "behavior": "Ghidra confirms a contiguous five-byte body [0x588F7D30,0x588F7D35), fully covered by `mov al,1; ret 4`. It sets AL to 1 and returns while removing four stack bytes; no claim is made about the upper EAX bits. Literal instruction emission verifies all five bytes.",
         "uncertainty": "The virtual method's purpose and contract, concrete dispatch sites, and runtime behavior remain unknown. Both vtable references support the class/slot attribution, but no direct callers or emulator behavior have been confirmed."
       }
+    },
+    {
+      "address": "588F8620",
+      "name": "FUN_588f8620",
+      "size": 31,
+      "symbol": "_FUN_588f8620",
+      "source": "src/client-current/Main/FUN_588f8620.cpp",
+      "source_sha256": "3e7fabb0340ead73545eb4cb39f9e5ef30070592135d576fe58218a3629fc069",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "589A2104",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F8620 / CWarehouseItemFactory deleting-destructor wrapper",
+        "called_by": "Ghidra finds no direct code callers and one data reference at the vtable slot 0x589A2104. The preceding complete-object locator at 0x589A2100 resolves to RTTI type .?AVCWarehouseItemFactory@@, and this is its sole address-point slot. The matched constructor FUN_588F84E0 writes the same vtable pointer at 0x588F8507 and is called by FUN_588FFE10 at 0x588FFEED.",
+        "behavior": "The Ghidra-indexed body has 28 bytes in ranges [0x588F8620,0x588F8636) and [0x588F8639,0x588F863F). The contiguous mapped function stream is 31 bytes [0x588F8620,0x588F863F), including the three-byte add esp,4 continuation after the helper call. It tests bit 0 of the stack flag, installs the factory vtable, optionally calls FUN_5897CC42 with this, then restores eax/esi and returns with ret 4 at 0x588F863C. INT3 at 0x588F863F is the boundary byte; the next function begins at 0x588F8640. Literal instruction emission verifies the complete 31-byte stream and audits the vtable and helper targets.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion and return behavior are unknown. That helper is itself a thunk through pointer slot 0x5898C1F8; Ghidra marks the call as non-returning, so the cleanup continuation has not been runtime-confirmed. No emulator behavior has been tested."
+      }
     }
   ]
 }

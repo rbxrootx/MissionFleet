@@ -338,6 +338,7 @@ ADDRESSES = (
     "588F7D40",
     "588F7EF0",
     "588F7FE0",
+    "588F8620",
     "5897CE32",
     "588F7D30",
 )
@@ -393,6 +394,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F7D40",
     "588F7EF0",
     "588F7FE0",
+    "588F8620",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -705,6 +707,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F7D40": 30,
 }
 EVIDENCE = {
+    "588F8620": {
+        "name_in_analysis": "FUN_588F8620 / CWarehouseItemFactory deleting-destructor wrapper",
+        "called_by": "Ghidra finds no direct code callers and one data reference at the vtable slot 0x589A2104. The preceding complete-object locator at 0x589A2100 resolves to RTTI type .?AVCWarehouseItemFactory@@, and this is its sole address-point slot. The matched constructor FUN_588F84E0 writes the same vtable pointer at 0x588F8507 and is called by FUN_588FFE10 at 0x588FFEED.",
+        "behavior": "The Ghidra-indexed body has 28 bytes in ranges [0x588F8620,0x588F8636) and [0x588F8639,0x588F863F). The contiguous mapped function stream is 31 bytes [0x588F8620,0x588F863F), including the three-byte add esp,4 continuation after the helper call. It tests bit 0 of the stack flag, installs the factory vtable, optionally calls FUN_5897CC42 with this, then restores eax/esi and returns with ret 4 at 0x588F863C. INT3 at 0x588F863F is the boundary byte; the next function begins at 0x588F8640. Literal instruction emission verifies the complete 31-byte stream and audits the vtable and helper targets.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion and return behavior are unknown. That helper is itself a thunk through pointer slot 0x5898C1F8; Ghidra marks the call as non-returning, so the cleanup continuation has not been runtime-confirmed. No emulator behavior has been tested.",
+    },
     "5897CE32": {
         "name_in_analysis": "FUN_5897CE32 / CWarehouseItem virtual tail-jump",
         "called_by": "Ghidra finds no direct code callers. RTTI-backed CWarehouseItem vtable 0x589A20D4 points slots +0x1C and +0x20 at this function (data references 0x589A20F0 and 0x589A20F4). Additional data references at 0x5898D038, 0x5898D03C, 0x58996BE8, 0x58999EA0, 0x589A2288, 0x589A228C, 0x589A2290, 0x589A2294, 0x589A252C, 0x589A2530, 0x589A2E98, 0x589A2EA0, 0x589A2EA4, and 0x589A2EA8 have unresolved table owners. The RTTI-backed CWarehouseItemForce table overrides these slots, so this is not attributed to that class.",

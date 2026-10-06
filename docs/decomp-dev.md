@@ -52,12 +52,12 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,494 of 42,461 functions and 2,371,183 of 10,470,230 bytes (17.6491% by
-functions and 22.6469% by bytes); every counted function match is verified at
+credits 7,495 of 42,461 functions and 2,371,214 of 10,470,233 bytes (17.6515% by
+functions and 22.6472% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,361 exact function matches totaling 1,397,765 bytes. The
+inventory has 1,362 exact function matches totaling 1,397,796 bytes. The
 parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
 separately. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and
