@@ -14,3 +14,11 @@ int missionFleetSendTextNotice(void* receiver, const char* text,
                                std::uint32_t first, std::uint32_t second,
                                const char* fallback, MissionFleetTextLength length,
                                MissionFleetSendNotice send, void* context) noexcept;
+
+// Normal-path model of FUN_587baa60. It prefixes the string with the raw
+// 8-byte record header and sends selector 0x80010F0E. The byte-identical
+// caller FUN_58833e40 supplies the indexed header pointer and text pointer.
+void missionFleetSendRecordText(void* receiver, std::uint32_t globalValue,
+                                const void* recordHeader8, const char* text,
+                                MissionFleetTextLength length,
+                                MissionFleetSendNotice send, void* context);

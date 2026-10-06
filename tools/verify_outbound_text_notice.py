@@ -1,4 +1,4 @@
-"""Build and run the normal-path model for Main.dll FUN_587b9440."""
+"""Build and run normal-path models for Main.dll outbound text helpers."""
 
 import os
 from pathlib import Path

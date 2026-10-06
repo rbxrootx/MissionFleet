@@ -268,6 +268,7 @@ ADDRESSES = (
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B92B0", "587B9E10", "58848A00", "58847A50",
     "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
+    "58833E40", "587BAA60",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -325,7 +326,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
-    "588AA0D0", "588AA120",
+    "588AA0D0", "588AA120", "58833E40", "587BAA60",
     "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B92B0", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
@@ -541,6 +542,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58833E40": {
+        "name_in_analysis": "FUN_58833E40 / indexed record-text dispatch",
+        "called_by": "Verified packet/event dispatchers FUN_587BB700 (call at 0x587BE127) and FUN_588C1650 (call at 0x588C1B5F) both gate this path on object byte +0x321 == 8 and pass their source record pointer. Their byte-matched instruction streams establish both call edges.",
+        "behavior": "Loads text from receiver +0x328, clears receiver byte +0x321, reads an index at +0x324, computes sourceRecord + index*8 + 0x5C, loads receiver context from 0x58A24588, and calls FUN_587BAA60 with the computed 8-byte record header and text. Returns with ret 4. The complete 43-byte body has two mapped operand targets.",
+        "uncertainty": "The source record schema, index meaning, receiver state-byte semantics, and user-visible meaning of the resulting message remain unknown. The indexed address and call arguments are instruction-level facts corroborated by two verified callers; no emulator runtime test was performed.",
+    },
+    "587BAA60": {
+        "name_in_analysis": "FUN_587BAA60 / record-prefixed outbound text sender",
+        "called_by": "Byte-matched FUN_58833E40 calls this at 0x58833E63 with an indexed 8-byte record header and text pointer. The call establishes the argument roles used by this routine.",
+        "behavior": "Calls indirect function slot 0x5898C1A8 with the text pointer for a length, allocates length+9 bytes through verified FUN_5897152E, copies the 8-byte header, and appends length+1 bytes of text through verified FUN_58731B60. It then sends selector 0x80010F0E with context value [0x58A0B4A0], second value 0, the assembled buffer, NUL-scanned text length+9, and flags 0 through verified FUN_58970C70, frees the buffer through verified FUN_5897CE26, and returns with ret 8. The complete body is 117 bytes with six mapped operand targets.",
+        "uncertainty": "The runtime target and precise contract of slot 0x5898C1A8, meanings of the two header DWORDs and global context value, selector semantics, server response, and visible game effect remain unresolved. The use as a NUL-terminated string is supported by both the length callback and explicit scan. No emulator/server test was performed.",
+    },
     "58778AD0": {
         "name_in_analysis": "FUN_58778AD0 / 16-bit strided-record lookup",
         "called_by": "Verified FUN_5886BA60 calls it at 0x5886BF6E and 0x5886C045; verified FUN_588AEFB0 calls it at 0x588AF256, 0x588AF2A0, 0x588AF377, and 0x588AF74A. Both callers use returned records and follow 16-bit references stored in the record's eight-slot area beginning at +0x362.",

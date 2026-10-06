@@ -314606,6 +314606,108 @@
         "behavior": "Reads the destination pointer at receiver +0x1028, calls the byte-matched six-byte thunk FUN_5897CC48 with destination, zero, and size 0x3C8, then copies 0xF2 dwords (968 bytes) from the incoming source pointer to that destination with REP MOVSD. The complete 48-byte function ends with ret 4.",
         "uncertainty": "FUN_5897CC48 jumps through pointer slot 0x5898C1FC, whose runtime target and effect are unresolved; the zero argument alone does not prove a zero-fill operation. The record schema, receiver type, and purpose of the snapshot are unknown. No runtime test was performed."
       }
+    },
+    {
+      "address": "58833E40",
+      "name": "FUN_58833e40",
+      "size": 43,
+      "symbol": "_FUN_58833e40",
+      "source": "src/client-current/Main/FUN_58833e40.cpp",
+      "source_sha256": "d1b40ec5a821d93468d957570b1494d901f09c305b10cd17e21e8c2a1b9be0cd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 30,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "587BAA60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58833E40 / indexed record-text dispatch",
+        "called_by": "Verified packet/event dispatchers FUN_587BB700 (call at 0x587BE127) and FUN_588C1650 (call at 0x588C1B5F) both gate this path on object byte +0x321 == 8 and pass their source record pointer. Their byte-matched instruction streams establish both call edges.",
+        "behavior": "Loads text from receiver +0x328, clears receiver byte +0x321, reads an index at +0x324, computes sourceRecord + index*8 + 0x5C, loads receiver context from 0x58A24588, and calls FUN_587BAA60 with the computed 8-byte record header and text. Returns with ret 4. The complete 43-byte body has two mapped operand targets.",
+        "uncertainty": "The source record schema, index meaning, receiver state-byte semantics, and user-visible meaning of the resulting message remain unknown. The indexed address and call arguments are instruction-level facts corroborated by two verified callers; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587BAA60",
+      "name": "FUN_587baa60",
+      "size": 117,
+      "symbol": "_FUN_587baa60",
+      "source": "src/client-current/Main/FUN_587baa60.cpp",
+      "source_sha256": "177e6cccc87e915a088f340b34244704dc06c90eb6f3246e537b60be5a8dc08e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58731B60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5897CE26",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587BAA60 / record-prefixed outbound text sender",
+        "called_by": "Byte-matched FUN_58833E40 calls this at 0x58833E63 with an indexed 8-byte record header and text pointer. The call establishes the argument roles used by this routine.",
+        "behavior": "Calls indirect function slot 0x5898C1A8 with the text pointer for a length, allocates length+9 bytes through verified FUN_5897152E, copies the 8-byte header, and appends length+1 bytes of text through verified FUN_58731B60. It then sends selector 0x80010F0E with context value [0x58A0B4A0], second value 0, the assembled buffer, NUL-scanned text length+9, and flags 0 through verified FUN_58970C70, frees the buffer through verified FUN_5897CE26, and returns with ret 8. The complete body is 117 bytes with six mapped operand targets.",
+        "uncertainty": "The runtime target and precise contract of slot 0x5898C1A8, meanings of the two header DWORDs and global context value, selector semantics, server response, and visible game effect remain unresolved. The use as a NUL-terminated string is supported by both the length callback and explicit scan. No emulator/server test was performed."
+      }
     }
   ]
 }

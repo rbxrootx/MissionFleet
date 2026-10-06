@@ -13,6 +13,7 @@ struct Log {
     std::uint32_t second = 0;
     std::uint32_t bytes = 0;
     std::uint32_t flags = 1;
+    char payloadCopy[64] = {};
     unsigned lengthCalls = 0;
     unsigned sendCalls = 0;
 };
@@ -35,6 +36,8 @@ int send(void* receiver, std::uint32_t message, std::uint32_t first,
     log.second = second;
     log.bytes = bytes;
     log.flags = flags;
+    assert(bytes <= sizeof(log.payloadCopy));
+    std::memcpy(log.payloadCopy, payload, bytes);
     ++log.sendCalls;
     return 37;
 }
@@ -63,4 +66,16 @@ int main() {
                                       lengthOf, send, &log) == 37);
     assert(log.measured == empty && log.payload == empty);
     assert(log.bytes == 1 && log.sendCalls == 3);
+
+    const char recordHeader[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    const char recordText[] = "fleet";
+    missionFleetSendRecordText(&receiver, 0xA0B4A0u, recordHeader, recordText,
+                               lengthOf, send, &log);
+    assert(log.lengthCalls == 4 && log.sendCalls == 4);
+    assert(log.message == 0x80010F0Eu && log.first == 0xA0B4A0u);
+    assert(log.second == 0 && log.bytes == 8 + sizeof(recordText));
+    assert(log.flags == 0);
+    assert(std::memcmp(log.payloadCopy, recordHeader, 8) == 0);
+    assert(std::memcmp(log.payloadCopy + 8, recordText,
+                       sizeof(recordText)) == 0);
 }
