@@ -7,12 +7,14 @@ Ghidra reports three body ranges totaling 2,951 bytes:
 
 ## Behavior supported by the original code
 
-`FUN_58807910` is the sole direct caller recorded by Ghidra. Before calling this
-routine, it selects the pointer stored at `DAT_58A247F8+0x10` and writes it to
-`DAT_58A247F8+4`. The selected pointer determines the routine's main path. If
-it is null, the function mirrors the current byte at `param_1+0x93` to the
-16-bit field at `param_1+0x90`. Otherwise it clears 32 pointer slots beginning
-at `param_1+8` and walks 32 selected-record entries.
+The sole direct caller recorded by Ghidra is now byte-matched handler
+`FUN_58807910`. Before calling this routine, it selects the pointer stored at
+`DAT_58A247F8+0x10` and writes it to `DAT_58A247F8+4`. The selected pointer
+determines the routine's main path. If it is null, the function mirrors the
+current byte at `param_1+0x93` to the 16-bit field at `param_1+0x90`. Otherwise
+it clears 32 pointer slots beginning at `param_1+8` and walks 32 selected-record
+entries. The caller's packet/event route and record-walk evidence are described
+in [the 0x80020113 handler notes](current-main-80020113-state-record-handler.md).
 
 For entries with the observed discriminator `0x05`, the function copies a
 `0x2D`-dword record into local storage, requests a `0x24508`-byte block through
