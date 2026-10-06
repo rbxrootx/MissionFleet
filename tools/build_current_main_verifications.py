@@ -18,6 +18,7 @@ ADDRESSES = (
     "588059B0",
     "588A9240",
     "588A6410",
+    "58879FB0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -352,6 +353,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588059B0",
     "588A9240",
     "588A6410",
+    "58879FB0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -661,6 +663,12 @@ EVIDENCE = {
         "called_by": "Ghidra's complete reference dump finds six direct calls from four functions. The byte-matched FUN_58806F60 calls it at 0x5880706F and 0x588072D6; the byte-matched FUN_58807910 calls it at 0x58807B88. The other references are FUN_58805260 at 0x58805386 and FUN_58807370 at 0x5880751F/0x58807531; those callers are not yet byte-matched in this catalog. The verified callers establish that this helper participates in the component-record update path, while the call arguments' feature-level meaning remains unknown.",
         "behavior": "The complete contiguous body is 365 bytes, [0x588A6410,0x588A657D), and returns with ret 8. Ghidra's decompilation and mapped instructions show it derives an index from the first argument and accesses the corresponding entry in the table at 0x58A0B1C4. It sets a flag when the selected object's byte +0x354 equals that index while [0x58A245A8]+0x114 and [0x58A247F8]+4 are nonzero, then calls FUN_58879FB0 with the index, indexed entry fields, and flag. It reads the indexed entry's +0x54 value; when global byte [0x58A245A8]+0x1BC bit 0 is set, it calls FUN_587AEE40(0xF4241) and, if the returned object's +0x6C is nonzero, adds the indexed dword at +0x3DC. If the second argument or [0x58A245A8]+0x114 is nonzero, it subtracts FUN_58789940() from that value. For global state word [0x58A245A8]+0x204 in {4, 5, 6, 10, 11, 14, 15, 16}, it passes FUN_58789790() to FUN_58907360 and makes a second FUN_58789790() call. For other states it passes the adjusted value divided by 1000 to FUN_58907360; a zero result triggers FUN_58902D20(-100) and an early return. Remaining paths call FUN_58902D20(0). The candidate emits the original mapped instruction stream literally and records its 17 mapped call/data operand targets.",
         "uncertainty": "The table-entry and selected-object types, meanings of the index, +0x54/+0x3DC fields, global state values, 0xF4241 lookup, and timer conversions remain unknown. Called functions' contracts and user-visible effects are not established by these references. Two caller functions in the full xref set are not yet byte-matched. No emulator runtime test was performed.",
+    },
+    "58879FB0": {
+        "name_in_analysis": "FUN_58879fb0 / selected-record counters and status refresh",
+        "called_by": "Ghidra's direct-reference dump finds one incoming call, at 0x588A6463 from byte-matched FUN_588A6410. The caller passes the selected record's index, pointers/values from the matching table entry, and a flag set when the active object's byte +0x354 equals that index. Ghidra reports a 982-byte body in two ranges, [0x58879FB0,0x58879FF8) and [0x5887A000,0x5887A38E), with the 8-byte gap excluded.",
+        "behavior": "The 982-byte function is emitted as two literal mapped-code segments, preserving the Ghidra ranges and excluding 0x58879FF8..0x58879FFF; 45 mapped call/data operand targets are recorded for audit. Ghidra shows it calls FUN_58879CC0, loops over the count at record +0x84 to call FUN_589032E0 with record-derived values (using 0xFF and 0x112 when global state word +0x204 is 16 and record byte +0x100 is zero), and sets or clears bit 0 of ushort +0x24 in objects referenced by the pointer array at record +0xE4 under the same condition. It copies 18 dwords from its third argument to record +0x88 and stores other arguments at +0xD0, +0xD4, +0xD8, +0xDC, and +0xE0. It folds ten signed record bytes into seven display slots with mapping {0:5, 1:5, 2:4, 3:3, 4:2, 5:2, 6:0, 7:0, 8:1, 9:6}. In state 16 it combines or clears auxiliary bytes at record +0x92 and +0x9C. When global byte +0x1BC bit 0 is set and FUN_587AEE40(0xF4241) returns an object whose +0x6C is nonzero, it adds the indexed 0x48-byte auxiliary block at lookup result +0x19C + argument-index*0x48. It sends the folded values to FUN_58907360 and reports zero-valued fields with FUN_58902D20(-100). When the final flag is nonzero, it maps the active object's field at +0x100C+4 (masked with 0x1F) to a display slot, decrements that slot, sends it to FUN_58907360, and reports -100 if the corresponding object at record +0x104+slot*8 has a zero dword at +100.",
+        "uncertainty": "The record, pointer-array, and auxiliary-block types; semantic labels for the ten inputs and seven display slots; global state meaning; lookup key 0xF4241; and the value/status setter contracts are not identified. Ghidra found one direct incoming reference; indirect call paths are not ruled out. The argument prototype and state effects have not been runtime-validated.",
     },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",

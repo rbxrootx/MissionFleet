@@ -12,8 +12,8 @@ body is contiguous from `0x588A6410` through `0x588A657C` and ends with
 Ghidra's decompilation indexes the table at `0x58A0B1C4` using the first
 argument. The helper sets a flag when the selected object's byte at `+0x354`
 matches this index while `[0x58A245A8]+0x114` and `[0x58A247F8]+4` are nonzero.
-It calls `FUN_58879FB0` with the index, fields from the indexed entry, and this
-flag.
+It calls [the selected-record status refresh helper](current-main-58879fb0-selected-record-status-refresh.md)
+with the index, fields from the indexed entry, and this flag.
 
 The helper next reads the indexed entry's dword at `+0x54`. If bit 0 of byte
 `[0x58A245A8]+0x1BC` is set, it calls `FUN_587AEE40(0xF4241)`. When the
