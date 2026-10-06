@@ -314132,6 +314132,414 @@
         "behavior": "Calls FUN_587A2D40 with ECX=[0x58A24578] and the text pointer/length. If that helper returns nonzero, returns 0. Otherwise it calls FUN_58970C70 with ECX equal to its incoming context and six stack arguments (0x8001AA01, 0, 0, text pointer, length, 0), then returns 1 using ret 8. The complete 69-byte body is decoded through the return.",
         "uncertainty": "The global context types, gate/helper contracts, meaning of key 0x8001AA01, and external effect of FUN_58970C70 are unknown. The call from the ClanMessage text helper is verified, but the end-user result has not been observed in the emulator."
       }
+    },
+    {
+      "address": "58748BE0",
+      "name": "_AfxAygshellState",
+      "size": 103,
+      "symbol": "__AfxAygshellState",
+      "source": "src/client-current/Main/_AfxAygshellState.cpp",
+      "source_sha256": "193d272381c2816c4ac274fd8169d93845552fa4b8ef75ad8eba020485d25817",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897E30E",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 15,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "589CFC44",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "589CFC44",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "589CFC0C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "58748B60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "5898AF50",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "5897CE0F",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "589CFC0C",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "_AfxAygshellState / process state lazy initializer",
+        "called_by": "Verified packet/event dispatcher FUN_587BB700 calls this at 0x587BD30E and 0x587BD355. Verified state updater FUN_587F8760 also contains a direct call to this target. These callers' instruction streams are byte-matched.",
+        "behavior": "Uses SEH and a stack cookie, then checks guard byte 0x589CFC44. If initialization has not run, it sets the guard, calls FUN_58748B60 with ECX=0x589CFC0C, and registers pointer 0x5898AF50 through _atexit at 0x5897CE0F. It returns the global address 0x589CFC0C whether initialization was newly performed or already complete. The complete 103-byte extent ends at ret 0x58748C46.",
+        "uncertainty": "The type and exact purpose of the object at 0x589CFC0C, the guard's C++ initialization model, and the registered cleanup contract are not independently proven. The symbol label resembles an MFC helper, but that attribution is not established by the call behavior. No runtime shutdown/initialization test was performed."
+      }
+    },
+    {
+      "address": "58748B60",
+      "name": "FUN_58748b60",
+      "size": 94,
+      "symbol": "_FUN_58748b60",
+      "source": "src/client-current/Main/FUN_58748b60.cpp",
+      "source_sha256": "1fa426f6caa9a7820fcde474a2707bbd7750d70d870a90ad386e7b43c4ea4999",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897E2D8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "587FF3E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "588FFDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58748B60 / first-use state object constructor",
+        "called_by": "Byte-matched _AfxAygshellState calls this at 0x58748C20 with ECX=0x589CFC0C.",
+        "behavior": "Runs an SEH/cookie-protected constructor body, calls byte-matched FUN_587FF3E0 with the incoming object as ECX and two stack arguments, then calls byte-matched FUN_588FFDB0 with ECX pointing at object offset +0x20. The complete 94-byte extent returns the original object pointer.",
+        "uncertainty": "The initialized object's type, the meanings of its two subobjects/helpers, and the runtime invariant for its storage are unknown. This is instruction-level evidence only; no initialization or shutdown runtime test was performed."
+      }
+    },
+    {
+      "address": "5897CE0F",
+      "name": "_atexit",
+      "size": 23,
+      "symbol": "__atexit",
+      "source": "src/client-current/Main/_atexit.cpp",
+      "source_sha256": "fd0708c4a94d2f780188f57c51e9f64cbd5fcc5c20ddd7e4511a46fc63fc3e96",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 9,
+          "target_address": "5897CD6A",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "_atexit / CRT cleanup callback registration wrapper",
+        "called_by": "Byte-matched _AfxAygshellState calls this at 0x58748C2A with callback pointer 0x5898AF50.",
+        "behavior": "Forwards its function-pointer argument to __onexit at 0x5897CE17, then normalizes the returned pointer into the wrapper's small integer result. Its full 23-byte body ends at 0x5897CE26.",
+        "uncertainty": "The callback body at 0x5898AF50 and process-shutdown execution order have not been reconstructed or run. The CRT compatibility semantics are inferred from the call shape and symbol label."
+      }
+    },
+    {
+      "address": "5897CD6A",
+      "name": "__onexit",
+      "size": 156,
+      "symbol": "___onexit",
+      "source": "src/client-current/Main/__onexit.cpp",
+      "source_sha256": "ccf0114e10834a9dcea69562447db2ff5d01b1dfa774d7ac2571573dee732e0d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "589B6E70",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 8,
+          "target_address": "5897D7BC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 14,
+          "target_address": "58A289B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "5898C39C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "5898C398",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5897D7B4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 61,
+          "target_address": "58A289B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58A289AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "5898C390",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "5897D7AE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 118,
+          "target_address": "58A289B0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 131,
+          "target_address": "58A289AC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5897CE06",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 151,
+          "target_address": "5897D801",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "__onexit / CRT cleanup callback list registration",
+        "called_by": "Byte-matched _atexit calls this at 0x5897CE17 with the callback pointer supplied by _AfxAygshellState.",
+        "behavior": "Maintains CRT registration state using globals at 0x58A289AC and 0x58A289B0, invokes internal helpers and indirect function pointers, and returns a registration result. The 156-byte body ends at 0x5897CE06.",
+        "uncertainty": "The list representation, the behavior of indirect function pointers, and the exact contract under allocation failure or repeated registration remain unresolved. Only the mapped instructions and direct callers are established; no runtime registration/shutdown test was performed."
+      }
+    },
+    {
+      "address": "5897D7A8",
+      "name": "FUN_5897d7a8",
+      "size": 6,
+      "symbol": "_FUN_5897d7a8",
+      "source": "src/client-current/Main/FUN_5897d7a8.cpp",
+      "source_sha256": "6c5e0b59018107da0669093139fd54fc53b06387e4942ef2cc8f31a9f32e81b0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C388",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897D7A8 / CRT indirect-call import thunk",
+        "called_by": "The 9-byte helper FUN_5897CE06 calls this at 0x5897CE08.",
+        "behavior": "A six-byte x86 indirect jump through pointer slot 0x5898C388; control and calling convention are delegated to the runtime target stored in that slot.",
+        "uncertainty": "The loaded pointer target and its runtime implementation are not resolved from this thunk alone. The thunk's six mapped bytes are the complete function extent."
+      }
+    },
+    {
+      "address": "5897D7AE",
+      "name": "FUN_5897d7ae",
+      "size": 6,
+      "symbol": "_FUN_5897d7ae",
+      "source": "src/client-current/Main/FUN_5897d7ae.cpp",
+      "source_sha256": "833c5a0518375a9f8f3af9c6ca5413e795cc3c245d0c72368c1d416f540e7184",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C38C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897D7AE / CRT indirect-call import thunk",
+        "called_by": "__onexit calls this thunk directly within its registration path.",
+        "behavior": "A six-byte x86 indirect jump through pointer slot 0x5898C38C.",
+        "uncertainty": "The loaded pointer target and calling convention are not resolved from the thunk alone. Its six mapped bytes are the complete function extent."
+      }
+    },
+    {
+      "address": "5897D7B4",
+      "name": "FUN_5897d7b4",
+      "size": 6,
+      "symbol": "_FUN_5897d7b4",
+      "source": "src/client-current/Main/FUN_5897d7b4.cpp",
+      "source_sha256": "b7f7ae02def5545789bf002aab947486fae49bc79f4591eabb2b485a7d6e7b64",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C394",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897D7B4 / CRT indirect-call import thunk",
+        "called_by": "__onexit calls this thunk directly within its registration path.",
+        "behavior": "A six-byte x86 indirect jump through pointer slot 0x5898C394.",
+        "uncertainty": "The loaded pointer target and calling convention are not resolved from the thunk alone. Its six mapped bytes are the complete function extent."
+      }
+    },
+    {
+      "address": "5897CE06",
+      "name": "FUN_5897ce06",
+      "size": 9,
+      "symbol": "_FUN_5897ce06",
+      "source": "src/client-current/Main/FUN_5897ce06.cpp",
+      "source_sha256": "dc97a91617b43fa02f9570dd4779cc0e1e8e2f7e45ba64189bfa4ea867bfcd3f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897D7A8",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897CE06 / CRT stack cleanup helper",
+        "called_by": "__onexit calls this helper at the end of its body.",
+        "behavior": "Pushes the value 8, calls FUN_5897D7A8, removes the pushed argument, and returns; the full body is 9 bytes.",
+        "uncertainty": "The indirect callee behind pointer slot 0x5898C388 determines the actual cleanup operation. Its name and runtime side effects cannot be established from this wrapper alone."
+      }
     }
   ]
 }

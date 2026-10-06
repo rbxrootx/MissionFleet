@@ -8,6 +8,9 @@ between those ranges are not part of the function; treating the full
 analysis uses the mapped capture and Ghidra's decoded instructions and
 decompilation. Its complete 25,950-byte body is now reproduced as 17 separately
 verified ranges; gaps between the ranges remain excluded.
+Two verified routes call the `_AfxAygshellState` lazy initializer; its exact
+guard, constructor, and cleanup-registration path is documented in
+[the initializer notes](current-main-afx-aygshell-state-initializer.md).
 
 At entry, the instructions read a 16-bit value at record offset `+0x6` and
 compare it with `0x8000`; on that path they read a 32-bit event value at `+0x4`.

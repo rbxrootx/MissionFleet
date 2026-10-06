@@ -5,6 +5,9 @@ from `0x587F8760` through `0x587FAEBE`. It records a direct call from
 `FUN_58807d50` at `0x58807E73`. The receiver class is not identified, so this
 note describes the routine by its observed work rather than assigning it a
 class name.
+The updater also calls `_AfxAygshellState`; see
+[the lazy-initializer notes](current-main-afx-aygshell-state-initializer.md)
+for the shared global object's initialization path.
 
 The routine copies `0x31` dwords (0xC4 bytes) from its second argument into the
 receiver at `+0x1056C`, then reads and updates numerous sprite/control fields
