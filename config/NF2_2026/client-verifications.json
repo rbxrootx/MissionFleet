@@ -325756,6 +325756,45 @@
         "behavior": "Ghidra confirms one contiguous 254-byte body [0x588F7C00,0x588F7CFE) with all instructions covered. It installs CWarehouseItem::vftable, then conditionally releases and clears seven child pointers at receiver byte offsets +0xA0, +0xA4, +0xA8, +0xAC, +0xB0, +0xB4, and +0xB8 by invoking each child's virtual slot 0 with delete flag 1. It calls FUN_58902C10 at 0x588F7CE7, restores the saved exception-list state, and returns. The emitted instruction source verifies the complete mapped extent and checks its operand targets.",
         "uncertainty": "The seven child fields' semantic roles and ownership rules, FUN_58902C10's effect, and runtime behavior remain unresolved. The class identity is supported by the installed vftable and its RTTI-backed deleting wrapper, but this path has not been exercised in the emulator."
       }
+    },
+    {
+      "address": "588F7D40",
+      "name": "FUN_588f7d40",
+      "size": 30,
+      "symbol": "_FUN_588f7d40",
+      "source": "src/client-current/Main/FUN_588f7d40.cpp",
+      "source_sha256": "dd6139a52df311dd608d66e9782df42deb1013306fc65441df4063990ca933c3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588F7C00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7D40 / CWarehouseItem scalar-deleting-destructor-shaped wrapper",
+        "called_by": "Ghidra's reference audit places this function at slot +0x00 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4. Its direct call at 0x588F7D43 enters FUN_588F7C00. No direct code callers were identified; the vtable is the recorded incoming data reference.",
+        "behavior": "Ghidra and the mapped instruction stream show a wrapper that preserves this, calls the CWarehouseItem destructor body, tests bit 0 of its stack flag, conditionally pushes this and calls FUN_5897CC42, then returns this with ret 4. Ghidra's indexed body has ranges [0x588F7D40,0x588F7D55) and [0x588F7D58,0x588F7D5E), totaling 27 bytes; it excludes the reachable add esp,4 at 0x588F7D55..0x588F7D58 between them. The contiguous mapped stream spans 30 bytes through ret 4 at 0x588F7D5B, before INT3 padding at 0x588F7D5E, and is emitted and checked with both direct-call targets audited.",
+        "uncertainty": "FUN_5897CC42 is an indirect IAT jump thunk at 0x5897CC42, and its deallocation semantics and return behavior are unavailable; Ghidra marks it non-returning. The cleanup between its call and the ret 4 is reachable if that callback returns, but no emulator runtime test has confirmed the target behavior."
+      }
     }
   ]
 }

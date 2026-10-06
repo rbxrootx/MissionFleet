@@ -335,6 +335,7 @@ ADDRESSES = (
     "588F8640",
     "588F8820",
     "588F7C00",
+    "588F7D40",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -385,6 +386,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F8640",
     "588F8820",
     "588F7C00",
+    "588F7D40",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -690,8 +692,17 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra's split 27-byte body excludes the reachable add esp,4 continuation
     # at 0x588F8835..0x588F8838. Include it with the existing ret 4 before INT3.
     "588F8820": 30,
+    # Ghidra's split 27-byte body excludes the reachable add esp,4 at
+    # 0x588F7D55..0x588F7D58; include it in the full mapped wrapper stream.
+    "588F7D40": 30,
 }
 EVIDENCE = {
+    "588F7D40": {
+        "name_in_analysis": "FUN_588F7D40 / CWarehouseItem scalar-deleting-destructor-shaped wrapper",
+        "called_by": "Ghidra's reference audit places this function at slot +0x00 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4. Its direct call at 0x588F7D43 enters FUN_588F7C00. No direct code callers were identified; the vtable is the recorded incoming data reference.",
+        "behavior": "Ghidra and the mapped instruction stream show a wrapper that preserves this, calls the CWarehouseItem destructor body, tests bit 0 of its stack flag, conditionally pushes this and calls FUN_5897CC42, then returns this with ret 4. Ghidra's indexed body has ranges [0x588F7D40,0x588F7D55) and [0x588F7D58,0x588F7D5E), totaling 27 bytes; it excludes the reachable add esp,4 at 0x588F7D55..0x588F7D58 between them. The contiguous mapped stream spans 30 bytes through ret 4 at 0x588F7D5B, before INT3 padding at 0x588F7D5E, and is emitted and checked with both direct-call targets audited.",
+        "uncertainty": "FUN_5897CC42 is an indirect IAT jump thunk at 0x5897CC42, and its deallocation semantics and return behavior are unavailable; Ghidra marks it non-returning. The cleanup between its call and the ret 4 is reachable if that callback returns, but no emulator runtime test has confirmed the target behavior.",
+    },
     "588F7C00": {
         "name_in_analysis": "FUN_588F7C00 / CWarehouseItem destructor body",
         "called_by": "Ghidra's reference audit finds ordinary direct calls from the CWarehouseItem deleting-destructor-shaped wrapper FUN_588F7D40 at 0x588F7D43, from CWarehouseItemForce destructor FUN_588F8640 at 0x588F87FF, and from FUN_588FAFB0 at 0x588FB00C. Four further references at 0x5898A083, 0x5898A0B3, 0x5898A2C3, and 0x5898A2F3 originate in exception/unwind helpers. The RTTI-backed CWarehouseItem vtable at 0x589A20D4 points slot +0x00 to FUN_588F7D40, which directly calls this body; this function also installs CWarehouseItem::vftable.",
