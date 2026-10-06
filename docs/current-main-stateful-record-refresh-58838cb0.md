@@ -18,8 +18,11 @@ call. With a record pointer, the code reads fields at `+0x0C`, `+0x2D`,
 write strings into child receivers at `+0xC4`, `+0xC8`, and `+0x178`. It also
 updates child fields and uses mapped callbacks to construct values from two
 triples of 16-bit record fields. When the record byte at `+0x5A` is nonzero, the
-method stores state `5` and calls `FUN_587b92b0`; the other branch clears that
-state byte after updating controls.
+method stores state `5` and calls byte-matched `FUN_587b92b0`; the other branch
+clears that state byte after updating controls. The wrapper forwards the value
+from record `+0x5A`, payload pointer at `+0x5C`, and selector `0x80010F12` to
+the verified outbound sender. See [the wrapper notes](current-main-simple-outbound-messages.md)
+for its exact argument mapping and unresolved payload meaning.
 
 In state `6`, it processes the string at record `+0x24`, scans collections
 referenced at receiver `+0x190` and `+0x258`, and calls insertion/update helpers

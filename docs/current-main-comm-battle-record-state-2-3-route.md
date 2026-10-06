@@ -20,6 +20,13 @@ record string at `+0x0C` to receiver `+0x14C`, sets receiver byte `+0x2E5` to 5,
 and calls `FUN_587B92B0` with global `0x58A24588` and record fields `+0x5A` and
 `+0x5C`.
 
+That 38-byte wrapper now matches the mapped client exactly. It forwards selector
+`0x80010F12` to the verified sender `FUN_58970C70`, preserving the observed
+record-derived value and pointer and scaling the value by eight for payload
+length. Its protocol meaning remains unresolved; argument evidence and the
+portable normal-path check are recorded in
+[`current-main-simple-outbound-messages.md`](current-main-simple-outbound-messages.md).
+
 The complete body is 356 bytes, ends with `ret 4` at `0x58839CE1`, and is
 followed by twelve `INT3` alignment bytes before the next indexed function at
 `0x58839CF0`. ObjDiff verified all 356 bytes and checked 15 operand targets.

@@ -1,4 +1,4 @@
-"""Build and run normal-path models of three Main.dll sender wrappers."""
+"""Build and run normal-path models of four Main.dll sender wrappers."""
 
 import os
 from pathlib import Path
@@ -27,7 +27,7 @@ def main():
         "-o", str(executable),
     ], check=True, cwd=ROOT, env=environment)
     subprocess.run([str(executable)], check=True, cwd=ROOT, env=environment)
-    print("simple outbound message normal-path tests passed")
+    print("simple outbound message normal-path tests passed (4 wrappers)")
 
 
 if __name__ == "__main__":

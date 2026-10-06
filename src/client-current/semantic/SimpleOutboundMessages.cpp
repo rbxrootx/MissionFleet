@@ -14,6 +14,13 @@ std::uint32_t missionFleetSendPairNotice(void* receiver,
                 context);
 }
 
+std::uint32_t missionFleetSendBattleRecordPayload(
+    void* receiver, std::uint32_t first, std::uint32_t payloadUnits,
+    const void* payload, MissionFleetSimpleSender send, void* context) noexcept {
+    return send(receiver, 0x80010F12u, first, payloadUnits, payload,
+                payloadUnits * 8u, 0u, context);
+}
+
 std::uint32_t missionFleetSendScalarNotice(void* receiver,
                                            std::uint32_t value,
                                            MissionFleetSimpleSender send,
