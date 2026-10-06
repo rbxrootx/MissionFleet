@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "588D28A0",
     "58752410",
     "587B95E0",
     "587B9600",
@@ -353,6 +354,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5888E450",
     "58789FE0",
     "58752410",
+    "588D28A0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -620,6 +622,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588D28A0": {
+        "name_in_analysis": "FUN_588d28a0 / conditional display-text update helper",
+        "called_by": "Fresh Ghidra references identify exactly three incoming direct calls. Byte-matched FUN_5888D390 calls at 0x5888D443 with ECX=[EBP+0x194] and a formatted local-buffer pointer; byte-matched FUN_5888E450 calls at 0x5888E51E with ECX=[ESI+0x194] and its formatted local-buffer pointer. Unmatched FUN_5888FFB0 calls at 0x58890072 with ECX=[ESI+0x4FC] and EAX returned by the preceding indirect call through 0x5898C030 as the argument.",
+        "behavior": "The full body is 110 contiguous bytes, [0x588D28A0,0x588D290E), a __thiscall taking one stack argument and returning via ret 4 on both exits. It checks whether the receiver C-string at +0x6C is empty. If empty, it calls FUN_58731CE0(argument), then obtains the object at receiver +0x50 and calls its vtable slot +4 with (argument, result of indirect function pointer 0x5898C1A8(argument, receiver+0x8C)). If the string is nonempty, it writes 1 to receiver +0x88 and calls indirect function pointer 0x5898C198(receiver+0x84, argument).",
+        "uncertainty": "The receiver type, meanings of fields +0x6C/+0x50/+0x84/+0x88/+0x8C, contracts of FUN_58731CE0 and the indirect callbacks, and resulting UI behavior are unknown. One of three incoming callers, FUN_5888FFB0, is unmatched, so its higher-level context is incomplete. No emulator runtime test was performed.",
+    },
     "58752410": {
         "name_in_analysis": "FUN_58752410 / validation-gated string report helper",
         "called_by": "Fresh Ghidra references and an independent inventory-wide direct-call scan find exactly two calls, both from byte-matched callers. FUN_58806F60 calls at 0x5880712D after loading ECX from 0x58A245B0 and pushing EBX as the string argument. FUN_58890110 calls at 0x58893240 with the same ECX value and EAX from the immediately preceding FUN_58759EB0 as the string argument.",
