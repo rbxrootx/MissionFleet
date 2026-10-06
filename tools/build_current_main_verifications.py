@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "587E7F20",
     "587A5080",
     "588D28A0",
     "58752410",
@@ -357,6 +358,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58752410",
     "588D28A0",
     "587A5080",
+    "587E7F20",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -624,6 +626,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587E7F20": {
+        "name_in_analysis": "FUN_587e7f20 / object-and-global flag predicate",
+        "called_by": "Fresh Ghidra references identify exactly two unconditional calls, both from byte-matched callers. FUN_58853C20 calls at 0x58853CDB with ECX=[0x58A2459C] and no stack arguments. FUN_58856560 calls at 0x58856612 with the same ECX value and no stack arguments; both callers' match records are verified in the current catalog.",
+        "behavior": "The full function body is 34 contiguous bytes, [0x587E7F20,0x587E7F42), with ret instructions at 0x587E7F3B and 0x587E7F41. It is __fastcall with one pointer in ECX and no stack arguments. It returns zero only when the dword at argument +0x20D40 is zero and bit 1 of the low byte at [0x58A245C0+0x24] is clear; it returns one in all other cases.",
+        "uncertainty": "The argument's object type, meaning of field +0x20D40, identity/type of the object at 0x58A245C0, and semantic meaning of the flag bit are unknown. No emulator runtime test was performed.",
+    },
     "587A5080": {
         "name_in_analysis": "FUN_587a5080 / possible bounded-cursor validation helper",
         "called_by": "Fresh Ghidra DumpFunctionRefs evidence records 80 unconditional call references across 11 callers. Byte-matched FUN_58775980 has seven sites (0x58775AAB, 0x58775AC6, 0x58775ADA, 0x58775AF0, 0x58775B06, 0x58775B48, 0x58775B58); byte-matched FUN_587A90D0 has thirteen (0x587A9256, 0x587A926E, 0x587A9294, 0x587A92BE, 0x587A9387, 0x587A9814, 0x587A98E6, 0x587A9942, 0x587A9E53, 0x587A9E70, 0x587A9E88, 0x587A9EC4, 0x587A9F15). Both matched callers pass a descriptor address in ECX and no stack arguments. The other 60 references are from currently unmatched FUN_58739740 (13), FUN_587752D0 (7), FUN_587754E0 (10), FUN_587756F0 (8), FUN_587A88A0 (1), FUN_587A5120 (1), FUN_587AAA50 (15), FUN_587AA5D0 (3), and FUN_58754E80 (2); their surrounding argument setup has not been independently audited.",
