@@ -311978,6 +311978,477 @@
         "behavior": "The 2,372-byte function takes ECX as a receiver and eight 32-bit stack arguments (ret 0x20). Its mapped prologue calls FUN_58907990, selects a global child using the value at DAT_58A246D8+0x170 and optional pointer +0x194, invokes that child's vtable slot +4 with 0, clears bit 0 on five receiver child flags at +0x24, and resets two children through FUN_58907360. It dispatches on the low word of stack argument 1 minus 2 using a 12-entry jump table. Ghidra's switch reconstruction exposes specialized paths for selector values 2, 3, 5, 6, and 13: these format values from stack arguments/records through DAT_5898C3C4 into child text controls via FUN_5875F360 and update child state/position; selector 5 additionally formats MESSAGESTRING__TEXT_MIAO, TEXT_FA, and TEXT_DU keys and conditionally displays fields from optional records, while selector 13 formats several numeric fields and an optional name/value. The fallback skips specialized formatting. All paths converge on writes of a selector-derived value to four child +0x50 fields, set receiver +0x54 to receiver +8, +0x58 to 0x100, and +0x50 to 0x306, then call the receiver's vtable slot +4. The original extent is exactly 0x944 bytes (0x58878AF0\u20130x58879433); control-flow data referenced by its dispatch is outside the function body. The emitted source preserves all 2,372 mapped bytes literally.",
         "uncertainty": "Exact class/control types, field names and units, what the selector values mean in game terms, localization-string translations, and the behavior behind FUN_58907990/FUN_58907360/FUN_5875F360 are not established. Ghidra's stack-argument typing is incomplete, so the description intentionally names raw arguments and record offsets rather than assigning unsupported semantic names. The shared final vtable call is observed but its method is unknown. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5882A730",
+      "name": "FUN_5882a730",
+      "size": 2305,
+      "symbol": "_FUN_5882a730",
+      "source": "src/client-current/Main/FUN_5882a730.cpp",
+      "source_sha256": "b2f4c61f89152f0dc30666c8d94b6e9ec4ad389e8b47b8b0b9305c20c2fa23d1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58983C43",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5899DED8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "58A245B4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 164,
+          "target_address": "58759F60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "58759F20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "58759F60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 241,
+          "target_address": "58759F20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 356,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 362,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 458,
+          "target_address": "5882A840",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 517,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 560,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 612,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 633,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 655,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 705,
+          "target_address": "58A24548",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 726,
+          "target_address": "5890A5B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 751,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 801,
+          "target_address": "58A24548",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 822,
+          "target_address": "5890A5B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 847,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 899,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 917,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 945,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 958,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 968,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 978,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1023,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1051,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1121,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1132,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1141,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1166,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1236,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1247,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1256,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1302,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1383,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1389,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1485,
+          "target_address": "5882AC43",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1495,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1544,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1565,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1590,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1640,
+          "target_address": "58A24548",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1661,
+          "target_address": "5890A5B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1686,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1736,
+          "target_address": "58A24548",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1757,
+          "target_address": "5890A5B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1782,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1834,
+          "target_address": "58A24534",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1855,
+          "target_address": "58761090",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1886,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1902,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1915,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1960,
+          "target_address": "58748E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1988,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2058,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2069,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2078,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2103,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2177,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2184,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2193,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2222,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 2241,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882A730 / CPannelCommunicatorConfigFormTab constructor",
+        "called_by": "The only direct caller is byte-identical FUN_58843380 at 0x5884425C. The caller allocates 0xB8 bytes, sets ECX to the returned allocation, pushes six values ([ESI+0x90], EBP, EDI, 0, 0, 0x40), invokes this constructor, and stores its returned pointer at its own +0x15C. The verified caller's Ghidra output shows this object being constructed among sibling child panels and stored in member slot +0x57.",
+        "behavior": "The exact 2,305-byte extent is 0x5882A730\u20130x5882B030 and ends in ret 0x18. It registers an SEH frame and stack cookie, calls FUN_589031A0 with the six stack arguments, assigns CMenuScreen::vftable and then CPannelCommunicatorConfigFormTab::vftable, initializes receiver fields/flags, and stores [DAT_58A245B4+0x50] at receiver +0x64. It allocates two 0x5C child objects, initializes and attaches them through FUN_58759F60/FUN_58759F20, and creates paired resource-indexed CSpriteDataScreen entries for each child. It also creates text/colored child controls through FUN_58761090, FUN_5890A5B0, and FUN_5875DDA0, applies control flags, allocates an 0x800-byte buffer, clears it through FUN_5897CC48, restores the prior exception list, and returns the receiver.",
+        "uncertainty": "Ghidra recovers the vtable symbol CPannelCommunicatorConfigFormTab, but the exact meaning of each child, resource index, text field, geometry value, and helper contract is not known. The constructor's raw field/control layout is observable; no runtime visual comparison or emulator test has been performed."
+      }
     }
   ]
 }
