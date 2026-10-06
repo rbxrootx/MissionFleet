@@ -13,14 +13,16 @@ caller path is also visible in `var/current-main-next/587fd890-ghidra.c`.
 
 The helper clears bit 0 in the receiver's word at `+0x24` and writes zero to
 its DWORD at `+0x6088`. It then loads the pointer at `0x58A2459C` and checks
-the DWORD at that object's `+0x218E0`. A nonzero value selects
-`FUN_587E8750(receiver, 5)`; zero selects `FUN_587E8750(receiver, 1)`. Both
-paths return immediately after the call. The complete instruction stream
+the DWORD at that object's `+0x218E0`. The helper call keeps that global pointer
+in `ECX` and passes the original receiver and mode on the stack: `(receiver, 5)`
+for nonzero and `(receiver, 1)` for zero. Both paths return immediately after
+the call. The complete instruction stream
 contains one mapped global-pointer operand and two mapped relative-call
 operands.
 
-The receiver field meanings, global state meaning, reason for modes 1 and 5,
-and `FUN_587E8750`'s contract remain unresolved. The global pointer is
+The receiver field meanings, global state meaning, reason these conditions
+select modes 1 and 5, and their downstream visible effect remain unresolved.
+`FUN_587E8750`'s observed contract is documented separately. The global pointer is
 dereferenced without a local null check. The behavior above is tied to the
 mapped instructions and verified caller paths; no emulator runtime test was
 performed. ObjDiff 3.8.0 is used to compare the rebuilt body with the

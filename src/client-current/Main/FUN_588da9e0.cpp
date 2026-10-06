@@ -1,8 +1,9 @@
 // Shared state-reset/routing helper called by verified FUN_587FAEC0 and
 // FUN_587FD890. It clears receiver bit 0 at +0x24 and DWORD +0x6088, then
-// calls FUN_587E8750(this, 5) when global [0x58A2459C]+0x218E0 is nonzero,
-// or FUN_587E8750(this, 1) otherwise. Field meanings and the helper's mode
-// contract remain unresolved; see docs/current-main-state-reset-routing.md.
+// calls FUN_587E8750 with ECX=[0x58A2459C], stack args (this, 5) when that
+// global object's +0x218E0 is nonzero, or stack args (this, 1) otherwise.
+// Field meanings, why the caller selects each mode, and the downstream
+// visible effect remain unresolved; see docs/current-main-state-reset-routing.md.
 // Instruction stream reconstructed from Ghidra and the pinned mapped Main.dll.
 // Ghidra extent: 0x588DA9E0 .. +0x36 bytes.
 // Source symbol alias: FUN_588da9e0.
