@@ -348,6 +348,13 @@ ADDRESSES = (
     "588FB030",
     "588FB070",
     "588FB1F0",
+    "588FB6E0",
+    "588FBED0",
+    "588FC640",
+    "588FC770",
+    "588FC830",
+    "588FD180",
+    "588FD520",
     "5897CE32",
     "588F7D30",
 )
@@ -413,6 +420,13 @@ SOURCE_COMPILER_ADDRESSES = {
     "588FB030",
     "588FB070",
     "588FB1F0",
+    "588FB6E0",
+    "588FBED0",
+    "588FC640",
+    "588FC770",
+    "588FC830",
+    "588FD180",
+    "588FD520",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -729,6 +743,8 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra's split ranges omit the reachable three-byte LEA at 0x588FB08D;
     # include it and the contiguous ret 8 at 0x588FB0B3 before INT3 padding.
     "588FB070": 70,
+    # Ghidra stops after pop esi; include the contiguous ret 4 at 0x588FBEEB.
+    "588FBED0": 30,
 }
 EVIDENCE = {
     "588F9900": {
@@ -784,6 +800,48 @@ EVIDENCE = {
         "called_by": "Ghidra records one data reference from slot +0x28 at 0x589A21FC in the RTTI-backed CWarehouseItemShip vtable at 0x589A21D4. The complete-object locator resolves through TypeDescriptor 0x589CDD94 to .?AVCWarehouseItemShip@@. No direct code callers are listed.",
         "behavior": "Ghidra indexes 67 bytes in ranges [0x588FB070,0x588FB08D) and [0x588FB090,0x588FB0B6). The contiguous mapped stream spans 70 bytes [0x588FB070,0x588FB0B6), including the three-byte LEA gap and ret 8 at 0x588FB0B3. It returns 0 unless the byte at +0x6A matches the first argument; then it searches six values in two groups of three beginning at +0x6B and returns 1 on a match. Literal instruction emission verifies the full mapped stream.",
         "uncertainty": "The selector byte, six stored values, and argument meanings remain unresolved. No emulator behavior has been tested.",
+    },
+    "588FB6E0": {
+        "name_in_analysis": "FUN_588FB6E0 / CWarehouseManager destructor body",
+        "called_by": "Ghidra records one direct call from deleting-destructor wrapper FUN_588FBED0 at 0x588FBED3. It installs the RTTI-backed CWarehouseManager vtable at 0x589A2224; that table's locator pointer at 0x589A2220 resolves through 0x589AAC0C to TypeDescriptor 0x589CDDE4 (.?AVCWarehouseManager@@).",
+        "behavior": "The fully decoded 308-byte body [0x588FB6E0,0x588FB814) reinstalls the class vtable, conditionally releases and clears child pointers at +0x60, +0x64, +0x6C, +0x70, +0x74, +0x78, +0x7C, +0xA8, +0xAC, +0xB0, and +0xB4 through virtual slot 0 with flag 1, calls FUN_58902C10, restores the exception-list pointer, and returns.",
+        "uncertainty": "The roles and ownership rules of these fields, helper contracts, and runtime destruction sequence remain unresolved. No emulator behavior has been tested.",
+    },
+    "588FBED0": {
+        "name_in_analysis": "FUN_588FBED0 / CWarehouseManager deleting-destructor wrapper",
+        "called_by": "Ghidra records a data reference from slot +0x00 at 0x589A2224 in the seven-entry RTTI-backed CWarehouseManager vtable. The locator pointer at 0x589A2220 leads to 0x589AAC0C and TypeDescriptor 0x589CDDE4 (.?AVCWarehouseManager@@). The wrapper calls destructor body FUN_588FB6E0 at 0x588FBED3. Constructor FUN_588FB9B0 stores this vtable at 0x588FBA28 and is called by FUN_5878AF40 at 0x5878CB29.",
+        "behavior": "Ghidra indexes 27 bytes in ranges [0x588FBED0,0x588FBEE5) and [0x588FBEE8,0x588FBEED). The contiguous mapped wrapper spans 30 bytes [0x588FBED0,0x588FBEEE), including ret 4 at 0x588FBEEB before two INT3 alignment bytes. It tests bit 0 of its stack flag, conditionally calls deletion thunk FUN_5897CC42 with this, and returns this with ret 4.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion behavior are unresolved; Ghidra marks the thunk as non-returning despite the mapped cleanup and ret continuation. No emulator behavior has been tested.",
+    },
+    "588FC640": {
+        "name_in_analysis": "FUN_588FC640 / CWarehouseManager virtual method +0x04",
+        "called_by": "Ghidra records one data reference from slot +0x04 at 0x589A2228 in the RTTI-backed CWarehouseManager vtable at 0x589A2224. No direct code callers are listed.",
+        "behavior": "The fully decoded 293-byte body [0x588FC640,0x588FC765) acts when (word[this+0x24] & 0x1F00) equals 0x500. It updates state and fields +0x90, +0x94, +0x98, +0x9C, and +0xA0; calls virtual slot +4 on children +0x78/+0x7C; calls helpers FUN_588BC600 and FUN_588BCFD0; conditionally invokes slot +8 on children +0xA8/+0xAC and helper FUN_588B2700; then calls a global-object virtual slot +0x18 callback with arguments (this, 100, 0).",
+        "uncertainty": "The state-word meanings, child roles, global-object identity, helper contracts, callback meaning, and dispatch conditions remain unresolved. No emulator behavior has been tested.",
+    },
+    "588FC770": {
+        "name_in_analysis": "FUN_588FC770 / CWarehouseManager virtual method +0x08",
+        "called_by": "Ghidra records one data reference from slot +0x08 at 0x589A222C in the RTTI-backed CWarehouseManager vtable at 0x589A2224. No direct code callers are listed.",
+        "behavior": "The fully decoded 187-byte body [0x588FC770,0x588FC82B) is gated by state 0x200, updates the state to 0x400, calls FUN_588BB5E0 and FUN_588BCB00 on child +0xA0, calls FUN_588FFC90 and FUN_588FDB80 for children +0x68, +0x78, and +0x7C, conditionally calls FUN_588B2700 when +0x9C equals 1, then calls FUN_588FEB40 and the global-object virtual slot +0x18 callback.",
+        "uncertainty": "The state transition's cause, child roles, global-object identity, and helper/callback contracts remain unresolved. No emulator behavior has been tested.",
+    },
+    "588FD520": {
+        "name_in_analysis": "FUN_588FD520 / CWarehouseManager virtual method +0x0C",
+        "called_by": "Ghidra records one data reference from slot +0x0C at 0x589A2230 in the RTTI-backed CWarehouseManager vtable at 0x589A2224. No direct code callers are listed.",
+        "behavior": "The fully decoded 620-byte body [0x588FD520,0x588FD78C) handles state codes 0x100, 0x200, and 0x400 while bit 2 of word[this+0x24] is set. It moves coordinates at +4/+8 toward targets +0x50/+0x54 through FUN_58902E10, changes state and calls FUN_588FC8E0, or decrements +0x94 and on timeout calls FUN_5876BAF0, FUN_58764D30, and FUN_588FC560. When +0x98 is zero it walks the list at +0x3C and dispatches each node's virtual slot +0x0C.",
+        "uncertainty": "Coordinate units, state meanings, helper contracts, and the indirect terminal jump at 0x588FD78A remain unresolved. Ghidra could not recover the jump table and models the terminal transfer as a call. No emulator behavior has been tested.",
+    },
+    "588FC830": {
+        "name_in_analysis": "FUN_588FC830 / CWarehouseManager virtual method +0x10",
+        "called_by": "Ghidra records one data reference from slot +0x10 at 0x589A2234 in the RTTI-backed CWarehouseManager vtable at 0x589A2224. No direct code callers are listed.",
+        "behavior": "The fully decoded 161-byte body [0x588FC830,0x588FC8D1) checks status bit 1, traverses the list at +0x3C and invokes each node's virtual slot +0x10 with the event argument, stopping on a null result. It compares event fields at argument offsets +4/+8 against stored values +0x84/+0x88 and globals, may clear event code 0x200, updates the stored values, and calls this object's virtual slot +8 for event code 0x100 with subtype 0x1B. It returns field +0x34.",
+        "uncertainty": "The event fields, global values, child-node roles, and virtual return contract remain unresolved. No emulator behavior has been tested.",
+    },
+    "588FD180": {
+        "name_in_analysis": "FUN_588FD180 / CWarehouseManager virtual event dispatcher +0x18",
+        "called_by": "Ghidra records one data reference from slot +0x18 at 0x589A223C in the RTTI-backed CWarehouseManager vtable at 0x589A2224. No direct code callers are listed.",
+        "behavior": "The fully decoded 924-byte body [0x588FD180,0x588FD51C) dispatches on parameter values 2, 61000, 62000, and 0xF231-0xF233. It compares child identities at +0xA8, +0xAC, and +0x70, manipulates mode field +0x8C and child state, gathers child bytes into a local array for FUN_588FC930, and emits child callbacks. It also invokes helpers including FUN_588FB950, FUN_588BB440, FUN_589001F0, and FUN_5874DDD0.",
+        "uncertainty": "The event identifiers, child identities, mode semantics, helper contracts, and user-visible effects remain unresolved. Several direct helpers are not byte-matched yet; no emulator behavior has been tested.",
     },
     "588F8620": {
         "name_in_analysis": "FUN_588F8620 / CWarehouseItemFactory deleting-destructor wrapper",
