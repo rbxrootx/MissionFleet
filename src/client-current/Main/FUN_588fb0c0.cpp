@@ -1,0 +1,48 @@
+// Instruction stream reconstructed from Ghidra and the pinned mapped Main.dll.
+// Ghidra extent: 0x588FB0C0 .. +0x1B bytes.
+// Source symbol alias: FUN_588fb0c0.
+extern "C" __declspec(naked) void FUN_588fb0c0() {
+    __asm {
+        // 0x588FB0C0: push esi
+        __asm _emit 0x56
+        // 0x588FB0C1: mov esi, ecx
+        __asm _emit 0x8B
+        __asm _emit 0xF1
+        // 0x588FB0C3: call 0x588fafb0
+        __asm _emit 0xE8
+        __asm _emit 0xE8
+        __asm _emit 0xFE
+        __asm _emit 0xFF
+        __asm _emit 0xFF
+        // 0x588FB0C8: test byte ptr [esp + 8], 1
+        __asm _emit 0xF6
+        __asm _emit 0x44
+        __asm _emit 0x24
+        __asm _emit 0x08
+        __asm _emit 0x01
+        // 0x588FB0CD: je 0x588fb0d8
+        __asm _emit 0x74
+        __asm _emit 0x09
+        // 0x588FB0CF: push esi
+        __asm _emit 0x56
+        // 0x588FB0D0: call 0x5897cc42
+        __asm _emit 0xE8
+        __asm _emit 0x6D
+        __asm _emit 0x1B
+        __asm _emit 0x08
+        __asm _emit 0x00
+        // 0x588FB0D5: add esp, 4
+        __asm _emit 0x83
+        __asm _emit 0xC4
+        __asm _emit 0x04
+        // 0x588FB0D8: mov eax, esi
+        __asm _emit 0x8B
+        __asm _emit 0xC6
+        // 0x588FB0DA: pop esi
+        __asm _emit 0x5E
+        // 0x588FB0DB: ret 4
+        __asm _emit 0xC2
+        __asm _emit 0x04
+        __asm _emit 0x00
+    }
+}

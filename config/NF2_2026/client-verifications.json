@@ -326130,6 +326130,364 @@
         "behavior": "Ghidra confirms a contiguous 24-byte body [0x588F9C90,0x588F9CA8), fully covered by seven instructions. It reads the 16-bit field at offset +0x24 from the pointer stored in DAT_58A24820, masks it with 0xFFFE, and writes it back, clearing bit 0 while preserving the other bits. Literal instruction emission verifies all 24 bytes and audits the global pointer operand.",
         "uncertainty": "The global's identity, the cleared bit's meaning, when virtual dispatch reaches this method, and runtime behavior are unresolved. No emulator behavior has been tested."
       }
+    },
+    {
+      "address": "588FAFB0",
+      "name": "FUN_588fafb0",
+      "size": 114,
+      "symbol": "_FUN_588fafb0",
+      "source": "src/client-current/Main/FUN_588fafb0.cpp",
+      "source_sha256": "93af01b121cd52b7b11cccd138eca82c824f6cbf53fa6e6a73c913e86d227a55",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898A2C8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "589A21D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "588F7C00",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAFB0 / CWarehouseItemShip destructor body",
+        "called_by": "Ghidra records a direct call from the deleting-destructor wrapper FUN_588FB0C0 at 0x588FB0C3. That wrapper is slot +0x00 in the RTTI-backed CWarehouseItemShip vtable at 0x589A21D4; the complete-object locator pointer at 0x589A21D0 leads to 0x589AAB60 and TypeDescriptor 0x589CDD94 (.?AVCWarehouseItemShip@@).",
+        "behavior": "The complete mapped function spans 114 bytes [0x588FAFB0,0x588FB022). It reinstalls the CWarehouseItemShip vtable, conditionally releases the child at +0xC0 through virtual slot 0 with flag 1, clears that field, calls FUN_588F7C00, restores the saved exception-list state, and returns. Literal instruction emission verifies the body bytes and audits four operands.",
+        "uncertainty": "The meaning and ownership rules of the receiver fields, contracts of FUN_588F7C00 and the child virtual call, and runtime destruction path remain unresolved. No emulator behavior has been tested."
+      }
+    },
+    {
+      "address": "588FB0C0",
+      "name": "FUN_588fb0c0",
+      "size": 30,
+      "symbol": "_FUN_588fb0c0",
+      "source": "src/client-current/Main/FUN_588fb0c0.cpp",
+      "source_sha256": "9cf393aff86f1d9d9a678b29c0b433aa0100347c6de0ba2a4ce5572a414e5dc8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588FAFB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB0C0 / CWarehouseItemShip deleting-destructor wrapper",
+        "called_by": "Ghidra records a data reference at slot +0x00 of the 11-entry RTTI-backed CWarehouseItemShip vtable at 0x589A21D4. The complete-object locator pointer at 0x589A21D0 leads to 0x589AAB60 and TypeDescriptor 0x589CDD94 (.?AVCWarehouseItemShip@@). The wrapper calls destructor body FUN_588FAFB0 at 0x588FB0C3, and constructor FUN_588FB0E0 stores this vtable at 0x588FB138.",
+        "behavior": "Ghidra indexes 27 bytes and ends after pop esi. The contiguous mapped wrapper spans 30 executable bytes [0x588FB0C0,0x588FB0DE): it calls FUN_588FAFB0, tests bit 0 of its stack flag, conditionally calls the deletion thunk FUN_5897CC42 with this, restores eax, and returns with ret 4. Two INT3 bytes follow. Literal instruction emission verifies all 30 bytes and audits both call targets.",
+        "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion behavior are unresolved; Ghidra marks the thunk as non-returning despite the mapped cleanup and ret continuation. No runtime behavior has been tested."
+      }
+    },
+    {
+      "address": "588FB0E0",
+      "name": "FUN_588fb0e0",
+      "size": 260,
+      "symbol": "_FUN_588fb0e0",
+      "source": "src/client-current/Main/FUN_588fb0e0.cpp",
+      "source_sha256": "5c451b586b92f214c0ee589bbf6db8db448c5d4871e03315a93ad1c50df78c39",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898A303",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "588F8100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "589A21D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 140,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 146,
+          "target_address": "5898CA74",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 202,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58903360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB0E0 / CWarehouseItemShip constructor",
+        "called_by": "Ghidra records a direct call from FUN_588F8520 at 0x588F85E9. This constructor stores the RTTI-backed CWarehouseItemShip vtable at 0x588FB138; the table address point is 0x589A21D4 and the TypeDescriptor at 0x589CDD94 names .?AVCWarehouseItemShip@@.",
+        "behavior": "The complete mapped body spans 260 bytes [0x588FB0E0,0x588FB1E4), installs the class vtable, initializes receiver state, calls base/helper routines, and returns with ret 0x18 before INT3 alignment. Literal instruction emission verifies all 260 bytes and audits eleven operands.",
+        "uncertainty": "The constructor arguments' meanings, initialized field roles, helper contracts, and the factory caller's runtime path remain unresolved. No emulator behavior has been tested."
+      }
+    },
+    {
+      "address": "588FB1F0",
+      "name": "FUN_588fb1f0",
+      "size": 633,
+      "symbol": "_FUN_588fb1f0",
+      "source": "src/client-current/Main/FUN_588fb1f0.cpp",
+      "source_sha256": "9c5d0cdf5d71627c249d85ad0cc00b0da340e4b93e7274115cc19c95f605d7db",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58A2481C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "58778B20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "588FB3CC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 110,
+          "target_address": "5898C040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 123,
+          "target_address": "5899FC1C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "58A24734",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 256,
+          "target_address": "58A24734",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "58A24598",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 584,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 625,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB1F0 / CWarehouseItemShip virtual method +0x1C",
+        "called_by": "Ghidra records a data reference from slot +0x1C at 0x589A21F0 in the 11-entry RTTI-backed CWarehouseItemShip vtable at 0x589A21D4. The complete-object locator pointer at 0x589A21D0 leads to 0x589AAB60 and TypeDescriptor 0x589CDD94 (.?AVCWarehouseItemShip@@).",
+        "behavior": "The fully decoded 633-byte method [0x588FB1F0,0x588FB469) reads receiver state at +0x70 and child pointers at +0xA0, +0xA4, +0xA8, and +0xC0. It checks and updates child state bits, formats a resource name, calls resource helpers, and copies metadata into child records before its stack-cookie epilogue and ret. Literal instruction emission verifies the complete body and audits sixteen operands.",
+        "uncertainty": "The virtual method's user-visible role, receiver-field meanings, global identity, helper contracts, and dispatch conditions remain unresolved. No emulator behavior has been tested."
+      }
+    },
+    {
+      "address": "588FB030",
+      "name": "FUN_588fb030",
+      "size": 49,
+      "symbol": "_FUN_588fb030",
+      "source": "src/client-current/Main/FUN_588fb030.cpp",
+      "source_sha256": "88c17178beb725b7d5607afe3ea3e703e875a0d0ca3d4209cc683eb167f62d49",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB030 / CWarehouseItemShip virtual method +0x24",
+        "called_by": "Ghidra records one data reference from slot +0x24 at 0x589A21F8 in the RTTI-backed CWarehouseItemShip vtable at 0x589A21D4. The complete-object locator resolves through TypeDescriptor 0x589CDD94 to .?AVCWarehouseItemShip@@. No direct code callers are listed.",
+        "behavior": "The fully decoded 49-byte method [0x588FB030,0x588FB061) reads its stack parameter, computes signed remainder by 6, and returns low-byte 1 only when the remainder is nonzero and below 5 and the parameter is below 0x12; otherwise it returns 0. It accesses no receiver fields or globals. Literal instruction emission verifies all 49 bytes.",
+        "uncertainty": "The parameter's role and whether the result represents a valid column, slot, or another property remain unresolved; negative and out-of-range inputs are not runtime-tested."
+      }
+    },
+    {
+      "address": "588FB070",
+      "name": "FUN_588fb070",
+      "size": 70,
+      "symbol": "_FUN_588fb070",
+      "source": "src/client-current/Main/FUN_588fb070.cpp",
+      "source_sha256": "401ee9a1848c9dcdc4f34efce3def6ad951e573fe0cdd6cd672f513c14d5c99b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB070 / CWarehouseItemShip virtual method +0x28",
+        "called_by": "Ghidra records one data reference from slot +0x28 at 0x589A21FC in the RTTI-backed CWarehouseItemShip vtable at 0x589A21D4. The complete-object locator resolves through TypeDescriptor 0x589CDD94 to .?AVCWarehouseItemShip@@. No direct code callers are listed.",
+        "behavior": "Ghidra indexes 67 bytes in ranges [0x588FB070,0x588FB08D) and [0x588FB090,0x588FB0B6). The contiguous mapped stream spans 70 bytes [0x588FB070,0x588FB0B6), including the three-byte LEA gap and ret 8 at 0x588FB0B3. It returns 0 unless the byte at +0x6A matches the first argument; then it searches six values in two groups of three beginning at +0x6B and returns 1 on a match. Literal instruction emission verifies the full mapped stream.",
+        "uncertainty": "The selector byte, six stored values, and argument meanings remain unresolved. No emulator behavior has been tested."
+      }
     }
   ]
 }
