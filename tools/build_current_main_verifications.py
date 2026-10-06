@@ -319,6 +319,7 @@ ADDRESSES = (
     "588D75F0",
     "588DEB30",
     "588628D0",
+    "58859DD0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -389,6 +390,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588D75F0",
     "588DEB30",
     "588628D0",
+    "58859DD0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6746,6 +6748,12 @@ EVIDENCE = {
         "called_by": "Ghidra records two direct calls: byte-matched FUN_588DEB30 at 0x588DF19A and byte-matched FUN_588E5150 at 0x588E6346. Both set ECX from the global child/manager pointer [0x58A245C4+0xA0] and pass no stack arguments. Each caller gates this path on its current record's low five type bits equaling 9; FUN_588DEB30 also reaches it after FUN_5885FC40.",
         "behavior": "Ghidra confirms one contiguous 1,137-byte body, [0x588628D0,0x58862D41), ending in `ret` at 0x58862D40. The routine scans the count at receiver +0x118 and processes entries whose +0x28 state is 2. In the active global-state branch it calls FUN_587A1640/FUN_587A15E0 to advance and cycle encoded per-entry values, updates observed state/visibility bits on completion, accumulates timer fields, derives a resource-relative timer value from a ushort at resource +0x0C, updates the selected seconds display through FUN_5877E740, and refreshes a child resource from global table offset +0x580 after the observed elapsed-time threshold exceeds six seconds. The other branch polls FUN_58793E10, clears a latch, adjusts child flags, and on state 4 invokes FUN_588EBEB0 and FUN_58907990 before indirect child-vtable calls. The candidate emits the exact mapped instruction stream and records its 43 operand targets.",
         "uncertainty": "The receiver and per-entry structure layouts, timer units, encoded-value meaning, resource-table identity, state/visibility semantics, helper contracts, and indirect vtable behavior are not established. Ghidra shows a possible divisor of zero at resource +0x0C without proving the runtime invariant that prevents it. No emulator runtime test was performed.",
+    },
+    "58859DD0": {
+        "name_in_analysis": "FUN_58859dd0 / non-type-9 ship-map timer and child refresh",
+        "called_by": "Fresh Ghidra references identify two direct calls: byte-matched FUN_588DEB30 at 0x588DF1D4 and byte-matched FUN_588E5150 at 0x588E6358. At both sites the caller loads [0x58A245C4] into EAX, sets ECX to [EAX+0x9C], and passes no stack arguments. Each path selects this function when the current record's low five type bits are not 9; the type-9 branch selects matched FUN_588628D0 with ECX=[0x58A245C4+0xA0].",
+        "behavior": "Ghidra confirms one contiguous 1,099-byte body, [0x58859DD0,0x5885A21B), ending with `ret` at 0x5885A21A. The routine scans the count at receiver +0xF0 and processes entries whose +0x40 state is 2. It updates timer/state fields and XOR-0xAA encoded per-entry values using FUN_587A1640, FUN_587A15E0, and FUN_58907360; completion selects observed states 1 or 4 and toggles child flags. It accumulates timer values, derives a resource-relative value using a ushort at resource +0x0C, refreshes a seconds display via FUN_5877E740, and after the observed six-second threshold copies resource fields from a global table entry at +0x580 to a child at receiver +0xA7C. A latch path polls FUN_58793E10 and, on completion, invokes FUN_58858BD0(0), FUN_588EBEB0(0x0F,0x54,0x57), FUN_58907990, and an indirect child-vtable operation. The instruction-stream candidate records 41 mapped operand targets.",
+        "uncertainty": "Receiver and record layouts, timer units, encoded-value meaning, resource-table identity, child visibility/state semantics, helper contracts, and vtable behavior remain unresolved. Ghidra's zero-resource branch sets the divisor to zero before a modulo operation; the runtime invariant that prevents a divide-by-zero is not established. The function is structurally parallel to type-9 handler FUN_588628D0 but uses different receiver offsets and calls FUN_58858BD0; no emulator runtime test was performed.",
     },
 }
 
