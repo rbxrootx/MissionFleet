@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40",
+    "587B2A40", "587B4A30",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -493,6 +493,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5890E400", "5890E0B0",
     "5875F650", "5875F6B0",
     "587B2A40",
+    "587B4A30",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -526,6 +527,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B4A30": {
+        "name_in_analysis": "FUN_587B4A30 / observed type-0x06 record-backed child-state initializer",
+        "called_by": "Verified FUN_587A6220 invokes it in the branch gated by the observed record byte 0x06 after FUN_587B58F0; verified FUN_588D84D0 invokes it at 0x588D8B48 during map-derived child setup. The calls pass the +0x100C pointer, a 42-DWORD local record, optional 45-DWORD record data, a per-entry pointer, an encoded word, and a word from +0x350.",
+        "behavior": "Sets receiver +0x3904 to 100 when the shared pointer is null, otherwise to 20 when its byte at +0x35C equals the 42-DWORD record word at +6, or 100 when unequal. Stores the final caller word at +0x18C, stores the supplied per-entry pointer at +0x138, and copies 42 DWORDs to receiver +0x190. It initializes XOR-0xAAAAAAAA values at +0x154/+0x158, replacing the second from optional-record word +0x9C masked to five bits when present; calls FUN_587B1850, FUN_587B4910 with the supplied encoded word, and FUN_587B4100. It clears +0x38FC; when optional record data exists, copies 45 DWORDs to +0x238, stores the copied word +0x2D8 at +0x38FC, calls FUN_5876BF40 with observed arguments 13000, word +0x2E2, and 0x6E, and stores the result at +0x2F4. It clears +0x2F8 and +0x3908, then looks up the first copied DWORD with FUN_58778D60 and stores the returned word +0xA0 at +0x390C, or zero on null. The mapped body is 315 bytes, ends in ret 0x18, and has 6 mapped operand targets.",
+        "uncertainty": "The record schema, meaning of the 0x06 discriminator and +0x3904 values, identity and ownership of the optional 45-DWORD data and created resource, semantics of the XOR-masked values and lookup, helper contracts, and runtime visible effect remain unknown. This is an exact instruction reconstruction supported by two verified call sites; no emulator runtime test was performed.",
+    },
     "587B2A40": {
         "name_in_analysis": "FUN_587B2A40 / type-0x05 record-backed child-state initializer",
         "called_by": "Verified FUN_587A6220 calls it in its observed type-0x05 record path after preparing the child; verified FUN_588D84D0 calls it at 0x588D88B4 while populating map-derived child state, then invokes virtual slot +0x30. Both pass a 0x2D-DWORD record pointer, an entry index, and a word read from +0x350.",
