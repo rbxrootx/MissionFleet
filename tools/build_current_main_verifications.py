@@ -330,6 +330,7 @@ ADDRESSES = (
     "588958C0",
     "58804A40",
     "588F8EA0",
+    "588F8840",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -377,6 +378,7 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "588F8840",
     "58804A40",
     "588F8EA0",
     "58787400",
@@ -679,6 +681,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588F8840": {
+        "name_in_analysis": "FUN_588F8840 / CWarehouseItemForce child flag setter",
+        "called_by": "Ghidra's reference audit finds one data reference at 0x589A212C, slot +0x20 in the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. No direct code callers were found, so the virtual dispatch sites are unknown.",
+        "behavior": "Ghidra confirms one contiguous 47-byte body [0x588F8840,0x588F886F) with 12 instructions and no gaps. Its one-byte stack argument selects a child at receiver +0xC0: value 0 sets bit 0 in the child's 16-bit word at +0x24; value 1 clears that bit; other values leave the word unchanged. The method has no direct outgoing calls. The source expresses the original branches and 16-bit flag operations in inline x86 mnemonics and byte-matches the mapped body.",
+        "uncertainty": "The child/control's semantic role and the argument's user-visible labels are unresolved. The vtable confirms the virtual method belongs to CWarehouseItemForce, but no concrete runtime dispatch site was found. The exact code match has not been exercised in the emulator.",
+    },
     "588F8EA0": {
         "name_in_analysis": "FUN_588F8EA0 / CWarehouseItemForce virtual resource and child-state updater",
         "called_by": "Ghidra's reference audit finds no direct code-call sites and one data reference at 0x589A2128, the +0x1C method slot in the RTTI-backed vtable at 0x589A210C. Its complete-object locator and type descriptor identify .?AVCWarehouseItemForce@@. This supports a virtual dispatch path, but the concrete dispatch sites are not identified.",

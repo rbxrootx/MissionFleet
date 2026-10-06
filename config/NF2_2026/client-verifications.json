@@ -325563,6 +325563,32 @@
         "behavior": "Ghidra confirms one contiguous 2,553-byte instruction body at [0x588F8EA0,0x588F9899), containing 679 instructions and ending in pop edi; pop esi; pop ebp; pop ebx; ret before alignment padding. It selects resource records from DAT_589CFD70 using receiver fields +0x6C and +0x70, resolves indices through global resource tables, copies resource fields into child objects at receiver offsets +0xA4 through +0xE0, and toggles child visibility bit 0 at child +0x24. A global state at DAT_58A24AE0 selects hide/clear versus resource-selection paths. Receiver mode +0x90 selects color constants written to the child at +0xA0 and special child values. The six direct helper calls are FUN_58907360 at 0x588F8F63, FUN_58731CE0 at 0x588F95F7, and FUN_587316C0 at 0x588F9737, 0x588F97A0, 0x588F97FB, and 0x588F982E. Literal x86 emission matches the complete mapped extent and checks 45 operand targets.",
         "uncertainty": "The semantic names of the receiver fields, resource-table schema and indices, child roles, global-state conditions, and mode/color labels remain unknown. The RTTI/vtable evidence identifies the class and slot, but does not reveal concrete virtual callers. Exact code bytes are checked against the installed Main.dll capture; visible behavior and emulator runtime have not been tested."
       }
+    },
+    {
+      "address": "588F8840",
+      "name": "FUN_588f8840",
+      "size": 47,
+      "symbol": "_FUN_588f8840",
+      "source": "src/client-current/Main/FUN_588f8840.cpp",
+      "source_sha256": "e1c0c901b06270de3aca3edfe09c81fccdbef6b6a5aa004c3579a0378d472c3a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588F8840 / CWarehouseItemForce child flag setter",
+        "called_by": "Ghidra's reference audit finds one data reference at 0x589A212C, slot +0x20 in the RTTI-backed CWarehouseItemForce vtable at 0x589A210C. No direct code callers were found, so the virtual dispatch sites are unknown.",
+        "behavior": "Ghidra confirms one contiguous 47-byte body [0x588F8840,0x588F886F) with 12 instructions and no gaps. Its one-byte stack argument selects a child at receiver +0xC0: value 0 sets bit 0 in the child's 16-bit word at +0x24; value 1 clears that bit; other values leave the word unchanged. The method has no direct outgoing calls. The source expresses the original branches and 16-bit flag operations in inline x86 mnemonics and byte-matches the mapped body.",
+        "uncertainty": "The child/control's semantic role and the argument's user-visible labels are unresolved. The vtable confirms the virtual method belongs to CWarehouseItemForce, but no concrete runtime dispatch site was found. The exact code match has not been exercised in the emulator."
+      }
     }
   ]
 }
