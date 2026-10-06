@@ -322,6 +322,7 @@ ADDRESSES = (
     "58859DD0",
     "58858BD0",
     "5884D420",
+    "588958C0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -395,6 +396,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58859DD0",
     "58858BD0",
     "5884D420",
+    "588958C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6770,6 +6772,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra records exactly two direct references, both from byte-matched functions: FUN_588D9E10 at 0x588D9F30 and FUN_588DEB30 at 0x588DEF38. The target uses ECX as receiver and `ret 0x18` confirms six stack arguments. Both callers pass the child at [ESI+0x1448], a local record at [ESI+0x3A0], the current type's low five bits, lower and decoded upper counter values, then two zeros. In FUN_588D9E10 the decoded upper counter is [ESI+0xD98] XOR 0xAAAAAAAA.",
         "behavior": "Ghidra confirms one contiguous 441-byte body, [0x5884D420,0x5884D5D9), ending with `ret 0x18` at 0x5884D5D6. The routine stores supplied counter values at receiver +0x54/+0x58 and derives values at +0x60/+0x64/+0x68 by dividing the supplied count by five and multiplying by three, two, or one. It lazily creates two children when receiver fields +0x5C and +0x50 are null, using checked resource-table entries at offsets 0x81C and 0x26A8 and FUN_5877E800 for child creation/configuration. It clears captured child flag bits and calls FUN_58907360 with the supplied count value. The candidate emits the exact mapped stream and records 12 operand targets.",
         "uncertainty": "The display's exact visual role, field meanings, resource identities, and helper contracts are not established; the counter/progress interpretation is inferred from matched callers and the observed arithmetic, not confirmed by runtime capture. Ghidra shows allocation returning zero can flow to field/flag accesses; the invariant preventing a null dereference is unknown. No emulator runtime test was performed.",
+    },
+    "588958C0": {
+        "name_in_analysis": "FUN_588958c0 / encoded counter and threshold-based child refresh",
+        "called_by": "Fresh Ghidra records exactly two incoming calls, both from byte-matched callers: FUN_588DEB30 at 0x588DF0CA and FUN_588E5150 at 0x588E62D0. Both set ECX from [0x58A245C4+0xC4] and push one DWORD, [ESI+0x398] XOR 0xAAAAAAAA; the target's `ret 4` confirms the one-stack-argument ABI.",
+        "behavior": "Ghidra confirms one contiguous 432-byte body, [0x588958C0,0x58895A70), ending in `ret 4` at 0x58895A6D. The routine clamps a negative signed input to zero, stores the resulting counter at receiver +0x90, updates child controls through FUN_5877E740, and sets a number child through FUN_58907360. It compares the counter with thresholds at receiver +0xB8/+0xBC/+0xC0, selects checked global resource entries 0x870 and 0x9B1–0x9B3 for a child at +0x70, copies resource fields, and uses FUN_587316C0 to update a secondary display. One branch calls FUN_588EC100(0x21,0x82,0); values of zero or greater than +0xC0 tail-dispatch to FUN_588EC080. The candidate emits the exact mapped stream and records its 17 operand targets.",
+        "uncertainty": "The counter's meaning, child roles, resource labels, helper contracts, and tail-dispatch visual/UI effect remain unknown. The ship-map counter/status interpretation is supported by both matched callers decoding the same field and invoking this routine during their update path, but no runtime capture or emulator test was performed.",
     },
 }
 
