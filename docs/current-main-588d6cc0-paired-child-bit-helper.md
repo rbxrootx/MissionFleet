@@ -6,9 +6,11 @@
 byte-matched `FUN_58807910` calls it at `0x58807C81` and `0x58807CA1` with
 ECX equal to `[0x58A247F8]+4`; the first passes a derived boolean and the
 second passes `1`. Byte-matched `FUN_58805940` also calls it at `0x58805988`
-with ECX=the return from `FUN_5878A160` and argument `1`. Ghidra also records
-calls from `FUN_58805880` and `FUN_588058D0`; those callers are not yet
-byte-matched.
+with ECX=the return from `FUN_5878A160` and argument `1`. Byte-matched
+`FUN_588058D0` calls it on both branches at `0x588058F9` and `0x58805918`, with
+ECX set to the selected object or the return from `FUN_5878A160`, respectively,
+and argument `1`. Ghidra also records a call from unmatched `FUN_58805880` at
+`0x5880589D`.
 
 ## Behavior supported by the original code
 
