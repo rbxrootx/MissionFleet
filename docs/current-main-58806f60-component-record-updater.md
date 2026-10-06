@@ -3,8 +3,11 @@
 `FUN_58806F60` is a 1,032-byte `__thiscall` helper in the installed `Main.dll`.
 The byte-matched event handler `FUN_58807910` calls it once per variable-size
 record at `0x58807A65`, passing the current record, its `+0x114` subrecord, and
-a boolean derived from the optional record mask. Ghidra records another caller
-at `0x5880786C` in `FUN_588075E0`; that path has not been fully traced.
+a boolean derived from the optional record mask. A second caller,
+`FUN_588075E0`, calls it at `0x5880786C` after copying a 0x13C-byte queue record
+to local storage. That caller dispatches IDs `0x04000008` and `0x04000009`,
+passing boolean 0 and 1 respectively. Those callsite bytes are in the pinned
+mapped image, but the queue's broader purpose is still unknown.
 
 ## Behavior supported by the original code
 
@@ -36,5 +39,6 @@ against the pinned mapped image with the repository's pinned clang-cl compiler.
 The record and object types, semantic names for fields, the meaning of the
 count/subtype values, the boolean's alternate-path meaning, the linked-node
 identity, and gameplay/UI effects remain unknown. Most called update helpers
-are not matched, and the second caller `FUN_588075E0` needs its own trace. This
-is a static byte match; no emulator runtime test has been performed.
+are not matched, and the broader role of the `FUN_588075E0` queue dispatch
+remains unknown. This is a static byte match; no emulator runtime test has been
+performed.
