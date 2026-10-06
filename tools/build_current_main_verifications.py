@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "58805880",
     "588058D0",
     "588075E0",
     "58805940",
@@ -328,6 +329,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "58805880",
     "588058D0",
     "588075E0",
     "58805940",
@@ -570,6 +572,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58805880": {
+        "name_in_analysis": "FUN_58805880 / queue ID 0x20 conditional selected-value update",
+        "called_by": "Byte-matched FUN_588075E0 calls this at 0x58807715 for queue ID 0x20 when receiver +0x114 and +0x110 are zero and the word at [0x58A245A0 + 0xA06] is 7 or 12. It passes the predicate local_40 < 3 as the single stack argument.",
+        "behavior": "Sets bit 0 in receiver dword +0x78, then calls byte-matched FUN_588D6CC0 with ECX=[0x58A247F8]+4 and argument (the stack argument == 0). It calls unmatched FUN_588A6720 with ECX=the object at receiver +0x174 and the original stack argument. It then sets bit 1 in that object's word at +0x24, writes 400 to receiver +0x300, and returns with ret 4. The complete indexed extent is 72 bytes through 0x588058C7.",
+        "uncertainty": "The local predicate's role, compared object and child types, and visible effect remain unknown. FUN_588A6720 is unmatched, so its contract is not inferred. No emulator runtime test was performed.",
+    },
     "588058D0": {
         "name_in_analysis": "FUN_588058d0 / selected-value queue ID 0x20 update",
         "called_by": "Byte-matched FUN_588075E0 calls this at 0x58807730 for queue ID 0x20 when receiver +0x114 is zero and its nested receiver/global-state gate selects this branch. It passes two record-derived 16-bit values; the first goes to FUN_588A6720 on the equality path, and the second is compared with the active object's word at +0x350.",
@@ -579,7 +587,7 @@ EVIDENCE = {
     "588075E0": {
         "name_in_analysis": "FUN_588075e0 / queued component-record dispatcher",
         "called_by": "Ghidra records direct calls from FUN_58807D50 at 0x58807E57 and FUN_58808080 at 0x588080A6; those callers are not yet byte-matched.",
-        "behavior": "Consumes 0x13C-byte records from a ring buffer rooted at receiver +0x260, using queue count/index fields +0x254/+0x25C, capacity +0x250, and boundary/index +0x258. It copies 0x4F DWORDs to a local record and dispatches on its first DWORD. Observed IDs are 1, 3, 4, 0x10, 0x20, 0x40, 0x50, 0x70, 0x100, 0x400, 0x04000008, and 0x04000009. ID 0x20, when receiver +0x114 is zero, chooses FUN_58805880 or byte-matched FUN_588058D0 according to receiver +0x110 and observed global values 7/12. ID 0x70 calls byte-matched FUN_58805940 when receiver +0x114 is zero; IDs 0x04000008/09 call byte-matched FUN_58806F60 with boolean 0/1 and a local record/subrecord pointer. Other cases call the helpers recorded in the Ghidra decompilation. It repeats until the queue count is empty and performs the captured cookie check/return path. Ghidra's 708-byte disjoint body omits the mapped stack cleanup at 0x58807882..0x58807884 and the frame restore/ret at 0x588078A4..0x588078A6; the complete contiguous extent is 711 bytes.",
+        "behavior": "Consumes 0x13C-byte records from a ring buffer rooted at receiver +0x260, using queue count/index fields +0x254/+0x25C, capacity +0x250, and boundary/index +0x258. It copies 0x4F DWORDs to a local record and dispatches on its first DWORD. Observed IDs are 1, 3, 4, 0x10, 0x20, 0x40, 0x50, 0x70, 0x100, 0x400, 0x04000008, and 0x04000009. ID 0x20, when receiver +0x114 is zero, chooses FUN_58805880 or byte-matched FUN_588058D0 according to receiver +0x110 and whether [0x58A245A0 + 0xA06] is 7 or 12. ID 0x70 calls byte-matched FUN_58805940 when receiver +0x114 is zero; IDs 0x04000008/09 call byte-matched FUN_58806F60 with boolean 0/1 and a local record/subrecord pointer. Other cases call the helpers recorded in the Ghidra decompilation. It repeats until the queue count is empty and performs the captured cookie check/return path. Ghidra's 708-byte disjoint body omits the mapped stack cleanup at 0x58807882..0x58807884 and the frame restore/ret at 0x588078A4..0x588078A6; the complete contiguous extent is 711 bytes.",
         "uncertainty": "The queue schema and semantic meaning of its IDs and fields are not established. Several other dispatch callees remain unmatched, and the direct callers FUN_58807D50/FUN_58808080 are not byte-matched. No emulator runtime test was performed.",
     },
     "58805940": {
@@ -596,7 +604,7 @@ EVIDENCE = {
     },
     "588D6CC0": {
         "name_in_analysis": "FUN_588d6cc0 / paired child bit update",
-        "called_by": "Byte-matched FUN_58806F60 calls at 0x5880719D, 0x588071D0, and 0x58807207 with ECX=ESI and stack arguments 0, 1, and 1. Byte-matched FUN_58807910 calls at 0x58807C81 and 0x58807CA1 with ECX=[0x58A247F8]+4; Ghidra decompiles their arguments as (iVar3 >= 3) and 1. Byte-matched FUN_58805940 calls it at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1. Byte-matched FUN_588058D0 calls it at 0x588058F9 and 0x58805918 with argument 1 on its equality and inequality branches. Ghidra also records a call from unmatched FUN_58805880 at 0x5880589D.",
+        "called_by": "Byte-matched FUN_58806F60 calls at 0x5880719D, 0x588071D0, and 0x58807207 with ECX=ESI and stack arguments 0, 1, and 1. Byte-matched FUN_58807910 calls at 0x58807C81 and 0x58807CA1 with ECX=[0x58A247F8]+4; Ghidra decompiles their arguments as (iVar3 >= 3) and 1. Byte-matched FUN_58805940 calls it at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1. Byte-matched FUN_588058D0 calls it at 0x588058F9 and 0x58805918 with argument 1 on its equality and inequality branches. Byte-matched FUN_58805880 calls it at 0x5880589D with ECX=[0x58A247F8]+4 and argument equal to its stack argument being zero.",
         "behavior": "As a __thiscall helper, stores its one stack argument at receiver +0x6074. When the argument is nonzero, it sets bit 0 in the 16-bit value at +0x24 of each object pointed to by receiver fields +0x12B8 and +0x12BC. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 66-byte indexed extent at 0x588D6CC0..0x588D6D01.",
         "uncertainty": "The receiver fields, referenced child-object types, and meaning of the stored value and flags are unknown. Callers show where the helper is used and what values they pass, but not the user-visible effect. No emulator runtime test was performed.",
     },

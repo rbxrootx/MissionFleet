@@ -9,8 +9,8 @@ second passes `1`. Byte-matched `FUN_58805940` also calls it at `0x58805988`
 with ECX=the return from `FUN_5878A160` and argument `1`. Byte-matched
 `FUN_588058D0` calls it on both branches at `0x588058F9` and `0x58805918`, with
 ECX set to the selected object or the return from `FUN_5878A160`, respectively,
-and argument `1`. Ghidra also records a call from unmatched `FUN_58805880` at
-`0x5880589D`.
+and argument `1`. Byte-matched `FUN_58805880` calls it at `0x5880589D` with
+ECX=`[0x58A247F8]+4` and argument equal to whether its stack argument is zero.
 
 ## Behavior supported by the original code
 
