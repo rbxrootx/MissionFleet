@@ -321,6 +321,7 @@ ADDRESSES = (
     "588628D0",
     "58859DD0",
     "58858BD0",
+    "5884D420",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -393,6 +394,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588628D0",
     "58859DD0",
     "58858BD0",
+    "5884D420",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6762,6 +6764,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra refs identify 13 direct calls. The matched FUN_58859DD0 calls at 0x5885A078, 0x5885A08A, and 0x5885A15B set ECX=EBX and push 0. Matched FUN_5873FE80 calls at 0x5874121C with ECX=[0x58A245C4+0x9C] and a path-dependent EAX or EBX stack argument. Ten further direct references are from currently unmatched callers FUN_5885A220, FUN_58859BB0, FUN_58859CC0, FUN_5885A340, FUN_588592C0, FUN_58859070, FUN_58859AA0, FUN_5885A460, and FUN_5885BAF0; their receiver and stack setups are documented in the Ghidra refs artifact.",
         "behavior": "Ghidra confirms one contiguous 533-byte body, [0x58858BD0,0x58858DE5), ending in `ret 4` at 0x58858DE2. The thiscall routine clears bit 0 on children at receiver +0xA90 and +0xA94, then dispatches on the selected entry code at receiver +0x138 + index*4 (index from +0xF4). Codes 1, 2, 4, 0x10, and 0x40 select observed resource IDs 600, 0x259/0x25A, argument-selected 0x25B–0x260, or 0x580 and update related timer/number/child flags. It bounds-checks the selected ID against the resource table count at receiver +0xA88 +0x164, then installs the selected resource on child +0xA8C and copies six resource fields. The function calls FUN_5877E7A0, FUN_5877E770, FUN_58734920, and FUN_58907360. The candidate emits the exact mapped stream and records its 18 operand targets.",
         "uncertainty": "The dispatch values' semantic names, resource table identity, child roles, timer/display meaning, and visible effects are unknown. The direct-call ABI has one DWORD stack argument, but some matched call paths choose that value conditionally and multiple unmatched callers remain to be confirmed. No emulator runtime test was performed.",
+    },
+    "5884D420": {
+        "name_in_analysis": "FUN_5884d420 / counter display and child-resource initializer",
+        "called_by": "Fresh Ghidra records exactly two direct references, both from byte-matched functions: FUN_588D9E10 at 0x588D9F30 and FUN_588DEB30 at 0x588DEF38. The target uses ECX as receiver and `ret 0x18` confirms six stack arguments. Both callers pass the child at [ESI+0x1448], a local record at [ESI+0x3A0], the current type's low five bits, lower and decoded upper counter values, then two zeros. In FUN_588D9E10 the decoded upper counter is [ESI+0xD98] XOR 0xAAAAAAAA.",
+        "behavior": "Ghidra confirms one contiguous 441-byte body, [0x5884D420,0x5884D5D9), ending with `ret 0x18` at 0x5884D5D6. The routine stores supplied counter values at receiver +0x54/+0x58 and derives values at +0x60/+0x64/+0x68 by dividing the supplied count by five and multiplying by three, two, or one. It lazily creates two children when receiver fields +0x5C and +0x50 are null, using checked resource-table entries at offsets 0x81C and 0x26A8 and FUN_5877E800 for child creation/configuration. It clears captured child flag bits and calls FUN_58907360 with the supplied count value. The candidate emits the exact mapped stream and records 12 operand targets.",
+        "uncertainty": "The display's exact visual role, field meanings, resource identities, and helper contracts are not established; the counter/progress interpretation is inferred from matched callers and the observed arithmetic, not confirmed by runtime capture. Ghidra shows allocation returning zero can flow to field/flag accesses; the invariant preventing a null dereference is unknown. No emulator runtime test was performed.",
     },
 }
 

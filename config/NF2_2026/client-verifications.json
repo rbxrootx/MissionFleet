@@ -324173,6 +324173,105 @@
         "behavior": "Ghidra confirms one contiguous 533-byte body, [0x58858BD0,0x58858DE5), ending in `ret 4` at 0x58858DE2. The thiscall routine clears bit 0 on children at receiver +0xA90 and +0xA94, then dispatches on the selected entry code at receiver +0x138 + index*4 (index from +0xF4). Codes 1, 2, 4, 0x10, and 0x40 select observed resource IDs 600, 0x259/0x25A, argument-selected 0x25B\u20130x260, or 0x580 and update related timer/number/child flags. It bounds-checks the selected ID against the resource table count at receiver +0xA88 +0x164, then installs the selected resource on child +0xA8C and copies six resource fields. The function calls FUN_5877E7A0, FUN_5877E770, FUN_58734920, and FUN_58907360. The candidate emits the exact mapped stream and records its 18 operand targets.",
         "uncertainty": "The dispatch values' semantic names, resource table identity, child roles, timer/display meaning, and visible effects are unknown. The direct-call ABI has one DWORD stack argument, but some matched call paths choose that value conditionally and multiple unmatched callers remain to be confirmed. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5884D420",
+      "name": "FUN_5884d420",
+      "size": 441,
+      "symbol": "_FUN_5884d420",
+      "source": "src/client-current/Main/FUN_5884d420.cpp",
+      "source_sha256": "683ab96051fa5fe615abe44c79573a95b829266b0055e7d2c5e09bae7d415b8d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58984F96",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "5884D51C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 96,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 197,
+          "target_address": "5877E800",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "5884D5B6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 295,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 366,
+          "target_address": "5877E800",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 415,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5884d420 / counter display and child-resource initializer",
+        "called_by": "Fresh Ghidra records exactly two direct references, both from byte-matched functions: FUN_588D9E10 at 0x588D9F30 and FUN_588DEB30 at 0x588DEF38. The target uses ECX as receiver and `ret 0x18` confirms six stack arguments. Both callers pass the child at [ESI+0x1448], a local record at [ESI+0x3A0], the current type's low five bits, lower and decoded upper counter values, then two zeros. In FUN_588D9E10 the decoded upper counter is [ESI+0xD98] XOR 0xAAAAAAAA.",
+        "behavior": "Ghidra confirms one contiguous 441-byte body, [0x5884D420,0x5884D5D9), ending with `ret 0x18` at 0x5884D5D6. The routine stores supplied counter values at receiver +0x54/+0x58 and derives values at +0x60/+0x64/+0x68 by dividing the supplied count by five and multiplying by three, two, or one. It lazily creates two children when receiver fields +0x5C and +0x50 are null, using checked resource-table entries at offsets 0x81C and 0x26A8 and FUN_5877E800 for child creation/configuration. It clears captured child flag bits and calls FUN_58907360 with the supplied count value. The candidate emits the exact mapped stream and records 12 operand targets.",
+        "uncertainty": "The display's exact visual role, field meanings, resource identities, and helper contracts are not established; the counter/progress interpretation is inferred from matched callers and the observed arithmetic, not confirmed by runtime capture. Ghidra shows allocation returning zero can flow to field/flag accesses; the invariant preventing a null dereference is unknown. No emulator runtime test was performed."
+      }
     }
   ]
 }
