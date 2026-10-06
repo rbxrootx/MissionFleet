@@ -176,6 +176,7 @@ ADDRESSES = (
     "587CECC0", "58789620",
     "587D3840", "587D0940", "587D5B20", "587D51D0", "587D1460",
     "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
+    "588DD520", "588DE620", "588DF9B0",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7355,6 +7356,24 @@ EVIDENCE = {
         "called_by": "All four Ghidra-recorded direct calls are from byte-matched FUN_588E4260: 0x588E43F9 (action 5), 0x588E4539 (action 7), 0x588E465F (action 0x15), and 0x588E467C (action 0x14). They pass the indexed value at [ESI+0x340]. At 43F9, 4539, and 467C, ECX=ESI; at 465F the caller does not explicitly reload ECX immediately before the call, so receiver setup on that path is unresolved. Ghidra decompilation places the calls in switch cases 5, 7, 0x23/0x24, and 0x25/0x26/0x29/0x2A, respectively.",
         "behavior": "Ghidra confirms 1,477 body bytes across [0x588D75F0,0x588D76BA), [0x588D76C0,0x588D78E7), and [0x588D78F0,0x588D7BC4). The omitted 6-byte gap is `lea ebx,[ebx]`; the omitted 9-byte gap is `lea esp,[esp]; mov edi,edi`. Unconditional jumps bridge both gaps. Action values 4/5 update matching child +0x128 by +/-1 and mark +0x10C; 6/7 update +0x124 and mark +0x108; 10/11 update +0x124 with sign selected by a per-entry byte and mark +0x108. Actions 0x14/0x15 clear matching child state at +0x108/+0x10C, subject to parent filter bits and reset conditions. The loops scan the count at this+0x141C, match item IDs at this+0x1FC against the supplied value, and skip null child pointers in the array at this+0x17C. The caller stores returned state bits at this+0x60B8 for actions 5/7 and toggles bits there for actions 0x14/0x15. The exact three body ranges are emitted literally and their mapped operand targets are recorded.",
         "uncertainty": "The owning type and the semantic identities of the indexed child, item IDs, filter flags, and state fields are not established. The ECX receiver at 0x588E465F is not explicitly loaded in the matched caller and remains unresolved. The byte-matched caller's switch cases establish where these actions are selected, but child rendering/gameplay effects have not been runtime-tested. No emulator runtime test was performed.",
+    },
+    "588DD520": {
+        "name_in_analysis": "FUN_588dd520 / CShip_MapObjectScreen state-dependent control update",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen update FUN_588E5150 at 0x588E5674. The matched call relocation identifies target 0x588DD520.",
+        "behavior": "Ghidra confirms 1,321 body bytes in four ranges: [0x588DD520,0x588DD77A), [0x588DD780,0x588DD92D), [0x588DD930,0x588DD9BA), and [0x588DD9C0,0x588DDA58). The routine branches on a short field at receiver +0x164 and repeatedly calls FUN_58902CE0 or FUN_58902D20 with values derived from receiver fields +0x28, +0x2C, +0x168, and +0x16C. Several modes update fields +0x170/+0x172, iterate 32 entries beginning at +0x17C, inspect a resource-derived count, and set a child flag at +0x1474; mode 3 or 6 also calls FUN_587315F0.",
+        "uncertainty": "The meaning of the short mode field, derived values, 32 child entries, resource count, and child flag remains unknown; timer, animation, or visual labels are not established by static evidence. No runtime test was performed.",
+    },
+    "588DE620": {
+        "name_in_analysis": "FUN_588de620 / CShip_MapObjectScreen linked-record effect/update pass",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen update FUN_588E5150 at 0x588E63B4. The matched call relocation identifies target 0x588DE620.",
+        "behavior": "The contiguous 1,281-byte body [0x588DE620,0x588DEB21) walks a global linked list and up to eight child lists. It checks record state fields and a receiver counter, computes thresholds from record values, a resource-derived mode value, and a shared rolling table, then conditionally invokes a record vtable method at +0x18. On selected outcomes it calls FUN_588DCE50, FUN_588DCD80, FUN_587E6480, FUN_5876C960, or FUN_588DB230 and updates receiver/global fields; it increments receiver +0x1410 on its exit paths.",
+        "uncertainty": "The linked-record types, threshold inputs, rolling-table purpose, vtable contract, and effects of the helper calls are unresolved. Probability-like branch behavior is a machine-code observation, not a recovered gameplay label. No runtime test was performed.",
+    },
+    "588DF9B0": {
+        "name_in_analysis": "FUN_588df9b0 / CShip_MapObjectScreen cleanup body",
+        "called_by": "Ghidra records one direct call from the byte-matched deleting wrapper FUN_588E0240 at 0x588E0243. The wrapper is slot +0x00 of the RTTI-confirmed CShip_MapObjectScreen vtable.",
+        "behavior": "Ghidra confirms 1,431 body bytes across [0x588DF9B0,0x588DFD6F), [0x588DFD74,0x588DFD8C), [0x588DFD95,0x588DFDA5), [0x588DFDAE,0x588DFF40), and [0x588DFF43,0x588DFF61). It reinstalls the class vtable, conditionally walks many receiver fields and child groups, invokes child vtable slot 0 with flag 1, clears released pointers, and calls FUN_588D6850/FUN_588D68C0/FUN_588D66F0 for observed states 0x40000, 0x50000, or 0x60000. Other object buffers are passed to thunk FUN_5897CC42.",
+        "uncertainty": "The ownership and types of the large set of fields/children, state-specific cleanup contracts, and external free-thunk behavior remain unresolved. Ghidra marks the external thunk non-returning; no runtime destruction test was performed.",
     },
     "588DEB30": {
         "name_in_analysis": "FUN_588deb30 / CShip_MapObjectScreen state and child-resource refresh",

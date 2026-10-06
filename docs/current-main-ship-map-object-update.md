@@ -28,3 +28,9 @@ callee and its corrected boundary are documented in the
 The stage-6 update path also invokes the conditional forwarder
 [`FUN_5875CD10`](current-main-ship-map-conditional-forwarder.md) through the
 object stored at `+0x21F08`.
+
+Three more direct dependencies of this subsystem now have exact byte-match
+records: `FUN_588DD520` and `FUN_588DE620` are called by this update, while
+the deleting wrapper calls `FUN_588DF9B0` for object cleanup. Their Ghidra
+ranges, call instructions, inferred behavior, and unresolved field semantics
+are recorded in the [ship-map helper notes](current-main-ship-map-helpers.md).
