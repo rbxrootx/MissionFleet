@@ -41,7 +41,7 @@ ADDRESSES = (
     "588E7700", "5897D17A", "5877E740", "5877E770",
     "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
-    "587ECAB0", "587ECCA0",
+    "587EC290", "587ECAB0", "587ECCA0",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
     "5888D250", "5888D390", "58780330", "5875ADB0", "587C4450", "587E5CB0",
     "588E0260",
@@ -318,7 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "5882A730",
+    "5882A730", "587EC290",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
@@ -1405,10 +1405,10 @@ EVIDENCE = {
         "uncertainty": "The delegated callback target and operation are unresolved.",
     },
     "588EADE0": {
-        "name_in_analysis": "FUN_588eade0",
-        "called_by": "Directly called at 0x587C3C0F by the matched AllocScreen constructor FUN_587C35A0 after its observed condition check.",
-        "behavior": "Matches the 316-byte Ghidra-indexed function extent in the mapped Main.dll image, emitted as literal bytes because the full extent does not decode contiguously.",
-        "uncertainty": "The exact instruction boundaries and high-level behavior are not recovered; this record establishes only byte identity for the indexed extent.",
+        "name_in_analysis": "FUN_588eade0 / CShipSpriteFileManager storage lifecycle",
+        "called_by": "The mapped screen constructor FUN_587C35A0 calls this routine. This routine installs the RTTI-backed CShipSpriteFileManager vtable 0x589A1468, and its state is released by verified destructor FUN_588EA420.",
+        "behavior": "Calls FUN_588FFDB0 on embedded state at +0x1808; initializes 0x200 records of 0x18 bytes at +0x1820 through FUN_5897D0BE; creates and stores two objects at +0x4830 and +0x4834 through FUN_588F3D70; initializes two 0x200-entry arrays at +0x808 and +0x1008 through FUN_58752830; then calls FUN_588EA770 to reset manager state.",
+        "uncertainty": "The meanings and ownership of the two created objects and record fields remain unresolved. The prior 316-byte inventory ended before the stack-restore epilogue and ret; the complete body is 327 bytes through 0x588EAF26, followed by nine CC bytes.",
     },
     "58793E00": {
         "name_in_analysis": "FUN_58793e00",
@@ -6137,6 +6137,12 @@ EVIDENCE = {
         "called_by": "Called by the verified communicator-configuration memo handler FUN_58840890 and panel handler FUN_588450B0. The callers pass one of their receiver-owned list bases, a small mode/stride value (3 or 4), and a selected index; after the call they toggle the selection bit and return or refresh a child.",
         "behavior": "Walks entries from the link at receiver +0x78, following each node's +0x14 pointer. It compares the payload pointers at node +4 byte-by-byte in two-byte steps until a mismatch or zero byte. When the comparison result is positive, it exchanges the observed node fields at +4, +8, and +0xC while repairing adjacent links and the receiver-owned entry table; it then continues through the chain. Ghidra's 539-byte extent ended after pop edi, omitting the contiguous mapped epilogue at 0x5878A5BB..0x5878A5C0 (`add esp, 0x18; ret 0xC`). The complete callable body is 545 bytes; fifteen INT3 bytes follow before the next indexed function at 0x5878A5D0. Nine operand targets are inventoried.",
         "uncertainty": "The payload encoding, node/list types, meaning of the caller's mode and index arguments, and whether the ordering is user-visible or only internal remain unknown. The two-byte comparison stride and field/link mutations are directly visible in the mapped instructions. The extended extent includes the ABI cleanup/return immediately before INT3 alignment. No emulator test was performed.",
+    },
+    "587EC290": {
+        "name_in_analysis": "FUN_587ec290 / event-backed child state and resource update",
+        "called_by": "The direct caller is byte-matched packet/message dispatcher FUN_587BB700 at 0x587C1550 in switch case 0x8002C010. The dispatcher prepares multiple stack words from the event record and calls this function with two words exposed by Ghidra; its six-word callee cleanup is visible as ret 0x18.",
+        "behavior": "Stores four 16-bit values from its stack arguments at receiver offsets +0x21CCC, +0x21CCE, +0x21CD0, and +0x21CD2. The first stored value selects state paths 0, 1, 2, or 3. Those paths update visibility bit 0 on child objects rooted at +0x21CAC through +0x21CE0, select resource pointers from objects rooted at globals 0x58A24728 and its +0x18C child, copy six DWORDs from a selected resource into child fields, and call FUN_587315F0/FUN_587316C0 where observed. The state comparisons also consult [0x58A245A8]+0x1B6 and skip updates for values 3, 8, and 9. The complete 2,069-byte indexed stream at 0x587EC290..0x587ECAA4 is instruction-decoded and emitted literally; it returns with ret 0x18 and has 43 mapped operand targets.",
+        "uncertainty": "The event payload schema, meanings of the four stored words, child types, resource indices/offsets, state values, global object schemas, and visible effect remain unknown. Ghidra recovers fewer stack parameters than the ret 0x18 cleanup and the verified caller's setup; the raw six-word stack contract is retained without assigning unsupported types or names. Although the selected resources are copied into child fields and visibility bits are changed, no visual result or emulator behavior has been tested.",
     },
 }
 
