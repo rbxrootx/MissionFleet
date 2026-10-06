@@ -318514,6 +318514,39 @@
         "behavior": "Ghidra and the mapped instruction stream give one contiguous 136-byte body, [0x588A6CD0, 0x588A6D58), with an absolute operand at offset 0x0E targeting 0x58A247F8. The helper stores 1 at receiver +0xA8, then tests dword +0x6074 on the object at [0x58A247F8]+4. If nonzero, it invokes vtable slot +8 on receiver children +0x190, +0x188, and +0x19C, then restores ESI and tail-jumps through slot +8 on child +0x1A8. If zero, it invokes slot +8 on children +0x18C, +0x190, and +0x198, then restores ESI and tail-jumps through slot +8 on child +0x19C. The final transfers are literal `pop esi; jmp eax` sequences in both branches.",
         "uncertainty": "The receiver and child types, global record schema, meaning of field +0x6074, and contracts/effects of the indirect slot +8 methods are unresolved. Ghidra reports both terminal indirect jumps as unrecovered jumptables and models them as calls followed by return; the mapped bytes establish the actual tail jumps. The direct caller is byte-matched, but neither the indirect methods nor the emulator-visible result have been runtime-tested."
       }
+    },
+    {
+      "address": "588489E0",
+      "name": "FUN_588489e0",
+      "size": 28,
+      "symbol": "_FUN_588489e0",
+      "source": "src/client-current/Main/FUN_588489e0.cpp",
+      "source_sha256": "ef5cc58bb4a7ebb41d9a8f75741f821b01debc02789b7d977d7aa3bffa3c19e0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58848610",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588489e0 / 0xF231 child callback dispatch",
+        "called_by": "Ghidra's reference dump and a Capstone scan of every indexed function in mapped Main.dll .text find four direct calls: FUN_587BB700 at 0x587BF253 and 0x587BF286, and FUN_588C1650 at 0x588C3338 and 0x588C3383. Both callers are byte-matched. Each loads ECX from [[0x58A245B4]+0xD8] and passes no stack arguments to this helper. The calls follow their respective dispatch branches selecting code 0x204 or 0x205.",
+        "behavior": "Ghidra confirms one contiguous 28-byte body, [0x588489E0, 0x588489FC). The helper saves ECX in ESI, calls matched FUN_58848610, loads child [receiver+0x30] and its vtable slot +0x18, then invokes the slot with ECX=child and stack arguments (receiver, 0xF231, 1). It restores ESI and returns. The only mapped operand is the rel32 call at instruction offset +3, with displacement field offset +4 targeting FUN_58848610; the complete stream is byte-identical under objdiff.",
+        "uncertainty": "The object/list type rooted at receiver +0x30, the slot +0x18 callback contract, the meaning of message 0xF231 and value 1, and the user-visible result remain unresolved. FUN_58848610 is documented as a linked-node clear helper, but its relationship to this receiver's list is unconfirmed. No emulator runtime comparison was performed."
+      }
     }
   ]
 }

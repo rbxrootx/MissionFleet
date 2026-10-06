@@ -22,6 +22,7 @@ ADDRESSES = (
     "588A69F0",
     "588A6C70",
     "588A6CD0",
+    "588489E0",
     "588A6D60",
     "588A70F0",
     "588A6E30",
@@ -363,6 +364,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588A69F0",
     "588A6C70",
     "588A6CD0",
+    "588489E0",
     "588A6D60",
     "588A70F0",
     "588A6E30",
@@ -1029,6 +1031,12 @@ EVIDENCE = {
         "called_by": "FUN_58848E60 calls this helper when receiver counter +0x106 reaches 0x12C under the observed global-byte gate.",
         "behavior": "Passes a 0xF0-byte stack buffer to FUN_5897CC48 with a zero argument, then traverses up to ten nodes from receiver list +0x6C using signed word count +0xF2 and up to ten nodes from list +0x64 using signed word count +0xF0. Each channel advances through node +0x54 and wraps to its list head, calls through pointer 0x5898C3C4 with destination slots 0x18 bytes apart, format pointer 0x5898D0D4, and a value from node +0x70/+0x6C. When nonempty it calls FUN_587B91B0 with the stack buffer, count, and channel 0 or 1. The corrected complete body is 353 bytes with 12 mapped operand targets, including add esp 0xF4 and ret.",
         "uncertainty": "The formatted value schema, callback contract, shared helper effect, and list preconditions remain unknown. The original 347-byte index stopped one byte into the epilogue instruction; the next function starts at 0x588489E0 after 15 CC bytes. No runtime comparison was performed.",
+    },
+    "588489E0": {
+        "name_in_analysis": "FUN_588489e0 / 0xF231 child callback dispatch",
+        "called_by": "Ghidra's reference dump and a Capstone scan of every indexed function in mapped Main.dll .text find four direct calls: FUN_587BB700 at 0x587BF253 and 0x587BF286, and FUN_588C1650 at 0x588C3338 and 0x588C3383. Both callers are byte-matched. Each loads ECX from [[0x58A245B4]+0xD8] and passes no stack arguments to this helper. The calls follow their respective dispatch branches selecting code 0x204 or 0x205.",
+        "behavior": "Ghidra confirms one contiguous 28-byte body, [0x588489E0, 0x588489FC). The helper saves ECX in ESI, calls matched FUN_58848610, loads child [receiver+0x30] and its vtable slot +0x18, then invokes the slot with ECX=child and stack arguments (receiver, 0xF231, 1). It restores ESI and returns. The only mapped operand is the rel32 call at instruction offset +3, with displacement field offset +4 targeting FUN_58848610; the complete stream is byte-identical under objdiff.",
+        "uncertainty": "The object/list type rooted at receiver +0x30, the slot +0x18 callback contract, the meaning of message 0xF231 and value 1, and the user-visible result remain unresolved. FUN_58848610 is documented as a linked-node clear helper, but its relationship to this receiver's list is unconfirmed. No emulator runtime comparison was performed.",
     },
     "5884AB90": {
         "name_in_analysis": "FUN_5884ab90 / CPannelCommunicatorIDPannel input method",
