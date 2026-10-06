@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "58805880",
     "588058D0",
+    "588A6720",
     "588075E0",
     "58805940",
     "588D6CC0",
@@ -331,6 +332,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "58805880",
     "588058D0",
+    "588A6720",
     "588075E0",
     "58805940",
     "588D6CC0",
@@ -572,17 +574,23 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588A6720": {
+        "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
+        "called_by": "Ghidra records four direct calls from three byte-matched functions: FUN_58805880 at 0x588058A9 passes its stack predicate directly; FUN_588058D0 at 0x58805909 calls on the +0x350 equality path with its first stack argument; FUN_58807910 calls at 0x58807C8D with iVar3 < 3 and at 0x58807CAE with 0 in its state-1 branch. The first two callers are also reached from the byte-matched queue dispatcher for ID 0x20.",
+        "behavior": "As a __thiscall helper, branches on its one stack argument and receiver word +0x9C. For a zero argument it clears receiver +0x200 and sets +0xA0, then uses observed state values and selected-object dword +0x608C to choose embedded-child vtable calls and low-bit updates. States 4, 5, 6, 10, 11, 13, 14, and 16, plus state 15 when [0x58A245A8 + 0x1B8] is zero, run the captured reset/configuration path; state 12 sets receiver +0xA8 and runs a separate pair of child updates; other states run the generic child reset path. In the configuration path, receiver +0xA8 selects between calls through child fields +0x188/+0x1A8/+0x18C/+0x198 and +0x18C/+0x1AC, while selected-object state 0x40000000 or 0 selects further updates to child fields +0x194/+0x198/+0x1A8. States 8 and 9 recompute child +0x50 from the optional descriptor product word[descriptor+0x0C]*dword[descriptor+8], or zero, then call the child vtable slot at +8. For a nonzero argument, state 12 sets +0xA8, calls child +0x11C vtable slot +8, clears +0xA4, and returns; other states recompute +0x50 from that descriptor product, call the same slot, clear +0xA0, and return. The two direct helpers are FUN_587B95E0(1) and FUN_587B9620 with receiver words +0x94/+0x96. The complete indexed extent is 709 contiguous bytes through 0x588A69E4.",
+        "uncertainty": "The receiver and child types, meanings of the +0x9C state values and selected-object +0x608C value, indirect vtable contracts, descriptor units, and visible effect remain unknown. FUN_587B95E0 and FUN_587B9620 are unmatched, and no emulator runtime test was performed.",
+    },
     "58805880": {
         "name_in_analysis": "FUN_58805880 / queue ID 0x20 conditional selected-value update",
         "called_by": "Byte-matched FUN_588075E0 calls this at 0x58807715 for queue ID 0x20 when receiver +0x114 and +0x110 are zero and the word at [0x58A245A0 + 0xA06] is 7 or 12. It passes the predicate local_40 < 3 as the single stack argument.",
-        "behavior": "Sets bit 0 in receiver dword +0x78, then calls byte-matched FUN_588D6CC0 with ECX=[0x58A247F8]+4 and argument (the stack argument == 0). It calls unmatched FUN_588A6720 with ECX=the object at receiver +0x174 and the original stack argument. It then sets bit 1 in that object's word at +0x24, writes 400 to receiver +0x300, and returns with ret 4. The complete indexed extent is 72 bytes through 0x588058C7.",
-        "uncertainty": "The local predicate's role, compared object and child types, and visible effect remain unknown. FUN_588A6720 is unmatched, so its contract is not inferred. No emulator runtime test was performed.",
+        "behavior": "Sets bit 0 in receiver dword +0x78, then calls byte-matched FUN_588D6CC0 with ECX=[0x58A247F8]+4 and argument (the stack argument == 0). It calls byte-matched FUN_588A6720 with ECX=the object at receiver +0x174 and the original stack argument. It then sets bit 1 in that object's word at +0x24, writes 400 to receiver +0x300, and returns with ret 4. The complete indexed extent is 72 bytes through 0x588058C7.",
+        "uncertainty": "The local predicate's role, compared object and child types, and visible effect remain unknown. FUN_588A6720's field meanings and indirect effects remain unresolved. No emulator runtime test was performed.",
     },
     "588058D0": {
         "name_in_analysis": "FUN_588058d0 / selected-value queue ID 0x20 update",
         "called_by": "Byte-matched FUN_588075E0 calls this at 0x58807730 for queue ID 0x20 when receiver +0x114 is zero and its nested receiver/global-state gate selects this branch. It passes two record-derived 16-bit values; the first goes to FUN_588A6720 on the equality path, and the second is compared with the active object's word at +0x350.",
-        "behavior": "Compares the active object's word at +0x350 with the second stack argument. If equal, it sets bit 0 in receiver dword +0x78, calls byte-matched FUN_588D6CC0(1) with ECX=[0x58A247F8]+4, then calls unmatched FUN_588A6720 with ECX=the object at receiver +0x174 and the first stack argument. If unequal, it calls byte-matched FUN_5878A160 with the compared value, then calls FUN_588D6CC0(1) with that return value in ECX. Both paths set bit 1 in the word at +0x24 of the object referenced by receiver +0x174, write 400 to receiver +0x300, and return with ret 8. The complete indexed extent is 102 bytes through 0x58805935.",
-        "uncertainty": "The compared +0x350 field, receiver flags, child-object roles, and visible effect remain unknown. FUN_588A6720 is unmatched, so its contract is not inferred. No emulator runtime test was performed.",
+        "behavior": "Compares the active object's word at +0x350 with the second stack argument. If equal, it sets bit 0 in receiver dword +0x78, calls byte-matched FUN_588D6CC0(1) with ECX=[0x58A247F8]+4, then calls byte-matched FUN_588A6720 with ECX=the object at receiver +0x174 and the first stack argument. If unequal, it calls byte-matched FUN_5878A160 with the compared value, then calls FUN_588D6CC0(1) with that return value in ECX. Both paths set bit 1 in the word at +0x24 of the object referenced by receiver +0x174, write 400 to receiver +0x300, and return with ret 8. The complete indexed extent is 102 bytes through 0x58805935.",
+        "uncertainty": "The compared +0x350 field, receiver flags, child-object roles, and visible effect remain unknown. FUN_588A6720 now has an exact byte match, but its field and indirect-call semantics remain unresolved. No emulator runtime test was performed.",
     },
     "588075E0": {
         "name_in_analysis": "FUN_588075e0 / queued component-record dispatcher",

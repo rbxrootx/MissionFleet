@@ -10,8 +10,10 @@ select this handler. The dispatcher passes two record-derived 16-bit values.
 The handler compares the word at `+0x350` of the selected object
 `[0x58A247F8]+4` with its second stack argument. If they match, it sets bit 0
 in receiver dword `+0x78`, calls byte-matched `FUN_588D6CC0(1)` with ECX set to
-the selected object, then calls `FUN_588A6720` with ECX set to the object at
-receiver `+0x174` and the first stack argument. If they differ, it calls
+the selected object, then calls byte-matched
+[`FUN_588A6720`](current-main-588a6720-mode-dependent-selected-object-child-update.md)
+with ECX set to the object at receiver `+0x174` and the first stack argument.
+If they differ, it calls
 byte-matched `FUN_5878A160` with the compared value and passes that return value
 in ECX to `FUN_588D6CC0(1)`.
 
@@ -24,5 +26,6 @@ complete indexed body from `0x588058D0` through `0x58805935`.
 ## Unresolved details
 
 The meaning of the selected object's `+0x350` value, receiver flags, and child
-object are unknown. `FUN_588A6720` remains unmatched, so its contract and any
-visible effect are not inferred. No emulator runtime test has been performed.
+object are unknown. Although `FUN_588A6720` now matches byte-for-byte, its
+state and virtual-call semantics remain unresolved. No emulator runtime test
+has been performed.

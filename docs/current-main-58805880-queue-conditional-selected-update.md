@@ -12,6 +12,8 @@ The helper sets bit 0 in receiver dword `+0x78`. It calls byte-matched
 stack argument is zero. It then calls `FUN_588A6720` with ECX set to the object
 at receiver `+0x174` and the original argument.
 
+It then calls the byte-matched, mode-dependent
+[`FUN_588a6720`](current-main-588a6720-mode-dependent-selected-object-child-update.md).
 After that call, it sets bit 1 in the word at `+0x24` of the object referenced
 by receiver `+0x174`, writes `400` to receiver `+0x300`, and returns with
 `ret 4`. The literal x86 source at
@@ -21,5 +23,6 @@ by receiver `+0x174`, writes `400` to receiver `+0x300`, and returns with
 ## Unresolved details
 
 The predicate's meaning, selected-object and child types, and visible effect
-are unknown. `FUN_588A6720` remains unmatched, so its contract is not inferred.
-No emulator runtime test has been performed.
+are unknown. Although `FUN_588A6720` now matches byte-for-byte, its state and
+virtual-call semantics remain unresolved. No emulator runtime test has been
+performed.
