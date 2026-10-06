@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -497,6 +497,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B1850",
     "587B08C0",
     "587B21F0",
+    "587B1F90",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -530,6 +531,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B1F90": {
+        "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",
+        "called_by": "Verified FUN_587A6220 passes two pointers from selected-record entries at offsets +0xF0C/+0xF10; verified ship-map builder FUN_588D84D0 passes two per-entry local pointers at 0x588D88D3.",
+        "behavior": "For each nonnull input pointer, copies 0x2B DWORDs (0xAC bytes) to receiver +0x270 or +0x324. It tests the input byte at +0x9B masked to the low nibble; when that value is 1, uses 0x50 as the middle argument, otherwise uses the input word at +0x9C. It calls FUN_5876BF40 with arguments 0x3FFF, that selected word, and 0x78, storing the return value at receiver +0x26C or +0x320. Each null pointer independently skips its copy and call, leaving the corresponding receiver fields untouched. The mapped function is 151 bytes, ends in ret 8 at 0x587B2024, and has 2 mapped operand targets.",
+        "uncertainty": "The copied record schema and source-field meanings, purpose of the nibble check and selected word, allocation/resource semantics and ownership of FUN_5876BF40 results, and visible effect remain unknown. This exact instruction reconstruction is tied to two verified caller paths; no emulator runtime test was performed.",
+    },
     "587B21F0": {
         "name_in_analysis": "FUN_587B21F0 / record-pair scaling and masked state update",
         "called_by": "Verified FUN_587A6220 calls it after reading and XOR-decoding two selected-record words; verified ship-map builder FUN_588D84D0 calls it at 0x588D88FB with the words read from child +0xBCC and +0xBCE, each XORed with 0xAA.",

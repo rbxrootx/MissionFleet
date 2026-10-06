@@ -310893,6 +310893,45 @@
         "behavior": "Multiplies the first input by the low byte of receiver word +0x308 and the second input by the low byte of receiver word +0x3BC. It first stores the products at +0x31C and +0x3D0. If the first product is zero, it writes 0xAAAAAAAA to +0x104 and clears +0xF8. It then XORs both products with 0xAAAAAAAA and stores those encoded results back at +0x31C and +0x3D0. When receiver +0x88 equals the pointer at [0x58A247F8]+4, it calls FUN_587A15E0 with address/value pairs for +0x104, +0x31C, and +0x3D0. The mapped function is 161 bytes, ends in ret 8 at 0x587B228E, and has 7 mapped operand targets.",
         "uncertainty": "The coefficients' and inputs' units, purposes of the XOR encoding and zero-product reset, meanings of receiver +0x104/+0xF8/+0x31C/+0x3D0, global-context condition, and FUN_587A15E0 callback contract remain unresolved. This exact instruction reconstruction is grounded in two verified child-builder callers; no emulator runtime comparison was performed."
       }
+    },
+    {
+      "address": "587B1F90",
+      "name": "FUN_587b1f90",
+      "size": 151,
+      "symbol": "_FUN_587b1f90",
+      "source": "src/client-current/Main/FUN_587b1f90.cpp",
+      "source_sha256": "3c625470fe315b7587ee5ffa21ef9ec275ffe269672c86663191d2fb56903b2c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 62,
+          "target_address": "5876BF40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "5876BF40",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",
+        "called_by": "Verified FUN_587A6220 passes two pointers from selected-record entries at offsets +0xF0C/+0xF10; verified ship-map builder FUN_588D84D0 passes two per-entry local pointers at 0x588D88D3.",
+        "behavior": "For each nonnull input pointer, copies 0x2B DWORDs (0xAC bytes) to receiver +0x270 or +0x324. It tests the input byte at +0x9B masked to the low nibble; when that value is 1, uses 0x50 as the middle argument, otherwise uses the input word at +0x9C. It calls FUN_5876BF40 with arguments 0x3FFF, that selected word, and 0x78, storing the return value at receiver +0x26C or +0x320. Each null pointer independently skips its copy and call, leaving the corresponding receiver fields untouched. The mapped function is 151 bytes, ends in ret 8 at 0x587B2024, and has 2 mapped operand targets.",
+        "uncertainty": "The copied record schema and source-field meanings, purpose of the nibble check and selected word, allocation/resource semantics and ownership of FUN_5876BF40 results, and visible effect remain unknown. This exact instruction reconstruction is tied to two verified caller paths; no emulator runtime test was performed."
+      }
     }
   ]
 }
