@@ -329,6 +329,7 @@ ADDRESSES = (
     "588D9D20",
     "588958C0",
     "58804A40",
+    "588F8EA0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -377,6 +378,7 @@ SYMBOL_OVERRIDES = {
 }
 SOURCE_COMPILER_ADDRESSES = {
     "58804A40",
+    "588F8EA0",
     "58787400",
     "588536C0",
     "5885EE90",
@@ -677,6 +679,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588F8EA0": {
+        "name_in_analysis": "FUN_588F8EA0 / CWarehouseItemForce virtual resource and child-state updater",
+        "called_by": "Ghidra's reference audit finds no direct code-call sites and one data reference at 0x589A2128, the +0x1C method slot in the RTTI-backed vtable at 0x589A210C. Its complete-object locator and type descriptor identify .?AVCWarehouseItemForce@@. This supports a virtual dispatch path, but the concrete dispatch sites are not identified.",
+        "behavior": "Ghidra confirms one contiguous 2,553-byte instruction body at [0x588F8EA0,0x588F9899), containing 679 instructions and ending in pop edi; pop esi; pop ebp; pop ebx; ret before alignment padding. It selects resource records from DAT_589CFD70 using receiver fields +0x6C and +0x70, resolves indices through global resource tables, copies resource fields into child objects at receiver offsets +0xA4 through +0xE0, and toggles child visibility bit 0 at child +0x24. A global state at DAT_58A24AE0 selects hide/clear versus resource-selection paths. Receiver mode +0x90 selects color constants written to the child at +0xA0 and special child values. The six direct helper calls are FUN_58907360 at 0x588F8F63, FUN_58731CE0 at 0x588F95F7, and FUN_587316C0 at 0x588F9737, 0x588F97A0, 0x588F97FB, and 0x588F982E. Literal x86 emission matches the complete mapped extent and checks 45 operand targets.",
+        "uncertainty": "The semantic names of the receiver fields, resource-table schema and indices, child roles, global-state conditions, and mode/color labels remain unknown. The RTTI/vtable evidence identifies the class and slot, but does not reveal concrete virtual callers. Exact code bytes are checked against the installed Main.dll capture; visible behavior and emulator runtime have not been tested.",
+    },
     "58804A40": {
         "name_in_analysis": "FUN_58804A40 / map-event record and screen-state initializer",
         "called_by": "Ghidra's reference audit finds one unconditional call from byte-verified FUN_587BB700 at 0x587BCEC5. The caller loads ECX from [0x58A245A8] and pushes three stack values from EBX and [EBP+8]/[EBP+0x0A]; the containing caller is dispatched through a data table referenced at 0x5899A30C.",

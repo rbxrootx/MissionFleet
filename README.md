@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,481 matches cover 2,364,063 bytes (22.5789%) and are verified
+The current 7,484 matches cover 2,369,943 bytes (22.6351%) and are verified
 individually at 100.0% by objdiff.
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).
@@ -21,6 +21,8 @@ The current-client HCB resource and child initializer is documented in
 [its Main.dll evidence](docs/current-main-58787400-hcb-child-initializer.md).
 The map-event record and screen-state initializer that feeds the map loader
 is documented in [its Main.dll evidence](docs/current-main-58804a40-map-event-initializer.md).
+The `CWarehouseItemForce` virtual resource and child-state updater is documented
+in [its Main.dll evidence](docs/current-main-588f8ea0-warehouse-item-force-update.md).
 Its allocation and aircraft-object initialization path is documented in
 [the CAircraft constructor evidence](docs/current-main-58741c20-aircraft-constructor.md).
 The aircraft record/stat initializer called from that launch path is documented
