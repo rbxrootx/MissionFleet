@@ -8,9 +8,11 @@ invokes it at `0x588A6AAB` in the receiver-state `0x0C` branch.
 ## Behavior visible in the original code
 
 The helper first calls `FUN_58789FB0`, then switches on receiver word `+0x110`.
-For states 4, 5, and 10, it may call `FUN_587AEE40(0xF4241)` when bit 0 is set
-in byte `[0x58A245A8+0x1BC]`; it then calls `FUN_58789FB0` again and requires
-the result to be at least 14, 12, or 16, respectively. State 11 selects a
+For states 4, 5, and 10, it may call byte-matched
+[`FUN_587AEE40`](current-main-587aee40-field-match-pointer-range-lookup.md)
+with `0xF4241` when bit 0 is set in byte `[0x58A245A8+0x1BC]`; this path
+ignores the lookup's return value. It then calls `FUN_58789FB0` again and
+requires the result to be at least 14, 12, or 16, respectively. State 11 selects a
 threshold from word `[0x58A245A8+0x1B8]`: values 0, 1–2, 3, and 4 select 16,
 14, 8, and 12; other values select 2. It requires the `FUN_58789FB0` result
 to reach that threshold.
@@ -35,8 +37,8 @@ return 0. Other states return 0 directly.
 ## Unresolved details
 
 The domain meanings of state `+0x110`, the global fields, list-node fields,
-thresholds, and notification codes remain unknown. `FUN_587AEE40` remains
-unmatched. The emitted instruction stream preserves the absolute
+thresholds, and notification codes remain unknown. The emitted instruction
+stream preserves the absolute
 switch-table bases `0x58808038` and `0x5880806C` at offsets `0x24` and `0x90`;
 the table contents lie outside this function extent and are not covered by
 this function's match record. No emulator runtime test has been performed.
