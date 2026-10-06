@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0830", "587B0860", "587B0910", "58778AD0",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0830", "587B0860", "587B0910", "587B1310", "58778AD0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -501,6 +501,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B0830",
     "587B0860",
     "587B0910",
+    "587B1310",
     "58778AD0",
 }
 SOURCE_COMPILER = {
@@ -558,6 +559,12 @@ EVIDENCE = {
         "called_by": "Verified FUN_587A6220 calls it at 0x587A6B36 and FUN_588D84D0 calls it at 0x588D8C7D after their record-backed scalar helpers. Their decompilations show a two-bit selector extracted from the packed table at +0x274 using the current entry index.",
         "behavior": "Copies its one 32-bit argument to receiver +0x80 and returns with ret 4. The mapped function is 13 bytes and has no operand targets.",
         "uncertainty": "The meaning of the packed two-bit table value and receiver +0x80 remains unknown. This exact setter is grounded in both verified child-builder call paths; no emulator runtime test was performed.",
+    },
+    "587B1310": {
+        "name_in_analysis": "FUN_587B1310 / child context pointer propagation",
+        "called_by": "Verified FUN_587A6220 calls it at 0x587A6699 and 0x587A69A2 with the pointer at [0x58A247F8]+4. Verified ship-map builder FUN_588D84D0 calls it at 0x588D8BD6 with param_1. The caller outputs expose these arguments and paths.",
+        "behavior": "Stores the input pointer at receiver +0x88. It then reads the pointer at receiver +0x168; when nonnull, it copies the DWORD at input +0x6060 into child +0xA4. When the child pointer is null, that copy is skipped. The 35-byte function ends with ret 4 and has no mapped operand targets.",
+        "uncertainty": "The input and receiver/child types, meanings of offsets +0x88/+0x168/input +0x6060/child +0xA4, and runtime effect remain unknown. The code dereferences the input when the child is nonnull, but whether callers guarantee a valid input in that case is not established. Caller edges are supported by byte-matched FUN_587A6220 and FUN_588D84D0; no emulator runtime test was performed.",
     },
     "587B1F90": {
         "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",
