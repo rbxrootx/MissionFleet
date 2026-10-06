@@ -268,7 +268,7 @@ ADDRESSES = (
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B92B0", "587B9E10", "58848A00", "58847A50",
     "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
-    "58833E40", "587BAA60",
+    "58833E40", "587BAA60", "5881DBE0", "58842780",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -326,7 +326,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
     "5897D801", "5897CFFD", "5897D05B", "589081C0", "5877ABA0",
     "588EBEB0", "5890BD90", "588DCDD0", "587C3D60", "587B6020", "587B7BD0", "587B70A0", "587B8290", "587B8300", "587B8370", "587A6190", "587A7110", "587A56A0", "587A7310", "588D8100", "588D8150", "58736080", "58853570", "58909B00", "58793DA0", "587A5720", "587A5790", "587A57E0", "587A5A70", "587A5840", "587A5980", "587E5AC0", "587E5B50", "587E5C10", "587E5BA0", "587EBCB0", "587D8E70", "587D8F40", "587D8F90", "587D8FF0", "58853B90", "588542A0", "587AFE40", "587AFE50", "587AFE60", "58907F30", "58907F40", "5877EBB0", "5877EC00", "5877EC30", "589072A0", "58907300", "58907650", "58782790", "588DE5C0", "5873A370", "5873A300", "5884D870", "587B5F50",
-    "588AA0D0", "588AA120", "58833E40", "587BAA60",
+    "588AA0D0", "588AA120", "58833E40", "587BAA60", "5881DBE0", "58842780",
     "588A44A0", "58842F60", "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760", "587B9190", "587B9270", "587B92B0", "587B9E10", "58848A00", "58847A50", "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0",
     "58848380", "588483D0",
     "58754CD0", "58754D10",
@@ -542,6 +542,18 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "5881DBE0": {
+        "name_in_analysis": "FUN_5881DBE0 / paired child-record removal dispatch",
+        "called_by": "Verified dispatcher FUN_587BB700 calls it at 0x587BE02C after loading ECX from 0x58A245B4 and pushing its two caller values. Verified event dispatcher FUN_588C1650 calls it at 0x588C17F9 with the same ECX context. In both byte-matched streams, the value in the original first stack slot is the pointer later forwarded to both child methods.",
+        "behavior": "Reads the original first stack argument, calls FUN_58842780 with ECX=[this+0xDC], then calls verified FUN_58848450 with ECX=[this+0xD8] and the same pointer. Restores EDI/ESI and returns with ret 8; the other stack argument is not read in this body. The full 37-byte function has two mapped relative call targets.",
+        "uncertainty": "The manager and child types, pointer/key schema, why the callers supply the additional unused stack value, and the event or user-visible meaning remain unknown. Both dispatcher call edges and argument setup are verified at the stated addresses; no emulator runtime test was performed.",
+    },
+    "58842780": {
+        "name_in_analysis": "FUN_58842780 / keyed parallel-array and linked-node removal",
+        "called_by": "Byte-matched FUN_5881DBE0 calls it at 0x5881DBEF with ECX=[this+0xDC] and the dispatcher's first stack argument. This call ties the method to the first half of the paired child-removal path.",
+        "behavior": "When the object at receiver +0xD0 has a positive count at +0x88, scans its indexed items with verified FUN_589080E0 and the callback pointer slot 0x5898C1A4. On the first callback result equal to zero, calls verified FUN_589081E0 on four consecutive array descriptors beginning at receiver +0xD0, using the matched index. It then scans nodes from receiver +0x138 through node +0x54, comparing the NUL-terminated string reached through node +0x70 then +0x6C against the argument. For the first equal string, repairs the linked-list head/tail and neighboring links, calls the node's first virtual method with argument 1, and returns with ret 4. If no linked node matches, it returns without unlinking one. The complete 343-byte body has four mapped operand targets.",
+        "uncertainty": "The comparison callback target, array and node schemas, four descriptor roles, virtual deletion contract, and key meaning are unresolved. The indexed-array scan and explicit byte-by-byte NUL comparison are visible in the mapped instructions; no emulator runtime test was performed.",
+    },
     "58833E40": {
         "name_in_analysis": "FUN_58833E40 / indexed record-text dispatch",
         "called_by": "Verified packet/event dispatchers FUN_587BB700 (call at 0x587BE127) and FUN_588C1650 (call at 0x588C1B5F) both gate this path on object byte +0x321 == 8 and pass their source record pointer. Their byte-matched instruction streams establish both call edges.",

@@ -314708,6 +314708,96 @@
         "behavior": "Calls indirect function slot 0x5898C1A8 with the text pointer for a length, allocates length+9 bytes through verified FUN_5897152E, copies the 8-byte header, and appends length+1 bytes of text through verified FUN_58731B60. It then sends selector 0x80010F0E with context value [0x58A0B4A0], second value 0, the assembled buffer, NUL-scanned text length+9, and flags 0 through verified FUN_58970C70, frees the buffer through verified FUN_5897CE26, and returns with ret 8. The complete body is 117 bytes with six mapped operand targets.",
         "uncertainty": "The runtime target and precise contract of slot 0x5898C1A8, meanings of the two header DWORDs and global context value, selector semantics, server response, and visible game effect remain unresolved. The use as a NUL-terminated string is supported by both the length callback and explicit scan. No emulator/server test was performed."
       }
+    },
+    {
+      "address": "5881DBE0",
+      "name": "FUN_5881dbe0",
+      "size": 37,
+      "symbol": "_FUN_5881dbe0",
+      "source": "src/client-current/Main/FUN_5881dbe0.cpp",
+      "source_sha256": "71bc920ce069b9a30511991ca13cfba44bc1a25b9398b3a04eb97c371738473a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "58842780",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 28,
+          "target_address": "58848450",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5881DBE0 / paired child-record removal dispatch",
+        "called_by": "Verified dispatcher FUN_587BB700 calls it at 0x587BE02C after loading ECX from 0x58A245B4 and pushing its two caller values. Verified event dispatcher FUN_588C1650 calls it at 0x588C17F9 with the same ECX context. In both byte-matched streams, the value in the original first stack slot is the pointer later forwarded to both child methods.",
+        "behavior": "Reads the original first stack argument, calls FUN_58842780 with ECX=[this+0xDC], then calls verified FUN_58848450 with ECX=[this+0xD8] and the same pointer. Restores EDI/ESI and returns with ret 8; the other stack argument is not read in this body. The full 37-byte function has two mapped relative call targets.",
+        "uncertainty": "The manager and child types, pointer/key schema, why the callers supply the additional unused stack value, and the event or user-visible meaning remain unknown. Both dispatcher call edges and argument setup are verified at the stated addresses; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58842780",
+      "name": "FUN_58842780",
+      "size": 343,
+      "symbol": "_FUN_58842780",
+      "source": "src/client-current/Main/FUN_58842780.cpp",
+      "source_sha256": "4bb03f78169ecbb7b1e37f70d893dd79c3aa8413d9a49e01351067ca464f0e74",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 30,
+          "target_address": "5898C1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "589080E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589081E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "588428D1",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58842780 / keyed parallel-array and linked-node removal",
+        "called_by": "Byte-matched FUN_5881DBE0 calls it at 0x5881DBEF with ECX=[this+0xDC] and the dispatcher's first stack argument. This call ties the method to the first half of the paired child-removal path.",
+        "behavior": "When the object at receiver +0xD0 has a positive count at +0x88, scans its indexed items with verified FUN_589080E0 and the callback pointer slot 0x5898C1A4. On the first callback result equal to zero, calls verified FUN_589081E0 on four consecutive array descriptors beginning at receiver +0xD0, using the matched index. It then scans nodes from receiver +0x138 through node +0x54, comparing the NUL-terminated string reached through node +0x70 then +0x6C against the argument. For the first equal string, repairs the linked-list head/tail and neighboring links, calls the node's first virtual method with argument 1, and returns with ret 4. If no linked node matches, it returns without unlinking one. The complete 343-byte body has four mapped operand targets.",
+        "uncertainty": "The comparison callback target, array and node schemas, four descriptor roles, virtual deletion contract, and key meaning are unresolved. The indexed-array scan and explicit byte-by-byte NUL comparison are visible in the mapped instructions; no emulator runtime test was performed."
+      }
     }
   ]
 }

@@ -13,6 +13,8 @@ guard, constructor, and cleanup-registration path is documented in
 [the initializer notes](current-main-afx-aygshell-state-initializer.md).
 The verified indexed record-text send path shared with `FUN_588C1650` is
 documented in [the record-text notes](current-main-indexed-record-text.md).
+The paired keyed removal path used by both dispatchers is documented in
+[the child-removal notes](current-main-paired-child-key-removal.md).
 
 At entry, the instructions read a 16-bit value at record offset `+0x6` and
 compare it with `0x8000`; on that path they read a 32-bit event value at `+0x4`.
