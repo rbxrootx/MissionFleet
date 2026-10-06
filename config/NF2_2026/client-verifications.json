@@ -327199,6 +327199,165 @@
         "behavior": "The fully decoded 620-byte body [0x588FD520,0x588FD78C) handles state codes 0x100, 0x200, and 0x400 while bit 2 of word[this+0x24] is set. It moves coordinates at +4/+8 toward targets +0x50/+0x54 through FUN_58902E10, changes state and calls FUN_588FC8E0, or decrements +0x94 and on timeout calls FUN_5876BAF0, FUN_58764D30, and FUN_588FC560. When +0x98 is zero it walks the list at +0x3C and dispatches each node's virtual slot +0x0C.",
         "uncertainty": "Coordinate units, state meanings, helper contracts, and the indirect terminal jump at 0x588FD78A remain unresolved. Ghidra could not recover the jump table and models the terminal transfer as a call. No emulator behavior has been tested."
       }
+    },
+    {
+      "address": "588FB470",
+      "name": "FUN_588fb470",
+      "size": 126,
+      "symbol": "_FUN_588fb470",
+      "source": "src/client-current/Main/FUN_588fb470.cpp",
+      "source_sha256": "86f7231faa87754e4a3a9133700ee7fd128cdae7779838204c71e9af0ca339ee",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898A328",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "589A2204",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "00000002",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "FFFFFFFF",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB470 / CWarehouseLockedSlotSprite destructor body",
+        "called_by": "Ghidra identifies FUN_588FB4F0 as its deleting wrapper and the address-point slot +0x00 at 0x589A2204 as that wrapper. The Complete Object Locator pointer at 0x589A2200 resolves through 0x589AABB8 to TypeDescriptor 0x589CDDB8 (.?AVCWarehouseLockedSlotSprite@@). Constructor FUN_588FB570 independently stores the same vtable address.",
+        "behavior": "The 126-byte body reinstalls the RTTI-backed vtable, then visits child pointers at +0x60 and +0x64, conditionally invokes each child's virtual slot 0 with flag 1 and clears the pointer, calls FUN_58902C10, restores the exception-list pointer, and returns. Ghidra pseudocode is preserved in var/current-main-next/_audit_manager.c.",
+        "uncertainty": "The child roles, ownership contract, and FUN_58902C10 semantics remain unknown. The class name is RTTI-backed, but no runtime destruction test has been run."
+      }
+    },
+    {
+      "address": "588FB4F0",
+      "name": "FUN_588fb4f0",
+      "size": 30,
+      "symbol": "_FUN_588fb4f0",
+      "source": "src/client-current/Main/FUN_588fb4f0.cpp",
+      "source_sha256": "0479888b4baf91dd31c9d06b5dcbe2e66b305a2466a98cab9fcda9081c56d193",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "588FB470",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB4F0 / CWarehouseLockedSlotSprite deleting-destructor wrapper",
+        "called_by": "The RTTI-backed vtable for .?AVCWarehouseLockedSlotSprite@@ at 0x589A2204 points slot +0x00 to this wrapper; its Complete Object Locator is at 0x589A2200 and resolves to TypeDescriptor 0x589CDDB8. The wrapper directly calls destructor body FUN_588FB470 at 0x588FB4F3.",
+        "behavior": "The mapped wrapper occupies 30 bytes [0x588FB4F0,0x588FB50E): Ghidra's indexed 27-byte extent ends after pop esi, while the contiguous ret 4 at 0x588FB50B completes the wrapper before INT3 padding. It tests bit 0 of its stack flag, conditionally calls deletion thunk FUN_5897CC42 with this, and returns this with ret 4.",
+        "uncertainty": "The wrapper flag's caller-level meaning and deletion thunk contract are unresolved. No emulator behavior has been tested."
+      }
+    },
+    {
+      "address": "588FB510",
+      "name": "FUN_588fb510",
+      "size": 87,
+      "symbol": "_FUN_588fb510",
+      "source": "src/client-current/Main/FUN_588fb510.cpp",
+      "source_sha256": "285ea76b8f1832dd091666a971f41f31aec7215979cbb59a1c1c8de8a2c0cb5b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 8,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "0000FFFE",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "0000FFFE",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB510 / CWarehouseLockedSlotSprite child-state helper",
+        "called_by": "FUN_588FF420 directly calls this helper at 0x588FF436 after loading the receiver from parent field +0x7C; that caller then iterates the associated item-pointer range at +0x70..+0x74. FUN_588FB570 constructs the RTTI-confirmed CWarehouseLockedSlotSprite at 0x589A2204 and initializes child fields +0x60/+0x64.",
+        "behavior": "For selector 0 the helper sets bit 0 in each child's word at +0x24; selector 1 clears that bit in child +0x60 and sets it in child +0x64; selector 2 clears it in both. The helper returns with ret 4 and is not a vtable entry.",
+        "uncertainty": "The child meanings, flag meaning, and selector names are unknown; the caller and helper assume valid child pointers. No runtime UI behavior has been tested."
+      }
     }
   ]
 }

@@ -348,6 +348,9 @@ ADDRESSES = (
     "588FB030",
     "588FB070",
     "588FB1F0",
+    "588FB470",
+    "588FB4F0",
+    "588FB510",
     "588FB6E0",
     "588FBED0",
     "588FC640",
@@ -420,6 +423,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "588FB030",
     "588FB070",
     "588FB1F0",
+    "588FB470",
+    "588FB4F0",
+    "588FB510",
     "588FB6E0",
     "588FBED0",
     "588FC640",
@@ -745,6 +751,8 @@ FUNCTION_SIZE_OVERRIDES = {
     "588FB070": 70,
     # Ghidra stops after pop esi; include the contiguous ret 4 at 0x588FBEEB.
     "588FBED0": 30,
+    # Ghidra's deleting wrapper stops after pop esi; include ret 4 at 0x588FB50B.
+    "588FB4F0": 30,
 }
 EVIDENCE = {
     "588F9900": {
@@ -812,6 +820,24 @@ EVIDENCE = {
         "called_by": "Ghidra records a data reference from slot +0x00 at 0x589A2224 in the seven-entry RTTI-backed CWarehouseManager vtable. The locator pointer at 0x589A2220 leads to 0x589AAC0C and TypeDescriptor 0x589CDDE4 (.?AVCWarehouseManager@@). The wrapper calls destructor body FUN_588FB6E0 at 0x588FBED3. Constructor FUN_588FB9B0 stores this vtable at 0x588FBA28 and is called by FUN_5878AF40 at 0x5878CB29.",
         "behavior": "Ghidra indexes 27 bytes in ranges [0x588FBED0,0x588FBEE5) and [0x588FBEE8,0x588FBEED). The contiguous mapped wrapper spans 30 bytes [0x588FBED0,0x588FBEEE), including ret 4 at 0x588FBEEB before two INT3 alignment bytes. It tests bit 0 of its stack flag, conditionally calls deletion thunk FUN_5897CC42 with this, and returns this with ret 4.",
         "uncertainty": "The stack flag's caller-level meaning and FUN_5897CC42's deletion behavior are unresolved; Ghidra marks the thunk as non-returning despite the mapped cleanup and ret continuation. No emulator behavior has been tested.",
+    },
+    "588FB470": {
+        "name_in_analysis": "FUN_588FB470 / CWarehouseLockedSlotSprite destructor body",
+        "called_by": "Ghidra identifies FUN_588FB4F0 as its deleting wrapper and the address-point slot +0x00 at 0x589A2204 as that wrapper. The Complete Object Locator pointer at 0x589A2200 resolves through 0x589AABB8 to TypeDescriptor 0x589CDDB8 (.?AVCWarehouseLockedSlotSprite@@). Constructor FUN_588FB570 independently stores the same vtable address.",
+        "behavior": "The 126-byte body reinstalls the RTTI-backed vtable, then visits child pointers at +0x60 and +0x64, conditionally invokes each child's virtual slot 0 with flag 1 and clears the pointer, calls FUN_58902C10, restores the exception-list pointer, and returns.",
+        "uncertainty": "The child roles, ownership contract, and FUN_58902C10 semantics remain unknown. The class name is RTTI-backed, but no runtime destruction test has been run.",
+    },
+    "588FB4F0": {
+        "name_in_analysis": "FUN_588FB4F0 / CWarehouseLockedSlotSprite deleting-destructor wrapper",
+        "called_by": "The RTTI-backed vtable for .?AVCWarehouseLockedSlotSprite@@ at 0x589A2204 points slot +0x00 to this wrapper; its Complete Object Locator is at 0x589A2200 and resolves to TypeDescriptor 0x589CDDB8. The wrapper directly calls destructor body FUN_588FB470 at 0x588FB4F3.",
+        "behavior": "The mapped wrapper occupies 30 bytes [0x588FB4F0,0x588FB50E): Ghidra's indexed 27-byte extent ends after pop esi, while the contiguous ret 4 at 0x588FB50B completes the wrapper before INT3 padding. It tests bit 0 of its stack flag, conditionally calls deletion thunk FUN_5897CC42 with this, and returns this with ret 4.",
+        "uncertainty": "The wrapper flag's caller-level meaning and deletion thunk contract are unresolved. No emulator behavior has been tested.",
+    },
+    "588FB510": {
+        "name_in_analysis": "FUN_588FB510 / CWarehouseLockedSlotSprite child-state helper",
+        "called_by": "FUN_588FF420 directly calls this helper at 0x588FF436 after loading the receiver from parent field +0x7C; that caller then iterates the associated item-pointer range at +0x70..+0x74. FUN_588FB570 constructs the RTTI-confirmed CWarehouseLockedSlotSprite at 0x589A2204 and initializes child fields +0x60/+0x64.",
+        "behavior": "For selector 0 the helper sets bit 0 in each child's word at +0x24; selector 1 clears that bit in child +0x60 and sets it in child +0x64; selector 2 clears it in both. The helper returns with ret 4 and is not a vtable entry.",
+        "uncertainty": "The child meanings, flag meaning, and selector names are unknown; the caller and helper assume valid child pointers. No runtime UI behavior has been tested.",
     },
     "588FC640": {
         "name_in_analysis": "FUN_588FC640 / CWarehouseManager virtual method +0x04",
