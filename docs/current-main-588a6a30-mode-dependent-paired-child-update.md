@@ -26,8 +26,9 @@ at `+0x24` of child pointers stored at receiver `+0x194` and `+0x198`.
   calls `FUN_587B9600` with receiver words `+0x96` and `+0x94`, clears the
   low four flag bits on child `+0x194`, calls child `+0x188` slot `+8`, and
   tail-jumps through child `+0x18C` slot `+4`.
-- If state `+0x9C` is `0x0C`, the function instead calls
-  `FUN_58807E80`; when it returns nonzero, the code calls matched
+- If state `+0x9C` is `0x0C`, the function instead calls byte-matched
+  [`FUN_58807E80`](current-main-58807e80-state-dependent-update-gate.md);
+  when it returns nonzero, the code calls matched
   `FUN_587B95E0(0)` and `FUN_587315C0(0)`, calls vtable slots on children
   `+0x188` and `+0x18C`, and clears the low four flag bits at child fields
   `+0x1A0` and `+0x1A4`.
@@ -46,8 +47,8 @@ and [`0x587B9620` notes](current-main-587b9620-fixed-code-message-wrapper.md).
 
 The receiver and child types, state meaning, flag meaning, global roles,
 message-code meanings, virtual method contracts, and visible effect are not
-established by this function. `FUN_58807E80` and the identified caller are not
-yet byte-matched. Ghidra did not recover a jump table at `0x588A6C06` and
-treated the indirect tail jump as a call in its pseudocode; the literal source
-retains the original instruction bytes. No emulator runtime test has been
-performed.
+established by this function. `FUN_58807E80`'s direct checks at
+`FUN_588044A0` and `FUN_58805D90`, and the identified caller, remain unmatched.
+Ghidra did not recover a jump table at `0x588A6C06` and treated the indirect
+tail jump as a call in its pseudocode; the literal source retains the original
+instruction bytes. No emulator runtime test has been performed.

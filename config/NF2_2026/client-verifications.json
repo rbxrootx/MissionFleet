@@ -317229,7 +317229,256 @@
         "name_in_analysis": "FUN_588a6a30 / mode-dependent paired-child update",
         "called_by": "Ghidra records one direct call from FUN_58808AD0 at 0x58808CFD; that caller is currently unmatched, so its surrounding state and queue context are not established.",
         "behavior": "The complete Ghidra extent is 567 contiguous bytes from 0x588A6A30 through 0x588A6C66. The function enters its update paths only when bit 0 differs between the words at +0x24 of receiver child pointers +0x194 and +0x198. Nested branches test receiver state word +0x9C and return values from FUN_588EB130 or FUN_58807E80. The captured paths call fixed-code message helpers with values from receiver words +0x96/+0x94, invoke matched FUN_58907990 or FUN_587315C0 with observed global/constant arguments, call child vtable slots through receiver fields +0x188/+0x18C, and clear low four bits in selected child +0x24 words at receiver fields +0x198, +0x194, +0x1A0, or +0x1A4. One branch ends with an indirect tail jump through a child vtable slot.",
-        "uncertainty": "The receiver and child types, meaning of state +0x9C, bit-0 flags, message codes, globals, indirect vtable contracts, and visible effect are unresolved. FUN_58807E80 and the only identified caller FUN_58808AD0 are unmatched. Ghidra did not recover the indirect jump table at 0x588A6C06; the literal source preserves the original bytes. No emulator runtime test was performed."
+        "uncertainty": "The receiver and child types, meaning of state +0x9C, bit-0 flags, message codes, globals, indirect vtable contracts, and visible effect are unresolved. FUN_58807E80 now byte-matches, but its direct gates FUN_588044A0 and FUN_58805D90 remain unmatched; the only identified caller FUN_58808AD0 is also unmatched. Ghidra did not recover the indirect jump table at 0x588A6C06; the literal source preserves the original bytes. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58807E80",
+      "name": "FUN_58807e80",
+      "size": 440,
+      "symbol": "_FUN_58807e80",
+      "source": "src/client-current/Main/FUN_58807e80.cpp",
+      "source_sha256": "bbecd0bcb4917556432577d17c2f3ee03a4c9df9c2cff1561cd2f00e81705531",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 5,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 10,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "58808034",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58A24828",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "587AEE40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "5880800B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 109,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 190,
+          "target_address": "5880800B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 206,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 213,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 223,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "58A24828",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "587AEE40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 254,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 259,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "58807ED4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 272,
+          "target_address": "58A245A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 287,
+          "target_address": "58A24828",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 297,
+          "target_address": "587AEE40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 303,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 308,
+          "target_address": "58789FB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 316,
+          "target_address": "58807ED4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 336,
+          "target_address": "58807EDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 365,
+          "target_address": "58807EDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "58807ED4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 387,
+          "target_address": "588044A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 398,
+          "target_address": "58805D90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 425,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 432,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58807e80 / state-dependent update gate",
+        "called_by": "Ghidra records one direct call from byte-matched FUN_588A6A30 at 0x588A6AAB, in that function's receiver-state 0x0C branch.",
+        "behavior": "Ghidra's contiguous extent is 440 bytes, [0x58807E80, 0x58808038). The function reads receiver word +0x110 and switches on its state. States 4, 5, and 10 optionally call FUN_587AEE40(0xF4241) when global byte [0x58A245A8+0x1BC] has bit 0 set, then require a fresh FUN_58789FB0 result >= 14, 12, and 16 respectively. State 11 maps global word [0x58A245A8+0x1B8] values 0/1-or-2/3/4 to thresholds 16/14/8/12 (default 2), then requires FUN_58789FB0 >= that threshold. State 12 walks the chain rooted at [0x58A247F8+0x0C], counts nodes by whether byte +0x354 is zero, and requires at least ten of each. State 6 calls FUN_588044A0(initial_FUN_58789FB0_result, 16); states 13 through 16 call it with second argument 14; a zero return fails these states. Passing branches call FUN_58805D90 and return 1 on nonzero. Threshold or list-count failures send notification 0x1D6 through matched FUN_5876BAF0/FUN_58764D30 and return 0; a zero FUN_58805D90 result sends 0x1D7 and returns 0. Other states return 0.",
+        "uncertainty": "The meanings of receiver state +0x110, the global fields, list-node fields, thresholds, notification codes, and helper return values are unknown. FUN_587AEE40, FUN_588044A0, and FUN_58805D90 remain unmatched. The source preserves exact absolute switch-table bases 0x58808038 and 0x5880806C at function offsets 0x24 and 0x90; those table contents lie outside this 440-byte function extent and are not covered by this match record. No emulator runtime test was performed."
       }
     }
   ]
