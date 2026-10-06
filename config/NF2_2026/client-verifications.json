@@ -313607,6 +313607,75 @@
         "behavior": "Runs only when receiver flag bit 0x0004 is set and state bits +0x24 & 0x1F00 select 0x0100 or 0x0400. It compares current geometry at receiver +0x04/+0x08 and +0x28/+0x2C with targets at +0x50/+0x54 and +0x58/+0x5C; it smooths position deltas through matched FUN_58902E10 and updates bounds through matched FUN_58902D20/FUN_58902CE0, which recursively propagate to eligible children. Once current and target geometry agree, it performs state-bit transitions and traverses the child chain at +0x3C, dispatching through child virtual slot +0x0C. The complete 500-byte extent ends at 0x58823103, with ret at 0x588230FF or an indirect tail-jump at 0x58823102.",
         "uncertainty": "The semantic names and units of the geometry fields, the meaning/timing of state values 0x0100 and 0x0400, the exact smoothing rules, and the child callback contract remain unresolved. Vtable evidence ties this to the ClanMessage class, but there is no direct static caller. No emulator layout/visual test was performed."
       }
+    },
+    {
+      "address": "58823EB0",
+      "name": "FUN_58823eb0",
+      "size": 129,
+      "symbol": "_FUN_58823eb0",
+      "source": "src/client-current/Main/FUN_58823eb0.cpp",
+      "source_sha256": "5f5a1336b42a8bcf39154c3fefce04a1fc595b7b422eccbae429ddcf6496f0ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 44,
+          "target_address": "589087F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 51,
+          "target_address": "58823210",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "58823110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 86,
+          "target_address": "588231A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58823210",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "588231D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "58823210",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58823eb0 / CPannelCommunicatorClanMessage notification handler",
+        "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 stores this method in slot +0x18. Verified constructor FUN_58823270 installs the vtable, and verified parent FUN_58849B70 stores the constructed object at +0x114. verify_current_communicator_rtti.py checks this original vtable slot; direct virtual-call sites remain unresolved.",
+        "behavior": "Checks the second stack argument for value 2. On that path it compares the first stack argument with receiver child pointers +0x80, +0x78, +0x7C, +0x9C, and +0xA0. A match at +0x80 dispatches through this object's vtable slot +0x08; the other matches call helpers FUN_589087F0/FUN_58823110/FUN_588231A0/FUN_588231D0, with FUN_58823210 following the +0x78, +0x9C, and +0xA0 cases. Every path returns zero using ret 0x0C. The complete indexed body is 129 bytes through 0x58823F30 and decodes continuously.",
+        "uncertainty": "The stack-argument ABI, meaning of value 2, child object identities, notification source, and helper effects are not established. The vtable and constructor establish class membership, but direct virtual callers and the runtime interaction remain unverified; no emulator test was performed."
+      }
     }
   ]
 }

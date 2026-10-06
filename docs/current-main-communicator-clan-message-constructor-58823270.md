@@ -24,3 +24,5 @@ appearance remain unverified. No emulator visual comparison was performed.
 
 The class's vtable `+0x10` input method is documented in
 [the clan-message input notes](current-main-communicator-clan-message-input-58823950.md).
+Its vtable `+0x18` notification handler is documented in
+[the notification-handler notes](current-main-communicator-clan-message-notification-58823eb0.md).
