@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "58752410",
     "587B95E0",
     "587B9600",
     "587B9620",
@@ -351,6 +352,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5885EE90",
     "5888E450",
     "58789FE0",
+    "58752410",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -618,6 +620,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58752410": {
+        "name_in_analysis": "FUN_58752410 / validation-gated string report helper",
+        "called_by": "Fresh Ghidra references and an independent inventory-wide direct-call scan find exactly two calls, both from byte-matched callers. FUN_58806F60 calls at 0x5880712D after loading ECX from 0x58A245B0 and pushing EBX as the string argument. FUN_58890110 calls at 0x58893240 with the same ECX value and EAX from the immediately preceding FUN_58759EB0 as the string argument.",
+        "behavior": "The complete contiguous Ghidra extent is 161 bytes, [0x58752410,0x587524B1), ending in ret 4. It calls FUN_587522F0 with its sole stack argument and continues only when that helper returns nonzero. It compares the input to the value at 0x58A0B450 in two-byte steps. When they differ, it formats the input into a local buffer through indirect function pointer 0x5898C3C4 using the format address 0x5898D0D4, then calls FUN_587B91B0 with ECX=[0x58A24588] and arguments (buffer,1,0xFFFFFFFF). Entry ECX is not read by this function.",
+        "uncertainty": "The captured mapped image contains zero bytes at 0x58A0B450, so its runtime value may be initialized elsewhere. The validation contract of FUN_587522F0, the indirect formatter and format string semantics, the meaning of FUN_587B91B0's arguments, and the user-visible effect are unresolved. No emulator runtime test was performed.",
+    },
     "587B95E0": {
         "name_in_analysis": "FUN_587b95e0 / fixed-code message wrapper",
         "called_by": "Ghidra records seven calls from three functions: byte-matched FUN_588A6720 calls at 0x588A6885 and 0x588A68BB with argument 1; unmatched FUN_588A6A30 calls at 0x588A6AC0 and 0x588A6C1A; unmatched FUN_588A8A70 calls at 0x588A8AE1, 0x588A8C51, and 0x588A8D1F. Other callers' surrounding behavior is not established.",
