@@ -325795,6 +325795,75 @@
         "behavior": "Ghidra and the mapped instruction stream show a wrapper that preserves this, calls the CWarehouseItem destructor body, tests bit 0 of its stack flag, conditionally pushes this and calls FUN_5897CC42, then returns this with ret 4. Ghidra's indexed body has ranges [0x588F7D40,0x588F7D55) and [0x588F7D58,0x588F7D5E), totaling 27 bytes; it excludes the reachable add esp,4 at 0x588F7D55..0x588F7D58 between them. The contiguous mapped stream spans 30 bytes through ret 4 at 0x588F7D5B, before INT3 padding at 0x588F7D5E, and is emitted and checked with both direct-call targets audited.",
         "uncertainty": "FUN_5897CC42 is an indirect IAT jump thunk at 0x5897CC42, and its deallocation semantics and return behavior are unavailable; Ghidra marks it non-returning. The cleanup between its call and the ret 4 is reachable if that callback returns, but no emulator runtime test has confirmed the target behavior."
       }
+    },
+    {
+      "address": "588F7EF0",
+      "name": "FUN_588f7ef0",
+      "size": 228,
+      "symbol": "_FUN_588f7ef0",
+      "source": "src/client-current/Main/FUN_588f7ef0.cpp",
+      "source_sha256": "411df57955f2b0f8d4d132ef1a827d3538f7b5116ba9ca2e4cbb931e0e5eb8eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "588F7FCC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "588F7FCC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "5898C3E8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7EF0 / warehouse-item virtual message and child-state handler",
+        "called_by": "Ghidra finds no direct code callers. Data references place this method at slot +0x10 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x10 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C; another reference at 0x589A21E4 belongs to a third table whose owner is unresolved.",
+        "behavior": "Ghidra confirms one contiguous 228-byte body [0x588F7EF0,0x588F7FD4), with complete instruction coverage. When receiver word +0x24 has bit 1 set, it traverses the child structure rooted at receiver +0x3C through virtual slot +0x10, passing the message record; a null child returns 0. It then checks message IDs 0x200 and 0x201 at record +4. The 0x200 path may call FUN_58903290 when receiver byte +0x98 is 1. The 0x201 path is gated by FUN_58731540(DAT_58A284C8+4), then dispatches child method +0x18 using receiver state and a value selected by callback DAT_5898C3E8(0x11). Other paths return the value stored at receiver +0x34. Literal instruction emission verifies the full body and audits seven operand targets.",
+        "uncertainty": "The message IDs' user-facing meanings, child-list and receiver-field roles, global state schema, third vtable owner, and callback contract are unresolved. The class/slot evidence supports a warehouse-item virtual method, but no concrete virtual dispatch site or emulator runtime behavior has been confirmed."
+      }
     }
   ]
 }

@@ -336,6 +336,7 @@ ADDRESSES = (
     "588F8820",
     "588F7C00",
     "588F7D40",
+    "588F7EF0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -387,6 +388,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588F8820",
     "588F7C00",
     "588F7D40",
+    "588F7EF0",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -697,6 +699,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F7D40": 30,
 }
 EVIDENCE = {
+    "588F7EF0": {
+        "name_in_analysis": "FUN_588F7EF0 / warehouse-item virtual message and child-state handler",
+        "called_by": "Ghidra finds no direct code callers. Data references place this method at slot +0x10 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4 and slot +0x10 of the RTTI-backed CWarehouseItemForce vtable at 0x589A210C; another reference at 0x589A21E4 belongs to a third table whose owner is unresolved.",
+        "behavior": "Ghidra confirms one contiguous 228-byte body [0x588F7EF0,0x588F7FD4), with complete instruction coverage. When receiver word +0x24 has bit 1 set, it traverses the child structure rooted at receiver +0x3C through virtual slot +0x10, passing the message record; a null child returns 0. It then checks message IDs 0x200 and 0x201 at record +4. The 0x200 path may call FUN_58903290 when receiver byte +0x98 is 1. The 0x201 path is gated by FUN_58731540(DAT_58A284C8+4), then dispatches child method +0x18 using receiver state and a value selected by callback DAT_5898C3E8(0x11). Other paths return the value stored at receiver +0x34. Literal instruction emission verifies the full body and audits seven operand targets.",
+        "uncertainty": "The message IDs' user-facing meanings, child-list and receiver-field roles, global state schema, third vtable owner, and callback contract are unresolved. The class/slot evidence supports a warehouse-item virtual method, but no concrete virtual dispatch site or emulator runtime behavior has been confirmed.",
+    },
     "588F7D40": {
         "name_in_analysis": "FUN_588F7D40 / CWarehouseItem scalar-deleting-destructor-shaped wrapper",
         "called_by": "Ghidra's reference audit places this function at slot +0x00 of the RTTI-backed CWarehouseItem vtable at 0x589A20D4. Its direct call at 0x588F7D43 enters FUN_588F7C00. No direct code callers were identified; the vtable is the recorded incoming data reference.",
