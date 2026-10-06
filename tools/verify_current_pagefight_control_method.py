@@ -1,4 +1,4 @@
-"""Verify RTTI, vtable, constructor, and boundary evidence for the fight menu method."""
+"""Verify RTTI, vtable, constructor, destructor, and boundary evidence for the fight menu."""
 
 from pathlib import Path
 import struct
@@ -71,10 +71,31 @@ def main():
         raise AssertionError("Deleting wrapper stack cleanup moved")
     if bytes_at(0x5880447B, 3) != bytes.fromhex("C2 04 00"):
         raise AssertionError("Deleting wrapper ret 4 moved")
+    if bytes_at(0x5880032C, 3) != bytes.fromhex("83 C4 04"):
+        raise AssertionError("Destructor cleanup tail no longer follows its final call")
+    if call_target(0x58800327) != 0x5897CC42:
+        raise AssertionError("Destructor callback thunk call changed")
+    if call_target(0x58800339) != 0x58902C10:
+        raise AssertionError("Destructor tail helper call changed")
+    if bytes_at(0x5897CC42, 6) != bytes.fromhex("FF 25 F8 C1 98 58"):
+        raise AssertionError("Destructor callback thunk changed")
+    if u32(0x5898C1F8) != 0x59873F03:
+        raise AssertionError("Captured external callback slot changed")
+    if bytes_at(0x58800351, 1) != b"\xC3":
+        raise AssertionError("Destructor return moved")
+    if bytes_at(0x58800352, 14) != b"\xCC" * 14:
+        raise AssertionError("Unexpected bytes between destructor and next function")
     if bytes_at(0x587EF906, 1) != b"\xC3":
         raise AssertionError("Fight-menu method return moved")
     if bytes_at(0x587EF907, 9) != b"\xCC" * 9:
         raise AssertionError("Unexpected bytes between the method and the next function")
+    if call_target(0x587FF3B1) != 0x587FF150:
+        raise AssertionError("Control-menu dispatcher helper call changed")
+    if call_target(0x587FF3D0) != 0x587FD810:
+        raise AssertionError("Control-menu event-handler helper call changed")
+    for site in (0x587E6117, 0x587E6127, 0x587E61B0, 0x587E61C0):
+        if call_target(site) != 0x587B63B0:
+            raise AssertionError(f"Three-field update helper call changed at {site:08X}")
     for address, expected in (
         (0x587FF3DD, bytes.fromhex("C2 04 00")),
         (0x587E8250, bytes.fromhex("C2 0C 00")),
@@ -84,7 +105,7 @@ def main():
             raise AssertionError(f"Unexpected virtual-method return at {address:08X}")
 
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    print("Constructor, fog creation, deleting-wrapper cleanup, and all vtable method boundaries verified")
+    print("Constructor, fog creation, destructor tail, deleting-wrapper cleanup, and vtable boundaries verified")
 
 
 if __name__ == "__main__":

@@ -35,7 +35,6 @@ def parse_ghidra_body_ranges(text, address):
         raise ValueError(f"Ghidra dump has no complete body-range block at {address:08X}") from error
 
     ranges = []
-    previous_end = -1
     for line in lines[ranges_index + 1:end_index]:
         value = line.strip()
         if not value:
@@ -44,14 +43,23 @@ def parse_ghidra_body_ranges(text, address):
         if not match:
             raise ValueError(f"Invalid Ghidra body range at {address:08X}: {value}")
         start, inclusive_end = (int(part, 16) for part in match.groups())
-        if inclusive_end < start or start <= previous_end:
-            raise ValueError(f"Unsorted or overlapping Ghidra body range at {address:08X}: {value}")
+        if inclusive_end < start:
+            raise ValueError(f"Invalid Ghidra body range at {address:08X}: {value}")
         ranges.append((start, inclusive_end - start + 1))
-        previous_end = inclusive_end
 
-    if not ranges or ranges[0][0] != address:
-        raise ValueError(f"Ghidra body ranges do not start at function entry {address:08X}")
-    return ranges
+    if not ranges:
+        raise ValueError(f"Ghidra body ranges are empty at {address:08X}")
+    ordered = sorted(ranges)
+    previous_end = -1
+    for start, size in ordered:
+        if start <= previous_end:
+            raise ValueError(f"Overlapping Ghidra body ranges at {address:08X}")
+        previous_end = start + size - 1
+
+    entry_range = next((item for item in ranges if item[0] == address), None)
+    if entry_range is None:
+        raise ValueError(f"Ghidra body ranges do not include function entry {address:08X}")
+    return [entry_range] + [item for item in ordered if item != entry_range]
 
 
 def asm_operand(text):

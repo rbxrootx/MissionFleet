@@ -23,17 +23,30 @@ SIGNATURE undefined FUN_1000(void)
             (0x1000, 3), (0x1008, 2),
         ])
 
-    def test_rejects_ranges_that_do_not_start_at_entry(self):
+    def test_puts_function_entry_first_when_it_is_not_the_lowest_body_range(self):
+        dump = """ENTRY 00001010
+BODY_RANGES
+  00001000..00001001
+  00001008..00001009
+  00001010..00001011
+SIGNATURE undefined FUN_1010(void)
+"""
+
+        self.assertEqual(parse_ghidra_body_ranges(dump, 0x1010), [
+            (0x1010, 2), (0x1000, 2), (0x1008, 2),
+        ])
+
+    def test_rejects_ranges_that_do_not_include_entry(self):
         dump = """ENTRY 00001000
 BODY_RANGES
   00001001..00001002
 SIGNATURE undefined FUN_1000(void)
 """
 
-        with self.assertRaisesRegex(ValueError, "do not start"):
+        with self.assertRaisesRegex(ValueError, "do not include"):
             parse_ghidra_body_ranges(dump, 0x1000)
 
-    def test_rejects_overlapping_or_unsorted_ranges(self):
+    def test_rejects_overlapping_ranges(self):
         dump = """ENTRY 00001000
 BODY_RANGES
   00001000..00001002
@@ -41,7 +54,7 @@ BODY_RANGES
 SIGNATURE undefined FUN_1000(void)
 """
 
-        with self.assertRaisesRegex(ValueError, "overlapping"):
+        with self.assertRaisesRegex(ValueError, "[Oo]verlapping"):
             parse_ghidra_body_ranges(dump, 0x1000)
 
 

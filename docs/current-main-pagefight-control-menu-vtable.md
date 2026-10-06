@@ -23,9 +23,22 @@ checked by `tools/verify_current_pagefight_control_method.py`. Each newly
 matched method is also verified against the complete mapped body by
 `tools/verify_client_matches.py`.
 
-The direct helper bodies called by these methods remain outside this slice:
-`FUN_587FFBC0` (destructor), `FUN_587FF150`, `FUN_587FD810`, `FUN_587B63B0`,
-and `FUN_58734920`. The event codes, child object types, coordinate units,
-resource-selection thresholds, and meaning of several state fields remain
-unresolved. This is static byte-match coverage; no runtime fight-screen test
-has been performed.
+The open direct dependencies from this analysis now have independent byte
+matches: `FUN_587B63B0` (24 bytes), `FUN_587FF150` (344 bytes), destructor
+`FUN_587FFBC0` (1,927 bytes across three ranges), and event helper
+`FUN_587FD810` (1,897 bytes across four ranges). `FUN_58734920` was already
+matched. `FUN_587FD810`'s 80-byte entry block is ordered first in the source
+map even though its other three code ranges precede it in memory.
+
+The destructor's 1,889-byte indexed/Ghidra body ends at `0x5880032B`, but
+decoded fallthrough cleanup continues through `ret` at `0x58800351`. Fourteen
+INT3 bytes separate that return from the next indexed function at `0x58800360`.
+The destructor tail is conditional on the callback at `0x5897CC42` returning:
+that thunk jumps through `0x5898C1F8` to a captured address outside `Main.dll`.
+The mapped fallthrough and a second call site with the same cleanup pattern
+support including the epilogue; the callback's runtime return behavior is
+unverified. Transitive helper contracts and the screen's visual/runtime
+behavior remain unresolved.
+The event codes, child object types, coordinate units, resource-selection
+thresholds, and meaning of several state fields remain unresolved. This is
+static byte-match coverage; no runtime fight-screen test has been performed.

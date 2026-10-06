@@ -86,18 +86,27 @@ def resolve_segments(document, match, image):
 
     resolved = []
     total_size = 0
-    previous_end = image_base - 1
     seen_symbols = set()
+    ordered_extents = sorted(
+        (int(segment["address"], 16), int(segment["size"]))
+        for segment in segments
+    )
+    previous_end = image_base - 1
+    for address, size in ordered_extents:
+        start = address - image_base
+        end = address + size
+        if size <= 0 or start < 0 or end > image_end:
+            raise ValueError(f"Invalid segment extent at {address:08X}")
+        if address <= previous_end:
+            raise ValueError(f"Overlapping segment at {address:08X}")
+        previous_end = end - 1
+
     for segment in segments:
         address = int(segment["address"], 16)
         size = int(segment["size"])
         symbol = segment.get("symbol")
         start = address - image_base
         end = address + size
-        if size <= 0 or start < 0 or end > image_end:
-            raise ValueError(f"Invalid segment extent at {address:08X}")
-        if address <= previous_end:
-            raise ValueError(f"Overlapping or unsorted segment at {address:08X}")
         if not isinstance(symbol, str) or not symbol or symbol in seen_symbols:
             raise ValueError(f"Invalid or repeated source symbol for segment at {address:08X}")
         code = image[start:start + size]
@@ -114,7 +123,6 @@ def resolve_segments(document, match, image):
             "relocations": segment_match["relocations"],
             "audited_relocations": audited,
         })
-        previous_end = end - 1
         total_size += size
         seen_symbols.add(symbol)
 

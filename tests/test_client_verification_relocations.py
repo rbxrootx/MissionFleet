@@ -75,19 +75,25 @@ class SegmentedClientMatchTests(unittest.TestCase):
             ("00001008", 3, "part_1", b"\x08\x09\x0a"),
         ])
 
-    def test_rejects_unsorted_or_overlapping_segments(self):
+    def test_accepts_entry_first_segments_when_other_ranges_precede_entry(self):
+        self.match["segments"] = [
+            {"address": "00001002", "size": 2, "symbol": "entry"},
+            {"address": "00001000", "size": 1, "symbol": "preceding"},
+            {"address": "00001008", "size": 2, "symbol": "later"},
+        ]
+        segments = resolve_segments(self.document, self.match, self.image)
+        self.assertEqual([item["symbol"] for item in segments], [
+            "entry", "preceding", "later",
+        ])
+
+    def test_rejects_overlapping_segments(self):
         self.match["segments"] = [
             {"address": "00001002", "size": 1, "symbol": "part_0"},
             {"address": "00001008", "size": 1, "symbol": "part_1"},
-            {"address": "00001005", "size": 3, "symbol": "part_2"},
         ]
-        with self.assertRaisesRegex(ValueError, "unsorted"):
-            resolve_segments(self.document, self.match, self.image)
-
-        self.match["segments"] = [
-            {"address": "00001002", "size": 4, "symbol": "part_0"},
-            {"address": "00001005", "size": 1, "symbol": "part_1"},
-        ]
+        self.match["segments"][0]["size"] = 4
+        self.match["segments"][1]["address"] = "00001005"
+        self.match["segments"][1]["size"] = 1
         with self.assertRaisesRegex(ValueError, "Overlapping"):
             resolve_segments(self.document, self.match, self.image)
 
