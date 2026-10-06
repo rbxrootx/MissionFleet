@@ -329990,7 +329990,291 @@
         "name_in_analysis": "FUN_587EF330 / CPageFightOn_ControlMenuScreen vtable method +0x04",
         "called_by": "This method occupies slot +0x04 of the RTTI-backed seven-entry vtable at 0x5899D180. The locator at 0x5899D17C resolves through 0x589A7CE8 to TypeDescriptor 0x589CC260, named .?AVCPageFightOn_ControlMenuScreen@@. Matched constructor FUN_588011C0 installs that vtable at 0x58801230; its matched caller invokes it at 0x5878C650.",
         "behavior": "The contiguous 1,495-byte body [0x587EF330,0x587EF907) resets screen and child state, conditionally creates and positions a CSpriteBundleScreen for mode 10, and configures child visibility based on DAT_589C906C. When DAT_589C903C is nonzero it allocates the fog object and directly calls the byte-matched CWarfogOnFight constructor FUN_58900E20 at 0x587EF639. It then derives and allocates the encoded fog-grid dimensions, clears the grid, resets screen controls, initializes the localized all-chat label, and calls the final menu-state helper. Ghidra covers all 1,495 bytes through ret at 0x587EF906; literal instruction emission verifies the mapped body.",
-        "uncertainty": "The four direct call sites to unmatched helpers FUN_58894A60 (twice), FUN_587EBA90, and FUN_5888CDF0 are preserved as exact addresses but their contracts remain unknown. The semantics of the screen's offsets, global flags, and resource helpers are only partially inferred from this function; no runtime fight-screen test has been run."
+        "uncertainty": "The contracts of helpers FUN_58894A60, FUN_587EBA90, and FUN_5888CDF0 are now byte-matched, but their fields and state values are not fully named. Other resource helpers and the screen's offsets/global flags remain only partially inferred; no runtime fight-screen test has been run."
+      }
+    },
+    {
+      "address": "58894A60",
+      "name": "FUN_58894a60",
+      "size": 210,
+      "symbol": "_FUN_58894a60",
+      "source": "src/client-current/Main/FUN_58894a60.cpp",
+      "source_sha256": "8315dc352719be2a9edfec0eed40a5ce38211cc075315d7b9f9c47171c4228ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "40000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "0000FFFD",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "00220000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 46,
+          "target_address": "58893860",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 62,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "0000FFFE",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 99,
+          "target_address": "58A28520",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "58A28520",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "587B67A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "0000E4FF",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "00000400",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 183,
+          "target_address": "0000FFFD",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58894A60 / shared screen child-layout refresh",
+        "called_by": "Matched fight control-menu method FUN_587EF330 calls this helper at 0x587EF714 and 0x587EF745. Ghidra also records direct callers FUN_5878AE50 at 0x5878AE5B and FUN_587E6450 at 0x587E646C.",
+        "behavior": "The contiguous 210-byte body [0x58894A60,0x58894B32) resets screen and child flags, assigns a 0x40000000 state value at receiver +0x74, derives dimensions and offsets from DAT_58A28520, calls FUN_587B67A0 with the width and height deltas, dispatches a child virtual method through receiver +0x64, updates screen state bits, and tail-jumps through a child virtual slot at +0x500. Literal instruction emission checks the mapped body.",
+        "uncertainty": "The child objects, DAT_58A28520 identity, state bits, geometry units, and both virtual-call contracts remain unknown. This helper has callers outside the fight menu; no runtime layout test has been run."
+      }
+    },
+    {
+      "address": "587EBA90",
+      "name": "FUN_587eba90",
+      "size": 541,
+      "symbol": "_FUN_587eba90",
+      "source": "src/client-current/Main/FUN_587eba90.cpp",
+      "source_sha256": "f32f3cba77c60912d32f787cc2354c1fd42d7b6d2307754fd66473d12be39c4b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 89,
+          "target_address": "0000001F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "00000002",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "00000003",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 235,
+          "target_address": "587EBAB0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 314,
+          "target_address": "58A244C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 334,
+          "target_address": "00000064",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 344,
+          "target_address": "51EB851F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 363,
+          "target_address": "00002710",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 376,
+          "target_address": "587EBB6A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 383,
+          "target_address": "00000004",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 398,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 428,
+          "target_address": "587E6E80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 488,
+          "target_address": "587EBB6A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 502,
+          "target_address": "CCCCCCCD",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 526,
+          "target_address": "587EBB6A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 537,
+          "target_address": "587EBB6A",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587EBA90 / two-side fight statistics buffer initializer",
+        "called_by": "Matched fight control-menu method FUN_587EF330 directly calls this helper at 0x587EF7F8. The Ghidra reference audit shows this as its only direct caller.",
+        "behavior": "The 541-byte Ghidra body at [0x587EBA90,0x587EBCAD) loops over two side records beginning at receiver +0x21E80, clearing each 0x38-byte record and scanning the current side's indexed entries. For eligible entries it writes a side tag and fields derived from the selected entity, allocates a value array, fills it through FUN_587E6E80, and stores the maximum and a threshold-selected value in the record. The emitted instructions preserve the full mapped body and its relative branches.",
+        "uncertainty": "The source types for the records and entity fields, side-selection mask semantics, the metric calculated by FUN_587E6E80, and the meaning of the 90-percent comparison remain unresolved. No fight-results runtime test has been run."
+      }
+    },
+    {
+      "address": "5888CDF0",
+      "name": "FUN_5888cdf0",
+      "size": 13,
+      "symbol": "_FUN_5888cdf0",
+      "source": "src/client-current/Main/FUN_5888cdf0.cpp",
+      "source_sha256": "ceba1eeffa33b007561ad3a790d687ad3a9a69de38a139773f57188c1526f41a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5888CDF0 / single-field state setter",
+        "called_by": "Matched fight control-menu method FUN_587EF330 calls this function at 0x587EF8E2 with value 1. Ghidra also lists callers FUN_587B83E0, FUN_587ED610, FUN_587EE240, FUN_58806B60, FUN_587F7530, and FUN_588AB330/FUN_588AB050.",
+        "behavior": "The complete 13-byte __thiscall body [0x5888CDF0,0x5888CDFD) copies its stack argument to receiver offset +0xBC and returns with ret 4. Literal instruction emission verifies the entire mapped function.",
+        "uncertainty": "The receiver field's role and the values passed by its callers are unresolved. No runtime state-change test has been run."
       }
     }
   ]

@@ -25,8 +25,7 @@ The complete instruction stream is emitted literally and checked against
 checks the RTTI chain, all seven vtable slots, constructor linkage, the direct
 fog-constructor call, and function boundary.
 
-The method has four calls to three unmatched helpers (`FUN_58894A60` twice,
-`FUN_587EBA90`, and `FUN_5888CDF0`). Their contracts, the meaning of the screen
-fields and global flags, and runtime behavior are unresolved. This slice proves
-the mapped method's byte identity; it does not yet prove a working fight screen
-in the emulator.
+The helpers invoked by this method are now byte-matched as a separate related
+slice. Their contracts, the meaning of the screen fields and global flags, and
+runtime behavior are still unresolved. This byte match does not yet prove a
+working fight screen in the emulator.
