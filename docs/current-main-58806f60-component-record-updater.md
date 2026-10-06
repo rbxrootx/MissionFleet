@@ -36,6 +36,10 @@ against the pinned mapped image with the repository's pinned clang-cl compiler.
 When receiver `+0x1B6` equals `2`, this function also calls the shared
 [`FUN_58805ba0` eight-slot refresh helper](current-main-58805ba0-eight-slot-refresh.md)
 at `0x58807260` with ECX=receiver.
+Its three calls to `FUN_588d6cc0` at `0x5880719D`, `0x588071D0`, and
+`0x58807207` use ECX=ESI and pass `0`, `1`, and `1`; the target's paired bit
+updates are described in the
+[child-bit helper notes](current-main-588d6cc0-paired-child-bit-helper.md).
 
 ## Unresolved details
 

@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
+    "588D6CC0",
     "58805BA0",
     "58807910",
     "58806F60",
@@ -323,6 +324,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "588D6CC0",
     "58805BA0",
     "58807910",
     "58806F60",
@@ -557,6 +559,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "588D6CC0": {
+        "name_in_analysis": "FUN_588d6cc0 / paired child bit update",
+        "called_by": "Byte-matched FUN_58806F60 calls at 0x5880719D, 0x588071D0, and 0x58807207 with ECX=ESI and stack arguments 0, 1, and 1. Byte-matched FUN_58807910 calls at 0x58807C81 and 0x58807CA1 with ECX=[0x58A247F8]+4; Ghidra decompiles their arguments as (iVar3 >= 3) and 1. Ghidra also records calls from unmatched FUN_58805940 at 0x58805988, FUN_58805880 at 0x5880589D, and FUN_588058D0 at 0x588058F9 and 0x58805918.",
+        "behavior": "As a __thiscall helper, stores its one stack argument at receiver +0x6074. When the argument is nonzero, it sets bit 0 in the 16-bit value at +0x24 of each object pointed to by receiver fields +0x12B8 and +0x12BC. When zero, it clears bit 0 in those same words while preserving other bits. Both branches end in ret 4. The source matches the complete 66-byte indexed extent at 0x588D6CC0..0x588D6D01.",
+        "uncertainty": "The receiver fields, referenced child-object types, and meaning of the stored value and flags are unknown. Callers show where the helper is used and what values they pass, but not the user-visible effect. No emulator runtime test was performed.",
+    },
     "58805BA0": {
         "name_in_analysis": "FUN_58805ba0 / eight-slot value refresh",
         "called_by": "Ghidra records calls from byte-matched FUN_58806F60 at 0x58807260 (ECX=its receiver) and byte-matched FUN_58807910 at 0x58807B9D (ECX=its receiver). It also records a call from unmatched FUN_58807370 at 0x58807542; that caller is contextual evidence only.",

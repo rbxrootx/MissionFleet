@@ -31,6 +31,12 @@ eight-slot refresh helper `FUN_58805ba0` with ECX=receiver. Its linked-list
 scan, x87 accumulation, and unresolved field meanings are documented in the
 [eight-slot refresh notes](current-main-58805ba0-eight-slot-refresh.md).
 
+The later calls at `0x58807C81` and `0x58807CA1` invoke `FUN_588d6cc0` with
+ECX pointing to the active object and pass a derived boolean and `1`,
+respectively. That helper stores the argument and toggles bit 0 on two
+referenced child words; the meaning of those fields remains unknown. See the
+[paired child-bit helper notes](current-main-588d6cc0-paired-child-bit-helper.md).
+
 The next record address advances by `0x114`, the record's 16-bit value at
 `+0x10A`, and `0x20` times its byte at `+0x100`. After the loop, the handler
 calls `FUN_58907990`, moves the selected pointer from `[0x58A247F8]+0x10` to
