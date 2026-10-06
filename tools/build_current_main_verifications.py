@@ -328,6 +328,7 @@ ADDRESSES = (
     "588D9C40",
     "588D9D20",
     "588958C0",
+    "58804A40",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -375,6 +376,7 @@ SYMBOL_OVERRIDES = {
     "5897D05B": "_eh_vector_destructor_iterator",
 }
 SOURCE_COMPILER_ADDRESSES = {
+    "58804A40",
     "58787400",
     "588536C0",
     "5885EE90",
@@ -675,6 +677,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58804A40": {
+        "name_in_analysis": "FUN_58804A40 / map-event record and screen-state initializer",
+        "called_by": "Ghidra's reference audit finds one unconditional call from byte-verified FUN_587BB700 at 0x587BCEC5. The caller loads ECX from [0x58A245A8] and pushes three stack values from EBX and [EBP+8]/[EBP+0x0A]; the containing caller is dispatched through a data table referenced at 0x5899A30C.",
+        "behavior": "Ghidra confirms 1,434 instruction bytes across [0x58804A40,0x58804DEB) (939 bytes), [0x58804DF0,0x58804EDA) (234 bytes), and [0x58804EE0,0x58804FE5) (261 bytes). The 5-byte and 6-byte gaps are excluded alignment. It copies 49 dwords from its input record to receiver +0x180; applies mode-dependent global state and record-type paths; derives an identifier and calls mapped, byte-verified FUN_58800360 to initialize map/harbor resources; then configures screen controls, child flags and positions, and receiver state. The type-7 path obtains the localized key MESSAGESTRING__OPCONVOY__ROOM_TITLE. The final range includes the full security-cookie call, stack cleanup, and ret 0xC. Segmented literal emission matches all 1,434 bytes and checks 43 mapped operand targets.",
+        "uncertainty": "The input record schema, mode and record-type meanings, global state fields, eight-slot child/control layout, localized title conditions, and visible map behavior remain unresolved. Several helper effects are known only through their call sites. Exact code bytes are verified against the installed Main.dll capture; this does not test emulator runtime behavior.",
+    },
     "58787400": {
         "name_in_analysis": "FUN_58787400 / HCB sprite-resource and child initializer",
         "called_by": "Ghidra records two unconditional calls from mapped, byte-matched FUN_58800360 at 0x58800BB5 and 0x58800C2B. Before the calls the caller prepares the target receiver's +0x914 child-resource field from its own +0x10524 field; exact class and field names remain unproven.",

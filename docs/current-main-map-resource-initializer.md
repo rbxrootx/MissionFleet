@@ -12,6 +12,8 @@ the current mode and a global table, calls this routine with that identifier,
 then continues renderer setup. `FUN_58804A40` copies a `0xC4`-byte record into
 its receiver, sets mode flags, derives an identifier from the record or a
 receiver field, and calls this routine.
+The matching `FUN_58804A40` body and its screen-state setup are documented in
+[the map-event initializer evidence](current-main-58804a40-map-event-initializer.md).
 
 The body returns when the child at receiver offset `+0x10524` is null. It then
 resets related state and selects a map path from the supplied identifier.
