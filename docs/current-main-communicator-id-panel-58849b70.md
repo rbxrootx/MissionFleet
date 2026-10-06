@@ -13,7 +13,10 @@ MSVC RTTI points from the latter vtable to
 from original binary metadata. The constructor subsequently allocates and
 initializes nested objects, including results stored at receiver
 `+0xA4/+0xA8/+0xAC/+0xB0` and `+0xCC/+0xD0/+0xD4/+0xD8/+0xDC`.
-Their individual visual roles remain undetermined.
+The child at `+0x114` is identified by original RTTI as
+`CPannelCommunicatorClanMessage`; its constructor and evidence are recorded in
+[the clan-message child notes](current-main-communicator-clan-message-constructor-58823270.md).
+The visual roles of the remaining nested controls remain undetermined.
 
 The Ghidra-derived function inventory ended at `0x5884A57C`, immediately
 before the constructor's `ret 0x18` at `0x5884A57D..0x5884A57F`.

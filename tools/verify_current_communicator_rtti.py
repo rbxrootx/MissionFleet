@@ -12,6 +12,7 @@ EXPECTED = {
     0x5899E780: ".?AVCPannelCommunicatorIDPannel@@",
     0x5899E400: ".?AVCPannelCommunicatorConfigPannel@@",
     0x5899E518: ".?AVCPannelCommunicatorDetailedUserInfo@@",
+    0x5899DB64: ".?AVCPannelCommunicatorClanMessage@@",
 }
 
 
@@ -31,6 +32,11 @@ def main():
     vtable_store = image[offset(0x58849BE6, 6):offset(0x58849BE6, 6) + 6]
     if vtable_store != b"\xc7\x06" + struct.pack("<I", 0x5899E780):
         raise AssertionError("ID-panel constructor vtable store changed")
+
+    # The nested ClanMessage child constructor installs this RTTI-backed vtable.
+    clan_message_store = image[offset(0x588232E3, 6):offset(0x588232E3, 6) + 6]
+    if clan_message_store != b"\xc7\x06" + struct.pack("<I", 0x5899DB64):
+        raise AssertionError("ClanMessage child constructor vtable changed")
 
     for vtable, expected_name in EXPECTED.items():
         locator = u32(vtable - 4)
