@@ -179,6 +179,7 @@ ADDRESSES = (
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
+    "5897CECE",
     "587AC9A0", "587867E0", "58786150", "58786250",
     "58778D00", "58779780", "587797C0",
     "58786750",
@@ -541,6 +542,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5897CE44", "5897CE4A", "5897CE56", "5897CE3E",
     "5875F4B0",
     "5897CEDA",
+    "5897CECE",
     "587AC9A0", "587867E0", "58786150", "58786250",
     "58778D00", "58779780", "587797C0",
     "58786750",
@@ -5681,6 +5683,12 @@ EVIDENCE = {
         "called_by": "Called twice by 0x587AF6D0 at 0x587AF843 and 0x587AF84D during a repeated 0x30-byte stride path.",
         "behavior": "Six-byte x86 import trampoline: jumps through the pointer stored at 0x5898C298.",
         "uncertainty": "The import slot's target and runtime API contract are unresolved. The trampoline bytes match exactly.",
+    },
+    "5897CECE": {
+        "name_in_analysis": "FUN_5897cece / captured _wassert alias thunk",
+        "called_by": "Ghidra and a Capstone scan of every indexed function range find 18 direct call sites from 15 functions. Three byte-matched callers account for five sites: FUN_58778F30 at 0x58778F51; FUN_587A90D0 at 0x587A912B, 0x587A9936, and 0x587AA16C; FUN_588E4260 at 0x588E4A34. The other 12 caller functions are unmatched. The matched sites push assertion expression, source path, and line number before calling this thunk.",
+        "behavior": "Ghidra confirms one contiguous six-byte body, [0x5897CECE, 0x5897CED4). The mapped bytes are `FF 25 90 C2 98 58`, an unconditional `jmp dword ptr [0x5898C290]`; the thunk leaves the caller's stack arguments intact. In this capture, the dword at alias slot 0x5898C290 is 0x59882E0C, equal to the mapped value in Main.dll's MSVCR90.dll!_wassert IAT entry at VA 0x58D69354 (RVA 0x639354). Thus the alias resolves to `_wassert` for the captured load. The only encoded operand is the absolute pointer-slot address at offset 2; objdiff verifies the six-byte stream exactly.",
+        "uncertainty": "The alias slot is in Main.dll .rdata and is not itself an IAT slot; only its captured value matches the `_wassert` IAT value. The imported routine's implementation body and loaded module base are outside this Main-only capture. The 12 unmatched callers' higher-level assertion conditions have not been reconstructed, and no emulator runtime comparison was performed.",
     },
     "587AC9A0": {
         "name_in_analysis": "FUN_587ac9a0",

@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,449 matches cover 2,341,620 bytes (22.3646%) and are verified
+The current 7,450 matches cover 2,341,626 bytes (22.3646%) and are verified
 individually at 100.0% by objdiff.
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 documented in [the class lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
@@ -78,6 +78,8 @@ The latest runtime-error entry slice is documented in
 [the current Core.dll status notes](docs/current-core-runtime-error-entry.md).
 The latest current Main.dll fixed-record copy path is documented in
 [the Main record-copy notes](docs/current-main-record-copy.md).
+The six-byte current Main assertion thunk and its captured `_wassert` alias are
+documented in [the thunk evidence](docs/current-main-assertion-thunk-5897cece.md).
 The original `Logo.spr` startup and login art now has a reproducible
 [RGB16 visual-path check](docs/current-client-logo-sprite-visual.md) against
 the installed asset and matched loader/compositor methods.
