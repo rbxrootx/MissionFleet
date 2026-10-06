@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0860",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0860", "58778AD0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -499,6 +499,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B21F0",
     "587B1F90",
     "587B0860",
+    "58778AD0",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -532,6 +533,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "58778AD0": {
+        "name_in_analysis": "FUN_58778AD0 / 16-bit strided-record lookup",
+        "called_by": "Verified FUN_5886BA60 calls it at 0x5886BF6E and 0x5886C045; verified FUN_588AEFB0 calls it at 0x588AF256, 0x588AF2A0, 0x588AF377, and 0x588AF74A. Both callers use returned records and follow 16-bit references stored in the record's eight-slot area beginning at +0x362.",
+        "behavior": "Reads signed count at receiver +0x1C and record base at +0x28. If count is nonpositive, returns null. Otherwise scans count records at stride 0x390, comparing the input 16-bit key with the word at each record +0x35E. Returns the matching record pointer or null when the scan ends; the function is 70 bytes and ends with ret 4 at 0x58778B13, with no mapped operand targets.",
+        "uncertainty": "The catalog/record type, semantic meaning and scope of the 16-bit key, field names, and callers' user-visible effects remain unknown. The lookup behavior is directly shown by the mapped instructions and two verified caller paths; no emulator runtime test was performed.",
+    },
     "587B0860": {
         "name_in_analysis": "FUN_587B0860 / record-backed child scalar update",
         "called_by": "Verified FUN_587A6220 calls this helper at 0x587A6973 and FUN_588D84D0 calls it at 0x588D8C4B. Both pass three sign-extended signed-short values from record tables, between companion calls to FUN_587B0830 and FUN_587B0910; the caller decompilations expose these input origins.",

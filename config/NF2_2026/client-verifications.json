@@ -310958,6 +310958,32 @@
         "behavior": "Multiplies each of the three 32-bit inputs by 10 using x86 integer operations. Stores input 0's product at receiver +0xB4, input 1's product at +0xB0, and input 2's product at +0xC4. If input 0's product is nonzero, sets +0xFC to 0x40000000 and +0xD4 to 100; when it is zero, those fields are left untouched. Stores 1 at +0xC8 if input 2's product is signed-greater than input 0's product, otherwise 0. The mapped function is 85 bytes, ends in ret 0xC at 0x587B08B2, and has no mapped operand targets.",
         "uncertainty": "The record field meanings and units, semantic names of the receiver fields, reason for the nonzero conditional writes, meaning of the signed comparison result, and runtime/gameplay effect remain unknown. This exact instruction reconstruction is grounded in two verified record-builder callers; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58778AD0",
+      "name": "FUN_58778ad0",
+      "size": 70,
+      "symbol": "_FUN_58778ad0",
+      "source": "src/client-current/Main/FUN_58778ad0.cpp",
+      "source_sha256": "260b0decf0fe49503ef9df5d5e2f821f98769239cf59cbb3ad6c7e5cbe697692",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778AD0 / 16-bit strided-record lookup",
+        "called_by": "Verified FUN_5886BA60 calls it at 0x5886BF6E and 0x5886C045; verified FUN_588AEFB0 calls it at 0x588AF256, 0x588AF2A0, 0x588AF377, and 0x588AF74A. Both callers use returned records and follow 16-bit references stored in the record's eight-slot area beginning at +0x362.",
+        "behavior": "Reads signed count at receiver +0x1C and record base at +0x28. If count is nonpositive, returns null. Otherwise scans count records at stride 0x390, comparing the input 16-bit key with the word at each record +0x35E. Returns the matching record pointer or null when the scan ends; the function is 70 bytes and ends with ret 4 at 0x58778B13, with no mapped operand targets.",
+        "uncertainty": "The catalog/record type, semantic meaning and scope of the 16-bit key, field names, and callers' user-visible effects remain unknown. The lookup behavior is directly shown by the mapped instructions and two verified caller paths; no emulator runtime test was performed."
+      }
     }
   ]
 }
