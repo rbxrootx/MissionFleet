@@ -29,8 +29,9 @@ The connected cases include:
   through `FUN_5878A160`, assigns its word at `+0x352`, then calls
   `FUN_588D81A0` and `FUN_58805100`. The other observed IDs dispatch to
   `FUN_58807370`, `FUN_588051C0`, `FUN_58805210`, `FUN_58805260`,
-  `FUN_588059B0`, and `FUN_58805150` in the branches shown by the original
-  switch.
+  [`FUN_588059B0`](current-main-588059b0-linked-record-selected-field-action.md)
+  for record ID `0x40` with `local_148`, `local_14c`, and zero, and
+  `FUN_58805150` in the branches shown by the original switch.
 
 After each dispatch, a nonzero local pointer is passed to `FUN_5897CC42`; the
 loop continues until the pending count is empty, then performs the captured

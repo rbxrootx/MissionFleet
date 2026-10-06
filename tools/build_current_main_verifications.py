@@ -15,6 +15,7 @@ ADDRESSES = (
     "58807E80",
     "588044A0",
     "58805D90",
+    "588059B0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -346,6 +347,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58807E80",
     "588044A0",
     "58805D90",
+    "588059B0",
     "58805880",
     "588058D0",
     "588A6720",
@@ -637,6 +639,12 @@ EVIDENCE = {
         "called_by": "The matched state gate FUN_58807E80 calls this at 0x5880800D after a state-specific threshold/list check.",
         "behavior": "Ghidra's contiguous extent is 47 bytes through 0x58805DBE. It starts at [0x58A247F8+0x0C] and follows each record's +0x78 link. It returns 0 if any visited record has both dwords +0x6074 and +0x608C equal to zero; it returns 1 if it reaches the end without finding such a record, including when the initial pointer is null.",
         "uncertainty": "The record type and meanings of fields +0x78, +0x6074, and +0x608C are unknown. No emulator runtime test was performed.",
+    },
+    "588059B0": {
+        "name_in_analysis": "FUN_588059b0 / linked-record selected-field action",
+        "called_by": "Ghidra's complete reference dump shows two direct calls: verified FUN_58807910 at 0x58807D0F and verified FUN_588075E0 at 0x58807748. FUN_58807910 calls it under `(unaff_EBX & 0x04000000) != 0`, passing selected-object byte +0x354, word +0x350, and 1, then calls FUN_588A9240. FUN_588075E0 dispatches record value 0x40 to it with `local_148`, `local_14c`, and 0.",
+        "behavior": "Ghidra identifies two body ranges totaling 156 bytes: [0x588059B0,0x588059C7) and [0x588059D0,0x58805A55); the 9-byte gap is outside the function. The __thiscall uses ECX as receiver and takes a signed byte, signed word, and dword. It walks the list at [0x58A247F8+0x0C] via node +0x78; each node whose byte +0x354 matches the first argument calls FUN_588DB3A0(0, third_argument). It then calls FUN_5878A160(second_argument) and FUN_588DB3A0(1, (char)third_argument+10). If the selected object's word +0x350 matches the second argument, it ORs 4 into receiver dword +0x78, calls FUN_588A9240, and returns. Otherwise, if the selected object's byte +0x354 matches the first argument, it calls FUN_588A6680.",
+        "uncertainty": "The selected-object and linked-node types, meanings of fields +0x78/+0x350/+0x354, argument domains, and effects of FUN_588DB3A0/FUN_5878A160/FUN_588A9240/FUN_588A6680 remain unknown. Caller evidence establishes invocation fields and conditions but not the feature-level behavior. The emitted source preserves two discontiguous body ranges and excludes the 9-byte gap. No emulator runtime test was performed.",
     },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
@@ -6518,6 +6526,43 @@ def main():
         source_path = ROOT / source
         name = row["name"]
         relocations = RELOCATION_OVERRIDES.get(address, relocation_data.get(address, []))
+        segmented_relocations = relocations if isinstance(relocations, dict) else None
+        if segmented_relocations is not None:
+            segments = segmented_relocations.get("segments")
+            if not isinstance(segments, list) or not segments:
+                raise ValueError(f"Missing emitted segments for {address}")
+            if sum(int(segment["size"]) for segment in segments) != int(row["size"]):
+                raise ValueError(f"Emitted segment sizes do not match the Ghidra inventory for {address}")
+            if segments[0]["address"].upper() != address:
+                raise ValueError(f"First emitted segment does not start at {address}")
+            output_segments = []
+            for segment in segments:
+                output_segments.append({
+                    "address": segment["address"],
+                    "size": int(segment["size"]),
+                    "symbol": segment["symbol"],
+                    "relocations": [
+                        dict(item, audit_only=item.get("audit_only", True))
+                        for item in segment.get("relocations", [])
+                    ],
+                })
+            match = {
+                "address": address,
+                "name": name,
+                "size": int(row["size"]),
+                "symbol": SYMBOL_OVERRIDES.get(address, "_" + name),
+                "source": source,
+                "source_sha256": sha256(source_path),
+                "verified_by": marker,
+                "flags": ["/O2", "/GX-", "/Zm200"],
+                **({"source_compiler": SOURCE_COMPILER}
+                   if address in SOURCE_COMPILER_ADDRESSES else {}),
+                "relocations": [],
+                "segments": output_segments,
+                "evidence": EVIDENCE[address],
+            }
+            matches.append(match)
+            continue
         if address == "58907CE0":
             # The generated native-instruction source emits each fixed absolute
             # operand literally; keep these entries as destination audits.
