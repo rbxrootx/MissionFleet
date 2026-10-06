@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,472 matches cover 2,359,553 bytes (22.5358%) and are verified
+The current 7,473 matches cover 2,360,690 bytes (22.5467%) and are verified
 individually at 100.0% by objdiff.
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).

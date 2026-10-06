@@ -318,6 +318,7 @@ ADDRESSES = (
     "587B7500",
     "588D75F0",
     "588DEB30",
+    "588628D0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -387,6 +388,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B7500",
     "588D75F0",
     "588DEB30",
+    "588628D0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6738,6 +6740,12 @@ EVIDENCE = {
         "called_by": "Ghidra records two direct calls: matched CShip_MapObjectScreen update method FUN_588E5150 at 0x588E64AF, and unmatched FUN_587CD000 at 0x587CD203. The matched update reaches it in state 0x60000 when its +0x664C counter is zero, and pushes 1. It decrements +0x664C instead when nonzero. The mapped call does not explicitly reload ECX immediately before the call; the object-base register and exact ABI are unresolved because Ghidra's caller/target prototypes disagree with the observed `ret 4` and ECX-based field accesses.",
         "behavior": "Ghidra confirms 1,858 body bytes in [0x588DEB30,0x588DEDEE) and [0x588DEDF0,0x588DF274), with the two-byte alignment gap `8B FF` (`mov edi,edi`) excluded. The second range ends with `ret 4` at 0x588DF271. The routine sets an observed state value 0x50000 at object +0x6090, resets related flags/counters, copies selected resource-record fields into child objects at +0x60D8/+0x1470 and other conditional children, and scans 32 resource/text slots dispatching on first-byte values 5, 6, and carriage return. It refreshes progress/status fields; when the object equals the global current object, it also follows a battle/rejoin UI path. It calls FUN_587EC270, then based on the stack flag calls FUN_588DE5C0 or drains eight child lists through a child vtable method with argument 1. The candidate emits both exact body ranges literally and records mapped operand targets.",
         "uncertainty": "The object-base ABI and stack-flag meaning are unresolved; the matched caller pushes 1 without an explicit ECX reload, while Ghidra models a one-argument fastcall and the target bytes use ECX as an object base and return with `ret 4`. Child/resource field meanings, helper contracts, and visible UI results are not established. FUN_587CD000 is an unmatched caller. No emulator runtime test was performed.",
+    },
+    "588628D0": {
+        "name_in_analysis": "FUN_588628d0 / type-9 ship-map timer and child refresh",
+        "called_by": "Ghidra records two direct calls: byte-matched FUN_588DEB30 at 0x588DF19A and byte-matched FUN_588E5150 at 0x588E6346. Both set ECX from the global child/manager pointer [0x58A245C4+0xA0] and pass no stack arguments. Each caller gates this path on its current record's low five type bits equaling 9; FUN_588DEB30 also reaches it after FUN_5885FC40.",
+        "behavior": "Ghidra confirms one contiguous 1,137-byte body, [0x588628D0,0x58862D41), ending in `ret` at 0x58862D40. The routine scans the count at receiver +0x118 and processes entries whose +0x28 state is 2. In the active global-state branch it calls FUN_587A1640/FUN_587A15E0 to advance and cycle encoded per-entry values, updates observed state/visibility bits on completion, accumulates timer fields, derives a resource-relative timer value from a ushort at resource +0x0C, updates the selected seconds display through FUN_5877E740, and refreshes a child resource from global table offset +0x580 after the observed elapsed-time threshold exceeds six seconds. The other branch polls FUN_58793E10, clears a latch, adjusts child flags, and on state 4 invokes FUN_588EBEB0 and FUN_58907990 before indirect child-vtable calls. The candidate emits the exact mapped instruction stream and records its 43 operand targets.",
+        "uncertainty": "The receiver and per-entry structure layouts, timer units, encoded-value meaning, resource-table identity, state/visibility semantics, helper contracts, and indirect vtable behavior are not established. Ghidra shows a possible divisor of zero at resource +0x0C without proving the runtime invariant that prevents it. No emulator runtime test was performed.",
     },
 }
 
