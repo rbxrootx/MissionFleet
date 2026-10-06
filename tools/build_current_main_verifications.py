@@ -315,6 +315,7 @@ ADDRESSES = (
     "588E3AE0",
     "58741C20",
     "5873A7C0",
+    "587B7500",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -381,6 +382,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588E3AE0",
     "58741C20",
     "5873A7C0",
+    "587B7500",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6714,6 +6716,12 @@ EVIDENCE = {
         "called_by": "Ghidra finds one incoming direct call and no data refs: byte-matched FUN_588E3AE0 at 0x588E3D72. The caller loads ECX from EDI (the CAircraft object) and pushes five arguments right-to-left: time `(DWORD[this+0x6060] + 900) % 0xE10`, pointer `[ESI+EBP*4+0xE8C]`, EBX index, boolean `(type low five bits == 8)`, and pointer `[ESI+EBX*4+0x6324]`. The target's `ret 0x14` confirms five stack arguments.",
         "behavior": "Ghidra confirms one contiguous 2,176-byte body, [0x5873A7C0,0x5873B040), decoded through `ret 0x14` at 0x5873B03D. It clears receiver flag bits and counters, copies 0x35 DWORDs (0xD4 bytes) from its third argument into receiver +0x234, and applies observed state/type-dependent percentage scaling to fields including +0x2CE, +0x2D8, and +0x2E2, using values from the fifth stack argument. It derives further values at +0xB0/+0xB4/+0x54C, updates sprite-child visibility/resource fields from bounded global tables, stores the supplied index and record pointer, copies coordinates from the parent at receiver +0x74, resets captured state fields, and creates/clears an effect-related buffer using dimensions derived from +0x2E2. The final selected-state path stores one of globals 0x58A248E0/0x58A248E4/0x58A248E8/0x58A248EC at +0x558 and sets +0x55C to 3. The literal stream has 37 mapped operand targets checked.",
         "uncertainty": "The copied record schema, field meanings/units, scaling inputs and gameplay interpretation, resource-table identity, child/effect semantics, and visible launch behavior remain uncertain. Ghidra's prototype and the matched caller agree on five stack arguments, but the names and types are still inferred. No runtime replay or emulator test was performed.",
+    },
+    "587B7500": {
+        "name_in_analysis": "FUN_587b7500 / scaled child coordinates and conditional virtual update",
+        "called_by": "Ghidra finds five direct calls and no data refs. Byte-matched FUN_5873A7C0 calls at 0x5873ADD5 and 0x5873AEB0 with ECX=[EBP+0x520], and byte-matched FUN_5873FE80 calls at 0x58740849 with ECX=[ESI+0x520] after a nonnull check. Each matched site pushes three values. Unmatched FUN_587CB6B0 and FUN_587CBE00 call at 0x587CB8DF and 0x587CC0E8.",
+        "behavior": "The contiguous body is 124 bytes, [0x587B7500,0x587B757C), and returns with `ret 0xC` at 0x587B7579; four CC padding bytes precede the next function. It converts two integer inputs using qword constant 0x5898CF08, obtains a third scaled float from FUN_5897CC90 and constant 0x5899A158, and passes three float values to FUN_58907820. It then calls the receiver's vtable slot +0x14; if that returns zero, it calls slot +4 with argument 1. The literal stream preserves the x87 operations and checks all five mapped operand targets.",
+        "uncertainty": "The child object identity, coordinate/scale units, meaning of the two virtual slots, and visible graphics effect are unknown. Ghidra's prototype exposes only two stack parameters, but the three matched callers each push three and the machine code ends in `ret 0xC`; the exact semantic argument mapping is therefore unresolved. Two callers are not byte-matched. No emulator runtime test was performed.",
     },
 }
 
