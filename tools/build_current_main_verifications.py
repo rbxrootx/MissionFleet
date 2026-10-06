@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "587E6670",
+    "5888D5C0",
     "58893E80",
     "5888CE00",
     "5887A3F0",
@@ -368,6 +369,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5887A3F0",
     "5888CE00",
     "587E6670",
+    "5888D5C0",
     "58893E80",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
@@ -647,6 +649,12 @@ EVIDENCE = {
         "called_by": "Ghidra's complete direct-reference report identifies four calls: FUN_587B83E0 at 0x587B86CA and 0x587B879F, FUN_587E8C00 at 0x587E9283, and FUN_58805A60 at 0x58805B1E. The first two sites are in the mapped, byte-matched FUN_587B83E0. Both load ECX from [0x58A245C0]; one pushes EDI, EBX, [ESI+0x0C], [ESI+8], and the other pushes 0, EBX, [ESI+0x0C], [ESI+8].",
         "behavior": "Fresh Ghidra decompilation and body audit show 2,025 code bytes in [0x58893E80,0x588941DA) and [0x588941E0,0x5889466F). The function branches on message type and flag fields, formats localized Whisper, Team, GM, and channel text, applies channel visibility/filter conditions, compares and updates a four-entry 0x18-byte whisper history on one path, forwards the resulting text and color to byte-matched FUN_5888D250, and then calls FUN_5888D5C0. The six mapped bytes between the body ranges decode as `lea ebx,[ebx]`, a multi-byte no-op; they are excluded from the body. Exact bytes are emitted from both Ghidra ranges, with 109 mapped relocations checked.",
         "uncertainty": "Ghidra's inferred prototype exposes three stack parameters, while the observed epilogue is `ret 0x10` and matched call sites push four stack values; the fourth value and semantic argument names are not settled. Two callers, FUN_587E8C00 and FUN_58805A60, are not yet matched, so their parameter setup is not verified. The effect of FUN_5888D5C0, precise flag semantics, and runtime chat UI effects remain unverified.",
+    },
+    "5888D5C0": {
+        "name_in_analysis": "FUN_5888d5c0 / two child-coordinate updates based on linked entries",
+        "called_by": "Fresh Ghidra reference analysis finds 12 unconditional calls: FUN_58893E80 at 0x5889464F; byte-matched FUN_58890110 at 0x58892DA2, 0x58892DD2, 0x58892E94, 0x58892ED4, 0x58892F66, 0x58892F8D, and 0x58892FE9; and FUN_58893430 at 0x58893760, 0x588937A3, 0x588937DC, and 0x5889382A. At the eight calls in byte-matched callers, ECX is loaded from EDI (FUN_58893E80) or EBP (FUN_58890110), with no explicit stack arguments. FUN_58893430 is not yet byte-matched; its four raw mapped call contexts load ECX from ESI and push no explicit stack arguments.",
+        "behavior": "Ghidra confirms one contiguous body, [0x5888D5C0,0x5888D651), 145 bytes, fully decoded through ret at 0x5888D650. It reads child objects at this+0x4C4 and this+0x4C8, compares each +0x88 value to the result of byte-matched FUN_58908170 and a respective threshold (9 and 6), and, when the difference is positive, computes a proportional offset using 0x54 and the child span. It subtracts that offset and 0x0E from this+8, then calls byte-matched FUN_58903360 on child objects this+0x4A4 and this+0x4A8 with the resulting coordinate. The candidate preserves all 145 bytes and four mapped operand targets.",
+        "uncertainty": "The exact identities of the child objects, meaning of their +0x88 values, interpretation of FUN_58908170's linked-node result, and visible UI effect of the coordinate updates remain uncertain. FUN_58893430 is an unmatched caller, so its broader control flow is not byte-verified. Neighboring pointer-like data and INT3 padding before the function have no established owner or role. No emulator runtime test was performed.",
     },
     "5888CE00": {
         "name_in_analysis": "FUN_5888ce00 / subobject cleanup and constant update wrapper",
