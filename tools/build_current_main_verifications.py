@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30",
+    "587B2A40", "587B4A30", "587B1850",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -494,6 +494,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5875F650", "5875F6B0",
     "587B2A40",
     "587B4A30",
+    "587B1850",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -527,6 +528,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B1850": {
+        "name_in_analysis": "FUN_587B1850 / shared encoded child-state reconciliation",
+        "called_by": "Verified FUN_587B2A40 calls it at 0x587B2BC0 after preparing two XOR-0xAAAAAAAA words; verified FUN_587B4A30 calls it at 0x587B4ACF after preparing the same pair; verified weapon-fire handler FUN_587B4B70 calls it before updating its own masked +0x2EC field.",
+        "behavior": "Zeros receiver +0x98 and writes 0xAAAAAAAA to +0x104. When receiver +0x88 equals the pointer at [0x58A247F8]+4, calls FUN_587A15E0 with receiver +0x104 and 0xAAAAAAAA. Computes a 32-bit sum of receiver dwords +0x154 and +0x158 after XORing each with 0xAAAAAAAA. Under the same context comparison, calls FUN_587A15E0 with receiver +0x9C and that sum. Stores the sum at +0x9C regardless of the comparison; if it is nonzero, writes 0x40000000 to receiver +0xF8. The mapped function is 144 bytes, ends in ret at 0x587B18DF, and has 6 mapped operand targets.",
+        "uncertainty": "The semantics, units, and validity of the encoded source words; the meaning of receiver +0x98/+0x104/+0x9C/+0xF8; the global context comparison; and the callback effects of FUN_587A15E0 remain unresolved. This exact instruction reconstruction has three verified callers but no emulator runtime comparison.",
+    },
     "587B4A30": {
         "name_in_analysis": "FUN_587B4A30 / observed type-0x06 record-backed child-state initializer",
         "called_by": "Verified FUN_587A6220 invokes it in the branch gated by the observed record byte 0x06 after FUN_587B58F0; verified FUN_588D84D0 invokes it at 0x588D8B48 during map-derived child setup. The calls pass the +0x100C pointer, a 42-DWORD local record, optional 45-DWORD record data, a per-entry pointer, an encoded word, and a word from +0x350.",

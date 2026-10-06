@@ -310735,6 +310735,69 @@
         "behavior": "Sets receiver +0x3904 to 100 when the shared pointer is null, otherwise to 20 when its byte at +0x35C equals the 42-DWORD record word at +6, or 100 when unequal. Stores the final caller word at +0x18C, stores the supplied per-entry pointer at +0x138, and copies 42 DWORDs to receiver +0x190. It initializes XOR-0xAAAAAAAA values at +0x154/+0x158, replacing the second from optional-record word +0x9C masked to five bits when present; calls FUN_587B1850, FUN_587B4910 with the supplied encoded word, and FUN_587B4100. It clears +0x38FC; when optional record data exists, copies 45 DWORDs to +0x238, stores the copied word +0x2D8 at +0x38FC, calls FUN_5876BF40 with observed arguments 13000, word +0x2E2, and 0x6E, and stores the result at +0x2F4. It clears +0x2F8 and +0x3908, then looks up the first copied DWORD with FUN_58778D60 and stores the returned word +0xA0 at +0x390C, or zero on null. The mapped body is 315 bytes, ends in ret 0x18, and has 6 mapped operand targets.",
         "uncertainty": "The record schema, meaning of the 0x06 discriminator and +0x3904 values, identity and ownership of the optional 45-DWORD data and created resource, semantics of the XOR-masked values and lookup, helper contracts, and runtime visible effect remain unknown. This is an exact instruction reconstruction supported by two verified call sites; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587B1850",
+      "name": "FUN_587b1850",
+      "size": 144,
+      "symbol": "_FUN_587b1850",
+      "source": "src/client-current/Main/FUN_587b1850.cpp",
+      "source_sha256": "989b050118b7730f8bb50986c628034ab3abb0e6b07ec9cf2b28c60fa5120ca2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 33,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "58A245FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "587A15E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 104,
+          "target_address": "58A245FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "587A15E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B1850 / shared encoded child-state reconciliation",
+        "called_by": "Verified FUN_587B2A40 calls it at 0x587B2BC0 after preparing two XOR-0xAAAAAAAA words; verified FUN_587B4A30 calls it at 0x587B4ACF after preparing the same pair; verified weapon-fire handler FUN_587B4B70 calls it before updating its own masked +0x2EC field.",
+        "behavior": "Zeros receiver +0x98 and writes 0xAAAAAAAA to +0x104. When receiver +0x88 equals the pointer at [0x58A247F8]+4, calls FUN_587A15E0 with receiver +0x104 and 0xAAAAAAAA. Computes a 32-bit sum of receiver dwords +0x154 and +0x158 after XORing each with 0xAAAAAAAA. Under the same context comparison, calls FUN_587A15E0 with receiver +0x9C and that sum. Stores the sum at +0x9C regardless of the comparison; if it is nonzero, writes 0x40000000 to receiver +0xF8. The mapped function is 144 bytes, ends in ret at 0x587B18DF, and has 6 mapped operand targets.",
+        "uncertainty": "The semantics, units, and validity of the encoded source words; the meaning of receiver +0x98/+0x104/+0x9C/+0xF8; the global context comparison; and the callback effects of FUN_587A15E0 remain unresolved. This exact instruction reconstruction has three verified callers but no emulator runtime comparison."
+      }
     }
   ]
 }
