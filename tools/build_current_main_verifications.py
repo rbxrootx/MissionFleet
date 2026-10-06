@@ -334,6 +334,7 @@ ADDRESSES = (
     "588F7D10",
     "588F8640",
     "588F8820",
+    "588F7C00",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -383,6 +384,7 @@ SYMBOL_OVERRIDES = {
 SOURCE_COMPILER_ADDRESSES = {
     "588F8640",
     "588F8820",
+    "588F7C00",
     "588F7D10",
     "588F8840",
     "58804A40",
@@ -690,6 +692,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588F8820": 30,
 }
 EVIDENCE = {
+    "588F7C00": {
+        "name_in_analysis": "FUN_588F7C00 / CWarehouseItem destructor body",
+        "called_by": "Ghidra's reference audit finds ordinary direct calls from the CWarehouseItem deleting-destructor-shaped wrapper FUN_588F7D40 at 0x588F7D43, from CWarehouseItemForce destructor FUN_588F8640 at 0x588F87FF, and from FUN_588FAFB0 at 0x588FB00C. Four further references at 0x5898A083, 0x5898A0B3, 0x5898A2C3, and 0x5898A2F3 originate in exception/unwind helpers. The RTTI-backed CWarehouseItem vtable at 0x589A20D4 points slot +0x00 to FUN_588F7D40, which directly calls this body; this function also installs CWarehouseItem::vftable.",
+        "behavior": "Ghidra confirms one contiguous 254-byte body [0x588F7C00,0x588F7CFE) with all instructions covered. It installs CWarehouseItem::vftable, then conditionally releases and clears seven child pointers at receiver byte offsets +0xA0, +0xA4, +0xA8, +0xAC, +0xB0, +0xB4, and +0xB8 by invoking each child's virtual slot 0 with delete flag 1. It calls FUN_58902C10 at 0x588F7CE7, restores the saved exception-list state, and returns. The emitted instruction source verifies the complete mapped extent and checks its operand targets.",
+        "uncertainty": "The seven child fields' semantic roles and ownership rules, FUN_58902C10's effect, and runtime behavior remain unresolved. The class identity is supported by the installed vftable and its RTTI-backed deleting wrapper, but this path has not been exercised in the emulator.",
+    },
     "588F8640": {
         "name_in_analysis": "FUN_588F8640 / CWarehouseItemForce destructor body",
         "called_by": "Ghidra records one direct incoming call from FUN_588F8820 at 0x588F8823. This body has no direct vtable or data reference of its own; the RTTI-backed CWarehouseItemForce table points to the scalar-deleting-shaped wrapper at slot +0x00.",

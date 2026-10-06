@@ -325705,6 +325705,57 @@
         "behavior": "Ghidra records 27 body bytes in [0x588F8820,0x588F8835) and [0x588F8838,0x588F883E), while the mapped stream contains a 3-byte add esp,4 cleanup continuation at 0x588F8835..0x588F8838 between those ranges. FUN_5897CC42 is an indirect IAT jump thunk despite Ghidra marking it non-returning, so the cleanup path may continue to the final ret 4 at 0x588F883B. The complete contiguous 30-byte stream calls destructor body FUN_588F8640, checks the deleting flag bit, conditionally calls FUN_5897CC42(this), then returns this. Exact mapped code is emitted and checked with the two direct-call targets audited.",
         "uncertainty": "The imported callback's deletion semantics and whether it returns in the target runtime are not confirmed. Ghidra excludes the 3-byte cleanup from its function body because it marks FUN_5897CC42 non-returning; the contiguous mapped instructions and existing thunk evidence support including it. No emulator runtime test has been performed."
       }
+    },
+    {
+      "address": "588F7C00",
+      "name": "FUN_588f7c00",
+      "size": 254,
+      "symbol": "_FUN_588f7c00",
+      "source": "src/client-current/Main/FUN_588f7c00.cpp",
+      "source_sha256": "3cafe999fb7cf2c0333838aadd415b10a18c3859c18db0fcf80084948fa62ea7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58988648",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "589A20D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7C00 / CWarehouseItem destructor body",
+        "called_by": "Ghidra's reference audit finds ordinary direct calls from the CWarehouseItem deleting-destructor-shaped wrapper FUN_588F7D40 at 0x588F7D43, from CWarehouseItemForce destructor FUN_588F8640 at 0x588F87FF, and from FUN_588FAFB0 at 0x588FB00C. Four further references at 0x5898A083, 0x5898A0B3, 0x5898A2C3, and 0x5898A2F3 originate in exception/unwind helpers. The RTTI-backed CWarehouseItem vtable at 0x589A20D4 points slot +0x00 to FUN_588F7D40, which directly calls this body; this function also installs CWarehouseItem::vftable.",
+        "behavior": "Ghidra confirms one contiguous 254-byte body [0x588F7C00,0x588F7CFE) with all instructions covered. It installs CWarehouseItem::vftable, then conditionally releases and clears seven child pointers at receiver byte offsets +0xA0, +0xA4, +0xA8, +0xAC, +0xB0, +0xB4, and +0xB8 by invoking each child's virtual slot 0 with delete flag 1. It calls FUN_58902C10 at 0x588F7CE7, restores the saved exception-list state, and returns. The emitted instruction source verifies the complete mapped extent and checks its operand targets.",
+        "uncertainty": "The seven child fields' semantic roles and ownership rules, FUN_58902C10's effect, and runtime behavior remain unresolved. The class identity is supported by the installed vftable and its RTTI-backed deleting wrapper, but this path has not been exercised in the emulator."
+      }
     }
   ]
 }
