@@ -321172,6 +321172,279 @@
         "behavior": "Ghidra confirms one contiguous body, [0x5888D5C0,0x5888D651), 145 bytes, fully decoded through ret at 0x5888D650. It reads child objects at this+0x4C4 and this+0x4C8, compares each +0x88 value to the result of byte-matched FUN_58908170 and a respective threshold (9 and 6), and, when the difference is positive, computes a proportional offset using 0x54 and the child span. It subtracts that offset and 0x0E from this+8, then calls byte-matched FUN_58903360 on child objects this+0x4A4 and this+0x4A8 with the resulting coordinate. The candidate preserves all 145 bytes and four mapped operand targets.",
         "uncertainty": "The exact identities of the child objects, meaning of their +0x88 values, interpretation of FUN_58908170's linked-node result, and visible UI effect of the coordinate updates remain uncertain. FUN_58893430 is an unmatched caller, so its broader control flow is not byte-verified. Neighboring pointer-like data and INT3 padding before the function have no established owner or role. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58893430",
+      "name": "FUN_58893430",
+      "size": 1072,
+      "symbol": "_FUN_58893430",
+      "source": "src/client-current/Main/FUN_58893430.cpp",
+      "source_sha256": "37d8ee00fb46c789a7e7d780affecc3f3a60aefd6bf24a28bda7c1dde6c14064",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58893858",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "588935CB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "58902E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 219,
+          "target_address": "588935CB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 231,
+          "target_address": "588935CB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "58A28520",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "587B67A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 344,
+          "target_address": "5888D660",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 433,
+          "target_address": "58893837",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "58902E60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 522,
+          "target_address": "58793DA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 550,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "5889372E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 573,
+          "target_address": "58793E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 581,
+          "target_address": "5889372E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 619,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 631,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 774,
+          "target_address": "58893837",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 780,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 795,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 810,
+          "target_address": "58908650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 817,
+          "target_address": "5888D5C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 822,
+          "target_address": "58893837",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 834,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 855,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 866,
+          "target_address": "58893837",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 877,
+          "target_address": "589086F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 884,
+          "target_address": "5888D5C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 889,
+          "target_address": "58893837",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 901,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 916,
+          "target_address": "58908650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 927,
+          "target_address": "58908650",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 934,
+          "target_address": "5888CEE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 941,
+          "target_address": "5888D5C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 955,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 976,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 994,
+          "target_address": "589086F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1005,
+          "target_address": "589086F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1012,
+          "target_address": "5888CEE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1019,
+          "target_address": "5888D5C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58893430 / control movement and child-state update callback",
+        "called_by": "Ghidra finds no direct code-call refs but confirms FUN_58893430 is vftable slot 3 at imported vftable 0x5899FC9C (+0x0C), with its data xref at 0x5899FCA8. FUN_58890110 occupies the next slot at +0x10. The vftable is installed at [ESI] by byte-matched FUN_5888E5E0 at 0x5888E64F and by unmatched FUN_5888C7B0 at 0x5888C7DB; both mapped instructions are `C7 06 9C FC 99 58`.",
+        "behavior": "Fresh Ghidra decompilation gives one contiguous body, [0x58893430,0x58893860), 1,072 bytes. Under the +0x24 flag bit 2 gate, it advances coordinates at +4/+8 toward targets +0x50/+0x54, using sign, half, or quarter deltas according to the remaining distance, and calls FUN_58902E10; on mode 0x100 arrival it changes the mode and invokes a child virtual slot at +4. In mode 0x200 it advances the +0x170 state toward [+0x168]+4 with steps clamped to +/-0x10, then calls FUN_58902E60. Under an additional completion gate it marks child flags when +0x178 is set and clears that field; it also processes a pending +0x4AC action through repeated FUN_58731540 checks. Four branches call byte-matched FUN_5888D5C0 with ECX=ESI and no stack arguments (at 0x58893760, 0x588937A3, 0x588937DC, 0x5889382A). Finally, it traverses a circular child list rooted at +0x3C and dispatches each child's virtual slot +0x0C. The candidate reproduces the 1,072 mapped bytes and 41 operand targets.",
+        "uncertainty": "The containing class identity and runtime event that dispatches vftable slot +0x0C remain unknown; FUN_5888C7B0, one vftable installer, is not byte-matched. The meanings of the mode values, child flags, pending action, and coordinate fields are inferred only from observed transitions. Callee and virtual-slot effects, plus emulator UI behavior, have not been runtime-tested."
+      }
     }
   ]
 }

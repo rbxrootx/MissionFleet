@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "587E6670",
+    "58893430",
     "5888D5C0",
     "58893E80",
     "5888CE00",
@@ -369,6 +370,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "5887A3F0",
     "5888CE00",
     "587E6670",
+    "58893430",
     "5888D5C0",
     "58893E80",
     # The legacy MSVC 6 executable cannot start in the current Windows
@@ -655,6 +657,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra reference analysis finds 12 unconditional calls: FUN_58893E80 at 0x5889464F; byte-matched FUN_58890110 at 0x58892DA2, 0x58892DD2, 0x58892E94, 0x58892ED4, 0x58892F66, 0x58892F8D, and 0x58892FE9; and FUN_58893430 at 0x58893760, 0x588937A3, 0x588937DC, and 0x5889382A. At the eight calls in byte-matched callers, ECX is loaded from EDI (FUN_58893E80) or EBP (FUN_58890110), with no explicit stack arguments. FUN_58893430 is not yet byte-matched; its four raw mapped call contexts load ECX from ESI and push no explicit stack arguments.",
         "behavior": "Ghidra confirms one contiguous body, [0x5888D5C0,0x5888D651), 145 bytes, fully decoded through ret at 0x5888D650. It reads child objects at this+0x4C4 and this+0x4C8, compares each +0x88 value to the result of byte-matched FUN_58908170 and a respective threshold (9 and 6), and, when the difference is positive, computes a proportional offset using 0x54 and the child span. It subtracts that offset and 0x0E from this+8, then calls byte-matched FUN_58903360 on child objects this+0x4A4 and this+0x4A8 with the resulting coordinate. The candidate preserves all 145 bytes and four mapped operand targets.",
         "uncertainty": "The exact identities of the child objects, meaning of their +0x88 values, interpretation of FUN_58908170's linked-node result, and visible UI effect of the coordinate updates remain uncertain. FUN_58893430 is an unmatched caller, so its broader control flow is not byte-verified. Neighboring pointer-like data and INT3 padding before the function have no established owner or role. No emulator runtime test was performed.",
+    },
+    "58893430": {
+        "name_in_analysis": "FUN_58893430 / control movement and child-state update callback",
+        "called_by": "Ghidra finds no direct code-call refs but confirms FUN_58893430 is vftable slot 3 at imported vftable 0x5899FC9C (+0x0C), with its data xref at 0x5899FCA8. FUN_58890110 occupies the next slot at +0x10. The vftable is installed at [ESI] by byte-matched FUN_5888E5E0 at 0x5888E64F and by unmatched FUN_5888C7B0 at 0x5888C7DB; both mapped instructions are `C7 06 9C FC 99 58`.",
+        "behavior": "Fresh Ghidra decompilation gives one contiguous body, [0x58893430,0x58893860), 1,072 bytes. Under the +0x24 flag bit 2 gate, it advances coordinates at +4/+8 toward targets +0x50/+0x54, using sign, half, or quarter deltas according to the remaining distance, and calls FUN_58902E10; on mode 0x100 arrival it changes the mode and invokes a child virtual slot at +4. In mode 0x200 it advances the +0x170 state toward [+0x168]+4 with steps clamped to +/-0x10, then calls FUN_58902E60. Under an additional completion gate it marks child flags when +0x178 is set and clears that field; it also processes a pending +0x4AC action through repeated FUN_58731540 checks. Four branches call byte-matched FUN_5888D5C0 with ECX=ESI and no stack arguments (at 0x58893760, 0x588937A3, 0x588937DC, 0x5889382A). Finally, it traverses a circular child list rooted at +0x3C and dispatches each child's virtual slot +0x0C. The candidate reproduces the 1,072 mapped bytes and 41 operand targets.",
+        "uncertainty": "The containing class identity and runtime event that dispatches vftable slot +0x0C remain unknown; FUN_5888C7B0, one vftable installer, is not byte-matched. The meanings of the mode values, child flags, pending action, and coordinate fields are inferred only from observed transitions. Callee and virtual-slot effects, plus emulator UI behavior, have not been runtime-tested.",
     },
     "5888CE00": {
         "name_in_analysis": "FUN_5888ce00 / subobject cleanup and constant update wrapper",
