@@ -373,6 +373,7 @@ ADDRESSES = (
     "58900E20",
     "58900E50",
     "58900E80",
+    "587EF330",
     "5897CE32",
     "588F7D30",
 )
@@ -463,6 +464,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58900E20",
     "58900E50",
     "58900E80",
+    "587EF330",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -838,6 +840,12 @@ EVIDENCE = {
         "called_by": "This method occupies slot +0x14 of the six-entry RTTI-backed CWarfogOnFight vtable at 0x589A24A8, installed by matched constructor FUN_58900E20. No direct code caller was identified.",
         "behavior": "The contiguous 1,888-byte body [0x58900E80,0x589015E0) first gates on bit 0 of receiver word +0x24. When enabled, it derives grid dimensions and indices from the object at DAT_58A2459C+0x10524, scans the byte grid rooted at DAT_58A2459C+0x10548, and builds an eight-neighbor mask by comparing nearby grid values with 2. Depending on the current cell and mask, it calls FUN_5873A5D0 or FUN_58903D60 to emit/update map tiles, then calls FUN_58906EA0 and restores exception state. This is a combat fog-grid rendering/update path; all mapped instructions are emitted literally.",
         "uncertainty": "The meanings of grid values below 2, mask bits, coordinate units, helper arguments, and DAT_58A2459C remain unresolved. Ghidra reports unsettled type propagation and a jump table at 0x589015E0 immediately after the function; no emulator render comparison has been run.",
+    },
+    "587EF330": {
+        "name_in_analysis": "FUN_587EF330 / CPageFightOn_ControlMenuScreen vtable method +0x04",
+        "called_by": "This method occupies slot +0x04 of the RTTI-backed seven-entry vtable at 0x5899D180. The locator at 0x5899D17C resolves through 0x589A7CE8 to TypeDescriptor 0x589CC260, named .?AVCPageFightOn_ControlMenuScreen@@. Matched constructor FUN_588011C0 installs that vtable at 0x58801230; its matched caller invokes it at 0x5878C650.",
+        "behavior": "The contiguous 1,495-byte body [0x587EF330,0x587EF907) resets screen and child state, conditionally creates and positions a CSpriteBundleScreen for mode 10, and configures child visibility based on DAT_589C906C. When DAT_589C903C is nonzero it allocates the fog object and directly calls the byte-matched CWarfogOnFight constructor FUN_58900E20 at 0x587EF639. It then derives and allocates the encoded fog-grid dimensions, clears the grid, resets screen controls, initializes the localized all-chat label, and calls the final menu-state helper. Ghidra covers all 1,495 bytes through ret at 0x587EF906; literal instruction emission verifies the mapped body.",
+        "uncertainty": "The four direct call sites to unmatched helpers FUN_58894A60 (twice), FUN_587EBA90, and FUN_5888CDF0 are preserved as exact addresses but their contracts remain unknown. The semantics of the screen's offsets, global flags, and resource helpers are only partially inferred from this function; no runtime fight-screen test has been run.",
     },
     "588F9900": {
         "name_in_analysis": "FUN_588F9900 / CWarehouseItemInfo destructor body",
