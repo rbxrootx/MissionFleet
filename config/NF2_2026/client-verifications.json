@@ -319076,6 +319076,69 @@
         "behavior": "The complete Ghidra extent is 330 contiguous bytes, [0x5888E450,0x5888E59A), ending with ret 8 at 0x5888E597. It allocates a 0x300-byte local formatting buffer and walks the list headed by [0x58A247F8]+0x0C, following node link +0x78 until it finds a short ID at node +0x350 equal to its first stack argument. On a match, it formats either \"%s (%s)    %s\" when [0x58A245A8]+0x204 equals 7, or \"%s (%s)\" otherwise, using receiver strings +0x198/+0x298 and the matched node string at +0x12E8+0x6C; it passes the result to FUN_588D28A0. When its second argument is one and the observed status is not 0, 1, or 3, it checks the active object at [0x58A247F8]+4; if that object's +0x350 ID matches, it resolves MESSAGESTRING__YOU_HAVE_BECAME_THE_NEW_HOST through indirect slot 0x5898C030 and calls FUN_5876BAF0(0x28,text) followed by FUN_58764D30. It verifies the stack cookie and returns.",
         "uncertainty": "The object/list schemas, ID and status meanings, string callback and UI helper contracts, and visible effect remain uncertain. The \u2018new host\u2019 description is inferred from the observed localization token and the caller's argument value, not from runtime behavior. No emulator test was performed."
       }
+    },
+    {
+      "address": "58789FE0",
+      "name": "FUN_58789fe0",
+      "size": 250,
+      "symbol": "_FUN_58789fe0",
+      "source": "src/client-current/Main/FUN_58789fe0.cpp",
+      "source_sha256": "b53a6161512ef9fdfd6c66f20fa7896ff769f47f72918340d5c5a73466b7e2b8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5897FB56",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "588E05C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 138,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 193,
+          "target_address": "588E05C0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789fe0 / allocated linked-node insertion helper",
+        "called_by": "Ghidra references and an independent inventory-wide direct-call scan find exactly two calls, both from byte-matched functions. FUN_587F8760 calls at 0x587F8867 with ECX=[0x58A247F8] and stack arguments (pointer to a local buffer, 0, 0). FUN_58806F60 calls at 0x58806FEB with the same ECX and stack arguments (EDI, ESI, EDX), where EDX=ESI+(((DWORD [EDI+0x44]>>1)&0x1F)*0x18).",
+        "behavior": "The complete Ghidra body is 250 contiguous bytes, [0x58789FE0,0x5878A0DA), with SEH/cookie handling and ret 0x0C. The __thiscall uses receiver fields +0x0C/+0x10/+0x14/+0x18 and count +8. It requests 0x6654 bytes through FUN_5897CC4E. With an empty receiver field +0x10, allocation failure clears those four link fields; success calls FUN_588E05C0(param_2,param_3,param_4,0,0,0,0,0,0,0x40) and writes the returned object into all four fields. With a nonempty receiver it allocates and constructs the same object, links it from the prior +0x10 object's +0x78 field, writes the prior object into the new object's +0x74 field, and replaces receiver +0x10 with the new tail. It increments receiver +8 and returns receiver +0x10.",
+        "uncertainty": "The receiver/list/node types, meanings of its four link fields and count, allocation ownership, constructor contract, and the 0x18-stride caller data remain unresolved. The nonempty allocation-failure branch still follows the mapped link-update sequence with a zero result; its runtime safety/effect is unknown. No emulator test was performed."
+      }
     }
   ]
 }

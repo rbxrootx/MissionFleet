@@ -111,7 +111,7 @@ ADDRESSES = (
     "58933B50", "58943C90", "58943CE0", "589402F0", "5894CC80",
     "5894CCC0", "58950B50", "58956400", "58956450", "589529D0",
     "58962D60", "58962DE0", "5895F370", "58903AC0", "5897CF96",
-    "5897CC42", "5897CBDA", "58789FB0", "5890C1C0",
+    "5897CC42", "5897CBDA", "58789FB0", "58789FE0", "5890C1C0",
     "58791F30", "5878D590", "58901A80", "5897D186", "58735360",
     "5897CC60", "588F6660", "5878D5F0", "58792120", "588995E0",
     "58735110", "588996D0", "58748180",
@@ -350,6 +350,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588536C0",
     "5885EE90",
     "5888E450",
+    "58789FE0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
@@ -2986,6 +2987,12 @@ EVIDENCE = {
         "called_by": "Directly called by both large CType0MMXHigh555SpriteData vtable methods in their epilogues.",
         "behavior": "The installed MSVC security-cookie check routine; both methods call it after restoring their saved registers and before returning.",
         "uncertainty": "This compiler-runtime helper is included only to preserve the observed call target; its broader runtime policy is outside this sprite-data slice.",
+    },
+    "58789FE0": {
+        "name_in_analysis": "FUN_58789fe0 / allocated linked-node insertion helper",
+        "called_by": "Ghidra references and an independent inventory-wide direct-call scan find exactly two calls, both from byte-matched functions. FUN_587F8760 calls at 0x587F8867 with ECX=[0x58A247F8] and stack arguments (pointer to a local buffer, 0, 0). FUN_58806F60 calls at 0x58806FEB with the same ECX and stack arguments (EDI, ESI, EDX), where EDX=ESI+(((DWORD [EDI+0x44]>>1)&0x1F)*0x18).",
+        "behavior": "The complete Ghidra body is 250 contiguous bytes, [0x58789FE0,0x5878A0DA), with SEH/cookie handling and ret 0x0C. The __thiscall uses receiver fields +0x0C/+0x10/+0x14/+0x18 and count +8. It requests 0x6654 bytes through FUN_5897CC4E. With an empty receiver field +0x10, allocation failure clears those four link fields; success calls FUN_588E05C0(param_2,param_3,param_4,0,0,0,0,0,0,0x40) and writes the returned object into all four fields. With a nonempty receiver it allocates and constructs the same object, links it from the prior +0x10 object's +0x78 field, writes the prior object into the new object's +0x74 field, and replaces receiver +0x10 with the new tail. It increments receiver +8 and returns receiver +0x10.",
+        "uncertainty": "The receiver/list/node types, meanings of its four link fields and count, allocation ownership, constructor contract, and the 0x18-stride caller data remain unresolved. The nonempty allocation-failure branch still follows the mapped link-update sequence with a zero result; its runtime safety/effect is unknown. No emulator test was performed.",
     },
     "58789FB0": {
         "name_in_analysis": "FUN_58789fb0",
