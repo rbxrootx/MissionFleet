@@ -17,8 +17,9 @@ After the walk it calls `FUN_5878A160(second_argument)` and
 
 It then compares the selected object's word at `+0x350` with the second
 argument. On equality, it sets bit `0x4` in receiver DWORD `+0x78`, calls
-`FUN_588A9240`, and returns. Otherwise, when the selected object's byte
-`+0x354` equals the first argument, it calls `FUN_588A6680`.
+byte-matched [`FUN_588A9240`](current-main-588a9240-selected-child-state-refresh.md),
+and returns. Otherwise, when the selected object's byte `+0x354` equals the
+first argument, it calls `FUN_588A6680`.
 
 The Ghidra reference dump found exactly two direct call sites. Verified queue
 dispatcher [`FUN_588075e0`](current-main-588075e0-queue-dispatcher.md) calls it

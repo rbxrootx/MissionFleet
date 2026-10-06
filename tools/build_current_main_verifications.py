@@ -16,6 +16,7 @@ ADDRESSES = (
     "588044A0",
     "58805D90",
     "588059B0",
+    "588A9240",
     "58805880",
     "588058D0",
     "588A6720",
@@ -348,6 +349,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588044A0",
     "58805D90",
     "588059B0",
+    "588A9240",
     "58805880",
     "588058D0",
     "588A6720",
@@ -645,6 +647,12 @@ EVIDENCE = {
         "called_by": "Ghidra's complete reference dump shows two direct calls: verified FUN_58807910 at 0x58807D0F and verified FUN_588075E0 at 0x58807748. FUN_58807910 calls it under `(unaff_EBX & 0x04000000) != 0`, passing selected-object byte +0x354, word +0x350, and 1, then calls FUN_588A9240. FUN_588075E0 dispatches record value 0x40 to it with `local_148`, `local_14c`, and 0.",
         "behavior": "Ghidra identifies two body ranges totaling 156 bytes: [0x588059B0,0x588059C7) and [0x588059D0,0x58805A55); the 9-byte gap is outside the function. The __thiscall uses ECX as receiver and takes a signed byte, signed word, and dword. It walks the list at [0x58A247F8+0x0C] via node +0x78; each node whose byte +0x354 matches the first argument calls FUN_588DB3A0(0, third_argument). It then calls FUN_5878A160(second_argument) and FUN_588DB3A0(1, (char)third_argument+10). If the selected object's word +0x350 matches the second argument, it ORs 4 into receiver dword +0x78, calls FUN_588A9240, and returns. Otherwise, if the selected object's byte +0x354 matches the first argument, it calls FUN_588A6680.",
         "uncertainty": "The selected-object and linked-node types, meanings of fields +0x78/+0x350/+0x354, argument domains, and effects of FUN_588DB3A0/FUN_5878A160/FUN_588A9240/FUN_588A6680 remain unknown. Caller evidence establishes invocation fields and conditions but not the feature-level behavior. The emitted source preserves two discontiguous body ranges and excludes the 9-byte gap. No emulator runtime test was performed.",
+    },
+    "588A9240": {
+        "name_in_analysis": "FUN_588a9240 / selected-child state refresh",
+        "called_by": "Ghidra's direct-reference dump finds exactly two calls, both from byte-matched functions: FUN_588059B0 at 0x58805A2D and FUN_58807910 at 0x58807D1A. Each caller loads ECX from its receiver's +0x174 child field. FUN_588059B0 reaches the call when the selected object's +0x350 word equals its second argument; FUN_58807910 reaches it immediately after the 0x04000000-gated FUN_588059B0 call.",
+        "behavior": "The complete contiguous body is 188 bytes, [0x588A9240,0x588A92FC). Ghidra identifies one __fastcall parameter in ECX and no stack arguments. It sets dword +0x68 of the child at receiver +0x17C to 1 and invokes that child's vtable slot +4 without stack arguments. Unless receiver word +0x9C is 8 or 9, it conditionally selects [0x58A246D8+0x194]+0x3C in ECX when global dword +0x170 is greater than 15 and +0x194 is nonnull (otherwise ECX is cleared), calls FUN_58907990 with [0x58A248F8], repeats the same selection, then calls the selected object's vtable slot +4 with argument 0. Finally it clears dwords +0x58 and +0x50 in the object at receiver +0x154, then stores the zero-extended byte [0x58A247F8+4]+0x354 at that object's +0x58.",
+        "uncertainty": "The receiver/child types, meanings of state values 8 and 9, global object fields, selected-object byte +0x354, and effects/contracts of both vtable calls and FUN_58907990 are unknown. The direct callers establish ECX as receiver +0x174 but not the feature-level purpose or visible result. No emulator runtime test was performed.",
     },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
