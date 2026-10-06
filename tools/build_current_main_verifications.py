@@ -312,6 +312,7 @@ ADDRESSES = (
     "587B9190", "587B9270", "587B92B0", "587B9E10", "58848A00", "58847A50",
     "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58822D20", "58822D40", "58822EC0", "58822F10", "58823EB0", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
     "58833E40", "587BAA60", "5881DBE0", "58842780", "5875BAE0",
+    "588E3AE0",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -375,6 +376,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58893430",
     "5888D5C0",
     "58893E80",
+    "588E3AE0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
     # most preserve literal x86 streams, while selected functions use
@@ -6690,6 +6692,12 @@ EVIDENCE = {
         "called_by": "Ghidra's reference dump and a Capstone scan of executable `.text` inventory ranges find one direct call, at 0x5888D52C, from byte-matched FUN_5888D390. That caller reads [0x58A245A8]+0x204, proceeds when the value is 8 or 9, loads ECX from [0x58A245A8]+0x174, and pushes no stack argument.",
         "behavior": "Ghidra confirms one contiguous 312-byte body, [0x588A6E30, 0x588A6F68). It initializes receiver dword +0xAC to 0 and continues only when `(word at +0x24 & 0x1F00) == 0x0200`. It calls matched FUN_588EB130 with ECX=0x58A24810. A zero result sets +0xAC to 1 and returns. A nonzero result selects children from the global object at 0x58A246D8: when its +0x170 dword exceeds 2 and +0x194 is nonzero, the child at +8 receives matched FUN_58907990 with ECX=that child and stack value 0x58A248F8, then its vtable slot +4 is called with 0; similarly, when +0x170 exceeds 7, the child at +0x1C receives FUN_58907990 with stack value 0x58A248FC and then its slot +4 is called with 0. It calls matched FUN_587B9600 with receiver words +0x96 and +0x94 in that order, clears the low four bits of the word at child +0x194 +0x24, then restores ESI and tail-jumps through child +0x188 vtable slot +8. Ghidra's decompiler treats the final indirect jump as a call/return; the bytes show `pop esi; jmp eax`.",
         "uncertainty": "The meaning of the 0x200 flag test, receiver +0xAC, global child counts/indices, and indirect vtable contracts are unknown. When the global child-count/pointer guards fail, the captured machine code zeros ECX before the following indirect slot call; the invariant that prevents a null dereference is not established. No emulator runtime test was performed.",
+    },
+    "588E3AE0": {
+        "name_in_analysis": "FUN_588e3ae0 / aircraft launch and return event handler",
+        "called_by": "Ghidra records calls from FUN_58738940 at 0x58738BD4 and 0x58738C34, and from byte-matched command handler FUN_588E4260 at 0x588E4943. The matched command handler retains its incoming receiver in ECX and pushes EDI as the payload pointer immediately before the call. The two unmatched FUN_58738940 callsites load ECX from [ESI+0x0C] and push EAX or EDX as the payload pointer.",
+        "behavior": "Ghidra confirms 1,894 body bytes across [0x588E3AE0,0x588E3C9E), [0x588E3CA0,0x588E3FED), and [0x588E3FF0,0x588E424B). The omitted two-byte and three-byte gaps are alignment instructions (`mov edi,edi` and `lea ecx,[ecx]`), excluded from the body; the last range includes stack cleanup and `ret 4`. The handler reads a low-five-bit receiver-entry index and proceeds on entries whose string starts with carriage return; the upper three payload bits select an aircraft event mode. Mode 0 processes Aircraft Launch records, validates reported counts, and includes the literal class labels `Scouter`, `Fighter`, `Torpedo Bomber`, and `Dive Bomber`; modes 1 and 2 process Aircraft Return records, with mode 2 taking an additional local-player/target path. The candidate emits all three exact ranges literally and records mapped operand targets.",
+        "uncertainty": "The full packet schema, meanings of receiver fields and aircraft-class identifiers, side effects of several unmatched helpers, and mode-2 target action remain unresolved. Ghidra shows an error-code-5 path through FUN_587B9B30 followed by FUN_58970AE0, whose shutdown behavior is separately byte-matched, but the game-level reason for that report is not established. FUN_58738940 is not byte-matched. No runtime replay or emulator test was performed.",
     },
 }
 
