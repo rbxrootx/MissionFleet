@@ -325,6 +325,7 @@ ADDRESSES = (
     "587A6FB0",
     "588955A0",
     "588D9C40",
+    "588D9D20",
     "588958C0",
 )
 RELOCATION_OVERRIDES = {
@@ -402,6 +403,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587A6FB0",
     "588955A0",
     "588D9C40",
+    "588D9D20",
     "588958C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
@@ -6802,6 +6804,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra refs identify exactly two direct callers, both byte-matched: FUN_588DB610 at 0x588DBA88 and FUN_588DEB30 at 0x588DED80. Both use ECX as the receiver and pass one DWORD; DB610 passes 0 on its state-0x80000 path, while DEB30 passes 1 with ECX=ESI. The target's `ret 4` confirms the thiscall ABI.",
         "behavior": "Ghidra confirms one contiguous 210-byte body, [0x588D9C40,0x588D9D12), ending in `ret 4` at 0x588D9D0F. The routine sets or clears only bit 0 of child flag words at child +0x24, preserving other bits. It first updates the low-bit flags for up to `(*(ushort*)(this+0x100C+0x0A) & 7)` pointers beginning at this +0x60DC, then always updates children at this +0x1470 and +0x1474. Unless the argument is 1 and this equals the global current object, it also walks the child-pointer list at this +0x17C for the count at this +0x141C, skips null entries, and applies the same flag update. The candidate emits the exact mapped stream and records its one operand target.",
         "uncertainty": "The meaning of flag bit 0 and the child roles remain unknown; calling it visibility or enabled state is only a hypothesis. The initial pointer array has no visible null checks, and the invariant that its entries are populated is not established. No emulator runtime test was performed.",
+    },
+    "588D9D20": {
+        "name_in_analysis": "FUN_588d9d20 / mounted-engine ratio-like progress calculation",
+        "called_by": "Fresh Ghidra references identify one direct caller: FUN_587b04b0 at 0x587B0577. The caller initializes CMountedEngine, retains its param_2 receiver in ECX, and passes (*(uint*)(param_2+0x398) ^ 0xAAAAAAAA) as the target's sole stack argument. It passes the returned EAX value to FUN_587b03a0.",
+        "behavior": "Ghidra confirms one contiguous 62-byte body, [0x588D9D20,0x588D9D5E), with `ret 4` exits and no callees. ECX is the receiver and [ESP+4] is the signed current value. The routine decodes a denominator from [this+0xD98] ^ 0xAAAAAAAA and uses a signed comparison: when current >= denominator it returns 100 without writing [this+0x1444]. Otherwise, a nonzero denominator yields signed (current*100)/denominator via IMUL/CDQ/IDIV; the result is stored at [this+0x1444] and returned. If that lower-than branch has a zero denominator, it stores and returns 0.",
+        "uncertainty": "The semantic meanings of fields +0x398, +0xD98, and +0x1444 remain unproven; describe the operation as ratio-like and preserve the observed signed comparison and arithmetic edge cases. No emulator runtime test was performed.",
     },
 }
 
