@@ -311384,6 +311384,32 @@
         "behavior": "Uses ECX as a context object, stack arg 1 as a subject object, and stack arg 2 as a mode; it returns with ret 8. It returns immediately if subject +0x100C is null. Modes 0-4 and 6 select corresponding MESSAGESTRING keys for sunk, out-of-field, wiped-out, lost-connection, retreated, and forced-retreat notices, formatting the subject's +0x12E8/+0x6C value into subject +0x3A0. Mode 5 formats MESSAGESTRING__START_OBSERVE into a stack buffer. The notice path passes 0xFFFF or 0xFFFF00 to FUN_5890BD90 according to subject +0x1258, calls FUN_58907990 with [0x58A248F8], and then attempts a virtual call through slot +4 of an object derived from DAT_58A246D8: when [DAT_58A246D8]+0x170 > 0x1D and +0x194 is nonzero, the object pointer is read from [[DAT_58A246D8]+0x194]+0x74; otherwise the decompilation leaves the local pointer zero before the dereference. Further state changes run only when context +0x105F0 equals 7: nonzero modes can write subject +0x664C=10000 and, for the active subject, update DAT_58A245A4+0x8D8 and context child +0xAC (1 for modes 1/4, otherwise 0); mode 0 calls FUN_587CC700(1) when subject +0x6648 is nonzero and sets subject +0x664C to 75, 125, 200, or 250 from the low five bits at [subject +0x100C]+4. The 722-byte extent ends at 0x587E8A22.",
         "uncertainty": "The message keys' localized text, subject/context object schemas, offsets +0x100C/+0x12E8/+0x6648/+0x664C, meaning of the conditional values, FUN_5890BD90/FUN_58907990/FUN_587CC700 contracts, and selected virtual method remain unresolved. Ghidra shows a null local pointer on one virtual-call selection path followed by an unconditional dereference; the runtime invariant that prevents this path from failing is not known. Known byte-matched callers exercise modes 0, 1, and 5; other switch cases are reconstructed from Ghidra output and mapped instructions but do not yet have caller evidence. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587E5C80",
+      "name": "FUN_587e5c80",
+      "size": 44,
+      "symbol": "_FUN_587e5c80",
+      "source": "src/client-current/Main/FUN_587e5c80.cpp",
+      "source_sha256": "ff935c76fc6b06d0b3c0c86aaf840e46e85553910358c38a8645fcd1d965611d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587E5C80 / chat-channel state field update",
+        "called_by": "Verified FUN_587B83E0 calls it at 0x587B8BEB with ECX=[0x58A2459C] and stack args (2, 0) in the MESSAGESTRING_ALL_CHATTING branch. Verified chat parser FUN_58890110 calls it at 0x58890DE3 with args (3, byte at the selected object's +0x354) in a MESSAGESTRING_CHANNEL_SQUADRON_CHATTING path, and at 0x58891390 with args (ESI, 0) in a MESSAGESTRING_CHANNEL_DIRECTFLEET_CHATTING path; both use ECX=[0x58A2459C]. Caller disassemblies and Ghidra output agree on these contexts.",
+        "behavior": "Reads the low 16 bits of stack arg 1, zero-extends it, and stores it as a DWORD at receiver +0x21CE4. It stores 1 at receiver +0x20D24 exactly when arg 1 equals 3, otherwise 0. It copies the low 16 bits of stack arg 2 to receiver +0x20D20 and returns with ret 8. The 44-byte body has no mapped operand targets.",
+        "uncertainty": "The semantic names and units of receiver +0x21CE4, +0x20D24, and +0x20D20, the meaning of the caller's second argument (including the byte at selected-object +0x354), and downstream effects remain unknown. The surrounding verified callers associate writes with all-chat, squadron-chat, and direct-fleet-chat paths, but the exact field contract and runtime UI effect have not been tested in the emulator."
+      }
     }
   ]
 }
