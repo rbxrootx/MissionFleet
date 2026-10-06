@@ -68,6 +68,11 @@ Two state-dispatch paths in this handler call the 1,279-byte
 refresh method. Its bounded text copies and state branches are now byte matched;
 the record schema and user-visible effect remain unknown.
 
+The shared receiver is also updated by a 48-byte helper called from both
+`FUN_587BB700` and `FUN_588C4210`; it copies a 0x3C8-byte snapshot into receiver
+offset `+0x1028`. The exact instructions and the unresolved indirect callback
+are recorded in [the snapshot-copy notes](current-main-context-snapshot-copy.md).
+
 The `0x80011035` route calls `FUN_587d6a60` at `0x587BB845`, passing a value
 through one stack argument while loading the receiver from `0x58A24598` into
 ECX. Ghidra identifies one other direct call, from `FUN_58871de0` at

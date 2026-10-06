@@ -39,7 +39,7 @@ ADDRESSES = (
     "587D9DB0", "587DF010", "587D8110", "587D6830",
     "587D8470", "587D9460", "588E6A70", "588E7C10",
     "588E7700", "5897D17A", "5877E740", "5877E770",
-    "587317E0", "588F42F0", "587D6C00", "58908190", "589081C0",
+    "587317E0", "588F42F0", "587D6BD0", "587D6C00", "58908190", "589081C0",
     "5877ABA0", "588EBEB0", "5890BD90", "588DCDD0", "587C3D60",
     "587EC290", "587ECAB0", "587ECCA0",
     "587B6020", "58907C80", "5873A540", "58775980", "587B7260",
@@ -318,6 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
+    "587D6BD0",
     "5882A730", "587EC290", "58823270", "58823950", "58822F10", "58823EB0", "58822EC0", "58822D20", "58822D40", "58823110", "58823210", "588231A0", "588231D0", "587B9820", "58748BE0", "58748B60", "5897CE0F", "5897CD6A", "5897D7A8", "5897D7AE", "5897D7B4", "5897CE06",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
@@ -875,6 +876,12 @@ EVIDENCE = {
         "called_by": "Byte-matched battle-record helpers FUN_58838CB0 at 0x58838EAF and FUN_58839B80 at 0x58839CD8. Both set ECX to global context 0x58A24588, pass zero as the first stack value, a byte derived from record +0x5A as the second, and a pointer to record +0x5C as the third.",
         "behavior": "Scales the second stack value by eight, then calls byte-matched FUN_58970C70 with selector 0x80010F12, the first and second values, the third value as payload pointer, the scaled value as payload length, and zero flags. It returns after consuming its three incoming stack arguments. The complete body is 38 bytes through ret 0x0C.",
         "uncertainty": "The protocol meaning of selector 0x80010F12, the semantic type of record byte +0x5A, why the payload length is that value times eight, and the live wire result remain unknown. The observed callsites support the mapping but do not validate it against a server. No emulator test was performed.",
+    },
+    "587D6BD0": {
+        "name_in_analysis": "FUN_587d6bd0 / shared context snapshot copy",
+        "called_by": "Byte-matched FUN_587BB700 at 0x587BBF40 and FUN_588C4210 at 0x588C5AD7. Both load ECX from global 0x58A24598 and pass the source pointer in a stack argument.",
+        "behavior": "Reads the destination pointer at receiver +0x1028, calls the byte-matched six-byte thunk FUN_5897CC48 with destination, zero, and size 0x3C8, then copies 0xF2 dwords (968 bytes) from the incoming source pointer to that destination with REP MOVSD. The complete 48-byte function ends with ret 4.",
+        "uncertainty": "FUN_5897CC48 jumps through pointer slot 0x5898C1FC, whose runtime target and effect are unresolved; the zero argument alone does not prove a zero-fill operation. The record schema, receiver type, and purpose of the snapshot are unknown. No runtime test was performed.",
     },
     "587B9E10": {
         "name_in_analysis": "FUN_587b9e10 / one-value 0x8001312B sender",
