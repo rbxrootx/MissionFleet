@@ -21,3 +21,6 @@ literally and is checked against the mapped image. RTTI establishes the child
 class and the caller establishes its parent-panel slot, but nested control
 roles, resource meanings, exception-cleanup invariants, and rendered
 appearance remain unverified. No emulator visual comparison was performed.
+
+The class's vtable `+0x10` input method is documented in
+[the clan-message input notes](current-main-communicator-clan-message-input-58823950.md).

@@ -267,7 +267,7 @@ ADDRESSES = (
     "58908650", "589086F0", "587B98B0", "58907820", "5897CC90", "5897CCA0",
     "58843190", "58842EF0", "58842FB0", "58843000", "587B9440", "587B9760",
     "587B9190", "587B9270", "587B9E10", "58848A00", "58847A50",
-    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58823270", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
+    "588338E0", "58833930", "58847AB0", "5881DE10", "58849B70", "58823270", "58823950", "58848BC0", "58848B40", "58848B90", "5884AB90", "58848E60", "58848870", "58848240", "58848680", "58849540", "588497E0", "5882A730",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -318,7 +318,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
-    "5882A730", "587EC290", "58823270",
+    "5882A730", "587EC290", "58823270", "58823950",
     "58846B00", "58846BD0", "58843060", "58842DC0", "58831D50", "587538B0", "58834190", "58839890", "589081E0", "589080E0", "587B6DD0", "58786A50", "58786B40", "587E7D40", "587BB160", "5882A680", "5886B9B0", "58831AE0", "58831B90", "587D6DB0", "58836AF0", "588DCF50", "587B4990", "588AEEF0", "58755520", "587B8110", "58906EA0", "58907100", "58907180", "589071A0",
     "5897D53A", "58907A90", "589073B0", "5896C460", "5896C010",
     "5896BF10", "5897CD4C", "5897D0BE", "5897D7BC", "5897D10B",
@@ -581,6 +581,12 @@ EVIDENCE = {
         "called_by": "Verified FUN_588DA9E0 calls it at 0x588DAA07 and 0x588DAA10 with ECX=[0x58A2459C], first stack argument equal to its receiver, and mode 5 or 1. Verified FUN_588DFFB0 calls it at 0x588E009C with the same ECX context, ESI as the first stack argument, and mode 0; the mode-zero push is at 0x588E0075. Ghidra function references and caller instruction streams agree.",
         "behavior": "Uses ECX as a context object, stack arg 1 as a subject object, and stack arg 2 as a mode; it returns with ret 8. It returns immediately if subject +0x100C is null. Modes 0-4 and 6 select corresponding MESSAGESTRING keys for sunk, out-of-field, wiped-out, lost-connection, retreated, and forced-retreat notices, formatting the subject's +0x12E8/+0x6C value into subject +0x3A0. Mode 5 formats MESSAGESTRING__START_OBSERVE into a stack buffer. The notice path passes 0xFFFF or 0xFFFF00 to FUN_5890BD90 according to subject +0x1258, calls FUN_58907990 with [0x58A248F8], and then attempts a virtual call through slot +4 of an object derived from DAT_58A246D8: when [DAT_58A246D8]+0x170 > 0x1D and +0x194 is nonzero, the object pointer is read from [[DAT_58A246D8]+0x194]+0x74; otherwise the decompilation leaves the local pointer zero before the dereference. Further state changes run only when context +0x105F0 equals 7: nonzero modes can write subject +0x664C=10000 and, for the active subject, update DAT_58A245A4+0x8D8 and context child +0xAC (1 for modes 1/4, otherwise 0); mode 0 calls FUN_587CC700(1) when subject +0x6648 is nonzero and sets subject +0x664C to 75, 125, 200, or 250 from the low five bits at [subject +0x100C]+4. The 722-byte extent ends at 0x587E8A22.",
         "uncertainty": "The message keys' localized text, subject/context object schemas, offsets +0x100C/+0x12E8/+0x6648/+0x664C, meaning of the conditional values, FUN_5890BD90/FUN_58907990/FUN_587CC700 contracts, and selected virtual method remain unresolved. Ghidra shows a null local pointer on one virtual-call selection path followed by an unconditional dereference; the runtime invariant that prevents this path from failing is not known. Known byte-matched callers exercise modes 0, 1, and 5; other switch cases are reconstructed from Ghidra output and mapped instructions but do not yet have caller evidence. No emulator runtime test was performed.",
+    },
+    "58823950": {
+        "name_in_analysis": "FUN_58823950 / CPannelCommunicatorClanMessage input handler",
+        "called_by": "The RTTI-backed CPannelCommunicatorClanMessage vtable at 0x5899DB64 contains FUN_58823950 in slot +0x10. Verified constructor FUN_58823270 installs this vtable at receiver +0 and the ID-panel constructor FUN_58849B70 stores this object at child slot +0x114. The exact original vtable pointer is checked by verify_current_communicator_rtti.py.",
+        "behavior": "Checks receiver state bit 0x0002, forwards the stack event pointer through a nested child chain using each child's virtual slot +0x10, then dispatches on the DWORD at event +4. The observed paths include values 0x102, 0x200, and 0x201 through 0x20A. They update receiver state and position fields including +0x50/+0x54/+0x84/+0x88/+0x8C/+0x90/+0x94, call child/scroll helpers FUN_58823110/FUN_588231A0/FUN_588231D0, and invoke control state helpers. The 926-byte body returns with ret 4 and contains 59 mapped operand targets.",
+        "uncertainty": "The event structure and ABI are not proven despite values resembling Windows keyboard/mouse messages. The nested child types, state/position field meanings, scroll units, indirect callback contracts, and rendered interaction remain unresolved. Several called methods in this class are still unmatched, and no emulator input or visual test was performed.",
     },
     "58823270": {
         "name_in_analysis": "FUN_58823270 / CPannelCommunicatorClanMessage constructor",
