@@ -322,6 +322,7 @@ ADDRESSES = (
     "58859DD0",
     "58858BD0",
     "5884D420",
+    "587A6FB0",
     "588958C0",
 )
 RELOCATION_OVERRIDES = {
@@ -396,6 +397,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58859DD0",
     "58858BD0",
     "5884D420",
+    "587A6FB0",
     "588958C0",
     # The legacy MSVC 6 executable cannot start in the current Windows
     # environment (WinError 623). These use the pinned clang-cl compiler;
@@ -6778,6 +6780,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra records exactly two incoming calls, both from byte-matched callers: FUN_588DEB30 at 0x588DF0CA and FUN_588E5150 at 0x588E62D0. Both set ECX from [0x58A245C4+0xC4] and push one DWORD, [ESI+0x398] XOR 0xAAAAAAAA; the target's `ret 4` confirms the one-stack-argument ABI.",
         "behavior": "Ghidra confirms one contiguous 432-byte body, [0x588958C0,0x58895A70), ending in `ret 4` at 0x58895A6D. The routine clamps a negative signed input to zero, stores the resulting counter at receiver +0x90, updates child controls through FUN_5877E740, and sets a number child through FUN_58907360. It compares the counter with thresholds at receiver +0xB8/+0xBC/+0xC0, selects checked global resource entries 0x870 and 0x9B1–0x9B3 for a child at +0x70, copies resource fields, and uses FUN_587316C0 to update a secondary display. One branch calls FUN_588EC100(0x21,0x82,0); values of zero or greater than +0xC0 tail-dispatch to FUN_588EC080. The candidate emits the exact mapped stream and records its 17 operand targets.",
         "uncertainty": "The counter's meaning, child roles, resource labels, helper contracts, and tail-dispatch visual/UI effect remain unknown. The ship-map counter/status interpretation is supported by both matched callers decoding the same field and invoking this routine during their update path, but no runtime capture or emulator test was performed.",
+    },
+    "587A6FB0": {
+        "name_in_analysis": "FUN_587a6fb0 / ship-map summary aggregation refresh",
+        "called_by": "Fresh Ghidra records exactly two direct incoming calls, both byte-matched: FUN_588DEB30 at 0x588DF125 and FUN_588E5150 at 0x588E6369. Both set ECX from [0x58A2459C+0x20C9C] and pass no stack arguments; the target ends with plain `ret`.",
+        "behavior": "Ghidra confirms one contiguous 339-byte body, [0x587A6FB0,0x587A7103), ending in `ret` at 0x587A7102. The routine reads the current object from [0x58A247F8+4] and loops over its count at +0x141C. It filters entries whose pointer at +0xE8C+i*4 is nonnull and begins with byte 5 or 6. For each, it reads a child from receiver +8+i*4; when the child's +0xF8 value is 0x40000000, it calls FUN_58853A00(index, child+0x9C-child+0x98). It accumulates maxima of child +0xAC into six local values selected by the current object's byte arrays at +0x21C and +0x1FC, and for entries with the latter byte zero it also stores child +0xA8 into the first two values. It passes the six results to FUN_58853A30. The candidate emits the mapped stream and records 12 operand targets.",
+        "uncertainty": "The two byte-array classifications, six bucket meanings, entry and child field semantics, and effects of FUN_58853A00/FUN_58853A30 remain unknown. Ghidra's loop dereferences the selected child without a visible null check; the population invariant is not established. The summary/aggregation interpretation follows the observed maxima and six-value helper call but has not been visually or at runtime confirmed. No emulator test was performed.",
     },
 }
 
