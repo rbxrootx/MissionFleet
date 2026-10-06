@@ -63,13 +63,28 @@ def main():
         raise AssertionError("Matched constructor no longer installs this RTTI vtable")
     if call_target(0x587EF639) != 0x58900E20:
         raise AssertionError("Fight-menu method no longer constructs CWarfogOnFight at this site")
+    if call_target(0x58804463) != 0x587FFBC0:
+        raise AssertionError("Deleting wrapper no longer calls the class destructor body")
+    if call_target(0x58804470) != 0x5897CC42:
+        raise AssertionError("Deleting wrapper deletion-thunk target changed")
+    if bytes_at(0x58804475, 3) != bytes.fromhex("83 C4 04"):
+        raise AssertionError("Deleting wrapper stack cleanup moved")
+    if bytes_at(0x5880447B, 3) != bytes.fromhex("C2 04 00"):
+        raise AssertionError("Deleting wrapper ret 4 moved")
     if bytes_at(0x587EF906, 1) != b"\xC3":
         raise AssertionError("Fight-menu method return moved")
     if bytes_at(0x587EF907, 9) != b"\xCC" * 9:
         raise AssertionError("Unexpected bytes between the method and the next function")
+    for address, expected in (
+        (0x587FF3DD, bytes.fromhex("C2 04 00")),
+        (0x587E8250, bytes.fromhex("C2 0C 00")),
+        (0x587E61C9, bytes.fromhex("C2 0C 00")),
+    ):
+        if bytes_at(address, len(expected)) != expected:
+            raise AssertionError(f"Unexpected virtual-method return at {address:08X}")
 
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    print("Matched constructor, fight-method-to-fog-constructor edge, and 1,495-byte boundary verified")
+    print("Constructor, fog creation, deleting-wrapper cleanup, and all vtable method boundaries verified")
 
 
 if __name__ == "__main__":

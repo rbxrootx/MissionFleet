@@ -330276,6 +330276,402 @@
         "behavior": "The complete 13-byte __thiscall body [0x5888CDF0,0x5888CDFD) copies its stack argument to receiver offset +0xBC and returns with ret 4. Literal instruction emission verifies the entire mapped function.",
         "uncertainty": "The receiver field's role and the values passed by its callers are unresolved. No runtime state-change test has been run."
       }
+    },
+    {
+      "address": "58804460",
+      "name": "FUN_58804460",
+      "size": 30,
+      "symbol": "_FUN_58804460",
+      "source": "src/client-current/Main/FUN_58804460.cpp",
+      "source_sha256": "dfa35ce0f8263e347fe9f6e99034d10e94383ebe087368d17da84fa8c69d8217",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "587FFBC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5897CC42",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58804460 / CPageFightOn_ControlMenuScreen deleting-destructor wrapper",
+        "called_by": "Slot +0x00 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180. Ghidra records this slot as the sole incoming reference. The wrapper calls original destructor body FUN_587FFBC0 and conditionally calls FUN_5897CC42(this).",
+        "behavior": "The complete mapped wrapper is 30 bytes [0x58804460,0x5880447E). It preserves this, calls FUN_587FFBC0, tests bit 0 of its stack flag, conditionally calls FUN_5897CC42(this), executes the omitted reachable add esp,4 at 0x58804475, and returns this with ret 4 at 0x5880447B. Ghidra indexes 27 bytes in two ranges; two INT3 bytes follow. Literal instruction emission checks the complete body.",
+        "uncertainty": "The wrapper flag's caller-level meaning and the deletion thunk's ultimate target are unresolved; no runtime destruction test has been run."
+      }
+    },
+    {
+      "address": "587FF340",
+      "name": "FUN_587ff340",
+      "size": 160,
+      "symbol": "_FUN_587ff340",
+      "source": "src/client-current/Main/FUN_587ff340.cpp",
+      "source_sha256": "d8a45905ad87ecdb4e300774523ee4a9fee52c067810c4a9810dfac979b3df58",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 73,
+          "target_address": "00000205",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "00000204",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "00000202",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "00000200",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 101,
+          "target_address": "FFFFFF00",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "587FF150",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "00000207",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 145,
+          "target_address": "587FD810",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587FF340 / CPageFightOn_ControlMenuScreen vtable method +0x10",
+        "called_by": "Slot +0x10 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 160-byte method [0x587FF340,0x587FF3E0) stores receiver +0x34 at +0x21F3C. If flag bit 1 at receiver +0x24 is set, it walks the linked structure at +0x3C using child virtual slot +0x10 and dispatches selected event IDs through FUN_587FF150 or FUN_587FD810. It returns the stored +0x21F3C value and uses ret 4. Literal instruction emission verifies the body.",
+        "uncertainty": "The event argument type, linked child type, recognized message meanings, and return-field role remain unknown. No runtime event-dispatch test has been run."
+      }
+    },
+    {
+      "address": "587E80B0",
+      "name": "FUN_587e80b0",
+      "size": 419,
+      "symbol": "_FUN_587e80b0",
+      "source": "src/client-current/Main/FUN_587e80b0.cpp",
+      "source_sha256": "084855fc0ff997fbfba0585466f3dd73147857abf7b6686f548c2cf51736f10e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "587E824E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 98,
+          "target_address": "587E824B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 133,
+          "target_address": "587E8207",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "58A24A44",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "5898C074",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "10624DD3",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "10624DD3",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 259,
+          "target_address": "10624DD3",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 288,
+          "target_address": "10624DD3",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 312,
+          "target_address": "5898C060",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 392,
+          "target_address": "00000000",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 407,
+          "target_address": "00000001",
+          "kind": "immediate",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587E80B0 / CPageFightOn_ControlMenuScreen vtable method +0x14",
+        "called_by": "Slot +0x14 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 419-byte method [0x587E80B0,0x587E8253) gates on receiver flag bit 0, updates each linked child from receiver +0x4C through virtual slot +0x14, and then, when receiver +0xBC is nonzero, queries a child through virtual slot +0x44 and transforms four receiver coordinates using map object +0x10524 and its scale at +0x114. It passes those values through DAT_5898C074/DAT_5898C060 callbacks and updates receiver +0x21C6C based on the six-unit coordinate comparison. It returns with ret 0x0C. Literal instruction emission verifies the full body.",
+        "uncertainty": "The linked child and callback types, receiver coordinate meanings, map scale units, and +0x21C6C state role are unresolved. No runtime drawing/update test has been run."
+      }
+    },
+    {
+      "address": "587E6010",
+      "name": "FUN_587e6010",
+      "size": 444,
+      "symbol": "_FUN_587e6010",
+      "source": "src/client-current/Main/FUN_587e6010.cpp",
+      "source_sha256": "9f4b74805a6828aba67e45e4cc7842df81b99322ae07eac1dfb0cf67b939a4f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 28,
+          "target_address": "587E61C6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "587E61C6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "587E61C6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 80,
+          "target_address": "58A24780",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "58A248D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 129,
+          "target_address": "587E61C6",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "587E6133",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 161,
+          "target_address": "FFFFFED4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "00000005",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 185,
+          "target_address": "FFFFFED4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 207,
+          "target_address": "00000240",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "00000200",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 264,
+          "target_address": "587B63B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 280,
+          "target_address": "587B63B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "587E61C5",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 314,
+          "target_address": "FFFFFED4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "58A246A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 324,
+          "target_address": "00000005",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 338,
+          "target_address": "FFFFFED4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "00000240",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 391,
+          "target_address": "00000200",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "58734920",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 417,
+          "target_address": "587B63B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 433,
+          "target_address": "587B63B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587E6010 / CPageFightOn_ControlMenuScreen vtable method +0x18",
+        "called_by": "Slot +0x18 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 444-byte method [0x587E6010,0x587E61CC) handles event code 0x0C by updating or notifying the object at receiver +0x10B90 for event arguments 0 and 1. For event code 2, it compares the sender with receiver fields +0x20E18/+0x20E1C, selects a resource offset using DAT_58A246A4, and calls FUN_58734920 and FUN_587B63B0 with stored child values. It returns zero with ret 0x0C on these paths. Literal instruction emission verifies the full body.",
+        "uncertainty": "The event argument meanings, child/resource types, resource-level thresholds, global identity, and user-visible effect are unresolved. No runtime event test has been run."
+      }
     }
   ]
 }

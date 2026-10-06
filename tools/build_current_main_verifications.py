@@ -377,6 +377,10 @@ ADDRESSES = (
     "58894A60",
     "587EBA90",
     "5888CDF0",
+    "58804460",
+    "587FF340",
+    "587E80B0",
+    "587E6010",
     "5897CE32",
     "588F7D30",
 )
@@ -471,6 +475,10 @@ SOURCE_COMPILER_ADDRESSES = {
     "58894A60",
     "587EBA90",
     "5888CDF0",
+    "58804460",
+    "587FF340",
+    "587E80B0",
+    "587E6010",
     "5897CE32",
     "588F7D30",
     "588F7D10",
@@ -797,6 +805,9 @@ FUNCTION_SIZE_OVERRIDES = {
     # Ghidra splits this deleting wrapper around reachable stack cleanup;
     # include add esp,4 through ret 4 at 0x58900E71.
     "58900E50": 36,
+    # Ghidra indexes 27 bytes in two ranges and omits the reachable add esp,4;
+    # include the complete wrapper through ret 4 at 0x5880447B.
+    "58804460": 30,
 }
 EVIDENCE = {
     "58900040": {
@@ -870,6 +881,30 @@ EVIDENCE = {
         "called_by": "Matched fight control-menu method FUN_587EF330 calls this function at 0x587EF8E2 with value 1. Ghidra also lists callers FUN_587B83E0, FUN_587ED610, FUN_587EE240, FUN_58806B60, FUN_587F7530, and FUN_588AB330/FUN_588AB050.",
         "behavior": "The complete 13-byte __thiscall body [0x5888CDF0,0x5888CDFD) copies its stack argument to receiver offset +0xBC and returns with ret 4. Literal instruction emission verifies the entire mapped function.",
         "uncertainty": "The receiver field's role and the values passed by its callers are unresolved. No runtime state-change test has been run.",
+    },
+    "58804460": {
+        "name_in_analysis": "FUN_58804460 / CPageFightOn_ControlMenuScreen deleting-destructor wrapper",
+        "called_by": "Slot +0x00 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180. Ghidra records this slot as the sole incoming reference. The wrapper calls original destructor body FUN_587FFBC0 and conditionally calls FUN_5897CC42(this).",
+        "behavior": "The complete mapped wrapper is 30 bytes [0x58804460,0x5880447E). It preserves this, calls FUN_587FFBC0, tests bit 0 of its stack flag, conditionally calls FUN_5897CC42(this), executes the omitted reachable add esp,4 at 0x58804475, and returns this with ret 4 at 0x5880447B. Ghidra indexes 27 bytes in two ranges; two INT3 bytes follow. Literal instruction emission checks the complete body.",
+        "uncertainty": "The wrapper flag's caller-level meaning and the deletion thunk's ultimate target are unresolved; no runtime destruction test has been run.",
+    },
+    "587FF340": {
+        "name_in_analysis": "FUN_587FF340 / CPageFightOn_ControlMenuScreen vtable method +0x10",
+        "called_by": "Slot +0x10 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 160-byte method [0x587FF340,0x587FF3E0) stores receiver +0x34 at +0x21F3C. If flag bit 1 at receiver +0x24 is set, it walks the linked structure at +0x3C using child virtual slot +0x10 and dispatches selected event IDs through FUN_587FF150 or FUN_587FD810. It returns the stored +0x21F3C value and uses ret 4. Literal instruction emission verifies the body.",
+        "uncertainty": "The event argument type, linked child type, recognized message meanings, and return-field role remain unknown. No runtime event-dispatch test has been run.",
+    },
+    "587E80B0": {
+        "name_in_analysis": "FUN_587E80B0 / CPageFightOn_ControlMenuScreen vtable method +0x14",
+        "called_by": "Slot +0x14 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 419-byte method [0x587E80B0,0x587E8253) gates on receiver flag bit 0, updates each linked child from receiver +0x4C through virtual slot +0x14, and then, when receiver +0xBC is nonzero, queries a child through virtual slot +0x44 and transforms four receiver coordinates using map object +0x10524 and its scale at +0x114. It passes those values through DAT_5898C074/DAT_5898C060 callbacks and updates receiver +0x21C6C based on the six-unit coordinate comparison. It returns with ret 0x0C. Literal instruction emission verifies the full body.",
+        "uncertainty": "The linked child and callback types, receiver coordinate meanings, map scale units, and +0x21C6C state role are unresolved. No runtime drawing/update test has been run.",
+    },
+    "587E6010": {
+        "name_in_analysis": "FUN_587E6010 / CPageFightOn_ControlMenuScreen vtable method +0x18",
+        "called_by": "Slot +0x18 of the RTTI-backed seven-entry CPageFightOn_ControlMenuScreen vtable at 0x5899D180, installed by matched constructor FUN_588011C0. No direct code caller was identified.",
+        "behavior": "The contiguous 444-byte method [0x587E6010,0x587E61CC) handles event code 0x0C by updating or notifying the object at receiver +0x10B90 for event arguments 0 and 1. For event code 2, it compares the sender with receiver fields +0x20E18/+0x20E1C, selects a resource offset using DAT_58A246A4, and calls FUN_58734920 and FUN_587B63B0 with stored child values. It returns zero with ret 0x0C on these paths. Literal instruction emission verifies the full body.",
+        "uncertainty": "The event argument meanings, child/resource types, resource-level thresholds, global identity, and user-visible effect are unresolved. No runtime event test has been run.",
     },
     "588F9900": {
         "name_in_analysis": "FUN_588F9900 / CWarehouseItemInfo destructor body",

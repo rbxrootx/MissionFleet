@@ -1,0 +1,31 @@
+# `CPageFightOn_ControlMenuScreen` vtable coverage
+
+The RTTI-backed class table at `0x5899D180` is named
+`.?AVCPageFightOn_ControlMenuScreen@@` through locator `0x589A7CE8` and
+TypeDescriptor `0x589CC260`. Matched constructor `FUN_588011C0` installs this
+table at `0x58801230`; matched code calls that constructor at `0x5878C650`.
+
+All seven entries now have byte-identical matches:
+
+| Slot | Function | Bytes | Evidence-backed role |
+|---:|---:|---:|---|
+| `+0x00` | `FUN_58804460` | 30 | Deleting-destructor wrapper; Ghidra's split 27-byte extent omitted reachable stack cleanup. |
+| `+0x04` | `FUN_587EF330` | 1,495 | Fight screen and fog-grid setup. |
+| `+0x08` | `FUN_587EF910` | 1,068 | Previously matched virtual method. |
+| `+0x0C` | `FUN_587FD890` | 6,314 | Previously matched virtual method. |
+| `+0x10` | `FUN_587FF340` | 160 | State-gated linked-child event dispatch. |
+| `+0x14` | `FUN_587E80B0` | 419 | Gated child updates and coordinate/callback handling. |
+| `+0x18` | `FUN_587E6010` | 444 | Event-code handling and child/resource updates. |
+
+The constructor, RTTI locator/name, all seven slot pointers, deleting-wrapper
+cleanup, direct fog-constructor edge, method returns, and byte boundaries are
+checked by `tools/verify_current_pagefight_control_method.py`. Each newly
+matched method is also verified against the complete mapped body by
+`tools/verify_client_matches.py`.
+
+The direct helper bodies called by these methods remain outside this slice:
+`FUN_587FFBC0` (destructor), `FUN_587FF150`, `FUN_587FD810`, `FUN_587B63B0`,
+and `FUN_58734920`. The event codes, child object types, coordinate units,
+resource-selection thresholds, and meaning of several state fields remain
+unresolved. This is static byte-match coverage; no runtime fight-screen test
+has been performed.
