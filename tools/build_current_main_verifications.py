@@ -23,6 +23,7 @@ ADDRESSES = (
     "588A6C70",
     "588A6D60",
     "588A70F0",
+    "588A6E30",
     "58805880",
     "588058D0",
     "588A6720",
@@ -362,6 +363,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "588A6C70",
     "588A6D60",
     "588A70F0",
+    "588A6E30",
     "58805880",
     "588058D0",
     "588A6720",
@@ -626,9 +628,9 @@ EVIDENCE = {
     },
     "587B9600": {
         "name_in_analysis": "FUN_587b9600 / fixed-code message wrapper",
-        "called_by": "Ghidra records four calls: byte-matched FUN_588A6A30 at 0x588A6BD9, unmatched FUN_588A6E30 at 0x588A6F3A, unmatched FUN_588A8A70 at 0x588A8BE3, and unmatched FUN_588060F0 at 0x58806139.",
+        "called_by": "Ghidra records four direct calls: byte-matched FUN_588A6A30 at 0x588A6BD9, byte-matched FUN_588A6E30 at 0x588A6F3A, unmatched FUN_588A8A70 at 0x588A8BE3, and unmatched FUN_588060F0 at 0x58806139. FUN_588A6E30 loads receiver fields +0x96 and +0x94, uses global 0x58A24588 in ECX, and passes those words as the two stack arguments.",
         "behavior": "Loads two stack arguments and calls byte-matched FUN_58970C70 with arguments (0x80010019, first_stack_argument, second_stack_argument, 0, 0, 0), then returns with ret 8. The indexed extent is 29 contiguous bytes through 0x587B961C.",
-        "uncertainty": "The meaning of code 0x80010019, the meanings and units of the forwarded words, and the three zero-valued fields are unknown. Three of its four direct callers are unmatched, and no emulator runtime test was performed.",
+        "uncertainty": "The meaning of code 0x80010019, the meanings and units of the forwarded words, and the three zero-valued fields are unknown. Two of its four direct callers are unmatched, and no emulator runtime test was performed.",
     },
     "588A6A30": {
         "name_in_analysis": "FUN_588a6a30 / mode-dependent paired-child update",
@@ -6533,6 +6535,12 @@ EVIDENCE = {
         "called_by": "Ghidra's reference dump and a scan of executable sections in the installed mapped Main.dll find one direct E8 call, at 0x587C0509, from byte-matched FUN_587BB700. The caller checks [0x58A245A8]+0x204 == 0x10, loads ECX from [0x58A245A8]+0x174, and pushes no stack argument. The call is in observed message case 0x80021103, event-record +0x0A == 1, after FUN_588A6C70 and FUN_588A6D60.",
         "behavior": "Ghidra and the mapped bytes give one contiguous 216-byte body, [0x588A70F0, 0x588A71C8), ending in RET. It branches on receiver byte +0x1DC. When zero, it walks eight dword pointers from +0x1BC and calls matched FUN_58903290 for each with ECX=array entry and stack values (selector, 8); selectors are 0x101, 0x113, 0x125, 0x137, 0x151, 0x163, 0x175, 0x187. When nonzero, it first walks pointer entries +0x1CC through +0x1D8 with the first four selectors, then entries +0x1BC through +0x1C8 with the last four selectors. Matched FUN_58903290 stores those supplied values at receiver +4/+8 and applies the observed child update path. After either branch, the function ORs bit 0 into the word at child +0xD4 +0x24, calls matched FUN_58902CE0 with ECX=child +0xD4 and argument 0x100, ORs 0xF into the word at child +0x15C +0x24, and sets byte child +0x15C +0x100 to 1.",
         "uncertainty": "The receiver/child types, meaning of byte +0x1DC, pointer-entry roles and selector meanings are unknown. The matched callees' local mechanics are documented, but the combined visual/game effect and emulator behavior have not been tested.",
+    },
+    "588A6E30": {
+        "name_in_analysis": "FUN_588a6e30 / gated child-state refresh",
+        "called_by": "Ghidra's reference dump and a Capstone scan of executable `.text` inventory ranges find one direct call, at 0x5888D52C, from byte-matched FUN_5888D390. That caller reads [0x58A245A8]+0x204, proceeds when the value is 8 or 9, loads ECX from [0x58A245A8]+0x174, and pushes no stack argument.",
+        "behavior": "Ghidra confirms one contiguous 312-byte body, [0x588A6E30, 0x588A6F68). It initializes receiver dword +0xAC to 0 and continues only when `(word at +0x24 & 0x1F00) == 0x0200`. It calls matched FUN_588EB130 with ECX=0x58A24810. A zero result sets +0xAC to 1 and returns. A nonzero result selects children from the global object at 0x58A246D8: when its +0x170 dword exceeds 2 and +0x194 is nonzero, the child at +8 receives matched FUN_58907990 with ECX=that child and stack value 0x58A248F8, then its vtable slot +4 is called with 0; similarly, when +0x170 exceeds 7, the child at +0x1C receives FUN_58907990 with stack value 0x58A248FC and then its slot +4 is called with 0. It calls matched FUN_587B9600 with receiver words +0x96 and +0x94 in that order, clears the low four bits of the word at child +0x194 +0x24, then restores ESI and tail-jumps through child +0x188 vtable slot +8. Ghidra's decompiler treats the final indirect jump as a call/return; the bytes show `pop esi; jmp eax`.",
+        "uncertainty": "The meaning of the 0x200 flag test, receiver +0xAC, global child counts/indices, and indirect vtable contracts are unknown. When the global child-count/pointer guards fail, the captured machine code zeros ECX before the following indirect slot call; the invariant that prevents a null dereference is not established. No emulator runtime test was performed.",
     },
 }
 
