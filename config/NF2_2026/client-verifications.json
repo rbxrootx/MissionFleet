@@ -310932,6 +310932,32 @@
         "behavior": "For each nonnull input pointer, copies 0x2B DWORDs (0xAC bytes) to receiver +0x270 or +0x324. It tests the input byte at +0x9B masked to the low nibble; when that value is 1, uses 0x50 as the middle argument, otherwise uses the input word at +0x9C. It calls FUN_5876BF40 with arguments 0x3FFF, that selected word, and 0x78, storing the return value at receiver +0x26C or +0x320. Each null pointer independently skips its copy and call, leaving the corresponding receiver fields untouched. The mapped function is 151 bytes, ends in ret 8 at 0x587B2024, and has 2 mapped operand targets.",
         "uncertainty": "The copied record schema and source-field meanings, purpose of the nibble check and selected word, allocation/resource semantics and ownership of FUN_5876BF40 results, and visible effect remain unknown. This exact instruction reconstruction is tied to two verified caller paths; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587B0860",
+      "name": "FUN_587b0860",
+      "size": 85,
+      "symbol": "_FUN_587b0860",
+      "source": "src/client-current/Main/FUN_587b0860.cpp",
+      "source_sha256": "91433c49da381a0f2cb0ae874ffdc66fd34b350a1cd82ff84acefe54d17a9a4f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587B0860 / record-backed child scalar update",
+        "called_by": "Verified FUN_587A6220 calls this helper at 0x587A6973 and FUN_588D84D0 calls it at 0x588D8C4B. Both pass three sign-extended signed-short values from record tables, between companion calls to FUN_587B0830 and FUN_587B0910; the caller decompilations expose these input origins.",
+        "behavior": "Multiplies each of the three 32-bit inputs by 10 using x86 integer operations. Stores input 0's product at receiver +0xB4, input 1's product at +0xB0, and input 2's product at +0xC4. If input 0's product is nonzero, sets +0xFC to 0x40000000 and +0xD4 to 100; when it is zero, those fields are left untouched. Stores 1 at +0xC8 if input 2's product is signed-greater than input 0's product, otherwise 0. The mapped function is 85 bytes, ends in ret 0xC at 0x587B08B2, and has no mapped operand targets.",
+        "uncertainty": "The record field meanings and units, semantic names of the receiver fields, reason for the nonzero conditional writes, meaning of the signed comparison result, and runtime/gameplay effect remain unknown. This exact instruction reconstruction is grounded in two verified record-builder callers; no emulator runtime test was performed."
+      }
     }
   ]
 }

@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0860",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -498,6 +498,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B08C0",
     "587B21F0",
     "587B1F90",
+    "587B0860",
 }
 SOURCE_COMPILER = {
     "kind": "clang-cl",
@@ -531,6 +532,12 @@ FUNCTION_SIZE_OVERRIDES = {
     "588D84D0": 2184,
 }
 EVIDENCE = {
+    "587B0860": {
+        "name_in_analysis": "FUN_587B0860 / record-backed child scalar update",
+        "called_by": "Verified FUN_587A6220 calls this helper at 0x587A6973 and FUN_588D84D0 calls it at 0x588D8C4B. Both pass three sign-extended signed-short values from record tables, between companion calls to FUN_587B0830 and FUN_587B0910; the caller decompilations expose these input origins.",
+        "behavior": "Multiplies each of the three 32-bit inputs by 10 using x86 integer operations. Stores input 0's product at receiver +0xB4, input 1's product at +0xB0, and input 2's product at +0xC4. If input 0's product is nonzero, sets +0xFC to 0x40000000 and +0xD4 to 100; when it is zero, those fields are left untouched. Stores 1 at +0xC8 if input 2's product is signed-greater than input 0's product, otherwise 0. The mapped function is 85 bytes, ends in ret 0xC at 0x587B08B2, and has no mapped operand targets.",
+        "uncertainty": "The record field meanings and units, semantic names of the receiver fields, reason for the nonzero conditional writes, meaning of the signed comparison result, and runtime/gameplay effect remain unknown. This exact instruction reconstruction is grounded in two verified record-builder callers; no emulator runtime test was performed.",
+    },
     "587B1F90": {
         "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",
         "called_by": "Verified FUN_587A6220 passes two pointers from selected-record entries at offsets +0xF0C/+0xF10; verified ship-map builder FUN_588D84D0 passes two per-entry local pointers at 0x588D88D3.",
