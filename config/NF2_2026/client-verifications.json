@@ -311010,6 +311010,32 @@
         "behavior": "Returns null unless the packed key's low byte is 1 and the signed record count at receiver +0x1C is positive. Scans records at receiver +0x28 with stride 0x390, requiring record byte +0 to equal 1, record byte +1 to equal the packed key's second byte, and record word +2 to equal the packed key's high word. On a match at index i, returns receiver dword +0x14 plus i*0xCE; otherwise returns null. The 84-byte function ends in ret 4 at 0x58778BD1 and has no mapped operand targets.",
         "uncertainty": "The record schema, packed-key field meanings, purpose and ownership of the secondary base at receiver +0x14, and the stored caller field's runtime effect remain unknown. This exact instruction reconstruction is tied to a verified caller; no emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58778C40",
+      "name": "FUN_58778c40",
+      "size": 81,
+      "symbol": "_FUN_58778c40",
+      "source": "src/client-current/Main/FUN_58778c40.cpp",
+      "source_sha256": "491038f191eb64e30f9bfe48432e83e02879d7ff8550f641f0d7c869357654f9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58778C40 / packed low-byte-0x04 record lookup",
+        "called_by": "Verified FUN_588E9940 calls it at 0x588E99FF, 0x588E9A14, 0x588E9A2C, and 0x588E9A44. Each call loads ECX from global 0x58A2481C and passes a packed key from EAX on the stack; the first three results are stored at [EBP+0xCD0], [EBP+0xCD4], and [EBP+0xCD8].",
+        "behavior": "Returns null unless the packed key's low byte is 4 and the signed count at receiver +0x58 is positive. Scans records at receiver +0x64 with stride 0x9C, requiring record byte +0 to equal 4, record byte +1 to equal the packed key's second byte, and record word +2 to equal the packed key's high word. Returns the matching record pointer or null if no record matches. The 81-byte function ends in ret 4 at 0x58778C8E and has no mapped operand targets.",
+        "uncertainty": "The record schema, key-field meanings, receiver type, and caller-visible semantics of the returned records remain unknown. The exact instruction stream is tied to four calls from one verified caller; no emulator runtime test was performed."
+      }
     }
   ]
 }
