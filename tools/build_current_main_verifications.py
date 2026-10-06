@@ -18,7 +18,7 @@ ADDRESSES = (
     "5897D0BE", "5897D7BC", "5897D10B", "5897D801", "5897CFFD",
     "5897D05B",
     "589728D0", "5890B370", "587B66E0", "588C60E0", "588D84D0",
-    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0860", "58778AD0",
+    "587B2A40", "587B4A30", "587B1850", "587B08C0", "587B21F0", "587B1F90", "587B0830", "587B0860", "587B0910", "58778AD0",
     "58972850", "5897CC3C", "5897CC36", "588C6090",
     "589724B0", "58972500",
     "5897D5D0",
@@ -498,7 +498,9 @@ SOURCE_COMPILER_ADDRESSES = {
     "587B08C0",
     "587B21F0",
     "587B1F90",
+    "587B0830",
     "587B0860",
+    "587B0910",
     "58778AD0",
 }
 SOURCE_COMPILER = {
@@ -539,11 +541,23 @@ EVIDENCE = {
         "behavior": "Reads signed count at receiver +0x1C and record base at +0x28. If count is nonpositive, returns null. Otherwise scans count records at stride 0x390, comparing the input 16-bit key with the word at each record +0x35E. Returns the matching record pointer or null when the scan ends; the function is 70 bytes and ends with ret 4 at 0x58778B13, with no mapped operand targets.",
         "uncertainty": "The catalog/record type, semantic meaning and scope of the 16-bit key, field names, and callers' user-visible effects remain unknown. The lookup behavior is directly shown by the mapped instructions and two verified caller paths; no emulator runtime test was performed.",
     },
+    "587B0830": {
+        "name_in_analysis": "FUN_587B0830 / two record-backed child scalars",
+        "called_by": "Verified FUN_587A6220 calls it at 0x587A6AC1 and FUN_588D84D0 calls it at 0x588D8C21. Both callers pass two sign-extended signed-short fields from their record tables before the companion three-scalar helper FUN_587B0860.",
+        "behavior": "Multiplies input 0 by 10 and stores it at receiver +0xC0; multiplies input 1 by 10 and stores it at +0xBC. It returns with ret 8. The 33-byte function has no mapped operand targets.",
+        "uncertainty": "The record fields' semantic names and units and the meaning of receiver +0xC0/+0xBC remain unknown. The exact instruction stream is tied to two verified record-builder callers; no emulator runtime test was performed.",
+    },
     "587B0860": {
         "name_in_analysis": "FUN_587B0860 / record-backed child scalar update",
-        "called_by": "Verified FUN_587A6220 calls this helper at 0x587A6973 and FUN_588D84D0 calls it at 0x588D8C4B. Both pass three sign-extended signed-short values from record tables, between companion calls to FUN_587B0830 and FUN_587B0910; the caller decompilations expose these input origins.",
+        "called_by": "Verified FUN_587A6220 calls it at 0x587A6AF3 and FUN_588D84D0 calls it at 0x588D8C4B. Both pass three sign-extended signed-short values from record tables, after FUN_587B0830 and before FUN_587B0910; the caller decompilations expose these input origins.",
         "behavior": "Multiplies each of the three 32-bit inputs by 10 using x86 integer operations. Stores input 0's product at receiver +0xB4, input 1's product at +0xB0, and input 2's product at +0xC4. If input 0's product is nonzero, sets +0xFC to 0x40000000 and +0xD4 to 100; when it is zero, those fields are left untouched. Stores 1 at +0xC8 if input 2's product is signed-greater than input 0's product, otherwise 0. The mapped function is 85 bytes, ends in ret 0xC at 0x587B08B2, and has no mapped operand targets.",
         "uncertainty": "The record field meanings and units, semantic names of the receiver fields, reason for the nonzero conditional writes, meaning of the signed comparison result, and runtime/gameplay effect remain unknown. This exact instruction reconstruction is grounded in two verified record-builder callers; no emulator runtime test was performed.",
+    },
+    "587B0910": {
+        "name_in_analysis": "FUN_587B0910 / child two-bit selector store",
+        "called_by": "Verified FUN_587A6220 calls it at 0x587A6B36 and FUN_588D84D0 calls it at 0x588D8C7D after their record-backed scalar helpers. Their decompilations show a two-bit selector extracted from the packed table at +0x274 using the current entry index.",
+        "behavior": "Copies its one 32-bit argument to receiver +0x80 and returns with ret 4. The mapped function is 13 bytes and has no operand targets.",
+        "uncertainty": "The meaning of the packed two-bit table value and receiver +0x80 remains unknown. This exact setter is grounded in both verified child-builder call paths; no emulator runtime test was performed.",
     },
     "587B1F90": {
         "name_in_analysis": "FUN_587B1F90 / dual optional record child setup",

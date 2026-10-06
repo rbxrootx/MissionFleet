@@ -1,24 +1,31 @@
-# Current Main record-backed child scalar update
+# Current Main record-backed child scalar setup
 
-`FUN_587B0860` is an 85-byte helper in the pinned mapped `Main.dll`. Its full
-instruction stream is preserved in
-[`FUN_587b0860.cpp`](../src/client-current/Main/FUN_587b0860.cpp).
+Three helpers form a shared scalar-setup sequence in the two verified child
+builders `FUN_587A6220` and `FUN_588D84D0`. Their complete instruction streams
+are preserved in [`FUN_587b0830.cpp`](../src/client-current/Main/FUN_587b0830.cpp),
+[`FUN_587b0860.cpp`](../src/client-current/Main/FUN_587b0860.cpp), and
+[`FUN_587b0910.cpp`](../src/client-current/Main/FUN_587b0910.cpp).
 
-Both verified child-building paths call it between `FUN_587B0830` and
-`FUN_587B0910`: the record-backed 32-slot builder `FUN_587A6220` and the
-ship-map builder `FUN_588D84D0` at `0x588D8C4B`. Their Ghidra decompilations show
-that all three values come from signed 16-bit fields in the selected record
-tables; the compiled caller streams confirm the mapped helper calls.
+Both paths first call `FUN_587B0830` (`FUN_587A6220` at `0x587A6AC1`,
+`FUN_588D84D0` at `0x588D8C21`). It multiplies its two sign-extended signed-short
+inputs by 10 and stores them at receiver `+0xC0` and `+0xBC`.
 
-The helper multiplies the three sign-extended inputs by 10. It stores the
-first product at receiver `+0xB4`, the second at `+0xB0`, and the third at
-`+0xC4`. When the first product is nonzero, it also writes `0x40000000` to
-`+0xFC` and `100` to `+0xD4`; the zero case leaves those fields unchanged. It
-stores `1` at `+0xC8` when the third product is signed-greater than the first,
-and `0` otherwise. The helper ends with `ret 0xC` and has no mapped address
-operands.
+They then call `FUN_587B0860` (`0x587A6AF3` and `0x588D8C4B`) with three
+sign-extended signed-short record values. This helper multiplies all three by
+10 and stores them at receiver `+0xB4`, `+0xB0`, and `+0xC4`. If the first
+product is nonzero, it also writes `0x40000000` to `+0xFC` and `100` to `+0xD4`;
+the zero case leaves those fields unchanged. It stores `1` at `+0xC8` when the
+third product is signed-greater than the first, and `0` otherwise.
 
-The three source record fields, receiver-field meanings, conditional state
-transition, and visible/gameplay effect remain unresolved. This reconstruction
-matches the mapped instruction stream and is tied to both callers; no emulator
-runtime comparison has been performed.
+Finally, each builder calls `FUN_587B0910` (`0x587A6B36` and `0x588D8C7D`). It
+stores its argument at receiver `+0x80`. Both caller decompilations show the
+argument extracted as a two-bit selector from the packed table at `+0x274`,
+using the current entry index. The Ghidra caller output and matched source
+streams establish these paths and input origins.
+
+All three functions end in `ret` instructions matching their argument counts
+(`ret 8`, `ret 0xC`, and `ret 4`) and have no mapped address operands. Their
+source fields, units, receiver-field meanings, conditional state transition,
+selector meaning, and visible/gameplay effects remain unresolved. Each
+instruction stream is checked independently against the mapped client; no
+emulator runtime comparison has been performed.
