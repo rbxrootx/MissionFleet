@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ADDRESSES = (
     "587B95E0",
+    "587B9620",
     "58805880",
     "588058D0",
     "588A6720",
@@ -332,6 +333,7 @@ SOURCE_COMPILER_ADDRESSES = {
     # environment (WinError 623). These all emit literal x86 instruction
     # bytes, and clang-cl is pinned by its SHA-256 in each match record.
     "587B95E0",
+    "587B9620",
     "58805880",
     "588058D0",
     "588A6720",
@@ -582,11 +584,17 @@ EVIDENCE = {
         "behavior": "Loads its one stack argument, then calls byte-matched FUN_58970C70 with arguments (0x80010034, stack_argument, 0, 0, 0, 0) and returns with ret 4. The complete indexed extent is 26 contiguous bytes through 0x587B95F9.",
         "uncertainty": "The meaning of code 0x80010034, the forwarded argument, and the four zero-valued fields is unknown. Three of its direct callers are unmatched, and no emulator runtime test was performed.",
     },
+    "587B9620": {
+        "name_in_analysis": "FUN_587b9620 / fixed-code message wrapper",
+        "called_by": "Ghidra records four calls: byte-matched FUN_588A6720 at 0x588A68FE and 0x588A693F, unmatched FUN_588A6A30 at 0x588A6C37, and unmatched FUN_588A8A70 at 0x588A8C6E. The first two matched calls pass receiver words +0x96 and +0x94, in that order. The latter two callers' behavior is not established; argument setup at 0x588A8C6E was not inspected.",
+        "behavior": "Loads its two stack arguments and calls byte-matched FUN_58970C70 with arguments (0x80010021, first_stack_argument, second_stack_argument, 0, 0, 0), then returns with ret 8. Ghidra's contiguous function extent is 29 bytes through 0x587B963C.",
+        "uncertainty": "The meaning of code 0x80010021, the meanings and units of the forwarded words, and the three zero-valued fields are unknown. Two direct callers are unmatched, and no emulator runtime test was performed.",
+    },
     "588A6720": {
         "name_in_analysis": "FUN_588a6720 / mode-dependent selected-object child update",
         "called_by": "Ghidra records four direct calls from three byte-matched functions: FUN_58805880 at 0x588058A9 passes its stack predicate directly; FUN_588058D0 at 0x58805909 calls on the +0x350 equality path with its first stack argument; FUN_58807910 calls at 0x58807C8D with iVar3 < 3 and at 0x58807CAE with 0 in its state-1 branch. The first two callers are also reached from the byte-matched queue dispatcher for ID 0x20.",
         "behavior": "As a __thiscall helper, branches on its one stack argument and receiver word +0x9C. For a zero argument it clears receiver +0x200 and sets +0xA0, then uses observed state values and selected-object dword +0x608C to choose embedded-child vtable calls and low-bit updates. States 4, 5, 6, 10, 11, 13, 14, and 16, plus state 15 when [0x58A245A8 + 0x1B8] is zero, run the captured reset/configuration path; state 12 sets receiver +0xA8 and runs a separate pair of child updates; other states run the generic child reset path. In the configuration path, receiver +0xA8 selects between calls through child fields +0x188/+0x1A8/+0x18C/+0x198 and +0x18C/+0x1AC, while selected-object state 0x40000000 or 0 selects further updates to child fields +0x194/+0x198/+0x1A8. States 8 and 9 recompute child +0x50 from the optional descriptor product word[descriptor+0x0C]*dword[descriptor+8], or zero, then call the child vtable slot at +8. For a nonzero argument, state 12 sets +0xA8, calls child +0x11C vtable slot +8, clears +0xA4, and returns; other states recompute +0x50 from that descriptor product, call the same slot, clear +0xA0, and return. The two direct helpers are FUN_587B95E0(1) and FUN_587B9620 with receiver words +0x94/+0x96. The complete indexed extent is 709 contiguous bytes through 0x588A69E4.",
-        "uncertainty": "The receiver and child types, meanings of the +0x9C state values and selected-object +0x608C value, indirect vtable contracts, descriptor units, and visible effect remain unknown. FUN_587B9620 is unmatched, and no emulator runtime test was performed.",
+        "uncertainty": "The receiver and child types, meanings of the +0x9C state values and selected-object +0x608C value, indirect vtable contracts, descriptor units, and visible effect remain unknown. The fixed-code meaning and units passed to FUN_587B9620 are still unknown. No emulator runtime test was performed.",
     },
     "58805880": {
         "name_in_analysis": "FUN_58805880 / queue ID 0x20 conditional selected-value update",

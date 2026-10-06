@@ -46,4 +46,6 @@ The receiver and embedded-child types, state meanings, object `+0x608C` meaning,
 descriptor units, virtual method contracts, and visible effect are unknown.
 `FUN_587B95E0` now matches byte-for-byte; its fixed code and forwarded argument
 are documented in the [wrapper notes](current-main-587b95e0-fixed-code-message-wrapper.md).
-`FUN_587B9620` remains unmatched. No emulator runtime test has been performed.
+`FUN_587B9620` now matches byte-for-byte; its fixed code and two forwarded words
+are documented in the [second wrapper notes](current-main-587b9620-fixed-code-message-wrapper.md).
+No emulator runtime test has been performed.
