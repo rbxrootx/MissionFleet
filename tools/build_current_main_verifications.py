@@ -1110,6 +1110,10 @@ MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES = (
 ADDRESSES += MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES)
 
+MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES = ("587EB370", "5897CE98")
+ADDRESSES += MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -11109,6 +11113,51 @@ MAIN_BATTLE_ROOM_20115_EVIDENCE = {
     for address in MAIN_BATTLE_ROOM_20115_ADDRESSES
 }
 EVIDENCE.update(MAIN_BATTLE_ROOM_20115_EVIDENCE)
+
+
+MAIN_REPLAY_SAVE_SERIALIZER_PARENTS = {
+    "587EB370": (
+        "Byte-matched FUN_587F8760 at 0x587FAE93, after its observed "
+        "receiver +0x21C38 nonzero gate; the caller pushes the mapped "
+        "SaveFile_0001 literal at 0x5899C908."
+    ),
+    "5897CE98": "FUN_587EB370 at 0x587EB48F.",
+}
+MAIN_REPLAY_SAVE_SERIALIZER_BEHAVIOR = {
+    "587EB370": (
+        "Builds the observed %s/%s.nsf path using the ReplayFile literal and "
+        "the indirect file callbacks. If the initial open fails, it inspects "
+        "the existing suffix and tries the observed %s/%s_%04d.nsf form. On "
+        "success it passes the FleetMission Battle Save file header literal "
+        "to an indirect callback with the receiver buffer at +0x21918, then "
+        "initializes adjacent observed header fields. It walks records linked "
+        "from [0x58A247F8]+0x0C and passes 0x114-byte spans beginning at each "
+        "record +0x350, together with the active handle, to an indirect callback."
+    ),
+    "5897CE98": (
+        "A six-byte indirect jump through the DWORD stored at 0x5898C26C; "
+        "the destination is not resolved by the available static image."
+    ),
+}
+MAIN_REPLAY_SAVE_SERIALIZER_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / replay and battle-save serializer closure member"
+        ),
+        "called_by": MAIN_REPLAY_SAVE_SERIALIZER_PARENTS[address],
+        "behavior": MAIN_REPLAY_SAVE_SERIALIZER_BEHAVIOR[address],
+        "uncertainty": (
+            "The instruction ranges and control flow come from fresh Ghidra "
+            "output over the pinned mapped Main.dll. The meaning of the "
+            "serialized fields and linked-record types, file callback and "
+            "import contracts, exact filename-selection policy, and runtime "
+            "effect are not established. No original-client or emulator "
+            "save/replay test has been performed."
+        ),
+    }
+    for address in MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES
+}
+EVIDENCE.update(MAIN_REPLAY_SAVE_SERIALIZER_EVIDENCE)
 
 
 def sha256(path):

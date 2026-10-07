@@ -412998,6 +412998,360 @@
         "behavior": "Selects a map-resource record using receiver +0xA06. Depending on the record type and map identifier, it delegates to one of five cell-status helpers; several resource types return an observed success code directly.",
         "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
       }
+    },
+    {
+      "address": "587EB370",
+      "name": "FUN_587eb370",
+      "size": 1808,
+      "symbol": "_FUN_587eb370",
+      "source": "src/client-current/Main/FUN_587eb370.cpp",
+      "source_sha256": "77b58830cf9c0e529deafc1c6247c6b061dc46ed33f1395e97a9891c1fd06ab0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EB370",
+          "size": 221,
+          "symbol": "_FUN_587eb370_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "589C8EE0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5898C148",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "589C8EE0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5899C034",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "587EB4EE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "587EB49A",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587EB450",
+          "size": 1239,
+          "symbol": "_FUN_587eb370_segment_01",
+          "relocations": [
+            {
+              "offset": 64,
+              "target_address": "5897CE98",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "589C8EE0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5899C024",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "587EBA71",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "5899C004",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "589C3144",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 234,
+              "target_address": "589C31AC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "58789FB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "5898C158",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58A242F8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 591,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 611,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 622,
+              "target_address": "587EBA71",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 709,
+              "target_address": "587EB7FD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 762,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 793,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 824,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 855,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 872,
+              "target_address": "587EB733",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 920,
+              "target_address": "58A284C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 925,
+              "target_address": "5898CE74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 930,
+              "target_address": "5899BFF8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 937,
+              "target_address": "5898C3CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1225,
+              "target_address": "587EBA66",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587EB930",
+          "size": 348,
+          "symbol": "_FUN_587eb370_segment_02",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "587EBA45",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "587EBA45",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "587EB930",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "587EB6C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587eb370 / replay and battle-save serializer closure member",
+        "called_by": "Byte-matched FUN_587F8760 at 0x587FAE93, after its observed receiver +0x21C38 nonzero gate; the caller pushes the mapped SaveFile_0001 literal at 0x5899C908.",
+        "behavior": "Builds the observed %s/%s.nsf path using the ReplayFile literal and the indirect file callbacks. If the initial open fails, it inspects the existing suffix and tries the observed %s/%s_%04d.nsf form. On success it passes the FleetMission Battle Save file header literal to an indirect callback with the receiver buffer at +0x21918, then initializes adjacent observed header fields. It walks records linked from [0x58A247F8]+0x0C and passes 0x114-byte spans beginning at each record +0x350, together with the active handle, to an indirect callback.",
+        "uncertainty": "The instruction ranges and control flow come from fresh Ghidra output over the pinned mapped Main.dll. The meaning of the serialized fields and linked-record types, file callback and import contracts, exact filename-selection policy, and runtime effect are not established. No original-client or emulator save/replay test has been performed."
+      }
+    },
+    {
+      "address": "5897CE98",
+      "name": "FUN_5897ce98",
+      "size": 6,
+      "symbol": "_FUN_5897ce98",
+      "source": "src/client-current/Main/FUN_5897ce98.cpp",
+      "source_sha256": "bd9f2c1cc9e0c74da970d03b9347445bc29eb5f8ce533c389105a646cade5005",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CE98",
+          "size": 6,
+          "symbol": "_FUN_5897ce98_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C26C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ce98 / replay and battle-save serializer closure member",
+        "called_by": "FUN_587EB370 at 0x587EB48F.",
+        "behavior": "A six-byte indirect jump through the DWORD stored at 0x5898C26C; the destination is not resolved by the available static image.",
+        "uncertainty": "The instruction ranges and control flow come from fresh Ghidra output over the pinned mapped Main.dll. The meaning of the serialized fields and linked-record types, file callback and import contracts, exact filename-selection policy, and runtime effect are not established. No original-client or emulator save/replay test has been performed."
+      }
     }
   ]
 }
