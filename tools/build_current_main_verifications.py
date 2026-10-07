@@ -1082,6 +1082,13 @@ MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
 ADDRESSES += MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES)
 
+MAIN_DISPSCREEN_80023102_ADDRESSES = (
+    "587537E0", "58824610", "58826F60", "588272D0",
+    "58827610", "588285B0", "58842980",
+)
+ADDRESSES += MAIN_DISPSCREEN_80023102_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_DISPSCREEN_80023102_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9863,6 +9870,91 @@ MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_EVIDENCE = {
     for address in MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES
 }
 EVIDENCE.update(MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_EVIDENCE)
+
+
+MAIN_DISPSCREEN_80023102_PARENTS = {
+    "587537E0": (
+        "FUN_588285B0 at 0x588286D8, 0x588287D3, 0x58828904, and "
+        "0x58828A02; FUN_588281A0 at 0x588281E6"
+    ),
+    "58824610": "FUN_58842980 tail-jumps here at 0x588429DE",
+    "58826F60": "FUN_588272D0 at 0x588275E7",
+    "588272D0": "FUN_58824610 tail-jumps here at 0x58824622",
+    "58827610": "FUN_58824610 at 0x58824613",
+    "588285B0": "FUN_58824610 at 0x5882461A",
+    "58842980": (
+        "Byte-matched FUN_5881DC30 calls this at 0x5881DCCA after copying "
+        "the 0x80023102 response header and allocating its 0x1C-byte records. "
+        "Byte-matched FUN_588C4210 enters FUN_5881DC30 at 0x588C42A6 in case "
+        "0x80023102."
+    ),
+}
+MAIN_DISPSCREEN_80023102_BEHAVIOR = {
+    "587537E0": (
+        "Scans 0x48-byte table rows between the receiver's begin/end pointers. "
+        "When row DWORDs +0 and +4 equal its two keys, it returns row DWORD +8; "
+        "otherwise it returns zero. The mapped code routes invalid iterator "
+        "states to FUN_5897CC72."
+    ),
+    "58824610": (
+        "Calls FUN_58827610, FUN_588285B0, and FUN_588272D0 in that order, "
+        "preserving the receiver between calls."
+    ),
+    "58826F60": (
+        "Updates two child rows using the receiver's +0x26C selector and "
+        "related arrays around +0x240/+0x268. It toggles low-bit flags, copies "
+        "or clears text through the observed string callback, adjusts child "
+        "flag masks, and updates text lengths."
+    ),
+    "588272D0": (
+        "Counts three global request slots at 0x58A245B4+4000 where values 1 "
+        "and 2 contribute attack and defense counts. It formats total, attack, "
+        "and defense labels with DISPSCREEN_CMMDIP_AS_NUMOF_* keys; rebuilds "
+        "per-request strings with the observed CONTENT_ATTACKREQUEST and "
+        "CONTENT_DEFENSEREQUEST keys; allocates their pointer list; then calls "
+        "FUN_58826F60."
+    ),
+    "58827610": (
+        "Refreshes text controls from global request data. It reads the "
+        "0x1C-byte records rooted at 0x58A245B4+0x12C4, filters the observed "
+        "record type words, formats defense-request labels using "
+        "DISPSCREEN_CMMDIP_IR_DEFENSE and a static name table, builds and "
+        "releases a text-pointer array, and formats attack/support and "
+        "defense/support controls from the corresponding global fields."
+    ),
+    "588285B0": (
+        "Rebuilds several repeated child rows from request-related global "
+        "arrays. It resets prior row state, resolves keys through "
+        "FUN_587537E0, obtains associated display data through FUN_58755FF0, "
+        "copies observed label strings into child controls, and updates child "
+        "flag bits and per-row stored values."
+    ),
+    "58842980": (
+        "Tests the 5-bit control state at child objects receiver +0x160 and "
+        "+0x16C. State 1 or 2 on the first child selects FUN_5874DDD0; when "
+        "that gate fails, state 1 or 2 on the second child tail-jumps to "
+        "FUN_58824610 to refresh the three request/display groups."
+    ),
+}
+MAIN_DISPSCREEN_80023102_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / 0x80023102 request-display closure member"
+        ),
+        "called_by": MAIN_DISPSCREEN_80023102_PARENTS[address],
+        "behavior": MAIN_DISPSCREEN_80023102_BEHAVIOR[address],
+        "uncertainty": (
+            "The installed Main.dll Ghidra decompilation and mapped bytes "
+            "establish the stated message branch, field accesses, string keys, "
+            "and helper calls. The response record schema, exact class and "
+            "control types, localization text, request semantics, ownership "
+            "rules, and visible/runtime effect remain unresolved. No emulator "
+            "runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_DISPSCREEN_80023102_ADDRESSES
+}
+EVIDENCE.update(MAIN_DISPSCREEN_80023102_EVIDENCE)
 
 
 def sha256(path):

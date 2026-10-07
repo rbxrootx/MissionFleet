@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,137 matches cover 2,601,029 bytes (24.8420%) and are verified
+The current 8,144 matches cover 2,605,122 bytes (24.8811%) and are verified
 individually at 100.0% by objdiff.
+The installed client's `0x80023102` request/display path adds seven exact
+functions / 4,093 bytes, tied through byte-matched dispatcher and response
+helpers to the displayed request rows. Its call chain, localization keys,
+exact ranges, and unresolved response/control meanings are recorded in
+[the subsystem evidence](docs/current-main-dispscreen-80023102.md).
 The PageFight control-menu event actions rooted at `FUN_587F7530` add seven
 byte-identical functions / 4,357 bytes. Their `CPageFightOn_ControlMenuScreen`
 event-code gate, selector branches, exact closure, and unknown control/protocol
