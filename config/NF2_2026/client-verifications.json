@@ -446518,6 +446518,71 @@
         "behavior": "Fresh Ghidra body exports agree on ranges [0x588D24F0, 0x588D250B) (27 bytes / 8 instructions) and [0x588D250E, 0x588D2514) (6 bytes / 3 instructions). The mapped gap contains a reachable add esp,4 at 0x588D250B after the conditional helper call; the reconstruction includes it as a third exact range, for 36 bytes / 12 instructions total. The method writes vtable 0x589A0F38 to this, calls FUN_58741990, tests bit 0 of the stack value at [esp+8], and, when set, passes this to byte-matched FUN_5897CC42. It then restores the stack, returns this in EAX, and ends with ret 4.",
         "uncertainty": "FUN_58741990 is not byte-verified, so its effects and its role in the CSantaAircraft/CAircraft hierarchy remain unresolved. The low-bit stack flag's semantic meaning and the ownership or deallocation behavior behind FUN_5897CC42 are not established by this body. Slot 0 and the conditional helper pattern are consistent with destructor dispatch, but that interpretation remains an inference. No runtime or emulator lifecycle test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
       }
+    },
+    {
+      "address": "588D26D0",
+      "name": "FUN_588d26d0",
+      "size": 134,
+      "symbol": "_FUN_588d26d0",
+      "source": "src/client-current/Main/FUN_588d26d0.cpp",
+      "source_sha256": "b0472790b6e4f385e956003c28738531d368c86b648b4ecf1d7a5967cb3c4ea4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D26D0",
+          "size": 134,
+          "symbol": "_FUN_588d26d0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5873C4A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "58A2468C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58A2468C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D26D0 / CSantaAircraft vtable slot +0x18",
+        "called_by": "Fresh Ghidra edge exports record this method in vtable slot +0x18 at cell 0x589A0F50 of the RTTI-identified .?AVCSantaAircraft@@ table at 0x589A0F38; both mapped cell and edge target are 0x588D26D0. Matched constructor FUN_588D2480 installs the same table. No incoming direct CALL edge was found, so entry is virtual dispatch.",
+        "behavior": "Fresh Ghidra body exports agree on the complete contiguous range [0x588D26D0, 0x588D2756), 134 bytes / 39 instructions. The method passes its stack argument to FUN_5873C4A0, tests the resulting EAX, and returns 0 on the zero branch. Otherwise it selects ECX from the global object at DAT_58A2468C using fields +0x170 and +0x194, passes DAT_58A248F8 to byte-matched FUN_58907990, then branches on the same global fields and performs an indirect call through the selected object's vtable with argument 0; both nonzero paths return 1. Its fallback block zeroes ECX before dereferencing it. A separate Ghidra decompilation of FUN_5873C4A0 shows aircraft state writes and an 'Aircraft Damaged' diagnostic string, but does not establish this caller's EAX contract.",
+        "uncertainty": "FUN_5873C4A0 is not byte-verified and Ghidra types it void even though this caller tests EAX immediately after the call. The fallback path at 0x588D273F sets ECX to zero before dereferencing [ECX] at 0x588D2741; its reachability and runtime environment are unresolved. The stack argument, global fields, selected virtual callback, and FUN_58907990 value semantics have not been identified. No runtime or emulator test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
+      }
     }
   ]
 }
