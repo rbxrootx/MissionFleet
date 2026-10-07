@@ -917,6 +917,15 @@ CPANNEL_OPTION_VTABLE = {
     "588A3200": "CPannelOption::vftable[6]",
 }
 
+# Shared record-to-child visual refresh and its numeric display formatting
+# helpers. Incoming panel callbacks are cited as context; this batch closes
+# the selected refresh function's direct callees.
+VISUAL_REFRESH_ADDRESSES = (
+    "58868110", "587C9E80", "587C9D80",
+)
+ADDRESSES += VISUAL_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(VISUAL_REFRESH_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8270,6 +8279,32 @@ EVIDENCE.update({
         "uncertainty": CPANNEL_OPTION_UNCERTAINTY,
     }
     for address in CPANNEL_OPTION_ADDRESSES
+})
+
+VISUAL_REFRESH_BEHAVIOR = {
+    "58868110": "Uses the receiver's encoded record fields to select bounded catalog records, stores those records on child controls, and copies observed record fields into the child data blocks. It also updates three numeric child controls by calling FUN_587c9e80 and passes other computed values to matched FUN_58907360. The catalog field names and visible labels are not recovered.",
+    "587C9E80": "Stores the supplied numeric value at receiver offsets +0x64 and +0x60, then calls FUN_587c9d80 to decompose the value into display-digit fields.",
+    "587C9D80": "Computes the displayed decimal digit count from receiver +0x60, unless receiver +0x5C supplies a count; writes decimal digits into the fields beginning at +0x68 and emits the observed sign marker using receiver +0xFC. Ghidra identifies two instruction ranges separated by a three-byte non-body gap.",
+}
+VISUAL_REFRESH_CALLERS = {
+    "58868110": "Ghidra xrefs show open FUN_58868a00 calls this at 0x58868A72 and open FUN_58869cf0 calls it at 0x58869D72. Both callers copy a 0x60-dword state block to receiver +0xCC before the refresh; FUN_58868a00 also calls matched FUN_5886ba60.",
+    "587C9E80": "Directly called at 0x58868801, 0x58868863, and 0x588688C1 from FUN_58868110 while preparing the three numeric child controls.",
+    "587C9D80": "Directly called by FUN_587c9e80 at 0x587C9E8A after the numeric value is stored.",
+}
+VISUAL_REFRESH_UNCERTAINTY = (
+    "The mapped image and Ghidra ranges/xrefs support the instruction-level behavior and the exact selected direct-call closure. "
+    "The owning class/vtable, catalog slot meanings, actual visible stat labels, encoding semantics of source fields, and live rendering effects "
+    "remain unresolved. No original-client or emulator visual test was performed."
+)
+
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / shared record-display refresh helper",
+        "called_by": VISUAL_REFRESH_CALLERS[address],
+        "behavior": VISUAL_REFRESH_BEHAVIOR[address],
+        "uncertainty": VISUAL_REFRESH_UNCERTAINTY,
+    }
+    for address in VISUAL_REFRESH_ADDRESSES
 })
 
 
