@@ -1051,6 +1051,14 @@ MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES = (
 ADDRESSES += MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES)
 
+CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES = (
+    "5877CBE0", "587E0D80", "5881E430", "5881F2F0", "588BC600",
+    "588BCFD0", "588F4500", "588F4527", "588F7580", "588FC050",
+    "588FC8E0", "588FCEF0", "588FEB40",
+)
+ADDRESSES += CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9202,6 +9210,166 @@ MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE = {
     },
 }
 EVIDENCE.update(MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE)
+
+CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE = {
+    "588FCEF0": {
+        "name_in_analysis": "FUN_588fcef0 / message 0x80027101 state route",
+        "called_by": (
+            "Byte-matched FUN_587bb700 compares EAX with 0x80027101 at "
+            "0x587C07EA; its conditional branch at 0x587C07F5 reaches the "
+            "direct call to this entry at 0x587C123B. The focused verifier "
+            "checks the compare, branch target, call, and exact helper closure."
+        ),
+        "behavior": (
+            "The root clears receiver fields +0x94/+0x98 and sets bit 1 at "
+            "+0x24. If param_2 is nonzero, it reports that value through "
+            "FUN_588f74c0/FUN_588f7580 and returns. Otherwise it reports "
+            "status 0, calls FUN_588fc8e0 with receiver +0x90, then branches "
+            "on param_3: zero calls FUN_587e0d80, FUN_588bcfd0, and "
+            "FUN_587da120; values 1 or 2 call FUN_588fc050. These paths and "
+            "other non-early-return values reach the 100-entry clear in "
+            "FUN_588feb40."
+        ),
+        "uncertainty": (
+            "The five parameters and receiver offsets have no recovered type "
+            "names or units. The dispatcher establishes message code "
+            "0x80027101 for this direct entry, but the full server protocol, "
+            "callback effects, and runtime UI result remain unverified."
+        ),
+    },
+    "5877CBE0": {
+        "name_in_analysis": "FUN_5877cbe0 / three-child state flag update",
+        "called_by": "FUN_588bc600 calls this helper with argument 1 after processing each accepted linked-list entry.",
+        "behavior": (
+            "For a nonzero argument, writes 1 at receiver byte offset 600 "
+            "(decimal) and clears the "
+            "low four bits of the word at +0x24 on children +0x20C, +0x210, "
+            "and +0x214. For zero, writes 0 at +600 and calls FUN_5877b1f0."
+        ),
+        "uncertainty": "The receiver type and the meaning of its three child flags are unresolved.",
+    },
+    "587E0D80": {
+        "name_in_analysis": "FUN_587e0d80 / selected-record resource update",
+        "called_by": "FUN_588fcef0 calls this helper only in its param_3 == 0 branch, passing the first value through param_5.",
+        "behavior": (
+            "Looks up the supplied value through FUN_588f4060. If the result "
+            "matches receiver +0xD78, tries FUN_587d8ff0 and then "
+            "FUN_587d8f90 to update +0xE10, invokes the corresponding update "
+            "helper, refreshes through FUN_588e9880/FUN_587df580, and releases "
+            "the supplied value through FUN_588f41e0. A changed lookup refreshes "
+            "and releases the old +0xD78 value."
+        ),
+        "uncertainty": "The resource type and the identity or presentation meaning of fields +0xD78/+0xE10 are unresolved.",
+    },
+    "5881E430": {
+        "name_in_analysis": "FUN_5881e430 / three-pair selection flags",
+        "called_by": "FUN_5881f2f0 calls this helper; Ghidra also records callers outside this closure.",
+        "behavior": (
+            "Scans three pairs from receiver +0x74. For the selected index, "
+            "sets bit 0 on both child words at +0x24, clears each child's "
+            "+0x50 value, and writes the selected child pointers/index at "
+            "receiver +0x70/+0x80/+0xA0. Other pairs have bit 0 cleared."
+        ),
+        "uncertainty": "The paired child classes and the selected-index semantics are unresolved.",
+    },
+    "5881F2F0": {
+        "name_in_analysis": "FUN_5881f2f0 / linked-item child reset",
+        "called_by": "FUN_588fc050 calls this helper when the current global object's +0x50 value equals an incoming array value.",
+        "behavior": (
+            "Clears receiver fields +0xCC/+0x60, resets +0x50 and bit 0 on "
+            "four child pointers at +0x84..+0x90, clears bit 0 on child +0x94, "
+            "zeros bytes +0x9C/+0xD0, then calls FUN_5881e430 and four further "
+            "update helpers."
+        ),
+        "uncertainty": "The child pointers, helper contracts, and reason for the matched-value reset remain unknown.",
+    },
+    "588BC600": {
+        "name_in_analysis": "FUN_588bc600 / linked-entry slot rebuild",
+        "called_by": "FUN_588fc050 calls this helper after processing its supplied values.",
+        "behavior": (
+            "Clears its 128-slot working arrays, walks the linked list at the "
+            "global object's +0x24, and accepts entries whose observed value "
+            "derived from +0xA4 is not 0x50, 0x51, or 0x52 and whose +0xB8 "
+            "equals -1. It copies several entry fields into receiver arrays, "
+            "calls three entry helpers and FUN_5877cbe0(1), then reports the "
+            "accepted count through FUN_58907360."
+        ),
+        "uncertainty": "The linked-list record type, filter field meaning, and 128-slot array schema are unresolved.",
+    },
+    "588BCFD0": {
+        "name_in_analysis": "FUN_588bcfd0 / child text and slot reset",
+        "called_by": "FUN_588fcef0 calls this helper only in its param_3 == 0 branch.",
+        "behavior": (
+            "Resets bytes +0xAC..+0xAE, copies a global value into +0x3DC, "
+            "calls FUN_589087f0 twice, formats labels from entries in a global "
+            "linked list through the observed localization/format helpers, "
+            "clears two 100-entry arrays, and clears bit 0 on seven child words "
+            "at +0x24."
+        ),
+        "uncertainty": "The seven children, formatted label schema, and meaning of the cleared arrays are not recovered.",
+    },
+    "588F4500": {
+        "name_in_analysis": "FUN_588f4500 / short list-removal entry",
+        "called_by": "FUN_588fc050 calls this entry once for each supplied value; its exact body transfers to FUN_588f4527.",
+        "behavior": "The exact 39-byte body contains a conditional transfer into the adjacent 236-byte removal routine FUN_588f4527.",
+        "uncertainty": "The original type of the list and the virtual destruction contract are unresolved.",
+    },
+    "588F4527": {
+        "name_in_analysis": "FUN_588f4527 / linked-list entry removal",
+        "called_by": "FUN_588f4500 transfers here; the caller is reached from FUN_588fc050.",
+        "behavior": (
+            "Searches the observed linked-list structures by a supplied value, "
+            "clears a matching global pointer or slot when applicable, unlinks "
+            "the matching nodes, updates list endpoints/counts, and invokes "
+            "their virtual slot-zero teardown callbacks."
+        ),
+        "uncertainty": "The list/node types, matching-key meaning, and virtual teardown effects are unresolved.",
+    },
+    "588F7580": {
+        "name_in_analysis": "FUN_588f7580 / trading status message selection",
+        "called_by": "FUN_588fcef0 reports its nonzero status argument here; matched warehouse-manager and trade-panel methods also reference it.",
+        "behavior": (
+            "Stores a global value at receiver +4; observed cases 0x00..0x12 "
+            "and 0x15..0x18 select literal or localized text passed to "
+            "FUN_588f7230. "
+            "Value 0x16 selects the literal \"You cannot trade DD-MP.\"; "
+            "unhandled values take the observed FUN_5876baf0/FUN_58764d30 path."
+        ),
+        "uncertainty": "The status-code enum, localization keys' complete policy, and the displayed window behavior are unresolved.",
+    },
+    "588FC050": {
+        "name_in_analysis": "FUN_588fc050 / supplied-item removal and slot rebuild",
+        "called_by": "FUN_588fcef0 calls this helper for param_3 values 1 or 2, forwarding param_4 and param_5.",
+        "behavior": (
+            "For each supplied value, conditionally calls FUN_5881f2f0 when it "
+            "matches the current global object's +0x50 value, then calls "
+            "FUN_588f4500. After the loop it calls FUN_588730f0 and rebuilds "
+            "slots through FUN_588bc600."
+        ),
+        "uncertainty": "The supplied values' record type and why param_3 selects one or two entries are unresolved.",
+    },
+    "588FC8E0": {
+        "name_in_analysis": "FUN_588fc8e0 / 0x80015101 state publication",
+        "called_by": "FUN_588fcef0 calls this helper with receiver field +0x90; byte-matched manager methods also call it.",
+        "behavior": (
+            "Clears receiver +0x94, sets +0x98 to 1, clears bit 1 at +0x24, "
+            "sets +0x94 to 0x7D, then calls FUN_58970c70 with event code "
+            "0x80015101 and the supplied value in the observed third argument."
+        ),
+        "uncertainty": "The receiver fields' meanings and the event's server/client contract are unresolved.",
+    },
+    "588FEB40": {
+        "name_in_analysis": "FUN_588feb40 / fixed 100-record clear",
+        "called_by": "FUN_588fcef0 calls this helper after either initialization/update branch; byte-matched manager methods also call it.",
+        "behavior": (
+            "Clears six fields per record across 100 records with a 0x18-byte "
+            "stride: a byte at record +0, followed by five DWORDs at +4 through "
+            "+0x14."
+        ),
+        "uncertainty": "The record layout, field semantics, and why exactly 100 records are reset remain unknown.",
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {
