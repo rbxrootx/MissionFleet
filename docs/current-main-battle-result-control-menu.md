@@ -134,8 +134,51 @@ page methods through the row-population helpers; the final edge in
 `FUN_588C6470` is a tail jump to `FUN_5875F310`. The shared construction, text,
 and state helpers called by these functions are already byte-matched or
 included in this batch, so this closes the direct row-population call path.
-Field names, row-column meanings, control
-identities, and the visual result remain unresolved; this is a binary match,
-not an emulator screenshot test. The separate `FUN_5880AF90` event/state path
-was audited but left out because it calls five additional unmatched control
-helpers outside this row-population path.
+Field names, row-column meanings, control identities, and the visual result
+remain unresolved; this is a binary match, not an emulator screenshot test.
+
+## Event and update helper path
+
+This batch extends the same battle-result screen from its already-matched
+vtable methods into result population and child/container updates. Ghidra shows
+`FUN_5880F950` entering `FUN_5880A9C0`, `FUN_5880CCA0`, and `FUN_5880AF90`;
+`FUN_5880C0B0` and `FUN_5880FC50` also enter `FUN_5880AF90`. That event helper
+reaches the state-reset and callback helpers below. The direct CALL/JMP sites
+that anchor this path are checked by
+[`verify_current_battle_result_control_menu.py`](../tools/verify_current_battle_result_control_menu.py).
+
+The 18 exact instruction-stream candidates cover 5,411 bytes:
+
+| Function | Bytes | Ghidra body ranges (half-open) | Observed behavior |
+| --- | ---: | --- | --- |
+| `FUN_5880A9C0` | 1,364 | `[5880A9C0,5880A9E7)`, `[5880A9F0,5880AA58)`, `[5880AA60,5880AE29)`, `[5880AE30,5880AF2C)` | Clears observed row/control state and populates result-row text and visibility through matched row helpers; local buffers contain `Alpha`, `Delta`, `Hotel`, and `Charlie`. |
+| `FUN_5880CCA0` | 1,323 | `[5880CCA0,5880CCCA)`, `[5880CCD0,5880D1D1)` | Updates summary fields and formats the observed localized battle-result message tokens. |
+| `FUN_5880AF90` | 310 | `[5880AF90,5880B0C6)` | Gates on receiver +0x6E0, then runs the per-screen reset and selector helpers. |
+| `FUN_587F2940` | 292 | `[587F2940,587F2A64)` | Resets observed fields and conditionally enters the container update and result-entry reset paths. |
+| `thunk_FUN_5878A120` | 5 | `[5878A1E0,5878A1E5)` | Direct JMP thunk to `FUN_5878A120`. |
+| `FUN_58789890` | 52 | `[58789890,587898C4)` | Clears observed child fields and delegates conditional cleanup. |
+| `FUN_587BAB60` | 85 | `[587BAB60,587BABB5)` | Dispatches selector `0x80010014` through a matched helper when its observed receiver guard is clear. |
+| `FUN_587B99D0` | 26 | `[587B99D0,587B99EA)` | Dispatches selector `0x80011010` through a matched helper. |
+| `FUN_587774A0` | 430 | `[587774A0,5877764E)` | Walks an observed container, invokes element callbacks, and enters its paired update helpers. |
+| `FUN_587CC5B0` | 127 | `[587CC5B0,587CC5ED)`, `[587CC5F0,587CC632)` | Clears observed fields and calls the matched value/control helper six times. |
+| `FUN_58789850` | 47 | `[58789850,5878985D)`, `[58789860,5878986A)`, `[58789871,58789889)` | Performs guarded child cleanup through a matched deletion thunk. |
+| `FUN_5878A120` | 55 | `[5878A120,5878A157)` | Iterates an observed callback list and clears list fields. |
+| `FUN_587CE310` | 10 | `[587CE310,587CE31A)` | Stores its argument at receiver +0x20. |
+| `FUN_587A8E70` | 34 | `[587A8E70,587A8E92)` | Clears three observed fields, sets a flag, and delegates to two container helpers. |
+| `FUN_587AAED0` | 356 | `[587AAED0,587AAFBD)`, `[587AAFC0,587AAFFD)`, `[587AB01A,587AB01E)`, `[587AB022,587AB058)` | Walks entries derived from global table data using matched guard and cleanup helpers. |
+| `FUN_587A8C50` | 151 | `[587A8C50,587A8CAD)`, `[587A8CCA,587A8CCE)`, `[587A8CD2,587A8D08)` | Follows guarded container erase/destruction paths. |
+| `FUN_587A8D10` | 229 | `[587A8D10,587A8D96)`, `[587A8D99,587A8DF8)` | Follows guarded container lookup/removal paths and calls `FUN_587A8690`. |
+| `FUN_587A8690` | 515 | `[587A8690,587A8893)` | Dispatches observed child virtual methods according to a state field and removes/releases selected entries. |
+
+The ranges and direct references come from the read-only Ghidra 12.1.3 logs and
+decompilations under `var/current-main-next/` with the
+`page-result-event-*` prefix. Ghidra's decoded instruction-byte counts equal
+the indexed body sizes for all 18 functions. The candidate generator emits
+only those exact ranges; alignment gaps remain excluded. The rolling
+verification inventory records each function separately and checks the
+selected direct edges against the mapped image.
+
+The meaning of global state values, record and container layouts, field names,
+callback contracts, child ownership, and exact screen appearance remain open
+questions. This static match does not verify the emulator's runtime behavior
+or produce a client screenshot.

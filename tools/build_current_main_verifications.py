@@ -833,6 +833,15 @@ FUNCTION_SIZE_OVERRIDES = {
     # include the complete wrapper through ret 4 at 0x5880447B.
     "58804460": 30,
 }
+ADDRESSES += (
+    # Battle-result screen event/update helpers; their exact Ghidra ranges and
+    # caller/callee evidence are recorded below.
+    "5880A9C0", "5880CCA0", "5880AF90", "587F2940", "5878A1E0",
+    "58789890", "587BAB60", "587B99D0", "587774A0", "587CC5B0",
+    "58789850", "5878A120", "587CE310", "587A8E70", "587AAED0",
+    "587A8C50", "587A8D10", "587A8690",
+)
+
 EVIDENCE = {
     "58900040": {
         "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
@@ -7717,6 +7726,117 @@ EVIDENCE = {
         "uncertainty": "The semantic meanings of fields +0x398, +0xD98, and +0x1444 remain unproven; describe the operation as ratio-like and preserve the observed signed comparison and arithmetic edge cases. No emulator runtime test was performed.",
     },
 }
+
+EVIDENCE.update({
+    "5880A9C0": {
+        "name_in_analysis": "FUN_5880a9c0 / battle-result roster row population",
+        "called_by": "Ghidra records a direct call from byte-matched page method FUN_5880F950 at 0x5880FA13. The method also calls byte-matched row-reset helper FUN_588C6510 twice, FUN_588C66C0, FUN_588C6830, and FUN_58903360.",
+        "behavior": "The fully decoded 1,364-byte body spans [0x5880A9C0,0x5880A9E7), [0x5880A9F0,0x5880AA58), [0x5880AA60,0x5880AE29), and [0x5880AE30,0x5880AF2C). It clears observed control/row state, branches on global result state and selected table entries, then populates row text and visibility through the matched row helpers. Local buffers contain the observed strings Alpha, Delta, Hotel, and Charlie.",
+        "uncertainty": "The global state values, selected-record schema, row labels, field meanings, and user-visible interpretation are unresolved. Exact Ghidra ranges are instruction-complete; no emulator runtime or screenshot test was performed.",
+    },
+    "5880CCA0": {
+        "name_in_analysis": "FUN_5880cca0 / battle-result summary update",
+        "called_by": "Ghidra records a direct call from byte-matched page method FUN_5880F950 at 0x5880FB0C. It calls matched row reset FUN_588C6510 at 0x5880CD42 and 0x5880CD63; other direct helpers are present in the exact-range audit log.",
+        "behavior": "The 1,323-byte body spans [0x5880CCA0,0x5880CCCA) and [0x5880CCD0,0x5880D1D1). It clears observed controls, updates result-summary fields, formats localized text through message tokens MESSAGE_RESULT_NEW_SOLDIER_DEAD, MESSAGE_RESULT_OLD_SOLDIER_DEAD, MESSAGE_RESULT_TECH_SOLDIER_DEAD, and MESSAGE_RESULT_NEW_SOLDIER_TO_OLD, and refreshes associated text rows.",
+        "uncertainty": "The localized tokens' exact display context, result-record field meanings, and visual effects are unresolved. The listed body ranges are instruction-complete; no emulator runtime or screenshot test was performed.",
+    },
+    "5880AF90": {
+        "name_in_analysis": "FUN_5880af90 / battle-result event-state reset",
+        "called_by": "Ghidra records direct calls from byte-matched page methods FUN_5880F950 at 0x5880FB55, FUN_5880C0B0 at 0x5880C196, and FUN_5880FC50 at 0x58810059.",
+        "behavior": "The contiguous 310-byte body [0x5880AF90,0x5880B0C6) gates on receiver +0x6E0, then calls FUN_587F2940, thunk FUN_5878A1E0, FUN_58789890, FUN_587BAB60, and FUN_587B99D0 before calling already matched helpers FUN_587B99F0, FUN_587D8840, and FUN_587D89F0 and clearing the observed gate.",
+        "uncertainty": "The receiver field's meaning, event selector semantics, child ownership, and downstream helper contracts are unknown. All five previously unmatched direct callees are included in this batch; other callees are already byte-matched. No emulator runtime test was performed.",
+    },
+    "587F2940": {
+        "name_in_analysis": "FUN_587f2940 / battle-result screen state clear",
+        "called_by": "Ghidra records one direct call from FUN_5880AF90 at 0x5880AFBA.",
+        "behavior": "The contiguous 292-byte body [0x587F2940,0x587F2A64) resets observed receiver fields, calls matched FUN_587CCAA0 twice, calls FUN_587774A0 when receiver +0x218B0 is nonzero, and calls FUN_587CC5B0 when the observed short state equals 7.",
+        "uncertainty": "Receiver fields, the short-state meaning, and the semantic roles of the two called update helpers remain unresolved. No emulator runtime test was performed.",
+    },
+    "5878A1E0": {
+        "name_in_analysis": "thunk_FUN_5878a120 / battle-result child-list callback thunk",
+        "called_by": "Ghidra records a direct call from FUN_5880AF90 at 0x5880AFC5. The five-byte thunk is itself an unconditional jump to byte-matched-in-this-batch FUN_5878A120.",
+        "behavior": "The complete five-byte body [0x5878A1E0,0x5878A1E5) is a direct JMP to 0x5878A120. The candidate and verifier retain that thunk as a separate indexed function and check its mapped jump target.",
+        "uncertainty": "The original compiler/linker reason for retaining this thunk and the callback list's domain role are unknown. No runtime callback test was performed.",
+    },
+    "58789890": {
+        "name_in_analysis": "FUN_58789890 / child-entry clear and teardown",
+        "called_by": "Ghidra records a direct call from FUN_5880AF90 at 0x5880AFD2. The body calls matched FUN_5897CC48 and FUN_58789850.",
+        "behavior": "The contiguous 52-byte body [0x58789890,0x587898C4) clears observed child fields, invokes the matched guard helper, and delegates a conditional child cleanup to FUN_58789850.",
+        "uncertainty": "The child structure, cleared fields, and ownership/deletion semantics are unresolved. No runtime teardown test was performed.",
+    },
+    "587BAB60": {
+        "name_in_analysis": "FUN_587bab60 / result-state selector dispatch",
+        "called_by": "Ghidra records a direct call from FUN_5880AF90 at 0x5880AFEA. Other references are listed in page-result-event-helpers-ghidra.log.",
+        "behavior": "The contiguous 85-byte body [0x587BAB60,0x587BABB5) checks receiver +0x134; when zero it copies observed globals, dispatches selector 0x80010014 through matched FUN_58970C70, and updates the observed receiver state.",
+        "uncertainty": "The selector's meaning, global identities, and receiver state contract are unknown. No emulator event test was performed.",
+    },
+    "587B99D0": {
+        "name_in_analysis": "FUN_587b99d0 / result-state selector dispatch",
+        "called_by": "Ghidra records a direct call from FUN_5880AF90 at 0x5880B01E. The dispatch target FUN_58970C70 is already byte-matched.",
+        "behavior": "The contiguous 26-byte body [0x587B99D0,0x587B99EA) forwards observed state through selector 0x80011010 to matched FUN_58970C70.",
+        "uncertainty": "The selector and its application-level meaning are not established by the wrapper. No emulator event test was performed.",
+    },
+    "587774A0": {
+        "name_in_analysis": "FUN_587774a0 / result-container callback and update loop",
+        "called_by": "Ghidra records a direct call from FUN_587F2940 at 0x587F2A45. The body calls FUN_587A8E70 and FUN_587AAED0, along with already byte-matched runtime/container helpers.",
+        "behavior": "The contiguous 430-byte body [0x587774A0,0x5877764E) walks an observed container, invokes each present element's first virtual callback with argument 1, calls FUN_587A8E70 and FUN_587AAED0, and conditionally calls FUN_587CC5B0. Ghidra decoded all 430 body bytes.",
+        "uncertainty": "The container element type, callback contract, condition fields, and user-visible effects remain unknown. No emulator runtime test was performed.",
+    },
+    "587CC5B0": {
+        "name_in_analysis": "FUN_587cc5b0 / result-entry reset",
+        "called_by": "Ghidra records direct calls from FUN_587F2940 at 0x587F2A5C and FUN_587774A0. It calls FUN_587CE310 and matched FUN_58907360 six times.",
+        "behavior": "The 127-byte body spans [0x587CC5B0,0x587CC5ED) and [0x587CC5F0,0x587CC632). It clears observed fields, calls FUN_587CE310 to set receiver +0x20 to argument 1, and invokes matched FUN_58907360 at the six callsites shown in the exact-range Ghidra log.",
+        "uncertainty": "Receiver layout, argument meaning, helper contract, and visible effect are unresolved. The noncontiguous gap is outside the function body; no runtime test was performed.",
+    },
+    "58789850": {
+        "name_in_analysis": "FUN_58789850 / guarded child delete",
+        "called_by": "Ghidra records a direct call from FUN_58789890 at 0x587898BF. The body conditionally delegates deletion to matched FUN_5897CC42.",
+        "behavior": "The 47-byte body spans [0x58789850,0x5878985D), [0x58789860,0x5878986A), and [0x58789871,0x58789889). It tests observed pointer/state fields, conditionally invokes the matched delete thunk with the selected pointer, and clears the observed pointer fields.",
+        "uncertainty": "The field ownership and delete thunk's runtime behavior remain unresolved. The discontiguous instruction ranges are complete; no runtime destruction test was performed.",
+    },
+    "5878A120": {
+        "name_in_analysis": "FUN_5878a120 / child-list callback iteration",
+        "called_by": "The matched-in-this-batch thunk FUN_5878A1E0 jumps here. Ghidra records the thunk edge as an unconditional jump.",
+        "behavior": "The contiguous 55-byte body [0x5878A120,0x5878A157) iterates a list rooted at argument +0x0C, invokes an observed callback pointer with argument 1 for each element, then clears observed list fields.",
+        "uncertainty": "The list and callback types, ownership, and callback behavior are not recovered. No emulator callback test was performed.",
+    },
+    "587CE310": {
+        "name_in_analysis": "FUN_587ce310 / observed child state setter",
+        "called_by": "Ghidra records a direct call from FUN_587CC5B0 at 0x587CC5D9 and another call from FUN_587CCEC0 at 0x587CCF26.",
+        "behavior": "The contiguous 10-byte body [0x587CE310,0x587CE31A) stores its sole observed argument at receiver +0x20 and returns.",
+        "uncertainty": "The receiver type and +0x20 field meaning are unknown. No runtime state test was performed.",
+    },
+    "587A8E70": {
+        "name_in_analysis": "FUN_587a8e70 / result-container reset coordinator",
+        "called_by": "Ghidra records a direct call from FUN_587774A0 at 0x58777593. This coordinator calls FUN_587A8C50 and FUN_587A8D10.",
+        "behavior": "The contiguous 34-byte body [0x587A8E70,0x587A8E92) clears three observed fields, sets a state flag, and delegates to the two container helpers.",
+        "uncertainty": "The state flag, cleared fields, and container's application role remain unresolved. No runtime test was performed.",
+    },
+    "587AAED0": {
+        "name_in_analysis": "FUN_587aaed0 / result-container table walk",
+        "called_by": "Ghidra records a direct call from FUN_587774A0 at 0x5877759E. Its other direct caller is FUN_587AB2F0 at 0x587AB325.",
+        "behavior": "The 356-byte body spans [0x587AAED0,0x587AAFBD), [0x587AAFC0,0x587AAFFD), [0x587AB01A,0x587AB01E), and [0x587AB022,0x587AB058). It walks entries derived from global table data and uses matched guard/delete/runtime helpers, including FUN_5897CC72, FUN_5897CC42, and FUN_587AEDB0.",
+        "uncertainty": "The global table schema, entry meanings, ownership rules, and cleanup effects remain unknown. Ghidra decoded every byte in the four body ranges; no runtime test was performed.",
+    },
+    "587A8C50": {
+        "name_in_analysis": "FUN_587a8c50 / result-container erase helper",
+        "called_by": "Ghidra records a direct call from FUN_587A8E70 at 0x587A8E85. Other direct callers are FUN_587A8E00 and FUN_587FB810.",
+        "behavior": "The 151-byte body spans [0x587A8C50,0x587A8CAD), [0x587A8CCA,0x587A8CCE), and [0x587A8CD2,0x587A8D08). It follows guarded container erase/destruction paths using matched runtime helpers and FUN_587AEDB0.",
+        "uncertainty": "The container/node layout, erase conditions, and object ownership are unresolved. No runtime container test was performed.",
+    },
+    "587A8D10": {
+        "name_in_analysis": "FUN_587a8d10 / result-container lookup and removal",
+        "called_by": "Ghidra records a direct call from FUN_587A8E70 at 0x587A8E8D. Other direct callers are FUN_587FBCC0 and a separate nearby function shown in the Ghidra reference log.",
+        "behavior": "The 229-byte body spans [0x587A8D10,0x587A8D96) and [0x587A8D99,0x587A8DF8). It follows guarded array/container search and removal paths, calls FUN_587A8690 at 0x587A8D6F, and invokes matched runtime helpers.",
+        "uncertainty": "The container schema, search key, state branches, and deletion ownership are unresolved. No runtime container test was performed.",
+    },
+    "587A8690": {
+        "name_in_analysis": "FUN_587a8690 / result-container element teardown",
+        "called_by": "Ghidra records a direct call from FUN_587A8D10 at 0x587A8D6F and another caller FUN_587A90D0 at 0x587A9762.",
+        "behavior": "The contiguous 515-byte body [0x587A8690,0x587A8893) checks and resolves the selected element, dispatches child virtual methods at slots +0x14 and +0x08 according to an observed state field, then removes/releases selected entries through matched FUN_58902C20, FUN_58902C70, and FUN_58849980.",
+        "uncertainty": "The element and child types, state meanings, vtable contracts, and release semantics are unresolved. No runtime teardown test was performed.",
+    },
+})
 
 
 def sha256(path):
