@@ -1134,6 +1134,13 @@ MAIN_CPANNEL_TRADE_EVENT_ADDRESSES = (
 ADDRESSES += MAIN_CPANNEL_TRADE_EVENT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_EVENT_ADDRESSES)
 
+MAIN_MAP_OBJECT_STATE_UPDATE_ADDRESSES = (
+    "58756670", "587A6DC0", "587A71A0", "587B0920", "587B1410",
+    "587B1A40", "58853F90", "588D7BD0", "588DA350", "588DE3D0",
+)
+ADDRESSES += MAIN_MAP_OBJECT_STATE_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MAP_OBJECT_STATE_UPDATE_ADDRESSES)
+
 MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES = (
     "588869A0", "58886AE0", "5887A410", "5887B450", "5887BEE0",
     "5887CB00", "5887CB30", "5887CB60", "5887DA60", "5887DBB0",
@@ -10761,6 +10768,109 @@ MAIN_CPANNEL_TRADE_EVENT_EVIDENCE["588B8CB0"]["called_by"] = (
     "confirms the virtual-table entry; no direct code callsite was found."
 )
 EVIDENCE.update(MAIN_CPANNEL_TRADE_EVENT_EVIDENCE)
+
+MAIN_MAP_OBJECT_STATE_UPDATE_BEHAVIOR = {
+    "58756670": (
+        "Stores the supplied mode, chooses an observed global-table entry "
+        "for modes 0 and 1, and copies six fields into its child; mode 2 "
+        "dispatches the mapped helper directly."
+    ),
+    "587A6DC0": (
+        "Walks the configured child entries, updates their mapped position "
+        "through FUN_58903290, and conditionally refreshes the shared "
+        "0xE10-based value through FUN_587B1A40."
+    ),
+    "587A71A0": (
+        "Walks 32 child pointers, writes the supplied value through "
+        "FUN_587B0920, and sets each present child's +0x144 field to 1."
+    ),
+    "587B0920": "Stores the supplied value at receiver offset +0x84.",
+    "587B1410": (
+        "Normalizes a changing value within an observed 0xE10 range, clamps "
+        "it against receiver bounds according to the mode at +0x80, then "
+        "updates the derived endpoint through FUN_587B0930 and FUN_587B0630."
+    ),
+    "587B1A40": (
+        "Stores the supplied value at +0x130 and invokes the range-normalizing "
+        "update in FUN_587B1410."
+    ),
+    "58853F90": (
+        "Stores two supplied values in a child record, scans eight neighboring "
+        "records for matching observed keys and object-type bytes, accumulates "
+        "their values, then calls a child virtual method at +0x20."
+    ),
+    "588D7BD0": (
+        "For a nonzero mode, walks the configured child count and updates "
+        "present children through FUN_587B1A40; if the receiver is the shared "
+        "active object, also calls FUN_587A6DC0."
+    ),
+    "588DA350": (
+        "Walks 32 observed child records, derives two values from their "
+        "encoded fields and referenced object types, and forwards each active "
+        "entry to FUN_58853F90."
+    ),
+    "588DE3D0": (
+        "Sets receiver state +0x6090 to 0x50000, updates present child "
+        "objects, refreshes a global-selected record, clears observed child "
+        "flags and state, then conditionally rebuilds derived child values "
+        "and shared positions."
+    ),
+}
+MAIN_MAP_OBJECT_STATE_UPDATE_CALLERS = {
+    "58756670": (
+        "FUN_588DEB30 at 0x588DEFD4, 0x588DEFEE, and 0x588DF1B1; "
+        "FUN_588DE3D0 at 0x588DE54C, 0x588DE566, and 0x588DE5A9."
+    ),
+    "587A6DC0": (
+        "FUN_588DE3D0 at 0x588DE578; byte-matched FUN_588DEB30 at "
+        "0x588DF001; RTTI-identified CShip_MapObjectScreen constructor "
+        "FUN_588E05C0 at 0x588E116D."
+    ),
+    "587A71A0": (
+        "FUN_588DE3D0 at 0x588DE58B and byte-matched FUN_588DEB30 at "
+        "0x588DF013."
+    ),
+    "587B0920": (
+        "FUN_587A71A0 at 0x587A71B7 and FUN_588DE3D0 at 0x588DE4A4."
+    ),
+    "587B1410": "FUN_587B1A40 at 0x587B1A4A.",
+    "587B1A40": (
+        "FUN_587A6DC0 at 0x587A6E5D and FUN_588D7BD0 at 0x588D7C09."
+    ),
+    "58853F90": (
+        "FUN_588DA350 at 0x588DA414; open callers FUN_587B2360 at "
+        "0x587B2432 and FUN_587B4640 at 0x587B46E6."
+    ),
+    "588D7BD0": (
+        "FUN_588DE3D0 at 0x588DE3E1; byte-matched RTTI-identified "
+        "CShip_MapObjectScreen update FUN_588E5150 at 0x588E60CC and "
+        "0x588E63FD."
+    ),
+    "588DA350": (
+        "FUN_588DE3D0 at 0x588DE532 and byte-matched FUN_588DEB30 at "
+        "0x588DF0AC."
+    ),
+    "588DE3D0": (
+        "Byte-matched FUN_587F8760 calls this method at 0x587F9614. The "
+        "method has no recovered RTTI owner or direct virtual-call evidence."
+    ),
+}
+MAIN_MAP_OBJECT_STATE_UPDATE_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / map-object state update closure member"
+        ),
+        "called_by": MAIN_MAP_OBJECT_STATE_UPDATE_CALLERS[address],
+        "behavior": behavior,
+        "uncertainty": (
+            "The receiver owner, meanings of the state and record fields, "
+            "and rendered effect remain unresolved. This is static analysis "
+            "of the installed Main.dll; no emulator interaction test was run."
+        ),
+    }
+    for address, behavior in MAIN_MAP_OBJECT_STATE_UPDATE_BEHAVIOR.items()
+}
+EVIDENCE.update(MAIN_MAP_OBJECT_STATE_UPDATE_EVIDENCE)
 
 MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_EVIDENCE = {
     "588869A0": {

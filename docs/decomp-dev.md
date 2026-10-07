@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,307 of 42,461 functions and 2,665,564 of 10,470,295 bytes (19.5638% by
-functions and 25.4583% by bytes); every counted function match is verified at
+credits 8,317 of 42,461 functions and 2,667,889 of 10,470,295 bytes (19.5874% by
+functions and 25.4806% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,174 exact function matches totaling 1,692,146 bytes. The
+inventory has 2,184 exact function matches totaling 1,694,471 bytes. The
 message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
@@ -192,6 +192,10 @@ The same RTTI-backed class's virtual slot `+0x18` adds 23 exact matches / 4,699
 bytes. Its row validation and payload path, exact direct-call closure, matched
 helper callers, and remaining record/protocol uncertainties are recorded in
 [`current-main-cpannel-trade-event.md`](current-main-cpannel-trade-event.md).
+The state-`0x50000` map-object refresh closure adds 10 exact matches / 2,325
+bytes. Its matched updater and `CShip_MapObjectScreen` helper callers, fresh
+Ghidra ranges, direct transfers, and unresolved receiver/field meanings are in
+[`current-main-map-object-state-update.md`](current-main-map-object-state-update.md).
 The paired Main message `0x8002C004` / `0x8002C006` record-update path adds 15
 exact matches / 2,634 bytes. The byte-matched dispatcher routes, 0x22-byte row
 helpers, localized transfer-status keys, exact closure, and unresolved record
