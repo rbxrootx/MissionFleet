@@ -37,3 +37,9 @@ established from this function alone.
 The generated source reproduces the 14 Ghidra ranges byte-for-byte under the
 recorded Visual C++ 6.0 SP5 profile. ObjDiff 3.8.0 checked 165 mapped operand
 targets. The emulator runtime was not tested.
+
+The `/w` and `/whisper` input branch is now reconstructed through its
+recipient parser, guarded-message dispatch, and input-state update. See the
+[private-chat recipient evidence](current-main-chat-private-recipient.md) for
+the exact caller, mapped command strings, verified ranges, and remaining
+uncertainties.

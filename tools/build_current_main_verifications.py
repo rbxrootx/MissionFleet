@@ -1226,6 +1226,10 @@ MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES = ("588471E0", "58753E60")
 ADDRESSES += MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES)
 
+MAIN_CHAT_PRIVATE_RECIPIENT_ADDRESSES = ("587F59F0", "587EE240")
+ADDRESSES += MAIN_CHAT_PRIVATE_RECIPIENT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CHAT_PRIVATE_RECIPIENT_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -12774,6 +12778,66 @@ MAIN_MESSAGE_80020F02_CONSUMER_EVIDENCE = {
     for address in MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES
 }
 EVIDENCE.update(MAIN_MESSAGE_80020F02_CONSUMER_EVIDENCE)
+
+MAIN_CHAT_PRIVATE_RECIPIENT_EVIDENCE = {
+    "587F59F0": {
+        "name_in_analysis": "FUN_587f59f0 / private-chat recipient parser and submitter",
+        "called_by": (
+            "Called by byte-matched chat input handler FUN_587FC9C0 at "
+            "0x587FD6B9. That handler compares the input prefix against the "
+            "mapped strings '/w' and '/whisper' at 0x5899BD40 and 0x5899BD34, "
+            "then reaches this routine when the command is followed by a space."
+        ),
+        "behavior": (
+            "Parses the recipient token after '/w ' or '/whisper ' (the latter "
+            "uses an eight-character prefix), applies the observed token-length "
+            "condition (at most twelve non-NUL bytes), and constructs a "
+            "text-bearing record from the recipient and "
+            "remaining message. It compares the recipient against four "
+            "24-byte entries at global object 0x58A245C0 + 0x57C, reorders an "
+            "exactly matched slot, shifts entries, then stores the current "
+            "recipient in the first slot. "
+            "It submits the record through verified FUN_587B8110(1, 0, record, "
+            "length, 1), switches the input child to mode values 1/1 through "
+            "FUN_587EE240, and returns. Fresh Ghidra assigns 1,225 bytes to "
+            "five exact body ranges."
+        ),
+        "uncertainty": (
+            "The user-facing purpose of the four-slot recipient list, the "
+            "message-record schema, empty-token handling, mode value meanings, "
+            "guarded-dispatch policy, and "
+            "server/protocol effect remain unresolved. Fourteen additional "
+            "Ghidra call references to FUN_587EE240 come from nearby chat-input "
+            "routines not reconstructed in this slice. No client or emulator "
+            "runtime test was performed."
+        ),
+    },
+    "587EE240": {
+        "name_in_analysis": "FUN_587ee240 / chat input mode and recipient display updater",
+        "called_by": (
+            "Called by verified private-chat parser FUN_587F59F0 at "
+            "0x587F5E9F after message submission; Ghidra also records fourteen "
+            "other incoming call sites in adjacent chat-input routines."
+        ),
+        "behavior": (
+            "Stores two supplied mode values in receiver fields +0x21CE8 and "
+            "+0x21CE4, calls verified FUN_5875F940 to clear/reset the input, "
+            "passes the supplied mode to verified FUN_5888CDF0, copies the "
+            "recipient text into the child buffer at +0x80, records its length "
+            "at +0x8C and +0x94, and writes the first mode value to global "
+            "0x58A245C0 + 0xB8. Its complete Ghidra body is 120 bytes in one "
+            "range."
+        ),
+        "uncertainty": (
+            "Receiver and child types, the meaning of the mode fields and global "
+            "+0xB8, recipient display behavior, and the contracts of the "
+            "adjacent chat-input callers remain unresolved. Static call evidence "
+            "does not establish server acceptance or visible runtime behavior; "
+            "no emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CHAT_PRIVATE_RECIPIENT_EVIDENCE)
 
 
 def sha256(path):
