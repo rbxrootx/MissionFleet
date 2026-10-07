@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,605 matches cover 2,746,093 bytes (20.2657% by functions and
-26.2275% by bytes) and are verified individually at 100.0% by objdiff.
+The current 8,606 matches cover 2,746,798 bytes (20.2680% by functions and
+26.2342% by bytes) and are verified individually at 100.0% by objdiff.
 The installed client's battle-room `0x80020115` update closure adds eight
 byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
 bitmap traversal, mode-specific object creation, exact ranges, and unresolved
@@ -105,6 +105,10 @@ The slot `+0x30` method adds one exact function / 216 bytes. Its text/state
 update branches, linked-node callback walk, decompiler's missed tail jump, and
 unresolved field and callback meanings are documented in
 [the method evidence](docs/current-main-santa-aircraft-slot12.md).
+The slot `+0x58` method adds one exact function / 705 bytes. Its frame-count
+branches, repeated frame-helper calls, final virtual dispatch, and unresolved
+render-field meanings are documented in
+[the method evidence](docs/current-main-santa-aircraft-slot22.md).
 The installed client's shared map-control refresh adds eight byte-identical
 functions / 3,894 bytes. Its original map labels, selector-driven child updates,
 five matched caller paths, exact Ghidra ranges, and four open callers are

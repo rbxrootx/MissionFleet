@@ -1435,6 +1435,10 @@ MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES = ("588D2910",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES)
 
+MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES = ("588D2EE0",)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14913,6 +14917,45 @@ MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_SLOT22_EVIDENCE = {
+    "588D2EE0": {
+        "name_in_analysis": "FUN_588D2EE0 / CSantaAircraft vtable slot +0x58",
+        "called_by": (
+            "Fresh Ghidra edge exports reference this method from vtable slot +0x58 "
+            "at cell 0x589A0F90 in the RTTI-identified .?AVCSantaAircraft@@ table "
+            "at 0x589A0F38; the mapped cell points to 0x588D2EE0. Matched "
+            "constructor FUN_588D2480 installs this table. No incoming direct "
+            "CALL edge was found, so entry is through virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports and a separate read-only decompilation agree "
+            "on the complete contiguous range [0x588D2EE0, 0x588D31A1), "
+            "705 bytes / 222 instructions. The method gates on bit 0x01 at "
+            "this+0x24 and a nonzero this+0x80 field. It calls byte-matched "
+            "FUN_5897CC90 and FUN_5897CCA0 to derive a frame count, builds an "
+            "origin from receiver fields and the supplied position, and branches "
+            "on the short at this+0x1D8. The value 3 updates this+0x220 and, under "
+            "a global modulo-3 condition, fields this+0x1F8 and this+0x264; value "
+            "5 sets this+0x28 to 0x96. It calls byte-matched frame helper "
+            "FUN_5873A5D0 with flag 0x101, then iterates derived positions and "
+            "calls that helper again. Finally it dispatches through the object at "
+            "this+0x4C, vtable slot +0x14, forwarding the three supplied draw "
+            "arguments. All six direct calls target byte-matched functions."
+        ),
+        "uncertainty": (
+            "The meanings and units of receiver fields +0x24, +0x28, +0x80, "
+            "+0x94, +0x98, +0x9C, +0x1D8, +0x1F8, +0x220, +0x264 and global "
+            "DAT_58A244BC / DAT_58A2459C / DAT_58A24670 are not established. "
+            "The frame-count helper's floating-point contract, values 3 and 5, "
+            "flag 0x101, and final virtual callback contract remain unresolved. "
+            "No runtime or emulator rendering test was performed. The emitted "
+            "source preserves the exact x86 instruction stream and is not recovered "
+            "high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT22_EVIDENCE)
 
 
 if __name__ == "__main__":
