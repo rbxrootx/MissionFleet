@@ -350634,6 +350634,817 @@
         "behavior": "Ghidra shows four mode-200 selection directions. It computes a candidate index using receiver fields +0xDC/+0xE0/+0xE4 and the selected value at +0xA06, sets a corresponding adjustment value at +0xF4, calls FUN_58789680 to update matching child states, and if the selection changed invokes FUN_587D0E40 and matched FUN_587B9060.",
         "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587D1830",
+      "name": "FUN_587d1830",
+      "size": 1715,
+      "symbol": "_FUN_587d1830",
+      "source": "src/client-current/Main/FUN_587d1830.cpp",
+      "source_sha256": "65d7354706dcedf5b3b12391499a2f39123f7399a998ed0234eaacca69258549",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D1830",
+          "size": 344,
+          "symbol": "_FUN_587d1830_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587D1CB6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "58795290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "587D1941",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "5899B510",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "5899B4F0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "5899B4D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "5899B4B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "58889600",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 309,
+              "target_address": "587D1C22",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D1990",
+          "size": 13,
+          "symbol": "_FUN_587d1830_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "587D19A0",
+          "size": 45,
+          "symbol": "_FUN_587d1830_segment_02",
+          "relocations": []
+        },
+        {
+          "address": "587D19D0",
+          "size": 631,
+          "symbol": "_FUN_587d1830_segment_03",
+          "relocations": [
+            {
+              "offset": 41,
+              "target_address": "58A245E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "587D1A8B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "58755FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58A24768",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "587D1B0C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "58755FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "58A24768",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "587D1990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 365,
+              "target_address": "587D1BCD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 409,
+              "target_address": "587D0180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "587D0100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "587D0250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 480,
+              "target_address": "587D01E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 485,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 500,
+              "target_address": "587D0250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 505,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "587D0250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 550,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "587D01E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 570,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 585,
+              "target_address": "587D01E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 590,
+              "target_address": "587D1D5A",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D1C50",
+          "size": 13,
+          "symbol": "_FUN_587d1830_segment_04",
+          "relocations": []
+        },
+        {
+          "address": "587D1C60",
+          "size": 157,
+          "symbol": "_FUN_587d1830_segment_05",
+          "relocations": [
+            {
+              "offset": 82,
+              "target_address": "587D1D51",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "58889600",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D1D00",
+          "size": 512,
+          "symbol": "_FUN_587d1830_segment_06",
+          "relocations": [
+            {
+              "offset": 110,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "587D1EDE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "587D1EDE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "58A245E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "58755FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "58A24768",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "58A245E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "58755FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "58A24768",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 481,
+              "target_address": "587CFF80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d1830 / channel-battle control-screen transition graph",
+        "called_by": "Ghidra records one incoming code ref from matched FUN_587D6450 at 0x587D6501. That caller is on event route 0x80023101 in FUN_588C4210 and calls this handler only when receiver +0xFC is 200; no vtable/data ref to FUN_587D1830 was found.",
+        "behavior": "Ghidra shows this event-driven handler using the indexed record at DAT_58A24860, formatting a date/countdown tuple through FUN_58795290, selecting among four recovered message-string globals from the record's type field, updating child flags through FUN_58889600, and handling a 25-entry row group through four pattern helpers before calling matched FUN_587CFF80. The four localization globals are DUETIME_WAITINGHCB, READYHCB, UNDERHCB, and RESPITE.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58795290",
+      "name": "FUN_58795290",
+      "size": 1038,
+      "symbol": "_FUN_58795290",
+      "source": "src/client-current/Main/FUN_58795290.cpp",
+      "source_sha256": "c304bf3742cdc0a6b461f1b37ac79ee395f3c429b9287deb27ef427d09697266",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "587950D0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "58795421",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5879542B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 137,
+          "target_address": "5879542B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "58795430",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 449,
+          "target_address": "5879551B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 467,
+          "target_address": "5879550D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 486,
+          "target_address": "58795508",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 684,
+          "target_address": "587955C7",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58795290 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D1830 at 0x587D1870, FUN_588290F0 at 0x588293EB, and FUN_588044D0 at 0x58804511.",
+        "behavior": "Ghidra shows building a date/countdown tuple from global clock/date state, rolling seconds, minutes, hours, day, month, and year fields as needed, and consulting FUN_587950D0 for the current tuple. The user-facing meaning and units of each output field are not established.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58889600",
+      "name": "FUN_58889600",
+      "size": 62,
+      "symbol": "_FUN_58889600",
+      "source": "src/client-current/Main/FUN_58889600.cpp",
+      "source_sha256": "b6dc1467d1239931d5b250c40710811cd1f0751a7e192052733be88d137e6efa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 58,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58889600 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0050 at 0x587D005F and by FUN_587D1830 at 0x587D194C and 0x587D1CBE.",
+        "behavior": "Ghidra shows toggling bit 0 in the low words of child objects at receiver offsets +0x6C and +0x7C according to the argument; the nonzero branch also calls matched FUN_58731CE0.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D0180",
+      "name": "FUN_587d0180",
+      "size": 96,
+      "symbol": "_FUN_587d0180",
+      "source": "src/client-current/Main/FUN_587d0180.cpp",
+      "source_sha256": "576dc70633cf5f7859bc4fa86b425345c704ca9c1db79d4486aba03346fa67e0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 51,
+          "target_address": "587CF000",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0180 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D1830 at 0x587D1B68.",
+        "behavior": "Ghidra shows iterating 25 entries of paired child pointers beginning at receiver +0x168 and assigning each pair a state value 0, 1, or 2 from the indexed record's flag bytes and shared predicate FUN_587CF000.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D0100",
+      "name": "FUN_587d0100",
+      "size": 123,
+      "symbol": "_FUN_587d0100",
+      "source": "src/client-current/Main/FUN_587d0100.cpp",
+      "source_sha256": "99ec43d69941ee3b0b858c8931b86cf714481929aea24bce14c1c95204c97d02",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 78,
+          "target_address": "587CF000",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0100 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D1830 at 0x587D1B7C.",
+        "behavior": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on each record flag, five-entry grouping, and FUN_587CF000.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D0250",
+      "name": "FUN_587d0250",
+      "size": 96,
+      "symbol": "_FUN_587d0250",
+      "source": "src/client-current/Main/FUN_587d0250.cpp",
+      "source_sha256": "f27bb1c79f722ccdd0cf25f9db5af267e352831a3c72b136f4de34f1e4fc610a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 51,
+          "target_address": "587CF000",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0250 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D1830 at 0x587D1B90, 0x587D1BC3, and 0x587D1BF0.",
+        "behavior": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on record flags, a five-entry boundary, and FUN_587CF000.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D01E0",
+      "name": "FUN_587d01e0",
+      "size": 106,
+      "symbol": "_FUN_587d01e0",
+      "source": "src/client-current/Main/FUN_587d01e0.cpp",
+      "source_sha256": "7ddec9708cb25e1867083c366e993e9e1210668017123fc9810c06c2347057d1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 61,
+          "target_address": "587CF000",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d01e0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D1830 at 0x587D1BAF, 0x587D1C04, and 0x587D1C18.",
+        "behavior": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on record flags, a four-offset/five-entry pattern, and FUN_587CF000.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587950D0",
+      "name": "FUN_587950d0",
+      "size": 441,
+      "symbol": "_FUN_587950d0",
+      "source": "src/client-current/Main/FUN_587950d0.cpp",
+      "source_sha256": "2b7c361eb78d373ae7c6da0f3f24613207bfb5dc542e1f929463681b105702c3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "5898C42C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "58A0B198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "58A0B1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 154,
+          "target_address": "58A0B1A6",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 196,
+          "target_address": "58A0B1A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 246,
+          "target_address": "58A0B1A2",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 258,
+          "target_address": "58A0B1A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "58A0B19E",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 316,
+          "target_address": "58A0B19C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 384,
+          "target_address": "58A0B19E",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 415,
+          "target_address": "58A0B19C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 429,
+          "target_address": "58A0B19C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587950d0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_58795290 at 0x5879529C, FUN_587C73D0 at 0x587C73F9, FUN_5887C900 at 0x5887CA3D, FUN_588892D0 at 0x588892EB, FUN_588FD790 at 0x588FD7B0, and FUN_5887C440 at 0x5887C7E8.",
+        "behavior": "Ghidra shows zeroing eight 16-bit output fields, then deriving a date/time tuple from an indirect callback at DAT_5898C42C and global date/time values. It includes month-length and rollover adjustments. The callback target and field meanings remain unresolved.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587CF000",
+      "name": "FUN_587cf000",
+      "size": 149,
+      "symbol": "_FUN_587cf000",
+      "source": "src/client-current/Main/FUN_587cf000.cpp",
+      "source_sha256": "fa04ba21bcef101b623e4297d32a073037d1fc46e1c352b1f1a82c3ff1abf62d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf000 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0100 at 0x587D014D, FUN_587D0180 at 0x587D01B2, FUN_587D01E0 at 0x587D021C, and FUN_587D0250 at 0x587D0282.",
+        "behavior": "Ghidra shows a shared predicate over the indexed record at DAT_58A24860: it checks boundary positions in a five-entry pattern and adjacent record flag bytes at offsets relative to +0xF7 through +0x101. Its higher-level row semantics are unresolved.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and unresolved. Shared callers outside the 28-function subset are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
     }
   ]
 }

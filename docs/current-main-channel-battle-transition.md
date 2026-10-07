@@ -1,11 +1,11 @@
 # Current Main channel-battle control-screen transition slice
 
-This slice byte-matches 19 open functions (5,096 bytes) tied by Ghidra call
-references to the `CPageChannelBattle_ControlMenuScreen` lifecycle, its mode
-switch, and selection updates. Its direct callees are closed: every direct
-call or tail jump from these 19 bodies lands in another matched function or
-inside the verified functions themselves. This does not close every caller of
-shared helpers or indirect child-vtable dispatch.
+This channel-battle subsystem now byte-matches 28 functions (8,922 bytes)
+across the screen lifecycle, mode/selection transitions, and an event-driven
+message/countdown and child-row refresh path. Every direct call or tail jump
+from these 28 bodies lands in another matched function or in a verified body.
+This closes their direct-call graph; it does not close every external caller
+of shared helpers or indirect child-vtable dispatch.
 
 ## Evidence from Main.dll
 
@@ -32,11 +32,39 @@ then refreshes the selection if the index changed. These are observations of
 the original instructions and decompiler output; they do not establish the
 user-visible names of the controls or fields.
 
+The event path adds `FUN_587D1830`. Its only incoming code reference is from
+matched `FUN_587D6450` at `0x587D6501`; that caller is reached through event
+route `0x80023101` in `FUN_588C4210` and invokes the handler when receiver field
+`+0xFC` equals 200. Ghidra found no vtable/data reference for `FUN_587D1830`,
+so its association with this screen is based on the event caller, mode check,
+and shared state-update helper, not a proven virtual slot.
+
+`FUN_587D1830` reads the indexed record at `DAT_58A24860`, formats a date/time
+tuple through `FUN_58795290`, selects among the recovered string globals
+`DUETIME_WAITINGHCB`, `READYHCB`, `UNDERHCB`, and `RESPITE`, and updates child
+flags and a 25-entry row group. Four pattern helpers (`FUN_587D0180`,
+`FUN_587D0100`, `FUN_587D0250`, and `FUN_587D01E0`) set paired child state
+fields using record flags and shared predicate `FUN_587CF000`. The handler
+then calls matched `FUN_587CFF80`. The tuple helper `FUN_58795290` consults
+`FUN_587950D0`, which uses global clock/date state and an indirect callback.
+
 ## Matched functions and direct-call closure
 
-The batch contains the three lifecycle/state roots, 13 still-open callees
-needed to close their direct-call paths, and three open input/selection
-handlers tied to the same state transition:
+The connected event-update extension adds these nine functions:
+
+| Address | Bytes | Observed role |
+| --- | ---: | --- |
+| `587D1830` | 1,715 | Event-driven message/date and 25-row child-state update |
+| `58795290` | 1,038 | Date/countdown tuple formatter |
+| `58889600` | 62 | Toggles a flag bit on two child objects; tail-jumps on one branch |
+| `587D0180` | 96 | Assigns paired row states using record flags and shared predicate |
+| `587D0100` | 123 | Assigns paired row states in five-entry groups |
+| `587D0250` | 96 | Assigns paired row states after the first five entries |
+| `587D01E0` | 106 | Assigns paired row states using a four-offset/five-entry pattern |
+| `587950D0` | 441 | Builds date/time fields from globals and an indirect callback |
+| `587CF000` | 149 | Tests neighboring record flags and five-entry boundaries |
+
+The original 19-function transition subset is detailed below:
 
 | Address | Bytes | Observed role |
 | --- | ---: | --- |
@@ -60,27 +88,31 @@ handlers tied to the same state transition:
 | `587D2630` | 130 | Sets a selection index and triggers refresh |
 | `587D16B0` | 338 | Computes directional selection changes in mode 200 |
 
-Ghidra reports complete instruction coverage for every body. Four functions
-have discontiguous body ranges: `587D03D0` (11 ranges), `587D0F90` (2),
-`587CFAD0` (2), and `58889120` (2). The remaining 15 are contiguous. The exact
-range starts and sizes are stored in
+Ghidra reports complete instruction coverage for every body. In the original
+19-function transition subset, four functions have discontiguous body ranges:
+`587D03D0` (11 ranges), `587D0F90` (2), `587CFAD0` (2), and `58889120` (2).
+The event-update extension adds the seven-range body `587D1830`; its other
+eight functions are contiguous. The exact range starts and sizes are stored in
 [`client-verifications.json`](../config/NF2_2026/client-verifications.json)
 and checked by
 [`verify_current_main_channel_battle_transition.py`](../tools/verify_current_main_channel_battle_transition.py).
 
-The 13 formerly open callees total 1,790 bytes. Their outgoing direct calls
-terminate in already-matched functions, including `FUN_58902C20`,
-`FUN_58902C70`, `FUN_5874FBD0`, and `FUN_58907360`. The custom verifier checks
-the key Ghidra call sites among the 19 functions and scans every direct call
-and jump in their body ranges for any remaining open indexed target.
+The original 13 formerly open callees total 1,790 bytes. The eight open direct
+and transitive callees in the event-update extension total 2,111 bytes. Their
+outgoing direct calls terminate in already-matched functions, including
+`FUN_58902C20`, `FUN_58902C70`, `FUN_5874FBD0`, and `FUN_58907360`. The custom
+verifier checks the audited Ghidra call sites across all 28 functions and
+scans every direct call and jump in their body ranges for any remaining open
+indexed target.
 
 ## Uncertainties and validation
 
 The emitted source preserves the installed Main.dll instruction stream and
-ObjDiff verifies all 19 functions at 100% (5,096 bytes). This is byte-matching
+ObjDiff verifies all 28 functions at 100% (8,922 bytes). This is byte-matching
 evidence, not recovery of the original high-level C++ implementation. Member
 schemas, numeric state names, the targets behind child virtual calls, and the
-visual/gameplay effects remain unresolved. Shared callers outside this slice
-include `FUN_587D1830` to `FUN_587CFF80`, `FUN_587DA9A0` to `FUN_587CF690`, and
-`FUN_58762D30` to `FUN_587D2630`; those functions were not added merely to
-inflate this subsystem. No emulator runtime test was performed.
+visual/gameplay effects remain unresolved. The date/time callback called
+indirectly by `FUN_587950D0` is not resolved, and other callers of shared
+helpers remain outside this subsystem. Shared callers include
+`FUN_587DA9A0` to `FUN_587CF690` and `FUN_58762D30` to `FUN_587D2630`. No
+emulator runtime test was performed.

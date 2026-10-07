@@ -872,6 +872,11 @@ CHANNEL_BATTLE_TRANSITION_ADDRESSES = (
     "58888970", "58888720", "587896E0", "587CF690", "58888940",
     "58888760", "5874A7D0", "58789680",
     "587D1810", "587D2630", "587D16B0",
+    # Event-driven message/countdown and child-row refresh path. Ghidra's
+    # incoming refs tie FUN_587D1830 to the same page lifecycle; the eight
+    # open direct/transitive callees below close its indexed call graph.
+    "587D1830", "58795290", "58889600", "587D0180", "587D0100",
+    "587D0250", "587D01E0", "587950D0", "587CF000",
 )
 ADDRESSES += CHANNEL_BATTLE_TRANSITION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CHANNEL_BATTLE_TRANSITION_ADDRESSES)
@@ -7979,7 +7984,7 @@ CHANNEL_BATTLE_TRANSITION_CALLERS = {
     "587CFAD0": "Called by FUN_587D03D0 at 0x587D04FE and byte-matched FUN_587D5B20 at 0x587D5D5A.",
     "58889120": "Called twice by FUN_587D0F90 at 0x587D1059 and 0x587D11F5.",
     "587CFA60": "Called by FUN_587D0F90 at 0x587D123F and byte-matched FUN_587D51D0 at 0x587D58A9.",
-    "587CFF80": "Called by FUN_587D0F90 at 0x587D141B, FUN_587D0E40 at 0x587D0F89, byte-matched FUN_587D5B20 at 0x587D5CB0, and the out-of-slice FUN_587D1830 at 0x587D1EE0.",
+    "587CFF80": "Called by FUN_587D0F90 at 0x587D141B, FUN_587D0E40 at 0x587D0F89, byte-matched FUN_587D5B20 at 0x587D5CB0, and the included FUN_587D1830 at 0x587D1EE0.",
     "58888ED0": "Called by FUN_587D0F90 at 0x587D1432 and byte-matched FUN_587D5B20 at 0x587D5C90.",
     "58888970": "Called twice by FUN_587D0F90 at 0x587D143D and 0x587D1451.",
     "58888720": "Called by byte-matched FUN_587D0940 at 0x587D0A7B and FUN_587D0F90 at 0x587D1446.",
@@ -7992,6 +7997,15 @@ CHANNEL_BATTLE_TRANSITION_CALLERS = {
     "587D1810": "Called by byte-matched FUN_588889F0 at 0x58888CE0; this input handler calls FUN_587D0F90 for its two mode branches.",
     "587D2630": "Called by byte-matched screen setup FUN_587BB700 at 0x587C0AB3 and the out-of-slice FUN_58762D30 at 0x58763121.",
     "587D16B0": "Called from four input sites in byte-matched FUN_588889F0 at 0x58888C47, 0x58888C70, 0x58888C99, and 0x58888CC2.",
+    "587D1830": "Ghidra records one incoming code ref from matched FUN_587D6450 at 0x587D6501. That caller is on event route 0x80023101 in FUN_588C4210 and calls this handler only when receiver +0xFC is 200; no vtable/data ref to FUN_587D1830 was found.",
+    "58795290": "Called by FUN_587D1830 at 0x587D1870, FUN_588290F0 at 0x588293EB, and FUN_588044D0 at 0x58804511.",
+    "58889600": "Called by FUN_587D0050 at 0x587D005F and by FUN_587D1830 at 0x587D194C and 0x587D1CBE.",
+    "587D0180": "Called by FUN_587D1830 at 0x587D1B68.",
+    "587D0100": "Called by FUN_587D1830 at 0x587D1B7C.",
+    "587D0250": "Called by FUN_587D1830 at 0x587D1B90, 0x587D1BC3, and 0x587D1BF0.",
+    "587D01E0": "Called by FUN_587D1830 at 0x587D1BAF, 0x587D1C04, and 0x587D1C18.",
+    "587950D0": "Called by FUN_58795290 at 0x5879529C, FUN_587C73D0 at 0x587C73F9, FUN_5887C900 at 0x5887CA3D, FUN_588892D0 at 0x588892EB, FUN_588FD790 at 0x588FD7B0, and FUN_5887C440 at 0x5887C7E8.",
+    "587CF000": "Called by FUN_587D0100 at 0x587D014D, FUN_587D0180 at 0x587D01B2, FUN_587D01E0 at 0x587D021C, and FUN_587D0250 at 0x587D0282.",
 }
 
 CHANNEL_BATTLE_TRANSITION_BEHAVIOR = {
@@ -8014,13 +8028,23 @@ CHANNEL_BATTLE_TRANSITION_BEHAVIOR = {
     "58888760": "Ghidra shows invoking virtual slot +8 on four child objects at receiver offsets +0xDC/+0xE0/+0xE4/+0xE8, then dispatching virtual slot +4 across those objects according to receiver +0xBC. The indirect child implementations are unresolved.",
     "5874A7D0": "Ghidra shows adding its second and third arguments to fields +0x6C and +0x70 of the first argument.",
     "58789680": "Ghidra shows walking a linked list at receiver +8, comparing each object's field +0x1C4 with the requested value, writing 0x100 or 0x60 to field +0xA8, and invoking that object's virtual slot +4.",
+    "587D1830": "Ghidra shows this event-driven handler using the indexed record at DAT_58A24860, formatting a date/countdown tuple through FUN_58795290, selecting among four recovered message-string globals from the record's type field, updating child flags through FUN_58889600, and handling a 25-entry row group through four pattern helpers before calling matched FUN_587CFF80. The four localization globals are DUETIME_WAITINGHCB, READYHCB, UNDERHCB, and RESPITE.",
+    "58795290": "Ghidra shows building a date/countdown tuple from global clock/date state, rolling seconds, minutes, hours, day, month, and year fields as needed, and consulting FUN_587950D0 for the current tuple. The user-facing meaning and units of each output field are not established.",
+    "58889600": "Ghidra shows toggling bit 0 in the low words of child objects at receiver offsets +0x6C and +0x7C according to the argument; the nonzero branch also calls matched FUN_58731CE0.",
+    "587D0180": "Ghidra shows iterating 25 entries of paired child pointers beginning at receiver +0x168 and assigning each pair a state value 0, 1, or 2 from the indexed record's flag bytes and shared predicate FUN_587CF000.",
+    "587D0100": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on each record flag, five-entry grouping, and FUN_587CF000.",
+    "587D0250": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on record flags, a five-entry boundary, and FUN_587CF000.",
+    "587D01E0": "Ghidra shows iterating the same 25 child pairs and assigning state values 0, 1, or 2 based on record flags, a four-offset/five-entry pattern, and FUN_587CF000.",
+    "587950D0": "Ghidra shows zeroing eight 16-bit output fields, then deriving a date/time tuple from an indirect callback at DAT_5898C42C and global date/time values. It includes month-length and rollover adjustments. The callback target and field meanings remain unresolved.",
+    "587CF000": "Ghidra shows a shared predicate over the indexed record at DAT_58A24860: it checks boundary positions in a five-entry pattern and adjacent record flag bytes at offsets relative to +0xF7 through +0x101. Its higher-level row semantics are unresolved.",
 }
 
 CHANNEL_BATTLE_TRANSITION_UNCERTAINTY = (
     "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources "
     "preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver "
     "member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain "
-    "uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed "
+    "uncertain unless stated as direct instruction behavior above. The callback used by FUN_587950D0 remains indirect and "
+    "unresolved. Shared callers outside the 28-function subset are listed "
     "in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
 )
 
