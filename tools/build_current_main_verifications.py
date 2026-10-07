@@ -1380,6 +1380,10 @@ MAIN_ROOM_TYPE_ALLIED_VS_AXIS_CONSTRUCTOR_ADDRESSES = ("588CBAF0",)
 ADDRESSES += MAIN_ROOM_TYPE_ALLIED_VS_AXIS_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_ALLIED_VS_AXIS_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES = ("588CD3C0",)
+ADDRESSES += MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14371,6 +14375,44 @@ MAIN_ROOM_TYPE_ALLIED_VS_AXIS_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_ALLIED_VS_AXIS_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_EVIDENCE = {
+    "588CD3C0": {
+        "name_in_analysis": "FUN_588CD3C0 / CRoomTypeDKT2 constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAA25 after FUN_5897CC4E accepts "
+            "resource 0x70. It passes pointers at CRoomSettingManager "
+            "offsets +0x68 and +0x12C; the returned pointer is stored at "
+            "receiver +0x188. The focused verifier checks the mapped resource "
+            "gate, argument setup, exact call, and result store."
+        ),
+        "behavior": (
+            "Fresh Ghidra body and edge exports cover 114 instructions in "
+            "one 347-byte range, with direct calls to byte-matched "
+            "FUN_588D02E0, FUN_5897CC4E, and FUN_588F3D70. The constructor "
+            "installs vtable 0x589A0D38, whose RTTI type descriptor is "
+            ".?AVCRoomTypeDKT2@@. On the accepted resource-0x198 path it "
+            "passes the literal `.\\SPR\\ITRSGB2.spr` to "
+            "FUN_588F3D70 and stores the returned sprite-file object at "
+            "receiver +0x58. It selects records using loaded-object fields "
+            "+0x164 and +0x18C, copies six DWORDs into children at receiver "
+            "+0x60 and +0x64, and writes the first record's +8 value through "
+            "child +0x5C+0x74."
+        ),
+        "uncertainty": (
+            "The meanings of resource identifiers 0x70 and 0x198, the "
+            "selected-record schema, fields and controls, and the class's "
+            "virtual behavior remain unknown. When the selected third value "
+            "is absent, mapped code zeros EAX and then reads [EAX+8], an "
+            "absolute address-0x8 read whose valid-state behavior is "
+            "unresolved. This is static evidence from the installed mapped "
+            "client, fresh Ghidra exports, and RTTI; no emulator or visual "
+            "runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":

@@ -23,6 +23,7 @@ from tools import (
     verify_current_main_room_type_waw_constructor,
     verify_current_main_room_type_skirmish_constructor,
     verify_current_main_room_type_allied_vs_axis_constructor,
+    verify_current_main_room_type_dkt2_constructor,
 )
 
 
@@ -35,8 +36,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_592)
-        self.assertEqual(self.report["measures"]["matched_code"], "2743421")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_593)
+        self.assertEqual(self.report["measures"]["matched_code"], "2743768")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -47,8 +48,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_459)
-        self.assertEqual(current["measures"]["matched_code"], "1770003")
+        self.assertEqual(current["measures"]["matched_functions"], 2_460)
+        self.assertEqual(current["measures"]["matched_code"], "1770350")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -148,6 +149,20 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("CRoomTypeAlliedvsAxis", item["behavior"])
         self.assertIn("address-0x8 read", item["uncertainty"])
         verify_current_main_room_type_allied_vs_axis_constructor.main()
+
+    def test_room_type_dkt2_constructor_has_gated_caller_and_rtti(self):
+        addresses = build_current_main_verifications.MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_EVIDENCE
+        self.assertEqual(addresses, ("588CD3C0",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588CD3C0"]
+        self.assertIn("0x588CAA25", item["called_by"])
+        self.assertIn("resource 0x70", item["called_by"])
+        self.assertIn("receiver +0x188", item["called_by"])
+        self.assertIn("CRoomTypeDKT2", item["behavior"])
+        self.assertIn("ITRSGB2.spr", item["behavior"])
+        self.assertIn("address-0x8 read", item["uncertainty"])
+        verify_current_main_room_type_dkt2_constructor.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (
