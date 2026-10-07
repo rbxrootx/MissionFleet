@@ -22,6 +22,12 @@ short value, scales it by 8, and clamps it. For type `0x100`, key values
 `0x0D`, `0x1B`, `0x25`, and `0x27` dispatch actions or adjust scrolling. Those
 branches and helper calls come directly from Ghidra pseudocode.
 
+The hit callback now matches byte-for-byte across its three fresh Ghidra
+ranges. It looks up the indexed entry value, updates the callback receiver's
+position and number controls, and populates two arrays of child controls from
+version-gated resource records. Its field, entry, and visible hover/selection
+meanings remain unknown; see the [callback notes](current-main-ship-tree-entry-hit-callback.md).
+
 ## Uncertainties
 
 Friendly event names, the item-data schema, exact selection side effects, and

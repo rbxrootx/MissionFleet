@@ -1094,6 +1094,10 @@ MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES = ("588D6EA0",)
 ADDRESSES += MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES)
 
+MAIN_SHIP_TREE_ENTRY_HIT_CALLBACK_ADDRESSES = ("588B1B40",)
+ADDRESSES += MAIN_SHIP_TREE_ENTRY_HIT_CALLBACK_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHIP_TREE_ENTRY_HIT_CALLBACK_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9852,6 +9856,42 @@ MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_EVIDENCE)
+
+MAIN_SHIP_TREE_ENTRY_HIT_CALLBACK_EVIDENCE = {
+    "588B1B40": {
+        "name_in_analysis": "FUN_588b1b40 / ship-tree entry hit callback",
+        "called_by": (
+            "Fresh Ghidra references show one call from the byte-matched "
+            "CPannelShipTree event handler FUN_588b1580 at 0x588B17B4. In its "
+            "0x200 mouse-move path, the handler tests the pointer against the "
+            "tree bounds, scans up to 100 child entries, and calls this routine "
+            "for the first hit with its indexed 16-bit value, adjusted child "
+            "coordinates, and an observed coordinate-boundary flag. The focused "
+            "verifier checks the matched call sequence and caller body range."
+        ),
+        "behavior": (
+            "Fresh Ghidra 12.1.3 output covers three exact body ranges totaling "
+            "1,160 bytes and 331 instructions. The method looks up the supplied "
+            "entry value through matched FUN_58778AD0 and returns on a null "
+            "result. Otherwise it updates the receiver position through matched "
+            "FUN_58903290, sets observed receiver flags, and sends four values "
+            "from the returned record to number children through matched "
+            "FUN_58907360. It uses record flag/count fields to populate at most "
+            "eight controls in each of two child arrays from version-gated "
+            "resource records, clears unused child flags, and selects additional "
+            "version-gated resource records according to the caller's boundary "
+            "flag. All six direct calls target byte-verified functions."
+        ),
+        "uncertainty": (
+            "The entry value's meaning, returned-record schema, bit-field and "
+            "count semantics, receiver type, child-control roles, resource-table "
+            "identities, and visible hover/selection result remain unresolved. "
+            "The exact ranges and call paths are static evidence; no emulator or "
+            "live-client input test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SHIP_TREE_ENTRY_HIT_CALLBACK_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {

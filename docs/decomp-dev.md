@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,372 of 42,461 functions and 2,692,554 of 10,470,295 bytes (19.7169% by
-functions and 25.7161% by bytes); every counted function match is verified at
+credits 8,373 of 42,461 functions and 2,693,714 of 10,470,295 bytes (19.7193% by
+functions and 25.7272% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,239 exact function matches totaling 1,719,136 bytes. The
+inventory has 2,240 exact function matches totaling 1,720,296 bytes. The
 RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are
@@ -68,6 +68,11 @@ function / 1,202 bytes. Its matched caller argument, observed value bands,
 complete direct-call boundary, and unresolved child/resource meanings are
 documented in
 [`current-main-ship-map-encoded-child-setup.md`](current-main-ship-map-encoded-child-setup.md).
+The `CPannelShipTree` mouse-move entry callback adds one exact function /
+1,160 bytes across three Ghidra body ranges. Its matched `0x200` hit-test
+caller, record lookup, child-control updates, and unknown visual effect are
+documented in
+[`current-main-ship-tree-entry-hit-callback.md`](current-main-ship-tree-entry-hit-callback.md).
 The RTTI-backed `CPannelCommunicatorMessage` constructor adds one exact function /
 1,298 bytes. Its matched parent call, `+0x110` child slot, complete direct-call
 boundaries, and unresolved control appearance are documented in

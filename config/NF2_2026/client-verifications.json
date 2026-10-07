@@ -427960,6 +427960,193 @@
         "behavior": "Fresh Ghidra 12.1.3 output covers the complete 1,202-byte body and shows the method extracting (argument >> 8) & 0xFFF. It clears six child resource pointers and number states, then configures a child group for encoded value zero or one of the observed ranges 1-10, 11-100, 101-300, 301-500, or 501-600. The nonzero branches select version-gated global resource records, update observed child positions through matched FUN_58903290, set number-child state via matched FUN_58907360, and set bit 0 on the observed child flags. All 17 direct calls target byte-verified functions.",
         "uncertainty": "The mapped code does not identify the encoded value's semantic category, the child-control roles, global record schemas, field types, coordinate units, or rendered result. Static matching does not establish the live-client appearance; no emulator or visual runtime test was performed."
       }
+    },
+    {
+      "address": "588B1B40",
+      "name": "FUN_588b1b40",
+      "size": 1160,
+      "symbol": "_FUN_588b1b40",
+      "source": "src/client-current/Main/FUN_588b1b40.cpp",
+      "source_sha256": "3a10868fc82b8e6aaa4397a058a33819afa3bcc8ee60241ea5cd60dc6b810fcb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B1B40",
+          "size": 196,
+          "symbol": "_FUN_588b1b40_segment_00",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "58778AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "588B1FD2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "588B1D09",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B1C10",
+          "size": 265,
+          "symbol": "_FUN_588b1b40_segment_01",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "588B1CD7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 31,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 233,
+              "target_address": "588B1C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B1D20",
+          "size": 699,
+          "symbol": "_FUN_588b1b40_segment_02",
+          "relocations": [
+            {
+              "offset": 69,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58A246B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "588B1EC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 276,
+              "target_address": "58A246B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "58A246B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "588B1F9D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "588B1F9D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "588B1F9F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "58A246B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 598,
+              "target_address": "58A246B4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b1b40 / ship-tree entry hit callback",
+        "called_by": "Fresh Ghidra references show one call from the byte-matched CPannelShipTree event handler FUN_588b1580 at 0x588B17B4. In its 0x200 mouse-move path, the handler tests the pointer against the tree bounds, scans up to 100 child entries, and calls this routine for the first hit with its indexed 16-bit value, adjusted child coordinates, and an observed coordinate-boundary flag. The focused verifier checks the matched call sequence and caller body range.",
+        "behavior": "Fresh Ghidra 12.1.3 output covers three exact body ranges totaling 1,160 bytes and 331 instructions. The method looks up the supplied entry value through matched FUN_58778AD0 and returns on a null result. Otherwise it updates the receiver position through matched FUN_58903290, sets observed receiver flags, and sends four values from the returned record to number children through matched FUN_58907360. It uses record flag/count fields to populate at most eight controls in each of two child arrays from version-gated resource records, clears unused child flags, and selects additional version-gated resource records according to the caller's boundary flag. All six direct calls target byte-verified functions.",
+        "uncertainty": "The entry value's meaning, returned-record schema, bit-field and count semantics, receiver type, child-control roles, resource-table identities, and visible hover/selection result remain unresolved. The exact ranges and call paths are static evidence; no emulator or live-client input test was performed."
+      }
     }
   ]
 }
