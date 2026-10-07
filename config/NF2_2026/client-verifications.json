@@ -359832,6 +359832,3764 @@
         "behavior": "Scans records in 0x54-byte steps, compares each record's string at +0x2D, shifts later 0x54-byte records over a match, decreases the collection end by 0x54, and returns one; returns zero when no record matches. Its calls are bounds-failure checks to FUN_5897CC72.",
         "uncertainty": "The record schema, string identity, and collection ownership remain unresolved."
       }
+    },
+    {
+      "address": "58756B40",
+      "name": "FUN_58756b40",
+      "size": 114,
+      "symbol": "_FUN_58756b40",
+      "source": "src/client-current/Main/FUN_58756b40.cpp",
+      "source_sha256": "af6edc36d87f35f14c95497bc41cd1d352de1de324396ed87bec8ce007e78339",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58756B40",
+          "size": 114,
+          "symbol": "_FUN_58756b40_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A246AC",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58756b40 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "58756BC0",
+      "name": "FUN_58756bc0",
+      "size": 230,
+      "symbol": "_FUN_58756bc0",
+      "source": "src/client-current/Main/FUN_58756bc0.cpp",
+      "source_sha256": "1315fe1b6b2e18062885a79990c28df1fad29df2818903cdc920acec01eebb77",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58756BC0",
+          "size": 230,
+          "symbol": "_FUN_58756bc0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E953",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "58796F00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5898D714",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 192,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58756bc0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "5878A190",
+      "name": "FUN_5878a190",
+      "size": 69,
+      "symbol": "_FUN_5878a190",
+      "source": "src/client-current/Main/FUN_5878a190.cpp",
+      "source_sha256": "e73908abf72d6be2dd3388e725ba436c5f3110395801af3c532c0548797999ff",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878A190",
+          "size": 69,
+          "symbol": "_FUN_5878a190_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "5898C138",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878a190 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "58796F00",
+      "name": "FUN_58796f00",
+      "size": 97,
+      "symbol": "_FUN_58796f00",
+      "source": "src/client-current/Main/FUN_58796f00.cpp",
+      "source_sha256": "607934b7690e2d9eece62062e6ccd81af8c03a3d0848dce78ede62d5ec0342f1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58796F00",
+          "size": 97,
+          "symbol": "_FUN_58796f00_segment_00",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "58998064",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58796f00 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "58796F80",
+      "name": "FUN_58796f80",
+      "size": 79,
+      "symbol": "_FUN_58796f80",
+      "source": "src/client-current/Main/FUN_58796f80.cpp",
+      "source_sha256": "c41f34b7080fadfa4507cb05f99758f96570230561ac7a9ce638e7776c7dfff9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58796F80",
+          "size": 79,
+          "symbol": "_FUN_58796f80_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58796f80 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587C9F30",
+      "name": "FUN_587c9f30",
+      "size": 635,
+      "symbol": "_FUN_587c9f30",
+      "source": "src/client-current/Main/FUN_587c9f30.cpp",
+      "source_sha256": "47d5a14499aca39711e44b974964111a1b5fa7bcd1d35a2d8232d40e094d5337",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587C9F30",
+          "size": 635,
+          "symbol": "_FUN_587c9f30_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5899B1DC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "5899B0D8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5897CECE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "587CA15A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "587CA04B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "587CA1A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "5899B1DC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5899B080",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "5897CECE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 248,
+              "target_address": "587CA1A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 293,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 299,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 313,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 444,
+              "target_address": "587CA1A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 470,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 528,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 544,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 556,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 572,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 579,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 584,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 598,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 606,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c9f30 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CA1C0",
+      "name": "FUN_587ca1c0",
+      "size": 235,
+      "symbol": "_FUN_587ca1c0",
+      "source": "src/client-current/Main/FUN_587ca1c0.cpp",
+      "source_sha256": "5584ecf7d8ce0d3abba49cd10f6d29b0676e52a0af7ebfa527011b5d93f6d703",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CA1C0",
+          "size": 235,
+          "symbol": "_FUN_587ca1c0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589817B3",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "5875BB10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5899B068",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ca1c0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CADA0",
+      "name": "FUN_587cada0",
+      "size": 37,
+      "symbol": "_FUN_587cada0",
+      "source": "src/client-current/Main/FUN_587cada0.cpp",
+      "source_sha256": "b58c13f9cb765cb6729f2327ca40184a2ed625e391f36ae3ac854dfd262b6254",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CADA0",
+          "size": 37,
+          "symbol": "_FUN_587cada0_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "587CB2F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cada0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CB2F0",
+      "name": "FUN_587cb2f0",
+      "size": 79,
+      "symbol": "_FUN_587cb2f0",
+      "source": "src/client-current/Main/FUN_587cb2f0.cpp",
+      "source_sha256": "10a6eae055749afec3e71c2c3c1f20952e1f6e8833783a3ff1b1ac8ae7838a42",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB2F0",
+          "size": 79,
+          "symbol": "_FUN_587cb2f0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb2f0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CC780",
+      "name": "FUN_587cc780",
+      "size": 524,
+      "symbol": "_FUN_587cc780",
+      "source": "src/client-current/Main/FUN_587cc780.cpp",
+      "source_sha256": "e67ab4835cbcf4500bd08b8e287bb9549474901d4e7d607bb9b6153512c81902",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CC780",
+          "size": 524,
+          "symbol": "_FUN_587cc780_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589818D6",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 19,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "587CC853",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "587CC900",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 257,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 355,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 477,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cc780 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CC990",
+      "name": "FUN_587cc990",
+      "size": 90,
+      "symbol": "_FUN_587cc990",
+      "source": "src/client-current/Main/FUN_587cc990.cpp",
+      "source_sha256": "dc80df35b2cec3ab35e7ce7634a3f8a90fd64edc20dacb97c6e96034246b5a95",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CC990",
+          "size": 90,
+          "symbol": "_FUN_587cc990_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "5898CDE8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5877ABA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "5877ABA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "587F2A70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cc990 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CD000",
+      "name": "FUN_587cd000",
+      "size": 533,
+      "symbol": "_FUN_587cd000",
+      "source": "src/client-current/Main/FUN_587cd000.cpp",
+      "source_sha256": "f6904529adfc034499c4f25a7dde2f64b8ccef82f6562a14982d0b32be7f7119",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CD000",
+          "size": 26,
+          "symbol": "_FUN_587cd000_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "587CD020",
+          "size": 58,
+          "symbol": "_FUN_587cd000_segment_01",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587CD060",
+          "size": 61,
+          "symbol": "_FUN_587cd000_segment_02",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587CD0A0",
+          "size": 388,
+          "symbol": "_FUN_587cd000_segment_03",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "587CD215",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "587CD215",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 241,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 248,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "58800FD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 265,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "58896200",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 291,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 308,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "588DEB30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cd000 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CD230",
+      "name": "FUN_587cd230",
+      "size": 656,
+      "symbol": "_FUN_587cd230",
+      "source": "src/client-current/Main/FUN_587cd230.cpp",
+      "source_sha256": "d708fe0ee714136b6cf5c8aeccd01333b1faaea556224ff1ec7d6ed54044bf3d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CD230",
+          "size": 656,
+          "symbol": "_FUN_587cd230_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589819B6",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "587CD35D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "587CD34C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 325,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "587CD42E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 345,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 493,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 601,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 630,
+              "target_address": "587CD289",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cd230 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CD4C0",
+      "name": "FUN_587cd4c0",
+      "size": 394,
+      "symbol": "_FUN_587cd4c0",
+      "source": "src/client-current/Main/FUN_587cd4c0.cpp",
+      "source_sha256": "c32c0edeb768191af4aba96e9a1fcdece128edfa4d06b5c7fbb08c616d449bd7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CD4C0",
+          "size": 394,
+          "symbol": "_FUN_587cd4c0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898263B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 221,
+              "target_address": "587CD624",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "587CD506",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cd4c0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CD650",
+      "name": "FUN_587cd650",
+      "size": 876,
+      "symbol": "_FUN_587cd650",
+      "source": "src/client-current/Main/FUN_587cd650.cpp",
+      "source_sha256": "4d69571736d6ae0b074625a547f6efc7340985e4749fb65350ca0a6fb2f42b45",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CD650",
+          "size": 567,
+          "symbol": "_FUN_587cd650_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58981A01",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "587CD76C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587CD75F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "587CD69C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 354,
+              "target_address": "587CD857",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 392,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 451,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 503,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 559,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587CD890",
+          "size": 309,
+          "symbol": "_FUN_587cd650_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587CD94E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "587CD890",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cd650 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CD9F0",
+      "name": "FUN_587cd9f0",
+      "size": 111,
+      "symbol": "_FUN_587cd9f0",
+      "source": "src/client-current/Main/FUN_587cd9f0.cpp",
+      "source_sha256": "c184130a5292cef1230210553c31dce1d55cbbd294c743eae56bdab4a58c3cc0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CD9F0",
+          "size": 111,
+          "symbol": "_FUN_587cd9f0_segment_00",
+          "relocations": [
+            {
+              "offset": 107,
+              "target_address": "587CD650",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cd9f0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CDA60",
+      "name": "FUN_587cda60",
+      "size": 745,
+      "symbol": "_FUN_587cda60",
+      "source": "src/client-current/Main/FUN_587cda60.cpp",
+      "source_sha256": "dd432dfe8ef331e88fa6ef8172ad2272dd493f7d0278089b6633093874b73139",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CDA60",
+          "size": 745,
+          "symbol": "_FUN_587cda60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58981A36",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "587CDC4B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "587CDC26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "587CDBEB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 244,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "58A24638",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 417,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "587CDB19",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 483,
+              "target_address": "587CDAE2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 516,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 524,
+              "target_address": "5899B2E0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 533,
+              "target_address": "5899B2D8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 539,
+              "target_address": "5899B2C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 580,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 648,
+              "target_address": "58A2454C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 663,
+              "target_address": "58733280",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 700,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 721,
+              "target_address": "587CDA91",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cda60 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CDD60",
+      "name": "FUN_587cdd60",
+      "size": 1389,
+      "symbol": "_FUN_587cdd60",
+      "source": "src/client-current/Main/FUN_587cdd60.cpp",
+      "source_sha256": "1cf7502fb1f25bad309c4aeb0e91d26bc841671e1c77657c023872e115c78f38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CDD60",
+          "size": 173,
+          "symbol": "_FUN_587cdd60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898028E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "587CD230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "587CD4C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "587CD650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "587CE7A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "587CDFEF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "587CDF5D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587CDE10",
+          "size": 1216,
+          "symbol": "_FUN_587cdd60_segment_01",
+          "relocations": [
+            {
+              "offset": 44,
+              "target_address": "5899B408",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587CC990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "587C9F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "587C9F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 197,
+              "target_address": "587CD9F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "5899B3E0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 244,
+              "target_address": "5899B3B4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "587CC990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "588DFFB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "5899B388",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "587CE049",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 346,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 398,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 417,
+              "target_address": "587CE05A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 428,
+              "target_address": "587C9F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 433,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "5899B35C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 466,
+              "target_address": "5899B334",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 473,
+              "target_address": "5899B30C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 481,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 504,
+              "target_address": "587C9F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 509,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 528,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 551,
+              "target_address": "587CD230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 560,
+              "target_address": "587CD650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "5899B2E8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 571,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 582,
+              "target_address": "587CC990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 627,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 663,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 676,
+              "target_address": "587CC780",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 681,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 694,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 717,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 739,
+              "target_address": "587CD230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 748,
+              "target_address": "587CD4C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 757,
+              "target_address": "587CC780",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 769,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 776,
+              "target_address": "587E5C30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 784,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 807,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 816,
+              "target_address": "587CE2A8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 833,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 857,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 888,
+              "target_address": "587CA1C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 948,
+              "target_address": "587C9F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 960,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 983,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1003,
+              "target_address": "587CD000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1035,
+              "target_address": "587CD230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1043,
+              "target_address": "587CD4C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1051,
+              "target_address": "587CD650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1059,
+              "target_address": "587CC780",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1072,
+              "target_address": "587CDA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1077,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1089,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1104,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1111,
+              "target_address": "587E5C30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1136,
+              "target_address": "587CD230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1145,
+              "target_address": "587CD4C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1154,
+              "target_address": "587CD650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1160,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1165,
+              "target_address": "587E5FB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1205,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cdd60 / PageFight mode-7 OpConvoy state update",
+        "called_by": "The currently open FUN_587fb810 calls this function at 0x587FBC99 only when the screen field at +0x105A2 equals 7. FUN_587fb810 is called at 0x587FEF97 and 0x587FF039 by the byte-matched, RTTI-identified CPageFightOn_ControlMenuScreen update method FUN_587fd890, referenced by vtable slot +0x0C at 0x5899D18C. Ghidra body and edge exports record this direct call and the transitive helper closure.",
+        "behavior": "Ghidra decompilation shows a state switch at receiver +0x18. State 3 branches on the referenced actor's +0x74 value: it handles a timed box pop, scans battle objects within +/-0x28 on both coordinate axes for status 0x40000000, and emits the original OPCONVOY localization keys for box pickup, wrong-side sink, and ally/opponent receive-point outcomes. State 4 counts down to state 5. State 5 allocates a 0x84-byte control, sets its rectangle fields, calls FUN_587cd000, and selects state 3 or 6; state 6 clears the related controls and returns the state to 1. The 1,389-byte body is emitted from its two exact Ghidra ranges.",
+        "uncertainty": "The meanings and ownership of the receiver fields, coordinate units, helper side effects, and server-event contract are not fully recovered. No direct RTTI/vtable entry identifies FUN_587cdd60 itself; the OpConvoy label is grounded in its message keys plus the Box::SetMode assertion and COpConvoy_Box constructor in its helper closure. This is static evidence from the installed client; no live runtime or emulator test has been run."
+      }
+    },
+    {
+      "address": "587CE320",
+      "name": "FUN_587ce320",
+      "size": 57,
+      "symbol": "_FUN_587ce320",
+      "source": "src/client-current/Main/FUN_587ce320.cpp",
+      "source_sha256": "0773530bb10533febd255100f5185e85150d0357f8dd97d58b3aa8290339888e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CE320",
+          "size": 57,
+          "symbol": "_FUN_587ce320_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ce320 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CE360",
+      "name": "FUN_587ce360",
+      "size": 108,
+      "symbol": "_FUN_587ce360",
+      "source": "src/client-current/Main/FUN_587ce360.cpp",
+      "source_sha256": "ef7b4af6fcef1a998be38ddf58e5f2ce20e94410d9449484c57d8312e818bef8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CE360",
+          "size": 108,
+          "symbol": "_FUN_587ce360_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ce360 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587CE7A0",
+      "name": "FUN_587ce7a0",
+      "size": 195,
+      "symbol": "_FUN_587ce7a0",
+      "source": "src/client-current/Main/FUN_587ce7a0.cpp",
+      "source_sha256": "3a11516d84367b329755d6b4125248093f2e2f241a85f971fa31610c3a87eb3b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CE7A0",
+          "size": 195,
+          "symbol": "_FUN_587ce7a0_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "587CE861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "587CADA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "587CADA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "587CE320",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "587CE320",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "587CE360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "589C903C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ce7a0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587E5C30",
+      "name": "FUN_587e5c30",
+      "size": 69,
+      "symbol": "_FUN_587e5c30",
+      "source": "src/client-current/Main/FUN_587e5c30.cpp",
+      "source_sha256": "2fcc57dd26d9b6345b79a182b2ecb99a80c36513661c5dd5e6173876fd113b98",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E5C30",
+          "size": 69,
+          "symbol": "_FUN_587e5c30_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5c30 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587E8C00",
+      "name": "FUN_587e8c00",
+      "size": 1699,
+      "symbol": "_FUN_587e8c00",
+      "source": "src/client-current/Main/FUN_587e8c00.cpp",
+      "source_sha256": "fb1d47882415d3bd7926f61d1be69701e36a34117848ab5eecd5ae52f6b5b161",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E8C00",
+          "size": 1699,
+          "symbol": "_FUN_587e8c00_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "587E8D35",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "5878A190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "588D6D50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 219,
+              "target_address": "5899BFC0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 264,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 305,
+              "target_address": "587E927D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "587E8E3B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "5898C138",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 352,
+              "target_address": "5899BFB4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 359,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "587E8E05",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 393,
+              "target_address": "5899BF9C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 399,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 415,
+              "target_address": "5899BF78",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 433,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 461,
+              "target_address": "5899BF70",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 468,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 484,
+              "target_address": "5899BF54",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 505,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 567,
+              "target_address": "587E927D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 591,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 597,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 611,
+              "target_address": "5878A190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 633,
+              "target_address": "5899BF48",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 640,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 649,
+              "target_address": "5899BF48",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 656,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 701,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 726,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 767,
+              "target_address": "587E927D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 779,
+              "target_address": "587E8F9E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 785,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 790,
+              "target_address": "5899BF2C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 803,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 813,
+              "target_address": "5899BF2C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 824,
+              "target_address": "5899BF24",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 840,
+              "target_address": "5899BF24",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 854,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 881,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 922,
+              "target_address": "587E927D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 936,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 941,
+              "target_address": "5899BF2C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 954,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 964,
+              "target_address": "5899BF2C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 975,
+              "target_address": "5899BF24",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 991,
+              "target_address": "5899BF24",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1005,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1032,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1050,
+              "target_address": "587E8D19",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1062,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1075,
+              "target_address": "587E9288",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1100,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1106,
+              "target_address": "5878A190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1121,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1131,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1197,
+              "target_address": "588D6D50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1213,
+              "target_address": "587E926D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1227,
+              "target_address": "5899BF0C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1233,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1248,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1253,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1269,
+              "target_address": "587E926D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1290,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1308,
+              "target_address": "587E9266",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1315,
+              "target_address": "5899BEF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1321,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1336,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1341,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1357,
+              "target_address": "587E926D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1378,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1396,
+              "target_address": "587E9266",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "5899BED0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1409,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1424,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1429,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1445,
+              "target_address": "587E926D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1466,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1484,
+              "target_address": "587E9266",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1491,
+              "target_address": "5899BEAC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1497,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1512,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1517,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1550,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1576,
+              "target_address": "5899BE88",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1582,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1597,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1621,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1663,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1668,
+              "target_address": "58893E80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1686,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e8c00 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587EF0C0",
+      "name": "FUN_587ef0c0",
+      "size": 147,
+      "symbol": "_FUN_587ef0c0",
+      "source": "src/client-current/Main/FUN_587ef0c0.cpp",
+      "source_sha256": "1893bad1313bcf7a1a382169c2345bdb423713525585d79bf7f398bad15449d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EF0C0",
+          "size": 147,
+          "symbol": "_FUN_587ef0c0_segment_00",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5899BD80",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5899BD80",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ef0c0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587F2A70",
+      "name": "FUN_587f2a70",
+      "size": 95,
+      "symbol": "_FUN_587f2a70",
+      "source": "src/client-current/Main/FUN_587f2a70.cpp",
+      "source_sha256": "cc0757cf8058f87e3ead8877c67e963f083a8cf4b639faa59d1cf7b1c7b07739",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587F2A70",
+          "size": 95,
+          "symbol": "_FUN_587f2a70_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "587E8C00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587f2a70 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "587F2AD0",
+      "name": "FUN_587f2ad0",
+      "size": 757,
+      "symbol": "_FUN_587f2ad0",
+      "source": "src/client-current/Main/FUN_587f2ad0.cpp",
+      "source_sha256": "0fbac8904eca1255e4b233bc9d4f0e4f12ef4e595d8c9561491933c410b6ef79",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587F2AD0",
+          "size": 757,
+          "symbol": "_FUN_587f2ad0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589825DE",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "58789FB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "587F2DAB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "587F2D86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 258,
+              "target_address": "5897CC3C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "587F2D47",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 305,
+              "target_address": "587F2D47",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 343,
+              "target_address": "5897CC3C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 353,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 388,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 412,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "58756BC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 492,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 505,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 510,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 529,
+              "target_address": "58796F80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 543,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 559,
+              "target_address": "58756B40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 585,
+              "target_address": "587EF0C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 593,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 609,
+              "target_address": "587F2C17",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 676,
+              "target_address": "587F2BD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 727,
+              "target_address": "587F2BA2",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587f2ad0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "58800FD0",
+      "name": "FUN_58800fd0",
+      "size": 476,
+      "symbol": "_FUN_58800fd0",
+      "source": "src/client-current/Main/FUN_58800fd0.cpp",
+      "source_sha256": "4aca90886ecc1ba859c84df0fba09ea0f5d55619c60f8a824eba8db68be443b0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58800FD0",
+          "size": 329,
+          "symbol": "_FUN_58800fd0_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "5890DBF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "58800360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58801120",
+          "size": 147,
+          "symbol": "_FUN_58800fd0_segment_01",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "587CDA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "587F2AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58800fd0 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "58896200",
+      "name": "FUN_58896200",
+      "size": 45,
+      "symbol": "_FUN_58896200",
+      "source": "src/client-current/Main/FUN_58896200.cpp",
+      "source_sha256": "6c30bc05037a84ef5132c5540ab1693e52128e8f0187c6e5f42832bd080a3503",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58896200",
+          "size": 45,
+          "symbol": "_FUN_58896200_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58896200 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
+    },
+    {
+      "address": "588D6D50",
+      "name": "FUN_588d6d50",
+      "size": 53,
+      "symbol": "_FUN_588d6d50",
+      "source": "src/client-current/Main/FUN_588d6d50.cpp",
+      "source_sha256": "55cfef5c15ddc383992ed878b84489057f1a15765fde4b7039a6629181145673",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D6D50",
+          "size": 53,
+          "symbol": "_FUN_588d6d50_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5876C8B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58751A60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d6d50 / OpConvoy state-update closure member",
+        "called_by": "Ghidra's direct-control-flow graph places this function in the open closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at 0x587FBC99 only in mode 7. The exact body ranges are preserved in the candidate source and match record; see docs/current-main-opconvoy-state-update.md.",
+        "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
+        "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
+      }
     }
   ]
 }

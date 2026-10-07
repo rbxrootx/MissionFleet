@@ -950,6 +950,17 @@ MANAGE_FLEET_EVENT_ADDRESSES = (
 ADDRESSES += MANAGE_FLEET_EVENT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MANAGE_FLEET_EVENT_ADDRESSES)
 
+OPCONVOY_BATTLE_UPDATE_ADDRESSES = (
+    "58756B40", "58756BC0", "5878A190", "58796F00", "58796F80",
+    "587C9F30", "587CA1C0", "587CADA0", "587CB2F0", "587CC780",
+    "587CC990", "587CD000", "587CD230", "587CD4C0", "587CD650",
+    "587CD9F0", "587CDA60", "587CDD60", "587CE320", "587CE360",
+    "587CE7A0", "587E5C30", "587E8C00", "587EF0C0", "587F2A70",
+    "587F2AD0", "58800FD0", "58896200", "588D6D50",
+)
+ADDRESSES += OPCONVOY_BATTLE_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(OPCONVOY_BATTLE_UPDATE_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8586,6 +8597,66 @@ MANAGE_FLEET_EVENT_EVIDENCE = {
     },
 }
 EVIDENCE.update(MANAGE_FLEET_EVENT_EVIDENCE)
+
+OPCONVOY_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_587cdd60 / PageFight mode-7 OpConvoy state update",
+    "called_by": (
+        "The currently open FUN_587fb810 calls this function at 0x587FBC99 only "
+        "when the screen field at +0x105A2 equals 7. FUN_587fb810 is called at "
+        "0x587FEF97 and 0x587FF039 by the byte-matched, RTTI-identified "
+        "CPageFightOn_ControlMenuScreen update method FUN_587fd890, referenced "
+        "by vtable slot +0x0C at 0x5899D18C. Ghidra body and edge exports record "
+        "this direct call and the transitive helper closure."
+    ),
+    "behavior": (
+        "Ghidra decompilation shows a state switch at receiver +0x18. State 3 "
+        "branches on the referenced actor's +0x74 value: it handles a timed box "
+        "pop, scans battle objects within +/-0x28 on both coordinate axes for "
+        "status 0x40000000, and emits the original OPCONVOY localization keys for "
+        "box pickup, wrong-side sink, and ally/opponent receive-point outcomes. "
+        "State 4 counts down to state 5. State 5 allocates a 0x84-byte control, "
+        "sets its rectangle fields, calls FUN_587cd000, and selects state 3 or 6; "
+        "state 6 clears the related controls and returns the state to 1. The "
+        "1,389-byte body is emitted from its two exact Ghidra ranges."
+    ),
+    "uncertainty": (
+        "The meanings and ownership of the receiver fields, coordinate units, "
+        "helper side effects, and server-event contract are not fully recovered. "
+        "No direct RTTI/vtable entry identifies FUN_587cdd60 itself; the OpConvoy "
+        "label is grounded in its message keys plus the Box::SetMode assertion "
+        "and COpConvoy_Box constructor in its helper closure. This is static "
+        "evidence from the installed client; no live runtime or emulator test "
+        "has been run."
+    ),
+}
+OPCONVOY_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / OpConvoy state-update closure member",
+        "called_by": (
+            "Ghidra's direct-control-flow graph places this function in the open "
+            "closure rooted at FUN_587cdd60, which open FUN_587fb810 calls at "
+            "0x587FBC99 only in mode 7. The exact body ranges are preserved in "
+            "the candidate source and match record; see "
+            "docs/current-main-opconvoy-state-update.md."
+        ),
+        "behavior": (
+            "The exact mapped x86 instruction stream for this Ghidra body is "
+            "emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking "
+            "the original OpConvoy_Box.cpp Box::SetMode assertion and "
+            "OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs "
+            "COpConvoy_Box::vftable as component-level evidence. No per-helper "
+            "behavior beyond those specific observations is asserted here."
+        ),
+        "uncertainty": (
+            "This helper's independent semantic role, field meanings, and runtime "
+            "effects remain unresolved; no emulator test has been run."
+        ),
+    }
+    for address in OPCONVOY_BATTLE_UPDATE_ADDRESSES
+    if address != "587CDD60"
+}
+OPCONVOY_HELPER_EVIDENCE["587CDD60"] = OPCONVOY_ROOT_EVIDENCE
+EVIDENCE.update(OPCONVOY_HELPER_EVIDENCE)
 
 
 def sha256(path):

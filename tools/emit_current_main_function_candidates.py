@@ -3,6 +3,7 @@ import argparse
 import csv
 import json
 import re
+from collections import defaultdict
 from pathlib import Path
 
 import capstone
@@ -13,15 +14,55 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = 0x58730000
 
 
+def load_exact_body_ranges(path):
+    """Load complete, non-overlapping Ghidra body ranges from the exporter TSV."""
+    ranges_by_function = defaultdict(list)
+    with path.open(encoding="utf-8", newline="") as stream:
+        for row in csv.DictReader(stream, delimiter="\t"):
+            address = row["function"].upper()
+            start = int(row["start"], 16)
+            size = int(row["length"])
+            instruction_bytes = int(row["instruction_bytes"])
+            instruction_count = int(row["instruction_count"])
+            if size <= 0 or instruction_bytes != size or instruction_count <= 0:
+                raise ValueError(f"Ghidra range has incomplete instruction coverage: {address} {row}")
+            ranges_by_function[address].append((start, size))
+    for address, ranges in ranges_by_function.items():
+        ranges.sort()
+        previous_end = None
+        for start, size in ranges:
+            if previous_end is not None and start < previous_end:
+                raise ValueError(f"Overlapping Ghidra body ranges for {address}")
+            previous_end = start + size
+    return dict(ranges_by_function)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--address", action="append", required=True,
+    parser.add_argument("--address", action="append", default=[],
                         help="Ghidra function entry address (repeatable, hexadecimal)")
     parser.add_argument("--raw-extent", action="append", default=[],
                         help="emit a function's complete indexed byte extent literally when decoding is incomplete")
     parser.add_argument("--segment", action="append", default=[], metavar="ADDRESS:SIZE",
                         help="emit one exact Ghidra body segment for the sole --address; repeat in address order")
+    parser.add_argument("--ranges-tsv", type=Path,
+                        help="emit all functions and exact body ranges from a Ghidra body-export TSV")
     args = parser.parse_args()
+
+    if args.ranges_tsv and args.segment:
+        parser.error("--ranges-tsv and --segment cannot be combined")
+    ranges_by_function = {}
+    if args.ranges_tsv:
+        ranges_by_function = load_exact_body_ranges(args.ranges_tsv)
+        manifest_addresses = set(ranges_by_function)
+        requested_addresses = {f"{int(value, 16):08X}" for value in args.address}
+        if args.address and requested_addresses != manifest_addresses:
+            raise ValueError("--address set must exactly match functions in --ranges-tsv")
+        if not manifest_addresses:
+            parser.error("--ranges-tsv contains no functions")
+        args.address = sorted(manifest_addresses)
+    elif not args.address:
+        parser.error("provide --address or --ranges-tsv")
 
     rows = {row["address"].upper(): row for row in csv.DictReader(
         (ROOT / "config/NF2_2026/client-functions.tsv").open(encoding="utf-8"),
@@ -66,18 +107,19 @@ def main():
         if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", source_name):
             raise ValueError(f"Function label is not a C identifier: {row['name']!r}")
 
-        if segment_specs:
-            if segment_specs[0][0] != start:
+        exact_segments = ranges_by_function.get(address, segment_specs)
+        if exact_segments:
+            if exact_segments[0][0] != start:
                 raise ValueError(f"First body segment must start at {address}")
-            if sum(segment_size for _, segment_size in segment_specs) != size:
+            if sum(segment_size for _, segment_size in exact_segments) != size:
                 raise ValueError(f"Segment byte total does not match indexed extent for {address}")
             segments = []
             lines = [
                 "// Instruction stream reconstructed from Ghidra body ranges and the pinned mapped Main.dll.",
-                f"// Ghidra body size: {size} bytes in {len(segment_specs)} discontiguous ranges.",
+                f"// Ghidra body size: {size} bytes in {len(exact_segments)} exact ranges.",
                 f"// Source symbol alias: {source_name}.",
             ]
-            for index, (segment_start, segment_size) in enumerate(segment_specs):
+            for index, (segment_start, segment_size) in enumerate(exact_segments):
                 segment_address = f"{segment_start:08X}"
                 segment_end = segment_start + segment_size
                 code = image[segment_start - BASE:segment_end - BASE]
