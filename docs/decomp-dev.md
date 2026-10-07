@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,364 of 42,461 functions and 2,684,870 of 10,470,295 bytes (19.6981% by
-functions and 25.6427% by bytes); every counted function match is verified at
+credits 8,368 of 42,461 functions and 2,687,082 of 10,470,295 bytes (19.7075% by
+functions and 25.6639% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,231 exact function matches totaling 1,711,452 bytes. The
+inventory has 2,235 exact function matches totaling 1,713,664 bytes. The
 `CPannelFactoryHelp` child-state selector and its direct-call closure add four
 byte-identical functions / 2,210 bytes, grounded by the panel's RTTI, vtable,
 matched caller sites, and exact Ghidra body ranges; numeric state meanings and
@@ -73,6 +73,11 @@ path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
 are documented in
 [`current-main-message-80022001-state-application.md`](current-main-message-80022001-state-application.md).
+The same message branch's auxiliary child-refresh closure adds four
+byte-identical functions / 2,212 bytes. Its exact Ghidra ranges, child/text
+updates, verified direct-call boundaries, and unresolved payload/control
+semantics are documented in
+[`current-main-message-80022001-auxiliary-child-refresh.md`](current-main-message-80022001-auxiliary-child-refresh.md).
 The installed client's battle-room `0x80020115`
 update closure adds eight byte-identical functions / 3,847 bytes. Its matched
 dispatcher route, bitmap traversal, factory selection, exact ranges, and payload

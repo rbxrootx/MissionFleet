@@ -12,6 +12,10 @@ Byte-matched dispatcher `FUN_587bb700` compares EAX with `0x80022001` at
 verifier checks all three instructions against the mapped image and confirms
 they lie in the already byte-matched dispatcher.
 
+The same dispatcher branch calls the auxiliary child-refresh path at
+`0x587C075B`; its four-function direct-call closure is documented in
+[`current-main-message-80022001-auxiliary-child-refresh.md`](current-main-message-80022001-auxiliary-child-refresh.md).
+
 Ghidra shows the handler passes the shared object at `0x58A245A4` in ECX and
 the payload in EBX. The state-application function sets flags on that object
 and its child at `+0x428`, applies payload-selected child flags, and updates

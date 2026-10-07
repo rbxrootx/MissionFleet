@@ -1072,6 +1072,12 @@ CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES = (
 ADDRESSES += CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES)
 
+CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES = (
+    "5875F7C0", "58779840", "58809780", "5884F4E0",
+)
+ADDRESSES += CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9646,6 +9652,63 @@ CURRENT_MAIN_MESSAGE_80022001_STATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_MESSAGE_80022001_STATE_EVIDENCE)
+
+CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_EVIDENCE = {
+    "58809780": {
+        "name_in_analysis": "FUN_58809780 / message 0x80022001 auxiliary child refresh entry",
+        "called_by": (
+            "Fresh Ghidra identifies this call at 0x587C075B in the byte-matched "
+            "FUN_587bb700 equality branch for message 0x80022001. The wrapper "
+            "calls FUN_5884f4e0 at 0x58809786."
+        ),
+        "behavior": "Calls FUN_5884f4e0 and returns.",
+        "uncertainty": (
+            "The full payload schema, receiver/control types, child roles, "
+            "resource-row meanings, and visible result are unresolved. The exact "
+            "instruction match does not establish a rendered or server-driven result."
+        ),
+    },
+    "5884F4E0": {
+        "name_in_analysis": "FUN_5884f4e0 / message 0x80022001 child text and state refresh",
+        "called_by": "FUN_58809780 at 0x58809786.",
+        "behavior": (
+            "Clears six payload words at receiver +0x1A4..+0x1B8 and bit 0 on "
+            "a fixed set of child objects. It treats a zero item count as an "
+            "inactive path; otherwise clamps the count to four and copies six "
+            "bytes per item from the supplied payload. For each item it looks up "
+            "a 0x574-byte-stride record through FUN_58779840, selects or formats "
+            "text, copies it to a child through FUN_5875F7C0, selects resource "
+            "records for related children, processes child text rows, and writes "
+            "observed flag/color fields."
+        ),
+        "uncertainty": (
+            "The payload fields, resource indices, child types, coordinate units, "
+            "color/state meanings, and FUN_58903290 callback purpose are not "
+            "established by this slice. No emulator or live-client test was run."
+        ),
+    },
+    "5875F7C0": {
+        "name_in_analysis": "FUN_5875f7c0 / bounded indexed child-text copy",
+        "called_by": "FUN_5884f4e0 at 0x5884F905.",
+        "behavior": (
+            "Copies a NUL-terminated string into a receiver text slot selected "
+            "by receiver +0x18. Slots advance by 0x100 bytes from receiver +0x20; "
+            "the copy is bounded to 0x100 bytes and terminates the destination."
+        ),
+        "uncertainty": "The receiver/control type, slot labels, and user-visible text role are unknown.",
+    },
+    "58779840": {
+        "name_in_analysis": "FUN_58779840 / short-key record lookup",
+        "called_by": "FUN_5884f4e0 at 0x5884F8AE.",
+        "behavior": (
+            "Scans the receiver's record count at +0xA8, compares a 16-bit key "
+            "at the start of each observed 0x574-byte-stride record, and returns "
+            "the matching record pointer or zero."
+        ),
+        "uncertainty": "The record type, key meaning, and lookup table's source are unresolved.",
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {
