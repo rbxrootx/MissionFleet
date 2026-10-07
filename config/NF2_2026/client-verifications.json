@@ -447181,6 +447181,356 @@
         "behavior": "The complete 43-byte, 12-instruction body reads its signed argument. For a nonnegative value it loads a child pointer from receiver +0x2BC and stores the argument at child +0xBC. For a negative value it computes the two's-complement magnitude with CDQ/XOR/SUB, loads the same child pointer, and stores that magnitude at child +0xBC. Both paths return with ret 4; the function has no outgoing calls.",
         "uncertainty": "The meaning of the source field at +0x50, child pointer at +0x2BC, and destination field at child +0xBC is unknown. The receiver is the same global object used by the already matched panel call paths, but this function has no established RTTI or vtable ownership. The two's-complement magnitude of INT_MIN wraps to itself. No client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587ED730",
+      "name": "FUN_587ed730",
+      "size": 1069,
+      "symbol": "_FUN_587ed730",
+      "source": "src/client-current/Main/FUN_587ed730.cpp",
+      "source_sha256": "9a71bb2c43a601a066aac86a71274f9a150163184eb3488ccd6d25af481fb470",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 175,
+          "target_address": "588DCDD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 212,
+          "target_address": "5897CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 218,
+          "target_address": "5899C0E8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 224,
+          "target_address": "5898CAE0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "5897CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 271,
+          "target_address": "5898CB38",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 277,
+          "target_address": "5898CF10",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 287,
+          "target_address": "5898CEB8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "5898D788",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 341,
+          "target_address": "5898CAE0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 364,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 379,
+          "target_address": "587ED975",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "587ED99C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 432,
+          "target_address": "587ED99C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "587ED99C",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 538,
+          "target_address": "587ED8BB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 559,
+          "target_address": "587ED8C4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 638,
+          "target_address": "5875CB90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 825,
+          "target_address": "587EDB3A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 885,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 918,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 984,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1021,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1056,
+          "target_address": "588DCDD0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ED730 / combat-resolver parameter-0x0B state update",
+        "called_by": "The byte-matched combat resolver FUN_587EFD60 calls this function at 0x587F16FE when its parameter 9 equals 0x0B and receiver flag byte +0x378 has bit 0x40 set. The same resolver calls sibling FUN_587EDB80 for parameter 9 equal to 0x0C under that flag. Both fresh Ghidra projects record the call edge.",
+        "behavior": "Fresh Ghidra exports agree on a complete 1,069-byte, 313-instruction body. The exact instruction stream reads caller-supplied records and receiver state, derives integer and floating-point values, and selects among table-driven paths. For eligible state types it adds 10*ESI to an XOR-encoded, byte-indexed DWORD at the first stack argument +0x10A8C; state/substate 0x0B/2 suppresses that update. Its jump-table paths make four computed-delta calls to FUN_588D6E10, whose ECX points to the first stack argument and whose +0x6504 DWORD it decodes, increments, and re-encodes. Other branches call matched FUN_588DCDD0 with selectors 0 or 1, which subtract from that argument's +0x128C or +0x1290 field. All direct callees are byte-matched in this subsystem.",
+        "uncertainty": "The exact roles, units, and validity ranges of the receiver fields, table entries, and arguments are unknown. The branch is evidenced as the resolver's parameter-0x0B path; assigning it a narrower weapon or effect name would exceed the current evidence. The source preserves the mapped x86 stream for byte matching, not recovered high-level C++. No emulator battle test was performed."
+      }
+    },
+    {
+      "address": "587EDB80",
+      "name": "FUN_587edb80",
+      "size": 960,
+      "symbol": "_FUN_587edb80",
+      "source": "src/client-current/Main/FUN_587edb80.cpp",
+      "source_sha256": "e3e7fe552ef4833fcb91ccd179892c0ff561c91da280b9409e05112dd298b091",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 40,
+          "target_address": "587EDC35",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 210,
+          "target_address": "5897CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 215,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "5897CC90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 254,
+          "target_address": "5899C0F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "5898CF10",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "5898CEB8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 315,
+          "target_address": "5898CAE0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 332,
+          "target_address": "5897CCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 347,
+          "target_address": "587EDD8D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "587EDDB4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 401,
+          "target_address": "587EDDB4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 583,
+          "target_address": "5875CB90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 769,
+          "target_address": "587EDF07",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 807,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 853,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 888,
+          "target_address": "588D6E10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 945,
+          "target_address": "588DCDD0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587EDB80 / combat-resolver parameter-0x0C state update",
+        "called_by": "The byte-matched combat resolver FUN_587EFD60 calls this function at 0x587F1811 when its parameter 9 equals 0x0C and receiver flag byte +0x378 has bit 0x40 set. Its sibling FUN_587ED730 handles parameter 9 equal to 0x0B under the same flag. Both fresh Ghidra projects record the call edge.",
+        "behavior": "Fresh Ghidra exports agree on a complete 960-byte, 266-instruction body. The exact instruction stream reads caller-supplied records and receiver state, derives integer and floating-point values, and selects among table-driven paths. Under its observed stack gate it updates an XOR-encoded DWORD at the first stack argument +0x1278 using the decoded +0xD98 value, with additional scaling when the receiver's +0x218B0 flag is nonzero. For eligible state types it also adds 10*ESI to the XOR-encoded indexed DWORD at +0x10A8C, with the same state/substate 0x0B/2 suppression seen in its sibling. Three table-driven computed deltas go through FUN_588D6E10 and update the first stack argument +0x6504. A fallback calls matched FUN_588DCDD0 with selector 0, subtracting its delta from +0x128C. All direct callees are byte-matched in this subsystem.",
+        "uncertainty": "The exact roles, units, and validity ranges of the receiver fields, table entries, and arguments are unknown. The branch is evidenced as the resolver's parameter-0x0C path; assigning it a narrower weapon or effect name would exceed the current evidence. The source preserves the mapped x86 stream for byte matching, not recovered high-level C++. No emulator battle test was performed."
+      }
+    },
+    {
+      "address": "588D6E10",
+      "name": "FUN_588d6e10",
+      "size": 29,
+      "symbol": "_FUN_588d6e10",
+      "source": "src/client-current/Main/FUN_588d6e10.cpp",
+      "source_sha256": "683b25070ec9adc154da72eb87026229c358b106532e43650274b9008d442b98",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588D6E10 / encoded first-argument accumulator update",
+        "called_by": "The two combat-resolver branch functions are its only direct callers in both full fresh Ghidra edge exports: FUN_587ED730 has four sites (0x587EDAA4, 0x587EDAC5, 0x587EDB07, 0x587EDB2C), and FUN_587EDB80 has three (0x587EDEA6, 0x587EDED4, 0x587EDEF7). Each sets ECX to the same first stack-argument object and passes a computed delta. This helper receiver is distinct from the sibling functions' own ECX receiver.",
+        "behavior": "Both Ghidra projects agree on the complete 29-byte, six-instruction leaf. It loads the field at helper-receiver +0x6504, XOR-decodes with 0xAAAAAAAA, adds the stack argument, XOR-encodes with the same mask, stores the result back at helper-receiver +0x6504, and returns with ret 4. In the sibling call paths, this helper receiver is the sibling's first stack argument. It has no outgoing calls.",
+        "uncertainty": "The member's semantic name, units, overflow behavior expected by the caller, and receiver type are unknown. No client or emulator battle test was performed."
+      }
     }
   ]
 }

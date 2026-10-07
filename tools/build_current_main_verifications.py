@@ -15219,6 +15219,106 @@ MAIN_NESTED_SIGNED_MAGNITUDE_STORE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_NESTED_SIGNED_MAGNITUDE_STORE_EVIDENCE)
 
+MAIN_COMBAT_EFFECT_STATE_ADDRESSES = (
+    "587ED730", "587EDB80", "588D6E10",
+)
+ADDRESSES += MAIN_COMBAT_EFFECT_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMBAT_EFFECT_STATE_ADDRESSES)
+
+MAIN_COMBAT_EFFECT_STATE_EVIDENCE = {
+    "587ED730": {
+        "name_in_analysis": "FUN_587ED730 / combat-resolver parameter-0x0B state update",
+        "called_by": (
+            "The byte-matched combat resolver FUN_587EFD60 calls this function at "
+            "0x587F16FE when its parameter 9 equals 0x0B and receiver flag byte "
+            "+0x378 has bit 0x40 set. The same resolver calls sibling "
+            "FUN_587EDB80 for parameter 9 equal to 0x0C under that flag. Both "
+            "fresh Ghidra projects record the call edge."
+        ),
+        "behavior": (
+            "Fresh Ghidra exports agree on a complete 1,069-byte, 313-instruction "
+            "body. The exact instruction stream reads caller-supplied records and "
+            "receiver state, derives integer and floating-point values, and "
+            "selects among table-driven paths. For eligible state types it adds "
+            "10*ESI to an XOR-encoded, byte-indexed DWORD at the first stack "
+            "argument +0x10A8C; state/substate 0x0B/2 suppresses that update. "
+            "Its jump-table paths make four computed-delta calls to "
+            "FUN_588D6E10, whose ECX points to the first stack argument and whose "
+            "+0x6504 DWORD it decodes, increments, and re-encodes. Other branches "
+            "call matched FUN_588DCDD0 with selectors 0 or 1, which subtract "
+            "from that argument's +0x128C or +0x1290 field. All direct callees "
+            "are byte-matched in this subsystem."
+        ),
+        "uncertainty": (
+            "The exact roles, units, and validity ranges of the receiver fields, "
+            "table entries, and arguments are unknown. The branch is evidenced as "
+            "the resolver's parameter-0x0B path; assigning it a narrower weapon or "
+            "effect name would exceed the current evidence. The source preserves "
+            "the mapped x86 stream for byte matching, not recovered high-level C++. "
+            "No emulator battle test was performed."
+        ),
+    },
+    "587EDB80": {
+        "name_in_analysis": "FUN_587EDB80 / combat-resolver parameter-0x0C state update",
+        "called_by": (
+            "The byte-matched combat resolver FUN_587EFD60 calls this function at "
+            "0x587F1811 when its parameter 9 equals 0x0C and receiver flag byte "
+            "+0x378 has bit 0x40 set. Its sibling FUN_587ED730 handles parameter "
+            "9 equal to 0x0B under the same flag. Both fresh Ghidra projects "
+            "record the call edge."
+        ),
+        "behavior": (
+            "Fresh Ghidra exports agree on a complete 960-byte, 266-instruction "
+            "body. The exact instruction stream reads caller-supplied records and "
+            "receiver state, derives integer and floating-point values, and "
+            "selects among table-driven paths. Under its observed stack gate it "
+            "updates an XOR-encoded DWORD at the first stack argument +0x1278 "
+            "using the decoded +0xD98 value, with additional scaling when the "
+            "receiver's +0x218B0 flag is nonzero. For eligible state types it "
+            "also adds 10*ESI to the XOR-encoded indexed DWORD at +0x10A8C, "
+            "with the same state/substate 0x0B/2 suppression seen in its sibling. "
+            "Three table-driven computed deltas go through FUN_588D6E10 and "
+            "update the first stack argument +0x6504. A fallback calls matched "
+            "FUN_588DCDD0 with selector 0, subtracting its delta from +0x128C. "
+            "All direct callees are byte-matched in this subsystem."
+        ),
+        "uncertainty": (
+            "The exact roles, units, and validity ranges of the receiver fields, "
+            "table entries, and arguments are unknown. The branch is evidenced as "
+            "the resolver's parameter-0x0C path; assigning it a narrower weapon or "
+            "effect name would exceed the current evidence. The source preserves "
+            "the mapped x86 stream for byte matching, not recovered high-level C++. "
+            "No emulator battle test was performed."
+        ),
+    },
+    "588D6E10": {
+        "name_in_analysis": "FUN_588D6E10 / encoded first-argument accumulator update",
+        "called_by": (
+            "The two combat-resolver branch functions are its only direct callers "
+            "in both full fresh Ghidra edge exports: FUN_587ED730 has four sites "
+            "(0x587EDAA4, 0x587EDAC5, 0x587EDB07, 0x587EDB2C), and FUN_587EDB80 "
+            "has three (0x587EDEA6, 0x587EDED4, 0x587EDEF7). Each sets ECX to "
+            "the same first stack-argument object and passes a computed delta. "
+            "This helper receiver is distinct from the sibling functions' own "
+            "ECX receiver."
+        ),
+        "behavior": (
+            "Both Ghidra projects agree on the complete 29-byte, six-instruction "
+            "leaf. It loads the field at helper-receiver +0x6504, XOR-decodes "
+            "with 0xAAAAAAAA, adds the stack argument, XOR-encodes with the same "
+            "mask, stores the result back at helper-receiver +0x6504, and returns "
+            "with ret 4. In the sibling call paths, this helper receiver is the "
+            "sibling's first stack argument. It has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The member's semantic name, units, overflow behavior expected by the "
+            "caller, and receiver type are unknown. No client or emulator battle "
+            "test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMBAT_EFFECT_STATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
