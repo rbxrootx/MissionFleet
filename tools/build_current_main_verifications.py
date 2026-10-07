@@ -1427,6 +1427,10 @@ MAIN_SANTA_AIRCRAFT_SLOT6_ADDRESSES = ("588D26D0",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT6_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT6_ADDRESSES)
 
+MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES = ("588D2760",)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14827,6 +14831,44 @@ MAIN_SANTA_AIRCRAFT_SLOT6_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT6_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE = {
+    "588D2760": {
+        "name_in_analysis": "FUN_588D2760 / CSantaAircraft vtable slot +0x1C",
+        "called_by": (
+            "Fresh Ghidra edge exports record this method in vtable slot +0x1C "
+            "at cell 0x589A0F54 of the RTTI-identified .?AVCSantaAircraft@@ table "
+            "at 0x589A0F38; both mapped cell and edge target are 0x588D2760. "
+            "Matched constructor FUN_588D2480 installs the same table. No "
+            "incoming direct CALL edge was found, so entry is virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on the complete contiguous range "
+            "[0x588D2760, 0x588D27EB), 139 bytes / 41 instructions. The method "
+            "passes two stack arguments to FUN_5873C790, tests the resulting EAX, "
+            "and returns 0 on the zero branch. Otherwise it selects ECX from the "
+            "global object at DAT_58A2468C using fields +0x170 and +0x194, passes "
+            "DAT_58A248F8 to byte-matched FUN_58907990, then repeats the state "
+            "check and performs an indirect call through the selected object's "
+            "vtable with argument 0; both nonzero paths return 1. Its fallback "
+            "block zeroes ECX before dereferencing it. A separate Ghidra "
+            "decompilation of FUN_5873C790 shows aircraft-state writes and the "
+            "diagnostic 'Aircraft Damaged ... HE P', but does not establish this "
+            "caller's EAX contract."
+        ),
+        "uncertainty": (
+            "FUN_5873C790 is not byte-verified and Ghidra types it void even "
+            "though this caller tests EAX immediately after the call. The "
+            "fallback path at 0x588D27D4 sets ECX to zero before dereferencing "
+            "[ECX] at 0x588D27D6; its reachability and runtime environment are "
+            "unresolved. The two stack arguments, global fields, selected virtual "
+            "callback, and FUN_58907990 value semantics have not been identified. "
+            "No runtime or emulator test was performed; emitted source preserves "
+            "the exact instructions and is not recovered high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE)
 
 
 if __name__ == "__main__":

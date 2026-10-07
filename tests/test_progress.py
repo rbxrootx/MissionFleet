@@ -35,6 +35,7 @@ from tools import (
     verify_current_main_santa_aircraft_constructor,
     verify_current_main_santa_aircraft_slot0,
     verify_current_main_santa_aircraft_slot6,
+    verify_current_main_santa_aircraft_slot7,
 )
 
 
@@ -47,8 +48,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470298")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_603)
-        self.assertEqual(self.report["measures"]["matched_code"], "2745738")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_604)
+        self.assertEqual(self.report["measures"]["matched_code"], "2745877")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -59,8 +60,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354364")
-        self.assertEqual(current["measures"]["matched_functions"], 2_470)
-        self.assertEqual(current["measures"]["matched_code"], "1772320")
+        self.assertEqual(current["measures"]["matched_functions"], 2_471)
+        self.assertEqual(current["measures"]["matched_code"], "1772459")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -307,6 +308,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("tests the resulting EAX", item["behavior"])
         self.assertIn("sets ECX to zero", item["uncertainty"])
         verify_current_main_santa_aircraft_slot6.main()
+
+    def test_santa_aircraft_slot7_has_rtti_and_exact_body(self):
+        addresses = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE
+        self.assertEqual(addresses, ("588D2760",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588D2760"]
+        self.assertIn("vtable slot +0x1C", item["called_by"])
+        self.assertIn("FUN_5873C790", item["behavior"])
+        self.assertIn("tests the resulting EAX", item["behavior"])
+        self.assertIn("sets ECX to zero", item["uncertainty"])
+        verify_current_main_santa_aircraft_slot7.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (
