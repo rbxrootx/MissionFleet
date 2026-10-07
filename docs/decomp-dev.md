@@ -52,12 +52,13 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,999 of 42,461 functions and 2,551,931 of 10,470,295 bytes (18.8385% by
-functions and 24.3731% by bytes); every counted function match is verified at
+credits 8,018 of 42,461 functions and 2,560,892 of 10,470,295 bytes (18.8832% by
+functions and 24.4586% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,866 exact function matches totaling 1,578,513 bytes. The
+inventory has 1,885 exact function matches totaling 1,587,474 bytes (22.2445% by
+functions and 67.4270% by bytes). The
 PageFight `CPageFightOn_ControlMenuScreen` update-loop closure adds 149 exact
 matches / 48,515 bytes; its matched caller, body ranges, direct-call boundary,
 and semantic limits are recorded in
@@ -75,6 +76,10 @@ bytes. Its matched dispatcher case, payload branch, exact body ranges, direct
 transfer closure, shared-helper callers, and unresolved data semantics are
 recorded in
 [`current-main-message-8002c101-update.md`](current-main-message-8002c101-update.md).
+The installed `0x80020A00` chat/display path adds 19 exact matches / 8,961
+bytes, with its dispatcher compare, two handler roots, parallel panel/member
+updates, complete direct-call closure, and protocol uncertainties recorded in
+[`current-main-message-80020a00-chat-display.md`](current-main-message-80020a00-chat-display.md).
 The linked-entry update path at `FUN_5874a010` adds five exact matches / 1,684
 bytes. Its two calls from the matched linked-entry dispatcher, exact body ranges,
 closed direct-transfer graph, and shared helpers are recorded in

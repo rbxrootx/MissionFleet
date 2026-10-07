@@ -1006,6 +1006,15 @@ CURRENT_MAIN_5874A010_UPDATE_ADDRESSES = (
 ADDRESSES += CURRENT_MAIN_5874A010_UPDATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_5874A010_UPDATE_ADDRESSES)
 
+MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES = (
+    "587529C0", "58752A40", "58752FC0", "587531B0", "5881DBA0",
+    "5881E120", "5881FDE0", "588201F0", "588205F0", "588206F0",
+    "588212F0", "58821480", "58821900", "58821CE0", "58821E00",
+    "58822A90", "5884A580", "5884A600", "5884B280",
+)
+ADDRESSES += MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8960,6 +8969,124 @@ CURRENT_MAIN_5874A010_UPDATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_5874A010_UPDATE_EVIDENCE)
+
+MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE = {
+    "587529C0": {
+        "name_in_analysis": "FUN_587529c0 / panel child-list update",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_58821900 at 0x588219E4 and 0x58821ABF.",
+        "behavior": "Checks a child-list range and backing child count, then invokes the observed byte-copy callback with a local value. The precise container contract is not identified.",
+        "uncertainty": "The child type, callback contract, and UI effect are unresolved.",
+    },
+    "58752A40": {
+        "name_in_analysis": "FUN_58752a40 / communicator panel selection and construction",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_58752FC0 at 0x58753154.",
+        "behavior": "Scans a child range for the first entry whose field at +0xC98 is zero; if none is available, allocates and constructs a 0xCA4-byte CPannelCommunicatorChatPannel2 through FUN_58821E00. It then applies a selected child-list update.",
+        "uncertainty": "The enclosing object type, child selection policy, and meaning of the 0xC98 field are unresolved.",
+    },
+    "58752FC0": {
+        "name_in_analysis": "FUN_58752fc0 / gated communicator update path",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_587531B0 at 0x587532F5 and FUN_5881E120 at 0x5881E2BB.",
+        "behavior": "Checks the supplied text against a global string, obtains state through FUN_587522F0 and child lookup helpers, and gates the update on fields at +0xA4/+0xA8. One observed branch passes text to matched routine FUN_58751BF0 and may select a panel with FUN_58752A40; accepted paths reach FUN_58821480.",
+        "uncertainty": "The global string, state fields, branches' user-visible meaning, and server compatibility are unresolved.",
+    },
+    "587531B0": {
+        "name_in_analysis": "FUN_587531b0 / message 0x800 chat-output route",
+        "called_by": "Fresh Ghidra references show calls from byte-matched FUN_587B83E0 at 0x587B8646 and 0x587B8772, in its observed 0x80020A00 branch.",
+        "behavior": "For the observed 0x800 parameter, handles the -1, 0, and 1 subcases using matched text routine FUN_58751BF0, localized message keys, or FUN_5888D250. Other values pass through a bounded-entry scan, optional text prefix formatting, FUN_5884B280, and the gated FUN_58752FC0 path.",
+        "uncertainty": "The protocol schema, parameter meanings, and exact message/UI policy are unresolved; labels above reflect only observed branches.",
+    },
+    "5881DBA0": {
+        "name_in_analysis": "FUN_5881dba0 / bounded text-entry scan",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_587531B0 at 0x58753280 and FUN_5881E120 at 0x5881E211.",
+        "behavior": "Compares the supplied value against up to 128 entries beginning at receiver +0xFC, stepping 0x18 bytes through the configured comparison callback; returns 1 on a zero comparison and 0 after the scan.",
+        "uncertainty": "The entries' semantic type and the comparator's string/encoding contract are unresolved.",
+    },
+    "5881E120": {
+        "name_in_analysis": "FUN_5881e120 / message 0x800 chat-output route",
+        "called_by": "Fresh Ghidra references show calls from byte-matched FUN_587B83E0 at 0x587B861F, 0x587B870A, and 0x587B874D, in its observed 0x80020A00 branch.",
+        "behavior": "For the observed 0x800 parameter, handles -1 by passing the supplied text to matched routine FUN_58751BF0, 0 by formatting MESSAGESTRING_DO_NOT_SEND_MESSAGE_TO, and 1 by displaying MESSAGESTRING_WHISPER_TO_GM. Other values scan bounded entries, route a matching screen state through FUN_5884B280 or prepend the observed '%s : ' format, and conditionally call FUN_58752FC0.",
+        "uncertainty": "The protocol schema, parameter meanings, and exact screen/state semantics are unresolved.",
+    },
+    "5881FDE0": {
+        "name_in_analysis": "FUN_5881fde0 / counted text-entry lookup",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_588201F0 at 0x58820210 and FUN_58821900 at 0x58821920.",
+        "behavior": "Scans the short count at receiver +0xC9A over 0x18-byte entries beginning at +0x64. On a comparison match it returns the matching entry's first byte as a boolean; otherwise it returns false.",
+        "uncertainty": "The entry layout, first-byte flag meaning, and text comparison contract are unresolved.",
+    },
+    "588201F0": {
+        "name_in_analysis": "FUN_588201f0 / communicator member-entry update",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_588212F0 at 0x5882130A.",
+        "behavior": "Rejects a matching entry through the observed duplicate path; otherwise fills the first free 0x18-byte slot or appends while the short count at +0xC9A is below 0x80. It increments the observed count, formats MESSAGESTRING__IT_JOIN_TO_CHATTING, and emits distinct observed paths when the table is full or a duplicate is found.",
+        "uncertainty": "The entry's fields and the two error-code meanings are not recovered; the localized label alone does not establish the complete feature contract.",
+    },
+    "588205F0": {
+        "name_in_analysis": "FUN_588205f0 / communicator state-flag setter",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_5884A580 at 0x5884A5CD.",
+        "behavior": "Sets or clears the low two bits at receiver +0x24 from the input byte, mirrors one bit to a child when the short at +0xC98 is positive, and for inputs 0 or 1 invokes a virtual method with event value 100 before updating +0xC9C.",
+        "uncertainty": "The flag meanings, callback contract, and child type remain unresolved.",
+    },
+    "588206F0": {
+        "name_in_analysis": "FUN_588206f0 / communicator chat panel constructor",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_5884A600 at 0x5884A68F and 0x5884A787.",
+        "behavior": "Constructs a CPannelCommunicatorChatPannel derived from CMenuScreen, clears 128 entry flags, initializes child/sprite controls and their positions, and sets observed visibility/state bits.",
+        "uncertainty": "The visual assets' meanings, screen geometry policy, and runtime lifecycle are unresolved; no emulator test was run.",
+    },
+    "588212F0": {
+        "name_in_analysis": "FUN_588212f0 / communicator member callback",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_5884B280 at 0x5884B36E.",
+        "behavior": "When its object argument is nonzero, calls FUN_588201F0 on a child selected through +0x70/+0x6C. If the helper reports success, stores the first argument at object +0xA4 and clears bit zero at a child +0x24.",
+        "uncertainty": "The object and callback parameter contracts are unresolved.",
+    },
+    "58821480": {
+        "name_in_analysis": "FUN_58821480 / chunked text display",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_58752FC0 at 0x58753195 and from FUN_5884B280 at 0x5884B2F0 and 0x5884B383.",
+        "behavior": "Emits supplied text through the observed display helpers in chunks of up to 0x400 bytes. At a chunk boundary it inspects the final byte, adjusts the next offset by 0x400 or 0x3FF, then displays the remaining text.",
+        "uncertainty": "The character encoding and display helper contracts are unresolved; the boundary byte test alone does not establish an encoding.",
+    },
+    "58821900": {
+        "name_in_analysis": "FUN_58821900 / second panel member-entry update",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_58822A90 at 0x58822AAA.",
+        "behavior": "Uses the same observed duplicate check and 0x80-entry limit as FUN_588201F0, copies a value into a free or appended 0x18-byte entry, updates the count, and formats MESSAGESTRING__IT_JOIN_TO_CHATTING. Its first-entry path calls FUN_587529C0.",
+        "uncertainty": "The second panel's type, member-entry contract, and localized message policy are unresolved.",
+    },
+    "58821CE0": {
+        "name_in_analysis": "FUN_58821ce0 / second panel state-flag setter",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_587529C0 at 0x58752A0A.",
+        "behavior": "Sets or clears low bits at receiver +0x24 and, when the callback input is 0 or 1, invokes a virtual method with event value 100 and updates +0xC9C. The input-1 branch also sets bit one on the child selected through +0xC74.",
+        "uncertainty": "The two flags, callback contract, and child type are unresolved.",
+    },
+    "58821E00": {
+        "name_in_analysis": "FUN_58821e00 / second communicator chat panel constructor",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_58752A40 at 0x58752AC2 and 0x58752BBC.",
+        "behavior": "Constructs a CPannelCommunicatorChatPannel2 derived from CMenuScreen, initializes 128 entry flags, allocates and positions observed child controls/sprites, and sets screen/visibility state bits.",
+        "uncertainty": "The visual assets' meanings, screen geometry policy, and runtime lifecycle are unresolved; no emulator test was run.",
+    },
+    "58822A90": {
+        "name_in_analysis": "FUN_58822a90 / second panel member callback",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_58752FC0 at 0x58753180.",
+        "behavior": "When its object argument is nonzero, calls FUN_58821900 on the selected child; on reported success, stores the first argument at object +0xA8 and clears bit zero at a child +0x24.",
+        "uncertainty": "The object and callback parameter contracts are unresolved.",
+    },
+    "5884A580": {
+        "name_in_analysis": "FUN_5884a580 / communicator child-list update",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_588201F0 at 0x588202DA and 0x588203BB.",
+        "behavior": "Checks the child-list range and backing child count at observed offsets, invokes FUN_588205F0 when an existing entry is present, then applies the observed byte-copy callback to the selected value.",
+        "uncertainty": "The child-list type, callback contract, and UI effect are unresolved.",
+    },
+    "5884A600": {
+        "name_in_analysis": "FUN_5884a600 / communicator panel selection and construction",
+        "called_by": "Fresh Ghidra CALL references show a call from FUN_5884B280 at 0x5884B35E.",
+        "behavior": "Scans a child range for an entry whose field at +0xC98 is zero; if absent, allocates and constructs a 0xCA4-byte CPannelCommunicatorChatPannel through FUN_588206F0. It then applies an observed child-list update.",
+        "uncertainty": "The enclosing object type, child selection policy, and meaning of the 0xC98 field are unresolved.",
+    },
+    "5884B280": {
+        "name_in_analysis": "FUN_5884b280 / recipient-state message display routing",
+        "called_by": "Fresh Ghidra CALL references show calls from FUN_587531B0 at 0x587532DF and FUN_5881E120 at 0x5881E2A5.",
+        "behavior": "Checks observed global and child state, then routes text to FUN_58821480; one branch passes text to matched routine FUN_58751BF0 and may create/select the first communicator panel through FUN_5884A600 and FUN_588212F0. A separate branch calls FUN_5881E2E0 with a selected child and observed flag.",
+        "uncertainty": "The recipient states, message policy, panel type, and FUN_5881E2E0 contract are unresolved.",
+    },
+}
+EVIDENCE.update(MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE)
 
 
 def sha256(path):

@@ -31,6 +31,10 @@ keys such as `MESSAGESTRING_ALL_CHATTING`, `MESSAGESTRING_USER_LIST_FLEET`,
 `MESSAGESTRING_USER_LIST_DIRECTFLEET`. The `0x8002B115` path copies the
 provided list into display chunks of up to 100 bytes.
 
+The `0x80020A00` case's paired message/display routines and their verified
+direct-call closure are documented separately in
+[`current-main-message-80020a00-chat-display.md`](current-main-message-80020a00-chat-display.md).
+
 The two source segments preserve the Ghidra body ranges and were compared
 against the pinned mapped image with ObjDiff 3.8.0. Local analysis artifacts
 include `var/current-main-next/587b83e0-ghidra.c`, its range/reference log, and

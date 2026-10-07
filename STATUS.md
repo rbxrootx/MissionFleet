@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 7,999 verified matches
-totaling 2,551,931 bytes (18.8385% by functions, 24.3731% by bytes), each at
+identified code bytes across six report units. There are 8,018 verified matches
+totaling 2,560,892 bytes (18.8832% by functions, 24.4586% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -33,6 +33,11 @@ The installed client's non-null `0x8002C101` update path adds 16 exact matches
 / 12,289 bytes; its matched dispatcher branch, direct-transfer closure, shared
 helper, and unresolved payload semantics are documented in
 [its subsystem note](docs/current-main-message-8002c101-update.md).
+The installed client's `0x80020A00` chat/display path adds 19 exact matches /
+8,961 bytes. Its five calls from the matched dispatcher, both parallel panel
+routes, and complete direct-call closure are documented in
+[its subsystem note](docs/current-main-message-80020a00-chat-display.md); its
+protocol payload schema and live-server compatibility remain unknown.
 The PageFight `CPageFightOn_ControlMenuScreen` update loop adds 149 exact
 matches / 48,515 bytes. Its caller path, observed object scans and update
 branches, exact direct-call boundary, and unresolved semantic/runtime questions
