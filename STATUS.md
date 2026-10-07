@@ -6,12 +6,17 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,106 verified matches
-totaling 2,587,793 bytes (19.0904% by functions, 24.7156% by bytes), each at
+identified code bytes across six report units. There are 8,123 verified matches
+totaling 2,592,439 bytes (19.1305% by functions, 24.7599% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project. The equipment and mine-count panel refresh
+the active decomp.dev project. The linked-record collection refresh rooted at
+`FUN_587487C0` adds 17 byte-identical functions / 4,646 bytes. Its matched
+caller setup, global name-key lookup, exact Ghidra body ranges, and unresolved
+collection/type semantics are recorded in
+[its subsystem note](docs/current-main-linked-record-collection-refresh.md).
+The equipment and mine-count panel refresh
 rooted at `FUN_588429F0` adds 23 byte-identical functions / 5,086 bytes. Its
 matched `0x8002312A` response gate, exact state setup, equipment/mine label
 references, complete closure, and unverified field/virtual-call semantics are

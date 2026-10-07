@@ -1059,6 +1059,15 @@ MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
 ADDRESSES += MESSAGE_8002C104_RECORD_ACTION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MESSAGE_8002C104_RECORD_ACTION_ADDRESSES)
 
+MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES = (
+    "587430A0", "58744740", "58744BB0", "58745070", "58745F80",
+    "587477A0", "58748020", "58748110", "58748270", "587487C0",
+    "587A0910", "587A0930", "587A0CC0", "587A1080", "587A13E0",
+    "587FF2B0", "5896BF30",
+)
+ADDRESSES += MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9594,6 +9603,81 @@ MAIN_EQUIPMENT_PANEL_REFRESH_EVIDENCE = {
     for address in MAIN_EQUIPMENT_PANEL_REFRESH_ADDRESSES
 }
 EVIDENCE.update(MAIN_EQUIPMENT_PANEL_REFRESH_EVIDENCE)
+
+MAIN_LINKED_RECORD_COLLECTION_REFRESH_PARENTS = {
+    "587430A0": "FUN_587487C0 at 0x587489E6",
+    "58744740": "FUN_58744BB0 at 0x58744D0D",
+    "58744BB0": "FUN_587477A0 at 0x587477D9",
+    "58745070": "FUN_58745F80 at 0x5874620E",
+    "58745F80": "FUN_587477A0 at 0x587477C7",
+    "587477A0": "FUN_587487C0 at 0x58748A0B",
+    "58748020": "FUN_58748110 at 0x58748156 and FUN_587FF2B0 at 0x587FF306",
+    "58748110": "FUN_58748270 at 0x587482C8",
+    "58748270": (
+        "FUN_587487C0 at 0x58748990 and byte-matched FUN_58800360 "
+        "at 0x588007E3"
+    ),
+    "587487C0": (
+        "Byte-matched FUN_587F8760 at 0x587FAE9F; immediately before the call, "
+        "FUN_58748BE0 returns the receiver at 0x587FAE98 and EAX is moved to ECX"
+    ),
+    "587A0910": "FUN_587A0CC0 at 0x587A0DD4",
+    "587A0930": "FUN_587A0CC0 at 0x587A0DB0",
+    "587A0CC0": "FUN_587A1080 at 0x587A113F",
+    "587A1080": "FUN_587A13E0 at 0x587A1424",
+    "587A13E0": "FUN_58744740 at 0x58744857",
+    "587FF2B0": "FUN_58748270 at 0x5874827D",
+    "5896BF30": "FUN_587487C0 at 0x58748A12",
+}
+MAIN_LINKED_RECORD_COLLECTION_REFRESH_BEHAVIOR = {
+    "58748020": (
+        "Compares bounded byte strings in four-byte chunks, then checks the "
+        "remaining one to three bytes; returns zero on equality."
+    ),
+    "58748110": (
+        "Bounds a key comparison against a string object's stored length and "
+        "capacity, then delegates the byte comparison to FUN_58748020."
+    ),
+    "58748270": (
+        "Resolves a record through FUN_587FF2B0, compares its stored key via "
+        "FUN_58748110, and copies the selected two-word record pair to output."
+    ),
+    "587487C0": (
+        "Walks this receiver's indexed entries and a global linked list whose "
+        "nodes expose a name at +0x12E8/+0x6C. It resolves each name through "
+        "FUN_58748270, compares the returned record pair with the receiver's "
+        "key, clears stale child fields, and conditionally allocates an "
+        "0x818-byte child through FUN_587430A0. It updates the current list "
+        "node through FUN_58743080 and FUN_587477A0, then appends the child "
+        "with FUN_588F6890 when FUN_5896BF30 selects the insertion path."
+    ),
+    "587FF2B0": (
+        "Looks up a record object using its stored string key and the bounded "
+        "comparison helpers FUN_58748110/FUN_58748020."
+    ),
+}
+MAIN_LINKED_RECORD_COLLECTION_REFRESH_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / linked-record collection refresh closure member"
+        ),
+        "called_by": MAIN_LINKED_RECORD_COLLECTION_REFRESH_PARENTS[address],
+        "behavior": MAIN_LINKED_RECORD_COLLECTION_REFRESH_BEHAVIOR.get(
+            address,
+            "Member of the complete direct-call closure rooted at FUN_587487C0; "
+            "its exact Ghidra body range and call-graph edges are recorded in "
+            "docs/current-main-linked-record-collection-refresh.md.",
+        ),
+        "uncertainty": (
+            "The owning C++ class, linked-list and collection types, key-field "
+            "schema, FUN_5896BF30 mode meaning, and runtime-facing effects are "
+            "unresolved. Ghidra's mapped-code decompilation grounds the observed "
+            "branches and offsets; no emulator or live-client test was run."
+        ),
+    }
+    for address in MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES
+}
+EVIDENCE.update(MAIN_LINKED_RECORD_COLLECTION_REFRESH_EVIDENCE)
 
 
 def sha256(path):

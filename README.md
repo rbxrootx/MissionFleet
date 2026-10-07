@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,106 matches cover 2,587,793 bytes (24.7156%) and are verified
+The current 8,123 matches cover 2,592,439 bytes (24.7599%) and are verified
 individually at 100.0% by objdiff.
+The installed client's linked-record collection refresh rooted at
+`FUN_587487C0` adds 17 byte-identical functions / 4,646 bytes. Its matched
+caller, global name-key lookup, complete call closure, and unresolved
+collection/type semantics are recorded in
+[the subsystem evidence](docs/current-main-linked-record-collection-refresh.md).
 The installed client's non-null `0x8002C101` update path adds 16 exact matches
 / 12,289 bytes; its caller, direct-transfer closure, and uncertainty record are
 in [the subsystem evidence](docs/current-main-message-8002c101-update.md).
