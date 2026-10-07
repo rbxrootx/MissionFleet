@@ -2,7 +2,11 @@ import hashlib
 import json
 import unittest
 
-from tools import build_current_main_verifications, generate_progress
+from tools import (
+    build_current_main_verifications,
+    generate_progress,
+    verify_current_main_c_explan_pannel,
+)
 
 
 class ProgressReportTests(unittest.TestCase):
@@ -14,8 +18,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_384)
-        self.assertEqual(self.report["measures"]["matched_code"], "2699893")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_446)
+        self.assertEqual(self.report["measures"]["matched_code"], "2711764")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,14 +30,28 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_251)
-        self.assertEqual(current["measures"]["matched_code"], "1726475")
+        self.assertEqual(current["measures"]["matched_functions"], 2_313)
+        self.assertEqual(current["measures"]["matched_code"], "1738346")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
         self.assertEqual(core["measures"]["matched_functions"], 431)
         self.assertEqual(core["measures"]["matched_code"], "333421")
+
+    def test_c_explan_pannel_event_closure_has_rtti_and_per_function_evidence(self):
+        addresses = build_current_main_verifications.MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_C_EXPLAN_PANNEL_EVENT_EVIDENCE
+        self.assertEqual(len(addresses), 62)
+        self.assertEqual(len(addresses), len(set(addresses)))
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+        self.assertIn(".?AVCExplanPannel@@", evidence["58763F70"]["called_by"])
+        self.assertIn("+0x78", evidence["58762D30"]["behavior"])
+        verify_current_main_c_explan_pannel.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

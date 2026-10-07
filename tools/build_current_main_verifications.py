@@ -406,6 +406,22 @@ ADDRESSES = (
 )
 MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES = ("588092F0",)
 ADDRESSES += MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES
+MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES = (
+    "58752290", "587629E0", "58762D30", "587635A0", "58763F70",
+    "587648F0", "5876B7F0", "5876EE10", "587866C0", "5878D2C0",
+    "5878D4D0", "5878F920", "58791DE0", "58792730", "587929D0",
+    "587AF690", "587B0900", "587B7930", "587B9020", "587B9240",
+    "587B9340", "587B9690", "587B99B0", "587BA000", "587BA050",
+    "587BA290", "587BA8A0", "587C2C90", "587CF580", "587D6CB0",
+    "587D9340", "587D9440", "587DAA30", "587E5BC0", "587E5BE0",
+    "587E92C0", "5881DA70", "5881F250", "58829670", "5882A420",
+    "58833E20", "58833FC0", "58834250", "588396F0", "58839950",
+    "5884E4E0", "58863E20", "58868B20", "58869F50", "58871F70",
+    "58882680", "58883E10", "588867D0", "58886910", "58886C50",
+    "588ADC20", "588ADC60", "588C8750", "588F46C0", "5890A8E0",
+    "58971E36", "5897CED4",
+)
+ADDRESSES += MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -771,6 +787,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "58778AD0",
 }
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13218,6 +13235,124 @@ def main():
     }
     output.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Wrote {len(matches)} {marker} records to {output.relative_to(ROOT)}")
+
+
+MAIN_C_EXPLAN_PANNEL_EVENT_TRANSFERS = ROOT / (
+    "config/NF2_2026/current-main-c-explan-pannel-event-transfers.tsv"
+)
+MAIN_C_EXPLAN_PANNEL_EVENT_PARENTS = {
+    address: [] for address in MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES
+}
+MAIN_C_EXPLAN_PANNEL_EVENT_CHILDREN = {
+    address: [] for address in MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES
+}
+with MAIN_C_EXPLAN_PANNEL_EVENT_TRANSFERS.open(
+        encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        source = edge["source"].upper()
+        site = edge["site"].upper()
+        target = edge["target"].upper()
+        MAIN_C_EXPLAN_PANNEL_EVENT_PARENTS[target].append((source, site))
+        MAIN_C_EXPLAN_PANNEL_EVENT_CHILDREN[source].append((site, target))
+
+MAIN_C_EXPLAN_PANNEL_EVENT_ROOT_BEHAVIOR = {
+    "58762D30": (
+        "The shared dispatcher branches on receiver fields +0x78 and +0x7C. "
+        "Fresh Ghidra output observes routes for values 0, 1, 2, 0x12, 0x14, "
+        "0x28, 3, 0x192, and 400; some paths call helpers and others invoke "
+        "indirect virtual slots. One observed branch writes receiver +0xA4; "
+        "another clears a word at global-state offset +0x19C. The labels and "
+        "effects of these state values are not assumed."
+    ),
+    "58763F70": (
+        "The vtable method handles event type 0x101 and inspects the word at "
+        "parameter +0x08 for values 0x0D or 0x1B. It branches on receiver "
+        "bytes +0x1E and +0x1F, calls the shared dispatcher, and updates "
+        "observed global panel/subscreen state."
+    ),
+    "587648F0": (
+        "The vtable method returns unless parameter 3 equals 2 and parameter "
+        "2 matches one of the receiver words at +0x23, +0x24, or +0x25. It "
+        "then routes according to receiver bytes +0x1E and +0x1F through the "
+        "shared dispatcher and other helpers."
+    ),
+    "5876B7F0": (
+        "The vtable update method is gated by bit 2 of receiver byte +0x09. "
+        "Fresh Ghidra output shows bounded changes of at most 0x20 per update, "
+        "state changes involving 0x100 and 0x400, countdown fields +0x2B and "
+        "+0x2C, and iteration over linked child nodes through an indirect "
+        "callback at child vtable slot +0x0C."
+    ),
+}
+MAIN_C_EXPLAN_PANNEL_EVENT_EVIDENCE = {}
+for address in MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES:
+    parents = MAIN_C_EXPLAN_PANNEL_EVENT_PARENTS[address]
+    children = MAIN_C_EXPLAN_PANNEL_EVENT_CHILDREN[address]
+    if address in {"58763F70", "587648F0", "5876B7F0"}:
+        called_by = (
+            "RTTI identifies the vtable at 0x5898DC10 as .?AVCExplanPannel@@; "
+            "this function is the observed slot "
+            f"+0x{ {'58763F70': '10', '587648F0': '18', '5876B7F0': '0C'}[address] } "
+            "entry. The mapped CompleteObjectLocator and TypeDescriptor are "
+            "checked by tools/verify_current_main_c_explan_pannel.py."
+        )
+    elif parents:
+        called_by = "; ".join(
+            f"FUN_{source.lower()} at 0x{site}"
+            for source, site in parents
+        )
+        called_by = (
+            "Fresh Ghidra direct-transfer edges in the vtable-rooted closure: "
+            + called_by + "."
+        )
+    else:
+        called_by = (
+            "This function is included in the audited direct-transfer closure "
+            "rooted at the CExplanPannel vtable methods. The fresh internal "
+            "CALL-edge export contains no direct CALL predecessor for this "
+            "entry; a tail-jump or indirect predecessor has not been isolated."
+        )
+    if address == "58762D30":
+        called_by = (
+            "Fresh Ghidra edges show all three CExplanPannel vtable methods "
+            "calling this shared dispatcher: 0x587641B7, 0x58764B7A, "
+            "0x58764C0F, and 0x5876B8C6."
+        )
+    if address in MAIN_C_EXPLAN_PANNEL_EVENT_ROOT_BEHAVIOR:
+        behavior = MAIN_C_EXPLAN_PANNEL_EVENT_ROOT_BEHAVIOR[address]
+    elif children:
+        behavior = (
+            "The exact emitted body is byte-matched. Its fresh Ghidra "
+            "intra-closure direct transfers are "
+            + "; ".join(
+                f"0x{site} to FUN_{target.lower()}"
+                for site, target in children
+            )
+            + ". This records the observed call behavior without assigning "
+            "an unsupported UI or gameplay meaning to this helper."
+        )
+    else:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra records no "
+            "direct CALL from this function to another member of this closure; "
+            "its own field and user-visible semantics remain unassigned."
+        )
+    MAIN_C_EXPLAN_PANNEL_EVENT_EVIDENCE[address] = {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CExplanPannel event/update closure member"
+        ),
+        "called_by": called_by,
+        "behavior": behavior,
+        "uncertainty": (
+            "The receiver and parameter types, child ownership, state-code "
+            "meanings, rendered explanation content, and user-visible effect "
+            "remain uncertain wherever not stated as a direct Ghidra "
+            "observation. The closure and byte ranges are grounded in fresh "
+            "Ghidra exports and mapped machine code; no emulator runtime "
+            "test has been performed."
+        ),
+    }
+EVIDENCE.update(MAIN_C_EXPLAN_PANNEL_EVENT_EVIDENCE)
 
 
 if __name__ == "__main__":
