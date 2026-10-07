@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,083 matches cover 2,582,707 bytes (24.6670%) and are verified
+The current 8,106 matches cover 2,587,793 bytes (24.7156%) and are verified
 individually at 100.0% by objdiff.
 The installed client's non-null `0x8002C101` update path adds 16 exact matches
 / 12,289 bytes; its caller, direct-transfer closure, and uncertainty record are
@@ -22,6 +22,11 @@ The installed client's `0x8002C104` record-action path adds 13 exact matches /
 3,533 bytes; its nine calls from the matched dispatcher, decoded action groups,
 direct-call closure, and unresolved field meanings are recorded in
 [the subsystem evidence](docs/current-main-message-8002c104-record-action.md).
+The equipment and mine-count panel refresh rooted at `FUN_588429F0` adds 23
+exact matches / 5,086 bytes. Its matched response gate, localized equipment and
+mine labels, full direct-call closure, and unknown field/virtual-call semantics
+are recorded in
+[the subsystem evidence](docs/current-main-equipment-panel-refresh.md).
 The trading-system InfoData event path rooted at `FUN_588F70E0` adds 23 exact
 matches / 5,195 bytes. Its `0x80027103` matched caller, original argument setup,
 InfoData and MessageBox type evidence, exact closure, and open questions are

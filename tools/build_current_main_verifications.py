@@ -993,6 +993,16 @@ MAIN_TRADING_INFO_EVENT_ADDRESSES = (
 ADDRESSES += MAIN_TRADING_INFO_EVENT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TRADING_INFO_EVENT_ADDRESSES)
 
+MAIN_EQUIPMENT_PANEL_REFRESH_ADDRESSES = (
+    "58786030", "58786090", "587860F0", "58786340", "587863C0",
+    "58786460", "58786480", "587864A0", "5882B9F0", "5882BA00",
+    "5882BBA0", "5882C310", "5882C3D0", "5882C490", "5882C7E0",
+    "5882C940", "5882CA80", "5882CBC0", "5882CDF0", "5882CFA0",
+    "5882D160", "5882EAA0", "588429F0",
+)
+ADDRESSES += MAIN_EQUIPMENT_PANEL_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_EQUIPMENT_PANEL_REFRESH_ADDRESSES)
+
 PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
     "587350E0", "58735170", "587351F0", "587352B0", "58735820", "58735930", "58735CC0", "58735E60",
     "587366F0", "58736A20", "58736E20", "58736E60", "58737170", "58737B00", "58738940", "58738C60",
@@ -9450,6 +9460,140 @@ MAIN_TRADING_INFO_EVENT_EVIDENCE = {
     for address in MAIN_TRADING_INFO_EVENT_ADDRESSES
 }
 EVIDENCE.update(MAIN_TRADING_INFO_EVENT_EVIDENCE)
+
+MAIN_EQUIPMENT_PANEL_REFRESH_PARENTS = {
+    "58786030": "FUN_5882D160",
+    "58786090": "FUN_5882C310 and FUN_5882CBC0",
+    "587860F0": "FUN_5882BA00, FUN_5882BBA0, FUN_5882C3D0, FUN_5882C490, FUN_5882CDF0, FUN_5882CFA0, and FUN_5882EAA0",
+    "58786340": "FUN_5882CDF0 and FUN_5882CFA0",
+    "587863C0": "FUN_5882CDF0 and FUN_5882CFA0",
+    "58786460": "FUN_5882D160",
+    "58786480": "FUN_5882C7E0, FUN_5882C940, and FUN_5882CA80",
+    "587864A0": "FUN_5882BA00, FUN_5882BBA0, FUN_5882C310, FUN_5882C3D0, FUN_5882C490, FUN_5882CBC0, FUN_5882CDF0, and FUN_5882CFA0",
+    "5882B9F0": "FUN_588429F0",
+    "5882BA00": "FUN_5882EAA0",
+    "5882BBA0": "FUN_5882EAA0",
+    "5882C310": "FUN_5882CBC0",
+    "5882C3D0": "FUN_5882CDF0",
+    "5882C490": "FUN_5882CFA0",
+    "5882C7E0": "FUN_588429F0",
+    "5882C940": "FUN_588429F0",
+    "5882CA80": "FUN_588429F0",
+    "5882CBC0": "FUN_588429F0",
+    "5882CDF0": "FUN_5882EAA0",
+    "5882CFA0": "FUN_5882EAA0",
+    "5882D160": "FUN_588429F0",
+    "5882EAA0": "FUN_588429F0",
+    "588429F0": "matched FUN_588C4210 at 0x588C5A8C, the common 0x8002312A response branch",
+}
+MAIN_EQUIPMENT_PANEL_REFRESH_BEHAVIOR = {
+    "58786030": (
+        "Reads the current object's +0x48 value, applies the captured float "
+        "scaling/rounding expression, and caches the result at +0x18."
+    ),
+    "58786090": (
+        "Reads the current object's +0x4C value, applies the captured float "
+        "conversion, and caches the result at +0x24."
+    ),
+    "587860F0": (
+        "Reads the current object's +0x4C value, applies a second captured "
+        "float scaling expression, and caches the result at +0x30."
+    ),
+    "58786340": (
+        "Counts nonempty records across 32 slots beginning at input +0x62 "
+        "and stores the count at receiver +0x40."
+    ),
+    "587863C0": (
+        "Counts nonempty records across 32 slots beginning at input +0x1E2 "
+        "and stores the count at receiver +0x42."
+    ),
+    "58786460": "Returns the referenced object's 16-bit field at +0x3C4, or zero.",
+    "58786480": "Returns the first 16-bit value through the referenced object, or zero.",
+    "587864A0": "Returns the referenced object's subobject at +0x60, or null.",
+    "5882B9F0": "Stores its supplied value in the receiver field at +0x170.",
+    "5882BA00": (
+        "Formats equipment labels using MESSAGESTRING__EQUIP_1 or "
+        "MESSAGESTRING__EQUIP_3 after looking up each nonempty record."
+    ),
+    "5882BBA0": (
+        "Formats equipment labels using MESSAGESTRING__EQUIP_2 after looking "
+        "up each nonempty record."
+    ),
+    "5882C310": (
+        "Checks five records and sets or clears the low four flag bits on two "
+        "corresponding row controls."
+    ),
+    "5882C3D0": (
+        "Checks three records and updates the low four flag bits on paired "
+        "row controls."
+    ),
+    "5882C490": (
+        "Checks three records from the alternate +0x180 source region and "
+        "updates the low four flag bits on paired row controls."
+    ),
+    "5882C7E0": (
+        "Rebuilds a candidate-record table for selector 1, filtering global "
+        "records by the selected key, several packed fields, and a zero field; "
+        "accepted entries occupy 20-byte rows at receiver +0x178."
+    ),
+    "5882C940": (
+        "Clears the candidate count at +0x18B and collects matching selector-5 "
+        "records that pass the captured bit and state tests into 20-byte rows."
+    ),
+    "5882CA80": (
+        "Builds the alternate selector-5 candidate list using the complementary "
+        "packed-bit condition to FUN_5882C940."
+    ),
+    "5882CBC0": (
+        "Copies 24 display records from the global +0x300 region, formats each "
+        "row using looked-up record fields and translated labels, then refreshes "
+        "the five paired row controls."
+    ),
+    "5882CDF0": (
+        "Formats rows from the primary item list, updates paired control states, "
+        "and refreshes one three-row control group."
+    ),
+    "5882CFA0": (
+        "Formats rows from the alternate item list at global +0x180, reverses "
+        "the paired control states, and refreshes the other three-row group."
+    ),
+    "5882D160": (
+        "Updates localized CURRENT_NUM_OF_MINE and MAX_NUM_OF_MINE labels, "
+        "clears the receiver's 16-bit field at +0x18E, and clears a display slot."
+    ),
+    "5882EAA0": (
+        "For receiver mode byte +0x188 values 1 and 2, selects different child "
+        "sets, clears their low-nibble flags, enables the corresponding current "
+        "rows, changes paired child +0x50 state values, and refreshes the "
+        "matching equipment-label and item-list helpers."
+    ),
+    "588429F0": (
+        "Sets receiver-linked child state at +0x50, invokes seven child virtual "
+        "slot-+8 methods and one slot-+4 method, stores the returned selection "
+        "through FUN_5882B9F0, rebuilds three candidate tables, and refreshes "
+        "equipment rows and mine-count labels."
+    ),
+}
+MAIN_EQUIPMENT_PANEL_REFRESH_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / equipment-panel refresh closure member",
+        "called_by": MAIN_EQUIPMENT_PANEL_REFRESH_PARENTS[address],
+        "behavior": MAIN_EQUIPMENT_PANEL_REFRESH_BEHAVIOR.get(
+            address,
+            "Member of the complete direct-call closure; its exact incoming "
+            "edge and mapped body range are listed in "
+            "docs/current-main-equipment-panel-refresh.md.",
+        ),
+        "uncertainty": (
+            "The owning C++ class, network field schema, item-type semantics, "
+            "dynamic virtual-call targets, and exact visible UI result remain "
+            "unverified. String keys establish the named equipment/mine labels, "
+            "not the complete gameplay contract; no emulator test was run."
+        ),
+    }
+    for address in MAIN_EQUIPMENT_PANEL_REFRESH_ADDRESSES
+}
+EVIDENCE.update(MAIN_EQUIPMENT_PANEL_REFRESH_EVIDENCE)
 
 
 def sha256(path):

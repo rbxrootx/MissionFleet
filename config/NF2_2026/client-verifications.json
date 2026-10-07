@@ -394233,6 +394233,2160 @@
         "behavior": "Implements lazy singleton allocation and installs CTradingSystem_MessageBox::vftable on the eight-byte allocation.",
         "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
       }
+    },
+    {
+      "address": "58786030",
+      "name": "FUN_58786030",
+      "size": 96,
+      "symbol": "_FUN_58786030",
+      "source": "src/client-current/Main/FUN_58786030.cpp",
+      "source_sha256": "1a9e61582201cba4abbda290f759ad619a9d05ab75e2fd304a4821f77d6bf990",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786030",
+          "size": 96,
+          "symbol": "_FUN_58786030_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58996AA0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "5898CAE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "5898CF18",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786030 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882D160",
+        "behavior": "Reads the current object's +0x48 value, applies the captured float scaling/rounding expression, and caches the result at +0x18.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "58786090",
+      "name": "FUN_58786090",
+      "size": 90,
+      "symbol": "_FUN_58786090",
+      "source": "src/client-current/Main/FUN_58786090.cpp",
+      "source_sha256": "e6623cf511aead565e826bb664b0da584900f839768ae19f92b066a5802216a7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786090",
+          "size": 90,
+          "symbol": "_FUN_58786090_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5898CEB8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58996AD0",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786090 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882C310 and FUN_5882CBC0",
+        "behavior": "Reads the current object's +0x4C value, applies the captured float conversion, and caches the result at +0x24.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "587860F0",
+      "name": "FUN_587860f0",
+      "size": 90,
+      "symbol": "_FUN_587860f0",
+      "source": "src/client-current/Main/FUN_587860f0.cpp",
+      "source_sha256": "c61882057d0c16b49af194212177595d075b91a7cbf7a032007cf46e77f25904",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587860F0",
+          "size": 90,
+          "symbol": "_FUN_587860f0_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58996AA0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58996AE0",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587860f0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882BA00, FUN_5882BBA0, FUN_5882C3D0, FUN_5882C490, FUN_5882CDF0, FUN_5882CFA0, and FUN_5882EAA0",
+        "behavior": "Reads the current object's +0x4C value, applies a second captured float scaling expression, and caches the result at +0x30.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "58786340",
+      "name": "FUN_58786340",
+      "size": 112,
+      "symbol": "_FUN_58786340",
+      "source": "src/client-current/Main/FUN_58786340.cpp",
+      "source_sha256": "853e33d6efade45343592b662869fb8084e4acc5516a28bcaecbbe7ab433216d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786340",
+          "size": 112,
+          "symbol": "_FUN_58786340_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786340 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882CDF0 and FUN_5882CFA0",
+        "behavior": "Counts nonempty records across 32 slots beginning at input +0x62 and stores the count at receiver +0x40.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "587863C0",
+      "name": "FUN_587863c0",
+      "size": 112,
+      "symbol": "_FUN_587863c0",
+      "source": "src/client-current/Main/FUN_587863c0.cpp",
+      "source_sha256": "2d15907764c6019ae9705655dc9b491933d134f39ebe85253fc18897c216d810",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587863C0",
+          "size": 112,
+          "symbol": "_FUN_587863c0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587863c0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882CDF0 and FUN_5882CFA0",
+        "behavior": "Counts nonempty records across 32 slots beginning at input +0x1E2 and stores the count at receiver +0x42.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "58786460",
+      "name": "FUN_58786460",
+      "size": 18,
+      "symbol": "_FUN_58786460",
+      "source": "src/client-current/Main/FUN_58786460.cpp",
+      "source_sha256": "5b78355053b49c8aa39553e6e324f66f1b0caa3c488bb24550c93adb5add49e2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786460",
+          "size": 18,
+          "symbol": "_FUN_58786460_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786460 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882D160",
+        "behavior": "Returns the referenced object's 16-bit field at +0x3C4, or zero.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "58786480",
+      "name": "FUN_58786480",
+      "size": 14,
+      "symbol": "_FUN_58786480",
+      "source": "src/client-current/Main/FUN_58786480.cpp",
+      "source_sha256": "752c1f1eebc9e27722193c2e396d6fd3b2a922c009dacfe1207e665f71ab07d3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786480",
+          "size": 14,
+          "symbol": "_FUN_58786480_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786480 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882C7E0, FUN_5882C940, and FUN_5882CA80",
+        "behavior": "Returns the first 16-bit value through the referenced object, or zero.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "587864A0",
+      "name": "FUN_587864a0",
+      "size": 14,
+      "symbol": "_FUN_587864a0",
+      "source": "src/client-current/Main/FUN_587864a0.cpp",
+      "source_sha256": "790cdbf6ea43ee5a9e7bf778b83978834db0c9436011be890bf142d540fba51b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587864A0",
+          "size": 14,
+          "symbol": "_FUN_587864a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587864a0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882BA00, FUN_5882BBA0, FUN_5882C310, FUN_5882C3D0, FUN_5882C490, FUN_5882CBC0, FUN_5882CDF0, and FUN_5882CFA0",
+        "behavior": "Returns the referenced object's subobject at +0x60, or null.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882B9F0",
+      "name": "FUN_5882b9f0",
+      "size": 13,
+      "symbol": "_FUN_5882b9f0",
+      "source": "src/client-current/Main/FUN_5882b9f0.cpp",
+      "source_sha256": "a85524d3735a8bb098b8a0e21b0a6990969826852a7ebda1dd63c71103118fbd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882B9F0",
+          "size": 13,
+          "symbol": "_FUN_5882b9f0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882b9f0 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Stores its supplied value in the receiver field at +0x170.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882BA00",
+      "name": "FUN_5882ba00",
+      "size": 408,
+      "symbol": "_FUN_5882ba00",
+      "source": "src/client-current/Main/FUN_5882ba00.cpp",
+      "source_sha256": "fa294e81c281d922504dc281d6530ccaa3588f5c08fddad3fc39d393ae152601",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882BA00",
+          "size": 408,
+          "symbol": "_FUN_5882ba00_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5882BB83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "5882BB83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5882BB4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "5882BB4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "5882BB46",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 199,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "5899DF2C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "5899DF14",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 284,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 338,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "5882BA7D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 400,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882ba00 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882EAA0",
+        "behavior": "Formats equipment labels using MESSAGESTRING__EQUIP_1 or MESSAGESTRING__EQUIP_3 after looking up each nonempty record.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882BBA0",
+      "name": "FUN_5882bba0",
+      "size": 328,
+      "symbol": "_FUN_5882bba0",
+      "source": "src/client-current/Main/FUN_5882bba0.cpp",
+      "source_sha256": "cefbac58202381c2ae22eb75de86a94035c0be37a5e838709d635cf82039a72c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882BBA0",
+          "size": 328,
+          "symbol": "_FUN_5882bba0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5882BCD3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5882BCD3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "5882BCAE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "5882BCAE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 192,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "5899DF44",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "5882BC1A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882bba0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882EAA0",
+        "behavior": "Formats equipment labels using MESSAGESTRING__EQUIP_2 after looking up each nonempty record.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882C310",
+      "name": "FUN_5882c310",
+      "size": 176,
+      "symbol": "_FUN_5882c310",
+      "source": "src/client-current/Main/FUN_5882c310.cpp",
+      "source_sha256": "562a53d949c2366954b7968f44d3a2044d868312f34ef0bf731f6b82fbccec20",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882C310",
+          "size": 29,
+          "symbol": "_FUN_5882c310_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5882C3C1",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882C330",
+          "size": 147,
+          "symbol": "_FUN_5882c310_segment_01",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "58786090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "5882C330",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c310 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882CBC0",
+        "behavior": "Checks five records and sets or clears the low four flag bits on two corresponding row controls.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882C3D0",
+      "name": "FUN_5882c3d0",
+      "size": 178,
+      "symbol": "_FUN_5882c3d0",
+      "source": "src/client-current/Main/FUN_5882c3d0.cpp",
+      "source_sha256": "60f392ae1b9265040a650d5e3211d13e150a90224ff60cce78bcee48677430a3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882C3D0",
+          "size": 29,
+          "symbol": "_FUN_5882c3d0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5882C483",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882C3F0",
+          "size": 149,
+          "symbol": "_FUN_5882c3d0_segment_01",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "5882C3F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c3d0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882CDF0",
+        "behavior": "Checks three records and updates the low four flag bits on paired row controls.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882C490",
+      "name": "FUN_5882c490",
+      "size": 185,
+      "symbol": "_FUN_5882c490",
+      "source": "src/client-current/Main/FUN_5882c490.cpp",
+      "source_sha256": "4a7ef3e7be1bbf7192dbd338aa7fde708b9b19581409cf144e7c5f7f99f6ab15",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882C490",
+          "size": 29,
+          "symbol": "_FUN_5882c490_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5882C54A",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882C4B0",
+          "size": 156,
+          "symbol": "_FUN_5882c490_segment_01",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5882C4B0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c490 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882CFA0",
+        "behavior": "Checks three records from the alternate +0x180 source region and updates the low four flag bits on paired row controls.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882C7E0",
+      "name": "FUN_5882c7e0",
+      "size": 341,
+      "symbol": "_FUN_5882c7e0",
+      "source": "src/client-current/Main/FUN_5882c7e0.cpp",
+      "source_sha256": "0101a3c8f192ffa678432b795ae4d40178a439b35070c87cbaf7ffc4e948f995",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882C7E0",
+          "size": 341,
+          "symbol": "_FUN_5882c7e0_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5882C92F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 31,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5882C92E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5882C922",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "5882C820",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c7e0 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Rebuilds a candidate-record table for selector 1, filtering global records by the selected key, several packed fields, and a zero field; accepted entries occupy 20-byte rows at receiver +0x178.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882C940",
+      "name": "FUN_5882c940",
+      "size": 307,
+      "symbol": "_FUN_5882c940",
+      "source": "src/client-current/Main/FUN_5882c940.cpp",
+      "source_sha256": "9480408b21a8a6e3f2baefbba847a412601b739d598be81e2c76a2fea4dc002c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882C940",
+          "size": 88,
+          "symbol": "_FUN_5882c940_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5882CA75",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5882CA73",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882C9A0",
+          "size": 219,
+          "symbol": "_FUN_5882c940_segment_01",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 26,
+              "target_address": "58778D00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "5882CA68",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5882CA68",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5882CA68",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5882C9A0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882c940 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Clears the candidate count at +0x18B and collects matching selector-5 records that pass the captured bit and state tests into 20-byte rows.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882CA80",
+      "name": "FUN_5882ca80",
+      "size": 301,
+      "symbol": "_FUN_5882ca80",
+      "source": "src/client-current/Main/FUN_5882ca80.cpp",
+      "source_sha256": "4c15e4abb6d40455ee34628d3fe97973a67b102dd2900f35539018a3f26b01a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882CA80",
+          "size": 88,
+          "symbol": "_FUN_5882ca80_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5882CBAF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5882CBAD",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882CAE0",
+          "size": 213,
+          "symbol": "_FUN_5882ca80_segment_01",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 26,
+              "target_address": "58778D00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "5882CBA2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5882CBA2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5882CBA2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5882CAE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882ca80 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Builds the alternate selector-5 candidate list using the complementary packed-bit condition to FUN_5882C940.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882CBC0",
+      "name": "FUN_5882cbc0",
+      "size": 557,
+      "symbol": "_FUN_5882cbc0",
+      "source": "src/client-current/Main/FUN_5882cbc0.cpp",
+      "source_sha256": "de288a17e8d4fbe5d49396f5e323108ab1adcda84c83f9294321c9862f03febd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882CBC0",
+          "size": 557,
+          "symbol": "_FUN_5882cbc0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5882CDD7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "58786150",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58786090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "58786250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 168,
+              "target_address": "5882CDCE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 255,
+              "target_address": "5882CD74",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "5882CD74",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 274,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 332,
+              "target_address": "5898C040",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 347,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "5882CDBA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 386,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 391,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 403,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 426,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 444,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 462,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 467,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 479,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 502,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 521,
+              "target_address": "5882CC75",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 529,
+              "target_address": "5882C310",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882cbc0 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Copies 24 display records from the global +0x300 region, formats each row using looked-up record fields and translated labels, then refreshes the five paired row controls.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882CDF0",
+      "name": "FUN_5882cdf0",
+      "size": 427,
+      "symbol": "_FUN_5882cdf0",
+      "source": "src/client-current/Main/FUN_5882cdf0.cpp",
+      "source_sha256": "dae587c817b7524f6ed503f2df1c8afee9671ba8564ee2c9ec0aefd1cd365441",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882CDF0",
+          "size": 427,
+          "symbol": "_FUN_5882cdf0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5882CF86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58786340",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "587863C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 200,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5882CF7F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "58778D00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 355,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 373,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 395,
+              "target_address": "5882CECE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 402,
+              "target_address": "5882C3D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 419,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882cdf0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882EAA0",
+        "behavior": "Formats rows from the primary item list, updates paired control states, and refreshes one three-row control group.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882CFA0",
+      "name": "FUN_5882cfa0",
+      "size": 433,
+      "symbol": "_FUN_5882cfa0",
+      "source": "src/client-current/Main/FUN_5882cfa0.cpp",
+      "source_sha256": "7a3d268de0dfa369148526508b9f5123abef43c3c106bb938570989b252ddb90",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882CFA0",
+          "size": 433,
+          "symbol": "_FUN_5882cfa0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5882D13C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "587864A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "587863C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "58786340",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5882D135",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 244,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "58778D00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 379,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 401,
+              "target_address": "5882D084",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 408,
+              "target_address": "5882C490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 425,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882cfa0 / equipment-panel refresh closure member",
+        "called_by": "FUN_5882EAA0",
+        "behavior": "Formats rows from the alternate item list at global +0x180, reverses the paired control states, and refreshes the other three-row group.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882D160",
+      "name": "FUN_5882d160",
+      "size": 136,
+      "symbol": "_FUN_5882d160",
+      "source": "src/client-current/Main/FUN_5882d160.cpp",
+      "source_sha256": "0c2b7594d71a5d4ca2e3c6490a5c39a988fce589d491142c0bc3602b0cecc1fc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882D160",
+          "size": 136,
+          "symbol": "_FUN_5882d160_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "58786030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "58786460",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5899DF7C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5899DF5C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882d160 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "Updates localized CURRENT_NUM_OF_MINE and MAX_NUM_OF_MINE labels, clears the receiver's 16-bit field at +0x18E, and clears a display slot.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "5882EAA0",
+      "name": "FUN_5882eaa0",
+      "size": 471,
+      "symbol": "_FUN_5882eaa0",
+      "source": "src/client-current/Main/FUN_5882eaa0.cpp",
+      "source_sha256": "1369cc81b5b20dcbb8f2456302db849caf6648802f0223c387379f958812a7e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882EAA0",
+          "size": 471,
+          "symbol": "_FUN_5882eaa0_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587860F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "5882EB97",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 234,
+              "target_address": "5882CDF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "5882BA00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5882EC74",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 455,
+              "target_address": "5882CFA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "5882BBA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882eaa0 / equipment-panel refresh closure member",
+        "called_by": "FUN_588429F0",
+        "behavior": "For receiver mode byte +0x188 values 1 and 2, selects different child sets, clears their low-nibble flags, enables the corresponding current rows, changes paired child +0x50 state values, and refreshes the matching equipment-label and item-list helpers.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
+    },
+    {
+      "address": "588429F0",
+      "name": "FUN_588429f0",
+      "size": 279,
+      "symbol": "_FUN_588429f0",
+      "source": "src/client-current/Main/FUN_588429f0.cpp",
+      "source_sha256": "d223d4cf63e37a24380911a080ee2e4ebc48ca7d59a852eb853ed3f6c3efd28b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588429F0",
+          "size": 279,
+          "symbol": "_FUN_588429f0_segment_00",
+          "relocations": [
+            {
+              "offset": 180,
+              "target_address": "5882F0B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5882B9F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "5882C7E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 229,
+              "target_address": "5882C940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5882CA80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5882CBC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "5882EAA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "5882D160",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588429f0 / equipment-panel refresh closure member",
+        "called_by": "matched FUN_588C4210 at 0x588C5A8C, the common 0x8002312A response branch",
+        "behavior": "Sets receiver-linked child state at +0x50, invokes seven child virtual slot-+8 methods and one slot-+4 method, stores the returned selection through FUN_5882B9F0, rebuilds three candidate tables, and refreshes equipment rows and mine-count labels.",
+        "uncertainty": "The owning C++ class, network field schema, item-type semantics, dynamic virtual-call targets, and exact visible UI result remain unverified. String keys establish the named equipment/mine labels, not the complete gameplay contract; no emulator test was run."
+      }
     }
   ]
 }

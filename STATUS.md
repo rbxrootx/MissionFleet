@@ -6,12 +6,18 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,083 verified matches
-totaling 2,582,707 bytes (19.0363% by functions, 24.6670% by bytes), each at
+identified code bytes across six report units. There are 8,106 verified matches
+totaling 2,587,793 bytes (19.0904% by functions, 24.7156% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project. The trading-system InfoData event path rooted at
+the active decomp.dev project. The equipment and mine-count panel refresh
+rooted at `FUN_588429F0` adds 23 byte-identical functions / 5,086 bytes. Its
+matched `0x8002312A` response gate, exact state setup, equipment/mine label
+references, complete closure, and unverified field/virtual-call semantics are
+recorded in
+[its subsystem note](docs/current-main-equipment-panel-refresh.md). The
+trading-system InfoData event path rooted at
 `FUN_588F70E0` adds 23 byte-identical functions / 5,195 bytes. Its matched
 `0x80027103` dispatcher, original argument setup, InfoData/MessageBox type
 evidence, complete direct-transfer closure, and remaining questions are
