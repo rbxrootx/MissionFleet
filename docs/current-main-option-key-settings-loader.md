@@ -1,10 +1,13 @@
 # Current Main option key-settings loader
 
-`FUN_588a0450` is the RTTI-backed `CPannelOption` method at vtable slot
-`+0x18`. The vtable entry is at `0x589A0218`; its complete-object locator at
-`0x589A9424` points to the type descriptor `.?AVCPannelOption@@`. The function
-occupies one Ghidra range, `0x588A0450..0x588A1038`, totaling 3,049 bytes.
-ObjDiff 3.8.0 verified all bytes and checked seven mapped operand records.
+`FUN_588a0450` is a `CPannelOption` key-settings loader. It is not the
+vtable's `+0x18` method: the RTTI-backed vtable begins at `0x589A0200`, and
+its `+0x18` entry at `0x589A0218` points to `FUN_588a3200`. The loader is
+called directly by that method at `0x588A324D`. The CompleteObjectLocator
+pointer at `0x589A01FC` resolves through `0x589A9424` to the RTTI type
+descriptor at `0x589CD37C`, named `.?AVCPannelOption@@`. The loader occupies
+one Ghidra range, `0x588A0450..0x588A1038`, totaling 3,049 bytes. ObjDiff 3.8.0
+verified all bytes and checked seven mapped operand records.
 
 ## Evidence from the original
 

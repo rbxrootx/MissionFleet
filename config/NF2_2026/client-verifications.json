@@ -217270,8 +217270,8 @@
         }
       ],
       "evidence": {
-        "name_in_analysis": "Ghidra identifies FUN_588a0450 as the function stored at 0x589A0218, slot +0x18 of the vtable beginning at 0x589A0200. Its complete-object locator at 0x589A9424 references RTTI type descriptor .?AVCPannelOption@@. The registered values use the path SOFTWARE\\FleetMission\\FleetMissionCN\\CONFIGURATION_KEY.",
-        "called_by": "Ghidra records one direct call from FUN_588a3200 at 0x588A324D. In that caller's param_3 == 2 branch, matching control param_1[0x93] runs prerequisite routines, calls FUN_5889F0C0 and FUN_5889FCA0, then invokes this loader before a virtual call through the panel vtable. The caller's RTTI-backed table identifies it as CPannelOption; the semantic name of the event remains unknown.",
+        "name_in_analysis": "FUN_588a0450 / CPannelOption key-settings loader called by the +0x18 vtable handler FUN_588a3200; it is not itself the vtable entry. The RTTI-backed vtable at 0x589A0200 has a CompleteObjectLocator pointer at 0x589A01FC to 0x589A9424, whose type descriptor at 0x589CD37C is .?AVCPannelOption@@.",
+        "called_by": "FUN_588a3200 is slot +0x18 at 0x589A0218 in the RTTI-backed CPannelOption vtable at 0x589A0200. Its param_3 == 2 path calls FUN_588a0450 at 0x588A324D after FUN_5889F0C0 and FUN_5889FCA0; the loader then participates in this options-panel key-settings path.",
         "behavior": "The loader validates 31 key codes stored from receiver +0x150, calls FUN_5889e970 for out-of-range or duplicate codes, then reads named values under the configuration registry path through host API function pointers. Visible value names include PortAllTurets, StarboardAllTurrets, PortTheTurret, StarboardTheTurret, GunElevationUp/Down, PreciseWeaponControl, Fire, SelectFrontWeapon, SelectRearWeapon, EngineAccelerate/Decelerate, ReturnToTheShip, Dive, Bombing, SmokeBomb, Submerging, CriticalSubmerging, and MapGridOnOff. It writes values back into receiver fields spanning +0x150 through +0x1C8 and closes the opened configuration handle through another host function pointer.",
         "uncertainty": "The key-code meanings, default-binding schema, exact registry API contracts, configuration versioning, and runtime effects of restored settings remain unresolved. No original-client options interaction test was performed."
       }
@@ -353247,6 +353247,2741 @@
         "called_by": "The shared base constructor directly calls this helper at 0x5874C62F.",
         "behavior": "Initializes a CPannelInfoBattleRoom subobject and installs CPannelInfoBattleRoom::vftable. It allocates and stores multiple child controls, including three resource-selected children, a seven-entry repeated child group, and further controls; it updates child state and restores the exception-list value before returning. The Ghidra body is 1,252 bytes.",
         "uncertainty": "These sources preserve the installed Main.dll x86 instructions for byte matching; they do not recover original high-level C++ source. The vtable labels are Ghidra names recovered from the mapped image. Member types and meanings, resource IDs and rendered appearance, indirect virtual-call targets, mode-specific gameplay meaning, and external constructor callers remain unresolved unless directly stated as an instruction-level fact above. No emulator or visual runtime test was performed."
+      }
+    },
+    {
+      "address": "5889F030",
+      "name": "FUN_5889f030",
+      "size": 27,
+      "symbol": "_FUN_5889f030",
+      "source": "src/client-current/Main/FUN_5889f030.cpp",
+      "source_sha256": "037de9f59c0d8890f08a509dd26a113e285e911d779a1086da80a3810eba66f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889F030",
+          "size": 21,
+          "symbol": "_FUN_5889f030_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "5889E430",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889F048",
+          "size": 6,
+          "symbol": "_FUN_5889f030_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889f030 / CPannelOption::vftable[0] deleting-destructor thunk",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this deleting-destructor thunk in slot +0x00; the CompleteObjectLocator pointer at 0x589A01FC is 0x589A9424 and the RTTI descriptor names .?AVCPannelOption@@.",
+        "behavior": "Deleting-destructor thunk calls FUN_5889e430 for child/control cleanup and calls scalar deleting destructor FUN_5897cc42 when the delete flag is set. Ghidra identifies two instruction ranges, with a three-byte gap between them.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A30B0",
+      "name": "FUN_588a30b0",
+      "size": 332,
+      "symbol": "_FUN_588a30b0",
+      "source": "src/client-current/Main/FUN_588a30b0.cpp",
+      "source_sha256": "a86cb0a29f260f32161d75c7811cacfbf2f7ee194e917b66bffc59881b04162d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "588A31FA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "5889F0C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "5889ECD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 297,
+          "target_address": "588A1340",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a30b0 / CPannelOption::vftable[1]",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x04.",
+        "behavior": "Tests the panel state bits, updates the panel and child-control state, dispatches through the shared screen host, copies option-control state through FUN_5889f0c0, resets the option-selection helper state, and refreshes two child labels. Direct open callees are FUN_5889f0c0, FUN_5889ecd0, and FUN_588a1340.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889F050",
+      "name": "FUN_5889f050",
+      "size": 106,
+      "symbol": "_FUN_5889f050",
+      "source": "src/client-current/Main/FUN_5889f050.cpp",
+      "source_sha256": "0ee63950d4193282888a9c753af77fe64f44eef10e6c6553d1d1ddff5a929746",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 71,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "58A24584",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889f050 / CPannelOption::vftable[2]",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x08.",
+        "behavior": "When the panel state bits equal 0x200, clears a panel flag, transitions the state bits to 0x400, then dispatches the stored screen handle (or a fallback value) through the shared screen vtable.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58874260",
+      "name": "FUN_58874260",
+      "size": 172,
+      "symbol": "_FUN_58874260",
+      "source": "src/client-current/Main/FUN_58874260.cpp",
+      "source_sha256": "7344fa9ff145aa98e6233b33321cd316729e807eb87c30adc1033a751f9ed15c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 11,
+          "target_address": "58874306",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58874260 / CPannelOption::vftable[3]",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x0C.",
+        "behavior": "When the panel dispatch flag is set, transitions panel state 0x100 to 0x200 or 0x400 to 0x500, updates state flags, then traverses the child list and calls each child's vtable entry at +0x0C. The indirect child callback targets are not resolved.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A34D0",
+      "name": "FUN_588a34d0",
+      "size": 1114,
+      "symbol": "_FUN_588a34d0",
+      "source": "src/client-current/Main/FUN_588a34d0.cpp",
+      "source_sha256": "cf4314ced7525a5aa15cbf6b50f13598a5e0ea4feb71a4e95ec0fc525c08da77",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 77,
+          "target_address": "588A3861",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "588A3771",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "588A373D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "588A35EB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 177,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 205,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 229,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 250,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 255,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 270,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 291,
+          "target_address": "588A3694",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 303,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 325,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 374,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 398,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 424,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 439,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 460,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 472,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 494,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 515,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 543,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 567,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 588,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 593,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 608,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 633,
+          "target_address": "5889ECD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 648,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 660,
+          "target_address": "588A12B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 676,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 723,
+          "target_address": "5889ED80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 731,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 772,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 787,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 817,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 832,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 861,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 867,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 882,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 890,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 920,
+          "target_address": "588A3921",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 942,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 957,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 978,
+          "target_address": "588A1040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 994,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1009,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1030,
+          "target_address": "588A1110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1047,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1062,
+          "target_address": "58731540",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1083,
+          "target_address": "588A11E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a34d0 / CPannelOption::vftable[4]",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x10.",
+        "behavior": "Handles keyboard messages while the panel input flag is set. It forwards messages through child controls, processes key-up and key-down codes, updates the selected key binding and duplicate display state, and delegates slider/mode control events to three helper methods.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A3200",
+      "name": "FUN_588a3200",
+      "size": 706,
+      "symbol": "_FUN_588a3200",
+      "source": "src/client-current/Main/FUN_588a3200.cpp",
+      "source_sha256": "039f0080aec8d9cf66e54c4768d4b2e6e02e56c1a01e0f33138eb8252aa5a582",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "588A34BC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 50,
+          "target_address": "5889EF90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "5889F0C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "5889FCA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "588A0450",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 108,
+          "target_address": "5876BAF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 115,
+          "target_address": "58764D30",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 135,
+          "target_address": "5889E970",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 142,
+          "target_address": "588A1340",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 181,
+          "target_address": "58A245EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 226,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 278,
+          "target_address": "587315C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 291,
+          "target_address": "587315C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 342,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 355,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 368,
+          "target_address": "587315F0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 381,
+          "target_address": "587315C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 394,
+          "target_address": "587315C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 433,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 438,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 466,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 484,
+          "target_address": "5889ED80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 493,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 524,
+          "target_address": "588A34BB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 533,
+          "target_address": "588A1040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 560,
+          "target_address": "588A34BB",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 569,
+          "target_address": "588A1110",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 601,
+          "target_address": "588A11E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a3200 / CPannelOption::vftable[6]",
+        "called_by": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x18 and directly calls verified key-settings loader FUN_588a0450 at 0x588A324D.",
+        "behavior": "Dispatches CPannelOption control events. Its settings button path validates settings, applies globals, loads OPTION registry values, then invokes the panel screen vtable; other paths dispatch individual key bindings, graphics modes, and slider controls. It directly calls verified loader FUN_588a0450 and the selected open helpers.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889EF90",
+      "name": "FUN_5889ef90",
+      "size": 152,
+      "symbol": "_FUN_5889ef90",
+      "source": "src/client-current/Main/FUN_5889ef90.cpp",
+      "source_sha256": "bd108c7641cd8407998900af0fd023d45a2c95acc5c74767b93bd32763762b42",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5889ef90 / CPannelOption direct-call helper",
+        "called_by": "Directly called by the CPannelOption +0x18 event handler FUN_588a3200 at 0x588A3231.",
+        "behavior": "Validates 31 candidate key codes in receiver storage beginning at +0x1CC, rejecting unsupported or duplicate codes. On success it copies the 31 values to the active binding array beginning at +0x150.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889F0C0",
+      "name": "FUN_5889f0c0",
+      "size": 2207,
+      "symbol": "_FUN_5889f0c0",
+      "source": "src/client-current/Main/FUN_5889f0c0.cpp",
+      "source_sha256": "db10ec1d1ff1e96635d5baa7ec50945976fb6e63e3ce37e13db72242e68e27e7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "5889F6B7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 21,
+          "target_address": "589C9038",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "589C903C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 75,
+          "target_address": "589C9040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 113,
+          "target_address": "58A248D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 134,
+          "target_address": "589C9044",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 161,
+          "target_address": "589C9048",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "589C904C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "589C9050",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 248,
+          "target_address": "589C9054",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 275,
+          "target_address": "589C9058",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 302,
+          "target_address": "589C905C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 329,
+          "target_address": "589C9060",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 356,
+          "target_address": "589C906C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 377,
+          "target_address": "58A248F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 410,
+          "target_address": "589C9068",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 437,
+          "target_address": "58A248F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 464,
+          "target_address": "589C9070",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 496,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 517,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 553,
+          "target_address": "58A248E0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 580,
+          "target_address": "58A248E4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 607,
+          "target_address": "58A248E8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 634,
+          "target_address": "58A248EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 661,
+          "target_address": "589C9064",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 688,
+          "target_address": "58A248DC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 706,
+          "target_address": "589C9074",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 772,
+          "target_address": "5889F470",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 777,
+          "target_address": "58A248D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 926,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 971,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 992,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1007,
+          "target_address": "5889F581",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1012,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1163,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1186,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1244,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1265,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1280,
+          "target_address": "5889F67D",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1285,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1436,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1459,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1496,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1517,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1547,
+          "target_address": "589C9038",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1567,
+          "target_address": "589C903C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1585,
+          "target_address": "589C9040",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1605,
+          "target_address": "58A244FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1637,
+          "target_address": "58A24780",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1642,
+          "target_address": "58A248D4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1662,
+          "target_address": "58A24780",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1706,
+          "target_address": "589C9044",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1726,
+          "target_address": "589C9048",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1745,
+          "target_address": "589C904C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1765,
+          "target_address": "589C9050",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1785,
+          "target_address": "589C9054",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1804,
+          "target_address": "589C9058",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1824,
+          "target_address": "589C905C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1844,
+          "target_address": "589C9060",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1859,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1867,
+          "target_address": "589C906C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1873,
+          "target_address": "58A24580",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1891,
+          "target_address": "587ECEC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 1913,
+          "target_address": "58A248F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1932,
+          "target_address": "589C9068",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1952,
+          "target_address": "58A248F4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1970,
+          "target_address": "589C9070",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 1992,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2000,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2027,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2035,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2059,
+          "target_address": "58A248DC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2076,
+          "target_address": "589C9074",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2099,
+          "target_address": "589C9074",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2121,
+          "target_address": "58A248E0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2141,
+          "target_address": "58A248E4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2161,
+          "target_address": "58A248E8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2180,
+          "target_address": "58A248EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 2200,
+          "target_address": "589C9064",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889f0c0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable methods FUN_588a30b0 and FUN_588a3200; also reached through its direct caller FUN_588a3200 at 0x588A323F.",
+        "behavior": "Copies option state between child-control states and renderer/audio globals. Its apply path updates the child states and slider positions and calls FUN_587ecec0 for the night-overlay setting when the active screen matches the observed condition.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889FCA0",
+      "name": "FUN_5889fca0",
+      "size": 825,
+      "symbol": "_FUN_5889fca0",
+      "source": "src/client-current/Main/FUN_5889fca0.cpp",
+      "source_sha256": "15e8b5144def1e1f5442b2f3276e33cd8e628ecccbb2206f98b3f08033e74175",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 17,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5898C008",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "5898C010",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "589C9038",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 90,
+          "target_address": "589A03B4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "589C903C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 117,
+          "target_address": "589A03AC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 122,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 130,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 139,
+          "target_address": "589C9040",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 144,
+          "target_address": "589A03A4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 166,
+          "target_address": "58A244FC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "589A03A0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 176,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 193,
+          "target_address": "589C9044",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 198,
+          "target_address": "589A0390",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 203,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 211,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "589C9048",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 225,
+          "target_address": "589A0380",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 230,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 238,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 247,
+          "target_address": "589C904C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 252,
+          "target_address": "589A0374",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 257,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "589C9050",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 279,
+          "target_address": "589A036C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 284,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 292,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 301,
+          "target_address": "589C9054",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 306,
+          "target_address": "589A035C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 311,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 328,
+          "target_address": "589C9058",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 333,
+          "target_address": "589A034C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 338,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 355,
+          "target_address": "589C906C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 360,
+          "target_address": "589A033C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 365,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 382,
+          "target_address": "589C905C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 387,
+          "target_address": "589A0330",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 392,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 400,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 409,
+          "target_address": "589C9060",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 414,
+          "target_address": "589A031C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 419,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 427,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 436,
+          "target_address": "58A248F0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 441,
+          "target_address": "589A0310",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 446,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 454,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 463,
+          "target_address": "589C9068",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "589A0300",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 481,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 490,
+          "target_address": "58A248F4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 495,
+          "target_address": "589A02F4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 500,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 508,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 517,
+          "target_address": "589C9070",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 522,
+          "target_address": "589A02E8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 527,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 535,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 544,
+          "target_address": "58A248D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 549,
+          "target_address": "589A02DC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 554,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 562,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 571,
+          "target_address": "58A248F8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 576,
+          "target_address": "589A02CC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 581,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 589,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 598,
+          "target_address": "58A248FC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 603,
+          "target_address": "589A02C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 608,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 616,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 625,
+          "target_address": "589C9074",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 630,
+          "target_address": "589A02B4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 635,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 643,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 652,
+          "target_address": "58A248E0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 657,
+          "target_address": "589A029C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 662,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 670,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 679,
+          "target_address": "58A248E4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 684,
+          "target_address": "589A0288",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 689,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 697,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 702,
+          "target_address": "58A248E8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 711,
+          "target_address": "589A0274",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 716,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 724,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 733,
+          "target_address": "58A248EC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 738,
+          "target_address": "589A025C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 743,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 751,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 760,
+          "target_address": "589C9064",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 765,
+          "target_address": "589A0250",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 770,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 778,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 787,
+          "target_address": "58A248DC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 792,
+          "target_address": "589A0244",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 797,
+          "target_address": "589A03C0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 805,
+          "target_address": "5889E910",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 816,
+          "target_address": "5898C000",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889fca0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable method FUN_588a3200 at 0x588A3246.",
+        "behavior": "Opens or creates SOFTWARE\\FleetMission\\FleetMissionCN\\OPTION and reads 27 named settings through FUN_5889e910, including Antialias, Warfog, Paticle, AircraftTrail, GunFireSound, NightOverlay, volume settings, auto-return settings, AutoMapGrid, and Dashboard; then closes the registry handle through a host function pointer.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A1340",
+      "name": "FUN_588a1340",
+      "size": 118,
+      "symbol": "_FUN_588a1340",
+      "source": "src/client-current/Main/FUN_588a1340.cpp",
+      "source_sha256": "64cc7155b810953e16ac3f01999dc8dab4ed451646c2933ea3235df87b953881",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 46,
+          "target_address": "5889ED80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a1340 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable methods FUN_588a30b0 and FUN_588a3200.",
+        "behavior": "Refreshes option-panel key-binding display state and calls FUN_5889ed80 to format key names for the child controls. It directly calls FUN_5889ed80.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889ED80",
+      "name": "FUN_5889ed80",
+      "size": 280,
+      "symbol": "_FUN_5889ed80",
+      "source": "src/client-current/Main/FUN_5889ed80.cpp",
+      "source_sha256": "71777d634cfe657db4dba05b3444dab7658163b0cc9c1b2e879eabeb3dcc9ff7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "5889EE79",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "58996468",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 47,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "589A0240",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 71,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 88,
+          "target_address": "589A023C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "589A0238",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 119,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 136,
+          "target_address": "589963AC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 160,
+          "target_address": "5899BCDC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 167,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 184,
+          "target_address": "589A0230",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 191,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 208,
+          "target_address": "589A0228",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 215,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 232,
+          "target_address": "589A0220",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "5898C198",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 260,
+          "target_address": "589A021C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 267,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889ed80 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption key handlers FUN_588a34d0, FUN_588a12b0, and FUN_588a1340.",
+        "behavior": "Formats a key-code label at receiver +0x254. It special-cases Shift, Control, Space, and several punctuation keys; other values are formatted from the character code through host string functions.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A1040",
+      "name": "FUN_588a1040",
+      "size": 195,
+      "symbol": "_FUN_588a1040",
+      "source": "src/client-current/Main/FUN_588a1040.cpp",
+      "source_sha256": "5edabe87de9db99c9a10c6ab7cb0e8ffc60ce8bdc0a7a37fefabcd7ba22bbfba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a1040 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+        "behavior": "Updates the first option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A1110",
+      "name": "FUN_588a1110",
+      "size": 195,
+      "symbol": "_FUN_588a1110",
+      "source": "src/client-current/Main/FUN_588a1110.cpp",
+      "source_sha256": "9995c131d41e8082cec2f7f3fc5d6d6acfdbef2948afa12e6e8f0fc5463e6736",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a1110 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+        "behavior": "Updates the second option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A11E0",
+      "name": "FUN_588a11e0",
+      "size": 195,
+      "symbol": "_FUN_588a11e0",
+      "source": "src/client-current/Main/FUN_588a11e0.cpp",
+      "source_sha256": "28b6e2bcd4134d12670bda0aeb9368207c576659e60780d4e1e671e066e011f2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 163,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 186,
+          "target_address": "589032E0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a11e0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+        "behavior": "Updates the third option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587ECEC0",
+      "name": "FUN_587ecec0",
+      "size": 75,
+      "symbol": "_FUN_587ecec0",
+      "source": "src/client-current/Main/FUN_587ecec0.cpp",
+      "source_sha256": "24790435e3c64f63e6b9ab020928ab250621cbb453ce462ddde36f0ee09300bc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587ecec0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by the option-state transfer helper FUN_5889f0c0 at 0x5889F822.",
+        "behavior": "Receives the option-panel night-overlay value from FUN_5889f0c0; the wider renderer meaning of this global-setting helper is not established by this subsystem audit.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889E910",
+      "name": "FUN_5889e910",
+      "size": 95,
+      "symbol": "_FUN_5889e910",
+      "source": "src/client-current/Main/FUN_5889e910.cpp",
+      "source_sha256": "bf7cd1b6af38192fdb9867a6375f5955993c927a5864876154e82dbedcfdf3c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "5898C00C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 70,
+          "target_address": "5898C010",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889e910 / CPannelOption direct-call helper",
+        "called_by": "Called 27 times from the registry options loader FUN_5889fca0, for separate option names under the OPTION registry path.",
+        "behavior": "Reads one named value from the supplied registry key/path into the supplied destination using host registry API pointers. It is called 27 times by FUN_5889fca0.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889ECD0",
+      "name": "FUN_5889ecd0",
+      "size": 74,
+      "symbol": "_FUN_5889ecd0",
+      "source": "src/client-current/Main/FUN_5889ecd0.cpp",
+      "source_sha256": "3ab351ebf0bfe4f87138aa2f10e4433c9a216ecbb5ef8ec3810f1324c76902cd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 4,
+          "target_address": "58A284C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 11,
+          "target_address": "5897CBBC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 29,
+          "target_address": "5897CBCE",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "5897CBC8",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58A284C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 65,
+          "target_address": "5897CBB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889ecd0 / CPannelOption direct-call helper",
+        "called_by": "Called from FUN_588a30b0 and FUN_588a34d0; it directly calls the four selected runtime thunks.",
+        "behavior": "Invokes four small host/runtime helper functions using DAT_58a284c4 and stack-local state. Their host API contracts are unresolved; CPannelOption reaches this helper from its state/apply and key-input paths.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A12B0",
+      "name": "FUN_588a12b0",
+      "size": 134,
+      "symbol": "_FUN_588a12b0",
+      "source": "src/client-current/Main/FUN_588a12b0.cpp",
+      "source_sha256": "57740f908a1b0df01cce5130fa87b52799fdd80e757f59e9c0ffb1ca3e9fc996",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "5889ED20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "5889ED80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 114,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a12b0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by the CPannelOption keyboard handler FUN_588a34d0 at 0x588A3763.",
+        "behavior": "Validates an individual key code with FUN_5889ed20, applies the binding, and uses FUN_5889ed80 to format/update the key label.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889ED20",
+      "name": "FUN_5889ed20",
+      "size": 84,
+      "symbol": "_FUN_5889ed20",
+      "source": "src/client-current/Main/FUN_5889ed20.cpp",
+      "source_sha256": "3a8494998e195d9c334ff45013aa81d3bd3cb4d99232f720f0ee38ccc91823c6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5889ed20 / CPannelOption direct-call helper",
+        "called_by": "Directly called by key-binding helper FUN_588a12b0 at 0x588A12C3.",
+        "behavior": "Returns whether a key code is accepted: uppercase A-Z, Shift, Control, Space, and the observed punctuation-key codes.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5897CBBC",
+      "name": "FUN_5897cbbc",
+      "size": 6,
+      "symbol": "_FUN_5897cbbc",
+      "source": "src/client-current/Main/FUN_5897cbbc.cpp",
+      "source_sha256": "e9c9615621c6f7ba812f4983d828a5ce5b75316939cc1a5767d081cefd221346",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C0A4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cbbc / CPannelOption direct-call helper",
+        "called_by": "Directly called by FUN_5889ecd0 at 0x5889ECDA.",
+        "behavior": "Small runtime thunk called by FUN_5889ecd0 with DAT_58a284c4; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5897CBCE",
+      "name": "FUN_5897cbce",
+      "size": 6,
+      "symbol": "_FUN_5897cbce",
+      "source": "src/client-current/Main/FUN_5897cbce.cpp",
+      "source_sha256": "413333837fd5a58284876e68145eb03ff71cb23df27b70b0195af3c40a913386",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C0B0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cbce / CPannelOption direct-call helper",
+        "called_by": "Directly called by FUN_5889ecd0 at 0x5889ECEC.",
+        "behavior": "Small runtime thunk called by FUN_5889ecd0 with stack-local values; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5897CBC8",
+      "name": "FUN_5897cbc8",
+      "size": 6,
+      "symbol": "_FUN_5897cbc8",
+      "source": "src/client-current/Main/FUN_5897cbc8.cpp",
+      "source_sha256": "3d4a2e17c00ed6453631e41d6dd22b24bc01be4c1d1771c6766dd09c890839ce",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C0AC",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cbc8 / CPannelOption direct-call helper",
+        "called_by": "Directly called by FUN_5889ecd0 at 0x5889ED03.",
+        "behavior": "Small runtime thunk called by FUN_5889ecd0 with stack-local values; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5897CBB0",
+      "name": "FUN_5897cbb0",
+      "size": 6,
+      "symbol": "_FUN_5897cbb0",
+      "source": "src/client-current/Main/FUN_5897cbb0.cpp",
+      "source_sha256": "a3d5f2ea46cd74822e413ec882535c26971ae53f4526bc68536a1a94de78df2b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "5898C0B4",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cbb0 / CPannelOption direct-call helper",
+        "called_by": "Directly called by FUN_5889ecd0 at 0x5889ED10.",
+        "behavior": "Small runtime thunk called by FUN_5889ecd0 with DAT_58a284c4 and a returned handle; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889E430",
+      "name": "FUN_5889e430",
+      "size": 1134,
+      "symbol": "_FUN_5889e430",
+      "source": "src/client-current/Main/FUN_5889e430.cpp",
+      "source_sha256": "1e2c14037046b6f5e6d0e5833e96fc45e0223922f2a77ab88fe3b6a51dc06f15",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58987F48",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "589A0200",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 1110,
+          "target_address": "58902C10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889e430 / CPannelOption direct-call helper",
+        "called_by": "Directly called by the CPannelOption deleting-destructor thunk FUN_5889f030 at 0x5889F033.",
+        "behavior": "Releases the option panel's child controls and owned resources through their virtual destructors, then calls matched helper FUN_58902c10. It is reached by the deleting-destructor thunk FUN_5889f030.",
+        "uncertainty": "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator runtime or visual test was performed."
       }
     }
   ]

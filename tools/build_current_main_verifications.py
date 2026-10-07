@@ -894,6 +894,29 @@ BATTLE_ROOM_PAGE_ADDRESSES = (
 ADDRESSES += BATTLE_ROOM_PAGE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(BATTLE_ROOM_PAGE_ADDRESSES)
 
+# RTTI-backed CPannelOption methods and the open direct-call helpers reached
+# from them. The selection closes the direct-call graph of all six still-open
+# vtable entries while retaining the already verified constructor/loader as
+# anchors.
+CPANNEL_OPTION_ADDRESSES = (
+    "5889F030", "588A30B0", "5889F050", "58874260", "588A34D0",
+    "588A3200", "5889EF90", "5889F0C0", "5889FCA0", "588A1340",
+    "5889ED80", "588A1040", "588A1110", "588A11E0", "587ECEC0",
+    "5889E910", "5889ECD0", "588A12B0", "5889ED20", "5897CBBC",
+    "5897CBCE", "5897CBC8", "5897CBB0", "5889E430",
+)
+ADDRESSES += CPANNEL_OPTION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CPANNEL_OPTION_ADDRESSES)
+
+CPANNEL_OPTION_VTABLE = {
+    "5889F030": "CPannelOption::vftable[0] deleting-destructor thunk",
+    "588A30B0": "CPannelOption::vftable[1]",
+    "5889F050": "CPannelOption::vftable[2]",
+    "58874260": "CPannelOption::vftable[3]",
+    "588A34D0": "CPannelOption::vftable[4]",
+    "588A3200": "CPannelOption::vftable[6]",
+}
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8178,6 +8201,75 @@ EVIDENCE.update({
         "uncertainty": BATTLE_ROOM_PAGE_UNCERTAINTY,
     }
     for address in BATTLE_ROOM_PAGE_ADDRESSES
+})
+
+CPANNEL_OPTION_BEHAVIOR = {
+    "5889F030": "Deleting-destructor thunk calls FUN_5889e430 for child/control cleanup and calls scalar deleting destructor FUN_5897cc42 when the delete flag is set. Ghidra identifies two instruction ranges, with a three-byte gap between them.",
+    "588A30B0": "Tests the panel state bits, updates the panel and child-control state, dispatches through the shared screen host, copies option-control state through FUN_5889f0c0, resets the option-selection helper state, and refreshes two child labels. Direct open callees are FUN_5889f0c0, FUN_5889ecd0, and FUN_588a1340.",
+    "5889F050": "When the panel state bits equal 0x200, clears a panel flag, transitions the state bits to 0x400, then dispatches the stored screen handle (or a fallback value) through the shared screen vtable.",
+    "58874260": "When the panel dispatch flag is set, transitions panel state 0x100 to 0x200 or 0x400 to 0x500, updates state flags, then traverses the child list and calls each child's vtable entry at +0x0C. The indirect child callback targets are not resolved.",
+    "588A34D0": "Handles keyboard messages while the panel input flag is set. It forwards messages through child controls, processes key-up and key-down codes, updates the selected key binding and duplicate display state, and delegates slider/mode control events to three helper methods.",
+    "588A3200": "Dispatches CPannelOption control events. Its settings button path validates settings, applies globals, loads OPTION registry values, then invokes the panel screen vtable; other paths dispatch individual key bindings, graphics modes, and slider controls. It directly calls verified loader FUN_588a0450 and the selected open helpers.",
+    "5889EF90": "Validates 31 candidate key codes in receiver storage beginning at +0x1CC, rejecting unsupported or duplicate codes. On success it copies the 31 values to the active binding array beginning at +0x150.",
+    "5889F0C0": "Copies option state between child-control states and renderer/audio globals. Its apply path updates the child states and slider positions and calls FUN_587ecec0 for the night-overlay setting when the active screen matches the observed condition.",
+    "5889FCA0": "Opens or creates SOFTWARE\\FleetMission\\FleetMissionCN\\OPTION and reads 27 named settings through FUN_5889e910, including Antialias, Warfog, Paticle, AircraftTrail, GunFireSound, NightOverlay, volume settings, auto-return settings, AutoMapGrid, and Dashboard; then closes the registry handle through a host function pointer.",
+    "588A1340": "Refreshes option-panel key-binding display state and calls FUN_5889ed80 to format key names for the child controls. It directly calls FUN_5889ed80.",
+    "5889ED80": "Formats a key-code label at receiver +0x254. It special-cases Shift, Control, Space, and several punctuation keys; other values are formatted from the character code through host string functions.",
+    "588A1040": "Updates the first option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+    "588A1110": "Updates the second option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+    "588A11E0": "Updates the third option-panel slider selection and stored value from the current shared slider coordinate. The value is clamped/quantized to fixed steps and FUN_589032e0 is called to update slider display positions.",
+    "587ECEC0": "Receives the option-panel night-overlay value from FUN_5889f0c0; the wider renderer meaning of this global-setting helper is not established by this subsystem audit.",
+    "5889E910": "Reads one named value from the supplied registry key/path into the supplied destination using host registry API pointers. It is called 27 times by FUN_5889fca0.",
+    "5889ECD0": "Invokes four small host/runtime helper functions using DAT_58a284c4 and stack-local state. Their host API contracts are unresolved; CPannelOption reaches this helper from its state/apply and key-input paths.",
+    "588A12B0": "Validates an individual key code with FUN_5889ed20, applies the binding, and uses FUN_5889ed80 to format/update the key label.",
+    "5889ED20": "Returns whether a key code is accepted: uppercase A-Z, Shift, Control, Space, and the observed punctuation-key codes.",
+    "5897CBBC": "Small runtime thunk called by FUN_5889ecd0 with DAT_58a284c4; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+    "5897CBCE": "Small runtime thunk called by FUN_5889ecd0 with stack-local values; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+    "5897CBC8": "Small runtime thunk called by FUN_5889ecd0 with stack-local values; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+    "5897CBB0": "Small runtime thunk called by FUN_5889ecd0 with DAT_58a284c4 and a returned handle; Ghidra gives a six-byte body. The external runtime contract remains unknown.",
+    "5889E430": "Releases the option panel's child controls and owned resources through their virtual destructors, then calls matched helper FUN_58902c10. It is reached by the deleting-destructor thunk FUN_5889f030.",
+}
+CPANNEL_OPTION_CALLERS = {
+    "5889F030": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this deleting-destructor thunk in slot +0x00; the CompleteObjectLocator pointer at 0x589A01FC is 0x589A9424 and the RTTI descriptor names .?AVCPannelOption@@.",
+    "588A30B0": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x04.",
+    "5889F050": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x08.",
+    "58874260": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x0C.",
+    "588A34D0": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x10.",
+    "588A3200": "The RTTI-backed CPannelOption vtable at 0x589A0200 stores this entry in slot +0x18 and directly calls verified key-settings loader FUN_588a0450 at 0x588A324D.",
+    "5889EF90": "Directly called by the CPannelOption +0x18 event handler FUN_588a3200 at 0x588A3231.",
+    "5889F0C0": "Directly called by CPannelOption vtable methods FUN_588a30b0 and FUN_588a3200; also reached through its direct caller FUN_588a3200 at 0x588A323F.",
+    "5889FCA0": "Directly called by CPannelOption vtable method FUN_588a3200 at 0x588A3246.",
+    "588A1340": "Directly called by CPannelOption vtable methods FUN_588a30b0 and FUN_588a3200.",
+    "5889ED80": "Directly called by CPannelOption key handlers FUN_588a34d0, FUN_588a12b0, and FUN_588a1340.",
+    "588A1040": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+    "588A1110": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+    "588A11E0": "Directly called by CPannelOption vtable methods FUN_588a34d0 and FUN_588a3200.",
+    "587ECEC0": "Directly called by the option-state transfer helper FUN_5889f0c0 at 0x5889F822.",
+    "5889E910": "Called 27 times from the registry options loader FUN_5889fca0, for separate option names under the OPTION registry path.",
+    "5889ECD0": "Called from FUN_588a30b0 and FUN_588a34d0; it directly calls the four selected runtime thunks.",
+    "588A12B0": "Directly called by the CPannelOption keyboard handler FUN_588a34d0 at 0x588A3763.",
+    "5889ED20": "Directly called by key-binding helper FUN_588a12b0 at 0x588A12C3.",
+    "5897CBBC": "Directly called by FUN_5889ecd0 at 0x5889ECDA.",
+    "5897CBCE": "Directly called by FUN_5889ecd0 at 0x5889ECEC.",
+    "5897CBC8": "Directly called by FUN_5889ecd0 at 0x5889ED03.",
+    "5897CBB0": "Directly called by FUN_5889ecd0 at 0x5889ED10.",
+    "5889E430": "Directly called by the CPannelOption deleting-destructor thunk FUN_5889f030 at 0x5889F033.",
+}
+CPANNEL_OPTION_UNCERTAINTY = (
+    "The mapped image, RTTI/vtable bytes, Ghidra body ranges, direct references, and ObjDiff comparisons establish the instruction-level evidence. "
+    "This reconstruction does not recover the original high-level C++ source. Several registry/runtime API pointers, indirect host dispatches, "
+    "child virtual-call targets, resource-label meanings, and actual control behavior in a live game session remain unresolved. No client/emulator "
+    "runtime or visual test was performed."
+)
+
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / {CPANNEL_OPTION_VTABLE.get(address, 'CPannelOption direct-call helper')}",
+        "called_by": CPANNEL_OPTION_CALLERS[address],
+        "behavior": CPANNEL_OPTION_BEHAVIOR[address],
+        "uncertainty": CPANNEL_OPTION_UNCERTAINTY,
+    }
+    for address in CPANNEL_OPTION_ADDRESSES
 })
 
 
