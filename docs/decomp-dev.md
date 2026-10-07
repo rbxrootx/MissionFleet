@@ -52,12 +52,12 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,779 of 42,461 functions and 2,471,898 of 10,470,295 bytes (18.3203% by
-functions and 23.6087% by bytes); every counted function match is verified at
+credits 7,781 of 42,461 functions and 2,473,682 of 10,470,295 bytes (18.3251% by
+functions and 23.6257% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,646 exact function matches totaling 1,498,480 bytes. The
+inventory has 1,648 exact function matches totaling 1,500,264 bytes. The
 PageFight battle-input and target-control path adds 12 exact matches totaling
 4,243 bytes; its direct-call closure and unresolved callback are documented in
 [`current-main-pagefight-battle-input.md`](current-main-pagefight-battle-input.md).
@@ -66,6 +66,12 @@ matched `FUN_58756020` caller. Its exact Ghidra ranges, direct-call closure, and
 unresolved file/pixel-format callbacks are recorded in
 [`current-main-itffm-sprite-resource.md`](current-main-itffm-sprite-resource.md);
 no client rendering test was run.
+
+The variable-record child-state refresh adds two exact matches / 1,784 bytes.
+The matched caller, exact ranges, and conditional child-flag behavior are
+recorded in
+[`current-main-variable-record-child-state-refresh.md`](current-main-variable-record-child-state-refresh.md);
+the receiver/global record meanings remain unresolved.
 parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
 separately. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and

@@ -938,6 +938,10 @@ SPRITE_RESOURCE_ADDRESSES = ("58755CF0", "587555C0")
 ADDRESSES += SPRITE_RESOURCE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(SPRITE_RESOURCE_ADDRESSES)
 
+RECORD_STATE_REFRESH_ADDRESSES = ("58813F10", "58810540")
+ADDRESSES += RECORD_STATE_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(RECORD_STATE_REFRESH_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8441,6 +8445,44 @@ EVIDENCE.update({
         "uncertainty": SPRITE_RESOURCE_UNCERTAINTY,
     }
     for address in SPRITE_RESOURCE_ADDRESSES
+})
+
+RECORD_STATE_REFRESH_CALLERS = {
+    "58813F10": (
+        "The byte-matched FUN_58807910 calls this at 0x58807C11 in its observed variable-record update path. "
+        "Ghidra records this as the sole direct code reference to the entry."
+    ),
+    "58810540": "Open FUN_58813F10 calls this at 0x58813F19 before its state and record updates.",
+}
+RECORD_STATE_REFRESH_BEHAVIOR = {
+    "58813F10": (
+        "Begins with FUN_58810540, makes seven direct calls to matched FUN_58907360, and clears the observed "
+        "field at receiver +0x84's child +0x50. It reads state and record data through globals 0x58A247F8, "
+        "0x58A24714, and 0x58A245C4; copies six DWORD fields into child records; and branches on flag bits at "
+        "receiver +0xB4 to set or clear bit 0 in ushort child fields at +0x24. Its two record loops use distinct "
+        "global table offsets for the observed mode-9 and other-mode paths, update child record fields, and set "
+        "additional child flags when a loop finds an active record."
+    ),
+    "58810540": (
+        "Sets bit 0 in ushort fields at child +0x24 for a fixed group of receiver child pointers, then clears bit 0 "
+        "across two indexed pointer groups. It also clears that bit on a separate fixed set of child pointers. "
+        "The function has no direct outgoing calls or jumps in its complete 401-byte Ghidra body."
+    ),
+}
+RECORD_STATE_REFRESH_UNCERTAINTY = (
+    "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the "
+    "instruction-level behavior and direct-call closure. The receiver and child types, semantics of the +0xB4 "
+    "bits, global record/table layouts, and meaning of the mode-9 branch remain unresolved. The audit does not "
+    "identify higher-level visual or gameplay effects, and no original-client or emulator interaction test was run."
+)
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / variable-record child state refresh path",
+        "called_by": RECORD_STATE_REFRESH_CALLERS[address],
+        "behavior": RECORD_STATE_REFRESH_BEHAVIOR[address],
+        "uncertainty": RECORD_STATE_REFRESH_UNCERTAINTY,
+    }
+    for address in RECORD_STATE_REFRESH_ADDRESSES
 })
 
 

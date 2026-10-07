@@ -358070,6 +358070,250 @@
         "behavior": "Selects a record from the pointer table at receiver +0x20 using the supplied index. It derives row and byte-stride values from that record, allocates staging storage, copies scanlines with matched FUN_5897CD4C, and fills a 0x174-byte result structure. It formats two `%d.BMP` strings, records observed dimensions/stride, and scans rows for zero/nonzero byte transitions before preparing additional output data.",
         "uncertainty": "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the instruction-level behavior and direct-call closure. No direct vtable/RTTI reference identifies either open entry as a class method. The source file's record schema, field types, pixel format, transparency meaning, BMP output contract, and dynamically dispatched file/API targets remain unresolved. Indirect calls through register-held callbacks and globals 0x5898C180, 0x5898C184, and 0x5898C3C4 are not closed by direct-call analysis. No emulator or original-client rendering test was run."
       }
+    },
+    {
+      "address": "58813F10",
+      "name": "FUN_58813f10",
+      "size": 1383,
+      "symbol": "_FUN_58813f10",
+      "source": "src/client-current/Main/FUN_58813f10.cpp",
+      "source_sha256": "774aedb43e9aeac6eb94d25acee23f939c6a0addf9eaf314fdb8df6977878ac4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58813F10",
+          "size": 984,
+          "symbol": "_FUN_58813f10_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58810540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58A24714",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 643,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 715,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 749,
+              "target_address": "588142D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 770,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 788,
+              "target_address": "588142BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 801,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 821,
+              "target_address": "58A24714",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 958,
+              "target_address": "58814210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 963,
+              "target_address": "5881442D",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588142F0",
+          "size": 399,
+          "symbol": "_FUN_58813f10_segment_01",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "58814414",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58A24714",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58A24714",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 313,
+              "target_address": "588142F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58813f10 / variable-record child state refresh path",
+        "called_by": "The byte-matched FUN_58807910 calls this at 0x58807C11 in its observed variable-record update path. Ghidra records this as the sole direct code reference to the entry.",
+        "behavior": "Begins with FUN_58810540, makes seven direct calls to matched FUN_58907360, and clears the observed field at receiver +0x84's child +0x50. It reads state and record data through globals 0x58A247F8, 0x58A24714, and 0x58A245C4; copies six DWORD fields into child records; and branches on flag bits at receiver +0xB4 to set or clear bit 0 in ushort child fields at +0x24. Its two record loops use distinct global table offsets for the observed mode-9 and other-mode paths, update child record fields, and set additional child flags when a loop finds an active record.",
+        "uncertainty": "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the instruction-level behavior and direct-call closure. The receiver and child types, semantics of the +0xB4 bits, global record/table layouts, and meaning of the mode-9 branch remain unresolved. The audit does not identify higher-level visual or gameplay effects, and no original-client or emulator interaction test was run."
+      }
+    },
+    {
+      "address": "58810540",
+      "name": "FUN_58810540",
+      "size": 401,
+      "symbol": "_FUN_58810540",
+      "source": "src/client-current/Main/FUN_58810540.cpp",
+      "source_sha256": "555da66dfa2edd41bf15ebbea498030e399e469ca765cc38bec5f55d26956f37",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58810540",
+          "size": 401,
+          "symbol": "_FUN_58810540_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58810540 / variable-record child state refresh path",
+        "called_by": "Open FUN_58813F10 calls this at 0x58813F19 before its state and record updates.",
+        "behavior": "Sets bit 0 in ushort fields at child +0x24 for a fixed group of receiver child pointers, then clears bit 0 across two indexed pointer groups. It also clears that bit on a separate fixed set of child pointers. The function has no direct outgoing calls or jumps in its complete 401-byte Ghidra body.",
+        "uncertainty": "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the instruction-level behavior and direct-call closure. The receiver and child types, semantics of the +0xB4 bits, global record/table layouts, and meaning of the mode-9 branch remain unresolved. The audit does not identify higher-level visual or gameplay effects, and no original-client or emulator interaction test was run."
+      }
     }
   ]
 }
