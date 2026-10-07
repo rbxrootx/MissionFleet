@@ -32,9 +32,11 @@ small temporary object, or return without sending. This describes observed
 branches, not recovered protocol names.
 
 The source preserves instructions from the Ghidra body and was compared with
-the pinned mapped image using ObjDiff 3.8.0. Local analysis artifacts include
-`var/current-main-next/587e9a10-ghidra.c`, its range/reference log, and
-`var/current-main-next/587ed5b0-ghidra.c` for the `0x5B`–`0x5E` caller paths.
+the pinned mapped image using ObjDiff 3.8.0. `FUN_587ED5B0`, its 74-byte
+dispatcher for event values `0x5B`–`0x5E`, is now byte-matched as part of the
+[ship-map action helper graph](current-main-ship-map-action-helper-graph.md).
+Local analysis artifacts include `var/current-main-next/587e9a10-ghidra.c`,
+its range/reference log, and `var/current-main-next/587ed5b0-ghidra.c`.
 
 ## Unresolved details
 

@@ -59,6 +59,64 @@ MATCHED_CALL_EDGES = (
     (0x58861F40, 0x588631CD, 0x58862FA0),
     (0x58862D50, 0x588DB0EE, 0x588DB050),
     (0x588DB050, 0x588E6082, 0x588E5150),
+    (0x5885ECC0, 0x58861E97, 0x58861CE0),
+    (0x5885ECC0, 0x58863178, 0x58862FA0),
+    (0x5885F8C0, 0x58863106, 0x58862FA0),
+    (0x5885F8C0, 0x5885FE4C, 0x5885FDC0),
+    (0x5885F8C0, 0x5885FEE4, 0x5885FE90),
+    (0x5885FDC0, 0x58861DA8, 0x58861CE0),
+    (0x5885FDC0, 0x58856AF7, 0x58856560),
+    (0x5885FE90, 0x58862FE8, 0x58862FA0),
+    (0x5885FE90, 0x58856B38, 0x58856560),
+    (0x58860540, 0x58861E8E, 0x58861CE0),
+    (0x58860540, 0x5886316F, 0x58862FA0),
+    (0x58860650, 0x58861D63, 0x58861CE0),
+    (0x58860650, 0x58861D72, 0x58861CE0),
+    (0x58860650, 0x58861EE2, 0x58861CE0),
+    (0x58860650, 0x58861F0C, 0x58861CE0),
+    (0x58860650, 0x58863077, 0x58862FA0),
+    (0x58860650, 0x5886308E, 0x58862FA0),
+    (0x587E5A70, 0x588605CE, 0x58860540),
+    (0x587E5A70, 0x5885ED07, 0x5885ECC0),
+    (0x587E5A70, 0x5886326B, 0x58862FA0),
+    (0x5885FA60, 0x58860796, 0x58860650),
+    (0x587E5F80, 0x5885ECD1, 0x5885ECC0),
+    (0x5885F3A0, 0x5885FE6A, 0x5885FDC0),
+    (0x5885EA90, 0x5885FF0C, 0x5885FE90),
+    (0x5885EA90, 0x5885FF2B, 0x5885FE90),
+    (0x587A1640, 0x5885FEC6, 0x5885FE90),
+    (0x587A1640, 0x5886068E, 0x58860650),
+    (0x587A1640, 0x5885FB42, 0x5885FA60),
+    (0x587ED5B0, 0x5885F3CC, 0x5885F3A0),
+    (0x587ED5B0, 0x5885F3FD, 0x5885F3A0),
+    (0x587ED5B0, 0x5885EAB3, 0x5885EA90),
+    (0x587A1550, 0x587A1645, 0x587A1640),
+    (0x58743AF0, 0x587A157A, 0x587A1567),
+    (0x5877ABA0, 0x5885F8FE, 0x5885F8C0),
+    (0x5897CC48, 0x5885FE1C, 0x5885FDC0),
+    (0x5897CBDA, 0x5885FE5C, 0x5885FDC0),
+    (0x5897CBDA, 0x5885FE7A, 0x5885FDC0),
+    (0x588EC100, 0x5885FEFB, 0x5885FE90),
+    (0x588EC080, 0x5885FF22, 0x5885FE90),
+    (0x58907990, 0x58860602, 0x58860540),
+    (0x58907360, 0x5886078F, 0x58860650),
+    (0x5897CD4C, 0x587E5A9A, 0x587E5A70),
+    (0x58902F50, 0x587E5F96, 0x587E5F80),
+    (0x58909B00, 0x5885F3A9, 0x5885F3A0),
+    (0x58909B00, 0x5885F3D9, 0x5885F3A0),
+    (0x58970AE0, 0x587A1656, 0x587A1640),
+    (0x587E9A10, 0x587ED5C8, 0x587ED5B0),
+    (0x587E9A10, 0x587ED5D6, 0x587ED5B0),
+    (0x587E9A10, 0x587ED5E4, 0x587ED5B0),
+    (0x587E9A10, 0x587ED5F2, 0x587ED5B0),
+    (0x5897CC72, 0x58743B3A, 0x58743AF0),
+    (0x5897CC72, 0x587A1591, 0x587A1567),
+    (0x5897CC72, 0x587A15AA, 0x587A1567),
+    (0x5897CC72, 0x587A15B4, 0x587A1567),
+    (0x587A1330, 0x587A15C5, 0x587A1567),
+)
+MATCHED_BRANCH_EDGES = (
+    (0x587A1567, 0x587A155D, 0x587A1550),
 )
 
 
@@ -80,6 +138,13 @@ def main():
             raise AssertionError(f"Expected direct CALL at {address:08X}")
         displacement = struct.unpack_from("<i", instruction, 1)[0]
         return address + 5 + displacement
+
+    def conditional_branch_target(address):
+        instruction = image[offset(address, 2):offset(address, 2) + 2]
+        if not 0x70 <= instruction[0] <= 0x7F:
+            raise AssertionError(f"Expected short conditional branch at {address:08X}")
+        displacement = struct.unpack_from("<b", instruction, 1)[0]
+        return address + 2 + displacement
 
     def contains(record, address):
         segments = record.get("segments")
@@ -155,9 +220,26 @@ def main():
         if not contains(caller_record, callsite):
             raise AssertionError(f"Callsite {callsite:08X} is outside matched caller {caller:08X}")
 
+    for target, branchsite, caller in MATCHED_BRANCH_EDGES:
+        target_record = records.get(target)
+        caller_record = records.get(caller)
+        if (target_record is None or
+                target_record.get("verified_by") != "objdiff-3.8.0-byte-identical"):
+            raise AssertionError(f"Branch target is not byte-matched: {target:08X}")
+        if conditional_branch_target(branchsite) != target:
+            raise AssertionError(f"Branch at {branchsite:08X} does not target {target:08X}")
+        if (caller_record is None or
+                caller_record.get("verified_by") != "objdiff-3.8.0-byte-identical"):
+            raise AssertionError(f"Branch source is not byte-matched: {caller:08X}")
+        if not contains(caller_record, branchsite):
+            raise AssertionError(f"Branchsite {branchsite:08X} is outside matched source {caller:08X}")
+
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    edge_count = len(MATCHED_HELPERS) + len(MATCHED_CALL_EDGES)
-    print(f"Constructor store, eight slot matches, and {edge_count} matched helper call edges verified")
+    print(
+        f"Constructor store, eight slot matches, {len(MATCHED_HELPERS)} helper sites, "
+        f"{len(MATCHED_CALL_EDGES)} call edges, and "
+        f"{len(MATCHED_BRANCH_EDGES)} conditional branch-edge targets verified"
+    )
 
 
 if __name__ == "__main__":

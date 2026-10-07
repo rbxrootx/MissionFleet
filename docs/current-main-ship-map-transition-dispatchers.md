@@ -2,9 +2,9 @@
 
 These three matched functions connect the row transition routines to UI-event
 paths and the periodic ship-map update. Together they add 1,594 bytes; ObjDiff
-3.8.0 verifies all three at 100%, checking 93 mapped operands. The ship-map
-graph checker now verifies 26 exact call edges, including the dispatcher calls
-into the byte-matched countdown and state transition functions.
+3.8.0 verifies all three at 100%, checking 93 mapped operands. Their selected
+row action, packet, and state helpers are now matched and traced in the
+[action helper graph](current-main-ship-map-action-helper-graph.md).
 
 | Function | Ghidra body | Evidence-backed path |
 | --- | --- | --- |
@@ -17,5 +17,5 @@ functions use event parameters and data-referenced dispatch tables whose roles
 are not yet identified. `FUN_588DB050` has three bytes between its Ghidra body
 ranges; those bytes are excluded from the match. State-code meanings, message
 and callback contracts, row-list schema, and the non-type-9 helper remain
-uncertain. The functions are statically byte-matched; no emulator input,
-timing, or visual test has been run.
+uncertain. The functions and their direct helper paths are statically
+byte-matched; no emulator input, timing, or visual test has been run.

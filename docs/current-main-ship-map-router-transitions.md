@@ -21,6 +21,8 @@ Ghidra records incoming dispatch calls to these helpers from
 dispatchers now have exact-match records. The stateful event paths and periodic
 row-list update are documented in the
 [transition dispatcher notes](current-main-ship-map-transition-dispatchers.md).
+[Their downstream action and message handlers are documented in the
+action-helper graph](current-main-ship-map-action-helper-graph.md).
 Several encoded counters, state codes, resource-table roles, and child flags
 remain unnamed. Static byte identity and call edges are verified, but runtime
 state changes and visuals have not been tested in the emulator.

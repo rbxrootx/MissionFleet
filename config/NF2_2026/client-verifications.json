@@ -339285,6 +339285,825 @@
         "behavior": "The complete 187-byte body is covered by 69 instructions. It decrements a receiver +0x140C throttle, resetting it to 0x0C when due, then scans eight linked-list roots at +0x1390. For the first node accepted by FUN_5873A250 it runs FUN_5873B040 when the node matches the current record, calls FUN_5873A760, and if the receiver is globally current dispatches by the record's low five type bits: type 9 calls FUN_58862D50(index), otherwise FUN_58859AA0(index).",
         "uncertainty": "The throttle unit, linked-list node schema, helper contracts, type-dependent effects, and reason the three alignment bytes are outside the Ghidra body are unresolved. No emulator timing or visual test has been run."
       }
+    },
+    {
+      "address": "5885ECC0",
+      "name": "FUN_5885ecc0",
+      "size": 79,
+      "symbol": "_FUN_5885ecc0",
+      "source": "src/client-current/Main/FUN_5885ecc0.cpp",
+      "source_sha256": "7a8449ebf90ece91993c609867848203ef16189b10dc60f51c111531ac420485",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 12,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "587E5F80",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 49,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "587E5A70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885ecc0 / selected-row action packet builder",
+        "called_by": "Fresh Ghidra references identify matched FUN_58861CE0 at 0x58861E97 and matched FUN_58862FA0 at 0x58863178. This function calls byte-matched FUN_587E5F80 at 0x5885ECD1 and FUN_587E5A70 at 0x5885ED07.",
+        "behavior": "The contiguous 79-byte body [0x5885ECC0,0x5885ED0F) reads the selected row index at +0x11C, resets that indexed child through FUN_587E5F80, builds an observed four-byte payload using the selected index and a row byte at +0x5D0, sets payload bits with mask 0x20, and submits message code 0x16 through FUN_587E5A70.",
+        "uncertainty": "The message code, payload byte meanings, selected-row schema, and downstream send/queue effect are not named by the available evidence. No emulator action test was run."
+      }
+    },
+    {
+      "address": "5885F8C0",
+      "name": "FUN_5885f8c0",
+      "size": 77,
+      "symbol": "_FUN_5885f8c0",
+      "source": "src/client-current/Main/FUN_5885f8c0.cpp",
+      "source_sha256": "a36faf2856eee5fd992f6f119274443eff8ca87aab313b2380ce9f9831f98d0e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5898C42C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58A28380",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 44,
+          "target_address": "58A245C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "5877ABA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 69,
+          "target_address": "58A28380",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885f8c0 / timestamp-throttled action notice",
+        "called_by": "Fresh Ghidra references identify calls from FUN_5885FDC0 at 0x5885FE4C, FUN_58862FA0 at 0x58863106, and FUN_5885FE90 at 0x5885FEE4; all three callers are now byte-matched.",
+        "behavior": "The contiguous 77-byte body [0x5885F8C0,0x5885F90D) reads a timestamp from the global at 0x58A28380. When global state at 0x58A245C4+0x2E4 is nonzero, it queries a function pointer at 0x5898C42C and, if at least 2,000 observed time units have elapsed, calls FUN_5877ABA0(argument, 0, 0x9F). It then stores the selected timestamp back to 0x58A28380.",
+        "uncertainty": "The timestamp units, message/control code 0x9F, global-state role, and UI effect are unresolved. No runtime timing test was run."
+      }
+    },
+    {
+      "address": "5885FDC0",
+      "name": "FUN_5885fdc0",
+      "size": 198,
+      "symbol": "_FUN_5885fdc0",
+      "source": "src/client-current/Main/FUN_5885fdc0.cpp",
+      "source_sha256": "9732351e069dedf7b5eca999d5c9ab3debd76e4a11ed20e6665e7848ee36e926",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 7,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 32,
+          "target_address": "5885FE70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 93,
+          "target_address": "5897CC48",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 105,
+          "target_address": "5899EB40",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 126,
+          "target_address": "5898C3C4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 141,
+          "target_address": "5885F8C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 157,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 171,
+          "target_address": "5885F3A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 187,
+          "target_address": "5897CBDA",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885fdc0 / on-surface control refusal handler",
+        "called_by": "Fresh Ghidra references identify matched FUN_58861CE0 at 0x58861DA8 and matched FUN_58856560 at 0x58856AF7. It calls byte-matched FUN_5885F8C0 at 0x5885FE4C and FUN_5885F3A0 at 0x5885FE6A.",
+        "behavior": "The contiguous 198-byte body [0x5885FDC0,0x5885FE86) gates on receiver +0xA8 and a global mode short at DAT_58A247F8+4+0x164. For modes 0 or 3, a nonzero short at receiver +0xC8 causes it to format the observed localized resource key MESSAGESTRING__SS_CANNOTCONTROL_ONSURFACE and route it through FUN_5885F8C0; otherwise it enters the alternate action-state helper FUN_5885F3A0.",
+        "uncertainty": "The receiver flags, global modes, +0xC8 field, localized message parameters, and alternate state helper's gameplay effect remain unknown. No runtime input test was run."
+      }
+    },
+    {
+      "address": "5885FE90",
+      "name": "FUN_5885fe90",
+      "size": 162,
+      "symbol": "_FUN_5885fe90",
+      "source": "src/client-current/Main/FUN_5885fe90.cpp",
+      "source_sha256": "29fabf471e64d4b5421ad454bb28df180610ea9664857d8dd35edabb2a8f5f20",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "58A245FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "587A1640",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5899EB6C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 74,
+          "target_address": "5898C030",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 85,
+          "target_address": "5885F8C0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "58A246EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 108,
+          "target_address": "588EC100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5885EA90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 140,
+          "target_address": "58A246EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 147,
+          "target_address": "588EC080",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "5885EA90",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885fe90 / oxygen-threshold action handler",
+        "called_by": "Fresh Ghidra references identify matched FUN_58862FA0 at 0x58862FE8 and matched FUN_58856560 at 0x58856B38. The body calls byte-matched FUN_587A1640 and FUN_588EC100/FUN_588EC080, plus in-slice FUN_5885F8C0 and FUN_5885EA90.",
+        "behavior": "The contiguous 162-byte body [0x5885FE90,0x5885FF32) returns when receiver +0xA8 equals 1. In observed mode 3 it advances receiver +0xB4 through FUN_587A1640; values above 299 call FUN_588EC100(0x24,0x85,0), copy the value to +0xC0, and enter state 4 through FUN_5885EA90, while lower values route the localized key MESSAGESTRING__SS_INSUFFICIENT_OXYGEN through FUN_5885F8C0. Observed mode 6 calls FUN_588EC080(0x24) and enters state 5.",
+        "uncertainty": "Mode values, receiver counters, the threshold's units, message IDs, and helper side effects are not fully identified. No runtime input test was run."
+      }
+    },
+    {
+      "address": "58860540",
+      "name": "FUN_58860540",
+      "size": 257,
+      "symbol": "_FUN_58860540",
+      "source": "src/client-current/Main/FUN_58860540.cpp",
+      "source_sha256": "3fc381a4f8834e417640f9c075d6e40be4e7c789d8df6c8f6832a59a6224c48b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 1,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 17,
+          "target_address": "5886063E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 143,
+          "target_address": "587E5A70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 148,
+          "target_address": "58A248D0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 189,
+          "target_address": "58A248FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 195,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 200,
+          "target_address": "58A248D0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860540 / guarded indexed row action",
+        "called_by": "Fresh Ghidra references identify matched FUN_58861CE0 at 0x58861E8E and matched FUN_58862FA0 at 0x5886316F. It calls byte-matched FUN_587E5A70 at 0x588605CE and FUN_58907990 at 0x58860602.",
+        "behavior": "The contiguous 257-byte body [0x58860540,0x58860641) runs only when bit 0x100 at DAT_58A2459C+0x10474 is clear. It uses the low byte of its index to update the corresponding child flag, byte +0x110, and dword +0xFC; toggles the indexed encoded value at +0x184 using 0xA0E6B2D0; sends a four-byte message with observed code 0x16 through FUN_587E5A70; then calls FUN_58907990 with the global at 0x58A248FC before an indirect callback branch.",
+        "uncertainty": "The global gate, indexed record fields, XOR encoding, message payload meaning, and indirect callback target/effect remain unknown. No emulator action test was run."
+      }
+    },
+    {
+      "address": "58860650",
+      "name": "FUN_58860650",
+      "size": 335,
+      "symbol": "_FUN_58860650",
+      "source": "src/client-current/Main/FUN_58860650.cpp",
+      "source_sha256": "4c553ed4c999d1d29d547c6727b6592a5b96c781b4a467199a08f4ee88d2eb32",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 21,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 56,
+          "target_address": "58A245FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 63,
+          "target_address": "587A1640",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 121,
+          "target_address": "5886079B",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 320,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 327,
+          "target_address": "5885FA60",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58860650 / selected-row count adjustment",
+        "called_by": "Fresh Ghidra references identify four calls from matched FUN_58861CE0 at 0x58861D63, 0x58861D72, 0x58861EE2, and 0x58861F0C, plus two calls from matched FUN_58862FA0 at 0x58863077 and 0x5886308E. It directly calls in-slice FUN_587A1640 and FUN_5885FA60.",
+        "behavior": "The contiguous 335-byte body [0x58860650,0x5886079F) examines the currently selected row at +0x11C and skips states 2 and 4. Otherwise it advances the row's encoded +0x120 value, checks row type and guard fields, toggles the encoded value at +0x188, and applies the requested increment/decrement to paired values at +0x160/+0x188. It then updates a field through FUN_58907360 and recalculates aggregate validation state through FUN_5885FA60.",
+        "uncertainty": "The selected-row record layout, state/type meanings, encoded values, guard fields, and real-world meaning of the adjusted count are unresolved. No emulator input test was run."
+      }
+    },
+    {
+      "address": "587E5A70",
+      "name": "FUN_587e5a70",
+      "size": 53,
+      "symbol": "_FUN_587e5a70",
+      "source": "src/client-current/Main/FUN_587e5a70.cpp",
+      "source_sha256": "cc0550ce32f2d235d32f20056686f7e50085f452bd2b91cd023936139b67caae",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 43,
+          "target_address": "5897CD4C",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5a70 / one-shot message staging gate",
+        "called_by": "Fresh Ghidra references include matched FUN_58860540 at 0x588605CE, matched FUN_5885ECC0 at 0x5885ED07, and matched FUN_58862FA0 at 0x5886326B. Ghidra also records additional callers outside this matched slice.",
+        "behavior": "The contiguous 53-byte body [0x587E5A70,0x587E5AA5) acts only when receiver byte +0x10484 is zero: it stores the supplied message byte at +0x10484, stores the supplied length at +0x20C94, and forwards the supplied payload to FUN_5897CD4C with destination receiver +0x20C14.",
+        "uncertainty": "The message flag, record layout, payload ownership, queue/send semantics, and other caller contracts are unknown. No network runtime test was run."
+      }
+    },
+    {
+      "address": "5885FA60",
+      "name": "FUN_5885fa60",
+      "size": 287,
+      "symbol": "_FUN_5885fa60",
+      "source": "src/client-current/Main/FUN_5885fa60.cpp",
+      "source_sha256": "21fa14470d641558112636318338e051718dbc0c93de6044e496539e22f1526f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 54,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 221,
+          "target_address": "58A245FC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 227,
+          "target_address": "587A1640",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885fa60 / selected-row aggregate validation",
+        "called_by": "Fresh Ghidra references identify one direct call from matched FUN_58860650 at 0x58860796. It calls in-slice FUN_587A1640 at 0x5885FB42.",
+        "behavior": "The contiguous 287-byte body [0x5885FA60,0x5885FB7F) sums the observed +0x160 values across receiver entries, compares the total and selected entry with limits read from a global resource, groups entry values by the word at each +0x244 record, and writes per-group validation results to receiver +0x640. It also sets receiver +0x63C according to the total and selected-entry checks.",
+        "uncertainty": "The resource/table schemas, entry grouping word, limits, and exact validity semantics remain unidentified. Ghidra's output reuses locals for several roles; no runtime validation test was run."
+      }
+    },
+    {
+      "address": "587E5F80",
+      "name": "FUN_587e5f80",
+      "size": 48,
+      "symbol": "_FUN_587e5f80",
+      "source": "src/client-current/Main/FUN_587e5f80.cpp",
+      "source_sha256": "c90c98655b83e045cc6d232ab6ae72e37989715b7f0e7ce0a54b8dce860b44af",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "58902F50",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e5f80 / indexed child reset helper",
+        "called_by": "Fresh Ghidra references include matched FUN_588626B0 at 0x58862743 and matched FUN_588627C0 at 0x5886284D, plus in-slice FUN_5885ECC0 at 0x5885ECD1. Additional callers are recorded in the Ghidra audit.",
+        "behavior": "The contiguous 48-byte body [0x587E5F80,0x587E5FB0) selects a child pointer from receiver +0xE0+index*4, passes it to FUN_58902F50, and clears bit 0 of the selected child's word at +0x24.",
+        "uncertainty": "The indexed child array and FUN_58902F50 contract are unresolved; the observed flag mutation does not establish a visible effect. No emulator state test was run."
+      }
+    },
+    {
+      "address": "5885F3A0",
+      "name": "FUN_5885f3a0",
+      "size": 100,
+      "symbol": "_FUN_5885f3a0",
+      "source": "src/client-current/Main/FUN_5885f3a0.cpp",
+      "source_sha256": "55d608045298f241e8e6ebd731e59cf82886574ef3d78641ddb0ee3b36aec774",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 10,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 40,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 45,
+          "target_address": "587ED5B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 58,
+          "target_address": "58909B00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 87,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "587ED5B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885f3a0 / guarded action-state entry helper",
+        "called_by": "Fresh Ghidra references identify a direct call from in-slice FUN_5885FDC0 at 0x5885FE6A and an additional caller at 0x5885F51B.",
+        "behavior": "The contiguous 100-byte body [0x5885F3A0,0x5885F404) queries FUN_58909B00; when the result is 0 or 1 and receiver +0xA8 is not 1, it stores 1 at +0xA8 and calls FUN_587ED5B0 with the corresponding observed argument 1 or 2.",
+        "uncertainty": "The source of the queried mode, meanings of the two results, receiver state, and downstream transition effect remain unresolved. No runtime state test was run."
+      }
+    },
+    {
+      "address": "5885EA90",
+      "name": "FUN_5885ea90",
+      "size": 48,
+      "symbol": "_FUN_5885ea90",
+      "source": "src/client-current/Main/FUN_5885ea90.cpp",
+      "source_sha256": "22d6fa07cd27a10631030e379d640f16d796faad1fde370fdbfe3ea474e0e1a3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 30,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "587ED5B0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885ea90 / one-time action-state transition",
+        "called_by": "Fresh Ghidra references identify two calls from in-slice FUN_5885FE90 at 0x5885FF0C and 0x5885FF2B; another caller is recorded at 0x5885F570.",
+        "behavior": "The contiguous 48-byte body [0x5885EA90,0x5885EAC0) returns 0 when receiver +0xA8 is already 1. Otherwise it stores 1, forwards the supplied value to FUN_587ED5B0, and returns 1.",
+        "uncertainty": "The receiver state and forwarded transition values have no confirmed semantic labels. No runtime transition test was run."
+      }
+    },
+    {
+      "address": "587A1640",
+      "name": "FUN_587a1640",
+      "size": 38,
+      "symbol": "_FUN_587a1640",
+      "source": "src/client-current/Main/FUN_587a1640.cpp",
+      "source_sha256": "f24c76dde15f440a6258792fab517d6ed7f352213b730a7971dd38493f9b7fbb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 6,
+          "target_address": "587A1550",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 23,
+          "target_address": "58970AE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "5898C3C8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a1640 / value-change notifier",
+        "called_by": "Fresh Ghidra references include calls from in-slice FUN_5885FE90 at 0x5885FEC6, FUN_58860650 at 0x5886068E, and FUN_5885FA60 at 0x5885FB42, as well as byte-matched ship-map timer helpers FUN_588626B0, FUN_588627C0, FUN_588628D0, and FUN_58859DD0.",
+        "behavior": "The contiguous 38-byte body [0x587A1640,0x587A1666) compares its second argument with the result of FUN_587A1550(first argument). Only when they differ does it call FUN_58970AE0 and invoke the function pointer at 0x5898C3C8 with 0xFFFFFFFF.",
+        "uncertainty": "The compared value representation, invalidation helper, callback contract, and relationship between these sites and visible state remain unresolved. No runtime callback test was run."
+      }
+    },
+    {
+      "address": "587ED5B0",
+      "name": "FUN_587ed5b0",
+      "size": 74,
+      "symbol": "_FUN_587ed5b0",
+      "source": "src/client-current/Main/FUN_587ed5b0.cpp",
+      "source_sha256": "26939d7a72b9038a990d174d45577badb4cb9d995a1ebd197410b26bbe9b5c74",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "587E9A10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 39,
+          "target_address": "587E9A10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 53,
+          "target_address": "587E9A10",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 67,
+          "target_address": "587E9A10",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ed5b0 / event-code 0x5B\u20130x5E dispatcher",
+        "called_by": "Fresh Ghidra references identify two calls from in-slice FUN_5885F3A0 at 0x5885F3CC and 0x5885F3FD, and one call from FUN_5885EA90 at 0x5885EAB3. Each target is byte-matched in this slice.",
+        "behavior": "The contiguous 74-byte body [0x587ED5B0,0x587ED5FA) switches on its 16-bit argument: values 1, 2, 4, and 5 call matched FUN_587E9A10 with event values 0x5B, 0x5C, 0x5D, and 0x5E, respectively; other values return without that call.",
+        "uncertainty": "The numeric argument meanings and event-code semantics remain unlabelled. FUN_587E9A10's message/packet effects are documented separately; live-server compatibility has not been tested."
+      }
+    },
+    {
+      "address": "587A1550",
+      "name": "FUN_587a1550",
+      "size": 23,
+      "symbol": "_FUN_587a1550",
+      "source": "src/client-current/Main/FUN_587a1550.cpp",
+      "source_sha256": "6849fe42032f4242cc44b0a3551cb0bc8d17f8b94333d327e39caf3de21f99a4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587a1550 / guarded value-lookup entry stub",
+        "called_by": "Matched FUN_587A1640 calls this entry at 0x587A1645. Fresh Ghidra range evidence bounds it to 23 bytes; its conditional branch at 0x587A155D targets the adjacent, separately indexed FUN_587A1567, which is also matched here.",
+        "behavior": "The exact body [0x587A1550,0x587A1567) returns zero when receiver +0x90 is zero; otherwise its conditional branch transfers to FUN_587A1567. Ghidra's decompiled listing flows across that branch, but its exact function body is only this 23-byte guard stub.",
+        "uncertainty": "The receiver field and the reason Ghidra splits the continuing value lookup across adjacent entries are unresolved. The target body is independently byte-matched; no runtime value-lookup test was run."
+      }
+    },
+    {
+      "address": "58743AF0",
+      "name": "FUN_58743af0",
+      "size": 138,
+      "symbol": "_FUN_58743af0",
+      "source": "src/client-current/Main/FUN_58743af0.cpp",
+      "source_sha256": "1ac483103ce60c7f3e8e529e614659c6ba3e71677d22d0573f9bbe5befd6e8d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 75,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58743af0 / ordered-node key search helper",
+        "called_by": "Fresh Ghidra references identify a call from matched FUN_587A1567 at 0x587A157A and another caller at 0x587447E6. It calls byte-matched FUN_5897CC72 at 0x58743B3A on an observed guard-failure path.",
+        "behavior": "The contiguous 138-byte body [0x58743AF0,0x58743B7A) starts from the header rooted at receiver +0x18, follows left/right node links while comparing node dword +0x0C with the requested key, and writes the resulting node/header pair through its second pointer argument.",
+        "uncertainty": "The container and node types, key contract, sentinel convention, and returned-pair ownership remain unknown. No container-operation test was run."
+      }
+    },
+    {
+      "address": "587A1567",
+      "name": "FUN_587a1567",
+      "size": 120,
+      "symbol": "_FUN_587a1567",
+      "source": "src/client-current/Main/FUN_587a1567.cpp",
+      "source_sha256": "e54aa19ae558025a811f55657e2b936b1684157dc37b2a0b956fbe4422eb4730",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [
+        {
+          "offset": 20,
+          "target_address": "58743AF0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 43,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 68,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 78,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 95,
+          "target_address": "587A1330",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a1567 / ordered-node value lookup continuation",
+        "called_by": "Ghidra records a conditional-jump reference from matched FUN_587A1550 at 0x587A155D. Its body calls matched FUN_58743AF0 at 0x587A157A and matched FUN_587A1330 at 0x587A15C5.",
+        "behavior": "The contiguous 120-byte body [0x587A1567,0x587A15DF) obtains a node/header pair through FUN_58743AF0, checks the observed sentinel/owner and key fields, returns zero when the searched value equals receiver +0x8C, and otherwise returns node dword +0x10 XOR the value returned by FUN_587A1330.",
+        "uncertainty": "The container schema, iterator/key field meanings, XOR encoding, and returned value semantics are unresolved. No runtime lookup test was run."
+      }
     }
   ]
 }
