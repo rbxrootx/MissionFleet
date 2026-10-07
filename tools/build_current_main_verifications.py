@@ -934,6 +934,10 @@ PAGEFIGHT_BATTLE_INPUT_ADDRESSES = (
 ADDRESSES += PAGEFIGHT_BATTLE_INPUT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_BATTLE_INPUT_ADDRESSES)
 
+SPRITE_RESOURCE_ADDRESSES = ("58755CF0", "587555C0")
+ADDRESSES += SPRITE_RESOURCE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(SPRITE_RESOURCE_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8396,6 +8400,47 @@ EVIDENCE.update({
         "uncertainty": PAGEFIGHT_BATTLE_INPUT_UNCERTAINTY,
     }
     for address in PAGEFIGHT_BATTLE_INPUT_ADDRESSES
+})
+
+SPRITE_RESOURCE_CALLERS = {
+    "58755CF0": (
+        "The byte-matched FUN_58756020 calls this at 0x58756088 when its observed selector is 1. "
+        "That caller also invokes the sprite-file wrapper FUN_588F3D70 with global string 0x5898D6A4; "
+        "the exact string contents and receiver type are unresolved."
+    ),
+    "587555C0": "Open FUN_58755CF0 calls this at 0x58755DC3 once per indexed sprite record.",
+}
+SPRITE_RESOURCE_BEHAVIOR = {
+    "58755CF0": (
+        "Contains the literals `Sangduck Sprite File` and `ITFFM.spr`. It reads the record count at receiver +8, "
+        "allocates an indexed pointer array through matched FUN_5897152E, and calls FUN_587555C0 for each record. "
+        "For each result it allocates a metadata block, copies 0x1C DWORDs from result +0x100, passes dimensions "
+        "and pixel data to matched FUN_5897CD4C, and accumulates the observed byte values. A later branch passes "
+        "the observed relative `ITFFM.spr` path through a runtime file/API callback."
+    ),
+    "587555C0": (
+        "Selects a record from the pointer table at receiver +0x20 using the supplied index. It derives row and "
+        "byte-stride values from that record, allocates staging storage, copies scanlines with matched "
+        "FUN_5897CD4C, and fills a 0x174-byte result structure. It formats two `%d.BMP` strings, records observed "
+        "dimensions/stride, and scans rows for zero/nonzero byte transitions before preparing additional output data."
+    ),
+}
+SPRITE_RESOURCE_UNCERTAINTY = (
+    "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the "
+    "instruction-level behavior and direct-call closure. No direct vtable/RTTI reference identifies either open "
+    "entry as a class method. The source file's record schema, field types, pixel format, transparency meaning, "
+    "BMP output contract, and dynamically dispatched file/API targets remain unresolved. Indirect calls through "
+    "register-held callbacks and globals 0x5898C180, 0x5898C184, and 0x5898C3C4 are not closed by direct-call "
+    "analysis. No emulator or original-client rendering test was run."
+)
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / ITFFM sprite-resource conversion path",
+        "called_by": SPRITE_RESOURCE_CALLERS[address],
+        "behavior": SPRITE_RESOURCE_BEHAVIOR[address],
+        "uncertainty": SPRITE_RESOURCE_UNCERTAINTY,
+    }
+    for address in SPRITE_RESOURCE_ADDRESSES
 })
 
 

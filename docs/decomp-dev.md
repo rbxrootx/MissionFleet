@@ -52,15 +52,20 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,777 of 42,461 functions and 2,469,425 of 10,470,295 bytes (18.3156% by
-functions and 23.5851% by bytes); every counted function match is verified at
+credits 7,779 of 42,461 functions and 2,471,898 of 10,470,295 bytes (18.3203% by
+functions and 23.6087% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,644 exact function matches totaling 1,496,007 bytes. The
+inventory has 1,646 exact function matches totaling 1,498,480 bytes. The
 PageFight battle-input and target-control path adds 12 exact matches totaling
 4,243 bytes; its direct-call closure and unresolved callback are documented in
 [`current-main-pagefight-battle-input.md`](current-main-pagefight-battle-input.md).
+The `ITFFM.spr` resource path adds two exact matches / 2,473 bytes, tied to the
+matched `FUN_58756020` caller. Its exact Ghidra ranges, direct-call closure, and
+unresolved file/pixel-format callbacks are recorded in
+[`current-main-itffm-sprite-resource.md`](current-main-itffm-sprite-resource.md);
+no client rendering test was run.
 parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
 separately. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and

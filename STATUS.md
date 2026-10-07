@@ -1,16 +1,19 @@
-# Native decompilation status — 5 October 2026
+# Native decompilation status — 6 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,470,180
-identified code bytes across six report units. There are 7,371 verified matches
-totaling 2,314,212 bytes (22.1029%), each at 100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
+identified code bytes across six report units. There are 7,779 verified matches
+totaling 2,471,898 bytes (18.3203% by functions, 23.6087% by bytes), each at
+100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project.
+the active decomp.dev project. The current `ITFFM.spr` resource conversion path
+adds two byte-identical functions / 2,473 bytes; its evidence and unresolved
+callbacks are recorded in [the subsystem note](docs/current-main-itffm-sprite-resource.md).
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 recorded in [the lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are recorded
