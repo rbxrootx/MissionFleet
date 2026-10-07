@@ -93,6 +93,11 @@ complete 36-byte mapped stream, including the reachable cleanup instruction
 Ghidra omitted from its two body ranges. Its RTTI-backed entry, flag test, and
 unresolved helper contracts are documented in
 [the method evidence](docs/current-main-santa-aircraft-slot0.md).
+The separate `CScrollTextScreen` slot-0 deleting-destructor body adds one exact
+function / 96 bytes, including 26 reachable cleanup bytes omitted by Ghidra's
+terminator-marked call edges. Its RTTI hierarchy, release paths, and unresolved
+field meanings are documented in
+[the method evidence](docs/current-main-scroll-text-screen-slot0.md).
 The class's slot `+0x18` callback adds one exact function / 134 bytes. Its
 aircraft-state helper, global-state gates, indirect callback path, and unresolved
 return contract are documented in
@@ -101,14 +106,14 @@ The adjacent slot `+0x1C` method adds one exact function / 139 bytes. Its HE
 damage-helper evidence, shared state gates, indirect callback, and unresolved
 return contract are documented in
 [the method evidence](docs/current-main-santa-aircraft-slot7.md).
-The slot `+0x30` method adds one exact function / 216 bytes. Its text/state
-update branches, linked-node callback walk, decompiler's missed tail jump, and
-unresolved field and callback meanings are documented in
-[the method evidence](docs/current-main-santa-aircraft-slot12.md).
-The slot `+0x58` method adds one exact function / 705 bytes. Its frame-count
-branches, repeated frame-helper calls, final virtual dispatch, and unresolved
-render-field meanings are documented in
-[the method evidence](docs/current-main-santa-aircraft-slot22.md).
+The `CScrollTextScreen` slot `+0x0C` method adds one exact function / 216 bytes.
+Its text/state update branches, linked-node callback walk, decompiler's missed
+tail jump, and unresolved field and callback meanings are documented in
+[the method evidence](docs/current-main-scroll-text-screen-slot3.md).
+The `CShell_MapObjectScreen` slot `+0x14` method adds one exact function / 705
+bytes. Its frame-count branches, repeated frame-helper calls, final virtual
+dispatch, and unresolved render-field meanings are documented in
+[the method evidence](docs/current-main-shell-map-object-screen-slot5.md).
 The installed client's shared map-control refresh adds eight byte-identical
 functions / 3,894 bytes. Its original map labels, selector-driven child updates,
 five matched caller paths, exact Ghidra ranges, and four open callers are

@@ -855,6 +855,10 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra splits this deleting destructor around three calls it treats as
+    # terminators. The reachable cleanup and return bridge bytes fill the
+    # contiguous mapped body through ret 4 at 0x588D289F.
+    "588D2840": 96,
     # Ghidra omits the reachable add esp,4 at 0x588D250B after the conditional
     # helper call; include it with the slot-0 method through ret 4 at 2511.
     "588D24F0": 36,
@@ -1431,13 +1435,17 @@ MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES = ("588D2760",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES)
 
-MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES = ("588D2910",)
-ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES
-SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES)
+MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES = ("588D2840",)
+ADDRESSES += MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES)
 
-MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES = ("588D2EE0",)
-ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES
-SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES)
+MAIN_SCROLL_TEXT_SCREEN_SLOT3_ADDRESSES = ("588D2910",)
+ADDRESSES += MAIN_SCROLL_TEXT_SCREEN_SLOT3_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SCROLL_TEXT_SCREEN_SLOT3_ADDRESSES)
+
+MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES = ("588D2EE0",)
+ADDRESSES += MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES)
 
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
@@ -14878,15 +14886,54 @@ MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE)
 
-MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE = {
-    "588D2910": {
-        "name_in_analysis": "FUN_588D2910 / CSantaAircraft vtable slot +0x30",
+MAIN_SCROLL_TEXT_SCREEN_SLOT0_EVIDENCE = {
+    "588D2840": {
+        "name_in_analysis": "FUN_588D2840 / CScrollTextScreen deleting destructor, vtable slot 0",
         "called_by": (
-            "Fresh Ghidra edge exports reference this method from vtable slot +0x30 "
-            "at cell 0x589A0F68 in the RTTI-identified .?AVCSantaAircraft@@ table "
-            "at 0x589A0F38; the mapped cell points to 0x588D2910. Matched "
-            "constructor FUN_588D2480 installs this table. No incoming direct "
-            "CALL edge was found, so the evidenced entry path is virtual dispatch."
+            "Fresh Ghidra edge exports reference this function from slot 0 at "
+            "0x589A0F5C. The preceding Complete Object Locator names "
+            ".?AVCScrollTextScreen@@ and its hierarchy lists "
+            ".?AVCStaticTextScreen@@, .?AVCTextScreen@@, and .?AVCScreen@@. "
+            "No direct code caller was found; the evidenced entry is virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on four reachable ranges totaling "
+            "70 bytes / 23 instructions. Mapped control flow reaches the omitted "
+            "post-call stack cleanup and field-zeroing bridges between those ranges; "
+            "the complete contiguous body is [0x588D2840, 0x588D28A0), 96 bytes / "
+            "28 instructions, ending in ret 4 immediately before FUN_588D28A0. "
+            "The method writes the CScrollTextScreen table pointer, conditionally "
+            "releases the field at this+0x84 through byte-matched FUN_5897CC42 and "
+            "zeros it, writes the CStaticTextScreen table pointer, then conditionally "
+            "releases and zeros this+0x6C. It calls byte-matched FUN_58903450 and, "
+            "when the low flag bit is set, releases the receiver through matched "
+            "FUN_5897CC42 before returning the receiver. Ghidra's edge export labels "
+            "the allocator calls as terminators, but the mapped bytes prove the "
+            "reachable cleanup instructions after them."
+        ),
+        "uncertainty": (
+            "The RTTI hierarchy identifies table ownership, but no constructor or "
+            "allocation caller for this class was established in this slice. The "
+            "slot-0 entry's byte flag and freeing behavior are consistent with a "
+            "scalar deleting destructor; that source-level label is an inference. "
+            "The meanings of fields this+0x6C and this+0x84 and the base cleanup "
+            "helper's contract remain unresolved. No emulator lifecycle test was "
+            "performed. Emitted source preserves mapped x86 instructions and is not "
+            "recovered high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SCROLL_TEXT_SCREEN_SLOT0_EVIDENCE)
+
+MAIN_SCROLL_TEXT_SCREEN_SLOT3_EVIDENCE = {
+    "588D2910": {
+        "name_in_analysis": "FUN_588D2910 / CScrollTextScreen vtable slot +0x0C",
+        "called_by": (
+            "Fresh Ghidra edge exports reference this method from cell 0x589A0F68, "
+            "slot +0x0C in the secondary vtable beginning at 0x589A0F5C. Its "
+            "Complete Object Locator identifies .?AVCScrollTextScreen@@ and the "
+            "mapped cell points to 0x588D2910. No incoming direct CALL edge was "
+            "found, so the evidenced entry path is virtual dispatch."
         ),
         "behavior": (
             "Fresh Ghidra body exports agree on the complete contiguous range "
@@ -14916,17 +14963,18 @@ MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE = {
         ),
     },
 }
-EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE)
+EVIDENCE.update(MAIN_SCROLL_TEXT_SCREEN_SLOT3_EVIDENCE)
 
-MAIN_SANTA_AIRCRAFT_SLOT22_EVIDENCE = {
+MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_EVIDENCE = {
     "588D2EE0": {
-        "name_in_analysis": "FUN_588D2EE0 / CSantaAircraft vtable slot +0x58",
+        "name_in_analysis": "FUN_588D2EE0 / CShell_MapObjectScreen vtable slot +0x14",
         "called_by": (
-            "Fresh Ghidra edge exports reference this method from vtable slot +0x58 "
-            "at cell 0x589A0F90 in the RTTI-identified .?AVCSantaAircraft@@ table "
-            "at 0x589A0F38; the mapped cell points to 0x588D2EE0. Matched "
-            "constructor FUN_588D2480 installs this table. No incoming direct "
-            "CALL edge was found, so entry is through virtual dispatch."
+            "Fresh Ghidra edge exports reference this method from cell 0x589A0F90, "
+            "slot +0x14 in the secondary vtable beginning at 0x589A0F7C. Its "
+            "Complete Object Locator identifies .?AVCShell_MapObjectScreen@@ and "
+            "the mapped cell points to 0x588D2EE0. The RTTI hierarchy lists "
+            ".?AVCNavyMapObjectScreen@@, .?AVCMapObjectScreen@@, and .?AVCScreen@@. "
+            "No incoming direct CALL edge was found; entry is virtual dispatch."
         ),
         "behavior": (
             "Fresh Ghidra body exports and a separate read-only decompilation agree "
@@ -14955,7 +15003,7 @@ MAIN_SANTA_AIRCRAFT_SLOT22_EVIDENCE = {
         ),
     },
 }
-EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT22_EVIDENCE)
+EVIDENCE.update(MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_EVIDENCE)
 
 
 if __name__ == "__main__":

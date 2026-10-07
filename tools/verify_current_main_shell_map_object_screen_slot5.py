@@ -1,4 +1,4 @@
-"""Validate Main.dll CSantaAircraft vtable slot +0x58 and its exact body."""
+"""Validate Main.dll CShell_MapObjectScreen vtable slot +0x14 and its exact body."""
 
 import csv
 import json
@@ -8,9 +8,9 @@ from pathlib import Path
 import capstone
 
 if __package__:
-    from .build_current_main_verifications import MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES
+    from .build_current_main_verifications import MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES
 else:
-    from build_current_main_verifications import MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES
+    from build_current_main_verifications import MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,7 +18,7 @@ BASE = 0x58730000
 IMAGE_PATH = ROOT / "reports/unpacked-current-main/Main.mapped.bin"
 INVENTORY_PATH = ROOT / "config/NF2_2026/client-functions.tsv"
 CATALOG_PATH = ROOT / "config/NF2_2026/client-verifications.json"
-RANGE_MANIFEST = ROOT / "config/NF2_2026/main-santa-aircraft-slot22-body-ranges.tsv"
+RANGE_MANIFEST = ROOT / "config/NF2_2026/main-shell-map-object-screen-slot5-body-ranges.tsv"
 BODY_EXPORTS = (
     ROOT / "var/current-main-next/58758ee0-fresh-function-bodies.tsv",
     ROOT / "var/current-main-next/587cef70-fresh-function-bodies.tsv",
@@ -33,8 +33,8 @@ ADDRESS = 0x588D2EE0
 SIZE = 705
 INSTRUCTION_COUNT = 222
 EXPECTED_RANGE = ((ADDRESS, SIZE, INSTRUCTION_COUNT),)
-VTABLE = 0x589A0F38
-SLOT_CELL = VTABLE + 22 * 4
+VTABLE = 0x589A0F7C
+SLOT_CELL = VTABLE + 5 * 4
 FRAME_HELPERS = {0x5897CC90, 0x5897CCA0, 0x5873A5D0}
 EXPECTED_CALLS = {
     (0x588D2F22, 0x5897CC90, "UNCONDITIONAL_CALL"),
@@ -122,14 +122,14 @@ def main():
     records = {int(item["address"], 16): item for item in catalog["matches"]}
     matched = {address for address, item in records.items()
                if item.get("verified_by") == MARKER}
-    selected = {int(address, 16) for address in MAIN_SANTA_AIRCRAFT_SLOT22_ADDRESSES}
+    selected = {int(address, 16) for address in MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_ADDRESSES}
     if selected != {ADDRESS}:
-        raise AssertionError("Builder set does not identify CSantaAircraft vtable slot +0x58")
+        raise AssertionError("Builder set does not identify CShell_MapObjectScreen vtable slot +0x14")
 
     row = inventory.get(ADDRESS)
     record = records.get(ADDRESS)
     if row is None or record is None or ADDRESS not in matched:
-        raise AssertionError("CSantaAircraft slot +0x58 is missing from verified catalog")
+        raise AssertionError("CShell_MapObjectScreen slot +0x14 is missing from verified catalog")
     segments = record.get("segments", [])
     if (int(row["size"]) != SIZE or int(record["size"]) != SIZE
             or len(segments) != 1
@@ -153,21 +153,20 @@ def main():
     for address, expected in EXPECTED_LANDMARKS.items():
         actual = instructions.get(address)
         if actual is None or (actual.mnemonic, actual.op_str) != expected:
-            raise AssertionError(f"Unexpected slot +0x58 instruction at {address:08X}: {actual}")
+            raise AssertionError(f"Unexpected slot +0x14 instruction at {address:08X}: {actual}")
 
     if read_u32(image, SLOT_CELL) != ADDRESS:
-        raise AssertionError("CSantaAircraft vtable slot +0x58 no longer points to this method")
-    if read_rtti_name(image, VTABLE) != b".?AVCSantaAircraft@@":
-        raise AssertionError("CSantaAircraft vtable RTTI owner changed")
+        raise AssertionError("CShell_MapObjectScreen vtable slot +0x14 no longer points to this method")
+    if read_rtti_name(image, VTABLE) != b".?AVCShell_MapObjectScreen@@":
+        raise AssertionError("CShell_MapObjectScreen vtable RTTI owner changed")
     expected_hierarchy = (
-        b".?AVCSantaAircraft@@",
-        b".?AVCAircraft@@",
+        b".?AVCShell_MapObjectScreen@@",
         b".?AVCNavyMapObjectScreen@@",
         b".?AVCMapObjectScreen@@",
         b".?AVCScreen@@",
     )
     if read_rtti_hierarchy(image, VTABLE) != expected_hierarchy:
-        raise AssertionError("CSantaAircraft RTTI base hierarchy changed")
+        raise AssertionError("CShell_MapObjectScreen RTTI base hierarchy changed")
 
     if not FRAME_HELPERS.issubset(matched):
         raise AssertionError("A direct frame helper cited as byte-verified is not in the match catalog")
@@ -193,7 +192,7 @@ def main():
             raise AssertionError(f"Vtable reference changed in {path.name}")
 
     print(
-        f"Main.dll CSantaAircraft vtable slot +0x58: {SIZE} bytes / "
+        f"Main.dll CShell_MapObjectScreen vtable slot +0x14: {SIZE} bytes / "
         f"{INSTRUCTION_COUNT} instructions byte-identical; RTTI, complete body, "
         "matched frame helpers, mode branches, and final virtual callback verified"
     )
