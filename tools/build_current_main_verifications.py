@@ -967,6 +967,30 @@ PAGEFIGHT_TICK_PROGRESS_ADDRESSES = (
 ADDRESSES += PAGEFIGHT_TICK_PROGRESS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_TICK_PROGRESS_ADDRESSES)
 
+PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
+    "587350E0", "58735170", "587351F0", "587352B0", "58735820", "58735930", "58735CC0", "58735E60",
+    "587366F0", "58736A20", "58736E20", "58736E60", "58737170", "58737B00", "58738940", "58738C60",
+    "58738D00", "587392D0", "58739740", "58739CD0", "58739DC0", "5873BF40", "58742570", "587425F0",
+    "58743070", "58743080", "587430C0", "587430E0", "58743140", "58743160", "587431B0", "58743360",
+    "58743400", "587434E0", "587435D0", "587436B0", "58743780", "587437D0", "58743860", "58743900",
+    "58743960", "587439D0", "58743A50", "58743A90", "58743BF0", "58743C80", "58743E80", "58744170",
+    "58744260", "58744340", "58744420", "587445F0", "587446B0", "58744870", "58744D20", "58744FB0",
+    "587453B0", "587453E0", "58745480", "587454E0", "587455B0", "587457F0", "58745840", "58745970",
+    "58745EB0", "58745F40", "587462D0", "587465C0", "587466B0", "58746720", "58746A10", "58746B70",
+    "58746F70", "587471B0", "58747270", "587472C0", "58747320", "587473E0", "58747410", "58747440",
+    "587474B0", "587474F0", "58747570", "587475E0", "58747650", "587476F0", "58747750", "587477F0",
+    "587479D0", "58747BA0", "58747C50", "58747D70", "587481F0", "58749900", "58749930", "587561F0",
+    "587565F0", "5875CB90", "5875D7C0", "587752D0", "58775C10", "58776050", "587765F0", "587766A0",
+    "587771E0", "58777650", "587779B0", "587A7EB0", "587A7EE0", "587A7F10", "587A8170", "587A84F0",
+    "587A8B70", "587AA540", "587AA5D0", "587AAA50", "587AAE60", "587AB060", "587B0680", "587B07F0",
+    "587B0930", "587B1090", "587B2460", "587E5AB0", "587E7160", "587E7C70", "587EAA20", "587EBDA0",
+    "587EC050", "587ED280", "587F58C0", "587FB810", "5885FF70", "58860030", "58862E90", "588965C0",
+    "588D6960", "588D6A30", "588D6B00", "588D7EC0", "588D9F80", "588DC930", "588DE0D0", "588F3930",
+    "588F4810", "5897CD52", "5897CD58", "5897CD5E", "5897CD64",
+)
+ADDRESSES += PAGEFIGHT_CONTROL_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_CONTROL_UPDATE_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8720,6 +8744,64 @@ PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE = {
 }
 PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE["587F5470"] = PAGEFIGHT_TICK_PROGRESS_ROOT_EVIDENCE
 EVIDENCE.update(PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE)
+
+PAGEFIGHT_CONTROL_UPDATE_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_587fb810 / CPageFightOn_ControlMenuScreen update event loop",
+    "called_by": (
+        "Ghidra identifies FUN_587fd890 as the CPageFightOn_ControlMenuScreen "
+        "update method in vtable slot +0x0C at 0x5899D18C. That byte-matched "
+        "method calls FUN_587fb810 at 0x587FEF97 and 0x587FF039. The root's "
+        "open direct-call closure and exact Ghidra body ranges are recorded in "
+        "config/NF2_2026/pagefight-update-body-ranges.tsv and checked by "
+        "tools/verify_current_main_pagefight_control_update.py."
+    ),
+    "behavior": (
+        "Ghidra decompilation shows this controller update scanning the linked "
+        "object chain rooted at DAT_58A247F8+0x0C, filtering objects by status "
+        "0x40000000, consulting their +4/+8 coordinates, and updating per-object "
+        "state and child records. It conditionally calls the already matched "
+        "25-tick counter/threshold routine FUN_587f5470 when receiver byte "
+        "+0x20D64 is set. It dispatches the already matched OpConvoy update "
+        "FUN_587cdd60 only when receiver state word +0x105A2 is 7. Other visible "
+        "branches update controller state, child visibility/positions, and "
+        "screen effects; the exact roles of many fields and helper calls remain "
+        "unresolved. The open root body is 1,198 bytes."
+    ),
+    "uncertainty": (
+        "The 149-function set is the root's direct-call closure only; indirect "
+        "virtual calls are outside that graph. The Ghidra audit found 99 direct "
+        "incoming control-flow sites from 36 functions to closure members, with "
+        "10 matched external caller functions, so some helpers are shared with "
+        "other paths. Object-field meanings, detailed game-state contracts, and "
+        "server effects remain incomplete. No live-client or emulator test was run."
+    ),
+}
+PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / PageFight update direct-call closure member",
+        "called_by": (
+            "Ghidra's exact direct-call graph places this function in the open "
+            "closure rooted at FUN_587fb810, called at 0x587FEF97 and 0x587FF039 "
+            "by byte-matched CPageFightOn_ControlMenuScreen update method "
+            "FUN_587fd890. Exact body ranges are frozen in "
+            "config/NF2_2026/pagefight-update-body-ranges.tsv."
+        ),
+        "behavior": (
+            "This match preserves the exact mapped x86 instruction stream for "
+            "one Ghidra body in the PageFight update closure. Its individual "
+            "semantic role is not asserted unless established by the root's "
+            "decompilation."
+        ),
+        "uncertainty": (
+            "The function's independent field, virtual-call, and gameplay "
+            "semantics remain unresolved; no emulator test has been run."
+        ),
+    }
+    for address in PAGEFIGHT_CONTROL_UPDATE_ADDRESSES
+    if address != "587FB810"
+}
+PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE["587FB810"] = PAGEFIGHT_CONTROL_UPDATE_ROOT_EVIDENCE
+EVIDENCE.update(PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE)
 
 
 def sha256(path):

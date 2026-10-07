@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 7,829 verified matches
-totaling 2,489,443 bytes (18.4381% by functions, 23.7762% by bytes), each at
+identified code bytes across six report units. There are 7,978 verified matches
+totaling 2,537,958 bytes (18.7890% by functions, 24.2396% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -29,6 +29,11 @@ The PageFight 25-tick counter and threshold update adds four exact matches /
 1,237 bytes, with the matched update method, conditional call gate, direct-call
 closure, and unresolved field meanings recorded in
 [its subsystem note](docs/current-main-pagefight-tick-progress.md).
+The PageFight `CPageFightOn_ControlMenuScreen` update loop adds 149 exact
+matches / 48,515 bytes. Its caller path, observed object scans and update
+branches, exact direct-call boundary, and unresolved semantic/runtime questions
+are recorded in
+[its subsystem note](docs/current-main-pagefight-control-update-loop.md).
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 recorded in [the lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are recorded
