@@ -466,6 +466,8 @@ MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES = (
     "58786320", "58786330", "587863B0", "58786430", "58786630",
 )
 ADDRESSES += MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
+MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES = ("5884B8A0",)
+ADDRESSES += MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -837,6 +839,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_RECORD_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_QUIT_PROMPT_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13862,6 +13865,40 @@ for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES:
         ),
     }
 EVIDENCE.update(MAIN_TAX_INVESTMENT_REFRESH_EVIDENCE)
+
+MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_EVIDENCE = {
+    "5884B8A0": {
+        "name_in_analysis": "FUN_5884B8A0 / CPannelCommunicatorMemo constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-verified FUN_5883F4C0 "
+            "(CPannelCommunicatorConfigMemoManage constructor) calling this "
+            "function at 0x588403F3 and storing its returned child at receiver "
+            "+0xD8. The child constructor call passes the parent constructor's "
+            "third and fourth arguments plus 0x32, followed by 0, 0, and 0x40."
+        ),
+        "behavior": (
+            "Ghidra labels the installed vtable as CPannelCommunicatorMemo. "
+            "The function first initializes a CMenuScreen base, writes the "
+            "constructor-supplied geometry and fixed fields, then installs the "
+            "derived vtable. It creates three table-selected child groups via "
+            "FUN_58731C60 and resource/table data rooted at 0x58A24768; invokes "
+            "FUN_5875DDA0 twice and FUN_58761090 three times with values from "
+            "constructor arguments or mapped globals; and makes three "
+            "FUN_58748E40 child operations. The selected table indices are "
+            "bounded by the observed constants 0x192, 400, and 0x191. The exact "
+            "object fields and callsites are covered by the 1,081-byte matched "
+            "body and the Ghidra transfer manifest."
+        ),
+        "uncertainty": (
+            "Ghidra supplies the class label and calls, but the specific child "
+            "control names, visible text, resource identities, and table-field "
+            "meanings are not established. The 0x40 argument's semantic role "
+            "and runtime visual behavior remain unverified. This is static "
+            "installed-client evidence; no emulator runtime test was run."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":

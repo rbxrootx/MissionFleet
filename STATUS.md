@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,578 verified matches
-totaling 2,734,442 bytes (20.2021% by functions, 26.1162% by bytes), each at
+identified code bytes across six report units. There are 8,579 verified matches
+totaling 2,735,523 bytes (20.2044% by functions, 26.1265% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The installed client's tax/investment control
@@ -15,6 +15,13 @@ refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases
 `0x8002311B` and `0x8002312B`; four other calling functions and the visual
 result remain unresolved. See
 [the refresh evidence](docs/current-main-tax-investment-refresh.md). The
+`CPannelCommunicatorMemo` constructor adds one exact 1,081-byte function. The
+matched config-memo constructor calls it at `0x588403F3`; the 340-instruction
+body and its 26 outgoing calls are checked against fresh Ghidra ranges and
+transfers. Child controls, resource identities, and visible behavior remain
+uncertain. See
+[`the constructor evidence`](docs/current-main-communicator-memo-constructor.md).
+The
 installed-client quit-prompt setup helper
 adds one byte-identical function / 246 bytes. Fresh Ghidra output and two
 matched callers anchor its child setup, conditional localized prompt key, and
@@ -335,6 +342,7 @@ and [`docs/current-main-indexed-pointer-lookup.md`](docs/current-main-indexed-po
 [`docs/current-main-linked-record-removal-helper.md`](docs/current-main-linked-record-removal-helper.md),
 [`docs/current-main-bounded-dispatcher-text-update.md`](docs/current-main-bounded-dispatcher-text-update.md),
 [`docs/current-main-parallel-collection-selection-update.md`](docs/current-main-parallel-collection-selection-update.md),
+[`docs/current-main-communicator-memo-constructor.md`](docs/current-main-communicator-memo-constructor.md),
 [`docs/current-main-sprite-data-screen-base-constructor.md`](docs/current-main-sprite-data-screen-base-constructor.md),
 [`docs/current-main-null-safe-pointer-getter.md`](docs/current-main-null-safe-pointer-getter.md),
 [`docs/current-main-field-getter-6088.md`](docs/current-main-field-getter-6088.md),

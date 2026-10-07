@@ -11,6 +11,7 @@ from tools import (
     verify_current_main_event_80020a03_list_update,
     verify_current_main_quit_prompt_setup,
     verify_current_main_5882fc60_refresh,
+    verify_current_main_5884b8a0_communicator_memo,
 )
 
 
@@ -23,8 +24,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_578)
-        self.assertEqual(self.report["measures"]["matched_code"], "2734442")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_579)
+        self.assertEqual(self.report["measures"]["matched_code"], "2735523")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -35,8 +36,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_445)
-        self.assertEqual(current["measures"]["matched_code"], "1761024")
+        self.assertEqual(current["measures"]["matched_functions"], 2_446)
+        self.assertEqual(current["measures"]["matched_code"], "1762105")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -144,6 +145,24 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("+0x48", evidence["58785FD0"]["behavior"])
         self.assertIn("Four", root["called_by"])
         verify_current_main_5882fc60_refresh.main()
+
+    def test_communicator_memo_constructor_has_matched_parent_and_closed_calls(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_EVIDENCE
+        )
+        self.assertEqual(addresses, ("5884B8A0",))
+        self.assertEqual(set(addresses), set(evidence))
+        root = evidence["5884B8A0"]
+        self.assertIn("FUN_5883F4C0", root["called_by"])
+        self.assertIn("0x588403F3", root["called_by"])
+        self.assertIn("CPannelCommunicatorMemo", root["behavior"])
+        self.assertIn("not established", root["uncertainty"])
+        verify_current_main_5884b8a0_communicator_memo.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (
