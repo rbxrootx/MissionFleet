@@ -1103,6 +1103,12 @@ MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES = (
 ADDRESSES += MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES)
 
+MAIN_ROOM_TYPE_MISSION_ADDRESSES = (
+    "587AEEF0", "588CEC10", "588CEF50", "588D02E0",
+)
+ADDRESSES += MAIN_ROOM_TYPE_MISSION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_MISSION_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -10143,6 +10149,79 @@ MAIN_PAGEFIGHT_EVENT_PREHANDLER_EVIDENCE = {
     for address in MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES
 }
 EVIDENCE.update(MAIN_PAGEFIGHT_EVENT_PREHANDLER_EVIDENCE)
+
+
+MAIN_ROOM_TYPE_MISSION_PARENTS = {
+    "587AEEF0": (
+        "FUN_588CEC10 at 0x588CEDB0 and byte-matched "
+        "CPageChannelBattle_ControlMenuScreen method FUN_587D51D0 at "
+        "0x587D53E0; fresh Ghidra references also list unmatched callers."
+    ),
+    "588CEC10": (
+        "FUN_588CEF50 at 0x588CF4A0 after constructing the mission-room "
+        "controls; fresh Ghidra also records a data reference from "
+        "0x589A0DEC."
+    ),
+    "588CEF50": (
+        "Byte-matched FUN_588C9280, whose Ghidra output identifies "
+        "CRoomSettingManager, allocates 0xA4 bytes and calls this at "
+        "0x588CAA63 to construct the child stored at receiver +0x17C."
+    ),
+    "588D02E0": "FUN_588CEF50 at 0x588CEF96",
+}
+MAIN_ROOM_TYPE_MISSION_BEHAVIOR = {
+    "587AEEF0": (
+        "Checks the array bounds in its receiver, searches for an entry whose "
+        "object field +0x50 equals the supplied value, and scans 32 pointers "
+        "from the observed global table at DAT_58A247F4+0x30. It derives a "
+        "maximum from each pointed object's word +0x5E, then tests object flag "
+        "bits +0x70 and a global table before returning the observed status "
+        "values or -1. The input meaning and status names are not known."
+    ),
+    "588CEC10": (
+        "Initializes the fields and flags of the mission-room child controls, "
+        "sets the observed MAP_NAME_MISSION and "
+        "MESSAGESTRING_ROOMTYPE_MISSION identifiers, accesses the global "
+        "entry table at DAT_58A24828, calls FUN_587AEEF0 for the current "
+        "selection, and configures "
+        "resource-derived child fields through FUN_589088D0."
+    ),
+    "588CEF50": (
+        "Calls base constructor FUN_588D02E0, installs the Ghidra-labeled "
+        "CRoomTypeMission vtable, and loads .\\SPR\\ITFMSN.spr through "
+        "FUN_588F3D70. It creates sprite and resource-backed controls, "
+        "sprite-data screens, repeated controls, and a text control using the "
+        "mapped resource indices and coordinate arguments, then "
+        "calls FUN_588CEC10(1)."
+    ),
+    "588D02E0": (
+        "Initializes a CMenuScreen base, installs the Ghidra-labeled "
+        "CRoomTypeObject vtable, stores two constructor arguments, and creates "
+        "a child through FUN_587B6DD0, two CSpriteDataScreen children, and two "
+        "additional sprite-data controls through FUN_5875DDA0. It writes the "
+        "observed child bounds from the coordinate arguments."
+    ),
+}
+MAIN_ROOM_TYPE_MISSION_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CRoomTypeMission constructor closure member"
+        ),
+        "called_by": MAIN_ROOM_TYPE_MISSION_PARENTS[address],
+        "behavior": MAIN_ROOM_TYPE_MISSION_BEHAVIOR[address],
+        "uncertainty": (
+            "The four function bodies and caller instructions are recorded from "
+            "fresh Ghidra output and mapped Main.dll bytes. Ghidra finds 18 "
+            "external incoming control-flow sites to this closure, but only two "
+            "of those callers are already byte-verified. The resource-table "
+            "schema, child purposes, field/status meanings, visual appearance, "
+            "and gameplay effect remain unresolved. No client visual or runtime "
+            "test was performed."
+        ),
+    }
+    for address in MAIN_ROOM_TYPE_MISSION_ADDRESSES
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_MISSION_EVIDENCE)
 
 
 def sha256(path):
