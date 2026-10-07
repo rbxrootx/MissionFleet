@@ -1075,6 +1075,13 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES = (
 ADDRESSES += MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES)
 
+MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
+    "587E63F0", "587E6450", "587E9310", "587ECF10",
+    "587F7530", "588545C0", "588B3180",
+)
+ADDRESSES += MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9770,6 +9777,92 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE = {
     for address in MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 }
 EVIDENCE.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE)
+
+
+MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_PARENTS = {
+    "587E63F0": "FUN_587F7530 at 0x587F79E5",
+    "587E6450": (
+        "FUN_587F7530 at 0x587F79F1; FUN_58894B40 at 0x58894C43"
+    ),
+    "587E9310": "FUN_587F7530 at 0x587F7BE9",
+    "587ECF10": (
+        "FUN_588545C0 at 0x58854665 and 0x588548CE"
+    ),
+    "587F7530": (
+        "Byte-matched FUN_587FF150 / CPageFightOn_ControlMenuScreen calls "
+        "this at 0x587FF29E in the event-code 0x100 branch, with ECX=the "
+        "page receiver and the event pointer as the stack argument"
+    ),
+    "588545C0": (
+        "FUN_587F7530 at 0x587F795A; FUN_587FD890 at 0x587FDB67"
+    ),
+    "588B3180": (
+        "FUN_587F7530 at 0x587F7590, 0x587F75B5, 0x587F75F4, "
+        "0x587F7619, and 0x587F77CC"
+    ),
+}
+MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_BEHAVIOR = {
+    "587E63F0": (
+        "Updates child/control flag bits, clears receiver +0x20D40, changes "
+        "fields on a global object, performs a virtual call, and invokes "
+        "FUN_58894820."
+    ),
+    "587E6450": (
+        "Initializes data reached from the global pointer at 0x58A245C0 with "
+        "zero and 0x300, calls FUN_58894A60, and sets a child low-bit flag."
+    ),
+    "587E9310": (
+        "After FUN_588D66E0 permits the check, walks the linked list rooted "
+        "at 0x58A247F8+0x0C. It excludes the current object, requires marker "
+        "0x40000000 and field +0x1258 equal to zero, and returns true when "
+        "the scaled squared distance is below 640000."
+    ),
+    "587ECF10": (
+        "Sets or clears the low bit across child arrays rooted at receiver "
+        "+0x10BCC, +0x10BD4, and +0x10BE8, plus state-dependent entries in "
+        "the +0x21CAC..+0x21CD8 region."
+    ),
+    "587F7530": (
+        "Dispatches on the event selector at event +8. Observed cases include "
+        "chat-mode/filter actions 0x70..0x72, firing-mode cycle 0x73, several "
+        "control actions 0x74/0x76/0x77/0x7A/0x7B, adjustments to receiver "
+        "fields +0x1052C/+0x10530 for selectors 0x25..0x28, and selector "
+        "0x1B that can set the observed CANNOT_ESCAPE_SO_CLOSE or "
+        "CANNOT_ESCAPE_SPEED_NOT_ZERO message strings. Case 0x100 "
+        "is the event code that the caller uses to enter this dispatcher; it "
+        "is distinct from the selector at event +8."
+    ),
+    "588545C0": (
+        "Branches on global 0x58A248DC, tests control state bits and fields, "
+        "changes multiple child low-bit flags/resources, calls "
+        "FUN_587ECF10(1) or (0), and dispatches observed numeric values "
+        "through FUN_58902CE0/FUN_58902D20."
+    ),
+    "588B3180": (
+        "Tests the receiver word at +0x24 masked with 0x1F00. For mask 0x500 "
+        "it clears receiver fields +0x124/+0x120 and calls vtable slot +4; "
+        "for mask 0x200 it calls slot +8."
+    ),
+}
+MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / PageFight control-menu action closure member"
+        ),
+        "called_by": MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_PARENTS[address],
+        "behavior": MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_BEHAVIOR[address],
+        "uncertainty": (
+            "Action IDs, receiver offsets, localized message strings, and "
+            "call/field effects are recorded from the installed Main.dll "
+            "Ghidra output and mapped instruction stream. Most UI object "
+            "types, field semantics, indirect virtual contracts, server "
+            "protocol meaning, and the resulting visuals/gameplay are not "
+            "established. No emulator runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES
+}
+EVIDENCE.update(MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_EVIDENCE)
 
 
 def sha256(path):

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,130 verified matches
-totaling 2,596,672 bytes (19.1470% by functions, 24.8004% by bytes), each at
+identified code bytes across six report units. There are 8,137 verified matches
+totaling 2,601,029 bytes (19.1635% by functions, 24.8420% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -16,6 +16,11 @@ the active decomp.dev project. The map-object proximity update rooted at
 matched `CShell_MapObjectScreen` callsites, exact spatial checks, complete
 closure, and unknown record/effect semantics are recorded in
 [its subsystem note](docs/current-main-map-object-proximity-effects.md). The
+PageFight control-menu event actions rooted at `FUN_587F7530` add seven exact
+matches / 4,357 bytes. Their matched `CPageFightOn_ControlMenuScreen` caller,
+event-code gate, selector behavior, complete call closure, and unresolved
+control/protocol meanings are recorded in
+[the subsystem note](docs/current-main-pagefight-control-menu-actions.md). The
 linked-record collection refresh rooted at
 `FUN_587487C0` adds 17 byte-identical functions / 4,646 bytes. Its matched
 caller setup, global name-key lookup, exact Ghidra body ranges, and unresolved

@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,130 matches cover 2,596,672 bytes (24.8004%) and are verified
+The current 8,137 matches cover 2,601,029 bytes (24.8420%) and are verified
 individually at 100.0% by objdiff.
+The PageFight control-menu event actions rooted at `FUN_587F7530` add seven
+byte-identical functions / 4,357 bytes. Their `CPageFightOn_ControlMenuScreen`
+event-code gate, selector branches, exact closure, and unknown control/protocol
+meanings are recorded in
+[the subsystem evidence](docs/current-main-pagefight-control-menu-actions.md).
 The installed client's map-object proximity update rooted at `FUN_587880C0`
 adds seven byte-identical functions / 4,233 bytes. Its two matched calls from
 the RTTI-identified `CShell_MapObjectScreen`, exact spatial checks, and
