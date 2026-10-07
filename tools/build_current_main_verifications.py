@@ -179,7 +179,7 @@ ADDRESSES = (
     "588DD520", "588DE620", "588DF9B0",
     "588D6570", "588DCE90", "588E6540", "588E7480", "5885FC40", "5885A340",
     "58861F40", "58860070", "588626B0", "588627C0", "588603C0",
-    "588607A0", "58862D50",
+    "588607A0", "58862D50", "58861CE0", "58862FA0", "588DB050",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7413,6 +7413,24 @@ EVIDENCE = {
         "called_by": "Ghidra records incoming call 0x588DB0EE from FUN_588DB050. The matched body directly calls FUN_58860070 at 0x58862DF6 when the selected row's +0x15C countdown reaches zero and it changes the row state to 0x10.",
         "behavior": "Ghidra confirms a contiguous 319-byte body [0x58862D50,0x58862E8F). It decrements selected-row counters, decodes and re-encodes paired values at receiver +0x184/+0x188, updates a child field from +0x160, and on countdown completion sets row state 0x10 and calls FUN_58860070(0). If this row is selected it also refreshes child +0x72C from global resource offset +0x680 and sets the corresponding global entry's +0x478 field to 1.",
         "uncertainty": "The paired-counter encoding, row state meaning, selected resource identity, child fields, and helper effects remain unresolved. The incoming dispatch caller and runtime visual effects have not been validated.",
+    },
+    "58861CE0": {
+        "name_in_analysis": "FUN_58861ce0 / ship-map code-0x102 state event router",
+        "called_by": "Ghidra records a data reference at 0x5899EAEC; the enclosing table and its callback ABI have not been identified. This method directly calls byte-matched FUN_588603C0 at 0x58861E50 for selected-row state 1 and byte-matched FUN_588607A0 at 0x58861E59 for state 2.",
+        "behavior": "Ghidra confirms a contiguous 569-byte body [0x58861CE0,0x58861F19). With receiver flag bit 1 set, it inspects event field +4. For code 0x102 and subtype 0x60 it checks the selected row state and routes state 1/2 to the matched counter/timer helpers; state 4 is gated by a child flag and child value before FUN_58860540, while state 0x10 calls FUN_5885ECC0. The same method handles observed event codes 0x201 and 0x20A, including calls to FUN_5885FDC0 and FUN_58860650(0/1).",
+        "uncertainty": "The event structure, codes/subtypes, callback-table role, global objects, row-state meanings, and downstream effects remain unknown. No runtime input test has been run.",
+    },
+    "58862FA0": {
+        "name_in_analysis": "FUN_58862fa0 / ship-map state and child event dispatcher",
+        "called_by": "Ghidra records a data reference at 0x5899EAF4; its table and callback ABI are unresolved. It directly calls byte-matched FUN_588603C0 at 0x58863130, FUN_588607A0 at 0x58863139, and FUN_58861F40 at 0x588631CD from distinct state/child branches.",
+        "behavior": "Ghidra confirms a contiguous 838-byte body [0x58862FA0,0x588632E6). It handles only param_3 == 2, clears two observed global timer fields, then routes by param_2 matching receiver children and selected-row state. Selected-row states 1 and 2 call the matched transition helpers, state 4 is flag/value gated, and state 0x10 uses FUN_5885ECC0. Other row-child matches call FUN_58861F40(row), while one state-4 branch clears a child flag and sends an observed 4-byte message with code 0x16 before invoking global/vtable callbacks.",
+        "uncertainty": "The event parameters, child identities, state/flag roles, message payload semantics, global timer meanings, and indirect callback effects remain unresolved. No runtime interaction test has been run.",
+    },
+    "588DB050": {
+        "name_in_analysis": "FUN_588db050 / ship-map periodic row-list update",
+        "called_by": "Byte-matched ship-map refresh FUN_588E5150 calls this function at 0x588E6082. Ghidra gives it two body ranges, [0x588DB050,0x588DB07D) and [0x588DB080,0x588DB10E), and records its direct type-9 transition call to matched FUN_58862D50 at 0x588DB0EE.",
+        "behavior": "The complete 187-byte body is covered by 69 instructions. It decrements a receiver +0x140C throttle, resetting it to 0x0C when due, then scans eight linked-list roots at +0x1390. For the first node accepted by FUN_5873A250 it runs FUN_5873B040 when the node matches the current record, calls FUN_5873A760, and if the receiver is globally current dispatches by the record's low five type bits: type 9 calls FUN_58862D50(index), otherwise FUN_58859AA0(index).",
+        "uncertainty": "The throttle unit, linked-list node schema, helper contracts, type-dependent effects, and reason the three alignment bytes are outside the Ghidra body are unresolved. No emulator timing or visual test has been run.",
     },
     "588D6570": {
         "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",

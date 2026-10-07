@@ -338630,6 +338630,661 @@
         "behavior": "Ghidra confirms a contiguous 319-byte body [0x58862D50,0x58862E8F). It decrements selected-row counters, decodes and re-encodes paired values at receiver +0x184/+0x188, updates a child field from +0x160, and on countdown completion sets row state 0x10 and calls FUN_58860070(0). If this row is selected it also refreshes child +0x72C from global resource offset +0x680 and sets the corresponding global entry's +0x478 field to 1.",
         "uncertainty": "The paired-counter encoding, row state meaning, selected resource identity, child fields, and helper effects remain unresolved. The incoming dispatch caller and runtime visual effects have not been validated."
       }
+    },
+    {
+      "address": "58861CE0",
+      "name": "FUN_58861ce0",
+      "size": 569,
+      "symbol": "_FUN_58861ce0",
+      "source": "src/client-current/Main/FUN_58861ce0.cpp",
+      "source_sha256": "a20721086d36597fce7b059a34542e3954abd49cd994cfd8753a047f95c25feb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58861CE0",
+          "size": 569,
+          "symbol": "_FUN_58861ce0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "58861DAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "00000102",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58861DB6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "000000FF",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5885FDC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "00000000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "00000320",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "58861EEF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "58861EC6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "58861DAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 369,
+              "target_address": "588603C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "588607A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 431,
+              "target_address": "58860540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "5885ECC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 452,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 498,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "58861DAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 529,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 540,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 548,
+              "target_address": "58861DAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 557,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861ce0 / ship-map code-0x102 state event router",
+        "called_by": "Ghidra records a data reference at 0x5899EAEC; the enclosing table and its callback ABI have not been identified. This method directly calls byte-matched FUN_588603C0 at 0x58861E50 for selected-row state 1 and byte-matched FUN_588607A0 at 0x58861E59 for state 2.",
+        "behavior": "Ghidra confirms a contiguous 569-byte body [0x58861CE0,0x58861F19). With receiver flag bit 1 set, it inspects event field +4. For code 0x102 and subtype 0x60 it checks the selected row state and routes state 1/2 to the matched counter/timer helpers; state 4 is gated by a child flag and child value before FUN_58860540, while state 0x10 calls FUN_5885ECC0. The same method handles observed event codes 0x201 and 0x20A, including calls to FUN_5885FDC0 and FUN_58860650(0/1).",
+        "uncertainty": "The event structure, codes/subtypes, callback-table role, global objects, row-state meanings, and downstream effects remain unknown. No runtime input test has been run."
+      }
+    },
+    {
+      "address": "58862FA0",
+      "name": "FUN_58862fa0",
+      "size": 838,
+      "symbol": "_FUN_58862fa0",
+      "source": "src/client-current/Main/FUN_58862fa0.cpp",
+      "source_sha256": "8e6098be3bb192e10e278a37c0b9771fc360e895a70214ae7895d43dd9d417a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58862FA0",
+          "size": 838,
+          "symbol": "_FUN_58862fa0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "00000000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "00000320",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "5885FE90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "00000139",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "0007D000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "0005DC00",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "58860650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "588631A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 279,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 328,
+              "target_address": "5899EBEC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "5899EBC0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "5899EB94",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 359,
+              "target_address": "5885F8C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 401,
+              "target_address": "588603C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 410,
+              "target_address": "588607A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "58860540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 473,
+              "target_address": "5885ECC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 478,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 484,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 558,
+              "target_address": "58861F40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 580,
+              "target_address": "588632DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 586,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 603,
+              "target_address": "588630F5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 618,
+              "target_address": "0000FFFD",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 641,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 659,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 681,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 694,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 716,
+              "target_address": "587E5A70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 721,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 726,
+              "target_address": "0000001B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 762,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 768,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 773,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58862fa0 / ship-map state and child event dispatcher",
+        "called_by": "Ghidra records a data reference at 0x5899EAF4; its table and callback ABI are unresolved. It directly calls byte-matched FUN_588603C0 at 0x58863130, FUN_588607A0 at 0x58863139, and FUN_58861F40 at 0x588631CD from distinct state/child branches.",
+        "behavior": "Ghidra confirms a contiguous 838-byte body [0x58862FA0,0x588632E6). It handles only param_3 == 2, clears two observed global timer fields, then routes by param_2 matching receiver children and selected-row state. Selected-row states 1 and 2 call the matched transition helpers, state 4 is flag/value gated, and state 0x10 uses FUN_5885ECC0. Other row-child matches call FUN_58861F40(row), while one state-4 branch clears a child flag and sends an observed 4-byte message with code 0x16 before invoking global/vtable callbacks.",
+        "uncertainty": "The event parameters, child identities, state/flag roles, message payload semantics, global timer meanings, and indirect callback effects remain unresolved. No runtime interaction test has been run."
+      }
+    },
+    {
+      "address": "588DB050",
+      "name": "FUN_588db050",
+      "size": 187,
+      "symbol": "_FUN_588db050",
+      "source": "src/client-current/Main/FUN_588db050.cpp",
+      "source_sha256": "faca61f345e2171de6de48f40a05793aedacf3e92c501a761903dd4e21189f8c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DB050",
+          "size": 45,
+          "symbol": "_FUN_588db050_segment_00",
+          "relocations": [
+            {
+              "offset": 30,
+              "target_address": "0000000C",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588DB080",
+          "size": 142,
+          "symbol": "_FUN_588db050_segment_01",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "5873A250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5873B040",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5873A760",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "58862D50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "58859AA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588db050 / ship-map periodic row-list update",
+        "called_by": "Byte-matched ship-map refresh FUN_588E5150 calls this function at 0x588E6082. Ghidra gives it two body ranges, [0x588DB050,0x588DB07D) and [0x588DB080,0x588DB10E), and records its direct type-9 transition call to matched FUN_58862D50 at 0x588DB0EE.",
+        "behavior": "The complete 187-byte body is covered by 69 instructions. It decrements a receiver +0x140C throttle, resetting it to 0x0C when due, then scans eight linked-list roots at +0x1390. For the first node accepted by FUN_5873A250 it runs FUN_5873B040 when the node matches the current record, calls FUN_5873A760, and if the receiver is globally current dispatches by the record's low five type bits: type 9 calls FUN_58862D50(index), otherwise FUN_58859AA0(index).",
+        "uncertainty": "The throttle unit, linked-list node schema, helper contracts, type-dependent effects, and reason the three alignment bytes are outside the Ghidra body are unresolved. No emulator timing or visual test has been run."
+      }
     }
   ]
 }

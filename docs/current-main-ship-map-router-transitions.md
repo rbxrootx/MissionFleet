@@ -17,8 +17,10 @@ streams at 100%, with 81 relocation operands checked.
 | `FUN_58862D50` | `[0x58862D50, 0x58862E8F)` (319 bytes) | `0x58862DF6` | Decrements row values; when the countdown reaches zero, sets state `0x10`, routes resources, and for the selected row refreshes child `+0x72C` from table offset `+0x680` and sets global entry `+0x478` to 1. |
 
 Ghidra records incoming dispatch calls to these helpers from
-`FUN_5873C2E0`, `FUN_58861CE0`, `FUN_58862FA0`, and `FUN_588DB050`; those
-dispatchers are not byte-matched in this slice. Several encoded counters,
-state codes, resource-table roles, and child flags remain unnamed. Static byte
-identity and call edges are verified, but runtime state changes and visuals
-have not been tested in the emulator.
+`FUN_5873C2E0`, `FUN_58861CE0`, `FUN_58862FA0`, and `FUN_588DB050`; all four
+dispatchers now have exact-match records. The stateful event paths and periodic
+row-list update are documented in the
+[transition dispatcher notes](current-main-ship-map-transition-dispatchers.md).
+Several encoded counters, state codes, resource-table roles, and child flags
+remain unnamed. Static byte identity and call edges are verified, but runtime
+state changes and visuals have not been tested in the emulator.

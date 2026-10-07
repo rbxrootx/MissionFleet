@@ -28,5 +28,6 @@ bytes with 36 mapped operand checks.
 
 This establishes exact bytes and direct-call ownership, not the meaning of the
 state codes, argument values, resource rows, child flags, timer values, or
-visible effects. The incoming dispatchers and helper contracts remain
-unresolved; no emulator or runtime visual test has been run.
+visible effects. The incoming dispatchers are now byte-matched, but their
+registration-table roles and helper contracts remain unresolved; no emulator
+or runtime visual test has been run.
