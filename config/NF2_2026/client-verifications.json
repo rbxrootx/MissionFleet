@@ -337994,6 +337994,642 @@
         "behavior": "Ghidra confirms one contiguous 571-byte body [0x58860070,0x588602AB), with complete instruction coverage. The function clears bit 0 in flags on children +0x74C and +0x750, then switches on the selected row state at receiver +0x148 + index*4. States 1, 2, and 4 select observed timer/resource paths; state 0x10 selects a resource index from the second argument, with argument 0 deriving two timer values from the selected entry's +0x4A0/+0x4A4 fields. It then looks up the selected resource-table index and updates child +0x740's pointer and six copied fields. The emitted exact byte stream records 36 mapped operand targets.",
         "uncertainty": "The state and argument meanings, selected resource-table schema, child roles, timer helpers' semantics, and effects of the five unmatched callers remain unresolved. No emulator or runtime visual test has been run."
       }
+    },
+    {
+      "address": "588626B0",
+      "name": "FUN_588626b0",
+      "size": 259,
+      "symbol": "_FUN_588626b0",
+      "source": "src/client-current/Main/FUN_588626b0.cpp",
+      "source_sha256": "832e9a2909a807a2141799fcb4db9d9078a5e18b33a2b6eba2b2ba957ff3825e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588626B0",
+          "size": 259,
+          "symbol": "_FUN_588626b0_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "587A1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "588627AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 131,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "587E5F80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "000005C0",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588626b0 / ship-map row countdown completion, forward",
+        "called_by": "Ghidra records incoming call 0x5873C38F from FUN_5873C2E0. The matched body directly calls FUN_58860070 at 0x58862737 after setting the row at param_2 to state 1 when its +0x614 countdown reaches zero.",
+        "behavior": "Ghidra confirms a contiguous 259-byte body [0x588626B0,0x588627B3). It decodes the row-selected value at receiver +0x5F0, decrements and re-encodes it when positive, and decrements the row countdown at +0x614. At zero it changes the row state at +0x148 to 1, calls FUN_58860070(0) and FUN_587E5F80(row), then refreshes child +0x72C from global resource offset +0x5C0 when this row is selected.",
+        "uncertainty": "The encoded counter, row schema, state meaning, child identity, and helper effects remain unknown. The incoming dispatch caller has not been byte-matched, and no runtime visual test has been run."
+      }
+    },
+    {
+      "address": "588627C0",
+      "name": "FUN_588627c0",
+      "size": 261,
+      "symbol": "_FUN_588627c0",
+      "source": "src/client-current/Main/FUN_588627c0.cpp",
+      "source_sha256": "5db4fdca91e4430e475f79b5ef67be4cdfd1f3e2e36ff1abb998cc21f898355d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588627C0",
+          "size": 261,
+          "symbol": "_FUN_588627c0_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "587A1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "588628BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "587E5F80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "000005C0",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588627c0 / ship-map row countdown completion, reverse",
+        "called_by": "Ghidra records incoming call 0x5873C3E5 from FUN_5873C2E0. The matched body directly calls FUN_58860070 at 0x58862856 after setting the row at param_2 to state 1 when its +0x614 countdown reaches zero.",
+        "behavior": "Ghidra confirms a contiguous 261-byte body [0x588627C0,0x588628C5). It decrements the row countdown at receiver +0x614, locates an indexed encoded value using the row ushort at +0x244, advances and re-encodes that value, and updates a global timer. When the countdown reaches zero it sets row state 1, calls FUN_587E5F80(row) and FUN_58860070(0), then refreshes child +0x72C from global resource offset +0x5C0 if this row is selected.",
+        "uncertainty": "The row counter and ushort fields, timer units, state meaning, child identity, and helper effects remain unresolved. The incoming dispatch caller has not been byte-matched, and no runtime visual test has been run."
+      }
+    },
+    {
+      "address": "588603C0",
+      "name": "FUN_588603c0",
+      "size": 370,
+      "symbol": "_FUN_588603c0",
+      "source": "src/client-current/Main/FUN_588603c0.cpp",
+      "source_sha256": "fb593162b1960405e1cb4b244053dd33216dc261aac474aca07632e5ed9165d8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588603C0",
+          "size": 370,
+          "symbol": "_FUN_588603c0_segment_00",
+          "relocations": [
+            {
+              "offset": 26,
+              "target_address": "58860530",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58860530",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "00000002",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "0000FFF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58793DA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 208,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "58970AE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 221,
+              "target_address": "5898C3C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "00000000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "000003E8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 363,
+              "target_address": "00000000",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588603c0 / ship-map selected-row state-2 transition",
+        "called_by": "Ghidra records incoming calls at 0x58861E50 from FUN_58861CE0 and 0x58863130 from FUN_58862FA0. The matched body directly calls FUN_58860070 at 0x58860403 after changing the selected row state to 2.",
+        "behavior": "Ghidra confirms a contiguous 370-byte body [0x588603C0,0x58860532). It proceeds only when the selected row state has neither bit 0x08 nor 0x10 and two observed counters differ. It sets the row to state 2, calls FUN_58860070(0), clears a child flag, sets a latch, stores the absolute counter difference at +0x120, and re-encodes it through FUN_587A15E0. A later equality check can clear elapsed time, derive an interval from the child resource's ushort at +0x0C, and clear the resource timer field.",
+        "uncertainty": "The state bits, counter units, latch semantics, resource field, and helper contracts remain unknown. Both incoming dispatchers and runtime effects remain unverified."
+      }
+    },
+    {
+      "address": "588607A0",
+      "name": "FUN_588607a0",
+      "size": 577,
+      "symbol": "_FUN_588607a0",
+      "source": "src/client-current/Main/FUN_588607a0.cpp",
+      "source_sha256": "ebb8c404c3775dc88dc4c7caaa395e01755a8f4453ceee8f5fe93b2a7200885c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588607A0",
+          "size": 577,
+          "symbol": "_FUN_588607a0_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "10624DD3",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "588609DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "587A1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 204,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 325,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "0000FFF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 521,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 561,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 569,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588607a0 / ship-map selected-row timeout reset",
+        "called_by": "Ghidra records incoming calls at 0x58861E59 from FUN_58861CE0 and 0x58863139 from FUN_58862FA0. The matched body directly calls FUN_58860070 at 0x588609D8 when the observed elapsed value exceeds six seconds.",
+        "behavior": "Ghidra confirms a contiguous 577-byte body [0x588607A0,0x588609E1). Above the six-second threshold it sets the selected row to state 1, updates the row's encoded value, clears observed per-row counters, flags, and timing fields, calls FUN_58793E00, and then routes state/resource updates through FUN_58860070(0), replacing the previously computed local result with the router's return value.",
+        "uncertainty": "The timer's units and trigger meaning, encoded value's role, row-field semantics, and helper effects remain unresolved. Both incoming dispatchers and visible runtime effects remain unverified."
+      }
+    },
+    {
+      "address": "58862D50",
+      "name": "FUN_58862d50",
+      "size": 319,
+      "symbol": "_FUN_58862d50",
+      "source": "src/client-current/Main/FUN_58862d50.cpp",
+      "source_sha256": "f3f7d3a645692a580bcbf17b81145f6e0d3ff7d2b845b75a979c5dcd5bd3f4b5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58862D50",
+          "size": 319,
+          "symbol": "_FUN_58862d50_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "58862E8A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "00000010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "58862E8A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "00000680",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 291,
+              "target_address": "00000139",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 310,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58862d50 / ship-map selected-row transition to state 0x10",
+        "called_by": "Ghidra records incoming call 0x588DB0EE from FUN_588DB050. The matched body directly calls FUN_58860070 at 0x58862DF6 when the selected row's +0x15C countdown reaches zero and it changes the row state to 0x10.",
+        "behavior": "Ghidra confirms a contiguous 319-byte body [0x58862D50,0x58862E8F). It decrements selected-row counters, decodes and re-encodes paired values at receiver +0x184/+0x188, updates a child field from +0x160, and on countdown completion sets row state 0x10 and calls FUN_58860070(0). If this row is selected it also refreshes child +0x72C from global resource offset +0x680 and sets the corresponding global entry's +0x478 field to 1.",
+        "uncertainty": "The paired-counter encoding, row state meaning, selected resource identity, child fields, and helper effects remain unresolved. The incoming dispatch caller and runtime visual effects have not been validated."
+      }
     }
   ]
 }

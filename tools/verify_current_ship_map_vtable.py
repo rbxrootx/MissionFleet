@@ -43,6 +43,14 @@ MATCHED_HELPERS = {
     0x58861F40: (1298, 0x58862BE7, 0x588628D0),
     0x58860070: (571, 0x58862445, 0x58861F40),
 }
+MATCHED_CALL_EDGES = (
+    (0x58860070, 0x5874116D, 0x5873FE80),
+    (0x58860070, 0x58862737, 0x588626B0),
+    (0x58860070, 0x58862856, 0x588627C0),
+    (0x58860070, 0x58860403, 0x588603C0),
+    (0x58860070, 0x588609D8, 0x588607A0),
+    (0x58860070, 0x58862DF6, 0x58862D50),
+)
 
 
 def main():
@@ -124,8 +132,23 @@ def main():
         if not contains(caller_record, callsite):
             raise AssertionError(f"Callsite {callsite:08X} is outside matched caller {caller:08X}")
 
+    for target, callsite, caller in MATCHED_CALL_EDGES:
+        target_record = records.get(target)
+        caller_record = records.get(caller)
+        if (target_record is None or
+                target_record.get("verified_by") != "objdiff-3.8.0-byte-identical"):
+            raise AssertionError(f"Call target is not byte-matched: {target:08X}")
+        if call_target(callsite) != target:
+            raise AssertionError(f"Call at {callsite:08X} does not target {target:08X}")
+        if (caller_record is None or
+                caller_record.get("verified_by") != "objdiff-3.8.0-byte-identical"):
+            raise AssertionError(f"Callsite owner is not byte-matched: {caller:08X}")
+        if not contains(caller_record, callsite):
+            raise AssertionError(f"Callsite {callsite:08X} is outside matched caller {caller:08X}")
+
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    print("Constructor store, eight slot matches, and eleven matched helper call edges verified")
+    edge_count = len(MATCHED_HELPERS) + len(MATCHED_CALL_EDGES)
+    print(f"Constructor store, eight slot matches, and {edge_count} matched helper call edges verified")
 
 
 if __name__ == "__main__":

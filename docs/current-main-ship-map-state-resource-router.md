@@ -6,7 +6,8 @@ one explicit argument (`0`), and calls the helper; the callee returns with
 `ret 4`. Another already byte-matched caller, `FUN_5873FE80`, passes its
 loop-local `iVar11` at `0x5874116D`. Ghidra records five more callsites:
 `0x58862737`, `0x58862856`, `0x58860403`, `0x588609D8`, and `0x58862DF6`.
-Those callers have no exact-match records yet.
+All five callers are now byte-matched; their transitions are in the
+[router caller notes](current-main-ship-map-router-transitions.md).
 
 Ghidra confirms one contiguous 571-byte body,
 `[0x58860070, 0x588602AB)`, containing 147 instructions with full body
@@ -27,5 +28,5 @@ bytes with 36 mapped operand checks.
 
 This establishes exact bytes and direct-call ownership, not the meaning of the
 state codes, argument values, resource rows, child flags, timer values, or
-visible effects. Five callers and the helper contracts remain to be traced;
-no emulator or runtime visual test has been run.
+visible effects. The incoming dispatchers and helper contracts remain
+unresolved; no emulator or runtime visual test has been run.
