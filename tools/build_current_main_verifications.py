@@ -1431,6 +1431,10 @@ MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES = ("588D2760",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES)
 
+MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES = ("588D2910",)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT12_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14869,6 +14873,46 @@ MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE = {
+    "588D2910": {
+        "name_in_analysis": "FUN_588D2910 / CSantaAircraft vtable slot +0x30",
+        "called_by": (
+            "Fresh Ghidra edge exports reference this method from vtable slot +0x30 "
+            "at cell 0x589A0F68 in the RTTI-identified .?AVCSantaAircraft@@ table "
+            "at 0x589A0F38; the mapped cell points to 0x588D2910. Matched "
+            "constructor FUN_588D2480 installs this table. No incoming direct "
+            "CALL edge was found, so the evidenced entry path is virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on the complete contiguous range "
+            "[0x588D2910, 0x588D29E8), 216 bytes / 77 instructions. The method "
+            "gates on bit 0x04 at this+0x24, scans the null-terminated text at "
+            "this+0x6C, and when it is nonempty adjusts receiver state using "
+            "byte-matched FUN_589032E0. If this+0x88 is 1, it copies text from "
+            "this+0x84 through byte-matched FUN_58731CE0, calls the global "
+            "callback at DAT_5898C1A8 with this+0x84 and this+0x8C, invokes "
+            "the object at this+0x50 through vtable slot +4 with the callback "
+            "result, and clears this+0x88. It then calls FUN_589032E0 with "
+            "this+0x78 and walks nodes rooted at this+0x3C through their +0x38 "
+            "links, dispatching each node's vtable slot +0x0C. Mapped control "
+            "flow ends with a tail jump to the final node callback when the link "
+            "returns to the list head."
+        ),
+        "uncertainty": (
+            "The flag and fields at this+0x04, +0x0C, +0x24, +0x50, +0x70, "
+            "+0x78, +0x80, +0x84, +0x88, +0x8C, and +0x3C have no confirmed "
+            "domain names. The global callback at DAT_5898C1A8 and both virtual "
+            "callback contracts are unresolved. Ghidra reports that it could not "
+            "recover a jump table at 0x588D29E6 and renders that terminal indirect "
+            "transfer as a call; mapped x86 bytes show a tail jump after restoring "
+            "the saved registers. No runtime or emulator test was performed. The "
+            "emitted source preserves the exact instructions and is not recovered "
+            "high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT12_EVIDENCE)
 
 
 if __name__ == "__main__":
