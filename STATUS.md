@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,040 verified matches
-totaling 2,569,879 bytes (18.9350% by functions, 24.5445% by bytes), each at
+identified code bytes across six report units. There are 8,060 verified matches
+totaling 2,577,512 bytes (18.9821% by functions, 24.6174% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -16,7 +16,12 @@ path adds nine byte-identical functions / 5,454 bytes. Its exact ranges, matched
 caller gate, direct-call boundary, observed object construction, and unresolved
 record semantics are recorded in
 [the subsystem note](docs/current-main-state9-indexed-record-path.md). The
-current `ITFFM.spr` resource conversion path
+conditional state-9 selected-record application adds another 20 exact
+instruction-stream matches / 7,633 bytes. Its matched table-scan caller,
+`CAIFleet` child construction, shared mission-event entry, exact ranges, and
+remaining schema uncertainties are recorded in
+[its subsystem note](docs/current-main-state9-selected-record-application.md).
+The current `ITFFM.spr` resource conversion path
 adds two byte-identical functions / 2,473 bytes; its evidence and unresolved
 callbacks are recorded in [the subsystem note](docs/current-main-itffm-sprite-resource.md).
 The variable-record child-state refresh adds another two exact functions / 1,784

@@ -974,6 +974,15 @@ MAIN_STATE9_RECORD_ADDRESSES = (
 ADDRESSES += MAIN_STATE9_RECORD_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE9_RECORD_ADDRESSES)
 
+MAIN_STATE9_RECORD_BIND_ADDRESSES = (
+    "58735650", "58735840", "587358C0", "58735950", "58736110",
+    "587374B0", "587429B0", "58777420", "58777710", "58777810",
+    "58777F30", "587780D0", "5878A0E0", "587A85E0", "587A8E00",
+    "587AB4D0", "587AF500", "587AF8F0", "587B2140", "588DCD00",
+)
+ADDRESSES += MAIN_STATE9_RECORD_BIND_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE9_RECORD_BIND_ADDRESSES)
+
 PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
     "587350E0", "58735170", "587351F0", "587352B0", "58735820", "58735930", "58735CC0", "58735E60",
     "587366F0", "58736A20", "58736E20", "58736E60", "58737170", "58737B00", "58738940", "58738C60",
@@ -9222,6 +9231,117 @@ MAIN_STATE9_RECORD_HELPER_EVIDENCE = {
 }
 MAIN_STATE9_RECORD_HELPER_EVIDENCE["58788880"] = MAIN_STATE9_RECORD_ROOT_EVIDENCE
 EVIDENCE.update(MAIN_STATE9_RECORD_HELPER_EVIDENCE)
+
+MAIN_STATE9_RECORD_BIND_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_587780d0 / state-9 selected-record application",
+    "called_by": (
+        "Byte-matched FUN_587F8760 enters its state-9 branch at 0x587F8D55. "
+        "After FUN_58788880 returns, it scans 0xE84-byte rows beginning at "
+        "0x589BAAB0 for a word matching DAT_58A0ADD0. On equality, it forms "
+        "the row pointer as 0x589BB838 + index*0xE84, pushes it, loads ECX "
+        "from [EBP+0x21C48], and calls this root at 0x587F8DB7. The focused "
+        "verifier checks the state gate, scan/selection, argument setup, matched "
+        "callers, exact Ghidra ranges, and full direct-call closure."
+    ),
+    "behavior": (
+        "Fresh Ghidra decompilation shows the root stores its row argument at "
+        "receiver +0x98, calls FUN_587AF8F0 with that pointer, and calls "
+        "FUN_58777F30 with 1,000,000. It then copies row DWORDs at +0x80, "
+        "+0x84, +0x88, and +0x8C to receiver offsets +0x9C, +0xA4, +0xA0, "
+        "and +0xA8 respectively. The child routine stores its argument at "
+        "+0xB8, looks it up through FUN_587AEE40, and when the lookup succeeds "
+        "walks the lookup record's +0x68 count to allocate 0x28-byte child "
+        "objects through FUN_58735650. Ghidra labels that constructor's "
+        "vtable CAIFleet::vftable. It appends the children, copies lookup-record "
+        "fields +0xD8/+0x124/+0x128 to receiver +0x88/+0x8C/+0x90, calls "
+        "FUN_58777710(0x80), and clears receiver +0x94. If the lookup record's "
+        "+0x134 field is nonzero, it also invokes FUN_587A8E00 and FUN_587AB4D0."
+    ),
+    "uncertainty": (
+        "The row and lookup-record schemas, meanings of the 1,000,000 key and "
+        "copied DWORDs, receiver/vector layouts, child-object purpose, and the "
+        "user-visible effect remain unproven. Ghidra contains another matched "
+        "entry into shared closure members from FUN_587A90D0; its "
+        "FUN_587A8E00 helper references MissionEventManager.cpp, so not every "
+        "closure member is exclusive to the state-9 path. This is static "
+        "installed-client evidence; no emulator runtime test was performed."
+    ),
+}
+MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / state-9 selected-record closure member",
+        "called_by": (
+            "Ghidra's exact open direct-call closure places this function below "
+            "FUN_587780D0 or one of its children. The root is called by "
+            "byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table "
+            "scan. Exact body ranges are frozen in "
+            "config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked "
+            "by tools/verify_current_main_state9_record_bind.py."
+        ),
+        "behavior": (
+            "This match preserves the exact installed Main.dll instruction "
+            "stream for one Ghidra body in the selected-record direct-call "
+            "closure. Its independent role is not asserted without stronger evidence."
+        ),
+        "uncertainty": (
+            "The helper's independent field, record, and object semantics remain "
+            "unresolved. Ghidra shows some closure members also have callers "
+            "outside the state-9 path; no emulator test was performed."
+        ),
+    }
+    for address in MAIN_STATE9_RECORD_BIND_ADDRESSES
+    if address != "587780D0"
+}
+MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE["58777F30"] = {
+    "name_in_analysis": "FUN_58777f30 / keyed child-list refresh",
+    "called_by": (
+        "Fresh Ghidra decompilation shows byte-matched "
+        "FUN_587780D0 calling this helper at 0x587780F1 with 1,000,000. "
+        "Byte-matched FUN_587F8760 also calls it at 0x587F9274 from another "
+        "path in the same updater. Its open direct-call closure is checked by "
+        "tools/verify_current_main_state9_record_bind.py."
+    ),
+    "behavior": (
+        "Stores its argument at receiver +0xB8 and calls FUN_587AEE40 with that "
+        "key, retaining the result at +0x50. If the lookup succeeds, it loops "
+        "over the observed count at lookup-record +0x68, calls FUN_58777810 for "
+        "each index, allocates 0x28 bytes, and constructs each entry through "
+        "FUN_58735650, whose Ghidra output writes CAIFleet::vftable. It appends "
+        "the resulting pointers to receiver vector fields +0x64..+0x6C, copies "
+        "lookup fields +0xD8/+0x124/+0x128 to receiver +0x88/+0x8C/+0x90, "
+        "calls FUN_58777710(0x80), and clears receiver +0x94. A nonzero lookup "
+        "field +0x134 leads to FUN_587A8E00 and FUN_587AB4D0."
+    ),
+    "uncertainty": (
+        "The key's meaning, lookup-record schema, vector fields, constructed "
+        "child role, and effect of the 0x80 argument remain unknown. This helper "
+        "also has a separate matched caller in FUN_587F8760; no emulator test "
+        "was performed."
+    ),
+}
+MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE["587A8E00"] = {
+    "name_in_analysis": "FUN_587a8e00 / observed event-root manager initializer",
+    "called_by": (
+        "FUN_58777F30 reaches this helper when its looked-up record has a "
+        "nonzero value at +0x134. The direct-call closure is shared with a "
+        "matched call from FUN_587A90D0 to FUN_587A85E0 at 0x587A981E."
+    ),
+    "behavior": (
+        "Returns zero for a null input. Otherwise copies input fields +0x3FC, "
+        "+0x400, and +0x404 to receiver +4, +8, and +0xC, sets receiver +0x40 "
+        "to 1, and calls FUN_587A85E0 and FUN_587A8C50. If the copied +0x3FC "
+        "value is zero, the Ghidra output calls the assertion helper with the "
+        "literal `m_EventRoot && \"InitManager\"`, file "
+        "`.\\MissionEventManager.cpp`, and line 0x23."
+    ),
+    "uncertainty": (
+        "The manager and input record types, copied-field meanings, assertion "
+        "invariant, and relation of this shared initialization path to the "
+        "state-9 selected-row update are not established. No runtime test was run."
+    ),
+}
+MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE["587780D0"] = MAIN_STATE9_RECORD_BIND_ROOT_EVIDENCE
+EVIDENCE.update(MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE)
 
 
 def sha256(path):

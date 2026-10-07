@@ -390153,6 +390153,2197 @@
         "behavior": "This candidate preserves the exact installed Main.dll instruction stream for one Ghidra body in the state-9 direct-call closure. Its independent semantic role is not asserted without stronger evidence.",
         "uncertainty": "The helper's independent field, record, and object semantics remain unresolved; its byte match has not been tested in the emulator."
       }
+    },
+    {
+      "address": "58735650",
+      "name": "FUN_58735650",
+      "size": 442,
+      "symbol": "_FUN_58735650",
+      "source": "src/client-current/Main/FUN_58735650.cpp",
+      "source_sha256": "57c15de8bb395715d22fac2a06384f284972d077f096917a8a58f4626dacecfa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58735650",
+          "size": 103,
+          "symbol": "_FUN_58735650_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897DCA6",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "5898CAB4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "588FFDB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587356C0",
+          "size": 339,
+          "symbol": "_FUN_58735650_segment_01",
+          "relocations": [
+            {
+              "offset": 22,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "587357BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "587429B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "588F6890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "587356C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58735650 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58735840",
+      "name": "FUN_58735840",
+      "size": 124,
+      "symbol": "_FUN_58735840",
+      "source": "src/client-current/Main/FUN_58735840.cpp",
+      "source_sha256": "87bd0be8bd170f4cefdde171c17d00639d97c304286bab8ff6908eddf232f520",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58735840",
+          "size": 124,
+          "symbol": "_FUN_58735840_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58735840 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587358C0",
+      "name": "FUN_587358c0",
+      "size": 99,
+      "symbol": "_FUN_587358c0",
+      "source": "src/client-current/Main/FUN_587358c0.cpp",
+      "source_sha256": "939c4e8a81004377f87818ad48c9cfb9b6afb1335726e7d266bae2c62303ec36",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587358C0",
+          "size": 99,
+          "symbol": "_FUN_587358c0_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "5898CAE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5898CAD8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587358c0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58735950",
+      "name": "FUN_58735950",
+      "size": 791,
+      "symbol": "_FUN_58735950",
+      "source": "src/client-current/Main/FUN_58735950.cpp",
+      "source_sha256": "c4df8af8c850d817a351196ffcbc285a7048e77c08256ecb13af138ddc4730a3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58735950",
+          "size": 791,
+          "symbol": "_FUN_58735950_segment_00",
+          "relocations": [
+            {
+              "offset": 84,
+              "target_address": "58A0ED18",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "58A244C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 346,
+              "target_address": "58735C12",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 353,
+              "target_address": "58735BF2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 466,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 690,
+              "target_address": "587359E6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 707,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 750,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58735950 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58736110",
+      "name": "FUN_58736110",
+      "size": 1489,
+      "symbol": "_FUN_58736110",
+      "source": "src/client-current/Main/FUN_58736110.cpp",
+      "source_sha256": "806f30b51751724109fea02bbdf7c35730ece0335184103f1d6bce82539a078c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58736110",
+          "size": 1433,
+          "symbol": "_FUN_58736110_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "587366D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "58736693",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5873669B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "587366D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 498,
+              "target_address": "587365FD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 513,
+              "target_address": "587365FD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 549,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 578,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 605,
+              "target_address": "58736650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 616,
+              "target_address": "5873665F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 627,
+              "target_address": "58736461",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 663,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 698,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 724,
+              "target_address": "587364BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 737,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 750,
+              "target_address": "587364BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 786,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 799,
+              "target_address": "587364BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 835,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 886,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 925,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 964,
+              "target_address": "58736646",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 996,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1009,
+              "target_address": "5873665F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1020,
+              "target_address": "587365AB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1119,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1148,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1175,
+              "target_address": "58736650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1212,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1247,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1289,
+              "target_address": "58735840",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1322,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1347,
+              "target_address": "587358C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1388,
+              "target_address": "587361A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587366B0",
+          "size": 56,
+          "symbol": "_FUN_58736110_segment_01",
+          "relocations": [
+            {
+              "offset": 48,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58736110 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587374B0",
+      "name": "FUN_587374b0",
+      "size": 1602,
+      "symbol": "_FUN_587374b0",
+      "source": "src/client-current/Main/FUN_587374b0.cpp",
+      "source_sha256": "e31ff2f4f167a2b5241102bb096d4d94754806218b119dae6db5f6dd85238c35",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587374B0",
+          "size": 508,
+          "symbol": "_FUN_587374b0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898253B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5898CAD0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "58736110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "588E05C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "5878A0E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 235,
+              "target_address": "587899D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 244,
+              "target_address": "588DCD00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 323,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 359,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587376B0",
+          "size": 381,
+          "symbol": "_FUN_587374b0_segment_01",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "587378AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "587378AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "58A244C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "587378CB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 362,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58737830",
+          "size": 713,
+          "symbol": "_FUN_587374b0_segment_02",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58735950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "587376B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 389,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 411,
+              "target_address": "58737AAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 428,
+              "target_address": "58737A92",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "58737A92",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "58737A83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 470,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "58778F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 606,
+              "target_address": "587379F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 633,
+              "target_address": "587379D1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 660,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587374b0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587429B0",
+      "name": "FUN_587429b0",
+      "size": 484,
+      "symbol": "_FUN_587429b0",
+      "source": "src/client-current/Main/FUN_587429b0.cpp",
+      "source_sha256": "18841ba727b53feba73c08df6bbf7491b7429f58606fb929085efab1c04ff36d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587429B0",
+          "size": 484,
+          "symbol": "_FUN_587429b0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E046",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5898CE70",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "588FFDB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58742B3A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "58742B3A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "587374B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 323,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "588F6890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 353,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 369,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "58742A18",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587429b0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58777420",
+      "name": "FUN_58777420",
+      "size": 117,
+      "symbol": "_FUN_58777420",
+      "source": "src/client-current/Main/FUN_58777420.cpp",
+      "source_sha256": "5e59c3016db20b071f8174527810f84030374a4166860e125c89451321356655",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58777420",
+          "size": 117,
+          "symbol": "_FUN_58777420_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898A298",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "589964C0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58735000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58735360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "589AC270",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5898CEC4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58777420 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58777710",
+      "name": "FUN_58777710",
+      "size": 225,
+      "symbol": "_FUN_58777710",
+      "source": "src/client-current/Main/FUN_58777710.cpp",
+      "source_sha256": "96200c8e5a256d938e21df60631f57f23b12a49091dec6a1770d1de0e74b4fb1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58777710",
+          "size": 187,
+          "symbol": "_FUN_58777710_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5897F1C0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "58901790",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "58901A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587777CE",
+          "size": 38,
+          "symbol": "_FUN_58777710_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58777710 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58777810",
+      "name": "FUN_58777810",
+      "size": 133,
+      "symbol": "_FUN_58777810",
+      "source": "src/client-current/Main/FUN_58777810.cpp",
+      "source_sha256": "1a9c3fd220537d05e5c4601d7fd977f7800c0fd4b52d324872c9b038703b8a13",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58777810",
+          "size": 133,
+          "symbol": "_FUN_58777810_segment_00",
+          "relocations": [
+            {
+              "offset": 30,
+              "target_address": "58777420",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58777810 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "58777F30",
+      "name": "FUN_58777f30",
+      "size": 405,
+      "symbol": "_FUN_58777f30",
+      "source": "src/client-current/Main/FUN_58777f30.cpp",
+      "source_sha256": "5e3f4241886f9448f068919e93f246148809ff75202d984c9e22a4179127ee07",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58777F30",
+          "size": 405,
+          "symbol": "_FUN_58777f30_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897F27B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58A24828",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "587AEE40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "587774A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58778051",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58777810",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "58735650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 264,
+              "target_address": "588F6890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "58777FAF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "58777710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 371,
+              "target_address": "587A8E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 379,
+              "target_address": "587AB4D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58777f30 / keyed child-list refresh",
+        "called_by": "Fresh Ghidra decompilation shows byte-matched FUN_587780D0 calling this helper at 0x587780F1 with 1,000,000. Byte-matched FUN_587F8760 also calls it at 0x587F9274 from another path in the same updater. Its open direct-call closure is checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "Stores its argument at receiver +0xB8 and calls FUN_587AEE40 with that key, retaining the result at +0x50. If the lookup succeeds, it loops over the observed count at lookup-record +0x68, calls FUN_58777810 for each index, allocates 0x28 bytes, and constructs each entry through FUN_58735650, whose Ghidra output writes CAIFleet::vftable. It appends the resulting pointers to receiver vector fields +0x64..+0x6C, copies lookup fields +0xD8/+0x124/+0x128 to receiver +0x88/+0x8C/+0x90, calls FUN_58777710(0x80), and clears receiver +0x94. A nonzero lookup field +0x134 leads to FUN_587A8E00 and FUN_587AB4D0.",
+        "uncertainty": "The key's meaning, lookup-record schema, vector fields, constructed child role, and effect of the 0x80 argument remain unknown. This helper also has a separate matched caller in FUN_587F8760; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587780D0",
+      "name": "FUN_587780d0",
+      "size": 91,
+      "symbol": "_FUN_587780d0",
+      "source": "src/client-current/Main/FUN_587780d0.cpp",
+      "source_sha256": "39ab9e14fba86ee46911f7f0b05beaee92919d3b6747931dba14bc525b490472",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587780D0",
+          "size": 91,
+          "symbol": "_FUN_587780d0_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58A24828",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "587AF8F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "58777F30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587780d0 / state-9 selected-record application",
+        "called_by": "Byte-matched FUN_587F8760 enters its state-9 branch at 0x587F8D55. After FUN_58788880 returns, it scans 0xE84-byte rows beginning at 0x589BAAB0 for a word matching DAT_58A0ADD0. On equality, it forms the row pointer as 0x589BB838 + index*0xE84, pushes it, loads ECX from [EBP+0x21C48], and calls this root at 0x587F8DB7. The focused verifier checks the state gate, scan/selection, argument setup, matched callers, exact Ghidra ranges, and full direct-call closure.",
+        "behavior": "Fresh Ghidra decompilation shows the root stores its row argument at receiver +0x98, calls FUN_587AF8F0 with that pointer, and calls FUN_58777F30 with 1,000,000. It then copies row DWORDs at +0x80, +0x84, +0x88, and +0x8C to receiver offsets +0x9C, +0xA4, +0xA0, and +0xA8 respectively. The child routine stores its argument at +0xB8, looks it up through FUN_587AEE40, and when the lookup succeeds walks the lookup record's +0x68 count to allocate 0x28-byte child objects through FUN_58735650. Ghidra labels that constructor's vtable CAIFleet::vftable. It appends the children, copies lookup-record fields +0xD8/+0x124/+0x128 to receiver +0x88/+0x8C/+0x90, calls FUN_58777710(0x80), and clears receiver +0x94. If the lookup record's +0x134 field is nonzero, it also invokes FUN_587A8E00 and FUN_587AB4D0.",
+        "uncertainty": "The row and lookup-record schemas, meanings of the 1,000,000 key and copied DWORDs, receiver/vector layouts, child-object purpose, and the user-visible effect remain unproven. Ghidra contains another matched entry into shared closure members from FUN_587A90D0; its FUN_587A8E00 helper references MissionEventManager.cpp, so not every closure member is exclusive to the state-9 path. This is static installed-client evidence; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5878A0E0",
+      "name": "FUN_5878a0e0",
+      "size": 60,
+      "symbol": "_FUN_5878a0e0",
+      "source": "src/client-current/Main/FUN_5878a0e0.cpp",
+      "source_sha256": "3bc44bd2a614727e9f1ea3c84e4140cf494436edb797bf105084356046eaac62",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878A0E0",
+          "size": 60,
+          "symbol": "_FUN_5878a0e0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878a0e0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587A85E0",
+      "name": "FUN_587a85e0",
+      "size": 164,
+      "symbol": "_FUN_587a85e0",
+      "source": "src/client-current/Main/FUN_587a85e0.cpp",
+      "source_sha256": "d96eff1207370febdf423b43204f53e8bf725e12a4726aad43e40ac4be71e53a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587A85E0",
+          "size": 164,
+          "symbol": "_FUN_587a85e0_segment_00",
+          "relocations": [
+            {
+              "offset": 66,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "587A85E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a85e0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587A8E00",
+      "name": "FUN_587a8e00",
+      "size": 100,
+      "symbol": "_FUN_587a8e00",
+      "source": "src/client-current/Main/FUN_587a8e00.cpp",
+      "source_sha256": "d5edf4ce962df818851a2a6a3ae5495647844f51f8f9d712785c98ceff509748",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587A8E00",
+          "size": 100,
+          "symbol": "_FUN_587a8e00_segment_00",
+          "relocations": [
+            {
+              "offset": 56,
+              "target_address": "589999A4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "58999AF8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CECE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "587A85E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "587A8C50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a8e00 / observed event-root manager initializer",
+        "called_by": "FUN_58777F30 reaches this helper when its looked-up record has a nonzero value at +0x134. The direct-call closure is shared with a matched call from FUN_587A90D0 to FUN_587A85E0 at 0x587A981E.",
+        "behavior": "Returns zero for a null input. Otherwise copies input fields +0x3FC, +0x400, and +0x404 to receiver +4, +8, and +0xC, sets receiver +0x40 to 1, and calls FUN_587A85E0 and FUN_587A8C50. If the copied +0x3FC value is zero, the Ghidra output calls the assertion helper with the literal `m_EventRoot && \"InitManager\"`, file `.\\MissionEventManager.cpp`, and line 0x23.",
+        "uncertainty": "The manager and input record types, copied-field meanings, assertion invariant, and relation of this shared initialization path to the state-9 selected-row update are not established. No runtime test was run."
+      }
+    },
+    {
+      "address": "587AB4D0",
+      "name": "FUN_587ab4d0",
+      "size": 601,
+      "symbol": "_FUN_587ab4d0",
+      "source": "src/client-current/Main/FUN_587ab4d0.cpp",
+      "source_sha256": "d04a375d288f96e64403443255b06539a362a76b37785abdb870a5231ef873ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587AB4D0",
+          "size": 58,
+          "symbol": "_FUN_587ab4d0_segment_00",
+          "relocations": [
+            {
+              "offset": 36,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587AB510",
+          "size": 231,
+          "symbol": "_FUN_587ab4d0_segment_01",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "587AB730",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "587AB6A7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "587AB6AF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "587AB700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "587AB6B7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 200,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 221,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587AB600",
+          "size": 312,
+          "symbol": "_FUN_587ab4d0_segment_02",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "587AB6BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "587AB6CD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "587AB600",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "587AB54D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "587AB585",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "587AB5D2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "587AB613",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 214,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 248,
+              "target_address": "587AB576",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 295,
+              "target_address": "587AB510",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ab4d0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587AF500",
+      "name": "FUN_587af500",
+      "size": 395,
+      "symbol": "_FUN_587af500",
+      "source": "src/client-current/Main/FUN_587af500.cpp",
+      "source_sha256": "f6ac2faf3a7a21708b0811e4e13043223367e53b58d1f2b37f1ad2a0805cb172",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587AF500",
+          "size": 395,
+          "symbol": "_FUN_587af500_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 31,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "587AF5D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "587AF641",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 223,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 255,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 312,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "587AF58A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 360,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587af500 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587AF8F0",
+      "name": "FUN_587af8f0",
+      "size": 173,
+      "symbol": "_FUN_587af8f0",
+      "source": "src/client-current/Main/FUN_587af8f0.cpp",
+      "source_sha256": "14ad6af7adeeb41e9425aa23ca39f5e2d2ffe01edfa44e752577daa88042e8bb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587AF8F0",
+          "size": 173,
+          "symbol": "_FUN_587af8f0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589899EB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "587AEE40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "587AF500",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "587AD4B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "587A54D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "587A54D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587af8f0 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "587B2140",
+      "name": "FUN_587b2140",
+      "size": 23,
+      "symbol": "_FUN_587b2140",
+      "source": "src/client-current/Main/FUN_587b2140.cpp",
+      "source_sha256": "d6e7a49460ce9e26d625af2364afbee3f9c7630828db0ccdaf99a34b4a666fbf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B2140",
+          "size": 23,
+          "symbol": "_FUN_587b2140_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b2140 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
+    },
+    {
+      "address": "588DCD00",
+      "name": "FUN_588dcd00",
+      "size": 115,
+      "symbol": "_FUN_588dcd00",
+      "source": "src/client-current/Main/FUN_588dcd00.cpp",
+      "source_sha256": "12657b602ae85f9383f208175ea36bb292204d7352d72dc5cdfd90acf770e509",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DCD00",
+          "size": 45,
+          "symbol": "_FUN_588dcd00_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "588DCD30",
+          "size": 70,
+          "symbol": "_FUN_588dcd00_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587B2140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "58A0B450",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588dcd00 / state-9 selected-record closure member",
+        "called_by": "Ghidra's exact open direct-call closure places this function below FUN_587780D0 or one of its children. The root is called by byte-matched FUN_587F8760 at 0x587F8DB7 after the state-9 table scan. Exact body ranges are frozen in config/NF2_2026/main-state9-record-bind-body-ranges.tsv and checked by tools/verify_current_main_state9_record_bind.py.",
+        "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
+        "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
+      }
     }
   ]
 }
