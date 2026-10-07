@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 7,994 verified matches
-totaling 2,550,247 bytes (18.8267% by functions, 24.3570% by bytes), each at
+identified code bytes across six report units. There are 7,999 verified matches
+totaling 2,551,931 bytes (18.8385% by functions, 24.3731% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -596,6 +596,10 @@ effect remain unresolved. The original 352-byte index extent ended midway
 through a conditional branch; the corrected extent includes the loop branch
 and `ret 0x14` and stops before four `INT3` padding bytes. All 13 mapped
 operand targets match under objdiff.
+Its `FUN_5874A010` update root and four direct helpers now add five exact
+matches / 1,684 bytes. Both matched call sites, fresh Ghidra ranges, the
+direct-transfer closure, and shared bookkeeping-helper callers are documented
+in [the hit-dispatch evidence](docs/current-main-linked-entry-hit-dispatch.md).
 
 | Server | Identified functions exported | Imports recovered | Missing virtual bytes |
 | --- | ---: | ---: | ---: |

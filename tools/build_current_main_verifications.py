@@ -1000,6 +1000,12 @@ MESSAGE_8002C101_UPDATE_ADDRESSES = (
 ADDRESSES += MESSAGE_8002C101_UPDATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MESSAGE_8002C101_UPDATE_ADDRESSES)
 
+CURRENT_MAIN_5874A010_UPDATE_ADDRESSES = (
+    "58749F50", "58749F80", "58749FA0", "5874A010", "587E6480",
+)
+ADDRESSES += CURRENT_MAIN_5874A010_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_5874A010_UPDATE_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8870,6 +8876,90 @@ MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE = {
 }
 MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE["58880F00"] = MESSAGE_8002C101_UPDATE_ROOT_EVIDENCE
 EVIDENCE.update(MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE)
+
+CURRENT_MAIN_5874A010_UPDATE_EVIDENCE = {
+    "5874A010": {
+        "name_in_analysis": "FUN_5874a010 / linked-entry processing update",
+        "called_by": (
+            "Fresh Ghidra decompiles byte-matched FUN_587c4450 as a linked-entry "
+            "scan that calls this function at 0x587C44C9 and 0x587C4577. It first "
+            "tests the entry's virtual slot +0x18; the zero-result path also checks "
+            "squared distance and synthesizes arguments, while the other path "
+            "forwards values from a caller record. A true result can trigger the "
+            "entry's virtual slot +0x24. The focused verifier checks both direct "
+            "calls and the exact body-range closure against the installed image."
+        ),
+        "behavior": (
+            "Ghidra shows the root checking receiver state +0x98, selecting "
+            "receiver/argument fields according to param_6, and using a shared "
+            "indexed table in its amount calculation. It subtracts the computed "
+            "amount from receiver +0x54, clamps that value at zero, and updates "
+            "state +0x98. The function also calls display/effect helpers. Under its "
+            "state-2 and second-object guards, it updates fields +0x128C/+0x1284 "
+            "on that object and calls three accounting helpers. These offsets and "
+            "operations are observed; gameplay names and units are not inferred."
+        ),
+        "uncertainty": (
+            "The five-function/1,684-byte CALL/JMP closure is rooted at the two "
+            "matched FUN_587c4450 call sites. FUN_587e6480 is shared with matched "
+            "FUN_5873f020 and FUN_588de620 plus open FUN_588d3390; FUN_58749fa0 "
+            "is also called twice by matched FUN_588dffb0. The object classes, "
+            "field units, random-table purpose, and exact gameplay meaning remain "
+            "unresolved. No runtime or emulator test was run."
+        ),
+    },
+    "58749F50": {
+        "name_in_analysis": "FUN_58749f50 / indexed counter increment and display update",
+        "called_by": "Fresh Ghidra references show the selected FUN_5874a010 root call at 0x5874A53A.",
+        "behavior": (
+            "Adds param_3 to the DWORD at receiver +0x20D88 + 4*param_2. When "
+            "param_2 is zero, it passes the updated first DWORD to FUN_58907360."
+        ),
+        "uncertainty": "The counter's name, units, and user-visible display meaning are unresolved.",
+    },
+    "58749F80": {
+        "name_in_analysis": "FUN_58749f80 / encoded counter increment",
+        "called_by": "Fresh Ghidra references show the selected FUN_5874a010 root call at 0x5874A557.",
+        "behavior": (
+            "Decodes the DWORD at receiver +0x20DE8 with XOR 0xAAAAAAAA, adds "
+            "param_2, then stores the result encoded with the same XOR mask."
+        ),
+        "uncertainty": "The counter's name, units, and sentinel policy are unresolved.",
+    },
+    "58749FA0": {
+        "name_in_analysis": "FUN_58749fa0 / bounded encoded-slot update",
+        "called_by": (
+            "Fresh Ghidra references show the selected FUN_5874a010 root call at "
+            "0x5874A59F and two calls from byte-matched FUN_588dffb0 at "
+            "0x588E00CD/0x588E00EC."
+        ),
+        "behavior": (
+            "For indices below 8, decodes the DWORD at receiver +0x109F4 + 4*index, "
+            "adds param_2, and re-encodes it with XOR 0xAAAAAAAA. Negative results "
+            "are replaced by encoded zero. When the index equals the global byte "
+            "at +0x354, it also adjusts a child DWORD at child +0x64 and clamps "
+            "that value to zero."
+        ),
+        "uncertainty": (
+            "The eight slots' names and units are unresolved; this helper is shared "
+            "with the separate FUN_588dffb0 path."
+        ),
+    },
+    "587E6480": {
+        "name_in_analysis": "FUN_587e6480 / repeated number-state update",
+        "called_by": (
+            "Fresh Ghidra references show calls from FUN_5874a010 at 0x5874A579, "
+            "matched FUN_5873f020 at 0x5873F599, open FUN_588d3390 at 0x588D3726, "
+            "and matched FUN_588de620 at 0x588DE9CF."
+        ),
+        "behavior": "Calls FUN_58907360 twice with the same argument.",
+        "uncertainty": (
+            "The repeated update's display or state meaning is unresolved; the "
+            "helper is shared with paths outside this closure."
+        ),
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_5874A010_UPDATE_EVIDENCE)
 
 
 def sha256(path):
