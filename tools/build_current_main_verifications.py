@@ -1114,6 +1114,10 @@ MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES = (
 ADDRESSES += MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES)
 
+MAIN_CMF_FILE_PARSER_ADDRESSES = ("587969D0", "589091F0", "58909F50")
+ADDRESSES += MAIN_CMF_FILE_PARSER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CMF_FILE_PARSER_ADDRESSES)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10498,6 +10502,61 @@ MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE)
+
+MAIN_CMF_FILE_PARSER_EVIDENCE = {
+    "587969D0": {
+        "name_in_analysis": "FUN_587969d0 / CMapFileFDL constructor",
+        "called_by": (
+            "Byte-matched FUN_58800360 at 0x5880084C, after it selects a CMF "
+            "path and before it stores the returned map-file object in the "
+            "map-resource entry."
+        ),
+        "behavior": (
+            "Base-initializes CMapFile, installs the observed CMapFileFDL "
+            "vftable, and calls the file parser for a non-null path. The "
+            "mapped zero-EAX path calls matched FUN_587750B0 with mode 4."
+        ),
+        "uncertainty": (
+            "The parser is typed void in the fresh Ghidra decompilation while "
+            "this constructor tests EAX; the exact status contract and mode-4 "
+            "helper meaning are unresolved. No runtime CMF parse was performed."
+        ),
+    },
+    "589091F0": {
+        "name_in_analysis": "FUN_589091f0 / CMapFile data-file parser",
+        "called_by": (
+            "FUN_587969d0 at 0x58796A19 and base constructor FUN_58909f50 "
+            "at 0x58909F66."
+        ),
+        "behavior": (
+            "Reads a 0x8C-byte header and following checksum through an "
+            "indirect read callback, verifies the 40-byte `Sangduck Map File` "
+            "signature and additive header checksum, then allocates indexed "
+            "0x7C-byte records and per-record payload arrays based on observed "
+            "counts, type bytes, and dimensions."
+        ),
+        "uncertainty": (
+            "The indirect file callback identities, complete record schema, "
+            "data encoding, resource ownership, and failure/status contract "
+            "remain unresolved. This is static mapped-code analysis only."
+        ),
+    },
+    "58909F50": {
+        "name_in_analysis": "FUN_58909f50 / CMapFile base constructor",
+        "called_by": "FUN_587969d0 at 0x587969FB.",
+        "behavior": (
+            "Sets the observed CMapFile vftable; for the null path used by the "
+            "derived constructor, clears the two fields at object offsets "
+            "+0x90 and +0x94. A non-null path delegates to FUN_589091f0."
+        ),
+        "uncertainty": (
+            "The two cleared fields' higher-level ownership and destructor "
+            "behavior are unresolved. No runtime construction/destruction "
+            "test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CMF_FILE_PARSER_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",

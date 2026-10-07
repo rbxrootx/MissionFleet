@@ -416386,6 +416386,464 @@
         "behavior": "Uses the observed string-keyed ordered-tree helpers to locate or create a map entry and returns the value slot at entry +0x28. The byte-matched map/harbor initializer calls it after choosing a CMF resource path and loading the associated resource.",
         "uncertainty": "The exact key normalization, concrete mapped value type, cache lifetime, and resource schema remain unresolved. No client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587969D0",
+      "name": "FUN_587969d0",
+      "size": 140,
+      "symbol": "_FUN_587969d0",
+      "source": "src/client-current/Main/FUN_587969d0.cpp",
+      "source_sha256": "47e50b430f7164cd1b2f11a5bf0f17bf21967d6353aeae2512efb8a6072af3b5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587969D0",
+          "size": 140,
+          "symbol": "_FUN_587969d0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58980578",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "58909F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "58997EC0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "589091F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58A247F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "587750B0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587969d0 / CMapFileFDL constructor",
+        "called_by": "Byte-matched FUN_58800360 at 0x5880084C, after it selects a CMF path and before it stores the returned map-file object in the map-resource entry.",
+        "behavior": "Base-initializes CMapFile, installs the observed CMapFileFDL vftable, and calls the file parser for a non-null path. The mapped zero-EAX path calls matched FUN_587750B0 with mode 4.",
+        "uncertainty": "The parser is typed void in the fresh Ghidra decompilation while this constructor tests EAX; the exact status contract and mode-4 helper meaning are unresolved. No runtime CMF parse was performed."
+      }
+    },
+    {
+      "address": "589091F0",
+      "name": "FUN_589091f0",
+      "size": 2092,
+      "symbol": "_FUN_589091f0",
+      "source": "src/client-current/Main/FUN_589091f0.cpp",
+      "source_sha256": "c33efda88ac9c00f283a38fef6cc9a26fe2d05d943428fd1377994df93ed4aaf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "589091F0",
+          "size": 335,
+          "symbol": "_FUN_589091f0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 293,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 310,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 323,
+              "target_address": "58909A44",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58909340",
+          "size": 1265,
+          "symbol": "_FUN_589091f0_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5890954A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "589096B1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "5890954A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 518,
+              "target_address": "589096A9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 543,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 908,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 917,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 927,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 965,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 998,
+              "target_address": "58909A56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1015,
+              "target_address": "58909839",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1054,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1071,
+              "target_address": "58909A67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1111,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1137,
+              "target_address": "5890982B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1261,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58909839",
+          "size": 94,
+          "symbol": "_FUN_589091f0_segment_02",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58909A1E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "589098D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58909A1E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "589098A0",
+          "size": 168,
+          "symbol": "_FUN_589091f0_segment_03",
+          "relocations": [
+            {
+              "offset": 51,
+              "target_address": "58909A1E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58909A1E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58909950",
+          "size": 128,
+          "symbol": "_FUN_589091f0_segment_04",
+          "relocations": [
+            {
+              "offset": 124,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58909A1E",
+          "size": 102,
+          "symbol": "_FUN_589091f0_segment_05",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58909340",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_589091f0 / CMapFile data-file parser",
+        "called_by": "FUN_587969d0 at 0x58796A19 and base constructor FUN_58909f50 at 0x58909F66.",
+        "behavior": "Reads a 0x8C-byte header and following checksum through an indirect read callback, verifies the 40-byte `Sangduck Map File` signature and additive header checksum, then allocates indexed 0x7C-byte records and per-record payload arrays based on observed counts, type bytes, and dimensions.",
+        "uncertainty": "The indirect file callback identities, complete record schema, data encoding, resource ownership, and failure/status contract remain unresolved. This is static mapped-code analysis only."
+      }
+    },
+    {
+      "address": "58909F50",
+      "name": "FUN_58909f50",
+      "size": 51,
+      "symbol": "_FUN_58909f50",
+      "source": "src/client-current/Main/FUN_58909f50.cpp",
+      "source_sha256": "db21e085990a8673c319c319234c59320aa4987b27b0d109c1fd3846269cfd45",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58909F50",
+          "size": 51,
+          "symbol": "_FUN_58909f50_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "589A2A64",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "589091F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58909f50 / CMapFile base constructor",
+        "called_by": "FUN_587969d0 at 0x587969FB.",
+        "behavior": "Sets the observed CMapFile vftable; for the null path used by the derived constructor, clears the two fields at object offsets +0x90 and +0x94. A non-null path delegates to FUN_589091f0.",
+        "uncertainty": "The two cleared fields' higher-level ownership and destructor behavior are unresolved. No runtime construction/destruction test was performed."
+      }
     }
   ]
 }

@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_262)
-        self.assertEqual(self.report["measures"]["matched_code"], "2654784")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_265)
+        self.assertEqual(self.report["measures"]["matched_code"], "2657067")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_129)
-        self.assertEqual(current["measures"]["matched_code"], "1681366")
+        self.assertEqual(current["measures"]["matched_functions"], 2_132)
+        self.assertEqual(current["measures"]["matched_code"], "1683649")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -134,6 +134,18 @@ class ProgressReportTests(unittest.TestCase):
             build_current_main_verifications
             .MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE
         )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_cmf_file_parser_has_evidence_for_every_member(self):
+        addresses = (
+            build_current_main_verifications.MAIN_CMF_FILE_PARSER_ADDRESSES
+        )
+        self.assertEqual(addresses, ("587969D0", "589091F0", "58909F50"))
+        evidence = build_current_main_verifications.MAIN_CMF_FILE_PARSER_EVIDENCE
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:
             self.assertTrue(evidence[address]["called_by"], address)

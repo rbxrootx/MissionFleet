@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,262 of 42,461 functions and 2,654,784 of 10,470,295 bytes (19.4579% by
-functions and 25.3554% by bytes); every counted function match is verified at
+credits 8,265 of 42,461 functions and 2,657,067 of 10,470,295 bytes (19.4649% by
+functions and 25.3772% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,129 exact function matches totaling 1,681,366 bytes. The
+inventory has 2,132 exact function matches totaling 1,683,649 bytes. The
 message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
@@ -179,6 +179,10 @@ CMF path and stores the loaded resource at the returned entry's value slot. Fres
 Ghidra ranges, direct-call closure, matched boundaries, and remaining container
 uncertainties are recorded in
 [`current-main-cmf-map-entry-lookup.md`](current-main-cmf-map-entry-lookup.md).
+The `CMapFileFDL` loader directly called by that initializer adds three exact
+matches / 2,283 bytes. Its checked `Sangduck Map File` header, record-reading
+branches, direct-call closure, and unresolved file/status semantics are recorded
+in [`current-main-cmf-file-parser.md`](current-main-cmf-file-parser.md).
 
 The variable-record child-state refresh adds two exact matches / 1,784 bytes.
 The matched caller, exact ranges, and conditional child-flag behavior are
