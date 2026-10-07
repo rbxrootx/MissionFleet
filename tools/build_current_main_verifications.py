@@ -12874,6 +12874,83 @@ MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_EVIDENCE)
 
+MAIN_FORCE_SCREEN_RECORD_REFRESH_ADDRESSES = (
+    "588B4980", "588F3F20", "588F44D0",
+)
+ADDRESSES += MAIN_FORCE_SCREEN_RECORD_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_SCREEN_RECORD_REFRESH_ADDRESSES)
+
+MAIN_FORCE_SCREEN_RECORD_REFRESH_EVIDENCE = {
+    "588B4980": {
+        "name_in_analysis": "FUN_588b4980 / force-screen record refresh",
+        "called_by": (
+            "Byte-matched message dispatcher FUN_587bb700 calls this body at "
+            "0x587bdf0a in its 0x80020D0D branch. Fresh Ghidra shows the "
+            "dispatcher passes the record pointer and payload-size value."
+        ),
+        "behavior": (
+            "Releases and clears existing pointer-array entries, then accepts "
+            "a payload only when the supplied size exceeds six bytes. It reads "
+            "two 16-bit counts. The first count drives construction of 0x180-byte "
+            "records through verified FUN_5877cc30; the second drives creation "
+            "of variable-sized records through verified FUN_588e9f60, advancing "
+            "by 0xb8 plus ((record_word >> 1) & 0x1f) * 0x18. It walks two "
+            "existing screen object collections through verified helpers, then "
+            "passes the first constructed collection through FUN_588f44d0 and "
+            "the second through FUN_588f3f20. The latter links entries through "
+            "the observed +0xce0/+0xce4 fields and increments its +0xc count. "
+            "Finally it writes 0x000b to receiver +0xce and 1 to +0x1cc, then "
+            "invokes virtual slot +0x08. Fresh Ghidra covers 997 bytes in six "
+            "ranges for the root and 103 bytes in the two child helpers."
+        ),
+        "uncertainty": (
+            "The record schemas, meanings of the two counts and receiver fields, "
+            "ownership and purpose of the first collection, contracts of the "
+            "indirect callbacks and allocation helpers, and visible screen result "
+            "remain unresolved. The dispatcher proves the mapped message route, "
+            "not live-server compatibility. No client or emulator runtime test "
+            "was performed."
+        ),
+    },
+    "588F3F20": {
+        "name_in_analysis": "FUN_588f3f20 / force-screen intrusive collection append",
+        "called_by": (
+            "Called by FUN_588b4980 at 0x588b4d4b once for each item in its "
+            "second constructed record collection."
+        ),
+        "behavior": (
+            "If the collection head at receiver +4 is null, stores the item as "
+            "both head and tail, zeros the item's +0xce0/+0xce4 links, and "
+            "increments receiver +0xc. Otherwise links the prior tail to the "
+            "item through +0xce4, sets the item's +0xce0 to the prior tail, "
+            "updates the tail, clears the item's +0xce4, and increments +0xc. "
+            "Fresh Ghidra assigns one 70-byte range with 20 instructions."
+        ),
+        "uncertainty": (
+            "The collection's class, its relationship to the screen object, the "
+            "item type, and link-field ownership remain unknown. No emulator "
+            "runtime test was performed."
+        ),
+    },
+    "588F44D0": {
+        "name_in_analysis": "FUN_588f44d0 / force-screen item helper",
+        "called_by": (
+            "Called by FUN_588b4980 at 0x588b4d23 once for each item in its "
+            "first constructed record collection."
+        ),
+        "behavior": (
+            "Calls verified FUN_5877b130 twice with the item pointer and returns "
+            "that pointer. Fresh Ghidra assigns one 33-byte range with 14 "
+            "instructions."
+        ),
+        "uncertainty": (
+            "The two helper-call contracts, item ownership, and visible screen "
+            "effect remain unresolved. No emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_FORCE_SCREEN_RECORD_REFRESH_EVIDENCE)
+
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

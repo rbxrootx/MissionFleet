@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_376)
-        self.assertEqual(self.report["measures"]["matched_code"], "2696166")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_379)
+        self.assertEqual(self.report["measures"]["matched_code"], "2697266")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,14 +26,30 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_243)
-        self.assertEqual(current["measures"]["matched_code"], "1722748")
+        self.assertEqual(current["measures"]["matched_functions"], 2_246)
+        self.assertEqual(current["measures"]["matched_code"], "1723848")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
         self.assertEqual(core["measures"]["matched_functions"], 431)
         self.assertEqual(core["measures"]["matched_code"], "333421")
+
+    def test_force_screen_record_refresh_has_original_code_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_FORCE_SCREEN_RECORD_REFRESH_ADDRESSES
+        )
+        self.assertEqual(addresses, ("588B4980", "588F3F20", "588F44D0"))
+        evidence = (
+            build_current_main_verifications
+            .MAIN_FORCE_SCREEN_RECORD_REFRESH_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
 
     def test_event_cleanup_closure_has_evidence_for_every_member(self):
         addresses = (

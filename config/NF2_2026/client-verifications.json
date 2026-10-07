@@ -428551,6 +428551,385 @@
         "behavior": "Installs CPageResultOfBattle_ControlMenuScreen::vftable on the receiver, then visits groups of child/object pointer fields and arrays. For each non-null pointer it calls that object's first vtable entry (usually with argument 1) and clears the field; the first field also receives a second supplied value. It then calls verified FUN_58902C10, restores the saved exception-list pointer, and returns. Fresh Ghidra assigns 1,107 bytes in two exact ranges with 374 decoded instructions.",
         "uncertainty": "Child field roles and ownership rules, the runtime effects of the indirect virtual callbacks, the second value passed for the first field, and FUN_58902C10's contract remain unresolved. The RTTI slot and mapped cleanup behavior establish static teardown context; no client or emulator destruction test was performed."
       }
+    },
+    {
+      "address": "588B4980",
+      "name": "FUN_588b4980",
+      "size": 997,
+      "symbol": "_FUN_588b4980",
+      "source": "src/client-current/Main/FUN_588b4980.cpp",
+      "source_sha256": "71718c0401697b2fa66a8ade0cd2309c006d76f9203c483a4b4bba2493ecb44c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B4980",
+          "size": 74,
+          "symbol": "_FUN_588b4980_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988286",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B49D0",
+          "size": 67,
+          "symbol": "_FUN_588b4980_segment_01",
+          "relocations": [
+            {
+              "offset": 63,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B4A1C",
+          "size": 103,
+          "symbol": "_FUN_588b4980_segment_02",
+          "relocations": [
+            {
+              "offset": 99,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B4A8C",
+          "size": 109,
+          "symbol": "_FUN_588b4980_segment_03",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "588B4BFD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B4B00",
+          "size": 281,
+          "symbol": "_FUN_588b4980_segment_04",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5877CC30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "588E9F60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B4C20",
+          "size": 363,
+          "symbol": "_FUN_588b4980_segment_05",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 14,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "588F4500",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "588B4D03",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "588B4D03",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "588F4060",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587D8FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "587DAD80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "587D8F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "587DAC20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "588E9880",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "587DF580",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "588F41E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 223,
+              "target_address": "588B4C61",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "588F44D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "588F3F20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b4980 / force-screen record refresh",
+        "called_by": "Byte-matched message dispatcher FUN_587bb700 calls this body at 0x587bdf0a in its 0x80020D0D branch. Fresh Ghidra shows the dispatcher passes the record pointer and payload-size value.",
+        "behavior": "Releases and clears existing pointer-array entries, then accepts a payload only when the supplied size exceeds six bytes. It reads two 16-bit counts. The first count drives construction of 0x180-byte records through verified FUN_5877cc30; the second drives creation of variable-sized records through verified FUN_588e9f60, advancing by 0xb8 plus ((record_word >> 1) & 0x1f) * 0x18. It walks two existing screen object collections through verified helpers, then passes the first constructed collection through FUN_588f44d0 and the second through FUN_588f3f20. The latter links entries through the observed +0xce0/+0xce4 fields and increments its +0xc count. Finally it writes 0x000b to receiver +0xce and 1 to +0x1cc, then invokes virtual slot +0x08. Fresh Ghidra covers 997 bytes in six ranges for the root and 103 bytes in the two child helpers.",
+        "uncertainty": "The record schemas, meanings of the two counts and receiver fields, ownership and purpose of the first collection, contracts of the indirect callbacks and allocation helpers, and visible screen result remain unresolved. The dispatcher proves the mapped message route, not live-server compatibility. No client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588F3F20",
+      "name": "FUN_588f3f20",
+      "size": 70,
+      "symbol": "_FUN_588f3f20",
+      "source": "src/client-current/Main/FUN_588f3f20.cpp",
+      "source_sha256": "a0c1f1438eef89d47bf7be60972e29d272e9135e51d2c25b67510c0c80a70e3b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F3F20",
+          "size": 70,
+          "symbol": "_FUN_588f3f20_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f3f20 / force-screen intrusive collection append",
+        "called_by": "Called by FUN_588b4980 at 0x588b4d4b once for each item in its second constructed record collection.",
+        "behavior": "If the collection head at receiver +4 is null, stores the item as both head and tail, zeros the item's +0xce0/+0xce4 links, and increments receiver +0xc. Otherwise links the prior tail to the item through +0xce4, sets the item's +0xce0 to the prior tail, updates the tail, clears the item's +0xce4, and increments +0xc. Fresh Ghidra assigns one 70-byte range with 20 instructions.",
+        "uncertainty": "The collection's class, its relationship to the screen object, the item type, and link-field ownership remain unknown. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588F44D0",
+      "name": "FUN_588f44d0",
+      "size": 33,
+      "symbol": "_FUN_588f44d0",
+      "source": "src/client-current/Main/FUN_588f44d0.cpp",
+      "source_sha256": "e45b2b4dbb68e716516bca4274afb6783fe33913c4f5fd5c9e23a183d6c226ad",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F44D0",
+          "size": 33,
+          "symbol": "_FUN_588f44d0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5877B130",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "5877B130",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f44d0 / force-screen item helper",
+        "called_by": "Called by FUN_588b4980 at 0x588b4d23 once for each item in its first constructed record collection.",
+        "behavior": "Calls verified FUN_5877b130 twice with the item pointer and returns that pointer. Fresh Ghidra assigns one 33-byte range with 14 instructions.",
+        "uncertainty": "The two helper-call contracts, item ownership, and visible screen effect remain unresolved. No emulator runtime test was performed."
+      }
     }
   ]
 }
