@@ -40,6 +40,7 @@ from tools import (
     verify_current_main_scroll_text_screen_slot3,
     verify_current_main_shell_map_object_screen_slot5,
     verify_current_main_587a6e90_child_flag_helper,
+    verify_current_main_58854300_child_bit_update,
 )
 
 
@@ -52,8 +53,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_608)
-        self.assertEqual(self.report["measures"]["matched_code"], "2747088")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_609)
+        self.assertEqual(self.report["measures"]["matched_code"], "2747219")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -64,8 +65,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_475)
-        self.assertEqual(current["measures"]["matched_code"], "1773670")
+        self.assertEqual(current["measures"]["matched_functions"], 2_476)
+        self.assertEqual(current["measures"]["matched_code"], "1773801")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -729,6 +730,23 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0xFFF0", evidence["587A6E90"]["behavior"])
         self.assertTrue(evidence["587A6E90"]["uncertainty"])
         verify_current_main_587a6e90_child_flag_helper.main()
+
+    def test_fire_control_panel_child_bit_update_matches_original_body_and_callers(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_ADDRESSES
+        )
+        self.assertEqual(addresses, ("58854300",))
+        evidence = (
+            build_current_main_verifications
+            .MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("58854A00", evidence["58854300"]["called_by"])
+        self.assertIn("588DF0A5", evidence["58854300"]["called_by"])
+        self.assertIn("+0x9C", evidence["58854300"]["behavior"])
+        self.assertTrue(evidence["58854300"]["uncertainty"])
+        verify_current_main_58854300_child_bit_update.main()
 
     def test_page_result_control_menu_cleanup_has_original_code_evidence(self):
         addresses = (

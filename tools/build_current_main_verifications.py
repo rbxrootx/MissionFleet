@@ -15039,6 +15039,44 @@ MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_SHELL_MAP_OBJECT_SCREEN_SLOT5_EVIDENCE)
 
+MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_ADDRESSES = ("58854300",)
+ADDRESSES += MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_ADDRESSES)
+
+MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_EVIDENCE = {
+    "58854300": {
+        "name_in_analysis": "FUN_58854300 / CPannelFireControl child bit-one update",
+        "called_by": (
+            "Fresh Ghidra body and edge exports identify three calls from two "
+            "already byte-matched callers: FUN_587F21E0 calls at 0x587F2562 and "
+            "0x587F27ED with ECX=[0x58A245C4] and argument 1; FUN_588DEB30 calls "
+            "at 0x588DF0A5 with the same receiver and argument 0. The matched "
+            "FUN_58854A00 constructor installs CPannelFireControl::vftable and its "
+            "matched caller stores the constructed panel at DAT_58A245C4."
+        ),
+        "behavior": (
+            "Stores the stack argument at receiver +0x2D8. A nonzero argument "
+            "calls verified FUN_588542A0 with 0 and clears bit 1 in the child "
+            "flag words at +0x24 reached through receiver pointer slots +0x9C, "
+            "+0xA0, +0xA4, and +0xA8. A zero argument calls FUN_588542A0 with 1 "
+            "and sets bit 1 in those four child words. "
+            "The verified helper performs the same bit update on eight more child "
+            "slots at +0x7C through +0x98. Fresh Ghidra assigns one contiguous "
+            "131-byte range with 33 instructions; both exits end in ret 4."
+        ),
+        "uncertainty": (
+            "The panel association comes from matched global initialization and "
+            "caller evidence; this helper has no established RTTI entry, vtable "
+            "slot, or original C++ method name. The meaning of bit 1, the roles of "
+            "the 12 children, the meaning of +0x2D8, and the initialization "
+            "invariant for four direct child pointers without null checks remain "
+            "unknown. "
+            "No client or emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

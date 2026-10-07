@@ -32,3 +32,25 @@ targets checked.
 
 The receiver and child classes, game meaning of bit one, mode byte, selectors,
 and `+0x2CC` value are unresolved. No runtime client test was performed.
+
+## `FUN_58854300`: fire-control panel child bit-one update
+
+Fresh Ghidra body exports agree on one contiguous `FUN_58854300` body,
+`[0x58854300,0x58854383)`, 131 bytes and 33 instructions. The two fresh edge
+exports identify three incoming calls from byte-matched `FUN_587F21E0`
+(twice) and `FUN_588DEB30` (once), and two outgoing calls to the already
+matched `FUN_588542A0` helper described above.
+
+Each caller loads ECX from `[0x58A245C4]`, the panel pointer installed by
+byte-matched constructor `FUN_58854A00`. `FUN_587F21E0` passes 1 at both sites;
+`FUN_588DEB30` passes 0. The wrapper stores the argument at `this+0x2D8`. A
+nonzero argument calls `FUN_588542A0(0)` and clears bit 1 in each pointed-to
+child's word at `+0x24` for pointers stored at `this+0x9C`, `+0xA0`, `+0xA4`,
+and `+0xA8`. A zero argument calls `FUN_588542A0(1)` and sets bit 1 in those
+four child words. Together, both methods update bit 1 across 12 child slots.
+
+The bit's domain meaning, each child's role, and `this+0x2D8` remain unknown.
+The four direct child accesses have no visible null checks; their initialization
+invariant is unestablished. No runtime client or emulator test has been
+performed. The focused body, call-edge, caller, and panel-global checks are in
+`tools/verify_current_main_58854300_child_bit_update.py`.
