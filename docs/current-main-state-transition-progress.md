@@ -9,8 +9,10 @@ computes a ratio clamped to 0..100, stores it at `+0x1444`, and passes that
 value to `FUN_587B03A0`. When the decoded `+0x398` value is nonpositive, it
 resets that field to the encoded sentinel `0xAAAAAAAA` and calls
 `FUN_588DF450`, now reconstructed through its return before INT3 padding.
-Active-object paths call `FUN_58895540` and `FUN_587A6E90`,
-and may invoke `FUN_587F2870`. If receiver `+0x60B0` is zero, it increments a
+Active-object paths call `FUN_58895540` and byte-matched `FUN_587A6E90`,
+which clears the low nibble in up to 32 non-null child words at child `+0x24`
+when passed 1; the meaning of those bits is unknown. The path may also invoke
+`FUN_587F2870`. If receiver `+0x60B0` is zero, it increments a
 global counter, sets receiver flags and calls `FUN_587E8750`. With a nonzero
 flag argument it also calls `FUN_58749FA0` and can adjust global `+0x10A18`.
 

@@ -13226,6 +13226,40 @@ MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE)
 
+MAIN_CHILD_FLAG_LOW_NIBBLE_HELPER_ADDRESSES = ("587A6E90",)
+ADDRESSES += MAIN_CHILD_FLAG_LOW_NIBBLE_HELPER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CHILD_FLAG_LOW_NIBBLE_HELPER_ADDRESSES)
+
+MAIN_CHILD_FLAG_LOW_NIBBLE_HELPER_EVIDENCE = {
+    "587A6E90": {
+        "name_in_analysis": "FUN_587a6e90 / 32-slot child-flag low-nibble helper",
+        "called_by": (
+            "Fresh Ghidra body and edge exports identify exactly two direct callers, "
+            "both already byte-matched: FUN_588DEB30 calls at 0x588DF024 with "
+            "ECX loaded from [0x58A2459C]+0x20C9C and pushes EBX, which that path "
+            "cleared to zero; FUN_588DFFB0 calls at 0x588E0046 with the same ECX "
+            "source and pushes 1."
+        ),
+        "behavior": (
+            "Walks 32 optional child pointers in eight groups of four at receiver "
+            "offsets +0x08 through +0x84. For each non-null child, it writes "
+            "(old_word_at_child_plus_0x24 & 0xFFF0) | (argument == 1 ? 0 : 0xF), "
+            "preserving the upper 12 bits and replacing the low nibble. The method "
+            "has one complete 194-byte Ghidra range with 71 instructions, no calls, "
+            "and ends in ret 4."
+        ),
+        "uncertainty": (
+            "No RTTI or vtable ownership is established; the mapped image has only "
+            "the two direct-call references. The child class and domain meaning of "
+            "the low nibble remain unknown, so names such as visibility or active "
+            "state are not justified. Callers evidence arguments 0 and 1; behavior "
+            "for other values follows the mapped comparison with 1. No client or "
+            "emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CHILD_FLAG_LOW_NIBBLE_HELPER_EVIDENCE)
+
 MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES = ("587D7000", "587D6740")
 ADDRESSES += MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES)
