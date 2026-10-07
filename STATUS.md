@@ -6,11 +6,17 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,558 verified matches
-totaling 2,733,000 bytes (20.1550% by functions, 26.1024% by bytes), each at
+identified code bytes across six report units. There are 8,559 verified matches
+totaling 2,733,246 bytes (20.1573% by functions, 26.1048% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
-source or playable behavior. The RTTI-identified `CExplanPannel` event/update
+source or playable behavior. The installed-client quit-prompt setup helper
+adds one byte-identical function / 246 bytes. Fresh Ghidra output and two
+matched callers anchor its child setup, conditional localized prompt key, and
+vtable call; a third incoming caller remains unmatched, and parameter and
+control meanings remain uncertain. See
+[the quit-prompt evidence](docs/current-main-quit-prompt-setup.md). The
+RTTI-identified `CExplanPannel` event/update
 closure adds 62 exact functions / 11,871 bytes across 74 fresh Ghidra ranges.
 Its three vtable methods, shared state dispatcher, matched caller paths, and
 remaining visual-state uncertainties are recorded in

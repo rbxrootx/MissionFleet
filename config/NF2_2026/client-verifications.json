@@ -442903,6 +442903,137 @@
         "behavior": "This six-byte function calls the indirect target stored at DAT_5898C2F0 and returns; the callback identity and contract are not resolved here.",
         "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
       }
+    },
+    {
+      "address": "5876B9F0",
+      "name": "FUN_5876b9f0",
+      "size": 246,
+      "symbol": "_FUN_5876b9f0",
+      "source": "src/client-current/Main/FUN_5876b9f0.cpp",
+      "source_sha256": "34d6e09a649a9f739e279a9443cfc835c38591389005b0957ba809821a86353c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876B9F0",
+          "size": 246,
+          "symbol": "_FUN_5876b9f0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 12,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5898D61C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "58762A60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58762B60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58762B60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58762B60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58995AD4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "587645F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876b9f0 / quit-prompt setup helper",
+        "called_by": "The byte-verified FUN_587D51D0 calls this function at 0x587D59D4, and byte-verified FUN_587DEB30 calls it at 0x587DEDEE. A third incoming call is mapped at 0x58894BA8 from FUN_58894B40, which is not byte-verified. The focused verifier checks all three original mapped call sites.",
+        "behavior": "Fresh Ghidra output shows setup of three child objects and their positions, followed by selector calls with values 3, 4, and 8. When the stack word at [esp+8] is zero, the function resolves MESSAGESTRING__ARE_YOU_SURE_TO_QUIT through the global string resolver, passes the result to FUN_587645F0, and writes 1 to receiver offset +0x7C. It then calls the receiver's vtable slot +4.",
+        "uncertainty": "The receiver type, child-control labels, caller-specific stack argument meanings, virtual callback contract, and the third caller's path are unresolved. Ghidra's inferred signature does not describe the full 0x10-byte stack cleanup. The function has not been exercised in the emulator."
+      }
     }
   ]
 }

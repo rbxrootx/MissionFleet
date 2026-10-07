@@ -52,12 +52,16 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,558 of 42,461 functions and 2,733,000 of 10,470,295 bytes (20.1550% by
-functions and 26.1024% by bytes); every counted function match is verified at
+credits 8,559 of 42,461 functions and 2,733,246 of 10,470,295 bytes (20.1573% by
+functions and 26.1048% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,425 exact function matches totaling 1,759,582 bytes. Its
+inventory has 2,426 exact function matches totaling 1,759,828 bytes. The
+quit-prompt setup helper adds one exact 246-byte function, anchored by two
+matched callers and the original localization key; a third caller is still
+unmatched and parameter and callback meanings remain unresolved. See
+[`current-main-quit-prompt-setup.md`](current-main-quit-prompt-setup.md). Its
 RTTI-identified `CExplanPannel` event/update closure adds 62 exact functions /
 11,871 bytes across 74 Ghidra ranges. The three vtable methods converge on a
 state dispatcher, and three already-matched caller paths reach helpers within

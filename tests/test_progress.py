@@ -9,6 +9,7 @@ from tools import (
     verify_current_main_c_screenshot_time,
     verify_current_main_force_record_refresh,
     verify_current_main_event_80020a03_list_update,
+    verify_current_main_quit_prompt_setup,
 )
 
 
@@ -21,8 +22,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_558)
-        self.assertEqual(self.report["measures"]["matched_code"], "2733000")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_559)
+        self.assertEqual(self.report["measures"]["matched_code"], "2733246")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -33,8 +34,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_425)
-        self.assertEqual(current["measures"]["matched_code"], "1759582")
+        self.assertEqual(current["measures"]["matched_functions"], 2_426)
+        self.assertEqual(current["measures"]["matched_code"], "1759828")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -105,6 +106,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x30C-byte", evidence["58841AF0"]["behavior"])
         self.assertIn("&lt;", evidence["5883EB90"]["behavior"])
         verify_current_main_event_80020a03_list_update.main()
+
+    def test_quit_prompt_setup_has_two_matched_caller_paths(self):
+        addresses = build_current_main_verifications.MAIN_QUIT_PROMPT_SETUP_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_QUIT_PROMPT_SETUP_EVIDENCE
+        self.assertEqual(addresses, ("5876B9F0",))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("587D59D4", evidence["5876B9F0"]["called_by"])
+        self.assertIn("587DEDEE", evidence["5876B9F0"]["called_by"])
+        self.assertIn("58894BA8", evidence["5876B9F0"]["called_by"])
+        self.assertIn("ARE_YOU_SURE_TO_QUIT", evidence["5876B9F0"]["behavior"])
+        self.assertTrue(evidence["5876B9F0"]["uncertainty"])
+        verify_current_main_quit_prompt_setup.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

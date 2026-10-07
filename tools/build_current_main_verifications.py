@@ -456,6 +456,8 @@ MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES = (
     "58841AF0", "588421C0", "5897D124",
 )
 ADDRESSES += MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
+MAIN_QUIT_PROMPT_SETUP_ADDRESSES = ("5876B9F0",)
+ADDRESSES += MAIN_QUIT_PROMPT_SETUP_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -825,6 +827,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_SCREENSHOT_TIME_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_RECORD_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_QUIT_PROMPT_SETUP_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13713,6 +13716,35 @@ for address in MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES:
         ),
     }
 EVIDENCE.update(MAIN_EVENT_80020A03_LIST_UPDATE_EVIDENCE)
+
+MAIN_QUIT_PROMPT_SETUP_EVIDENCE = {
+    "5876B9F0": {
+        "name_in_analysis": "FUN_5876b9f0 / quit-prompt setup helper",
+        "called_by": (
+            "The byte-verified FUN_587D51D0 calls this function at 0x587D59D4, "
+            "and byte-verified FUN_587DEB30 calls it at 0x587DEDEE. A third "
+            "incoming call is mapped at 0x58894BA8 from FUN_58894B40, which "
+            "is not byte-verified. The focused verifier checks all three "
+            "original mapped call sites."
+        ),
+        "behavior": (
+            "Fresh Ghidra output shows setup of three child objects and their "
+            "positions, followed by selector calls with values 3, 4, and 8. "
+            "When the stack word at [esp+8] is zero, the function resolves "
+            "MESSAGESTRING__ARE_YOU_SURE_TO_QUIT through the global string "
+            "resolver, passes the result to FUN_587645F0, and writes 1 to "
+            "receiver offset +0x7C. It then calls the receiver's vtable slot +4."
+        ),
+        "uncertainty": (
+            "The receiver type, child-control labels, caller-specific stack "
+            "argument meanings, virtual callback contract, and the third "
+            "caller's path are unresolved. "
+            "Ghidra's inferred signature does not describe the full 0x10-byte "
+            "stack cleanup. The function has not been exercised in the emulator."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_QUIT_PROMPT_SETUP_EVIDENCE)
 
 
 if __name__ == "__main__":
