@@ -52,13 +52,18 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,184 of 42,461 functions and 2,627,810 of 10,470,295 bytes (19.2742% by
-functions and 25.0978% by bytes); every counted function match is verified at
+credits 8,202 of 42,461 functions and 2,633,140 of 10,470,295 bytes (19.3165% by
+functions and 25.1487% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,051 exact function matches totaling 1,654,392 bytes (24.2034% by
-functions and 70.2693% by bytes). The installed client's battle-room `0x80020115`
+inventory has 2,069 exact function matches totaling 1,659,722 bytes (24.4159% by
+functions and 70.4956% by bytes). The message `0x80022001` state-application
+path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
+branch, 32-entry update, exact body ranges, and remaining field uncertainties
+are documented in
+[`current-main-message-80022001-state-application.md`](current-main-message-80022001-state-application.md).
+The installed client's battle-room `0x80020115`
 update closure adds eight byte-identical functions / 3,847 bytes. Its matched
 dispatcher route, bitmap traversal, factory selection, exact ranges, and payload
 uncertainties are recorded in

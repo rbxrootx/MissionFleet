@@ -1059,6 +1059,12 @@ CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES = (
 ADDRESSES += CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES)
 
+CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES = (
+    "5880C710", "588890F0", "5888CC50", "5888CC70", "588C7110",
+)
+ADDRESSES += CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9370,6 +9376,69 @@ CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE)
+
+CURRENT_MAIN_MESSAGE_80022001_STATE_EVIDENCE = {
+    "5880C710": {
+        "name_in_analysis": "FUN_5880c710 / message 0x80022001 state application",
+        "called_by": (
+            "Byte-matched FUN_587bb700 compares EAX with 0x80022001 at "
+            "0x587BFF12, branches to the 0x587C071D handler at 0x587BFF1D, "
+            "and directly calls this entry at 0x587C076D. The focused "
+            "verifier checks those mapped instructions and the exact helper closure."
+        ),
+        "behavior": (
+            "The root updates bit 1 on the receiver and its child at +0x428, "
+            "uses the payload flags to set or clear child state bits, and "
+            "selects four child flags from the payload's 16-bit state value. "
+            "It stores payload-derived values after XOR with 0xAAAAAAAA, "
+            "updates 32 entries through FUN_588c7110, and then takes a state "
+            "path selected by global mode flags. The matched caller passes "
+            "the shared object at 0x58A245A4 in ECX and the payload in EBX."
+        ),
+        "uncertainty": (
+            "The payload schema, receiver and child types, meanings of the "
+            "state values and XOR encoding, and visible UI effect are unknown. "
+            "FUN_588890f0 ends in an indirect virtual jump whose target is "
+            "runtime data. Static caller evidence does not prove a live server "
+            "exchange or rendered result."
+        ),
+    },
+    "588890F0": {
+        "name_in_analysis": "FUN_588890f0 / indirect state callback",
+        "called_by": "Called by FUN_5880c710 when the observed field at the selected state object +0x4C equals 0xAAAAAAAA.",
+        "behavior": (
+            "Calls the vtable slot at +8 on the object at receiver +0x78, "
+            "calls FUN_587b67a0 with fields from receiver +0x68 and +0x54, "
+            "then tail-jumps through vtable slot +4 of the object at +0x68."
+        ),
+        "uncertainty": "The receiver type, callback meanings, and indirect tail-call destination are not identified.",
+    },
+    "5888CC50": {
+        "name_in_analysis": "FUN_5888cc50 / encoded state setter",
+        "called_by": "Called by FUN_5880c710 after it stores the payload-derived value at receiver +0x8E0.",
+        "behavior": "Stores the supplied value in global 0x58A0B46C, XORs the argument with 0xAAAAAAAA, and tail-jumps to FUN_58895060 through receiver +0x64.",
+        "uncertainty": "The global's type, why the value is XOR encoded, and the delegated helper's state semantics are unknown.",
+    },
+    "5888CC70": {
+        "name_in_analysis": "FUN_5888cc70 / encoded state setter",
+        "called_by": "Called by FUN_5880c710 after it stores the payload-derived value at receiver +0x8DC.",
+        "behavior": "Stores the supplied value in global 0x58A0B468 and calls FUN_58895090 through receiver +0x64 with the value XORed by 0xAAAAAAAA.",
+        "uncertainty": "The global's type, why the value is XOR encoded, and the delegated helper's state semantics are unknown.",
+    },
+    "588C7110": {
+        "name_in_analysis": "FUN_588c7110 / 32-entry child-state updater",
+        "called_by": "Called once for each of the 32 state entries processed by FUN_5880c710.",
+        "behavior": (
+            "When its second argument is nonzero, copies 0x60 DWORDs from "
+            "that record +0x50 into receiver +0x220, clears two child fields, "
+            "selects child records through the observed indexed table lookups, "
+            "and forwards record-derived values to the observed state helpers. "
+            "A zero second argument clears receiver +0x90 and returns."
+        ),
+        "uncertainty": "The copied record schema, table element types, selected child roles, and helper contracts remain unknown.",
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_MESSAGE_80022001_STATE_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {
