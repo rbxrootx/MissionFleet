@@ -420609,6 +420609,490 @@
         "behavior": "Sets receiver state +0x6090 to 0x50000, updates present child objects, refreshes a global-selected record, clears observed child flags and state, then conditionally rebuilds derived child values and shared positions.",
         "uncertainty": "The receiver owner, meanings of the state and record fields, and rendered effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
       }
+    },
+    {
+      "address": "5879D4F0",
+      "name": "FUN_5879d4f0",
+      "size": 46,
+      "symbol": "_FUN_5879d4f0",
+      "source": "src/client-current/Main/FUN_5879d4f0.cpp",
+      "source_sha256": "610e0e58e39adfc7d8b91b42e23ee93ee36adc0118566b7903d6877407530903",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5879D4F0",
+          "size": 46,
+          "symbol": "_FUN_5879d4f0_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5879D480",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5879d4f0 / CPannelFactoryHelp child-state selection closure",
+        "called_by": "FUN_5879DCF0 calls it at 0x5879DD49.",
+        "behavior": "When the receiver field at +0x300 is nonzero and the requested count is nonzero, repeatedly calls FUN_5879D480 until the count is reached or that helper returns zero.",
+        "uncertainty": "The friendly meanings of the numeric modes, global and record fields, child roles, and visible panel effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "5879DCF0",
+      "name": "FUN_5879dcf0",
+      "size": 131,
+      "symbol": "_FUN_5879dcf0",
+      "source": "src/client-current/Main/FUN_5879dcf0.cpp",
+      "source_sha256": "63f8b4811b0c567185737be244cb68bdf00be9014a54bed684149bc6ba7dcf57",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5879DCF0",
+          "size": 131,
+          "symbol": "_FUN_5879dcf0_segment_00",
+          "relocations": [
+            {
+              "offset": 69,
+              "target_address": "5879D450",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "5879D4F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "5890BC40",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5879dcf0 / CPannelFactoryHelp child-state selection closure",
+        "called_by": "Selected helper FUN_588504C0 calls it at 0x58850812, 0x5885084D, 0x58850886, and 0x588508BC.",
+        "behavior": "Requires the receiver's +0x24 state mask to equal 0x0200, maps selected input values to helper parameters, and calls the existing transition helpers; its mapped path calls FUN_5879D4F0.",
+        "uncertainty": "The friendly meanings of the numeric modes, global and record fields, child roles, and visible panel effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588504C0",
+      "name": "FUN_588504c0",
+      "size": 1360,
+      "symbol": "_FUN_588504c0",
+      "source": "src/client-current/Main/FUN_588504c0.cpp",
+      "source_sha256": "8a183009574d607835368eef1f90def7a2d72d860e10fdc09f9c3a269afeecef",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588504C0",
+          "size": 173,
+          "symbol": "_FUN_588504c0_segment_00",
+          "relocations": [
+            {
+              "offset": 127,
+              "target_address": "58850706",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58850570",
+          "size": 122,
+          "symbol": "_FUN_588504c0_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "588505F0",
+          "size": 328,
+          "symbol": "_FUN_588504c0_segment_02",
+          "relocations": [
+            {
+              "offset": 218,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58850740",
+          "size": 737,
+          "symbol": "_FUN_588504c0_segment_03",
+          "relocations": [
+            {
+              "offset": 70,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "588508D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "5879DCF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "5879DCF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "588508DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 327,
+              "target_address": "5879DCF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 343,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "5879DCF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "5885096D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 478,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 484,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 548,
+              "target_address": "587B63B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 600,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 627,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 639,
+              "target_address": "588B2700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 668,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 696,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 709,
+              "target_address": "588B2700",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588504c0 / CPannelFactoryHelp child-state selection closure",
+        "called_by": "Selected state method FUN_58852D60 calls it at 0x58852FE9; byte-matched CPannelFactoryHelp event callback FUN_58852D10 also calls it at 0x58852D3A.",
+        "behavior": "Compares the requested mode with the value at +0x274, maps the mode to one of six display groups, and updates bit 0 at child offset +0x24 plus the observed visibility value at +0x50 across the 15 three-entry groups and paired controls. It then runs the mode-specific transition and position helpers.",
+        "uncertainty": "The friendly meanings of the numeric modes, global and record fields, child roles, and visible panel effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "58852D60",
+      "name": "FUN_58852d60",
+      "size": 673,
+      "symbol": "_FUN_58852d60",
+      "source": "src/client-current/Main/FUN_58852d60.cpp",
+      "source_sha256": "36820730d9667db593e333a673517f37d5a17e43f74278909185ab45f5723b8c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58852D60",
+          "size": 673,
+          "symbol": "_FUN_58852d60_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58852FBA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "58852FBA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "58852FBA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "588E64F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 229,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 288,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 346,
+              "target_address": "58852FBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "58852FB3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 650,
+              "target_address": "588504C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 658,
+              "target_address": "58850A70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58852d60 / CPannelFactoryHelp child-state selection closure",
+        "called_by": "Byte-matched CPannelFactoryHelp state-update method FUN_58853010 calls it at 0x58853038.",
+        "behavior": "Reads global panel and record fields to select a 16-bit candidate mode from the observed values 0 through 14, stores it at +0x276, and reuses the previous mode at +0x274 when the candidate is -1 or the observed gate at +0x278 is zero. On a mode change it calls FUN_588504C0, always refreshes the child-visibility path through FUN_58850A70, and returns the selected mode.",
+        "uncertainty": "The friendly meanings of the numeric modes, global and record fields, child roles, and visible panel effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
     }
   ]
 }

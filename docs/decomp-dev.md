@@ -52,12 +52,17 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,317 of 42,461 functions and 2,667,889 of 10,470,295 bytes (19.5874% by
-functions and 25.4806% by bytes); every counted function match is verified at
+credits 8,321 of 42,461 functions and 2,670,099 of 10,470,295 bytes (19.5968% by
+functions and 25.5017% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,184 exact function matches totaling 1,694,471 bytes. The
+inventory has 2,188 exact function matches totaling 1,696,681 bytes. The
+`CPannelFactoryHelp` child-state selector and its direct-call closure add four
+byte-identical functions / 2,210 bytes, grounded by the panel's RTTI, vtable,
+matched caller sites, and exact Ghidra body ranges; numeric state meanings and
+the visible panel effect remain unresolved. See
+[`current-main-factory-help-child-state-selection.md`](current-main-factory-help-child-state-selection.md).
 message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties

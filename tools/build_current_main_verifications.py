@@ -1134,6 +1134,12 @@ MAIN_CPANNEL_TRADE_EVENT_ADDRESSES = (
 ADDRESSES += MAIN_CPANNEL_TRADE_EVENT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_EVENT_ADDRESSES)
 
+MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES = (
+    "5879D4F0", "5879DCF0", "588504C0", "58852D60",
+)
+ADDRESSES += MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES)
+
 MAIN_MAP_OBJECT_STATE_UPDATE_ADDRESSES = (
     "58756670", "587A6DC0", "587A71A0", "587B0920", "587B1410",
     "587B1A40", "58853F90", "588D7BD0", "588DA350", "588DE3D0",
@@ -10768,6 +10774,69 @@ MAIN_CPANNEL_TRADE_EVENT_EVIDENCE["588B8CB0"]["called_by"] = (
     "confirms the virtual-table entry; no direct code callsite was found."
 )
 EVIDENCE.update(MAIN_CPANNEL_TRADE_EVENT_EVIDENCE)
+
+MAIN_FACTORY_HELP_CHILD_STATE_BEHAVIOR = {
+    "58852D60": (
+        "Reads global panel and record fields to select a 16-bit candidate "
+        "mode from the observed values 0 through 14, stores it at +0x276, "
+        "and reuses the previous mode at +0x274 when the candidate is -1 "
+        "or the observed gate at +0x278 is zero. On a mode change it calls "
+        "FUN_588504C0, always refreshes the child-visibility path through "
+        "FUN_58850A70, and returns the selected mode."
+    ),
+    "588504C0": (
+        "Compares the requested mode with the value at +0x274, maps the "
+        "mode to one of six display groups, and updates bit 0 at child "
+        "offset +0x24 plus the observed visibility value at +0x50 across "
+        "the 15 three-entry groups and paired controls. It then runs the "
+        "mode-specific transition and position helpers."
+    ),
+    "5879DCF0": (
+        "Requires the receiver's +0x24 state mask to equal 0x0200, maps "
+        "selected input values to helper parameters, and calls the existing "
+        "transition helpers; its mapped path calls FUN_5879D4F0."
+    ),
+    "5879D4F0": (
+        "When the receiver field at +0x300 is nonzero and the requested "
+        "count is nonzero, repeatedly calls FUN_5879D480 until the count "
+        "is reached or that helper returns zero."
+    ),
+}
+MAIN_FACTORY_HELP_CHILD_STATE_CALLERS = {
+    "58852D60": (
+        "Byte-matched CPannelFactoryHelp state-update method FUN_58853010 "
+        "calls it at 0x58853038."
+    ),
+    "588504C0": (
+        "Selected state method FUN_58852D60 calls it at 0x58852FE9; "
+        "byte-matched CPannelFactoryHelp event callback FUN_58852D10 also "
+        "calls it at 0x58852D3A."
+    ),
+    "5879DCF0": (
+        "Selected helper FUN_588504C0 calls it at 0x58850812, 0x5885084D, "
+        "0x58850886, and 0x588508BC."
+    ),
+    "5879D4F0": (
+        "FUN_5879DCF0 calls it at 0x5879DD49."
+    ),
+}
+MAIN_FACTORY_HELP_CHILD_STATE_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CPannelFactoryHelp child-state selection closure"
+        ),
+        "called_by": MAIN_FACTORY_HELP_CHILD_STATE_CALLERS[address],
+        "behavior": behavior,
+        "uncertainty": (
+            "The friendly meanings of the numeric modes, global and record "
+            "fields, child roles, and visible panel effect remain unresolved. "
+            "This is static analysis of the installed Main.dll; no emulator "
+            "interaction test was run."
+        ),
+    }
+    for address, behavior in MAIN_FACTORY_HELP_CHILD_STATE_BEHAVIOR.items()
+}
+EVIDENCE.update(MAIN_FACTORY_HELP_CHILD_STATE_EVIDENCE)
 
 MAIN_MAP_OBJECT_STATE_UPDATE_BEHAVIOR = {
     "58756670": (

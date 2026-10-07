@@ -26,3 +26,6 @@ Together the 11 virtual methods total 6,884 byte-matched bytes. The separate
 The class is complete at the function-byte level for all entries in this
 vtable. The control names, event meanings, resource-frame meanings, and
 emulator appearance remain unresolved; no in-game behavior test was performed.
+The child-mode selector and its byte-matched direct-call descendants are
+documented in
+[the child-state selection trace](current-main-factory-help-child-state-selection.md).
