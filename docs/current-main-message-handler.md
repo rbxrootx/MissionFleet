@@ -13,6 +13,10 @@ several branches. These operations and constants are directly visible in the
 decompilation; the semantic names of the protocol fields and helper IDs remain
 unknown.
 
+The non-null `0x8002C101` branch and its 16-function update closure are
+documented separately in
+[`current-main-message-8002c101-update.md`](current-main-message-8002c101-update.md).
+
 ## Caller evidence
 
 Ghidra records one direct caller, `FUN_587bb700`. Its switch contains a

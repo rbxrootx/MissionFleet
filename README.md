@@ -9,8 +9,11 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,978 matches cover 2,537,958 bytes (24.2396%) and are verified
+The current 7,994 matches cover 2,550,247 bytes (24.3570%) and are verified
 individually at 100.0% by objdiff.
+The installed client's non-null `0x8002C101` update path adds 16 exact matches
+/ 12,289 bytes; its caller, direct-transfer closure, and uncertainty record are
+in [the subsystem evidence](docs/current-main-message-8002c101-update.md).
 The PageFight `CPageFightOn_ControlMenuScreen` update-loop closure adds 149
 exact matches / 48,515 bytes; its Ghidra-backed call path, direct-call boundary,
 and uncertainties are recorded in

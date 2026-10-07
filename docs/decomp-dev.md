@@ -52,12 +52,12 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,978 of 42,461 functions and 2,537,958 of 10,470,295 bytes (18.7890% by
-functions and 24.2396% by bytes); every counted function match is verified at
+credits 7,994 of 42,461 functions and 2,550,247 of 10,470,295 bytes (18.8267% by
+functions and 24.3570% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,845 exact function matches totaling 1,564,540 bytes. The
+inventory has 1,861 exact function matches totaling 1,576,829 bytes. The
 PageFight `CPageFightOn_ControlMenuScreen` update-loop closure adds 149 exact
 matches / 48,515 bytes; its matched caller, body ranges, direct-call boundary,
 and semantic limits are recorded in
@@ -70,6 +70,11 @@ matched `FUN_58756020` caller. Its exact Ghidra ranges, direct-call closure, and
 unresolved file/pixel-format callbacks are recorded in
 [`current-main-itffm-sprite-resource.md`](current-main-itffm-sprite-resource.md);
 no client rendering test was run.
+The non-null `0x8002C101` message update path adds 16 exact matches / 12,289
+bytes. Its matched dispatcher case, payload branch, exact body ranges, direct
+transfer closure, shared-helper callers, and unresolved data semantics are
+recorded in
+[`current-main-message-8002c101-update.md`](current-main-message-8002c101-update.md).
 
 The variable-record child-state refresh adds two exact matches / 1,784 bytes.
 The matched caller, exact ranges, and conditional child-flag behavior are

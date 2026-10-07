@@ -991,6 +991,15 @@ PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
 ADDRESSES += PAGEFIGHT_CONTROL_UPDATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_CONTROL_UPDATE_ADDRESSES)
 
+MESSAGE_8002C101_UPDATE_ADDRESSES = (
+    "5887A8B0", "5887AA10", "5887B040", "5887C440", "5887CBA0",
+    "5887D230", "5887DBF0", "5887E2B0", "5887E990", "5887ECC0",
+    "58880890", "58880B30", "58880DF0", "58880F00", "588C5BC0",
+    "5897CE8C",
+)
+ADDRESSES += MESSAGE_8002C101_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MESSAGE_8002C101_UPDATE_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8802,6 +8811,65 @@ PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE = {
 }
 PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE["587FB810"] = PAGEFIGHT_CONTROL_UPDATE_ROOT_EVIDENCE
 EVIDENCE.update(PAGEFIGHT_CONTROL_UPDATE_HELPER_EVIDENCE)
+
+MESSAGE_8002C101_UPDATE_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_58880f00 / non-null 0x8002C101 message payload update",
+    "called_by": (
+        "Ghidra decompiles matched FUN_58882d80 as a message handler. In its "
+        "0x8002C101 case, a non-null payload at param_5 is passed to "
+        "FUN_58880f00 by the direct call at 0x58882E0C; a null payload branches "
+        "to the 0x0FA2 identifier path. The matched caller, payload gate, exact "
+        "body ranges, and direct-transfer closure are checked by "
+        "tools/verify_current_main_message_8002c101.py."
+    ),
+    "behavior": (
+        "FUN_58880f00 obtains a record through FUN_58778b20(param_1+0x24), then "
+        "compares the low four bits of DAT_58A24598+0xD54 with the byte at "
+        "record+0x35C. The equal path calls FUN_587e0090 with the record's first "
+        "word and the payload; the other path calls FUN_588f3e70 with the payload "
+        "and payload+0xB8. Both paths call FUN_58880df0. That helper checks "
+        "receiver fields +0x70/+0x74, selects a record through an indexed global "
+        "array, copies six dwords, and dispatches values 0..4 in +0x6C to five "
+        "type-specific update helpers. Their Ghidra bodies contain event-ship, "
+        "premium-ship, force-item, and related text keys. Field roles and the "
+        "external message contract are not inferred from these strings."
+    ),
+    "uncertainty": (
+        "The 16-function/12,289-byte set is the direct CALL/JMP closure of the "
+        "message-specific root. FUN_58880df0 is also called by five other "
+        "functions outside this closure, so parts of the record/type update are "
+        "shared with sibling paths. Payload structure, field meanings, item "
+        "state semantics, and any server-side relationship remain unresolved. "
+        "No live-client or emulator test was run."
+    ),
+}
+MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / 0x8002C101 update closure member",
+        "called_by": (
+            "Ghidra's direct-call graph places this function in the open closure "
+            "rooted at FUN_58880f00, which matched message handler FUN_58882d80 "
+            "calls at 0x58882E0C for non-null 0x8002C101 payloads. Exact body "
+            "ranges are frozen in "
+            "config/NF2_2026/message-8002c101-body-ranges.tsv."
+        ),
+        "behavior": (
+            "This match preserves the exact mapped x86 instruction stream for "
+            "one Ghidra body in the message-specific update closure. Its "
+            "individual semantic role is asserted only where the root and "
+            "type-dispatcher decompilations establish it."
+        ),
+        "uncertainty": (
+            "The function's independent fields, virtual calls, and gameplay "
+            "semantics remain unresolved; shared helper callers remain outside "
+            "this batch, and no emulator test has been run."
+        ),
+    }
+    for address in MESSAGE_8002C101_UPDATE_ADDRESSES
+    if address != "58880F00"
+}
+MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE["58880F00"] = MESSAGE_8002C101_UPDATE_ROOT_EVIDENCE
+EVIDENCE.update(MESSAGE_8002C101_UPDATE_HELPER_EVIDENCE)
 
 
 def sha256(path):
