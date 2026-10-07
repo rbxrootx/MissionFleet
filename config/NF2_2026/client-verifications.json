@@ -447155,6 +447155,32 @@
         "behavior": "The 36-byte, 8-instruction body computes receiver +0x604+4*index, stores argument 2 there, loads ECX from [0x58A245FC], places the slot address and value into the outgoing stack arguments, and tail-jumps to verified FUN_587A15E0.",
         "uncertainty": "The semantic role of the indexed field, the meaning of the caller's 0xAA transform, the effect of FUN_587A15E0, valid index bounds, and receiver ownership are not established. No client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58853B60",
+      "name": "FUN_58853b60",
+      "size": 43,
+      "symbol": "_FUN_58853b60",
+      "source": "src/client-current/Main/FUN_58853b60.cpp",
+      "source_sha256": "8300a23274bd51436e194b6b9df64ed5aed45a931e3cffdca14f45ded3804e90",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58853B60 / nested signed-magnitude field store",
+        "called_by": "Both fresh Ghidra projects show exactly two direct callers, and both are byte-matched: FUN_588DEB30 calls at 0x588DF114 and FUN_588E5150 calls at 0x588E631B. Each loads ECX from [0x58A245C4] and passes a signed divide-by-100 result computed from a value at receiver path [ESI+0x23C]+0x50 XOR 0xAAAAAAAA using multiplier 0x51EB851F.",
+        "behavior": "The complete 43-byte, 12-instruction body reads its signed argument. For a nonnegative value it loads a child pointer from receiver +0x2BC and stores the argument at child +0xBC. For a negative value it computes the two's-complement magnitude with CDQ/XOR/SUB, loads the same child pointer, and stores that magnitude at child +0xBC. Both paths return with ret 4; the function has no outgoing calls.",
+        "uncertainty": "The meaning of the source field at +0x50, child pointer at +0x2BC, and destination field at child +0xBC is unknown. The receiver is the same global object used by the already matched panel call paths, but this function has no established RTTI or vtable ownership. The two's-complement magnitude of INT_MIN wraps to itself. No client or emulator runtime test was performed."
+      }
     }
   ]
 }

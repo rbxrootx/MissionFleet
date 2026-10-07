@@ -15185,6 +15185,40 @@ MAIN_INDEXED_CHILD_SLOT_UPDATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_INDEXED_CHILD_SLOT_UPDATE_EVIDENCE)
 
+MAIN_NESTED_SIGNED_MAGNITUDE_STORE_ADDRESSES = ("58853B60",)
+ADDRESSES += MAIN_NESTED_SIGNED_MAGNITUDE_STORE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_NESTED_SIGNED_MAGNITUDE_STORE_ADDRESSES)
+
+MAIN_NESTED_SIGNED_MAGNITUDE_STORE_EVIDENCE = {
+    "58853B60": {
+        "name_in_analysis": "FUN_58853B60 / nested signed-magnitude field store",
+        "called_by": (
+            "Both fresh Ghidra projects show exactly two direct callers, and both "
+            "are byte-matched: FUN_588DEB30 calls at 0x588DF114 and FUN_588E5150 "
+            "calls at 0x588E631B. Each loads ECX from [0x58A245C4] and passes a "
+            "signed divide-by-100 result computed from a value at receiver path "
+            "[ESI+0x23C]+0x50 XOR 0xAAAAAAAA using multiplier 0x51EB851F."
+        ),
+        "behavior": (
+            "The complete 43-byte, 12-instruction body reads its signed argument. "
+            "For a nonnegative value it loads a child pointer from receiver +0x2BC "
+            "and stores the argument at child +0xBC. For a negative value it "
+            "computes the two's-complement magnitude with CDQ/XOR/SUB, loads the "
+            "same child pointer, and stores that magnitude at child +0xBC. Both "
+            "paths return with ret 4; the function has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The meaning of the source field at +0x50, child pointer at +0x2BC, "
+            "and destination field at child +0xBC is unknown. The receiver is the "
+            "same global object used by the already matched panel call paths, but "
+            "this function has no established RTTI or vtable ownership. The "
+            "two's-complement magnitude of INT_MIN wraps to itself. No client or "
+            "emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_NESTED_SIGNED_MAGNITUDE_STORE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

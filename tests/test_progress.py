@@ -42,6 +42,7 @@ from tools import (
     verify_current_main_587a6e90_child_flag_helper,
     verify_current_main_58854300_child_bit_update,
     verify_current_main_indexed_child_slot_updates,
+    verify_current_main_58853b60_signed_magnitude_store,
 )
 
 
@@ -54,8 +55,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_613)
-        self.assertEqual(self.report["measures"]["matched_code"], "2747413")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_614)
+        self.assertEqual(self.report["measures"]["matched_code"], "2747456")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -66,8 +67,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_480)
-        self.assertEqual(current["measures"]["matched_code"], "1773995")
+        self.assertEqual(current["measures"]["matched_functions"], 2_481)
+        self.assertEqual(current["measures"]["matched_code"], "1774038")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -765,6 +766,23 @@ class ProgressReportTests(unittest.TestCase):
             self.assertTrue(evidence[address]["behavior"], address)
             self.assertTrue(evidence[address]["uncertainty"], address)
         verify_current_main_indexed_child_slot_updates.main()
+
+    def test_nested_signed_magnitude_store_matches_original_body_and_callers(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_NESTED_SIGNED_MAGNITUDE_STORE_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_NESTED_SIGNED_MAGNITUDE_STORE_EVIDENCE
+        )
+        self.assertEqual(addresses, ("58853B60",))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("588DF114", evidence["58853B60"]["called_by"])
+        self.assertIn("588E631B", evidence["58853B60"]["called_by"])
+        self.assertIn("+0xBC", evidence["58853B60"]["behavior"])
+        self.assertTrue(evidence["58853B60"]["uncertainty"])
+        verify_current_main_58853b60_signed_magnitude_store.main()
 
     def test_page_result_control_menu_cleanup_has_original_code_evidence(self):
         addresses = (
