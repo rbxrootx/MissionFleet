@@ -1123,6 +1123,13 @@ MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES = (
 ADDRESSES += MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES)
 
+MAIN_BATTLE_ROOM_20115_ADDRESSES = (
+    "5874A840", "5874B5A0", "5874BAC0", "5874F1F0",
+    "5874F8C0", "58789590", "587D0AA0", "58877AB0",
+)
+ADDRESSES += MAIN_BATTLE_ROOM_20115_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_BATTLE_ROOM_20115_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -10419,6 +10426,89 @@ MAIN_COMBAT_STRENGTH_ANALYZER_EVIDENCE = {
     for address in MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES
 }
 EVIDENCE.update(MAIN_COMBAT_STRENGTH_ANALYZER_EVIDENCE)
+
+MAIN_BATTLE_ROOM_20115_PARENTS = {
+    "5874A840": "Called from FUN_5874BAC0 at 0x5874BB6D.",
+    "5874B5A0": "Called from FUN_587D0AA0 at 0x587D0C83.",
+    "5874BAC0": "Called from FUN_587D0AA0 at 0x587D0DE6.",
+    "5874F1F0": "Called from the singleton-factory helper FUN_5874F8C0 at 0x5874F94E.",
+    "5874F8C0": (
+        "Called twice from FUN_587D0AA0 at 0x587D0C73 and 0x587D0DBD."
+    ),
+    "58789590": (
+        "Called from FUN_587D0AA0 at 0x587D0C98 and 0x587D0E05."
+    ),
+    "587D0AA0": (
+        "Called by the byte-matched event dispatcher FUN_587BB700 at "
+        "0x587BCA99, inside its 0x80020115 event branch and after the "
+        "observed subtype check at message offset +0x0A."
+    ),
+    "58877AB0": "Called from FUN_5874BAC0 at 0x5874BB86.",
+}
+MAIN_BATTLE_ROOM_20115_BEHAVIOR = {
+    "5874A840": (
+        "Synchronizes child-control low-bit flags from receiver flags, applies "
+        "the observed selector at +0x194, and conditionally copies a value from "
+        "the global state table."
+    ),
+    "5874B5A0": (
+        "Clears a 0xD4-byte receiver buffer and three observed receiver fields, "
+        "clears selection bits on three child controls, and conditionally "
+        "copies a value from the global state table."
+    ),
+    "5874BAC0": (
+        "Copies 0x35 DWORDs into the receiver record area, stores two supplied "
+        "values, updates child-control selection bits, invokes observed "
+        "virtual slots +0x30 and +0x20, and conditionally copies the record "
+        "through FUN_58877AB0."
+    ),
+    "5874F1F0": (
+        "Dispatches on an observed mode field at argument +0x86, allocates a "
+        "mode-sized object, and calls the corresponding CBattleRoomOnPage "
+        "derived constructor. Those constructor vtable labels and byte matches "
+        "are documented in current-main-battle-room-page-constructors.md."
+    ),
+    "5874F8C0": (
+        "Lazily initializes the global "
+        "battleroomfactory::CBattleRoomOnPageFactory vtable and delegates to "
+        "FUN_5874F1F0."
+    ),
+    "58789590": (
+        "Allocates and appends a 12-byte linked-list node containing the "
+        "supplied value, initializing the list head when the list is empty."
+    ),
+    "587D0AA0": (
+        "Stores four supplied DWORDs on the receiver, records a selector, and "
+        "walks eight bitmap words as five groups of five flags (200 tested "
+        "positions). Each set flag can create a battle-room page object through "
+        "FUN_5874F8C0 using observed table offsets. For a nonzero optional "
+        "record count, it copies count * 0xD4 bytes, scans the 0xD4-byte "
+        "records, marks active entries, creates corresponding page objects, "
+        "and appends them through FUN_5874BAC0."
+    ),
+    "58877AB0": (
+        "When its input pointer is non-null, copies 0x35 DWORDs into the "
+        "receiver block beginning at +0xBC."
+    ),
+}
+MAIN_BATTLE_ROOM_20115_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / battle-room 0x80020115 update closure",
+        "called_by": MAIN_BATTLE_ROOM_20115_PARENTS[address],
+        "behavior": MAIN_BATTLE_ROOM_20115_BEHAVIOR[address],
+        "uncertainty": (
+            "The instruction behavior and function ranges are from a fresh "
+            "Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The "
+            "matched dispatcher establishes the 0x80020115 route, while the "
+            "event payload schema, bit/record meanings, member types, position "
+            "units, mode semantics beyond Ghidra's constructor labels, virtual "
+            "side effects, and visible result remain uncertain. No client "
+            "runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_BATTLE_ROOM_20115_ADDRESSES
+}
+EVIDENCE.update(MAIN_BATTLE_ROOM_20115_EVIDENCE)
 
 
 def sha256(path):

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,176 verified matches
-totaling 2,623,963 bytes (19.2553% by functions, 25.0610% by bytes), each at
+identified code bytes across six report units. There are 8,184 verified matches
+totaling 2,627,810 bytes (19.2742% by functions, 25.0978% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -37,6 +37,10 @@ combat-strength analyzer closure adds six byte-identical functions / 3,582
 bytes. Its matched map-screen callers, 32-entry processing path, packed-field
 helper, exact ranges, and unresolved record meanings are documented in
 [the subsystem note](docs/current-main-combat-strength-analyzer.md). The
+`0x80020115` battle-room update closure adds eight byte-identical functions /
+3,847 bytes. Its matched dispatcher route, 200-position bitmap traversal,
+constructor family, exact ranges, and unresolved payload meanings are recorded
+in [the subsystem note](docs/current-main-battle-room-20115.md). The
 map-object proximity update rooted at
 `FUN_587880C0` adds seven byte-identical functions / 4,233 bytes. Its two
 matched `CShell_MapObjectScreen` callsites, exact spatial checks, complete

@@ -406507,6 +406507,911 @@
         "behavior": "Ghidra labels this routine CShipData::vftable. It installs that vtable, calls FUN_588C61A0, clears a contiguous group of observed fields, initializes two additional fields, and delegates to FUN_588E9C70.",
         "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
       }
+    },
+    {
+      "address": "5874A840",
+      "name": "FUN_5874a840",
+      "size": 368,
+      "symbol": "_FUN_5874a840",
+      "source": "src/client-current/Main/FUN_5874a840.cpp",
+      "source_sha256": "1c87a674b3a04d3062e5a047059d40cd0ceedafc0c65c5bf243d23f2b391d366",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874A840",
+          "size": 368,
+          "symbol": "_FUN_5874a840_segment_00",
+          "relocations": [
+            {
+              "offset": 123,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "5874A9AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874a840 / battle-room 0x80020115 update closure",
+        "called_by": "Called from FUN_5874BAC0 at 0x5874BB6D.",
+        "behavior": "Synchronizes child-control low-bit flags from receiver flags, applies the observed selector at +0x194, and conditionally copies a value from the global state table.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5874B5A0",
+      "name": "FUN_5874b5a0",
+      "size": 365,
+      "symbol": "_FUN_5874b5a0",
+      "source": "src/client-current/Main/FUN_5874b5a0.cpp",
+      "source_sha256": "396a8bc1f8d53cbe1b45a191b7502889206463b12695733cf27a29a81a42e1f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874B5A0",
+          "size": 365,
+          "symbol": "_FUN_5874b5a0_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 332,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874b5a0 / battle-room 0x80020115 update closure",
+        "called_by": "Called from FUN_587D0AA0 at 0x587D0C83.",
+        "behavior": "Clears a 0xD4-byte receiver buffer and three observed receiver fields, clears selection bits on three child controls, and conditionally copies a value from the global state table.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5874BAC0",
+      "name": "FUN_5874bac0",
+      "size": 203,
+      "symbol": "_FUN_5874bac0",
+      "source": "src/client-current/Main/FUN_5874bac0.cpp",
+      "source_sha256": "f2363a0a39acc980899ce15ab28929ead443344c99d1a6a640175f75b9f029bc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874BAC0",
+          "size": 122,
+          "symbol": "_FUN_5874bac0_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "5874BB40",
+          "size": 15,
+          "symbol": "_FUN_5874bac0_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "5874BB50",
+          "size": 66,
+          "symbol": "_FUN_5874bac0_segment_02",
+          "relocations": [
+            {
+              "offset": 30,
+              "target_address": "5874A840",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58877AB0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874bac0 / battle-room 0x80020115 update closure",
+        "called_by": "Called from FUN_587D0AA0 at 0x587D0DE6.",
+        "behavior": "Copies 0x35 DWORDs into the receiver record area, stores two supplied values, updates child-control selection bits, invokes observed virtual slots +0x30 and +0x20, and conditionally copies the record through FUN_58877AB0.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5874F1F0",
+      "name": "FUN_5874f1f0",
+      "size": 1669,
+      "symbol": "_FUN_5874f1f0",
+      "source": "src/client-current/Main/FUN_5874f1f0.cpp",
+      "source_sha256": "b228caee4f34ce72c7d70fa68d79bc2845363c5d41dd289e887ad1bfc9636f7c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874F1F0",
+          "size": 1669,
+          "symbol": "_FUN_5874f1f0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E63B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "5874D8B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "5874DE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 264,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "5874EE50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 357,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 380,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 422,
+              "target_address": "5874C8B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 473,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "5874CA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 543,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 566,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 608,
+              "target_address": "5874D560",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 636,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 659,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 701,
+              "target_address": "5874CE40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 729,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 752,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 794,
+              "target_address": "5874D720",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 822,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 845,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 887,
+              "target_address": "5874E0A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 915,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 938,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 980,
+              "target_address": "5874EB40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1008,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1031,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1073,
+              "target_address": "5874D380",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1101,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1124,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1166,
+              "target_address": "5874DC80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1194,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1217,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1259,
+              "target_address": "5874EFE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1287,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1310,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1352,
+              "target_address": "5874EC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1380,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1445,
+              "target_address": "5874E520",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1473,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1496,
+              "target_address": "5874F861",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1538,
+              "target_address": "5874C6C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1566,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1627,
+              "target_address": "5874DD90",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874f1f0 / battle-room 0x80020115 update closure",
+        "called_by": "Called from the singleton-factory helper FUN_5874F8C0 at 0x5874F94E.",
+        "behavior": "Dispatches on an observed mode field at argument +0x86, allocates a mode-sized object, and calls the corresponding CBattleRoomOnPage derived constructor. Those constructor vtable labels and byte matches are documented in current-main-battle-room-page-constructors.md.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5874F8C0",
+      "name": "FUN_5874f8c0",
+      "size": 163,
+      "symbol": "_FUN_5874f8c0",
+      "source": "src/client-current/Main/FUN_5874f8c0.cpp",
+      "source_sha256": "da8ac8086e57fbddff53ea30bf99dfbf60650cf8c3877c938e92043036e7bfd0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874F8C0",
+          "size": 163,
+          "symbol": "_FUN_5874f8c0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E66E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "589CFC4C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "589CFC4C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5898D5C0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "589CFC48",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "589CFC48",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5874F1F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874f8c0 / battle-room 0x80020115 update closure",
+        "called_by": "Called twice from FUN_587D0AA0 at 0x587D0C73 and 0x587D0DBD.",
+        "behavior": "Lazily initializes the global battleroomfactory::CBattleRoomOnPageFactory vtable and delegates to FUN_5874F1F0.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58789590",
+      "name": "FUN_58789590",
+      "size": 141,
+      "symbol": "_FUN_58789590",
+      "source": "src/client-current/Main/FUN_58789590.cpp",
+      "source_sha256": "91f105b1268801fc17f4f63a6410d6252470f87163c6f185996c25902307832a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58789590",
+          "size": 141,
+          "symbol": "_FUN_58789590_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789590 / battle-room 0x80020115 update closure",
+        "called_by": "Called from FUN_587D0AA0 at 0x587D0C98 and 0x587D0E05.",
+        "behavior": "Allocates and appends a 12-byte linked-list node containing the supplied value, initializing the list head when the list is empty.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587D0AA0",
+      "name": "FUN_587d0aa0",
+      "size": 910,
+      "symbol": "_FUN_587d0aa0",
+      "source": "src/client-current/Main/FUN_587d0aa0.cpp",
+      "source_sha256": "8fd31137b0c03d8058e960217c6645a95f70adb6bddff8fa9e09feb0ed5b1805",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D0AA0",
+          "size": 375,
+          "symbol": "_FUN_587d0aa0_segment_00",
+          "relocations": [
+            {
+              "offset": 55,
+              "target_address": "5898CAE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "58789620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0C20",
+          "size": 282,
+          "symbol": "_FUN_587d0aa0_segment_01",
+          "relocations": [
+            {
+              "offset": 84,
+              "target_address": "5874F8C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "5874B5A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "58789590",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "587D0C22",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "587D0C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "587D0C01",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "587D0E36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "5897CD4C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "587D0E2D",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0D40",
+          "size": 243,
+          "symbol": "_FUN_587d0aa0_segment_02",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "587D0E12",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5874F8C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "5874BAC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "58789590",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 233,
+              "target_address": "587D0D40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0E36",
+          "size": 10,
+          "symbol": "_FUN_587d0aa0_segment_03",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0aa0 / battle-room 0x80020115 update closure",
+        "called_by": "Called by the byte-matched event dispatcher FUN_587BB700 at 0x587BCA99, inside its 0x80020115 event branch and after the observed subtype check at message offset +0x0A.",
+        "behavior": "Stores four supplied DWORDs on the receiver, records a selector, and walks eight bitmap words as five groups of five flags (200 tested positions). Each set flag can create a battle-room page object through FUN_5874F8C0 using observed table offsets. For a nonzero optional record count, it copies count * 0xD4 bytes, scans the 0xD4-byte records, marks active entries, creates corresponding page objects, and appends them through FUN_5874BAC0.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58877AB0",
+      "name": "FUN_58877ab0",
+      "size": 28,
+      "symbol": "_FUN_58877ab0",
+      "source": "src/client-current/Main/FUN_58877ab0.cpp",
+      "source_sha256": "83a6d7c76bbdaaaebd83957df800de53087ee5a671e47bd3d3dcad7043caac6d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877AB0",
+          "size": 28,
+          "symbol": "_FUN_58877ab0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877ab0 / battle-room 0x80020115 update closure",
+        "called_by": "Called from FUN_5874BAC0 at 0x5874BB86.",
+        "behavior": "When its input pointer is non-null, copies 0x35 DWORDs into the receiver block beginning at +0xBC.",
+        "uncertainty": "The instruction behavior and function ranges are from a fresh Ghidra 12.1.3 headless export of the pinned mapped Main.dll. The matched dispatcher establishes the 0x80020115 route, while the event payload schema, bit/record meanings, member types, position units, mode semantics beyond Ghidra's constructor labels, virtual side effects, and visible result remain uncertain. No client runtime or visual test was performed."
+      }
     }
   ]
 }

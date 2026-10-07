@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,176 matches cover 2,623,963 bytes (25.0610%) and are verified
+The current 8,184 matches cover 2,627,810 bytes (25.0978%) and are verified
 individually at 100.0% by objdiff.
+The installed client's battle-room `0x80020115` update closure adds eight
+byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
+bitmap traversal, mode-specific object creation, exact ranges, and unresolved
+payload semantics are recorded in
+[the subsystem evidence](docs/current-main-battle-room-20115.md).
 The installed client's `CRoomTypeMission` constructor closure adds four exact
 functions / 3,634 bytes, grounded in the matched `CRoomSettingManager`
 constructor and `CPageChannelBattle_ControlMenuScreen` caller. Its sprite and

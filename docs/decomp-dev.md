@@ -52,13 +52,18 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,176 of 42,461 functions and 2,623,963 of 10,470,295 bytes (19.2553% by
-functions and 25.0610% by bytes); every counted function match is verified at
+credits 8,184 of 42,461 functions and 2,627,810 of 10,470,295 bytes (19.2742% by
+functions and 25.0978% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,043 exact function matches totaling 1,650,545 bytes (24.1090% by
-functions and 70.1059% by bytes). The installed client's combat-strength
+inventory has 2,051 exact function matches totaling 1,654,392 bytes (24.2034% by
+functions and 70.2693% by bytes). The installed client's battle-room `0x80020115`
+update closure adds eight byte-identical functions / 3,847 bytes. Its matched
+dispatcher route, bitmap traversal, factory selection, exact ranges, and payload
+uncertainties are recorded in
+[`current-main-battle-room-20115.md`](current-main-battle-room-20115.md). The
+combat-strength
 analyzer closure adds six byte-identical functions / 3,582 bytes. Its Ghidra
 range manifest, matched callers, 32-entry record-processing path, packed-field
 helper, and unresolved semantics are documented in
