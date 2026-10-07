@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,144 matches cover 2,605,122 bytes (24.8811%) and are verified
+The current 8,150 matches cover 2,609,148 bytes (24.9195%) and are verified
 individually at 100.0% by objdiff.
+The installed client's FCCHS tutorial-panel lifecycle adds six exact functions
+/ 4,026 bytes, traced from a matched `CPageFactory_ControlMenuScreen` caller
+through the level-status selector, `ITFCCHS.spr` load, panel construction, and
+message-key updates. Exact ranges and unresolved state meanings are recorded
+in [the subsystem evidence](docs/current-main-fcchs-tutorial-panel.md).
 The installed client's `0x80023102` request/display path adds seven exact
 functions / 4,093 bytes, tied through byte-matched dispatcher and response
 helpers to the displayed request rows. Its call chain, localization keys,

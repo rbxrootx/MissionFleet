@@ -1089,6 +1089,13 @@ MAIN_DISPSCREEN_80023102_ADDRESSES = (
 ADDRESSES += MAIN_DISPSCREEN_80023102_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_DISPSCREEN_80023102_ADDRESSES)
 
+MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES = (
+    "587494D0", "5876EE90", "5876F560", "58770530", "587714C0",
+    "58771840",
+)
+ADDRESSES += MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9955,6 +9962,91 @@ MAIN_DISPSCREEN_80023102_EVIDENCE = {
     for address in MAIN_DISPSCREEN_80023102_ADDRESSES
 }
 EVIDENCE.update(MAIN_DISPSCREEN_80023102_EVIDENCE)
+
+
+MAIN_FCCHS_TUTORIAL_PANEL_PARENTS = {
+    "587494D0": (
+        "FUN_58771840 at 0x587719C3, 0x58771A63, 0x58771B06, 0x58771B8A, "
+        "0x58771C11, 0x58771C95, and 0x58771D1F; FUN_58770D50 at 0x58770F3F"
+    ),
+    "5876EE90": "FUN_58770530 at 0x58770568",
+    "5876F560": "FUN_58770530 at 0x58770580",
+    "58770530": (
+        "Byte-matched FUN_587E2E80, the CPageFactory_ControlMenuScreen vtable "
+        "slot +0x04 method, calls this at 0x587E3006. Other Ghidra-recorded "
+        "callers are FUN_58770680 at 0x587706E7 and FUN_58863D00 at "
+        "0x58863DF2."
+    ),
+    "587714C0": "FUN_58770530 at 0x5877064D",
+    "58771840": "FUN_58770530 at 0x5877061C",
+}
+MAIN_FCCHS_TUTORIAL_PANEL_BEHAVIOR = {
+    "587494D0": (
+        "Calls FUN_58731700 for common edit-screen setup, stores constructor "
+        "arguments, initializes receiver fields, allocates two 0x101-byte "
+        "buffers, and creates an embedded sprite-bundle object. It selects "
+        "additional layout values from the observed global language/code "
+        "switch and initializes its text-entry state."
+    ),
+    "5876EE90": (
+        "Releases the child objects referenced at receiver +0x54/+0x58, "
+        "deletes the child objects at +0x54 through +0x68 and +0x50 when "
+        "present, frees the pointer at +0x6C through FUN_5897CC42, and writes "
+        "1 to receiver +0x74. The mapped code also clears released pointers."
+    ),
+    "5876F560": (
+        "Scans the linked structure rooted at 0x58A247F4+4. A node whose "
+        "object byte at +0x35C is nonzero causes its pointer value masked with "
+        "0xFFFFFF00 to be returned. Otherwise it scans the structure rooted "
+        "at 0x58A247F4+0x14, reads each object's word +0x5E and DWORD +0xA4, "
+        "counts the observed categories, and returns low-byte status values "
+        "1, 2, or 3 under the decompiled count conditions."
+    ),
+    "58770530": (
+        "Checks receiver fields +0x70/+0x74, calls FUN_5876F560 for the "
+        "current status, and processes statuses 1..3. If needed, it loads "
+        ".\\\\spr\\\\ITFCCHS.spr through FUN_588F3D70, allocates and "
+        "constructs the panel through FUN_58771840, applies the observed "
+        "0x24-word flag masks, calls FUN_587714C0(status), dispatches child "
+        "vtable slot +4, and stores the status byte at receiver +0x7A. Its "
+        "inactive branch can call FUN_5876EE90 for cleanup."
+    ),
+    "587714C0": (
+        "Branches on its status argument and sends the observed "
+        "MESSAGESTRING__FCCHS__STARTTITLE_LEVEL1/2/3, LEVEL1/2/3, FIN, and "
+        "STARTSUBTITLE_LEVEL1 keys through FUN_58770A80. Statuses 2 and 3 "
+        "also clear selected text-control buffers; other values clear the "
+        "remaining observed text controls."
+    ),
+    "58771840": (
+        "Initializes a CMenuScreen base, installs the Ghidra-labeled "
+        "CFCCH_PannelTutorialStart vtable, and creates its embedded controls. "
+        "It constructs repeated CAutoLineFeedEditScreen children through "
+        "FUN_587494D0 with mapped position/color arguments, then creates two "
+        "additional child objects through FUN_5875DDA0 and sets the parent "
+        "control mask."
+    ),
+}
+MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / FCCHS tutorial-panel lifecycle closure member"
+        ),
+        "called_by": MAIN_FCCHS_TUTORIAL_PANEL_PARENTS[address],
+        "behavior": MAIN_FCCHS_TUTORIAL_PANEL_BEHAVIOR[address],
+        "uncertainty": (
+            "The callsites, vtable symbols, resource path, message keys, state "
+            "branches, and field accesses are recorded from the installed "
+            "Main.dll Ghidra output and mapped instructions. The FCCHS acronym, "
+            "status meanings, object/field semantics beyond the displayed "
+            "operations, indirect virtual contracts, localized text, and "
+            "runtime visual result remain unverified. No emulator runtime or "
+            "visual test was performed."
+        ),
+    }
+    for address in MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
+}
+EVIDENCE.update(MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE)
 
 
 def sha256(path):
