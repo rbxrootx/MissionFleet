@@ -15319,6 +15319,51 @@ MAIN_COMBAT_EFFECT_STATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_COMBAT_EFFECT_STATE_EVIDENCE)
 
+MAIN_NESTED_RECORD_STATE_ADDRESSES = ("58776B10",)
+ADDRESSES += MAIN_NESTED_RECORD_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_NESTED_RECORD_STATE_ADDRESSES)
+
+MAIN_NESTED_RECORD_STATE_EVIDENCE = {
+    "58776B10": {
+        "name_in_analysis": "FUN_58776B10 / nested-record state update",
+        "called_by": (
+            "Both fresh Ghidra projects record two calls from the byte-matched "
+            "FUN_587FAEC0, at 0x587FB088 with mode 0 and 0x587FB154 with mode 1. "
+            "Both calls pass ESI as the first stack argument and load ECX from "
+            "[0x58A2459C]+0x21C48. Before the first call the caller tests bit 0 "
+            "of byte [EDX+0x105A8]; before the second it tests bit 0 of "
+            "[EAX+0x105A8]. Each also requires [ESI+0x6070] to be zero. The "
+            "different gate registers are preserved as observed; their pointer "
+            "equivalence is not established."
+        ),
+        "behavior": (
+            "Both fresh Ghidra projects agree on the complete 1,035-byte, "
+            "315-instruction body, also covered exactly by the mapped Main.dll. "
+            "The routine traverses receiver-held DWORD ranges and compares a "
+            "record byte at +0x4 with the supplied object's byte at +0x354. "
+            "It follows nested ranges and makes an indirect callback through "
+            "the pointer at 0x5898C1A4. In the mode-1 path, it clears observed "
+            "bits 0 and 2 in child +0x24 and, when the child +0x354 byte differs "
+            "from the byte at [0x58A247F8]+4, adds [child+0x100C]+0x60 to its "
+            "return accumulator. In the mode-0 path it calls matched "
+            "FUN_588DF450, FUN_588DA9E0, and FUN_587F21E0 on the observed "
+            "branches. Its 49 direct call sites target byte-matched code. The "
+            "mode-1 caller subtracts the return value from its +0x10A18 field."
+        ),
+        "uncertainty": (
+            "The collection and nested-record types, byte +0x354 meaning, "
+            "callback contract, and flag meanings are unknown. The call through "
+            "0x5898C1A4 is indirect and its destination is unresolved. The two "
+            "caller gates use EDX and EAX respectively; no evidence establishes "
+            "those registers hold the same object. This source preserves the "
+            "mapped x86 instruction stream for byte matching rather than a "
+            "recovered high-level implementation. No emulator runtime test was "
+            "performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_NESTED_RECORD_STATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

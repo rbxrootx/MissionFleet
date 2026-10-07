@@ -61,6 +61,11 @@ disassembly shows the reads and calls, but most event meanings remain unknown.
 The reader still loads a slot when the indices match, so empty-queue behavior
 cannot be inferred without confirming initial slot contents and runtime state.
 
+One event/UI route in this reader calls the nested-record state update
+[`FUN_58776B10`](current-main-58776b10-nested-record-state-update.md) at
+`0x587FB088` and `0x587FB154`, with mode arguments 0 and 1. The focused notes
+record the exact caller gates and keep the callback and record types unresolved.
+
 The owning constructor `FUN_588011c0` now byte-matches its 12,934-byte Ghidra
 body across three ranges and has a direct caller at `0x5878C650`. Ghidra
 identifies its vtable as `CPageFightOn_ControlMenuScreen` and its embedded
