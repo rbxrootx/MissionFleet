@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,382 of 42,461 functions and 2,698,425 of 10,470,295 bytes (19.7405% by
-functions and 25.7722% by bytes); every counted function match is verified at
+credits 8,384 of 42,461 functions and 2,699,893 of 10,470,295 bytes (19.7452% by
+functions and 25.7862% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,249 exact function matches totaling 1,725,007 bytes. The
+inventory has 2,251 exact function matches totaling 1,726,475 bytes. The
 RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are
@@ -87,6 +87,10 @@ encoded-state helper match. The field updates, verified callback boundary, two
 matched callers, third unmatched caller, and remaining field meanings are
 recorded in
 [`current-main-type-06-child-state-helper.md`](current-main-type-06-child-state-helper.md).
+The installed `CPageFactory_ControlMenuScreen` destructor path adds two exact
+functions / 1,468 bytes. Its vtable-rooted caller path, six 32-entry child
+arrays, fresh body ranges, and unknown indirect callback contracts are in
+[`current-main-control-menu-destructor.md`](current-main-control-menu-destructor.md).
 The page-result control menu's slot `+0x00` cleanup body adds one exact
 function / 1,107 bytes. Its matched RTTI caller, child-pointer cleanup, exact
 ranges, and unresolved indirect callbacks are documented in

@@ -16,9 +16,13 @@ matches:
 | `+0x18` | `FUN_587e3080` | 4,296 | [selection refresh](current-main-control-selection-refresh.md) |
 
 The seven vtable bodies total 12,164 byte-matched bytes. The separate
-12,589-byte constructor is also verified, for 24,753 matched bytes across the
-class constructor and its vtable methods. This is function-byte coverage; the
-event meanings, control names, and in-game behavior remain partly unresolved.
+12,589-byte constructor is also verified. The slot `+0x00` cleanup body and
+its 238-byte helper add two functions / 1,468 bytes, for 26,221 matched bytes
+across the constructor, seven vtable methods, and cleanup closure (10
+functions). The cleanup evidence and open questions are in the
+[destructor closure note](current-main-control-menu-destructor.md). This is
+function-byte coverage; event meanings, control names, child ownership, and
+in-game behavior remain partly unresolved.
 
 The menu's entry method calls the separately matched
 [`FUN_588ed750` layout refresh](current-main-control-menu-layout-refresh.md);

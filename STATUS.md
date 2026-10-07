@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,382 verified matches
-totaling 2,698,425 bytes (19.7405% by functions, 25.7722% by bytes), each at
+identified code bytes across six report units. There are 8,384 verified matches
+totaling 2,699,893 bytes (19.7452% by functions, 25.7862% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The RTTI-backed `CHCB_LandingTank` constructor
@@ -35,6 +35,11 @@ type-0x06 child-state path now includes the exact 123-byte
 `FUN_587B4910` field-update helper. Its Ghidra range, two matched callers, third
 unmatched caller, and unresolved field meanings are recorded in
 [the subsystem note](docs/current-main-type-06-child-state-helper.md). The
+installed `CPageFactory_ControlMenuScreen` cleanup closure adds two exact
+functions / 1,468 bytes. Its matched vtable entry, fresh Ghidra ranges, six
+32-entry child arrays, exact verification, and unresolved callback contracts
+are documented in
+[the subsystem note](docs/current-main-control-menu-destructor.md). The
 page-result control menu's slot `+0x00` cleanup body adds one exact function /
 1,107 bytes. Its matched RTTI vtable caller, observed child-pointer cleanup,
 exact ranges, and unresolved indirect callbacks are documented in
@@ -1115,11 +1120,12 @@ captured bodies, totaling 6,884 bytes. Together with the separately matched
 control meanings and in-game behavior are still unverified. See
 [the vtable coverage map](docs/current-main-factory-help-vtable.md).
 
-`CPageFactory_ControlMenuScreen` now has byte-matched coverage for all seven
-non-null methods in its vtable, totaling 12,164 bytes; its separate
-12,589-byte constructor is also matched. This batch adds the `+0x04`, `+0x08`,
-`+0x10`, and `+0x14` methods and corrects the `+0x00` body to include its
-`ret 4` epilogue. No emulator interaction test was performed. See
+`CPageFactory_ControlMenuScreen` has byte-matched coverage for its seven
+non-null vtable methods (12,164 bytes), its 12,589-byte constructor, and a
+two-function cleanup closure (1,468 bytes): 26,221 bytes across 10 functions.
+The cleanup closure follows the slot `+0x00` wrapper into the destructor body
+and its six 32-entry child arrays. Its indirect callback contracts and runtime
+behavior remain unresolved; no emulator interaction test was performed. See
 [the vtable coverage map](docs/current-main-control-menu-vtable.md).
 
 `FUN_5878AD50` adds the 252-byte observed setup caller for

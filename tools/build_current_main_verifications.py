@@ -13045,6 +13045,57 @@ MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE)
 
+MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES = ("587D7000", "587D6740")
+ADDRESSES += MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CONTROL_MENU_DESTRUCTOR_ADDRESSES)
+
+MAIN_CONTROL_MENU_DESTRUCTOR_EVIDENCE = {
+    "587D7000": {
+        "name_in_analysis": "FUN_587d7000 / CPageFactory_ControlMenuScreen cleanup body",
+        "called_by": (
+            "The byte-matched FUN_587DA7D0 wrapper calls this body at "
+            "0x587DA7D3. Ghidra records the wrapper as the function pointer at "
+            "0x5899B824, slot +0x00 of the CPageFactory_ControlMenuScreen "
+            "vtable installed by matched constructor FUN_587DBA00."
+        ),
+        "behavior": (
+            "Installs the CPageFactory_ControlMenuScreen vtable on the receiver, "
+            "then conditionally calls the first virtual method with argument 1 "
+            "for observed nonnull receiver pointer slots and clears each slot. "
+            "It delegates the six 32-entry pointer arrays to FUN_587D6740, "
+            "releases further individual slots, calls verified FUN_58902C10, "
+            "and restores the prior exception-list pointer. Fresh Ghidra assigns "
+            "one 1,230-byte range with 422 instructions and two direct calls."
+        ),
+        "uncertainty": (
+            "The child/control types, ownership rules, indirect virtual callback "
+            "contract, meaning of the stack argument 1, exact destructor/base "
+            "contract of FUN_58902C10, and visible lifecycle effects remain "
+            "unverified. No emulator runtime test was performed."
+        ),
+    },
+    "587D6740": {
+        "name_in_analysis": "FUN_587d6740 / 32-entry control-pointer cleanup helper",
+        "called_by": "Called by FUN_587D7000 at 0x587D70DB during the matched CPageFactory_ControlMenuScreen slot +0x00 cleanup path.",
+        "behavior": (
+            "For each of 32 positions, checks six receiver pointer arrays "
+            "beginning at +0xC0, +0x140, +0x1C0, +0x240, +0x2C0, and +0x504. "
+            "For each nonnull entry it calls the first virtual method with "
+            "argument 1 and clears that pointer. It then applies the same "
+            "conditional callback-and-clear sequence to receiver fields +0x584, "
+            "+0x340, and +0x344. Fresh Ghidra assigns one 238-byte range with "
+            "88 instructions."
+        ),
+        "uncertainty": (
+            "The array element types, ownership and aliases, virtual callback "
+            "contract, reason for 32 iterations, and relationship of these "
+            "fields to rendered controls remain unresolved. No runtime test was "
+            "performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CONTROL_MENU_DESTRUCTOR_EVIDENCE)
+
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
