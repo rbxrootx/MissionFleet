@@ -1123,6 +1123,12 @@ MAIN_ROOM_TYPE_MISSION_ADDRESSES = (
 ADDRESSES += MAIN_ROOM_TYPE_MISSION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_MISSION_ADDRESSES)
 
+MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES = (
+    "58897850", "58897930", "588CD740",
+)
+ADDRESSES += MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -10480,6 +10486,70 @@ MAIN_ROOM_TYPE_MISSION_EVIDENCE = {
     for address in MAIN_ROOM_TYPE_MISSION_ADDRESSES
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_MISSION_EVIDENCE)
+
+MAIN_ROOM_TYPE_FLB_SETTING_EVIDENCE = {
+    "588CD740": {
+        "name_in_analysis": "FUN_588CD740 / CRoomTypeFLB constructor body",
+        "called_by": (
+            "Byte-matched FUN_588C9280, identified by its installed vtable as "
+            "CRoomSettingManager, checks resource 0x7C through FUN_5897CC4E and "
+            "calls this function at 0x588CAC41 only when the lookup succeeds. "
+            "The returned pointer is stored at receiver +0x1A4."
+        ),
+        "behavior": (
+            "Fresh Ghidra pseudocode identifies the installed table as "
+            "CRoomTypeFLB::vftable. The body initializes the CRoomTypeObject "
+            "base, reads room-resource entries, creates two sprite-data children "
+            "through FUN_5875DDA0, constructs a CPannelNormalRoomSetting child "
+            "through FUN_58897930, and calls FUN_58897850 to update indexed "
+            "child-control positions. The direct child calls are at "
+            "0x588CD95E, 0x588CDA2D, and 0x588CDA51."
+        ),
+        "uncertainty": (
+            "The room-resource table schema, resource labels, child ownership, "
+            "control purposes, and exact visible screen result are not recovered. "
+            "This is an instruction-stream byte match grounded in the matched "
+            "constructor callsite and fresh Ghidra behavior; no client visual or "
+            "runtime test was performed."
+        ),
+    },
+    "58897850": {
+        "name_in_analysis": "FUN_58897850 / indexed room-control position updater",
+        "called_by": (
+            "FUN_588CD740 calls this helper at 0x588CDA2D and 0x588CDA51 while "
+            "laying out its indexed room-setting controls."
+        ),
+        "behavior": (
+            "Fresh Ghidra pseudocode reads eight child pointers from indexed "
+            "receiver slots and calls FUN_58903290 for each child with its "
+            "existing coordinates offset by the two supplied position values."
+        ),
+        "uncertainty": (
+            "The eight child types, coordinate units, and control meanings are "
+            "unknown; no rendered layout has been compared with the original."
+        ),
+    },
+    "58897930": {
+        "name_in_analysis": "FUN_58897930 / CPannelNormalRoomSetting constructor",
+        "called_by": (
+            "FUN_588CD740 calls this at 0x588CD95E. Open FUN_588CF880 also calls "
+            "it at 0x588CF908; that additional caller is not byte-verified."
+        ),
+        "behavior": (
+            "Fresh Ghidra pseudocode identifies CPannelNormalRoomSetting::vftable, "
+            "initializes a CMenuScreen base, and builds sprite controls, repeated "
+            "controls, and CSpriteDataScreen children using FUN_58731C60, "
+            "FUN_58907100, and FUN_5875DDA0. It loops over the supplied item "
+            "count and updates screen state through FUN_58902D20."
+        ),
+        "uncertainty": (
+            "Resource-table meanings, repeated-row labels, field semantics, "
+            "ownership rules, and actual appearance remain unresolved. No "
+            "client visual or interaction test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_FLB_SETTING_EVIDENCE)
 
 MAIN_SHARED_CONTROL_REFRESH_PARENTS = {
     "58796AF0": (

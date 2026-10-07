@@ -52,13 +52,13 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,202 of 42,461 functions and 2,633,140 of 10,470,295 bytes (19.3165% by
-functions and 25.1487% by bytes); every counted function match is verified at
+credits 8,205 of 42,461 functions and 2,635,743 of 10,470,295 bytes (19.3236% by
+functions and 25.1735% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,069 exact function matches totaling 1,659,722 bytes (24.4159% by
-functions and 70.4956% by bytes). The message `0x80022001` state-application
+inventory has 2,072 exact function matches totaling 1,662,325 bytes (24.4513% by
+functions and 70.6062% by bytes). The message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
 are documented in
@@ -79,6 +79,11 @@ adds four byte-identical functions / 3,634 bytes. Its matched
 caller, sprite/control setup, exact closure, and remaining status uncertainties
 are documented in
 [`current-main-room-type-mission-construction.md`](current-main-room-type-mission-construction.md).
+The `CRoomTypeFLB` room-settings path adds three byte-identical functions / 2,603
+bytes. Its matched `CRoomSettingManager` resource `0x7C` gate, sprite-backed
+children, repeated settings panel, eight-slot position helper, and remaining
+resource/layout uncertainties are documented in
+[`current-main-room-type-flb-setting-construction.md`](current-main-room-type-flb-setting-construction.md).
 The shared map-control refresh adds eight exact functions / 3,894 bytes. Its
 original map labels, five matched callers, exact ranges, and four unmatched
 caller sites are documented in
