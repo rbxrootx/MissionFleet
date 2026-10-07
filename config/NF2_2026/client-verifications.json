@@ -349460,6 +349460,1180 @@
         "behavior": "Ghidra's read-only exact-range dump confirms complete instruction-byte coverage for this body. The function is reached through the direct queue/event call edge stated above; its outgoing edges and branch context are recorded in docs/current-main-queue-event-update.md. Candidate source preserves the mapped instruction stream byte for byte.",
         "uncertainty": "The mapped bytes and direct call sites are tied to the installed Main.dll, but object/class types, field semantics, gameplay meaning, and user-visible effects remain uncertain unless explicitly described above. Candidate sources preserve the original x86 instruction stream; they do not recover the original high-level C++ source. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587D03D0",
+      "name": "FUN_587d03d0",
+      "size": 1256,
+      "symbol": "_FUN_587d03d0",
+      "source": "src/client-current/Main/FUN_587d03d0.cpp",
+      "source_sha256": "11fcc388e9be82559683b9a02456e58b6bf3d443c65a0ff821627547dfc30546",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D03D0",
+          "size": 921,
+          "symbol": "_FUN_587d03d0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58981B38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5899B494",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58A24780",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "58A24780",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "587CFAD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 634,
+              "target_address": "589BAA94",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 649,
+              "target_address": "587D07BA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0770",
+          "size": 102,
+          "symbol": "_FUN_587d03d0_segment_01",
+          "relocations": [
+            {
+              "offset": 98,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D07E9",
+          "size": 31,
+          "symbol": "_FUN_587d03d0_segment_02",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0818",
+          "size": 43,
+          "symbol": "_FUN_587d03d0_segment_03",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589C2D38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "587D0650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D0850",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_04",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D086D",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_05",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D088A",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_06",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D08A7",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_07",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D08C4",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_08",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D08E1",
+          "size": 16,
+          "symbol": "_FUN_587d03d0_segment_09",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D08FE",
+          "size": 63,
+          "symbol": "_FUN_587d03d0_segment_10",
+          "relocations": [
+            {
+              "offset": 39,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d03d0 / channel-battle control-screen transition graph",
+        "called_by": "Ghidra identifies the CPageChannelBattle_ControlMenuScreen vtable store. Its deleting-destructor wrapper FUN_587D3840 calls it at 0x587D3843.",
+        "behavior": "Ghidra shows this class destructor installing the CPageChannelBattle_ControlMenuScreen vtable, releasing and clearing many child/control pointers, iterating repeated child/resource tables, calling FUN_587CFAD0 to clean another field group, and ending with a heap cleanup helper. The exact member types and ownership rules are unresolved.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D0F90",
+      "name": "FUN_587d0f90",
+      "size": 1217,
+      "symbol": "_FUN_587d0f90",
+      "source": "src/client-current/Main/FUN_587d0f90.cpp",
+      "source_sha256": "688d99250071b8483d3cc892517992ecadcf11cf73d310e9ee83ebc7f45d4e37",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D0F90",
+          "size": 423,
+          "symbol": "_FUN_587d0f90_segment_00",
+          "relocations": [
+            {
+              "offset": 101,
+              "target_address": "587D11B6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "58889120",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "58A0B478",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "58A0B47C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 269,
+              "target_address": "589BAA94",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "587D1180",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587D1140",
+          "size": 794,
+          "symbol": "_FUN_587d0f90_segment_01",
+          "relocations": [
+            {
+              "offset": 75,
+              "target_address": "589C2D38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "587D10A1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587D1415",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "587D1419",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "58889120",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "587CFA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "589BAA94",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "587D131B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "587D13E4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 687,
+              "target_address": "589C2D38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 697,
+              "target_address": "587D1260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 732,
+              "target_address": "587CFF80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 738,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 755,
+              "target_address": "58888ED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 761,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 766,
+              "target_address": "58888970",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 775,
+              "target_address": "58888720",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 781,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 786,
+              "target_address": "58888970",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0f90 / channel-battle control-screen transition graph",
+        "called_by": "Ghidra records mode-change calls from FUN_587D1810 at 0x587D181E and 0x587D1829, from FUN_587D51D0 at 0x587D55E6, 0x587D5A25, and 0x587D5A31, and from the large same-class method FUN_587D3860 at 0x587D5188.",
+        "behavior": "Ghidra shows this mode helper setting receiver state and selection fields, then taking distinct parameter-100 and parameter-200 branches. The branches set child flags across indexed groups and call FUN_58889120 with 0 or 1; mode 200 additionally checks FUN_587CFA60 and applies FUN_587CFF80, FUN_58888ED0, FUN_58888970, and FUN_58888720. The numeric modes and child identities are not named by the binary evidence.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D0E40",
+      "name": "FUN_587d0e40",
+      "size": 334,
+      "symbol": "_FUN_587d0e40",
+      "source": "src/client-current/Main/FUN_587d0e40.cpp",
+      "source_sha256": "ec1a014093958ce108546c790771b1a5649c7af7be3cefbc30e4e3602e7a8ce4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "587D0F2A",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 152,
+          "target_address": "587B63B0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 165,
+          "target_address": "587896E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 250,
+          "target_address": "587CF690",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 263,
+          "target_address": "58A245BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 269,
+          "target_address": "58888940",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 280,
+          "target_address": "58A245BC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 330,
+          "target_address": "587CFF80",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d0e40 / channel-battle control-screen transition graph",
+        "called_by": "Ghidra records selection-transition calls from FUN_587D51D0 at 0x587D55ED, FUN_587D5B20 at 0x587D63E9, and the audited selection handlers FUN_587D2630 at 0x587D2688 and FUN_587D16B0 at 0x587D17D8.",
+        "behavior": "Ghidra shows a two-stage transition keyed by receiver +0xF8: the zero state clears child flags, snapshots coordinates, and offsets child records; state 0x40000000 calls FUN_587CF690 and FUN_58888940, clears the transition value, restores flags, and calls FUN_587CFF80. The exact visual meaning is unresolved.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587CFAD0",
+      "name": "FUN_587cfad0",
+      "size": 516,
+      "symbol": "_FUN_587cfad0",
+      "source": "src/client-current/Main/FUN_587cfad0.cpp",
+      "source_sha256": "24b581c5af76c4131ce72b035c7418fd9084dee5aca3b4a1e747d86f30366e74",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CFAD0",
+          "size": 29,
+          "symbol": "_FUN_587cfad0_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "587CFAF0",
+          "size": 487,
+          "symbol": "_FUN_587cfad0_segment_01",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "587CFAF5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "587CFAF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cfad0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D03D0 at 0x587D04FE and byte-matched FUN_587D5B20 at 0x587D5D5A.",
+        "behavior": "Ghidra shows repeated cleanup across child fields and table-backed groups. For selected non-null members it calls matched FUN_58902C20/FUN_58902C70 before releasing the object through its virtual slot and clearing the stored pointer.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58889120",
+      "name": "FUN_58889120",
+      "size": 208,
+      "symbol": "_FUN_58889120",
+      "source": "src/client-current/Main/FUN_58889120.cpp",
+      "source_sha256": "030d7c60d9ddcd30eae9ef93e7d0ea8b28fb0d3cfe90d2108680e1a3fdbbc41f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58889120",
+          "size": 42,
+          "symbol": "_FUN_58889120_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "58889150",
+          "size": 166,
+          "symbol": "_FUN_58889120_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58889120 / channel-battle control-screen transition graph",
+        "called_by": "Called twice by FUN_587D0F90 at 0x587D1059 and 0x587D11F5.",
+        "behavior": "Ghidra shows a child-flag update selected by receiver short +0xD2: values 10, 11, and 12 iterate over four, two, and three child pointers starting at +0x98, respectively, and set or clear bit 1 according to the low bit of the argument.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587CFA60",
+      "name": "FUN_587cfa60",
+      "size": 109,
+      "symbol": "_FUN_587cfa60",
+      "source": "src/client-current/Main/FUN_587cfa60.cpp",
+      "source_sha256": "347915deaffedd860dfb2bcee508523b1d2d4d3ed45790c28ccc180e543a61cb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58A284C8",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cfa60 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0F90 at 0x587D123F and byte-matched FUN_587D51D0 at 0x587D58A9.",
+        "behavior": "Ghidra shows a bounds predicate that compares two coordinate pairs against values from DAT_58A284C8 using receiver fields +0x68 through +0x7C, returning 1 only when both tested intervals satisfy the observed inequalities.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587CFF80",
+      "name": "FUN_587cff80",
+      "size": 126,
+      "symbol": "_FUN_587cff80",
+      "source": "src/client-current/Main/FUN_587cff80.cpp",
+      "source_sha256": "c05a1ecf39997df4ad0780292672cdfb906c253fa87c94d0a90fa3727e9b8d38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cff80 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0F90 at 0x587D141B, FUN_587D0E40 at 0x587D0F89, byte-matched FUN_587D5B20 at 0x587D5CB0, and the out-of-slice FUN_587D1830 at 0x587D1EE0.",
+        "behavior": "Ghidra shows clearing the low flag bit on five pairs of children when receiver +0x134 is nonzero, then conditionally re-enabling those bits for a table-selected group when receiver mode +0xFC is 200.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888ED0",
+      "name": "FUN_58888ed0",
+      "size": 63,
+      "symbol": "_FUN_58888ed0",
+      "source": "src/client-current/Main/FUN_58888ed0.cpp",
+      "source_sha256": "a89b24d87fdcf902adc05adfec504aa87c0b473705fe35e2195abe1f43926f40",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 59,
+          "target_address": "58888760",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58888ed0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0F90 at 0x587D1432 and byte-matched FUN_587D5B20 at 0x587D5C90.",
+        "behavior": "Ghidra shows four child virtual calls at slot +4 followed by FUN_58888760.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888970",
+      "name": "FUN_58888970",
+      "size": 81,
+      "symbol": "_FUN_58888970",
+      "source": "src/client-current/Main/FUN_58888970.cpp",
+      "source_sha256": "bce59fcb5557d27720adf6f9cca22e59348fb683f50bf1b84db7aff5e6996439",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 2,
+          "target_address": "589CD0F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "589CD0D4",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "589CD0B8",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 30,
+          "target_address": "5874FBD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 36,
+          "target_address": "589CD0F0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "589CD09C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "589CD080",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "5874FBD0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 72,
+          "target_address": "589CD0F0",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58888970 / channel-battle control-screen transition graph",
+        "called_by": "Called twice by FUN_587D0F90 at 0x587D143D and 0x587D1451.",
+        "behavior": "Ghidra shows alternating between two pairs of global argument records through matched FUN_5874FBD0, controlled by global flag DAT_589CD0F0.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888720",
+      "name": "FUN_58888720",
+      "size": 56,
+      "symbol": "_FUN_58888720",
+      "source": "src/client-current/Main/FUN_58888720.cpp",
+      "source_sha256": "7f118f0fba2350c8b1c4f7f69c56d04c5cabd93697355ee33c046aa220cee60c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58888720 / channel-battle control-screen transition graph",
+        "called_by": "Called by byte-matched FUN_587D0940 at 0x587D0A7B and FUN_587D0F90 at 0x587D1446.",
+        "behavior": "Ghidra shows invoking child virtual slot +8 on four pointers at receiver offsets +0xDC, +0xE0, +0xE4, and +0xE8; Ghidra could not recover the final indirect jump table.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587896E0",
+      "name": "FUN_587896e0",
+      "size": 40,
+      "symbol": "_FUN_587896e0",
+      "source": "src/client-current/Main/FUN_587896e0.cpp",
+      "source_sha256": "a0fcd45269616cb90111cd43a739ad3b24c9aa0ec8e58c3508e4815bde2046a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "5874A7D0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587896e0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0E40 at 0x587D0EE4.",
+        "behavior": "Ghidra shows traversing a linked list beginning at receiver +8 and calling FUN_5874A7D0 for each node with the two passed values.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587CF690",
+      "name": "FUN_587cf690",
+      "size": 59,
+      "symbol": "_FUN_587cf690",
+      "source": "src/client-current/Main/FUN_587cf690.cpp",
+      "source_sha256": "7754fcd42f35ebdba953bf02ef67695511c26c42225a034e91621bf342c9a372",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf690 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0E40 at 0x587D0F39 and by the out-of-slice FUN_587DA9A0 at 0x587DA9E9.",
+        "behavior": "Ghidra shows storing a selection value at receiver +0xA06, loading a table-backed word into +0xD8, and updating +0x50 on two optional child objects at +0x7A4 and +0x7A8.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888940",
+      "name": "FUN_58888940",
+      "size": 26,
+      "symbol": "_FUN_58888940",
+      "source": "src/client-current/Main/FUN_58888940.cpp",
+      "source_sha256": "4f7dfb61c265f45c6a08d402ec223838cd3eaccf254468139134fb044f6d1af3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 22,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58888940 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587D0E40 at 0x587D0F4C, byte-matched FUN_587D51D0 at 0x587D5655, byte-matched FUN_587D1460 at 0x587D1618, and byte-matched FUN_587BB700 at 0x587BCA4E and 0x587BCE42.",
+        "behavior": "Ghidra shows storing the argument in receiver +0xBC and tail-jumping to matched FUN_58907360.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58888760",
+      "name": "FUN_58888760",
+      "size": 406,
+      "symbol": "_FUN_58888760",
+      "source": "src/client-current/Main/FUN_58888760.cpp",
+      "source_sha256": "b72b6652dbed7d915db111b3a6969d8317508c39c89fa0097224bdc807fcf5c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 67,
+          "target_address": "588888C1",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58888760 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_58888ED0 at 0x58888F0A and byte-matched FUN_587BB700 at 0x587BCA59.",
+        "behavior": "Ghidra shows invoking virtual slot +8 on four child objects at receiver offsets +0xDC/+0xE0/+0xE4/+0xE8, then dispatching virtual slot +4 across those objects according to receiver +0xBC. The indirect child implementations are unresolved.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5874A7D0",
+      "name": "FUN_5874a7d0",
+      "size": 17,
+      "symbol": "_FUN_5874a7d0",
+      "source": "src/client-current/Main/FUN_5874a7d0.cpp",
+      "source_sha256": "1220d5a9e052ae7275920802f2a17bde39af0682f8a6be3e7c58bf719b4b7dec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_5874a7d0 / channel-battle control-screen transition graph",
+        "called_by": "Called by FUN_587896E0 at 0x587896F7.",
+        "behavior": "Ghidra shows adding its second and third arguments to fields +0x6C and +0x70 of the first argument.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58789680",
+      "name": "FUN_58789680",
+      "size": 83,
+      "symbol": "_FUN_58789680",
+      "source": "src/client-current/Main/FUN_58789680.cpp",
+      "source_sha256": "7f931549549bdff9501915e6c529aff8cd2a3411d2e613bd97719512c0a6439f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_58789680 / channel-battle control-screen transition graph",
+        "called_by": "Called twice by FUN_587D16B0 at 0x587D16FE and 0x587D17C1.",
+        "behavior": "Ghidra shows walking a linked list at receiver +8, comparing each object's field +0x1C4 with the requested value, writing 0x100 or 0x60 to field +0xA8, and invoking that object's virtual slot +4.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D1810",
+      "name": "FUN_587d1810",
+      "size": 31,
+      "symbol": "_FUN_587d1810",
+      "source": "src/client-current/Main/FUN_587d1810.cpp",
+      "source_sha256": "81d92187e0ca3ee8467dfcef7cf31dfb408fa02fc75ab030648f2d8542106395",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "587D0F90",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "587D0F90",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d1810 / channel-battle control-screen transition graph",
+        "called_by": "Called by byte-matched FUN_588889F0 at 0x58888CE0; this input handler calls FUN_587D0F90 for its two mode branches.",
+        "behavior": "Ghidra shows a two-way input branch: when receiver +0xFC is 200 it calls FUN_587D0F90(100), otherwise it calls FUN_587D0F90(200).",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D2630",
+      "name": "FUN_587d2630",
+      "size": 130,
+      "symbol": "_FUN_587d2630",
+      "source": "src/client-current/Main/FUN_587d2630.cpp",
+      "source_sha256": "6ad0839450585c378a8c0e48458c9c1c3cc1a5dd6a9ce412de18846237b9f636",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 89,
+          "target_address": "587D0E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 102,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "587B9060",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d2630 / channel-battle control-screen transition graph",
+        "called_by": "Called by byte-matched screen setup FUN_587BB700 at 0x587C0AB3 and the out-of-slice FUN_58762D30 at 0x58763121.",
+        "behavior": "Ghidra shows this setter storing the requested selection index in receiver +0xE8 and +0xA06, deriving a table-backed word at +0xD8, updating two child fields when present, storing the second argument at +0xA04, resetting +0xF8, then calling FUN_587D0E40 and matched FUN_587B9060.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587D16B0",
+      "name": "FUN_587d16b0",
+      "size": 338,
+      "symbol": "_FUN_587d16b0",
+      "source": "src/client-current/Main/FUN_587d16b0.cpp",
+      "source_sha256": "6699093039128c8d2fbf1cb97eec37dbd345d1143031710a4169cdb8d93104f6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 15,
+          "target_address": "587D17FC",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 79,
+          "target_address": "58789680",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 84,
+          "target_address": "587D17C7",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 274,
+          "target_address": "58789680",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 297,
+          "target_address": "587D0E40",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 309,
+          "target_address": "58A24588",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 319,
+          "target_address": "587B9060",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d16b0 / channel-battle control-screen transition graph",
+        "called_by": "Called from four input sites in byte-matched FUN_588889F0 at 0x58888C47, 0x58888C70, 0x58888C99, and 0x58888CC2.",
+        "behavior": "Ghidra shows four mode-200 selection directions. It computes a candidate index using receiver fields +0xDC/+0xE0/+0xE4 and the selected value at +0xA06, sets a corresponding adjustment value at +0xF4, calls FUN_58789680 to update matching child states, and if the selection changed invokes FUN_587D0E40 and matched FUN_587B9060.",
+        "uncertainty": "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+      }
     }
   ]
 }

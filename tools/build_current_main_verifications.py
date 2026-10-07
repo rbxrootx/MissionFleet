@@ -862,6 +862,20 @@ QUEUE_BATCH_ADDRESSES = (
 ADDRESSES += QUEUE_BATCH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(QUEUE_BATCH_ADDRESSES)
 
+# Ghidra's exact-range and call-reference audits identify the mode transition,
+# child-state refresh, and input-selection cluster for
+# CPageChannelBattle_ControlMenuScreen. Include the open direct-call closure
+# plus the three open input/selection callers that drive the same state path.
+CHANNEL_BATTLE_TRANSITION_ADDRESSES = (
+    "587D03D0", "587D0F90", "587D0E40",
+    "587CFAD0", "58889120", "587CFA60", "587CFF80", "58888ED0",
+    "58888970", "58888720", "587896E0", "587CF690", "58888940",
+    "58888760", "5874A7D0", "58789680",
+    "587D1810", "587D2630", "587D16B0",
+)
+ADDRESSES += CHANNEL_BATTLE_TRANSITION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CHANNEL_BATTLE_TRANSITION_ADDRESSES)
+
 EVIDENCE = {
     "58900040": {
         "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
@@ -7956,6 +7970,68 @@ EVIDENCE.update({
         "uncertainty": QUEUE_BATCH_DEFAULT_UNCERTAINTY,
     }
     for address in QUEUE_BATCH_ADDRESSES
+})
+
+CHANNEL_BATTLE_TRANSITION_CALLERS = {
+    "587D03D0": "Ghidra identifies the CPageChannelBattle_ControlMenuScreen vtable store. Its deleting-destructor wrapper FUN_587D3840 calls it at 0x587D3843.",
+    "587D0F90": "Ghidra records mode-change calls from FUN_587D1810 at 0x587D181E and 0x587D1829, from FUN_587D51D0 at 0x587D55E6, 0x587D5A25, and 0x587D5A31, and from the large same-class method FUN_587D3860 at 0x587D5188.",
+    "587D0E40": "Ghidra records selection-transition calls from FUN_587D51D0 at 0x587D55ED, FUN_587D5B20 at 0x587D63E9, and the audited selection handlers FUN_587D2630 at 0x587D2688 and FUN_587D16B0 at 0x587D17D8.",
+    "587CFAD0": "Called by FUN_587D03D0 at 0x587D04FE and byte-matched FUN_587D5B20 at 0x587D5D5A.",
+    "58889120": "Called twice by FUN_587D0F90 at 0x587D1059 and 0x587D11F5.",
+    "587CFA60": "Called by FUN_587D0F90 at 0x587D123F and byte-matched FUN_587D51D0 at 0x587D58A9.",
+    "587CFF80": "Called by FUN_587D0F90 at 0x587D141B, FUN_587D0E40 at 0x587D0F89, byte-matched FUN_587D5B20 at 0x587D5CB0, and the out-of-slice FUN_587D1830 at 0x587D1EE0.",
+    "58888ED0": "Called by FUN_587D0F90 at 0x587D1432 and byte-matched FUN_587D5B20 at 0x587D5C90.",
+    "58888970": "Called twice by FUN_587D0F90 at 0x587D143D and 0x587D1451.",
+    "58888720": "Called by byte-matched FUN_587D0940 at 0x587D0A7B and FUN_587D0F90 at 0x587D1446.",
+    "587896E0": "Called by FUN_587D0E40 at 0x587D0EE4.",
+    "587CF690": "Called by FUN_587D0E40 at 0x587D0F39 and by the out-of-slice FUN_587DA9A0 at 0x587DA9E9.",
+    "58888940": "Called by FUN_587D0E40 at 0x587D0F4C, byte-matched FUN_587D51D0 at 0x587D5655, byte-matched FUN_587D1460 at 0x587D1618, and byte-matched FUN_587BB700 at 0x587BCA4E and 0x587BCE42.",
+    "58888760": "Called by FUN_58888ED0 at 0x58888F0A and byte-matched FUN_587BB700 at 0x587BCA59.",
+    "5874A7D0": "Called by FUN_587896E0 at 0x587896F7.",
+    "58789680": "Called twice by FUN_587D16B0 at 0x587D16FE and 0x587D17C1.",
+    "587D1810": "Called by byte-matched FUN_588889F0 at 0x58888CE0; this input handler calls FUN_587D0F90 for its two mode branches.",
+    "587D2630": "Called by byte-matched screen setup FUN_587BB700 at 0x587C0AB3 and the out-of-slice FUN_58762D30 at 0x58763121.",
+    "587D16B0": "Called from four input sites in byte-matched FUN_588889F0 at 0x58888C47, 0x58888C70, 0x58888C99, and 0x58888CC2.",
+}
+
+CHANNEL_BATTLE_TRANSITION_BEHAVIOR = {
+    "587D03D0": "Ghidra shows this class destructor installing the CPageChannelBattle_ControlMenuScreen vtable, releasing and clearing many child/control pointers, iterating repeated child/resource tables, calling FUN_587CFAD0 to clean another field group, and ending with a heap cleanup helper. The exact member types and ownership rules are unresolved.",
+    "587D0F90": "Ghidra shows this mode helper setting receiver state and selection fields, then taking distinct parameter-100 and parameter-200 branches. The branches set child flags across indexed groups and call FUN_58889120 with 0 or 1; mode 200 additionally checks FUN_587CFA60 and applies FUN_587CFF80, FUN_58888ED0, FUN_58888970, and FUN_58888720. The numeric modes and child identities are not named by the binary evidence.",
+    "587D0E40": "Ghidra shows a two-stage transition keyed by receiver +0xF8: the zero state clears child flags, snapshots coordinates, and offsets child records; state 0x40000000 calls FUN_587CF690 and FUN_58888940, clears the transition value, restores flags, and calls FUN_587CFF80. The exact visual meaning is unresolved.",
+    "587D1810": "Ghidra shows a two-way input branch: when receiver +0xFC is 200 it calls FUN_587D0F90(100), otherwise it calls FUN_587D0F90(200).",
+    "587D2630": "Ghidra shows this setter storing the requested selection index in receiver +0xE8 and +0xA06, deriving a table-backed word at +0xD8, updating two child fields when present, storing the second argument at +0xA04, resetting +0xF8, then calling FUN_587D0E40 and matched FUN_587B9060.",
+    "587D16B0": "Ghidra shows four mode-200 selection directions. It computes a candidate index using receiver fields +0xDC/+0xE0/+0xE4 and the selected value at +0xA06, sets a corresponding adjustment value at +0xF4, calls FUN_58789680 to update matching child states, and if the selection changed invokes FUN_587D0E40 and matched FUN_587B9060.",
+    "587CFAD0": "Ghidra shows repeated cleanup across child fields and table-backed groups. For selected non-null members it calls matched FUN_58902C20/FUN_58902C70 before releasing the object through its virtual slot and clearing the stored pointer.",
+    "58889120": "Ghidra shows a child-flag update selected by receiver short +0xD2: values 10, 11, and 12 iterate over four, two, and three child pointers starting at +0x98, respectively, and set or clear bit 1 according to the low bit of the argument.",
+    "587CFA60": "Ghidra shows a bounds predicate that compares two coordinate pairs against values from DAT_58A284C8 using receiver fields +0x68 through +0x7C, returning 1 only when both tested intervals satisfy the observed inequalities.",
+    "587CFF80": "Ghidra shows clearing the low flag bit on five pairs of children when receiver +0x134 is nonzero, then conditionally re-enabling those bits for a table-selected group when receiver mode +0xFC is 200.",
+    "58888ED0": "Ghidra shows four child virtual calls at slot +4 followed by FUN_58888760.",
+    "58888970": "Ghidra shows alternating between two pairs of global argument records through matched FUN_5874FBD0, controlled by global flag DAT_589CD0F0.",
+    "58888720": "Ghidra shows invoking child virtual slot +8 on four pointers at receiver offsets +0xDC, +0xE0, +0xE4, and +0xE8; Ghidra could not recover the final indirect jump table.",
+    "587896E0": "Ghidra shows traversing a linked list beginning at receiver +8 and calling FUN_5874A7D0 for each node with the two passed values.",
+    "587CF690": "Ghidra shows storing a selection value at receiver +0xA06, loading a table-backed word into +0xD8, and updating +0x50 on two optional child objects at +0x7A4 and +0x7A8.",
+    "58888940": "Ghidra shows storing the argument in receiver +0xBC and tail-jumping to matched FUN_58907360.",
+    "58888760": "Ghidra shows invoking virtual slot +8 on four child objects at receiver offsets +0xDC/+0xE0/+0xE4/+0xE8, then dispatching virtual slot +4 across those objects according to receiver +0xBC. The indirect child implementations are unresolved.",
+    "5874A7D0": "Ghidra shows adding its second and third arguments to fields +0x6C and +0x70 of the first argument.",
+    "58789680": "Ghidra shows walking a linked list at receiver +8, comparing each object's field +0x1C4 with the requested value, writing 0x100 or 0x60 to field +0xA8, and invoking that object's virtual slot +4.",
+}
+
+CHANNEL_BATTLE_TRANSITION_UNCERTAINTY = (
+    "The exact Ghidra body ranges and direct references are recorded for this installed Main.dll build. Candidate sources "
+    "preserve the mapped x86 instructions for byte matching; they do not recover original high-level C++ source. Receiver "
+    "member schemas, numeric state names, indirect virtual-call targets, graphics, and gameplay interpretation remain "
+    "uncertain unless stated as direct instruction behavior above. Shared callers outside the 19-function slice are listed "
+    "in docs/current-main-channel-battle-transition.md. No emulator runtime test was performed."
+)
+
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / channel-battle control-screen transition graph",
+        "called_by": CHANNEL_BATTLE_TRANSITION_CALLERS[address],
+        "behavior": CHANNEL_BATTLE_TRANSITION_BEHAVIOR[address],
+        "uncertainty": CHANNEL_BATTLE_TRANSITION_UNCERTAINTY,
+    }
+    for address in CHANNEL_BATTLE_TRANSITION_ADDRESSES
 })
 
 
