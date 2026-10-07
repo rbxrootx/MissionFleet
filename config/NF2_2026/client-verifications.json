@@ -446229,6 +446229,53 @@
         "behavior": "Fresh Ghidra body and edge exports cover 89 instructions in one 275-byte range, with one direct call to byte-matched FUN_588D02E0. The constructor installs vtable 0x589A0CC0 whose RTTI type descriptor is .?AVCRoomTypeBlitz@@. It reads a pointer from global slot 0x58A24744 and checks fields +0x164 and +0x18C. It selects records at pointer offsets +0 and +4, stores their pointers at child offsets +0x60/+0x64 plus +0x50, and copies six DWORDs into each child at +0x0C through +0x20. The first record's +8 value is also written through child +0x5C+0x74.",
         "uncertainty": "The meaning of resource 0x70, the global pointer and its fields, the record schema, child roles, and class behavior remain unresolved. On the absent-record path, mapped code reads [0x8] after clearing EAX; the valid-state behavior of this absolute address-0x8 read is unknown. This is static evidence from the installed mapped client, Ghidra exports, and RTTI; no emulator or visual runtime test was performed."
       }
+    },
+    {
+      "address": "588D1F60",
+      "name": "FUN_588d1f60",
+      "size": 47,
+      "symbol": "_FUN_588d1f60",
+      "source": "src/client-current/Main/FUN_588d1f60.cpp",
+      "source_sha256": "29e7b75b5284c0320b331330409b9552ea67d45ccdd629f7016fb7a6ea839cb5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D1F60",
+          "size": 47,
+          "symbol": "_FUN_588d1f60_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "588D02E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "589A0EE8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D1F60 / CRoomTypeTrade constructor",
+        "called_by": "Fresh Ghidra references show byte-matched FUN_588C9280 calling this constructor at 0x588CAB4F after FUN_5897CC4E accepts resource 0x70. It passes manager ESI, EBP, EBX, and addresses [ESI+0x68] and [ESI+0x12C] as five stack arguments, with the allocated object in ECX; the result is stored at receiver +0x180. The focused verifier checks the gate, argument setup, call, and result store in the mapped caller.",
+        "behavior": "Fresh Ghidra body and edge exports cover 18 instructions in one 47-byte range, with one direct call to byte-matched FUN_588D02E0. The constructor forwards its five stack arguments to that base constructor, installs vtable 0x589A0EE8 whose RTTI type descriptor is .?AVCRoomTypeTrade@@, returns this in EAX, and cleans 0x14 bytes of caller arguments. No direct member copies or table accesses occur in this body.",
+        "uncertainty": "The meanings of resource 0x70, the five arguments, state initialized by the base constructor, virtual behavior, and the class's visible or gameplay effect remain unresolved. The emitted source preserves the exact mapped instruction stream and is not a recovered high-level C++ implementation. This is static evidence from the installed mapped client, Ghidra exports, and RTTI; no emulator or visual runtime test was performed."
+      }
     }
   ]
 }

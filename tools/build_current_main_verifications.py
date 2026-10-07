@@ -1400,6 +1400,10 @@ MAIN_ROOM_TYPE_BLITZ_CONSTRUCTOR_ADDRESSES = ("588CBEB0",)
 ADDRESSES += MAIN_ROOM_TYPE_BLITZ_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_BLITZ_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES = ("588D1F60",)
+ADDRESSES += MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14570,6 +14574,40 @@ MAIN_ROOM_TYPE_BLITZ_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_BLITZ_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_EVIDENCE = {
+    "588D1F60": {
+        "name_in_analysis": "FUN_588D1F60 / CRoomTypeTrade constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAB4F after FUN_5897CC4E accepts "
+            "resource 0x70. It passes manager ESI, EBP, EBX, and addresses "
+            "[ESI+0x68] and [ESI+0x12C] as five stack arguments, with the "
+            "allocated object in ECX; the result is stored at receiver "
+            "+0x180. The focused verifier checks the gate, argument setup, "
+            "call, and result store in the mapped caller."
+        ),
+        "behavior": (
+            "Fresh Ghidra body and edge exports cover 18 instructions in one "
+            "47-byte range, with one direct call to byte-matched "
+            "FUN_588D02E0. The constructor forwards its five stack arguments "
+            "to that base constructor, installs vtable 0x589A0EE8 whose RTTI "
+            "type descriptor is .?AVCRoomTypeTrade@@, returns this in EAX, "
+            "and cleans 0x14 bytes of caller arguments. No direct member "
+            "copies or table accesses occur in this body."
+        ),
+        "uncertainty": (
+            "The meanings of resource 0x70, the five arguments, state "
+            "initialized by the base constructor, virtual behavior, and the "
+            "class's visible or gameplay effect remain unresolved. The emitted "
+            "source preserves the exact mapped instruction stream and is not "
+            "a recovered high-level C++ implementation. This is static "
+            "evidence from the installed mapped client, Ghidra exports, and "
+            "RTTI; no emulator or visual runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":
