@@ -46,6 +46,7 @@ from tools import (
     verify_current_main_combat_effect_state,
     verify_current_main_58776b10,
     verify_current_main_58833980,
+    verify_current_main_5881d570,
 )
 
 
@@ -58,8 +59,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_619)
-        self.assertEqual(self.report["measures"]["matched_code"], "2751547")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_620)
+        self.assertEqual(self.report["measures"]["matched_code"], "2752462")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -70,8 +71,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_486)
-        self.assertEqual(current["measures"]["matched_code"], "1778129")
+        self.assertEqual(current["measures"]["matched_functions"], 2_487)
+        self.assertEqual(current["measures"]["matched_code"], "1779044")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -832,6 +833,16 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("FUN_5897CC4E", evidence["58833980"]["behavior"])
         self.assertTrue(evidence["58833980"]["uncertainty"])
         verify_current_main_58833980.main()
+
+    def test_manage_fleet_child_matches_original_and_verified_caller(self):
+        addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_EVIDENCE
+        self.assertEqual(addresses, ("5881D570",))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x58837EDB", evidence["5881D570"]["called_by"])
+        self.assertIn("FUN_58902CE0", evidence["5881D570"]["behavior"])
+        self.assertTrue(evidence["5881D570"]["uncertainty"])
+        verify_current_main_5881d570.main()
 
     def test_page_result_control_menu_cleanup_has_original_code_evidence(self):
         addresses = (

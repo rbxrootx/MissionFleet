@@ -448290,6 +448290,213 @@
         "behavior": "Both fresh projects agree on two exact body ranges: 0x58833980..+157 bytes (46 instructions) and 0x58833A20..+841 bytes (260 instructions), totaling 998 bytes and 306 instructions. The mapped Main.dll decodes across both ranges exactly. The body calls matched FUN_589031A0, writes observed vtable and receiver fields, allocates and initializes child records under bounds and null checks, and calls matched FUN_58902D20 and FUN_58733280 on its control-flow paths. Across the full body its 17 direct calls target only matched functions: FUN_589031A0 twice, FUN_5897CC4E seven times, FUN_58902D20 twice, FUN_58733280 four times, and FUN_5875DDA0 twice. No indirect call instruction is present.",
         "uncertainty": "The exact child class name, meaning of the vtable and receiver fields, resource identifiers, and the constructor parameters' domain meanings are unresolved. The parent identifies this as one child created by the communicator-configuration panel, but that does not identify the child's displayed content or behavior. The source preserves the mapped x86 instruction stream across the two Ghidra ranges for byte matching. No emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "5881D570",
+      "name": "FUN_5881d570",
+      "size": 915,
+      "symbol": "_FUN_5881d570",
+      "source": "src/client-current/Main/FUN_5881d570.cpp",
+      "source_sha256": "a8e08f91dee48512f56351b6cdee2d4e0c3f2ece55991a613302ebca3b05cfd5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "5898364F",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 20,
+          "target_address": "589CFBD4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 76,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5898C500",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 120,
+          "target_address": "5899D9E0",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 125,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 149,
+          "target_address": "5899D9FC",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 156,
+          "target_address": "588F3D70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 182,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 265,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 271,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 348,
+          "target_address": "5881D623",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 361,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 374,
+          "target_address": "58902CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 405,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 491,
+          "target_address": "589031A0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 497,
+          "target_address": "5898C55C",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 581,
+          "target_address": "5881D702",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 594,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 607,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 617,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 687,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 694,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 704,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 728,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 738,
+          "target_address": "5897CC4E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 813,
+          "target_address": "58A2478C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 820,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 830,
+          "target_address": "5875DDA0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 854,
+          "target_address": "58902D20",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5881D570 / Manage Fleet tab child initialization",
+        "called_by": "Both fresh Ghidra projects record one incoming call, from the byte-matched Manage Fleet tab constructor FUN_58836B90 at 0x58837EDB. The parent requests 0x7C bytes through matched FUN_5897CC4E; on a nonnull result it passes [parent+0x30], four zero values, and 0x40, uses the allocation as ECX, and stores the return value at parent+0x1D0. Ghidra expresses the call as FUN_5881D570(param_1[0xC],0,0,0,0,0x40).",
+        "behavior": "Both fresh projects agree on the complete contiguous range 0x5881D570..0x5881D903: 915 bytes and 284 instructions; mapped Main.dll decoding covers the same extent. The function calls matched FUN_589031A0, writes an observed vtable pointer and receiver fields, allocates and initializes child records under null and bounds checks, then calls matched helpers on its observed branches. Its 17 direct calls target only matched functions: FUN_589031A0 three times, FUN_5897CC4E five times, FUN_588F3D70 once, FUN_58902CE0 once, FUN_58902D20 five times, and FUN_5875DDA0 twice. No indirect call instruction is present.",
+        "uncertainty": "The child class associated with vtable 0x5899D9E0, the exact meanings of its fields and constructor arguments, and the resource-to-control mapping are unknown. Its matched caller places it in the Manage Fleet tab, but does not identify labels or runtime interactions. The source preserves the mapped x86 instruction stream for byte matching. No emulator runtime or visual test was performed."
+      }
     }
   ]
 }

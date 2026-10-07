@@ -14,6 +14,10 @@ and stores the result at parent offset `+0x160`. The same parent then allocates
 documented in the [Manage Squad tab note](current-main-manage-squad-tab-constructor.md),
 storing that sibling at `+0x164`.
 
+This constructor also creates a child through `FUN_5881D570`, at
+`0x58837EDB`, and stores it at `+0x1D0`; the matched caller setup and child
+initialization evidence are recorded in the [Manage Fleet child note](current-main-5881d570-manage-fleet-child.md).
+
 The constructor calls base initialization `FUN_587b6dd0`, installs the
 ManageFleetTab vtable, initializes layout and shared resource-table fields, and
 creates many child controls. Its loops bounds-check indexed presentation

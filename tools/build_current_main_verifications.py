@@ -15409,6 +15409,47 @@ MAIN_COMMUNICATOR_CONFIG_CHILD_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_CONFIG_CHILD_EVIDENCE)
 
+MAIN_MANAGE_FLEET_CHILD_ADDRESSES = ("5881D570",)
+ADDRESSES += MAIN_MANAGE_FLEET_CHILD_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_FLEET_CHILD_ADDRESSES)
+
+MAIN_MANAGE_FLEET_CHILD_EVIDENCE = {
+    "5881D570": {
+        "name_in_analysis": "FUN_5881D570 / Manage Fleet tab child initialization",
+        "called_by": (
+            "Both fresh Ghidra projects record one incoming call, from the "
+            "byte-matched Manage Fleet tab constructor FUN_58836B90 at "
+            "0x58837EDB. The parent requests 0x7C bytes through matched "
+            "FUN_5897CC4E; on a nonnull result it passes [parent+0x30], four "
+            "zero values, and 0x40, uses the allocation as ECX, and stores the "
+            "return value at parent+0x1D0. Ghidra expresses the call as "
+            "FUN_5881D570(param_1[0xC],0,0,0,0,0x40)."
+        ),
+        "behavior": (
+            "Both fresh projects agree on the complete contiguous range "
+            "0x5881D570..0x5881D903: 915 bytes and 284 instructions; mapped "
+            "Main.dll decoding covers the same extent. The function calls "
+            "matched FUN_589031A0, writes an observed vtable pointer and "
+            "receiver fields, allocates and initializes child records under "
+            "null and bounds checks, then calls matched helpers on its "
+            "observed branches. Its 17 direct calls target only matched "
+            "functions: FUN_589031A0 three times, FUN_5897CC4E five times, "
+            "FUN_588F3D70 once, FUN_58902CE0 once, FUN_58902D20 five times, "
+            "and FUN_5875DDA0 twice. No indirect call instruction is present."
+        ),
+        "uncertainty": (
+            "The child class associated with vtable 0x5899D9E0, the exact "
+            "meanings of its fields and constructor arguments, and the "
+            "resource-to-control mapping are unknown. Its matched caller "
+            "places it in the Manage Fleet tab, but does not identify labels "
+            "or runtime interactions. The source preserves the mapped x86 "
+            "instruction stream for byte matching. No emulator runtime or "
+            "visual test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_MANAGE_FLEET_CHILD_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
