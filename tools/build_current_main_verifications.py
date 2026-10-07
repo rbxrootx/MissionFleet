@@ -881,6 +881,66 @@ CHANNEL_BATTLE_TRANSITION_ADDRESSES = (
 ADDRESSES += CHANNEL_BATTLE_TRANSITION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CHANNEL_BATTLE_TRANSITION_ADDRESSES)
 
+# Ghidra's exact body ranges, vtable stores, and direct references connect the
+# shared battle-room page constructor, its 17 derived mode constructors, and
+# every still-open direct helper used by that constructor.
+BATTLE_ROOM_PAGE_ADDRESSES = (
+    "5874BCF0", "5874C6C0", "5874C8B0", "5874CA60", "5874CE40",
+    "5874D380", "5874D560", "5874D720", "5874D8B0", "5874DC80",
+    "5874DD90", "5874DE10", "5874E0A0", "5874E520", "5874EB40",
+    "5874EC40", "5874EE50", "5874EFE0", "58750390", "58750FC0",
+    "587B5FD0", "587B6010", "58878230",
+)
+ADDRESSES += BATTLE_ROOM_PAGE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(BATTLE_ROOM_PAGE_ADDRESSES)
+
+BATTLE_ROOM_PAGE_VTABLES = {
+    "5874BCF0": "CBattleRoomOnPage::vftable",
+    "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
+    "5874C8B0": "CBattleRoomOnPage_Battle::vftable",
+    "5874CA60": "CBattleRoomOnPage_Betting::vftable",
+    "5874CE40": "CBattleRoomOnPage_Blitz::vftable",
+    "5874D380": "CBattleRoomOnPage_Convoy::vftable",
+    "5874D560": "CBattleRoomOnPage_DKT::vftable",
+    "5874D720": "CBattleRoomOnPage_DKT2::vftable",
+    "5874D8B0": "CBattleRoomOnPage_Dummy::vftable",
+    "5874DC80": "CBattleRoomOnPage_FLB::vftable",
+    "5874DD90": "CBattleRoomOnPage_HCB::vftable",
+    "5874DE10": "CBattleRoomOnPage_Mission::vftable",
+    "5874E0A0": "CBattleRoomOnPage_NightCombat::vftable",
+    "5874E520": "CBattleRoomOnPage_Occupation::vftable",
+    "5874EB40": "CBattleRoomOnPage_SelectMode::vftable",
+    "5874EC40": "CBattleRoomOnPage_Skirmish::vftable",
+    "5874EE50": "CBattleRoomOnPage_Trade::vftable",
+    "5874EFE0": "CBattleRoomOnPage_WAW::vftable",
+}
+BATTLE_ROOM_PAGE_BASE_CALLS = {
+    "5874C6C0": "5874C6E8", "5874C8B0": "5874C8D8",
+    "5874CA60": "5874CAAD", "5874CE40": "5874CE68",
+    "5874D380": "5874D3A8", "5874D560": "5874D588",
+    "5874D720": "5874D748", "5874D8B0": "5874D8D8",
+    "5874DC80": "5874DCD0", "5874DD90": "5874DDB8",
+    "5874DE10": "5874DE38", "5874E0A0": "5874E0C8",
+    "5874E520": "5874E56F", "5874EB40": "5874EB90",
+    "5874EC40": "5874EC68", "5874EE50": "5874EE78",
+    "5874EFE0": "5874F008",
+}
+BATTLE_ROOM_PAGE_HELPER_CALLS = {
+    "58750390": "5874C5D7", "58750FC0": "5874C586",
+    "58878230": "5874C62F", "587B6010": "5874C67E",
+    "587B5FD0": "5874C68D",
+}
+BATTLE_ROOM_PAGE_CUSTOM_HELPER_CALLS = {
+    "5874CA60": (("5897CC4E", "5874CAC5"),
+                 ("58907100", "5874CB16"), ("58902D20", "5874CB31")),
+    "5874DC80": (("5897CC4E", "5874DD07"),
+                 ("589031A0", "5874DD39"), ("58902D20", "5874DD70")),
+    "5874E520": (("5897CC4E", "5874E584"),
+                 ("589031A0", "5874E5B4")),
+    "5874EB40": (("5897CC4E", "5874EBB2"),
+                 ("589031A0", "5874EBE4"), ("58902D20", "5874EC1B")),
+}
+
 EVIDENCE = {
     "58900040": {
         "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
@@ -8056,6 +8116,68 @@ EVIDENCE.update({
         "uncertainty": CHANNEL_BATTLE_TRANSITION_UNCERTAINTY,
     }
     for address in CHANNEL_BATTLE_TRANSITION_ADDRESSES
+})
+
+BATTLE_ROOM_PAGE_HELPER_BEHAVIOR = {
+    "58750390": "Stores its two stack arguments at receiver offsets +0x50 and +0x54, then returns. The Ghidra body is 17 bytes.",
+    "58750FC0": "Initializes a CChatroomTitleBox subobject, calls FUN_589031A0 with the supplied coordinates, installs CChatroomTitleBox::vftable, and constructs/stores child control handles using FUN_58733280 and FUN_58907100. It then updates the associated child state and returns the receiver. The Ghidra body is 335 bytes.",
+    "587B5FD0": "Stores its second and third arguments at receiver offsets +0x68 and +0x60. When the second argument is 1, it derives +0x64 from the table at DAT_58A0B4D8 indexed by receiver +0x50 and the third argument, and writes receiver +0x08 multiplied by 1000 at +0x58. The Ghidra body is 50 bytes.",
+    "587B6010": "Stores its stack argument at receiver offset +0x50 and returns. The Ghidra body is 10 bytes.",
+    "58878230": "Initializes a CPannelInfoBattleRoom subobject and installs CPannelInfoBattleRoom::vftable. It allocates and stores multiple child controls, including three resource-selected children, a seven-entry repeated child group, and further controls; it updates child state and restores the exception-list value before returning. The Ghidra body is 1,252 bytes.",
+}
+BATTLE_ROOM_PAGE_UNCERTAINTY = (
+    "These sources preserve the installed Main.dll x86 instructions for byte matching; they do not recover original high-level C++ source. "
+    "The vtable labels are Ghidra names recovered from the mapped image. Member types and meanings, resource IDs and rendered appearance, "
+    "indirect virtual-call targets, mode-specific gameplay meaning, and external constructor callers remain unresolved unless directly stated "
+    "as an instruction-level fact above. No emulator or visual runtime test was performed."
+)
+
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / {BATTLE_ROOM_PAGE_VTABLES.get(address, 'battle-room page helper')}"
+        ),
+        "called_by": (
+            "Ghidra's incoming-reference and decompilation audit shows direct calls from the 17 derived constructors: "
+            + ", ".join(
+                f"0x{caller} at 0x{site}"
+                for caller, site in BATTLE_ROOM_PAGE_BASE_CALLS.items()
+            )
+            if address == "5874BCF0" else
+            (
+                f"The constructor's direct call to shared base 0x5874BCF0 is at 0x{BATTLE_ROOM_PAGE_BASE_CALLS[address]}; "
+                "Ghidra's external factory/caller for this derived constructor was not resolved in this audit."
+                if address in BATTLE_ROOM_PAGE_BASE_CALLS else
+                f"The shared base constructor directly calls this helper at 0x{BATTLE_ROOM_PAGE_HELPER_CALLS[address]}."
+            )
+        ),
+        "behavior": (
+            "Installs CBattleRoomOnPage::vftable, initializes base-page state, and constructs/stores child widgets including a CChatroomTitleBox. "
+            "Its exact Ghidra body consists of [0x5874BCF0,0x5874C28C] and [0x5874C290,0x5874C6BB], totaling 2,505 instruction-covered bytes. "
+            "The five open direct helpers are called at 0x5874C586, 0x5874C5D7, 0x5874C62F, 0x5874C67E, and 0x5874C68D; all other "
+            "direct callees in this body are already byte-verified."
+            if address == "5874BCF0" else
+            (
+                (
+                    f"Calls the shared base constructor at 0x{BATTLE_ROOM_PAGE_BASE_CALLS[address]}, installs "
+                    f"{BATTLE_ROOM_PAGE_VTABLES[address]}, and performs additional child setup through matched helper calls "
+                    + ", ".join(
+                        f"0x{target} at 0x{site}"
+                        for target, site in BATTLE_ROOM_PAGE_CUSTOM_HELPER_CALLS[address]
+                    )
+                    + "."
+                ) if address in BATTLE_ROOM_PAGE_CUSTOM_HELPER_CALLS else
+                (
+                    f"Calls the shared base constructor at 0x{BATTLE_ROOM_PAGE_BASE_CALLS[address]}, installs "
+                    f"{BATTLE_ROOM_PAGE_VTABLES[address]}, and returns the receiver. The Ghidra body is the 57-byte "
+                    "common derived-constructor form."
+                ) if address in BATTLE_ROOM_PAGE_BASE_CALLS else
+                BATTLE_ROOM_PAGE_HELPER_BEHAVIOR[address]
+            )
+        ),
+        "uncertainty": BATTLE_ROOM_PAGE_UNCERTAINTY,
+    }
+    for address in BATTLE_ROOM_PAGE_ADDRESSES
 })
 
 
