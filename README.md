@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,601 matches cover 2,745,568 bytes (20.2562% by functions and
-26.2225% by bytes) and are verified individually at 100.0% by objdiff.
+The current 8,602 matches cover 2,745,604 bytes (20.2586% by functions and
+26.2228% by bytes) and are verified individually at 100.0% by objdiff.
 The installed client's battle-room `0x80020115` update closure adds eight
 byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
 bitmap traversal, mode-specific object creation, exact ranges, and unresolved
@@ -88,6 +88,11 @@ function / 87 bytes. Its matched `CAircraft` base-constructor call, RTTI-backed
 vtable, argument forwarding, two initialized fields, and unresolved creation
 caller are documented in
 [the constructor evidence](docs/current-main-santa-aircraft-constructor.md).
+The adjacent `CSantaAircraft` vtable slot-0 method is now matched across its
+complete 36-byte mapped stream, including the reachable cleanup instruction
+Ghidra omitted from its two body ranges. Its RTTI-backed entry, flag test, and
+unresolved helper contracts are documented in
+[the method evidence](docs/current-main-santa-aircraft-slot0.md).
 The installed client's shared map-control refresh adds eight byte-identical
 functions / 3,894 bytes. Its original map labels, selector-driven child updates,
 five matched caller paths, exact Ghidra ranges, and four open callers are

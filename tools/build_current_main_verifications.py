@@ -855,6 +855,9 @@ SOURCE_COMPILER = {
     "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69",
 }
 FUNCTION_SIZE_OVERRIDES = {
+    # Ghidra omits the reachable add esp,4 at 0x588D250B after the conditional
+    # helper call; include it with the slot-0 method through ret 4 at 2511.
+    "588D24F0": 36,
     # Ghidra counts 708 bytes across disjoint ranges, omitting add esp,4 at
     # 0x58807882 and the frame epilogue through ret at 0x588078A6.
     "588075E0": 711,
@@ -1415,6 +1418,10 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES)
 MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES = ("588D2480",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES)
+
+MAIN_SANTA_AIRCRAFT_SLOT0_ADDRESSES = ("588D24F0",)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT0_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT0_ADDRESSES)
 
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
@@ -14740,6 +14747,44 @@ MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_SLOT0_EVIDENCE = {
+    "588D24F0": {
+        "name_in_analysis": "FUN_588D24F0 / CSantaAircraft vtable slot 0",
+        "called_by": (
+            "Fresh Ghidra edge exports record a data reference from this body "
+            "to 0x589A0F38, the slot-0 cell of the RTTI-identified "
+            ".?AVCSantaAircraft@@ vtable. The mapped cell contains "
+            "0x588D24F0, and the class hierarchy includes .?AVCAircraft@@. "
+            "The edge exports show no incoming direct CALL edge; the known "
+            "entry is through virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on ranges [0x588D24F0, "
+            "0x588D250B) (27 bytes / 8 instructions) and [0x588D250E, "
+            "0x588D2514) (6 bytes / 3 instructions). The mapped gap contains "
+            "a reachable add esp,4 at 0x588D250B after the conditional helper "
+            "call; the reconstruction includes it as a third exact range, "
+            "for 36 bytes / 12 instructions total. The method writes vtable "
+            "0x589A0F38 to this, calls FUN_58741990, tests bit 0 of the stack "
+            "value at [esp+8], and, when set, passes this to byte-matched "
+            "FUN_5897CC42. It then restores the stack, returns this in EAX, "
+            "and ends with ret 4."
+        ),
+        "uncertainty": (
+            "FUN_58741990 is not byte-verified, so its effects and its role "
+            "in the CSantaAircraft/CAircraft hierarchy remain unresolved. "
+            "The low-bit stack flag's semantic meaning and the ownership or "
+            "deallocation behavior behind FUN_5897CC42 are not established "
+            "by this body. Slot 0 and the conditional helper pattern are "
+            "consistent with destructor dispatch, but that interpretation "
+            "remains an inference. No runtime or emulator lifecycle test was "
+            "performed; emitted source preserves the exact instructions and "
+            "is not recovered high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT0_EVIDENCE)
 
 
 if __name__ == "__main__":

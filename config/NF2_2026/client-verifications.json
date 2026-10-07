@@ -446453,6 +446453,71 @@
         "behavior": "Fresh Ghidra body exports agree on the exact contiguous range [0x588D2480, 0x588D24D7): 87 bytes / 28 instructions. The method forwards its nine stack arguments to FUN_58741C20, installs vtable 0x589A0F38, writes 6 to [this+0x560] and 1 to [this+0x4F8], returns this in EAX, and ends with ret 0x24. The callee is the byte-matched CAircraft constructor, which performs the base object and sprite-child initialization documented in docs/current-main-58741c20-aircraft-constructor.md.",
         "uncertainty": "The nine constructor argument meanings, the two derived-field semantics, and the creation context in unmatched caller FUN_587F5760 remain unresolved. RTTI and the base-constructor call identify the observed class and initialization path, but no runtime or visual emulator construction test was performed. The emitted source preserves the mapped instruction stream and is not recovered high-level C++."
       }
+    },
+    {
+      "address": "588D24F0",
+      "name": "FUN_588d24f0",
+      "size": 36,
+      "symbol": "_FUN_588d24f0",
+      "source": "src/client-current/Main/FUN_588d24f0.cpp",
+      "source_sha256": "e2ad6592f6a2109566fcedd39246f8ab99ed0a79f53df8444ebaf942dbe5e00e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D24F0",
+          "size": 27,
+          "symbol": "_FUN_588d24f0_segment_00",
+          "relocations": [
+            {
+              "offset": 5,
+              "target_address": "589A0F38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 10,
+              "target_address": "58741990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588D250B",
+          "size": 3,
+          "symbol": "_FUN_588d24f0_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "588D250E",
+          "size": 6,
+          "symbol": "_FUN_588d24f0_segment_02",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D24F0 / CSantaAircraft vtable slot 0",
+        "called_by": "Fresh Ghidra edge exports record a data reference from this body to 0x589A0F38, the slot-0 cell of the RTTI-identified .?AVCSantaAircraft@@ vtable. The mapped cell contains 0x588D24F0, and the class hierarchy includes .?AVCAircraft@@. The edge exports show no incoming direct CALL edge; the known entry is through virtual dispatch.",
+        "behavior": "Fresh Ghidra body exports agree on ranges [0x588D24F0, 0x588D250B) (27 bytes / 8 instructions) and [0x588D250E, 0x588D2514) (6 bytes / 3 instructions). The mapped gap contains a reachable add esp,4 at 0x588D250B after the conditional helper call; the reconstruction includes it as a third exact range, for 36 bytes / 12 instructions total. The method writes vtable 0x589A0F38 to this, calls FUN_58741990, tests bit 0 of the stack value at [esp+8], and, when set, passes this to byte-matched FUN_5897CC42. It then restores the stack, returns this in EAX, and ends with ret 4.",
+        "uncertainty": "FUN_58741990 is not byte-verified, so its effects and its role in the CSantaAircraft/CAircraft hierarchy remain unresolved. The low-bit stack flag's semantic meaning and the ownership or deallocation behavior behind FUN_5897CC42 are not established by this body. Slot 0 and the conditional helper pattern are consistent with destructor dispatch, but that interpretation remains an inference. No runtime or emulator lifecycle test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
+      }
     }
   ]
 }
