@@ -15364,6 +15364,51 @@ MAIN_NESTED_RECORD_STATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_NESTED_RECORD_STATE_EVIDENCE)
 
+MAIN_COMMUNICATOR_CONFIG_CHILD_ADDRESSES = ("58833980",)
+ADDRESSES += MAIN_COMMUNICATOR_CONFIG_CHILD_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_CONFIG_CHILD_ADDRESSES)
+
+MAIN_COMMUNICATOR_CONFIG_CHILD_EVIDENCE = {
+    "58833980": {
+        "name_in_analysis": "FUN_58833980 / communicator-configuration child initialization",
+        "called_by": (
+            "Both fresh Ghidra projects record exactly one incoming call, from "
+            "the byte-matched communicator-configuration panel constructor "
+            "FUN_58843380 at 0x5884421D. The parent requests 0x84 bytes from "
+            "matched FUN_5897CC4E, sets ECX to the returned object, and passes "
+            "[parent+0x90], EBP, EDI, 0, 0, and 0x40 on the stack. Ghidra's "
+            "parent decompilation records the call as "
+            "FUN_58833980(param_1[0x24], param_3, param_4, 0, 0, 0x40) and "
+            "stores the returned pointer at parent+0x158."
+        ),
+        "behavior": (
+            "Both fresh projects agree on two exact body ranges: "
+            "0x58833980..+157 bytes (46 instructions) and "
+            "0x58833A20..+841 bytes (260 instructions), totaling 998 bytes "
+            "and 306 instructions. The mapped Main.dll decodes across both "
+            "ranges exactly. The body calls matched FUN_589031A0, writes "
+            "observed vtable and receiver fields, allocates and initializes "
+            "child records under bounds and null checks, and calls matched "
+            "FUN_58902D20 and FUN_58733280 on its control-flow paths. Across "
+            "the full body its 17 direct calls target only matched functions: "
+            "FUN_589031A0 twice, FUN_5897CC4E seven times, FUN_58902D20 twice, "
+            "FUN_58733280 four times, and FUN_5875DDA0 twice. No indirect call "
+            "instruction is present."
+        ),
+        "uncertainty": (
+            "The exact child class name, meaning of the vtable and receiver "
+            "fields, resource identifiers, and the constructor parameters' "
+            "domain meanings are unresolved. The parent identifies this as one "
+            "child created by the communicator-configuration panel, but that "
+            "does not identify the child's displayed content or behavior. The "
+            "source preserves the mapped x86 instruction stream across the two "
+            "Ghidra ranges for byte matching. No emulator runtime or visual "
+            "test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_CONFIG_CHILD_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

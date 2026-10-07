@@ -12,6 +12,11 @@ controls through `FUN_5875dda0`. Child coordinates are based on the `(100,
 panel identity; the child labels, resource mapping, and interactions remain
 unknown.
 
+The parent also allocates an `0x84`-byte child at member `+0x158` and calls
+`FUN_58833980` at `0x5884421D`. Its argument setup and observed field updates
+are documented in the [child initialization notes](current-main-58833980-communicator-panel-child.md);
+the child's class and content remain unidentified.
+
 The Ghidra body has four ranges totaling 6,408 bytes:
 
 - `58843380..58843C75` (2,294 bytes)
