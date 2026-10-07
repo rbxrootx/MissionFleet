@@ -1364,6 +1364,10 @@ MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES = ("588D1030",)
 ADDRESSES += MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES)
 
+MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES = ("588CDF70",)
+ADDRESSES += MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14221,6 +14225,35 @@ MAIN_ROOM_TYPE_SELECT_MODE_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_SELECT_MODE_EVIDENCE)
+
+MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_EVIDENCE = {
+    "588CDF70": {
+        "name_in_analysis": "FUN_588CDF70 / CRoomTypeHCB constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAC06 after FUN_5897CC4E accepts "
+            "resource 0x70. The returned pointer is stored at "
+            "CRoomSettingManager receiver +0x1A0. The focused verifier checks "
+            "the resource gate, argument setup, exact call, and result store "
+            "against mapped bytes."
+        ),
+        "behavior": (
+            "The exact 47-byte constructor forwards its arguments and receiver "
+            "to byte-matched FUN_588D02E0, installs the vtable at 0x589A0DA8, "
+            "and returns the receiver with ret 0x14. The vtable's complete "
+            "object locator leads to RTTI type descriptor "
+            ".?AVCRoomTypeHCB@@."
+        ),
+        "uncertainty": (
+            "The meaning of resource 0x70, the state held by the base "
+            "initializer, the virtual behavior of CRoomTypeHCB, and its "
+            "appearance or gameplay effect remain unresolved. This is static "
+            "evidence from the installed mapped client and RTTI; no runtime "
+            "or visual emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":
