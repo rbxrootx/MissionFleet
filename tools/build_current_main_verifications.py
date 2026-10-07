@@ -1412,6 +1412,10 @@ MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES = ("588D2300",)
 ADDRESSES += MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES)
 
+MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES = ("588D2480",)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14703,6 +14707,39 @@ MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_EVIDENCE = {
+    "588D2480": {
+        "name_in_analysis": "FUN_588D2480 / CSantaAircraft constructor",
+        "called_by": (
+            "Fresh Ghidra edge exports show one direct incoming call, from "
+            "unmatched FUN_587F5760 at 0x587F5866. The constructor calls "
+            "byte-matched FUN_58741C20 at 0x588D24B2. Its mapped vtable write "
+            "targets 0x589A0F38; RTTI identifies .?AVCSantaAircraft@@ and its "
+            "class hierarchy lists .?AVCAircraft@@ as a base."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on the exact contiguous range "
+            "[0x588D2480, 0x588D24D7): 87 bytes / 28 instructions. The method "
+            "forwards its nine stack arguments to FUN_58741C20, installs "
+            "vtable 0x589A0F38, writes 6 to [this+0x560] and 1 to "
+            "[this+0x4F8], returns this in EAX, and ends with ret 0x24. The "
+            "callee is the byte-matched CAircraft constructor, which performs "
+            "the base object and sprite-child initialization documented in "
+            "docs/current-main-58741c20-aircraft-constructor.md."
+        ),
+        "uncertainty": (
+            "The nine constructor argument meanings, the two derived-field "
+            "semantics, and the creation context in unmatched caller "
+            "FUN_587F5760 remain unresolved. RTTI and the base-constructor "
+            "call identify the observed class and initialization path, but no "
+            "runtime or visual emulator construction test was performed. The "
+            "emitted source preserves the mapped instruction stream and is "
+            "not recovered high-level C++."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":

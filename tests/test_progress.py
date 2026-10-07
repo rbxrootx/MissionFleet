@@ -32,6 +32,7 @@ from tools import (
     verify_current_main_room_type_trade_constructor,
     verify_current_main_room_type_trade_slot7,
     verify_current_main_room_type_trade_waw_shared_slot,
+    verify_current_main_santa_aircraft_constructor,
 )
 
 
@@ -44,8 +45,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_600)
-        self.assertEqual(self.report["measures"]["matched_code"], "2745481")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_601)
+        self.assertEqual(self.report["measures"]["matched_code"], "2745568")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -56,8 +57,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_467)
-        self.assertEqual(current["measures"]["matched_code"], "1772063")
+        self.assertEqual(current["measures"]["matched_functions"], 2_468)
+        self.assertEqual(current["measures"]["matched_code"], "1772150")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -266,6 +267,20 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("MESSAGESTRING_ROOMTYPE_WAW", item["behavior"])
         self.assertIn("address 0x4", item["uncertainty"])
         verify_current_main_room_type_trade_waw_shared_slot.main()
+
+    def test_santa_aircraft_constructor_has_rtti_and_matched_base_constructor(self):
+        addresses = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_CONSTRUCTOR_EVIDENCE
+        self.assertEqual(addresses, ("588D2480",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588D2480"]
+        self.assertIn("FUN_587F5760", item["called_by"])
+        self.assertIn("CSantaAircraft", item["called_by"])
+        self.assertIn("CAircraft", item["called_by"])
+        self.assertIn("FUN_58741C20", item["behavior"])
+        self.assertIn("+0x560", item["behavior"])
+        self.assertIn("remain unresolved", item["uncertainty"])
+        verify_current_main_santa_aircraft_constructor.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (
