@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_369)
-        self.assertEqual(self.report["measures"]["matched_code"], "2688820")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_370)
+        self.assertEqual(self.report["measures"]["matched_code"], "2690118")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_236)
-        self.assertEqual(current["measures"]["matched_code"], "1715402")
+        self.assertEqual(current["measures"]["matched_functions"], 2_237)
+        self.assertEqual(current["measures"]["matched_code"], "1716700")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -61,6 +61,22 @@ class ProgressReportTests(unittest.TestCase):
         evidence = (
             build_current_main_verifications
             .MAIN_REPLAY_SAVE_SERIALIZER_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_communicator_message_panel_constructor_has_original_code_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES
+        )
+        self.assertEqual(addresses, ("5884CA60",))
+        evidence = (
+            build_current_main_verifications
+            .CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_EVIDENCE
         )
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:

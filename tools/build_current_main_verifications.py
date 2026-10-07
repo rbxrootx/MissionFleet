@@ -1082,6 +1082,10 @@ CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES = ("5880B810",)
 ADDRESSES += CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES)
 
+CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES = ("5884CA60",)
+ADDRESSES += CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9742,6 +9746,36 @@ CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_EVIDENCE)
+
+CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_EVIDENCE = {
+    "5884CA60": {
+        "name_in_analysis": "FUN_5884ca60 / RTTI-backed CPannelCommunicatorMessage constructor",
+        "called_by": (
+            "Fresh Ghidra references show one direct call from the byte-matched "
+            "CPannelCommunicatorIDPannel constructor FUN_58849b70 at 0x5884A46D. "
+            "The caller stores the returned object at receiver +0x110; the focused "
+            "verifier checks both the call target and the caller's matched range."
+        ),
+        "behavior": (
+            "Fresh Ghidra 12.1.3 decompilation shows base initialization, then "
+            "the RTTI-confirmed CPannelCommunicatorMessage vtable installation. "
+            "The constructor conditionally allocates three 0x54-byte children, "
+            "two 0x10C-byte text controls, and four 0xAC-byte controls, associates "
+            "observed resource/data fields with those controls, sets their "
+            "coordinates from the constructor arguments, and initializes the "
+            "parent flags and pointer/state fields. All 31 direct calls transfer "
+            "to functions already verified byte-identical in the same mapped image."
+        ),
+        "uncertainty": (
+            "RTTI establishes the class name, and the matched caller establishes "
+            "its parent slot and construction coordinates. The child control "
+            "labels, exact visible content, resource meanings, field types, and "
+            "runtime appearance remain unresolved. Ghidra body coverage is exact, "
+            "but no emulator or live-client rendering test was performed."
+        ),
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {

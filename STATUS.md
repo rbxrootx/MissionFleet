@@ -6,11 +6,15 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,369 verified matches
-totaling 2,688,820 bytes (19.7099% by functions, 25.6805% by bytes), each at
+identified code bytes across six report units. There are 8,370 verified matches
+totaling 2,690,118 bytes (19.7122% by functions, 25.6929% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
-source or playable behavior. The RTTI-backed `CLogoControlMenuScreen` slot
+source or playable behavior. The RTTI-backed `CPannelCommunicatorMessage`
+constructor adds one exact function / 1,298 bytes; its matched parent slot,
+complete direct-call boundary, and remaining visual uncertainties are recorded
+in [the subsystem note](docs/current-main-communicator-message-panel.md). The
+RTTI-backed `CLogoControlMenuScreen` slot
 `+0x0C` method adds 43 exact functions / 14,771 bytes through its direct-call
 closure; its mapped-code validation is complete, but no emulator runtime test
 has been performed. GitHub Actions publishes the generated report to the

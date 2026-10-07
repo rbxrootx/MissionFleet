@@ -16,6 +16,10 @@ initializes nested objects, including results stored at receiver
 The child at `+0x114` is identified by original RTTI as
 `CPannelCommunicatorClanMessage`; its constructor and evidence are recorded in
 [the clan-message child notes](current-main-communicator-clan-message-constructor-58823270.md).
+The RTTI-identified `CPannelCommunicatorMessage` child is constructed at
+`0x5884A46D` and stored at `+0x110`; its exact body and remaining visual
+uncertainties are recorded in
+[the message-panel constructor notes](current-main-communicator-message-panel.md).
 The visual roles of the remaining nested controls remain undetermined.
 
 The Ghidra-derived function inventory ended at `0x5884A57C`, immediately

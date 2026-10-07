@@ -10,6 +10,7 @@ IMAGE = ROOT / "reports/unpacked-current-main/Main.mapped.bin"
 EXPECTED = {
     0x5898C500: ".?AVCMenuScreen@@",
     0x5899E780: ".?AVCPannelCommunicatorIDPannel@@",
+    0x5899E7F4: ".?AVCPannelCommunicatorMessage@@",
     0x5899E400: ".?AVCPannelCommunicatorConfigPannel@@",
     0x5899E518: ".?AVCPannelCommunicatorDetailedUserInfo@@",
     0x5899DB64: ".?AVCPannelCommunicatorClanMessage@@",
@@ -37,6 +38,11 @@ def main():
     clan_message_store = image[offset(0x588232E3, 6):offset(0x588232E3, 6) + 6]
     if clan_message_store != b"\xc7\x06" + struct.pack("<I", 0x5899DB64):
         raise AssertionError("ClanMessage child constructor vtable changed")
+
+    # FUN_5884CA60 installs the message-panel vtable immediately after base setup.
+    communicator_message_store = image[offset(0x5884CAC3, 6):offset(0x5884CAC3, 6) + 6]
+    if communicator_message_store != b"\xc7\x06" + struct.pack("<I", 0x5899E7F4):
+        raise AssertionError("Communicator message-panel constructor vtable changed")
 
     for vtable, expected_name in EXPECTED.items():
         locator = u32(vtable - 4)
@@ -89,6 +95,7 @@ def main():
     print("5899DB68: FUN_58822D40 (ClanMessage state-update slot +0x04)")
     print("5899DB70: FUN_58822F10 (ClanMessage geometry-update slot +0x0C)")
     print("5899DB7C: FUN_58823EB0 (ClanMessage notification-handler slot +0x18)")
+    print("5899E7F4: CPannelCommunicatorMessage vtable (constructor store at 0x5884CAC3)")
 
 
 if __name__ == "__main__":
