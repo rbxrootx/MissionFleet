@@ -52,13 +52,18 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,031 of 42,461 functions and 2,564,425 of 10,470,295 bytes (18.9138% by
-functions and 24.4924% by bytes); every counted function match is verified at
+credits 8,137 of 42,461 functions and 2,601,029 of 10,470,295 bytes (19.1635% by
+functions and 24.8420% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,885 exact function matches totaling 1,587,474 bytes (22.2445% by
-functions and 67.4270% by bytes). The
+inventory has 2,004 exact function matches totaling 1,627,611 bytes (23.6488% by
+functions and 69.1318% by bytes). The PageFight control-menu event actions
+rooted at `FUN_587F7530` add seven byte-identical functions / 4,357 bytes. Their
+matched event handler, selector branches, exact closure, and remaining control
+and protocol uncertainties are documented in
+[`current-main-pagefight-control-menu-actions.md`](current-main-pagefight-control-menu-actions.md).
+The
 PageFight `CPageFightOn_ControlMenuScreen` update-loop closure adds 149 exact
 matches / 48,515 bytes; its matched caller, body ranges, direct-call boundary,
 and semantic limits are recorded in
