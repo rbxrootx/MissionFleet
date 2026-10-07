@@ -446276,6 +446276,71 @@
         "behavior": "Fresh Ghidra body and edge exports cover 18 instructions in one 47-byte range, with one direct call to byte-matched FUN_588D02E0. The constructor forwards its five stack arguments to that base constructor, installs vtable 0x589A0EE8 whose RTTI type descriptor is .?AVCRoomTypeTrade@@, returns this in EAX, and cleans 0x14 bytes of caller arguments. No direct member copies or table accesses occur in this body.",
         "uncertainty": "The meanings of resource 0x70, the five arguments, state initialized by the base constructor, virtual behavior, and the class's visible or gameplay effect remain unresolved. The emitted source preserves the exact mapped instruction stream and is not a recovered high-level C++ implementation. This is static evidence from the installed mapped client, Ghidra exports, and RTTI; no emulator or visual runtime test was performed."
       }
+    },
+    {
+      "address": "588D2080",
+      "name": "FUN_588d2080",
+      "size": 285,
+      "symbol": "_FUN_588d2080",
+      "source": "src/client-current/Main/FUN_588d2080.cpp",
+      "source_sha256": "3e7cd0052a61f6ec189cf340def388d6a536c4388271aa15ba006d04180d2835",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D2080",
+          "size": 233,
+          "symbol": "_FUN_588d2080_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5899A5C4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588D2170",
+          "size": 52,
+          "symbol": "_FUN_588d2080_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D2080 / CRoomTypeTrade vtable slot 7",
+        "called_by": "Fresh Ghidra data references and the mapped CRoomTypeTrade vtable show this function at slot 7 (vtable address 0x589A0F04, offset +0x1C from vtable 0x589A0EE8). No direct static call edge appears in the fresh edge export; invocation is through virtual dispatch.",
+        "behavior": "Fresh Ghidra body ranges cover 233 bytes / 72 instructions at 0x588D2080 and 52 bytes / 25 instructions at 0x588D2170, totaling 285 bytes / 97 instructions with a 7-byte non-body gap. The method passes [this+0x50], zero, and 0xC4, then [this+0x54], zero, and 0x50 to byte-matched FUN_5897CC48. It writes fixed DWORD, WORD, byte-mask, and bit-mask values through those two pointers. It then passes the NUL-terminated key MESSAGESTRING_ROOMTYPE_TRADE at 0x5899A5C4 through the function pointer at [0x5898C030] and copies the returned bytes into [this+0x50], with a 0x30-byte capacity including the terminator. The method returns with ret 4 without reading its stack argument.",
+        "uncertainty": "The [this+0x50]/[this+0x54] structure types and field meanings, the thunk's underlying operation, the stack argument meaning, and the method's UI effect remain unknown. Main.dll imports UtilsGetLanguageText from FleetMissionUtils.dll, and the captured pointer 0x59A98290 matches that installed export's RVA 0x8290 if the utility module is loaded at 0x59A90000; the module base is not in the captured manifest, so this symbol resolution is a strong inference. The emitted source preserves the exact mapped instruction stream and is not recovered high-level C++. No emulator or visual runtime test was performed."
+      }
     }
   ]
 }

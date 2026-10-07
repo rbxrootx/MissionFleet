@@ -1404,6 +1404,10 @@ MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES = ("588D1F60",)
 ADDRESSES += MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES = ("588D2080",)
+ADDRESSES += MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14608,6 +14612,44 @@ MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_TRADE_SLOT7_EVIDENCE = {
+    "588D2080": {
+        "name_in_analysis": "FUN_588D2080 / CRoomTypeTrade vtable slot 7",
+        "called_by": (
+            "Fresh Ghidra data references and the mapped CRoomTypeTrade vtable "
+            "show this function at slot 7 (vtable address 0x589A0F04, offset "
+            "+0x1C from vtable 0x589A0EE8). No direct static call edge appears "
+            "in the fresh edge export; invocation is through virtual dispatch."
+        ),
+        "behavior": (
+            "Fresh Ghidra body ranges cover 233 bytes / 72 instructions at "
+            "0x588D2080 and 52 bytes / 25 instructions at 0x588D2170, totaling "
+            "285 bytes / 97 instructions with a 7-byte non-body gap. The method "
+            "passes [this+0x50], zero, and 0xC4, then [this+0x54], zero, and "
+            "0x50 to byte-matched FUN_5897CC48. It writes fixed DWORD, WORD, "
+            "byte-mask, and bit-mask values through those two pointers. It then "
+            "passes the NUL-terminated key MESSAGESTRING_ROOMTYPE_TRADE at "
+            "0x5899A5C4 through the function pointer at [0x5898C030] and copies "
+            "the returned bytes into [this+0x50], with a 0x30-byte capacity "
+            "including the terminator. The method returns with ret 4 without "
+            "reading its stack argument."
+        ),
+        "uncertainty": (
+            "The [this+0x50]/[this+0x54] structure types and field meanings, "
+            "the thunk's underlying operation, the stack argument meaning, and "
+            "the method's UI effect remain unknown. Main.dll imports "
+            "UtilsGetLanguageText from FleetMissionUtils.dll, and the captured "
+            "pointer 0x59A98290 matches that installed export's RVA 0x8290 if "
+            "the utility module is loaded at 0x59A90000; the module base is not "
+            "in the captured manifest, so this symbol resolution is a strong "
+            "inference. The emitted source preserves the exact mapped "
+            "instruction stream and is not recovered high-level C++. No "
+            "emulator or visual runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_SLOT7_EVIDENCE)
 
 
 if __name__ == "__main__":
