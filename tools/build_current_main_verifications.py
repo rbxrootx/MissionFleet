@@ -399,6 +399,10 @@ ADDRESSES = (
     "587FD810",
     "5897CE32",
     "588F7D30",
+    # RTTI-backed battle-result screen row-population call graph audited in Ghidra.
+    "58809AF0", "5880A260", "5880B0D0", "5880A940", "58870130",
+    "588C6510", "588C6AA0", "588C66C0", "588C6830", "588D6C40",
+    "588EB2D0", "588C6470", "5875F310",
 )
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -4297,6 +4301,84 @@ EVIDENCE = {
         "called_by": "RTTI maps slot +0x18 at 0x5899D60C to this method in the same class table whose TypeDescriptor is 0x589CC2E8 (.?AVCPageResultOfBattle_ControlMenuScreen@@). Constructor FUN_5880DD80 installs that table at object offset 0. No direct E8 call sites were identified for this method; dispatch evidence is the RTTI-backed vtable.",
         "behavior": "Ghidra identifies a contiguous 713-byte method. Selector 2 is the observed event branch; it compares the supplied value against receiver field +0x42C and dispatches the matching child-control helpers, including FUN_5880A940.",
         "uncertainty": "The selector and compared field's roles, child-control identities, and user-visible action are unresolved. No emulator runtime or visual test has been performed.",
+    },
+    "58809AF0": {
+        "name_in_analysis": "FUN_58809af0 / battle-result row detail and record-list population helper",
+        "called_by": "Ghidra's exact references show calls from RTTI-backed CPageResultOfBattle_ControlMenuScreen methods FUN_5880B450 at 0x5880B5D0 and FUN_5880F950 at 0x5880FA9F and 0x5880FB9E.",
+        "behavior": "Ghidra assigns 1,893 body bytes across [0x58809AF0,0x58809B79) and [0x58809B80,0x5880A25C), with complete instruction coverage. The helper updates child-control flags, derives displayed values from the selected result record and linked entry list, writes per-entry rows through FUN_588C66C0, updates row visibility through FUN_588C6830, clears controls through FUN_588C6510, and reads indexed fields through FUN_588D6C40.",
+        "uncertainty": "Most receiver fields, global records, row columns, and state bits are unnamed. Ghidra reports an unreachable block at 0x5880A13D; its two recorded body ranges still have complete instruction coverage. No runtime visual test has been performed.",
+    },
+    "5880A260": {
+        "name_in_analysis": "FUN_5880a260 / battle-result screen child-row construction helper",
+        "called_by": "Ghidra records direct calls from RTTI-backed CPageResultOfBattle_ControlMenuScreen methods FUN_5880B450 at 0x5880B4C9 and FUN_5880C1B0 at 0x5880C229.",
+        "behavior": "Ghidra assigns 1,740 body bytes across [0x5880A260,0x5880A7DD), [0x5880A7E0,0x5880A889), and [0x5880A890,0x5880A936), with complete instruction coverage. It clears observed receiver fields, maps result-record values into child controls, builds two repeated child-row groups through FUN_588C6AA0, and calls FUN_588C6510 while initializing the resulting controls.",
+        "uncertainty": "The indexed arrays, child identities, color constants, and screen-field meanings are unresolved. No runtime visual test has been performed.",
+    },
+    "5880B0D0": {
+        "name_in_analysis": "FUN_5880b0d0 / alternate battle-result row population helper",
+        "called_by": "Ghidra records calls from RTTI-backed CPageResultOfBattle_ControlMenuScreen methods FUN_5880B450 at 0x5880B5C9 and FUN_5880F950 at 0x5880FA91 and 0x5880FB97.",
+        "behavior": "Ghidra assigns 876 body bytes across [0x5880B0D0,0x5880B365) and [0x5880B370,0x5880B447), with complete instruction coverage. This alternate branch updates child flags and result-row values through FUN_588C66C0, FUN_588C6830, and FUN_588C6510 while walking the linked result entries.",
+        "uncertainty": "The mode selecting this path, result-record schema, and child-control roles are not fully named. No runtime visual test has been performed.",
+    },
+    "5880A940": {
+        "name_in_analysis": "FUN_5880a940 / battle-result row-window update helper",
+        "called_by": "Ghidra records calls from RTTI-backed CPageResultOfBattle_ControlMenuScreen methods FUN_5880C0B0 at 0x5880C132 and 0x5880C147, and FUN_5880F950 at 0x5880F975 and 0x5880F98F.",
+        "behavior": "The complete 122-byte body subtracts the supplied amount from the receiver's +0x6C index and clamps a negative result to zero. Otherwise it walks the observed row count, updates the row's visible index interval through FUN_588C6830, and refreshes text through FUN_58903360.",
+        "uncertainty": "The receiver index and row-count meanings remain provisional; Ghidra's parameters are not semantically named. No runtime scroll test has been performed.",
+    },
+    "58870130": {
+        "name_in_analysis": "FUN_58870130 / child-control state reset helper",
+        "called_by": "Ghidra records direct calls from RTTI-backed CPageResultOfBattle_ControlMenuScreen methods FUN_5880B450 at 0x5880B579 and FUN_5880C1B0 at 0x5880C4BC.",
+        "behavior": "The complete 60-byte body masks and sets observed flag bits in the child control's word at +0x24, clears fields at +0x28 and +0x58, and returns.",
+        "uncertainty": "The control type and semantic names of the flag bits and cleared fields are unresolved. No runtime visual test has been performed.",
+    },
+    "588C6510": {
+        "name_in_analysis": "FUN_588c6510 / result-row control reset helper",
+        "called_by": "Ghidra records two direct calls from FUN_58809AF0, two from FUN_5880A260, and two from FUN_5880B0D0; the callsites are present in the audited row-population bodies.",
+        "behavior": "Ghidra assigns 405 body bytes across five ranges, all fully instruction-covered. It clears row-control flags and fields, resets associated child controls through FUN_588EB2D0, empties four observed text buffers, and calls the matched FUN_5875F320 helper twice.",
+        "uncertainty": "The four text columns and reset fields have no verified semantic names. No runtime visual test has been performed.",
+    },
+    "588C6AA0": {
+        "name_in_analysis": "FUN_588c6aa0 / CResultRecord_Screen child-row constructor",
+        "called_by": "Ghidra records two direct child-construction calls from FUN_5880A260 at 0x5880A815 and 0x5880A8C7.",
+        "behavior": "The complete 1,183-byte body installs Ghidra's CResultRecord_Screen vtable, creates an associated CSpriteDataScreen object, and constructs the row's observed child controls through matched initializers and text/control helpers using fixed coordinates and color values.",
+        "uncertainty": "The row columns, fixed colors, and sprite-data ownership semantics are not established by this function alone. The object names are Ghidra RTTI labels; no runtime visual test has been performed.",
+    },
+    "588C66C0": {
+        "name_in_analysis": "FUN_588c66c0 / result-row record and text updater",
+        "called_by": "Ghidra records a direct call from FUN_58809AF0 at 0x5880A203 and from FUN_5880B0D0 at 0x5880B3E2.",
+        "behavior": "The complete 361-byte body stores the supplied row values in observed fields, resets the row state, copies supplied strings into four child text buffers, updates four displayed text positions through FUN_589032E0, and stores the final supplied value at +0xF4.",
+        "uncertainty": "The parameter meanings, row-column identities, and final field meaning are unresolved. No runtime visual test has been performed.",
+    },
+    "588C6830": {
+        "name_in_analysis": "FUN_588c6830 / result-row visibility and state helper",
+        "called_by": "Ghidra records calls from FUN_58809AF0 at 0x5880A214, FUN_5880B0D0 at 0x5880B3EF, and FUN_5880A940 at 0x5880A983.",
+        "behavior": "Ghidra assigns 323 body bytes across [0x588C6830,0x588C6938) and [0x588C6940,0x588C6979), with complete instruction coverage. It compares a supplied index interval with an observed row field, toggles row and child-control bits, propagates four value/state pairs through FUN_588C6470, and updates child controls through matched helpers.",
+        "uncertainty": "The interval units, row flag meanings, and four child roles are unresolved. No runtime visual test has been performed.",
+    },
+    "588D6C40": {
+        "name_in_analysis": "FUN_588d6c40 / indexed result-record field accessor",
+        "called_by": "Ghidra records three calls from FUN_58809AF0 at 0x5880A177, 0x5880A186, and 0x5880A196.",
+        "behavior": "The complete 68-byte body selects one of two record fields at offsets +0x1420 or +0x1424 using an eight-byte stride for selectors 0x0B and 0x0C. It returns one for other selectors and changes a zero field value to one when the requested index is nonzero.",
+        "uncertainty": "The record schema, selectors, and default-value policy have not been named by the original analysis. No runtime test has been performed.",
+    },
+    "588EB2D0": {
+        "name_in_analysis": "FUN_588eb2d0 / result-row child-field clear helper",
+        "called_by": "Ghidra records one call instruction inside the three-iteration reset loop in FUN_588C6510 at 0x588C6532.",
+        "behavior": "The complete 15-byte body clears the four observed child fields at offsets +0x50, +0x58, +0x5C, and +0x60.",
+        "uncertainty": "The child type and field roles are unresolved. No runtime visual test has been performed.",
+    },
+    "588C6470": {
+        "name_in_analysis": "FUN_588c6470 / result-row value propagation helper",
+        "called_by": "Ghidra records one direct call from FUN_588C6830 at 0x588C688A.",
+        "behavior": "The complete 151-byte body copies four observed values into associated child controls, sets each child state field to 0x40000000, applies sign-derived masks to the paired values, and calls FUN_5875F310 twice.",
+        "uncertainty": "The four values and child-control roles are not semantically named. No runtime visual test has been performed.",
+    },
+    "5875F310": {
+        "name_in_analysis": "FUN_5875f310 / child-control state-bit helper",
+        "called_by": "Ghidra records two direct calls from FUN_588C6470 at 0x588C64F5 and 0x588C6502, among other callers elsewhere in Main.dll.",
+        "behavior": "The complete six-byte body sets bit 0x04 in the child control's word at +0x24 and returns.",
+        "uncertainty": "The control type and bit meaning have not been independently named. No runtime visual test has been performed.",
     },
     "588F0460": {
         "name_in_analysis": "FUN_588f0460",

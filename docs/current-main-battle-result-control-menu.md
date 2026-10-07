@@ -89,3 +89,53 @@ is the RTTI-backed table. ObjDiff verifies the four newly matched methods'
 2,042 bytes and checks 113 mapped operands at 100.0%; the preceding three
 event/update methods contribute another 2,040 exact bytes. The full vtable is
 now matched. No emulator runtime or visual test has been performed.
+
+## Result-row population path
+
+The already-matched vtable methods enter a separate, byte-matched result-row
+path. `FUN_5880B450` and `FUN_5880C1B0` call the row builder and shared control
+reset; `FUN_5880F950` calls the two result-population branches and the row
+window updater; `FUN_5880C0B0` also calls the row window updater. The direct
+callsites and their expected targets are checked in
+[`verify_current_battle_result_control_menu.py`](../tools/verify_current_battle_result_control_menu.py).
+
+This batch covers 13 Ghidra functions and 7,203 bytes:
+
+| Function | Body bytes | Ghidra body ranges (half-open) | Observed role |
+| --- | ---: | --- | --- |
+| `FUN_58809AF0` | 1,893 | `[58809AF0,58809B79)`, `[58809B80,5880A25C)` | Builds row values from the selected record and linked entries; updates row text and visibility. |
+| `FUN_5880A260` | 1,740 | `[5880A260,5880A7DD)`, `[5880A7E0,5880A889)`, `[5880A890,5880A936)` | Clears and rebuilds the result controls, including repeated row children. |
+| `FUN_5880B0D0` | 876 | `[5880B0D0,5880B365)`, `[5880B370,5880B447)` | Alternate result-row population path. |
+| `FUN_5880A940` | 122 | `[5880A940,5880A9BA)` | Decrements and clamps the row-window index, then refreshes the visible interval. |
+| `FUN_58870130` | 60 | `[58870130,5887016C)` | Sets and clears observed child-control state bits and fields. |
+| `FUN_588C6510` | 405 | `[588C6510,588C6589)`, `[588C6590,588C65DA)`, `[588C65E0,588C662A)`, `[588C6630,588C667A)`, `[588C6680,588C66BE)` | Resets a result row and clears its associated text buffers and child fields. |
+| `FUN_588C6AA0` | 1,183 | `[588C6AA0,588C6F3F)` | Constructs a `CResultRecord_Screen` row and its observed child controls. |
+| `FUN_588C66C0` | 361 | `[588C66C0,588C6829)` | Stores row values and updates four child text buffers. |
+| `FUN_588C6830` | 323 | `[588C6830,588C6939)`, `[588C6940,588C697A)` | Updates row visibility and child-control state for a supplied interval. |
+| `FUN_588D6C40` | 68 | `[588D6C40,588D6C84)` | Reads one of two indexed fields from the result record with observed defaults. |
+| `FUN_588EB2D0` | 15 | `[588EB2D0,588EB2DF)` | Clears four child fields. |
+| `FUN_588C6470` | 151 | `[588C6470,588C6507)` | Propagates four values and state fields to associated child controls. |
+| `FUN_5875F310` | 6 | `[5875F310,5875F316)` | Sets bit `0x04` in a child-control state word. |
+
+The read-only Ghidra 12.1.3 audit used the saved
+`var/current-main-ghidra/CurrentFleetMain` project and fully covered each
+listed body with decoded instructions. The main row methods and shared
+dependencies are recorded in the `page-result-helpers` and
+`result-row-dependencies` audit logs and decompilations under
+`var/current-main-next/`; the small row leaves are in the `result-row-leaves`
+and `result-row-thunk` audit outputs. Ghidra reports one unreachable block at
+`0x5880A13D` in `FUN_58809AF0`, but its two body ranges are instruction-complete.
+The noncontiguous gaps shown above are outside each function body and are not
+emitted as code.
+
+ObjDiff 3.8.0 confirms all 13 functions at 100.0%, checking 205 relocation
+operands. The verifier also checks 34 direct CALL/JMP edges from the matched
+page methods through the row-population helpers; the final edge in
+`FUN_588C6470` is a tail jump to `FUN_5875F310`. The shared construction, text,
+and state helpers called by these functions are already byte-matched or
+included in this batch, so this closes the direct row-population call path.
+Field names, row-column meanings, control
+identities, and the visual result remain unresolved; this is a binary match,
+not an emulator screenshot test. The separate `FUN_5880AF90` event/state path
+was audited but left out because it calls five additional unmatched control
+helpers outside this row-population path.
