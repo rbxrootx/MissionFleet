@@ -961,6 +961,12 @@ OPCONVOY_BATTLE_UPDATE_ADDRESSES = (
 ADDRESSES += OPCONVOY_BATTLE_UPDATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(OPCONVOY_BATTLE_UPDATE_ADDRESSES)
 
+PAGEFIGHT_TICK_PROGRESS_ADDRESSES = (
+    "58762A20", "587C3F50", "587E64D0", "587F5470",
+)
+ADDRESSES += PAGEFIGHT_TICK_PROGRESS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_TICK_PROGRESS_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8657,6 +8663,63 @@ OPCONVOY_HELPER_EVIDENCE = {
 }
 OPCONVOY_HELPER_EVIDENCE["587CDD60"] = OPCONVOY_ROOT_EVIDENCE
 EVIDENCE.update(OPCONVOY_HELPER_EVIDENCE)
+
+PAGEFIGHT_TICK_PROGRESS_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_587f5470 / PageFight 25-tick counter and threshold update",
+    "called_by": (
+        "The byte-matched, RTTI-identified CPageFightOn_ControlMenuScreen update "
+        "FUN_587fd890 is in vtable slot +0x0C at 0x5899D18C and calls open "
+        "FUN_587fb810 at 0x587FEF97 and 0x587FF039. Ghidra decompilation of "
+        "FUN_587fb810 records a conditional direct call to this function at "
+        "0x587FB931 when receiver byte +0x20D64 is nonzero. The direct-call "
+        "closure and exact body ranges are checked by the focused verifier."
+    ),
+    "behavior": (
+        "Ghidra shows the routine proceeds when receiver counter +0x104F4 is "
+        "divisible by 25. Depending on +0x218AC, it advances +0x20DD8, formats "
+        "its quotient and remainder by 60 through matched FUN_58907360, compares "
+        "the result against two groups of three thresholds, and updates latch "
+        "fields +0x20DC8/+0x20DCC. On the reached transition path it increments "
+        "+0x20DE4, clears the latches, calls open FUN_587e64d0 and matched "
+        "message/state helpers, then calls open FUN_58762a20. Other branches "
+        "invoke matched FUN_587f21e0 and set receiver byte +0x10474 to 0x10 or "
+        "0x20. The 745-byte routine is emitted from its two exact Ghidra ranges."
+    ),
+    "uncertainty": (
+        "The receiver fields' names, the meaning of the two threshold groups, "
+        "the relationship between the 25-count cadence and real time, and the "
+        "server/message contract remain unresolved. FUN_587e64d0 and "
+        "FUN_58762a20 are included because they are open direct callees, but "
+        "their independent semantics are not established here. This is static "
+        "installed-client evidence; no live runtime or emulator test has been run."
+    ),
+}
+PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / PageFight counter-update closure member",
+        "called_by": (
+            "Ghidra's direct-call graph places this function in the exact open "
+            "closure rooted at FUN_587f5470, called from FUN_587fb810 at "
+            "0x587FB931 under receiver-byte gate +0x20D64. The path is reached "
+            "from the byte-matched PageFight update method FUN_587fd890. See "
+            "docs/current-main-pagefight-tick-progress.md for ranges and call sites."
+        ),
+        "behavior": (
+            "This entry preserves the exact mapped x86 instruction stream for a "
+            "Ghidra body and is checked at 100% by ObjDiff. Its direct-call role "
+            "in the four-function closure is recorded; no additional semantic "
+            "role is asserted without stronger caller evidence."
+        ),
+        "uncertainty": (
+            "The helper's independent field and message semantics remain open; "
+            "the byte match has not been tested in the emulator."
+        ),
+    }
+    for address in PAGEFIGHT_TICK_PROGRESS_ADDRESSES
+    if address != "587F5470"
+}
+PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE["587F5470"] = PAGEFIGHT_TICK_PROGRESS_ROOT_EVIDENCE
+EVIDENCE.update(PAGEFIGHT_TICK_PROGRESS_HELPER_EVIDENCE)
 
 
 def sha256(path):

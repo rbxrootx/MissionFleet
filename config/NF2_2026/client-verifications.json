@@ -363590,6 +363590,313 @@
         "behavior": "The exact mapped x86 instruction stream for this Ghidra body is emitted and checked by ObjDiff. Ghidra shows FUN_587c9f30 checking the original OpConvoy_Box.cpp Box::SetMode assertion and OPCONVOY_BOX_MODE constants, while FUN_587ca1c0 installs COpConvoy_Box::vftable as component-level evidence. No per-helper behavior beyond those specific observations is asserted here.",
         "uncertainty": "This helper's independent semantic role, field meanings, and runtime effects remain unresolved; no emulator test has been run."
       }
+    },
+    {
+      "address": "58762A20",
+      "name": "FUN_58762a20",
+      "size": 60,
+      "symbol": "_FUN_58762a20",
+      "source": "src/client-current/Main/FUN_58762a20.cpp",
+      "source_sha256": "e648607363fcd452142488eddd1f5de8d2381df6dd0f448a11424b4e22f5bf34",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58762A20",
+          "size": 60,
+          "symbol": "_FUN_58762a20_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58762a20 / PageFight counter-update closure member",
+        "called_by": "Ghidra's direct-call graph places this function in the exact open closure rooted at FUN_587f5470, called from FUN_587fb810 at 0x587FB931 under receiver-byte gate +0x20D64. The path is reached from the byte-matched PageFight update method FUN_587fd890. See docs/current-main-pagefight-tick-progress.md for ranges and call sites.",
+        "behavior": "This entry preserves the exact mapped x86 instruction stream for a Ghidra body and is checked at 100% by ObjDiff. Its direct-call role in the four-function closure is recorded; no additional semantic role is asserted without stronger caller evidence.",
+        "uncertainty": "The helper's independent field and message semantics remain open; the byte match has not been tested in the emulator."
+      }
+    },
+    {
+      "address": "587C3F50",
+      "name": "FUN_587c3f50",
+      "size": 59,
+      "symbol": "_FUN_587c3f50",
+      "source": "src/client-current/Main/FUN_587c3f50.cpp",
+      "source_sha256": "59202d77e3791f0b55c0dc76f9379b4e3eeb50cc3ebb3ca009344bb0dda32446",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587C3F50",
+          "size": 59,
+          "symbol": "_FUN_587c3f50_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c3f50 / PageFight counter-update closure member",
+        "called_by": "Ghidra's direct-call graph places this function in the exact open closure rooted at FUN_587f5470, called from FUN_587fb810 at 0x587FB931 under receiver-byte gate +0x20D64. The path is reached from the byte-matched PageFight update method FUN_587fd890. See docs/current-main-pagefight-tick-progress.md for ranges and call sites.",
+        "behavior": "This entry preserves the exact mapped x86 instruction stream for a Ghidra body and is checked at 100% by ObjDiff. Its direct-call role in the four-function closure is recorded; no additional semantic role is asserted without stronger caller evidence.",
+        "uncertainty": "The helper's independent field and message semantics remain open; the byte match has not been tested in the emulator."
+      }
+    },
+    {
+      "address": "587E64D0",
+      "name": "FUN_587e64d0",
+      "size": 373,
+      "symbol": "_FUN_587e64d0",
+      "source": "src/client-current/Main/FUN_587e64d0.cpp",
+      "source_sha256": "34dfa6e59e64286787885a055470e52904fbc32507361ed96832c4626aa6c7fc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E64D0",
+          "size": 373,
+          "symbol": "_FUN_587e64d0_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "587C3F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "587E6643",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e64d0 / PageFight counter-update closure member",
+        "called_by": "Ghidra's direct-call graph places this function in the exact open closure rooted at FUN_587f5470, called from FUN_587fb810 at 0x587FB931 under receiver-byte gate +0x20D64. The path is reached from the byte-matched PageFight update method FUN_587fd890. See docs/current-main-pagefight-tick-progress.md for ranges and call sites.",
+        "behavior": "This entry preserves the exact mapped x86 instruction stream for a Ghidra body and is checked at 100% by ObjDiff. Its direct-call role in the four-function closure is recorded; no additional semantic role is asserted without stronger caller evidence.",
+        "uncertainty": "The helper's independent field and message semantics remain open; the byte match has not been tested in the emulator."
+      }
+    },
+    {
+      "address": "587F5470",
+      "name": "FUN_587f5470",
+      "size": 745,
+      "symbol": "_FUN_587f5470",
+      "source": "src/client-current/Main/FUN_587f5470.cpp",
+      "source_sha256": "ef0b5288ebcb5905197944af54692b0276b01c36eea10ceb4114eadd478cba4b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587F5470",
+          "size": 605,
+          "symbol": "_FUN_587f5470_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "587F575A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "587F5653",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "587F21E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "587F21E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 200,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 357,
+              "target_address": "587F5759",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "587E64D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 403,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 410,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 415,
+              "target_address": "58A24610",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 451,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "58762A20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 469,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "58762A20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "587F5759",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 522,
+              "target_address": "587F570C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 591,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587F56D0",
+          "size": 140,
+          "symbol": "_FUN_587f5470_segment_01",
+          "relocations": [
+            {
+              "offset": 87,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "587F21E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "587F21E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587f5470 / PageFight 25-tick counter and threshold update",
+        "called_by": "The byte-matched, RTTI-identified CPageFightOn_ControlMenuScreen update FUN_587fd890 is in vtable slot +0x0C at 0x5899D18C and calls open FUN_587fb810 at 0x587FEF97 and 0x587FF039. Ghidra decompilation of FUN_587fb810 records a conditional direct call to this function at 0x587FB931 when receiver byte +0x20D64 is nonzero. The direct-call closure and exact body ranges are checked by the focused verifier.",
+        "behavior": "Ghidra shows the routine proceeds when receiver counter +0x104F4 is divisible by 25. Depending on +0x218AC, it advances +0x20DD8, formats its quotient and remainder by 60 through matched FUN_58907360, compares the result against two groups of three thresholds, and updates latch fields +0x20DC8/+0x20DCC. On the reached transition path it increments +0x20DE4, clears the latches, calls open FUN_587e64d0 and matched message/state helpers, then calls open FUN_58762a20. Other branches invoke matched FUN_587f21e0 and set receiver byte +0x10474 to 0x10 or 0x20. The 745-byte routine is emitted from its two exact Ghidra ranges.",
+        "uncertainty": "The receiver fields' names, the meaning of the two threshold groups, the relationship between the 25-count cadence and real time, and the server/message contract remain unresolved. FUN_587e64d0 and FUN_58762a20 are included because they are open direct callees, but their independent semantics are not established here. This is static installed-client evidence; no live runtime or emulator test has been run."
+      }
     }
   ]
 }

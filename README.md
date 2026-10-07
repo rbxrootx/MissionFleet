@@ -9,8 +9,11 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 7,498 matches cover 2,371,580 bytes (22.6507%) and are verified
+The current 7,829 matches cover 2,489,443 bytes (23.7762%) and are verified
 individually at 100.0% by objdiff.
+The latest focused PageFight counter/progress slice adds four exact matches /
+1,237 bytes; its call gate, direct-call closure, and uncertainties are recorded
+in [the subsystem evidence](docs/current-main-pagefight-tick-progress.md).
 The state-field predicate used by the motion callback is documented in
 [its Main.dll evidence](docs/current-main-58793e10-state-predicate.md).
 The motion callback and its child-state path are documented in

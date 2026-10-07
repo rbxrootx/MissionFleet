@@ -52,12 +52,12 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,825 of 42,461 functions and 2,488,206 of 10,470,295 bytes (18.4287% by
-functions and 23.7644% by bytes); every counted function match is verified at
+credits 7,829 of 42,461 functions and 2,489,443 of 10,470,295 bytes (18.4381% by
+functions and 23.7762% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,692 exact function matches totaling 1,514,788 bytes. The
+inventory has 1,696 exact function matches totaling 1,516,025 bytes. The
 PageFight battle-input and target-control path adds 12 exact matches totaling
 4,243 bytes; its direct-call closure and unresolved callback are documented in
 [`current-main-pagefight-battle-input.md`](current-main-pagefight-battle-input.md).
@@ -79,6 +79,10 @@ and source-recovery limits are recorded in
 The PageFight mode-7 OpConvoy box/cargo update adds 29 exact instruction-stream
 matches / 10,594 bytes, documented with its original state and caller evidence
 in [current-main-opconvoy-state-update.md](current-main-opconvoy-state-update.md).
+The focused PageFight 25-tick counter/threshold branch adds four exact matches
+/ 1,237 bytes; its conditional call gate, exact helper closure, and unresolved
+field meanings are recorded in
+[current-main-pagefight-tick-progress.md](current-main-pagefight-tick-progress.md).
 
 parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
 separately. The sibling
