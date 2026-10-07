@@ -1116,6 +1116,13 @@ MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
 ADDRESSES += MAIN_SHARED_CONTROL_REFRESH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SHARED_CONTROL_REFRESH_ADDRESSES)
 
+MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES = (
+    "587B4060", "58758870", "58758EE0", "588E92B0", "588E9C70",
+    "588E9E10",
+)
+ADDRESSES += MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -10335,6 +10342,83 @@ MAIN_SHARED_CONTROL_REFRESH_EVIDENCE = {
     for address in MAIN_SHARED_CONTROL_REFRESH_ADDRESSES
 }
 EVIDENCE.update(MAIN_SHARED_CONTROL_REFRESH_EVIDENCE)
+
+MAIN_COMBAT_STRENGTH_ANALYZER_PARENTS = {
+    "587B4060": (
+        "Called from FUN_58758870 at 0x58758CCB and the byte-matched "
+        "ship-map state initializer FUN_588D84D0 at 0x588D8AF0; an additional "
+        "incoming call at 0x587B5912 is from open function FUN_587B58F0."
+    ),
+    "58758870": "Called from FUN_58758EE0 at 0x58759082.",
+    "58758EE0": (
+        "Called twice from the byte-matched event dispatcher FUN_587BB700 at "
+        "0x587BFF8E and 0x587C00FE. The dispatch owner's runtime entry path "
+        "remains unconfirmed."
+    ),
+    "588E92B0": "Called from FUN_588E9C70 at 0x588E9DF6.",
+    "588E9C70": "Called from FUN_588E9E10 at 0x588E9F3C.",
+    "588E9E10": (
+        "Called from FUN_58758EE0 at 0x58758F52 and the byte-matched "
+        "CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E0653."
+    ),
+}
+MAIN_COMBAT_STRENGTH_ANALYZER_BEHAVIOR = {
+    "587B4060": (
+        "Ghidra labels this routine CMountedWeapon_TpLauncher::vftable. It "
+        "calls the observed base initializer FUN_587B1640, writes object "
+        "fields, and clears buffers. The class label is Ghidra analysis, not "
+        "independent runtime confirmation."
+    ),
+    "58758870": (
+        "Runs a 32-iteration walk over receiver-associated records, clears "
+        "three 32-entry arrays, and branches on observed record type bytes "
+        "0x05 and 0x06. Those branches copy record data, calculate values, "
+        "and update associated state; one path constructs a "
+        "CMountedWeapon_TpLauncher and calls FUN_587B4A30."
+    ),
+    "58758EE0": (
+        "Ghidra labels this routine CCombatStrengthAnalyzer::vftable. It "
+        "initializes receiver fields, constructs CShipData through "
+        "FUN_588E9E10, extracts two 32-bit fields at offsets +0x268 and "
+        "+0x26C into two 32-entry bit arrays, then calls FUN_58758870."
+    ),
+    "588E92B0": (
+        "Walks 32 entries, selecting entries by observed presence bytes. It "
+        "unpacks three 10-bit fields from a packed word, applies scaled and "
+        "rounded transforms using three arguments and a global constant, "
+        "calls FUN_588E7C10, then writes packed values back."
+    ),
+    "588E9C70": (
+        "Copies a fixed object prefix, initializes a 32-row block with "
+        "0xAA-derived patterns, copies selected rows from the supplied data, "
+        "resets eight observed DWORD fields, and branches on global flag "
+        "DAT_58A2485E to call FUN_588E7C10 or FUN_588E92B0."
+    ),
+    "588E9E10": (
+        "Ghidra labels this routine CShipData::vftable. It installs that "
+        "vtable, calls FUN_588C61A0, clears a contiguous group of observed "
+        "fields, initializes two additional fields, and delegates to "
+        "FUN_588E9C70."
+    ),
+}
+MAIN_COMBAT_STRENGTH_ANALYZER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / combat-strength analyzer closure",
+        "called_by": MAIN_COMBAT_STRENGTH_ANALYZER_PARENTS[address],
+        "behavior": MAIN_COMBAT_STRENGTH_ANALYZER_BEHAVIOR[address],
+        "uncertainty": (
+            "The exact instruction ranges and behavior summary are based on a "
+            "fresh Ghidra headless export and the pinned mapped Main.dll. "
+            "Three external caller functions are byte-matched and one remains "
+            "open; Ghidra labels do not prove runtime class semantics. The "
+            "record schemas, meanings and units of fields, type-0x05/0x06 "
+            "meaning, formulas, callback contracts, and visible result remain "
+            "uncertain. No original-client runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES
+}
+EVIDENCE.update(MAIN_COMBAT_STRENGTH_ANALYZER_EVIDENCE)
 
 
 def sha256(path):

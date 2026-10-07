@@ -405879,6 +405879,634 @@
         "behavior": "Calls the function pointer stored at DAT_5898C42C, passes its result to FUN_5897CC3C, obtains another value from FUN_5897CC36, sends that value modulo 10000 to FUN_58907360, and calls FUN_5875F940. The callback and value meanings are unresolved.",
         "uncertainty": "These body ranges, instructions, and references come from a fresh Ghidra headless export and the pinned mapped Main.dll. Ghidra finds nine external incoming functions to this closure; five are byte-verified and four remain unmatched. The owner of the event dispatcher, table schemas, most field meanings, callback contracts, and exact visible result remain uncertain. No runtime or visual test was performed."
       }
+    },
+    {
+      "address": "587B4060",
+      "name": "FUN_587b4060",
+      "size": 130,
+      "symbol": "_FUN_587b4060",
+      "source": "src/client-current/Main/FUN_587b4060.cpp",
+      "source_sha256": "78b0c409ba18d7eb2995a5ca309b454a459648edc1ea0e268d454976d855dc7f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B4060",
+          "size": 130,
+          "symbol": "_FUN_587b4060_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "587B1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58999F74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b4060 / combat-strength analyzer closure",
+        "called_by": "Called from FUN_58758870 at 0x58758CCB and the byte-matched ship-map state initializer FUN_588D84D0 at 0x588D8AF0; an additional incoming call at 0x587B5912 is from open function FUN_587B58F0.",
+        "behavior": "Ghidra labels this routine CMountedWeapon_TpLauncher::vftable. It calls the observed base initializer FUN_587B1640, writes object fields, and clears buffers. The class label is Ghidra analysis, not independent runtime confirmation.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58758870",
+      "name": "FUN_58758870",
+      "size": 1632,
+      "symbol": "_FUN_58758870",
+      "source": "src/client-current/Main/FUN_58758870.cpp",
+      "source_sha256": "0d7f6e84f1807e92cbfa25f2f9484b55da03bfd389952bf809bdfcd578ad0e8a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58758870",
+          "size": 231,
+          "symbol": "_FUN_58758870_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "5897E9EC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58758960",
+          "size": 1401,
+          "symbol": "_FUN_58758870_segment_01",
+          "relocations": [
+            {
+              "offset": 55,
+              "target_address": "58758BE8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58758BE8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "5898D780",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 413,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "58A2464C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "587B3090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 512,
+              "target_address": "58A2464C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 531,
+              "target_address": "587B0BB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 562,
+              "target_address": "587B2A40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 589,
+              "target_address": "587B1F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 637,
+              "target_address": "587B21F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 644,
+              "target_address": "58758D2E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 655,
+              "target_address": "58758D31",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 668,
+              "target_address": "58758D31",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 787,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 823,
+              "target_address": "58A24650",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 876,
+              "target_address": "587B4060",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 964,
+              "target_address": "587B4A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1007,
+              "target_address": "58758960",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1068,
+              "target_address": "58758E98",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1145,
+              "target_address": "587B0830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1190,
+              "target_address": "587B0860",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1237,
+              "target_address": "587B0910",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1288,
+              "target_address": "587B08C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1324,
+              "target_address": "587B0630",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1361,
+              "target_address": "58758D87",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1393,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58758870 / combat-strength analyzer closure",
+        "called_by": "Called from FUN_58758EE0 at 0x58759082.",
+        "behavior": "Runs a 32-iteration walk over receiver-associated records, clears three 32-entry arrays, and branches on observed record type bytes 0x05 and 0x06. Those branches copy record data, calculate values, and update associated state; one path constructs a CMountedWeapon_TpLauncher and calls FUN_587B4A30.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58758EE0",
+      "name": "FUN_58758ee0",
+      "size": 439,
+      "symbol": "_FUN_58758ee0",
+      "source": "src/client-current/Main/FUN_58758ee0.cpp",
+      "source_sha256": "e09d9e90150c8ac30cd54fbd900222415750a805c39708d46220f53384e24d60",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58758EE0",
+          "size": 138,
+          "symbol": "_FUN_58758ee0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898947B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "5898D774",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "588E9E10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58758F70",
+          "size": 301,
+          "symbol": "_FUN_58758ee0_segment_01",
+          "relocations": [
+            {
+              "offset": 268,
+              "target_address": "58758F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "58758870",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58758ee0 / combat-strength analyzer closure",
+        "called_by": "Called twice from the byte-matched event dispatcher FUN_587BB700 at 0x587BFF8E and 0x587C00FE. The dispatch owner's runtime entry path remains unconfirmed.",
+        "behavior": "Ghidra labels this routine CCombatStrengthAnalyzer::vftable. It initializes receiver fields, constructs CShipData through FUN_588E9E10, extracts two 32-bit fields at offsets +0x268 and +0x26C into two 32-entry bit arrays, then calls FUN_58758870.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588E92B0",
+      "name": "FUN_588e92b0",
+      "size": 650,
+      "symbol": "_FUN_588e92b0",
+      "source": "src/client-current/Main/FUN_588e92b0.cpp",
+      "source_sha256": "371fada2973609a2b12b2dcbe444607ef1b45c9860705efb66eba32ee45ea3b5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E92B0",
+          "size": 397,
+          "symbol": "_FUN_588e92b0_segment_00",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "5898CAE0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "588E9412",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5898CB10",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5898CB10",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "5898CB10",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 367,
+              "target_address": "588E92E8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "588E7C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588E9440",
+          "size": 253,
+          "symbol": "_FUN_588e92b0_segment_01",
+          "relocations": [
+            {
+              "offset": 236,
+              "target_address": "588E9440",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e92b0 / combat-strength analyzer closure",
+        "called_by": "Called from FUN_588E9C70 at 0x588E9DF6.",
+        "behavior": "Walks 32 entries, selecting entries by observed presence bytes. It unpacks three 10-bit fields from a packed word, applies scaled and rounded transforms using three arguments and a global constant, calls FUN_588E7C10, then writes packed values back.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588E9C70",
+      "name": "FUN_588e9c70",
+      "size": 405,
+      "symbol": "_FUN_588e9c70",
+      "source": "src/client-current/Main/FUN_588e9c70.cpp",
+      "source_sha256": "bac66f6d92cccd5af7cd4bf5a2bef6fd79fa290af9a3ee578921b1ee53399dea",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E9C70",
+          "size": 135,
+          "symbol": "_FUN_588e9c70_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "588E9940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "588E9DA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588E9D00",
+          "size": 270,
+          "symbol": "_FUN_588e9c70_segment_01",
+          "relocations": [
+            {
+              "offset": 156,
+              "target_address": "588E9D00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "58A2485E",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 223,
+              "target_address": "58A0ADBA",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "58A0ADB9",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58A0ADB8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "588E92B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "588E7C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9c70 / combat-strength analyzer closure",
+        "called_by": "Called from FUN_588E9E10 at 0x588E9F3C.",
+        "behavior": "Copies a fixed object prefix, initializes a 32-row block with 0xAA-derived patterns, copies selected rows from the supplied data, resets eight observed DWORD fields, and branches on global flag DAT_58A2485E to call FUN_588E7C10 or FUN_588E92B0.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588E9E10",
+      "name": "FUN_588e9e10",
+      "size": 326,
+      "symbol": "_FUN_588e9e10",
+      "source": "src/client-current/Main/FUN_588e9e10.cpp",
+      "source_sha256": "a47f0a55b0b3de0b0aa61436356aecd87528cfde9213352bc97939eda8f4162a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E9E10",
+          "size": 326,
+          "symbol": "_FUN_588e9e10_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898983E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "589A13F4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "588C61A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "588E9C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9e10 / combat-strength analyzer closure",
+        "called_by": "Called from FUN_58758EE0 at 0x58758F52 and the byte-matched CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E0653.",
+        "behavior": "Ghidra labels this routine CShipData::vftable. It installs that vtable, calls FUN_588C61A0, clears a contiguous group of observed fields, initializes two additional fields, and delegates to FUN_588E9C70.",
+        "uncertainty": "The exact instruction ranges and behavior summary are based on a fresh Ghidra headless export and the pinned mapped Main.dll. Three external caller functions are byte-matched and one remains open; Ghidra labels do not prove runtime class semantics. The record schemas, meanings and units of fields, type-0x05/0x06 meaning, formulas, callback contracts, and visible result remain uncertain. No original-client runtime or visual test was performed."
+      }
     }
   ]
 }
