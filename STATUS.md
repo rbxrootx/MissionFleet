@@ -6,11 +6,16 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,559 verified matches
-totaling 2,733,246 bytes (20.1573% by functions, 26.1048% by bytes), each at
+identified code bytes across six report units. There are 8,578 verified matches
+totaling 2,734,442 bytes (20.2021% by functions, 26.1162% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
-source or playable behavior. The installed-client quit-prompt setup helper
+source or playable behavior. The installed client's tax/investment control
+refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases
+`0x8002311B` and `0x8002312B`; four other calling functions and the visual
+result remain unresolved. See
+[the refresh evidence](docs/current-main-tax-investment-refresh.md). The
+installed-client quit-prompt setup helper
 adds one byte-identical function / 246 bytes. Fresh Ghidra output and two
 matched callers anchor its child setup, conditional localized prompt key, and
 vtable call; a third incoming caller remains unmatched, and parameter and

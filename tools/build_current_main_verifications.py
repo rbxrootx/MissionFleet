@@ -458,6 +458,14 @@ MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES = (
 ADDRESSES += MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
 MAIN_QUIT_PROMPT_SETUP_ADDRESSES = ("5876B9F0",)
 ADDRESSES += MAIN_QUIT_PROMPT_SETUP_ADDRESSES
+MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES = (
+    "5882FC60",
+    "58785EA0", "58785ED0", "58785F00", "58785F30", "58785F60",
+    "58785F90", "58785FC0", "58785FD0",
+    "58786200", "58786210", "58786220", "58786230", "58786240",
+    "58786320", "58786330", "587863B0", "58786430", "58786630",
+)
+ADDRESSES += MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -828,6 +836,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_C_SCREENSHOT_TIME_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_RECORD_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_QUIT_PROMPT_SETUP_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13745,6 +13754,114 @@ MAIN_QUIT_PROMPT_SETUP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_QUIT_PROMPT_SETUP_EVIDENCE)
+
+MAIN_TAX_INVESTMENT_REFRESH_TRANSFER_PATH = ROOT / (
+    "config/NF2_2026/current-main-5882fc60-refresh-transfers.tsv"
+)
+MAIN_TAX_INVESTMENT_REFRESH_PARENTS = {
+    address: [] for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
+}
+MAIN_TAX_INVESTMENT_REFRESH_CHILDREN = {
+    address: [] for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
+}
+with MAIN_TAX_INVESTMENT_REFRESH_TRANSFER_PATH.open(
+        encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        source = edge["function"].upper()
+        site = edge["site"].upper()
+        target = edge["target_function"].upper()
+        if target in MAIN_TAX_INVESTMENT_REFRESH_PARENTS:
+            MAIN_TAX_INVESTMENT_REFRESH_PARENTS[target].append((source, site))
+        if source in MAIN_TAX_INVESTMENT_REFRESH_CHILDREN:
+            MAIN_TAX_INVESTMENT_REFRESH_CHILDREN[source].append((site, target))
+
+MAIN_TAX_INVESTMENT_REFRESH_ROOT_BEHAVIOR = (
+    "Fresh Ghidra output shows this update routine deriving an indexed table "
+    "entry from FUN_58786480 and global table fields, copying six entry values "
+    "into the children at receiver offsets +0x70 and +0x74, then refreshing "
+    "additional child values through accessors. It formats the mapped "
+    "MESSAGESTRING__TAXUP_REQUIREDPRODUCTIVITY key when the observed input "
+    "gates pass, and formats MESSAGESTRING__DAILY_INVESTMENT_LIMIT twice with "
+    "the values returned by two accessors and argument 1,000,000. Other calls "
+    "forward values to child controls and update callbacks. These observations "
+    "describe offsets and calls; they do not assign control or gameplay names."
+)
+MAIN_TAX_INVESTMENT_REFRESH_HELPER_BEHAVIOR = {
+    "58785EA0": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x44. The root uses this getter for child-value refresh and the conditional tax-productivity string.",
+    "58785ED0": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x48.",
+    "58785F00": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x4C.",
+    "58785F30": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x58.",
+    "58785F60": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x5C.",
+    "58785F90": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x50. The root passes this value to the daily-investment localization formatter with argument 1,000,000.",
+    "58785FC0": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x54. The root passes this value to the daily-investment localization formatter with argument 1,000,000.",
+    "58785FD0": "When the pointer at argument +8 is nonnull, reads its DWORD at +0x48, converts and scales it using mapped floating-point globals, rounds it, stores the result at argument +0x0C, and returns it; otherwise returns zero.",
+    "58786200": "Returns the 16-bit value at argument +0x34.",
+    "58786210": "Returns the 16-bit value at argument +0x36.",
+    "58786220": "Returns the 16-bit value at argument +0x38.",
+    "58786230": "Returns the 16-bit value at argument +0x3A.",
+    "58786240": "Returns the 16-bit value at argument +0x3C.",
+    "58786320": "Returns the nested pointer at argument +8 plus 0x10 when that pointer is nonnull; otherwise returns zero.",
+    "58786330": "Returns the nested pointer at argument +8 plus 0x28 when that pointer is nonnull; otherwise returns zero.",
+    "587863B0": "Returns the 16-bit value at argument +0x40.",
+    "58786430": "Returns the 16-bit value at argument +0x42.",
+    "58786630": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x40.",
+}
+MAIN_TAX_INVESTMENT_REFRESH_EVIDENCE = {}
+for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES:
+    parents = MAIN_TAX_INVESTMENT_REFRESH_PARENTS[address]
+    children = MAIN_TAX_INVESTMENT_REFRESH_CHILDREN[address]
+    if address == "5882FC60":
+        called_by = (
+            "Byte-verified FUN_588C4210 calls this updater at 0x588C4DB0 in "
+            "its 0x8002311B message case and at 0x588C4EC4 in its 0x8002312B "
+            "message case. Four other caller functions are present in fresh "
+            "Ghidra references but remain unmatched: FUN_5882F270, "
+            "FUN_5882F350, FUN_58830010, and FUN_58830280. The focused verifier "
+            "checks all 20 mapped incoming callsites and both matched-parent sites."
+        )
+    elif parents:
+        called_by = "Fresh Ghidra direct-call references: " + "; ".join(
+            f"FUN_{source.lower()} at 0x{site}"
+            for source, site in parents
+        ) + "."
+    else:
+        called_by = (
+            "Included in the fresh Ghidra direct-call closure rooted at "
+            "FUN_5882FC60; no direct incoming callsite was recorded for this "
+            "entry in the selected reference export."
+        )
+    if address == "5882FC60":
+        behavior = MAIN_TAX_INVESTMENT_REFRESH_ROOT_BEHAVIOR
+    elif address in MAIN_TAX_INVESTMENT_REFRESH_HELPER_BEHAVIOR:
+        behavior = MAIN_TAX_INVESTMENT_REFRESH_HELPER_BEHAVIOR[address]
+    elif children:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra direct-call "
+            "edges from this helper are "
+            + "; ".join(
+                f"0x{site} to FUN_{target.lower()}"
+                for site, target in children
+            ) + "."
+        )
+    else:
+        behavior = (
+            "The exact emitted body is byte-matched. The fresh Ghidra export "
+            "records no direct call from this helper to another member of the "
+            "selected closure."
+        )
+    MAIN_TAX_INVESTMENT_REFRESH_EVIDENCE[address] = {
+        "name_in_analysis": f"FUN_{address.lower()} / tax-investment UI refresh path",
+        "called_by": called_by,
+        "behavior": behavior,
+        "uncertainty": (
+            "The receiver class, child-control labels, business meaning of the "
+            "table and field offsets, localization arguments, and visible UI "
+            "effect remain unproven. Four additional caller functions are not "
+            "byte-matched, so their triggering paths are unresolved. This is "
+            "static installed-client evidence; no emulator runtime test was run."
+        ),
+    }
+EVIDENCE.update(MAIN_TAX_INVESTMENT_REFRESH_EVIDENCE)
 
 
 if __name__ == "__main__":

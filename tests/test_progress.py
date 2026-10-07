@@ -10,6 +10,7 @@ from tools import (
     verify_current_main_force_record_refresh,
     verify_current_main_event_80020a03_list_update,
     verify_current_main_quit_prompt_setup,
+    verify_current_main_5882fc60_refresh,
 )
 
 
@@ -22,8 +23,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_559)
-        self.assertEqual(self.report["measures"]["matched_code"], "2733246")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_578)
+        self.assertEqual(self.report["measures"]["matched_code"], "2734442")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -34,8 +35,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_426)
-        self.assertEqual(current["measures"]["matched_code"], "1759828")
+        self.assertEqual(current["measures"]["matched_functions"], 2_445)
+        self.assertEqual(current["measures"]["matched_code"], "1761024")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -118,6 +119,31 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("ARE_YOU_SURE_TO_QUIT", evidence["5876B9F0"]["behavior"])
         self.assertTrue(evidence["5876B9F0"]["uncertainty"])
         verify_current_main_quit_prompt_setup.main()
+
+    def test_tax_investment_refresh_closure_has_callsite_and_offset_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_TAX_INVESTMENT_REFRESH_EVIDENCE
+        )
+        self.assertEqual(len(addresses), 19)
+        self.assertEqual(len(addresses), len(set(addresses)))
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+        root = evidence["5882FC60"]
+        self.assertIn("0x8002311B", root["called_by"])
+        self.assertIn("0x8002312B", root["called_by"])
+        self.assertIn("MESSAGESTRING__TAXUP_REQUIREDPRODUCTIVITY", root["behavior"])
+        self.assertIn("MESSAGESTRING__DAILY_INVESTMENT_LIMIT", root["behavior"])
+        self.assertIn("+0x48", evidence["58785FD0"]["behavior"])
+        self.assertIn("Four", root["called_by"])
+        verify_current_main_5882fc60_refresh.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (
