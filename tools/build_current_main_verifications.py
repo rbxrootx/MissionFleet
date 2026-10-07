@@ -1095,6 +1095,13 @@ MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
 ADDRESSES += MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES)
 
+MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES = (
+    "587CA820", "587CAD90", "587CAF30", "587CB340", "587CB6B0",
+    "587CCEC0", "587CE2F0", "587CE3D0",
+)
+ADDRESSES += MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -10142,6 +10149,82 @@ MAIN_SPATIAL_RECORD_PROCESSING_EVIDENCE = {
     for address in MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES
 }
 EVIDENCE.update(MAIN_SPATIAL_RECORD_PROCESSING_EVIDENCE)
+
+MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_PARENTS = {
+    "587CA820": "FUN_587CE3D0 at 0x587CE482",
+    "587CAD90": "FUN_587CE3D0 at 0x587CE581 and 0x587CE58D",
+    "587CAF30": "FUN_587CE3D0 at 0x587CE4D5 and 0x587CE528",
+    "587CB340": (
+        "FUN_587CE3D0 at 15 mapped call sites from 0x587CE5AC through "
+        "0x587CE76D"
+    ),
+    "587CB6B0": "FUN_587CA820 at 0x587CA870 and FUN_587CAF30 at 0x587CAF7F",
+    "587CCEC0": (
+        "Byte-matched FUN_587E8A40 at 0x587E8ADB when receiver word "
+        "+0x105A2 equals 7"
+    ),
+    "587CE2F0": "FUN_587CCEC0 at 0x587CCF0D",
+    "587CE3D0": "FUN_587CCEC0 at 0x587CCF36",
+}
+MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_BEHAVIOR = {
+    "587CA820": (
+        "Initializes a COpConvoy_DA_Cargo object through FUN_587CB6B0, "
+        "installs the cargo vtable, and copies selected table-entry fields "
+        "into its nested resource record."
+    ),
+    "587CAD90": "Stores its argument at receiver offset +0x204.",
+    "587CAF30": (
+        "Initializes a COpConvoy_DA_Fighter object through FUN_587CB6B0, "
+        "installs the fighter vtable, and copies selected table-entry fields "
+        "into its nested resource record."
+    ),
+    "587CB340": (
+        "Writes coordinate/value fields and an enabled flag into a "
+        "16-byte-strided receiver record selected by its index."
+    ),
+    "587CB6B0": (
+        "Initializes a COpConvoy_DummyAircraft record, stores its two input "
+        "coordinates in both direct and 3000-scaled fields, sets observed "
+        "state/constants, and creates a CSpriteBundleScreen child."
+    ),
+    "587CCEC0": (
+        "Sets the manager state to 2, lazily creates and stores the "
+        "COpConvoy_OpenSceneManager child, initializes the scene from receiver "
+        "+0x1C/+0x20 coordinates, clears observed global flags, calls the "
+        "matched child-state helper four times, and totals two categories of "
+        "records from the global object list."
+    ),
+    "587CE2F0": (
+        "Installs the Ghidra-labeled COpConvoy_OpenSceneManager vtable and "
+        "zeros the observed child fields while setting one state field to 1."
+    ),
+    "587CE3D0": (
+        "Stores input coordinates and writes the screen origin offsets "
+        "(+0x1052C = x-0x200 and +0x10530 = y-0x180). It creates three "
+        "0x2C0-byte convoy objects at the observed relative positions, calls "
+        "FUN_58902F50 for each, and writes 15 indexed coordinate/value "
+        "records through FUN_587CB340."
+    ),
+}
+MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / OpConvoy open-scene bootstrap closure member"
+        ),
+        "called_by": MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_PARENTS[address],
+        "behavior": MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_BEHAVIOR[address],
+        "uncertainty": (
+            "The direct calls, field offsets, constants, vtable labels, and "
+            "Ghidra ranges come from the fresh mapped Main.dll analysis. The "
+            "formal owners of the helper routines, meanings of resource-table "
+            "entries, coordinate units, 16-byte record fields and timing values, "
+            "rendered appearance, and server-authoritative event effects remain "
+            "unresolved. No emulator runtime or visual test was run."
+        ),
+    }
+    for address in MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES
+}
+EVIDENCE.update(MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_EVIDENCE)
 
 
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_PARENTS = {
