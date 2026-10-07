@@ -1109,6 +1109,13 @@ MAIN_ROOM_TYPE_MISSION_ADDRESSES = (
 ADDRESSES += MAIN_ROOM_TYPE_MISSION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_MISSION_ADDRESSES)
 
+MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
+    "58796AF0", "587CEF70", "588946B0", "588C8520",
+    "588C8A50", "588CB0E0", "588CBA30", "588CE320",
+)
+ADDRESSES += MAIN_SHARED_CONTROL_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHARED_CONTROL_REFRESH_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -10222,6 +10229,112 @@ MAIN_ROOM_TYPE_MISSION_EVIDENCE = {
     for address in MAIN_ROOM_TYPE_MISSION_ADDRESSES
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_MISSION_EVIDENCE)
+
+MAIN_SHARED_CONTROL_REFRESH_PARENTS = {
+    "58796AF0": (
+        "FUN_588CBA30 at 0x588CBAB2 and FUN_588C8A50 at 0x588C8BF2 and "
+        "0x588C8C59. Fresh Ghidra references confirm all three calls."
+    ),
+    "587CEF70": (
+        "Byte-matched FUN_587BB700 at 0x587BCAF1. Ghidra identifies that "
+        "caller as an event dispatcher, but its table owner is unresolved."
+    ),
+    "588946B0": (
+        "FUN_588CBA30 at 0x588CBA39; byte-matched channel-battle method "
+        "FUN_587D0940 at 0x587D0A97; byte-matched result-screen methods "
+        "FUN_5880C1B0 at 0x5880C4C7 and FUN_5880C4E0 at 0x5880C628; and "
+        "byte-matched FUN_587EF910 at 0x587EF9F5. Fresh Ghidra also lists "
+        "two unmatched callers."
+    ),
+    "588C8520": (
+        "FUN_588C8A50 at 0x588C907F and 0x588C917E."
+    ),
+    "588C8A50": (
+        "FUN_588CB0E0 at 0x588CB41F; fresh Ghidra also lists unmatched "
+        "callers FUN_588CB710 at 0x588CB94A and FUN_588C9250 at 0x588C926D."
+    ),
+    "588CB0E0": "FUN_588CBA30 at 0x588CBAD7",
+    "588CBA30": "FUN_587CEF70 at 0x587CEF8D",
+    "588CE320": "FUN_588C8A50 at 0x588C8F42",
+}
+MAIN_SHARED_CONTROL_REFRESH_BEHAVIOR = {
+    "58796AF0": (
+        "Registers the observed MAP_NAME_RANDOM, MAP_NAME_NOWAYOUT1, "
+        "MAP_NAME_NOWAYOUT2, MAP_NAME_DOKDO, MAP_NAME_BLUE_OCEAN, "
+        "MAP_NAME_WOO_SAN_GUK, MAP_NAME_ICE_AGE, MAP_NAME_MINE_LANDS, "
+        "MAP_NAME_HUNTERS, MAP_NAME_AMERIGO, MAP_NAME_NEW_WORLD, "
+        "MAP_NAME_TORPERS_TOMB, and MAP_NAME_RACE labels with their mapped "
+        "numeric values using the observed global callback and FUN_589088D0. "
+        "When its second argument is nonzero, it also registers "
+        "MAP_NAME_OCCUPATION with value 3000."
+    ),
+    "587CEF70": (
+        "Calls FUN_588CBA30 with a 16-bit receiver value at +0xA06, the "
+        "supplied argument, and a receiver value at +0xEC. It then invokes "
+        "virtual methods at slots +0x04 and +0x08 through child pointers at "
+        "+0xA00 and +0xADC."
+    ),
+    "588946B0": (
+        "Resets observed child flags and state fields, clears a child text "
+        "buffer, sets receiver fields +0xF8 through +0x104 and +0x10C to zero, "
+        "sets +0xB4 to 0x100000, and clears +0x4AC. It selects one of two "
+        "control-reset branches by comparing DAT_58A24580 with "
+        "DAT_58A245A4/DAT_58A245A8, then resets additional children."
+    ),
+    "588C8520": (
+        "Clears the low four bits in the +0x24 flags of 15 child controls "
+        "starting from receiver +0x17C. For selection argument zero it clears "
+        "the control at +0x19C; for observed values 1 and 3 through 0x10 it "
+        "uses DAT_589A0C30 to select a child and sets that child's low four "
+        "flag bits."
+    ),
+    "588C8A50": (
+        "Refreshes the child controls from receiver fields and global tables "
+        "DAT_58A24690, DAT_58A24638, and DAT_58A24640. It updates mapped "
+        "record pointers when their observed count thresholds are met, sets "
+        "child flags and data fields, branches on receiver selectors at +0x9E "
+        "and +0xEC, and calls FUN_588C8520 to update selection flags."
+    ),
+    "588CB0E0": (
+        "Copies two observed records from the table rooted at DAT_58A24690 "
+        "when its count fields meet thresholds 0x34 and 0x33, clears the low "
+        "four state bits across 15 child controls, and branches on a receiver "
+        "state byte and the supplied selector. The observed cases update child "
+        "flags or delegate to FUN_588C8A50."
+    ),
+    "588CBA30": (
+        "Runs FUN_588946B0, zeroes two receiver buffers, stores selector "
+        "arguments at +0x60 and +0x62 and a caller value at +0x64, registers "
+        "the selectors through FUN_58907360, initializes two child flags, "
+        "then calls FUN_588CB0E0 with the first selector."
+    ),
+    "588CE320": (
+        "Calls the function pointer stored at DAT_5898C42C, passes its result "
+        "to FUN_5897CC3C, obtains another value from FUN_5897CC36, sends that "
+        "value modulo 10000 to FUN_58907360, and calls FUN_5875F940. The "
+        "callback and value meanings are unresolved."
+    ),
+}
+MAIN_SHARED_CONTROL_REFRESH_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / shared map-control refresh closure member"
+        ),
+        "called_by": MAIN_SHARED_CONTROL_REFRESH_PARENTS[address],
+        "behavior": MAIN_SHARED_CONTROL_REFRESH_BEHAVIOR[address],
+        "uncertainty": (
+            "These body ranges, instructions, and references come from a fresh "
+            "Ghidra headless export and the pinned mapped Main.dll. Ghidra "
+            "finds nine external incoming functions to this closure; five are "
+            "byte-verified and four remain unmatched. The owner of the event "
+            "dispatcher, table schemas, most field meanings, callback contracts, "
+            "and exact visible result remain uncertain. No runtime or visual "
+            "test was performed."
+        ),
+    }
+    for address in MAIN_SHARED_CONTROL_REFRESH_ADDRESSES
+}
+EVIDENCE.update(MAIN_SHARED_CONTROL_REFRESH_EVIDENCE)
 
 
 def sha256(path):

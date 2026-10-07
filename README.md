@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,162 matches cover 2,616,487 bytes (24.9896%) and are verified
+The current 8,170 matches cover 2,620,381 bytes (25.0268%) and are verified
 individually at 100.0% by objdiff.
 The installed client's `CRoomTypeMission` constructor closure adds four exact
 functions / 3,634 bytes, grounded in the matched `CRoomSettingManager`
@@ -17,6 +17,11 @@ constructor and `CPageChannelBattle_ControlMenuScreen` caller. Its sprite and
 control construction, selector helper, exact ranges, and unresolved status
 meanings are recorded in
 [the subsystem evidence](docs/current-main-room-type-mission-construction.md).
+The installed client's shared map-control refresh adds eight byte-identical
+functions / 3,894 bytes. Its original map labels, selector-driven child updates,
+five matched caller paths, exact Ghidra ranges, and four open callers are
+recorded in
+[the subsystem evidence](docs/current-main-map-control-refresh.md).
 The PageFight event pre-handler at `FUN_587EE2C0` adds eight exact functions /
 3,705 bytes. Its matched `CPageFightOn_ControlMenuScreen` call path, shared
 keyboard-index helper, exact ranges, and unresolved event/state meanings are

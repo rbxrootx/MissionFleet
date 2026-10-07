@@ -52,18 +52,22 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,162 of 42,461 functions and 2,616,487 of 10,470,295 bytes (19.2223% by
-functions and 24.9896% by bytes); every counted function match is verified at
+credits 8,170 of 42,461 functions and 2,620,381 of 10,470,295 bytes (19.2412% by
+functions and 25.0268% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,029 exact function matches totaling 1,643,069 bytes (23.9438% by
-functions and 69.7883% by bytes). The `CRoomTypeMission` constructor closure
+inventory has 2,037 exact function matches totaling 1,646,963 bytes (24.0382% by
+functions and 69.9537% by bytes). The `CRoomTypeMission` constructor closure
 adds four byte-identical functions / 3,634 bytes. Its matched
 `CRoomSettingManager` constructor and `CPageChannelBattle_ControlMenuScreen`
 caller, sprite/control setup, exact closure, and remaining status uncertainties
 are documented in
 [`current-main-room-type-mission-construction.md`](current-main-room-type-mission-construction.md).
+The shared map-control refresh adds eight exact functions / 3,894 bytes. Its
+original map labels, five matched callers, exact ranges, and four unmatched
+caller sites are documented in
+[`current-main-map-control-refresh.md`](current-main-map-control-refresh.md).
 The PageFight event pre-handler rooted at
 `FUN_587EE2C0` adds eight byte-identical functions / 3,705 bytes. Its matched
 message-handler route, shared keyboard-index helper, exact closure, and

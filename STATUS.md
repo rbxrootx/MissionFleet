@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,162 verified matches
-totaling 2,616,487 bytes (19.2223% by functions, 24.9896% by bytes), each at
+identified code bytes across six report units. There are 8,170 verified matches
+totaling 2,620,381 bytes (19.2412% by functions, 25.0268% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -29,6 +29,10 @@ helper, exact closure, and unresolved event/state meanings are recorded in
 `CPageChannelBattle_ControlMenuScreen` method. Its controls, shared selector,
 exact ranges, and unknown status meanings are documented in
 [the subsystem note](docs/current-main-room-type-mission-construction.md). The
+shared map-control refresh adds eight byte-identical functions / 3,894 bytes.
+Its original map labels, matched channel-battle and battle-result callers,
+exact ranges, and four unmatched callers are documented in
+[the subsystem note](docs/current-main-map-control-refresh.md). The
 map-object proximity update rooted at
 `FUN_587880C0` adds seven byte-identical functions / 4,233 bytes. Its two
 matched `CShell_MapObjectScreen` callsites, exact spatial checks, complete
