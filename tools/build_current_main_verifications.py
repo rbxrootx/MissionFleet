@@ -1086,6 +1086,10 @@ CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES = ("5884CA60",)
 ADDRESSES += CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_ADDRESSES)
 
+CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES = ("58782810",)
+ADDRESSES += CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9776,6 +9780,41 @@ CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_COMMUNICATOR_MESSAGE_PANEL_EVIDENCE)
+
+CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_EVIDENCE = {
+    "58782810": {
+        "name_in_analysis": "FUN_58782810 / RTTI-backed CHCB_LandingTank constructor",
+        "called_by": (
+            "Fresh Ghidra references show one direct call from the byte-matched "
+            "CShip_MapObjectScreen constructor FUN_588e05c0 at 0x588E378F. "
+            "The caller stores the returned object into its eight-entry child "
+            "array and loops until index 8; the focused verifier checks this call, "
+            "the array store, and the matched caller range."
+        ),
+        "behavior": (
+            "Fresh Ghidra 12.1.3 decompilation shows the constructor install the "
+            "RTTI-confirmed CHCB_LandingTank vtable and initialize the base object. "
+            "It creates nine conditional 0x58-byte children with the "
+            "CSpriteBundleScreen vtable, selecting observed data records from two "
+            "global table paths, then conditionally allocates five 0x20-byte "
+            "objects and initializes them through FUN_587b7350. Four observed "
+            "calls pass zero; the last can pass a table value when its "
+            "count/pointer gate succeeds. It initializes related pointer/flag "
+            "fields. All 22 "
+            "direct calls target functions already verified byte-identical in the "
+            "same mapped image."
+        ),
+        "uncertainty": (
+            "RTTI establishes the class name and its existing vtable method at "
+            "+0x0C. The matched map-screen caller establishes an eight-object "
+            "construction loop and coordinate formulas. Child roles, data-table "
+            "schemas, field types and meanings, coordinate units, and rendered "
+            "appearance remain unresolved. No emulator or live-client rendering "
+            "test was performed."
+        ),
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {

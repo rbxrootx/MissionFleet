@@ -15,8 +15,11 @@ The vtable address point at `0x58996A68` references this function at slot `+0x0C
 Its preceding Complete Object Locator at `0x58996A64` points to
 `0x589A5EF4`; that record's TypeDescriptor names `.?AVCHCB_LandingTank@@`.
 Thus the receiver class is supported by mapped RTTI, not inferred from the
-function's behavior. Ghidra found no direct callsite; virtual-dispatch callers
-remain unknown.
+function's behavior. Its constructor is now matched and traced to the eight
+object setup loop in `CShip_MapObjectScreen`; the evidence is in the
+[constructor note](current-main-chcb-landing-tank-constructor.md). Ghidra found
+no direct callsite to this virtual method; virtual-dispatch callers remain
+unknown.
 
 The body returns when receiver flag `+0x24` lacks bit 2. Otherwise it calls
 `FUN_587e5e10` with coordinates at `+4` and `+8`, and sets or clears flag bit 0

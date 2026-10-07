@@ -52,13 +52,18 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,370 of 42,461 functions and 2,690,118 of 10,470,295 bytes (19.7122% by
-functions and 25.6929% by bytes); every counted function match is verified at
+credits 8,371 of 42,461 functions and 2,691,352 of 10,470,295 bytes (19.7146% by
+functions and 25.7046% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,237 exact function matches totaling 1,716,700 bytes. The
-RTTI-backed `CPannelCommunicatorMessage` constructor adds one exact function /
+inventory has 2,238 exact function matches totaling 1,717,934 bytes. The
+RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
+bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
+children, complete direct-call boundary, and unresolved visual roles are
+documented in
+[`current-main-chcb-landing-tank-constructor.md`](current-main-chcb-landing-tank-constructor.md).
+The RTTI-backed `CPannelCommunicatorMessage` constructor adds one exact function /
 1,298 bytes. Its matched parent call, `+0x110` child slot, complete direct-call
 boundaries, and unresolved control appearance are documented in
 [`current-main-communicator-message-panel.md`](current-main-communicator-message-panel.md).
