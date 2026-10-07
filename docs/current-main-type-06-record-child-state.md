@@ -31,6 +31,13 @@ to `+0x238`, stores the copied word at `+0x2D8` into `+0x38FC`, and calls
 `+0x3908`, looks up the first copied DWORD through `FUN_58778D60`, and writes
 the returned word at `+0xA0` to `+0x390C`, or zero if the lookup returns null.
 
+The initializer's call to `FUN_587B4910` at `0x587B4ADB` is now independently
+matched byte-for-byte. That helper compares the supplied value against the low
+nibble of receiver word `+0x228`, updates fields `+0xE0`, `+0xF8`, `+0x104`,
+and `+0x2EC`, and uses verified `FUN_587A15E0` for two global-context updates.
+See the [helper evidence](current-main-type-06-child-state-helper.md) for its
+exact range, second matched caller, and unresolved field semantics.
+
 The exact instruction stream and match record are in
 [`src/client-current/Main/FUN_587b4a30.cpp`](../src/client-current/Main/FUN_587b4a30.cpp).
 Related type-0x05 child setup is recorded in the [companion initializer

@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,381 of 42,461 functions and 2,698,302 of 10,470,295 bytes (19.7381% by
-functions and 25.7710% by bytes); every counted function match is verified at
+credits 8,382 of 42,461 functions and 2,698,425 of 10,470,295 bytes (19.7405% by
+functions and 25.7722% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,248 exact function matches totaling 1,724,884 bytes. The
+inventory has 2,249 exact function matches totaling 1,725,007 bytes. The
 RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are
@@ -82,6 +82,11 @@ The adjacent numeric user-chat channel command adds two exact functions / 1,036
 bytes. Its matched slash-plus-digit route, three-entry channel lookup, message
 submission path, and unresolved record/server semantics are documented in
 [`current-main-user-chat-channel-command.md`](current-main-user-chat-channel-command.md).
+The type-0x06 record-backed child initializer now includes its exact 123-byte
+encoded-state helper match. The field updates, verified callback boundary, two
+matched callers, third unmatched caller, and remaining field meanings are
+recorded in
+[`current-main-type-06-child-state-helper.md`](current-main-type-06-child-state-helper.md).
 The page-result control menu's slot `+0x00` cleanup body adds one exact
 function / 1,107 bytes. Its matched RTTI caller, child-pointer cleanup, exact
 ranges, and unresolved indirect callbacks are documented in

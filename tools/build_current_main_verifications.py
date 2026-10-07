@@ -13010,6 +13010,41 @@ MAIN_USER_CHAT_CHANNEL_COMMAND_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_USER_CHAT_CHANNEL_COMMAND_EVIDENCE)
 
+MAIN_TYPE_06_CHILD_STATE_HELPER_ADDRESSES = ("587B4910",)
+ADDRESSES += MAIN_TYPE_06_CHILD_STATE_HELPER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE_06_CHILD_STATE_HELPER_ADDRESSES)
+
+MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE = {
+    "587B4910": {
+        "name_in_analysis": "FUN_587b4910 / encoded type-0x06 child-state helper",
+        "called_by": (
+            "Byte-matched FUN_587B4A30 calls this helper at 0x587B4ADB as part "
+            "of its observed type-0x06 record-backed initializer; byte-matched "
+            "FUN_588DEB30 calls it at 0x588DEE55 in the ship-map update path. "
+            "Fresh Ghidra also records a third call from unmatched "
+            "FUN_587A74C0 at 0x587A7550."
+        ),
+        "behavior": (
+            "Reads the low four bits of receiver word +0x228 and compares them "
+            "with the requested value as signed integers, storing the selected "
+            "value at +0xE0. It stores 0x40000000 at +0xF8 when the request is "
+            "nonzero and zero otherwise, writes request XOR 0xAAAAAAAA at +0x2EC, "
+            "and writes 0xAAAAAAAA at +0x104. When receiver +0x88 equals "
+            "[0x58A247F8]+4, it calls verified FUN_587A15E0 for the +0x104 and "
+            "+0x2EC address/value pairs. Fresh Ghidra assigns one 123-byte range "
+            "with 33 instructions; the body ends in ret 4."
+        ),
+        "uncertainty": (
+            "The meanings and units of the selected value and receiver fields, "
+            "the global-context comparison, the callback contract of "
+            "FUN_587A15E0, and the wider semantics of the type-0x06 child record "
+            "remain unresolved. One additional incoming caller is unmatched. "
+            "No client or emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE)
+
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

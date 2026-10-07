@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_381)
-        self.assertEqual(self.report["measures"]["matched_code"], "2698302")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_382)
+        self.assertEqual(self.report["measures"]["matched_code"], "2698425")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_248)
-        self.assertEqual(current["measures"]["matched_code"], "1724884")
+        self.assertEqual(current["measures"]["matched_functions"], 2_249)
+        self.assertEqual(current["measures"]["matched_code"], "1725007")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -179,6 +179,25 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(set(addresses), set(evidence))
         self.assertIn("0x587fd022", evidence["587F6C40"]["called_by"])
         self.assertIn("0x58891be4", evidence["587B7870"]["called_by"])
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_type_06_child_state_helper_has_original_code_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_TYPE_06_CHILD_STATE_HELPER_ADDRESSES
+        )
+        self.assertEqual(addresses, ("587B4910",))
+        evidence = (
+            build_current_main_verifications
+            .MAIN_TYPE_06_CHILD_STATE_HELPER_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("587B4ADB", evidence["587B4910"]["called_by"])
+        self.assertIn("588DEE55", evidence["587B4910"]["called_by"])
+        self.assertIn("587A7550", evidence["587B4910"]["called_by"])
         for address in addresses:
             self.assertTrue(evidence[address]["called_by"], address)
             self.assertTrue(evidence[address]["behavior"], address)
