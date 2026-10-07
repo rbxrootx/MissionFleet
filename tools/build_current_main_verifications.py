@@ -1068,6 +1068,13 @@ MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES = (
 ADDRESSES += MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES)
 
+MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES = (
+    "5876BF80", "5876C8D0", "58783C80", "58783F60", "58784310",
+    "58784B10", "587880C0",
+)
+ADDRESSES += MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9678,6 +9685,91 @@ MAIN_LINKED_RECORD_COLLECTION_REFRESH_EVIDENCE = {
     for address in MAIN_LINKED_RECORD_COLLECTION_REFRESH_ADDRESSES
 }
 EVIDENCE.update(MAIN_LINKED_RECORD_COLLECTION_REFRESH_EVIDENCE)
+
+MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_PARENTS = {
+    "5876BF80": (
+        "FUN_587880C0 at 0x5878827F, 0x58788495, and 0x587885C5; "
+        "FUN_58783C80 at 0x58783CBD"
+    ),
+    "5876C8D0": "FUN_58783C80 at 0x58783C97",
+    "58783C80": "FUN_58783F60 at 0x587840FD",
+    "58783F60": "FUN_58784310 at 0x587846E7",
+    "58784310": "FUN_587880C0 at 0x587883D3 and 0x587884D3",
+    "58784B10": "FUN_587880C0 at 0x587881BE and 0x587882BE",
+    "587880C0": (
+        "Byte-matched FUN_588D4300 at 0x588D5C83 and 0x588D5FE9; Ghidra "
+        "associates its virtual-table entry with RTTI type CShell_MapObjectScreen"
+    ),
+}
+MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_BEHAVIOR = {
+    "5876BF80": (
+        "Returns x - (x * y) / z using signed integer arithmetic, as shown by "
+        "the decompiled expression."
+    ),
+    "5876C8D0": (
+        "Selects six coordinate pairs from an object table using its +0x605C "
+        "index, computes squared distances to the supplied point, and returns "
+        "the first distance within the supplied radius squared or -1."
+    ),
+    "58783C80": (
+        "Runs the six-pair distance helper, obtains the shared scale value, "
+        "adjusts an input value through FUN_5876BF80, and on a positive result "
+        "calls FUN_587EFD60 with the current object's coordinates and the "
+        "observed record fields."
+    ),
+    "58783F60": (
+        "Clears receiver +0x68, resets/toggles linked child state, selects a "
+        "resource entry from receiver +4, derives a position from receiver "
+        "coordinates and global screen fields, then walks the global linked "
+        "list. Matching entries can reach FUN_58783C80; the routine ends with "
+        "FUN_587BB160(1, 0)."
+    ),
+    "58784310": (
+        "Updates receiver +0x6C using the supplied record and global state. "
+        "Its mode branches allocate 0x11C-byte records through FUN_5875ADB0; "
+        "when +0x6C reaches zero it calls FUN_58783F60 and returns 1."
+    ),
+    "58784B10": (
+        "Updates receiver +0x50 using the supplied record and global state. "
+        "Its mode branches allocate 0x11C-byte records through FUN_5875ADB0, "
+        "update child state, and signal completion when +0x50 reaches zero."
+    ),
+    "587880C0": (
+        "Validates and walks the receiver's two object arrays at +0x858 and "
+        "+0x870. For entries with nonzero fields at +0x50 or +0x68, it tests "
+        "coordinate deltas against +/-10 or +/-25 windows and otherwise tests "
+        "squared distance against the supplied radius squared. Qualifying "
+        "entries are updated through FUN_58784B10 or FUN_58784310; completed "
+        "updates can dispatch event code 0x0B through FUN_588D6C90. When the "
+        "receiver's +0x88C byte is nonzero and the mode argument is not 1, it "
+        "also walks coordinate pairs beginning at +0x894 and dispatches "
+        "position updates through FUN_587ECAB0/FUN_58780330."
+    ),
+}
+MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / map-object proximity update closure member"
+        ),
+        "called_by": MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_PARENTS[address],
+        "behavior": MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_BEHAVIOR.get(
+            address,
+            "Member of the complete direct-call closure rooted at FUN_587880C0; "
+            "its exact Ghidra body range and call-graph edges are recorded in "
+            "docs/current-main-map-object-proximity-effects.md.",
+        ),
+        "uncertainty": (
+            "The owner/type of the two arrays, coordinate units, meanings of "
+            "record fields and event code 0x0B, exact resource/effect names, "
+            "and authoritative gameplay outcome remain unresolved. The caller "
+            "is RTTI-identified as CShell_MapObjectScreen, but the helper's "
+            "formal class and virtual contracts are unknown. No emulator visual "
+            "test was run."
+        ),
+    }
+    for address in MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
+}
+EVIDENCE.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE)
 
 
 def sha256(path):

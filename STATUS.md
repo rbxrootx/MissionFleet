@@ -6,12 +6,17 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,123 verified matches
-totaling 2,592,439 bytes (19.1305% by functions, 24.7599% by bytes), each at
+identified code bytes across six report units. There are 8,130 verified matches
+totaling 2,596,672 bytes (19.1470% by functions, 24.8004% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project. The linked-record collection refresh rooted at
+the active decomp.dev project. The map-object proximity update rooted at
+`FUN_587880C0` adds seven byte-identical functions / 4,233 bytes. Its two
+matched `CShell_MapObjectScreen` callsites, exact spatial checks, complete
+closure, and unknown record/effect semantics are recorded in
+[its subsystem note](docs/current-main-map-object-proximity-effects.md). The
+linked-record collection refresh rooted at
 `FUN_587487C0` adds 17 byte-identical functions / 4,646 bytes. Its matched
 caller setup, global name-key lookup, exact Ghidra body ranges, and unresolved
 collection/type semantics are recorded in

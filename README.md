@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,123 matches cover 2,592,439 bytes (24.7599%) and are verified
+The current 8,130 matches cover 2,596,672 bytes (24.8004%) and are verified
 individually at 100.0% by objdiff.
+The installed client's map-object proximity update rooted at `FUN_587880C0`
+adds seven byte-identical functions / 4,233 bytes. Its two matched calls from
+the RTTI-identified `CShell_MapObjectScreen`, exact spatial checks, and
+unresolved record/effect meanings are recorded in
+[the subsystem evidence](docs/current-main-map-object-proximity-effects.md).
 The installed client's linked-record collection refresh rooted at
 `FUN_587487C0` adds 17 byte-identical functions / 4,646 bytes. Its matched
 caller, global name-key lookup, complete call closure, and unresolved
