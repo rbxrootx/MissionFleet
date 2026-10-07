@@ -402919,6 +402919,1050 @@
         "behavior": "Initializes a CMenuScreen base, installs the Ghidra-labeled CFCCH_PannelTutorialStart vtable, and creates its embedded controls. It constructs repeated CAutoLineFeedEditScreen children through FUN_587494D0 with mapped position/color arguments, then creates two additional child objects through FUN_5875DDA0 and sets the parent control mask.",
         "uncertainty": "The callsites, vtable symbols, resource path, message keys, state branches, and field accesses are recorded from the installed Main.dll Ghidra output and mapped instructions. The FCCHS acronym, status meanings, object/field semantics beyond the displayed operations, indirect virtual contracts, localized text, and runtime visual result remain unverified. No emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "5875EE50",
+      "name": "FUN_5875ee50",
+      "size": 84,
+      "symbol": "_FUN_5875ee50",
+      "source": "src/client-current/Main/FUN_5875ee50.cpp",
+      "source_sha256": "7c77b38b220d3d1f9157f98020eec23db2ca8c2df44250cf418136bb6f9402be",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5875EE50",
+          "size": 84,
+          "symbol": "_FUN_5875ee50_segment_00",
+          "relocations": [
+            {
+              "offset": 49,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "587B7400",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875ee50 / PageFight event pre-handler closure member",
+        "called_by": "FUN_58896300 at 0x5889631B and 0x58896334",
+        "behavior": "Clears receiver +0x54 and sets +0x78 according to its second argument. When receiver +0x7C is non-null, it invokes that object's virtual slot +8 and calls FUN_587B7400 with coordinates derived from the receiver and the observed global DAT_58A248F8.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587E7F70",
+      "name": "FUN_587e7f70",
+      "size": 19,
+      "symbol": "_FUN_587e7f70",
+      "source": "src/client-current/Main/FUN_587e7f70.cpp",
+      "source_sha256": "491249393b5bed96147bc5d7e723cece5a5f049ab05ddd407221bec23fef51c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E7F70",
+          "size": 19,
+          "symbol": "_FUN_587e7f70_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e7f70 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE67B",
+        "behavior": "Calls receiver virtual slot +0x18 with the DWORD at receiver +0x29F*4, followed by arguments 2 and 0.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587E7FF0",
+      "name": "FUN_587e7ff0",
+      "size": 19,
+      "symbol": "_FUN_587e7ff0",
+      "source": "src/client-current/Main/FUN_587e7ff0.cpp",
+      "source_sha256": "5d7f49025ff85dee4f5efaa8059c4cf92c0729f528fd03d1b1ba02aa17660f1a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E7FF0",
+          "size": 19,
+          "symbol": "_FUN_587e7ff0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e7ff0 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE661",
+        "behavior": "Calls receiver virtual slot +0x18 with the DWORD at receiver +0x1CB*4, followed by arguments 2 and 0.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587EE2C0",
+      "name": "FUN_587ee2c0",
+      "size": 1701,
+      "symbol": "_FUN_587ee2c0",
+      "source": "src/client-current/Main/FUN_587ee2c0.cpp",
+      "source_sha256": "02a23f45016056388b1b313a025fc9b61f424c0c38a476e39b7d0a218926378f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EE2C0",
+          "size": 330,
+          "symbol": "_FUN_587ee2c0_segment_00",
+          "relocations": [
+            {
+              "offset": 86,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "587EE95F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "587EE95F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "587EE554",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "587EE554",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "587EE554",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 263,
+              "target_address": "58861F40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "588592C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587EE410",
+          "size": 45,
+          "symbol": "_FUN_587ee2c0_segment_01",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587EE440",
+          "size": 694,
+          "symbol": "_FUN_587ee2c0_segment_02",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "5873B3B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5873A250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "5873B3B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "58A2462C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 284,
+              "target_address": "5889EAC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "5881E670",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "58896300",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 366,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "587EE787",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 444,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 460,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 478,
+              "target_address": "587E9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "587E9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 535,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "587E7FF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 561,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 572,
+              "target_address": "587E7F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 624,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 676,
+              "target_address": "587EE772",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587EE700",
+          "size": 632,
+          "symbol": "_FUN_587ee2c0_segment_03",
+          "relocations": [
+            {
+              "offset": 110,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "587E9A10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "5898C42C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58A28348",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "5899C1D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5877ABA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "58A28348",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 229,
+              "target_address": "587EE8FC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 235,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "5898C42C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 310,
+              "target_address": "58A28344",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "587EE8EC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 347,
+              "target_address": "5899C1AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 411,
+              "target_address": "587EE96E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 418,
+              "target_address": "587EAE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 439,
+              "target_address": "58A28344",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "5899C180",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 477,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 488,
+              "target_address": "5877ABA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 495,
+              "target_address": "58A28344",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 510,
+              "target_address": "5898C42C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 516,
+              "target_address": "58A28340",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 533,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 550,
+              "target_address": "5899C15C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 556,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 567,
+              "target_address": "5877ABA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 574,
+              "target_address": "58A28340",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ee2c0 / PageFight event pre-handler closure member",
+        "called_by": "Byte-matched FUN_587FF150, the CPageFightOn_ControlMenuScreen message handler, calls this at 0x587FF296 in its event-code 0x100 branch before dispatching FUN_587F7530 at 0x587FF29E.",
+        "behavior": "Handles the event passed by the matched PageFight message handler. It clears observed receiver state, checks global and receiver gates, routes key values 0x31..0x38 through FUN_588592C0 when the observed table bounds allow it, maps the event key through FUN_5889EAC0, and branches on observed mapped key indices 0x08, 0x14..0x18, 0x1A, and 0x1C. Some branches update coordinates and selection fields; others call the matched event-payload builder FUN_587E9A10, toggle communication-control state, or emit the literal battle and underwater message keys recorded in the decompilation.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5881E670",
+      "name": "FUN_5881e670",
+      "size": 161,
+      "symbol": "_FUN_5881e670",
+      "source": "src/client-current/Main/FUN_5881e670.cpp",
+      "source_sha256": "f5aba4fd37fee33b01931f0311ac2a76a38f1148eae0e33ddb722cbe4e9ba308",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5881E670",
+          "size": 161,
+          "symbol": "_FUN_5881e670_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5881E70F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "5899DAB4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "58751BF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "5899DA8C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "58751BF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5881e670 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE580",
+        "behavior": "Toggles receiver +0xD1C when +0xCC is nonzero, sends the observed MESSAGESTRING__COMM_CONTROL_ENABLED or MESSAGESTRING__COMM_CONTROL_DISBALED key through FUN_58751BF0, and updates low flag bits on the child pointers at receiver +0x54 onward.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588592C0",
+      "name": "FUN_588592c0",
+      "size": 1307,
+      "symbol": "_FUN_588592c0",
+      "source": "src/client-current/Main/FUN_588592c0.cpp",
+      "source_sha256": "18c83e8b8af5b993070788e47a231a13eb44b25f0a00ecc2a85f24fe0070546c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588592C0",
+          "size": 649,
+          "symbol": "_FUN_588592c0_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5885944A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "588594E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "588594E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "588594E7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 510,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 617,
+              "target_address": "588593A0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58859550",
+          "size": 658,
+          "symbol": "_FUN_588592c0_segment_01",
+          "relocations": [
+            {
+              "offset": 55,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "58858BD0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588592c0 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE3E1",
+        "behavior": "Stores its index at receiver +0xF4, passes observed index/count values through FUN_58907360, and walks eight repeated child groups. The loop changes child low flag bits and selects bounds-checked resource records from DAT_58A246A0 for embedded child fields; it then clears related flags and calls FUN_58858BD0(0).",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58896300",
+      "name": "FUN_58896300",
+      "size": 59,
+      "symbol": "_FUN_58896300",
+      "source": "src/client-current/Main/FUN_58896300.cpp",
+      "source_sha256": "bd6b22583ed925f7677bf6508b90d8bd8ced300cc54c61877d558de6cb098380",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58896300",
+          "size": 59,
+          "symbol": "_FUN_58896300_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "5875EE20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "5875EE50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "5875EE20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5875EE50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58896300 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE59B",
+        "behavior": "Calls FUN_5875EE20 to inspect a state value. For return value 1 it calls FUN_5875EE50(0); for return value 2 it calls FUN_5875EE50(1).",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5889EAC0",
+      "name": "FUN_5889eac0",
+      "size": 355,
+      "symbol": "_FUN_5889eac0",
+      "source": "src/client-current/Main/FUN_5889eac0.cpp",
+      "source_sha256": "bed3dc2a27fea3ef510a86400fe9e05865be3569eb3c40f17e0d61d2262c28d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889EAC0",
+          "size": 355,
+          "symbol": "_FUN_5889eac0_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5889EC05",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5889EC07",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889eac0 / PageFight event pre-handler closure member",
+        "called_by": "FUN_587EE2C0 at 0x587EE55B, and byte-matched FUN_58856560, the CPannelFactoryHelp vtable slot +0x48 method, at 0x588565CD.",
+        "behavior": "For event field +8 equal to 0xE5, maps the low byte at event +0xE through observed keyboard scan-code cases. It then searches 31 DWORD entries starting at receiver +0x150 and returns the matching index, or -1 when no entry matches.",
+        "uncertainty": "Function boundaries, callsites, event comparisons, literals, and field accesses are recorded from fresh Ghidra output and the installed Main.dll mapped instructions. The event names, receiver field meanings, keyboard-state contract, virtual child semantics, resource labels, and exact gameplay effects remain unresolved. No emulator runtime or visual test was performed."
+      }
     }
   ]
 }

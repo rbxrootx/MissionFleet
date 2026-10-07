@@ -1096,6 +1096,13 @@ MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES = (
 ADDRESSES += MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES)
 
+MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES = (
+    "5875EE50", "587E7F70", "587E7FF0", "587EE2C0", "5881E670",
+    "588592C0", "58896300", "5889EAC0",
+)
+ADDRESSES += MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -10047,6 +10054,95 @@ MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE = {
     for address in MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
 }
 EVIDENCE.update(MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE)
+
+
+MAIN_PAGEFIGHT_EVENT_PREHANDLER_PARENTS = {
+    "5875EE50": "FUN_58896300 at 0x5889631B and 0x58896334",
+    "587E7F70": "FUN_587EE2C0 at 0x587EE67B",
+    "587E7FF0": "FUN_587EE2C0 at 0x587EE661",
+    "587EE2C0": (
+        "Byte-matched FUN_587FF150, the CPageFightOn_ControlMenuScreen "
+        "message handler, calls this at 0x587FF296 in its event-code "
+        "0x100 branch before dispatching FUN_587F7530 at 0x587FF29E."
+    ),
+    "5881E670": "FUN_587EE2C0 at 0x587EE580",
+    "588592C0": "FUN_587EE2C0 at 0x587EE3E1",
+    "58896300": "FUN_587EE2C0 at 0x587EE59B",
+    "5889EAC0": (
+        "FUN_587EE2C0 at 0x587EE55B, and byte-matched FUN_58856560, "
+        "the CPannelFactoryHelp vtable slot +0x48 method, at 0x588565CD."
+    ),
+}
+MAIN_PAGEFIGHT_EVENT_PREHANDLER_BEHAVIOR = {
+    "5875EE50": (
+        "Clears receiver +0x54 and sets +0x78 according to its second "
+        "argument. When receiver +0x7C is non-null, it invokes that object's "
+        "virtual slot +8 and calls FUN_587B7400 with coordinates derived from "
+        "the receiver and the observed global DAT_58A248F8."
+    ),
+    "587E7F70": (
+        "Calls receiver virtual slot +0x18 with the DWORD at receiver "
+        "+0x29F*4, followed by arguments 2 and 0."
+    ),
+    "587E7FF0": (
+        "Calls receiver virtual slot +0x18 with the DWORD at receiver "
+        "+0x1CB*4, followed by arguments 2 and 0."
+    ),
+    "587EE2C0": (
+        "Handles the event passed by the matched PageFight message handler. "
+        "It clears observed receiver state, checks global and receiver gates, "
+        "routes key values 0x31..0x38 through FUN_588592C0 when the observed "
+        "table bounds allow it, maps the event key through FUN_5889EAC0, and "
+        "branches on observed mapped key indices "
+        "0x08, 0x14..0x18, 0x1A, and 0x1C. Some branches update coordinates and "
+        "selection fields; others call the matched event-payload builder "
+        "FUN_587E9A10, toggle communication-control state, or emit the literal "
+        "battle and underwater message keys recorded in the decompilation."
+    ),
+    "5881E670": (
+        "Toggles receiver +0xD1C when +0xCC is nonzero, sends the observed "
+        "MESSAGESTRING__COMM_CONTROL_ENABLED or "
+        "MESSAGESTRING__COMM_CONTROL_DISBALED key through FUN_58751BF0, and "
+        "updates low flag bits on the child pointers at receiver +0x54 onward."
+    ),
+    "588592C0": (
+        "Stores its index at receiver +0xF4, passes observed index/count values "
+        "through FUN_58907360, and walks eight repeated child groups. "
+        "The loop changes child low flag bits and selects bounds-checked "
+        "resource records from DAT_58A246A0 for embedded child fields; it "
+        "then clears related flags and calls FUN_58858BD0(0)."
+    ),
+    "58896300": (
+        "Calls FUN_5875EE20 to inspect a state value. For return value 1 it "
+        "calls FUN_5875EE50(0); for return value 2 it calls "
+        "FUN_5875EE50(1)."
+    ),
+    "5889EAC0": (
+        "For event field +8 equal to 0xE5, maps the low byte at event +0xE "
+        "through observed keyboard scan-code cases. It then searches 31 DWORD "
+        "entries starting at receiver +0x150 and returns the matching index, "
+        "or -1 when no entry matches."
+    ),
+}
+MAIN_PAGEFIGHT_EVENT_PREHANDLER_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / PageFight event pre-handler closure member"
+        ),
+        "called_by": MAIN_PAGEFIGHT_EVENT_PREHANDLER_PARENTS[address],
+        "behavior": MAIN_PAGEFIGHT_EVENT_PREHANDLER_BEHAVIOR[address],
+        "uncertainty": (
+            "Function boundaries, callsites, event comparisons, literals, and "
+            "field accesses are recorded from fresh Ghidra output and the "
+            "installed Main.dll mapped instructions. The event names, receiver "
+            "field meanings, keyboard-state contract, virtual child semantics, "
+            "resource labels, and exact gameplay effects remain unresolved. "
+            "No emulator runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES
+}
+EVIDENCE.update(MAIN_PAGEFIGHT_EVENT_PREHANDLER_EVIDENCE)
 
 
 def sha256(path):

@@ -52,13 +52,18 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,150 of 42,461 functions and 2,609,148 of 10,470,295 bytes (19.1941% by
-functions and 24.9195% by bytes); every counted function match is verified at
+credits 8,158 of 42,461 functions and 2,612,853 of 10,470,295 bytes (19.2129% by
+functions and 24.9549% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,017 exact function matches totaling 1,635,730 bytes (23.8022% by
-functions and 69.4766% by bytes). The FCCHS tutorial-panel lifecycle adds six
+inventory has 2,025 exact function matches totaling 1,639,435 bytes (23.8966% by
+functions and 69.6340% by bytes). The PageFight event pre-handler rooted at
+`FUN_587EE2C0` adds eight byte-identical functions / 3,705 bytes. Its matched
+message-handler route, shared keyboard-index helper, exact closure, and
+remaining event/state uncertainties are documented in
+[`current-main-pagefight-event-prehandler.md`](current-main-pagefight-event-prehandler.md).
+The FCCHS tutorial-panel lifecycle adds six
 exact functions / 4,026 bytes. Its matched PageFactory caller, `ITFCCHS.spr`
 load, status/message-key handling, exact closure, and unresolved status meanings
 are documented in

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,150 verified matches
-totaling 2,609,148 bytes (19.1941% by functions, 24.9195% by bytes), each at
+identified code bytes across six report units. There are 8,158 verified matches
+totaling 2,612,853 bytes (19.2129% by functions, 24.9549% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -19,8 +19,12 @@ unresolved payload/control semantics are recorded in
 tutorial-panel lifecycle rooted at `FUN_58770530` adds six byte-identical
 functions / 4,026 bytes. Its matched PageFactory caller, resource and message
 keys, exact closure, and unresolved status meanings are recorded in
-[the subsystem note](docs/current-main-fcchs-tutorial-panel.md). The map-object
-proximity update rooted at
+[the subsystem note](docs/current-main-fcchs-tutorial-panel.md). The PageFight
+event pre-handler rooted at `FUN_587EE2C0` adds eight byte-identical functions /
+3,705 bytes. Its matched message-handler call path, shared keyboard-index
+helper, exact closure, and unresolved event/state meanings are recorded in
+[the subsystem note](docs/current-main-pagefight-event-prehandler.md). The
+map-object proximity update rooted at
 `FUN_587880C0` adds seven byte-identical functions / 4,233 bytes. Its two
 matched `CShell_MapObjectScreen` callsites, exact spatial checks, complete
 closure, and unknown record/effect semantics are recorded in
