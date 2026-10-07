@@ -1102,6 +1102,14 @@ MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES = (
 ADDRESSES += MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES)
 
+MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES = (
+    "5874A9B0", "5874AA70", "5874AAE0", "5874ADD0", "5874AE20",
+    "5874B0E0", "58789710", "58796C80", "587CF0A0", "587CF190",
+    "587CF280", "587CF370", "587CF450", "587CF530", "587D02B0",
+)
+ADDRESSES += MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -10225,6 +10233,134 @@ MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_EVIDENCE = {
     for address in MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_ADDRESSES
 }
 EVIDENCE.update(MAIN_OPCONVOY_OPEN_SCENE_BOOTSTRAP_EVIDENCE)
+
+MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_PARENTS = {
+    "5874A9B0": "FUN_5874AAE0 at 0x5874AB23",
+    "5874AA70": "FUN_5874AAE0 at 0x5874AB12",
+    "5874AAE0": "FUN_5874AE20 at 0x5874B02E",
+    "5874ADD0": "FUN_5874AE20 at 0x5874B05F",
+    "5874AE20": "FUN_5874B0E0 at 0x5874B0F4",
+    "5874B0E0": "FUN_587CF530 at 0x587CF564",
+    "58789710": "FUN_587CF530 at 0x587CF552",
+    "58796C80": "FUN_5874AE20 at 0x5874AE7C",
+    "587CF0A0": "FUN_587D02B0 at 0x587D031E",
+    "587CF190": "FUN_587D02B0 at 0x587D0319",
+    "587CF280": (
+        "FUN_587D02B0 at 0x587D032F and 0x587D0353"
+    ),
+    "587CF370": "FUN_587D02B0 at 0x587D0358",
+    "587CF450": (
+        "FUN_587D02B0 at 0x587D0323, 0x587D0334, and 0x587D034E"
+    ),
+    "587CF530": (
+        "Byte-matched FUN_587BB700 at 0x587BCAA4 in event case "
+        "0x80020115, when event word +0x0A equals 10"
+    ),
+    "587D02B0": (
+        "FUN_5874AE20 at 0x5874AEC9; byte-matched FUN_587D51D0 at "
+        "0x587D52F1"
+    ),
+}
+MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_BEHAVIOR = {
+    "5874A9B0": (
+        "Scans the 32 pointers in the observed resource table at offsets "
+        "+0x9A4 through +0xA23, decodes each object's word at +0x5E by "
+        "shifting right four bits and XORing 0xAA, and returns the observed "
+        "minimum and maximum values."
+    ),
+    "5874AA70": (
+        "Scans a caller-selected half-open range of resource-table entries "
+        "and returns the minimum and maximum decoded values from each "
+        "non-null object."
+    ),
+    "5874AAE0": (
+        "Selects a whole-table or single-entry resource scan from receiver "
+        "fields +0x16A/+0x16C, then compares the decoded minimum and maximum "
+        "with receiver bytes +0x17A/+0x17B. It reports observed error IDs "
+        "0x19A or 0x199 when the bounds fail."
+    ),
+    "5874ADD0": (
+        "When the observed global mode bits match 8, scans four receiver "
+        "words from +0xEFC through +0xF08 for value 1; if none match, it "
+        "reports error ID 0x2714 and returns failure."
+    ),
+    "5874AE20": (
+        "Validates a receiver against shared state, requires receiver words "
+        "+0x98 and +0x94 to equal 0x40000000, checks its map key against the "
+        "resource opened by FUN_58796C80, and applies further observed "
+        "resource-layout and virtual-method gates before returning success."
+    ),
+    "5874B0E0": (
+        "Optionally sets receiver +0x94 to 0x40000000, calls the "
+        "FUN_5874AE20 validator, and on success clears receiver +0x98/+0x94 "
+        "before invoking virtual slot +0x28."
+    ),
+    "58789710": (
+        "Walks the linked entries rooted at receiver +0x08, matching the "
+        "payload word +0xB0 and the low seven bits of payload byte +0x164 "
+        "against two keys; it returns the payload pointer or zero."
+    ),
+    "58796C80": (
+        "Builds a path using the observed format '.\\\\MAP\\\\%s', opens "
+        "that resource through the client file callbacks, reads and closes "
+        "the resulting handle, and passes the loaded data to FUN_5875BA80."
+    ),
+    "587CF0A0": (
+        "For a matching map-resource record, inspects the selected cell and "
+        "its neighboring occupancy bytes and returns an observed status code "
+        "2, 3, or 4; otherwise it returns the unmatched-record sentinel."
+    ),
+    "587CF190": (
+        "For a matching map-resource record, checks the selected cell and "
+        "four adjacent occupancy bytes, returning status 2, 3, or 4, or the "
+        "unmatched-record sentinel."
+    ),
+    "587CF280": (
+        "For a matching map-resource record, checks the selected cell and "
+        "adjacent occupancy bytes and returns status 2 or 3, or the "
+        "unmatched-record sentinel."
+    ),
+    "587CF370": (
+        "For a matching map-resource record, checks the selected cell and "
+        "adjacent occupancy bytes and returns status 2 or 3, or the "
+        "unmatched-record sentinel."
+    ),
+    "587CF450": (
+        "For a matching map-resource record, checks the selected cell and "
+        "adjacent occupancy bytes and returns status 2, 3, or 4, or the "
+        "unmatched-record sentinel."
+    ),
+    "587CF530": (
+        "Checks receiver handle +0x114, looks up a related record using "
+        "receiver words +0xA06/+0xA04, then passes the handle to "
+        "FUN_5874B0E0 and clears +0x114 if the lookup succeeds."
+    ),
+    "587D02B0": (
+        "Selects a map-resource record using receiver +0xA06. Depending on "
+        "the record type and map identifier, it delegates to one of five "
+        "cell-status helpers; several resource types return an observed "
+        "success code directly."
+    ),
+}
+MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / event 0x80020115 pending-state cleanup closure member"
+        ),
+        "called_by": MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_PARENTS[address],
+        "behavior": MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_BEHAVIOR[address],
+        "uncertainty": (
+            "The event label, receiver types, map/resource record schema, "
+            "cell-status result meanings, callback contracts, and exact "
+            "gameplay effect are not established by the available static "
+            "evidence. The direct call graph, field offsets, constants, and "
+            "mapped byte ranges are taken from fresh Ghidra output; no "
+            "emulator runtime test has been performed."
+        ),
+    }
+    for address in MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_ADDRESSES
+}
+EVIDENCE.update(MAIN_EVENT_80020115_PENDING_STATE_CLEANUP_EVIDENCE)
 
 
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_PARENTS = {

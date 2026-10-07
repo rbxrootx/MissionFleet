@@ -52,13 +52,13 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,218 of 42,461 functions and 2,641,574 of 10,470,295 bytes (19.3542% by
-functions and 25.2292% by bytes); every counted function match is verified at
+credits 8,233 of 42,461 functions and 2,644,405 of 10,470,295 bytes (19.3896% by
+functions and 25.2563% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,085 exact function matches totaling 1,668,156 bytes (24.6047% by
-functions and 70.8539% by bytes). The message `0x80022001` state-application
+inventory has 2,100 exact function matches totaling 1,670,987 bytes (24.7817% by
+functions and 70.9741% by bytes). The message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
 are documented in
@@ -94,6 +94,11 @@ eight byte-identical functions / 3,239 bytes. Its matched event path, actor
 constructors, indexed position records, exact ranges, and unresolved visual
 semantics are documented in
 [`current-main-opconvoy-open-scene-bootstrap.md`](current-main-opconvoy-open-scene-bootstrap.md).
+The Main event 0x80020115 pending-state cleanup closure adds 15 byte-identical
+functions / 2,831 bytes. Its matched dispatcher jump-table route, second matched
+caller, resource/map validation chain, exact ranges, and unresolved result
+meanings are documented in
+[current-main-event-80020115-pending-state-cleanup.md](current-main-event-80020115-pending-state-cleanup.md).
 The shared map-control refresh adds eight exact functions / 3,894 bytes. Its
 original map labels, five matched callers, exact ranges, and four unmatched
 caller sites are documented in

@@ -411920,6 +411920,1084 @@
         "behavior": "Stores input coordinates and writes the screen origin offsets (+0x1052C = x-0x200 and +0x10530 = y-0x180). It creates three 0x2C0-byte convoy objects at the observed relative positions, calls FUN_58902F50 for each, and writes 15 indexed coordinate/value records through FUN_587CB340.",
         "uncertainty": "The direct calls, field offsets, constants, vtable labels, and Ghidra ranges come from the fresh mapped Main.dll analysis. The formal owners of the helper routines, meanings of resource-table entries, coordinate units, 16-byte record fields and timing values, rendered appearance, and server-authoritative event effects remain unresolved. No emulator runtime or visual test was run."
       }
+    },
+    {
+      "address": "5874A9B0",
+      "name": "FUN_5874a9b0",
+      "size": 190,
+      "symbol": "_FUN_5874a9b0",
+      "source": "src/client-current/Main/FUN_5874a9b0.cpp",
+      "source_sha256": "00c17750f68d456a8bd81054bccfc8a092b9e8d5219a612f0d3ba301e3b5c40f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874A9B0",
+          "size": 190,
+          "symbol": "_FUN_5874a9b0_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "5874A9C4",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874a9b0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AAE0 at 0x5874AB23",
+        "behavior": "Scans the 32 pointers in the observed resource table at offsets +0x9A4 through +0xA23, decodes each object's word at +0x5E by shifting right four bits and XORing 0xAA, and returns the observed minimum and maximum values.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5874AA70",
+      "name": "FUN_5874aa70",
+      "size": 98,
+      "symbol": "_FUN_5874aa70",
+      "source": "src/client-current/Main/FUN_5874aa70.cpp",
+      "source_sha256": "bb8fac518e932c606d2308ba3965d64aeec65fbd4e13c6a90c9498e458de632c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874AA70",
+          "size": 98,
+          "symbol": "_FUN_5874aa70_segment_00",
+          "relocations": [
+            {
+              "offset": 49,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874aa70 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AAE0 at 0x5874AB12",
+        "behavior": "Scans a caller-selected half-open range of resource-table entries and returns the minimum and maximum decoded values from each non-null object.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5874AAE0",
+      "name": "FUN_5874aae0",
+      "size": 157,
+      "symbol": "_FUN_5874aae0",
+      "source": "src/client-current/Main/FUN_5874aae0.cpp",
+      "source_sha256": "d7bd954d49b3b7d6061aca80827710f38175ebda9948da403eab87dd1893362f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874AAE0",
+          "size": 157,
+          "symbol": "_FUN_5874aae0_segment_00",
+          "relocations": [
+            {
+              "offset": 51,
+              "target_address": "5874AA70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "5874A9B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874aae0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AE20 at 0x5874B02E",
+        "behavior": "Selects a whole-table or single-entry resource scan from receiver fields +0x16A/+0x16C, then compares the decoded minimum and maximum with receiver bytes +0x17A/+0x17B. It reports observed error IDs 0x19A or 0x199 when the bounds fail.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5874ADD0",
+      "name": "FUN_5874add0",
+      "size": 80,
+      "symbol": "_FUN_5874add0",
+      "source": "src/client-current/Main/FUN_5874add0.cpp",
+      "source_sha256": "673ef59122cd730b4130a92ec3d429300375cf0b47f42398f2d51e75d4231505",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874ADD0",
+          "size": 80,
+          "symbol": "_FUN_5874add0_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874add0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AE20 at 0x5874B05F",
+        "behavior": "When the observed global mode bits match 8, scans four receiver words from +0xEFC through +0xF08 for value 1; if none match, it reports error ID 0x2714 and returns failure.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5874AE20",
+      "name": "FUN_5874ae20",
+      "size": 615,
+      "symbol": "_FUN_5874ae20",
+      "source": "src/client-current/Main/FUN_5874ae20.cpp",
+      "source_sha256": "f2637fa92dde3e79a4e3d47ab2e108c60527b93745e0608d73025ea9623540f6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874AE20",
+          "size": 221,
+          "symbol": "_FUN_5874ae20_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58A24628",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58796C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "587D02B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "5874AF84",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5874AF00",
+          "size": 394,
+          "symbol": "_FUN_5874ae20_segment_01",
+          "relocations": [
+            {
+              "offset": 54,
+              "target_address": "5874AFEB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "5874AFEB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "5898D0CC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "5898D0B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "5897CE4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "5898D048",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 197,
+              "target_address": "5897CE44",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "5897CE44",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "5897CE3E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "5874AF61",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "5874AAE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "5874AF61",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 328,
+              "target_address": "5874AF61",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 345,
+              "target_address": "5874AF61",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 352,
+              "target_address": "5874ADD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 377,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874ae20 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874B0E0 at 0x5874B0F4",
+        "behavior": "Validates a receiver against shared state, requires receiver words +0x98 and +0x94 to equal 0x40000000, checks its map key against the resource opened by FUN_58796C80, and applies further observed resource-layout and virtual-method gates before returning success.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5874B0E0",
+      "name": "FUN_5874b0e0",
+      "size": 62,
+      "symbol": "_FUN_5874b0e0",
+      "source": "src/client-current/Main/FUN_5874b0e0.cpp",
+      "source_sha256": "2ad908b4a283cec490d620133a4ef69c1797ce55a0a9419fed0d05d0e9aa672a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874B0E0",
+          "size": 62,
+          "symbol": "_FUN_5874b0e0_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "5874AE20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874b0e0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587CF530 at 0x587CF564",
+        "behavior": "Optionally sets receiver +0x94 to 0x40000000, calls the FUN_5874AE20 validator, and on success clears receiver +0x98/+0x94 before invoking virtual slot +0x28.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "58789710",
+      "name": "FUN_58789710",
+      "size": 60,
+      "symbol": "_FUN_58789710",
+      "source": "src/client-current/Main/FUN_58789710.cpp",
+      "source_sha256": "880a660eb171a3687691a81fbb870ef5788eef6fa21934741cef547fccc4317b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58789710",
+          "size": 60,
+          "symbol": "_FUN_58789710_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789710 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587CF530 at 0x587CF552",
+        "behavior": "Walks the linked entries rooted at receiver +0x08, matching the payload word +0xB0 and the low seven bits of payload byte +0x164 against two keys; it returns the payload pointer or zero.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "58796C80",
+      "name": "FUN_58796c80",
+      "size": 183,
+      "symbol": "_FUN_58796c80",
+      "source": "src/client-current/Main/FUN_58796c80.cpp",
+      "source_sha256": "003302c4712b4d24b66c3e6499ec464e64a974cb9928326b3a2e63b95dc0b0a4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58796C80",
+          "size": 156,
+          "symbol": "_FUN_58796c80_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "58997FE0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "5898C18C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "58A24814",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "5875BA80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58796D24",
+          "size": 27,
+          "symbol": "_FUN_58796c80_segment_01",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58796c80 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AE20 at 0x5874AE7C",
+        "behavior": "Builds a path using the observed format '.\\\\MAP\\\\%s', opens that resource through the client file callbacks, reads and closes the resulting handle, and passes the loaded data to FUN_5875BA80.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF0A0",
+      "name": "FUN_587cf0a0",
+      "size": 237,
+      "symbol": "_FUN_587cf0a0",
+      "source": "src/client-current/Main/FUN_587cf0a0.cpp",
+      "source_sha256": "3d1176c66fc2c23c1ca6f578b546eacf32a8552f04ae5d040f9659587ded012a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF0A0",
+          "size": 237,
+          "symbol": "_FUN_587cf0a0_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf0a0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587D02B0 at 0x587D031E",
+        "behavior": "For a matching map-resource record, inspects the selected cell and its neighboring occupancy bytes and returns an observed status code 2, 3, or 4; otherwise it returns the unmatched-record sentinel.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF190",
+      "name": "FUN_587cf190",
+      "size": 233,
+      "symbol": "_FUN_587cf190",
+      "source": "src/client-current/Main/FUN_587cf190.cpp",
+      "source_sha256": "e1607e82a528eb471e30fee319581a269ced210be274d9d9c44eccbb01f674cc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF190",
+          "size": 233,
+          "symbol": "_FUN_587cf190_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf190 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587D02B0 at 0x587D0319",
+        "behavior": "For a matching map-resource record, checks the selected cell and four adjacent occupancy bytes, returning status 2, 3, or 4, or the unmatched-record sentinel.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF280",
+      "name": "FUN_587cf280",
+      "size": 232,
+      "symbol": "_FUN_587cf280",
+      "source": "src/client-current/Main/FUN_587cf280.cpp",
+      "source_sha256": "88844f4861b434bb2bf8d1f4f769765f248798e7584a1506b75cf0b36cace439",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF280",
+          "size": 232,
+          "symbol": "_FUN_587cf280_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf280 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587D02B0 at 0x587D032F and 0x587D0353",
+        "behavior": "For a matching map-resource record, checks the selected cell and adjacent occupancy bytes and returns status 2 or 3, or the unmatched-record sentinel.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF370",
+      "name": "FUN_587cf370",
+      "size": 221,
+      "symbol": "_FUN_587cf370",
+      "source": "src/client-current/Main/FUN_587cf370.cpp",
+      "source_sha256": "5d694d3b81d2a11eb41134aec7b0a1af3c3affbc450252b0ec150499d35ae296",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF370",
+          "size": 221,
+          "symbol": "_FUN_587cf370_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf370 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587D02B0 at 0x587D0358",
+        "behavior": "For a matching map-resource record, checks the selected cell and adjacent occupancy bytes and returns status 2 or 3, or the unmatched-record sentinel.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF450",
+      "name": "FUN_587cf450",
+      "size": 218,
+      "symbol": "_FUN_587cf450",
+      "source": "src/client-current/Main/FUN_587cf450.cpp",
+      "source_sha256": "e7a1d45d437086d67098f16900022a72dd39fdd9542bd441305c308338107b46",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF450",
+          "size": 218,
+          "symbol": "_FUN_587cf450_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "589BAAB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "589C2D54",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf450 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_587D02B0 at 0x587D0323, 0x587D0334, and 0x587D034E",
+        "behavior": "For a matching map-resource record, checks the selected cell and adjacent occupancy bytes and returns status 2, 3, or 4, or the unmatched-record sentinel.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587CF530",
+      "name": "FUN_587cf530",
+      "size": 69,
+      "symbol": "_FUN_587cf530",
+      "source": "src/client-current/Main/FUN_587cf530.cpp",
+      "source_sha256": "9605228849e01f1e2a6c0aeae59b82b4ada517391c9871a0fc0a09c18cc9fdb4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CF530",
+          "size": 69,
+          "symbol": "_FUN_587cf530_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "58789710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5874B0E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cf530 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "Byte-matched FUN_587BB700 at 0x587BCAA4 in event case 0x80020115, when event word +0x0A equals 10",
+        "behavior": "Checks receiver handle +0x114, looks up a related record using receiver words +0xA06/+0xA04, then passes the handle to FUN_5874B0E0 and clears +0x114 if the lookup succeeds.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "587D02B0",
+      "name": "FUN_587d02b0",
+      "size": 176,
+      "symbol": "_FUN_587d02b0",
+      "source": "src/client-current/Main/FUN_587d02b0.cpp",
+      "source_sha256": "79e3aeec7387fae6f6abfee681509d481ab8b856ab48ac54d7ae81c63d6247f4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D02B0",
+          "size": 176,
+          "symbol": "_FUN_587d02b0_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "587D035D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 31,
+              "target_address": "587D035D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "587D035D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "587CF190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "587CF0A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "587CF450",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "587CF280",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "587CF450",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "587CF450",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "587CF280",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "587CF370",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d02b0 / event 0x80020115 pending-state cleanup closure member",
+        "called_by": "FUN_5874AE20 at 0x5874AEC9; byte-matched FUN_587D51D0 at 0x587D52F1",
+        "behavior": "Selects a map-resource record using receiver +0xA06. Depending on the record type and map identifier, it delegates to one of five cell-status helpers; several resource types return an observed success code directly.",
+        "uncertainty": "The event label, receiver types, map/resource record schema, cell-status result meanings, callback contracts, and exact gameplay effect are not established by the available static evidence. The direct call graph, field offsets, constants, and mapped byte ranges are taken from fresh Ghidra output; no emulator runtime test has been performed."
+      }
     }
   ]
 }
