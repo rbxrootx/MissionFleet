@@ -414510,6 +414510,660 @@
         "behavior": "Adds the supplied byte-sized amount to the indexed byte at +0xA28 and caps it at global value 0x589C3E94.",
         "uncertainty": "Fresh Ghidra 12.1.3 exact body ranges and decompilation were checked against the pinned mapped Main.dll. The formal record and child-list types, coordinate/time units, packed-field meanings, random-table purpose, observed state values, effect identity, battle-message semantics, and server-authoritative outcome remain unresolved. The root is called by the RTTI-identified CShell_MapObjectScreen method, but the visual and gameplay effects were not runtime-tested."
       }
+    },
+    {
+      "address": "588F7430",
+      "name": "FUN_588f7430",
+      "size": 120,
+      "symbol": "_FUN_588f7430",
+      "source": "src/client-current/Main/FUN_588f7430.cpp",
+      "source_sha256": "e3b009ec16303ee112516f820875ff85b4b45a8353badafbd67f65e20e1e352a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F7430",
+          "size": 120,
+          "symbol": "_FUN_588f7430_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "589A1D78",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "589A1A78",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "589A1D54",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "589A1D20",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "589A1CF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "589A1A18",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f7430 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FCFEF and 0x588FD0AB.",
+        "behavior": "Stores the global at receiver +4. Values 0 through 4 call FUN_588f7230; other values call FUN_5876baf0 with observed code 0x2711 and then FUN_58764d30.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588F7E90",
+      "name": "FUN_588f7e90",
+      "size": 88,
+      "symbol": "_FUN_588f7e90",
+      "source": "src/client-current/Main/FUN_588f7e90.cpp",
+      "source_sha256": "f9390dd2347239aafeb7a33d71e2710752569201de68af29c507dc51b7bd8592",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F7E90",
+          "size": 88,
+          "symbol": "_FUN_588f7e90_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "588F7D60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f7e90 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FCFE2 and 0x588FD0C5.",
+        "behavior": "When the object's byte at +0x98 equals 1, clears it, masks the attached object's word at +0x24 with 0xFFF0, calls FUN_588f7d60 with bytes +0x6B and +0x6A, subtracts 1000 from +0x26, and calls two lifecycle helpers when fields +0x40 and +0x30 are nonzero.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588FC110",
+      "name": "FUN_588fc110",
+      "size": 235,
+      "symbol": "_FUN_588fc110",
+      "source": "src/client-current/Main/FUN_588fc110.cpp",
+      "source_sha256": "8b5ede4b8a094edb70dbf6f88ef09cf77816c1e9c0fb8c491f6861d53b084059",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FC110",
+          "size": 167,
+          "symbol": "_FUN_588fc110_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "588F3E70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "587DAEB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587DF580",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "588BCFD0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588FC1C0",
+          "size": 68,
+          "symbol": "_FUN_588fc110_segment_01",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 8,
+              "target_address": "588F43F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "588730F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "588BC600",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "587DA120",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588fc110 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FD078.",
+        "behavior": "Sets receiver +0xA0 to 1, resolves data through FUN_588f3e70 and FUN_58778b20, and compares a byte at the resolved object +0x35C against the low nibble of a global byte. On the observed mode branches it calls FUN_587df580 or FUN_587daeb0; it then calls FUN_588bcfd0. For a nonzero count it derives a record start from the input header, calls FUN_588f43f0 once per record at a 0x180-byte stride, then calls FUN_588730f0 and FUN_588bc600. It finishes with FUN_587da120.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588FCFB0",
+      "name": "FUN_588fcfb0",
+      "size": 289,
+      "symbol": "_FUN_588fcfb0",
+      "source": "src/client-current/Main/FUN_588fcfb0.cpp",
+      "source_sha256": "731542046f9535f04f0201b043d8dbb051030389b2b864706e30ebea27564497",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FCFB0",
+          "size": 289,
+          "symbol": "_FUN_588fcfb0_segment_00",
+          "relocations": [
+            {
+              "offset": 40,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "588F7E90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "588F74C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "588F7430",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "588FD0A2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "588FF0F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "588FD0B7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "588F43F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "588730F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "588BC600",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "588FC110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 224,
+              "target_address": "588FFB50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "588FD011",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "588F74C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 252,
+              "target_address": "588F7430",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "588F7E90",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588fcfb0 / message 0x80027105 state-application closure member",
+        "called_by": "Byte-matched FUN_587bb700's switch table routes event 0x80027105 to block 0x587C126B, whose direct call is at 0x587C127B.",
+        "behavior": "Clears receiver fields +0x94 and +0x98 and sets bit 1 at +0x24. For a nonzero second argument it finds the first vector entry whose object byte +0x98 is 1, deactivates it when found, then calls FUN_588f74c0 and FUN_588f7430 with the argument. Otherwise it walks the supplied 8-byte descriptors, looks up entries by fields +0x60 and +0x64, and follows the observed +0x68 subtype branches. Subtype 0 calls FUN_588fc110; subtype 1 calls FUN_588f43f0, FUN_588730f0, and FUN_588bc600 while advancing the output pointer by 0x180. Each found entry is removed through FUN_588ffb50. A missing entry deactivates the first active item if one exists and returns. The normal end calls FUN_588f74c0(0) and FUN_588f7430(0).",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588FF080",
+      "name": "FUN_588ff080",
+      "size": 97,
+      "symbol": "_FUN_588ff080",
+      "source": "src/client-current/Main/FUN_588ff080.cpp",
+      "source_sha256": "3eb85fab3abc3df23c97f259564cddf32a88a43f4bca75373bed5fc1e7385509",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF080",
+          "size": 97,
+          "symbol": "_FUN_588ff080_segment_00",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ff080 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FCFD7 and 0x588FD0BA.",
+        "behavior": "Scans the pointer vector delimited by fields +0x70 and +0x74 and returns its first object whose byte at +0x98 equals 1, or zero.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588FF0F0",
+      "name": "FUN_588ff0f0",
+      "size": 142,
+      "symbol": "_FUN_588ff0f0",
+      "source": "src/client-current/Main/FUN_588ff0f0.cpp",
+      "source_sha256": "730f4be08ef404ded8d152a8d9a62c019ad2854b84ea9678b4497d0f7f6ba0cf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF0F0",
+          "size": 142,
+          "symbol": "_FUN_588ff0f0_segment_00",
+          "relocations": [
+            {
+              "offset": 46,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ff0f0 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FD01D.",
+        "behavior": "Scans the same pointer vector and returns the first object whose DWORDs at +0x60 and +0x64 equal the two supplied values, or zero.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
+    },
+    {
+      "address": "588FFB50",
+      "name": "FUN_588ffb50",
+      "size": 317,
+      "symbol": "_FUN_588ffb50",
+      "source": "src/client-current/Main/FUN_588ffb50.cpp",
+      "source_sha256": "32784d7b9bdd99de396f47bfe56c778e5c0ebd435a2046b0bff2a544cc7e9c38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FFB50",
+          "size": 317,
+          "symbol": "_FUN_588ffb50_segment_00",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "588FFC88",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 219,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ffb50 / message 0x80027105 state-application closure member",
+        "called_by": "FUN_588fcfb0 calls it at 0x588FD08F.",
+        "behavior": "Finds the vector object whose DWORDs at +0x60 and +0x64 equal the supplied pair. If it is the current object at receiver +0x90, clears that field; it calls the object's first virtual method with 1, clears the vector slot, shifts later pointers down with FUN_5897cc54, and reduces the vector end by four bytes.",
+        "uncertainty": "Fresh Ghidra 12.1.3 decompilation and exact body ranges were checked against the installed mapped Main.dll. The packet descriptor's semantic field names, receiver class, +0x68 subtype meaning, output-record schema, global state values, virtual callback contracts, and server-authoritative meaning are not established by this code slice. No runtime visual or emulator test was run."
+      }
     }
   ]
 }

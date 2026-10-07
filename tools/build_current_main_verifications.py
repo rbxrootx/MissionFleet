@@ -1059,6 +1059,13 @@ CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES = (
 ADDRESSES += CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80027101_STATE_ADDRESSES)
 
+CURRENT_MAIN_MESSAGE_80027105_STATE_ADDRESSES = (
+    "588F7430", "588F7E90", "588FC110", "588FCFB0",
+    "588FF080", "588FF0F0", "588FFB50",
+)
+ADDRESSES += CURRENT_MAIN_MESSAGE_80027105_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80027105_STATE_ADDRESSES)
+
 CURRENT_MAIN_MESSAGE_80022001_STATE_ADDRESSES = (
     "5880C710", "588890F0", "5888CC50", "5888CC70", "588C7110",
 )
@@ -9417,6 +9424,96 @@ CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_MESSAGE_80027101_STATE_EVIDENCE)
+
+CURRENT_MAIN_MESSAGE_80027105_STATE_PARENTS = {
+    "588F7430": (
+        "FUN_588fcfb0 calls it at 0x588FCFEF and 0x588FD0AB."
+    ),
+    "588F7E90": (
+        "FUN_588fcfb0 calls it at 0x588FCFE2 and 0x588FD0C5."
+    ),
+    "588FC110": "FUN_588fcfb0 calls it at 0x588FD078.",
+    "588FCFB0": (
+        "Byte-matched FUN_587bb700's switch table routes event 0x80027105 "
+        "to block 0x587C126B, whose direct call is at 0x587C127B."
+    ),
+    "588FF080": (
+        "FUN_588fcfb0 calls it at 0x588FCFD7 and 0x588FD0BA."
+    ),
+    "588FF0F0": "FUN_588fcfb0 calls it at 0x588FD01D.",
+    "588FFB50": "FUN_588fcfb0 calls it at 0x588FD08F.",
+}
+CURRENT_MAIN_MESSAGE_80027105_STATE_BEHAVIOR = {
+    "588F7430": (
+        "Stores the global at receiver +4. Values 0 through 4 call "
+        "FUN_588f7230; other values call FUN_5876baf0 with observed code "
+        "0x2711 and then FUN_58764d30."
+    ),
+    "588F7E90": (
+        "When the object's byte at +0x98 equals 1, clears it, masks the "
+        "attached object's word at +0x24 with 0xFFF0, calls FUN_588f7d60 "
+        "with bytes +0x6B and +0x6A, subtracts 1000 from +0x26, and calls "
+        "two lifecycle helpers when fields +0x40 and +0x30 are nonzero."
+    ),
+    "588FC110": (
+        "Sets receiver +0xA0 to 1, resolves data through FUN_588f3e70 and "
+        "FUN_58778b20, and compares a byte at the resolved object +0x35C "
+        "against the low nibble of a global byte. On the observed mode "
+        "branches it calls FUN_587df580 or FUN_587daeb0; it then calls "
+        "FUN_588bcfd0. For a nonzero count it derives a record start from "
+        "the input header, calls FUN_588f43f0 once per record at a 0x180-byte "
+        "stride, then calls FUN_588730f0 and FUN_588bc600. It finishes with "
+        "FUN_587da120."
+    ),
+    "588FCFB0": (
+        "Clears receiver fields +0x94 and +0x98 and sets bit 1 at +0x24. "
+        "For a nonzero second argument it finds the first vector entry whose "
+        "object byte +0x98 is 1, deactivates it when found, then calls "
+        "FUN_588f74c0 and FUN_588f7430 with the argument. Otherwise it walks "
+        "the supplied 8-byte descriptors, looks up entries by fields +0x60 "
+        "and +0x64, and follows the observed +0x68 subtype branches. Subtype "
+        "0 calls FUN_588fc110; subtype 1 calls FUN_588f43f0, FUN_588730f0, "
+        "and FUN_588bc600 while advancing the output pointer by 0x180. Each "
+        "found entry is removed through FUN_588ffb50. A missing entry "
+        "deactivates the first active item if one exists and returns. The "
+        "normal end calls FUN_588f74c0(0) and FUN_588f7430(0)."
+    ),
+    "588FF080": (
+        "Scans the pointer vector delimited by fields +0x70 and +0x74 and "
+        "returns its first object whose byte at +0x98 equals 1, or zero."
+    ),
+    "588FF0F0": (
+        "Scans the same pointer vector and returns the first object whose "
+        "DWORDs at +0x60 and +0x64 equal the two supplied values, or zero."
+    ),
+    "588FFB50": (
+        "Finds the vector object whose DWORDs at +0x60 and +0x64 equal the "
+        "supplied pair. If it is the current object at receiver +0x90, clears "
+        "that field; it calls the object's first virtual method with 1, clears "
+        "the vector slot, shifts later pointers down with FUN_5897cc54, and "
+        "reduces the vector end by four bytes."
+    ),
+}
+CURRENT_MAIN_MESSAGE_80027105_STATE_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / message 0x80027105 state-application closure member"
+        ),
+        "called_by": CURRENT_MAIN_MESSAGE_80027105_STATE_PARENTS[address],
+        "behavior": CURRENT_MAIN_MESSAGE_80027105_STATE_BEHAVIOR[address],
+        "uncertainty": (
+            "Fresh Ghidra 12.1.3 decompilation and exact body ranges were "
+            "checked against the installed mapped Main.dll. The packet "
+            "descriptor's semantic field names, receiver class, +0x68 subtype "
+            "meaning, output-record schema, global state values, virtual "
+            "callback contracts, and server-authoritative meaning are not "
+            "established by this code slice. No runtime visual or emulator "
+            "test was run."
+        ),
+    }
+    for address in CURRENT_MAIN_MESSAGE_80027105_STATE_ADDRESSES
+}
+EVIDENCE.update(CURRENT_MAIN_MESSAGE_80027105_STATE_EVIDENCE)
 
 CURRENT_MAIN_MESSAGE_80022001_STATE_EVIDENCE = {
     "5880C710": {
