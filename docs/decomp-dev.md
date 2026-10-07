@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,269 of 42,461 functions and 2,658,231 of 10,470,295 bytes (19.4743% by
-functions and 25.3883% by bytes); every counted function match is verified at
+credits 8,284 of 42,461 functions and 2,660,865 of 10,470,295 bytes (19.5097% by
+functions and 25.4135% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,136 exact function matches totaling 1,684,813 bytes. The
+inventory has 2,151 exact function matches totaling 1,687,447 bytes. The
 message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
@@ -188,6 +188,11 @@ state-reset closure add four exact matches / 1,164 bytes. Its event condition,
 vtable evidence, matched helper callers, and unresolved virtual dispatch are
 recorded in
 [`current-main-cpannel-trade-state-reset.md`](current-main-cpannel-trade-state-reset.md).
+The paired Main message `0x8002C004` / `0x8002C006` record-update path adds 15
+exact matches / 2,634 bytes. The byte-matched dispatcher routes, 0x22-byte row
+helpers, localized transfer-status keys, exact closure, and unresolved record
+semantics are documented in
+[`current-main-message-8002c004-8002c006-record-update.md`](current-main-message-8002c004-8002c006-record-update.md).
 
 The variable-record child-state refresh adds two exact matches / 1,784 bytes.
 The matched caller, exact ranges, and conditional child-flag behavior are

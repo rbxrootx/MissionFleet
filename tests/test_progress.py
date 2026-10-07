@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_269)
-        self.assertEqual(self.report["measures"]["matched_code"], "2658231")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_284)
+        self.assertEqual(self.report["measures"]["matched_code"], "2660865")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_136)
-        self.assertEqual(current["measures"]["matched_code"], "1684813")
+        self.assertEqual(current["measures"]["matched_functions"], 2_151)
+        self.assertEqual(current["measures"]["matched_code"], "1687447")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -164,6 +164,29 @@ class ProgressReportTests(unittest.TestCase):
         evidence = (
             build_current_main_verifications
             .MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_message_8002c004_8002c006_record_update_has_evidence_for_every_member(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES
+        )
+        self.assertEqual(
+            addresses,
+            (
+                "588869A0", "58886AE0", "5887A410", "5887B450", "5887BEE0",
+                "5887CB00", "5887CB30", "5887CB60", "5887DA60", "5887DBB0",
+                "58880D00", "58880D90", "588823D0", "58883EB0", "58886870",
+            ),
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_EVIDENCE
         )
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:

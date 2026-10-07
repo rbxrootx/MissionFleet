@@ -1124,6 +1124,16 @@ MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES = (
 ADDRESSES += MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES)
 
+MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES = (
+    "588869A0", "58886AE0", "5887A410", "5887B450", "5887BEE0",
+    "5887CB00", "5887CB30", "5887CB60", "5887DA60", "5887DBB0",
+    "58880D00", "58880D90", "588823D0", "58883EB0", "58886870",
+)
+ADDRESSES += MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(
+    MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES
+)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10630,6 +10640,208 @@ MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE)
+
+MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_EVIDENCE = {
+    "588869A0": {
+        "name_in_analysis": "FUN_588869a0 / Main message 0x8002C004 record update",
+        "called_by": (
+            "Byte-matched dispatcher FUN_587BB700 calls it at 0x587C14B4, "
+            "0x587C14CD, and 0x587C14DE in case 0x8002C004."
+        ),
+        "behavior": (
+            "Checks the receiver's 0x22-byte-stride buffer bounds, appends "
+            "existing and incoming rows through FUN_58886870, resets the "
+            "observed state field at +0x70, and calls the shared control and "
+            "transfer-status helpers."
+        ),
+        "uncertainty": (
+            "The record schema, meaning of the case-0x8002C004 state values, "
+            "receiver type, and visible result remain unknown. This is static "
+            "analysis of the installed Main.dll; no runtime test was performed."
+        ),
+    },
+    "58886AE0": {
+        "name_in_analysis": "FUN_58886ae0 / Main message 0x8002C006 record update",
+        "called_by": (
+            "Byte-matched dispatcher FUN_587BB700 calls it at 0x587C150B "
+            "and 0x587C1527 in case 0x8002C006."
+        ),
+        "behavior": (
+            "Validates two receiver-owned 0x22-byte-stride buffers, appends "
+            "the supplied rows, reconciles rows between the buffers when "
+            "their observed counts differ, then resets +0x70 and calls the "
+            "shared control and transfer-status helpers."
+        ),
+        "uncertainty": (
+            "The record schema, meanings of the two buffer fields and packet "
+            "state values, receiver type, and visible result remain unknown. "
+            "This is static analysis of the installed Main.dll; no runtime "
+            "test was performed."
+        ),
+    },
+    "5887A410": {
+        "name_in_analysis": "FUN_5887a410 / 0x22-byte row allocator",
+        "called_by": "FUN_588823D0 at 0x58882482.",
+        "behavior": (
+            "Checks the requested row count for multiplication overflow, "
+            "allocates count * 0x22 bytes through the observed runtime "
+            "allocator, and raises the mapped allocation-failure path on "
+            "overflow."
+        ),
+        "uncertainty": (
+            "The containing C++ container type, row schema, and allocator "
+            "ownership contract are not established."
+        ),
+    },
+    "5887B450": {
+        "name_in_analysis": "FUN_5887b450 / overlapping 0x22-byte row move",
+        "called_by": "FUN_5887DA60 at 0x5887DA82.",
+        "behavior": (
+            "Walks backward over a row range and copies each 0x22-byte row, "
+            "supporting an overlapping move during insertion."
+        ),
+        "uncertainty": (
+            "The higher-level container type and row meaning remain unknown."
+        ),
+    },
+    "5887BEE0": {
+        "name_in_analysis": "FUN_5887bee0 / shared transfer-status update",
+        "called_by": (
+            "FUN_588869A0 at 0x58886AC6 and FUN_58886AE0 at 0x58886BFE."
+        ),
+        "behavior": (
+            "For the observed nonzero mode, advances one child value by 1000, "
+            "sets a state bit, and writes localized key "
+            "TEXTSTRING_TRANSFERINGDATAFROMSERVER. Otherwise it refreshes "
+            "four child values, clears the state bit, resets fields +0x90 and "
+            "+0x94, and writes TEXTSTRING_TRANSFERINGCOMPLETE."
+        ),
+        "uncertainty": (
+            "The receiver and child-control identities, progress units, and "
+            "host-visible wording are unknown; the misspelled resource keys "
+            "are preserved as observed. No runtime UI test was performed."
+        ),
+    },
+    "5887CB00": {
+        "name_in_analysis": "FUN_5887cb00 / repeated 0x22-byte row fill",
+        "called_by": "FUN_588823D0 at 0x5888260E.",
+        "behavior": (
+            "Copies one 0x22-byte row template into each destination row in "
+            "the supplied half-open range."
+        ),
+        "uncertainty": "The row schema and container type remain unknown.",
+    },
+    "5887CB30": {
+        "name_in_analysis": "FUN_5887cb30 / repeated 0x22-byte row copy",
+        "called_by": (
+            "FUN_58886870 at 0x588868D0 and FUN_5887DBB0 at 0x5887DBD5."
+        ),
+        "behavior": (
+            "Copies one 0x22-byte row template into a requested number of "
+            "destination slots, advancing by 0x22 bytes per row."
+        ),
+        "uncertainty": "The row schema and container type remain unknown.",
+    },
+    "5887CB60": {
+        "name_in_analysis": "FUN_5887cb60 / 0x22-byte row-range copy",
+        "called_by": (
+            "FUN_588823D0 at 0x588824E3 and 0x58882516; FUN_58880D90 at "
+            "0x58880DB1."
+        ),
+        "behavior": (
+            "Copies a half-open range of 0x22-byte rows, advancing source and "
+            "destination by the observed row stride."
+        ),
+        "uncertainty": "The row schema and container type remain unknown.",
+    },
+    "5887DA60": {
+        "name_in_analysis": "FUN_5887da60 / row-range movement adapter",
+        "called_by": "FUN_588823D0 at 0x58882641.",
+        "behavior": "Forwards the supplied row-range operation to FUN_5887B450.",
+        "uncertainty": (
+            "The Ghidra prototype is imprecise around the adapter's register "
+            "arguments; its exact instruction stream is preserved."
+        ),
+    },
+    "5887DBB0": {
+        "name_in_analysis": "FUN_5887dbb0 / row-range construction helper",
+        "called_by": "FUN_588823D0 at 0x588824C2 and 0x588825F8.",
+        "behavior": (
+            "Forwards the supplied row template and count to FUN_5887CB30 "
+            "and returns the resulting end pointer using the 0x22-byte stride."
+        ),
+        "uncertainty": (
+            "Ghidra's prototype is imprecise for this adapter; the exact row "
+            "ownership and higher-level container semantics remain unknown."
+        ),
+    },
+    "58880D00": {
+        "name_in_analysis": "FUN_58880d00 / indexed row-range validation",
+        "called_by": (
+            "FUN_588869A0 at 0x588869E6; FUN_58886AE0 at 0x58886B1D and "
+            "0x58886C36."
+        ),
+        "behavior": (
+            "Validates observed begin/end indices against container bounds, "
+            "copies the underlying container and requested index into the "
+            "range state, and invokes FUN_5887B3F0 when the selected index "
+            "must move."
+        ),
+        "uncertainty": (
+            "The higher-level container type, index meaning, and movement "
+            "contract remain unknown."
+        ),
+    },
+    "58880D90": {
+        "name_in_analysis": "FUN_58880d90 / row-range copy adapter",
+        "called_by": "FUN_588823D0 at 0x588825C8 and 0x58882630.",
+        "behavior": "Forwards a supplied row range to FUN_5887CB60.",
+        "uncertainty": (
+            "The exact iterator/container abstraction remains unknown."
+        ),
+    },
+    "588823D0": {
+        "name_in_analysis": "FUN_588823d0 / dynamic 0x22-byte row insertion",
+        "called_by": "FUN_58883EB0 at 0x58883F20.",
+        "behavior": (
+            "Inserts a requested row range into a dynamic buffer. When the "
+            "buffer is full it grows capacity, allocates new storage, copies "
+            "the prefix and suffix, inserts the supplied rows, and releases "
+            "the old allocation; otherwise it shifts or fills rows in place."
+        ),
+        "uncertainty": (
+            "The row schema, container identity, capacity policy's meaning, "
+            "and owning object remain unknown. Ghidra reports three exact "
+            "body ranges separated by alignment gaps."
+        ),
+    },
+    "58883EB0": {
+        "name_in_analysis": "FUN_58883eb0 / indexed 0x22-byte row insertion",
+        "called_by": "FUN_58886870 at 0x58886900.",
+        "behavior": (
+            "Computes a row index from a validated buffer range, inserts one "
+            "0x22-byte record through FUN_588823D0, then writes the resulting "
+            "buffer pointer and row position to the supplied range state."
+        ),
+        "uncertainty": (
+            "The row schema, iterator representation, and higher-level "
+            "container type remain unknown."
+        ),
+    },
+    "58886870": {
+        "name_in_analysis": "FUN_58886870 / append one 0x22-byte row",
+        "called_by": (
+            "FUN_588869A0 at 0x58886A62 and 0x58886A9B; FUN_58886AE0 at "
+            "0x58886B33 and 0x58886BB8."
+        ),
+        "behavior": (
+            "Appends one 0x22-byte row in existing capacity or calls "
+            "FUN_58883EB0 to insert a row when the buffer must grow."
+        ),
+        "uncertainty": "The row schema and container type remain unknown.",
+    },
+}
+EVIDENCE.update(MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",
