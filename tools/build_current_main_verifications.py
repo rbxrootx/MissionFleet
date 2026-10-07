@@ -15077,6 +15077,114 @@ MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_FIRE_CONTROL_PANEL_CHILD_BIT_UPDATE_EVIDENCE)
 
+MAIN_INDEXED_CHILD_SLOT_UPDATE_ADDRESSES = (
+    "58858360", "588583A0", "5885EAF0", "5885EB30",
+)
+ADDRESSES += MAIN_INDEXED_CHILD_SLOT_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_INDEXED_CHILD_SLOT_UPDATE_ADDRESSES)
+
+MAIN_INDEXED_CHILD_SLOT_UPDATE_EVIDENCE = {
+    "58858360": {
+        "name_in_analysis": "FUN_58858360 / indexed slot update and encoded child dispatch",
+        "called_by": (
+            "Both fresh Ghidra projects show direct calls from the byte-matched "
+            "FUN_58857020 at 0x588575A8 and FUN_588E7480 at 0x588E7551. "
+            "FUN_58857020 passes index EDI and a word read from the selected "
+            "record at +0xE7C with ECX=[ESI+0x9C]. FUN_588E7480 passes an index "
+            "derived from [EBX+0x98] and the record byte at +0x0C XOR 0xAA, "
+            "with ECX selected through [0x58A245C4]+0x9C."
+        ),
+        "behavior": (
+            "The 61-byte, 21-instruction body reads argument 1 as an index and "
+            "argument 2 as a value. It loads a companion pointer from receiver "
+            "+0xA50+4*index, calls verified FUN_58907360 with that pointer in ECX "
+            "and value XOR 0xAA, stores value at receiver +0x898+4*index, then "
+            "calls verified FUN_587A15E0 using ECX loaded from [0x58A245FC], the "
+            "slot address, and value. The body ends in ret 8."
+        ),
+        "uncertainty": (
+            "The semantic role of either indexed array, the meaning of the "
+            "0xAA transform, the effect of FUN_58907360 and FUN_587A15E0, valid "
+            "index bounds, receiver ownership, and pointer initialization are "
+            "not established. The two callers and both dependencies are byte-matched; "
+            "no client or emulator runtime test was performed."
+        ),
+    },
+    "588583A0": {
+        "name_in_analysis": "FUN_588583A0 / indexed dword store and shared notification tail-call",
+        "called_by": (
+            "Both fresh Ghidra projects show direct calls from byte-matched "
+            "FUN_58857020 at 0x588575C5 and FUN_588E7480 at 0x588E757D. "
+            "FUN_58857020 passes index EDI and a word read from the selected "
+            "record at +0xE7E with ECX=[ESI+0x9C]. FUN_588E7480 passes an index "
+            "derived from [EBX+0x98] and the record byte at +0x0D XOR 0xAA, "
+            "with ECX selected through [0x58A245C4]+0x9C."
+        ),
+        "behavior": (
+            "The 36-byte, 8-instruction body computes receiver +0x8B8+4*index, "
+            "stores argument 2 there, loads ECX from [0x58A245FC], places the "
+            "slot address and value into the outgoing stack arguments, and tail-jumps "
+            "to verified FUN_587A15E0."
+        ),
+        "uncertainty": (
+            "The semantic role of the indexed field, the meaning of the caller's "
+            "0xAA transform, the effect of FUN_587A15E0, valid index bounds, and "
+            "receiver ownership are not established. No client or emulator runtime "
+            "test was performed."
+        ),
+    },
+    "5885EAF0": {
+        "name_in_analysis": "FUN_5885EAF0 / parallel indexed slot update and encoded child dispatch",
+        "called_by": (
+            "Both fresh Ghidra projects show direct calls from byte-matched "
+            "FUN_58857020 at 0x58857558 and FUN_588E7480 at 0x588E75A8. "
+            "FUN_58857020 passes index EDI and a word read from the selected "
+            "record at +0xE7C with ECX=[ESI+0xA0]. FUN_588E7480 passes an index "
+            "derived from [EBX+0x98] and the record byte at +0x0C XOR 0xAA, "
+            "with ECX selected through [0x58A245C4]+0xA0."
+        ),
+        "behavior": (
+            "The 61-byte, 21-instruction body reads argument 1 as an index and "
+            "argument 2 as a value. It loads a companion pointer from receiver "
+            "+0x70C+4*index, calls verified FUN_58907360 with that pointer in ECX "
+            "and value XOR 0xAA, stores value at receiver +0x5E4+4*index, then "
+            "calls verified FUN_587A15E0 using ECX loaded from [0x58A245FC], the "
+            "slot address, and value. The body ends in ret 8."
+        ),
+        "uncertainty": (
+            "The semantic role of either indexed array, the meaning of the "
+            "0xAA transform, the effect of FUN_58907360 and FUN_587A15E0, valid "
+            "index bounds, receiver ownership, and pointer initialization are "
+            "not established. The two callers and both dependencies are byte-matched; "
+            "no client or emulator runtime test was performed."
+        ),
+    },
+    "5885EB30": {
+        "name_in_analysis": "FUN_5885EB30 / parallel indexed dword store and notification tail-call",
+        "called_by": (
+            "Both fresh Ghidra projects show direct calls from byte-matched "
+            "FUN_58857020 at 0x58857576 and FUN_588E7480 at 0x588E75D3. "
+            "FUN_58857020 passes index EDI and a word read from the selected "
+            "record at +0xE7E with ECX=[ESI+0xA0]. FUN_588E7480 passes an index "
+            "derived from [EBX+0x98] and the record byte at +0x0D XOR 0xAA, "
+            "with ECX selected through [0x58A245C4]+0xA0."
+        ),
+        "behavior": (
+            "The 36-byte, 8-instruction body computes receiver +0x604+4*index, "
+            "stores argument 2 there, loads ECX from [0x58A245FC], places the "
+            "slot address and value into the outgoing stack arguments, and tail-jumps "
+            "to verified FUN_587A15E0."
+        ),
+        "uncertainty": (
+            "The semantic role of the indexed field, the meaning of the caller's "
+            "0xAA transform, the effect of FUN_587A15E0, valid index bounds, and "
+            "receiver ownership are not established. No client or emulator runtime "
+            "test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_INDEXED_CHILD_SLOT_UPDATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
