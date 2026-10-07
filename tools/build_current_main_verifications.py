@@ -1140,6 +1140,20 @@ MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES = (
 ADDRESSES += MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FACTORY_HELP_CHILD_STATE_ADDRESSES)
 
+MAIN_LOGO_CONTROL_MENU_STATE_ADDRESSES = (
+    "5874A7F0", "58758150", "5878AAC0", "5878AB00", "5878CD60",
+    "5878D0A0", "5878D490", "5878D660", "58790990", "58791590",
+    "58791E50", "58791ED0", "58791FE0", "58792160", "587921C0",
+    "587921F0", "58792220", "587925C0", "58792680", "58876E50",
+    "58877370", "58888960", "58898610", "588996A0", "58899700",
+    "58899800", "58899840", "588999D0", "58899B60", "58899BB0",
+    "58899C50", "58899C80", "58899CE0", "58899D80", "5889A050",
+    "5889A080", "5889A0D0", "5889A210", "5889A240", "5889A370",
+    "5889A990", "5889AA80", "5889AB20",
+)
+ADDRESSES += MAIN_LOGO_CONTROL_MENU_STATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_LOGO_CONTROL_MENU_STATE_ADDRESSES)
+
 MAIN_MAP_OBJECT_STATE_UPDATE_ADDRESSES = (
     "58756670", "587A6DC0", "587A71A0", "587B0920", "587B1410",
     "587B1A40", "58853F90", "588D7BD0", "588DA350", "588DE3D0",
@@ -10837,6 +10851,265 @@ MAIN_FACTORY_HELP_CHILD_STATE_EVIDENCE = {
     for address, behavior in MAIN_FACTORY_HELP_CHILD_STATE_BEHAVIOR.items()
 }
 EVIDENCE.update(MAIN_FACTORY_HELP_CHILD_STATE_EVIDENCE)
+
+MAIN_LOGO_CONTROL_MENU_STATE_BEHAVIOR = {
+    "5874A7F0": "Forwards its supplied value to FUN_58902EE0 and FUN_58902F50.",
+    "58758150": (
+        "When receiver +0x5F4 is zero, allocates and stores a child; reads "
+        "resource fields at +0x5F0 when available, sets the child +0x26 "
+        "ordering field to 0x7FF8, conditionally links it, and sets child "
+        "+0x24 bit 0 from the supplied argument."
+    ),
+    "5878AAC0": (
+        "Masks the receiver state at +0x24, clears bit 1, advances +0x12138 "
+        "by four, writes 0x56 to +0x12144, and resets +0x28 and +0x58."
+    ),
+    "5878AB00": (
+        "When receiver fields +0xA0 and +0x9C equal 0x40000000, advances "
+        "+0x98 and conditionally calls a child at +0x84 through vtable "
+        "slots +0x0C and +0x08; the latter path clears +0x9C."
+    ),
+    "5878CD60": (
+        "Sets +0x12144 to 0x1E, selects a child pointer from the state at "
+        "+0x12138 and observed global records, then conditionally copies six "
+        "dwords from a 0x40-stride row and calls FUN_58793E00 or FUN_58793DA0."
+    ),
+    "5878D0A0": (
+        "Resets +0x94 and +0x98, sets +0xA0 to 0x40000000 and +0x6C to 1, "
+        "then clears bit 0 at the child pointers stored at +0x121A8/+0x121AC."
+    ),
+    "5878D490": (
+        "If DAT_58A245C0 is nonzero, clears its +0x50 field, writes 0x2CE "
+        "to +0x54, invokes its vtable slot +4, then calls "
+        "FUN_58893860(0x220000)."
+    ),
+    "5878D660": (
+        "Initializes a CSpriteBundleScreen through FUN_589031A0, installs "
+        "its vtable, zeros fields +0x14/+0x15, and copies six dwords from "
+        "the supplied object offsets +0x18 through +0x2C."
+    ),
+    "58790990": (
+        "Reads a selected row from global records, copies six dwords into "
+        "an object, creates two CSpriteBundleScreen children and a "
+        "CSpriteDataScreen, links child-list fields, then builds and updates "
+        "another child through FUN_58877370."
+    ),
+    "58791590": (
+        "Checks receiver +0x24 bit 2 and dispatches on its 0x1F00 state "
+        "mask. The body advances fields +0x58/+0x28 in steps capped at "
+        "0x24, branches through observed states 0x0100/0x0200/0x0400/"
+        "0x0700/0x0800/0x0D00/0x0E00, and calls state helpers. One 0x0200 "
+        "subphase allocates 0x600 bytes, initializes through matched "
+        "FUN_58756F80, registers it, then reads NFCOSFO.RPT; a 0x0D00 path "
+        "reads NFALRINT.RPT and updates child fields. Common exit calls "
+        "FUN_5878AB00 and walks children through virtual slot +0x0C."
+    ),
+    "58791E50": (
+        "When two record pointers differ, copies dwords at offsets +4 "
+        "through +0x18 between them and performs the observed stack-cookie check."
+    ),
+    "58791ED0": (
+        "Clears three container pointers, handles a zero count, checks the "
+        "requested allocation bound, allocates count times 0x1C through "
+        "FUN_5878D5F0, stores begin/end/capacity, and returns success."
+    ),
+    "58791FE0": (
+        "Walks 0x1C-stride records, conditionally clears associated fields "
+        "and calls FUN_58734F20, invokes FUN_58791E50 for each row, then "
+        "frees an associated buffer when its observed length exceeds 0xF."
+    ),
+    "58792160": (
+        "Walks backward over records in 0x1C-byte steps, calls "
+        "FUN_58791E50 for each, and returns a pointer adjusted by the count."
+    ),
+    "587921C0": (
+        "Masks the low byte of an argument and forwards adjusted range "
+        "parameters to FUN_58791FE0."
+    ),
+    "587921F0": "Forwards adjusted arguments to FUN_58792160.",
+    "58792220": (
+        "Inserts records with a 0x1C-byte stride. It grows storage when "
+        "capacity is exhausted, moves the prefix/suffix, frees the old "
+        "buffer, and updates begin/end/capacity; otherwise shifts rows in place."
+    ),
+    "587925C0": (
+        "Checks index and capacity bounds, requests a one-record insertion "
+        "through FUN_58792220, then computes and returns the element pointer pair."
+    ),
+    "58792680": (
+        "Appends one 0x1C-byte element by calling FUN_58791F30 and "
+        "advancing the end pointer when capacity remains; otherwise calls "
+        "FUN_587925C0."
+    ),
+    "58876E50": (
+        "Reads .\\HKIN.sdt through observed global file callbacks, counts "
+        "carriage returns, allocates 0x47-byte rows, splits carriage-return "
+        "and tab-delimited data into terminated strings, and calls FUN_58748E40."
+    ),
+    "58877370": (
+        "RTTI identifies this as CPannelHotKeysInfo: it calls FUN_587B62B0, "
+        "installs the panel vtable, loads HOTKEYSINFOPNL.SPR, creates child "
+        "screens/controls from resource entries, updates observed fields, "
+        "and parses HKIN.sdt through FUN_58876E50."
+    ),
+    "58888960": "Writes 0x40000000 to the receiver field at +0xC8.",
+    "58898610": (
+        "Checks multiplication bounds for a count of 0x18-byte entries and "
+        "requests the resulting allocation; the overflow path invokes the "
+        "observed allocation-error helpers."
+    ),
+    "588996A0": "Forwards its three arguments to FUN_58899580.",
+    "58899700": (
+        "Allocates a four-byte wrapper, requests a 0x1C-stride record "
+        "sequence through FUN_58791ED0, copies rows with FUN_588995E0, "
+        "and stores the resulting pointer."
+    ),
+    "58899800": (
+        "Checks pointer ordering and forwards the observed record range "
+        "and container fields to FUN_589022B0."
+    ),
+    "58899840": (
+        "Replaces one 0x1C-stride sequence with another: handles empty "
+        "input, copies into existing storage when capacity permits, shifts "
+        "the tail, or allocates/copies and frees the old buffer."
+    ),
+    "588999D0": (
+        "Ensures capacity for a requested count of 0x1C-byte records, "
+        "allocates through FUN_5878D5F0 as needed, copies through "
+        "FUN_58791FE0, frees old storage, and updates three container pointers."
+    ),
+    "58899B60": (
+        "Walks backward over 0x18-byte elements, calls FUN_58899840 "
+        "for each step, and returns an adjusted pointer."
+    ),
+    "58899BB0": (
+        "Walks a range in 0x18-byte steps, conditionally calls "
+        "FUN_58899700, and advances the destination pointer per element."
+    ),
+    "58899C50": (
+        "Walks a range of 0x18-byte elements and calls FUN_58899840 "
+        "with the supplied third argument for each element."
+    ),
+    "58899C80": (
+        "When the two supplied pointers differ, forwards stored range "
+        "fields to FUN_58902180, zeros three container fields, and frees "
+        "the buffer referenced by the first field."
+    ),
+    "58899CE0": (
+        "Loops over a requested count of 0x18-byte entries, conditionally "
+        "calling FUN_58899700 and advancing the first pointer each iteration."
+    ),
+    "58899D80": (
+        "Opens a supplied path through global file callbacks; on success "
+        "reads and transforms the file, computes a 0x1C-stride entry count, "
+        "ensures capacity, and appends parsed entries with FUN_58792680."
+    ),
+    "5889A050": "Forwards its arguments to FUN_58899B60.",
+    "5889A080": (
+        "Loads .\\Announcement.txt, .\\Patch.txt, and .\\Eula.sdt "
+        "through FUN_58899D80 with observed indices 0, 1, and 2."
+    ),
+    "5889A0D0": (
+        "Masks the low byte of an argument, calls FUN_58899CE0, and "
+        "returns the second pointer plus the count times 0x18."
+    ),
+    "5889A210": (
+        "Masks an argument's low byte and forwards the range to "
+        "FUN_58899BB0."
+    ),
+    "5889A240": (
+        "Reserves room for a requested count of 0x18-byte elements; when "
+        "needed, allocates through FUN_58898610, copies elements, frees "
+        "the old buffer, and updates begin/end/capacity."
+    ),
+    "5889A370": (
+        "Inserts a requested number of 0x18-byte elements at a selected "
+        "position, growing storage or shifting existing elements in place "
+        "and updating the end pointer."
+    ),
+    "5889A990": (
+        "Requests insertion of one 0x18-byte element through FUN_5889A370, "
+        "computes its position, and writes an output pointer pair after bounds checks."
+    ),
+    "5889AA80": (
+        "Appends one 0x18-byte element through FUN_58899CE0 when capacity "
+        "remains; otherwise requests space through FUN_5889A990."
+    ),
+    "5889AB20": (
+        "RTTI identifies the constructed object as CPannelNotice: calls "
+        "FUN_587B62B0, installs its vtable, loads .\\SPR\\NTCPNL.SPR, "
+        "allocates child screens/controls from resource entries, updates "
+        "observed flags, and initializes a three-element sequence through "
+        "FUN_5889AA80."
+    ),
+}
+MAIN_LOGO_CONTROL_MENU_STATE_CALLERS = {
+    "5874A7F0": "FUN_58791590 calls it at 0x58791919.",
+    "58758150": "FUN_58791590 calls it at 0x58791936; open FUN_58758240 calls it at 0x58758282.",
+    "5878AAC0": "FUN_58791590 calls it at 0x58791BD5.",
+    "5878AB00": "FUN_58791590 calls it at 0x58791B44.",
+    "5878CD60": "FUN_58791590 calls it at 0x587919BA and 0x58791BDF.",
+    "5878D0A0": "FUN_58791590 calls it at 0x587918BC.",
+    "5878D490": "FUN_58791590 calls it at 0x58791D15.",
+    "5878D660": "FUN_58790990 calls it at 0x58790A5E and 0x58790A6E.",
+    "58790990": "FUN_58791590 calls it at 0x587919A8.",
+    "58791590": (
+        "RTTI type descriptor 0x589C2F40 names CLogoControlMenuScreen; its "
+        "vtable address point 0x58996BFC stores this method at slot +0x0C "
+        "(0x58996C08). Byte-matched constructor FUN_5878D6D0 installs the "
+        "class vtable. No byte-matched direct CALL caller was found."
+    ),
+    "58791E50": "FUN_58791FE0 calls it per 0x1C-stride row at 0x58792065; FUN_58792160 calls it at 0x587921A7.",
+    "58791ED0": "FUN_58899700 calls it with a 0x1C-stride count; FUN_58899840 also calls it for replacement storage.",
+    "58791FE0": "FUN_587921C0 calls it at 0x587921E1; FUN_58792220 calls it at 0x5879235C and 0x58792395; FUN_588999D0 calls it at 0x58899A79.",
+    "58792160": "FUN_587921F0 calls it at 0x58792212.",
+    "587921C0": "FUN_58792220 calls it at 0x587924B6 and 0x5879256E.",
+    "587921F0": "FUN_58792220 calls it at 0x5879257F.",
+    "58792220": "FUN_587925C0 calls it at 0x58792633.",
+    "587925C0": "FUN_58792680 calls it at 0x58792716.",
+    "58792680": "FUN_58899D80 calls it at 0x58899F23 and 0x58899FC2; open FUN_58792730 calls it at 0x587927F4 and 0x5879285B.",
+    "58876E50": "FUN_58877370 calls it at 0x5887785C.",
+    "58877370": "FUN_58790990 calls it at 0x587910B6.",
+    "58888960": "FUN_58791590 calls it at 0x58791D2D.",
+    "58898610": "FUN_5889A240 calls it at 0x5889A2A5; FUN_5889A370 calls it at 0x5889A432.",
+    "588996A0": "FUN_58899840 calls it at 0x58899945.",
+    "58899700": "FUN_58899BB0 calls it at 0x58899C06; FUN_58899CE0 at 0x58899D38; FUN_5889A370 at 0x5889A5B1 and 0x5889A68D.",
+    "58899800": "FUN_58899840 calls it at 0x58899870.",
+    "58899840": "FUN_58899B10 calls it at 0x58899B45; FUN_58899B60 at 0x58899B9F; FUN_58899C50 at 0x58899C66.",
+    "588999D0": "FUN_58899D80 calls it at 0x58899EA9.",
+    "58899B60": "FUN_5889A050 calls it at 0x5889A072.",
+    "58899BB0": "FUN_5889A210 calls it at 0x5889A231; FUN_5889A240 at 0x5889A2E7; FUN_5889A370 at 0x5889A497 and 0x5889A4CA.",
+    "58899C50": "FUN_5889A370 calls it at 0x5889A61D and 0x5889A6D2.",
+    "58899C80": "FUN_5889A0B0 calls it at 0x5889A0C3; FUN_5889A110 at 0x5889A129; FUN_5889A160 at 0x5889A1EF; FUN_5889A240 at 0x5889A319; FUN_5889A370 at 0x5889A4FE; FUN_5889A730 at 0x5889A93E.",
+    "58899CE0": "FUN_5889A0D0 calls it at 0x5889A0F5; FUN_5889AA80 calls it at 0x5889AAE0.",
+    "58899D80": "FUN_5889A080 calls it at 0x5889A08A, 0x5889A098, and 0x5889A0A6.",
+    "5889A050": "FUN_5889A370 calls it at 0x5889A6C2.",
+    "5889A080": "FUN_58791590 calls it at 0x58791C8D.",
+    "5889A0D0": "FUN_5889A370 calls it at 0x5889A46F and 0x5889A600.",
+    "5889A210": "FUN_5889A370 calls it at 0x5889A5D4 and 0x5889A6B1.",
+    "5889A240": "FUN_5889AB20 calls it at 0x5889B320.",
+    "5889A370": "FUN_5889A990 calls it at 0x5889AA00.",
+    "5889A990": "FUN_5889AA80 calls it at 0x5889AB10.",
+    "5889AA80": "FUN_5889AB20 calls it at 0x5889B368.",
+    "5889AB20": "FUN_58791590 calls it at 0x58791C74.",
+}
+MAIN_LOGO_CONTROL_MENU_STATE_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CLogoControlMenuScreen state-update direct-call closure"
+        ),
+        "called_by": MAIN_LOGO_CONTROL_MENU_STATE_CALLERS[address],
+        "behavior": behavior,
+        "uncertainty": (
+            "Numeric state meanings and several object/global field roles remain unknown; "
+            "0x1C- and 0x18-byte record strides are inferred from pointer differences and "
+            "loops, not recovered source types. Indirect virtual calls are not expanded, "
+            "and no emulator runtime/visual test was performed."
+        ),
+    }
+    for address, behavior in MAIN_LOGO_CONTROL_MENU_STATE_BEHAVIOR.items()
+}
+EVIDENCE.update(MAIN_LOGO_CONTROL_MENU_STATE_EVIDENCE)
 
 MAIN_MAP_OBJECT_STATE_UPDATE_BEHAVIOR = {
     "58756670": (

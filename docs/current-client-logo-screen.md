@@ -18,6 +18,9 @@ traced. Sprite parsing for the `Logo.spr` path is documented separately in
 The first two installed `Logo.spr` frames are rendered and cross-checked
 through the opaque RGB16 path in
 [the visual-path evidence](current-client-logo-sprite-visual.md).
+The RTTI-backed `CLogoControlMenuScreen` update method and its 43-function
+direct-call closure are documented in
+[`current-main-logo-control-menu-state-update.md`](current-main-logo-control-menu-state-update.md).
 
 The direct constructor/helper slice is:
 

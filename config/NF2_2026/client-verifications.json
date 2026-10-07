@@ -421093,6 +421093,5442 @@
         "behavior": "Reads global panel and record fields to select a 16-bit candidate mode from the observed values 0 through 14, stores it at +0x276, and reuses the previous mode at +0x274 when the candidate is -1 or the observed gate at +0x278 is zero. On a mode change it calls FUN_588504C0, always refreshes the child-visibility path through FUN_58850A70, and returns the selected mode.",
         "uncertainty": "The friendly meanings of the numeric modes, global and record fields, child roles, and visible panel effect remain unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
       }
+    },
+    {
+      "address": "5874A7F0",
+      "name": "FUN_5874a7f0",
+      "size": 27,
+      "symbol": "_FUN_5874a7f0",
+      "source": "src/client-current/Main/FUN_5874a7f0.cpp",
+      "source_sha256": "fd5ea8d00d2ff34cea2ca16dba39596eb35a716e0f64560b08454545d8c6468b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5874A7F0",
+          "size": 27,
+          "symbol": "_FUN_5874a7f0_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5874a7f0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791919.",
+        "behavior": "Forwards its supplied value to FUN_58902EE0 and FUN_58902F50.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58758150",
+      "name": "FUN_58758150",
+      "size": 239,
+      "symbol": "_FUN_58758150",
+      "source": "src/client-current/Main/FUN_58758150.cpp",
+      "source_sha256": "d6f6e92bb787f579d680dd9831154724351e007b305c9d5558eb9ae32ed65b0f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58758150",
+          "size": 239,
+          "symbol": "_FUN_58758150_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898947B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "58758207",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58758150 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791936; open FUN_58758240 calls it at 0x58758282.",
+        "behavior": "When receiver +0x5F4 is zero, allocates and stores a child; reads resource fields at +0x5F0 when available, sets the child +0x26 ordering field to 0x7FF8, conditionally links it, and sets child +0x24 bit 0 from the supplied argument.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878AAC0",
+      "name": "FUN_5878aac0",
+      "size": 61,
+      "symbol": "_FUN_5878aac0",
+      "source": "src/client-current/Main/FUN_5878aac0.cpp",
+      "source_sha256": "40e4367420e324ad2d76a800137a54ce11a63ef9a6d0047c24e3db9f63fdd294",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878AAC0",
+          "size": 61,
+          "symbol": "_FUN_5878aac0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878aac0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791BD5.",
+        "behavior": "Masks the receiver state at +0x24, clears bit 1, advances +0x12138 by four, writes 0x56 to +0x12144, and resets +0x28 and +0x58.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878AB00",
+      "name": "FUN_5878ab00",
+      "size": 102,
+      "symbol": "_FUN_5878ab00",
+      "source": "src/client-current/Main/FUN_5878ab00.cpp",
+      "source_sha256": "fbb0328ab8635e808a7c960b8e755d479a3f7ff5d40ff3d04ca5c2cdb25bd242",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878AB00",
+          "size": 102,
+          "symbol": "_FUN_5878ab00_segment_00",
+          "relocations": [
+            {
+              "offset": 54,
+              "target_address": "58A248D4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878ab00 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791B44.",
+        "behavior": "When receiver fields +0xA0 and +0x9C equal 0x40000000, advances +0x98 and conditionally calls a child at +0x84 through vtable slots +0x0C and +0x08; the latter path clears +0x9C.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878CD60",
+      "name": "FUN_5878cd60",
+      "size": 302,
+      "symbol": "_FUN_5878cd60",
+      "source": "src/client-current/Main/FUN_5878cd60.cpp",
+      "source_sha256": "ee6e010296d9245e35812f8af3167e0c817bcab1d288902622eda57a90a45c05",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878CD60",
+          "size": 302,
+          "symbol": "_FUN_5878cd60_segment_00",
+          "relocations": [
+            {
+              "offset": 87,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "58793DA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878cd60 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x587919BA and 0x58791BDF.",
+        "behavior": "Sets +0x12144 to 0x1E, selects a child pointer from the state at +0x12138 and observed global records, then conditionally copies six dwords from a 0x40-stride row and calls FUN_58793E00 or FUN_58793DA0.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878D0A0",
+      "name": "FUN_5878d0a0",
+      "size": 59,
+      "symbol": "_FUN_5878d0a0",
+      "source": "src/client-current/Main/FUN_5878d0a0.cpp",
+      "source_sha256": "51dc89b0073eca459f3f3268889017dd6e5c40aff10da934ce36f73b27167a39",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878D0A0",
+          "size": 59,
+          "symbol": "_FUN_5878d0a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878d0a0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x587918BC.",
+        "behavior": "Resets +0x94 and +0x98, sets +0xA0 to 0x40000000 and +0x6C to 1, then clears bit 0 at the child pointers stored at +0x121A8/+0x121AC.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878D490",
+      "name": "FUN_5878d490",
+      "size": 53,
+      "symbol": "_FUN_5878d490",
+      "source": "src/client-current/Main/FUN_5878d490.cpp",
+      "source_sha256": "4ee731a8adf81370589d30484435a87750e2a888a324d99234100f5c0e9998d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878D490",
+          "size": 53,
+          "symbol": "_FUN_5878d490_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58893860",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878d490 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791D15.",
+        "behavior": "If DAT_58A245C0 is nonzero, clears its +0x50 field, writes 0x2CE to +0x54, invokes its vtable slot +4, then calls FUN_58893860(0x220000).",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5878D660",
+      "name": "FUN_5878d660",
+      "size": 103,
+      "symbol": "_FUN_5878d660",
+      "source": "src/client-current/Main/FUN_5878d660.cpp",
+      "source_sha256": "c1551a80ede25ab2a6e08fcfc0f8ec8272071ba679609dd85b8669e2ddd7a8cf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5878D660",
+          "size": 103,
+          "symbol": "_FUN_5878d660_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5878d660 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58790990 calls it at 0x58790A5E and 0x58790A6E.",
+        "behavior": "Initializes a CSpriteBundleScreen through FUN_589031A0, installs its vtable, zeros fields +0x14/+0x15, and copies six dwords from the supplied object offsets +0x18 through +0x2C.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58790990",
+      "name": "FUN_58790990",
+      "size": 2321,
+      "symbol": "_FUN_58790990",
+      "source": "src/client-current/Main/FUN_58790990.cpp",
+      "source_sha256": "7c607a1a64750632f99d07b442c29866cdc686de000e5bcd023922c3db43c93b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58790990",
+          "size": 2321,
+          "symbol": "_FUN_58790990_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898030D",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "58A24608",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58A24608",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5878D660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 223,
+              "target_address": "5878D660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 241,
+              "target_address": "58A24800",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 325,
+              "target_address": "58A24804",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 363,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 389,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 416,
+              "target_address": "58A24808",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 426,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "58A24800",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 477,
+              "target_address": "58A24800",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "58A24804",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 511,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 524,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "58A24800",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 540,
+              "target_address": "58A24808",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 564,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 577,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 584,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 610,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 638,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 644,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 666,
+              "target_address": "58A2480C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 671,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 701,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 707,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 764,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 786,
+              "target_address": "58A0B1BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 791,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 816,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 822,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 880,
+              "target_address": "58907100",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 892,
+              "target_address": "58A0B1BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 897,
+              "target_address": "58A0B1C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 902,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 936,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 949,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 955,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 965,
+              "target_address": "58A0B1C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 987,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1000,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1006,
+              "target_address": "58A0B1BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1016,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1022,
+              "target_address": "58A0B1C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1032,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1037,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1060,
+              "target_address": "58A2480C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1078,
+              "target_address": "58A0B1BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1096,
+              "target_address": "58A0B1C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1114,
+              "target_address": "58A247FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1120,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1130,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1138,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1143,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1149,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1159,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1167,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1172,
+              "target_address": "58A245CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1178,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1188,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1196,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1201,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1207,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1217,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1225,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1231,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1253,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1266,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1271,
+              "target_address": "58A245A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1277,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1287,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1295,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1300,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1306,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1316,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1324,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1329,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1335,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1345,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1353,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1358,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1364,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1374,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1382,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1387,
+              "target_address": "58A245A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1393,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1411,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1416,
+              "target_address": "58A0ADBC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1422,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1432,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1440,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1445,
+              "target_address": "58A245C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1451,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1461,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1469,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1474,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1480,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1490,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1498,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1503,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1509,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1519,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1527,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1532,
+              "target_address": "58A245D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1538,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1548,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1556,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1561,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1567,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1577,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1585,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1590,
+              "target_address": "58A2462C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1596,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1606,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1614,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1619,
+              "target_address": "58A245B0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1625,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1635,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1643,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1648,
+              "target_address": "58A245E4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1654,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1664,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1672,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1677,
+              "target_address": "58A245D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1683,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1693,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1701,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1706,
+              "target_address": "58A245EC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1712,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1722,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1730,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1735,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1741,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1751,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1759,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1764,
+              "target_address": "58A245F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1770,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1780,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1788,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1798,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1831,
+              "target_address": "58877370",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1843,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1858,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1865,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1873,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1878,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1893,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1905,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1911,
+              "target_address": "58A245D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1933,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1946,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1952,
+              "target_address": "58A245D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1959,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1965,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1987,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2000,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2006,
+              "target_address": "58A245C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2028,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2041,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2047,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2069,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2082,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2088,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2110,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2123,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2129,
+              "target_address": "58A245D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2151,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2164,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2170,
+              "target_address": "58A245B0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2192,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2205,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2211,
+              "target_address": "58A0ADBC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 2233,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2246,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58790990 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x587919A8.",
+        "behavior": "Reads a selected row from global records, copies six dwords into an object, creates two CSpriteBundleScreen children and a CSpriteDataScreen, links child-list fields, then builds and updates another child through FUN_58877370.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58791590",
+      "name": "FUN_58791590",
+      "size": 2120,
+      "symbol": "_FUN_58791590",
+      "source": "src/client-current/Main/FUN_58791590.cpp",
+      "source_sha256": "d07422bf555d4bf1262e273a5dc0caf86f5b14c34a98dda253a0f8cdd99971bb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58791590",
+          "size": 617,
+          "symbol": "_FUN_58791590_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58980346",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58791DCB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58791B1F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "58791B1F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58791B1F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58791834",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "5879174C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "589C9034",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "58A0ADB0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 224,
+              "target_address": "58A2470C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "58A244FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "58A248D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "58A24780",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 341,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 354,
+              "target_address": "58A247FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "588C0BD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 403,
+              "target_address": "587316C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 416,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 422,
+              "target_address": "58A2456C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 435,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 505,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 556,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 574,
+              "target_address": "58791B3D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 584,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 600,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58791800",
+          "size": 1503,
+          "symbol": "_FUN_58791590_segment_01",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58791B3D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58791961",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "5878D0A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "58756F80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 263,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "58A24590",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "5874A7F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 288,
+              "target_address": "58A24590",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "58731590",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 304,
+              "target_address": "58A24590",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "58758150",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "589977C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "5898C17C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 349,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "589977B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "5898C17C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 405,
+              "target_address": "5898C128",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 418,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 425,
+              "target_address": "58790990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 443,
+              "target_address": "5878CD60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 460,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 494,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 517,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 563,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 606,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 614,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 633,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 683,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 694,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 704,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 781,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 830,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 837,
+              "target_address": "5878AB00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 848,
+              "target_address": "58791DCB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 865,
+              "target_address": "58791DC9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 936,
+              "target_address": "58791CD3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 982,
+              "target_address": "5878AAC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 987,
+              "target_address": "58791CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 992,
+              "target_address": "5878CD60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 997,
+              "target_address": "58791CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1009,
+              "target_address": "58791CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1053,
+              "target_address": "58791CA1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1099,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1141,
+              "target_address": "5889AB20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1166,
+              "target_address": "5889A080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1209,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1223,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1231,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1302,
+              "target_address": "5878D490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1308,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1321,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1326,
+              "target_address": "58888960",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1332,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1344,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1367,
+              "target_address": "58791B42",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1373,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1384,
+              "target_address": "58970AE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1390,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1409,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1415,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1424,
+              "target_address": "58970AE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1430,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1449,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1457,
+              "target_address": "5898C3C8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58791590 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "RTTI type descriptor 0x589C2F40 names CLogoControlMenuScreen; its vtable address point 0x58996BFC stores this method at slot +0x0C (0x58996C08). Byte-matched constructor FUN_5878D6D0 installs the class vtable. No byte-matched direct CALL caller was found.",
+        "behavior": "Checks receiver +0x24 bit 2 and dispatches on its 0x1F00 state mask. The body advances fields +0x58/+0x28 in steps capped at 0x24, branches through observed states 0x0100/0x0200/0x0400/0x0700/0x0800/0x0D00/0x0E00, and calls state helpers. One 0x0200 subphase allocates 0x600 bytes, initializes through matched FUN_58756F80, registers it, then reads NFCOSFO.RPT; a 0x0D00 path reads NFALRINT.RPT and updates child fields. Common exit calls FUN_5878AB00 and walks children through virtual slot +0x0C.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58791E50",
+      "name": "FUN_58791e50",
+      "size": 115,
+      "symbol": "_FUN_58791e50",
+      "source": "src/client-current/Main/FUN_58791e50.cpp",
+      "source_sha256": "e52310a50850436a7662efb6cd4192cb45950e71ce36244c6bc670a9c7d8eea4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58791E50",
+          "size": 115,
+          "symbol": "_FUN_58791e50_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58791e50 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791FE0 calls it per 0x1C-stride row at 0x58792065; FUN_58792160 calls it at 0x587921A7.",
+        "behavior": "When two record pointers differ, copies dwords at offsets +4 through +0x18 between them and performs the observed stack-cookie check.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58791ED0",
+      "name": "FUN_58791ed0",
+      "size": 81,
+      "symbol": "_FUN_58791ed0",
+      "source": "src/client-current/Main/FUN_58791ed0.cpp",
+      "source_sha256": "a154aba2ed1c9ddad6bbb6920bdbab38f7c6ff2c25634f1e747b8b87aad36a47",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58791ED0",
+          "size": 81,
+          "symbol": "_FUN_58791ed0_segment_00",
+          "relocations": [
+            {
+              "offset": 39,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "5878D5F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58791ed0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899700 calls it with a 0x1C-stride count; FUN_58899840 also calls it for replacement storage.",
+        "behavior": "Clears three container pointers, handles a zero count, checks the requested allocation bound, allocates count times 0x1C through FUN_5878D5F0, stores begin/end/capacity, and returns success.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58791FE0",
+      "name": "FUN_58791fe0",
+      "size": 194,
+      "symbol": "_FUN_58791fe0",
+      "source": "src/client-current/Main/FUN_58791fe0.cpp",
+      "source_sha256": "735daaa4dce5f7bd4d19a87e4955e0609ab2bbf52f2c0ab624c56f00b2d32e0a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58791FE0",
+          "size": 149,
+          "symbol": "_FUN_58791fe0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589803B9",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58734F20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58791E50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5879209A",
+          "size": 15,
+          "symbol": "_FUN_58791fe0_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587920AC",
+          "size": 30,
+          "symbol": "_FUN_58791fe0_segment_02",
+          "relocations": [
+            {
+              "offset": 22,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58791fe0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_587921C0 calls it at 0x587921E1; FUN_58792220 calls it at 0x5879235C and 0x58792395; FUN_588999D0 calls it at 0x58899A79.",
+        "behavior": "Walks 0x1C-stride records, conditionally clears associated fields and calls FUN_58734F20, invokes FUN_58791E50 for each row, then frees an associated buffer when its observed length exceeds 0xF.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58792160",
+      "name": "FUN_58792160",
+      "size": 87,
+      "symbol": "_FUN_58792160",
+      "source": "src/client-current/Main/FUN_58792160.cpp",
+      "source_sha256": "c87b1ce344c29a644c34be9473bde9db7f3bc9132bef567b3835c917ad961d1c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58792160",
+          "size": 87,
+          "symbol": "_FUN_58792160_segment_00",
+          "relocations": [
+            {
+              "offset": 72,
+              "target_address": "58791E50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58792160 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_587921F0 calls it at 0x58792212.",
+        "behavior": "Walks backward over records in 0x1C-byte steps, calls FUN_58791E50 for each, and returns a pointer adjusted by the count.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "587921C0",
+      "name": "FUN_587921c0",
+      "size": 44,
+      "symbol": "_FUN_587921c0",
+      "source": "src/client-current/Main/FUN_587921c0.cpp",
+      "source_sha256": "d463265847e77699aa12b41374b4de47123623bdde348959328dc48a1402694f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587921C0",
+          "size": 44,
+          "symbol": "_FUN_587921c0_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58791FE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587921c0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58792220 calls it at 0x587924B6 and 0x5879256E.",
+        "behavior": "Masks the low byte of an argument and forwards adjusted range parameters to FUN_58791FE0.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "587921F0",
+      "name": "FUN_587921f0",
+      "size": 43,
+      "symbol": "_FUN_587921f0",
+      "source": "src/client-current/Main/FUN_587921f0.cpp",
+      "source_sha256": "abd35e5d91d018d7fdb6f0f42f199cb2ede52eab4708fefbc4f83a14b3a74921",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587921F0",
+          "size": 43,
+          "symbol": "_FUN_587921f0_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "58792160",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587921f0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58792220 calls it at 0x5879257F.",
+        "behavior": "Forwards adjusted arguments to FUN_58792160.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58792220",
+      "name": "FUN_58792220",
+      "size": 779,
+      "symbol": "_FUN_58792220",
+      "source": "src/client-current/Main/FUN_58792220.cpp",
+      "source_sha256": "8bd1d74d10cffbac4f557d70b130caf19406ceb3890efe79843b2e900dd33be4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58792220",
+          "size": 441,
+          "symbol": "_FUN_58792220_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589803F0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "5879259F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "5879246A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 208,
+              "target_address": "5878D5F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "58792120",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "58791FE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "58791FE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 428,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 437,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587923DC",
+          "size": 44,
+          "symbol": "_FUN_58792220_segment_01",
+          "relocations": [
+            {
+              "offset": 40,
+              "target_address": "5879259F",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5879246A",
+          "size": 168,
+          "symbol": "_FUN_58792220_segment_02",
+          "relocations": [
+            {
+              "offset": 26,
+              "target_address": "5879253F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "58735110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "587921C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "58792120",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58902230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "5879259A",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5879253F",
+          "size": 126,
+          "symbol": "_FUN_58792220_segment_03",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "58735110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "587921C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "587921F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58902230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58748180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58792220 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_587925C0 calls it at 0x58792633.",
+        "behavior": "Inserts records with a 0x1C-byte stride. It grows storage when capacity is exhausted, moves the prefix/suffix, frees the old buffer, and updates begin/end/capacity; otherwise shifts rows in place.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "587925C0",
+      "name": "FUN_587925c0",
+      "size": 179,
+      "symbol": "_FUN_587925c0",
+      "source": "src/client-current/Main/FUN_587925c0.cpp",
+      "source_sha256": "c9e56ef6614a6092d1ae9ae431bdd90743a24c88dd4c3eea44073a4bdb47df2e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587925C0",
+          "size": 179,
+          "symbol": "_FUN_587925c0_segment_00",
+          "relocations": [
+            {
+              "offset": 48,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "58792220",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "5878D590",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587925c0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58792680 calls it at 0x58792716.",
+        "behavior": "Checks index and capacity bounds, requests a one-record insertion through FUN_58792220, then computes and returns the element pointer pair.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58792680",
+      "name": "FUN_58792680",
+      "size": 165,
+      "symbol": "_FUN_58792680",
+      "source": "src/client-current/Main/FUN_58792680.cpp",
+      "source_sha256": "1aa7a5b2dce434d53d416058987f2e8b4db780ed380a5ccab7b14291d4335123",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58792680",
+          "size": 165,
+          "symbol": "_FUN_58792680_segment_00",
+          "relocations": [
+            {
+              "offset": 102,
+              "target_address": "58791F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "587925C0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58792680 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899D80 calls it at 0x58899F23 and 0x58899FC2; open FUN_58792730 calls it at 0x587927F4 and 0x5879285B.",
+        "behavior": "Appends one 0x1C-byte element by calling FUN_58791F30 and advancing the end pointer when capacity remains; otherwise calls FUN_587925C0.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58876E50",
+      "name": "FUN_58876e50",
+      "size": 300,
+      "symbol": "_FUN_58876e50",
+      "source": "src/client-current/Main/FUN_58876e50.cpp",
+      "source_sha256": "5423a12b297a06e32c52202be3752c25afd209e8cfc27faaaa022450b45286ef",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58876E50",
+          "size": 300,
+          "symbol": "_FUN_58876e50_segment_00",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "5899EFBC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58876F62",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "5898C18C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "58748E40",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876e50 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58877370 calls it at 0x5887785C.",
+        "behavior": "Reads .\\HKIN.sdt through observed global file callbacks, counts carriage returns, allocates 0x47-byte rows, splits carriage-return and tab-delimited data into terminated strings, and calls FUN_58748E40.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58877370",
+      "name": "FUN_58877370",
+      "size": 1289,
+      "symbol": "_FUN_58877370",
+      "source": "src/client-current/Main/FUN_58877370.cpp",
+      "source_sha256": "54dcd653df0313baadd226865abaefa1b86e91341d348eb71cd641b076a53865",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877370",
+          "size": 1289,
+          "symbol": "_FUN_58877370_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589865EB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "587B62B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "5899EFA0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5899EFC8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "588F3D70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 208,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 276,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 404,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 484,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 510,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 532,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 592,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 612,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 651,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 661,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 728,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 735,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 745,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 771,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 787,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 797,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 819,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 877,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 884,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 894,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 920,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 936,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 946,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 968,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1026,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1033,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1043,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1069,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1085,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1095,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1131,
+              "target_address": "58A24534",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1168,
+              "target_address": "58761090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1221,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1261,
+              "target_address": "58876E50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877370 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58790990 calls it at 0x587910B6.",
+        "behavior": "RTTI identifies this as CPannelHotKeysInfo: it calls FUN_587B62B0, installs the panel vtable, loads HOTKEYSINFOPNL.SPR, creates child screens/controls from resource entries, updates observed fields, and parses HKIN.sdt through FUN_58876E50.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58888960",
+      "name": "FUN_58888960",
+      "size": 11,
+      "symbol": "_FUN_58888960",
+      "source": "src/client-current/Main/FUN_58888960.cpp",
+      "source_sha256": "de96a41c1c28a2e9f0171ae5110be56b378cfa487474f0b14b098dc6a03c33ce",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58888960",
+          "size": 11,
+          "symbol": "_FUN_58888960_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58888960 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791D2D.",
+        "behavior": "Writes 0x40000000 to the receiver field at +0xC8.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58898610",
+      "name": "FUN_58898610",
+      "size": 92,
+      "symbol": "_FUN_58898610",
+      "source": "src/client-current/Main/FUN_58898610.cpp",
+      "source_sha256": "ba513cdc28e76552517d93558ebb2ddca2f9175a051d88b1540eeb58e38a3556",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58898610",
+          "size": 92,
+          "symbol": "_FUN_58898610_segment_00",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5897CC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "589ABD70",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "5898CA90",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58898610 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A240 calls it at 0x5889A2A5; FUN_5889A370 calls it at 0x5889A432.",
+        "behavior": "Checks multiplication bounds for a count of 0x18-byte entries and requests the resulting allocation; the overflow path invokes the observed allocation-error helpers.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "588996A0",
+      "name": "FUN_588996a0",
+      "size": 43,
+      "symbol": "_FUN_588996a0",
+      "source": "src/client-current/Main/FUN_588996a0.cpp",
+      "source_sha256": "f75f17c792bf4b4db2da70501a2e6e9db9fbc654700c54969772c548bc1b734b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588996A0",
+          "size": 43,
+          "symbol": "_FUN_588996a0_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "58899580",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588996a0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899840 calls it at 0x58899945.",
+        "behavior": "Forwards its three arguments to FUN_58899580.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899700",
+      "name": "FUN_58899700",
+      "size": 208,
+      "symbol": "_FUN_58899700",
+      "source": "src/client-current/Main/FUN_58899700.cpp",
+      "source_sha256": "d7e0653a0957efdccb22dbf763ade5a9f86850566b749705a15ed99c04b73696",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899700",
+          "size": 208,
+          "symbol": "_FUN_58899700_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58987348",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "58791ED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "588995E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899700 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899BB0 calls it at 0x58899C06; FUN_58899CE0 at 0x58899D38; FUN_5889A370 at 0x5889A5B1 and 0x5889A68D.",
+        "behavior": "Allocates a four-byte wrapper, requests a 0x1C-stride record sequence through FUN_58791ED0, copies rows with FUN_588995E0, and stores the resulting pointer.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899800",
+      "name": "FUN_58899800",
+      "size": 63,
+      "symbol": "_FUN_58899800",
+      "source": "src/client-current/Main/FUN_58899800.cpp",
+      "source_sha256": "14f43743b5393e9621f108c645efce8f42d5ed21a97e187fcae22b51bdf44abf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899800",
+          "size": 63,
+          "symbol": "_FUN_58899800_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "589022B0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899800 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899840 calls it at 0x58899870.",
+        "behavior": "Checks pointer ordering and forwards the observed record range and container fields to FUN_589022B0.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899840",
+      "name": "FUN_58899840",
+      "size": 390,
+      "symbol": "_FUN_58899840",
+      "source": "src/client-current/Main/FUN_58899840.cpp",
+      "source_sha256": "2d7626329a7ac398b8a314b4445c65fc95064873baeb57f5a23f63ddf30ec996",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899840",
+          "size": 322,
+          "symbol": "_FUN_58899840_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "588999C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58899800",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58899580",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "588996A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "588996D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 309,
+              "target_address": "58902260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 318,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899985",
+          "size": 68,
+          "symbol": "_FUN_58899840_segment_01",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "58791ED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "588996D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899840 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899B10 calls it at 0x58899B45; FUN_58899B60 at 0x58899B9F; FUN_58899C50 at 0x58899C66.",
+        "behavior": "Replaces one 0x1C-stride sequence with another: handles empty input, copies into existing storage when capacity permits, shifts the tail, or allocates/copies and frees the old buffer.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "588999D0",
+      "name": "FUN_588999d0",
+      "size": 294,
+      "symbol": "_FUN_588999d0",
+      "source": "src/client-current/Main/FUN_588999d0.cpp",
+      "source_sha256": "b39818a37c8535829f3d99fc0d4127547c06464a5881061542efdad5217e72a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588999D0",
+          "size": 235,
+          "symbol": "_FUN_588999d0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58987370",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "58899AE5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "5878D5F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58791FE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899ABE",
+          "size": 59,
+          "symbol": "_FUN_588999d0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588999d0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58899D80 calls it at 0x58899EA9.",
+        "behavior": "Ensures capacity for a requested count of 0x1C-byte records, allocates through FUN_5878D5F0 as needed, copies through FUN_58791FE0, frees old storage, and updates three container pointers.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899B60",
+      "name": "FUN_58899b60",
+      "size": 79,
+      "symbol": "_FUN_58899b60",
+      "source": "src/client-current/Main/FUN_58899b60.cpp",
+      "source_sha256": "9e89b8c4d531e56a6b498222ab10511176beee3468baf39e1f897c6b20694bb5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899B60",
+          "size": 79,
+          "symbol": "_FUN_58899b60_segment_00",
+          "relocations": [
+            {
+              "offset": 64,
+              "target_address": "58899840",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899b60 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A050 calls it at 0x5889A072.",
+        "behavior": "Walks backward over 0x18-byte elements, calls FUN_58899840 for each step, and returns an adjusted pointer.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899BB0",
+      "name": "FUN_58899bb0",
+      "size": 125,
+      "symbol": "_FUN_58899bb0",
+      "source": "src/client-current/Main/FUN_58899bb0.cpp",
+      "source_sha256": "9985d84bad5e2ed84d882ca5d9580bf1dfade581f68132da9e03e4ca1bfa156e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899BB0",
+          "size": 105,
+          "symbol": "_FUN_58899bb0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589873A1",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58899700",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899C3A",
+          "size": 20,
+          "symbol": "_FUN_58899bb0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899bb0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A210 calls it at 0x5889A231; FUN_5889A240 at 0x5889A2E7; FUN_5889A370 at 0x5889A497 and 0x5889A4CA.",
+        "behavior": "Walks a range in 0x18-byte steps, conditionally calls FUN_58899700, and advances the destination pointer per element.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899C50",
+      "name": "FUN_58899c50",
+      "size": 38,
+      "symbol": "_FUN_58899c50",
+      "source": "src/client-current/Main/FUN_58899c50.cpp",
+      "source_sha256": "601f4b949c5e8e2674d2d636899d2a55c3dfd0fdab4b569e7557529201e02a5a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899C50",
+          "size": 38,
+          "symbol": "_FUN_58899c50_segment_00",
+          "relocations": [
+            {
+              "offset": 23,
+              "target_address": "58899840",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899c50 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A370 calls it at 0x5889A61D and 0x5889A6D2.",
+        "behavior": "Walks a range of 0x18-byte elements and calls FUN_58899840 with the supplied third argument for each element.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899C80",
+      "name": "FUN_58899c80",
+      "size": 73,
+      "symbol": "_FUN_58899c80",
+      "source": "src/client-current/Main/FUN_58899c80.cpp",
+      "source_sha256": "259a7c331ebd3fe4f968866d09196454ad14df3b8910ef807e4b36b67a67288f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899C80",
+          "size": 53,
+          "symbol": "_FUN_58899c80_segment_00",
+          "relocations": [
+            {
+              "offset": 40,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899CB8",
+          "size": 17,
+          "symbol": "_FUN_58899c80_segment_01",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899CD5",
+          "size": 3,
+          "symbol": "_FUN_58899c80_segment_02",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899c80 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A0B0 calls it at 0x5889A0C3; FUN_5889A110 at 0x5889A129; FUN_5889A160 at 0x5889A1EF; FUN_5889A240 at 0x5889A319; FUN_5889A370 at 0x5889A4FE; FUN_5889A730 at 0x5889A93E.",
+        "behavior": "When the two supplied pointers differ, forwards stored range fields to FUN_58902180, zeros three container fields, and frees the buffer referenced by the first field.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899CE0",
+      "name": "FUN_58899ce0",
+      "size": 123,
+      "symbol": "_FUN_58899ce0",
+      "source": "src/client-current/Main/FUN_58899ce0.cpp",
+      "source_sha256": "d73578d2d3e70c8b3e18136a2e784f6e22f48c3888190409420b98993229c1a3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899CE0",
+          "size": 105,
+          "symbol": "_FUN_58899ce0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589873D1",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "58899700",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899D6A",
+          "size": 18,
+          "symbol": "_FUN_58899ce0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899ce0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A0D0 calls it at 0x5889A0F5; FUN_5889AA80 calls it at 0x5889AAE0.",
+        "behavior": "Loops over a requested count of 0x18-byte entries, conditionally calling FUN_58899700 and advancing the first pointer each iteration.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "58899D80",
+      "name": "FUN_58899d80",
+      "size": 702,
+      "symbol": "_FUN_58899d80",
+      "source": "src/client-current/Main/FUN_58899d80.cpp",
+      "source_sha256": "0bc083e2e2cb41faef1e3c377cb7eb43679b0fed86582738279da627b2a438d8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58899D80",
+          "size": 446,
+          "symbol": "_FUN_58899d80_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58987408",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5889A02E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5898C18C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "5898C190",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "589963B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "58902B60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "588999D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "58902030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 359,
+              "target_address": "58735000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 402,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 420,
+              "target_address": "58792680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 442,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899F41",
+          "size": 156,
+          "symbol": "_FUN_58899d80_segment_01",
+          "relocations": [
+            {
+              "offset": 5,
+              "target_address": "5889A000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "58902090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58735000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "58792680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58899FE0",
+          "size": 100,
+          "symbol": "_FUN_58899d80_segment_02",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "58899F51",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "589023B0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58899d80 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A080 calls it at 0x5889A08A, 0x5889A098, and 0x5889A0A6.",
+        "behavior": "Opens a supplied path through global file callbacks; on success reads and transforms the file, computes a 0x1C-stride entry count, ensures capacity, and appends parsed entries with FUN_58792680.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A050",
+      "name": "FUN_5889a050",
+      "size": 43,
+      "symbol": "_FUN_5889a050",
+      "source": "src/client-current/Main/FUN_5889a050.cpp",
+      "source_sha256": "f6062bce1d6ade5b0fb2b461f3dea43200723a25c90a9a1d81a37b3f5bf089c9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A050",
+          "size": 43,
+          "symbol": "_FUN_5889a050_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "58899B60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a050 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A370 calls it at 0x5889A6C2.",
+        "behavior": "Forwards its arguments to FUN_58899B60.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A080",
+      "name": "FUN_5889a080",
+      "size": 45,
+      "symbol": "_FUN_5889a080",
+      "source": "src/client-current/Main/FUN_5889a080.cpp",
+      "source_sha256": "1232ebfbaa3bb63d90fbb21a782b0a1b39dfdd328c87d07fbe32d09d5b377b6d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A080",
+          "size": 45,
+          "symbol": "_FUN_5889a080_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589A015C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 11,
+              "target_address": "58899D80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589A0150",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "58899D80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "5899E890",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58899D80",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a080 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791C8D.",
+        "behavior": "Loads .\\Announcement.txt, .\\Patch.txt, and .\\Eula.sdt through FUN_58899D80 with observed indices 0, 1, and 2.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A0D0",
+      "name": "FUN_5889a0d0",
+      "size": 57,
+      "symbol": "_FUN_5889a0d0",
+      "source": "src/client-current/Main/FUN_5889a0d0.cpp",
+      "source_sha256": "d987855632a4d74f8d4602c87707ebaa00f6a2c795897a550ddec9fca583cd1c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A0D0",
+          "size": 57,
+          "symbol": "_FUN_5889a0d0_segment_00",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58899CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a0d0 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A370 calls it at 0x5889A46F and 0x5889A600.",
+        "behavior": "Masks the low byte of an argument, calls FUN_58899CE0, and returns the second pointer plus the count times 0x18.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A210",
+      "name": "FUN_5889a210",
+      "size": 44,
+      "symbol": "_FUN_5889a210",
+      "source": "src/client-current/Main/FUN_5889a210.cpp",
+      "source_sha256": "8384f8d4e165046bdefecb837b87adef06a479a2e098f819a9bfe3c6ab79b6a0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A210",
+          "size": 44,
+          "symbol": "_FUN_5889a210_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58899BB0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a210 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A370 calls it at 0x5889A5D4 and 0x5889A6B1.",
+        "behavior": "Masks an argument's low byte and forwards the range to FUN_58899BB0.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A240",
+      "name": "FUN_5889a240",
+      "size": 278,
+      "symbol": "_FUN_5889a240",
+      "source": "src/client-current/Main/FUN_5889a240.cpp",
+      "source_sha256": "f20740e3a9343072f0015f226323abd15ad28ddaac6cb4d020b8fe492f523802",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A240",
+          "size": 231,
+          "symbol": "_FUN_5889a240_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58987430",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "5889A345",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "58898610",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 168,
+              "target_address": "58899BB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "58899C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A32A",
+          "size": 47,
+          "symbol": "_FUN_5889a240_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a240 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889AB20 calls it at 0x5889B320.",
+        "behavior": "Reserves room for a requested count of 0x18-byte elements; when needed, allocates through FUN_58898610, copies elements, frees the old buffer, and updates begin/end/capacity.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A370",
+      "name": "FUN_5889a370",
+      "size": 821,
+      "symbol": "_FUN_5889a370",
+      "source": "src/client-current/Main/FUN_5889a370.cpp",
+      "source_sha256": "6fdf77e886a30240fb99d18a1196d8edf0cb55acfff700d4c9893988992e3b70",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A370",
+          "size": 412,
+          "symbol": "_FUN_5889a370_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58987460",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "5889A716",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "5889A58E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58898610",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "5889A0D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "58899BB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 347,
+              "target_address": "58899BB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 399,
+              "target_address": "58899C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 408,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A50F",
+          "size": 47,
+          "symbol": "_FUN_5889a370_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "5889A58E",
+          "size": 187,
+          "symbol": "_FUN_5889a370_segment_02",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "5889A686",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "58899700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "5889A210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5889A0D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "58899C50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A64C",
+          "size": 17,
+          "symbol": "_FUN_5889a370_segment_03",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5889A70D",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A686",
+          "size": 120,
+          "symbol": "_FUN_5889a370_segment_04",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "58899700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "5889A210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "5889A050",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "58899C50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "58902180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A701",
+          "size": 18,
+          "symbol": "_FUN_5889a370_segment_05",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889A716",
+          "size": 20,
+          "symbol": "_FUN_5889a370_segment_06",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a370 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889A990 calls it at 0x5889AA00.",
+        "behavior": "Inserts a requested number of 0x18-byte elements at a selected position, growing storage or shifting existing elements in place and updating the end pointer.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889A990",
+      "name": "FUN_5889a990",
+      "size": 203,
+      "symbol": "_FUN_5889a990",
+      "source": "src/client-current/Main/FUN_5889a990.cpp",
+      "source_sha256": "6a7b86d711c90d54f1a908c8fb743fc04b324cae2aa91f8074ab41b3318d926e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889A990",
+          "size": 203,
+          "symbol": "_FUN_5889a990_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5889A370",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889a990 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889AA80 calls it at 0x5889AB10.",
+        "behavior": "Requests insertion of one 0x18-byte element through FUN_5889A370, computes its position, and writes an output pointer pair after bounds checks.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889AA80",
+      "name": "FUN_5889aa80",
+      "size": 158,
+      "symbol": "_FUN_5889aa80",
+      "source": "src/client-current/Main/FUN_5889aa80.cpp",
+      "source_sha256": "7839bb1cb6e119fa51e31d9f8e7a498e1536114b39dab52898e84240a0d6ec58",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889AA80",
+          "size": 158,
+          "symbol": "_FUN_5889aa80_segment_00",
+          "relocations": [
+            {
+              "offset": 97,
+              "target_address": "58899CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5889A990",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889aa80 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_5889AB20 calls it at 0x5889B368.",
+        "behavior": "Appends one 0x18-byte element through FUN_58899CE0 when capacity remains; otherwise requests space through FUN_5889A990.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
+    },
+    {
+      "address": "5889AB20",
+      "name": "FUN_5889ab20",
+      "size": 2218,
+      "symbol": "_FUN_5889ab20",
+      "source": "src/client-current/Main/FUN_5889ab20.cpp",
+      "source_sha256": "47b79a80deb069c18bffcc0a66afd626cb51fd36398fc395e77670d2155df8ae",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889AB20",
+          "size": 2163,
+          "symbol": "_FUN_5889ab20_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898755F",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "587B62B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "589A0174",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "588FFDB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "589A0190",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "588F3D70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 293,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 328,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 418,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 512,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 539,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 567,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 574,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 630,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 673,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 701,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 790,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 870,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 877,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 887,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 910,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 919,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 946,
+              "target_address": "5889AE00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1033,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1093,
+              "target_address": "58A24534",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1104,
+              "target_address": "58733280",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1179,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1211,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1224,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1241,
+              "target_address": "5889AF26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1251,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1275,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1350,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1357,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1367,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1408,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1420,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1430,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1452,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1513,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1520,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1530,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1557,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1569,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1579,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1601,
+              "target_address": "58A246B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1659,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1666,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1676,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1703,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1715,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1721,
+              "target_address": "589A0130",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1851,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1873,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1941,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1948,
+              "target_address": "58A24794",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1958,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1985,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1997,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2049,
+              "target_address": "5889A240",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2067,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2121,
+              "target_address": "5889AA80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 2159,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B396",
+          "size": 33,
+          "symbol": "_FUN_5889ab20_segment_01",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B3BA",
+          "size": 22,
+          "symbol": "_FUN_5889ab20_segment_02",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889ab20 / CLogoControlMenuScreen state-update direct-call closure",
+        "called_by": "FUN_58791590 calls it at 0x58791C74.",
+        "behavior": "RTTI identifies the constructed object as CPannelNotice: calls FUN_587B62B0, installs its vtable, loads .\\SPR\\NTCPNL.SPR, allocates child screens/controls from resource entries, updates observed flags, and initializes a three-element sequence through FUN_5889AA80.",
+        "uncertainty": "Numeric state meanings and several object/global field roles remain unknown; 0x1C- and 0x18-byte record strides are inferred from pointer differences and loops, not recovered source types. Indirect virtual calls are not expanded, and no emulator runtime/visual test was performed."
+      }
     }
   ]
 }
