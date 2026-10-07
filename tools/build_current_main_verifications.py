@@ -1089,6 +1089,12 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES = (
 ADDRESSES += MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES)
 
+MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES = (
+    "588D3390", "588DC830", "588DC990", "588DCD80", "588E6650",
+)
+ADDRESSES += MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10097,6 +10103,79 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE = {
     for address in MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 }
 EVIDENCE.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE)
+
+MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_PARENTS = {
+    "588D3390": (
+        "Byte-matched FUN_588D4300 at 0x588D45EF; its RTTI-backed vtable "
+        "entry is identified as CShell_MapObjectScreen."
+    ),
+    "588DC830": "FUN_588DC990 at 0x588DCB96.",
+    "588DC990": (
+        "FUN_588D3390 at 0x588D36DE and byte-matched FUN_587EFD60 at "
+        "0x587F05FD."
+    ),
+    "588DCD80": (
+        "FUN_588D3390 at 0x588D35E5; byte-matched FUN_5873F020 at "
+        "0x5873F5AB and FUN_588DE620 at 0x588DE99E."
+    ),
+    "588E6650": (
+        "FUN_588DC990 at 0x588DCB85; byte-matched FUN_587F2DD0 also calls "
+        "it at 0x587F478C."
+    ),
+}
+MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_BEHAVIOR = {
+    "588D3390": (
+        "Walks the linked records rooted at [0x58A247F8]+0x0C and their "
+        "eight indexed child lists. It tests record eligibility, a scaled "
+        "record-field difference, coordinate deltas, a squared-distance bound, "
+        "and a virtual predicate. Under a global flag and non-null-record gate, "
+        "it compares bytes at +0x354 in two pointed-to records; unequal values "
+        "enter the update path through matched helpers and FUN_588DC990. "
+        "For the active local record it accumulates a count and value; when "
+        "the global message gate is set it formats MESSAGESTRING__BATTLE_"
+        "MESSAGE_16 and MESSAGESTRING__BATTLE_MESSAGE_1 through the matched "
+        "text updater."
+    ),
+    "588DC830": (
+        "Adjusts two packed 10-bit fields in records at +0x47C and +0x87C "
+        "using the supplied amount. When the active record matches the global "
+        "local record it sets observed flags at global +0x3AC and +0x3B0+index."
+    ),
+    "588DC990": (
+        "Iterates 32 indexed records, applies an observed random-table check "
+        "to packed counts at +0x47C, caps byte counters at +0xA28 to the "
+        "global limit, updates them through FUN_588E6650, and synchronizes "
+        "the packed fields through FUN_588DC830. Returns the accumulated count."
+    ),
+    "588DCD80": (
+        "For a fixed set of observed global state values, adds its argument "
+        "to receiver +0x12A4."
+    ),
+    "588E6650": (
+        "Adds the supplied byte-sized amount to the indexed byte at "
+        "+0xA28 and caps it at global value 0x589C3E94."
+    ),
+}
+MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / shell-map nearby-effect processing closure member"
+        ),
+        "called_by": MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_PARENTS[address],
+        "behavior": MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_BEHAVIOR[address],
+        "uncertainty": (
+            "Fresh Ghidra 12.1.3 exact body ranges and decompilation were checked "
+            "against the pinned mapped Main.dll. The formal record and child-list "
+            "types, coordinate/time units, packed-field meanings, random-table "
+            "purpose, observed state values, effect identity, battle-message "
+            "semantics, and server-authoritative outcome remain unresolved. "
+            "The root is called by the RTTI-identified CShell_MapObjectScreen "
+            "method, but the visual and gameplay effects were not runtime-tested."
+        ),
+    }
+    for address in MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES
+}
+EVIDENCE.update(MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",

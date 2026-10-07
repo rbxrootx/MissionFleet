@@ -52,13 +52,13 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,237 of 42,461 functions and 2,647,548 of 10,470,295 bytes (19.3990% by
-functions and 25.2863% by bytes); every counted function match is verified at
+credits 8,242 of 42,461 functions and 2,649,679 of 10,470,295 bytes (19.4108% by
+functions and 25.3066% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,104 exact function matches totaling 1,674,130 bytes (24.8289% by
-functions and 71.1076% by bytes). The message `0x80022001` state-application
+inventory has 2,109 exact function matches totaling 1,676,261 bytes (24.8879% by
+functions and 71.1981% by bytes). The message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
 are documented in
@@ -109,6 +109,11 @@ functions / 1,329 bytes. Its verified dispatcher route, status/insignia/clan
 string-key selection, exact Ghidra ranges, and unresolved record and callback
 semantics are documented in
 [`current-main-message-80020f02-consumer.md`](current-main-message-80020f02-consumer.md).
+The `CShell_MapObjectScreen` nearby-effect path adds five byte-identical
+functions / 2,131 bytes. Its mapped entry traversal, coordinate checks,
+packed-field updates, matched callers, and remaining state and effect
+uncertainties are documented in
+[`current-main-shell-map-nearby-effect-processing.md`](current-main-shell-map-nearby-effect-processing.md).
 The shared map-control refresh adds eight exact functions / 3,894 bytes. Its
 original map labels, five matched callers, exact ranges, and four unmatched
 caller sites are documented in
