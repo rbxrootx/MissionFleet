@@ -451,6 +451,11 @@ MAIN_FORCE_RECORD_REFRESH_ADDRESSES = (
     "588B6050", "588B81F0", "588B8980",
 )
 ADDRESSES += MAIN_FORCE_RECORD_REFRESH_ADDRESSES
+MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES = (
+    "58789C50", "58789CD0", "58789DB0", "5883EB90",
+    "58841AF0", "588421C0", "5897D124",
+)
+ADDRESSES += MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -819,6 +824,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_SCREENSHOT_TIME_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_RECORD_REFRESH_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13586,6 +13592,127 @@ for address in MAIN_FORCE_RECORD_REFRESH_ADDRESSES:
         ),
     }
 EVIDENCE.update(MAIN_FORCE_RECORD_REFRESH_EVIDENCE)
+
+MAIN_EVENT_80020A03_LIST_UPDATE_TRANSFERS = ROOT / (
+    "config/NF2_2026/current-main-event-80020a03-list-update-transfers.tsv"
+)
+MAIN_EVENT_80020A03_LIST_UPDATE_PARENTS = {
+    address: [] for address in MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
+}
+MAIN_EVENT_80020A03_LIST_UPDATE_CHILDREN = {
+    address: [] for address in MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
+}
+with MAIN_EVENT_80020A03_LIST_UPDATE_TRANSFERS.open(
+        encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        source = edge["source"].upper()
+        site = edge["site"].upper()
+        target = edge["target"].upper()
+        MAIN_EVENT_80020A03_LIST_UPDATE_PARENTS[target].append((source, site))
+        MAIN_EVENT_80020A03_LIST_UPDATE_CHILDREN[source].append((site, target))
+
+MAIN_EVENT_80020A03_LIST_UPDATE_BEHAVIOR = {
+    "588421C0": (
+        "Fresh Ghidra decompilation shows a path through FUN_58841AF0 when "
+        "this wrapper's first argument is nonzero. The mapped instruction at "
+        "0x588421D2 is a direct tail JMP to that helper; Ghidra reports the "
+        "edge as a call terminator. Otherwise the wrapper returns without "
+        "that transfer. The matched FUN_587BB700 dispatcher reaches this "
+        "wrapper twice in event case 0x80020A03, at 0x587BD7FC and 0x587BD816."
+    ),
+    "58841AF0": (
+        "This routine first resets list state through FUN_58789DB0. For each "
+        "0xC3-dword (0x30C-byte) record, it copies the record to local storage, "
+        "passes a local string field through FUN_5883EB90, appends a node with "
+        "FUN_58789CD0, and invokes the callback thunk FUN_5897D124 with "
+        "DAT_58A0B450 and a local buffer. Depending on the callback result, it "
+        "calls drawing helpers with three local or callback-produced values. "
+        "When the receiver flag at +0xAC is set, it follows the observed mode "
+        "at +0xF0 to clamp index +0x114 and refresh child values through "
+        "FUN_5883EAB0, FUN_5883F0E0, and drawing callbacks."
+    ),
+    "58789DB0": (
+        "This list-state helper calls FUN_5897CC42 on the dword at receiver "
+        "+8 when nonzero, then clears the observed dwords at offsets +4, +8, "
+        "+0xC, and +0x10."
+    ),
+    "58789CD0": (
+        "This helper copies 0xC3 dwords of input into local storage and "
+        "allocates a 0x314-byte node. If the list is empty, it initializes a "
+        "node with FUN_58789C50 and stores it in the receiver's head/tail "
+        "fields; otherwise it appends the node through the observed link "
+        "fields. It increments the receiver count at +4."
+    ),
+    "58789C50": (
+        "This node initializer copies 0xC3 dwords to the new node beginning at "
+        "+8, then zeros the first two dwords."
+    ),
+    "5883EB90": (
+        "This in-place text helper scans for selected encoded sequences. Fresh "
+        "Ghidra output shows `&lt;` replaced with `<`, `&apos;` replaced with "
+        "`,`, and `&#34;` replaced with a double quote, shifting the remaining "
+        "bytes left and terminating the shortened string."
+    ),
+    "5897D124": (
+        "This six-byte function calls the indirect target stored at "
+        "DAT_5898C2F0 and returns; the callback identity and contract are not "
+        "resolved here."
+    ),
+}
+MAIN_EVENT_80020A03_LIST_UPDATE_EVIDENCE = {}
+for address in MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES:
+    parents = MAIN_EVENT_80020A03_LIST_UPDATE_PARENTS[address]
+    children = MAIN_EVENT_80020A03_LIST_UPDATE_CHILDREN[address]
+    if address == "588421C0":
+        called_by = (
+            "The matched FUN_587BB700 message dispatcher calls this wrapper "
+            "at 0x587BD7FC and 0x587BD816 in its 0x80020A03 event case. The "
+            "focused verifier checks both mapped direct-call sites."
+        )
+    elif parents:
+        called_by = "Fresh Ghidra direct-transfer edges: " + "; ".join(
+            f"FUN_{source.lower()} at 0x{site}"
+            for source, site in parents
+        ) + "."
+    else:
+        called_by = (
+            "This function belongs to the audited direct-transfer closure "
+            "rooted at the matched 0x80020A03 event path. Its direct caller "
+            "within that path was not isolated."
+        )
+    if address in MAIN_EVENT_80020A03_LIST_UPDATE_BEHAVIOR:
+        behavior = MAIN_EVENT_80020A03_LIST_UPDATE_BEHAVIOR[address]
+    elif children:
+        behavior = (
+            "Fresh Ghidra records direct in-closure transfers at "
+            + "; ".join(
+                f"0x{site} to FUN_{target.lower()}"
+                for site, target in children
+            )
+            + ". The exact emitted body is byte-matched; remaining data and "
+            "display semantics are not inferred beyond observed operations."
+        )
+    else:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra records no "
+            "direct CALL or JMP from this body to another closure member; its "
+            "remaining semantics are not assigned."
+        )
+    MAIN_EVENT_80020A03_LIST_UPDATE_EVIDENCE[address] = {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / event 0x80020A03 list-update closure"
+        ),
+        "called_by": called_by,
+        "behavior": behavior,
+        "uncertainty": (
+            "The event's user-visible meaning, record schema and field labels, "
+            "callback contracts, linked-list ownership, and rendered effect "
+            "remain uncertain where not stated as direct Ghidra observations. "
+            "The closure uses fresh Ghidra body ranges and mapped transfers; "
+            "no emulator runtime test has been performed."
+        ),
+    }
+EVIDENCE.update(MAIN_EVENT_80020A03_LIST_UPDATE_EVIDENCE)
 
 
 if __name__ == "__main__":

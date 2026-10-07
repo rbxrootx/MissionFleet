@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,551 of 42,461 functions and 2,731,274 of 10,470,295 bytes (20.1385% by
-functions and 26.0859% by bytes); every counted function match is verified at
+credits 8,558 of 42,461 functions and 2,733,000 of 10,470,295 bytes (20.1550% by
+functions and 26.1024% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,418 exact function matches totaling 1,757,856 bytes. Its
+inventory has 2,425 exact function matches totaling 1,759,582 bytes. Its
 RTTI-identified `CExplanPannel` event/update closure adds 62 exact functions /
 11,871 bytes across 74 Ghidra ranges. The three vtable methods converge on a
 state dispatcher, and three already-matched caller paths reach helpers within
@@ -76,6 +76,11 @@ bytes in six fresh Ghidra ranges. Its matched `0x80020D03` dispatcher call,
 matched `CForce` constructor, and two-step refresh chain establish the path;
 record and UI semantics remain uncertain. See
 [`current-main-force-record-population-refresh.md`](current-main-force-record-population-refresh.md).
+The event `0x80020A03` list-update path adds seven exact functions / 1,726 bytes
+in eight fresh Ghidra ranges. The two matched dispatcher sites, record-copy
+path, list-node helpers, and Ghidra call-reference versus mapped JMP difference
+are documented with callback and display uncertainties in
+[`current-main-event-80020a03-list-update.md`](current-main-event-80020a03-list-update.md).
 The RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are

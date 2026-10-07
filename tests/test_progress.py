@@ -8,6 +8,7 @@ from tools import (
     verify_current_main_c_explan_pannel,
     verify_current_main_c_screenshot_time,
     verify_current_main_force_record_refresh,
+    verify_current_main_event_80020a03_list_update,
 )
 
 
@@ -20,8 +21,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_551)
-        self.assertEqual(self.report["measures"]["matched_code"], "2731274")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_558)
+        self.assertEqual(self.report["measures"]["matched_code"], "2733000")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -32,8 +33,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_418)
-        self.assertEqual(current["measures"]["matched_code"], "1757856")
+        self.assertEqual(current["measures"]["matched_functions"], 2_425)
+        self.assertEqual(current["measures"]["matched_code"], "1759582")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -83,6 +84,27 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x80020D03", evidence["588B8980"]["behavior"])
         self.assertIn("0x180 bytes", evidence["588B8980"]["behavior"])
         verify_current_main_force_record_refresh.main()
+
+    def test_event_80020a03_list_update_closure_has_dispatch_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_EVENT_80020A03_LIST_UPDATE_EVIDENCE
+        )
+        self.assertEqual(len(addresses), 7)
+        self.assertEqual(len(addresses), len(set(addresses)))
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+        self.assertIn("0x80020A03", evidence["588421C0"]["behavior"])
+        self.assertIn("0x30C-byte", evidence["58841AF0"]["behavior"])
+        self.assertIn("&lt;", evidence["5883EB90"]["behavior"])
+        verify_current_main_event_80020a03_list_update.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

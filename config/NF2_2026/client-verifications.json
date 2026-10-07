@@ -442298,6 +442298,611 @@
         "behavior": "In the matched FUN_587BB700 dispatcher, event value 0x80020D03 reaches this routine at 0x587BDE7D. When its fifth argument is nonzero, the routine clears any prior child arrays, reads three counts from its input, allocates pointer arrays, and constructs one CForce child per first-list record through FUN_5877CC30. The source record pointer advances by 0x180 bytes each iteration, equal to the 0x60 dwords copied by that matched constructor. It constructs a second list through FUN_588E9F60, calls FUN_588B81F0, then sets bit 0 in three receiver child-control flags at offsets +0xF0, +0xF4, and +0xF8.",
         "uncertainty": "Event meaning, input record schemas, receiver and parameter types, global-list ownership, and user-visible display behavior remain uncertain wherever not stated as direct Ghidra or mapped instruction observations. The closure uses fresh Ghidra ranges and transfers; no emulator runtime test has been performed."
       }
+    },
+    {
+      "address": "58789C50",
+      "name": "FUN_58789c50",
+      "size": 93,
+      "symbol": "_FUN_58789c50",
+      "source": "src/client-current/Main/FUN_58789c50.cpp",
+      "source_sha256": "3e15bbf527f73d326a75ff06d4904291eb0b4eb873f2c111c17b1ab130b179bb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58789C50",
+          "size": 93,
+          "symbol": "_FUN_58789c50_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789c50 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_58789cd0 at 0x58789D2C; FUN_58789cd0 at 0x58789D6D.",
+        "behavior": "This node initializer copies 0xC3 dwords to the new node beginning at +8, then zeros the first two dwords.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "58789CD0",
+      "name": "FUN_58789cd0",
+      "size": 213,
+      "symbol": "_FUN_58789cd0",
+      "source": "src/client-current/Main/FUN_58789cd0.cpp",
+      "source_sha256": "6e67fb2426a0ff76b7735d788c2a9c242804b80dbc12a178cc57d4ae5e9d2449",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58789CD0",
+          "size": 213,
+          "symbol": "_FUN_58789cd0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58789C50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58789C50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789cd0 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_58841af0 at 0x58841BB5.",
+        "behavior": "This helper copies 0xC3 dwords of input into local storage and allocates a 0x314-byte node. If the list is empty, it initializes a node with FUN_58789C50 and stores it in the receiver's head/tail fields; otherwise it appends the node through the observed link fields. It increments the receiver count at +4.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "58789DB0",
+      "name": "FUN_58789db0",
+      "size": 42,
+      "symbol": "_FUN_58789db0",
+      "source": "src/client-current/Main/FUN_58789db0.cpp",
+      "source_sha256": "c8938195834befd97df3f075cf43cc4da02c69327008fc5dfd445a8c91d4edc7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58789DB0",
+          "size": 26,
+          "symbol": "_FUN_58789db0_segment_00",
+          "relocations": [
+            {
+              "offset": 22,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58789DD1",
+          "size": 16,
+          "symbol": "_FUN_58789db0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58789db0 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_58841af0 at 0x58841B24.",
+        "behavior": "This list-state helper calls FUN_5897CC42 on the dword at receiver +8 when nonzero, then clears the observed dwords at offsets +4, +8, +0xC, and +0x10.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5883EB90",
+      "name": "FUN_5883eb90",
+      "size": 321,
+      "symbol": "_FUN_5883eb90",
+      "source": "src/client-current/Main/FUN_5883eb90.cpp",
+      "source_sha256": "e40452a280da42e0bcee539601a82714188b18a258330c5a6c1a8e6b283142ed",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5883EB90",
+          "size": 321,
+          "symbol": "_FUN_5883eb90_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "5883ECC9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "5883ECAC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "5883EBC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5883eb90 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_58841af0 at 0x58841B94.",
+        "behavior": "This in-place text helper scans for selected encoded sequences. Fresh Ghidra output shows `&lt;` replaced with `<`, `&apos;` replaced with `,`, and `&#34;` replaced with a double quote, shifting the remaining bytes left and terminating the shortened string.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "58841AF0",
+      "name": "FUN_58841af0",
+      "size": 1025,
+      "symbol": "_FUN_58841af0",
+      "source": "src/client-current/Main/FUN_58841af0.cpp",
+      "source_sha256": "12f420c2ff0e546fd6fd796d3ac05f0d59ce70109a2c6912067dc10eb0b08c61",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58841AF0",
+          "size": 1025,
+          "symbol": "_FUN_58841af0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "58789DB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "58841CC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "5883EB90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "58789CD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "58A0B450",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5897D124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 249,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "58841CAD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 345,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 371,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 402,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 419,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 460,
+              "target_address": "58841B76",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 485,
+              "target_address": "58841EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 518,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 527,
+              "target_address": "58841EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 542,
+              "target_address": "58841E2D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 589,
+              "target_address": "5883EAB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 616,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 638,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 663,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 677,
+              "target_address": "5883F0E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 701,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 707,
+              "target_address": "587BA450",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 726,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 749,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 772,
+              "target_address": "589082B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 794,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 819,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 834,
+              "target_address": "58841EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 881,
+              "target_address": "5883EAB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 908,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 930,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 955,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 969,
+              "target_address": "5883F0E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 990,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1015,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58841af0 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_588421c0 at 0x588421D2.",
+        "behavior": "This routine first resets list state through FUN_58789DB0. For each 0xC3-dword (0x30C-byte) record, it copies the record to local storage, passes a local string field through FUN_5883EB90, appends a node with FUN_58789CD0, and invokes the callback thunk FUN_5897D124 with DAT_58A0B450 and a local buffer. Depending on the callback result, it calls drawing helpers with three local or callback-produced values. When the receiver flag at +0xAC is set, it follows the observed mode at +0xF0 to clamp index +0x114 and refresh child values through FUN_5883EAB0, FUN_5883F0E0, and drawing callbacks.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "588421C0",
+      "name": "FUN_588421c0",
+      "size": 26,
+      "symbol": "_FUN_588421c0",
+      "source": "src/client-current/Main/FUN_588421c0.cpp",
+      "source_sha256": "b9296da7e77ab0d08830ee087becb6dc92c91b812c1531773c4606fb3af5c407",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588421C0",
+          "size": 26,
+          "symbol": "_FUN_588421c0_segment_00",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "58841AF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588421c0 / event 0x80020A03 list-update closure",
+        "called_by": "The matched FUN_587BB700 message dispatcher calls this wrapper at 0x587BD7FC and 0x587BD816 in its 0x80020A03 event case. The focused verifier checks both mapped direct-call sites.",
+        "behavior": "Fresh Ghidra decompilation shows a path through FUN_58841AF0 when this wrapper's first argument is nonzero. The mapped instruction at 0x588421D2 is a direct tail JMP to that helper; Ghidra reports the edge as a call terminator. Otherwise the wrapper returns without that transfer. The matched FUN_587BB700 dispatcher reaches this wrapper twice in event case 0x80020A03, at 0x587BD7FC and 0x587BD816.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "5897D124",
+      "name": "FUN_5897d124",
+      "size": 6,
+      "symbol": "_FUN_5897d124",
+      "source": "src/client-current/Main/FUN_5897d124.cpp",
+      "source_sha256": "2c6d332961a16120b547ba4e013d8ed86453c63843a9d5ab5f089675e5fe398f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897D124",
+          "size": 6,
+          "symbol": "_FUN_5897d124_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C2F0",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897d124 / event 0x80020A03 list-update closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_58841af0 at 0x58841BC7.",
+        "behavior": "This six-byte function calls the indirect target stored at DAT_5898C2F0 and returns; the callback identity and contract are not resolved here.",
+        "uncertainty": "The event's user-visible meaning, record schema and field labels, callback contracts, linked-list ownership, and rendered effect remain uncertain where not stated as direct Ghidra observations. The closure uses fresh Ghidra body ranges and mapped transfers; no emulator runtime test has been performed."
+      }
     }
   ]
 }
