@@ -1015,6 +1015,14 @@ MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES = (
 ADDRESSES += MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MESSAGE_80020A00_CHAT_DISPLAY_ADDRESSES)
 
+MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
+    "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
+    "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
+    "58880F70", "58881C90", "58908B90",
+)
+ADDRESSES += MESSAGE_8002C104_RECORD_ACTION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MESSAGE_8002C104_RECORD_ACTION_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -9087,6 +9095,61 @@ MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE = {
     },
 }
 EVIDENCE.update(MESSAGE_80020A00_CHAT_DISPLAY_EVIDENCE)
+
+MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
+    "58881C90": {
+        "name_in_analysis": "FUN_58881c90 / record count-adjustment action handler",
+        "called_by": (
+            "Byte-matched FUN_58882d80 routes message 0x8002C104 to this root "
+            "at nine direct call sites: 0x58882F7B, 0x58882F94, 0x5888359B, "
+            "0x588835B5, 0x588835D1, 0x588835EB, 0x58883605, 0x5888393E, and "
+            "0x5888395A. Fresh Ghidra decompilation shows these calls in the "
+            "0x8002C104 handler case."
+        ),
+        "behavior": (
+            "Looks up the supplied record through FUN_588f4090 and XOR-decodes "
+            "the 16-bit value at record +0x5A with 0xAA. Action values 0-10 "
+            "select a decrement of 10, 1, or 5; insufficient decoded values "
+            "route to FUN_5887a3f0(0x1139). Otherwise it calls FUN_5877cb40 "
+            "with the decoded +0x58 value unchanged, the decoded +0x5A value "
+            "reduced by the selected decrement, and the decoded +0x5C value "
+            "increased by it. It copies receiver +0x80 to +0x84 and calls "
+            "FUN_58880f70(1). When the observed child-count gate is positive, "
+            "it updates children and invokes a five-iteration helper loop."
+        ),
+        "uncertainty": (
+            "The three record fields, action meanings, message identifiers, "
+            "receiver type, and helper contracts are not recovered. The 13 "
+            "functions / 3,533 bytes are an exact direct-call closure; no live "
+            "client or emulator behavior test was run."
+        ),
+    },
+    **{
+        address: {
+            "name_in_analysis": f"FUN_{address.lower()} / 0x8002C104 action-closure member",
+            "called_by": (
+                "Ghidra's direct-call graph places this function in the open "
+                "closure rooted at FUN_58881c90, which byte-matched dispatcher "
+                "FUN_58882d80 reaches in its observed 0x8002C104 case. Exact "
+                "fresh body ranges are frozen in "
+                "config/NF2_2026/message-8002c104-record-action-body-ranges.tsv."
+            ),
+            "behavior": (
+                "Preserves the exact mapped x86 instruction bytes over the "
+                "fresh Ghidra body range(s). Its independent semantic role is "
+                "left unnamed unless established by the root decompilation."
+            ),
+            "uncertainty": (
+                "Helper contracts, receiver and record field types, and the "
+                "user-visible meaning of this path remain unresolved; no "
+                "emulator runtime test was run."
+            ),
+        }
+        for address in MESSAGE_8002C104_RECORD_ACTION_ADDRESSES
+        if address != "58881C90"
+    },
+}
+EVIDENCE.update(MESSAGE_8002C104_RECORD_ACTION_EVIDENCE)
 
 
 def sha256(path):

@@ -9,7 +9,7 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,018 matches cover 2,560,892 bytes (24.4586%) and are verified
+The current 8,031 matches cover 2,564,425 bytes (24.4924%) and are verified
 individually at 100.0% by objdiff.
 The installed client's non-null `0x8002C101` update path adds 16 exact matches
 / 12,289 bytes; its caller, direct-transfer closure, and uncertainty record are
@@ -18,6 +18,10 @@ The installed client's `0x80020A00` chat/display path adds 19 exact matches /
 8,961 bytes; its dispatcher compare, paired panel routes, direct-call closure,
 and unknown protocol fields are recorded in
 [the subsystem evidence](docs/current-main-message-80020a00-chat-display.md).
+The installed client's `0x8002C104` record-action path adds 13 exact matches /
+3,533 bytes; its nine calls from the matched dispatcher, decoded action groups,
+direct-call closure, and unresolved field meanings are recorded in
+[the subsystem evidence](docs/current-main-message-8002c104-record-action.md).
 The linked-entry update helper path adds five exact matches / 1,684 bytes and
 is documented in [the hit-dispatch notes](docs/current-main-linked-entry-hit-dispatch.md).
 The PageFight `CPageFightOn_ControlMenuScreen` update-loop closure adds 149
