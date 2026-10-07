@@ -52,18 +52,24 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,586 of 42,461 functions and 2,741,223 of 10,470,295 bytes (20.2209% by
-functions and 26.1810% by bytes); every counted function match is verified at
+credits 8,587 of 42,461 functions and 2,741,911 of 10,470,295 bytes (20.2233% by
+functions and 26.1875% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,453 exact function matches totaling 1,767,805 bytes. The
+inventory has 2,454 exact function matches totaling 1,768,493 bytes. The
 `CRoomTypeOccupation` constructor adds one exact function / 960 bytes. Its
 fresh Ghidra body has 287 instructions; a matched `CRoomSettingManager` caller
 and all 13 outgoing transfers to verified functions pass the focused verifier.
 The record-table schema, resource and control meanings, and rendered appearance
 remain unknown. See
 [`current-main-room-type-occupation-construction.md`](current-main-room-type-occupation-construction.md).
+The adjacent `CRoomTypeConvoy` constructor adds one exact function / 688 bytes.
+Its 209-instruction Ghidra body, matched resource `0x8C` caller gate, child
+pointer store at `+0x198`, and seven verified outgoing transfers pass the
+focused verifier. Its record schema, control meanings, and appearance remain
+unknown. See
+[`current-main-room-type-convoy-construction.md`](current-main-room-type-convoy-construction.md).
 The event 0x80021101 record-metric helper closure adds three exact functions / 1,680
 bytes. Its fresh Ghidra ranges, paired record path, bounded coefficient-driven
 calculation, lookup tail-jumps, and matched caller chain are checked by a

@@ -17,6 +17,7 @@ from tools import (
     verify_current_main_587b4100_type06_transform,
     verify_current_main_80021101_record_metric,
     verify_current_main_room_type_occupation,
+    verify_current_main_room_type_convoy,
 )
 
 
@@ -29,8 +30,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_586)
-        self.assertEqual(self.report["measures"]["matched_code"], "2741223")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_587)
+        self.assertEqual(self.report["measures"]["matched_code"], "2741911")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -41,8 +42,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_453)
-        self.assertEqual(current["measures"]["matched_code"], "1767805")
+        self.assertEqual(current["measures"]["matched_functions"], 2_454)
+        self.assertEqual(current["measures"]["matched_code"], "1768493")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -62,6 +63,20 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("resource lookup 0xAC", item["behavior"])
         self.assertTrue(item["uncertainty"])
         verify_current_main_room_type_occupation.main()
+
+    def test_room_type_convoy_constructor_has_resource_gated_caller_and_body(self):
+        addresses = build_current_main_verifications.MAIN_ROOM_TYPE_CONVOY_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_ROOM_TYPE_CONVOY_EVIDENCE
+        self.assertEqual(addresses, ("588CC610",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588CC610"]
+        self.assertIn("0x588CABCB", item["called_by"])
+        self.assertIn("resource 0x8C", item["called_by"])
+        self.assertIn("receiver +0x198", item["called_by"])
+        self.assertIn("CRoomTypeConvoy", item["behavior"])
+        self.assertIn("seven sprite-data controls", item["behavior"])
+        self.assertTrue(item["uncertainty"])
+        verify_current_main_room_type_convoy.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (

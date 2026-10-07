@@ -1356,6 +1356,10 @@ MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES = ("588D0710",)
 ADDRESSES += MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES)
 
+MAIN_ROOM_TYPE_CONVOY_ADDRESSES = ("588CC610",)
+ADDRESSES += MAIN_ROOM_TYPE_CONVOY_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_CONVOY_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14143,6 +14147,40 @@ MAIN_ROOM_TYPE_OCCUPATION_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_OCCUPATION_EVIDENCE)
+
+MAIN_ROOM_TYPE_CONVOY_EVIDENCE = {
+    "588CC610": {
+        "name_in_analysis": "FUN_588CC610 / CRoomTypeConvoy constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CABCB after FUN_5897CC4E accepts resource "
+            "0x8C. The returned pointer is stored at CRoomSettingManager "
+            "receiver +0x198. The focused verifier checks the resource gate, "
+            "argument setup, exact call, and result store against mapped bytes."
+        ),
+        "behavior": (
+            "Fresh Ghidra output calls FUN_588D02E0 for base initialization, "
+            "installs the CRoomTypeConvoy vtable, and selects records through "
+            "fields at DAT_58A24638+0x164 and +0x18C. It copies six DWORDs "
+            "from each selected record into child objects at receiver indices "
+            "0x18 and 0x19, then writes an additional value through child "
+            "index 0x17. Two loops construct seven sprite-data controls via "
+            "FUN_5875DDA0: four controls followed by three. Each control is "
+            "gated by resource lookup 0xAC through FUN_5897CC4E and followed "
+            "by FUN_58902D20(0x101)."
+        ),
+        "uncertainty": (
+            "The global table and selected-record schemas, state/bounds field "
+            "meanings, resource IDs 0x8C and 0xAC, control value 0x101, and "
+            "the controls' appearance or actions remain unidentified. The "
+            "fallback around the third child's value read needs runtime "
+            "evidence to establish its validity conditions. This is static "
+            "evidence from the installed mapped client; no runtime or visual "
+            "emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_CONVOY_EVIDENCE)
 
 
 if __name__ == "__main__":
