@@ -445489,6 +445489,161 @@
         "behavior": "Fresh Ghidra output calls FUN_588D02E0 for base initialization, installs the CRoomTypeConvoy vtable, and selects records through fields at DAT_58A24638+0x164 and +0x18C. It copies six DWORDs from each selected record into child objects at receiver indices 0x18 and 0x19, then writes an additional value through child index 0x17. Two loops construct seven sprite-data controls via FUN_5875DDA0: four controls followed by three. Each control is gated by resource lookup 0xAC through FUN_5897CC4E and followed by FUN_58902D20(0x101).",
         "uncertainty": "The global table and selected-record schemas, state/bounds field meanings, resource IDs 0x8C and 0xAC, control value 0x101, and the controls' appearance or actions remain unidentified. The fallback around the third child's value read needs runtime evidence to establish its validity conditions. This is static evidence from the installed mapped client; no runtime or visual emulator test was performed."
       }
+    },
+    {
+      "address": "588D1030",
+      "name": "FUN_588d1030",
+      "size": 638,
+      "symbol": "_FUN_588d1030",
+      "source": "src/client-current/Main/FUN_588d1030.cpp",
+      "source_sha256": "9de8999bbe289e078b359fe29218db163e6a84c6575762bb20d4fad855aff57f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D1030",
+          "size": 638,
+          "symbol": "_FUN_588d1030_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589891BE",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "588D02E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "589A0E98",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "58A2474C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "58A2474C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "58A2474C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "58A2474C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 389,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 396,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 433,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 470,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 492,
+              "target_address": "58A2474C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 554,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 564,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 587,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 610,
+              "target_address": "588D1200",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D1030 / CRoomTypeSelectMode constructor",
+        "called_by": "Fresh Ghidra references show byte-matched FUN_588C9280 calling this constructor at 0x588CAB8D after FUN_5897CC4E accepts resource 0x88. The returned pointer is stored at CRoomSettingManager receiver +0x18C. The focused verifier checks the resource gate, argument setup, exact call, and result store against mapped bytes.",
+        "behavior": "Fresh Ghidra output labels the vtable CRoomTypeSelectMode::vftable and shows FUN_588D02E0 base initialization. It selects two records from fields at DAT_58A2474C+0x164 and +0x18C and copies six DWORDs from each selected record into receiver children 0x18 and 0x19. It also writes the first selected record's value at +8 through child 0x17+0x74. One additional sprite-data control and a five-iteration loop construct six controls total via FUN_5875DDA0; each path checks resource 0xAC through FUN_5897CC4E and calls FUN_58902D20(0x101).",
+        "uncertainty": "The global table and selected-record schemas, state/bounds field meanings, resource IDs 0x88 and 0xAC, control value 0x101, and the controls' appearance or actions remain unidentified. The third child's value read follows a fallback that can set its source pointer to zero; its valid-state conditions need runtime evidence. This is static evidence from the installed mapped client; no runtime or visual emulator test was performed."
+      }
     }
   ]
 }

@@ -1360,6 +1360,10 @@ MAIN_ROOM_TYPE_CONVOY_ADDRESSES = ("588CC610",)
 ADDRESSES += MAIN_ROOM_TYPE_CONVOY_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_CONVOY_ADDRESSES)
 
+MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES = ("588D1030",)
+ADDRESSES += MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_SELECT_MODE_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14181,6 +14185,42 @@ MAIN_ROOM_TYPE_CONVOY_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_CONVOY_EVIDENCE)
+
+MAIN_ROOM_TYPE_SELECT_MODE_EVIDENCE = {
+    "588D1030": {
+        "name_in_analysis": "FUN_588D1030 / CRoomTypeSelectMode constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAB8D after FUN_5897CC4E accepts "
+            "resource 0x88. The returned pointer is stored at "
+            "CRoomSettingManager receiver +0x18C. The focused verifier checks "
+            "the resource gate, argument setup, exact call, and result store "
+            "against mapped bytes."
+        ),
+        "behavior": (
+            "Fresh Ghidra output labels the vtable "
+            "CRoomTypeSelectMode::vftable and shows FUN_588D02E0 base "
+            "initialization. It selects two records from fields at "
+            "DAT_58A2474C+0x164 and +0x18C and copies six DWORDs from each "
+            "selected record into receiver children 0x18 and 0x19. It also "
+            "writes the first selected record's value at +8 through child "
+            "0x17+0x74. One additional sprite-data control and a five-iteration "
+            "loop construct six controls total via FUN_5875DDA0; each path "
+            "checks resource 0xAC through FUN_5897CC4E and calls "
+            "FUN_58902D20(0x101)."
+        ),
+        "uncertainty": (
+            "The global table and selected-record schemas, state/bounds field "
+            "meanings, resource IDs 0x88 and 0xAC, control value 0x101, and "
+            "the controls' appearance or actions remain unidentified. The "
+            "third child's value read follows a fallback that can set its "
+            "source pointer to zero; its valid-state conditions need runtime "
+            "evidence. This is static evidence from the installed mapped "
+            "client; no runtime or visual emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_SELECT_MODE_EVIDENCE)
 
 
 if __name__ == "__main__":
