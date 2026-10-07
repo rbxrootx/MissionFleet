@@ -1102,6 +1102,10 @@ MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES = (
 ADDRESSES += MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES)
 
+MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES = ("587870B0", "58787B70")
+ADDRESSES += MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10273,6 +10277,59 @@ MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_EVIDENCE = {
     for address in MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_ADDRESSES
 }
 EVIDENCE.update(MAIN_SHELL_MAP_NEARBY_EFFECT_PROCESSING_EVIDENCE)
+
+MAIN_SHELL_MAP_TARGET_PROXIMITY_EVIDENCE = {
+    "587870B0": {
+        "name_in_analysis": "FUN_587870b0 / shell-map target-state counter update",
+        "called_by": "FUN_58787b70 at 0x58787F99.",
+        "behavior": (
+            "Updates the packed DWORD at the supplied object's +0x1264 using "
+            "the value at the supplied record +8, calls FUN_588dcdd0 with "
+            "observed selector/value pairs 0 and 2, and adds that value to "
+            "the global counter indexed by the object's byte at +0x354. "
+            "For the observed local-object and matching-byte conditions, it "
+            "updates additional +100-derived counters and increments receiver "
+            "+0x91C, capping it at +0x918."
+        ),
+        "uncertainty": (
+            "Fresh Ghidra 12.1.3 output and exact ranges were checked against "
+            "the mapped Main.dll. The object and record types, +0x354 identity, "
+            "+0x1264 encoding, counter units, FUN_588dcdd0 selector meanings, "
+            "and user-visible/gameplay effect are unresolved; no runtime test "
+            "was run."
+        ),
+    },
+    "58787B70": {
+        "name_in_analysis": "FUN_58787b70 / shell-map target-proximity processing",
+        "called_by": (
+            "Byte-matched FUN_588d4300, the RTTI-identified "
+            "CShell_MapObjectScreen update method, calls it at 0x588D5C23 "
+            "and 0x588D5F35."
+        ),
+        "behavior": (
+            "Unless the second argument equals 1, loops over the observed "
+            "entry count at receiver +0x88C using pointers rooted at +0x910 "
+            "and coordinate pairs at +0x890/+0x894, advancing by eight bytes. "
+            "It skips entries whose "
+            "DWORD at object +0xB8 equals the byte at the supplied object "
+            "+0x354, computes squared coordinate distance, and branches on the "
+            "entry's DWORD at +0xC8. The observed state groups use distance "
+            "thresholds 600, 10,000, and 0xB9A3 to choose mapped update, "
+            "allocation, and helper calls with mode values 10 or 100. The "
+            "state-0/5 path calls FUN_587870b0 when the compared identity "
+            "still differs; matching the local object's +0x354 byte sets "
+            "entry byte +0xCE."
+        ),
+        "uncertainty": (
+            "Fresh Ghidra 12.1.3 output and exact ranges were checked against "
+            "the mapped Main.dll. Entry and coordinate schemas, the +0xB8 and "
+            "+0xC8 meanings, distance units, values 10/100, allocated object "
+            "purpose, and whether these calls represent visuals or gameplay "
+            "remain unresolved. No emulator or live-client test was run."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SHELL_MAP_TARGET_PROXIMITY_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",
