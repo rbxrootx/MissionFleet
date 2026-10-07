@@ -27,3 +27,7 @@ targets. The verification catalog ties the function to the byte-matched
 handler callsite. Field meanings, row/resource schemas, the helper's secondary
 callers, and visible runtime effects remain uncertain. No emulator visual test
 has been run.
+
+After the selected child resources are refreshed, the transition calls
+`FUN_58860070(0)` to route the selected row's state and resource; see the
+[state/resource router notes](current-main-ship-map-state-resource-router.md).

@@ -178,7 +178,7 @@ ADDRESSES = (
     "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
     "588DD520", "588DE620", "588DF9B0",
     "588D6570", "588DCE90", "588E6540", "588E7480", "5885FC40", "5885A340",
-    "58861F40",
+    "58861F40", "58860070",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7376,6 +7376,12 @@ EVIDENCE = {
         "called_by": "Fresh Ghidra references show calls at 0x58862BE7 from byte-matched FUN_588628D0, 0x587EE3C6 from FUN_587EE2C0, 0x588625E9 from FUN_58862460, and 0x588631CD from FUN_58862FA0. At 0x58862BE7, the matched caller pushes EBP, loads ECX with the current entry from EBX, and calls this function with the loop index; it sets entry state 4 and a latch immediately before the call when the countdown reaches zero and the paired counter is nonzero.",
         "behavior": "Ghidra confirms one contiguous 1,298-byte body [0x58861F40,0x58862452), with complete instruction coverage. The function stores the selected index at receiver +0x11C, clears an observed +0x478 field for entries in state 0x10, then walks five child rows to toggle visibility bits and copy six DWORDs from global resource records into row children. The selected row uses records at offsets +0x440/+0x4C0; other rows use indices derived from per-row ushort values. It then updates selected child resources at +0x72C and +0x744/+0x748/+0x754/+0x758 from global-table entries and calls FUN_58860070(0). The exact byte stream and mapped operands are emitted from the captured image.",
         "uncertainty": "The entry/row schema, meaning of the state and visibility bits, selected resource identities, and helper contracts remain unresolved. The other three incoming callers have not been traced, and no emulator or runtime visual test has been run.",
+    },
+    "58860070": {
+        "name_in_analysis": "FUN_58860070 / ship-map selected-entry state and resource router",
+        "called_by": "Ghidra lists seven direct callers. Byte-matched FUN_58861F40 calls this helper at 0x58862445 with ECX=this and one stack argument, 0, after refreshing selected-entry children. Another byte-matched caller, FUN_5873FE80, passes loop-local iVar11 at 0x5874116D. Five additional references are at 0x58862737, 0x58862856, 0x58860403, 0x588609D8, and 0x58862DF6; those caller paths have no exact-match records yet.",
+        "behavior": "Ghidra confirms one contiguous 571-byte body [0x58860070,0x588602AB), with complete instruction coverage. The function clears bit 0 in flags on children +0x74C and +0x750, then switches on the selected row state at receiver +0x148 + index*4. States 1, 2, and 4 select observed timer/resource paths; state 0x10 selects a resource index from the second argument, with argument 0 deriving two timer values from the selected entry's +0x4A0/+0x4A4 fields. It then looks up the selected resource-table index and updates child +0x740's pointer and six copied fields. The emitted exact byte stream records 36 mapped operand targets.",
+        "uncertainty": "The state and argument meanings, selected resource-table schema, child roles, timer helpers' semantics, and effects of the five unmatched callers remain unresolved. No emulator or runtime visual test has been run.",
     },
     "588D6570": {
         "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",
