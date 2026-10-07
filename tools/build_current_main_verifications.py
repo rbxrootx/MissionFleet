@@ -983,6 +983,16 @@ MAIN_STATE9_RECORD_BIND_ADDRESSES = (
 ADDRESSES += MAIN_STATE9_RECORD_BIND_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE9_RECORD_BIND_ADDRESSES)
 
+MAIN_TRADING_INFO_EVENT_ADDRESSES = (
+    "5886DCF0", "5886FFA0", "588BE810", "588BEDC0", "588C61A0",
+    "588E9F60", "588F6210", "588F6290", "588F6300", "588F6470",
+    "588F6480", "588F6550", "588F6580", "588F6940", "588F6B80",
+    "588F6C60", "588F6D20", "588F6E20", "588F6E70", "588F70E0",
+    "588F7230", "588F72D0", "588F74C0",
+)
+ADDRESSES += MAIN_TRADING_INFO_EVENT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TRADING_INFO_EVENT_ADDRESSES)
+
 PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
     "587350E0", "58735170", "587351F0", "587352B0", "58735820", "58735930", "58735CC0", "58735E60",
     "587366F0", "58736A20", "58736E20", "58736E60", "58737170", "58737B00", "58738940", "58738C60",
@@ -9342,6 +9352,104 @@ MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE["587A8E00"] = {
 }
 MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE["587780D0"] = MAIN_STATE9_RECORD_BIND_ROOT_EVIDENCE
 EVIDENCE.update(MAIN_STATE9_RECORD_BIND_HELPER_EVIDENCE)
+
+MAIN_TRADING_INFO_EVENT_PARENTS = {
+    "5886DCF0": "FUN_588F6940 at 0x588F6A93",
+    "5886FFA0": "FUN_588F6940 at 0x588F6A5A",
+    "588BE810": "FUN_588BEDC0 at 0x588BF3A6",
+    "588BEDC0": "FUN_588F6B80 at 0x588F6C14",
+    "588C61A0": "FUN_588E9F60 at 0x588E9F94",
+    "588E9F60": "FUN_588F6B80 at 0x588F6BD5",
+    "588F6210": "FUN_588F6C60 at 0x588F6CA1 and FUN_588F6D20 at 0x588F6D61",
+    "588F6290": "FUN_588F6C60 at 0x588F6CC1",
+    "588F6300": "FUN_588F6D20 at 0x588F6D81",
+    "588F6470": "FUN_588F6C60 at 0x588F6CCA and FUN_588F6D20 at 0x588F6D8A",
+    "588F6480": "FUN_588F6E70 at 0x588F6ED2",
+    "588F6550": "FUN_588F6E20 at 0x588F6E52",
+    "588F6580": "FUN_588F6940 at 0x588F6B59",
+    "588F6940": "FUN_588F6E70 at 0x588F6EA7",
+    "588F6B80": "FUN_588F6E70 at 0x588F6EBC",
+    "588F6C60": "FUN_588F70E0 at 0x588F711E",
+    "588F6D20": "FUN_588F70E0 at 0x588F713A",
+    "588F6E20": "FUN_588F6E70 at 0x588F6E7C",
+    "588F6E70": "FUN_588F6C60 at 0x588F6CEF and FUN_588F6D20 at 0x588F6DAF",
+    "588F70E0": "matched FUN_587BB700 at 0x587C12C5, in dispatch case 0x80027103",
+    "588F7230": "tail-jump transfers from FUN_588F72D0 at 0x588F7312, 0x588F731F, and 0x588F732C",
+    "588F72D0": "FUN_588F70E0 at 0x588F70F4",
+    "588F74C0": "FUN_588F70E0 at 0x588F70ED",
+}
+MAIN_TRADING_INFO_EVENT_BEHAVIOR = {
+    "588F6210": (
+        "Ghidra identifies the constructor's first stored vtable as "
+        "CTradingSystem_InfoData::vftable and zeros fields at +0x08 through "
+        "+0x18."
+    ),
+    "588F6290": (
+        "Sets the record kind to 1, allocates a 0xE0-byte copy and a "
+        "0x180-byte-per-entry buffer, copies 0x38 DWORDs, and records the "
+        "entry count."
+    ),
+    "588F6300": (
+        "Sets the record kind to 0, copies 0xB8 bytes, allocates a buffer "
+        "sized from bits 1–5 of the first input DWORD, and copies 0xE0 bytes."
+    ),
+    "588F6C60": (
+        "Allocates a 0x1C-byte InfoData object, calls its constructor and "
+        "the kind-1 record initializer, then applies it if its two key fields "
+        "match the current object's fields (or both current fields are zero)."
+    ),
+    "588F6D20": (
+        "Mirrors the other setup path through the kind-0 record initializer; it "
+        "uses the same two-field equality gate before applying the new data."
+    ),
+    "588F6E70": (
+        "Copies two values from the prepared InfoData record into owner fields "
+        "+0x68/+0x6C, selects a kind-specific apply helper, updates +0x78, "
+        "optionally copies additional data to +0x7C, and sets low four flag "
+        "bits on the selected children."
+    ),
+    "588F70E0": (
+        "Clears receiver byte +0x62. A nonzero first stack argument follows "
+        "the MessageBox-helper path; otherwise the 16-bit selector chooses "
+        "the kind-0 initializer for value 0 or the kind-1 initializer for "
+        "values 1 and 2."
+    ),
+    "588F7230": (
+        "Scans a supplied NUL-terminated string; for a nonempty string it "
+        "calls the existing reporting routine with code 0x2711, the text, "
+        "its length, and a value stored at receiver +4."
+    ),
+    "588F72D0": (
+        "Stores the value at global 0x58A245F4 into receiver +4 and dispatches "
+        "the recognized selector values 1–3 to FUN_588F7230 by tail jump; other values "
+        "take the assertion/reporting path."
+    ),
+    "588F74C0": (
+        "Implements lazy singleton allocation and installs "
+        "CTradingSystem_MessageBox::vftable on the eight-byte allocation."
+    ),
+}
+MAIN_TRADING_INFO_EVENT_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / trading-system InfoData event closure member",
+        "called_by": MAIN_TRADING_INFO_EVENT_PARENTS[address],
+        "behavior": MAIN_TRADING_INFO_EVENT_BEHAVIOR.get(
+            address,
+            "Support function in the complete Ghidra direct-call closure; "
+            "its address, incoming edge, and exact body range are recorded "
+            "in docs/current-main-trading-system-info-event.md.",
+        ),
+        "uncertainty": (
+            "The control flow and field accesses are byte-matched, but the "
+            "gameplay meaning of packet fields and owner offsets and the "
+            "runtime visual/result effect are not established. Embedded "
+            "RTTI/vftable names support the two recovered type labels; no "
+            "emulator test was run."
+        ),
+    }
+    for address in MAIN_TRADING_INFO_EVENT_ADDRESSES
+}
+EVIDENCE.update(MAIN_TRADING_INFO_EVENT_EVIDENCE)
 
 
 def sha256(path):

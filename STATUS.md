@@ -6,13 +6,19 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,060 verified matches
-totaling 2,577,512 bytes (18.9821% by functions, 24.6174% by bytes), each at
+identified code bytes across six report units. There are 8,083 verified matches
+totaling 2,582,707 bytes (19.0363% by functions, 24.6670% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project. The installed client's state-9 indexed-record
-path adds nine byte-identical functions / 5,454 bytes. Its exact ranges, matched
+the active decomp.dev project. The trading-system InfoData event path rooted at
+`FUN_588F70E0` adds 23 byte-identical functions / 5,195 bytes. Its matched
+`0x80027103` dispatcher, original argument setup, InfoData/MessageBox type
+evidence, complete direct-transfer closure, and remaining questions are
+recorded in
+[its subsystem note](docs/current-main-trading-system-info-event.md). The
+installed client's state-9 indexed-record path adds nine byte-identical
+functions / 5,454 bytes. Its exact ranges, matched
 caller gate, direct-call boundary, observed object construction, and unresolved
 record semantics are recorded in
 [the subsystem note](docs/current-main-state9-indexed-record-path.md). The

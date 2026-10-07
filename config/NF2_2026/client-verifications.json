@@ -392344,6 +392344,1895 @@
         "behavior": "This match preserves the exact installed Main.dll instruction stream for one Ghidra body in the selected-record direct-call closure. Its independent role is not asserted without stronger evidence.",
         "uncertainty": "The helper's independent field, record, and object semantics remain unresolved. Ghidra shows some closure members also have callers outside the state-9 path; no emulator test was performed."
       }
+    },
+    {
+      "address": "5886DCF0",
+      "name": "FUN_5886dcf0",
+      "size": 162,
+      "symbol": "_FUN_5886dcf0",
+      "source": "src/client-current/Main/FUN_5886dcf0.cpp",
+      "source_sha256": "40cace7b7d845e45c5f2be6703e5e6457d9a36139051a341b0a25b62225a5b15",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5886DCF0",
+          "size": 162,
+          "symbol": "_FUN_5886dcf0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58985E7B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886dcf0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6940 at 0x588F6A93",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "5886FFA0",
+      "name": "FUN_5886ffa0",
+      "size": 23,
+      "symbol": "_FUN_5886ffa0",
+      "source": "src/client-current/Main/FUN_5886ffa0.cpp",
+      "source_sha256": "b5df2f841e047e76ce13fc3f7b7678c6b737c60b1a7ad340e6c51cc4a6cd8918",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5886FFA0",
+          "size": 23,
+          "symbol": "_FUN_5886ffa0_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "5886BA60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5886ffa0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6940 at 0x588F6A5A",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588BE810",
+      "name": "FUN_588be810",
+      "size": 499,
+      "symbol": "_FUN_588be810",
+      "source": "src/client-current/Main/FUN_588be810.cpp",
+      "source_sha256": "964a16180352857d3ece5d98b7642d3437712101ac959f54355ab4527b0f28c8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BE810",
+          "size": 499,
+          "symbol": "_FUN_588be810_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "588E8570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "588BE8E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "589A0A64",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "589A0A4C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 192,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 224,
+              "target_address": "588BE986",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 299,
+              "target_address": "589A0A4C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "589A0A64",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 323,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 353,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 387,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 431,
+              "target_address": "589A0A34",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 448,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 478,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588be810 / trading-system InfoData event closure member",
+        "called_by": "FUN_588BEDC0 at 0x588BF3A6",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588BEDC0",
+      "name": "FUN_588bedc0",
+      "size": 1681,
+      "symbol": "_FUN_588bedc0",
+      "source": "src/client-current/Main/FUN_588bedc0.cpp",
+      "source_sha256": "de70d367c57475320e559e81379c650f736f300fe9bcf53d0c467bf36c69ce47",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BEDC0",
+          "size": 1681,
+          "symbol": "_FUN_588bedc0_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "588E8570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 257,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 334,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 353,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 391,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 405,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 410,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 427,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 498,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 523,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 540,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 566,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 574,
+              "target_address": "588BF0C7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 602,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 644,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 677,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 716,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 763,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 769,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 776,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 793,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 806,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 819,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 832,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 845,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 857,
+              "target_address": "588BF1D3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 885,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 927,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 960,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1003,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1044,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1061,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1074,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1087,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1100,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1113,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1149,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1174,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1213,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1235,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1241,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1256,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1269,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1282,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1295,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1307,
+              "target_address": "588BF363",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1335,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1360,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1444,
+              "target_address": "5899FBF4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1450,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1465,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1478,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1491,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1504,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1511,
+              "target_address": "588BE810",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bedc0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6B80 at 0x588F6C14",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588C61A0",
+      "name": "FUN_588c61a0",
+      "size": 55,
+      "symbol": "_FUN_588c61a0",
+      "source": "src/client-current/Main/FUN_588c61a0.cpp",
+      "source_sha256": "f4c9c20b9b2900e31562b5bffa0ddd944463dfb6486843c74cd8ea1adf51d674",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588C61A0",
+          "size": 55,
+          "symbol": "_FUN_588c61a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c61a0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588E9F60 at 0x588E9F94",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588E9F60",
+      "name": "FUN_588e9f60",
+      "size": 322,
+      "symbol": "_FUN_588e9f60",
+      "source": "src/client-current/Main/FUN_588e9f60.cpp",
+      "source_sha256": "191af6c99356dd3266161f8a368797ec299c0c70eacb8b353e3431543ea24f88",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E9F60",
+          "size": 322,
+          "symbol": "_FUN_588e9f60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898983E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "589A13F4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "588C61A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "588E9940",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e9f60 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6B80 at 0x588F6BD5",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6210",
+      "name": "FUN_588f6210",
+      "size": 26,
+      "symbol": "_FUN_588f6210",
+      "source": "src/client-current/Main/FUN_588f6210.cpp",
+      "source_sha256": "16af707a9ea1d7365e538838adf79c5ce19ed775ab2a1e2572b2905e3fa874ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6210",
+          "size": 26,
+          "symbol": "_FUN_588f6210_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589A19E8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6210 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6C60 at 0x588F6CA1 and FUN_588F6D20 at 0x588F6D61",
+        "behavior": "Ghidra identifies the constructor's first stored vtable as CTradingSystem_InfoData::vftable and zeros fields at +0x08 through +0x18.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6290",
+      "name": "FUN_588f6290",
+      "size": 105,
+      "symbol": "_FUN_588f6290",
+      "source": "src/client-current/Main/FUN_588f6290.cpp",
+      "source_sha256": "c6c5f8e7e14e8a686deb50a997362ec8896b90a24e022d846ad7cb6d987148c4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6290",
+          "size": 105,
+          "symbol": "_FUN_588f6290_segment_00",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5897CD4C",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6290 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6C60 at 0x588F6CC1",
+        "behavior": "Sets the record kind to 1, allocates a 0xE0-byte copy and a 0x180-byte-per-entry buffer, copies 0x38 DWORDs, and records the entry count.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6300",
+      "name": "FUN_588f6300",
+      "size": 137,
+      "symbol": "_FUN_588f6300",
+      "source": "src/client-current/Main/FUN_588f6300.cpp",
+      "source_sha256": "57f814dad0d30d617b24a72c04d975fe8b694a2d5be77660fdaaa9f97f33bf0b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6300",
+          "size": 137,
+          "symbol": "_FUN_588f6300_segment_00",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5897CD4C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6300 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6D20 at 0x588F6D81",
+        "behavior": "Sets the record kind to 0, copies 0xB8 bytes, allocates a buffer sized from bits 1\u20135 of the first input DWORD, and copies 0xE0 bytes.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6470",
+      "name": "FUN_588f6470",
+      "size": 16,
+      "symbol": "_FUN_588f6470",
+      "source": "src/client-current/Main/FUN_588f6470.cpp",
+      "source_sha256": "2a6054b88ddf36544065b0ba97e56e5d979d7d3a2df6c6742a20716ae32d5f7f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6470",
+          "size": 16,
+          "symbol": "_FUN_588f6470_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "587A54D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6470 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6C60 at 0x588F6CCA and FUN_588F6D20 at 0x588F6D8A",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6480",
+      "name": "FUN_588f6480",
+      "size": 197,
+      "symbol": "_FUN_588f6480",
+      "source": "src/client-current/Main/FUN_588f6480.cpp",
+      "source_sha256": "2296df72c9ef76db725ff4846d8ab79e31b78a7d2cea01e9d87742ac15f1e0ff",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6480",
+          "size": 197,
+          "symbol": "_FUN_588f6480_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "588F652C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "589A19EC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5874BA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6480 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6E70 at 0x588F6ED2",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6550",
+      "name": "FUN_588f6550",
+      "size": 39,
+      "symbol": "_FUN_588f6550",
+      "source": "src/client-current/Main/FUN_588f6550.cpp",
+      "source_sha256": "c2e2118e8e6fa4f42e15aa17bd3f7391beff92734b0ef8bd9727fc54a6120e43",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6550",
+          "size": 39,
+          "symbol": "_FUN_588f6550_segment_00",
+          "relocations": [
+            {
+              "offset": 23,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "5875F940",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6550 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6E20 at 0x588F6E52",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6580",
+      "name": "FUN_588f6580",
+      "size": 219,
+      "symbol": "_FUN_588f6580",
+      "source": "src/client-current/Main/FUN_588f6580.cpp",
+      "source_sha256": "422b017fb7a2d0eae145518f6aa6360c91c6e0125050daa75a4f5919733efd79",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6580",
+          "size": 219,
+          "symbol": "_FUN_588f6580_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6580 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6940 at 0x588F6B59",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6940",
+      "name": "FUN_588f6940",
+      "size": 564,
+      "symbol": "_FUN_588f6940",
+      "source": "src/client-current/Main/FUN_588f6940.cpp",
+      "source_sha256": "61bc9348627f7ea514a931f614bdec58f8d4b16d4478a0e71aca9e00b05cec97",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6940",
+          "size": 564,
+          "symbol": "_FUN_588f6940_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58989F76",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "588F6B5E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "588F6B04",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "5886DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "5877CC30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "58903160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "5886FFA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "5886DCF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 408,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "588F6890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 448,
+              "target_address": "588F69A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 469,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 501,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 538,
+              "target_address": "588F6580",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6940 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6E70 at 0x588F6EA7",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6B80",
+      "name": "FUN_588f6b80",
+      "size": 183,
+      "symbol": "_FUN_588f6b80",
+      "source": "src/client-current/Main/FUN_588f6b80.cpp",
+      "source_sha256": "a82751eb9658063d602d85f6b9c83a8b81729324b9592358c95cce9f72b7d503",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6B80",
+          "size": 183,
+          "symbol": "_FUN_588f6b80_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898947B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "588E9F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "588BEDC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6b80 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6E70 at 0x588F6EBC",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6C60",
+      "name": "FUN_588f6c60",
+      "size": 178,
+      "symbol": "_FUN_588f6c60",
+      "source": "src/client-current/Main/FUN_588f6c60.cpp",
+      "source_sha256": "b46f8a3313aeb2ff738746254e8a7af36dd0f5eca4fe6ccf8e85fe188c5b4fce",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6C60",
+          "size": 178,
+          "symbol": "_FUN_588f6c60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589894AB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "588F6210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "588F6290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "588F6470",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "588F6E70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6c60 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F70E0 at 0x588F711E",
+        "behavior": "Allocates a 0x1C-byte InfoData object, calls its constructor and the kind-1 record initializer, then applies it if its two key fields match the current object's fields (or both current fields are zero).",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6D20",
+      "name": "FUN_588f6d20",
+      "size": 178,
+      "symbol": "_FUN_588f6d20",
+      "source": "src/client-current/Main/FUN_588f6d20.cpp",
+      "source_sha256": "e407548e80cce1e12a303c28c531fc21978bdf07cb004c7fafcd3563708b1465",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6D20",
+          "size": 178,
+          "symbol": "_FUN_588f6d20_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589894AB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "588F6210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "588F6300",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "588F6470",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "588F6E70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6d20 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F70E0 at 0x588F713A",
+        "behavior": "Mirrors the other setup path through the kind-0 record initializer; it uses the same two-field equality gate before applying the new data.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6E20",
+      "name": "FUN_588f6e20",
+      "size": 69,
+      "symbol": "_FUN_588f6e20",
+      "source": "src/client-current/Main/FUN_588f6e20.cpp",
+      "source_sha256": "7e5fad87852b7178deb002901817cae6b1d149f7e77e1912d548fa538e15ccc1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6E20",
+          "size": 69,
+          "symbol": "_FUN_588f6e20_segment_00",
+          "relocations": [
+            {
+              "offset": 51,
+              "target_address": "588F6550",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6e20 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6E70 at 0x588F6E7C",
+        "behavior": "Support function in the complete Ghidra direct-call closure; its address, incoming edge, and exact body range are recorded in docs/current-main-trading-system-info-event.md.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F6E70",
+      "name": "FUN_588f6e70",
+      "size": 127,
+      "symbol": "_FUN_588f6e70",
+      "source": "src/client-current/Main/FUN_588f6e70.cpp",
+      "source_sha256": "4e7f7ca7820ec2473bc803056074f00a3884a1ed9ab0d91e99bb35e370038a97",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F6E70",
+          "size": 127,
+          "symbol": "_FUN_588f6e70_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "588F6E20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "588F6940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "588F6B80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "588F6480",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f6e70 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F6C60 at 0x588F6CEF and FUN_588F6D20 at 0x588F6DAF",
+        "behavior": "Copies two values from the prepared InfoData record into owner fields +0x68/+0x6C, selects a kind-specific apply helper, updates +0x78, optionally copies additional data to +0x7C, and sets low four flag bits on the selected children.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F70E0",
+      "name": "FUN_588f70e0",
+      "size": 98,
+      "symbol": "_FUN_588f70e0",
+      "source": "src/client-current/Main/FUN_588f70e0.cpp",
+      "source_sha256": "dc9bba2f81e272a8141960841b25e640bcb37e8243e9cb8617ef47c27b3d0345",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F70E0",
+          "size": 98,
+          "symbol": "_FUN_588f70e0_segment_00",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "588F74C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "588F72D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "588F6C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "588F6D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f70e0 / trading-system InfoData event closure member",
+        "called_by": "matched FUN_587BB700 at 0x587C12C5, in dispatch case 0x80027103",
+        "behavior": "Clears receiver byte +0x62. A nonzero first stack argument follows the MessageBox-helper path; otherwise the 16-bit selector chooses the kind-0 initializer for value 0 or the kind-1 initializer for values 1 and 2.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F7230",
+      "name": "FUN_588f7230",
+      "size": 69,
+      "symbol": "_FUN_588f7230",
+      "source": "src/client-current/Main/FUN_588f7230.cpp",
+      "source_sha256": "f710ca09e9ccaa5ecef94bf2fdb0bf8e81a92ba85c3feace787a24f503b98230",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F7230",
+          "size": 13,
+          "symbol": "_FUN_588f7230_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "588F7240",
+          "size": 56,
+          "symbol": "_FUN_588f7230_segment_01",
+          "relocations": [
+            {
+              "offset": 40,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f7230 / trading-system InfoData event closure member",
+        "called_by": "tail-jump transfers from FUN_588F72D0 at 0x588F7312, 0x588F731F, and 0x588F732C",
+        "behavior": "Scans a supplied NUL-terminated string; for a nonempty string it calls the existing reporting routine with code 0x2711, the text, its length, and a value stored at receiver +4.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F72D0",
+      "name": "FUN_588f72d0",
+      "size": 97,
+      "symbol": "_FUN_588f72d0",
+      "source": "src/client-current/Main/FUN_588f72d0.cpp",
+      "source_sha256": "0b83d8a2b142ea2cdb56a08c417251937d0126fbb4b74826cc6b5f4ad53be73d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F72D0",
+          "size": 97,
+          "symbol": "_FUN_588f72d0_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "589A1A18",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "589A1AB8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "589A1A90",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "589A1A78",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "588F7230",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f72d0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F70E0 at 0x588F70F4",
+        "behavior": "Stores the value at global 0x58A245F4 into receiver +4 and dispatches the recognized selector values 1\u20133 to FUN_588F7230 by tail jump; other values take the assertion/reporting path.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
+    },
+    {
+      "address": "588F74C0",
+      "name": "FUN_588f74c0",
+      "size": 151,
+      "symbol": "_FUN_588f74c0",
+      "source": "src/client-current/Main/FUN_588f74c0.cpp",
+      "source_sha256": "a5ec7d2cbdfa888e41291fbe320eed3f0cee26cee989f6e0f8954cfb9a8bb6f7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F74C0",
+          "size": 151,
+          "symbol": "_FUN_588f74c0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58989FAE",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58A284BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58A284BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "589A1A14",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58A284B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58A284B8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 131,
+              "target_address": "58A284B8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f74c0 / trading-system InfoData event closure member",
+        "called_by": "FUN_588F70E0 at 0x588F70ED",
+        "behavior": "Implements lazy singleton allocation and installs CTradingSystem_MessageBox::vftable on the eight-byte allocation.",
+        "uncertainty": "The control flow and field accesses are byte-matched, but the gameplay meaning of packet fields and owner offsets and the runtime visual/result effect are not established. Embedded RTTI/vftable names support the two recovered type labels; no emulator test was run."
+      }
     }
   ]
 }
