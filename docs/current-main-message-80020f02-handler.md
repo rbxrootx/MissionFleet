@@ -20,6 +20,9 @@ result through fixed thresholds from `0x11` to `0x7D` into selectors 0 through
 resources through global objects and helpers, including
 `FUN_587522F0` and `FUN_5875A440`.
 
+The downstream record consumer and its two-function direct-call closure are
+documented in the [consumer notes](current-main-message-80020f02-consumer.md).
+
 The complete contiguous body is 718 bytes and ends with a stack-cookie check
 and `ret 4`. ObjDiff 3.8.0 matches all 718 bytes and checks 30 mapped address
 operands. The reconstruction is

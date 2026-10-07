@@ -1114,6 +1114,10 @@ MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES = ("587EB370", "5897CE98")
 ADDRESSES += MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES)
 
+MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES = ("588471E0", "58753E60")
+ADDRESSES += MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -11158,6 +11162,54 @@ MAIN_REPLAY_SAVE_SERIALIZER_EVIDENCE = {
     for address in MAIN_REPLAY_SAVE_SERIALIZER_ADDRESSES
 }
 EVIDENCE.update(MAIN_REPLAY_SAVE_SERIALIZER_EVIDENCE)
+
+
+MAIN_MESSAGE_80020F02_CONSUMER_PARENTS = {
+    "588471E0": (
+        "Byte-matched FUN_58847770 at 0x58847A24. That method is reached "
+        "from byte-matched dispatchers FUN_587BB700 and FUN_588C1650 in the "
+        "documented 0x80020F02 message path."
+    ),
+    "58753E60": "FUN_588471E0 at 0x5884765E.",
+}
+MAIN_MESSAGE_80020F02_CONSUMER_BEHAVIOR = {
+    "588471E0": (
+        "Updates observed text buffers through matched FUN_58731CE0. The "
+        "record word at +0x1A selects among seven STR_COMMUSERSTATUS_* keys; "
+        "three values at offsets +0x9C/+0xA0/+0xA4 of the additional argument "
+        "are passed to MESSAGESTRING__WIN_LOSE_DISCONNECT; and the word at "
+        "+0x34 selects among eleven STR_INSIGNIA_* keys. It also selects two "
+        "child resource records through version-gated global tables, handles "
+        "a two-key clan lookup at record +0x3C/+0x40, maps +0x44 to observed "
+        "STR_CLANRANK_* keys, and conditionally invokes a virtual slot. On a "
+        "failed clan lookup it calls matched FUN_587B9270, whose message ID "
+        "is 0x80010F06."
+    ),
+    "58753E60": (
+        "Passes the two DWORDs at its argument pointer to matched "
+        "FUN_587538B0 and returns that helper's lookup result."
+    ),
+}
+MAIN_MESSAGE_80020F02_CONSUMER_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / 0x80020F02 downstream record consumer closure member"
+        ),
+        "called_by": MAIN_MESSAGE_80020F02_CONSUMER_PARENTS[address],
+        "behavior": MAIN_MESSAGE_80020F02_CONSUMER_BEHAVIOR[address],
+        "uncertainty": (
+            "Fresh Ghidra 12.1.3 body ranges and decompilation were checked "
+            "against the pinned mapped Main.dll. The record and argument "
+            "schemas, status/rank value meanings, child/resource types, "
+            "indirect callback contract, clan-key meaning, localization "
+            "format parameters, and visible runtime result remain unresolved. "
+            "The 0x80020F02 caller path is byte-matched, but no emulator "
+            "runtime test was performed."
+        ),
+    }
+    for address in MAIN_MESSAGE_80020F02_CONSUMER_ADDRESSES
+}
+EVIDENCE.update(MAIN_MESSAGE_80020F02_CONSUMER_EVIDENCE)
 
 
 def sha256(path):
