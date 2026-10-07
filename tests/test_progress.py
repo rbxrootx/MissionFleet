@@ -14,8 +14,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_251)
-        self.assertEqual(self.report["measures"]["matched_code"], "2652429")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_262)
+        self.assertEqual(self.report["measures"]["matched_code"], "2654784")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -26,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_118)
-        self.assertEqual(current["measures"]["matched_code"], "1679011")
+        self.assertEqual(current["measures"]["matched_functions"], 2_129)
+        self.assertEqual(current["measures"]["matched_code"], "1681366")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -112,6 +112,27 @@ class ProgressReportTests(unittest.TestCase):
         evidence = (
             build_current_main_verifications
             .MAIN_SHELL_MAP_TARGET_PROXIMITY_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_cmf_map_entry_lookup_has_evidence_for_every_member(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES
+        )
+        self.assertEqual(
+            addresses,
+            ("587480A0", "587481B0", "587485F0", "587E7F90", "587EF1A0",
+             "587EF1F0", "587FF470", "587FF510", "587FF710", "587FF870",
+             "587FFAA0"),
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE
         )
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:

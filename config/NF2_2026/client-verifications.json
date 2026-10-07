@@ -415612,6 +415612,780 @@
         "behavior": "Unless the second argument equals 1, loops over the observed entry count at receiver +0x88C using pointers rooted at +0x910 and paired coordinates rooted at +0x894. It skips entries whose DWORD at object +0xB8 equals the byte at the supplied object +0x354, computes squared coordinate distance, and branches on the entry's DWORD at +0xC8. The observed state groups use distance thresholds 600, 10,000, and 0xB9A3 to choose mapped update, allocation, and helper calls with mode values 10 or 100. The state-0/5 path calls FUN_587870b0 when the compared identity still differs; matching the local object's +0x354 byte sets entry byte +0xCE.",
         "uncertainty": "Fresh Ghidra 12.1.3 output and exact ranges were checked against the mapped Main.dll. Entry and coordinate schemas, the +0xB8 and +0xC8 meanings, distance units, values 10/100, allocated object purpose, and whether these calls represent visuals or gameplay remain unresolved. No emulator or live-client test was run."
       }
+    },
+    {
+      "address": "587480A0",
+      "name": "FUN_587480a0",
+      "size": 99,
+      "symbol": "_FUN_587480a0",
+      "source": "src/client-current/Main/FUN_587480a0.cpp",
+      "source_sha256": "86b974ffbe05d09c991b5f8438166b3f65bca8aae45d10d003de10ea31f439d3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587480A0",
+          "size": 99,
+          "symbol": "_FUN_587480a0_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587480a0 / ordered-tree iterator increment",
+        "called_by": "FUN_587ff870 at 0x587FFA0F and byte-matched destructor FUN_587ffbc0 at 0x587FFC6F.",
+        "behavior": "Advances an iterator through the observed ordered-tree node links, using the sentinel byte at node +0x2D to detect the end.",
+        "uncertainty": "The concrete map type, owning objects, value type, and cache lifetime are unresolved. This is static mapped-code evidence; no runtime lookup or destruction test was performed."
+      }
+    },
+    {
+      "address": "587481B0",
+      "name": "FUN_587481b0",
+      "size": 50,
+      "symbol": "_FUN_587481b0",
+      "source": "src/client-current/Main/FUN_587481b0.cpp",
+      "source_sha256": "6c9b41da00a25adfe29be593af320bf2bdd65cce9f24a0c23f79b5eb61453dd9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587481B0",
+          "size": 50,
+          "symbol": "_FUN_587481b0_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58748110",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587481b0 / ordered-tree key comparison",
+        "called_by": "FUN_587ff870 at 0x587FF8D0, 0x587FF929, 0x587FF962, 0x587FF98F, 0x587FF9E1, and 0x587FFA31.",
+        "behavior": "Selects the inline or heap-backed string bytes at the observed length-16 threshold, then compares key bytes and lengths through FUN_58748110.",
+        "uncertainty": "The exact key contract, normalization, and owner/container type are unresolved. No client runtime test was performed."
+      }
+    },
+    {
+      "address": "587485F0",
+      "name": "FUN_587485f0",
+      "size": 87,
+      "symbol": "_FUN_587485f0",
+      "source": "src/client-current/Main/FUN_587485f0.cpp",
+      "source_sha256": "7ced1667119db88233f4a298af135f614a2b4bc4c0969d31178e1e7350c65cd2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587485F0",
+          "size": 87,
+          "symbol": "_FUN_587485f0_segment_00",
+          "relocations": [
+            {
+              "offset": 58,
+              "target_address": "58734F20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587485f0 / ordered-tree node initialization",
+        "called_by": "FUN_587ff470 at 0x587FF4D2.",
+        "behavior": "Initializes node links and state, copies the observed string value through FUN_58734F20, stores the associated value, and clears the sentinel byte at node +0x2D.",
+        "uncertainty": "The stored value type, exact string object layout, and cache ownership are unresolved. No runtime test was performed."
+      }
+    },
+    {
+      "address": "587E7F90",
+      "name": "FUN_587e7f90",
+      "size": 82,
+      "symbol": "_FUN_587e7f90",
+      "source": "src/client-current/Main/FUN_587e7f90.cpp",
+      "source_sha256": "edac1fda9a17b3eb8cedde9a84507513d08364183a21dc5ce952a1067471dbb4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E7F90",
+          "size": 82,
+          "symbol": "_FUN_587e7f90_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e7f90 / ordered-tree left rotation",
+        "called_by": "FUN_587ff510 at 0x587FF653 and 0x587FF681.",
+        "behavior": "Re-links parent, child, and root pointers for the observed ordered-tree rotation.",
+        "uncertainty": "The concrete map type and node field declarations are unresolved; the rotation role follows the observed link updates."
+      }
+    },
+    {
+      "address": "587EF1A0",
+      "name": "FUN_587ef1a0",
+      "size": 78,
+      "symbol": "_FUN_587ef1a0",
+      "source": "src/client-current/Main/FUN_587ef1a0.cpp",
+      "source_sha256": "d7aa432ee6ba9a4f0b5815b17e6376360f36abcbdc03b27dfa2374b231c6d653",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EF1A0",
+          "size": 78,
+          "symbol": "_FUN_587ef1a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ef1a0 / ordered-tree right rotation",
+        "called_by": "FUN_587ff510 at 0x587FF635.",
+        "behavior": "Re-links parent, child, and root pointers for the observed ordered-tree rotation.",
+        "uncertainty": "The concrete map type and node field declarations are unresolved; the rotation role follows the observed link updates."
+      }
+    },
+    {
+      "address": "587EF1F0",
+      "name": "FUN_587ef1f0",
+      "size": 137,
+      "symbol": "_FUN_587ef1f0",
+      "source": "src/client-current/Main/FUN_587ef1f0.cpp",
+      "source_sha256": "750b796601d5129d62138b49d31417ce01da267881efeda8ada542326058db4e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EF1F0",
+          "size": 137,
+          "symbol": "_FUN_587ef1f0_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ef1f0 / ordered-tree iterator decrement",
+        "called_by": "FUN_587ff710 at 0x587FF80C and FUN_587ff870 at 0x587FF97F.",
+        "behavior": "Moves an iterator to the preceding ordered-tree node using the observed parent and child links and sentinel byte at +0x2D.",
+        "uncertainty": "The concrete map type and iterator contract are unresolved. No runtime iteration test was performed."
+      }
+    },
+    {
+      "address": "587FF470",
+      "name": "FUN_587ff470",
+      "size": 125,
+      "symbol": "_FUN_587ff470",
+      "source": "src/client-current/Main/FUN_587ff470.cpp",
+      "source_sha256": "115e332e9005e3313abe139e427d289097e9eab38eb1402fe5e376e678d57ad0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FF470",
+          "size": 125,
+          "symbol": "_FUN_587ff470_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "589826B1",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "587485F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ff470 / ordered-tree node allocator",
+        "called_by": "FUN_587ff510 at 0x587FF59F.",
+        "behavior": "Allocates an observed 0x30-byte node and initializes it through FUN_587485F0 when allocation succeeds.",
+        "uncertainty": "Allocator behavior and the concrete node/value type are unresolved."
+      }
+    },
+    {
+      "address": "587FF510",
+      "name": "FUN_587ff510",
+      "size": 511,
+      "symbol": "_FUN_587ff510",
+      "source": "src/client-current/Main/FUN_587ff510.cpp",
+      "source_sha256": "d1338b95275287ab74125091f34e451d0a96bc56060eb2cb608d01c17bf1fa1d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FF510",
+          "size": 511,
+          "symbol": "_FUN_587ff510_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E078",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "5898CECC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58735000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58735360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "589ABEA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "5898CAA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "587FF470",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 229,
+              "target_address": "587FF6E5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 279,
+              "target_address": "587FF6D5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "587EF1A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "587E7F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "587E7F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "587FF600",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ff510 / ordered-tree insertion and rebalance",
+        "called_by": "FUN_587ff710 at 0x587FF7E9 and FUN_587ff870 at 0x587FF88F, 0x587FF8EC, 0x587FF947, 0x587FF9AC, 0x587FF9C5, 0x587FFA52, and 0x587FFA67.",
+        "behavior": "Allocates and links a node, increments the observed tree count, and rebalances through color-field changes and rotations. Its exception path constructs the literal `map/set<T> too long`.",
+        "uncertainty": "The template's concrete key/value types, insertion policy, and owner are unresolved. No runtime cache test was performed."
+      }
+    },
+    {
+      "address": "587FF710",
+      "name": "FUN_587ff710",
+      "size": 343,
+      "symbol": "_FUN_587ff710",
+      "source": "src/client-current/Main/FUN_587ff710.cpp",
+      "source_sha256": "31cbe25a6f3c40aac5b84d694d8a40a385b4a34159e73ec68caabc4b33eb6162",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FF710",
+          "size": 343,
+          "symbol": "_FUN_587ff710_segment_00",
+          "relocations": [
+            {
+              "offset": 100,
+              "target_address": "58748020",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "587EF1F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58748110",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ff710 / ordered-tree lower-bound search",
+        "called_by": "FUN_587ff870 at 0x587FFA80.",
+        "behavior": "Walks the tree comparing stored key lengths and bytes, then returns an existing iterator or the insertion position.",
+        "uncertainty": "The key contract and precise lower-bound semantics are unresolved; no runtime lookup test was performed."
+      }
+    },
+    {
+      "address": "587FF870",
+      "name": "FUN_587ff870",
+      "size": 559,
+      "symbol": "_FUN_587ff870",
+      "source": "src/client-current/Main/FUN_587ff870.cpp",
+      "source_sha256": "a72cdb3dcb965e425aaf499a6af157413e78fda5300a88fd10aff53a59b56e95",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FF870",
+          "size": 559,
+          "symbol": "_FUN_587ff870_segment_00",
+          "relocations": [
+            {
+              "offset": 32,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "587FFA78",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "587FFA78",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "587EF1F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 288,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "587FFA78",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 416,
+              "target_address": "587480A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 430,
+              "target_address": "58743680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "587481B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 483,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 504,
+              "target_address": "587FF510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 529,
+              "target_address": "587FF710",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ff870 / ordered-tree find-or-insert",
+        "called_by": "FUN_587ffaa0 at 0x587FFB5A.",
+        "behavior": "Handles empty-tree and boundary cases, searches neighboring tree nodes, and inserts a node through FUN_587ff510 when no equal key is found.",
+        "uncertainty": "The key/value types, duplicate-key policy, and cache owner are unresolved. No client runtime test was performed."
+      }
+    },
+    {
+      "address": "587FFAA0",
+      "name": "FUN_587ffaa0",
+      "size": 284,
+      "symbol": "_FUN_587ffaa0",
+      "source": "src/client-current/Main/FUN_587ffaa0.cpp",
+      "source_sha256": "6fff22db0fc435d242dc5af79b6e21490b741a0c39e558bf2fadc1ab3c206b91",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587FFAA0",
+          "size": 213,
+          "symbol": "_FUN_587ffaa0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589826D8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "587FF2B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58748110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58734F20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "587FF870",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 209,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587FFB78",
+          "size": 71,
+          "symbol": "_FUN_587ffaa0_segment_01",
+          "relocations": [
+            {
+              "offset": 26,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ffaa0 / CMF resource map-entry lookup",
+        "called_by": "Byte-matched FUN_58800360 at 0x5880086D calls this routine with its local key object and stores the newly created resource pointer at the returned entry slot. Ghidra also records an open direct caller FUN_58748BC0 at 0x58748BC5.",
+        "behavior": "Uses the observed string-keyed ordered-tree helpers to locate or create a map entry and returns the value slot at entry +0x28. The byte-matched map/harbor initializer calls it after choosing a CMF resource path and loading the associated resource.",
+        "uncertainty": "The exact key normalization, concrete mapped value type, cache lifetime, and resource schema remain unresolved. No client or emulator runtime test was performed."
+      }
     }
   ]
 }

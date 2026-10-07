@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,251 of 42,461 functions and 2,652,429 of 10,470,295 bytes (19.4319% by
-functions and 25.3329% by bytes); every counted function match is verified at
+credits 8,262 of 42,461 functions and 2,654,784 of 10,470,295 bytes (19.4579% by
+functions and 25.3554% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,118 exact function matches totaling 1,679,011 bytes. The
+inventory has 2,129 exact function matches totaling 1,681,366 bytes. The
 message `0x80022001` state-application
 path adds five byte-identical functions / 2,212 bytes. Its matched dispatcher
 branch, 32-entry update, exact body ranges, and remaining field uncertainties
@@ -172,6 +172,13 @@ The linked-entry update path at `FUN_5874a010` adds five exact matches / 1,684
 bytes. Its two calls from the matched linked-entry dispatcher, exact body ranges,
 closed direct-transfer graph, and shared helpers are recorded in
 [`current-main-linked-entry-hit-dispatch.md`](current-main-linked-entry-hit-dispatch.md).
+
+The CMF map-resource entry lookup adds 11 exact instruction-stream matches / 2,355
+bytes. The matched `FUN_58800360` map initializer calls the root after choosing a
+CMF path and stores the loaded resource at the returned entry's value slot. Fresh
+Ghidra ranges, direct-call closure, matched boundaries, and remaining container
+uncertainties are recorded in
+[`current-main-cmf-map-entry-lookup.md`](current-main-cmf-map-entry-lookup.md).
 
 The variable-record child-state refresh adds two exact matches / 1,784 bytes.
 The matched caller, exact ranges, and conditional child-flag behavior are

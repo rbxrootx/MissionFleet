@@ -1106,6 +1106,14 @@ MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES = ("587870B0", "58787B70")
 ADDRESSES += MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_TARGET_PROXIMITY_ADDRESSES)
 
+MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES = (
+    "587480A0", "587481B0", "587485F0", "587E7F90", "587EF1A0",
+    "587EF1F0", "587FF470", "587FF510", "587FF710", "587FF870",
+    "587FFAA0",
+)
+ADDRESSES += MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CMF_MAP_ENTRY_LOOKUP_ADDRESSES)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10330,6 +10338,166 @@ MAIN_SHELL_MAP_TARGET_PROXIMITY_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SHELL_MAP_TARGET_PROXIMITY_EVIDENCE)
+
+MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE = {
+    "587480A0": {
+        "name_in_analysis": "FUN_587480a0 / ordered-tree iterator increment",
+        "called_by": (
+            "FUN_587ff870 at 0x587FFA0F and byte-matched destructor "
+            "FUN_587ffbc0 at 0x587FFC6F."
+        ),
+        "behavior": (
+            "Advances an iterator through the observed ordered-tree node links, "
+            "using the sentinel byte at node +0x2D to detect the end."
+        ),
+        "uncertainty": (
+            "The concrete map type, owning objects, value type, and cache "
+            "lifetime are unresolved. This is static mapped-code evidence; "
+            "no runtime lookup or destruction test was performed."
+        ),
+    },
+    "587481B0": {
+        "name_in_analysis": "FUN_587481b0 / ordered-tree key comparison",
+        "called_by": (
+            "FUN_587ff870 at 0x587FF8D0, 0x587FF929, 0x587FF962, "
+            "0x587FF98F, 0x587FF9E1, and 0x587FFA31."
+        ),
+        "behavior": (
+            "Selects the inline or heap-backed string bytes at the observed "
+            "length-16 threshold, then compares key bytes and lengths through "
+            "FUN_58748110."
+        ),
+        "uncertainty": (
+            "The exact key contract, normalization, and owner/container type "
+            "are unresolved. No client runtime test was performed."
+        ),
+    },
+    "587485F0": {
+        "name_in_analysis": "FUN_587485f0 / ordered-tree node initialization",
+        "called_by": "FUN_587ff470 at 0x587FF4D2.",
+        "behavior": (
+            "Initializes node links and state, copies the observed string value "
+            "through FUN_58734F20, stores the associated value, and clears the "
+            "sentinel byte at node +0x2D."
+        ),
+        "uncertainty": (
+            "The stored value type, exact string object layout, and cache "
+            "ownership are unresolved. No runtime test was performed."
+        ),
+    },
+    "587E7F90": {
+        "name_in_analysis": "FUN_587e7f90 / ordered-tree left rotation",
+        "called_by": "FUN_587ff510 at 0x587FF653 and 0x587FF681.",
+        "behavior": (
+            "Re-links parent, child, and root pointers for the observed "
+            "ordered-tree rotation."
+        ),
+        "uncertainty": (
+            "The concrete map type and node field declarations are unresolved; "
+            "the rotation role follows the observed link updates."
+        ),
+    },
+    "587EF1A0": {
+        "name_in_analysis": "FUN_587ef1a0 / ordered-tree right rotation",
+        "called_by": "FUN_587ff510 at 0x587FF635.",
+        "behavior": (
+            "Re-links parent, child, and root pointers for the observed "
+            "ordered-tree rotation."
+        ),
+        "uncertainty": (
+            "The concrete map type and node field declarations are unresolved; "
+            "the rotation role follows the observed link updates."
+        ),
+    },
+    "587EF1F0": {
+        "name_in_analysis": "FUN_587ef1f0 / ordered-tree iterator decrement",
+        "called_by": (
+            "FUN_587ff710 at 0x587FF80C and FUN_587ff870 at 0x587FF97F."
+        ),
+        "behavior": (
+            "Moves an iterator to the preceding ordered-tree node using the "
+            "observed parent and child links and sentinel byte at +0x2D."
+        ),
+        "uncertainty": (
+            "The concrete map type and iterator contract are unresolved. "
+            "No runtime iteration test was performed."
+        ),
+    },
+    "587FF470": {
+        "name_in_analysis": "FUN_587ff470 / ordered-tree node allocator",
+        "called_by": "FUN_587ff510 at 0x587FF59F.",
+        "behavior": (
+            "Allocates an observed 0x30-byte node and initializes it through "
+            "FUN_587485F0 when allocation succeeds."
+        ),
+        "uncertainty": (
+            "Allocator behavior and the concrete node/value type are unresolved."
+        ),
+    },
+    "587FF510": {
+        "name_in_analysis": "FUN_587ff510 / ordered-tree insertion and rebalance",
+        "called_by": (
+            "FUN_587ff710 at 0x587FF7E9 and FUN_587ff870 at 0x587FF88F, "
+            "0x587FF8EC, 0x587FF947, 0x587FF9AC, 0x587FF9C5, "
+            "0x587FFA52, and 0x587FFA67."
+        ),
+        "behavior": (
+            "Allocates and links a node, increments the observed tree count, "
+            "and rebalances through color-field changes and rotations. Its "
+            "exception path constructs the literal `map/set<T> too long`."
+        ),
+        "uncertainty": (
+            "The template's concrete key/value types, insertion policy, and "
+            "owner are unresolved. No runtime cache test was performed."
+        ),
+    },
+    "587FF710": {
+        "name_in_analysis": "FUN_587ff710 / ordered-tree lower-bound search",
+        "called_by": "FUN_587ff870 at 0x587FFA80.",
+        "behavior": (
+            "Walks the tree comparing stored key lengths and bytes, then "
+            "returns an existing iterator or the insertion position."
+        ),
+        "uncertainty": (
+            "The key contract and precise lower-bound semantics are unresolved; "
+            "no runtime lookup test was performed."
+        ),
+    },
+    "587FF870": {
+        "name_in_analysis": "FUN_587ff870 / ordered-tree find-or-insert",
+        "called_by": "FUN_587ffaa0 at 0x587FFB5A.",
+        "behavior": (
+            "Handles empty-tree and boundary cases, searches neighboring tree "
+            "nodes, and inserts a node through FUN_587ff510 when no equal key "
+            "is found."
+        ),
+        "uncertainty": (
+            "The key/value types, duplicate-key policy, and cache owner are "
+            "unresolved. No client runtime test was performed."
+        ),
+    },
+    "587FFAA0": {
+        "name_in_analysis": "FUN_587ffaa0 / CMF resource map-entry lookup",
+        "called_by": (
+            "Byte-matched FUN_58800360 at 0x5880086D calls this routine with "
+            "its local key object and stores the newly created resource pointer "
+            "at the returned entry slot. Ghidra also records an open direct "
+            "caller FUN_58748BC0 at 0x58748BC5."
+        ),
+        "behavior": (
+            "Uses the observed string-keyed ordered-tree helpers to locate or "
+            "create a map entry and returns the value slot at entry +0x28. "
+            "The byte-matched map/harbor initializer calls it after choosing "
+            "a CMF resource path and loading the associated resource."
+        ),
+        "uncertainty": (
+            "The exact key normalization, concrete mapped value type, cache "
+            "lifetime, and resource schema remain unresolved. No client or "
+            "emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CMF_MAP_ENTRY_LOOKUP_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",
