@@ -34,6 +34,10 @@ MATCHED_HELPERS = {
     0x588DD520: (1321, 0x588E5674, 0x588E5150),
     0x588DE620: (1281, 0x588E63B4, 0x588E5150),
     0x588DF9B0: (1431, 0x588E0243, 0x588E0240),
+    0x588D6570: (80, 0x588DEB95, 0x588DEB30),
+    0x588DCE90: (186, 0x588DEDB0, 0x588DEB30),
+    0x588E6540: (39, 0x588DEE93, 0x588DEB30),
+    0x588E7480: (350, 0x588DEE7F, 0x588DEB30),
 }
 
 
@@ -55,6 +59,17 @@ def main():
             raise AssertionError(f"Expected direct CALL at {address:08X}")
         displacement = struct.unpack_from("<i", instruction, 1)[0]
         return address + 5 + displacement
+
+    def contains(record, address):
+        segments = record.get("segments")
+        if segments:
+            return any(
+                int(segment["address"], 16) <= address <
+                int(segment["address"], 16) + int(segment["size"])
+                for segment in segments
+            )
+        start = int(record["address"], 16)
+        return start <= address < start + int(record["size"])
 
     locator = u32(VTABLE - 4)
     if locator != 0x589AA384:
@@ -98,11 +113,15 @@ def main():
             raise AssertionError(f"Unexpected matched extent for {address:08X}")
         if call_target(callsite) != address:
             raise AssertionError(f"Call at {callsite:08X} does not target {address:08X}")
-        if caller not in MATCHED_METHODS:
-            raise AssertionError(f"Callsite owner is not a verified screen method: {caller:08X}")
+        caller_record = records.get(caller)
+        if (caller_record is None or
+                caller_record.get("verified_by") != "objdiff-3.8.0-byte-identical"):
+            raise AssertionError(f"Callsite owner is not byte-matched: {caller:08X}")
+        if not contains(caller_record, callsite):
+            raise AssertionError(f"Callsite {callsite:08X} is outside matched caller {caller:08X}")
 
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    print("Constructor store, eight slot matches, and three direct helper call edges verified")
+    print("Constructor store, eight slot matches, and seven matched helper call edges verified")
 
 
 if __name__ == "__main__":

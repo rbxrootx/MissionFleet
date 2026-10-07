@@ -337052,6 +337052,275 @@
         "behavior": "Ghidra confirms 1,431 body bytes across [0x588DF9B0,0x588DFD6F), [0x588DFD74,0x588DFD8C), [0x588DFD95,0x588DFDA5), [0x588DFDAE,0x588DFF40), and [0x588DFF43,0x588DFF61). It reinstalls the class vtable, conditionally walks many receiver fields and child groups, invokes child vtable slot 0 with flag 1, clears released pointers, and calls FUN_588D6850/FUN_588D68C0/FUN_588D66F0 for observed states 0x40000, 0x50000, or 0x60000. Other object buffers are passed to thunk FUN_5897CC42.",
         "uncertainty": "The ownership and types of the large set of fields/children, state-specific cleanup contracts, and external free-thunk behavior remain unresolved. Ghidra marks the external thunk non-returning; no runtime destruction test was performed."
       }
+    },
+    {
+      "address": "588D6570",
+      "name": "FUN_588d6570",
+      "size": 80,
+      "symbol": "_FUN_588d6570",
+      "source": "src/client-current/Main/FUN_588d6570.cpp",
+      "source_sha256": "2badb07812a0ff6d0a39ae3ceed2b383cc7d77f05d300058156efd5c9b89416e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D6570",
+          "size": 80,
+          "symbol": "_FUN_588d6570_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "00000E10",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 14,
+              "target_address": "FFFFF1F0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "00000E10",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "51EB851F",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",
+        "called_by": "Ghidra records a direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEB95 and another call from FUN_588D8080 at 0x588D8083.",
+        "behavior": "The complete 80-byte body [0x588D6570,0x588D65C0) reads receiver +0x6060, subtracts 0xE10 when the value is above 0xE0F, adds 0xE10 when negative, stores the adjusted value, rounds it by adding 0x32 before division by 100, and stores the result at receiver +0x605C. Values above 0x23 are reduced by 0x24 before the final store.",
+        "uncertainty": "The units and purpose of the counters at +0x6060 and +0x605C are not established by the helper alone. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588DCE90",
+      "name": "FUN_588dce90",
+      "size": 186,
+      "symbol": "_FUN_588dce90",
+      "source": "src/client-current/Main/FUN_588dce90.cpp",
+      "source_sha256": "7e1242073c6734eb031790bd0de0a4dd048ea843bc5c8df21381cccf28961145",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DCE90",
+          "size": 186,
+          "symbol": "_FUN_588dce90_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58749900",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588dce90 / ship-map paired state refresh",
+        "called_by": "Ghidra records a direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEDB0 and two calls from FUN_587A90D0 at 0x587A9DD9 and 0x587A9EE7.",
+        "behavior": "The complete 186-byte body [0x588DCE90,0x588DCF4A) forwards its two arguments to FUN_58903290 and FUN_58749900, then updates fields in the object at receiver +0x6028: it clears selected offsets, copies the argument pair into offsets +0x60/+0x64, +0x6C/+0x70, +0x84/+0x88, and writes the pair into receiver +0x6044/+0x6048.",
+        "uncertainty": "The receiver type, meanings of fields +0x6028/+0x6044/+0x6048, and the state changes performed by the called helpers remain unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588E6540",
+      "name": "FUN_588e6540",
+      "size": 39,
+      "symbol": "_FUN_588e6540",
+      "source": "src/client-current/Main/FUN_588e6540.cpp",
+      "source_sha256": "832d5af41f6b9891723320815b3a8bf7cd20d292578232ea983868b992c13bf0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E6540",
+          "size": 39,
+          "symbol": "_FUN_588e6540_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e6540 / guarded ship-map derived-value update",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEE93.",
+        "behavior": "The complete 39-byte body [0x588E6540,0x588E6567) checks receiver +0xCDC; when nonzero, it stores at receiver +0xA60 the product of the 16-bit values at *(receiver +0xCC0) +0x124 and receiver +0x8E.",
+        "uncertainty": "The two 16-bit inputs and derived field +0xA60 have no confirmed semantic labels. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588E7480",
+      "name": "FUN_588e7480",
+      "size": 350,
+      "symbol": "_FUN_588e7480",
+      "source": "src/client-current/Main/FUN_588e7480.cpp",
+      "source_sha256": "3f882ddfc6d285fb54046f6f4f2da77824ef2d2d01fead5850c4daa49fbf2c87",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E7480",
+          "size": 350,
+          "symbol": "_FUN_588e7480_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "588E75DA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "0000AAAA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "0000AAAA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "588E75D9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58778F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "588E75D8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "58858360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 234,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "588583A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "5885EAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "000000AA",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "5885EB30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e7480 / ship-map child-entry refresh",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEE7F.",
+        "behavior": "The complete 350-byte body [0x588E7480,0x588E75DE) searches up to the count encoded in receiver +0x48 within 0x18-byte records rooted at receiver +0x118, matching the second argument against each record's byte +0x0E. On a match it copies the record's two encoded coordinate bytes into receiver tables at +0xAC0/+0xAC2. If the third argument is nonzero and FUN_58778F30 resolves the record object, it calls FUN_58858360, FUN_588583A0, FUN_5885EAF0, and FUN_5885EB30 with values derived from the record.",
+        "uncertainty": "The child-record schema, encoded coordinate meanings, and rendering/update effects of the four downstream calls are not recovered. No emulator runtime test was performed."
+      }
     }
   ]
 }

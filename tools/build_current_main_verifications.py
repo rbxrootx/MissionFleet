@@ -177,6 +177,7 @@ ADDRESSES = (
     "587D3840", "587D0940", "587D5B20", "587D51D0", "587D1460",
     "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
     "588DD520", "588DE620", "588DF9B0",
+    "588D6570", "588DCE90", "588E6540", "588E7480",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7356,6 +7357,30 @@ EVIDENCE = {
         "called_by": "All four Ghidra-recorded direct calls are from byte-matched FUN_588E4260: 0x588E43F9 (action 5), 0x588E4539 (action 7), 0x588E465F (action 0x15), and 0x588E467C (action 0x14). They pass the indexed value at [ESI+0x340]. At 43F9, 4539, and 467C, ECX=ESI; at 465F the caller does not explicitly reload ECX immediately before the call, so receiver setup on that path is unresolved. Ghidra decompilation places the calls in switch cases 5, 7, 0x23/0x24, and 0x25/0x26/0x29/0x2A, respectively.",
         "behavior": "Ghidra confirms 1,477 body bytes across [0x588D75F0,0x588D76BA), [0x588D76C0,0x588D78E7), and [0x588D78F0,0x588D7BC4). The omitted 6-byte gap is `lea ebx,[ebx]`; the omitted 9-byte gap is `lea esp,[esp]; mov edi,edi`. Unconditional jumps bridge both gaps. Action values 4/5 update matching child +0x128 by +/-1 and mark +0x10C; 6/7 update +0x124 and mark +0x108; 10/11 update +0x124 with sign selected by a per-entry byte and mark +0x108. Actions 0x14/0x15 clear matching child state at +0x108/+0x10C, subject to parent filter bits and reset conditions. The loops scan the count at this+0x141C, match item IDs at this+0x1FC against the supplied value, and skip null child pointers in the array at this+0x17C. The caller stores returned state bits at this+0x60B8 for actions 5/7 and toggles bits there for actions 0x14/0x15. The exact three body ranges are emitted literally and their mapped operand targets are recorded.",
         "uncertainty": "The owning type and the semantic identities of the indexed child, item IDs, filter flags, and state fields are not established. The ECX receiver at 0x588E465F is not explicitly loaded in the matched caller and remains unresolved. The byte-matched caller's switch cases establish where these actions are selected, but child rendering/gameplay effects have not been runtime-tested. No emulator runtime test was performed.",
+    },
+    "588D6570": {
+        "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",
+        "called_by": "Ghidra records a direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEB95 and another call from FUN_588D8080 at 0x588D8083.",
+        "behavior": "The complete 80-byte body [0x588D6570,0x588D65C0) reads receiver +0x6060, subtracts 0xE10 when the value is above 0xE0F, adds 0xE10 when negative, stores the adjusted value, rounds it by adding 0x32 before division by 100, and stores the result at receiver +0x605C. Values above 0x23 are reduced by 0x24 before the final store.",
+        "uncertainty": "The units and purpose of the counters at +0x6060 and +0x605C are not established by the helper alone. No emulator runtime test was performed.",
+    },
+    "588DCE90": {
+        "name_in_analysis": "FUN_588dce90 / ship-map paired state refresh",
+        "called_by": "Ghidra records a direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEDB0 and two calls from FUN_587A90D0 at 0x587A9DD9 and 0x587A9EE7.",
+        "behavior": "The complete 186-byte body [0x588DCE90,0x588DCF4A) forwards its two arguments to FUN_58903290 and FUN_58749900, then updates fields in the object at receiver +0x6028: it clears selected offsets, copies the argument pair into offsets +0x60/+0x64, +0x6C/+0x70, +0x84/+0x88, and writes the pair into receiver +0x6044/+0x6048.",
+        "uncertainty": "The receiver type, meanings of fields +0x6028/+0x6044/+0x6048, and the state changes performed by the called helpers remain unresolved. No emulator runtime test was performed.",
+    },
+    "588E6540": {
+        "name_in_analysis": "FUN_588e6540 / guarded ship-map derived-value update",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEE93.",
+        "behavior": "The complete 39-byte body [0x588E6540,0x588E6567) checks receiver +0xCDC; when nonzero, it stores at receiver +0xA60 the product of the 16-bit values at *(receiver +0xCC0) +0x124 and receiver +0x8E.",
+        "uncertainty": "The two 16-bit inputs and derived field +0xA60 have no confirmed semantic labels. No emulator runtime test was performed.",
+    },
+    "588E7480": {
+        "name_in_analysis": "FUN_588e7480 / ship-map child-entry refresh",
+        "called_by": "Ghidra records one direct call from byte-matched CShip_MapObjectScreen refresh FUN_588DEB30 at 0x588DEE7F.",
+        "behavior": "The complete 350-byte body [0x588E7480,0x588E75DE) searches up to the count encoded in receiver +0x48 within 0x18-byte records rooted at receiver +0x118, matching the second argument against each record's byte +0x0E. On a match it copies the record's two encoded coordinate bytes into receiver tables at +0xAC0/+0xAC2. If the third argument is nonzero and FUN_58778F30 resolves the record object, it calls FUN_58858360, FUN_588583A0, FUN_5885EAF0, and FUN_5885EB30 with values derived from the record.",
+        "uncertainty": "The child-record schema, encoded coordinate meanings, and rendering/update effects of the four downstream calls are not recovered. No emulator runtime test was performed.",
     },
     "588DD520": {
         "name_in_analysis": "FUN_588dd520 / CShip_MapObjectScreen state-dependent control update",

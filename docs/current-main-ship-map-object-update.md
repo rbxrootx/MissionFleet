@@ -29,6 +29,11 @@ The stage-6 update path also invokes the conditional forwarder
 [`FUN_5875CD10`](current-main-ship-map-conditional-forwarder.md) through the
 object stored at `+0x21F08`.
 
+The matched refresh body `FUN_588DEB30` calls four more exact-matched helpers
+for counter normalization and child/resource refresh. Their direct-call
+evidence and unresolved field meanings are in the
+[refresh helper notes](current-main-ship-map-refresh-helpers.md).
+
 Three more direct dependencies of this subsystem now have exact byte-match
 records: `FUN_588DD520` and `FUN_588DE620` are called by this update, while
 the deleting wrapper calls `FUN_588DF9B0` for object cleanup. Their Ghidra
