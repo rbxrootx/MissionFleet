@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,580 verified matches
-totaling 2,736,707 bytes (20.2068% by functions, 26.1378% by bytes), each at
+identified code bytes across six report units. There are 8,581 verified matches
+totaling 2,737,738 bytes (20.2091% by functions, 26.1477% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The installed client's tax/investment control
@@ -26,6 +26,11 @@ one byte-identical 1,184-byte function. Its matched parent gate, receiver field,
 14 explicit `CSpriteDataScreen` objects, 20 verified callees, and remaining
 resource/control uncertainties are documented in
 [`the setup evidence`](docs/current-main-state6-sprite-child-setup.md). The
+type-0x05 record path adds one exact 1,031-byte packed geometry transform.
+Ghidra's three body ranges, its two-helper boundary, and two matched parent
+paths are checked against the mapped image; field units and visible effect are
+still unknown. See
+[`the transform evidence`](docs/current-main-type05-geometry-transform.md). The
 installed-client quit-prompt setup helper
 adds one byte-identical function / 246 bytes. Fresh Ghidra output and two
 matched callers anchor its child setup, conditional localized prompt key, and

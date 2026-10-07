@@ -13,6 +13,7 @@ from tools import (
     verify_current_main_5882fc60_refresh,
     verify_current_main_5884b8a0_communicator_memo,
     verify_current_main_5875cf00_state6_sprite_setup,
+    verify_current_main_587b1b70_type05_geometry,
 )
 
 
@@ -25,8 +26,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_580)
-        self.assertEqual(self.report["measures"]["matched_code"], "2736707")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_581)
+        self.assertEqual(self.report["measures"]["matched_code"], "2737738")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -37,8 +38,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_447)
-        self.assertEqual(current["measures"]["matched_code"], "1763289")
+        self.assertEqual(current["measures"]["matched_functions"], 2_448)
+        self.assertEqual(current["measures"]["matched_code"], "1764320")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -176,6 +177,25 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("CSpriteDataScreen", root["behavior"])
         self.assertIn("remain unresolved", root["uncertainty"])
         verify_current_main_5875cf00_state6_sprite_setup.main()
+
+    def test_type05_geometry_transform_has_matched_record_path_and_closed_calls(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_TYPE05_GEOMETRY_TRANSFORM_EVIDENCE
+        )
+        self.assertEqual(addresses, ("587B1B70",))
+        self.assertEqual(set(addresses), set(evidence))
+        root = evidence["587B1B70"]
+        self.assertIn("0x587B2BEC", root["called_by"])
+        self.assertIn("0x587A6730", root["called_by"])
+        self.assertIn("0x588D88B4", root["called_by"])
+        self.assertIn("three Ghidra ranges", root["behavior"])
+        self.assertIn("units", root["uncertainty"])
+        verify_current_main_587b1b70_type05_geometry.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

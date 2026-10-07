@@ -470,6 +470,8 @@ MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES = ("5884B8A0",)
 ADDRESSES += MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES
 MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES = ("5875CF00",)
 ADDRESSES += MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES
+MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES = ("587B1B70",)
+ADDRESSES += MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -843,6 +845,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_QUIT_PROMPT_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13938,6 +13941,44 @@ MAIN_STATE6_SPRITE_CHILD_SETUP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_STATE6_SPRITE_CHILD_SETUP_EVIDENCE)
+
+MAIN_TYPE05_GEOMETRY_TRANSFORM_EVIDENCE = {
+    "587B1B70": {
+        "name_in_analysis": "FUN_587B1B70 / type-0x05 packed geometry transform",
+        "called_by": (
+            "Byte-verified FUN_587B2A40 calls this helper at 0x587B2BEC after "
+            "deriving its input fields from the copied record offsets +0x224 "
+            "through +0x22C. That initializer is called in the observed "
+            "type-0x05 path by byte-verified FUN_587A6220 at 0x587A6730 and "
+            "by byte-verified FUN_588D84D0 at 0x588D88B4 with a stack-local "
+            "0x2D-DWORD record. The five-call transfer manifest checks both "
+            "parent paths and the helper boundary against the mapped image."
+        ),
+        "behavior": (
+            "Reads packed words at receiver +0x224 and +0x226 and a stride "
+            "value at +0xB8. The first word's observed bit fields determine "
+            "integer offsets, a table index/step, and a low-three-bit repeat "
+            "count. It uses coefficient arrays at 0x58A0B4D8 and 0x58A0ED18, "
+            "zeros a 0x200-byte local scratch area through matched "
+            "FUN_5897CC48, fills paired intermediate values, then iterates 36 "
+            "steps applying integer two-coefficient arithmetic and writes "
+            "coordinate-like pairs into receiver storage beginning at +1000. "
+            "The body occupies three Ghidra ranges totaling 1,031 bytes and "
+            "315 mapped instructions; its other direct call is the matched "
+            "stack-probe helper FUN_5897CE60."
+        ),
+        "uncertainty": (
+            "The packed fields' units, coefficient-table meanings, destination "
+            "record schema, and resulting rendered/gameplay effect are not "
+            "identified by the mapped instructions or caller paths. Ghidra "
+            "reports an injected stack-probe warning and an unreachable block "
+            "at 0x587B1BC0; the three recovered ranges are individually fully "
+            "decoded, but the reason for the gap is not established. This is "
+            "static installed-client evidence, not an emulator runtime test."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_EVIDENCE)
 
 
 if __name__ == "__main__":

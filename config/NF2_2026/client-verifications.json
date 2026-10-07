@@ -444622,6 +444622,97 @@
         "behavior": "Fresh Ghidra output shows the receiver state fields +0x60, +0x68, and +0x6C initialized from constants and a byte at DAT_58A247F8+4+0x354. If receiver +0x64 is zero, the routine creates two objects through FUN_58907100, selects two indexed children through FUN_58731C60 using table entries 3 and 4 when their count gates pass, then creates seven pairs of CSpriteDataScreen children from paired table entries. Each of the 14 sprite screens receives a table record pointer and copies six record fields at +0x10 through +0x24. It marks initialization at receiver +0x64 and clears the low four flag bits at +0x24 on 18 child objects. All 20 outbound direct calls resolve to verified functions and match the Ghidra transfer manifest.",
         "uncertainty": "The exact receiver class, table schema and entry meanings, the visual identities and resource names of the children, and the meaning of the copied record fields remain unresolved. The state-6 condition and child construction are static observations; no emulator rendering or runtime test was performed."
       }
+    },
+    {
+      "address": "587B1B70",
+      "name": "FUN_587b1b70",
+      "size": 1031,
+      "symbol": "_FUN_587b1b70",
+      "source": "src/client-current/Main/FUN_587b1b70.cpp",
+      "source_sha256": "01b98f76d28ded566b9a1d33c88a7de26d4f9f8bd751497fb65dd4f3b73c6b53",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B1B70",
+          "size": 171,
+          "symbol": "_FUN_587b1b70_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5897CE60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587B1C20",
+          "size": 232,
+          "symbol": "_FUN_587b1b70_segment_01",
+          "relocations": [
+            {
+              "offset": 153,
+              "target_address": "587B1C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "587B1F47",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587B1D10",
+          "size": 628,
+          "symbol": "_FUN_587b1b70_segment_02",
+          "relocations": [
+            {
+              "offset": 528,
+              "target_address": "587B1D18",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 559,
+              "target_address": "587B1D10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 613,
+              "target_address": "587B1CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B1B70 / type-0x05 packed geometry transform",
+        "called_by": "Byte-verified FUN_587B2A40 calls this helper at 0x587B2BEC after deriving its input fields from the copied record offsets +0x224 through +0x22C. That initializer is called in the observed type-0x05 path by byte-verified FUN_587A6220 at 0x587A6730 and by byte-verified FUN_588D84D0 at 0x588D88B4 with a stack-local 0x2D-DWORD record. The five-call transfer manifest checks both parent paths and the helper boundary against the mapped image.",
+        "behavior": "Reads packed words at receiver +0x224 and +0x226 and a stride value at +0xB8. The first word's observed bit fields determine integer offsets, a table index/step, and a low-three-bit repeat count. It uses coefficient arrays at 0x58A0B4D8 and 0x58A0ED18, zeros a 0x200-byte local scratch area through matched FUN_5897CC48, fills paired intermediate values, then iterates 36 steps applying integer two-coefficient arithmetic and writes coordinate-like pairs into receiver storage beginning at +1000. The body occupies three Ghidra ranges totaling 1,031 bytes and 315 mapped instructions; its other direct call is the matched stack-probe helper FUN_5897CE60.",
+        "uncertainty": "The packed fields' units, coefficient-table meanings, destination record schema, and resulting rendered/gameplay effect are not identified by the mapped instructions or caller paths. Ghidra reports an injected stack-probe warning and an unreachable block at 0x587B1BC0; the three recovered ranges are individually fully decoded, but the reason for the gap is not established. This is static installed-client evidence, not an emulator runtime test."
+      }
     }
   ]
 }
