@@ -337321,6 +337321,115 @@
         "behavior": "The complete 350-byte body [0x588E7480,0x588E75DE) searches up to the count encoded in receiver +0x48 within 0x18-byte records rooted at receiver +0x118, matching the second argument against each record's byte +0x0E. On a match it copies the record's two encoded coordinate bytes into receiver tables at +0xAC0/+0xAC2. If the third argument is nonzero and FUN_58778F30 resolves the record object, it calls FUN_58858360, FUN_588583A0, FUN_5885EAF0, and FUN_5885EB30 with values derived from the record.",
         "uncertainty": "The child-record schema, encoded coordinate meanings, and rendering/update effects of the four downstream calls are not recovered. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "5885FC40",
+      "name": "FUN_5885fc40",
+      "size": 365,
+      "symbol": "_FUN_5885fc40",
+      "source": "src/client-current/Main/FUN_5885fc40.cpp",
+      "source_sha256": "852a79f16ab27a55184082b26f522fd369649cacafa7068f1537a7215027505c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5885FC40",
+          "size": 151,
+          "symbol": "_FUN_5885fc40_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "0000007D",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5885FCE0",
+          "size": 214,
+          "symbol": "_FUN_5885fc40_segment_01",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "00000001",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "A0E6B2D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58793E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "0000FFF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "000005C0",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885fc40 / type-9 ship-map child-state reset",
+        "called_by": "Ghidra records the direct call at 0x588DF189 from byte-matched FUN_588DEB30. The matched caller selects it when the current record's low five type bits equal 9, explicitly loads ECX from [0x58A245C4+0xA0], passes no stack arguments, and then calls matched FUN_588628D0 at 0x588DF19A.",
+        "behavior": "Ghidra confirms 365 body bytes across [0x5885FC40,0x5885FCD7) and [0x5885FCE0,0x5885FDB6). The routine copies a value from the current object's resource at +0x388 into receiver +0xB8, initializes +0xB4 to 0x7D through FUN_587A15E0, changes three child fields at +0xEC/+0xE4/+0xF4, and clears observed counters/flags. It loops five times to reset child-row fields and child flag bits, calling FUN_58793E00 during each iteration. When a global resource table has at least 0x18 records and its data pointer is nonzero, it selects record offset +0x5C0 and copies six words into the child at receiver +0x72C.",
+        "uncertainty": "The receiver/row schema, meanings of the reset flags and counters, selected resource identity, and helper contracts are unresolved. The type-9 branch is evidenced by the matched caller, but its visible effects have not been runtime-tested."
+      }
     }
   ]
 }

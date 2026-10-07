@@ -38,6 +38,7 @@ MATCHED_HELPERS = {
     0x588DCE90: (186, 0x588DEDB0, 0x588DEB30),
     0x588E6540: (39, 0x588DEE93, 0x588DEB30),
     0x588E7480: (350, 0x588DEE7F, 0x588DEB30),
+    0x5885FC40: (365, 0x588DF189, 0x588DEB30),
 }
 
 
@@ -121,7 +122,7 @@ def main():
             raise AssertionError(f"Callsite {callsite:08X} is outside matched caller {caller:08X}")
 
     print(f"{VTABLE:08X}: {name}; {len(slots)} RTTI-backed slots verified")
-    print("Constructor store, eight slot matches, and seven matched helper call edges verified")
+    print("Constructor store, eight slot matches, and eight matched helper call edges verified")
 
 
 if __name__ == "__main__":

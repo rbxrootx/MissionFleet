@@ -177,7 +177,7 @@ ADDRESSES = (
     "587D3840", "587D0940", "587D5B20", "587D51D0", "587D1460",
     "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
     "588DD520", "588DE620", "588DF9B0",
-    "588D6570", "588DCE90", "588E6540", "588E7480",
+    "588D6570", "588DCE90", "588E6540", "588E7480", "5885FC40",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7357,6 +7357,12 @@ EVIDENCE = {
         "called_by": "All four Ghidra-recorded direct calls are from byte-matched FUN_588E4260: 0x588E43F9 (action 5), 0x588E4539 (action 7), 0x588E465F (action 0x15), and 0x588E467C (action 0x14). They pass the indexed value at [ESI+0x340]. At 43F9, 4539, and 467C, ECX=ESI; at 465F the caller does not explicitly reload ECX immediately before the call, so receiver setup on that path is unresolved. Ghidra decompilation places the calls in switch cases 5, 7, 0x23/0x24, and 0x25/0x26/0x29/0x2A, respectively.",
         "behavior": "Ghidra confirms 1,477 body bytes across [0x588D75F0,0x588D76BA), [0x588D76C0,0x588D78E7), and [0x588D78F0,0x588D7BC4). The omitted 6-byte gap is `lea ebx,[ebx]`; the omitted 9-byte gap is `lea esp,[esp]; mov edi,edi`. Unconditional jumps bridge both gaps. Action values 4/5 update matching child +0x128 by +/-1 and mark +0x10C; 6/7 update +0x124 and mark +0x108; 10/11 update +0x124 with sign selected by a per-entry byte and mark +0x108. Actions 0x14/0x15 clear matching child state at +0x108/+0x10C, subject to parent filter bits and reset conditions. The loops scan the count at this+0x141C, match item IDs at this+0x1FC against the supplied value, and skip null child pointers in the array at this+0x17C. The caller stores returned state bits at this+0x60B8 for actions 5/7 and toggles bits there for actions 0x14/0x15. The exact three body ranges are emitted literally and their mapped operand targets are recorded.",
         "uncertainty": "The owning type and the semantic identities of the indexed child, item IDs, filter flags, and state fields are not established. The ECX receiver at 0x588E465F is not explicitly loaded in the matched caller and remains unresolved. The byte-matched caller's switch cases establish where these actions are selected, but child rendering/gameplay effects have not been runtime-tested. No emulator runtime test was performed.",
+    },
+    "5885FC40": {
+        "name_in_analysis": "FUN_5885fc40 / type-9 ship-map child-state reset",
+        "called_by": "Ghidra records the direct call at 0x588DF189 from byte-matched FUN_588DEB30. The matched caller selects it when the current record's low five type bits equal 9, explicitly loads ECX from [0x58A245C4+0xA0], passes no stack arguments, and then calls matched FUN_588628D0 at 0x588DF19A.",
+        "behavior": "Ghidra confirms 365 body bytes across [0x5885FC40,0x5885FCD7) and [0x5885FCE0,0x5885FDB6). The routine copies a value from the current object's resource at +0x388 into receiver +0xB8, initializes +0xB4 to 0x7D through FUN_587A15E0, changes three child fields at +0xEC/+0xE4/+0xF4, and clears observed counters/flags. It loops five times to reset child-row fields and child flag bits, calling FUN_58793E00 during each iteration. When a global resource table has at least 0x18 records and its data pointer is nonzero, it selects record offset +0x5C0 and copies six words into the child at receiver +0x72C.",
+        "uncertainty": "The receiver/row schema, meanings of the reset flags and counters, selected resource identity, and helper contracts are unresolved. The type-9 branch is evidenced by the matched caller, but its visible effects have not been runtime-tested.",
     },
     "588D6570": {
         "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",
