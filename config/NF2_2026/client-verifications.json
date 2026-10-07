@@ -337520,6 +337520,234 @@
         "behavior": "Ghidra confirms one contiguous 288-byte body [0x5885A340,0x5885A460). The routine runs an eight-row reset loop: it calls FUN_58858BD0(0), clears per-row fields, resets an indexed value through FUN_587A15E0, restores two sentinel words, clears child state/flag fields, and calls FUN_58793E00. It then checks for at least 0x18 records in a global resource table and a nonnull data pointer; when available, it selects record offset +0x5C0 and copies six words into the child at receiver +0xA7C.",
         "uncertainty": "The receiver and child-row schemas, meaning of the reset fields and sentinel words, selected resource identity, and helper contracts remain unresolved. The non-type-9 selection is established by the matched caller, but no runtime visual test was performed."
       }
+    },
+    {
+      "address": "58861F40",
+      "name": "FUN_58861f40",
+      "size": 1298,
+      "symbol": "_FUN_58861f40",
+      "source": "src/client-current/Main/FUN_58861f40.cpp",
+      "source_sha256": "82fa6a7fbdbede4514a5f929cf667ffc064c808b03d1ec011e5f19cb7b3a1374",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58861F40",
+          "size": 1298,
+          "symbol": "_FUN_58861f40_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "00001390",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 192,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 214,
+              "target_address": "0000000F",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "588620BC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "0000FFF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "000004C0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 334,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 347,
+              "target_address": "58862157",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 360,
+              "target_address": "58862157",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 371,
+              "target_address": "00000440",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 376,
+              "target_address": "58862159",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "0000FFF0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 400,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 594,
+              "target_address": "000000D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 603,
+              "target_address": "58862012",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 614,
+              "target_address": "0000FFFD",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 629,
+              "target_address": "00000004",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 643,
+              "target_address": "0000FFFE",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 695,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 726,
+              "target_address": "00000680",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 825,
+              "target_address": "000005C0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 900,
+              "target_address": "00000262",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1095,
+              "target_address": "000000C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1195,
+              "target_address": "00000190",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1286,
+              "target_address": "58860070",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58861f40 / type-9 ship-map selected-entry transition",
+        "called_by": "Fresh Ghidra references show calls at 0x58862BE7 from byte-matched FUN_588628D0, 0x587EE3C6 from FUN_587EE2C0, 0x588625E9 from FUN_58862460, and 0x588631CD from FUN_58862FA0. At 0x58862BE7, the matched caller pushes EBP, loads ECX with the current entry from EBX, and calls this function with the loop index; it sets entry state 4 and a latch immediately before the call when the countdown reaches zero and the paired counter is nonzero.",
+        "behavior": "Ghidra confirms one contiguous 1,298-byte body [0x58861F40,0x58862452), with complete instruction coverage. The function stores the selected index at receiver +0x11C, clears an observed +0x478 field for entries in state 0x10, then walks five child rows to toggle visibility bits and copy six DWORDs from global resource records into row children. The selected row uses records at offsets +0x440/+0x4C0; other rows use indices derived from per-row ushort values. It then updates selected child resources at +0x72C and +0x744/+0x748/+0x754/+0x758 from global-table entries and calls FUN_58860070(0). The exact byte stream and mapped operands are emitted from the captured image.",
+        "uncertainty": "The entry/row schema, meaning of the state and visibility bits, selected resource identities, and helper contracts remain unresolved. The other three incoming callers have not been traced, and no emulator or runtime visual test has been run."
+      }
     }
   ]
 }

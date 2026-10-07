@@ -36,6 +36,8 @@ evidence and unresolved field meanings are in the
 Its type-9 branch now also has an exact-matched child-reset routine; see the
 [type-9 reset notes](current-main-ship-map-type9-reset.md) and the
 [non-type-9 sibling branch](current-main-ship-map-nontype9-reset.md).
+The matched type-9 timer handler's selected-entry transition helper is now
+covered in [type-9 transition notes](current-main-ship-map-type9-transition.md).
 
 Three more direct dependencies of this subsystem now have exact byte-match
 records: `FUN_588DD520` and `FUN_588DE620` are called by this update, while

@@ -28,5 +28,9 @@ The branch establishes the type-9 call path, but the child-row schema, counter
 and flag meanings, resource identity, and downstream visual effects remain
 unknown. No emulator runtime or visual test has been run for this branch.
 
+When the type-9 timer handler completes its selected-entry countdown, it calls
+the byte-matched selected-entry transition helper documented in
+[type-9 selected-entry transition](current-main-ship-map-type9-transition.md).
+
 The alternate non-type-9 branch has its own exact-match record and notes in
 [non-type-9 reset](current-main-ship-map-nontype9-reset.md).

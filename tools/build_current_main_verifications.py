@@ -178,6 +178,7 @@ ADDRESSES = (
     "588E0240", "588DF6B0", "588D81D0", "5874DDD0",
     "588DD520", "588DE620", "588DF9B0",
     "588D6570", "588DCE90", "588E6540", "588E7480", "5885FC40", "5885A340",
+    "58861F40",
     "588C5F30", "588C5FD0", "58814A10",
     "58907F80",
     "587781D0", "5875BA80",
@@ -7369,6 +7370,12 @@ EVIDENCE = {
         "called_by": "Ghidra records the direct call at 0x588DF189 from byte-matched FUN_588DEB30. The matched caller selects it when the current record's low five type bits equal 9, explicitly loads ECX from [0x58A245C4+0xA0], passes no stack arguments, and then calls matched FUN_588628D0 at 0x588DF19A.",
         "behavior": "Ghidra confirms 365 body bytes across [0x5885FC40,0x5885FCD7) and [0x5885FCE0,0x5885FDB6). The routine copies a value from the current object's resource at +0x388 into receiver +0xB8, initializes +0xB4 to 0x7D through FUN_587A15E0, changes three child fields at +0xEC/+0xE4/+0xF4, and clears observed counters/flags. It loops five times to reset child-row fields and child flag bits, calling FUN_58793E00 during each iteration. When a global resource table has at least 0x18 records and its data pointer is nonzero, it selects record offset +0x5C0 and copies six DWORDs into the child at receiver +0x72C.",
         "uncertainty": "The receiver/row schema, meanings of the reset flags and counters, selected resource identity, and helper contracts are unresolved. The type-9 branch is evidenced by the matched caller, but its visible effects have not been runtime-tested.",
+    },
+    "58861F40": {
+        "name_in_analysis": "FUN_58861f40 / type-9 ship-map selected-entry transition",
+        "called_by": "Fresh Ghidra references show calls at 0x58862BE7 from byte-matched FUN_588628D0, 0x587EE3C6 from FUN_587EE2C0, 0x588625E9 from FUN_58862460, and 0x588631CD from FUN_58862FA0. At 0x58862BE7, the matched caller pushes EBP, loads ECX with the current entry from EBX, and calls this function with the loop index; it sets entry state 4 and a latch immediately before the call when the countdown reaches zero and the paired counter is nonzero.",
+        "behavior": "Ghidra confirms one contiguous 1,298-byte body [0x58861F40,0x58862452), with complete instruction coverage. The function stores the selected index at receiver +0x11C, clears an observed +0x478 field for entries in state 0x10, then walks five child rows to toggle visibility bits and copy six DWORDs from global resource records into row children. The selected row uses records at offsets +0x440/+0x4C0; other rows use indices derived from per-row ushort values. It then updates selected child resources at +0x72C and +0x744/+0x748/+0x754/+0x758 from global-table entries and calls FUN_58860070(0). The exact byte stream and mapped operands are emitted from the captured image.",
+        "uncertainty": "The entry/row schema, meaning of the state and visibility bits, selected resource identities, and helper contracts remain unresolved. The other three incoming callers have not been traced, and no emulator or runtime visual test has been run.",
     },
     "588D6570": {
         "name_in_analysis": "FUN_588d6570 / ship-map refresh counter normalization",
