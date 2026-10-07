@@ -447,6 +447,10 @@ MAIN_C_SCREENSHOT_TIME_ADDRESSES = (
     "5897B790", "5897B850", "5897BA20", "5897CFE4", "5897D5D6",
 )
 ADDRESSES += MAIN_C_SCREENSHOT_TIME_ADDRESSES
+MAIN_FORCE_RECORD_REFRESH_ADDRESSES = (
+    "588B6050", "588B81F0", "588B8980",
+)
+ADDRESSES += MAIN_FORCE_RECORD_REFRESH_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -814,6 +818,7 @@ SOURCE_COMPILER_ADDRESSES = {
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_SCREENSHOT_TIME_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FORCE_RECORD_REFRESH_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13475,6 +13480,112 @@ for address in MAIN_C_SCREENSHOT_TIME_ADDRESSES:
         ),
     }
 EVIDENCE.update(MAIN_C_SCREENSHOT_TIME_EVIDENCE)
+
+MAIN_FORCE_RECORD_REFRESH_TRANSFERS = ROOT / (
+    "config/NF2_2026/current-main-force-record-refresh-transfers.tsv"
+)
+MAIN_FORCE_RECORD_REFRESH_PARENTS = {
+    address: [] for address in MAIN_FORCE_RECORD_REFRESH_ADDRESSES
+}
+MAIN_FORCE_RECORD_REFRESH_CHILDREN = {
+    address: [] for address in MAIN_FORCE_RECORD_REFRESH_ADDRESSES
+}
+with MAIN_FORCE_RECORD_REFRESH_TRANSFERS.open(encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        source = edge["source"].upper()
+        site = edge["site"].upper()
+        target = edge["target"].upper()
+        MAIN_FORCE_RECORD_REFRESH_PARENTS[target].append((source, site))
+        MAIN_FORCE_RECORD_REFRESH_CHILDREN[source].append((site, target))
+
+MAIN_FORCE_RECORD_REFRESH_ROOT_BEHAVIOR = {
+    "588B8980": (
+        "In the matched FUN_587BB700 dispatcher, event value 0x80020D03 "
+        "reaches this routine at 0x587BDE7D. When its fifth argument is "
+        "nonzero, the routine clears any prior child arrays, reads three "
+        "counts from its input, allocates pointer arrays, and constructs one "
+        "CForce child per first-list record through FUN_5877CC30. The source "
+        "record pointer advances by 0x180 bytes each iteration, equal to the "
+        "0x60 dwords copied by that matched constructor. It constructs a "
+        "second list through FUN_588E9F60, calls FUN_588B81F0, then sets bit 0 "
+        "in three receiver child-control flags at offsets +0xF0, +0xF4, and "
+        "+0xF8."
+    ),
+    "588B81F0": (
+        "This method updates text and data for the two child arrays at "
+        "receiver offsets +0x188 and +0x18C. For first-list entries it formats "
+        "a string from child offset +0xDC, looks up shared data using fields "
+        "at +0xA4 and +0x5E, and calls drawing/data callbacks. It scans the "
+        "global chain at DAT_58A247F4 for entries matching observed words at "
+        "+0x35E and low five bits of +4; a match calls FUN_5876BAF0 with "
+        "0x2BE, calls FUN_58764D30, and sets receiver field +0x1D0. It then "
+        "calls FUN_588B6050."
+    ),
+    "588B6050": (
+        "This method reads the selected child and global index bounds, "
+        "updates a timing value when the observed global interval is below "
+        "eight entries, and sets or clears a child flag at receiver offset "
+        "+0x148. It then updates eight child entries beginning at receiver "
+        "+0x11C from the selected index and first-list records, writing each "
+        "record's low four bits from offset +0x5E or zero when the index is "
+        "outside the observed bounds."
+    ),
+}
+MAIN_FORCE_RECORD_REFRESH_EVIDENCE = {}
+for address in MAIN_FORCE_RECORD_REFRESH_ADDRESSES:
+    parents = MAIN_FORCE_RECORD_REFRESH_PARENTS[address]
+    children = MAIN_FORCE_RECORD_REFRESH_CHILDREN[address]
+    if address == "588B8980":
+        called_by = (
+            "Matched FUN_587BB700 calls this function at 0x587BDE7D in its "
+            "0x80020D03 event case. The current direct-call verifier checks "
+            "that mapped caller edge and event-case evidence."
+        )
+    elif parents:
+        called_by = "Fresh Ghidra direct-transfer edges: " + "; ".join(
+            f"FUN_{source.lower()} at 0x{site}"
+            for source, site in parents
+        ) + "."
+    else:
+        called_by = (
+            "This function belongs to the audited direct-transfer closure "
+            "rooted at the matched 0x80020D03 event path. Its direct caller "
+            "inside the closure was not isolated."
+        )
+    if address in MAIN_FORCE_RECORD_REFRESH_ROOT_BEHAVIOR:
+        behavior = MAIN_FORCE_RECORD_REFRESH_ROOT_BEHAVIOR[address]
+    elif children:
+        behavior = (
+            "Fresh Ghidra records direct in-closure transfers at "
+            + "; ".join(
+                f"0x{site} to FUN_{target.lower()}"
+                for site, target in children
+            )
+            + ". The exact emitted body is byte-matched; its remaining field "
+            "and display semantics are described only where directly observed."
+        )
+    else:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra records no "
+            "direct CALL or JMP from this body to another closure member; "
+            "its own field and display semantics remain unassigned beyond "
+            "the direct observations in this subsystem note."
+        )
+    MAIN_FORCE_RECORD_REFRESH_EVIDENCE[address] = {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / force-record population and refresh closure"
+        ),
+        "called_by": called_by,
+        "behavior": behavior,
+        "uncertainty": (
+            "Event meaning, input record schemas, receiver and parameter "
+            "types, global-list ownership, and user-visible display behavior "
+            "remain uncertain wherever not stated as direct Ghidra or mapped "
+            "instruction observations. The closure uses fresh Ghidra ranges "
+            "and transfers; no emulator runtime test has been performed."
+        ),
+    }
+EVIDENCE.update(MAIN_FORCE_RECORD_REFRESH_EVIDENCE)
 
 
 if __name__ == "__main__":

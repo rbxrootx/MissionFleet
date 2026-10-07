@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,548 of 42,461 functions and 2,729,458 of 10,470,295 bytes (20.1314% by
-functions and 26.0686% by bytes); every counted function match is verified at
+credits 8,551 of 42,461 functions and 2,731,274 of 10,470,295 bytes (20.1385% by
+functions and 26.0859% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,415 exact function matches totaling 1,756,040 bytes. Its
+inventory has 2,418 exact function matches totaling 1,757,856 bytes. Its
 RTTI-identified `CExplanPannel` event/update closure adds 62 exact functions /
 11,871 bytes across 74 Ghidra ranges. The three vtable methods converge on a
 state dispatcher, and three already-matched caller paths reach helpers within
@@ -71,6 +71,11 @@ functions / 17,694 bytes across 106 fresh Ghidra ranges. Its vtable method,
 matched constructor path, screenshot-directory formatting calls, and field and
 callback uncertainties are recorded in
 [`current-main-c-screenshot-time.md`](current-main-c-screenshot-time.md).
+The force-record population and refresh path adds three exact functions / 1,816
+bytes in six fresh Ghidra ranges. Its matched `0x80020D03` dispatcher call,
+matched `CForce` constructor, and two-step refresh chain establish the path;
+record and UI semantics remain uncertain. See
+[`current-main-force-record-population-refresh.md`](current-main-force-record-population-refresh.md).
 The RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are

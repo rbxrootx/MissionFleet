@@ -441824,6 +441824,480 @@
         "behavior": "The exact emitted body is byte-matched. Fresh Ghidra records no direct CALL or JMP from this body to another closure member; its field and user-visible semantics remain unassigned.",
         "uncertainty": "The callback meanings, receiver and parameter types, field semantics, and user-visible screenshot behavior remain uncertain where not stated as direct Ghidra observations. The function ranges and direct transfers come from fresh Ghidra exports and mapped machine code. No emulator runtime test has been performed."
       }
+    },
+    {
+      "address": "588B6050",
+      "name": "FUN_588b6050",
+      "size": 347,
+      "symbol": "_FUN_588b6050",
+      "source": "src/client-current/Main/FUN_588b6050.cpp",
+      "source_sha256": "d20e2aa28b163c25e5e51a5e4baffc9c6f917b6664d7645db94f14887ca059de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B6050",
+          "size": 347,
+          "symbol": "_FUN_588b6050_segment_00",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "588B61A9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 284,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b6050 / force-record population and refresh closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_588b81f0 at 0x588B8489.",
+        "behavior": "This method reads the selected child and global index bounds, updates a timing value when the observed global interval is below eight entries, and sets or clears a child flag at receiver offset +0x148. It then updates eight child entries beginning at receiver +0x11C from the selected index and first-list records, writing each record's low four bits from offset +0x5E or zero when the index is outside the observed bounds.",
+        "uncertainty": "Event meaning, input record schemas, receiver and parameter types, global-list ownership, and user-visible display behavior remain uncertain wherever not stated as direct Ghidra or mapped instruction observations. The closure uses fresh Ghidra ranges and transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "588B81F0",
+      "name": "FUN_588b81f0",
+      "size": 682,
+      "symbol": "_FUN_588b81f0",
+      "source": "src/client-current/Main/FUN_588b81f0.cpp",
+      "source_sha256": "0b285f56ad8010f4f08d8b0814196059971e8863d02de3a99c8cac2681408f0c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B81F0",
+          "size": 519,
+          "symbol": "_FUN_588b81f0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "588B8310",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "589A0988",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "589A0984",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "589CFCA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 284,
+              "target_address": "588B8240",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "588B83DE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 328,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 346,
+              "target_address": "5898C040",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "5898C194",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "589A0984",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 416,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 452,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "588B8321",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 513,
+              "target_address": "588B8487",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B8400",
+          "size": 163,
+          "symbol": "_FUN_588b81f0_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 131,
+              "target_address": "588B8400",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "588B6050",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b81f0 / force-record population and refresh closure",
+        "called_by": "Fresh Ghidra direct-transfer edges: FUN_588b8980 at 0x588B8C6D.",
+        "behavior": "This method updates text and data for the two child arrays at receiver offsets +0x188 and +0x18C. For first-list entries it formats a string from child offset +0xDC, looks up shared data using fields at +0xA4 and +0x5E, and calls drawing/data callbacks. It scans the global chain at DAT_58A247F4 for entries matching observed words at +0x35E and low five bits of +4; a match calls FUN_5876BAF0 with 0x2BE, calls FUN_58764D30, and sets receiver field +0x1D0. It then calls FUN_588B6050.",
+        "uncertainty": "Event meaning, input record schemas, receiver and parameter types, global-list ownership, and user-visible display behavior remain uncertain wherever not stated as direct Ghidra or mapped instruction observations. The closure uses fresh Ghidra ranges and transfers; no emulator runtime test has been performed."
+      }
+    },
+    {
+      "address": "588B8980",
+      "name": "FUN_588b8980",
+      "size": 787,
+      "symbol": "_FUN_588b8980",
+      "source": "src/client-current/Main/FUN_588b8980.cpp",
+      "source_sha256": "4aeb7bb0d4890deddb9f9c40f1018d9aac28e42e461ded1d87eb60693cf2a41c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B8980",
+          "size": 245,
+          "symbol": "_FUN_588b8980_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988576",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 19,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "588B8C8F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 241,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B8A7E",
+          "size": 101,
+          "symbol": "_FUN_588b8980_segment_01",
+          "relocations": [
+            {
+              "offset": 97,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B8AEC",
+          "size": 441,
+          "symbol": "_FUN_588b8980_segment_02",
+          "relocations": [
+            {
+              "offset": 71,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "5877CC30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "588E9F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 386,
+              "target_address": "588B81F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b8980 / force-record population and refresh closure",
+        "called_by": "Matched FUN_587BB700 calls this function at 0x587BDE7D in its 0x80020D03 event case. The current direct-call verifier checks that mapped caller edge and event-case evidence.",
+        "behavior": "In the matched FUN_587BB700 dispatcher, event value 0x80020D03 reaches this routine at 0x587BDE7D. When its fifth argument is nonzero, the routine clears any prior child arrays, reads three counts from its input, allocates pointer arrays, and constructs one CForce child per first-list record through FUN_5877CC30. The source record pointer advances by 0x180 bytes each iteration, equal to the 0x60 dwords copied by that matched constructor. It constructs a second list through FUN_588E9F60, calls FUN_588B81F0, then sets bit 0 in three receiver child-control flags at offsets +0xF0, +0xF4, and +0xF8.",
+        "uncertainty": "Event meaning, input record schemas, receiver and parameter types, global-list ownership, and user-visible display behavior remain uncertain wherever not stated as direct Ghidra or mapped instruction observations. The closure uses fresh Ghidra ranges and transfers; no emulator runtime test has been performed."
+      }
     }
   ]
 }

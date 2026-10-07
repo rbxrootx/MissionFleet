@@ -7,6 +7,7 @@ from tools import (
     generate_progress,
     verify_current_main_c_explan_pannel,
     verify_current_main_c_screenshot_time,
+    verify_current_main_force_record_refresh,
 )
 
 
@@ -19,8 +20,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_548)
-        self.assertEqual(self.report["measures"]["matched_code"], "2729458")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_551)
+        self.assertEqual(self.report["measures"]["matched_code"], "2731274")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -31,8 +32,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_415)
-        self.assertEqual(current["measures"]["matched_code"], "1756040")
+        self.assertEqual(current["measures"]["matched_functions"], 2_418)
+        self.assertEqual(current["measures"]["matched_code"], "1757856")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -69,6 +70,19 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("+0xFC", evidence["587C7300"]["behavior"])
         self.assertIn("./ScreenShot", evidence["587C71A0"]["behavior"])
         verify_current_main_c_screenshot_time.main()
+
+    def test_force_record_population_refresh_has_dispatch_and_constructor_evidence(self):
+        addresses = build_current_main_verifications.MAIN_FORCE_RECORD_REFRESH_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_FORCE_RECORD_REFRESH_EVIDENCE
+        self.assertEqual(addresses, ("588B6050", "588B81F0", "588B8980"))
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+        self.assertIn("0x80020D03", evidence["588B8980"]["behavior"])
+        self.assertIn("0x180 bytes", evidence["588B8980"]["behavior"])
+        verify_current_main_force_record_refresh.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,548 verified matches
-totaling 2,729,458 bytes (20.1314% by functions, 26.0686% by bytes), each at
+identified code bytes across six report units. There are 8,551 verified matches
+totaling 2,731,274 bytes (20.1385% by functions, 26.0859% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The RTTI-identified `CExplanPannel` event/update
@@ -20,6 +20,11 @@ RTTI-backed `CScreenShotTime@CNFScreenShot` closure adds 102 exact functions /
 matched constructor path, screenshot-directory formatting calls, and remaining
 field/callback uncertainties are recorded in
 [the subsystem note](docs/current-main-c-screenshot-time.md). The
+force-record population and refresh path adds three exact functions / 1,816
+bytes in six fresh Ghidra ranges. Its matched `0x80020D03` dispatcher caller,
+`CForce` constructor link, and two-helper update path are documented with the
+remaining input-record and UI uncertainties in
+[the subsystem note](docs/current-main-force-record-population-refresh.md). The
 RTTI-backed `CHCB_LandingTank` constructor
 adds one exact function / 1,234 bytes; its matched eight-object map-screen
 caller loop, sprite-bundle setup, and unresolved visual roles are recorded in
