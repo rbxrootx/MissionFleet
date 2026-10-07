@@ -1118,6 +1118,12 @@ MAIN_CMF_FILE_PARSER_ADDRESSES = ("587969D0", "589091F0", "58909F50")
 ADDRESSES += MAIN_CMF_FILE_PARSER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CMF_FILE_PARSER_ADDRESSES)
 
+MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES = (
+    "587B9110", "588B5840", "588BB5E0", "588BCB00",
+)
+ADDRESSES += MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES)
+
 MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
     "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
 )
@@ -10557,6 +10563,73 @@ MAIN_CMF_FILE_PARSER_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CMF_FILE_PARSER_EVIDENCE)
+
+MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE = {
+    "587B9110": {
+        "name_in_analysis": "FUN_587b9110 / trade-panel event helper",
+        "called_by": "FUN_588b5840 at 0x588B585F.",
+        "behavior": (
+            "Calls FUN_58970c70 with event 0x80010D01 and five zero-valued "
+            "arguments."
+        ),
+        "uncertainty": (
+            "The event dispatcher, receiver, and event payload semantics are "
+            "unresolved. No client input or panel-close runtime test was run."
+        ),
+    },
+    "588B5840": {
+        "name_in_analysis": "FUN_588b5840 / CPannelTrade virtual slot +0x08",
+        "called_by": (
+            "RTTI-backed vftable address point 0x589A0954 references this "
+            "function at slot +0x08 (0x589A095C). The complete-object locator "
+            "at 0x589A0950 points to the CPannelTrade type descriptor. No "
+            "direct code caller was found in fresh Ghidra references."
+        ),
+        "behavior": (
+            "When receiver field +0x19C is not 10 or 11, sends event "
+            "0x80010D01 through FUN_587b9110. Then updates flags at +0x24, "
+            "clears sixteen child-record fields at +0x50, releases conditional "
+            "child collections, resets child state through FUN_588bb5e0 and "
+            "FUN_588bcb00, clears counters at +0x178..+0x184, and zeros "
+            "+0x1D4/+0x1D8."
+        ),
+        "uncertainty": (
+            "RTTI establishes class ownership and the vtable slot, but the "
+            "virtual dispatch caller, receiver-field meanings, child identities, "
+            "and event behavior are unresolved. No UI runtime test was run."
+        ),
+    },
+    "588BB5E0": {
+        "name_in_analysis": "FUN_588bb5e0 / trade-panel child-state reset",
+        "called_by": (
+            "FUN_588b5840 at 0x588B5ACD; byte-matched FUN_588fc770 at "
+            "0x588FC7C0; and byte-matched FUN_588fd180 at 0x588FD3E7."
+        ),
+        "behavior": (
+            "Walks the observed child count and, for selected entries, restores "
+            "a flag and short key, updates linked memberships through "
+            "FUN_58902f50/FUN_58902ee0, and invokes the observed panel helpers."
+        ),
+        "uncertainty": (
+            "The entry schema, selection predicate's meaning, linked-index "
+            "ownership, and helper effects on visible controls are unresolved. "
+            "No panel runtime test was run."
+        ),
+    },
+    "588BCB00": {
+        "name_in_analysis": "FUN_588bcb00 / repeated trade-panel child cleanup",
+        "called_by": (
+            "FUN_588b5840 at 0x588B5ADF and byte-matched FUN_588fc770 at "
+            "0x588FC7D2."
+        ),
+        "behavior": "Calls FUN_589087f0 twice in a fixed loop.",
+        "uncertainty": (
+            "The cleanup target identity and ownership contract are unresolved. "
+            "No runtime cleanup test was run."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE)
 
 MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
     "587A2F20": "FUN_587A5120 at 0x587A51BB",
