@@ -1090,6 +1090,10 @@ CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES = ("58782810",)
 ADDRESSES += CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_ADDRESSES)
 
+MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES = ("588D6EA0",)
+ADDRESSES += MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9815,6 +9819,39 @@ CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_CHCB_LANDING_TANK_CONSTRUCTOR_EVIDENCE)
+
+MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_EVIDENCE = {
+    "588D6EA0": {
+        "name_in_analysis": "FUN_588d6ea0 / ship-map encoded child-state setup",
+        "called_by": (
+            "Fresh Ghidra references show one direct call from the byte-matched "
+            "CShip_MapObjectScreen constructor FUN_588e05c0 at 0x588E2FA4. "
+            "The matched caller loads a DWORD from its constructor argument at "
+            "+0x110, pushes it, and sets ECX to the screen receiver before the "
+            "call; the focused verifier checks those instructions and the caller "
+            "body range."
+        ),
+        "behavior": (
+            "Fresh Ghidra 12.1.3 output covers the complete 1,202-byte body and "
+            "shows the method extracting (argument >> 8) & 0xFFF. It clears six "
+            "child resource pointers and number states, then configures a child "
+            "group for encoded value zero or one of the observed ranges 1-10, "
+            "11-100, 101-300, 301-500, or 501-600. The nonzero branches select "
+            "version-gated global resource records, update observed child "
+            "positions through matched FUN_58903290, set number-child state via "
+            "matched FUN_58907360, and set bit 0 on the observed child flags. "
+            "All 17 direct calls target byte-verified functions."
+        ),
+        "uncertainty": (
+            "The mapped code does not identify the encoded value's semantic "
+            "category, the child-control roles, global record schemas, field "
+            "types, coordinate units, or rendered result. Static matching does "
+            "not establish the live-client appearance; no emulator or visual "
+            "runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SHIP_MAP_ENCODED_CHILD_SETUP_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {

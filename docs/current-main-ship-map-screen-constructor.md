@@ -23,6 +23,10 @@ not exercised in the original client, and the decompiler output does not
 establish the original high-level source or runtime visual result.
 Its call to `FUN_588D6600` now has a verified complete boundary and is described
 in the [child position update notes](current-main-ship-map-child-position-update.md).
+The constructor also calls `FUN_588D6EA0` at `0x588E2FA4` with the value loaded
+from the constructor argument object's `+0x110` field. The matched helper's
+encoded child-state setup and remaining uncertainties are documented in the
+[child-state setup notes](current-main-ship-map-encoded-child-setup.md).
 
 ## State construction at `0x588D84D0`
 
