@@ -15,6 +15,7 @@ from tools import (
     verify_current_main_5875cf00_state6_sprite_setup,
     verify_current_main_587b1b70_type05_geometry,
     verify_current_main_587b4100_type06_transform,
+    verify_current_main_80021101_record_metric,
 )
 
 
@@ -27,8 +28,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_582)
-        self.assertEqual(self.report["measures"]["matched_code"], "2738583")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_585)
+        self.assertEqual(self.report["measures"]["matched_code"], "2740263")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -39,14 +40,29 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_449)
-        self.assertEqual(current["measures"]["matched_code"], "1765165")
+        self.assertEqual(current["measures"]["matched_functions"], 2_452)
+        self.assertEqual(current["measures"]["matched_code"], "1766845")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
         self.assertEqual(core["measures"]["matched_functions"], 431)
         self.assertEqual(core["measures"]["matched_code"], "333421")
+
+    def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
+        addresses = (
+            build_current_main_verifications.MAIN_80021101_RECORD_METRIC_ADDRESSES
+        )
+        evidence = build_current_main_verifications.MAIN_80021101_RECORD_METRIC_EVIDENCE
+        self.assertEqual(addresses, ("587583E0", "58758760", "587590A0"))
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+        self.assertIn("0x80021101", evidence["587590A0"]["called_by"])
+        self.assertIn("1,000 iterations", evidence["587583E0"]["behavior"])
+        verify_current_main_80021101_record_metric.main()
 
     def test_c_explan_pannel_event_closure_has_rtti_and_per_function_evidence(self):
         addresses = build_current_main_verifications.MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES

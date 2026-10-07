@@ -444785,6 +444785,316 @@
         "behavior": "Reads packed words at receiver +0x228, +0x22A, and +0x22C. The low four bits of +0x228 set the observed entry count; bits 11-12 select one to four groups, with the entry count divided across them and any remainder assigned to the first group. The low five bits of +0x22A seed values and bits 5-9 provide the step. It builds six-value scratch records, then processes each selected entry over 36 coefficient steps using arrays at 0x58A0B4D8 and 0x58A0ED18. Each step writes six integer results beginning at receiver +0x304; the low four bits of +0x22C bias one result. The Ghidra body contains 845 bytes / 268 instructions in two ranges and has no direct outgoing calls.",
         "uncertainty": "The packed fields' domain units, coefficient-array meanings, destination table schema, and downstream visual/gameplay effect are not identified by the mapped code or callers. The two Ghidra ranges omit an intervening eight-byte gap; its ownership and purpose are not established. This is static installed-client evidence, not an emulator runtime test."
       }
+    },
+    {
+      "address": "587583E0",
+      "name": "FUN_587583e0",
+      "size": 889,
+      "symbol": "_FUN_587583e0",
+      "source": "src/client-current/Main/FUN_587583e0.cpp",
+      "source_sha256": "c5a4e9f9eb40f82978ec2493f5cb96d9bc6651c789fdc43d4295910b468be939",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587583E0",
+          "size": 889,
+          "symbol": "_FUN_587583e0_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "58A244C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "587585BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "587585BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "587585BE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "587585AE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "58A0ED18",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "58A244C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "5875870F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "58758498",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 603,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 829,
+              "target_address": "58758500",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 848,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587583E0 / bounded integer record calculation",
+        "called_by": "Fresh Ghidra references show two calls from byte-verified FUN_587590A0, at 0x587591C2 and 0x58759288, for the paired record slots.",
+        "behavior": "Uses the parent object's selected type-5 record and the supplied 0x38-byte scratch context. It computes an initial 10,000-scaled integer value from context fields and a decoded record byte, then uses coefficient tables at 0x58A0ED18 and 0x58A0B4D8 in an integer-only iterative calculation. The loop exits on its observed value bounds or after 1,000 iterations.",
+        "uncertainty": "The input fields' units, coefficient-table semantics, returned metric meaning, and gameplay effect are unknown. The description follows Ghidra's recovered integer operations; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58758760",
+      "name": "FUN_58758760",
+      "size": 255,
+      "symbol": "_FUN_58758760",
+      "source": "src/client-current/Main/FUN_58758760.cpp",
+      "source_sha256": "8059cdced5c764ed43fd1d439ab2665808f916486143edd4283650717d0be0de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58758760",
+          "size": 87,
+          "symbol": "_FUN_58758760_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587587C0",
+          "size": 168,
+          "symbol": "_FUN_58758760_segment_01",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "58778DC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58758760 / keyed type-0x0B record selector",
+        "called_by": "Fresh Ghidra references show two calls from byte-verified FUN_587590A0 at 0x58759195 and 0x5875925B, when a selected type-5 record's status low nibble is 2.",
+        "behavior": "Walks the count at DAT_58A2481C+0xE4 and queries each ordinal through FUN_58778DC0 using type 0x0B. It keeps at most three records whose +0xA2 key matches the argument and whose status low nibble is zero, recording their +0x99 bytes and lookup keys. It then compares those byte values and performs a final lookup through FUN_58778DC0.",
+        "uncertainty": "The record schema, why at most three candidates are considered, and the final lookup's tie/default behavior are unresolved. This is static mapped-client evidence; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587590A0",
+      "name": "FUN_587590a0",
+      "size": 536,
+      "symbol": "_FUN_587590a0",
+      "source": "src/client-current/Main/FUN_587590a0.cpp",
+      "source_sha256": "e590b8bbd65aab3461817f883920e3177af922f0c5bd029b260f11b6f5ffa98e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587590A0",
+          "size": 536,
+          "symbol": "_FUN_587590a0_segment_00",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "587592AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "587592AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "587592AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "587591D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "587591D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "58758760",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 291,
+              "target_address": "587583E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 318,
+              "target_address": "587592A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "587592A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 380,
+              "target_address": "587592A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 444,
+              "target_address": "58758760",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "587583E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587590A0 / event 0x80021101 record metric helper",
+        "called_by": "Fresh Ghidra references show byte-verified FUN_587592C0 calling this helper at 0x58759E39. Byte-verified FUN_587BB700 calls FUN_587592C0 at 0x587BFFA6 and 0x587C0116 in its event 0x80021101 paths; the focused verifier checks all three direct transfers.",
+        "behavior": "The helper clears two DWORD result slots and reads record tables from the object at receiver +8. It proceeds only when the indexed record kind is 5, then independently checks the two record pointers at nested offsets +0xBC0/+0xBC4 and the encoded status words at +0xAC0/+0xAC2. Status low-nibble values 0 and 2 are accepted unless the associated word equals 0xAA. Each accepted record builds a zeroed 0x38-byte scratch context and calls FUN_587583E0; status 2 first resolves its +0xA2 key through FUN_58758760. The caller reads both result slots, takes their maximum, and tracks the maximum across 32 indices. The calculation helper performs integer arithmetic with coefficient data at 0x58A0B4D8 and 0x58A0ED18 and is bounded by 1,000 iterations.",
+        "uncertainty": "The record schema, coefficient meanings, metric units, gameplay contract, and interpretation of the selected status values are not identified. FUN_58758760 scans up to three matching type-0x0B records and chooses through FUN_58778DC0, but the key/tie policy is not established. This is static mapped-client evidence; no emulator runtime test was performed."
+      }
     }
   ]
 }

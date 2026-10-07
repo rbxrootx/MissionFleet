@@ -333,6 +333,8 @@ The localized member squad-join proposal path is documented in
 [the proposal helper notes](docs/current-main-member-squad-join-proposal.md).
 The communication battle-record route is documented in
 [the battle-record notes](docs/current-main-comm-battle-record-route.md).
+The event 0x80021101 record-metric helper closure is documented in
+[its focused notes](docs/current-main-80021101-record-metric-helpers.md).
 The companion state-2/3 branch is documented in
 [the state-transition notes](docs/current-main-comm-battle-record-state-2-3-route.md).
 The shared bounded record-pointer lookup is documented in

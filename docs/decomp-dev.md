@@ -52,13 +52,18 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,582 of 42,461 functions and 2,738,583 of 10,470,295 bytes (20.2115% by
-functions and 26.1557% by bytes); every counted function match is verified at
+credits 8,585 of 42,461 functions and 2,740,263 of 10,470,295 bytes (20.2186% by
+functions and 26.1718% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,449 exact function matches totaling 1,765,165 bytes. The
-tax/investment control refresh adds 19 exact functions / 1,196 bytes across 19
+inventory has 2,452 exact function matches totaling 1,766,845 bytes. The
+event 0x80021101 record-metric helper closure adds three exact functions / 1,680
+bytes. Its fresh Ghidra ranges, paired record path, bounded coefficient-driven
+calculation, lookup tail-jumps, and matched caller chain are checked by a
+focused verifier; schema and metric meaning remain unresolved. See
+[`current-main-80021101-record-metric-helpers.md`](current-main-80021101-record-metric-helpers.md).
+The tax/investment control refresh adds 19 exact functions / 1,196 bytes across 19
 fresh Ghidra ranges. Its 371 instructions, 76 direct-call references, and the
 matched `0x8002311B` / `0x8002312B` callsites are checked by a focused verifier.
 Four other callers remain unmatched, and the control and table meanings and

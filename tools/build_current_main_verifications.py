@@ -1366,6 +1366,12 @@ MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES = (
 ADDRESSES += MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMBAT_STRENGTH_ANALYZER_ADDRESSES)
 
+MAIN_80021101_RECORD_METRIC_ADDRESSES = (
+    "587583E0", "58758760", "587590A0",
+)
+ADDRESSES += MAIN_80021101_RECORD_METRIC_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_80021101_RECORD_METRIC_ADDRESSES)
+
 MAIN_BATTLE_ROOM_20115_ADDRESSES = (
     "5874A840", "5874B5A0", "5874BAC0", "5874F1F0",
     "5874F8C0", "58789590", "587D0AA0", "58877AB0",
@@ -14018,6 +14024,86 @@ MAIN_TYPE06_PACKED_STATE_TRANSFORM_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_EVIDENCE)
+
+MAIN_80021101_RECORD_METRIC_EVIDENCE = {
+    "587590A0": {
+        "name_in_analysis": "FUN_587590A0 / event 0x80021101 record metric helper",
+        "called_by": (
+            "Fresh Ghidra references show byte-verified FUN_587592C0 calling "
+            "this helper at 0x58759E39. Byte-verified FUN_587BB700 calls "
+            "FUN_587592C0 at 0x587BFFA6 and 0x587C0116 in its event "
+            "0x80021101 paths; the focused verifier checks all three direct "
+            "transfers."
+        ),
+        "behavior": (
+            "The helper clears two DWORD result slots and reads record tables "
+            "from the object at receiver +8. It proceeds only when the "
+            "indexed record kind is 5, then independently checks the two "
+            "record pointers at nested offsets +0xBC0/+0xBC4 and the encoded "
+            "status words at +0xAC0/+0xAC2. Status low-nibble values 0 and 2 "
+            "are accepted unless the associated word equals 0xAA. Each "
+            "accepted record builds a zeroed 0x38-byte scratch context and "
+            "calls FUN_587583E0; status 2 first resolves its +0xA2 key through "
+            "FUN_58758760. The caller reads both result slots, takes their "
+            "maximum, and tracks the maximum across 32 indices. The calculation "
+            "helper performs integer arithmetic with coefficient data at "
+            "0x58A0B4D8 and 0x58A0ED18 and is bounded by 1,000 iterations."
+        ),
+        "uncertainty": (
+            "The record schema, coefficient meanings, metric units, gameplay "
+            "contract, and interpretation of the selected status values are "
+            "not identified. FUN_58758760 scans up to three matching type-0x0B "
+            "records and chooses through FUN_58778DC0, but the key/tie policy "
+            "is not established. This is static mapped-client evidence; no "
+            "emulator runtime test was performed."
+        ),
+    },
+    "587583E0": {
+        "name_in_analysis": "FUN_587583E0 / bounded integer record calculation",
+        "called_by": (
+            "Fresh Ghidra references show two calls from byte-verified "
+            "FUN_587590A0, at 0x587591C2 and 0x58759288, for the paired "
+            "record slots."
+        ),
+        "behavior": (
+            "Uses the parent object's selected type-5 record and the supplied "
+            "0x38-byte scratch context. It computes an initial 10,000-scaled "
+            "integer value from context fields and a decoded record byte, then "
+            "uses coefficient tables at 0x58A0ED18 and 0x58A0B4D8 in an "
+            "integer-only iterative calculation. The loop exits on its "
+            "observed value bounds or after 1,000 iterations."
+        ),
+        "uncertainty": (
+            "The input fields' units, coefficient-table semantics, returned "
+            "metric meaning, and gameplay effect are unknown. The description "
+            "follows Ghidra's recovered integer operations; no emulator runtime "
+            "test was performed."
+        ),
+    },
+    "58758760": {
+        "name_in_analysis": "FUN_58758760 / keyed type-0x0B record selector",
+        "called_by": (
+            "Fresh Ghidra references show two calls from byte-verified "
+            "FUN_587590A0 at 0x58759195 and 0x5875925B, when a selected "
+            "type-5 record's status low nibble is 2."
+        ),
+        "behavior": (
+            "Walks the count at DAT_58A2481C+0xE4 and queries each ordinal "
+            "through FUN_58778DC0 using type 0x0B. It keeps at most three "
+            "records whose +0xA2 key matches the argument and whose status "
+            "low nibble is zero, recording their +0x99 bytes and lookup keys. "
+            "It then compares those byte values and performs a final lookup "
+            "through FUN_58778DC0."
+        ),
+        "uncertainty": (
+            "The record schema, why at most three candidates are considered, "
+            "and the final lookup's tie/default behavior are unresolved. This "
+            "is static mapped-client evidence; no emulator runtime test was "
+            "performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_80021101_RECORD_METRIC_EVIDENCE)
 
 
 if __name__ == "__main__":

@@ -22,6 +22,12 @@ XOR `0xAA`. Some paths walk adjacent records in `0x60`-byte steps; others call
 `FUN_58758360` or `FUN_587590a0` and compare resulting values. The offsets,
 conditions, and helper calls are directly visible in Ghidra.
 
+The `FUN_587590a0` branch is now covered by a separate exact-match closure of
+three functions totaling 1,680 bytes. Its paired outputs are compared and
+aggregated by this scanner. The sibling `FUN_58758360` calculation path is
+still outside that closure; see the
+[event 0x80021101 helper notes](current-main-80021101-record-metric-helpers.md).
+
 ## Uncertainty
 
 The record schema, metric units, intended battle meaning, and precise output
