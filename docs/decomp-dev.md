@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,375 of 42,461 functions and 2,695,059 of 10,470,295 bytes (19.7240% by
-functions and 25.7400% by bytes); every counted function match is verified at
+credits 8,376 of 42,461 functions and 2,696,166 of 10,470,295 bytes (19.7263% by
+functions and 25.7506% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,242 exact function matches totaling 1,721,641 bytes. The
+inventory has 2,243 exact function matches totaling 1,722,748 bytes. The
 RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are
@@ -78,6 +78,10 @@ functions / 1,345 bytes. Its mapped strings and matched Enter-key caller ground
 the recipient parser and input-state update; record and protocol semantics
 remain unresolved. See
 [`current-main-chat-private-recipient.md`](current-main-chat-private-recipient.md).
+The page-result control menu's slot `+0x00` cleanup body adds one exact
+function / 1,107 bytes. Its matched RTTI caller, child-pointer cleanup, exact
+ranges, and unresolved indirect callbacks are documented in
+[`current-main-page-result-control-menu-cleanup.md`](current-main-page-result-control-menu-cleanup.md).
 The RTTI-backed `CPannelCommunicatorMessage` constructor adds one exact function /
 1,298 bytes. Its matched parent call, `+0x110` child slot, complete direct-call
 boundaries, and unresolved control appearance are documented in

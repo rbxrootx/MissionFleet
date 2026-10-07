@@ -428485,6 +428485,72 @@
         "behavior": "Stores two supplied mode values in receiver fields +0x21CE8 and +0x21CE4, calls verified FUN_5875F940 to clear/reset the input, passes the supplied mode to verified FUN_5888CDF0, copies the recipient text into the child buffer at +0x80, records its length at +0x8C and +0x94, and writes the first mode value to global 0x58A245C0 + 0xB8. Its complete Ghidra body is 120 bytes in one range.",
         "uncertainty": "Receiver and child types, the meaning of the mode fields and global +0xB8, recipient display behavior, and the contracts of the adjacent chat-input callers remain unresolved. Static call evidence does not establish server acceptance or visible runtime behavior; no emulator test was performed."
       }
+    },
+    {
+      "address": "588092F0",
+      "name": "FUN_588092f0",
+      "size": 1107,
+      "symbol": "_FUN_588092f0",
+      "source": "src/client-current/Main/FUN_588092f0.cpp",
+      "source_sha256": "b8a624cec2f26dfedda96d3a6f31aab7376b7a866b9f2e7e3adf1310d22a5dfa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588092F0",
+          "size": 397,
+          "symbol": "_FUN_588092f0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58987F48",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5899D5F4",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58809480",
+          "size": 710,
+          "symbol": "_FUN_588092f0_segment_01",
+          "relocations": [
+            {
+              "offset": 686,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588092f0 / CPageResultOfBattle_ControlMenuScreen cleanup body",
+        "called_by": "Called at 0x58809893 by byte-matched FUN_58809890, the +0x00 method in the RTTI-backed CPageResultOfBattle_ControlMenuScreen vtable at 0x5899D5F4. Ghidra records no other incoming callsite.",
+        "behavior": "Installs CPageResultOfBattle_ControlMenuScreen::vftable on the receiver, then visits groups of child/object pointer fields and arrays. For each non-null pointer it calls that object's first vtable entry (usually with argument 1) and clears the field; the first field also receives a second supplied value. It then calls verified FUN_58902C10, restores the saved exception-list pointer, and returns. Fresh Ghidra assigns 1,107 bytes in two exact ranges with 374 decoded instructions.",
+        "uncertainty": "Child field roles and ownership rules, the runtime effects of the indirect virtual callbacks, the second value passed for the first field, and FUN_58902C10's contract remain unresolved. The RTTI slot and mapped cleanup behavior establish static teardown context; no client or emulator destruction test was performed."
+      }
     }
   ]
 }

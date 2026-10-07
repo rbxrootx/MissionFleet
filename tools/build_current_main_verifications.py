@@ -404,6 +404,9 @@ ADDRESSES = (
     "588C6510", "588C6AA0", "588C66C0", "588C6830", "588D6C40",
     "588EB2D0", "588C6470", "5875F310",
 )
+MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES = ("588092F0",)
+ADDRESSES += MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES
+
 RELOCATION_OVERRIDES = {
     "58907380": [
         {"offset": 8, "target_address": "589072A0", "kind": "relative",
@@ -767,6 +770,7 @@ SOURCE_COMPILER_ADDRESSES = {
     "587E5C80",
     "58778AD0",
 }
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -12838,6 +12842,37 @@ MAIN_CHAT_PRIVATE_RECIPIENT_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CHAT_PRIVATE_RECIPIENT_EVIDENCE)
+
+MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_EVIDENCE = {
+    "588092F0": {
+        "name_in_analysis": (
+            "FUN_588092f0 / CPageResultOfBattle_ControlMenuScreen cleanup body"
+        ),
+        "called_by": (
+            "Called at 0x58809893 by byte-matched FUN_58809890, the +0x00 "
+            "method in the RTTI-backed CPageResultOfBattle_ControlMenuScreen "
+            "vtable at 0x5899D5F4. Ghidra records no other incoming callsite."
+        ),
+        "behavior": (
+            "Installs CPageResultOfBattle_ControlMenuScreen::vftable on the "
+            "receiver, then visits groups of child/object pointer fields and "
+            "arrays. For each non-null pointer it calls that object's first "
+            "vtable entry (usually with argument 1) and clears the field; the "
+            "first field also receives a second supplied value. It then calls "
+            "verified FUN_58902C10, restores the saved exception-list pointer, "
+            "and returns. Fresh Ghidra assigns 1,107 bytes in two exact ranges "
+            "with 374 decoded instructions."
+        ),
+        "uncertainty": (
+            "Child field roles and ownership rules, the runtime effects of the "
+            "indirect virtual callbacks, the second value passed for the first "
+            "field, and FUN_58902C10's contract remain unresolved. The RTTI slot "
+            "and mapped cleanup behavior establish static teardown context; no "
+            "client or emulator destruction test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_EVIDENCE)
 
 
 def sha256(path):

@@ -68,6 +68,11 @@ calls `FUN_5897CC42` when the second argument's low bit is set, otherwise
 returning the receiver. This matches a scalar-deleting-destructor pattern, but
 the callback's actual deletion behavior is unresolved.
 
+The called cleanup body `FUN_588092F0` is now byte-matched across its two
+complete Ghidra ranges. Its receiver vtable and child-pointer cleanup, direct
+base-cleanup helper, and unresolved indirect callbacks are documented in the
+[cleanup subsystem note](current-main-page-result-control-menu-cleanup.md).
+
 Slot `+0x04` targets `FUN_5880C1B0` (815 bytes). It resets screen and child
 flags, releases the active child at `+0x60`, chooses a result record using
 `+0x84` and global result-table state, copies record fields into the child at
