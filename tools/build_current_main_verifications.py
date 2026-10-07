@@ -926,6 +926,14 @@ VISUAL_REFRESH_ADDRESSES = (
 ADDRESSES += VISUAL_REFRESH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(VISUAL_REFRESH_ADDRESSES)
 
+PAGEFIGHT_BATTLE_INPUT_ADDRESSES = (
+    "587F7E10", "5873A250", "5873B3B0", "5875EE20", "587B0C10",
+    "587ED430", "587F2870", "588DA150", "587EAC40", "5897CEE0",
+    "587B07B0", "5876C6B0",
+)
+ADDRESSES += PAGEFIGHT_BATTLE_INPUT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_BATTLE_INPUT_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8305,6 +8313,89 @@ EVIDENCE.update({
         "uncertainty": VISUAL_REFRESH_UNCERTAINTY,
     }
     for address in VISUAL_REFRESH_ADDRESSES
+})
+
+PAGEFIGHT_BATTLE_INPUT_CALLERS = {
+    "587F7E10": (
+        "Matched FUN_587FD810 tail-transfers here at 0x587FD834 for event codes 0x201 and 0x202. "
+        "FUN_587FD810 is the event handler in the RTTI-backed CPageFightOn_ControlMenuScreen path; "
+        "the surrounding class identity is supported by that caller, not by a direct vtable xref to this body."
+    ),
+    "5873A250": "Open FUN_587F7E10 calls this at 0x587F7FB7 and 0x587F84C8 while processing the 0x202 input path.",
+    "5873B3B0": "Open FUN_587F7E10 calls this at 0x587F8017, 0x587F8055, 0x587F8527, and 0x587F8565 while changing child-control state.",
+    "5875EE20": "Open FUN_587F7E10 calls this at 0x587F816E to read the value used by its target-action switch.",
+    "587B0C10": "Open FUN_587F7E10 calls this at 0x587F83DF; this helper calls the matched runtime thunks and stores their result on its receiver.",
+    "587ED430": "Open FUN_587F7E10 calls this at 0x587F7EF4 and 0x587F8146 for the observed smoke-bomb validation/error path.",
+    "587F2870": "Open FUN_587F7E10 calls this at 0x587F864F after processing the 0x201/0x202 event state.",
+    "588DA150": "Open FUN_587F2870 calls this at 0x587F2880 and 0x587F28C5 while updating target-selection state.",
+    "587EAC40": "Open FUN_587F2870 calls this at 0x587F292F to clear or update child state after the selection check.",
+    "5897CEE0": "Open FUN_587B0C10 calls this at 0x587B0C64 between matched runtime thunk calls.",
+    "587B07B0": "Open FUN_587EAC40 calls this at 0x587EACE7 as part of the coordinate-difference calculation.",
+    "5876C6B0": "Open FUN_587EAC40 calls this at 0x587EACED to normalize the coordinate-difference value.",
+}
+PAGEFIGHT_BATTLE_INPUT_BEHAVIOR = {
+    "587F7E10": (
+        "Handles event codes 0x201 and 0x202. The first branch reads map coordinates, applies the observed "
+        "scale/offset transform, and initializes a bounded selection rectangle. The second checks state and "
+        "mode gates, updates child-control flags, validates smoke-bomb actions, and updates map selection/target "
+        "state through the listed helper calls."
+    ),
+    "5873A250": "Returns the pointer stored at receiver +0x470; the caller uses the result while walking map entries.",
+    "5873B3B0": (
+        "Sets or clears bit 0 in six child-control words at receiver offsets +0x510, +0x518, +0x51C, +0x530, "
+        "+0x534, and +0x538. A guarded branch performs the observed callback/sound-related updates; when its third "
+        "argument is zero it also stores the second argument at receiver +0x478."
+    ),
+    "5875EE20": "Returns the value at receiver +0x54.",
+    "587B0C10": "Calls runtime thunks at 0x5897CC90, 0x5897CEE0, and 0x5897CCA0, then stores the last result at receiver +0x180.",
+    "587ED430": (
+        "Clears the observed smoke-bomb/control flags and branches through range, quantity, and cooldown checks. "
+        "The decompilation contains MESSAGESTRING__SMOKEBOMB_ERROR_RANGE, "
+        "MESSAGESTRING__SMOKEBOMB_ERROR_QUANTITY, MESSAGESTRING__SMOKEBOMB_ERROR_COOLTIME, and a call to "
+        "FUN_587E9A10(0, 0x5A, 0)."
+    ),
+    "587F2870": (
+        "Updates fields at receiver +0x104C8, +0x10554, +0x10558, and +0x10568 from the supplied selection "
+        "and observed global record, calls FUN_588DA150 for state transitions, copies selected coordinates, "
+        "and calls FUN_587EAC40 for child-state cleanup/update."
+    ),
+    "588DA150": (
+        "Calls matched FUN_58902D20(0x101). For argument 0x40000000 it sets bit 0 on the child at receiver +0x60FC "
+        "and sets the low four bits on children at +0x12F4 (unless the receiver is the global selected object) and +0x12F8. "
+        "For argument zero it clears those same observed bits."
+    ),
+    "587EAC40": (
+        "For the observed mode and selection state, clears child flag +0x108 or compares the two selected "
+        "coordinate pairs using FUN_5876C010, FUN_587B07B0, and FUN_5876C6B0, then writes a direction/state "
+        "value at child +0x124 and a flag at child +0x108."
+    ),
+    "5897CEE0": "Six-byte thunk that transfers through the function pointer stored at 0x5898C29C.",
+    "587B07B0": (
+        "Reads fields at argument offsets +0x130 and +0xA8, adds 900, reduces the result modulo 0xE10, stores "
+        "it at +0xE4, and adds 0xE10 if the remainder is negative. The semantic type of the argument is not named."
+    ),
+    "5876C6B0": (
+        "Computes the difference between two scalar values and wraps the difference across the observed 0/0xE10 "
+        "boundary; one equality/half-turn case returns 0x708. The inputs' units and domain are not recovered."
+    ),
+}
+PAGEFIGHT_BATTLE_INPUT_UNCERTAINTY = (
+    "Ghidra exact body ranges, decompilation, direct xrefs, and the pinned mapped Main.dll support the listed "
+    "instruction-level behavior and the direct-call closure. The event handler is connected to the matched "
+    "RTTI-backed CPageFightOn_ControlMenuScreen event path through FUN_587FD810; no direct vtable/RTTI reference "
+    "to FUN_587F7E10 was found. Object-field meanings, coordinate units, control identities, and gameplay meaning "
+    "of the state codes remain partly uncertain. FUN_5897CEE0 reaches a runtime callback through 0x5898C29C, "
+    "whose target is unresolved; the direct-call closure does not resolve indirect virtual/callback paths. "
+    "No original-client or emulator interaction test was run."
+)
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / PageFight battle-input target-control helper",
+        "called_by": PAGEFIGHT_BATTLE_INPUT_CALLERS[address],
+        "behavior": PAGEFIGHT_BATTLE_INPUT_BEHAVIOR[address],
+        "uncertainty": PAGEFIGHT_BATTLE_INPUT_UNCERTAINTY,
+    }
+    for address in PAGEFIGHT_BATTLE_INPUT_ADDRESSES
 })
 
 
