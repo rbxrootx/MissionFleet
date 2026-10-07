@@ -468,6 +468,8 @@ MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES = (
 ADDRESSES += MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES
 MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES = ("5884B8A0",)
 ADDRESSES += MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES
+MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES = ("5875CF00",)
+ADDRESSES += MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -840,6 +842,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_QUIT_PROMPT_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13899,6 +13902,42 @@ MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_EVIDENCE)
+
+MAIN_STATE6_SPRITE_CHILD_SETUP_EVIDENCE = {
+    "5875CF00": {
+        "name_in_analysis": "FUN_5875CF00 / state-6 sprite child setup",
+        "called_by": (
+            "Byte-verified FUN_587E8A40 calls this function at 0x587E8B0E only "
+            "after the word at its receiver +0x105F0 compares equal to 6. The "
+            "caller loads ECX from receiver +0x21F08 immediately before the "
+            "call. That matched caller is reached by byte-verified FUN_587BB700 "
+            "at 0x587BC7CB in the documented 0x80000500 PageFight path. The "
+            "focused verifier checks both mapped callsites and the mode gate."
+        ),
+        "behavior": (
+            "Fresh Ghidra output shows the receiver state fields +0x60, +0x68, "
+            "and +0x6C initialized from constants and a byte at "
+            "DAT_58A247F8+4+0x354. If receiver +0x64 is zero, the routine "
+            "creates two objects through FUN_58907100, selects two indexed "
+            "children through FUN_58731C60 using table entries 3 and 4 when "
+            "their count gates pass, then creates seven pairs of "
+            "CSpriteDataScreen children from paired table entries. Each of the "
+            "14 sprite screens receives a table record pointer and copies six "
+            "record fields at +0x10 through +0x24. It marks initialization at "
+            "receiver +0x64 and clears the low four flag bits at +0x24 on 18 "
+            "child objects. All 20 outbound direct calls resolve to verified "
+            "functions and match the Ghidra transfer manifest."
+        ),
+        "uncertainty": (
+            "The exact receiver class, table schema and entry meanings, the "
+            "visual identities and resource names of the children, and the "
+            "meaning of the copied record fields remain unresolved. The state-6 "
+            "condition and child construction are static observations; no "
+            "emulator rendering or runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_STATE6_SPRITE_CHILD_SETUP_EVIDENCE)
 
 
 if __name__ == "__main__":

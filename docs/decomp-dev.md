@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,579 of 42,461 functions and 2,735,523 of 10,470,295 bytes (20.2044% by
-functions and 26.1265% by bytes); every counted function match is verified at
+credits 8,580 of 42,461 functions and 2,736,707 of 10,470,295 bytes (20.2068% by
+functions and 26.1378% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,446 exact function matches totaling 1,762,105 bytes. The
+inventory has 2,447 exact function matches totaling 1,763,289 bytes. The
 tax/investment control refresh adds 19 exact functions / 1,196 bytes across 19
 fresh Ghidra ranges. Its 371 instructions, 76 direct-call references, and the
 matched `0x8002311B` / `0x8002312B` callsites are checked by a focused verifier.
@@ -70,6 +70,12 @@ outgoing direct calls resolve to verified functions and match fresh Ghidra
 transfers. Table gates and child setup are documented, while exact controls,
 resources, and rendered appearance remain unresolved. See
 [`current-main-communicator-memo-constructor.md`](current-main-communicator-memo-constructor.md).
+The PageFight `0x80000500` route's state-6 sprite-child setup adds one exact
+function / 1,184 bytes. Two matched caller steps anchor it, the parent gate and
+receiver load are checked against mapped instructions, and its 14
+`CSpriteDataScreen` children and 20 matched outgoing calls are recorded from
+Ghidra. Child assets, labels, and runtime visuals remain unknown. See
+[`current-main-state6-sprite-child-setup.md`](current-main-state6-sprite-child-setup.md).
 quit-prompt setup helper adds one exact 246-byte function, anchored by two
 matched callers and the original localization key; a third caller is still
 unmatched and parameter and callback meanings remain unresolved. See
