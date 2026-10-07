@@ -2,8 +2,9 @@
 
 `FUN_58805940` is a 102-byte `__thiscall` helper. Byte-matched queue dispatcher
 `FUN_588075E0` calls it at `0x588077F9` for queue ID `0x70`, when receiver
-`+0x114` is zero. The dispatcher is called by `FUN_58807D50` and
-`FUN_58808080`, which are not yet byte-matched. This helper connects the two
+`+0x114` is zero. Both byte-matched callers of the dispatcher,
+`FUN_58807D50` and `FUN_58808080`, are traced in the
+[queue event/update notes](current-main-queue-event-update.md). This helper connects the two
 byte-matched paired-child helpers:
 `FUN_588D6D10` at `0x58805969` and `FUN_588D6CC0` at `0x58805988`.
 
@@ -26,6 +27,5 @@ complete indexed extent through `0x588059A5`.
 
 The meaning of the compared `+0x350` word, receiver flags, and referenced
 objects is unknown. The effects of `FUN_588A69F0` and `FUN_5878A160` are also
-unresolved. The wider invocation paths through `FUN_58807D50` and
-`FUN_58808080` are not established. No emulator runtime test has been
-performed.
+unresolved. The wider direct-call path is now byte-matched, but its indirect
+virtual calls and runtime effects have not been tested in the emulator.

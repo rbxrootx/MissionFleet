@@ -842,6 +842,26 @@ ADDRESSES += (
     "587A8C50", "587A8D10", "587A8690",
 )
 
+# Ghidra's exact body-range and call-site audits connect this queued component
+# event/update path from its two callers through every still-open direct callee.
+QUEUE_BATCH_ADDRESSES = (
+    "58808080", "58807D50", "5890DBF0", "58789770", "58809830", "588C0BD0",
+    "588D81A0", "58805100", "58807370", "588051C0", "58805210", "58805260",
+    "58805150",
+    "587B9A90", "587BA140", "587BA170", "587BA1A0", "587BA1D0", "587BA200",
+    "587BAF40", "587BB230", "587BB260", "587BB290", "587BB2C0", "587E8010",
+    "58804680", "58805690", "58805790", "58805B30", "58805E70", "588060F0",
+    "58894820", "588A5580", "588A6F70",
+    "58752550", "5875A440", "587899D0", "58789B40", "5878A1F0", "587AF330",
+    "587AF350", "587AF370", "587AF390", "587B9060", "587B9640", "58893E50",
+    "588A6680", "588A6A20", "588A6DF0", "588D8080", "588DA340", "588DA450",
+    "588D27F0",
+    "587897B0", "587ABD70", "587AD0A0", "587AB740", "587AB9D0", "58748790",
+    "5888D2D0", "5877E2E0", "587ACBA0", "58748650", "588A5470",
+)
+ADDRESSES += QUEUE_BATCH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(QUEUE_BATCH_ADDRESSES)
+
 EVIDENCE = {
     "58900040": {
         "name_in_analysis": "FUN_58900040 / CWarehouseTradePanel destructor body",
@@ -1367,15 +1387,15 @@ EVIDENCE = {
     },
     "588075E0": {
         "name_in_analysis": "FUN_588075e0 / queued component-record dispatcher",
-        "called_by": "Ghidra records direct calls from FUN_58807D50 at 0x58807E57 and FUN_58808080 at 0x588080A6; those callers are not yet byte-matched.",
+        "called_by": "Byte-matched FUN_58807D50 and FUN_58808080 call this at 0x58807E57 and 0x588080A6 respectively; their connected paths are summarized in docs/current-main-queue-event-update.md.",
         "behavior": "Consumes 0x13C-byte records from a ring buffer rooted at receiver +0x260, using queue count/index fields +0x254/+0x25C, capacity +0x250, and boundary/index +0x258. It copies 0x4F DWORDs to a local record and dispatches on its first DWORD. Observed IDs are 1, 3, 4, 0x10, 0x20, 0x40, 0x50, 0x70, 0x100, 0x400, 0x04000008, and 0x04000009. ID 0x20, when receiver +0x114 is zero, chooses FUN_58805880 or byte-matched FUN_588058D0 according to receiver +0x110 and whether [0x58A245A0 + 0xA06] is 7 or 12. ID 0x70 calls byte-matched FUN_58805940 when receiver +0x114 is zero; IDs 0x04000008/09 call byte-matched FUN_58806F60 with boolean 0/1 and a local record/subrecord pointer. Other cases call the helpers recorded in the Ghidra decompilation. It repeats until the queue count is empty and performs the captured cookie check/return path. Ghidra's 708-byte disjoint body omits the mapped stack cleanup at 0x58807882..0x58807884 and the frame restore/ret at 0x588078A4..0x588078A6; the complete contiguous extent is 711 bytes.",
-        "uncertainty": "The queue schema and semantic meaning of its IDs and fields are not established. Several other dispatch callees remain unmatched, and the direct callers FUN_58807D50/FUN_58808080 are not byte-matched. No emulator runtime test was performed.",
+        "uncertainty": "The queue schema, meanings of its IDs and fields, and user-visible effects are not established. All observed direct dispatch callees and both direct callers are byte-matched, but indirect virtual behavior is not recovered and no emulator runtime test was performed.",
     },
     "58805940": {
         "name_in_analysis": "FUN_58805940 / selected-value paired child update",
         "called_by": "Byte-matched FUN_588075E0 calls this in case 0x70 at 0x588077F9 when receiver +0x114 is zero, passing the two 16-bit values described below. Within this helper, the equality path calls byte-matched FUN_588D6D10 at 0x58805969 with ECX=[0x58A247F8]+4 and argument 1; the other path calls byte-matched FUN_588D6CC0 at 0x58805988 with ECX=the value returned by FUN_5878A160 and argument 1.",
         "behavior": "Compares the selected object's word at +0x350 with the second stack argument. If equal, sets bit 1 in receiver dword +0x78, invokes FUN_588D6D10(1) on the selected object, then calls FUN_588A69F0 with the first stack argument. If unequal, calls FUN_5878A160 with the compared value and invokes FUN_588D6CC0(1) with its return value as ECX. Both paths then set bit 1 in the word at +0x24 of the object referenced by receiver +0x174, write 400 to receiver +0x300, and return with ret 8. The complete indexed body is 102 bytes through 0x588059A5.",
-        "uncertainty": "The meaning of the compared +0x350 word, receiver flags, referenced child objects, and the effects of FUN_588A69F0/FUN_5878A160 are unknown. FUN_588075E0 is now byte-matched, but its callers FUN_58807D50/FUN_58808080 remain unmatched, so the broader invocation context is unverified. No emulator runtime test was performed.",
+        "uncertainty": "The meaning of the compared +0x350 word, receiver flags, referenced child objects, and the effects of FUN_588A69F0/FUN_5878A160 are unknown. The broader direct-call path through FUN_58807D50/FUN_58808080 is now byte-matched, but indirect virtual behavior and runtime effects remain unverified. No emulator runtime test was performed.",
     },
     "588D6D10": {
         "name_in_analysis": "FUN_588d6d10 / paired child-bit update",
@@ -7836,6 +7856,106 @@ EVIDENCE.update({
         "behavior": "The contiguous 515-byte body [0x587A8690,0x587A8893) checks and resolves the selected element, dispatches child virtual methods at slots +0x14 and +0x08 according to an observed state field, then removes/releases selected entries through matched FUN_58902C20, FUN_58902C70, and FUN_58849980.",
         "uncertainty": "The element and child types, state meanings, vtable contracts, and release semantics are unresolved. No runtime teardown test was performed.",
     },
+})
+
+QUEUE_BATCH_CALLERS = {
+    "58808080": "Ghidra reports a DATA reference at 0x5899D3E4; it looks like a vtable slot, but the owning type is not established. The method directly calls the matched queue dispatcher FUN_588075E0 at 0x588080A6.",
+    "58807D50": "Byte-matched FUN_587BB700 directly calls this at 0x587BC1DA. This method calls FUN_588075E0 at 0x58807E57.",
+    "5890DBF0": "FUN_58807D50 calls this at 0x58807D87 while traversing the list rooted at [0x58A247F8]+0x0C. Ghidra also records callers FUN_58909070 and FUN_58800FD0.",
+    "58789770": "FUN_58807D50 calls this at 0x58807DA7 inside a loop bounded by the low four bits of receiver byte +0x1B2.",
+    "58809830": "FUN_58807D50 calls this at 0x58807DC6 with 0x40000000. Ghidra also records repeated references from FUN_587FBCC0.",
+    "588C0BD0": "FUN_58807D50 calls this at 0x58807DD6 with 0x50000. Ghidra also records callers FUN_58791590, FUN_58806B60, and FUN_587E2E80.",
+    "588D81A0": "Ghidra records calls from FUN_588075E0, FUN_58805150, FUN_58807370, and FUN_588E0130; its queue-path callsites are listed in the subsystem notes.",
+    "58805100": "Called by byte-matched FUN_588075E0 in its observed ID 0x100 branch.",
+    "58807370": "Called by byte-matched FUN_588075E0 in its observed ID 1 branch; its other direct callers are documented in the Ghidra reference audit.",
+    "588051C0": "Called by byte-matched FUN_588075E0 in its observed ID 3 branch.",
+    "58805210": "Called by byte-matched FUN_588075E0 in its observed ID 4 branch.",
+    "58805260": "Called twice by byte-matched FUN_588075E0 for observed IDs 0x10 and 0x50.",
+    "58805150": "Called by byte-matched FUN_588075E0; this helper also calls FUN_588D81A0 and FUN_588A6A20 on the observed list-update path.",
+    "587B9A90": "Called by FUN_58808080 at 0x58808492.",
+    "587BA140": "Called by FUN_58808080 at 0x58808991.",
+    "587BA170": "Called by FUN_58808080 at 0x588089BE.",
+    "587BA1A0": "Called by FUN_58808080 at 0x588089A1.",
+    "587BA1D0": "Called by FUN_58808080 at 0x588089B1.",
+    "587BA200": "Called by FUN_58808080 at 0x588089FF.",
+    "587BAF40": "Called by FUN_58808080 at 0x58808981.",
+    "587BB230": "Called by FUN_58808080 at 0x588089CB.",
+    "587BB260": "Called by FUN_58808080 at 0x588089D8.",
+    "587BB290": "Called by FUN_58808080 at 0x588089F2.",
+    "587BB2C0": "Called by FUN_58808080 at 0x588089E5.",
+    "587E8010": "Called by FUN_58808080 at 0x58808384.",
+    "58804680": "Called by FUN_58808080 at 0x58808551.",
+    "58805690": "Called by FUN_58808080 at 0x5880842C.",
+    "58805790": "Called by FUN_58808080 at 0x588081C0 and FUN_58807370 at 0x58807596; Ghidra also records a caller at FUN_588A8A70.",
+    "58805B30": "Called by FUN_58808080 at 0x58808289.",
+    "58805E70": "Called by FUN_58808080 at 0x58808538.",
+    "588060F0": "Called by FUN_58808080 at 0x58808502.",
+    "58894820": "Called by FUN_58808080 at 0x588081CB; it tail-jumps to FUN_588D27F0 at 0x58894964, which is included in this batch.",
+    "588A5580": "Called by FUN_58808080 at 0x58808474.",
+    "588A6F70": "Called twice by FUN_58808080 at 0x58808817 and 0x58808835; Ghidra also records caller FUN_58805FC0.",
+    "58752550": "Called twice by FUN_58805260 at 0x588054A0 and 0x58805542. Other callers include FUN_588C1650 and FUN_5881E760.",
+    "5875A440": "Called by FUN_58805260 at 0x58805470 and 0x588054F8; Ghidra also records calls from FUN_58847770.",
+    "587899D0": "Called twice by FUN_58807370 at 0x5880744E and 0x58807490; Ghidra also records callers FUN_587374B0 and FUN_58806F60.",
+    "58789B40": "Called by FUN_58805260 at 0x58805374 and FUN_58807370 at 0x588074A2.",
+    "5878A1F0": "Called by FUN_58805260 at 0x5880554E.",
+    "587AF330": "Called by FUN_58805260 at 0x588052F9; its direct open callee FUN_587ABD70 is included in this batch.",
+    "587AF350": "Called by FUN_58807370 at 0x58807511; its direct open callee FUN_587AD0A0 is included in this batch.",
+    "587AF370": "Called by FUN_588075E0 at 0x588077D1; its direct open callee FUN_587AB740 is included in this batch.",
+    "587AF390": "Called by FUN_588075E0 at 0x58807837; its direct open callee FUN_587AB9D0 is included in this batch.",
+    "587B9060": "Called by FUN_58805260 at 0x588053E3 and byte-matched FUN_587BB700; Ghidra also records several other screen/event callers.",
+    "587B9640": "Called by FUN_58807370 at 0x588075CC and byte-matched FUN_587BB700; Ghidra also records other screen/event callers.",
+    "58893E50": "Called by FUN_58805260 at 0x58805340; its direct open callee FUN_5888D2D0 is included in this batch.",
+    "588A6680": "Called by FUN_58807370 at 0x588073E5 and byte-matched FUN_588059B0.",
+    "588A6A20": "Called by FUN_58805150 at 0x588051A0.",
+    "588A6DF0": "Called by FUN_58807370 at 0x588075A7.",
+    "588D8080": "Called by FUN_588D81A0 and other matched ship-map update methods; its open direct callee FUN_5877E2E0 is included in this batch.",
+    "588DA340": "Called by FUN_58807370 at 0x588073A1.",
+    "588DA450": "Called by FUN_588051C0 at 0x588051DF and FUN_58805210 at 0x5880522C; Ghidra also records a caller at FUN_58806F60.",
+    "588D27F0": "FUN_58894820 tail-jumps here at 0x58894964; FUN_58894970 directly calls it at 0x58894A26.",
+    "587897B0": "Called twice by FUN_587899D0 at 0x58789A0A and 0x58789A47.",
+    "587ABD70": "Called by FUN_587AF330 at 0x587AF341.",
+    "587AD0A0": "Called by FUN_587AF350 at 0x587AF366; it then calls FUN_587ACBA0 at 0x587AD3D6.",
+    "587AB740": "Called by FUN_587AF370 at 0x587AF381.",
+    "587AB9D0": "Called by FUN_587AF390 at 0x587AF3A6.",
+    "58748790": "Called by FUN_587B9060 at 0x587B9084; it then calls FUN_58748650 at 0x5874879C.",
+    "5888D2D0": "Called by FUN_58893E50 at 0x58893E66; it then calls FUN_588A5470 at 0x5888D355.",
+    "5877E2E0": "Called by FUN_588D8080 at 0x588D80B3 and three other ship-map methods.",
+    "587ACBA0": "Called by FUN_587AD0A0 at 0x587AD3D6 and byte-matched FUN_587AF1F0.",
+    "58748650": "Called recursively at 0x58748669 and by FUN_58748790 at 0x5874879C; Ghidra also records a caller at FUN_587486B0.",
+    "588A5470": "Called by FUN_5888D2D0 at 0x5888D355 and FUN_5888D040 at 0x5888D0D8.",
+}
+
+QUEUE_BATCH_BEHAVIOR = {
+    "58808080": "Ghidra decompilation shows this routine first drains FUN_588075E0 when receiver flag bit 2 is set. For receiver state values 0x100 and 0x400 it moves two counters toward their targets by at most 0x20 per call. When both reach their targets, state 0x100 transitions to 0x200, updates the current selected entry, and sends three observed MESSAGESTRING__TRADE_BEWARE strings when receiver word +0x1B6 is 1; state 0x400 calls FUN_58805B30 and changes the state to 0x500. Further branches update list children, timers, and event-specific UI/action handlers. Exact field meanings and the vtable owner remain unresolved.",
+    "58807D50": "Ghidra decompilation shows this routine stores receiver +0x114 in global +0x218E0, walks the list at [0x58A247F8]+0x0C calling FUN_5890DBF0 for each node, repeats FUN_58789770 according to receiver byte +0x1B2 low bits, calls FUN_58809830(0x40000000) and FUN_588C0BD0(0x50000), clears one observed flag, invokes a child virtual slot, applies an optional bit-5 update, runs eight iterations of matched FUN_58902C20/FUN_58902C70 pairs, drains FUN_588075E0, then calls FUN_587F8760 with receiver +0x180 and its arguments.",
+    "58805260": "Ghidra decompilation shows this ID 0x10/0x50 queue handler resolves an object by the passed selector, updates two receiver counters for observed type codes 8 and 6/7, conditionally calls FUN_587AF330, and may update a secondary object's fields through FUN_58893E50. It refreshes the selected object with FUN_58789B40 and FUN_588A6410, then scans entries using the count at [0x58A245C0+0x4C8]+0x88; matching paths call FUN_5875A440/FUN_58752550. The actual object/entry schemas and type-code meanings are unresolved.",
+}
+
+QUEUE_BATCH_DEFAULT_UNCERTAINTY = (
+    "The mapped bytes and direct call sites are tied to the installed Main.dll, but object/class types, field semantics, "
+    "gameplay meaning, and user-visible effects remain uncertain unless explicitly described above. Candidate sources "
+    "preserve the original x86 instruction stream; they do not recover the original high-level C++ source. No emulator "
+    "runtime test was performed."
+)
+
+EVIDENCE.update({
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / queued event-update call graph",
+        "called_by": QUEUE_BATCH_CALLERS.get(
+            address,
+            "Ghidra's direct-reference audit places this function in the queued event/update path; exact callsites are "
+            "summarized in docs/current-main-queue-event-update.md.",
+        ),
+        "behavior": QUEUE_BATCH_BEHAVIOR.get(
+            address,
+            "Ghidra's read-only exact-range dump confirms complete instruction-byte coverage for this body. The "
+            "function is reached through the direct queue/event call edge stated above; its outgoing edges and branch "
+            "context are recorded in docs/current-main-queue-event-update.md. Candidate source preserves the mapped "
+            "instruction stream byte for byte.",
+        ),
+        "uncertainty": QUEUE_BATCH_DEFAULT_UNCERTAINTY,
+    }
+    for address in QUEUE_BATCH_ADDRESSES
 })
 
 

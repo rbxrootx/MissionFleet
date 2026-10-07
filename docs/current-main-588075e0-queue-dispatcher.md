@@ -1,8 +1,10 @@
 # Current Main queued component-record dispatcher
 
 `FUN_588075e0` drains 0x13C-byte records from a ring buffer and dispatches
-their first DWORD. Ghidra records callers `FUN_58807D50` at `0x58807E57` and
-`FUN_58808080` at `0x588080A6`; neither caller is byte-matched yet.
+their first DWORD. Byte-matched callers `FUN_58807D50` and `FUN_58808080` reach
+it at `0x58807E57` and `0x588080A6`. Their connected event/update path and the
+remaining direct callees are covered in the
+[queue event/update notes](current-main-queue-event-update.md).
 
 ## Behavior supported by the original code
 
@@ -46,7 +48,7 @@ byte of the frame restore. The function extent was corrected before matching.
 
 ## Unresolved details
 
-The queue schema, meanings of its IDs and fields, and user-visible effects are
-not established. Several dispatch callees remain unmatched, and the direct
-callers `FUN_58807D50` and `FUN_58808080` have not been matched. No emulator
-runtime test has been performed.
+The queue schema, meanings of its IDs and fields, and some user-visible effects
+remain unresolved. All observed direct dispatch callees and both direct callers
+are now byte-matched; indirect virtual-call behavior and runtime results have
+not been tested in the emulator.
