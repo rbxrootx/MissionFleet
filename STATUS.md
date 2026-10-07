@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 7,781 verified matches
-totaling 2,473,682 bytes (18.3251% by functions, 23.6257% by bytes), each at
+identified code bytes across six report units. There are 7,796 verified matches
+totaling 2,477,612 bytes (18.3604% by functions, 23.6632% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
@@ -17,6 +17,10 @@ callbacks are recorded in [the subsystem note](docs/current-main-itffm-sprite-re
 The variable-record child-state refresh adds another two exact functions / 1,784
 bytes, documented with its matched caller and unresolved field meanings in
 [its subsystem note](docs/current-main-variable-record-child-state-refresh.md).
+The ManageFleetTab event-dispatch path adds 15 exact instruction-stream matches /
+3,930 bytes, grounded in its vtable slot and closed direct-call graph; behavior
+and source-recovery limits are recorded in
+[its subsystem note](docs/current-main-manage-fleet-event-dispatch.md).
 The current Main.dll sprite file manager cleanup and deleting wrapper are
 recorded in [the lifecycle evidence](docs/current-main-ship-sprite-file-manager-lifecycle.md).
 The six methods called from the current Main.dll tag dispatcher are recorded

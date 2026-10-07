@@ -358314,6 +358314,1524 @@
         "behavior": "Sets bit 0 in ushort fields at child +0x24 for a fixed group of receiver child pointers, then clears bit 0 across two indexed pointer groups. It also clears that bit on a separate fixed set of child pointers. The function has no direct outgoing calls or jumps in its complete 401-byte Ghidra body.",
         "uncertainty": "The exact Ghidra body ranges, decompilation, matched caller, and pinned mapped Main.dll support the instruction-level behavior and direct-call closure. The receiver and child types, semantics of the +0xB4 bits, global record/table layouts, and meaning of the mode-9 branch remain unresolved. The audit does not identify higher-level visual or gameplay effects, and no original-client or emulator interaction test was run."
       }
+    },
+    {
+      "address": "58835F70",
+      "name": "FUN_58835f70",
+      "size": 2430,
+      "symbol": "_FUN_58835f70",
+      "source": "src/client-current/Main/FUN_58835f70.cpp",
+      "source_sha256": "fa4b74f50e607b08f26a2ba72def2c9c192bfd922824b2825b12fa6558a72413",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58835F70",
+          "size": 1418,
+          "symbol": "_FUN_58835f70_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58836473",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58836056",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "587B6C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "587B6BE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 331,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 362,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 377,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 389,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 412,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 424,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 435,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 447,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "58834520",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 486,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 509,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 516,
+              "target_address": "58834520",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 521,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 559,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 571,
+              "target_address": "5883626C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 587,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 595,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 612,
+              "target_address": "58835920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 633,
+              "target_address": "58835B30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 641,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 652,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 666,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 678,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 690,
+              "target_address": "589081E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 748,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 755,
+              "target_address": "58834030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 760,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 774,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 788,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 817,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 830,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 856,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 863,
+              "target_address": "5876A570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 868,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 878,
+              "target_address": "58836411",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 904,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 918,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 925,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 959,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 982,
+              "target_address": "587C8190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 992,
+              "target_address": "5899E2B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 998,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1004,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1021,
+              "target_address": "587C8910",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1039,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1051,
+              "target_address": "5883641D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1058,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1091,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1116,
+              "target_address": "587C8190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1126,
+              "target_address": "5899E294",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1132,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1155,
+              "target_address": "587C8910",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1186,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1193,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1200,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1206,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1279,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1290,
+              "target_address": "58836823",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1296,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1317,
+              "target_address": "588367D4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1331,
+              "target_address": "588366DF",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58836500",
+          "size": 1012,
+          "symbol": "_FUN_58835f70_segment_01",
+          "relocations": [
+            {
+              "offset": 49,
+              "target_address": "58834B00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58836602",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "587A8520",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "58A0B4A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 249,
+              "target_address": "587B9400",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 339,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 351,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 369,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 413,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 443,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 466,
+              "target_address": "587BA9E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 483,
+              "target_address": "588367AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "58A0B4A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 570,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 576,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 583,
+              "target_address": "587B9290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 588,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 603,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 617,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 652,
+              "target_address": "58A0B4A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 657,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 668,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 675,
+              "target_address": "587B9420",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 680,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 688,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 709,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 715,
+              "target_address": "587B94A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 720,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 728,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 763,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 770,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 775,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 781,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 788,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 794,
+              "target_address": "587BA070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 799,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 810,
+              "target_address": "588368D7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 830,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 856,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 869,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 921,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 934,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 972,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 979,
+              "target_address": "5876A570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 999,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58835f70 / CPannelCommunicatorConfigManageFleetTab vtable slot +0x18",
+        "called_by": "The imported vftable at 0x5899E1D4 points slot +0x18 (0x5899E1EC) to this method. Verified constructor FUN_58836B90 installs that table; destructor-shaped FUN_58834C00 restores it. Ghidra identifies the table references at 0x58836BFF and 0x58834C2B; no direct code caller was found because dispatch is virtual.",
+        "behavior": "The two Ghidra body ranges total 2,430 bytes. Pseudocode dispatches on event values 2, 62000 and 0xF235; event 2 selects child controls, updates their +0x24 flag bits, refreshes five value pairs, walks bounded 0x54-byte records, and invokes message helpers. The 62000 path compares the selected user/object and emits status commands; the 0xF235 path handles deposit/withdraw prompt state and message resources. See docs/current-main-manage-fleet-event-dispatch.md for the evidence-backed path and closure.",
+        "uncertainty": "Only the Ghidra function name and vtable slot are known; the virtual method's formal name, event contracts, field meanings, and message-ID semantics remain unresolved. This is a static instruction-stream match and not a runtime client or emulator test."
+      }
+    },
+    {
+      "address": "587A8520",
+      "name": "FUN_587a8520",
+      "size": 63,
+      "symbol": "_FUN_587a8520",
+      "source": "src/client-current/Main/FUN_587a8520.cpp",
+      "source_sha256": "a14be550e82cc029865b86490e27c0cc49febaa38ec512941bc9151cb0bfba57",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 23,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 48,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a8520 / bounded four-byte iterator advance",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883659B while advancing a bounded row iterator.",
+        "behavior": "Copies the iterator's current pointer/index pair to an output pair, validates the index against the referenced collection, advances the index by four, and returns the output pair. Its only outgoing calls are bounds-failure helper FUN_5897CC72.",
+        "uncertainty": "The collection and iterator types are not identified. No runtime iterator test was run."
+      }
+    },
+    {
+      "address": "587B6BE0",
+      "name": "FUN_587b6be0",
+      "size": 116,
+      "symbol": "_FUN_587b6be0",
+      "source": "src/client-current/Main/FUN_587b6be0.cpp",
+      "source_sha256": "c2bfb1eecc467f36814db9fbde8373b6db4d14e85f42672fb0aea79e08f7b65c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6be0 / bounded panel position update",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883605E for one selected child-control path.",
+        "behavior": "Ghidra pseudocode updates the horizontal or vertical position field at +0x50/+0x54 according to the axis byte at +0x61, current offsets, extents, and bounds at +0x78/+0x7C.",
+        "uncertainty": "The receiver's type, coordinate units, and UI meaning of the axis and bound fields remain unknown."
+      }
+    },
+    {
+      "address": "587B6C60",
+      "name": "FUN_587b6c60",
+      "size": 174,
+      "symbol": "_FUN_587b6c60",
+      "source": "src/client-current/Main/FUN_587b6c60.cpp",
+      "source_sha256": "29efba5afa0dfd495c868f0ffaf3a54be0a2614b98b04e965b9b6142f4e4502a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6c60 / bounded panel position update",
+        "called_by": "FUN_58835F70 calls this helper at 0x58835FBB for the alternate selected child-control path.",
+        "behavior": "Ghidra pseudocode adjusts the horizontal or vertical position field at +0x50/+0x54 using the axis byte at +0x61, extents, offsets, and a +0x74 viewport bound; it writes only on the observed positive-extent branches.",
+        "uncertainty": "The receiver's type, coordinate units, and meaning of the viewport and axis fields remain unknown."
+      }
+    },
+    {
+      "address": "587B9400",
+      "name": "FUN_587b9400",
+      "size": 32,
+      "symbol": "_FUN_587b9400",
+      "source": "src/client-current/Main/FUN_587b9400.cpp",
+      "source_sha256": "f1cb8055be1998e2d1f1526b9593f543b56247b4e99563da59d9a7136519cb53",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9400 / message wrapper 0x80010F09",
+        "called_by": "FUN_58835F70 calls this helper at 0x588365F8 in its selected-user event path.",
+        "behavior": "Forwards the three supplied values to FUN_58970C70 with command 0x80010F09, length 0x30, and a final zero.",
+        "uncertainty": "FUN_58970C70's transport contract and the command's application-level meaning are unresolved."
+      }
+    },
+    {
+      "address": "587B9420",
+      "name": "FUN_587b9420",
+      "size": 32,
+      "symbol": "_FUN_587b9420",
+      "source": "src/client-current/Main/FUN_587b9420.cpp",
+      "source_sha256": "4547b9987856a680ddc2796a45a34a7c7db02c81686bffad40189d959c383561",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 25,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9420 / message wrapper 0x80010F0A",
+        "called_by": "FUN_58835F70 calls this helper at 0x588367A2 in its selected-user event path.",
+        "behavior": "Forwards the three supplied values to FUN_58970C70 with command 0x80010F0A, length 0x30, and a final zero.",
+        "uncertainty": "FUN_58970C70's transport contract and the command's application-level meaning are unresolved."
+      }
+    },
+    {
+      "address": "587B94A0",
+      "name": "FUN_587b94a0",
+      "size": 50,
+      "symbol": "_FUN_587b94a0",
+      "source": "src/client-current/Main/FUN_587b94a0.cpp",
+      "source_sha256": "b1e81cee7e23121b9ea9b715105e99af36484a8d465e5fc05cb3358ee0b74eab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 19,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 26,
+          "target_address": "58A0B4A4",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 41,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b94a0 / message wrapper 0x80010F13",
+        "called_by": "FUN_58835F70 calls this helper at 0x588367CA in its selected-user event path.",
+        "behavior": "Measures the supplied string with DAT_5898C1A8, then forwards command 0x80010F13, globals 0x58A0B4A0/0x58A0B4A4, the string pointer, and its measured length plus one to FUN_58970C70.",
+        "uncertainty": "The string schema, message transport, and command semantics are not identified."
+      }
+    },
+    {
+      "address": "587BA070",
+      "name": "FUN_587ba070",
+      "size": 46,
+      "symbol": "_FUN_587ba070",
+      "source": "src/client-current/Main/FUN_587ba070.cpp",
+      "source_sha256": "2cb1f59e216768c9856eff986599fb6578a57f89dfc8c4f28cdf2e9e6ea7273a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba070 / message wrapper 0x80013126",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836819 when the event sender matches the receiver.",
+        "behavior": "Measures the supplied string and forwards command 0x80013126, the caller return address, the first supplied value, the string pointer, and its measured length to FUN_58970C70.",
+        "uncertainty": "The caller-supplied payload, message transport, and command semantics are unresolved."
+      }
+    },
+    {
+      "address": "587BA9E0",
+      "name": "FUN_587ba9e0",
+      "size": 117,
+      "symbol": "_FUN_587ba9e0",
+      "source": "src/client-current/Main/FUN_587ba9e0.cpp",
+      "source_sha256": "1cf6332e96bfe49222ec678ec7e28da98711580fb721eb7afb5970611bf4109d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 13,
+          "target_address": "5898C1A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "5897152E",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 55,
+          "target_address": "58731B60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 73,
+          "target_address": "58A0B4A0",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 97,
+          "target_address": "58970C70",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 103,
+          "target_address": "5897CE26",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba9e0 / string payload message wrapper 0x80010F0D",
+        "called_by": "FUN_58835F70 calls this helper at 0x588366D1 after a bounded row lookup.",
+        "behavior": "Measures a string, allocates a payload of length plus nine, copies an eight-byte prefix and the NUL-terminated string, sends command 0x80010F0D through FUN_58970C70, then releases the payload with FUN_5897CE26.",
+        "uncertainty": "The eight-byte prefix schema, allocator contract, and message semantics remain unresolved."
+      }
+    },
+    {
+      "address": "587C8190",
+      "name": "FUN_587c8190",
+      "size": 13,
+      "symbol": "_FUN_587c8190",
+      "source": "src/client-current/Main/FUN_587c8190.cpp",
+      "source_sha256": "f79755711987b18e9f1505c40080fe5d0dc359859650e34c4d3017cc653613ba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587c8190 / panel message-field setter",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836345 and 0x588363CB while setting message-dialog state.",
+        "behavior": "Stores the second argument at receiver offset +0xB4 and returns.",
+        "uncertainty": "The receiver type and the meaning of field +0xB4 are not identified."
+      }
+    },
+    {
+      "address": "587C8910",
+      "name": "FUN_587c8910",
+      "size": 68,
+      "symbol": "_FUN_587c8910",
+      "source": "src/client-current/Main/FUN_587c8910.cpp",
+      "source_sha256": "0e3c1b251aeddd66c5702972a46d48c1e5223f543e8c2778af27d99725f1eecf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 32,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 60,
+          "target_address": "58903290",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c8910 / panel message-state initializer",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883636C and 0x588363F2 to prepare the deposit and withdrawal message paths.",
+        "behavior": "Stores arguments at receiver offsets +0xB8 and +0xB0, then calls FUN_58731CE0, FUN_58907360 with zero, and FUN_58903290 with the two values referenced through the fifth argument.",
+        "uncertainty": "The receiver and argument types and the three helper contracts remain unresolved."
+      }
+    },
+    {
+      "address": "58834030",
+      "name": "FUN_58834030",
+      "size": 230,
+      "symbol": "_FUN_58834030",
+      "source": "src/client-current/Main/FUN_58834030.cpp",
+      "source_sha256": "3f1eabefdf653d3cab005d1ec384ec457d24857b8f3fdacbfea2b5c279cc9629",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 14,
+          "target_address": "58908170",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 42,
+          "target_address": "58908140",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 52,
+          "target_address": "588340F4",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 64,
+          "target_address": "58908140",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 220,
+          "target_address": "58834052",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58834030 / five-row control refresh",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836262 after validating the row-selection path.",
+        "behavior": "Obtains a collection iterator and examines five records. For each, it clears paired child values at +0x50 when the record is absent or inactive; otherwise it maps record type values 3, 4, and 6 to paired values 2*field+4, 3, and 1 respectively, clearing other types.",
+        "uncertainty": "The record type and child value meanings are not identified; no UI rendering test was run."
+      }
+    },
+    {
+      "address": "58834520",
+      "name": "FUN_58834520",
+      "size": 246,
+      "symbol": "_FUN_58834520",
+      "source": "src/client-current/Main/FUN_58834520.cpp",
+      "source_sha256": "24cbad49085d501850c8d0cd03a904c15f3eb5e4f0a0d03db98ce8e0cbca88cd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 3,
+          "target_address": "58A0B4A8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 13,
+          "target_address": "58834614",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 18,
+          "target_address": "58A248F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 24,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 31,
+          "target_address": "58907990",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 37,
+          "target_address": "58A24798",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5898C922",
+          "kind": "immediate",
+          "audit_only": true
+        },
+        {
+          "offset": 112,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 222,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 239,
+          "target_address": "58731CE0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58834520 / selected fleet action-state refresh",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836135 and 0x58836173 after selected-control events.",
+        "behavior": "When global mode equals 6, refreshes a global selection and reads the selected record through receiver field +0x24C. It sets child values at +0x294/+0x298/+0x29C according to the record's +8 field and updates a displayed string through FUN_58731CE0.",
+        "uncertainty": "The mode, selected-record, child-control, and displayed-string meanings remain unresolved."
+      }
+    },
+    {
+      "address": "58834B00",
+      "name": "FUN_58834b00",
+      "size": 43,
+      "symbol": "_FUN_58834b00",
+      "source": "src/client-current/Main/FUN_58834b00.cpp",
+      "source_sha256": "963462bc8b8348e9b74e8afeb1051598b5dcc19921c06450e839a28cabf476d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 24,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58834b00 / bounded record iterator copy",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836530 before scanning the 0x54-byte row records.",
+        "behavior": "Copies the collection's current pointer and index into the output iterator pair after checking the index against the collection bound.",
+        "uncertainty": "The collection and iterator types are not identified; no runtime iterator test was run."
+      }
+    },
+    {
+      "address": "58835B30",
+      "name": "FUN_58835b30",
+      "size": 270,
+      "symbol": "_FUN_58835b30",
+      "source": "src/client-current/Main/FUN_58835b30.cpp",
+      "source_sha256": "4cca3f6e92a9e634132de61df9e1f27bd0706ef22fbd5636e35ee41ef9feb6e8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58835B30",
+          "size": 40,
+          "symbol": "_FUN_58835b30_segment_00",
+          "relocations": [
+            {
+              "offset": 24,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58835B60",
+          "size": 230,
+          "symbol": "_FUN_58835b30_segment_01",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "58835C36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58835b30 / bounded 0x54-byte record removal",
+        "called_by": "FUN_58835F70 calls this helper at 0x588361E8 after a string match in the row-record collection.",
+        "behavior": "Scans records in 0x54-byte steps, compares each record's string at +0x2D, shifts later 0x54-byte records over a match, decreases the collection end by 0x54, and returns one; returns zero when no record matches. Its calls are bounds-failure checks to FUN_5897CC72.",
+        "uncertainty": "The record schema, string identity, and collection ownership remain unresolved."
+      }
     }
   ]
 }

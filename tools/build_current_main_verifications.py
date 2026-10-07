@@ -942,6 +942,14 @@ RECORD_STATE_REFRESH_ADDRESSES = ("58813F10", "58810540")
 ADDRESSES += RECORD_STATE_REFRESH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(RECORD_STATE_REFRESH_ADDRESSES)
 
+MANAGE_FLEET_EVENT_ADDRESSES = (
+    "58835F70", "587A8520", "587B6BE0", "587B6C60", "587B9400",
+    "587B9420", "587B94A0", "587BA070", "587BA9E0", "587C8190",
+    "587C8910", "58834030", "58834520", "58834B00", "58835B30",
+)
+ADDRESSES += MANAGE_FLEET_EVENT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MANAGE_FLEET_EVENT_ADDRESSES)
+
 BATTLE_ROOM_PAGE_VTABLES = {
     "5874BCF0": "CBattleRoomOnPage::vftable",
     "5874C6C0": "CBattleRoomOnPage_AlliedvsAxis::vftable",
@@ -8484,6 +8492,100 @@ EVIDENCE.update({
     }
     for address in RECORD_STATE_REFRESH_ADDRESSES
 })
+
+MANAGE_FLEET_EVENT_EVIDENCE = {
+    "58835F70": {
+        "name_in_analysis": "FUN_58835f70 / CPannelCommunicatorConfigManageFleetTab vtable slot +0x18",
+        "called_by": "The imported vftable at 0x5899E1D4 points slot +0x18 (0x5899E1EC) to this method. Verified constructor FUN_58836B90 installs that table; destructor-shaped FUN_58834C00 restores it. Ghidra identifies the table references at 0x58836BFF and 0x58834C2B; no direct code caller was found because dispatch is virtual.",
+        "behavior": "The two Ghidra body ranges total 2,430 bytes. Pseudocode dispatches on event values 2, 62000 and 0xF235; event 2 selects child controls, updates their +0x24 flag bits, refreshes five value pairs, walks bounded 0x54-byte records, and invokes message helpers. The 62000 path compares the selected user/object and emits status commands; the 0xF235 path handles deposit/withdraw prompt state and message resources. See docs/current-main-manage-fleet-event-dispatch.md for the evidence-backed path and closure.",
+        "uncertainty": "Only the Ghidra function name and vtable slot are known; the virtual method's formal name, event contracts, field meanings, and message-ID semantics remain unresolved. This is a static instruction-stream match and not a runtime client or emulator test.",
+    },
+    "587A8520": {
+        "name_in_analysis": "FUN_587a8520 / bounded four-byte iterator advance",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883659B while advancing a bounded row iterator.",
+        "behavior": "Copies the iterator's current pointer/index pair to an output pair, validates the index against the referenced collection, advances the index by four, and returns the output pair. Its only outgoing calls are bounds-failure helper FUN_5897CC72.",
+        "uncertainty": "The collection and iterator types are not identified. No runtime iterator test was run.",
+    },
+    "587B6BE0": {
+        "name_in_analysis": "FUN_587b6be0 / bounded panel position update",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883605E for one selected child-control path.",
+        "behavior": "Ghidra pseudocode updates the horizontal or vertical position field at +0x50/+0x54 according to the axis byte at +0x61, current offsets, extents, and bounds at +0x78/+0x7C.",
+        "uncertainty": "The receiver's type, coordinate units, and UI meaning of the axis and bound fields remain unknown.",
+    },
+    "587B6C60": {
+        "name_in_analysis": "FUN_587b6c60 / bounded panel position update",
+        "called_by": "FUN_58835F70 calls this helper at 0x58835FBB for the alternate selected child-control path.",
+        "behavior": "Ghidra pseudocode adjusts the horizontal or vertical position field at +0x50/+0x54 using the axis byte at +0x61, extents, offsets, and a +0x74 viewport bound; it writes only on the observed positive-extent branches.",
+        "uncertainty": "The receiver's type, coordinate units, and meaning of the viewport and axis fields remain unknown.",
+    },
+    "587B9400": {
+        "name_in_analysis": "FUN_587b9400 / message wrapper 0x80010F09",
+        "called_by": "FUN_58835F70 calls this helper at 0x588365F8 in its selected-user event path.",
+        "behavior": "Forwards the three supplied values to FUN_58970C70 with command 0x80010F09, length 0x30, and a final zero.",
+        "uncertainty": "FUN_58970C70's transport contract and the command's application-level meaning are unresolved.",
+    },
+    "587B9420": {
+        "name_in_analysis": "FUN_587b9420 / message wrapper 0x80010F0A",
+        "called_by": "FUN_58835F70 calls this helper at 0x588367A2 in its selected-user event path.",
+        "behavior": "Forwards the three supplied values to FUN_58970C70 with command 0x80010F0A, length 0x30, and a final zero.",
+        "uncertainty": "FUN_58970C70's transport contract and the command's application-level meaning are unresolved.",
+    },
+    "587B94A0": {
+        "name_in_analysis": "FUN_587b94a0 / message wrapper 0x80010F13",
+        "called_by": "FUN_58835F70 calls this helper at 0x588367CA in its selected-user event path.",
+        "behavior": "Measures the supplied string with DAT_5898C1A8, then forwards command 0x80010F13, globals 0x58A0B4A0/0x58A0B4A4, the string pointer, and its measured length plus one to FUN_58970C70.",
+        "uncertainty": "The string schema, message transport, and command semantics are not identified.",
+    },
+    "587BA070": {
+        "name_in_analysis": "FUN_587ba070 / message wrapper 0x80013126",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836819 when the event sender matches the receiver.",
+        "behavior": "Measures the supplied string and forwards command 0x80013126, the caller return address, the first supplied value, the string pointer, and its measured length to FUN_58970C70.",
+        "uncertainty": "The caller-supplied payload, message transport, and command semantics are unresolved.",
+    },
+    "587BA9E0": {
+        "name_in_analysis": "FUN_587ba9e0 / string payload message wrapper 0x80010F0D",
+        "called_by": "FUN_58835F70 calls this helper at 0x588366D1 after a bounded row lookup.",
+        "behavior": "Measures a string, allocates a payload of length plus nine, copies an eight-byte prefix and the NUL-terminated string, sends command 0x80010F0D through FUN_58970C70, then releases the payload with FUN_5897CE26.",
+        "uncertainty": "The eight-byte prefix schema, allocator contract, and message semantics remain unresolved.",
+    },
+    "587C8190": {
+        "name_in_analysis": "FUN_587c8190 / panel message-field setter",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836345 and 0x588363CB while setting message-dialog state.",
+        "behavior": "Stores the second argument at receiver offset +0xB4 and returns.",
+        "uncertainty": "The receiver type and the meaning of field +0xB4 are not identified.",
+    },
+    "587C8910": {
+        "name_in_analysis": "FUN_587c8910 / panel message-state initializer",
+        "called_by": "FUN_58835F70 calls this helper at 0x5883636C and 0x588363F2 to prepare the deposit and withdrawal message paths.",
+        "behavior": "Stores arguments at receiver offsets +0xB8 and +0xB0, then calls FUN_58731CE0, FUN_58907360 with zero, and FUN_58903290 with the two values referenced through the fifth argument.",
+        "uncertainty": "The receiver and argument types and the three helper contracts remain unresolved.",
+    },
+    "58834030": {
+        "name_in_analysis": "FUN_58834030 / five-row control refresh",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836262 after validating the row-selection path.",
+        "behavior": "Obtains a collection iterator and examines five records. For each, it clears paired child values at +0x50 when the record is absent or inactive; otherwise it maps record type values 3, 4, and 6 to paired values 2*field+4, 3, and 1 respectively, clearing other types.",
+        "uncertainty": "The record type and child value meanings are not identified; no UI rendering test was run.",
+    },
+    "58834520": {
+        "name_in_analysis": "FUN_58834520 / selected fleet action-state refresh",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836135 and 0x58836173 after selected-control events.",
+        "behavior": "When global mode equals 6, refreshes a global selection and reads the selected record through receiver field +0x24C. It sets child values at +0x294/+0x298/+0x29C according to the record's +8 field and updates a displayed string through FUN_58731CE0.",
+        "uncertainty": "The mode, selected-record, child-control, and displayed-string meanings remain unresolved.",
+    },
+    "58834B00": {
+        "name_in_analysis": "FUN_58834b00 / bounded record iterator copy",
+        "called_by": "FUN_58835F70 calls this helper at 0x58836530 before scanning the 0x54-byte row records.",
+        "behavior": "Copies the collection's current pointer and index into the output iterator pair after checking the index against the collection bound.",
+        "uncertainty": "The collection and iterator types are not identified; no runtime iterator test was run.",
+    },
+    "58835B30": {
+        "name_in_analysis": "FUN_58835b30 / bounded 0x54-byte record removal",
+        "called_by": "FUN_58835F70 calls this helper at 0x588361E8 after a string match in the row-record collection.",
+        "behavior": "Scans records in 0x54-byte steps, compares each record's string at +0x2D, shifts later 0x54-byte records over a match, decreases the collection end by 0x54, and returns one; returns zero when no record matches. Its calls are bounds-failure checks to FUN_5897CC72.",
+        "uncertainty": "The record schema, string identity, and collection ownership remain unresolved.",
+    },
+}
+EVIDENCE.update(MANAGE_FLEET_EVENT_EVIDENCE)
 
 
 def sha256(path):

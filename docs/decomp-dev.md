@@ -52,12 +52,12 @@ python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 7,781 of 42,461 functions and 2,473,682 of 10,470,295 bytes (18.3251% by
-functions and 23.6257% by bytes); every counted function match is verified at
+credits 7,796 of 42,461 functions and 2,477,612 of 10,470,295 bytes (18.3604% by
+functions and 23.6632% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 1,648 exact function matches totaling 1,500,264 bytes. The
+inventory has 1,663 exact function matches totaling 1,504,194 bytes. The
 PageFight battle-input and target-control path adds 12 exact matches totaling
 4,243 bytes; its direct-call closure and unresolved callback are documented in
 [`current-main-pagefight-battle-input.md`](current-main-pagefight-battle-input.md).
@@ -72,6 +72,10 @@ The matched caller, exact ranges, and conditional child-flag behavior are
 recorded in
 [`current-main-variable-record-child-state-refresh.md`](current-main-variable-record-child-state-refresh.md);
 the receiver/global record meanings remain unresolved.
+The ManageFleetTab event-dispatch path adds 15 exact instruction-stream matches
+and 3,930 bytes. Its vtable evidence, direct-call closure, per-helper behavior,
+and source-recovery limits are recorded in
+[`current-main-manage-fleet-event-dispatch.md`](current-main-manage-fleet-event-dispatch.md).
 parser-selected `CType2MMXAlphaSpriteData` virtual-method slice is documented
 separately. The sibling
 [`CType0MMXAlphaSpriteData`](current-client-alpha-type0-methods.md) and

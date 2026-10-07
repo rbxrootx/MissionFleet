@@ -1,7 +1,7 @@
 # Current Main.dll sprite-data screen base constructor
 
 `FUN_587B6DD0` is a 201-byte constructor called by the verified
-`FUN_58836B90` (ManageSquadTab) and `FUN_5883BBE0` (ManageFleetTab)
+`FUN_58836B90` (ManageFleetTab) and `FUN_5883BBE0` (ManageSquadTab)
 constructors. Both pass the receiver in ECX and use this shared initialization
 before configuring their tab-specific controls. Its mapped body has three
 operand targets and returns with `ret 0x24`.
