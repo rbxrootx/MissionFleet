@@ -6,12 +6,17 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,031 verified matches
-totaling 2,564,425 bytes (18.9138% by functions, 24.4924% by bytes), each at
+identified code bytes across six report units. There are 8,040 verified matches
+totaling 2,569,879 bytes (18.9350% by functions, 24.5445% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. GitHub Actions publishes the generated report to
-the active decomp.dev project. The current `ITFFM.spr` resource conversion path
+the active decomp.dev project. The installed client's state-9 indexed-record
+path adds nine byte-identical functions / 5,454 bytes. Its exact ranges, matched
+caller gate, direct-call boundary, observed object construction, and unresolved
+record semantics are recorded in
+[the subsystem note](docs/current-main-state9-indexed-record-path.md). The
+current `ITFFM.spr` resource conversion path
 adds two byte-identical functions / 2,473 bytes; its evidence and unresolved
 callbacks are recorded in [the subsystem note](docs/current-main-itffm-sprite-resource.md).
 The variable-record child-state refresh adds another two exact functions / 1,784

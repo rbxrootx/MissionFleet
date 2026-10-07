@@ -967,6 +967,13 @@ PAGEFIGHT_TICK_PROGRESS_ADDRESSES = (
 ADDRESSES += PAGEFIGHT_TICK_PROGRESS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(PAGEFIGHT_TICK_PROGRESS_ADDRESSES)
 
+MAIN_STATE9_RECORD_ADDRESSES = (
+    "58783D20", "587847D0", "58785200", "58785300", "58788880",
+    "587B0BB0", "587B1640", "587B3090", "5882F0B0",
+)
+ADDRESSES += MAIN_STATE9_RECORD_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE9_RECORD_ADDRESSES)
+
 PAGEFIGHT_CONTROL_UPDATE_ADDRESSES = (
     "587350E0", "58735170", "587351F0", "587352B0", "58735820", "58735930", "58735CC0", "58735E60",
     "587366F0", "58736A20", "58736E20", "58736E60", "58737170", "58737B00", "58738940", "58738C60",
@@ -9150,6 +9157,71 @@ MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     },
 }
 EVIDENCE.update(MESSAGE_8002C104_RECORD_ACTION_EVIDENCE)
+
+MAIN_STATE9_RECORD_ROOT_EVIDENCE = {
+    "name_in_analysis": "FUN_58788880 / state-9 indexed-record construction path",
+    "called_by": (
+        "The byte-matched FUN_587F8760 takes its state-9 branch when the word "
+        "at receiver +0x105F0 equals 9, then calls this routine at 0x587F8D6C. "
+        "At that instruction ECX is loaded from [EBP+0x21C4C] and the stack "
+        "argument comes from [EBP+0x10524]. After return the caller stores "
+        "DAT_58A0ADD8 at receiver +0x218D0 and scans the global array beginning "
+        "at 0x589BAAB0. The focused verifier checks the state gate, matched "
+        "caller, call instruction, exact Ghidra ranges, and direct-call closure."
+    ),
+    "behavior": (
+        "Fresh Ghidra decompilation shows this routine stores its second "
+        "argument at receiver +0x914 and declares a 33-integer local occupancy "
+        "array whose first 0x80 bytes are zeroed. It scans two 0x80-byte "
+        "global regions at four-byte strides, "
+        "selecting records whose first byte is 5 and whose word at +2 is "
+        "nonzero. It derives indices using DAT_58A0ADD8, constants 0x11 and "
+        "0x13, the pointer/capacity fields reached through receiver +0x14, and "
+        "four counters at receiver +0x818..+0x824. Selected entries allocate "
+        "0xBC-byte objects through FUN_58785300 and place pointers in a vector "
+        "rooted at receiver +0x864. The routine also calls FUN_5882F0B0 and "
+        "FUN_587867E0 with DAT_58A0ADD0. When DAT_58A0B194 is nonzero, a later "
+        "loop allocates 0x70-byte objects through FUN_58783D20 and stores them "
+        "in a second vector-like region whose decompiled base appears to be "
+        "receiver +0x870. The base local is not clearly recovered in this "
+        "later loop. Vector growth calls FUN_588F6890."
+    ),
+    "uncertainty": (
+        "The meanings and schemas of both global record regions, the tag and "
+        "index calculations, receiver counters and vectors, constructed object "
+        "types, and the visible purpose of the state-9 path are not established. "
+        "The base local used in the later allocation loop is not clearly "
+        "recovered by Ghidra, so its apparent relation to the receiver is "
+        "uncertain. Several fields and helper contracts are described only by "
+        "observed offsets and call behavior. This is static evidence from the "
+        "installed Main.dll; no live-client or emulator runtime test was performed."
+    ),
+}
+MAIN_STATE9_RECORD_HELPER_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / state-9 record-path closure member",
+        "called_by": (
+            "Ghidra's exact direct-call closure places this function below "
+            "FUN_58788880, which is called by byte-matched FUN_587F8760 at "
+            "0x587F8D6C in its state-9 branch. Exact body ranges are frozen in "
+            "config/NF2_2026/main-state9-body-ranges.tsv and checked by "
+            "tools/verify_current_main_state9_records.py."
+        ),
+        "behavior": (
+            "This candidate preserves the exact installed Main.dll instruction "
+            "stream for one Ghidra body in the state-9 direct-call closure. Its "
+            "independent semantic role is not asserted without stronger evidence."
+        ),
+        "uncertainty": (
+            "The helper's independent field, record, and object semantics remain "
+            "unresolved; its byte match has not been tested in the emulator."
+        ),
+    }
+    for address in MAIN_STATE9_RECORD_ADDRESSES
+    if address != "58788880"
+}
+MAIN_STATE9_RECORD_HELPER_EVIDENCE["58788880"] = MAIN_STATE9_RECORD_ROOT_EVIDENCE
+EVIDENCE.update(MAIN_STATE9_RECORD_HELPER_EVIDENCE)
 
 
 def sha256(path):
