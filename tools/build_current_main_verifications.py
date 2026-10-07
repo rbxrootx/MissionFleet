@@ -472,6 +472,8 @@ MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES = ("5875CF00",)
 ADDRESSES += MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES
 MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES = ("587B1B70",)
 ADDRESSES += MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES
+MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES = ("587B4100",)
+ADDRESSES += MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -846,6 +848,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13979,6 +13982,42 @@ MAIN_TYPE05_GEOMETRY_TRANSFORM_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_EVIDENCE)
+
+MAIN_TYPE06_PACKED_STATE_TRANSFORM_EVIDENCE = {
+    "587B4100": {
+        "name_in_analysis": "FUN_587B4100 / observed type-0x06 packed-state transform",
+        "called_by": (
+            "Byte-matched FUN_587B4A30 calls this helper at 0x587B4AE2 during "
+            "its observed type-0x06 record-backed child setup. Ghidra records "
+            "three matched callers of that initializer: FUN_58758870 at "
+            "0x58758D23, FUN_587A6220 at 0x587A6A01, and FUN_588D84D0 at "
+            "0x588D8B48. The focused verifier checks these four direct call "
+            "transfers against the mapped Main.dll."
+        ),
+        "behavior": (
+            "Reads packed words at receiver +0x228, +0x22A, and +0x22C. The "
+            "low four bits of +0x228 set the observed entry count; bits 11-12 "
+            "select one to four groups, with the entry count divided across "
+            "them and any remainder assigned to the first group. The low five "
+            "bits of +0x22A seed values and bits 5-9 provide the step. It "
+            "builds six-value scratch records, then processes each selected "
+            "entry over 36 coefficient steps using arrays at 0x58A0B4D8 and "
+            "0x58A0ED18. Each step writes six integer results beginning at "
+            "receiver +0x304; the low four bits of +0x22C bias one result. The "
+            "Ghidra body contains 845 bytes / 268 instructions in two ranges "
+            "and has no direct outgoing calls."
+        ),
+        "uncertainty": (
+            "The packed fields' domain units, coefficient-array meanings, "
+            "destination table schema, and downstream visual/gameplay effect "
+            "are not identified by the mapped code or callers. The two Ghidra "
+            "ranges omit an intervening eight-byte gap; its ownership and "
+            "purpose are not established. This is static installed-client "
+            "evidence, not an emulator runtime test."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_EVIDENCE)
 
 
 if __name__ == "__main__":

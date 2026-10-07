@@ -14,6 +14,7 @@ from tools import (
     verify_current_main_5884b8a0_communicator_memo,
     verify_current_main_5875cf00_state6_sprite_setup,
     verify_current_main_587b1b70_type05_geometry,
+    verify_current_main_587b4100_type06_transform,
 )
 
 
@@ -26,8 +27,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_581)
-        self.assertEqual(self.report["measures"]["matched_code"], "2737738")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_582)
+        self.assertEqual(self.report["measures"]["matched_code"], "2738583")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -38,8 +39,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_448)
-        self.assertEqual(current["measures"]["matched_code"], "1764320")
+        self.assertEqual(current["measures"]["matched_functions"], 2_449)
+        self.assertEqual(current["measures"]["matched_code"], "1765165")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -196,6 +197,24 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("three Ghidra ranges", root["behavior"])
         self.assertIn("units", root["uncertainty"])
         verify_current_main_587b1b70_type05_geometry.main()
+
+    def test_type06_packed_state_transform_has_matched_parent_and_closed_boundary(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_TYPE06_PACKED_STATE_TRANSFORM_EVIDENCE
+        )
+        self.assertEqual(addresses, ("587B4100",))
+        self.assertEqual(set(addresses), set(evidence))
+        root = evidence["587B4100"]
+        self.assertIn("0x587B4AE2", root["called_by"])
+        self.assertIn("0x587A6A01", root["called_by"])
+        self.assertIn("36 coefficient steps", root["behavior"])
+        self.assertIn("eight-byte gap", root["uncertainty"])
+        verify_current_main_587b4100_type06_transform.main()
 
     def test_force_screen_record_refresh_has_original_code_evidence(self):
         addresses = (

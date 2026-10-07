@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,581 of 42,461 functions and 2,737,738 of 10,470,295 bytes (20.2091% by
-functions and 26.1477% by bytes); every counted function match is verified at
+credits 8,582 of 42,461 functions and 2,738,583 of 10,470,295 bytes (20.2115% by
+functions and 26.1557% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,448 exact function matches totaling 1,764,320 bytes. The
+inventory has 2,449 exact function matches totaling 1,765,165 bytes. The
 tax/investment control refresh adds 19 exact functions / 1,196 bytes across 19
 fresh Ghidra ranges. Its 371 instructions, 76 direct-call references, and the
 matched `0x8002311B` / `0x8002312B` callsites are checked by a focused verifier.
@@ -81,6 +81,11 @@ geometry transform. Its three completely decoded Ghidra ranges, two matched
 parent routes, and both verified helper calls are checked by a focused
 verifier; packed-field units and visible effect remain unknown. See
 [`current-main-type05-geometry-transform.md`](current-main-type05-geometry-transform.md).
+The observed type-0x06 path adds `FUN_587B4100`, an 845-byte packed-state
+transform in two Ghidra ranges with three matched caller routes. Its 36-step
+table calculations and coefficient references are checked; field units and
+downstream effect remain unknown. See
+[`current-main-type06-packed-state-transform.md`](current-main-type06-packed-state-transform.md).
 quit-prompt setup helper adds one exact 246-byte function, anchored by two
 matched callers and the original localization key; a third caller is still
 unmatched and parameter and callback meanings remain unresolved. See
