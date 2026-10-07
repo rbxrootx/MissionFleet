@@ -1089,6 +1089,12 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES = (
 ADDRESSES += MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES)
 
+MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES = (
+    "587A2F20", "587A3370", "587A3680", "587A3F30", "587A5120",
+)
+ADDRESSES += MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES)
+
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_ADDRESSES = (
     "587E63F0", "587E6450", "587E9310", "587ECF10",
     "587F7530", "588545C0", "588B3180",
@@ -10068,6 +10074,74 @@ MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE = {
     for address in MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_ADDRESSES
 }
 EVIDENCE.update(MAIN_MAP_OBJECT_PROXIMITY_EFFECTS_EVIDENCE)
+
+MAIN_SPATIAL_RECORD_PROCESSING_PARENTS = {
+    "587A2F20": "FUN_587A5120 at 0x587A51BB",
+    "587A3370": (
+        "FUN_587A3680 at 0x587A37B4; byte-matched FUN_587A4440 at "
+        "0x587A4B4D and 0x587A4CB0"
+    ),
+    "587A3680": "FUN_587A3F30 at 0x587A42F7",
+    "587A3F30": (
+        "FUN_587A5120 at 0x587A5222 and 0x587A531D"
+    ),
+    "587A5120": (
+        "Byte-matched FUN_588D4300 at 0x588D606C; Ghidra associates its "
+        "virtual-table entry with RTTI type CShell_MapObjectScreen"
+    ),
+}
+MAIN_SPATIAL_RECORD_PROCESSING_BEHAVIOR = {
+    "587A2F20": (
+        "Tests whether the supplied object state at +0x13C equals "
+        "0x40000000."
+    ),
+    "587A3370": (
+        "Walks the global object list, retaining entries with state "
+        "0x40000000 while excluding type 6 and the receiver's current target. "
+        "It checks the configured coordinate radius through FUN_5876C8D0 and "
+        "passes qualifying records to the byte-matched combat resolver "
+        "FUN_587EFD60."
+    ),
+    "587A3680": (
+        "Resets receiver state at +0x134 and related child flags, creates "
+        "resource-backed records through the observed allocation helpers, "
+        "calls FUN_587A3370, then refreshes position/state-dependent data."
+    ),
+    "587A3F30": (
+        "Derives a bounded decrement from descriptor fields, caps descriptor "
+        "+0x04 at 2500 on one branch, and subtracts the result from receiver "
+        "+0x74. It can allocate 0x11C-byte records; a depletion path calls "
+        "FUN_587A3680 and then observed notification helpers."
+    ),
+    "587A5120": (
+        "Processes only descriptor tag 0x0B. It validates a pointer-backed "
+        "range, scans candidate records, requires object state "
+        "0x40000000, and tests coordinate deltas against 50 before using a "
+        "radius-squared fallback. A qualifying candidate reaches "
+        "FUN_587A3F30; successful processing can dispatch tag 0x0B through "
+        "FUN_588D6C90 and remove the current entry through FUN_58849980."
+    ),
+}
+MAIN_SPATIAL_RECORD_PROCESSING_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / spatial record processing closure member"
+        ),
+        "called_by": MAIN_SPATIAL_RECORD_PROCESSING_PARENTS[address],
+        "behavior": MAIN_SPATIAL_RECORD_PROCESSING_BEHAVIOR[address],
+        "uncertainty": (
+            "The exact control flow and field offsets come from fresh Ghidra "
+            "12.1.3 output and the pinned mapped Main.dll. The descriptor "
+            "schema, coordinate units, state names, resource/effect identities, "
+            "and gameplay semantics of event tags 0x0B and 0x0C remain "
+            "unresolved. The root's caller is RTTI-identified as "
+            "CShell_MapObjectScreen, but these helper methods' class ownership "
+            "is not established. No emulator runtime or visual test was run."
+        ),
+    }
+    for address in MAIN_SPATIAL_RECORD_PROCESSING_ADDRESSES
+}
+EVIDENCE.update(MAIN_SPATIAL_RECORD_PROCESSING_EVIDENCE)
 
 
 MAIN_PAGEFIGHT_CONTROL_MENU_ACTIONS_PARENTS = {
