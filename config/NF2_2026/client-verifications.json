@@ -446341,6 +446341,71 @@
         "behavior": "Fresh Ghidra body ranges cover 233 bytes / 72 instructions at 0x588D2080 and 52 bytes / 25 instructions at 0x588D2170, totaling 285 bytes / 97 instructions with a 7-byte non-body gap. The method passes [this+0x50], zero, and 0xC4, then [this+0x54], zero, and 0x50 to byte-matched FUN_5897CC48. It writes fixed DWORD, WORD, byte-mask, and bit-mask values through those two pointers. It then passes the NUL-terminated key MESSAGESTRING_ROOMTYPE_TRADE at 0x5899A5C4 through the function pointer at [0x5898C030] and copies the returned bytes into [this+0x50], with a 0x30-byte capacity including the terminator. The method returns with ret 4 without reading its stack argument.",
         "uncertainty": "The [this+0x50]/[this+0x54] structure types and field meanings, the thunk's underlying operation, the stack argument meaning, and the method's UI effect remain unknown. Main.dll imports UtilsGetLanguageText from FleetMissionUtils.dll, and the captured pointer 0x59A98290 matches that installed export's RVA 0x8290 if the utility module is loaded at 0x59A90000; the module base is not in the captured manifest, so this symbol resolution is a strong inference. The emitted source preserves the exact mapped instruction stream and is not recovered high-level C++. No emulator or visual runtime test was performed."
       }
+    },
+    {
+      "address": "588D2300",
+      "name": "FUN_588d2300",
+      "size": 369,
+      "symbol": "_FUN_588d2300",
+      "source": "src/client-current/Main/FUN_588d2300.cpp",
+      "source_sha256": "02dac0261cb5c87dabdbe68c957ed8b60491930113345dbd4df8ccfaf860d37b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D2300",
+          "size": 369,
+          "symbol": "_FUN_588d2300_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 233,
+              "target_address": "5899A4C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "58A24754",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D2300 / shared Trade slot 17 and WAW slot 7 method",
+        "called_by": "Fresh Ghidra edge exports record a data reference from this body to 0x589A0F2C and no incoming direct CALL edge. In the mapped image, 0x589A0EE8 + 17*4 and 0x589A0F10 + 7*4 are the same cell; that cell points to this method. The first table's RTTI names .?AVCRoomTypeTrade@@ and the second's names .?AVCRoomTypeWAW@@. This establishes two table views of one entry, without establishing an inheritance relationship.",
+        "behavior": "Two fresh Ghidra body exports agree on the single exact range [0x588D2300, 0x588D2471): 369 bytes / 111 instructions. The body passes [this+0x50], zero, and 0xC4, then [this+0x54], zero, and 0x50 to byte-matched FUN_5897CC48. It writes fixed values and masked bits through those pointers, then calls through [0x5898C030] with MESSAGESTRING_ROOMTYPE_WAW at 0x5899A4C8 and copies the returned string into [this+0x50] with a 0x30-byte capacity including the terminator. It selects the first row via DAT_58A24754 count and table fields, computes row[+4] + [this+4] + 0x2C into [[this+0x5C]+0x6C], then copies child fields +0x88/+0x8C to +0x50/+0x54. The WAW constructor's Ghidra body loads .\\spr\\ITWAW.spr into DAT_58A24754 when its resource allocation succeeds.",
+        "uncertainty": "The two child structure schemas and field meanings, helper FUN_5897CC48's external operation, message callback contract, stack argument meaning, table schema, and user-visible effect remain unknown. The captured callback pointer 0x59A98290 matches the installed FleetMissionUtils.dll UtilsGetLanguageText export at RVA 0x8290 if that DLL is loaded at 0x59A90000; the capture does not establish that module base, so this is a strong inference. If the count or table-pointer check fails, the code zeros EAX and then reads [EAX+4] (absolute address 0x4); the runtime validity of that path is unresolved and may fault. The emitted source preserves the exact mapped instruction stream; it is not recovered high-level C++. This is static Ghidra and mapped client evidence; no runtime or visual emulator test was performed."
+      }
     }
   ]
 }

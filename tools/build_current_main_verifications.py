@@ -1408,6 +1408,10 @@ MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES = ("588D2080",)
 ADDRESSES += MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_SLOT7_ADDRESSES)
 
+MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES = ("588D2300",)
+ADDRESSES += MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14650,6 +14654,55 @@ MAIN_ROOM_TYPE_TRADE_SLOT7_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_SLOT7_EVIDENCE)
+
+MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_EVIDENCE = {
+    "588D2300": {
+        "name_in_analysis": (
+            "FUN_588D2300 / shared Trade slot 17 and WAW slot 7 method"
+        ),
+        "called_by": (
+            "Fresh Ghidra edge exports record a data reference from this body "
+            "to 0x589A0F2C and no incoming direct CALL edge. In the mapped "
+            "image, 0x589A0EE8 + 17*4 and 0x589A0F10 + 7*4 are the same cell; "
+            "that cell points to this method. The first table's RTTI names "
+            ".?AVCRoomTypeTrade@@ and the second's names "
+            ".?AVCRoomTypeWAW@@. This establishes two table views of one entry, "
+            "without establishing an inheritance relationship."
+        ),
+        "behavior": (
+            "Two fresh Ghidra body exports agree on the single exact range "
+            "[0x588D2300, 0x588D2471): 369 bytes / 111 instructions. The body "
+            "passes [this+0x50], zero, and 0xC4, then [this+0x54], zero, and "
+            "0x50 to byte-matched FUN_5897CC48. It writes fixed values and "
+            "masked bits through those pointers, then calls through "
+            "[0x5898C030] with MESSAGESTRING_ROOMTYPE_WAW at 0x5899A4C8 and "
+            "copies the returned string into [this+0x50] with a 0x30-byte "
+            "capacity including the terminator. It selects the first row via "
+            "DAT_58A24754 count and table fields, computes row[+4] + "
+            "[this+4] + 0x2C into [[this+0x5C]+0x6C], then copies child fields "
+            "+0x88/+0x8C to +0x50/+0x54. The WAW constructor's Ghidra body "
+            "loads .\\spr\\ITWAW.spr into DAT_58A24754 when its resource "
+            "allocation succeeds."
+        ),
+        "uncertainty": (
+            "The two child structure schemas and field meanings, helper "
+            "FUN_5897CC48's external operation, message callback contract, "
+            "stack argument meaning, table schema, and user-visible effect "
+            "remain unknown. The captured callback pointer 0x59A98290 matches "
+            "the installed FleetMissionUtils.dll UtilsGetLanguageText export "
+            "at RVA 0x8290 if that DLL is loaded at 0x59A90000; the capture "
+            "does not establish that module base, so this is a strong "
+            "inference. If the count or table-pointer check fails, the code "
+            "zeros EAX and then reads [EAX+4] (absolute address 0x4); the "
+            "runtime validity of that path is unresolved and may fault. The "
+            "emitted source preserves the exact mapped instruction stream; it "
+            "is not recovered high-level C++. This is static Ghidra and mapped "
+            "client evidence; no runtime or visual emulator test was "
+            "performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_EVIDENCE)
 
 
 if __name__ == "__main__":

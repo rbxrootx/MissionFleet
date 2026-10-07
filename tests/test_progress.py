@@ -31,6 +31,7 @@ from tools import (
     verify_current_main_room_type_blitz_constructor,
     verify_current_main_room_type_trade_constructor,
     verify_current_main_room_type_trade_slot7,
+    verify_current_main_room_type_trade_waw_shared_slot,
 )
 
 
@@ -43,8 +44,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470295")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_599)
-        self.assertEqual(self.report["measures"]["matched_code"], "2745112")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_600)
+        self.assertEqual(self.report["measures"]["matched_code"], "2745481")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -55,8 +56,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354361")
-        self.assertEqual(current["measures"]["matched_functions"], 2_466)
-        self.assertEqual(current["measures"]["matched_code"], "1771694")
+        self.assertEqual(current["measures"]["matched_functions"], 2_467)
+        self.assertEqual(current["measures"]["matched_code"], "1772063")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -253,6 +254,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("[this+0x54]", item["behavior"])
         self.assertIn("strong inference", item["uncertainty"])
         verify_current_main_room_type_trade_slot7.main()
+
+    def test_room_type_trade_waw_shared_vtable_method_has_dual_rtti_evidence(self):
+        addresses = build_current_main_verifications.MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_ROOM_TYPE_TRADE_WAW_SHARED_SLOT_EVIDENCE
+        self.assertEqual(addresses, ("588D2300",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588D2300"]
+        self.assertIn("Trade@@", item["called_by"])
+        self.assertIn("WAW@@", item["called_by"])
+        self.assertIn("MESSAGESTRING_ROOMTYPE_WAW", item["behavior"])
+        self.assertIn("address 0x4", item["uncertainty"])
+        verify_current_main_room_type_trade_waw_shared_slot.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (
