@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,594 matches cover 2,743,939 bytes (20.2397% by functions and
-26.2069% by bytes) and are verified individually at 100.0% by objdiff.
+The current 8,595 matches cover 2,744,214 bytes (20.2421% by functions and
+26.2095% by bytes) and are verified individually at 100.0% by objdiff.
 The installed client's battle-room `0x80020115` update closure adds eight
 byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
 bitmap traversal, mode-specific object creation, exact ranges, and unresolved
@@ -58,6 +58,10 @@ The adjacent `CRoomTypeNormal` constructor adds one exact function / 171 bytes.
 Its matched manager gate, RTTI identity, `CPannelNormalRoomSetting` child
 construction, and unresolved resource/argument meanings are documented in
 [the constructor evidence](docs/current-main-room-type-normal-constructor.md).
+The following `CRoomTypeNightBattle` constructor adds one exact function /
+275 bytes. Its matched manager gate, RTTI identity, two selected-record copies,
+and unresolved address-`0x8` fallback read are documented in
+[the constructor evidence](docs/current-main-room-type-night-battle-constructor.md).
 The installed client's shared map-control refresh adds eight byte-identical
 functions / 3,894 bytes. Its original map labels, selector-driven child updates,
 five matched caller paths, exact Ghidra ranges, and four open callers are

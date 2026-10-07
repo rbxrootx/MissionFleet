@@ -1388,6 +1388,10 @@ MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES = ("588CF880",)
 ADDRESSES += MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_NIGHT_BATTLE_CONSTRUCTOR_ADDRESSES = ("588CF570",)
+ADDRESSES += MAIN_ROOM_TYPE_NIGHT_BATTLE_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_NIGHT_BATTLE_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14452,6 +14456,41 @@ MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_NIGHT_BATTLE_CONSTRUCTOR_EVIDENCE = {
+    "588CF570": {
+        "name_in_analysis": "FUN_588CF570 / CRoomTypeNightBattle constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAAD9 after FUN_5897CC4E accepts "
+            "resource 0x70. It passes manager fields at +0x68 and +0x12C, "
+            "plus EBX and EBP; the return value is stored at receiver +0x194. "
+            "The focused verifier checks the gate, argument setup, call, and "
+            "result store in the mapped caller."
+        ),
+        "behavior": (
+            "Fresh Ghidra body and edge exports cover 89 instructions in one "
+            "275-byte range, with one direct call to byte-matched "
+            "FUN_588D02E0. The constructor installs vtable 0x589A0DF8 whose "
+            "RTTI type descriptor is .?AVCRoomTypeNightBattle@@. It reads a "
+            "pointer from global slot 0x58A24748 and uses fields +0x164 and "
+            "+0x18C to select two records. For each selected record it stores "
+            "the record pointer at child +0x50 and copies six DWORDs into child "
+            "+0x0C through +0x20; the first record's +8 value is also written "
+            "through child +0x5C+0x74."
+        ),
+        "uncertainty": (
+            "The meaning of resource 0x70, the global pointer slot and its "
+            "fields, the selected-record schema, child roles, and class "
+            "behavior remain unresolved. On the absent-third-record path, the "
+            "mapped code reads [0x8] after clearing EAX; the valid-state "
+            "behavior of this absolute address-0x8 read is unknown. This is "
+            "static evidence from the installed mapped client, Ghidra exports, "
+            "and RTTI; no emulator or visual runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_NIGHT_BATTLE_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":
