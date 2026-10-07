@@ -1352,6 +1352,10 @@ MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES = (
 ADDRESSES += MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES)
 
+MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES = ("588D0710",)
+ADDRESSES += MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14104,6 +14108,41 @@ MAIN_80021101_RECORD_METRIC_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_80021101_RECORD_METRIC_EVIDENCE)
+
+MAIN_ROOM_TYPE_OCCUPATION_EVIDENCE = {
+    "588D0710": {
+        "name_in_analysis": "FUN_588D0710 / CRoomTypeOccupation constructor",
+        "called_by": (
+            "Fresh Ghidra references record byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CACF5. Its installed vtable identifies "
+            "the caller as CRoomSettingManager. The focused verifier checks "
+            "the caller identity, exact mapped call instruction, and all 13 "
+            "outgoing transfers. FUN_587CEC30 is a broader constructor path "
+            "in Ghidra, but that caller is not byte-verified and is not used "
+            "as the primary match boundary."
+        ),
+        "behavior": (
+            "Fresh Ghidra output calls FUN_588D02E0 for base initialization, "
+            "installs the CRoomTypeOccupation vtable, and reads selected "
+            "records through fields at DAT_58A24640+0x164 and +0x18C. It copies "
+            "six DWORDs from each selected record into child objects at "
+            "receiver indices 0x18 and 0x19, then writes an additional value "
+            "to the child at index 0x17. It constructs nine repeated "
+            "sprite-data controls over three iterations and two more controls "
+            "over a second loop. Each control-construction path is gated by "
+            "resource lookup 0xAC through FUN_5897CC4E, creates its child via "
+            "FUN_5875DDA0, and calls FUN_58902D20 with value 0x101."
+        ),
+        "uncertainty": (
+            "The global table and selected-record schemas, meanings of the "
+            "bounds/state fields, resource 0xAC, control value 0x101, and the "
+            "created controls' appearance or actions remain unidentified. "
+            "This is static evidence from the installed mapped client; no "
+            "runtime or visual emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_OCCUPATION_EVIDENCE)
 
 
 if __name__ == "__main__":
