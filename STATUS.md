@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,368 verified matches
-totaling 2,687,082 bytes (19.7075% by functions, 25.6639% by bytes), each at
+identified code bytes across six report units. There are 8,369 verified matches
+totaling 2,688,820 bytes (19.7099% by functions, 25.6805% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The RTTI-backed `CLogoControlMenuScreen` slot
@@ -968,6 +968,9 @@ applies mode-dependent percentage changes and bounds, then re-encodes selected
 fields. ObjDiff checks both ranges and 74 mapped operands. Record, field, mode,
 and helper meanings remain unresolved; no emulator test was performed. See
 [the function evidence](docs/current-main-masked-record-parameter-update.md).
+Its three-site helper `FUN_5880B810` now adds 1,738 exact bytes, with the
+observed arithmetic and its mode/subtype uncertainties in
+[the helper note](docs/current-main-masked-record-parameter-helper.md).
 
 `FUN_5896f3e0` adds a 2,640-byte clipped pixel blit and compositing method
 across two Ghidra ranges. The pseudocode shows rectangle clipping, a backend

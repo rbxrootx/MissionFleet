@@ -1078,6 +1078,10 @@ CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES = (
 ADDRESSES += CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_ADDRESSES)
 
+CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES = ("5880B810",)
+ADDRESSES += CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_ADDRESSES)
+
 MESSAGE_8002C104_RECORD_ACTION_ADDRESSES = (
     "587798E0", "5877CB40", "5878A370", "5887B240", "5887B3F0",
     "5887B4B0", "5887BD30", "5887C900", "5887CFB0", "58880C90",
@@ -9709,6 +9713,35 @@ CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_EVIDENCE = {
     },
 }
 EVIDENCE.update(CURRENT_MAIN_MESSAGE_80022001_CHILD_REFRESH_EVIDENCE)
+
+CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_EVIDENCE = {
+    "5880B810": {
+        "name_in_analysis": "FUN_5880b810 / masked-record derived parameter calculation",
+        "called_by": (
+            "Fresh Ghidra references identify three direct calls from the "
+            "byte-matched FUN_5880d270 at 0x5880D80B, 0x5880D831, and "
+            "0x5880D83E. The focused verifier checks each mapped CALL target."
+        ),
+        "behavior": (
+            "Reads a word at the global object's +0x6504 and XOR-decodes it "
+            "with 0xAAAAAAAA, then uses an observed floating-point divide and "
+            "rounding sequence to produce an integer. It selects a 5-bit "
+            "subtype from the active object at +0x100C and a mode from the "
+            "global state at +0x105F0. Under the observed modes "
+            "4, 6, 10, 11, 14, and 15, it applies the 0.2f factor to the "
+            "documented subtype cases before returning; other paths return "
+            "the unscaled or default result. In FUN_5880d270, selected "
+            "returns are added to the field at param_2 +0x10C."
+        ),
+        "uncertainty": (
+            "The global/object types, +0x6504 field meaning and units, "
+            "runtime divisor initialization, mode and subtype meanings, "
+            "rounding contract, and why the caller applies this result are "
+            "unresolved. No emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(CURRENT_MAIN_MASKED_RECORD_PARAMETER_HELPER_EVIDENCE)
 
 MESSAGE_8002C104_RECORD_ACTION_EVIDENCE = {
     "58881C90": {

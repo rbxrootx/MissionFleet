@@ -18,10 +18,21 @@ re-encodes fields, and calculates a byte-sum field over a 0x71-iteration loop
 before calling `FUN_5875b3f0`. These operations are visible in Ghidra's
 pseudocode and are preserved in the matched original ranges.
 
+The called helper `FUN_5880B810` is now matched as a separate 1,738-byte
+function in the exact fresh Ghidra range `[0x5880B810, 0x5880BEDA)`, covering
+491 instructions. Fresh Ghidra references and the mapped caller bytes confirm
+calls at `0x5880D80B`, `0x5880D831`, and `0x5880D83E` from this byte-matched
+updater. The helper XOR-decodes a global word at offset `+0x6504`, converts it
+through an observed floating-point divide/round sequence, and applies a 0.2f
+factor on selected mode/subtype paths. The updater adds some returned values to
+its field at `+0x10C`. ObjDiff matches the helper at 100.0% and checks 32
+mapped operand targets. See the
+[helper evidence](current-main-masked-record-parameter-helper.md).
+
 ## Uncertainties
 
-The record's class, field names, mode and subtype meanings, helper semantics,
-caller lifecycle, and effect on visible or gameplay behavior have not been
-established. The source is an exact machine-code representation of the captured
-ranges; this match alone does not establish a readable high-level port. No
-emulator/runtime test was performed.
+The record's class, field names, mode and subtype meanings, the helper's global
+types/divisor initialization, caller lifecycle, and effect on visible or
+gameplay behavior have not been established. The source is an exact machine-code
+representation of the captured ranges; this match alone does not establish a
+readable high-level port. No emulator/runtime test was performed.

@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,368 of 42,461 functions and 2,687,082 of 10,470,295 bytes (19.7075% by
-functions and 25.6639% by bytes); every counted function match is verified at
+credits 8,369 of 42,461 functions and 2,688,820 of 10,470,295 bytes (19.7099% by
+functions and 25.6805% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,235 exact function matches totaling 1,713,664 bytes. The
+inventory has 2,236 exact function matches totaling 1,715,402 bytes. The
 `CPannelFactoryHelp` child-state selector and its direct-call closure add four
 byte-identical functions / 2,210 bytes, grounded by the panel's RTTI, vtable,
 matched caller sites, and exact Ghidra body ranges; numeric state meanings and
@@ -78,6 +78,11 @@ byte-identical functions / 2,212 bytes. Its exact Ghidra ranges, child/text
 updates, verified direct-call boundaries, and unresolved payload/control
 semantics are documented in
 [`current-main-message-80022001-auxiliary-child-refresh.md`](current-main-message-80022001-auxiliary-child-refresh.md).
+The masked-record parameter updater's byte-matched helper adds one function /
+1,738 bytes, tied to three calls from the matched updater and checked against
+fresh Ghidra arithmetic and body ranges. Its unresolved mode, subtype, and
+field meanings are recorded in
+[`current-main-masked-record-parameter-helper.md`](current-main-masked-record-parameter-helper.md).
 The installed client's battle-room `0x80020115`
 update closure adds eight byte-identical functions / 3,847 bytes. Its matched
 dispatcher route, bitmap traversal, factory selection, exact ranges, and payload
