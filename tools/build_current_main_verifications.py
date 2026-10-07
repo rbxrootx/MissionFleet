@@ -1368,6 +1368,10 @@ MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES = ("588CDF70",)
 ADDRESSES += MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_WAW_CONSTRUCTOR_ADDRESSES = ("588D21B0",)
+ADDRESSES += MAIN_ROOM_TYPE_WAW_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_WAW_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -14254,6 +14258,41 @@ MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_HCB_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_WAW_CONSTRUCTOR_EVIDENCE = {
+    "588D21B0": {
+        "name_in_analysis": "FUN_588D21B0 / CRoomTypeWAW constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAC7C after FUN_5897CC4E accepts "
+            "resource 0x70. The returned pointer is stored at "
+            "CRoomSettingManager receiver +0x1A8. The focused verifier checks "
+            "the resource gate, argument setup, exact call, and result store "
+            "against mapped bytes."
+        ),
+        "behavior": (
+            "Fresh Ghidra body and edge exports cover 89 instructions in one "
+            "275-byte range, with a direct call to byte-matched "
+            "FUN_588D02E0. Mapped instructions install vtable 0x589A0F10, "
+            "whose RTTI type descriptor is .?AVCRoomTypeWAW@@. The constructor "
+            "uses fields DAT_58A24754+0x164 and +0x18C to select two records "
+            "and copies six DWORDs from each record into children at receiver "
+            "offsets +0x60 and +0x64; it also writes a value from the first "
+            "record at +8 through child +0x5C+0x74."
+        ),
+        "uncertainty": (
+            "The selected-record schema, global field meanings, resource "
+            "0x70, child and field semantics, and CRoomTypeWAW virtual "
+            "behavior remain unidentified. On the third-value fallback path, "
+            "the mapped instructions zero EAX and then read [EAX+8] before "
+            "storing the value; the runtime validity and meaning of that "
+            "absolute address-0x8 read are unknown. This is static evidence "
+            "from the installed mapped client and RTTI; no runtime or visual "
+            "emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_WAW_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":
