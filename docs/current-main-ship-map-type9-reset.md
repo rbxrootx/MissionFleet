@@ -21,9 +21,12 @@ into receiver `+0xB8`, initializes `+0xB4` to `0x7D` through
 then clears observed counters and flags. It resets five child rows, including
 their state words and flag bits, calling `FUN_58793E00` for each row. When the
 global table has at least `0x18` records and a nonnull data pointer, it takes
-the record at offset `+0x5C0` and copies six words into the child at receiver
+the record at offset `+0x5C0` and copies six DWORDs into the child at receiver
 `+0x72C`.
 
 The branch establishes the type-9 call path, but the child-row schema, counter
 and flag meanings, resource identity, and downstream visual effects remain
 unknown. No emulator runtime or visual test has been run for this branch.
+
+The alternate non-type-9 branch has its own exact-match record and notes in
+[non-type-9 reset](current-main-ship-map-nontype9-reset.md).
