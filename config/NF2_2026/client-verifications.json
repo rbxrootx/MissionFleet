@@ -418175,6 +418175,1773 @@
         "behavior": "Appends one 0x22-byte row in existing capacity or calls FUN_58883EB0 to insert a row when the buffer must grow.",
         "uncertainty": "The row schema and container type remain unknown."
       }
+    },
+    {
+      "address": "58779890",
+      "name": "FUN_58779890",
+      "size": 78,
+      "symbol": "_FUN_58779890",
+      "source": "src/client-current/Main/FUN_58779890.cpp",
+      "source_sha256": "dc62e20fff53f627d9a594c7a0cdb4524cf6385867d0e36a14663f27919d3c86",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58779890",
+          "size": 78,
+          "symbol": "_FUN_58779890_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58779890 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Searches a fixed-stride record array for a pair of 16-bit key values and returns the matching record address or zero.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "587B9130",
+      "name": "FUN_587b9130",
+      "size": 21,
+      "symbol": "_FUN_587b9130",
+      "source": "src/client-current/Main/FUN_587b9130.cpp",
+      "source_sha256": "de8bd222b1e703ccc6ca88964ab6b76273ccc5059f4cd5a093335ae286e5acae",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B9130",
+          "size": 21,
+          "symbol": "_FUN_587b9130_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9130 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Dispatches event 0x80010D06 with five zero arguments.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "587B9150",
+      "name": "FUN_587b9150",
+      "size": 21,
+      "symbol": "_FUN_587b9150",
+      "source": "src/client-current/Main/FUN_587b9150.cpp",
+      "source_sha256": "5267d314638578a73e4979716f09cba2f28324b821ca70b5da9eafea433dcffe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B9150",
+          "size": 21,
+          "symbol": "_FUN_587b9150_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b9150 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Dispatches event 0x80010D07 with five zero arguments.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "587BA8F0",
+      "name": "FUN_587ba8f0",
+      "size": 56,
+      "symbol": "_FUN_587ba8f0",
+      "source": "src/client-current/Main/FUN_587ba8f0.cpp",
+      "source_sha256": "31a2edb9e3e10f52ddd84ae99fe575c4059f5f773d931e3de6f01e194b0226c8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587BA8F0",
+          "size": 56,
+          "symbol": "_FUN_587ba8f0_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba8f0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "When an observed global receiver field equals 3, dispatches event 0x80010D03 with the four supplied values.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "587BA930",
+      "name": "FUN_587ba930",
+      "size": 42,
+      "symbol": "_FUN_587ba930",
+      "source": "src/client-current/Main/FUN_587ba930.cpp",
+      "source_sha256": "a0ed3406dafc16fce201204c72589dabae365c77a4fd9f0abeb2ce3cc1619d05",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587BA930",
+          "size": 42,
+          "symbol": "_FUN_587ba930_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba930 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "When an observed global receiver field equals 4, dispatches event 0x80010D04 with zero arguments.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "587C8850",
+      "name": "FUN_587c8850",
+      "size": 7,
+      "symbol": "_FUN_587c8850",
+      "source": "src/client-current/Main/FUN_587c8850.cpp",
+      "source_sha256": "2d06e434a74a306c64eb133c8bc32fa7a7c0f0a93b9daac9e0da7049f4a74abf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587C8850",
+          "size": 7,
+          "symbol": "_FUN_587c8850_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587c8850 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Returns the value reached through object offsets +0x74 and +0x6C.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B5DC0",
+      "name": "FUN_588b5dc0",
+      "size": 97,
+      "symbol": "_FUN_588b5dc0",
+      "source": "src/client-current/Main/FUN_588b5dc0.cpp",
+      "source_sha256": "783ffd4c3922f4ce8f63e96169a436ea14d73f8b0338b9830b304b08e6956cf2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B5DC0",
+          "size": 97,
+          "symbol": "_FUN_588b5dc0_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "589072A0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b5dc0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Bounds an increment against a remaining-capacity field and calls an observed update helper when the new value stays within the limit.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B5E30",
+      "name": "FUN_588b5e30",
+      "size": 97,
+      "symbol": "_FUN_588b5e30",
+      "source": "src/client-current/Main/FUN_588b5e30.cpp",
+      "source_sha256": "f07f5aaac60fc177ba8830992425c547589d4d5a41a535a6b1078b9cb2b66897",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B5E30",
+          "size": 97,
+          "symbol": "_FUN_588b5e30_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "58A0B46C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "589072A0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b5e30 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Applies the corresponding bounded increment to the second observed capacity/value pair.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B5EA0",
+      "name": "FUN_588b5ea0",
+      "size": 419,
+      "symbol": "_FUN_588b5ea0",
+      "source": "src/client-current/Main/FUN_588b5ea0.cpp",
+      "source_sha256": "763427662113c92baff0a67802af77197c62a7f3effc2ab4566c3997184ea4aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B5EA0",
+          "size": 419,
+          "symbol": "_FUN_588b5ea0_segment_00",
+          "relocations": [
+            {
+              "offset": 128,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 221,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 367,
+              "target_address": "588BB220",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b5ea0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Rebuilds eight child values from the selected record range, clearing unused child values and adjusting an observed selection flag.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B61B0",
+      "name": "FUN_588b61b0",
+      "size": 38,
+      "symbol": "_FUN_588b61b0",
+      "source": "src/client-current/Main/FUN_588b61b0.cpp",
+      "source_sha256": "eaf7d2a4f9f73f7775b71f8a0ea2e899a5717779dcd24527eef07da544edc6ec",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B61B0",
+          "size": 38,
+          "symbol": "_FUN_588b61b0_segment_00",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "587B9130",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b61b0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Clears a child flag, sets receiver field +0x19C to 5, then dispatches event 0x80010D06 through FUN_587B9130.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B7F70",
+      "name": "FUN_588b7f70",
+      "size": 631,
+      "symbol": "_FUN_588b7f70",
+      "source": "src/client-current/Main/FUN_588b7f70.cpp",
+      "source_sha256": "c510b148a4be8c09adf7e2e3cc679106d9eff8d037bb60f36fc2d3049098943b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B7F70",
+          "size": 631,
+          "symbol": "_FUN_588b7f70_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "589087F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "588B80C8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "588BB370",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "589A0988",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "588BB3D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "589A0984",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "588BB4A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "588BB440",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 249,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "588BB3D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 318,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "588B7FF1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "588B81CB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "588BC980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "5898C194",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 418,
+              "target_address": "588BCD20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 428,
+              "target_address": "589A0984",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 457,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "588BCA40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "588BC9E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 521,
+              "target_address": "589088D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "588BCDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 583,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 599,
+              "target_address": "588B80F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 606,
+              "target_address": "588B5EA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 623,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b7f70 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Rebuilds two displayed row sets from separate record sources, fills their text/value fields through indexed accessors, and refreshes the child controls.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588B8CB0",
+      "name": "FUN_588b8cb0",
+      "size": 2140,
+      "symbol": "_FUN_588b8cb0",
+      "source": "src/client-current/Main/FUN_588b8cb0.cpp",
+      "source_sha256": "99d6090b0fd2539c8c1fb472f896c83e6f1a6dd4317c8bd524ac1685f14a0fef",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588B8CB0",
+          "size": 122,
+          "symbol": "_FUN_588b8cb0_segment_00",
+          "relocations": [
+            {
+              "offset": 23,
+              "target_address": "588B94C6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "588B944C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "588B9106",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "588B8E22",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "588B8E22",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B8D30",
+          "size": 827,
+          "symbol": "_FUN_588b8cb0_segment_01",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "588BB220",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58779890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58A24909",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "588B8E86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "588B8E86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "588B8E86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "588BCAA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "58779890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "588B8E86",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "588BCAA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "588B8EA9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "588B8D12",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 354,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 389,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 396,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "588B90E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "58A0B46C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 456,
+              "target_address": "588B90E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 461,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 531,
+              "target_address": "588B909F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 543,
+              "target_address": "588B909F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 653,
+              "target_address": "588B907A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 679,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 732,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 748,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 809,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 817,
+              "target_address": "587BA8F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 823,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588B907A",
+          "size": 1191,
+          "symbol": "_FUN_588b8cb0_segment_02",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "587BA8F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "587BA930",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 248,
+              "target_address": "587B9150",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "58A245EC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 313,
+              "target_address": "58A245EC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 339,
+              "target_address": "588B61B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 367,
+              "target_address": "58731620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "587B9150",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 451,
+              "target_address": "587B9110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "588B5DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 549,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 559,
+              "target_address": "58907300",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 593,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 602,
+              "target_address": "588B5E30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 636,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "58907300",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 670,
+              "target_address": "588B93CB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 684,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 820,
+              "target_address": "5874DDD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 857,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 871,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 949,
+              "target_address": "5874DDD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 983,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 994,
+              "target_address": "588B9515",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1005,
+              "target_address": "587C8850",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1011,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1017,
+              "target_address": "589A0998",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1036,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1059,
+              "target_address": "587C8850",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1065,
+              "target_address": "589A0990",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1084,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1175,
+              "target_address": "588B7F70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588b8cb0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "RTTI-backed CPannelTrade vtable address point 0x589A0954 stores this method at slot +0x18, address 0x589A096C. Its fresh Ghidra data reference confirms the virtual-table entry; no direct code callsite was found.",
+        "behavior": "CPannelTrade vtable slot +0x18 callback. Validates selected record rows and capacity limits, changes child selection/state fields, builds a compact word payload, and passes it with two values to FUN_587BA8F0.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BB220",
+      "name": "FUN_588bb220",
+      "size": 83,
+      "symbol": "_FUN_588bb220",
+      "source": "src/client-current/Main/FUN_588bb220.cpp",
+      "source_sha256": "46042269383ba2e1daf320710bd2208a4adf0308dec9298692ac6aea8b29ea7f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BB220",
+          "size": 83,
+          "symbol": "_FUN_588bb220_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bb220 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Returns the requested active entry from a filtered set of child record pointers, or zero when the index is out of range.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BB370",
+      "name": "FUN_588bb370",
+      "size": 92,
+      "symbol": "_FUN_588bb370",
+      "source": "src/client-current/Main/FUN_588bb370.cpp",
+      "source_sha256": "46d55c761fded77c995911f3d214c193261d36a3aca4258a3a25b21963ac715d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BB370",
+          "size": 92,
+          "symbol": "_FUN_588bb370_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bb370 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Resolves an active entry by filtered index and returns the nested value at offsets +0x23C and +0x6C.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BB3D0",
+      "name": "FUN_588bb3d0",
+      "size": 99,
+      "symbol": "_FUN_588bb3d0",
+      "source": "src/client-current/Main/FUN_588bb3d0.cpp",
+      "source_sha256": "818a0a833eb3c229afa694c2b68b3925c215bb49c878202f99c4288d21821c55",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BB3D0",
+          "size": 99,
+          "symbol": "_FUN_588bb3d0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bb3d0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Resolves an active entry and returns its encoded +0x5E high-nibble value XOR 0xAA.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BB440",
+      "name": "FUN_588bb440",
+      "size": 86,
+      "symbol": "_FUN_588bb440",
+      "source": "src/client-current/Main/FUN_588bb440.cpp",
+      "source_sha256": "e12ff3ad0f4e544f651f46aaf0e62b7d21fb5d8aff6aaf29cf75bb8ca9dee60f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BB440",
+          "size": 86,
+          "symbol": "_FUN_588bb440_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bb440 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Returns the +0x50 field of the requested active entry.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BB4A0",
+      "name": "FUN_588bb4a0",
+      "size": 119,
+      "symbol": "_FUN_588bb4a0",
+      "source": "src/client-current/Main/FUN_588bb4a0.cpp",
+      "source_sha256": "eaba3fc1964b3c695cebcf0d53588057a43a66289c13f15139fe500a5cc0ca0f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BB4A0",
+          "size": 119,
+          "symbol": "_FUN_588bb4a0_segment_00",
+          "relocations": [
+            {
+              "offset": 111,
+              "target_address": "589CFCA8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bb4a0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Uses an active entry's +0xA4 and +0x5E fields to compute a pointer into the mapped resource table.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BC980",
+      "name": "FUN_588bc980",
+      "size": 88,
+      "symbol": "_FUN_588bc980",
+      "source": "src/client-current/Main/FUN_588bc980.cpp",
+      "source_sha256": "f9b70961027583081f0bf5a6b9275ed1a48d722c6ba4bdac26cbbdd4900eef41",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BC980",
+          "size": 88,
+          "symbol": "_FUN_588bc980_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "589080E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bc980 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Maps the requested active row to an indexed value through FUN_589080E0.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BC9E0",
+      "name": "FUN_588bc9e0",
+      "size": 88,
+      "symbol": "_FUN_588bc9e0",
+      "source": "src/client-current/Main/FUN_588bc9e0.cpp",
+      "source_sha256": "bf713fd9bd4dfd9446220b22b317e5c463a0ac171e2aab6595f48c30902401e1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BC9E0",
+          "size": 88,
+          "symbol": "_FUN_588bc9e0_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "589080E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bc9e0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Maps the requested active row to an indexed value through FUN_589080E0.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BCA40",
+      "name": "FUN_588bca40",
+      "size": 88,
+      "symbol": "_FUN_588bca40",
+      "source": "src/client-current/Main/FUN_588bca40.cpp",
+      "source_sha256": "2e5a0e871e315ef18e830ab6f5046c7e9d135d9026df1e543dc9edb3915d130d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BCA40",
+          "size": 88,
+          "symbol": "_FUN_588bca40_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bca40 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Maps the requested active row to an indexed value through FUN_58908140.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BCAA0",
+      "name": "FUN_588bcaa0",
+      "size": 88,
+      "symbol": "_FUN_588bcaa0",
+      "source": "src/client-current/Main/FUN_588bcaa0.cpp",
+      "source_sha256": "4619feac9ba5fb6f8b21611161fe99d61b3ac2cec2703becfc018fa092b1ab1b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BCAA0",
+          "size": 88,
+          "symbol": "_FUN_588bcaa0_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bcaa0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Maps the requested active row to an indexed value through FUN_58908140.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BCD20",
+      "name": "FUN_588bcd20",
+      "size": 115,
+      "symbol": "_FUN_588bcd20",
+      "source": "src/client-current/Main/FUN_588bcd20.cpp",
+      "source_sha256": "4f54ee08494af897d437b51b2cf92cef746019293e316779f9a2bb6b3c2c0f00",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BCD20",
+          "size": 115,
+          "symbol": "_FUN_588bcd20_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bcd20 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Resolves the requested active row's nested object and extracts the observed 8-bit field at +0x0E.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
+    },
+    {
+      "address": "588BCDA0",
+      "name": "FUN_588bcda0",
+      "size": 106,
+      "symbol": "_FUN_588bcda0",
+      "source": "src/client-current/Main/FUN_588bcda0.cpp",
+      "source_sha256": "24341b03e9e7bf1242541d2ef7bfac9cd4f34eb2a88186336cc92c4001877e78",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BCDA0",
+          "size": 106,
+          "symbol": "_FUN_588bcda0_segment_00",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "58908140",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58778B20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588bcda0 / CPannelTrade slot +0x18 event closure",
+        "called_by": "Part of the fresh Ghidra direct-call closure rooted at the CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180.",
+        "behavior": "Resolves the requested active row's nested object and returns its field at +0x60.",
+        "uncertainty": "The C++ field names, row schemas, event dispatcher semantics, and visible UI effect are unresolved. This is static analysis of the installed Main.dll; no emulator interaction test was run."
+      }
     }
   ]
 }

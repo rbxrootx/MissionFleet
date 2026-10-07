@@ -1124,6 +1124,16 @@ MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES = (
 ADDRESSES += MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_STATE_RESET_ADDRESSES)
 
+MAIN_CPANNEL_TRADE_EVENT_ADDRESSES = (
+    "58779890", "587B9130", "587B9150", "587BA8F0", "587BA930",
+    "587C8850", "588B5DC0", "588B5E30", "588B5EA0", "588B61B0",
+    "588B7F70", "588B8CB0", "588BB220", "588BB370", "588BB3D0",
+    "588BB440", "588BB4A0", "588BC980", "588BC9E0", "588BCA40",
+    "588BCAA0", "588BCD20", "588BCDA0",
+)
+ADDRESSES += MAIN_CPANNEL_TRADE_EVENT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_TRADE_EVENT_ADDRESSES)
+
 MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_ADDRESSES = (
     "588869A0", "58886AE0", "5887A410", "5887B450", "5887BEE0",
     "5887CB00", "5887CB30", "5887CB60", "5887DA60", "5887DBB0",
@@ -10640,6 +10650,117 @@ MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CPANNEL_TRADE_STATE_RESET_EVIDENCE)
+
+MAIN_CPANNEL_TRADE_EVENT_BEHAVIOR = {
+    "58779890": (
+        "Searches a fixed-stride record array for a pair of 16-bit key values "
+        "and returns the matching record address or zero."
+    ),
+    "587B9130": "Dispatches event 0x80010D06 with five zero arguments.",
+    "587B9150": "Dispatches event 0x80010D07 with five zero arguments.",
+    "587BA8F0": (
+        "When an observed global receiver field equals 3, dispatches event "
+        "0x80010D03 with the four supplied values."
+    ),
+    "587BA930": (
+        "When an observed global receiver field equals 4, dispatches event "
+        "0x80010D04 with zero arguments."
+    ),
+    "587C8850": "Returns the value reached through object offsets +0x74 and +0x6C.",
+    "588B5DC0": (
+        "Bounds an increment against a remaining-capacity field and calls an "
+        "observed update helper when the new value stays within the limit."
+    ),
+    "588B5E30": (
+        "Applies the corresponding bounded increment to the second observed "
+        "capacity/value pair."
+    ),
+    "588B5EA0": (
+        "Rebuilds eight child values from the selected record range, clearing "
+        "unused child values and adjusting an observed selection flag."
+    ),
+    "588B61B0": (
+        "Clears a child flag, sets receiver field +0x19C to 5, then dispatches "
+        "event 0x80010D06 through FUN_587B9130."
+    ),
+    "588B7F70": (
+        "Rebuilds two displayed row sets from separate record sources, fills "
+        "their text/value fields through indexed accessors, and refreshes the "
+        "child controls."
+    ),
+    "588B8CB0": (
+        "CPannelTrade vtable slot +0x18 callback. Validates selected record "
+        "rows and capacity limits, changes child selection/state fields, builds "
+        "a compact word payload, and passes it with two values to "
+        "FUN_587BA8F0."
+    ),
+    "588BB220": (
+        "Returns the requested active entry from a filtered set of child "
+        "record pointers, or zero when the index is out of range."
+    ),
+    "588BB370": (
+        "Resolves an active entry by filtered index and returns the nested "
+        "value at offsets +0x23C and +0x6C."
+    ),
+    "588BB3D0": (
+        "Resolves an active entry and returns its encoded +0x5E high-nibble "
+        "value XOR 0xAA."
+    ),
+    "588BB440": "Returns the +0x50 field of the requested active entry.",
+    "588BB4A0": (
+        "Uses an active entry's +0xA4 and +0x5E fields to compute a pointer "
+        "into the mapped resource table."
+    ),
+    "588BC980": (
+        "Maps the requested active row to an indexed value through "
+        "FUN_589080E0."
+    ),
+    "588BC9E0": (
+        "Maps the requested active row to an indexed value through "
+        "FUN_589080E0."
+    ),
+    "588BCA40": (
+        "Maps the requested active row to an indexed value through "
+        "FUN_58908140."
+    ),
+    "588BCAA0": (
+        "Maps the requested active row to an indexed value through "
+        "FUN_58908140."
+    ),
+    "588BCD20": (
+        "Resolves the requested active row's nested object and extracts the "
+        "observed 8-bit field at +0x0E."
+    ),
+    "588BCDA0": (
+        "Resolves the requested active row's nested object and returns its "
+        "field at +0x60."
+    ),
+}
+MAIN_CPANNEL_TRADE_EVENT_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CPannelTrade slot +0x18 event closure"
+        ),
+        "called_by": (
+            "Part of the fresh Ghidra direct-call closure rooted at the "
+            "CPannelTrade vtable entry 0x589A096C. Byte-matched incoming helper "
+            "callers include FUN_588B96B0, FUN_588EC5D0, and FUN_588FD180."
+        ),
+        "behavior": behavior,
+        "uncertainty": (
+            "The C++ field names, row schemas, event dispatcher semantics, and "
+            "visible UI effect are unresolved. This is static analysis of the "
+            "installed Main.dll; no emulator interaction test was run."
+        ),
+    }
+    for address, behavior in MAIN_CPANNEL_TRADE_EVENT_BEHAVIOR.items()
+}
+MAIN_CPANNEL_TRADE_EVENT_EVIDENCE["588B8CB0"]["called_by"] = (
+    "RTTI-backed CPannelTrade vtable address point 0x589A0954 stores this "
+    "method at slot +0x18, address 0x589A096C. Its fresh Ghidra data reference "
+    "confirms the virtual-table entry; no direct code callsite was found."
+)
+EVIDENCE.update(MAIN_CPANNEL_TRADE_EVENT_EVIDENCE)
 
 MAIN_MESSAGE_8002C004_8002C006_RECORD_UPDATE_EVIDENCE = {
     "588869A0": {
