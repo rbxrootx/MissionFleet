@@ -8,7 +8,10 @@ import capstone
 from capstone import CS_GRP_JUMP
 from capstone.x86_const import X86_INS_CALL, X86_OP_IMM
 
-from build_current_main_verifications import MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES
+if __package__:
+    from .build_current_main_verifications import MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES
+else:
+    from build_current_main_verifications import MAIN_ROOM_TYPE_FLB_SETTING_ADDRESSES
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +40,8 @@ EXPECTED_CLOSURE_TRANSFERS = {
     0x588CDA2D: 0x58897850,
     0x588CDA51: 0x58897850,
 }
-OPEN_INCOMING_TRANSFER = (0x588CF908, 0x58897930)
+NORMAL_CALLER = 0x588CF880
+NORMAL_INCOMING_TRANSFER = (0x588CF908, 0x58897930)
 EXPECTED_FUNCTIONS = 3
 EXPECTED_BYTES = 2603
 EXPECTED_RANGES = 3
@@ -122,6 +126,12 @@ def main():
     if "CRoomSettingManager" not in json.dumps(caller.get("evidence", {})):
         raise AssertionError("Matched caller evidence does not identify CRoomSettingManager")
 
+    normal_caller = records.get(NORMAL_CALLER)
+    if normal_caller is None or NORMAL_CALLER not in matched:
+        raise AssertionError("CRoomTypeNormal caller is not byte-verified")
+    if "CRoomTypeNormal" not in json.dumps(normal_caller.get("evidence", {})):
+        raise AssertionError("Matched secondary caller evidence does not identify CRoomTypeNormal")
+
     decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     decoder.detail = True
     for address, (mnemonic, operands) in CALLER_SETUP.items():
@@ -183,13 +193,13 @@ def main():
 
     for site, target in EXPECTED_CLOSURE_TRANSFERS.items():
         verify_transfer(image, decoder, site, target)
-    verify_transfer(image, decoder, *OPEN_INCOMING_TRANSFER)
+    verify_transfer(image, decoder, *NORMAL_INCOMING_TRANSFER)
     print(
         f"Main.dll FLB room-settings constructor closure: {len(selected)} functions / "
         f"{byte_count:,} bytes ObjDiff-identical across {range_count} exact "
         f"Ghidra ranges; resource 0x7C gate, matched CRoomSettingManager call, "
-        f"{len(boundary_transfers)} verified boundary transfers, and the open "
-        "secondary panel caller pass"
+        f"{len(boundary_transfers)} verified boundary transfers, and the "
+        "byte-matched CRoomTypeNormal panel caller pass"
     )
 
 

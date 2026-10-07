@@ -1384,6 +1384,10 @@ MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES = ("588CD3C0",)
 ADDRESSES += MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_ADDRESSES)
 
+MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES = ("588CF880",)
+ADDRESSES += MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_ADDRESSES)
+
 MAIN_SHARED_CONTROL_REFRESH_ADDRESSES = (
     "58796AF0", "587CEF70", "588946B0", "588C8520",
     "588C8A50", "588CB0E0", "588CBA30", "588CE320",
@@ -12521,8 +12525,10 @@ MAIN_ROOM_TYPE_FLB_SETTING_EVIDENCE = {
     "58897930": {
         "name_in_analysis": "FUN_58897930 / CPannelNormalRoomSetting constructor",
         "called_by": (
-            "FUN_588CD740 calls this at 0x588CD95E. Open FUN_588CF880 also calls "
-            "it at 0x588CF908; that additional caller is not byte-verified."
+            "Byte-matched FUN_588CD740 calls this at 0x588CD95E. The now-byte-"
+            "matched CRoomTypeNormal constructor FUN_588CF880 also calls it at "
+            "0x588CF908; its focused verifier checks the complete caller body, "
+            "resource-0x1B4 gate, arguments, and result store."
         ),
         "behavior": (
             "Fresh Ghidra pseudocode identifies CPannelNormalRoomSetting::vftable, "
@@ -14413,6 +14419,39 @@ MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_ROOM_TYPE_DKT2_CONSTRUCTOR_EVIDENCE)
+
+MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_EVIDENCE = {
+    "588CF880": {
+        "name_in_analysis": "FUN_588CF880 / CRoomTypeNormal constructor",
+        "called_by": (
+            "Fresh Ghidra references show byte-matched FUN_588C9280 calling "
+            "this constructor at 0x588CAA9E after FUN_5897CC4E accepts "
+            "resource 0x74. It passes the manager fields at +0x68 and +0x12C "
+            "along with its EBX and EBP values; the returned pointer is stored "
+            "at receiver +0x19C. The focused verifier checks the resource "
+            "gate, argument setup, call, and result store against mapped bytes."
+        ),
+        "behavior": (
+            "Fresh Ghidra body and edge exports cover 59 instructions in one "
+            "171-byte range. The constructor calls byte-matched "
+            "FUN_588D02E0, FUN_5897CC4E, and FUN_58897930, then installs vtable "
+            "0x589A0E20 whose RTTI type descriptor is .?AVCRoomTypeNormal@@. "
+            "When resource 0x1B4 is accepted, it calls "
+            "FUN_58897930/CPannelNormalRoomSetting with receiver, two "
+            "zero-valued arguments, constants 0x40 and 7, and values derived "
+            "from saved arguments by adding 0x2C and 0xBD. It stores the result "
+            "at receiver +0x70."
+        ),
+        "uncertainty": (
+            "The meanings of resources 0x74 and 0x1B4, manager pointer fields, "
+            "the EBX/EBP-derived arguments and their units, and the child "
+            "panel's rendered or interactive role remain unresolved. The "
+            "constructor's exact instruction stream is matched, but this path "
+            "has not had an emulator or visual runtime test."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ROOM_TYPE_NORMAL_CONSTRUCTOR_EVIDENCE)
 
 
 if __name__ == "__main__":

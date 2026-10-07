@@ -12,8 +12,8 @@ creates two `CSpriteDataScreen` children through `FUN_5875DDA0`, and constructs
 a `CPannelNormalRoomSetting` child through `FUN_58897930`. The constructor then
 calls `FUN_58897850` while placing indexed child controls. That helper applies
 the supplied coordinate offsets to eight child slots through
-`FUN_58903290`. Ghidra also records a second, still-open call to
-`FUN_58897930` from `FUN_588CF880` at `0x588CF908`.
+`FUN_58903290`. The separate `CRoomTypeNormal` constructor now has its own
+byte-match and confirms its call to `FUN_58897930` at `0x588CF908`.
 
 The closed direct-call subsystem contains three functions / 2,603 bytes across
 three exact Ghidra body ranges. The emitted instruction streams match the
