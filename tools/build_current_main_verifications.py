@@ -12951,6 +12951,65 @@ MAIN_FORCE_SCREEN_RECORD_REFRESH_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_FORCE_SCREEN_RECORD_REFRESH_EVIDENCE)
 
+MAIN_USER_CHAT_CHANNEL_COMMAND_ADDRESSES = ("587F6C40", "587B7870")
+ADDRESSES += MAIN_USER_CHAT_CHANNEL_COMMAND_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_USER_CHAT_CHANNEL_COMMAND_ADDRESSES)
+
+MAIN_USER_CHAT_CHANNEL_COMMAND_EVIDENCE = {
+    "587F6C40": {
+        "name_in_analysis": "FUN_587f6c40 / numeric user-chat channel command",
+        "called_by": (
+            "Byte-matched chat input handler FUN_587fc9c0 calls this body at "
+            "0x587fd022 after recognizing the mapped slash prefix at "
+            "0x589cc120 and a digit as the next input character. The mapped "
+            "prefix target is the literal '/'."
+        ),
+        "behavior": (
+            "Reads decimal digits from the input after '/', stopping at a space "
+            "or NUL; a nondigit exits the routine. It stores the parsed value at "
+            "receiver +0x21d1c, formats it with the mapped '%d' format into the "
+            "buffer at +0x21cec, mirrors that channel text to global "
+            "0x58a245c0 + 0xc0, and checks it against the three-entry channel "
+            "table through FUN_587b7870. If no entry matches, it displays "
+            "MESSAGESTRING_ENTER_USERCHAT_CHANNEL_FIRST and resets the input. "
+            "For a match with trailing text, it creates a 0x30-byte header, "
+            "appends the message, and submits the buffer through verified "
+            "FUN_587b81a0; a zero result displays "
+            "MESSAGESTRING__FORBIDDEN_WORD_INCLUDE. It then formats "
+            "MESSAGESTRING_CHANNEL_USERCHANNEL_CHATTING and updates the input "
+            "through verified FUN_587ee240(2, 5, label). Fresh Ghidra covers "
+            "947 bytes in two ranges."
+        ),
+        "uncertainty": (
+            "The three table entries' domain meaning, the 0x30-byte message "
+            "header schema, FUN_587b81a0's complete contract, localized display "
+            "semantics, accepted numeric range, and server effect remain "
+            "unresolved. The matched caller and mapped strings prove local input "
+            "routing, not live-server compatibility. No client or emulator test "
+            "was performed."
+        ),
+    },
+    "587B7870": {
+        "name_in_analysis": "FUN_587b7870 / three-entry user-chat channel lookup",
+        "called_by": (
+            "Called by FUN_587f6c40 at 0x587f6d9a and independently by "
+            "byte-matched FUN_58890110 at 0x58891be4."
+        ),
+        "behavior": (
+            "Compares the supplied NUL-terminated channel text against three "
+            "receiver entries beginning at +0x130 with a 0x18-byte stride. It "
+            "returns 1 on equality with any entry and 0 after all three miss. "
+            "Fresh Ghidra assigns one 89-byte range with 41 instructions."
+        ),
+        "uncertainty": (
+            "The receiver type, ownership and meaning of the three entries, and "
+            "whether a match represents membership or another authorization "
+            "state remain unknown. No emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_USER_CHAT_CHANNEL_COMMAND_EVIDENCE)
+
 
 def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,379 verified matches
-totaling 2,697,266 bytes (19.7334% by functions, 25.7611% by bytes), each at
+identified code bytes across six report units. There are 8,381 verified matches
+totaling 2,698,302 bytes (19.7381% by functions, 25.7710% by bytes), each at
 100.0% under objdiff 3.8.0. A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The RTTI-backed `CHCB_LandingTank` constructor
@@ -27,6 +27,10 @@ functions / 1,345 bytes. Its mapped command strings, matched Enter-key caller,
 recipient parsing and input-state update are documented with the remaining
 record/protocol uncertainties in
 [the subsystem note](docs/current-main-chat-private-recipient.md). The
+adjacent numeric user-chat channel command adds two exact functions / 1,036
+bytes. Its matched slash-plus-digit route, three-entry lookup, message submission
+path, and unresolved server semantics are recorded in
+[the subsystem note](docs/current-main-user-chat-channel-command.md). The
 page-result control menu's slot `+0x00` cleanup body adds one exact function /
 1,107 bytes. Its matched RTTI vtable caller, observed child-pointer cleanup,
 exact ranges, and unresolved indirect callbacks are documented in

@@ -55,3 +55,6 @@ meanings of the mode fields, guard/filter decisions, and server/protocol
 effects remain unresolved. Ghidra records fourteen other incoming calls to
 `FUN_587EE240` from adjacent chat-input routines that are outside this slice.
 No client or emulator runtime test was performed.
+
+The neighboring numeric user-chat channel route is documented separately in
+[`current-main-user-chat-channel-command.md`](current-main-user-chat-channel-command.md).

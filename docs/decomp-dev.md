@@ -52,12 +52,12 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,379 of 42,461 functions and 2,697,266 of 10,470,295 bytes (19.7334% by
-functions and 25.7611% by bytes); every counted function match is verified at
+credits 8,381 of 42,461 functions and 2,698,302 of 10,470,295 bytes (19.7381% by
+functions and 25.7710% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,246 exact function matches totaling 1,723,848 bytes. The
+inventory has 2,248 exact function matches totaling 1,724,884 bytes. The
 RTTI-backed `CHCB_LandingTank` constructor adds one exact function / 1,234
 bytes. Its eight-object matched map-screen setup loop, nine sprite-bundle
 children, complete direct-call boundary, and unresolved visual roles are
@@ -78,6 +78,10 @@ functions / 1,345 bytes. Its mapped strings and matched Enter-key caller ground
 the recipient parser and input-state update; record and protocol semantics
 remain unresolved. See
 [`current-main-chat-private-recipient.md`](current-main-chat-private-recipient.md).
+The adjacent numeric user-chat channel command adds two exact functions / 1,036
+bytes. Its matched slash-plus-digit route, three-entry channel lookup, message
+submission path, and unresolved record/server semantics are documented in
+[`current-main-user-chat-channel-command.md`](current-main-user-chat-channel-command.md).
 The page-result control menu's slot `+0x00` cleanup body adds one exact
 function / 1,107 bytes. Its matched RTTI caller, child-pointer cleanup, exact
 ranges, and unresolved indirect callbacks are documented in
