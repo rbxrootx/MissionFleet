@@ -423,6 +423,31 @@ MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES = (
 )
 ADDRESSES += MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES
 
+MAIN_C_SCREENSHOT_TIME_ADDRESSES = (
+    "587C7090", "587C71A0", "587C7300",
+    "58971E50", "58971EC0", "58971F10", "58972270",
+    "58972490", "589724A0", "58972550", "58972580", "58972590",
+    "589725A0", "589725B0", "589725C0", "589725D0", "589725F0",
+    "58972610", "58972620", "58972650", "58972690", "58972740",
+    "58972750", "589728F0", "589729A0", "58972A10", "58972BC0",
+    "58972C20", "58972C40", "58972C70", "58972CE0", "58972D30",
+    "58973020", "58973580", "58973780", "58973790", "589737B0",
+    "58973810", "58973860", "58973870", "589738A0", "589738E0",
+    "58973930", "58973980", "58973E00", "58973F60", "58973F70",
+    "58973FA0", "58974000", "58974010", "58974970", "58974AE0",
+    "58974BA0", "58974C00", "58974CF0", "58974E00", "58975050",
+    "58975210", "589752E0", "589752F0", "58975340", "58975450",
+    "589754D0", "589755A0", "58975680", "589756C0", "58975700",
+    "58975720", "58975820", "58975880", "58975920", "589759A0",
+    "58975CA0", "58975E50", "58975E90", "58975EE0", "58975F50",
+    "58976B70", "58976BB0", "58976BD0", "58976BF0", "58976C10",
+    "58976C20", "58976CB0", "58977590", "58977650", "589776A0",
+    "589776B0", "58977840", "589784F0", "58978E50", "58979A60",
+    "5897A030", "5897A4C0", "5897A5F0", "5897B000", "5897B780",
+    "5897B790", "5897B850", "5897BA20", "5897CFE4", "5897D5D6",
+)
+ADDRESSES += MAIN_C_SCREENSHOT_TIME_ADDRESSES
+
 RELOCATION_OVERRIDES = {
     "58907380": [
         {"offset": 8, "target_address": "589072A0", "kind": "relative",
@@ -788,6 +813,7 @@ SOURCE_COMPILER_ADDRESSES = {
 }
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGE_RESULT_CONTROL_MENU_CLEANUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_C_SCREENSHOT_TIME_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13353,6 +13379,102 @@ for address in MAIN_C_EXPLAN_PANNEL_EVENT_ADDRESSES:
         ),
     }
 EVIDENCE.update(MAIN_C_EXPLAN_PANNEL_EVENT_EVIDENCE)
+
+MAIN_C_SCREENSHOT_TIME_TRANSFERS = ROOT / (
+    "config/NF2_2026/current-main-c-screenshot-time-transfers.tsv"
+)
+MAIN_C_SCREENSHOT_TIME_PARENTS = {
+    address: [] for address in MAIN_C_SCREENSHOT_TIME_ADDRESSES
+}
+MAIN_C_SCREENSHOT_TIME_CHILDREN = {
+    address: [] for address in MAIN_C_SCREENSHOT_TIME_ADDRESSES
+}
+with MAIN_C_SCREENSHOT_TIME_TRANSFERS.open(encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        source = edge["source"].upper()
+        site = edge["site"].upper()
+        target = edge["target"].upper()
+        MAIN_C_SCREENSHOT_TIME_PARENTS[target].append((source, site))
+        MAIN_C_SCREENSHOT_TIME_CHILDREN[source].append((site, target))
+
+MAIN_C_SCREENSHOT_TIME_ROOT_BEHAVIOR = {
+    "587C7300": (
+        "The RTTI-identified CScreenShotTime vtable method first calls "
+        "FUN_58906F30 with its three arguments. It reads a child pointer from "
+        "parent offset +0xFC, derives four coordinates from parameter 3 with "
+        "observed offsets +300, -0x26, unchanged right, and -0x23, then "
+        "conditionally calls FUN_58731CE0 and invokes a child virtual method. "
+        "When parent byte +0x100 is set and global DAT_58A24A98 exceeds 2, it "
+        "resets that global, calls FUN_587C71A0, and clears the byte; otherwise "
+        "it increments the global."
+    ),
+    "587C71A0": (
+        "This method clears receiver byte +4, makes observed calls to "
+        "FUN_58902C20 and FUN_58902C70, clears selected bits and a word in the "
+        "child object at receiver offset +0xB4, and conditionally passes the "
+        "string ./ScreenShot to a host callback. It formats ./ScreenShot/%s "
+        "using receiver offset +0x0C and passes the result to FUN_58971EC0 "
+        "with argument 3."
+    ),
+}
+MAIN_C_SCREENSHOT_TIME_EVIDENCE = {}
+for address in MAIN_C_SCREENSHOT_TIME_ADDRESSES:
+    parents = MAIN_C_SCREENSHOT_TIME_PARENTS[address]
+    children = MAIN_C_SCREENSHOT_TIME_CHILDREN[address]
+    if address == "587C7300":
+        called_by = (
+            "RTTI identifies the vtable at 0x5899AF00 as "
+            ".?AVCScreenShotTime@CNFScreenShot@@; this function is slot +0x14. "
+            "The matched FUN_587C75E0 constructor installs that vtable for its "
+            "child object and is called by matched FUN_5878D6D0 at 0x5878D75B. "
+            "The focused verifier checks the RTTI, slot, and matched call path."
+        )
+    elif parents:
+        called_by = "Fresh Ghidra direct-transfer edges: " + "; ".join(
+            f"FUN_{source.lower()} at 0x{site}"
+            for source, site in parents
+        ) + "."
+    else:
+        called_by = (
+            "This function belongs to the audited direct-transfer closure "
+            "rooted at the CScreenShotTime vtable method. The fresh transfer "
+            "manifest contains no direct in-closure predecessor; an indirect "
+            "or data-driven reference has not been isolated."
+        )
+    if address in MAIN_C_SCREENSHOT_TIME_ROOT_BEHAVIOR:
+        behavior = MAIN_C_SCREENSHOT_TIME_ROOT_BEHAVIOR[address]
+    elif children:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra records its "
+            "in-closure direct transfers at "
+            + "; ".join(
+                f"0x{site} to FUN_{target.lower()}"
+                for site, target in children
+            )
+            + ". The helper's higher-level rendering or callback semantics "
+            "are not assigned beyond those observed transfers."
+        )
+    else:
+        behavior = (
+            "The exact emitted body is byte-matched. Fresh Ghidra records no "
+            "direct CALL or JMP from this body to another closure member; its "
+            "field and user-visible semantics remain unassigned."
+        )
+    MAIN_C_SCREENSHOT_TIME_EVIDENCE[address] = {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / CScreenShotTime closure member"
+        ),
+        "called_by": called_by,
+        "behavior": behavior,
+        "uncertainty": (
+            "The callback meanings, receiver and parameter types, field "
+            "semantics, and user-visible screenshot behavior remain uncertain "
+            "where not stated as direct Ghidra observations. The function "
+            "ranges and direct transfers come from fresh Ghidra exports and "
+            "mapped machine code. No emulator runtime test has been performed."
+        ),
+    }
+EVIDENCE.update(MAIN_C_SCREENSHOT_TIME_EVIDENCE)
 
 
 if __name__ == "__main__":
