@@ -452268,6 +452268,200 @@
         "behavior": "Both fresh body exports and a targeted headless export agree on one complete 785-byte range (207 instructions), [0x58876FA0,0x588772B1). When receiver +0x24 bit 2 is set, state 0x100 advances child values at +0x28 in six-unit steps through matched FUN_58902CE0, with observed upper clamps 0xFA/0xFF; on completion it copies receiver +0xA4 to +0xA8, calls matched FUN_58770A80 with +0xA4, and changes the state mask to 0x200. State 0x400 decrements the same child values by six, clamps at zero, and changes to 0x500 when complete; state 0x500 clears bit 2. The method has 32 direct calls: 31 to matched FUN_58902CE0 and one to matched FUN_58770A80. It then traverses the child list through a virtual call at slot +0x0C, with an indirect tail transfer on the final child.",
         "uncertainty": "The child object types, meaning of the +0x28 values and state bits, purpose of the +0xA4/+0xA8 fields, transition names, and visible result are not established. The target behind child vtable slot +0x0C is dynamic; no client or emulator visual test was performed."
       }
+    },
+    {
+      "address": "588772C0",
+      "name": "FUN_588772c0",
+      "size": 72,
+      "symbol": "_FUN_588772c0",
+      "source": "src/client-current/Main/FUN_588772c0.cpp",
+      "source_sha256": "e2a800b1ca0d02a5288a412a1384452755b18bde6fe238fd812d3180da9dc25e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588772C0",
+          "size": 72,
+          "symbol": "_FUN_588772c0_segment_00",
+          "relocations": [
+            {
+              "offset": 46,
+              "target_address": "58770A80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58770A80",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588772C0 / CPannelHotKeysInfo backward pointer step",
+        "called_by": "Both fresh Ghidra edge exports record calls from FUN_58877880 at 0x58877893 and FUN_588778D0 at 0x5887796A. Both callers are entries in the RTTI-identified CPannelHotKeysInfo secondary vtable or its event path.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 72-byte range (23 instructions), [0x588772C0,0x58877308). If receiver +0xA4 and +0xA8 are nonzero, it subtracts 0x47 from +0xA8 when that remains at or above +0xA4; otherwise it clamps +0xA8 to +0xA4. It then calls matched FUN_58770A80 with the selected pointer. Its two direct calls both target that byte-matched helper.",
+        "uncertainty": "The pointer fields' application meaning, the reason for the 0x47 step, and the visible effect of the string/helper update are not established."
+      }
+    },
+    {
+      "address": "58877310",
+      "name": "FUN_58877310",
+      "size": 83,
+      "symbol": "_FUN_58877310",
+      "source": "src/client-current/Main/FUN_58877310.cpp",
+      "source_sha256": "e90a12b6d36190e5d6eb2f66202db698b0802347fa1b560e3780f914bc5b9b44",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877310",
+          "size": 83,
+          "symbol": "_FUN_58877310_segment_00",
+          "relocations": [
+            {
+              "offset": 78,
+              "target_address": "58770A80",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877310 / CPannelHotKeysInfo forward pointer step",
+        "called_by": "Both fresh Ghidra edge exports record calls from FUN_58877880 at 0x588778A5 and FUN_588778D0 at 0x5887793F and 0x5887795B. Both callers are entries in the RTTI-identified CPannelHotKeysInfo secondary vtable or its event path.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 83-byte range (28 instructions), [0x58877310,0x58877363). If receiver +0xA4 and +0xA8 are nonzero, it scans the NUL-terminated string beginning at +0xA8. When the terminator reaches or passes +0xA8 plus 0x545, it advances +0xA8 by 0x47, then calls matched FUN_58770A80 with the resulting pointer. Its sole direct call targets that byte-matched helper.",
+        "uncertainty": "The string's meaning, pointer-range ownership, purpose of the 0x47 stride and 0x545 bound, and visible effect are not established."
+      }
+    },
+    {
+      "address": "58877880",
+      "name": "FUN_58877880",
+      "size": 67,
+      "symbol": "_FUN_58877880",
+      "source": "src/client-current/Main/FUN_58877880.cpp",
+      "source_sha256": "0c113e811b10ac50efd7f3161706b17a740b0574dbb2d3f4c6f3e19e951f9b70",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877880",
+          "size": 67,
+          "symbol": "_FUN_58877880_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "588772C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "58877310",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877880 / CPannelHotKeysInfo child-event dispatcher",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EFB8, slot +0x18 of the secondary vtable at 0x5899EFA0. Its Complete Object Locator and TypeDescriptor identify .?AVCPannelHotKeysInfo@@. Neither export records a direct caller.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 67-byte range (20 instructions), [0x58877880,0x588778C3). For event kind 2, it compares the event pointer with receiver fields +0x9C, +0xA0, and +0x98. The first two matches call FUN_588772C0 and FUN_58877310 respectively; the third invokes the pointed object's virtual slot +0x08. Both direct helper targets are included in this byte-matched slice.",
+        "uncertainty": "The event structure, child object types, meanings of the pointer fields, and the target behind the virtual slot +0x08 call are unresolved."
+      }
+    },
+    {
+      "address": "588778D0",
+      "name": "FUN_588778d0",
+      "size": 167,
+      "symbol": "_FUN_588778d0",
+      "source": "src/client-current/Main/FUN_588778d0.cpp",
+      "source_sha256": "584a8ef6e62eef146be007326ca42736de3937df75b10e6acd0d95d7d7ef754d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588778D0",
+          "size": 167,
+          "symbol": "_FUN_588778d0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5887796F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "58877310",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "58877310",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "588772C0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588778D0 / CPannelHotKeysInfo input-event handler",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EFB0, slot +0x10 of the secondary vtable at 0x5899EFA0. Its Complete Object Locator and TypeDescriptor identify .?AVCPannelHotKeysInfo@@. Neither export records a direct caller.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 167-byte range (63 instructions), [0x588778D0,0x58877977). When receiver flag bit 1 is set, it forwards the event through child vtable slot +0x10. In state 0x200 it routes message 0x100 with key values 0x26/0x28, and message 0x20A with the observed short-value sign test, to the matched backward/forward helpers. Its three direct calls target the two helpers in this slice.",
+        "uncertainty": "The event/message structure, key meanings, state semantics, child object types, and target behind child vtable slot +0x10 remain unresolved."
+      }
     }
   ]
 }

@@ -45,6 +45,7 @@ from tools import (
     verify_current_main_panel_help_event,
     verify_current_main_panel_help_state_transition,
     verify_current_main_hotkeys_info_transition,
+    verify_current_main_hotkeys_info_input,
     verify_current_main_pagefight_ringout_monitor,
     verify_current_main_pagefight_position_bounds,
     verify_current_main_scroll_text_screen_slot0,
@@ -72,8 +73,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_653)
-        self.assertEqual(self.report["measures"]["matched_code"], "2767575")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_657)
+        self.assertEqual(self.report["measures"]["matched_code"], "2767964")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -84,8 +85,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_520)
-        self.assertEqual(current["measures"]["matched_code"], "1794157")
+        self.assertEqual(current["measures"]["matched_functions"], 2_524)
+        self.assertEqual(current["measures"]["matched_code"], "1794546")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -988,6 +989,19 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("one to matched FUN_58770A80", evidence["58876FA0"]["behavior"])
         self.assertIn("dynamic", evidence["58876FA0"]["uncertainty"])
         verify_current_main_hotkeys_info_transition.main()
+
+    def test_hotkeys_info_input_path_matches_original_and_closes_helper_calls(self):
+        addresses = build_current_main_verifications.MAIN_HOTKEYS_INFO_INPUT_ADDRESSES
+        self.assertEqual(addresses, ("588772C0", "58877310", "58877880", "588778D0"))
+        evidence = build_current_main_verifications.MAIN_HOTKEYS_INFO_INPUT_EVIDENCE
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x5899EFB0", evidence["588778D0"]["called_by"])
+        self.assertIn("0x5899EFB8", evidence["58877880"]["called_by"])
+        self.assertIn("0x47", evidence["588772C0"]["behavior"])
+        self.assertIn("0x545", evidence["58877310"]["behavior"])
+        self.assertIn("0x26/0x28", evidence["588778D0"]["behavior"])
+        self.assertIn("child vtable slot +0x10", evidence["588778D0"]["uncertainty"])
+        verify_current_main_hotkeys_info_input.main()
 
     def test_manage_fleet_child_matches_original_and_verified_caller(self):
         addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES

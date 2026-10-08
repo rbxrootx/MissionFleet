@@ -16395,6 +16395,108 @@ MAIN_HOTKEYS_INFO_TRANSITION_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_HOTKEYS_INFO_TRANSITION_EVIDENCE)
 
+MAIN_HOTKEYS_INFO_INPUT_ADDRESSES = (
+    "588772C0", "58877310", "58877880", "588778D0",
+)
+ADDRESSES += MAIN_HOTKEYS_INFO_INPUT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_HOTKEYS_INFO_INPUT_ADDRESSES)
+
+MAIN_HOTKEYS_INFO_INPUT_EVIDENCE = {
+    "588772C0": {
+        "name_in_analysis": "FUN_588772C0 / CPannelHotKeysInfo backward pointer step",
+        "called_by": (
+            "Both fresh Ghidra edge exports record calls from "
+            "FUN_58877880 at 0x58877893 and FUN_588778D0 at 0x5887796A. "
+            "Both callers are entries in the RTTI-identified "
+            "CPannelHotKeysInfo secondary vtable or its event path."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 72-byte range (23 instructions), "
+            "[0x588772C0,0x58877308). If receiver +0xA4 and +0xA8 are nonzero, "
+            "it subtracts 0x47 from +0xA8 when that remains at or above +0xA4; "
+            "otherwise it clamps +0xA8 to +0xA4. It then calls matched "
+            "FUN_58770A80 with the selected pointer. Its two direct calls both "
+            "target that byte-matched helper."
+        ),
+        "uncertainty": (
+            "The pointer fields' application meaning, the reason for the "
+            "0x47 step, and the visible effect of the string/helper update are "
+            "not established."
+        ),
+    },
+    "58877310": {
+        "name_in_analysis": "FUN_58877310 / CPannelHotKeysInfo forward pointer step",
+        "called_by": (
+            "Both fresh Ghidra edge exports record calls from "
+            "FUN_58877880 at 0x588778A5 and FUN_588778D0 at 0x5887793F and "
+            "0x5887795B. Both callers are entries in the RTTI-identified "
+            "CPannelHotKeysInfo secondary vtable or its event path."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 83-byte range (28 instructions), "
+            "[0x58877310,0x58877363). If receiver +0xA4 and +0xA8 are nonzero, "
+            "it scans the NUL-terminated string beginning at +0xA8. When the "
+            "terminator reaches or passes +0xA8 plus 0x545, it advances +0xA8 "
+            "by 0x47, then calls matched FUN_58770A80 with the resulting "
+            "pointer. Its sole direct call targets that byte-matched helper."
+        ),
+        "uncertainty": (
+            "The string's meaning, pointer-range ownership, purpose of the "
+            "0x47 stride and 0x545 bound, and visible effect are not established."
+        ),
+    },
+    "58877880": {
+        "name_in_analysis": "FUN_58877880 / CPannelHotKeysInfo child-event dispatcher",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EFB8, slot +0x18 of the secondary vtable at 0x5899EFA0. "
+            "Its Complete Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHotKeysInfo@@. Neither export records a direct caller."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 67-byte range (20 instructions), "
+            "[0x58877880,0x588778C3). For event kind 2, it compares the event "
+            "pointer with receiver fields +0x9C, +0xA0, and +0x98. The first "
+            "two matches call FUN_588772C0 and FUN_58877310 respectively; the "
+            "third invokes the pointed object's virtual slot +0x08. Both direct "
+            "helper targets are included in this byte-matched slice."
+        ),
+        "uncertainty": (
+            "The event structure, child object types, meanings of the pointer "
+            "fields, and the target behind the virtual slot +0x08 call are "
+            "unresolved."
+        ),
+    },
+    "588778D0": {
+        "name_in_analysis": "FUN_588778D0 / CPannelHotKeysInfo input-event handler",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EFB0, slot +0x10 of the secondary vtable at 0x5899EFA0. "
+            "Its Complete Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHotKeysInfo@@. Neither export records a direct caller."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 167-byte range (63 instructions), "
+            "[0x588778D0,0x58877977). When receiver flag bit 1 is set, it "
+            "forwards the event through child vtable slot +0x10. In state "
+            "0x200 it routes message 0x100 with key values 0x26/0x28, and "
+            "message 0x20A with the observed short-value sign test, to the "
+            "matched backward/forward helpers. Its three direct calls target "
+            "the two helpers in this slice."
+        ),
+        "uncertainty": (
+            "The event/message structure, key meanings, state semantics, "
+            "child object types, and target behind child vtable slot +0x10 "
+            "remain unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_HOTKEYS_INFO_INPUT_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
