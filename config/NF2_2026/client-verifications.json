@@ -446581,7 +446581,7 @@
         "name_in_analysis": "FUN_588D26D0 / CSantaAircraft vtable slot +0x18",
         "called_by": "Fresh Ghidra edge exports record this method in vtable slot +0x18 at cell 0x589A0F50 of the RTTI-identified .?AVCSantaAircraft@@ table at 0x589A0F38; both mapped cell and edge target are 0x588D26D0. Matched constructor FUN_588D2480 installs the same table. No incoming direct CALL edge was found, so entry is virtual dispatch.",
         "behavior": "Fresh Ghidra body exports agree on the complete contiguous range [0x588D26D0, 0x588D2756), 134 bytes / 39 instructions. The method passes its stack argument to FUN_5873C4A0, tests the resulting EAX, and returns 0 on the zero branch. Otherwise it selects ECX from the global object at DAT_58A2468C using fields +0x170 and +0x194, passes DAT_58A248F8 to byte-matched FUN_58907990, then branches on the same global fields and performs an indirect call through the selected object's vtable with argument 0; both nonzero paths return 1. Its fallback block zeroes ECX before dereferencing it. A separate Ghidra decompilation of FUN_5873C4A0 shows aircraft state writes and an 'Aircraft Damaged' diagnostic string, but does not establish this caller's EAX contract.",
-        "uncertainty": "FUN_5873C4A0 is not byte-verified and Ghidra types it void even though this caller tests EAX immediately after the call. The fallback path at 0x588D273F sets ECX to zero before dereferencing [ECX] at 0x588D2741; its reachability and runtime environment are unresolved. The stack argument, global fields, selected virtual callback, and FUN_58907990 value semantics have not been identified. No runtime or emulator test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
+        "uncertainty": "FUN_5873C4A0 is now byte-verified, but Ghidra types it void even though this caller tests EAX immediately after the call. The fallback path at 0x588D273F sets ECX to zero before dereferencing [ECX] at 0x588D2741; its reachability and runtime environment are unresolved. The stack argument, global fields, selected virtual callback, and FUN_58907990 value semantics have not been identified. No runtime or emulator test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
       }
     },
     {
@@ -446646,7 +446646,7 @@
         "name_in_analysis": "FUN_588D2760 / CSantaAircraft vtable slot +0x1C",
         "called_by": "Fresh Ghidra edge exports record this method in vtable slot +0x1C at cell 0x589A0F54 of the RTTI-identified .?AVCSantaAircraft@@ table at 0x589A0F38; both mapped cell and edge target are 0x588D2760. Matched constructor FUN_588D2480 installs the same table. No incoming direct CALL edge was found, so entry is virtual dispatch.",
         "behavior": "Fresh Ghidra body exports agree on the complete contiguous range [0x588D2760, 0x588D27EB), 139 bytes / 41 instructions. The method passes two stack arguments to FUN_5873C790, tests the resulting EAX, and returns 0 on the zero branch. Otherwise it selects ECX from the global object at DAT_58A2468C using fields +0x170 and +0x194, passes DAT_58A248F8 to byte-matched FUN_58907990, then repeats the state check and performs an indirect call through the selected object's vtable with argument 0; both nonzero paths return 1. Its fallback block zeroes ECX before dereferencing it. A separate Ghidra decompilation of FUN_5873C790 shows aircraft-state writes and the diagnostic 'Aircraft Damaged ... HE P', but does not establish this caller's EAX contract.",
-        "uncertainty": "FUN_5873C790 is not byte-verified and Ghidra types it void even though this caller tests EAX immediately after the call. The fallback path at 0x588D27D4 sets ECX to zero before dereferencing [ECX] at 0x588D27D6; its reachability and runtime environment are unresolved. The two stack arguments, global fields, selected virtual callback, and FUN_58907990 value semantics have not been identified. No runtime or emulator test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
+        "uncertainty": "FUN_5873C790 is now byte-verified, but Ghidra types it void even though this caller tests EAX immediately after the call. The fallback path at 0x588D27D4 sets ECX to zero before dereferencing [ECX] at 0x588D27D6; its reachability and runtime environment are unresolved. The two stack arguments, global fields, selected virtual callback, and FUN_58907990 value semantics have not been identified. No runtime or emulator test was performed; emitted source preserves the exact instructions and is not recovered high-level C++."
       }
     },
     {
@@ -449014,6 +449014,629 @@
         "called_by": "Both fresh Ghidra edge exports record three incoming calls: FUN_587F7000 at 0x587F7212 and 0x587F7326, and the currently unmatched FUN_588AB330 at 0x588AB48B. The matched handler uses it in the user-chat command path; the other caller's wider behavior remains outside this subsystem.",
         "behavior": "Both projects agree on the complete 62-byte, 25-instruction leaf, which mapped Main.dll decodes exactly. It copies a NUL-terminated string into receiver +0xC0, stopping after at most 0x17 data bytes and writing a terminator. It has no outgoing calls.",
         "uncertainty": "The copied field's display role, text encoding, and truncation behavior as observed by the UI are unknown. FUN_588AB330 is an unmatched caller and is recorded as such; its presence does not change this leaf's exact byte match. No runtime test was performed."
+      }
+    },
+    {
+      "address": "5873C4A0",
+      "name": "FUN_5873c4a0",
+      "size": 752,
+      "symbol": "_FUN_5873c4a0",
+      "source": "src/client-current/Main/FUN_5873c4a0.cpp",
+      "source_sha256": "f47d71a7014e954656ea861daf874fb8e6f7e3e2aed96dbc61a22a020e3a8d2e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5873C4A0",
+          "size": 752,
+          "symbol": "_FUN_5873c4a0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "5873C6A3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "5873C2E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "58A2485F",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 320,
+              "target_address": "588DC380",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 362,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 375,
+              "target_address": "5873C6AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "5873C6AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 404,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 448,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 459,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 558,
+              "target_address": "58A24574",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "5873C772",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 648,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 671,
+              "target_address": "5898CB48",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 678,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 699,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 705,
+              "target_address": "58A0B4D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 718,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 739,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873C4A0 / CSantaAircraft AP damage callback",
+        "called_by": "Fresh Ghidra edge exports record the sole direct caller as matched FUN_588D26D0 at 0x588D26D5. The existing slot audit identifies that method as slot +0x18 in the RTTI-identified CSantaAircraft table installed by matched constructor FUN_588D2480.",
+        "behavior": "Fresh Ghidra body exports agree on [0x5873C4A0, 0x5873C790), 752 bytes / 198 instructions. The decompilation logs the literal 'Aircraft Damaged' and AP P diagnostic, updates aircraft fields around +0x2D8/+0x2DC, calls shared FUN_588DC380 on a conditional path, and performs an indirect object-vtable call at +8. Its direct non-runtime callees are byte-matched.",
+        "uncertainty": "The AP label is supported by the diagnostic string, but the argument, field meanings, conditional FUN_588DC380 discriminator, indirect callback target, and effective EAX return contract remain unknown; the matched caller tests EAX immediately after this Ghidra-void function. No emulator callback test was performed."
+      }
+    },
+    {
+      "address": "5873C790",
+      "name": "FUN_5873c790",
+      "size": 909,
+      "symbol": "_FUN_5873c790",
+      "source": "src/client-current/Main/FUN_5873c790.cpp",
+      "source_sha256": "052678bbbec631a984f0aeb65b42e406c73f788923a96c91107111bd8b71a605",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5873C790",
+          "size": 909,
+          "symbol": "_FUN_5873c790_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897DD0E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "5873CAF4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 131,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "5873CA18",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "5873C2E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "58A246F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 309,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "58907C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 419,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "58A2485F",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "588DC380",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 495,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 508,
+              "target_address": "5873CA21",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 518,
+              "target_address": "5873CA21",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 527,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 537,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 581,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 587,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 592,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 698,
+              "target_address": "58A24574",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 705,
+              "target_address": "5873CAEE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 788,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 811,
+              "target_address": "5898CBB8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 818,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 839,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 845,
+              "target_address": "58A0B4D4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 858,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 896,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873C790 / CSantaAircraft HE damage callback",
+        "called_by": "Fresh Ghidra edge exports record the sole direct caller as matched FUN_588D2760 at 0x588D276A. The existing slot audit identifies that method as slot +0x1C in the RTTI-identified CSantaAircraft table installed by matched constructor FUN_588D2480.",
+        "behavior": "Fresh Ghidra body exports agree on [0x5873C790, 0x5873CB1D), 909 bytes / 238 instructions. The decompilation logs the literal 'Aircraft Damaged ... HE P' diagnostic, updates aircraft fields around +0x2DA/+0x2DC, calls shared FUN_588DC380 on a conditional path, and contains the event 0x102/effect path through matched helpers. Its direct non-runtime callees are byte-matched.",
+        "uncertainty": "The HE label is supported by the diagnostic string, but the two arguments, field meanings, event/effect semantics, conditional FUN_588DC380 discriminator, indirect callback targets, and effective EAX return contract remain unknown; the matched caller tests EAX immediately after this Ghidra-void function. No emulator callback test was performed."
+      }
+    },
+    {
+      "address": "588DC380",
+      "name": "FUN_588dc380",
+      "size": 615,
+      "symbol": "_FUN_588dc380",
+      "source": "src/client-current/Main/FUN_588dc380.cpp",
+      "source_sha256": "7f2802900726d1cddff9057f5172b632b09c69d14f10f869da91a30af6cc72cd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DC380",
+          "size": 615,
+          "symbol": "_FUN_588dc380_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "588DC5E4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "588DC5E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "588DC5E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 252,
+              "target_address": "588DC537",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 457,
+              "target_address": "588DC5E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 572,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 586,
+              "target_address": "5885EAD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 604,
+              "target_address": "58858450",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588DC380 / shared indexed aircraft-state dispatch",
+        "called_by": "Fresh Ghidra edge exports show exactly two direct callers: the AP and HE damage callbacks FUN_5873C4A0 and FUN_5873C790. Both call sites are conditional branches in the corresponding aircraft damage paths.",
+        "behavior": "Fresh body exports agree on [0x588DC380, 0x588DC5E7), 615 bytes / 157 instructions. The helper tests a low-five-bit value against 9 and dispatches to FUN_5885EAD0 when equal, otherwise to FUN_58858450. Those leaf helpers write indexed words at receiver offsets +0x628 and +0x8E8 respectively.",
+        "uncertainty": "The low-five-bit discriminator, receiver type, indexed-array schemas, and meanings of the two state fields remain unresolved. The helper's effects have only static instruction and call-edge evidence; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5885EAD0",
+      "name": "FUN_5885ead0",
+      "size": 18,
+      "symbol": "_FUN_5885ead0",
+      "source": "src/client-current/Main/FUN_5885ead0.cpp",
+      "source_sha256": "ce92777ff6e214462c846bb35d5e05fe98c51e30464f7eb784bd7021be8cdb16",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5885EAD0",
+          "size": 18,
+          "symbol": "_FUN_5885ead0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885EAD0 / indexed aircraft-state store at +0x628",
+        "called_by": "Fresh Ghidra edge exports record FUN_588DC380 as a direct caller and byte-matched FUN_58857020 at 0x588574C8 as a second direct caller.",
+        "behavior": "The exact body is one 18-byte range with four instructions. It stores the supplied value at receiver offset +0x628 plus four times the supplied index; it has no outgoing calls.",
+        "uncertainty": "The receiver type, index bounds, field schema, stored-value meaning, and runtime effect remain unknown. No emulator test was performed."
+      }
+    },
+    {
+      "address": "58858450",
+      "name": "FUN_58858450",
+      "size": 18,
+      "symbol": "_FUN_58858450",
+      "source": "src/client-current/Main/FUN_58858450.cpp",
+      "source_sha256": "569863c8f48a8c847ddac0fea089578f63f476db35864df7e6bcc177656c4bca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858450",
+          "size": 18,
+          "symbol": "_FUN_58858450_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858450 / indexed aircraft-state store at +0x8E8",
+        "called_by": "Fresh Ghidra edge exports record FUN_588DC380 as a direct caller and byte-matched FUN_58857020 at 0x588574E2 as a second direct caller.",
+        "behavior": "The exact body is one 18-byte range with four instructions. It stores the supplied value at receiver offset +0x8E8 plus four times the supplied index; it has no outgoing calls.",
+        "uncertainty": "The receiver type, index bounds, field schema, stored-value meaning, and runtime effect remain unknown. No emulator test was performed."
       }
     }
   ]

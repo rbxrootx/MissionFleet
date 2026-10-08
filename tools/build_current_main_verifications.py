@@ -1435,6 +1435,12 @@ MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES = ("588D2760",)
 ADDRESSES += MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_SLOT7_ADDRESSES)
 
+MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES = (
+    "5873C4A0", "5873C790", "588DC380", "5885EAD0", "58858450",
+)
+ADDRESSES += MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES)
+
 MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES = ("588D2840",)
 ADDRESSES += MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES)
@@ -14869,7 +14875,7 @@ MAIN_SANTA_AIRCRAFT_SLOT6_EVIDENCE = {
             "does not establish this caller's EAX contract."
         ),
         "uncertainty": (
-            "FUN_5873C4A0 is not byte-verified and Ghidra types it void even "
+            "FUN_5873C4A0 is now byte-verified, but Ghidra types it void even "
             "though this caller tests EAX immediately after the call. The "
             "fallback path at 0x588D273F sets ECX to zero before dereferencing "
             "[ECX] at 0x588D2741; its reachability and runtime environment are "
@@ -14907,7 +14913,7 @@ MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE = {
             "caller's EAX contract."
         ),
         "uncertainty": (
-            "FUN_5873C790 is not byte-verified and Ghidra types it void even "
+            "FUN_5873C790 is now byte-verified, but Ghidra types it void even "
             "though this caller tests EAX immediately after the call. The "
             "fallback path at 0x588D27D4 sets ECX to zero before dereferencing "
             "[ECX] at 0x588D27D6; its reachability and runtime environment are "
@@ -14919,6 +14925,112 @@ MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SANTA_AIRCRAFT_SLOT7_EVIDENCE)
+
+MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_EVIDENCE = {
+    "5873C4A0": {
+        "name_in_analysis": "FUN_5873C4A0 / CSantaAircraft AP damage callback",
+        "called_by": (
+            "Fresh Ghidra edge exports record the sole direct caller as matched "
+            "FUN_588D26D0 at 0x588D26D5. The existing slot audit identifies that "
+            "method as slot +0x18 in the RTTI-identified CSantaAircraft table "
+            "installed by matched constructor FUN_588D2480."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on [0x5873C4A0, 0x5873C790), "
+            "752 bytes / 198 instructions. The decompilation logs the literal "
+            "'Aircraft Damaged' and AP P diagnostic, updates aircraft fields "
+            "around +0x2D8/+0x2DC, calls shared FUN_588DC380 on a conditional "
+            "path, and performs an indirect object-vtable call at +8. Its direct "
+            "non-runtime callees are byte-matched."
+        ),
+        "uncertainty": (
+            "The AP label is supported by the diagnostic string, but the "
+            "argument, field meanings, conditional FUN_588DC380 discriminator, "
+            "indirect callback target, and effective EAX return contract remain "
+            "unknown; the matched caller tests EAX immediately after this "
+            "Ghidra-void function. No emulator callback test was performed."
+        ),
+    },
+    "5873C790": {
+        "name_in_analysis": "FUN_5873C790 / CSantaAircraft HE damage callback",
+        "called_by": (
+            "Fresh Ghidra edge exports record the sole direct caller as matched "
+            "FUN_588D2760 at 0x588D276A. The existing slot audit identifies that "
+            "method as slot +0x1C in the RTTI-identified CSantaAircraft table "
+            "installed by matched constructor FUN_588D2480."
+        ),
+        "behavior": (
+            "Fresh Ghidra body exports agree on [0x5873C790, 0x5873CB1D), "
+            "909 bytes / 238 instructions. The decompilation logs the literal "
+            "'Aircraft Damaged ... HE P' diagnostic, updates aircraft fields "
+            "around +0x2DA/+0x2DC, calls shared FUN_588DC380 on a conditional "
+            "path, and contains the event 0x102/effect path through matched "
+            "helpers. Its direct non-runtime callees are byte-matched."
+        ),
+        "uncertainty": (
+            "The HE label is supported by the diagnostic string, but the two "
+            "arguments, field meanings, event/effect semantics, conditional "
+            "FUN_588DC380 discriminator, indirect callback targets, and effective "
+            "EAX return contract remain unknown; the matched caller tests EAX "
+            "immediately after this Ghidra-void function. No emulator callback "
+            "test was performed."
+        ),
+    },
+    "588DC380": {
+        "name_in_analysis": "FUN_588DC380 / shared indexed aircraft-state dispatch",
+        "called_by": (
+            "Fresh Ghidra edge exports show exactly two direct callers: the AP "
+            "and HE damage callbacks FUN_5873C4A0 and FUN_5873C790. Both call "
+            "sites are conditional branches in the corresponding aircraft damage paths."
+        ),
+        "behavior": (
+            "Fresh body exports agree on [0x588DC380, 0x588DC5E7), 615 bytes / "
+            "157 instructions. The helper tests a low-five-bit value against 9 "
+            "and dispatches to FUN_5885EAD0 when equal, otherwise to "
+            "FUN_58858450. Those leaf helpers write indexed words at receiver "
+            "offsets +0x628 and +0x8E8 respectively."
+        ),
+        "uncertainty": (
+            "The low-five-bit discriminator, receiver type, indexed-array "
+            "schemas, and meanings of the two state fields remain unresolved. "
+            "The helper's effects have only static instruction and call-edge "
+            "evidence; no emulator runtime test was performed."
+        ),
+    },
+    "5885EAD0": {
+        "name_in_analysis": "FUN_5885EAD0 / indexed aircraft-state store at +0x628",
+        "called_by": (
+            "Fresh Ghidra edge exports record FUN_588DC380 as a direct caller "
+            "and byte-matched FUN_58857020 at 0x588574C8 as a second direct caller."
+        ),
+        "behavior": (
+            "The exact body is one 18-byte range with four instructions. It "
+            "stores the supplied value at receiver offset +0x628 plus four "
+            "times the supplied index; it has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The receiver type, index bounds, field schema, stored-value meaning, "
+            "and runtime effect remain unknown. No emulator test was performed."
+        ),
+    },
+    "58858450": {
+        "name_in_analysis": "FUN_58858450 / indexed aircraft-state store at +0x8E8",
+        "called_by": (
+            "Fresh Ghidra edge exports record FUN_588DC380 as a direct caller "
+            "and byte-matched FUN_58857020 at 0x588574E2 as a second direct caller."
+        ),
+        "behavior": (
+            "The exact body is one 18-byte range with four instructions. It "
+            "stores the supplied value at receiver offset +0x8E8 plus four "
+            "times the supplied index; it has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The receiver type, index bounds, field schema, stored-value meaning, "
+            "and runtime effect remain unknown. No emulator test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_EVIDENCE)
 
 MAIN_SCROLL_TEXT_SCREEN_SLOT0_EVIDENCE = {
     "588D2840": {

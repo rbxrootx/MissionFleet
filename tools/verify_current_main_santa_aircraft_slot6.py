@@ -165,8 +165,8 @@ def main():
     if read_rtti_hierarchy(image, VTABLE) != expected_hierarchy:
         raise AssertionError("CSantaAircraft RTTI base hierarchy changed")
 
-    if AIRCRAFT_STATE_HELPER in matched:
-        raise AssertionError("Recorded aircraft-state helper is no longer unresolved")
+    if AIRCRAFT_STATE_HELPER not in matched:
+        raise AssertionError("Recorded AP-damage callback is not byte-verified")
     if NUMERIC_HELPER not in matched:
         raise AssertionError("Numeric helper is not byte-verified")
 

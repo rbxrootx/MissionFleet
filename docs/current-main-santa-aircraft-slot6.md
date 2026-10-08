@@ -18,12 +18,14 @@ with argument 0. The nonzero paths return 1. In the other branch it zeroes ECX
 and dereferences `[ECX]` before making an indirect call; the reachability and
 runtime meaning of that path are unknown.
 
-A separate Ghidra decompilation of `FUN_5873C4A0` shows aircraft-state writes
-and the diagnostic string `Aircraft Damaged`. That helper is not yet
-byte-verified, and Ghidra types it `void` although this caller immediately
-tests EAX. The effective return contract, stack argument meaning, global field
-roles, numeric helper value, and indirect callback contract remain unresolved.
-The null-based fallback also needs runtime context before it can be interpreted.
+A separate Ghidra decompilation of `FUN_5873C4A0` shows the AP-damage state
+path and `Aircraft Damaged ... AP P` diagnostic. The callback is now
+byte-verified with its sibling HE path and shared indexed-state helper in
+[`the damage-callback subsystem`](current-main-santa-aircraft-damage-callbacks.md).
+Ghidra still types it `void` although this caller immediately tests EAX, so the
+effective return contract, stack argument meaning, global field roles, numeric
+helper value, and indirect callback contract remain unresolved. The null-based
+fallback also needs runtime context before it can be interpreted.
 
 The emitted source preserves the exact 134-byte x86 instruction stream and is
 verified byte-identical by objdiff 3.8.0. It is instruction-level source, not

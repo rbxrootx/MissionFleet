@@ -36,6 +36,7 @@ from tools import (
     verify_current_main_santa_aircraft_slot0,
     verify_current_main_santa_aircraft_slot6,
     verify_current_main_santa_aircraft_slot7,
+    verify_current_main_santa_aircraft_damage_callbacks,
     verify_current_main_scroll_text_screen_slot0,
     verify_current_main_scroll_text_screen_slot3,
     verify_current_main_shell_map_object_screen_slot5,
@@ -61,8 +62,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_625)
-        self.assertEqual(self.report["measures"]["matched_code"], "2754804")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_630)
+        self.assertEqual(self.report["measures"]["matched_code"], "2757116")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -73,8 +74,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_492)
-        self.assertEqual(current["measures"]["matched_code"], "1781386")
+        self.assertEqual(current["measures"]["matched_functions"], 2_497)
+        self.assertEqual(current["measures"]["matched_code"], "1783698")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -333,6 +334,20 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("tests the resulting EAX", item["behavior"])
         self.assertIn("sets ECX to zero", item["uncertainty"])
         verify_current_main_santa_aircraft_slot7.main()
+
+    def test_santa_aircraft_damage_callbacks_have_closed_verified_ap_he_paths(self):
+        addresses = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_EVIDENCE
+        self.assertEqual(
+            addresses,
+            ("5873C4A0", "5873C790", "588DC380", "5885EAD0", "58858450"),
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("AP P", evidence["5873C4A0"]["behavior"])
+        self.assertIn("HE P", evidence["5873C790"]["behavior"])
+        self.assertIn("FUN_588DC380", evidence["5873C790"]["behavior"])
+        self.assertIn("remain unknown", evidence["5873C790"]["uncertainty"])
+        verify_current_main_santa_aircraft_damage_callbacks.main()
 
     def test_scroll_text_screen_slot0_has_rtti_and_complete_mapped_body(self):
         addresses = build_current_main_verifications.MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES
