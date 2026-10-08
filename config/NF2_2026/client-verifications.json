@@ -466515,6 +466515,485 @@
         "behavior": "Clears the previously selected record's low flag bit, searches the linked records for a value matching param_2, and selects the matching record unless its +0xEC field is nonzero; a selected record has its low flag bit set.",
         "uncertainty": "The record identity key, flag meaning, and +0xEC state are unnamed."
       }
+    },
+    {
+      "address": "5873A730",
+      "name": "FUN_5873a730",
+      "size": 48,
+      "symbol": "_FUN_5873a730",
+      "source": "src/client-current/Main/FUN_5873a730.cpp",
+      "source_sha256": "1295b6f08e09874576b842523a551940e4b0eb02ded84a830614cc0493ec326f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5873A730",
+          "size": 48,
+          "symbol": "_FUN_5873a730_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873a730 / decimal-place power helper",
+        "called_by": "FUN_587EDF60 calls it at 0x587EE13C while accumulating the digit token after the /user command. FUN_58890110 also calls this shared helper at five mapped sites.",
+        "behavior": "Multiplies a floating-point base by exponentiation by squaring and returns the reciprocal when the signed exponent is negative. The body is 48 bytes and decodes to 23 x86 instructions.",
+        "uncertainty": "The caller's floating-point constant and the parsed number's application meaning are unresolved."
+      }
+    },
+    {
+      "address": "587B7700",
+      "name": "FUN_587b7700",
+      "size": 261,
+      "symbol": "_FUN_587b7700",
+      "source": "src/client-current/Main/FUN_587b7700.cpp",
+      "source_sha256": "5713fa23c7996e2cca0825f263a222ac21d6abde008106fdc2314c68c6b8d6d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B7700",
+          "size": 261,
+          "symbol": "_FUN_587b7700_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "587B77A6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587B77D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "587B77D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "5899A17C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 184,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "5888D250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b7700 / user-chat selector validation and send",
+        "called_by": "FUN_587EDF60 calls this shared helper from its validation, rejection, and formatted-value paths. FUN_58890110 has four more mapped calls to it.",
+        "behavior": "Branches on selectors 2 through 5, checks receiver fields or one of three stored channel strings, and on accepted paths calls the matched outbound sender FUN_58970C70 with observed event 0x8001B115. The fallback requests MESSAGESTRING_NOT_ALLOWED_CHANNEL_TO_USE_COMMAND.",
+        "uncertainty": "The channel names' meaning, selector semantics, event payload contract, and server-side effect are not established."
+      }
+    },
+    {
+      "address": "587EDF60",
+      "name": "FUN_587edf60",
+      "size": 727,
+      "symbol": "_FUN_587edf60",
+      "source": "src/client-current/Main/FUN_587edf60.cpp",
+      "source_sha256": "9c4e0552629dcb1a7b8e56ed2ca4975c992fc6a66e15df8c4385d34cb432d3b1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EDF60",
+          "size": 727,
+          "symbol": "_FUN_587edf60_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5897CFF6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "5899C158",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "587EE205",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5899C150",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "587EE205",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "5899C148",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "587EE205",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "5899C144",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "587EE205",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5899C140",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "587EE1F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "5899C130",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 242,
+              "target_address": "587EE1F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "5899C128",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "587EE1F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "5899C11C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "587EE1F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "5899C114",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "587EE1F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "5899C110",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "587EE1E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 327,
+              "target_address": "5899C104",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "587EE1E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 347,
+              "target_address": "5899C0FC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 362,
+              "target_address": "587EE1E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 367,
+              "target_address": "5899C0F8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "587EE1E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 427,
+              "target_address": "587EE1C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "587EE1C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "5898CB38",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 477,
+              "target_address": "5873A730",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 505,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 520,
+              "target_address": "587EE216",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 547,
+              "target_address": "5898D18C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 583,
+              "target_address": "5874BA60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 589,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 604,
+              "target_address": "587B7700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 616,
+              "target_address": "5899A17C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 622,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 637,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 645,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 654,
+              "target_address": "587B7700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 662,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 671,
+              "target_address": "587B7700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 679,
+              "target_address": "58A2458C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 688,
+              "target_address": "587B7700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 705,
+              "target_address": "5875F940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 719,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587edf60 / /user chat-input command handler",
+        "called_by": "The byte-matched FUN_587FC9C0 calls this function once at 0x587FD1B1. Its branch compares the mapped command string at 0x589CC134 ('/user') and requires a following space.",
+        "behavior": "Copies at most 0x32 bytes from the current chat text after its six-byte command prefix, runs indirect validation callbacks, then scans a decimal digit token and accumulates a bounded value. It rejects values above 0xFFFF, formats the value through FUN_5874BA60, and reaches FUN_587B7700 for selector validation or notification. Its complete direct-call closure is four open functions totaling 1,042 bytes.",
+        "uncertainty": "The number's domain meaning, indirect callback policies at 0x5898C1A4 and 0x5898C2EC, semantics of event 0x8001B115, and visible or server-side effects are unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5897CFF6",
+      "name": "FUN_5897cff6",
+      "size": 6,
+      "symbol": "_FUN_5897cff6",
+      "source": "src/client-current/Main/FUN_5897cff6.cpp",
+      "source_sha256": "e041b291aa2fc673ef378e4f0133ce7d2f2f84d55abb22cab8a3b74c18f3692d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CFF6",
+          "size": 6,
+          "symbol": "_FUN_5897cff6_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C2EC",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cff6 / indirect validation callback thunk",
+        "called_by": "FUN_587EDF60 calls it at 0x587EDFD0 to process the copied command text. Matched FUN_58890110 also calls it at 0x5889251D.",
+        "behavior": "A six-byte thunk that calls through the pointer slot 0x5898C2EC and returns to its caller.",
+        "uncertainty": "The indirect target and its validation policy are unresolved."
+      }
     }
   ]
 }

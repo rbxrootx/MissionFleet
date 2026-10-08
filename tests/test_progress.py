@@ -69,6 +69,7 @@ from tools import (
     verify_current_main_novice_help_panel,
     verify_current_main_event_80025102,
     verify_current_main_event_80021004,
+    verify_current_main_user_command,
 )
 
 
@@ -81,8 +82,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_815)
-        self.assertEqual(self.report["measures"]["matched_code"], "2813457")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_819)
+        self.assertEqual(self.report["measures"]["matched_code"], "2814499")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -93,8 +94,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_682)
-        self.assertEqual(current["measures"]["matched_code"], "1840039")
+        self.assertEqual(current["measures"]["matched_functions"], 2_686)
+        self.assertEqual(current["measures"]["matched_code"], "1841081")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -141,6 +142,15 @@ class ProgressReportTests(unittest.TestCase):
         self.assertTrue(all(build_current_main_verifications.EVIDENCE[address]["uncertainty"]
                             for address in addresses))
         verify_current_main_event_80021004.main()
+
+    def test_user_chat_command_has_complete_matched_open_closure(self):
+        addresses = build_current_main_verifications.MAIN_USER_CHAT_COMMAND_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_USER_CHAT_COMMAND_EVIDENCE
+        self.assertEqual(len(addresses), 4)
+        self.assertEqual(set(addresses), set(verify_current_main_user_command.FUNCTIONS))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_user_command.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

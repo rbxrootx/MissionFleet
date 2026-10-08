@@ -17325,6 +17325,89 @@ MAIN_EVENT_80021004_EVIDENCE = {
 for _event_80021004_address, _event_80021004_detail in MAIN_EVENT_80021004_EVIDENCE.items():
     EVIDENCE[_event_80021004_address] = _event_80021004_detail
 
+MAIN_USER_CHAT_COMMAND_ADDRESSES = (
+    "5873A730", "587B7700", "587EDF60", "5897CFF6",
+)
+ADDRESSES += MAIN_USER_CHAT_COMMAND_ADDRESSES
+
+MAIN_USER_CHAT_COMMAND_EVIDENCE = {
+    "5873A730": {
+        "name_in_analysis": "FUN_5873a730 / decimal-place power helper",
+        "called_by": (
+            "FUN_587EDF60 calls it at 0x587EE13C while accumulating the digit "
+            "token after the /user command. FUN_58890110 also calls this shared "
+            "helper at five mapped sites."
+        ),
+        "behavior": (
+            "Multiplies a floating-point base by exponentiation by squaring and "
+            "returns the reciprocal when the signed exponent is negative. The "
+            "body is 48 bytes and decodes to 23 x86 instructions."
+        ),
+        "uncertainty": (
+            "The caller's floating-point constant and the parsed number's "
+            "application meaning are unresolved."
+        ),
+    },
+    "587B7700": {
+        "name_in_analysis": "FUN_587b7700 / user-chat selector validation and send",
+        "called_by": (
+            "FUN_587EDF60 calls this shared helper from its validation, "
+            "rejection, and formatted-value paths. FUN_58890110 has four more "
+            "mapped calls to it."
+        ),
+        "behavior": (
+            "Branches on selectors 2 through 5, checks receiver fields or one "
+            "of three stored channel strings, and on accepted paths calls the "
+            "matched outbound sender FUN_58970C70 with observed event "
+            "0x8001B115. The fallback requests "
+            "MESSAGESTRING_NOT_ALLOWED_CHANNEL_TO_USE_COMMAND."
+        ),
+        "uncertainty": (
+            "The channel names' meaning, selector semantics, event payload "
+            "contract, and server-side effect are not established."
+        ),
+    },
+    "587EDF60": {
+        "name_in_analysis": "FUN_587edf60 / /user chat-input command handler",
+        "called_by": (
+            "The byte-matched FUN_587FC9C0 calls this function once at "
+            "0x587FD1B1. Its branch compares the mapped command string at "
+            "0x589CC134 ('/user') and requires a following space."
+        ),
+        "behavior": (
+            "Copies at most 0x32 bytes from the current chat text after its "
+            "six-byte command prefix, runs indirect validation callbacks, then "
+            "scans a decimal digit token and accumulates a bounded value. It "
+            "rejects values above 0xFFFF, formats the value through "
+            "FUN_5874BA60, and reaches FUN_587B7700 for selector validation or "
+            "notification. Its complete direct-call closure is four open "
+            "functions totaling 1,042 bytes."
+        ),
+        "uncertainty": (
+            "The number's domain meaning, indirect callback policies at "
+            "0x5898C1A4 and 0x5898C2EC, semantics of event 0x8001B115, and "
+            "visible or server-side effects are unresolved. No emulator "
+            "runtime test was performed."
+        ),
+    },
+    "5897CFF6": {
+        "name_in_analysis": "FUN_5897cff6 / indirect validation callback thunk",
+        "called_by": (
+            "FUN_587EDF60 calls it at 0x587EDFD0 to process the copied command "
+            "text. Matched FUN_58890110 also calls it at 0x5889251D."
+        ),
+        "behavior": (
+            "A six-byte thunk that calls through the pointer slot "
+            "0x5898C2EC and returns to its caller."
+        ),
+        "uncertainty": (
+            "The indirect target and its validation policy are unresolved."
+        ),
+    },
+}
+for _user_chat_command_address, _user_chat_command_detail in MAIN_USER_CHAT_COMMAND_EVIDENCE.items():
+    EVIDENCE[_user_chat_command_address] = _user_chat_command_detail
+
 
 if __name__ == "__main__":
     main()
