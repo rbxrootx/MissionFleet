@@ -19152,6 +19152,39 @@ MAIN_EVENT_PRECONDITION_GATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_EVENT_PRECONDITION_GATE_EVIDENCE)
 
+MAIN_COMMUNICATOR_USER_STATUS_ADDRESSES = (
+    "588424D0", "58842B10", "58844CA0", "58888F10",
+)
+ADDRESSES += MAIN_COMMUNICATOR_USER_STATUS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_USER_STATUS_ADDRESSES)
+MAIN_COMMUNICATOR_USER_STATUS_EVIDENCE = {
+    "588424D0": {
+        "name_in_analysis": "FUN_588424D0 / communicator first user-status list refresh",
+        "called_by": "Matched CPannelCommunicatorConfigPannel handler FUN_588450B0 calls it at 0x588450D5, 0x588456D0, and 0x58845914; panel method FUN_58844CA0 calls it at 0x58844D51. Both fresh Ghidra projects confirm these edges.",
+        "behavior": "Walks the linked records rooted at DAT_58A245B4+0xD8 through the list at +0x6C, stores the root on the receiver at +0x64, and updates child text using record status +0x9E, clan fields +0x78/+0x7C/+0x80, and child pointers +0x70/+0x74. Observed status keys include STR_COMMUSERSTATUS_LOGOFF, SHIPYARD, BATTLECHANNEL, CHATTING, BATTLEREADY, and UNDERBATTLE; offline rows use 0x777777 and active rows use 0xFFFFFF.",
+        "uncertainty": "The record and two-list schemas, localization/formatting callback contracts, status meanings beyond their identifiers, and server-driven update cadence are not established; no emulator runtime test was performed.",
+    },
+    "58842B10": {
+        "name_in_analysis": "FUN_58842B10 / communicator second user-status list refresh",
+        "called_by": "Matched CPannelCommunicatorConfigPannel handler FUN_588450B0 calls it at 0x588457EA; both fresh Ghidra projects confirm the edge.",
+        "behavior": "Uses the same observed status, clan-label, and child-text update logic as FUN_588424D0, but follows the list at the root record's +0x64 field rather than +0x6C. It stores the root on the receiver at +0x64 and updates child text through FUN_589088D0.",
+        "uncertainty": "The semantic distinction between the +0x64 and +0x6C lists, their record ownership, localization/formatting callback contracts, and server-driven update cadence are unknown; no emulator runtime test was performed.",
+    },
+    "58844CA0": {
+        "name_in_analysis": "FUN_58844CA0 / CPannelCommunicatorConfigPannel state and child update method",
+        "called_by": "The RTTI-identified vtable at 0x5899E400 points slot +0x04 here; matched handler FUN_588450B0 occupies slot +0x18. Both fresh Ghidra exports contain the vtable data reference and the parent handler call edges.",
+        "behavior": "Updates panel state fields and child-control flags, calls FUN_588424D0 to refresh one observed user list, and calls FUN_58888F10 to clear low-nibble state on five child controls. It also invokes matched helper routines and one indirect child callback through a vtable slot at +0x18.",
+        "uncertainty": "The member/control names, list selection conditions, indirect callback target and contract, and visible effect of each state bit are unresolved; no emulator runtime test was performed.",
+    },
+    "58888F10": {
+        "name_in_analysis": "FUN_58888F10 / communicator five-child low-nibble reset",
+        "called_by": "CPannelCommunicatorConfigPannel method FUN_58844CA0 calls it at 0x58844E1C; both fresh Ghidra projects confirm the edge.",
+        "behavior": "For receiver child pointers at offsets +0xDC, +0xE0, +0xE4, +0xE8, and +0xEC, clears the low four bits of each child's 16-bit state at +0x24 while preserving the remaining bits.",
+        "uncertainty": "The child-control identities and meanings of the cleared low-nibble states are unknown; no emulator runtime test was performed.",
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_USER_STATUS_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

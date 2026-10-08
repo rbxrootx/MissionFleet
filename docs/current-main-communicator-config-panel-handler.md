@@ -22,3 +22,6 @@ three-byte span `5884526D..5884526F` contains no instructions and is skipped by
 the recorded branch edges. Exact member names, message contracts, labels,
 actions, and runtime appearance remain uncertain. No emulator runtime test was
 performed.
+
+The adjacent byte-matched user-status list and child-state helpers are
+documented in the [communicator user-status slice](current-main-communicator-user-status.md).

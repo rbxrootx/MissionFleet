@@ -574,3 +574,11 @@ runtime test was performed. See
 
 The workflow at `.github/workflows/progress.yml` uploads
 `build/progress/report.json` for the registered decomp.dev project.
+
+The communicator configuration panel user-status slice adds four exact
+functions / 1,922 bytes. Both list refresh paths, their localized status and
+clan-label selection, the matched parent callsites, the RTTI-backed panel
+vtable, and the five-child state reset are checked against the installed image
+and two fresh Ghidra exports. The indirect callback destination, list schema,
+and runtime appearance remain unresolved. See
+[`current-main-communicator-user-status.md`](current-main-communicator-user-status.md).

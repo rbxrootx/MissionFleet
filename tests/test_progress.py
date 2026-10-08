@@ -40,6 +40,7 @@ from tools import (
     verify_current_main_santa_aircraft_damage_callbacks,
     verify_current_main_ship_map_constructor_helpers,
     verify_current_main_communicator_id_pointer_range_update,
+    verify_current_main_communicator_user_status,
     verify_current_main_factory_help_cleanup,
     verify_current_main_pagefight_control_layout,
     verify_current_main_panel_help_update,
@@ -97,8 +98,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_971)
-        self.assertEqual(self.report["measures"]["matched_code"], "2860468")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_975)
+        self.assertEqual(self.report["measures"]["matched_code"], "2862390")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -109,8 +110,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_838)
-        self.assertEqual(current["measures"]["matched_code"], "1887050")
+        self.assertEqual(current["measures"]["matched_functions"], 2_842)
+        self.assertEqual(current["measures"]["matched_code"], "1888972")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -1296,6 +1297,26 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("FUN_5897CC4E", evidence["58833980"]["behavior"])
         self.assertTrue(evidence["58833980"]["uncertainty"])
         verify_current_main_58833980.main()
+
+    def test_communicator_user_status_panel_has_exact_ghidra_and_rtti_evidence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_USER_STATUS_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_USER_STATUS_EVIDENCE
+        )
+        self.assertEqual(
+            addresses, ("588424D0", "58842B10", "58844CA0", "58888F10")
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x588450D5", evidence["588424D0"]["called_by"])
+        self.assertIn("+0x64", evidence["58842B10"]["behavior"])
+        self.assertIn("0x5899E400", evidence["58844CA0"]["called_by"])
+        self.assertIn("+0xEC", evidence["58888F10"]["behavior"])
+        self.assertTrue(all(evidence[address]["uncertainty"] for address in addresses))
+        verify_current_main_communicator_user_status.main()
 
     def test_communicator_id_pointer_range_helper_has_verified_input_and_call_closure(self):
         addresses = (
