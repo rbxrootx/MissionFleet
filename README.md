@@ -9,8 +9,12 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 9,012 matches cover 2,872,813 bytes (21.2242% by functions and
-27.4377% by bytes) and are verified individually at 100.0% by objdiff.
+The current 9,017 matches cover 2,875,639 bytes (21.2360% by functions and
+27.4647% by bytes) and are verified individually at 100.0% by objdiff.
+The aircraft fire-control event handler and four direct helpers add five exact
+functions / 2,826 bytes; their RTTI, event paths, call edges, and unresolved
+dispatch details are recorded in
+[the subsystem evidence](docs/current-main-fire-control-aircraft.md).
 Five chat command routes add 2,146 exact bytes; their original command strings,
 caller paths, shared sender helper, and unresolved protocol meaning are
 documented in [the subsystem evidence](docs/current-main-chat-command-routes.md).

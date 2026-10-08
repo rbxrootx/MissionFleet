@@ -19751,6 +19751,121 @@ EVIDENCE.update({
     },
 })
 
+MAIN_FIRE_CONTROL_AIRCRAFT_ADDRESSES = (
+    "5885A460", "588585D0", "58858AB0", "58858F20", "58859070",
+)
+ADDRESSES += MAIN_FIRE_CONTROL_AIRCRAFT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FIRE_CONTROL_AIRCRAFT_ADDRESSES)
+EVIDENCE.update({
+    "5885A460": {
+        "name_in_analysis": (
+            "FUN_5885a460 / CPannelFireControlAddOnAircraft event handler"
+        ),
+        "called_by": (
+            "The mapped RTTI complete-object locator at 0x5899EA10 identifies "
+            "CPannelFireControlAddOnAircraft; its vtable slot at 0x5899EA24 "
+            "points to this method at offset +0x10. Two independent fresh "
+            "Ghidra body and edge exports agree on the exact 1,494-byte body, "
+            "all direct calls, and the vtable data reference."
+        ),
+        "behavior": (
+            "Dispatches records selected by their +4 event identifier and +8 "
+            "command. The body handles identifiers 0x100, 0x101, 0x102, and "
+            "0x20A; updates receiver state and eight indexed item slots; calls "
+            "the four matched helpers in this closure; and in two branches "
+            "builds a four-byte payload passed to matched FUN_587E5A70 with "
+            "identifier 0x16. It also walks a child list using an indirect "
+            "virtual call at vtable offset +0x10, and has three additional "
+            "indirect calls at 0x5885A69D, 0x5885A8E9, and 0x5885A909."
+        ),
+        "uncertainty": (
+            "The event and command semantics, receiver and eight-slot record "
+            "layouts, XOR-masked field meanings, 0x16 payload meaning, child "
+            "virtual-call contract, and contracts for the other three indirect "
+            "calls are unresolved. RTTI and a vtable slot "
+            "identify the method but do not establish constructor reachability "
+            "or runtime behavior; no emulator test was performed. Other open "
+            "slots in the same class remain outside this five-function closure."
+        ),
+    },
+    "588585D0": {
+        "name_in_analysis": "FUN_588585d0 / eight-slot state payload builder",
+        "called_by": (
+            "Called by the RTTI-identified FUN_5885A460 handler at 0x5885A924, "
+            "0x5885A936, and 0x5885A962. Two independent fresh Ghidra exports "
+            "agree on its exact 126-byte body and direct-call edges."
+        ),
+        "behavior": (
+            "Builds an eight-bit mask from eight receiver slot values, places "
+            "that mask into a four-byte local payload, and passes it to matched "
+            "FUN_587E5A70 with identifier 0x16."
+        ),
+        "uncertainty": (
+            "The eight slot meanings, payload schema, event semantics, and "
+            "server-side effect remain unknown. No emulator runtime test was "
+            "performed."
+        ),
+    },
+    "58858AB0": {
+        "name_in_analysis": "FUN_58858ab0 / selected-slot counter aggregation",
+        "called_by": (
+            "Called by FUN_58858F20 at 0x58859066 within the selected closure. "
+            "Two independent fresh Ghidra body and edge exports agree on its "
+            "exact 287-byte body and call to matched FUN_587A1640."
+        ),
+        "behavior": (
+            "Walks receiver entries indexed from +0xF0, aggregates counters "
+            "from selected entries into four local tallies, writes receiver "
+            "state at +0x908, and normalizes values through matched "
+            "FUN_587A1640."
+        ),
+        "uncertainty": (
+            "The entry layout, selection rule, tally categories, normalization "
+            "units, and meaning of receiver +0x908 remain unresolved. The "
+            "available call-edge exports are function scoped and do not prove "
+            "that the listed caller is the only caller. No emulator runtime "
+            "test was performed."
+        ),
+    },
+    "58858F20": {
+        "name_in_analysis": "FUN_58858f20 / fire-control selection counter update",
+        "called_by": (
+            "Called at five direct sites from RTTI-identified FUN_5885A460. "
+            "Two independent fresh Ghidra exports agree on its exact 335-byte "
+            "body, direct calls, and call to FUN_58858AB0 at 0x58859066."
+        ),
+        "behavior": (
+            "Checks mode and slot state, updates a selected counter and an "
+            "adjacent XOR-masked field for increment or decrement paths, then "
+            "calls matched FUN_58907360 and open helper FUN_58858AB0."
+        ),
+        "uncertainty": (
+            "The counter units, XOR field schema, exact increment/decrement "
+            "meaning, and external callers remain unresolved. No emulator "
+            "runtime test was performed."
+        ),
+    },
+    "58859070": {
+        "name_in_analysis": "FUN_58859070 / thresholded slot-state refresh",
+        "called_by": (
+            "Called from RTTI-identified FUN_5885A460 at 0x5885A7B5. Two "
+            "independent fresh Ghidra exports agree on its exact 584-byte "
+            "body and direct-call edges."
+        ),
+        "behavior": (
+            "Checks a receiver counter against a threshold after integer "
+            "division by 1,000. On the passing path it resets indexed state "
+            "and refreshes related values through matched helper calls."
+        ),
+        "uncertainty": (
+            "The counter units, threshold meaning, indexed state schema, and "
+            "refresh effects remain unresolved. The Ghidra function-scoped "
+            "exports do not establish the complete caller set; no emulator "
+            "runtime test was performed."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()
