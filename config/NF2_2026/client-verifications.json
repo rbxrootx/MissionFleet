@@ -453303,6 +453303,2725 @@
         "behavior": "Both fresh body exports agree on ranges totaling 169 bytes / 58 instructions: [0x58878180,0x5887820D) and [0x58878210,0x5887822C). It checks state bits in receiver +0x24, calls the shared transition helper FUN_587B60A0, conditionally calls display refresh FUN_58877BC0, and walks a linked child sequence through virtual slot +0x0C. The skipped alignment bytes at 0x5887820D decode as `lea ecx, [ecx]` and are checked separately.",
         "uncertainty": "The meanings of state values 0x100, 0x200, 0x400, and 0x500, linked-child ordering, and dynamic virtual callback targets remain unresolved."
       }
+    },
+    {
+      "address": "5876F620",
+      "name": "FUN_5876f620",
+      "size": 1737,
+      "symbol": "_FUN_5876f620",
+      "source": "src/client-current/Main/FUN_5876f620.cpp",
+      "source_sha256": "a58b975dde3382aab23ed796e4e9011ba14aeb8b88de6fa1b88cbba135e46fb0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876F620",
+          "size": 19,
+          "symbol": "_FUN_5876f620_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876F63D",
+          "size": 509,
+          "symbol": "_FUN_5876f620_segment_01",
+          "relocations": [
+            {
+              "offset": 53,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "5876FA4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5876F7C9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5876FD0B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58996128",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "589960F8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 288,
+              "target_address": "589960C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 398,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 403,
+              "target_address": "58996098",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "58996068",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876F840",
+          "size": 265,
+          "symbol": "_FUN_5876f620_segment_02",
+          "relocations": [
+            {
+              "offset": 52,
+              "target_address": "58996038",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "58996008",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "58995FD8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876F950",
+          "size": 189,
+          "symbol": "_FUN_5876f620_segment_03",
+          "relocations": [
+            {
+              "offset": 50,
+              "target_address": "58995FA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "58995F78",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FA10",
+          "size": 394,
+          "symbol": "_FUN_5876f620_segment_04",
+          "relocations": [
+            {
+              "offset": 64,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58995F48",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "58995F18",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "58995EE8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 275,
+              "target_address": "58995EB8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 363,
+              "target_address": "58995E88",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FBA0",
+          "size": 61,
+          "symbol": "_FUN_5876f620_segment_05",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "58995E58",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FBE0",
+          "size": 109,
+          "symbol": "_FUN_5876f620_segment_06",
+          "relocations": [
+            {
+              "offset": 74,
+              "target_address": "58995E28",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FC50",
+          "size": 61,
+          "symbol": "_FUN_5876f620_segment_07",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "58995DF8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FC90",
+          "size": 130,
+          "symbol": "_FUN_5876f620_segment_08",
+          "relocations": [
+            {
+              "offset": 52,
+              "target_address": "58995DC8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876f620 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587708E0 at 0x5877090B",
+        "behavior": "Allocates 0x418-byte records for the current tutorial level and resolves MESSAGESTRING__FCCHS__TUTORIAL_MESSAGE_LEVEL1_1..9, LEVEL2_1..7, or LEVEL3_1..3. It stores observed per-record coordinates and text pointers.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770D50",
+      "name": "FUN_58770d50",
+      "size": 1200,
+      "symbol": "_FUN_58770d50",
+      "source": "src/client-current/Main/FUN_58770d50.cpp",
+      "source_sha256": "880bf19f2932c544f826b7c2ea8ba6e23b47ccc27baf1f789c5a076702e6c461",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770D50",
+          "size": 1200,
+          "symbol": "_FUN_58770d50_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898C500",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58996170",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 276,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "587B6DD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 419,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 478,
+              "target_address": "58A24534",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "587494D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 532,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 573,
+              "target_address": "58748E40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 638,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 660,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 713,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 720,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 730,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 754,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 764,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 786,
+              "target_address": "58A246C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 845,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 852,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 862,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 890,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 900,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 964,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 971,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 981,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1005,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1015,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1037,
+              "target_address": "58A24610",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1077,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1096,
+              "target_address": "58A2478C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1106,
+              "target_address": "5875DDA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1130,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770d50 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587706F0 at 0x58770779",
+        "behavior": "Initializes a CMenuScreen base, installs the CFCCH_PannelTutorialMessage vtable, and constructs two localized header controls, a child text/scroll control, and the repeated message-line controls at the observed offsets.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770130",
+      "name": "FUN_58770130",
+      "size": 1015,
+      "symbol": "_FUN_58770130",
+      "source": "src/client-current/Main/FUN_58770130.cpp",
+      "source_sha256": "3bb83dfcd02663ed3f6379a22ae3e5d35430370df47e7fc57663e4396bcdd5de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770130",
+          "size": 1015,
+          "symbol": "_FUN_58770130_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897EF46",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "5877020F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "587702AA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 235,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 308,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 343,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "58770454",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 393,
+              "target_address": "58770454",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 402,
+              "target_address": "587704FE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 427,
+              "target_address": "58770415",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 547,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 556,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 580,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 606,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 627,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 639,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 651,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 660,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 683,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 710,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 729,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 737,
+              "target_address": "587704D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 746,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 755,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 765,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 775,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 800,
+              "target_address": "587704D5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 809,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 816,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 826,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 837,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 854,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 862,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 872,
+              "target_address": "58902C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 879,
+              "target_address": "58902C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 890,
+              "target_address": "589032E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 902,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 921,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 929,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 950,
+              "target_address": "58770164",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770130 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587706F0 at 0x587707CB",
+        "behavior": "For the active tutorial step, lazily creates and updates paired child controls across three observed groups, derives resource offsets from the current client record, and applies the original visibility/state masks.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876FD20",
+      "name": "FUN_5876fd20",
+      "size": 956,
+      "symbol": "_FUN_5876fd20",
+      "source": "src/client-current/Main/FUN_5876fd20.cpp",
+      "source_sha256": "48c476f9ed215b8641561cc6174e4dcaadb9cfd3721f0e956aec4fb447035bbf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876FD20",
+          "size": 509,
+          "symbol": "_FUN_5876fd20_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "5876FF5E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "5876FDD1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58A245BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5877004B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 295,
+              "target_address": "5877004B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "587700BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 360,
+              "target_address": "5876FD5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 370,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 383,
+              "target_address": "58873030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 463,
+              "target_address": "58873030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 496,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876FF20",
+          "size": 345,
+          "symbol": "_FUN_5876fd20_segment_01",
+          "relocations": [
+            {
+              "offset": 71,
+              "target_address": "5876FD5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5877004B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "587700BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 246,
+              "target_address": "5876FD5B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 258,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "58873030",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58770080",
+          "size": 102,
+          "symbol": "_FUN_5876fd20_segment_02",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "58873030",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876fd20 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587706F0 at 0x587707A4",
+        "behavior": "Implements the step-selection state machine for tutorial levels 1 through 3. It scans linked client records, stores selected-record pointers into the 0x418-byte message records, advances the step byte, and waits for observed client state fields before returning success.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876EF70",
+      "name": "FUN_5876ef70",
+      "size": 659,
+      "symbol": "_FUN_5876ef70",
+      "source": "src/client-current/Main/FUN_5876ef70.cpp",
+      "source_sha256": "f8e3f64280153657c3c9ba7d3c5a5a7607e9723b4cc5a89e8b330d1c7fb055ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876EF70",
+          "size": 659,
+          "symbol": "_FUN_5876ef70_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58770C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "5876F1EA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "5876F154",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5876F1E9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5876F0C4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5876F1E9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "5876F1E2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "58995DA0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58995D78",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58995D50",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "58995D28",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58995D00",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "58995CD8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "58995CB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "58995C88",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "58995C60",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "58995C38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 312,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "58770C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "5876F1E9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "5876F1E2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 369,
+              "target_address": "58995CD8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "58995CB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 395,
+              "target_address": "58995C88",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 408,
+              "target_address": "58995C60",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 415,
+              "target_address": "58995C38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 457,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 475,
+              "target_address": "58770C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 480,
+              "target_address": "5876F1E9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 488,
+              "target_address": "5876F1E9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 514,
+              "target_address": "58995CD8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 527,
+              "target_address": "58995CB0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 540,
+              "target_address": "58995C88",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58995C60",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 560,
+              "target_address": "58995C38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 566,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 602,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 620,
+              "target_address": "58770C20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 629,
+              "target_address": "5876EE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876ef70 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587706F0 at 0x587707C4",
+        "behavior": "Formats the current message using localized nation names USA/UK/JPN/GM/NONE and harbor names, then passes the selected string through FUN_58770C20 for display. Other message rows go through that same text helper.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876F210",
+      "name": "FUN_5876f210",
+      "size": 583,
+      "symbol": "_FUN_5876f210",
+      "source": "src/client-current/Main/FUN_5876f210.cpp",
+      "source_sha256": "d424bf938a5730ec084c19d122266fd74bab2acff89c6270209e716a66b64a83",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876F210",
+          "size": 583,
+          "symbol": "_FUN_5876f210_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5876F31C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "5876F31B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5876F31B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "5876F31B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5876F377",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "5876F44B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "5876F451",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 343,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 421,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 457,
+              "target_address": "5876F319",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 475,
+              "target_address": "5876F319",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 527,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 563,
+              "target_address": "5876F319",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 573,
+              "target_address": "5876F319",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876f210 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58770800 at 0x587708A8",
+        "behavior": "Checks whether the active level/step is ready by testing the observed global client-state masks, selected record fields, and per-level conditions; FUN_58770800 uses its result to decide whether to refresh the panel.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58771200",
+      "name": "FUN_58771200",
+      "size": 302,
+      "symbol": "_FUN_58771200",
+      "source": "src/client-current/Main/FUN_58771200.cpp",
+      "source_sha256": "7ac201197a0628761021187ac1f16961f9ea5d4d10429c13a22145506b64226c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771200",
+          "size": 302,
+          "symbol": "_FUN_58771200_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988648",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58996190",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771200 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587713C0 at 0x587713C3",
+        "behavior": "Installs the CFCCH_PannelTutorialStart vtable, invokes deleting destructors for child pointers at offsets +0x60 through +0x88, clears those pointers, and calls the matched base-screen destructor FUN_58902C10.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770C20",
+      "name": "FUN_58770c20",
+      "size": 290,
+      "symbol": "_FUN_58770c20",
+      "source": "src/client-current/Main/FUN_58770c20.cpp",
+      "source_sha256": "4ec81dac239d1fceab63d804f4238157fa3122bbf738fd1b600473fd915df2d3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770C20",
+          "size": 290,
+          "symbol": "_FUN_58770c20_segment_00",
+          "relocations": [
+            {
+              "offset": 110,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 249,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770c20 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_5876EF70 at 0x5876EFB4, 0x5876F0B9, 0x5876F14A, and 0x5876F1DB",
+        "behavior": "Updates the tutorial text control's bounds and scroll limits from its parent geometry, optionally positions the selection marker, writes the supplied localized string, and records the resulting text length.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587706F0",
+      "name": "FUN_587706f0",
+      "size": 267,
+      "symbol": "_FUN_587706f0",
+      "source": "src/client-current/Main/FUN_587706f0.cpp",
+      "source_sha256": "ac503411a83dabe2711f2ff75d1fd28d0d8904b3a0f02c3674b4174ed2d77b05",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587706F0",
+          "size": 267,
+          "symbol": "_FUN_587706f0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898947B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "58770680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58770D50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "5876FD20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "5876EF70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "58770130",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "5876EE10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587706f0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587708E0 at 0x58770912 and FUN_58770800 at 0x587708B3",
+        "behavior": "Refreshes the active tutorial message panel: it removes an exhausted panel, constructs the child through FUN_58770D50 when absent, advances the tutorial step state, updates the localized row, and creates/updates the visible child controls.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876EBE0",
+      "name": "FUN_5876ebe0",
+      "size": 225,
+      "symbol": "_FUN_5876ebe0",
+      "source": "src/client-current/Main/FUN_5876ebe0.cpp",
+      "source_sha256": "67ec3fd754833216383a77440d8a66f3eb6bdce1ae58e517f33433bcc8cd9512",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876EBE0",
+          "size": 192,
+          "symbol": "_FUN_5876ebe0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988A28",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58995C20",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876ECA6",
+          "size": 33,
+          "symbol": "_FUN_5876ebe0_segment_01",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "58902D60",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876ebe0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_5876ED60 at 0x5876ED63",
+        "behavior": "Installs the CFCCH_MainManager vtable, deletes and clears child pointers at offsets +0x50 through +0x68, frees the pointer at +0x6C, and calls the matched base destructor FUN_58902D60.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770800",
+      "name": "FUN_58770800",
+      "size": 220,
+      "symbol": "_FUN_58770800",
+      "source": "src/client-current/Main/FUN_58770800.cpp",
+      "source_sha256": "1bf1d297aa4f1a4700688365215020929a382c56063a852e22ae90645e2eacba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770800",
+          "size": 220,
+          "symbol": "_FUN_58770800_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587708D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "5876F490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "5876F210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "587706F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770800 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_MainManager vtable at 0x58995C20, slot +0x0C",
+        "behavior": "Updates CFCCH_MainManager state masks for the observed 0x100/0x200/0x400 transitions, checks whether the active tutorial step is ready, refreshes the message panel when ready, and forwards update calls through child vtable slot +0x0C.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770930",
+      "name": "FUN_58770930",
+      "size": 212,
+      "symbol": "_FUN_58770930",
+      "source": "src/client-current/Main/FUN_58770930.cpp",
+      "source_sha256": "a36affcc8f5ffec81bf8d73525149dc2c85e6f55ae43b497231b9cdd26c73067",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770930",
+          "size": 212,
+          "symbol": "_FUN_58770930_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988648",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58996170",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770930 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58770AC0 at 0x58770AC3",
+        "behavior": "Installs the CFCCH_PannelTutorialMessage vtable, deletes and clears its observed child pointers at offsets +0x60 through +0x7C, then calls the matched base-screen destructor FUN_58902C10.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876F490",
+      "name": "FUN_5876f490",
+      "size": 194,
+      "symbol": "_FUN_5876f490",
+      "source": "src/client-current/Main/FUN_5876f490.cpp",
+      "source_sha256": "32e2fec76ed6a2ac3189456faa00053d6a266cc0f8ae45b36905c3af9b4a8baf",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876F490",
+          "size": 194,
+          "symbol": "_FUN_5876f490_segment_00",
+          "relocations": [
+            {
+              "offset": 44,
+              "target_address": "5876F542",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "5876C010",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "589BA84C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "589BA84C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "589BA84C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "5876F4B5",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876f490 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58770800 at 0x587708A1",
+        "behavior": "Repositions two paired tutorial controls from the current window coordinates and panel bounds. It also toggles the observed shared blink state and applies the control's vertical offset.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770AE0",
+      "name": "FUN_58770ae0",
+      "size": 174,
+      "symbol": "_FUN_58770ae0",
+      "source": "src/client-current/Main/FUN_58770ae0.cpp",
+      "source_sha256": "ddb0e9e10e618fa8f27c3a387ebf0f64c3eb4fdfcc76412417212e310d3f576f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770AE0",
+          "size": 174,
+          "symbol": "_FUN_58770ae0_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "58770B8C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770ae0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x04",
+        "behavior": "When the panel's 0x24 state mask is 0x500, changes it to 0x100, places the child marker at parent-relative coordinates, and updates the child text control's scroll bounds.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58771430",
+      "name": "FUN_58771430",
+      "size": 139,
+      "symbol": "_FUN_58771430",
+      "source": "src/client-current/Main/FUN_58771430.cpp",
+      "source_sha256": "84fd968251a0a5cae2fab27201e0637ed4738a5eeb61b6af0006486c489f14c0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771430",
+          "size": 139,
+          "symbol": "_FUN_58771430_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771430 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x10",
+        "behavior": "When its active bit is set, forwards the event through a linked child sequence. For event fields (0x100,0x0D) or (0x100,0x1B), it dispatches the corresponding child at offsets +0x84 or +0x88 through vtable slot +0x18.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876ED80",
+      "name": "FUN_5876ed80",
+      "size": 137,
+      "symbol": "_FUN_5876ed80",
+      "source": "src/client-current/Main/FUN_5876ed80.cpp",
+      "source_sha256": "00f27c8651768468c34e06c8df12e644508fbc992bf581f66a8e3e4f3f74651d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876ED80",
+          "size": 137,
+          "symbol": "_FUN_5876ed80_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876ed80 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_MainManager vtable at 0x58995C20, slot +0x08",
+        "behavior": "When the manager's state mask is 0x200, transitions it to 0x400 and clears visibility bits on its two primary child controls and two pairs of row controls.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770B90",
+      "name": "FUN_58770b90",
+      "size": 133,
+      "symbol": "_FUN_58770b90",
+      "source": "src/client-current/Main/FUN_58770b90.cpp",
+      "source_sha256": "2b575c1ac6c7d98dd963ec894a12362fdeb039cbff6862f8682cb45e91be1f42",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770B90",
+          "size": 133,
+          "symbol": "_FUN_58770b90_segment_00",
+          "relocations": [
+            {
+              "offset": 72,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770b90 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x10",
+        "behavior": "For event type 0x20A, checks the signed event value and dispatches the matching message-panel child at offsets +0x70 or +0x74 through virtual slot +0x18.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770A10",
+      "name": "FUN_58770a10",
+      "size": 112,
+      "symbol": "_FUN_58770a10",
+      "source": "src/client-current/Main/FUN_58770a10.cpp",
+      "source_sha256": "7f6099cb6cb61a7e168102de2700d90741300f7780fbbbe0d09750b13eedfe02",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770A10",
+          "size": 112,
+          "symbol": "_FUN_58770a10_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "5876A570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "587B6D10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "587B6D80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "58770680",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770a10 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x18",
+        "behavior": "Handles type-2 tutorial-panel child events: one child requests action 0x259, two children move the shared scroll control by 0x11, and another child clears/deactivates the active message panel.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587B6D10",
+      "name": "FUN_587b6d10",
+      "size": 108,
+      "symbol": "_FUN_587b6d10",
+      "source": "src/client-current/Main/FUN_587b6d10.cpp",
+      "source_sha256": "7beca6b86912b9c74b6fccbd7c67188e4fab1fa19a1c8aebee3170cc6a21b767",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B6D10",
+          "size": 108,
+          "symbol": "_FUN_587b6d10_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6d10 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58770A10 at 0x58770A46; the helper also has callers in other open UI functions",
+        "behavior": "Moves a shared scroll position forward by the requested amount, clamped to the observed content extent minus viewport size for mode bytes 1 or 2.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770680",
+      "name": "FUN_58770680",
+      "size": 98,
+      "symbol": "_FUN_58770680",
+      "source": "src/client-current/Main/FUN_58770680.cpp",
+      "source_sha256": "fddb0f23b2bcb653bd7463c94afacee51cb7a460d312ed64d8b8b8f003230bc2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770680",
+          "size": 16,
+          "symbol": "_FUN_58770680_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5877069A",
+          "size": 82,
+          "symbol": "_FUN_58770680_segment_01",
+          "relocations": [
+            {
+              "offset": 78,
+              "target_address": "58770530",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770680 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_587706F0 at 0x5877071D and FUN_58770A10 at 0x58770A76",
+        "behavior": "Frees the allocated message-record array, deactivates child controls, and either resets the current tutorial status and calls FUN_58770530 or clears the outer state for status 3.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587713E0",
+      "name": "FUN_587713e0",
+      "size": 79,
+      "symbol": "_FUN_587713e0",
+      "source": "src/client-current/Main/FUN_587713e0.cpp",
+      "source_sha256": "4b207632bd4d5d14b8eb49edeacbd280b8b70901d272719a377ed8bd80a61487",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587713E0",
+          "size": 79,
+          "symbol": "_FUN_587713e0_segment_00",
+          "relocations": [
+            {
+              "offset": 74,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587713e0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x04",
+        "behavior": "When the Start panel state mask is 0x500, changes it to 0x100 and sets the tutorial child position relative to the parent using the observed +300/+0x104 offsets.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58771370",
+      "name": "FUN_58771370",
+      "size": 73,
+      "symbol": "_FUN_58771370",
+      "source": "src/client-current/Main/FUN_58771370.cpp",
+      "source_sha256": "72bb9805c7961ceb98685858bfcbf3bfa7c53865587943f2434b8510b192555c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771370",
+          "size": 73,
+          "symbol": "_FUN_58771370_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "587708E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58A248CC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5876EE10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771370 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x18",
+        "behavior": "Handles type-2 child callbacks for Start-panel child slots +0x84/+0x88; it invokes the matched inherited method and then refreshes or exits the active tutorial message flow.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587B6D80",
+      "name": "FUN_587b6d80",
+      "size": 69,
+      "symbol": "_FUN_587b6d80",
+      "source": "src/client-current/Main/FUN_587b6d80.cpp",
+      "source_sha256": "33b1cd1ddaa54a75535374d7856eab3ca032d40dd028d2353e30421bf55836c9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B6D80",
+          "size": 69,
+          "symbol": "_FUN_587b6d80_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b6d80 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58770A10 at 0x58770A5A; the helper also has callers in other open UI functions",
+        "behavior": "Moves the shared scroll position backward by the requested amount, clamped to the observed content origin for mode bytes 1 or 2.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587708E0",
+      "name": "FUN_587708e0",
+      "size": 66,
+      "symbol": "_FUN_587708e0",
+      "source": "src/client-current/Main/FUN_587708e0.cpp",
+      "source_sha256": "d800c4a898a996ef6986958ba99136eb8ac07ab58481dcd7c274421553088ba1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587708E0",
+          "size": 66,
+          "symbol": "_FUN_587708e0_segment_00",
+          "relocations": [
+            {
+              "offset": 44,
+              "target_address": "5876F620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587706F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587708e0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "FUN_58771370 at 0x58771390",
+        "behavior": "Selects 9, 7, or 3 message rows from the stored tutorial status, resets the current row, loads localized message data, refreshes the message panel, and calls the panel's dynamic virtual method at slot +0x04.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58771330",
+      "name": "FUN_58771330",
+      "size": 56,
+      "symbol": "_FUN_58771330",
+      "source": "src/client-current/Main/FUN_58771330.cpp",
+      "source_sha256": "4e4b50b9eceb4dfafcc7f0d0dd0f0afc6abcfac23c9ebcee26ee281a2520f320",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771330",
+          "size": 56,
+          "symbol": "_FUN_58771330_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771330 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialMessage vtable slot +0x08 and CFCCH_PannelTutorialStart vtable slot +0x08; also referenced by two other vtables",
+        "behavior": "For a 0x200 panel state, clears the observed flag and changes the panel mask to 0x400. This method is shared by both tutorial panel vtables and two other vtables.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588A3A00",
+      "name": "FUN_588a3a00",
+      "size": 52,
+      "symbol": "_FUN_588a3a00",
+      "source": "src/client-current/Main/FUN_588a3a00.cpp",
+      "source_sha256": "68188390edf6c2e92658bac70d77f7849b942ec51fcf51ef0cc7f27516adca72",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588A3A00",
+          "size": 52,
+          "symbol": "_FUN_588a3a00_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588a3a00 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_MainManager vtable at 0x58995C20, slot +0x04; also referenced by the table at 0x589A0650",
+        "behavior": "For a 0x500 state mask, sets the observed flag bits and transitions the object to state 0x100; the MainManager vtable uses this method at slot +0x04.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587713C0",
+      "name": "FUN_587713c0",
+      "size": 27,
+      "symbol": "_FUN_587713c0",
+      "source": "src/client-current/Main/FUN_587713c0.cpp",
+      "source_sha256": "9a779e25d80ba36efa3769d26ec2df296229a972e564355350c0d65df228b137",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587713C0",
+          "size": 21,
+          "symbol": "_FUN_587713c0_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58771200",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587713D8",
+          "size": 6,
+          "symbol": "_FUN_587713c0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587713c0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x00",
+        "behavior": "Deleting-destructor wrapper for CFCCH_PannelTutorialStart: calls FUN_58771200 and frees the object when the low bit of the deletion flag is set.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5876ED60",
+      "name": "FUN_5876ed60",
+      "size": 27,
+      "symbol": "_FUN_5876ed60",
+      "source": "src/client-current/Main/FUN_5876ed60.cpp",
+      "source_sha256": "0e9a14761face62388ae5e98dd3be07d4f6fee0d11bb798afd2a715b90314014",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876ED60",
+          "size": 21,
+          "symbol": "_FUN_5876ed60_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "5876EBE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5876ED78",
+          "size": 6,
+          "symbol": "_FUN_5876ed60_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876ed60 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_MainManager vtable at 0x58995C20, slot +0x00",
+        "behavior": "Deleting-destructor wrapper for CFCCH_MainManager: calls FUN_5876EBE0 and frees the object when the low bit of the deletion flag is set.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58770AC0",
+      "name": "FUN_58770ac0",
+      "size": 27,
+      "symbol": "_FUN_58770ac0",
+      "source": "src/client-current/Main/FUN_58770ac0.cpp",
+      "source_sha256": "02603eeca353137f64f1446313ceeb9efd5052b917c5289ae79b61bad1dec014",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58770AC0",
+          "size": 21,
+          "symbol": "_FUN_58770ac0_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58770930",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58770AD8",
+          "size": 6,
+          "symbol": "_FUN_58770ac0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58770ac0 / FCCHS tutorial RTTI-vtable flow member",
+        "called_by": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x00",
+        "behavior": "Deleting-destructor wrapper for CFCCH_PannelTutorialMessage: calls FUN_58770930 and frees the object when the low bit of the deletion flag is set.",
+        "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
+      }
     }
   ]
 }

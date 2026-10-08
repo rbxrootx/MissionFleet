@@ -64,6 +64,7 @@ from tools import (
     verify_current_main_5881d570,
     verify_current_main_5888df10,
     verify_current_main_user_chat_enter_command,
+    verify_current_main_fcchs_tutorial_flow,
 )
 
 
@@ -76,8 +77,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_667)
-        self.assertEqual(self.report["measures"]["matched_code"], "2770859")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_696)
+        self.assertEqual(self.report["measures"]["matched_code"], "2780096")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -88,14 +89,22 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_534)
-        self.assertEqual(current["measures"]["matched_code"], "1797441")
+        self.assertEqual(current["measures"]["matched_functions"], 2_563)
+        self.assertEqual(current["measures"]["matched_code"], "1806678")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
         self.assertEqual(core["measures"]["matched_functions"], 431)
         self.assertEqual(core["measures"]["matched_code"], "333421")
+
+    def test_fcchs_tutorial_vtable_flow_has_exact_rtti_and_call_closure(self):
+        addresses = build_current_main_verifications.MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_FCCHS_TUTORIAL_VTABLE_EVIDENCE
+        self.assertEqual(len(addresses), 29)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_fcchs_tutorial_flow.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

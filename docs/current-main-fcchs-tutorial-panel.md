@@ -64,3 +64,60 @@ instruction-stream sources match under objdiff 3.8.0 at 100.0%. The FCCHS
 acronym, status/category meaning, indirect virtual contracts, localization
 text, and actual on-screen result remain unverified. No emulator runtime or
 visual test has been run.
+
+## RTTI-rooted tutorial progression and message panels
+
+The installed image identifies three adjacent tutorial classes through their
+Complete Object Locators, TypeDescriptors, and vtable pointers:
+
+| Class | Vtable | Slots | Open tutorial entries |
+| --- | ---: | ---: | --- |
+| `CFCCH_MainManager` | `0x58995C20` | 6 | `5876ED60`, `588A3A00`, `5876ED80`, `58770800` |
+| `CFCCH_PannelTutorialMessage` | `0x58996170` | 7 | `58770AC0`, `58770AE0`, `58771330`, `58770B90`, `58770A10` |
+| `CFCCH_PannelTutorialStart` | `0x58996190` | 7 | `587713C0`, `587713E0`, `58771330`, `58771430`, `58771370` |
+
+The other two slots in the manager table and two slots in each panel table
+already match. The Start table's final method is `FUN_58771370` at slot `+0x18`;
+the following bytes start a message string, which confirms the seven-slot table
+boundary.
+
+The Start panel routes type-2 child events into `FUN_587708E0`, which advances
+the tutorial step, loads the level's localized message records, refreshes the
+page, and invokes a child virtual method. The refresh path constructs its
+message panel with `FUN_58770D50`, selects state through `FUN_5876FD20`, formats
+nation and harbor names through `FUN_5876EF70`, and updates the visible child
+controls through `FUN_58770130`. The MainManager handles the observed
+`0x100`/`0x200`/`0x400` state transitions, checks step readiness, and traverses
+its children. The Message panel routes its own child events and scroll
+adjustments; its shared scroll helpers clamp the observed position to the
+content and viewport bounds. These behaviors are from the installed image's
+Ghidra output and mapped x86 instructions; state names and user-visible text
+meaning remain unresolved.
+
+The three tables contain 14 open slot entries (13 unique targets); those
+methods and their direct-call paths close over 29 open functions. Two fresh
+Ghidra project exports agree on **9,237 indexed bytes,
+3,008 instructions, and 44 exact body ranges**. ObjDiff 3.8.0 verifies all 29
+functions at 100%; direct-flow validation finds 21 edges within the closure and
+93 transfers to 30 already byte-matched functions. The standalone verifier
+also checks each RTTI record, every vtable slot, the class-rooted call closure,
+all external transfer targets, and the localized tutorial message keys.
+
+Ghidra leaves 15 physical fragments totaling 76 bytes between indexed body
+ranges. Six fragments contain code or epilogues and nine contain alignment
+instructions; their exact bytes are preserved and checked in
+`config/NF2_2026/main-fcchs-tutorial-vtables-unindexed-fragments.tsv`. Four
+indirect switch dispatches use separate tables at `0x5876F458` (6 entries),
+`0x5876F470` (8), `0x587700E8` (7), and `0x58770104` (9). Their 120 bytes are
+outside the indexed body total and are verified separately. The 66 indirect
+calls and the two remaining indirect jumps invoke dynamic child or virtual
+targets that are not resolved here.
+
+`FUN_58771330` and `FUN_588A3A00` also appear in sibling panel tables, and the
+two scroll helpers have ten incoming calls from five other open functions.
+Those shared users remain outside this tutorial slice. The field meanings,
+state labels, localized strings, virtual callback targets, sibling behavior,
+and runtime visual result remain unverified; no emulator test was performed.
+The new exact ranges are recorded in
+`config/NF2_2026/main-fcchs-tutorial-vtables-body-ranges.tsv` and validated by
+`tools/verify_current_main_fcchs_tutorial_flow.py`.

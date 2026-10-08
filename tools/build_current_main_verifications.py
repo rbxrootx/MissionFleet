@@ -1340,6 +1340,17 @@ MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES = (
 ADDRESSES += MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES)
 
+MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES = (
+    "5876F620", "58770D50", "58770130", "5876FD20", "5876EF70",
+    "5876F210", "58771200", "58770C20", "587706F0", "5876EBE0",
+    "58770800", "58770930", "5876F490", "58770AE0", "58771430",
+    "5876ED80", "58770B90", "58770A10", "587B6D10", "58770680",
+    "587713E0", "58771370", "587B6D80", "587708E0", "58771330",
+    "588A3A00", "587713C0", "5876ED60", "58770AC0",
+)
+ADDRESSES += MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES)
+
 MAIN_PAGEFIGHT_EVENT_PREHANDLER_ADDRESSES = (
     "5875EE50", "587E7F70", "587E7FF0", "587EE2C0", "5881E670",
     "588592C0", "58896300", "5889EAC0",
@@ -12390,6 +12401,91 @@ MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE = {
     for address in MAIN_FCCHS_TUTORIAL_PANEL_ADDRESSES
 }
 EVIDENCE.update(MAIN_FCCHS_TUTORIAL_PANEL_EVIDENCE)
+
+
+MAIN_FCCHS_TUTORIAL_VTABLE_PARENTS = {
+    "5876F620": "FUN_587708E0 at 0x5877090B",
+    "58770D50": "FUN_587706F0 at 0x58770779",
+    "58770130": "FUN_587706F0 at 0x587707CB",
+    "5876FD20": "FUN_587706F0 at 0x587707A4",
+    "5876EF70": "FUN_587706F0 at 0x587707C4",
+    "5876F210": "FUN_58770800 at 0x587708A8",
+    "58771200": "FUN_587713C0 at 0x587713C3",
+    "58770C20": "FUN_5876EF70 at 0x5876EFB4, 0x5876F0B9, 0x5876F14A, and 0x5876F1DB",
+    "587706F0": "FUN_587708E0 at 0x58770912 and FUN_58770800 at 0x587708B3",
+    "5876EBE0": "FUN_5876ED60 at 0x5876ED63",
+    "58770800": "CFCCH_MainManager vtable at 0x58995C20, slot +0x0C",
+    "58770930": "FUN_58770AC0 at 0x58770AC3",
+    "5876F490": "FUN_58770800 at 0x587708A1",
+    "58770AE0": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x04",
+    "58771430": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x10",
+    "5876ED80": "CFCCH_MainManager vtable at 0x58995C20, slot +0x08",
+    "58770B90": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x10",
+    "58770A10": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x18",
+    "587B6D10": "FUN_58770A10 at 0x58770A46; the helper also has callers in other open UI functions",
+    "58770680": "FUN_587706F0 at 0x5877071D and FUN_58770A10 at 0x58770A76",
+    "587713E0": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x04",
+    "58771370": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x18",
+    "587B6D80": "FUN_58770A10 at 0x58770A5A; the helper also has callers in other open UI functions",
+    "587708E0": "FUN_58771370 at 0x58771390",
+    "58771330": "CFCCH_PannelTutorialMessage vtable slot +0x08 and CFCCH_PannelTutorialStart vtable slot +0x08; also referenced by two other vtables",
+    "588A3A00": "CFCCH_MainManager vtable at 0x58995C20, slot +0x04; also referenced by the table at 0x589A0650",
+    "587713C0": "CFCCH_PannelTutorialStart vtable at 0x58996190, slot +0x00",
+    "5876ED60": "CFCCH_MainManager vtable at 0x58995C20, slot +0x00",
+    "58770AC0": "CFCCH_PannelTutorialMessage vtable at 0x58996170, slot +0x00",
+}
+MAIN_FCCHS_TUTORIAL_VTABLE_BEHAVIOR = {
+    "5876F620": "Allocates 0x418-byte records for the current tutorial level and resolves MESSAGESTRING__FCCHS__TUTORIAL_MESSAGE_LEVEL1_1..9, LEVEL2_1..7, or LEVEL3_1..3. It stores observed per-record coordinates and text pointers.",
+    "58770D50": "Initializes a CMenuScreen base, installs the CFCCH_PannelTutorialMessage vtable, and constructs two localized header controls, a child text/scroll control, and the repeated message-line controls at the observed offsets.",
+    "58770130": "For the active tutorial step, lazily creates and updates paired child controls across three observed groups, derives resource offsets from the current client record, and applies the original visibility/state masks.",
+    "5876FD20": "Implements the step-selection state machine for tutorial levels 1 through 3. It scans linked client records, stores selected-record pointers into the 0x418-byte message records, advances the step byte, and waits for observed client state fields before returning success.",
+    "5876EF70": "Formats the current message using localized nation names USA/UK/JPN/GM/NONE and harbor names, then passes the selected string through FUN_58770C20 for display. Other message rows go through that same text helper.",
+    "5876F210": "Checks whether the active level/step is ready by testing the observed global client-state masks, selected record fields, and per-level conditions; FUN_58770800 uses its result to decide whether to refresh the panel.",
+    "58771200": "Installs the CFCCH_PannelTutorialStart vtable, invokes deleting destructors for child pointers at offsets +0x60 through +0x88, clears those pointers, and calls the matched base-screen destructor FUN_58902C10.",
+    "58770C20": "Updates the tutorial text control's bounds and scroll limits from its parent geometry, optionally positions the selection marker, writes the supplied localized string, and records the resulting text length.",
+    "587706F0": "Refreshes the active tutorial message panel: it removes an exhausted panel, constructs the child through FUN_58770D50 when absent, advances the tutorial step state, updates the localized row, and creates/updates the visible child controls.",
+    "5876EBE0": "Installs the CFCCH_MainManager vtable, deletes and clears child pointers at offsets +0x50 through +0x68, frees the pointer at +0x6C, and calls the matched base destructor FUN_58902D60.",
+    "58770800": "Updates CFCCH_MainManager state masks for the observed 0x100/0x200/0x400 transitions, checks whether the active tutorial step is ready, refreshes the message panel when ready, and forwards update calls through child vtable slot +0x0C.",
+    "58770930": "Installs the CFCCH_PannelTutorialMessage vtable, deletes and clears its observed child pointers at offsets +0x60 through +0x7C, then calls the matched base-screen destructor FUN_58902C10.",
+    "5876F490": "Repositions two paired tutorial controls from the current window coordinates and panel bounds. It also toggles the observed shared blink state and applies the control's vertical offset.",
+    "58770AE0": "When the panel's 0x24 state mask is 0x500, changes it to 0x100, places the child marker at parent-relative coordinates, and updates the child text control's scroll bounds.",
+    "58771430": "When its active bit is set, forwards the event through a linked child sequence. For event fields (0x100,0x0D) or (0x100,0x1B), it dispatches the corresponding child at offsets +0x84 or +0x88 through vtable slot +0x18.",
+    "5876ED80": "When the manager's state mask is 0x200, transitions it to 0x400 and clears visibility bits on its two primary child controls and two pairs of row controls.",
+    "58770B90": "For event type 0x20A, checks the signed event value and dispatches the matching message-panel child at offsets +0x70 or +0x74 through virtual slot +0x18.",
+    "58770A10": "Handles type-2 tutorial-panel child events: one child requests action 0x259, two children move the shared scroll control by 0x11, and another child clears/deactivates the active message panel.",
+    "587B6D10": "Moves a shared scroll position forward by the requested amount, clamped to the observed content extent minus viewport size for mode bytes 1 or 2.",
+    "58770680": "Frees the allocated message-record array, deactivates child controls, and either resets the current tutorial status and calls FUN_58770530 or clears the outer state for status 3.",
+    "587713E0": "When the Start panel state mask is 0x500, changes it to 0x100 and sets the tutorial child position relative to the parent using the observed +300/+0x104 offsets.",
+    "58771370": "Handles type-2 child callbacks for Start-panel child slots +0x84/+0x88; it invokes the matched inherited method and then refreshes or exits the active tutorial message flow.",
+    "587B6D80": "Moves the shared scroll position backward by the requested amount, clamped to the observed content origin for mode bytes 1 or 2.",
+    "587708E0": "Selects 9, 7, or 3 message rows from the stored tutorial status, resets the current row, loads localized message data, refreshes the message panel, and calls the panel's dynamic virtual method at slot +0x04.",
+    "58771330": "For a 0x200 panel state, clears the observed flag and changes the panel mask to 0x400. This method is shared by both tutorial panel vtables and two other vtables.",
+    "588A3A00": "For a 0x500 state mask, sets the observed flag bits and transitions the object to state 0x100; the MainManager vtable uses this method at slot +0x04.",
+    "587713C0": "Deleting-destructor wrapper for CFCCH_PannelTutorialStart: calls FUN_58771200 and frees the object when the low bit of the deletion flag is set.",
+    "5876ED60": "Deleting-destructor wrapper for CFCCH_MainManager: calls FUN_5876EBE0 and frees the object when the low bit of the deletion flag is set.",
+    "58770AC0": "Deleting-destructor wrapper for CFCCH_PannelTutorialMessage: calls FUN_58770930 and frees the object when the low bit of the deletion flag is set.",
+}
+MAIN_FCCHS_TUTORIAL_VTABLE_EVIDENCE = {
+    address: {
+        "name_in_analysis": (
+            f"FUN_{address.lower()} / FCCHS tutorial RTTI-vtable flow member"
+        ),
+        "called_by": MAIN_FCCHS_TUTORIAL_VTABLE_PARENTS[address],
+        "behavior": MAIN_FCCHS_TUTORIAL_VTABLE_BEHAVIOR[address],
+        "uncertainty": (
+            "The three vtable identities and slot pointers are tied to the "
+            "installed Main.dll RTTI records; body boundaries and direct "
+            "transfers are checked against two agreeing Ghidra exports. Field "
+            "names, meanings of state masks, localized string contents, "
+            "runtime rendering, and dynamic child-vtable targets remain "
+            "unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers "
+            "outside this tutorial flow. No emulator runtime or visual test "
+            "was performed."
+        ),
+    }
+    for address in MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES
+}
+EVIDENCE.update(MAIN_FCCHS_TUTORIAL_VTABLE_EVIDENCE)
 
 
 MAIN_PAGEFIGHT_EVENT_PREHANDLER_PARENTS = {
