@@ -79,6 +79,7 @@ from tools import (
     verify_current_main_cforce_primary_vtable,
     verify_current_main_opconvoy_aircraft_update,
     verify_current_main_diplomacy_tab,
+    verify_current_main_cpanel_dashboard_vtable,
 )
 
 
@@ -91,8 +92,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_896)
-        self.assertEqual(self.report["measures"]["matched_code"], "2839436")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_907)
+        self.assertEqual(self.report["measures"]["matched_code"], "2844424")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -103,8 +104,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_763)
-        self.assertEqual(current["measures"]["matched_code"], "1866018")
+        self.assertEqual(current["measures"]["matched_functions"], 2_774)
+        self.assertEqual(current["measures"]["matched_code"], "1871006")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -282,6 +283,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("slot +0x18", evidence["587CADF0"]["called_by"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_opconvoy_aircraft_update.main()
+
+    def test_cpanel_dashboard_primary_vtable_has_exact_rtti_and_call_closures(self):
+        addresses = build_current_main_verifications.MAIN_CPANEL_DASHBOARD_VTABLE_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CPANEL_DASHBOARD_VTABLE_EVIDENCE
+        self.assertEqual(len(addresses), 11)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("slot +0x0C", evidence["58814480"]["name_in_analysis"])
+        self.assertIn("0x100", evidence["58814480"]["behavior"])
+        self.assertIn("DAT_58A245C4+0xA0", evidence["58811E30"]["behavior"])
+        self.assertIn("CPanelDashboard vftable", evidence["58810090"]["called_by"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_cpanel_dashboard_vtable.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

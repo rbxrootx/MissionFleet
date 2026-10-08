@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,896 matches cover 2,839,436 bytes (20.9510% by functions and
-27.1189% by bytes) and are verified individually at 100.0% by objdiff.
+The current 8,907 matches cover 2,844,424 bytes (20.9769% by functions and
+27.1665% by bytes) and are verified individually at 100.0% by objdiff.
 The installed client's RTTI-backed `CPannelCommunicatorConfigDiplomacyTab`
 event closure adds 30 exact functions / 3,876 bytes across 31 ranges. Its
 mode dispatcher, matched callers, constructor path, and indirect callback
@@ -21,6 +21,11 @@ closures add 12 exact functions / 4,627 bytes. Their shared `+0x0C` update,
 class-specific dispatch paths, matched constructor evidence, and unresolved
 indirect calls are recorded in
 [the subsystem evidence](docs/current-main-opconvoy-aircraft-update.md).
+The installed client's RTTI-backed `CPanelDashboard` primary-vftable slice adds
+11 exact functions / 4,988 bytes. Its four open slots, matched constructor path,
+39 transfers to verified code, and 44 unresolved child virtual calls are
+documented in
+[the subsystem evidence](docs/current-main-cpanel-dashboard-vtable.md).
 The installed client's battle-room `0x80020115` update closure adds eight
 byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
 bitmap traversal, mode-specific object creation, exact ranges, and unresolved

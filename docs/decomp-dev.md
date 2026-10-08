@@ -52,8 +52,8 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,896 of 42,461 functions and 2,839,436 of 10,470,324 bytes (20.9510% by
-functions and 27.1189% by bytes); every counted function match is verified at
+credits 8,907 of 42,461 functions and 2,844,424 of 10,470,324 bytes (20.9769% by
+functions and 27.1665% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. The installed-client `CFCManager` file-integrity
 and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
 five-slot vtable, callback route, two record strides, exact file-status strings,
@@ -62,7 +62,7 @@ and open questions are documented in
 This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,763 exact function matches totaling 1,866,018 bytes. The
+inventory has 2,774 exact function matches totaling 1,871,006 bytes. The
 two-function nested-range state-refresh closure at `FUN_58776F20` adds 801
 exact bytes. Fresh Ghidra and the independent body/call-edge inventories agree
 on both complete bodies and all 33 direct calls; the matched `FUN_588DF450`
@@ -96,6 +96,11 @@ checks the three class vftables and matched constructor path. Five indirect
 call instructions remain, with unresolved linked-child, state, and Cargo
 dispatch contracts. See
 [`current-main-opconvoy-aircraft-update.md`](current-main-opconvoy-aircraft-update.md).
+The RTTI-backed `CPanelDashboard` primary-vftable slice adds eleven exact
+functions / 4,988 bytes across 13 Ghidra ranges. Its four open primary slots,
+matched constructor path, 39 transfers to verified code, and 44 unresolved
+child virtual calls are documented in
+[`current-main-cpanel-dashboard-vtable.md`](current-main-cpanel-dashboard-vtable.md).
 The `CRoomTypeOccupation` constructor adds one exact function / 960 bytes. Its
 fresh Ghidra body has 287 instructions; a matched `CRoomSettingManager` caller
 and all 13 outgoing transfers to verified functions pass the focused verifier.

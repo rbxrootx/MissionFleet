@@ -18446,5 +18446,188 @@ MAIN_DIPLOMACY_TAB_EVENT_EVIDENCE = {
 EVIDENCE.update(MAIN_DIPLOMACY_TAB_EVENT_EVIDENCE)
 
 
+MAIN_CPANEL_DASHBOARD_VTABLE_ADDRESSES = (
+    "58810090", "588104B0", "588104E0", "58810520", "588106E0",
+    "58810850", "58810AC0", "58811960", "58811AD0", "58811E30",
+    "58814480",
+)
+ADDRESSES += MAIN_CPANEL_DASHBOARD_VTABLE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANEL_DASHBOARD_VTABLE_ADDRESSES)
+
+MAIN_CPANEL_DASHBOARD_VTABLE_EVIDENCE = {
+    "58810520": {
+        "name_in_analysis": "FUN_58810520 / CPanelDashboard primary-vftable slot +0",
+        "called_by": (
+            "Fresh Ghidra maps slot +0 at 0x5899D6D4 to this wrapper; its direct "
+            "call at 0x58810523 enters FUN_58810090."
+        ),
+        "behavior": (
+            "Calls the dashboard child cleanup helper, then tests bit 0 of the "
+            "second argument and conditionally calls FUN_5897CC42."
+        ),
+        "uncertainty": (
+            "The second argument's ownership convention and the child objects' "
+            "runtime types are not established by this wrapper."
+        ),
+    },
+    "58810090": {
+        "name_in_analysis": "FUN_58810090 / CPanelDashboard child cleanup",
+        "called_by": (
+            "Called by the slot +0 wrapper FUN_58810520 at 0x58810523; fresh "
+            "Ghidra records a write to the CPanelDashboard vftable at 0x588100BB."
+        ),
+        "behavior": (
+            "Installs the CPanelDashboard primary vftable, invokes the first "
+            "virtual method on each non-null child member, and clears the "
+            "corresponding pointers."
+        ),
+        "uncertainty": (
+            "The child member names, concrete child classes, and first-slot "
+            "destructor contracts remain unresolved."
+        ),
+    },
+    "588104B0": {
+        "name_in_analysis": "FUN_588104B0 / CPanelDashboard primary-vftable slot +4",
+        "called_by": (
+            "Fresh Ghidra maps slot +4 at 0x5899D6D8 to this method."
+        ),
+        "behavior": (
+            "Writes mode value 0x100 in the word at this+0x24, sets bit 2, "
+            "and clears bits 0 and 1."
+        ),
+        "uncertainty": (
+            "The meaning of state value 0x100 and the active-bit contract are "
+            "unknown beyond the observed masks."
+        ),
+    },
+    "588104E0": {
+        "name_in_analysis": "FUN_588104E0 / CPanelDashboard primary-vftable slot +8",
+        "called_by": (
+            "Fresh Ghidra maps slot +8 at 0x5899D6DC to this method."
+        ),
+        "behavior": (
+            "Writes mode value 0x400 in the word at this+0x24, clears bits "
+            "2, 0, and 1, and zeros the byte at this+0xB4."
+        ),
+        "uncertainty": (
+            "The meaning of state value 0x400 and byte +0xB4 is not recovered."
+        ),
+    },
+    "58814480": {
+        "name_in_analysis": "FUN_58814480 / CPanelDashboard primary-vftable slot +0x0C",
+        "called_by": (
+            "Fresh Ghidra maps slot +0x0C at 0x5899D6E0 to this method. "
+            "The matched FUN_58812170 constructor installs that table at "
+            "0x588121E5, and matched caller FUN_5878AF40 invokes the constructor "
+            "at 0x5878C86C."
+        ),
+        "behavior": (
+            "When bit 2 of the word at this+0x24 is set, advances mode 0x100 "
+            "to 0x200 or mode 0x400 to 0x500, clearing observed low state bits. "
+            "In mode 0x200 it runs three common open helpers and matched "
+            "FUN_58810CB0, then either two selector-9 helpers or one alternate "
+            "helper; it then walks the linked list at this+0x3C and calls each "
+            "child's virtual slot +0x0C."
+        ),
+        "uncertainty": (
+            "State labels, helper member identities, the five-bit global "
+            "selector's meaning, linked-list node types, and the child virtual "
+            "method contract remain unresolved; no runtime visual check was made."
+        ),
+    },
+    "588106E0": {
+        "name_in_analysis": "FUN_588106E0 / CPanelDashboard mode-update helper",
+        "called_by": "FUN_58814480 calls this at 0x588144CD in mode 0x200.",
+        "behavior": (
+            "Reads six values through FUN_58907360, derives a scaled value into "
+            "the child at this+0x84, calls FUN_589032E0 twice using fields at "
+            "this+0x9C, and writes a second scaled value through this+0x94."
+        ),
+        "uncertainty": (
+            "Child control identities, source table semantics, units, and "
+            "displayed labels are not established."
+        ),
+    },
+    "58810850": {
+        "name_in_analysis": "FUN_58810850 / CPanelDashboard mode-update helper",
+        "called_by": "FUN_58814480 calls this at 0x588144D4 in mode 0x200.",
+        "behavior": (
+            "Branches on a value at global-record offset +0x34, selects "
+            "threshold-gated records, copies six record fields into the child "
+            "at this+0xA8, updates the child at this+0xA4, and derives a value "
+            "for the child at this+0xAC."
+        ),
+        "uncertainty": (
+            "The selector, global record schema, child types, and computed "
+            "value's user-visible meaning remain unknown."
+        ),
+    },
+    "58810AC0": {
+        "name_in_analysis": "FUN_58810AC0 / CPanelDashboard mode-update helper",
+        "called_by": "FUN_58814480 calls this at 0x588144E2 in mode 0x200.",
+        "behavior": (
+            "Scans 32 indexed records using pair-state bytes and record fields "
+            "+0x98/+0x9C, tracks two extrema according to global mode, then "
+            "writes scaled values through child pointers at this+0xFC and +0x100."
+        ),
+        "uncertainty": (
+            "The indexed record types, state-byte meanings, selected extrema, "
+            "and visual interpretation are unresolved."
+        ),
+    },
+    "58811960": {
+        "name_in_analysis": "FUN_58811960 / CPanelDashboard selector helper A",
+        "called_by": (
+            "FUN_58814480 calls this at 0x58814503 when the observed global "
+            "five-bit selector equals 9."
+        ),
+        "behavior": (
+            "Computes a scaled value into the child at this+0x104, selects and "
+            "copies a six-field record into the child at this+0x110 for global "
+            "states 0 or 2, and routes other observed states through "
+            "FUN_587316C0 with a selected record value or zero."
+        ),
+        "uncertainty": (
+            "Global state labels, record schema, child identity, and "
+            "FUN_587316C0's displayed-resource contract are not recovered."
+        ),
+    },
+    "58811E30": {
+        "name_in_analysis": "FUN_58811E30 / CPanelDashboard selector helper B",
+        "called_by": (
+            "FUN_58814480 calls this at 0x5881450A when the observed global "
+            "five-bit selector equals 9."
+        ),
+        "behavior": (
+            "Uses the record at DAT_58A245C4+0xA0, updates child fields at "
+            "this+0x118 and +0x124 when the selected index changes, reads the "
+            "associated table values, and updates eight indexed child values."
+        ),
+        "uncertainty": (
+            "Record schema, selected-index meaning, child control types, and "
+            "visible presentation remain unresolved."
+        ),
+    },
+    "58811AD0": {
+        "name_in_analysis": "FUN_58811AD0 / CPanelDashboard selector helper C",
+        "called_by": (
+            "FUN_58814480 calls this at 0x58814511 when the observed global "
+            "five-bit selector is not 9."
+        ),
+        "behavior": (
+            "Uses the record at DAT_58A245C4+0x9C, caches a selected index, "
+            "refreshes resource offsets and a record-derived child at this+0x124, "
+            "then loops over eight indexed child values and computes scaled "
+            "values from record fields."
+        ),
+        "uncertainty": (
+            "The selected item, record schema, child identities, and whether "
+            "the scaled outputs are text, bars, or other visuals are unknown."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CPANEL_DASHBOARD_VTABLE_EVIDENCE)
+
+
 if __name__ == "__main__":
     main()
