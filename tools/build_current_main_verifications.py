@@ -17528,6 +17528,65 @@ MAIN_ENABLE_CHILD_EVENT_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_ENABLE_CHILD_EVENT_EVIDENCE)
 
+MAIN_58776F20_STATE_REFRESH_ADDRESSES = ("58776F20", "58737080")
+ADDRESSES += MAIN_58776F20_STATE_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_58776F20_STATE_REFRESH_ADDRESSES)
+MAIN_58776F20_STATE_REFRESH_EVIDENCE = {
+    "58776F20": {
+        "name_in_analysis": "FUN_58776f20 / nested-range state refresh",
+        "called_by": (
+            "Byte-matched FUN_588DF450 calls this at 0x588DF69B when bit 0 "
+            "of [0x58A2459C+0x105A8] is set and [receiver+0x6070] is zero. "
+            "That call loads ECX from [0x58A2459C]+0x21C48 and passes ESI "
+            "on the stack."
+        ),
+        "behavior": (
+            "Scans receiver-held DWORD ranges, finds an outer record whose "
+            "+0x4 byte matches the supplied object's +0x354 byte, then walks "
+            "nested ranges. When the indirect comparator at 0x5898C1A4 "
+            "returns zero for the observed +0x6C values, it calls "
+            "FUN_58737080. That helper either clears +0x1C and writes 2 to "
+            "the related object's +0x11C when its +0xF0 short is not 4, or "
+            "scans the observed global list, filters a byte match, calls "
+            "FUN_588D66E0, and retains the eligible entry with the greatest "
+            "+0x60 value. The closure has 33 direct calls: 31 range checks, "
+            "one matched eligibility helper, and one internal helper call."
+        ),
+        "uncertainty": (
+            "The collection and record schemas, ownership, meanings of the "
+            "compared bytes, the +0x6C comparator contract, the significance "
+            "of short value 4 and stored state 2, and the +0x60 score are "
+            "unresolved. The callback destination behind 0x5898C1A4 is "
+            "indirect and not recovered. FUN_588DF450's byte-matched indexed "
+            "extent is 595 bytes while the independent Ghidra body covers "
+            "589 bytes in two ranges; the call site is present in both. No "
+            "emulator runtime test was performed."
+        ),
+    },
+    "58737080": {
+        "name_in_analysis": "FUN_58737080 / nested-range selection helper",
+        "called_by": (
+            "Called by FUN_58776F20 at 0x5877713C with the selected nested "
+            "entry in ECX."
+        ),
+        "behavior": (
+            "If the entry's short at +0xF0 is not 4, clears its +0x1C pointer "
+            "and writes 2 to the related object's +0x11C. Otherwise scans "
+            "the linked list at 0x58A247F8+0x0C, filters candidates by the "
+            "observed byte comparison, checks eligibility through matched "
+            "FUN_588D66E0, and stores the candidate with the greatest "
+            "+0x60 value at +0x1C."
+        ),
+        "uncertainty": (
+            "The linked-list and record schemas, byte-field meanings, the "
+            "meaning of short value 4 and stored state 2, the eligibility "
+            "helper's domain semantics, and the +0x60 score are unresolved. "
+            "No emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_58776F20_STATE_REFRESH_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
