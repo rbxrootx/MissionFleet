@@ -43,3 +43,8 @@ config/NF2_2026/client-verifications.json --only 5884AB90` and
 The source preserves original x86 bytes, but the method and table have not
 been linked into a runnable client. Per-message contracts, indirect callback
 effects, and the visible interaction remain unresolved.
+
+Two branches in this method call the pointer-range helper
+`FUN_5884A820` at `0x5884B0CD` and `0x5884B0F3`. Its exact instruction body,
+other two callers, and remaining uncertainty are recorded in the
+[pointer-range update notes](current-main-communicator-id-pointer-range-update.md).

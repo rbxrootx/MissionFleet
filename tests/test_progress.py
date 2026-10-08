@@ -38,6 +38,7 @@ from tools import (
     verify_current_main_santa_aircraft_slot7,
     verify_current_main_santa_aircraft_damage_callbacks,
     verify_current_main_ship_map_constructor_helpers,
+    verify_current_main_communicator_id_pointer_range_update,
     verify_current_main_scroll_text_screen_slot0,
     verify_current_main_scroll_text_screen_slot3,
     verify_current_main_shell_map_object_screen_slot5,
@@ -63,8 +64,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_643)
-        self.assertEqual(self.report["measures"]["matched_code"], "2761397")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_644)
+        self.assertEqual(self.report["measures"]["matched_code"], "2762268")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -75,8 +76,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_510)
-        self.assertEqual(current["measures"]["matched_code"], "1787979")
+        self.assertEqual(current["measures"]["matched_functions"], 2_511)
+        self.assertEqual(current["measures"]["matched_code"], "1788850")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -874,6 +875,24 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("FUN_5897CC4E", evidence["58833980"]["behavior"])
         self.assertTrue(evidence["58833980"]["uncertainty"])
         verify_current_main_58833980.main()
+
+    def test_communicator_id_pointer_range_helper_has_verified_input_and_call_closure(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES
+        )
+        self.assertEqual(addresses, ("5884A820",))
+        evidence = (
+            build_current_main_verifications
+            .MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x5884B0CD", evidence["5884A820"]["called_by"])
+        self.assertIn("0x5884B0F3", evidence["5884A820"]["called_by"])
+        self.assertIn("44 direct call sites", evidence["5884A820"]["behavior"])
+        self.assertIn("58820EA0", evidence["5884A820"]["called_by"])
+        self.assertTrue(evidence["5884A820"]["uncertainty"])
+        verify_current_main_communicator_id_pointer_range_update.main()
 
     def test_manage_fleet_child_matches_original_and_verified_caller(self):
         addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES

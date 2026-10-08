@@ -15626,6 +15626,10 @@ MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES = (
 ADDRESSES += MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES)
 
+MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES = ("5884A820",)
+ADDRESSES += MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -15989,6 +15993,43 @@ MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_EVIDENCE)
+
+MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_EVIDENCE = {
+    "5884A820": {
+        "name_in_analysis": "FUN_5884A820 / CPannelCommunicatorIDPannel pointer-range update",
+        "called_by": (
+            "Both fresh Ghidra edge exports record two calls from the byte-matched "
+            "CPannelCommunicatorIDPannel input method FUN_5884AB90 at "
+            "0x5884B0CD and 0x5884B0F3. The RTTI-backed vtable places that caller "
+            "at slot +0x10. The matched input method passes its receiver in ECX; "
+            "the first call pushes EBP and the second pushes the DWORD loaded from "
+            "[EDI+0xA4]. Both projects also record callers FUN_58820EA0 at "
+            "0x58820EBB and FUN_58820F70 at 0x58820FA1; these callers are not "
+            "byte-matched and remain outside this slice."
+        ),
+        "behavior": (
+            "The complete 871-byte body (307 instructions) checks the pointer "
+            "range referenced through receiver +0x8C/+0x98/+0x9C, scans its "
+            "entries, and compares the supplied value with entries and a value "
+            "observed at entry +0x60. On a matching path it calls matched "
+            "FUN_588205F0 with 0 or 1, passes a local output pair and iterator "
+            "values to FUN_58849980, and passes the supplied value's address to "
+            "FUN_587A54D0. A second path shifts pointer entries through matched "
+            "FUN_5897CC54, subtracts four from the observed end pointer, and "
+            "calls matched FUN_588F6890 when the capacity check requires it. Its "
+            "44 direct call sites target six byte-matched functions."
+        ),
+        "uncertainty": (
+            "The receiver fields' exact container roles, entry type, meaning of "
+            "+0x60, semantics of FUN_588205F0's 0/1 arguments, and the operation's "
+            "visible effect are not recovered. The two additional callers are "
+            "unmatched, and their behavior is outside this evidence. This is an "
+            "exact instruction reconstruction; no emulator runtime comparison "
+            "was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_EVIDENCE)
 
 
 if __name__ == "__main__":
