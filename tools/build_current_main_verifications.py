@@ -16614,6 +16614,134 @@ MAIN_BATTLE_ROOM_DESTRUCTOR_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_BATTLE_ROOM_DESTRUCTOR_EVIDENCE)
 
+MAIN_BATTLE_ROOM_UPDATE_ADDRESSES = (
+    "587B60A0", "58877AD0", "58877B60", "58877B90", "58877BC0", "58878180",
+)
+ADDRESSES += MAIN_BATTLE_ROOM_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_BATTLE_ROOM_UPDATE_ADDRESSES)
+
+MAIN_BATTLE_ROOM_UPDATE_EVIDENCE = {
+    "587B60A0": {
+        "name_in_analysis": "FUN_587B60A0 / shared panel transition update",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a call at 0x588781B8 from "
+            "slot +0x0C handler FUN_58878180. The helper is shared: the same "
+            "exports also record a call from FUN_587B6360 at 0x587B636B."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one 527-byte range / 188 instructions. When receiver field +0x5C "
+            "equals 0x40000000, it moves the current coordinates at +0x04/+0x08 "
+            "toward targets at +0x6C/+0x70. Mode +0x68 selects divided or "
+            "clamped movement; matched helpers update movement and elapsed "
+            "time. At the target it may invoke dynamic child callbacks, "
+            "updates transition bits in +0x24, and clears +0x5C."
+        ),
+        "uncertainty": (
+            "The exact animation-mode meanings, ownership and target of the "
+            "dynamic child callbacks, and all callers beyond the two reported "
+            "call edges remain unresolved; this helper is shared with another "
+            "class."
+        ),
+    },
+    "58877AD0": {
+        "name_in_analysis": "FUN_58877AD0 / battle-room mode-index mapper",
+        "called_by": (
+            "Both fresh edge exports record six calls from FUN_58877BC0. "
+            "The first is at 0x58877C28; later calls map the repeated row loop."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one 66-byte range / 17 instructions. The switch maps values "
+            "2 to 4, 3 to 3, 4 and 5 to 2, 6 and 7 to 0, 8 to 1, and 9 to 6; "
+            "other values use index 5. Its indirect branch reads a ten-entry "
+            "absolute-address table immediately following the function."
+        ),
+        "uncertainty": (
+            "The external names and user-facing meanings of the numeric mode "
+            "values and resulting row indexes are not established by this "
+            "function alone."
+        ),
+    },
+    "58877B60": {
+        "name_in_analysis": "FUN_58877B60 / battle-room transition flag callback",
+        "called_by": (
+            "Both fresh edge exports record a DATA reference from 0x5899EFEC, "
+            "slot +0x04 of the CPannelInfoBattleRoom vtable at 0x5899EFE8."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one 44-byte range / 12 instructions. It sets low state bits in "
+            "receiver +0x24, selects state 0x100 in the 0x1F00 mask, then "
+            "calls matched FUN_587B6020 with event code 0x374 and receiver +0x08."
+        ),
+        "uncertainty": (
+            "The semantic name of state 0x100, event code 0x374, and the "
+            "receiver field passed to the matched notifier remain unresolved."
+        ),
+    },
+    "58877B90": {
+        "name_in_analysis": "FUN_58877B90 / battle-room transition flag callback",
+        "called_by": (
+            "Both fresh edge exports record a DATA reference from 0x5899EFF0, "
+            "slot +0x08 of the CPannelInfoBattleRoom vtable at 0x5899EFE8."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one 44-byte range / 12 instructions. It sets low state bits in "
+            "receiver +0x24, selects state 0x400 in the 0x1F00 mask, then "
+            "calls matched FUN_587B6020 with event code 0x406 and receiver +0x08."
+        ),
+        "uncertainty": (
+            "The semantic name of state 0x400, event code 0x406, and the "
+            "receiver field passed to the matched notifier remain unresolved."
+        ),
+    },
+    "58877BC0": {
+        "name_in_analysis": "FUN_58877BC0 / battle-room display refresh",
+        "called_by": (
+            "Both fresh edge exports record a direct call from FUN_58878180 "
+            "at 0x588781E2. That caller is the RTTI-backed vtable slot +0x0C."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one 1,418-byte range / 402 instructions. The routine switches on "
+            "the 16-bit mode at receiver +0x142, aggregates ten row values "
+            "using FUN_58877AD0, formats strings, refreshes display controls, "
+            "and copies selected geometry/state records into child objects. "
+            "Its five-entry target table and 17-byte mode-index table are "
+            "verified separately from its code range."
+        ),
+        "uncertainty": (
+            "The exact names of display controls, meanings of each mode, and "
+            "the rendering callback behind the function-pointer calls remain "
+            "unresolved."
+        ),
+    },
+    "58878180": {
+        "name_in_analysis": "FUN_58878180 / battle-room state and child-event handler",
+        "called_by": (
+            "Both fresh edge exports record a DATA reference from 0x5899EFF4, "
+            "slot +0x0C of the CPannelInfoBattleRoom vtable at 0x5899EFE8."
+        ),
+        "behavior": (
+            "Both fresh body exports agree on ranges totaling 169 bytes / "
+            "58 instructions: [0x58878180,0x5887820D) and "
+            "[0x58878210,0x5887822C). It checks state bits in receiver +0x24, "
+            "calls the shared transition helper FUN_587B60A0, conditionally "
+            "calls display refresh FUN_58877BC0, and walks a linked child "
+            "sequence through virtual slot +0x0C. The skipped alignment bytes "
+            "at 0x5887820D decode as `lea ecx, [ecx]` and are checked separately."
+        ),
+        "uncertainty": (
+            "The meanings of state values 0x100, 0x200, 0x400, and 0x500, "
+            "linked-child ordering, and dynamic virtual callback targets remain "
+            "unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_BATTLE_ROOM_UPDATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

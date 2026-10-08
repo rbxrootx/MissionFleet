@@ -452686,6 +452686,623 @@
         "behavior": "Both fresh body exports and a targeted headless export agree on two reachable ranges totaling 27 bytes / 10 instructions: [0x58877B40,0x58877B55) and [0x58877B58,0x58877B5E). It calls FUN_58877980, tests parameter bit 0, calls matched thunk FUN_5897CC42 when set, and otherwise returns the receiver. The raw contiguous wrapper includes a three-byte `add esp, 4` at 0x58877B55 that Ghidra omits after classifying the call as a terminator; that mapped fragment is separately preserved.",
         "uncertainty": "The ABI meaning of parameter bit 0, the indirect host callback target behind FUN_5897CC42, and its object-ownership contract are unresolved. The destructor's child vtable targets are dynamic."
       }
+    },
+    {
+      "address": "587B60A0",
+      "name": "FUN_587b60a0",
+      "size": 527,
+      "symbol": "_FUN_587b60a0",
+      "source": "src/client-current/Main/FUN_587b60a0.cpp",
+      "source_sha256": "1a4a914e5f6b724d6da1e78ae6a11ec9363c58e0c3eef5e5e3bcfb73d6f26df2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B60A0",
+          "size": 527,
+          "symbol": "_FUN_587b60a0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "587B62AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "587B61C6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "587B6170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "587B61C6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "58902E60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "587B62AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "587B62AC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 388,
+              "target_address": "587B7400",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B60A0 / shared panel transition update",
+        "called_by": "Both fresh Ghidra edge exports record a call at 0x588781B8 from slot +0x0C handler FUN_58878180. The helper is shared: the same exports also record a call from FUN_587B6360 at 0x587B636B.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one 527-byte range / 188 instructions. When receiver field +0x5C equals 0x40000000, it moves the current coordinates at +0x04/+0x08 toward targets at +0x6C/+0x70. Mode +0x68 selects divided or clamped movement; matched helpers update movement and elapsed time. At the target it may invoke dynamic child callbacks, updates transition bits in +0x24, and clears +0x5C.",
+        "uncertainty": "The exact animation-mode meanings, ownership and target of the dynamic child callbacks, and all callers beyond the two reported call edges remain unresolved; this helper is shared with another class."
+      }
+    },
+    {
+      "address": "58877AD0",
+      "name": "FUN_58877ad0",
+      "size": 66,
+      "symbol": "_FUN_58877ad0",
+      "source": "src/client-current/Main/FUN_58877ad0.cpp",
+      "source_sha256": "96af92d93b3baa439f00105fcaccad74c732acca4bee125010c9706d6ddf7b91",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877AD0",
+          "size": 66,
+          "symbol": "_FUN_58877ad0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877AD0 / battle-room mode-index mapper",
+        "called_by": "Both fresh edge exports record six calls from FUN_58877BC0. The first is at 0x58877C28; later calls map the repeated row loop.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one 66-byte range / 17 instructions. The switch maps values 2 to 4, 3 to 3, 4 and 5 to 2, 6 and 7 to 0, 8 to 1, and 9 to 6; other values use index 5. Its indirect branch reads a ten-entry absolute-address table immediately following the function.",
+        "uncertainty": "The external names and user-facing meanings of the numeric mode values and resulting row indexes are not established by this function alone."
+      }
+    },
+    {
+      "address": "58877B60",
+      "name": "FUN_58877b60",
+      "size": 44,
+      "symbol": "_FUN_58877b60",
+      "source": "src/client-current/Main/FUN_58877b60.cpp",
+      "source_sha256": "34b7781a10bf18b70dde77a918299dea822edb66eb59ac77a5ed01228de8ad85",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877B60",
+          "size": 44,
+          "symbol": "_FUN_58877b60_segment_00",
+          "relocations": [
+            {
+              "offset": 39,
+              "target_address": "587B6020",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877B60 / battle-room transition flag callback",
+        "called_by": "Both fresh edge exports record a DATA reference from 0x5899EFEC, slot +0x04 of the CPannelInfoBattleRoom vtable at 0x5899EFE8.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one 44-byte range / 12 instructions. It sets low state bits in receiver +0x24, selects state 0x100 in the 0x1F00 mask, then calls matched FUN_587B6020 with event code 0x374 and receiver +0x08.",
+        "uncertainty": "The semantic name of state 0x100, event code 0x374, and the receiver field passed to the matched notifier remain unresolved."
+      }
+    },
+    {
+      "address": "58877B90",
+      "name": "FUN_58877b90",
+      "size": 44,
+      "symbol": "_FUN_58877b90",
+      "source": "src/client-current/Main/FUN_58877b90.cpp",
+      "source_sha256": "f156945ecce119c9f882cdb12bbe37c4f06ecd25b2dbd4aa4b633cd922576a5f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877B90",
+          "size": 44,
+          "symbol": "_FUN_58877b90_segment_00",
+          "relocations": [
+            {
+              "offset": 39,
+              "target_address": "587B6020",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877B90 / battle-room transition flag callback",
+        "called_by": "Both fresh edge exports record a DATA reference from 0x5899EFF0, slot +0x08 of the CPannelInfoBattleRoom vtable at 0x5899EFE8.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one 44-byte range / 12 instructions. It sets low state bits in receiver +0x24, selects state 0x400 in the 0x1F00 mask, then calls matched FUN_587B6020 with event code 0x406 and receiver +0x08.",
+        "uncertainty": "The semantic name of state 0x400, event code 0x406, and the receiver field passed to the matched notifier remain unresolved."
+      }
+    },
+    {
+      "address": "58877BC0",
+      "name": "FUN_58877bc0",
+      "size": 1418,
+      "symbol": "_FUN_58877bc0",
+      "source": "src/client-current/Main/FUN_58877bc0.cpp",
+      "source_sha256": "6069583dafb1f0112403ecf8edb155d86ca76e55bde83fb8a3fed6c8a12b5dfe",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877BC0",
+          "size": 1418,
+          "symbol": "_FUN_58877bc0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58877E7D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "5899F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "58877EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 209,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 219,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "5899F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "58877EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "5899F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 408,
+              "target_address": "58877EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 439,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 508,
+              "target_address": "5899F004",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 535,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 549,
+              "target_address": "58877EDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 555,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 662,
+              "target_address": "5899F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 685,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 695,
+              "target_address": "58877DF1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 703,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 713,
+              "target_address": "58877AD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 761,
+              "target_address": "5899F010",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 784,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 805,
+              "target_address": "58A246A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 913,
+              "target_address": "58A24640",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 959,
+              "target_address": "58A24764",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1062,
+              "target_address": "5875F310",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1089,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1108,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1126,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1153,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1200,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1243,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1276,
+              "target_address": "5875F360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1303,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1350,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1374,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1407,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877BC0 / battle-room display refresh",
+        "called_by": "Both fresh edge exports record a direct call from FUN_58878180 at 0x588781E2. That caller is the RTTI-backed vtable slot +0x0C.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one 1,418-byte range / 402 instructions. The routine switches on the 16-bit mode at receiver +0x142, aggregates ten row values using FUN_58877AD0, formats strings, refreshes display controls, and copies selected geometry/state records into child objects. Its five-entry target table and 17-byte mode-index table are verified separately from its code range.",
+        "uncertainty": "The exact names of display controls, meanings of each mode, and the rendering callback behind the function-pointer calls remain unresolved."
+      }
+    },
+    {
+      "address": "58878180",
+      "name": "FUN_58878180",
+      "size": 169,
+      "symbol": "_FUN_58878180",
+      "source": "src/client-current/Main/FUN_58878180.cpp",
+      "source_sha256": "96e73695fc8a2c224a3fc3fb005e022d53733fb363d7e378500be8c896130e7a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58878180",
+          "size": 141,
+          "symbol": "_FUN_58878180_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "58878226",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "587B60A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58877BC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58878210",
+          "size": 28,
+          "symbol": "_FUN_58878180_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58878180 / battle-room state and child-event handler",
+        "called_by": "Both fresh edge exports record a DATA reference from 0x5899EFF4, slot +0x0C of the CPannelInfoBattleRoom vtable at 0x5899EFE8.",
+        "behavior": "Both fresh body exports agree on ranges totaling 169 bytes / 58 instructions: [0x58878180,0x5887820D) and [0x58878210,0x5887822C). It checks state bits in receiver +0x24, calls the shared transition helper FUN_587B60A0, conditionally calls display refresh FUN_58877BC0, and walks a linked child sequence through virtual slot +0x0C. The skipped alignment bytes at 0x5887820D decode as `lea ecx, [ecx]` and are checked separately.",
+        "uncertainty": "The meanings of state values 0x100, 0x200, 0x400, and 0x500, linked-child ordering, and dynamic virtual callback targets remain unresolved."
+      }
     }
   ]
 }
