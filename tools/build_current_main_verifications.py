@@ -19416,6 +19416,43 @@ for address in MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES:
     }
 EVIDENCE.update(MAIN_SHELL_MAP_OBJECT_UPDATE_EVIDENCE)
 
+MAIN_SHELL_MAP_RELATION_PREDICATE_ADDRESSES = ("587756F0",)
+ADDRESSES += MAIN_SHELL_MAP_RELATION_PREDICATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_RELATION_PREDICATE_ADDRESSES)
+EVIDENCE.update({
+    "587756F0": {
+        "name_in_analysis": "FUN_587756f0 / shell-map relation fallback predicate",
+        "called_by": (
+            "The RTTI-identified CShell_MapObjectScreen path reaches matched "
+            "FUN_58775980 through FUN_588D4300 -> FUN_588D31B0; the matched "
+            "predicate calls this function at 0x58775BD0. Two independent "
+            "fresh Ghidra exports confirm the call and exact body range."
+        ),
+        "behavior": (
+            "Returns 1 when the two supplied values equal param_4 fields "
+            "+0x1334/+0x1338. Otherwise it scans the begin/end range reached "
+            "through receiver +0x54 for records whose first two DWORDs match "
+            "the supplied values and whose short at +8 is zero. The default "
+            "result is 3. Under the param_4 +0x6070 mode gate, further checks compare "
+            "record fields +0x10 or +0x18 and param_4 fields +0x350/+0x354 "
+            "with fields +0x0C/+0x10/+0x14 reached through matched "
+            "FUN_587A5080; a qualifying record selects the helper value at "
+            "+0x0C. FUN_5897CC72 guards inconsistent range and iterator state. "
+            "The source reproduces the complete Ghidra-bounded 647-byte "
+            "instruction stream."
+        ),
+        "uncertainty": (
+            "The range, node and record schemas; meanings of param_1's +0x54 "
+            "range state and param_4 fields +0x1334/+0x1338, +0x6070, +0x350 "
+            "and +0x354; the semantic meaning "
+            "of results 1 and 3; and the helper descriptor's field names are "
+            "unresolved. FUN_5897CC72's assertion contract is also unresolved. "
+            "The result is supported by fresh Ghidra pseudocode and matched "
+            "caller evidence, but has not been exercised in the emulator."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()
