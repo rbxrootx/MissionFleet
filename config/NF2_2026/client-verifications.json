@@ -466994,6 +466994,180 @@
         "behavior": "A six-byte thunk that calls through the pointer slot 0x5898C2EC and returns to its caller.",
         "uncertainty": "The indirect target and its validation policy are unresolved."
       }
+    },
+    {
+      "address": "5873BF90",
+      "name": "FUN_5873bf90",
+      "size": 835,
+      "symbol": "_FUN_5873bf90",
+      "source": "src/client-current/Main/FUN_5873bf90.cpp",
+      "source_sha256": "0aad743b56053c6ae3cb2e93740a5cbd3029caaae660d73bdf21701346a0b08a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5873BF90",
+          "size": 835,
+          "symbol": "_FUN_5873bf90_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5873C2CD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5873C1DC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "5873C2CB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "5873C2CB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "5873C1C5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58775980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 235,
+              "target_address": "5873C1C5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 263,
+              "target_address": "5873C1B3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5873C1B3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 300,
+              "target_address": "5873C19C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 404,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 409,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 535,
+              "target_address": "5873C0B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 561,
+              "target_address": "5873C091",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 576,
+              "target_address": "5873C020",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 591,
+              "target_address": "5873B540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 599,
+              "target_address": "5873C270",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 703,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 708,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 728,
+              "target_address": "587E5E10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873bf90 / periodic candidate-selection state update",
+        "called_by": "Byte-matched FUN_5873FE80 calls this function once at 0x58740888 when receiver +0x460 is zero, word +0x2CE is nonzero, dword +0x228 is positive, and (word +0x2CC equals 2 or dword +0x45C is nonzero). The caller then skips the adjacent FUN_5873BBA0 path.",
+        "behavior": "Runs when the global counter at DAT_58A2459C+0x104F4 is divisible by 25. It walks a global linked list, filters entries through a matched helper, scans eight receiver-linked buckets, compares record values, and updates saved/candidate state fields around receiver +0x4C8..+0x4E4. Its other branch looks up an entry and restores or clears that state. All eight direct calls reach byte-matched functions.",
+        "uncertainty": "The owning class, counter units, linked-record and bucket schemas, field meanings, and helper contracts remain unresolved. No live client or emulator runtime test was performed."
+      }
     }
   ]
 }

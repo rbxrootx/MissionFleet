@@ -52,8 +52,8 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,819 of 42,461 functions and 2,814,499 of 10,470,324 bytes (20.7696% by
-functions and 26.8807% by bytes); every counted function match is verified at
+credits 8,820 of 42,461 functions and 2,815,334 of 10,470,324 bytes (20.7720% by
+functions and 26.8887% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. The installed-client `CFCManager` file-integrity
 and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
 five-slot vtable, callback route, two record strides, exact file-status strings,
@@ -62,7 +62,7 @@ and open questions are documented in
 This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,686 exact function matches totaling 1,841,081 bytes. The
+inventory has 2,687 exact function matches totaling 1,841,916 bytes. The
 `CRoomTypeOccupation` constructor adds one exact function / 960 bytes. Its
 fresh Ghidra body has 287 instructions; a matched `CRoomSettingManager` caller
 and all 13 outgoing transfers to verified functions pass the focused verifier.
@@ -489,6 +489,13 @@ space, and the verifier checks its complete open direct-call closure against
 the installed image and independent Ghidra exports. The parsed value's meaning
 and server effect remain unknown. See
 [`current-main-user-chat-command.md`](current-main-user-chat-command.md).
+
+The periodic selection-state updater adds one exact function / 835 bytes. Its
+matched caller gate, 25-tick cadence, eight linked-bucket scan, state writes,
+and eight calls to verified functions are recorded against two independent
+Ghidra exports. Class and field meanings remain unresolved; no runtime test was
+performed. See
+[`current-main-periodic-selection-state.md`](current-main-periodic-selection-state.md).
 
 The workflow at `.github/workflows/progress.yml` uploads
 `build/progress/report.json` for the registered decomp.dev project.

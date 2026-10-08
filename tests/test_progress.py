@@ -70,6 +70,7 @@ from tools import (
     verify_current_main_event_80025102,
     verify_current_main_event_80021004,
     verify_current_main_user_command,
+    verify_current_main_periodic_selection_state,
 )
 
 
@@ -82,8 +83,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_819)
-        self.assertEqual(self.report["measures"]["matched_code"], "2814499")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_820)
+        self.assertEqual(self.report["measures"]["matched_code"], "2815334")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -94,8 +95,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_686)
-        self.assertEqual(current["measures"]["matched_code"], "1841081")
+        self.assertEqual(current["measures"]["matched_functions"], 2_687)
+        self.assertEqual(current["measures"]["matched_code"], "1841916")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -151,6 +152,23 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(set(addresses), set(evidence))
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_user_command.main()
+
+    def test_periodic_selection_state_update_has_matched_caller_and_body(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_PERIODIC_SELECTION_STATE_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_PERIODIC_SELECTION_STATE_EVIDENCE
+        )
+        self.assertEqual(addresses, ("5873BF90",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["5873BF90"]
+        self.assertIn("0x58740888", item["called_by"])
+        self.assertIn("eight receiver-linked buckets", item["behavior"])
+        self.assertTrue(item["uncertainty"])
+        verify_current_main_periodic_selection_state.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

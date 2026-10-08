@@ -17408,6 +17408,35 @@ MAIN_USER_CHAT_COMMAND_EVIDENCE = {
 for _user_chat_command_address, _user_chat_command_detail in MAIN_USER_CHAT_COMMAND_EVIDENCE.items():
     EVIDENCE[_user_chat_command_address] = _user_chat_command_detail
 
+MAIN_PERIODIC_SELECTION_STATE_ADDRESSES = ("5873BF90",)
+ADDRESSES += MAIN_PERIODIC_SELECTION_STATE_ADDRESSES
+MAIN_PERIODIC_SELECTION_STATE_EVIDENCE = {
+    "5873BF90": {
+        "name_in_analysis": "FUN_5873bf90 / periodic candidate-selection state update",
+        "called_by": (
+            "Byte-matched FUN_5873FE80 calls this function once at 0x58740888 "
+            "when receiver +0x460 is zero, word +0x2CE is nonzero, dword "
+            "+0x228 is positive, and (word +0x2CC equals 2 or dword +0x45C is "
+            "nonzero). The caller then skips the adjacent FUN_5873BBA0 path."
+        ),
+        "behavior": (
+            "Runs when the global counter at DAT_58A2459C+0x104F4 is divisible "
+            "by 25. It walks a global linked list, filters entries through a "
+            "matched helper, scans eight receiver-linked buckets, compares "
+            "record values, and updates saved/candidate state fields around "
+            "receiver +0x4C8..+0x4E4. Its other branch looks up an entry and "
+            "restores or clears that state. All eight direct calls reach "
+            "byte-matched functions."
+        ),
+        "uncertainty": (
+            "The owning class, counter units, linked-record and bucket schemas, "
+            "field meanings, and helper contracts remain unresolved. No live "
+            "client or emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PERIODIC_SELECTION_STATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
