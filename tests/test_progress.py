@@ -98,6 +98,7 @@ from tools import (
     verify_current_main_manage_squad_tab,
     verify_current_main_communicator_join_tab,
     verify_current_main_communicator_manage_fleet_tab,
+    verify_current_main_item_manager_vtable,
 )
 
 
@@ -110,8 +111,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 9_062)
-        self.assertEqual(self.report["measures"]["matched_code"], "2895797")
+        self.assertEqual(self.report["measures"]["matched_functions"], 9_082)
+        self.assertEqual(self.report["measures"]["matched_code"], "2902664")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -122,8 +123,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_929)
-        self.assertEqual(current["measures"]["matched_code"], "1922379")
+        self.assertEqual(current["measures"]["matched_functions"], 2_949)
+        self.assertEqual(current["measures"]["matched_code"], "1929246")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -208,6 +209,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("Fifty-six indirect calls", evidence["58834C00"]["uncertainty"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_communicator_manage_fleet_tab.main()
+
+    def test_item_manager_vtable_has_exact_rtti_and_closed_direct_call_slice(self):
+        addresses = build_current_main_verifications.MAIN_ITEM_MANAGER_VTABLE_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_ITEM_MANAGER_VTABLE_EVIDENCE
+        self.assertEqual(len(addresses), 20)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertEqual(set(addresses), verify_current_main_item_manager_vtable.FUNCTIONS)
+        self.assertIn("0x5899F918", evidence["588826D0"]["called_by"])
+        self.assertIn("0x8001C005", evidence["58881680"]["behavior"])
+        self.assertIn("62 indirect call sites", evidence["588826F0"]["uncertainty"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_item_manager_vtable.main()
 
     def test_event_80025102_has_complete_matched_dispatch_case_closure(self):
         addresses = build_current_main_verifications.MAIN_EVENT_80025102_ADDRESSES

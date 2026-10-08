@@ -492944,6 +492944,1957 @@
         "behavior": "The 1,793-byte, 572-instruction cleanup sets the class vtable, checks and destroys child pointers through virtual slot 0, and zeros the corresponding stored pointers. Together the five functions contain 91 direct call sites: two internal closure edges and 89 calls to 18 already matched functions.",
         "uncertainty": "The exact dynamic types and destruction contracts of each child pointer are unresolved. Fifty-six indirect calls in this cleanup body still dispatch through child vtables. Byte-identical matching does not identify those runtime targets."
       }
+    },
+    {
+      "address": "587BA0A0",
+      "name": "FUN_587ba0a0",
+      "size": 21,
+      "symbol": "_FUN_587ba0a0",
+      "source": "src/client-current/Main/FUN_587ba0a0.cpp",
+      "source_sha256": "7337a925140bb37191206cca8b9b6e2a388a3d4ef88f074e639c132e5a47e63d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587BA0A0",
+          "size": 21,
+          "symbol": "_FUN_587ba0a0_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba0a0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Calls matched FUN_58970C70 with observed identifier 0x8001C004 and zero-valued arguments.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "587BA0C0",
+      "name": "FUN_587ba0c0",
+      "size": 124,
+      "symbol": "_FUN_587ba0c0",
+      "source": "src/client-current/Main/FUN_587ba0c0.cpp",
+      "source_sha256": "6c1864364e54cf18fec55897c40420418e240f76115667db79ce3289e658dff8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587BA0C0",
+          "size": 124,
+          "symbol": "_FUN_587ba0c0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58A245E4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "5887A3E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ba0c0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Loads an object pointer from observed global DAT_58A245E4 and calls FUN_5887A3E0 with value 1; that setter stores its second argument at receiver +0x94. It then calls matched FUN_58970C70 with identifier 0x8001C005 and a two- or four-byte payload selected by the 0xFF sentinel branch.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A3E0",
+      "name": "FUN_5887a3e0",
+      "size": 13,
+      "symbol": "_FUN_5887a3e0",
+      "source": "src/client-current/Main/FUN_5887a3e0.cpp",
+      "source_sha256": "bb6fa81ef61d8309dee49d478cc2d43f9dff2aefb19e6e843bd5142575dc09b0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A3E0",
+          "size": 13,
+          "symbol": "_FUN_5887a3e0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a3e0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Stores its second argument at receiver field +0x94.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A470",
+      "name": "FUN_5887a470",
+      "size": 136,
+      "symbol": "_FUN_5887a470",
+      "source": "src/client-current/Main/FUN_5887a470.cpp",
+      "source_sha256": "4c8df5b725330dd5686c56240569c305eea6347b61faeb76dcfe6bee4c152501",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A470",
+          "size": 136,
+          "symbol": "_FUN_5887a470_segment_00",
+          "relocations": [
+            {
+              "offset": 115,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a470 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "When receiver state bits equal 0x200, resets a child, changes the state to 0x400, writes target coordinates 0x52 and -0x20C, and notifies the observed global screen manager.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A500",
+      "name": "FUN_5887a500",
+      "size": 620,
+      "symbol": "_FUN_5887a500",
+      "source": "src/client-current/Main/FUN_5887a500.cpp",
+      "source_sha256": "d4545c0537e2db50acf1981c2d9a742d43294b9ec2434b31bce0b87d83780a6a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A500",
+          "size": 620,
+          "symbol": "_FUN_5887a500_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5887A766",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5887A5F5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5887A743",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5887A743",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 241,
+              "target_address": "5887A743",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "5887A6E4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 412,
+              "target_address": "58902E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 424,
+              "target_address": "5887A743",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "5887A743",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 565,
+              "target_address": "5887A3F0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a500 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Advances receiver state and position fields under a state-bit gate, steps coordinates toward stored targets, changes state when a target is reached, decrements two observed timers, and updates linked child controls through virtual calls.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A770",
+      "name": "FUN_5887a770",
+      "size": 151,
+      "symbol": "_FUN_5887a770",
+      "source": "src/client-current/Main/FUN_5887a770.cpp",
+      "source_sha256": "4c7062fc3f4d38537cb2e6c3d740a9defb25b9c24e6af058e173a1a41e26b971",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A770",
+          "size": 151,
+          "symbol": "_FUN_5887a770_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5887A804",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "58908650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a770 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Decrements the bounded receiver index at +0x7C, updates associated control geometry, and adjusts a child state when the index reaches zero.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A810",
+      "name": "FUN_5887a810",
+      "size": 152,
+      "symbol": "_FUN_5887a810",
+      "source": "src/client-current/Main/FUN_5887a810.cpp",
+      "source_sha256": "1a0e5b98b941516be14d3d7809fb4661214d9afdcf3e00e3173882dced98569f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A810",
+          "size": 152,
+          "symbol": "_FUN_5887a810_segment_00",
+          "relocations": [
+            {
+              "offset": 30,
+              "target_address": "589086F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a810 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Increments the receiver index at +0x7C up to a limit derived from a child field at +0x88, then updates associated geometry and child state.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887A980",
+      "name": "FUN_5887a980",
+      "size": 131,
+      "symbol": "_FUN_5887a980",
+      "source": "src/client-current/Main/FUN_5887a980.cpp",
+      "source_sha256": "58e7786da21819c24771c88a406427ad3ddd719f74db489bbcc6ca15e5d26af0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887A980",
+          "size": 131,
+          "symbol": "_FUN_5887a980_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "589081C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58908830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "588F4090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5886FFA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887a980 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Queries the observed selection helper, runs its companion update for five entries, then updates receiver fields and child controls.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887AD20",
+      "name": "FUN_5887ad20",
+      "size": 160,
+      "symbol": "_FUN_5887ad20",
+      "source": "src/client-current/Main/FUN_5887ad20.cpp",
+      "source_sha256": "86f1872bb1933ce1344a5c6042e3411ce029452a08fcd7beabf81fc2b41bafc1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887AD20",
+          "size": 160,
+          "symbol": "_FUN_5887ad20_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "5887ADBD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "58908650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887ad20 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Decrements the bounded receiver index at +0x8C and updates its associated child-control geometry and state.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887ADC0",
+      "name": "FUN_5887adc0",
+      "size": 165,
+      "symbol": "_FUN_5887adc0",
+      "source": "src/client-current/Main/FUN_5887adc0.cpp",
+      "source_sha256": "e46357d961b8911d15413034f0a45e98c6e7a1ae98ff639b6905c0969c1c14d4",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887ADC0",
+          "size": 165,
+          "symbol": "_FUN_5887adc0_segment_00",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "5887AE63",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "589086F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887adc0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Increments the receiver index at +0x8C up to a limit derived from a child field at +0x88, then updates its associated child controls.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887BE10",
+      "name": "FUN_5887be10",
+      "size": 194,
+      "symbol": "_FUN_5887be10",
+      "source": "src/client-current/Main/FUN_5887be10.cpp",
+      "source_sha256": "9f279fcda1764edbe84a307bf77f93497b02fe0117eada58aff4518e74433f53",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887BE10",
+          "size": 194,
+          "symbol": "_FUN_5887be10_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5887BED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58908650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "5887B240",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887be10 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Decrements the receiver index at +0x80 when positive and refreshes the five related child-control entries.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887D1C0",
+      "name": "FUN_5887d1c0",
+      "size": 110,
+      "symbol": "_FUN_5887d1c0",
+      "source": "src/client-current/Main/FUN_5887d1c0.cpp",
+      "source_sha256": "6155f5b4544c555fa1a3a83e557303a178450c11779bc1cf12587924cb8d3637",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887D1C0",
+          "size": 110,
+          "symbol": "_FUN_5887d1c0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 11,
+              "target_address": "587BA0A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "5899F20C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887d1c0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Calls the helper that sends identifier 0x8001C004, enables a child display, copies localized text key TEXTSTRING_TRANSFERINGDATAFROMSERVER, and sets receiver field +0x94.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "5887DA90",
+      "name": "FUN_5887da90",
+      "size": 277,
+      "symbol": "_FUN_5887da90",
+      "source": "src/client-current/Main/FUN_5887da90.cpp",
+      "source_sha256": "64506a62d1cf9faaeaa0d9e31563074f3603471eb2279068665377d4b3789a49",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5887DA90",
+          "size": 277,
+          "symbol": "_FUN_5887da90_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5887DBA3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "5887CBA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5887D1C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 166,
+              "target_address": "58A24584",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58A245F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "58A245F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5887da90 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "When receiver state bits equal 0x500, resets observed selection and timer fields, updates linked controls, writes coordinates 0x52 and 0x7A, notifies the global screen manager, and clears child flags.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58881150",
+      "name": "FUN_58881150",
+      "size": 1219,
+      "symbol": "_FUN_58881150",
+      "source": "src/client-current/Main/FUN_58881150.cpp",
+      "source_sha256": "0f3d318db6b955d72609485237c1557198cf5fe2a041498f7314d5ba5067a75e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58881150",
+          "size": 861,
+          "symbol": "_FUN_58881150_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589867E4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5899F918",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588814B0",
+          "size": 328,
+          "symbol": "_FUN_58881150_segment_01",
+          "relocations": [
+            {
+              "offset": 324,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588815FB",
+          "size": 30,
+          "symbol": "_FUN_58881150_segment_02",
+          "relocations": [
+            {
+              "offset": 26,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58881150 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Restores the CPannelItemManager vtable, releases non-null child pointers through their first virtual methods, clears pointer fields, and frees the observed owned allocation.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58881680",
+      "name": "FUN_58881680",
+      "size": 1433,
+      "symbol": "_FUN_58881680",
+      "source": "src/client-current/Main/FUN_58881680.cpp",
+      "source_sha256": "1dbe5c44b9571439ff9e9f2fa3635bd2ac119a6fb0f2e33fa1e712392adb93ab",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58881680",
+          "size": 173,
+          "symbol": "_FUN_58881680_segment_00",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "58881BA5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "588C5C30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "588C5C30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58881730",
+          "size": 425,
+          "symbol": "_FUN_58881680_segment_01",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "58881824",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5887CFB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58880DF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "58881770",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 257,
+              "target_address": "58881949",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "58881920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 323,
+              "target_address": "58881920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 334,
+              "target_address": "587BA0A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 366,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 379,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "5899F20C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588818E0",
+          "size": 835,
+          "symbol": "_FUN_58881680_segment_02",
+          "relocations": [
+            {
+              "offset": 70,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "5887A770",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 164,
+              "target_address": "5887A810",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "5887AD20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5887ADC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 233,
+              "target_address": "5887BE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "5887BD30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 276,
+              "target_address": "58881B3B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 325,
+              "target_address": "58881B60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 341,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "5876A570",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 398,
+              "target_address": "587BA0C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 456,
+              "target_address": "5887A3F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 495,
+              "target_address": "58759E90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 501,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 512,
+              "target_address": "587BA0C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 541,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 562,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 579,
+              "target_address": "587BA0C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 613,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 618,
+              "target_address": "588F3FA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 626,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 636,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 669,
+              "target_address": "58881C1B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 689,
+              "target_address": "58996C38",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 697,
+              "target_address": "5898C3B4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58881680 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Handles observed event kinds 2, 3, and 4. For kind 2 it locates a child among the item arrays, updates six item-control states and selection fields, and may call the wrappers that send identifier 0x8001C005. One guarded state-3 path calls matched FUN_58759E90(0xFF) and forwards its result through that sender. Kind 3 updates active flags across five entries; kind 4 clears the selected entry's flag.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "58881C30",
+      "name": "FUN_58881c30",
+      "size": 96,
+      "symbol": "_FUN_58881c30",
+      "source": "src/client-current/Main/FUN_58881c30.cpp",
+      "source_sha256": "fec4eb29e75ca7ff869da9d668c6344fcfd31ba3ab137ecb3ab8943f386955d2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58881C30",
+          "size": 96,
+          "symbol": "_FUN_58881c30_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "58908750",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58A2481C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "58779890",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 88,
+              "target_address": "58880DF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58881c30 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Calls the matched list-data helper, derives an index and count from receiver child data, stores those values at +0x70 and +0x74, and refreshes the associated child control.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588826D0",
+      "name": "FUN_588826d0",
+      "size": 27,
+      "symbol": "_FUN_588826d0",
+      "source": "src/client-current/Main/FUN_588826d0.cpp",
+      "source_sha256": "944369c9dcbde3a65b252f0d7d04cd07f381673218a591c738ff92d6bce74489",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588826D0",
+          "size": 21,
+          "symbol": "_FUN_588826d0_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58881150",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588826E8",
+          "size": 6,
+          "symbol": "_FUN_588826d0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588826d0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Calls derived cleanup FUN_58881150 and, when delete-flag bit 0 is set, calls matched operator-delete helper FUN_5897CC42.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588826F0",
+      "name": "FUN_588826f0",
+      "size": 1665,
+      "symbol": "_FUN_588826f0",
+      "source": "src/client-current/Main/FUN_588826f0.cpp",
+      "source_sha256": "11f5a3484dcdc16ed6df6452f086cd41dfda8ad924a0d30727c4d987307941f2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588826F0",
+          "size": 1665,
+          "symbol": "_FUN_588826f0_segment_00",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "58882BCA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "58882B1A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "58882AFD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58882885",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "588828A1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 202,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 269,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "5887A770",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 341,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 358,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 376,
+              "target_address": "5887A810",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 388,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 407,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 418,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 445,
+              "target_address": "588829A5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 468,
+              "target_address": "588829C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 477,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 511,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 570,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 595,
+              "target_address": "5887AD20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 607,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 629,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 664,
+              "target_address": "5887ADC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 676,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 695,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 706,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 732,
+              "target_address": "58882AD8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 755,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 775,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 800,
+              "target_address": "58903360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 844,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 861,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 883,
+              "target_address": "5887BE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 895,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 917,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 925,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 938,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 953,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 963,
+              "target_address": "5887BD30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 975,
+              "target_address": "58908170",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1002,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1013,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1043,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1106,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1193,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1206,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1221,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1249,
+              "target_address": "58882CC4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1258,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1264,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1275,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1283,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1295,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1315,
+              "target_address": "5887A770",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1326,
+              "target_address": "5887A810",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1340,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1360,
+              "target_address": "5887AD20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1371,
+              "target_address": "5887ADC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1381,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1387,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1412,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1455,
+              "target_address": "5887BE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1471,
+              "target_address": "58882D67",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1478,
+              "target_address": "5887BD30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1556,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1571,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1589,
+              "target_address": "58881C30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1595,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1620,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1651,
+              "target_address": "5887A980",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588826f0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Dispatches observed input/event codes including 0x100, 0x200, 0x201, 0x202, and 0x20A. Branches update child states, scroll or selection indices, and call the item-control movement helpers.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588C5C30",
+      "name": "FUN_588c5c30",
+      "size": 138,
+      "symbol": "_FUN_588c5c30",
+      "source": "src/client-current/Main/FUN_588c5c30.cpp",
+      "source_sha256": "b82db3d1caedad5040bf3b11223a969c0cf833c4c2ffbe8c888c1685ad424955",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588C5C30",
+          "size": 138,
+          "symbol": "_FUN_588c5c30_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588c5c30 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Stores an item index at child field +0x7C, marks that indexed child with state 5, and sets the other entries in the observed child array to state 1.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
+    },
+    {
+      "address": "588F3FA0",
+      "name": "FUN_588f3fa0",
+      "size": 35,
+      "symbol": "_FUN_588f3fa0",
+      "source": "src/client-current/Main/FUN_588f3fa0.cpp",
+      "source_sha256": "0b110c95f1142693b28c216177b6ff931dc7db0a4b2c363bacdc099590dca3aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F3FA0",
+          "size": 35,
+          "symbol": "_FUN_588f3fa0_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f3fa0 / CPannelItemManager closure member",
+        "called_by": "The installed Main.dll RTTI identifies the primary table at 0x5899F918 as CPannelItemManager. Its six open roots are the methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; this body is either one of those slots or is reachable by direct calls from that root set. Two independent fresh Ghidra inventories and a targeted fresh decompilation are checked by the focused verifier.",
+        "behavior": "Returns false after calling observed helpers with identifier 0x36 when the input object's field +0x0C equals 100; otherwise returns true.",
+        "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
+      }
     }
   ]
 }

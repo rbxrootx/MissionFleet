@@ -20732,6 +20732,143 @@ MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE)
 
+MAIN_ITEM_MANAGER_VTABLE_ADDRESSES = (
+    "587BA0A0", "587BA0C0", "5887A3E0", "5887A470", "5887A500",
+    "5887A770", "5887A810", "5887A980", "5887AD20", "5887ADC0",
+    "5887BE10", "5887D1C0", "5887DA90", "58881150", "58881680",
+    "58881C30", "588826D0", "588826F0", "588C5C30", "588F3FA0",
+)
+ADDRESSES += MAIN_ITEM_MANAGER_VTABLE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ITEM_MANAGER_VTABLE_ADDRESSES)
+
+MAIN_ITEM_MANAGER_VTABLE_BEHAVIOR = {
+    "587BA0A0": (
+        "Calls matched FUN_58970C70 with observed identifier 0x8001C004 and "
+        "zero-valued arguments."
+    ),
+    "587BA0C0": (
+        "Loads an object pointer from observed global DAT_58A245E4 and calls "
+        "FUN_5887A3E0 with value 1; that setter stores its second argument at "
+        "receiver +0x94. It then calls matched FUN_58970C70 with identifier "
+        "0x8001C005 and a two- or four-byte payload selected by the 0xFF "
+        "sentinel branch."
+    ),
+    "5887A3E0": "Stores its second argument at receiver field +0x94.",
+    "5887A470": (
+        "When receiver state bits equal 0x200, resets a child, changes the "
+        "state to 0x400, writes target coordinates 0x52 and -0x20C, and "
+        "notifies the observed global screen manager."
+    ),
+    "5887A500": (
+        "Advances receiver state and position fields under a state-bit gate, "
+        "steps coordinates toward stored targets, changes state when a target "
+        "is reached, decrements two observed timers, and updates linked child "
+        "controls through virtual calls."
+    ),
+    "5887A770": (
+        "Decrements the bounded receiver index at +0x7C, updates associated "
+        "control geometry, and adjusts a child state when the index reaches "
+        "zero."
+    ),
+    "5887A810": (
+        "Increments the receiver index at +0x7C up to a limit derived from a "
+        "child field at +0x88, then updates associated geometry and child "
+        "state."
+    ),
+    "5887A980": (
+        "Queries the observed selection helper, runs its companion update for "
+        "five entries, then updates receiver fields and child controls."
+    ),
+    "5887AD20": (
+        "Decrements the bounded receiver index at +0x8C and updates its "
+        "associated child-control geometry and state."
+    ),
+    "5887ADC0": (
+        "Increments the receiver index at +0x8C up to a limit derived from a "
+        "child field at +0x88, then updates its associated child controls."
+    ),
+    "5887BE10": (
+        "Decrements the receiver index at +0x80 when positive and refreshes "
+        "the five related child-control entries."
+    ),
+    "5887D1C0": (
+        "Calls the helper that sends identifier 0x8001C004, enables a child "
+        "display, copies localized text key "
+        "TEXTSTRING_TRANSFERINGDATAFROMSERVER, and sets receiver field +0x94."
+    ),
+    "5887DA90": (
+        "When receiver state bits equal 0x500, resets observed selection and "
+        "timer fields, updates linked controls, writes coordinates 0x52 and "
+        "0x7A, notifies the global screen manager, and clears child flags."
+    ),
+    "58881150": (
+        "Restores the CPannelItemManager vtable, releases non-null child "
+        "pointers through their first virtual methods, clears pointer fields, "
+        "and frees the observed owned allocation."
+    ),
+    "58881680": (
+        "Handles observed event kinds 2, 3, and 4. For kind 2 it locates a "
+        "child among the item arrays, updates six item-control states and "
+        "selection fields, and may call the wrappers that send identifier "
+        "0x8001C005. One guarded state-3 path calls matched "
+        "FUN_58759E90(0xFF) and forwards its result through that sender. Kind "
+        "3 updates active flags across five entries; kind 4 clears the "
+        "selected entry's flag."
+    ),
+    "58881C30": (
+        "Calls the matched list-data helper, derives an index and count from "
+        "receiver child data, stores those values at +0x70 and +0x74, and "
+        "refreshes the associated child control."
+    ),
+    "588826D0": (
+        "Calls derived cleanup FUN_58881150 and, when delete-flag bit 0 is "
+        "set, calls matched operator-delete helper FUN_5897CC42."
+    ),
+    "588826F0": (
+        "Dispatches observed input/event codes including 0x100, 0x200, "
+        "0x201, 0x202, and 0x20A. Branches update child states, scroll or "
+        "selection indices, and call the item-control movement helpers."
+    ),
+    "588C5C30": (
+        "Stores an item index at child field +0x7C, marks that indexed child "
+        "with state 5, and sets the other entries in the observed child array "
+        "to state 1."
+    ),
+    "588F3FA0": (
+        "Returns false after calling observed helpers with identifier 0x36 "
+        "when the input object's field +0x0C equals 100; otherwise returns "
+        "true."
+    ),
+}
+
+MAIN_ITEM_MANAGER_VTABLE_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / CPannelItemManager closure member",
+        "called_by": (
+            "The installed Main.dll RTTI identifies the primary table at "
+            "0x5899F918 as CPannelItemManager. Its six open roots are the "
+            "methods at slots +0x00, +0x04, +0x08, +0x0C, +0x10, and +0x18; "
+            "this body is either one of those slots or is reachable by direct "
+            "calls from that root set. Two independent fresh Ghidra inventories "
+            "and a targeted fresh decompilation are checked by the focused "
+            "verifier."
+        ),
+        "behavior": MAIN_ITEM_MANAGER_VTABLE_BEHAVIOR[address],
+        "uncertainty": (
+            "The native fields, item-record schema, UI labels and images beyond "
+            "the observed localization keys, and the meanings of the event and "
+            "identifier values remain unresolved. Across the closure, 62 "
+            "indirect call sites remain unresolved, including dynamic child "
+            "virtual calls. Static call sites do not establish successful "
+            "server transactions or rendered behavior. The source preserves the "
+            "mapped x86 instruction stream for byte matching; no emulator "
+            "runtime or visual test was performed."
+        ),
+    }
+    for address in MAIN_ITEM_MANAGER_VTABLE_ADDRESSES
+}
+EVIDENCE.update(MAIN_ITEM_MANAGER_VTABLE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
