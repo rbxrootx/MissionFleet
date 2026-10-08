@@ -40,6 +40,7 @@ from tools import (
     verify_current_main_ship_map_constructor_helpers,
     verify_current_main_communicator_id_pointer_range_update,
     verify_current_main_factory_help_cleanup,
+    verify_current_main_pagefight_control_layout,
     verify_current_main_pagefight_ringout_monitor,
     verify_current_main_pagefight_position_bounds,
     verify_current_main_scroll_text_screen_slot0,
@@ -67,8 +68,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_647)
-        self.assertEqual(self.report["measures"]["matched_code"], "2764757")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_648)
+        self.assertEqual(self.report["measures"]["matched_code"], "2765396")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -79,8 +80,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_514)
-        self.assertEqual(current["measures"]["matched_code"], "1791339")
+        self.assertEqual(current["measures"]["matched_functions"], 2_515)
+        self.assertEqual(current["measures"]["matched_code"], "1791978")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -928,6 +929,16 @@ class ProgressReportTests(unittest.TestCase):
         self.assertTrue(evidence["587E8260"]["uncertainty"])
         verify_current_main_pagefight_position_bounds.main()
 
+    def test_pagefight_control_layout_helper_matches_original_and_call_closure(self):
+        addresses = build_current_main_verifications.MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES
+        self.assertEqual(addresses, ("58875830",))
+        evidence = build_current_main_verifications.MAIN_PAGEFIGHT_CONTROL_LAYOUT_EVIDENCE
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x587FE0D8", evidence["58875830"]["called_by"])
+        self.assertIn("20 direct calls", evidence["58875830"]["behavior"])
+        self.assertTrue(evidence["58875830"]["uncertainty"])
+        verify_current_main_pagefight_control_layout.main()
+
     def test_manage_fleet_child_matches_original_and_verified_caller(self):
         addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES
         evidence = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_EVIDENCE
@@ -1295,6 +1306,31 @@ class ProgressReportTests(unittest.TestCase):
             [("1000", "old-a"), ("2000", "new-b"),
              ("3000", "old-c"), ("4000", "new-d")],
         )
+
+    def test_current_client_candidate_refresh_preserves_only_unchanged_byte_matches(self):
+        verified = {
+            "address": "2000",
+            "size": 59,
+            "source_sha256": "same-source",
+            "verified_by": "objdiff-3.8.0-byte-identical",
+            "segments": [{"address": "2000", "size": 59}],
+        }
+        same_source_candidate = {
+            **verified,
+            "name": "refreshed-name",
+            "verified_by": "candidate-not-yet-verified",
+        }
+        merged = build_current_main_verifications.merge_match_records(
+            [verified], [same_source_candidate]
+        )
+        self.assertEqual(merged[0]["name"], "refreshed-name")
+        self.assertEqual(merged[0]["verified_by"], "objdiff-3.8.0-byte-identical")
+
+        changed_source = {**same_source_candidate, "source_sha256": "changed-source"}
+        changed = build_current_main_verifications.merge_match_records(
+            [verified], [changed_source]
+        )
+        self.assertEqual(changed[0]["verified_by"], "candidate-not-yet-verified")
 
 
 if __name__ == "__main__":

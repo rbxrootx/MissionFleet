@@ -13331,12 +13331,24 @@ def sha256(path):
 
 
 def merge_match_records(previous, updates):
-    """Replace updated addresses in place and retain all other catalog rows."""
+    """Replace updated rows without discarding still-valid byte-match status."""
     pending = {item["address"].upper(): item for item in updates}
     merged = []
     for item in previous:
         address = item["address"].upper()
-        merged.append(pending.pop(address, item))
+        update = pending.pop(address, None)
+        if update is None:
+            merged.append(item)
+            continue
+        if (
+            update.get("verified_by") == "candidate-not-yet-verified"
+            and item.get("verified_by") == "objdiff-3.8.0-byte-identical"
+            and item.get("source_sha256") == update.get("source_sha256")
+            and item.get("size") == update.get("size")
+            and item.get("segments", []) == update.get("segments", [])
+        ):
+            update = dict(update, verified_by=item["verified_by"])
+        merged.append(update)
     merged.extend(pending.values())
     return merged
 
@@ -15642,6 +15654,10 @@ MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES = ("587E8260",)
 ADDRESSES += MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES)
 
+MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES = ("58875830",)
+ADDRESSES += MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -16142,6 +16158,42 @@ MAIN_PAGEFIGHT_POSITION_BOUNDS_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_PAGEFIGHT_POSITION_BOUNDS_EVIDENCE)
+
+MAIN_PAGEFIGHT_CONTROL_LAYOUT_EVIDENCE = {
+    "58875830": {
+        "name_in_analysis": "FUN_58875830 / PageFight control-layout state helper",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a call from byte-matched "
+            "FUN_587FD890 at 0x587FE0D8. The matched caller is slot +0x0C of "
+            "the RTTI-backed CPageFightOn_ControlMenuScreen vtable at "
+            "0x5899D180. Its original pseudocode calls this helper with mode "
+            "1 only when receiver +0x218E8 is zero and +0x105A2 is not 7, then "
+            "sets +0x218E8 to 1. Ten more call sites across four other "
+            "currently unmatched functions pass modes 0, 2, or 3."
+        ),
+        "behavior": (
+            "Both fresh body exports agree on two complete ranges totaling "
+            "639 bytes and 173 instructions: [0x58875830,0x58875859) and "
+            "[0x58875860,0x58875AB6). The helper stores its short mode at "
+            "receiver +0xCC, clears +0xCE, and clears bit 0 in six pointers' "
+            "pointees at +0xAC/+0xB0/+0xB4/+0xB8/+0xBC/+0xC0. Modes 1, 2, and "
+            "3 set bit 0 on different subsets; mode 2 also has a one-time "
+            "+0xC8 transition that changes pointees at +0x54/+0x58 and "
+            "+0x6C/+0x70. Mode 0 clears selected +0x6C/+0x70 and +0x84/+0x88 "
+            "bits. Its 20 direct calls target only the byte-matched "
+            "FUN_58902CE0 and FUN_58902D20 helpers, which propagate scalar "
+            "values through flagged child lists."
+        ),
+        "uncertainty": (
+            "The pointed-to object types, meaning of active bit 0, user-facing "
+            "names for modes 0 through 3, purpose of receiver +0xC8, and visual "
+            "meaning of values written through +0x28/+0x2C are not established. "
+            "Ten incoming call sites are in four still-unmatched functions. "
+            "No live PageFight visual or emulator test has been performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PAGEFIGHT_CONTROL_LAYOUT_EVIDENCE)
 
 
 if __name__ == "__main__":

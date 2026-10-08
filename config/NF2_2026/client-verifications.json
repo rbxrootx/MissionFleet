@@ -451348,6 +451348,179 @@
         "behavior": "Both fresh body exports agree on one complete 815-byte range (212 instructions). The helper gates on receiver mode/flags and a global state, then samples the global position at +4/+8. It sets four direction bits in receiver +0x3A8 and adjusts position fields +0x1052C/+0x10530 by receiver speed +0x104CC, with limits derived from map geometry through +0x10524. It copies two map values to +0x10464/+0x10468 and, when an optional tracked object at +0x10558 is within the observed interior bounds, follows its coordinate changes using +0x10BB8/+0x10BBC. The original body contains no call instructions.",
         "uncertainty": "The exact object types, coordinate units, semantic direction-bit names, meaning of the mode/flag fields and global gate, and runtime map-window behavior are inferred from arithmetic and field access. No live PageFight screen or emulator movement test was performed."
       }
+    },
+    {
+      "address": "58875830",
+      "name": "FUN_58875830",
+      "size": 639,
+      "symbol": "_FUN_58875830",
+      "source": "src/client-current/Main/FUN_58875830.cpp",
+      "source_sha256": "60cc6efe9764a653ad1dce878d9d762fd653df7f161ddbba0ac650c7a0339e66",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58875830",
+          "size": 41,
+          "symbol": "_FUN_58875830_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "58875860",
+          "size": 598,
+          "symbol": "_FUN_58875830_segment_01",
+          "relocations": [
+            {
+              "offset": 36,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58875994",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 224,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "58875A40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 327,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 413,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 469,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 497,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 513,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 566,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58875830 / PageFight control-layout state helper",
+        "called_by": "Both fresh Ghidra edge exports record a call from byte-matched FUN_587FD890 at 0x587FE0D8. The matched caller is slot +0x0C of the RTTI-backed CPageFightOn_ControlMenuScreen vtable at 0x5899D180. Its original pseudocode calls this helper with mode 1 only when receiver +0x218E8 is zero and +0x105A2 is not 7, then sets +0x218E8 to 1. Ten more call sites across four other currently unmatched functions pass modes 0, 2, or 3.",
+        "behavior": "Both fresh body exports agree on two complete ranges totaling 639 bytes and 173 instructions: [0x58875830,0x58875859) and [0x58875860,0x58875AB6). The helper stores its short mode at receiver +0xCC, clears +0xCE, and clears bit 0 in six pointers' pointees at +0xAC/+0xB0/+0xB4/+0xB8/+0xBC/+0xC0. Modes 1, 2, and 3 set bit 0 on different subsets; mode 2 also has a one-time +0xC8 transition that changes pointees at +0x54/+0x58 and +0x6C/+0x70. Mode 0 clears selected +0x6C/+0x70 and +0x84/+0x88 bits. Its 20 direct calls target only the byte-matched FUN_58902CE0 and FUN_58902D20 helpers, which propagate scalar values through flagged child lists.",
+        "uncertainty": "The pointed-to object types, meaning of active bit 0, user-facing names for modes 0 through 3, purpose of receiver +0xC8, and visual meaning of values written through +0x28/+0x2C are not established. Ten incoming call sites are in four still-unmatched functions. No live PageFight visual or emulator test has been performed."
+      }
     }
   ]
 }

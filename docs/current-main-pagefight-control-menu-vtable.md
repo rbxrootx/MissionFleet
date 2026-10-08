@@ -50,3 +50,6 @@ message/state behavior are recorded in the
 The same update sequence calls the 815-byte position-and-bounds helper
 `FUN_587E8260` at `0x587FEE0D`; its observed map-window adjustments are
 documented in the [position helper notes](current-main-pagefight-position-bounds.md).
+The screen's one-time setup path also calls the 639-byte control-layout helper
+`FUN_58875830` at `0x587FE0D8`; its mode gates, child-flag updates, and open
+callers are recorded in the [control-layout notes](current-main-pagefight-control-layout.md).
