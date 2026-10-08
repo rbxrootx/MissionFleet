@@ -19258,6 +19258,164 @@ MAIN_TAX_INVESTMENT_UPDATE_EVENT_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_TAX_INVESTMENT_UPDATE_EVENT_EVIDENCE)
 
+MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES = (
+    "58734AC0", "58734B60", "58735DD0", "587367C0", "58748CB0",
+    "5875BC80", "5875E290", "587891A0", "587A5670", "587B0BC0",
+    "587E8690", "588D2CB0", "588D2DB0", "588D31B0", "588D3830",
+)
+ADDRESSES += MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES)
+
+MAIN_SHELL_MAP_OBJECT_UPDATE_CALL_EDGES = ROOT / (
+    "config/NF2_2026/current-main-shell-map-object-update-call-edges.tsv"
+)
+MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS = {
+    address: [] for address in MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES
+}
+with MAIN_SHELL_MAP_OBJECT_UPDATE_CALL_EDGES.open(
+        encoding="utf-8", newline="") as stream:
+    for edge in csv.DictReader(stream, delimiter="\t"):
+        # Keep one export for construction; the focused verifier independently
+        # checks that both fresh projects have the same transfer graph.
+        if edge["export"].upper() != "58758EE0" or edge["kind"] != "CALL":
+            continue
+        source = edge["function"].upper()
+        site = edge["site"].upper()
+        target = edge["target"].upper()
+        if source == "588D4300" and target in MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS:
+            MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS[target].append((source, site))
+        if target in MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS:
+            MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS[target].append((source, site))
+
+MAIN_SHELL_MAP_OBJECT_UPDATE_BEHAVIOR = {
+    "58734AC0": (
+        "Initializes a CAASmokeSpriteBundleScreen: delegates base setup, writes "
+        "that class's vtable, invokes a state helper, derives a field from the "
+        "base object's +0x14 value, and initializes the observed count/state "
+        "fields."
+    ),
+    "58734B60": (
+        "Offsets the supplied index by 0x22 except when receiver +0x60 equals "
+        "1, where it uses 0x27. It allocates a 0x58-byte object, looks up a "
+        "bounded 0x40-byte table entry, calls FUN_58734A30 when allocation "
+        "succeeds, stores the result at receiver +0x64, invokes cleanup/state "
+        "helpers, and clears bit 15 of the word at the result's +0x24."
+    ),
+    "58735DD0": (
+        "Scans the selected 0x38-byte record's +0x60 array for its maximum, "
+        "stores that maximum at +0x68 and its square in the record two slots "
+        "later, then may lower +0x6C to the first sample at or above 90% of "
+        "the maximum."
+    ),
+    "587367C0": (
+        "For a valid index in the selected 0x38-byte record, samples two "
+        "values from matched helpers and adjusts that array entry according "
+        "to observed absolute and percentage thresholds. It smooths nearby "
+        "entries over up to seven slots in either direction on selected paths "
+        "and calls FUN_58735DD0 to refresh derived values."
+    ),
+    "58748CB0": (
+        "Initializes an object through FUN_58731C60 and then writes the "
+        "CAutoFadeSpriteDataScreen vtable pointer."
+    ),
+    "5875BC80": (
+        "Writes fixed constants and copies two 16-bit values from the supplied "
+        "record. It masks two helper-returned values to low bits for fields at "
+        "+0x17C/+0x180 "
+        "and XORs the copied words at +0x11A/+0x11C with 0xAA."
+    ),
+    "5875E290": (
+        "Initializes a CEffectExplodeDamage through FUN_587B7260 with final "
+        "argument 0xFFFFFFFF, clears observed fields +0x50 and +0x60 through "
+        "+0x74, then writes the CEffectExplodeDamage vtable pointer."
+    ),
+    "587891A0": (
+        "Updates four referenced objects through FUN_58902CE0, submits the "
+        "supplied coordinate pair to FUN_58903290, then writes a coordinate "
+        "pair relative to the base object at +0x30 into a four-entry ring "
+        "buffer at +0x60. It scales the stored second coordinate by 117/100, "
+        "advances the index modulo four, and returns the observed arithmetic "
+        "result."
+    ),
+    "587A5670": (
+        "Checks the indexed pointer array at receiver +8 and calls "
+        "FUN_587B0BC0 with the supplied object only when that entry is nonnull."
+    ),
+    "587B0BC0": (
+        "Calls FUN_587891A0 only when the supplied object has a nonzero pointer "
+        "at +0x168."
+    ),
+    "587E8690": (
+        "Requires a nonnull second argument and equality between the first "
+        "argument and the global pointer at +4. It then checks "
+        "FUN_588D66D0's result against 0x40000000 before routing through "
+        "FUN_587A5670."
+    ),
+    "588D2CB0": (
+        "Uses the supplied range values and helper-returned values to allocate a "
+        "variable number of 0x84-byte objects. Each iteration selects a "
+        "bounded table entry, computes nearby coordinates, and calls "
+        "FUN_5876BE10 with the resulting values."
+    ),
+    "588D2DB0": (
+        "Walks the linked object list at global +0x0C. It filters entries by "
+        "FUN_588D66E0, a state word below 3, a nonzero receiver field at +0x1DC, "
+        "and FUN_5876C8D0; surviving entries receive computed coordinates "
+        "and are passed to FUN_587EFD60 with the observed combat/effect "
+        "arguments."
+    ),
+    "588D31B0": (
+        "Converts the supplied coordinates using global scale factors, then "
+        "searches the linked object list under observed mode and state gates. "
+        "It excludes the receiver's current object, applies a team/state check "
+        "on one path and the matched FUN_58775980 predicate, then uses "
+        "FUN_588D6960 for the coordinate test. On success it stores the "
+        "selected pointer at receiver +0x200 and the object's word at +0x350 "
+        "at receiver +0x1E4."
+    ),
+    "588D3830": (
+        "Runs only when receiver +0x74 equals 2 and +0x204 exceeds 2. It "
+        "chooses a count from a helper-returned low bit and +0x204, constructs a "
+        "CEffectExplodeDamage with a bounded resource-table entry, and invokes "
+        "its virtual slot +0x18. It then conditionally allocates two "
+        "FUN_587B7260 objects using observed identifiers 6000 and 6001."
+    ),
+}
+MAIN_SHELL_MAP_OBJECT_UPDATE_UNCERTAINTY = (
+    "The original member names, meanings of most receiver offsets and state "
+    "values, units for sampled coordinates/scalars, identities of resource "
+    "table entries, and server-authoritative outcomes are unresolved. The "
+    "descriptions report observed operations only; no original-client or "
+    "emulator runtime test was performed."
+)
+MAIN_SHELL_MAP_OBJECT_UPDATE_EVIDENCE = {}
+for address in MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES:
+    parents = sorted(set(MAIN_SHELL_MAP_OBJECT_UPDATE_PARENTS[address]))
+    if not parents:
+        raise ValueError(f"Missing Ghidra parent edge for shell-map helper {address}")
+    parent_details = "; ".join(
+        f"FUN_{source.lower()} at 0x{site}" for source, site in parents
+    )
+    if any(source == "588D4300" for source, _ in parents):
+        called_by = (
+            "The RTTI-identified CShell_MapObjectScreen updater "
+            "FUN_588D4300 calls this helper at " + parent_details + ". Both "
+            "fresh Ghidra exports confirm the edge."
+        )
+    else:
+        called_by = (
+            "The helper is reached through the byte-matched "
+            "CShell_MapObjectScreen update closure: " + parent_details + ". "
+            "Both fresh Ghidra exports confirm the edge."
+        )
+    MAIN_SHELL_MAP_OBJECT_UPDATE_EVIDENCE[address] = {
+        "name_in_analysis": f"FUN_{address.lower()} / shell-map update helper",
+        "called_by": called_by,
+        "behavior": MAIN_SHELL_MAP_OBJECT_UPDATE_BEHAVIOR[address],
+        "uncertainty": MAIN_SHELL_MAP_OBJECT_UPDATE_UNCERTAINTY,
+    }
+EVIDENCE.update(MAIN_SHELL_MAP_OBJECT_UPDATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

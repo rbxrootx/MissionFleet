@@ -57,6 +57,7 @@ from tools import (
     verify_current_main_scroll_text_screen_slot0,
     verify_current_main_scroll_text_screen_slot3,
     verify_current_main_shell_map_object_screen_slot5,
+    verify_current_main_shell_map_object_update_closure,
     verify_current_main_587a6e90_child_flag_helper,
     verify_current_main_58854300_child_bit_update,
     verify_current_main_indexed_child_slot_updates,
@@ -99,8 +100,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_985)
-        self.assertEqual(self.report["measures"]["matched_code"], "2863888")
+        self.assertEqual(self.report["measures"]["matched_functions"], 9_000)
+        self.assertEqual(self.report["measures"]["matched_code"], "2867264")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -111,8 +112,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_852)
-        self.assertEqual(current["measures"]["matched_code"], "1890470")
+        self.assertEqual(current["measures"]["matched_functions"], 2_867)
+        self.assertEqual(current["measures"]["matched_code"], "1893846")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -833,6 +834,27 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("frame count", item["behavior"])
         self.assertIn("final virtual callback contract remain unresolved", item["uncertainty"])
         verify_current_main_shell_map_object_screen_slot5.main()
+
+    def test_shell_map_object_update_helpers_have_exact_rtti_rooted_call_closure(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_SHELL_MAP_OBJECT_UPDATE_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_SHELL_MAP_OBJECT_UPDATE_EVIDENCE
+        )
+        self.assertEqual(len(addresses), 15)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertEqual(
+            set(addresses),
+            {f"{address:08X}"
+             for address in verify_current_main_shell_map_object_update_closure.FUNCTIONS},
+        )
+        self.assertIn("RTTI-identified", evidence["58734AC0"]["called_by"])
+        self.assertIn("+0x200", evidence["588D31B0"]["behavior"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_shell_map_object_update_closure.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (

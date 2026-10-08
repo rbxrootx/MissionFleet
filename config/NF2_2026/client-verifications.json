@@ -483223,6 +483223,1148 @@
         "behavior": "Fresh Ghidra decompilation shows the paired +0x120/+0x21C record selection and rounded-ratio path, using the +0x4C/+0x5C record values and guarded setters. On the selected-record path it routes MESSAGESTRING__DAILY_INVESTMENT_LIMIT through the text formatter, then clears receiver fields at +0xD0/+0xC8, calls matched helpers with zero, and writes observed child fields including a 0xFFFFFF color value.",
         "uncertainty": "The receiver class, record and payload schemas, numeric units/scale, selector meanings, localization callback contracts, and runtime visual effect are unresolved. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "58734AC0",
+      "name": "FUN_58734ac0",
+      "size": 153,
+      "symbol": "_FUN_58734ac0",
+      "source": "src/client-current/Main/FUN_58734ac0.cpp",
+      "source_sha256": "8fd778877bc3445883f1071af3b61e4291353839fd6cacebfa9d1c4c35dfc79f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58734AC0",
+          "size": 153,
+          "symbol": "_FUN_58734ac0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897F488",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5898CA58",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58734ac0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D4999. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Initializes a CAASmokeSpriteBundleScreen: delegates base setup, writes that class's vtable, invokes a state helper, derives a field from the base object's +0x14 value, and initializes the observed count/state fields.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58734B60",
+      "name": "FUN_58734b60",
+      "size": 223,
+      "symbol": "_FUN_58734b60",
+      "source": "src/client-current/Main/FUN_58734b60.cpp",
+      "source_sha256": "3aa01a6e40980221adc762581ccf6dfc7f5eb1b3812c82c1c55a0e72046ee229",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58734B60",
+          "size": 223,
+          "symbol": "_FUN_58734b60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E8AB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "58A246F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58734b60 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D49CE. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Offsets the supplied index by 0x22 except when receiver +0x60 equals 1, where it uses 0x27. It allocates a 0x58-byte object, looks up a bounded 0x40-byte table entry, calls FUN_58734A30 when allocation succeeds, stores the result at receiver +0x64, invokes cleanup/state helpers, and clears bit 15 of the word at the result's +0x24.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58735DD0",
+      "name": "FUN_58735dd0",
+      "size": 135,
+      "symbol": "_FUN_58735dd0",
+      "source": "src/client-current/Main/FUN_58735dd0.cpp",
+      "source_sha256": "d4837dfa89aff9d02aa0e32182aaaf7877209869c781a8fd44ba48d16226a495",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58735DD0",
+          "size": 135,
+          "symbol": "_FUN_58735dd0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58735dd0 / shell-map update helper",
+        "called_by": "The helper is reached through the byte-matched CShell_MapObjectScreen update closure: FUN_587367c0 at 0x5873689B; FUN_587367c0 at 0x5873691F; FUN_587367c0 at 0x587369D6; FUN_587367c0 at 0x58736A0E. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Scans the selected 0x38-byte record's +0x60 array for its maximum, stores that maximum at +0x68 and its square in the record two slots later, then may lower +0x6C to the first sample at or above 90% of the maximum.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587367C0",
+      "name": "FUN_587367c0",
+      "size": 603,
+      "symbol": "_FUN_587367c0",
+      "source": "src/client-current/Main/FUN_587367c0.cpp",
+      "source_sha256": "62da3e69a9014522aeb55d918edfe674add3446c125342cd83e9afcfc15e46af",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587367C0",
+          "size": 603,
+          "symbol": "_FUN_587367c0_segment_00",
+          "relocations": [
+            {
+              "offset": 33,
+              "target_address": "58736A15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "58736A15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "58736A05",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "58735DD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "58736A05",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 352,
+              "target_address": "58735DD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "587369E3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 535,
+              "target_address": "58735DD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 591,
+              "target_address": "58735DD0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587367c0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D4F96; FUN_588d4300 at 0x588D5E87. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "For a valid index in the selected 0x38-byte record, samples two values from matched helpers and adjusts that array entry according to observed absolute and percentage thresholds. It smooths nearby entries over up to seven slots in either direction on selected paths and calls FUN_58735DD0 to refresh derived values.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58748CB0",
+      "name": "FUN_58748cb0",
+      "size": 47,
+      "symbol": "_FUN_58748cb0",
+      "source": "src/client-current/Main/FUN_58748cb0.cpp",
+      "source_sha256": "7aaede891983173fdbe446533bfcb4e5088f8aa6ce534488150f66d3ea4b9e06",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58748CB0",
+          "size": 47,
+          "symbol": "_FUN_58748cb0_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "58731C60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5898CF7C",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58748cb0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D55B0; FUN_588d4300 at 0x588D59A9. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Initializes an object through FUN_58731C60 and then writes the CAutoFadeSpriteDataScreen vtable pointer.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5875BC80",
+      "name": "FUN_5875bc80",
+      "size": 214,
+      "symbol": "_FUN_5875bc80",
+      "source": "src/client-current/Main/FUN_5875bc80.cpp",
+      "source_sha256": "c2d021b69f7ca9a0817b82c987335e4edd6bd9a5eff6671e93e9bfcc0db0f493",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5875BC80",
+          "size": 214,
+          "symbol": "_FUN_5875bc80_segment_00",
+          "relocations": [
+            {
+              "offset": 109,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875bc80 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D6198. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Writes fixed constants and copies two 16-bit values from the supplied record. It masks two helper-returned values to low bits for fields at +0x17C/+0x180 and XORs the copied words at +0x11A/+0x11C with 0xAA.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5875E290",
+      "name": "FUN_5875e290",
+      "size": 87,
+      "symbol": "_FUN_5875e290",
+      "source": "src/client-current/Main/FUN_5875e290.cpp",
+      "source_sha256": "4605894b5f268bc3da02896bdf297133b741101bc366074d80066c20c6563741",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5875E290",
+          "size": 87,
+          "symbol": "_FUN_5875e290_segment_00",
+          "relocations": [
+            {
+              "offset": 48,
+              "target_address": "587B7260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "5898D9DC",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875e290 / shell-map update helper",
+        "called_by": "The helper is reached through the byte-matched CShell_MapObjectScreen update closure: FUN_588d3830 at 0x588D3909. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Initializes a CEffectExplodeDamage through FUN_587B7260 with final argument 0xFFFFFFFF, clears observed fields +0x50 and +0x60 through +0x74, then writes the CEffectExplodeDamage vtable pointer.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587891A0",
+      "name": "FUN_587891a0",
+      "size": 234,
+      "symbol": "_FUN_587891a0",
+      "source": "src/client-current/Main/FUN_587891a0.cpp",
+      "source_sha256": "6762292c9c646acbcd160de82e6bab0367fac9c8db9a00e0a31555674388d2eb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587891A0",
+          "size": 234,
+          "symbol": "_FUN_587891a0_segment_00",
+          "relocations": [
+            {
+              "offset": 40,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587891a0 / shell-map update helper",
+        "called_by": "The helper is reached through the byte-matched CShell_MapObjectScreen update closure: FUN_587b0bc0 at 0x587B0BCA. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Updates four referenced objects through FUN_58902CE0, submits the supplied coordinate pair to FUN_58903290, then writes a coordinate pair relative to the base object at +0x30 into a four-entry ring buffer at +0x60. It scales the stored second coordinate by 117/100, advances the index modulo four, and returns the observed arithmetic result.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587A5670",
+      "name": "FUN_587a5670",
+      "size": 25,
+      "symbol": "_FUN_587a5670",
+      "source": "src/client-current/Main/FUN_587a5670.cpp",
+      "source_sha256": "1c94ff179aea10158eec1883191e22e7d4c10f60d2bfc7d44f446b797b0d9aee",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587A5670",
+          "size": 25,
+          "symbol": "_FUN_587a5670_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "587B0BC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587a5670 / shell-map update helper",
+        "called_by": "The helper is reached through the byte-matched CShell_MapObjectScreen update closure: FUN_587e8690 at 0x587E86C5. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Checks the indexed pointer array at receiver +8 and calls FUN_587B0BC0 with the supplied object only when that entry is nonnull.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587B0BC0",
+      "name": "FUN_587b0bc0",
+      "size": 18,
+      "symbol": "_FUN_587b0bc0",
+      "source": "src/client-current/Main/FUN_587b0bc0.cpp",
+      "source_sha256": "4c929fe567aec8ec17637dc72d8fb3a1b0367d071fe1d834ae643e3621ddb309",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B0BC0",
+          "size": 18,
+          "symbol": "_FUN_587b0bc0_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587891A0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b0bc0 / shell-map update helper",
+        "called_by": "The helper is reached through the byte-matched CShell_MapObjectScreen update closure: FUN_587a5670 at 0x587A5681. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Calls FUN_587891A0 only when the supplied object has a nonzero pointer at +0x168.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "587E8690",
+      "name": "FUN_587e8690",
+      "size": 63,
+      "symbol": "_FUN_587e8690",
+      "source": "src/client-current/Main/FUN_587e8690.cpp",
+      "source_sha256": "f9e3de0075626090d8dc442e218d12ac8a2480c7cb5d84c82235ee0207d7b90f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E8690",
+          "size": 63,
+          "symbol": "_FUN_587e8690_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "588D66D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "587A5670",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e8690 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D5728; FUN_588d4300 at 0x588D5E44. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Requires a nonnull second argument and equality between the first argument and the global pointer at +4. It then checks FUN_588D66D0's result against 0x40000000 before routing through FUN_587A5670.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588D2CB0",
+      "name": "FUN_588d2cb0",
+      "size": 252,
+      "symbol": "_FUN_588d2cb0",
+      "source": "src/client-current/Main/FUN_588d2cb0.cpp",
+      "source_sha256": "505ad8360898820055ad9908f952e3347e8ed29e889698f8796a1adb72fded2a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D2CB0",
+          "size": 252,
+          "symbol": "_FUN_588d2cb0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898924B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 19,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "588D2D96",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58A246F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "5876BE10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "588D2CF2",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d2cb0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D5388. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Uses the supplied range values and helper-returned values to allocate a variable number of 0x84-byte objects. Each iteration selects a bounded table entry, computes nearby coordinates, and calls FUN_5876BE10 with the resulting values.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588D2DB0",
+      "name": "FUN_588d2db0",
+      "size": 293,
+      "symbol": "_FUN_588d2db0",
+      "source": "src/client-current/Main/FUN_588d2db0.cpp",
+      "source_sha256": "89a4277014523f8185455dd08c72f9967c3cfe497f8f95967e69e79f91b55aa2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D2DB0",
+          "size": 293,
+          "symbol": "_FUN_588d2db0_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "588D2ECF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 26,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "588D2EC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "588D2EC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "588D2EC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "5876C8D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "588D2EC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 144,
+              "target_address": "5876BF80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "588D6670",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 265,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "587EFD60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "588D2DC7",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d2db0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D5E5D. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Walks the linked object list at global +0x0C. It filters entries by FUN_588D66E0, a state word below 3, a nonzero receiver field at +0x1DC, and FUN_5876C8D0; surviving entries receive computed coordinates and are passed to FUN_587EFD60 with the observed combat/effect arguments.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588D31B0",
+      "name": "FUN_588d31b0",
+      "size": 480,
+      "symbol": "_FUN_588d31b0",
+      "source": "src/client-current/Main/FUN_588d31b0.cpp",
+      "source_sha256": "44e385797959787b8e0fce773ccf2d7e4c0fd284a37809a3c0339ecfbd01a68a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D31B0",
+          "size": 480,
+          "symbol": "_FUN_588d31b0_segment_00",
+          "relocations": [
+            {
+              "offset": 8,
+              "target_address": "58A244BC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "588D32BC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "588D32BC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 214,
+              "target_address": "58775980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "588D6960",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "588D3352",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 264,
+              "target_address": "588D3232",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 269,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "588D3349",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 291,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 363,
+              "target_address": "58775980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 394,
+              "target_address": "588D6960",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d31b0 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D4EC5. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Converts the supplied coordinates using global scale factors, then searches the linked object list under observed mode and state gates. It excludes the receiver's current object, applies a team/state check on one path and the matched FUN_58775980 predicate, then uses FUN_588D6960 for the coordinate test. On success it stores the selected pointer at receiver +0x200 and the object's word at +0x350 at receiver +0x1E4.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588D3830",
+      "name": "FUN_588d3830",
+      "size": 549,
+      "symbol": "_FUN_588d3830",
+      "source": "src/client-current/Main/FUN_588d3830.cpp",
+      "source_sha256": "ad264b7cb859504fa834dd70670c3e67e14497c4ca5f8e9151d4c6c3fd996d62",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D3830",
+          "size": 549,
+          "symbol": "_FUN_588d3830_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58989291",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "588D3A3F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "588D3A3F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "58A24718",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 199,
+              "target_address": "58A246E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "5875E290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 308,
+              "target_address": "58A24718",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 351,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "58A246E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 392,
+              "target_address": "587B7260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 403,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "58A24718",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 488,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 507,
+              "target_address": "58A246E0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 518,
+              "target_address": "587B7260",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d3830 / shell-map update helper",
+        "called_by": "The RTTI-identified CShell_MapObjectScreen updater FUN_588D4300 calls this helper at FUN_588d4300 at 0x588D545E; FUN_588d4300 at 0x588D5869; FUN_588d4300 at 0x588D5DB3. Both fresh Ghidra exports confirm the edge.",
+        "behavior": "Runs only when receiver +0x74 equals 2 and +0x204 exceeds 2. It chooses a count from a helper-returned low bit and +0x204, constructs a CEffectExplodeDamage with a bounded resource-table entry, and invokes its virtual slot +0x18. It then conditionally allocates two FUN_587B7260 objects using observed identifiers 6000 and 6001.",
+        "uncertainty": "The original member names, meanings of most receiver offsets and state values, units for sampled coordinates/scalars, identities of resource table entries, and server-authoritative outcomes are unresolved. The descriptions report observed operations only; no original-client or emulator runtime test was performed."
+      }
     }
   ]
 }
