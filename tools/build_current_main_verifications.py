@@ -525,6 +525,12 @@ MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES = (
     "588336D0", "588337A0",
 )
 ADDRESSES += MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES
+MAIN_COMMUNICATOR_FORM_TAB_ADDRESSES = (
+    "58753A50", "58753CC0", "58753EA0", "58753EC0", "587540A0",
+    "587B9380", "58829460", "58829690", "588296B0", "58829B40",
+    "58829BE0", "5882A1C0", "5882B040", "5882B340",
+)
+ADDRESSES += MAIN_COMMUNICATOR_FORM_TAB_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     # Fixed-address calls emitted literally by the original eight-slot
@@ -969,6 +975,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_FORM_TAB_ADDRESSES)
 MAIN_MANAGE_FLEET_TAB_ADDRESSES = (
     "58835900", "58834680", "58835370", "58834120", "58834C00",
 )
@@ -21026,6 +21033,37 @@ MAIN_COMMUNICATOR_LEAVE_TAB_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_LEAVE_TAB_EVIDENCE)
+
+MAIN_COMMUNICATOR_FORM_TAB_EVIDENCE = {
+    "58753A50": ("pair lookup reached through FUN_58753EA0", "Scans the pointer range at receiver +0x10 through +0x14, comparing two DWORDs and returning a matching entry or zero."),
+    "58753CC0": ("pair lookup reached through FUN_587540A0; also called at 0x58754D74 and 0x58754EB1", "Scans the pointer range at receiver +0x28 through +0x2C, comparing two DWORDs and returning a matching value or zero."),
+    "58753EA0": ("FUN_588296B0 calls this wrapper at 0x5882986A", "Passes the input pair's two DWORDs to FUN_58753A50."),
+    "58753EC0": ("FUN_588296B0 calls this wrapper at 0x588298C5, 0x58829978, and 0x58829A89", "Passes the input pair's two DWORDs to matched FUN_58753B20."),
+    "587540A0": ("FUN_588296B0 calls this wrapper at 0x588298B0, 0x58829964, and 0x58829A75", "Passes the input pair's two DWORDs to FUN_58753CC0."),
+    "587B9380": ("FUN_5882B340 calls this helper at 0x5882B4C9", "Copies an observed 0x83A-byte buffer, writes a string into it through an indirect function pointer, sends identifier 0x80010F11 through FUN_58970C70, then frees the buffer."),
+    "58829460": ("FUN_58829690 calls this cleanup body at 0x58829693", "Installs the FormTab vtable, destroys non-null child pointers, clears them, and calls the matched base cleanup routine."),
+    "58829690": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x00", "Calls FUN_58829460 and, when the deleting flag has bit zero set, calls FUN_5897CC42; otherwise returns the object pointer."),
+    "588296B0": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x04", "Branches on receiver state bits under mask 0x1F00, reads global values and child fields, and calls the observed pair wrappers and control helpers."),
+    "58829B40": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x08", "For state values 0x0100 or 0x0200 under mask 0x1F00, writes state 0x0400, clears bit one, and invokes an indirect slot +0x18 twice."),
+    "58829BE0": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x10", "Branches on a receiver flag, traverses an observed child chain through an indirect slot +0x10, and dispatches on fields in the supplied event record."),
+    "5882A1C0": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x0C", "When receiver bit two is set, branches on masked state, updates receiver and child state bits, and calls the observed control helpers."),
+    "5882B040": ("FUN_5882B340 calls this helper at 0x5882B3B9", "Checks input lengths through indirect function pointers, calls observed error/message helpers on short inputs, and branches on receiver field +0x60."),
+    "5882B340": ("CPannelCommunicatorConfigFormTab primary vtable slot +0x18", "Dispatches on event value and supplied control pointer; for event 2 it calls FUN_5882B040 for receiver controls +0x8C/+0xAC, or an indirect slot +0x18 for +0x90/+0xB0."),
+}
+MAIN_COMMUNICATOR_FORM_TAB_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address} / FormTab closure",
+        "called_by": context + "; mapped RTTI and the two fresh Ghidra exports anchor this closure.",
+        "behavior": behavior,
+        "uncertainty": (
+            "Control identities, resource text, state and protocol meanings, indirect targets, "
+            "and runtime results remain unverified. FUN_58754E80, which calls FUN_58753CC0, "
+            "is not yet byte-matched; no emulator runtime test was performed."
+        ),
+    }
+    for address, (context, behavior) in MAIN_COMMUNICATOR_FORM_TAB_EVIDENCE.items()
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_FORM_TAB_EVIDENCE)
 
 MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE = {
     "58835900": {

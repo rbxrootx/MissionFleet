@@ -6,9 +6,12 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 9,105 verified matches
-totaling 2,907,269 bytes (21.4432% by functions, 27.7668% by bytes), each at
-100.0% under objdiff 3.8.0. The aircraft fire-control handler and primary
+identified code bytes across six report units. There are 9,119 verified matches
+totaling 2,912,936 bytes (21.4762% by functions, 27.8209% by bytes), each at
+100.0% under objdiff 3.8.0. The FormTab vtable closure adds 14 exact
+functions / 5,667 bytes; its mapped RTTI, 203 direct transfers, and unresolved
+indirect calls are documented in
+[the subsystem note](docs/current-main-communicator-form-tab.md). The aircraft fire-control handler and primary
 vtable remainder cover 14 exact functions / 5,496 bytes; their RTTI, matched
 constructor path, all primary slots, call edges, and unresolved dispatch details
 are documented in

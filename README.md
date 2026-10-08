@@ -9,8 +9,12 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 9,105 matches cover 2,907,269 bytes (21.4432% by functions and
-27.7668% by bytes) and are verified individually at 100.0% by objdiff.
+The current 9,119 matches cover 2,912,936 bytes (21.4762% by functions and
+27.8209% by bytes) and are verified individually at 100.0% by objdiff.
+The RTTI-backed `CPannelCommunicatorConfigFormTab` vtable closure adds 14 exact
+functions / 5,667 bytes across 16 Ghidra ranges. Its constructor path,
+203 direct transfers, and 45 unresolved indirect call sites are recorded in
+[the subsystem evidence](docs/current-main-communicator-form-tab.md).
 The aircraft fire-control panel's handler and primary-vtable remainder now
 cover 14 exact functions / 5,496 bytes; RTTI, the constructor path, all primary
 vtable slots, call edges, and unresolved indirect dispatch details are recorded
