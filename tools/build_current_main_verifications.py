@@ -18629,5 +18629,139 @@ MAIN_CPANEL_DASHBOARD_VTABLE_EVIDENCE = {
 EVIDENCE.update(MAIN_CPANEL_DASHBOARD_VTABLE_EVIDENCE)
 
 
+MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES = (
+    "588F7D00", "588F7E00", "588F7E10", "588FB8E0", "588FD790",
+    "588FDC00", "588FDCF0", "588FDD10", "588FDD30", "588FDDD0",
+    "588FDDF0", "588FE010", "588FE0E0", "588FE460", "588FE9C0",
+    "588FEA10", "588FEA30", "588FEB10", "588FF420", "588FF530",
+)
+ADDRESSES += MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES)
+
+MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE = {
+    "588F7D00": {
+        "name_in_analysis": "FUN_588F7D00 / child-control virtual slot +0x20 thunk",
+        "called_by": "FUN_588FF420 calls this at 0x588FF511 with one of three state values.",
+        "behavior": "Tail-dispatches through the child object's vtable slot +0x20.",
+        "uncertainty": "The child class, virtual target, and meaning of the values 0, 1, and 2 are unresolved.",
+    },
+    "588F7E00": {
+        "name_in_analysis": "FUN_588F7E00 / child low-state clear helper",
+        "called_by": "FUN_588FF530 calls this at 0x588FF5F6 when FUN_588F7E10 reports the child state is 0xF; open FUN_588FF6B0 also calls it at 0x588FF756.",
+        "behavior": "Clears the low four bits of the 16-bit field at the child pointer stored at this+0xA8, offset +0x24.",
+        "uncertainty": "The child type and the interpretation of its low state bits are not established.",
+    },
+    "588F7E10": {
+        "name_in_analysis": "FUN_588F7E10 / child low-state predicate",
+        "called_by": "FUN_588FF530 calls this at 0x588FF5D5 for child items that are not the current selection.",
+        "behavior": "Returns whether the low four bits of the child state word at child+0x24 equal 0xF.",
+        "uncertainty": "The child type and whether state 0xF means hovered, selected, or another visual state remain unknown.",
+    },
+    "588FB8E0": {
+        "name_in_analysis": "FUN_588FB8E0 / page-navigation state helper",
+        "called_by": "FUN_588FD790 calls this at 0x588FD80C after updating the displayed count.",
+        "behavior": "Compares the requested count divided into two-item groups with this+0x90, then calls FUN_588FF420 with state 2 or a boundary-derived 0/1 value.",
+        "uncertainty": "The exact navigation control and visible enabled/disabled appearance are not identified.",
+    },
+    "588FD790": {
+        "name_in_analysis": "FUN_588FD790 / warehouse page count setter",
+        "called_by": "Called by the decrement/increment controls FUN_588FDCF0 and FUN_588FDD10, interaction slot FUN_588FDD30, and row-hit helper FUN_588FE010.",
+        "behavior": "Validates a requested value in the 1..100 range through record helpers; on an accepted change stores it at this+0x90, refreshes child states and page rows, and updates navigation state.",
+        "uncertainty": "The +0x90 value's UI label and the shared 0x18-byte record fields are not fully identified.",
+    },
+    "588FDC00": {
+        "name_in_analysis": "FUN_588FDC00 / CWarehousePageButton destructor body",
+        "called_by": "Deleting-destructor slot wrapper FUN_588FDDD0 calls this at 0x588FDDD3.",
+        "behavior": "Installs the CWarehousePageButton vtable, walks ten pairs of child pointers and four additional child pointers, and invokes their first virtual method before clearing the fields.",
+        "uncertainty": "Child classes and the exact ownership/destruction contract of each pointer are not recovered; six indirect virtual calls remain in this body.",
+    },
+    "588FDCF0": {
+        "name_in_analysis": "FUN_588FDCF0 / decrement page-count control callback",
+        "called_by": "Event slot FUN_588FE460 dispatches here for event type 0x100 and subtype 0x25.",
+        "behavior": "If the value at this+0x60 exceeds 1, calls FUN_588FD790 with that value minus one.",
+        "uncertainty": "The event subtype's user-facing label is unknown.",
+    },
+    "588FDD10": {
+        "name_in_analysis": "FUN_588FDD10 / increment page-count control callback",
+        "called_by": "Event slot FUN_588FE460 dispatches here for event type 0x100 and subtype 0x27.",
+        "behavior": "If the value at this+0x60 is below 100, calls FUN_588FD790 with that value plus one.",
+        "uncertainty": "The event subtype's user-facing label is unknown.",
+    },
+    "588FDD30": {
+        "name_in_analysis": "FUN_588FDD30 / CWarehousePageButton primary-vtable slot +0x18",
+        "called_by": "Referenced by primary-vtable slot +0x18 at 0x589A2354; dispatches click-like input to FUN_588FD790 when param_3 equals 2.",
+        "behavior": "Matches param_2 against four child pointers at this+0xB4..+0xC0; accepted branches change the value at this+0x60 by one or ten, with lower and upper bounds, then refresh through FUN_588FD790.",
+        "uncertainty": "The four child control labels and which branches correspond to each visible page button are not known.",
+    },
+    "588FDDD0": {
+        "name_in_analysis": "FUN_588FDDD0 / CWarehousePageButton deleting-destructor slot +0",
+        "called_by": "Referenced by the class primary-vtable address point at 0x589A233C.",
+        "behavior": "Calls FUN_588FDC00 and invokes the scalar deleting destructor helper when the deletion flag's low bit is set.",
+        "uncertainty": "The allocator's full object-size and delete-flag contract is not inferred from this wrapper alone.",
+    },
+    "588FDDF0": {
+        "name_in_analysis": "FUN_588FDDF0 / warehouse row hover-state update",
+        "called_by": "Event slot FUN_588FE460 calls this at 0x588FE4D9 for event type 0x200.",
+        "behavior": "Tests the input point against rectangles of ten paired row children and four controls; writes 0 or 0xFFFFFFFF to child fields at +0x0C and +0x10 to update hover state.",
+        "uncertainty": "The child-to-row mapping, rectangle coordinate convention, and visual state encoding are unresolved.",
+    },
+    "588FE010": {
+        "name_in_analysis": "FUN_588FE010 / warehouse row hit-test and selection helper",
+        "called_by": "Event slot FUN_588FE460 calls this at 0x588FE4C1 for event type 0x201.",
+        "behavior": "Checks the input point against ten pairs of child rectangles; on a hit derives a one-based row index from this+0x60 and calls FUN_588FD790 with the corresponding item index.",
+        "uncertainty": "The two row-child roles and the meaning of the selected shared record are not established.",
+    },
+    "588FE0E0": {
+        "name_in_analysis": "FUN_588FE0E0 / ten-row warehouse page population",
+        "called_by": "FUN_588FE9C0 calls this after storing the page/count value at this+0x60.",
+        "behavior": "Iterates ten row positions, indexes shared tables using the current page and row, resolves bounded records through a global pointer table, copies six record fields into child objects, and updates four page-control state words at page boundaries.",
+        "uncertainty": "The table schemas, record labels, child types, data units, and rendered text or sprite meanings remain unknown.",
+    },
+    "588FE460": {
+        "name_in_analysis": "FUN_588FE460 / CWarehousePageButton primary-vtable slot +0x10 event handler",
+        "called_by": "Referenced by primary-vtable slot +0x10 at 0x589A234C.",
+        "behavior": "When the control state permits, dispatches an indirect child event and routes observed event types 0x100, 0x200, and 0x201 to decrement/increment, hover, and row-hit helpers.",
+        "uncertainty": "The child event callback target, event names, and higher-level visual/input contract are unresolved; one indirect child dispatch remains.",
+    },
+    "588FE9C0": {
+        "name_in_analysis": "FUN_588FE9C0 / warehouse page selection-state refresh",
+        "called_by": "Called by FUN_588FD790 at 0x588FD7F8, matched caller FUN_588FBEF0 at 0x588FBFC5, and open caller FUN_588FC0D0 at 0x588FC102.",
+        "behavior": "Stores its argument at this+0x60 and repopulates the ten-row display through FUN_588FE0E0.",
+        "uncertainty": "The stored value's precise domain and the meaning of the rows' source records remain uncertain.",
+    },
+    "588FEA10": {
+        "name_in_analysis": "FUN_588FEA10 / bounded warehouse record flag lookup",
+        "called_by": "FUN_588FD790 calls this at 0x588FD7A2 before attempting a selection update.",
+        "behavior": "For indices 1..100, reads a byte flag from a record at a 0x18-byte stride; out-of-range input returns zero.",
+        "uncertainty": "The record base, flag meaning, and whether this is item availability or another gate are not identified.",
+    },
+    "588FEA30": {
+        "name_in_analysis": "FUN_588FEA30 / bounded warehouse record ordering check",
+        "called_by": "FUN_588FD790 calls this at 0x588FD7DC with a four-word value returned by FUN_587950D0.",
+        "behavior": "Validates the record index and flag, then compares packed fields in adjacent 0x18-byte records and returns a byte result used to accept or reject the requested value.",
+        "uncertainty": "The packed fields' schema, comparison ordering, and gameplay meaning are unknown.",
+    },
+    "588FEB10": {
+        "name_in_analysis": "FUN_588FEB10 / bounded warehouse record field lookup",
+        "called_by": "FUN_588FD790 calls this at 0x588FD804 and passes its result to FUN_588FB8E0.",
+        "behavior": "For indices 1..100 whose record flag is nonzero, returns a four-byte field at record offset +0x08; otherwise returns zero.",
+        "uncertainty": "The field's units and its relationship to the two-item navigation grouping have not been recovered.",
+    },
+    "588FF420": {
+        "name_in_analysis": "FUN_588FF420 / page-item state propagation",
+        "called_by": "Called twice by FUN_588FB8E0, and by matched caller FUN_588FBEF0 at 0x588FBFF9.",
+        "behavior": "Stores the requested state at the child record's +0x6C, refreshes a shared helper, scans the current pointer range, compares each record's byte at +0x6A, derives a state from +0x6B, and dispatches it through child virtual slot +0x20.",
+        "uncertainty": "The record fields and virtual callback contract remain unresolved; child dispatch semantics cannot be named from available evidence.",
+    },
+    "588FF530": {
+        "name_in_analysis": "FUN_588FF530 / warehouse selected-item state propagation",
+        "called_by": "Called by FUN_588FD790 at 0x588FD7EF, matched caller FUN_588FBEF0 at 0x588FBFBC, and open caller FUN_588FC0D0 at 0x588FC0F9.",
+        "behavior": "Stores the requested item index at this+0x88, scans the active child-pointer range, sets or clears each child state word according to its item byte and flag at +0x98, and clears stale low-state bits through child helpers.",
+        "uncertainty": "The item identifier, child type, and low-state values' visible interpretation are unresolved.",
+    },
+}
+EVIDENCE.update(MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE)
+
+
 if __name__ == "__main__":
     main()

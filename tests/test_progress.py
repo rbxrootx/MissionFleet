@@ -80,6 +80,7 @@ from tools import (
     verify_current_main_opconvoy_aircraft_update,
     verify_current_main_diplomacy_tab,
     verify_current_main_cpanel_dashboard_vtable,
+    verify_current_main_warehouse_page_button,
 )
 
 
@@ -92,8 +93,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_907)
-        self.assertEqual(self.report["measures"]["matched_code"], "2844424")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_927)
+        self.assertEqual(self.report["measures"]["matched_code"], "2847650")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -104,8 +105,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_774)
-        self.assertEqual(current["measures"]["matched_code"], "1871006")
+        self.assertEqual(current["measures"]["matched_functions"], 2_794)
+        self.assertEqual(current["measures"]["matched_code"], "1874232")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -295,6 +296,17 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("CPanelDashboard vftable", evidence["58810090"]["called_by"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_cpanel_dashboard_vtable.main()
+
+    def test_warehouse_page_button_vtable_has_exact_rtti_and_call_closures(self):
+        addresses = build_current_main_verifications.MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE
+        self.assertEqual(len(addresses), 20)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("slot +0x10", evidence["588FE460"]["name_in_analysis"])
+        self.assertIn("ten row positions", evidence["588FE0E0"]["behavior"])
+        self.assertIn("matched caller FUN_588FBEF0", evidence["588FF530"]["called_by"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_warehouse_page_button.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
