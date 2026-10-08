@@ -42,3 +42,8 @@ behavior remain unresolved.
 The event codes, child object types, coordinate units, resource-selection
 thresholds, and meaning of several state fields remain unresolved. This is
 static byte-match coverage; no runtime fight-screen test has been performed.
+
+The matched slot `+0x0C` update method also calls the 857-byte out-of-field
+ring-out monitor `FUN_587EA6C0` at `0x587FEE19`. Its exact body and observed
+message/state behavior are recorded in the
+[ring-out monitor notes](current-main-pagefight-ringout-monitor.md).

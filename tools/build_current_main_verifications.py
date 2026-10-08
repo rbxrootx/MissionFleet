@@ -15634,6 +15634,10 @@ MAIN_FACTORY_HELP_CLEANUP_ADDRESSES = ("58853230",)
 ADDRESSES += MAIN_FACTORY_HELP_CLEANUP_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_FACTORY_HELP_CLEANUP_ADDRESSES)
 
+MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES = ("587EA6C0",)
+ADDRESSES += MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -16065,6 +16069,42 @@ MAIN_FACTORY_HELP_CLEANUP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_FACTORY_HELP_CLEANUP_EVIDENCE)
+
+MAIN_PAGEFIGHT_RINGOUT_MONITOR_EVIDENCE = {
+    "587EA6C0": {
+        "name_in_analysis": "FUN_587EA6C0 / PageFight out-of-field ring-out monitor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record one incoming direct call from "
+            "the byte-matched FUN_587FD890 at 0x587FEE19. The caller is the "
+            "RTTI-backed CPageFightOn_ControlMenuScreen update method at slot "
+            "+0x0C of vtable 0x5899D180, and reloads ECX from ESI immediately "
+            "before the call. Both exports contain no other incoming direct-call "
+            "site for this helper."
+        ),
+        "behavior": (
+            "Both fresh Ghidra exports agree on one complete 857-byte range "
+            "(215 instructions). The body gates on a current-player pointer, "
+            "FUN_588D66E0() == 0x40000000, receiver flags at +0x10474, and a "
+            "25-update counter. It compares current-player coordinates at +4/+8 "
+            "against dimensions from receiver +0x10524 with mode-dependent "
+            "margins. The out-of-field branch formats the mapped keys "
+            "MESSAGESTRING__XX_WILL_RINGOUT and "
+            "MESSAGESTRING__XX_HAS_BEEN_OUT_FROM_FIELD, updates receiver state "
+            "including bit 0x20000000 at +0x10474, and calls matched "
+            "FUN_587B9760 and FUN_587315F0. Its 11 direct calls target seven "
+            "already byte-matched functions; callback and vtable calls remain "
+            "indirect."
+        ),
+        "uncertainty": (
+            "The object and coordinate types, mode values, units and source of "
+            "the boundary margins, meaning of the +0x104EC/+0x104F0 state, "
+            "message callback contract, and gameplay effects are not fully "
+            "established. The code is statically mapped and byte-matched; no live "
+            "battle or emulator comparison was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PAGEFIGHT_RINGOUT_MONITOR_EVIDENCE)
 
 
 if __name__ == "__main__":

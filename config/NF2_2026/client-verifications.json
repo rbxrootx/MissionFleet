@@ -450978,6 +450978,257 @@
         "behavior": "Both fresh body exports agree on two complete ranges totaling 817 bytes and 288 instructions. The current Ghidra decompilation writes CPannelFireControl::vftable to the receiver, then repeatedly checks child pointers, calls each nonnull child's first vtable entry with argument 1, and clears the pointer field. The loops cover observed pointer groups and a 32-entry sequence. One direct call at 0x5885354B reaches the already byte-matched FUN_58902C10; child release transfers are indirect virtual calls.",
         "uncertainty": "The exact identities and ownership contracts of the child fields, the relationship between CPannelFactoryHelp and the installed CPannelFireControl vtable, and the virtual release targets are not established. The helper's runtime teardown effects and visual impact were not tested in the emulator."
       }
+    },
+    {
+      "address": "587EA6C0",
+      "name": "FUN_587ea6c0",
+      "size": 857,
+      "symbol": "_FUN_587ea6c0",
+      "source": "src/client-current/Main/FUN_587ea6c0.cpp",
+      "source_sha256": "2d3d11befaeee7086a7d95bbd239917a153c73900e610c5c356d6ba819b3f387",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EA6C0",
+          "size": 857,
+          "symbol": "_FUN_587ea6c0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 21,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "587EA9FE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "588D66E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587EA9FE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "587EA9FE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "587EA9F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "587EA979",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "587EA901",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "5899BE40",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 401,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 452,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 457,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 528,
+              "target_address": "587CC700",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 544,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 555,
+              "target_address": "58A245A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 609,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 673,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 689,
+              "target_address": "587B9760",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 706,
+              "target_address": "5899BFD8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 712,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 727,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 751,
+              "target_address": "5890BD90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 757,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 766,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 795,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 816,
+              "target_address": "587EA7BB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 826,
+              "target_address": "587EA7BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 846,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587EA6C0 / PageFight out-of-field ring-out monitor",
+        "called_by": "Both fresh Ghidra edge exports record one incoming direct call from the byte-matched FUN_587FD890 at 0x587FEE19. The caller is the RTTI-backed CPageFightOn_ControlMenuScreen update method at slot +0x0C of vtable 0x5899D180, and reloads ECX from ESI immediately before the call. Both exports contain no other incoming direct-call site for this helper.",
+        "behavior": "Both fresh Ghidra exports agree on one complete 857-byte range (215 instructions). The body gates on a current-player pointer, FUN_588D66E0() == 0x40000000, receiver flags at +0x10474, and a 25-update counter. It compares current-player coordinates at +4/+8 against dimensions from receiver +0x10524 with mode-dependent margins. The out-of-field branch formats the mapped keys MESSAGESTRING__XX_WILL_RINGOUT and MESSAGESTRING__XX_HAS_BEEN_OUT_FROM_FIELD, updates receiver state including bit 0x20000000 at +0x10474, and calls matched FUN_587B9760 and FUN_587315F0. Its 11 direct calls target seven already byte-matched functions; callback and vtable calls remain indirect.",
+        "uncertainty": "The object and coordinate types, mode values, units and source of the boundary margins, meaning of the +0x104EC/+0x104F0 state, message callback contract, and gameplay effects are not fully established. The code is statically mapped and byte-matched; no live battle or emulator comparison was performed."
+      }
     }
   ]
 }
