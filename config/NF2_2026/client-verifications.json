@@ -486500,7 +486500,7 @@
         "name_in_analysis": "FUN_5885a460 / CPannelFireControlAddOnAircraft event handler",
         "called_by": "The mapped RTTI complete-object locator at 0x5899EA10 identifies CPannelFireControlAddOnAircraft; its vtable slot at 0x5899EA24 points to this method at offset +0x10. Two independent fresh Ghidra body and edge exports agree on the exact 1,494-byte body, all direct calls, and the vtable data reference.",
         "behavior": "Dispatches records selected by their +4 event identifier and +8 command. The body handles identifiers 0x100, 0x101, 0x102, and 0x20A; updates receiver state and eight indexed item slots; calls the four matched helpers in this closure; and in two branches builds a four-byte payload passed to matched FUN_587E5A70 with identifier 0x16. It also walks a child list using an indirect virtual call at vtable offset +0x10, and has three additional indirect calls at 0x5885A69D, 0x5885A8E9, and 0x5885A909.",
-        "uncertainty": "The event and command semantics, receiver and eight-slot record layouts, XOR-masked field meanings, 0x16 payload meaning, child virtual-call contract, and contracts for the other three indirect calls are unresolved. RTTI and a vtable slot identify the method but do not establish constructor reachability or runtime behavior; no emulator test was performed. Other open slots in the same class remain outside this five-function closure."
+        "uncertainty": "The event and command semantics, receiver and eight-slot record layouts, XOR-masked field meanings, 0x16 payload meaning, child virtual-call contract, and contracts for the other three indirect calls are unresolved. RTTI and a vtable slot identify the method but do not establish constructor reachability or runtime behavior; no emulator test was performed. The other open primary-vtable methods are covered in the separate aircraft fire-control vtable remainder slice."
       }
     },
     {
@@ -486809,6 +486809,752 @@
         "called_by": "Called from RTTI-identified FUN_5885A460 at 0x5885A7B5. Two independent fresh Ghidra exports agree on its exact 584-byte body and direct-call edges.",
         "behavior": "Checks a receiver counter against a threshold after integer division by 1,000. On the passing path it resets indexed state and refreshes related values through matched helper calls.",
         "uncertainty": "The counter units, threshold meaning, indexed state schema, and refresh effects remain unresolved. The Ghidra function-scoped exports do not establish the complete caller set; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58858670",
+      "name": "FUN_58858670",
+      "size": 27,
+      "symbol": "_FUN_58858670",
+      "source": "src/client-current/Main/FUN_58858670.cpp",
+      "source_sha256": "a083be5b92fefa02e6321dd12b3ba30da850a3b3762c090fe84d449ca4877f28",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858670",
+          "size": 21,
+          "symbol": "_FUN_58858670_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58858030",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58858688",
+          "size": 6,
+          "symbol": "_FUN_58858670_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858670 / aircraft panel deleting-destructor wrapper",
+        "called_by": "This is slot +0x00 of the mapped CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two independent fresh Ghidra exports place its exact two body ranges at 0x58858670 and 0x58858688; it directly calls derived destructor FUN_58858030 at 0x58858673.",
+        "behavior": "Calls FUN_58858030 and, when delete flag bit 0 is set, calls the matched operator-delete helper FUN_5897CC42. The complete emitted instruction stream covers both Ghidra body ranges (21 and 6 bytes).",
+        "uncertainty": "The caller-specific delete flag contract and the full ownership meaning of the derived destructor's child pointers remain unknown. The emitted source reproduces bytes; it does not validate runtime destruction behavior in the emulator."
+      }
+    },
+    {
+      "address": "58858030",
+      "name": "FUN_58858030",
+      "size": 814,
+      "symbol": "_FUN_58858030",
+      "source": "src/client-current/Main/FUN_58858030.cpp",
+      "source_sha256": "eccd1e0bf3f9103b5b2ce18b558dd8766044b40843405e54e8c553a536dac6f2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858030",
+          "size": 814,
+          "symbol": "_FUN_58858030_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589856C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5899EA14",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 790,
+              "target_address": "58857E40",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858030 / aircraft panel derived destructor",
+        "called_by": "Directly called by the RTTI-vtable deleting-destructor wrapper FUN_58858670 at 0x58858673. The mapped primary vtable at 0x5899EA14 identifies this object as CPannelFireControlAddOnAircraft. Two fresh Ghidra body and edge exports agree on its 814-byte body and outgoing calls.",
+        "behavior": "Restores the derived-class vptr, releases and clears owned child pointers through their first virtual methods, then calls the open base destructor FUN_58857E40 at 0x58858345. Ghidra shows 30 indirect child dispatch sites in the destructor.",
+        "uncertainty": "The child pointer types, ownership rules, and all 30 indirect dispatch contracts are unresolved. Exact bytes are verified; destructor side effects have not been tested in the emulator."
+      }
+    },
+    {
+      "address": "58857E40",
+      "name": "FUN_58857e40",
+      "size": 114,
+      "symbol": "_FUN_58857e40",
+      "source": "src/client-current/Main/FUN_58857e40.cpp",
+      "source_sha256": "1c8e5cb4a4950da6aaced4ed8ba318604c9fbf70ba0ce6a32ea3cd20b36251ad",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58857E40",
+          "size": 114,
+          "symbol": "_FUN_58857e40_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589854B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "5899E9D8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "587B5F50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58857E40 / CPannelFireControl base destructor",
+        "called_by": "Directly called by derived destructor FUN_58858030 at 0x58858345. The base vptr set by this function is consistent with CPannelFireControl, the base of the RTTI-identified derived panel. Two fresh Ghidra exports agree on its exact body and direct call.",
+        "behavior": "Installs the base fire-control vptr, releases and clears the child pointer at receiver +0x84 through a virtual call, and invokes matched cleanup helper FUN_587B5F50.",
+        "uncertainty": "The +0x84 child type, its virtual release contract, and the base object's complete field ownership are unresolved. The virtual destination is indirect and runtime destruction is untested."
+      }
+    },
+    {
+      "address": "5885C060",
+      "name": "FUN_5885c060",
+      "size": 228,
+      "symbol": "_FUN_5885c060",
+      "source": "src/client-current/Main/FUN_5885c060.cpp",
+      "source_sha256": "d2ce12459ccbd4f56f5cbd1eb2cebcc9f08e47540400a28a5cd1d1fed0d9f699",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5885C060",
+          "size": 228,
+          "symbol": "_FUN_5885c060_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5885C13C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5885C110",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58A246A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5885C080",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885C060 / aircraft fire-control panel update",
+        "called_by": "This is slot +0x0C of the primary RTTI-identified CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh Ghidra exports agree on its exact 228-byte body and data reference.",
+        "behavior": "When receiver flag bit 4 is set, iterates eight indexed controls, counts down latched per-slot bytes, restores child state and resource fields when a counter expires, clears the latch, then walks a linked child list and dispatches vtable slot +0x0C.",
+        "uncertainty": "The eight indexed slot schema, counter units, global resource threshold and resource-record format, linked-list node type, and indirect callback contract are unresolved. Exact bytes are verified, but update behavior has not been emulator-tested."
+      }
+    },
+    {
+      "address": "5885BAF0",
+      "name": "FUN_5885baf0",
+      "size": 1347,
+      "symbol": "_FUN_5885baf0",
+      "source": "src/client-current/Main/FUN_5885baf0.cpp",
+      "source_sha256": "a645713667ee9be41a2dc32def1c610ed31118a6aa2168c17bde070011185cc3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5885BAF0",
+          "size": 1037,
+          "symbol": "_FUN_5885baf0_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "5885BBF1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 111,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "58858F20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 290,
+              "target_address": "58858F20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 309,
+              "target_address": "5885BEF3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 331,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "588D66D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 379,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 391,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 434,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 450,
+              "target_address": "58858BD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 470,
+              "target_address": "587315C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 490,
+              "target_address": "58793DA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 553,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 567,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 588,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 593,
+              "target_address": "58970AE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 601,
+              "target_address": "5898C3C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 621,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 650,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 763,
+              "target_address": "58859070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 791,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 816,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 825,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 831,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 847,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 967,
+              "target_address": "5885BFB2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 996,
+              "target_address": "588585D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1016,
+              "target_address": "588585D0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5885BF00",
+          "size": 310,
+          "symbol": "_FUN_5885baf0_segment_01",
+          "relocations": [
+            {
+              "offset": 32,
+              "target_address": "588592C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5885C02F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "587E5A70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 242,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5885BAF0 / aircraft fire-control selection handler",
+        "called_by": "This is slot +0x18 of the primary RTTI-identified CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh Ghidra exports agree on its two exact body ranges (1,037 and 310 bytes) and all direct call and data references.",
+        "behavior": "Runs only when param_3 equals 2, matches param_2 against receiver selection ids and indexed values, and handles state cases 1, 2, 4, and 0x10. Some transitions update slot flags, timers and selection state, emit a four-byte payload with matched event helper FUN_587E5A70 using id 0x16, then refresh through FUN_58907990.",
+        "uncertainty": "Formal parameter meanings, selection and layout units, slot-field schemas, the global coordinate fields at +0x1052C/+0x10530, and three indirect call destinations are unresolved. Exact bytes are verified; no input sequence has been exercised in the emulator."
+      }
+    },
+    {
+      "address": "58857F00",
+      "name": "FUN_58857f00",
+      "size": 3,
+      "symbol": "_FUN_58857f00",
+      "source": "src/client-current/Main/FUN_58857f00.cpp",
+      "source_sha256": "a0daa80cf04080b0984b3efffc57e2e5192871bd1bb545750a4678aa39343cd6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58857F00",
+          "size": 3,
+          "symbol": "_FUN_58857f00_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58857F00 / shared empty fire-control vtable method",
+        "called_by": "This three-byte no-op occupies slot +0x20 of the aircraft fire-control primary vtable at 0x5899EA14. Fresh Ghidra data references also show it shared by three other vtables.",
+        "behavior": "Returns immediately without reading or writing state. The complete one-instruction body is the three-byte RET at 0x58857F00.",
+        "uncertainty": "Its virtual method name and why several classes share this no-op are unknown. The mapped behavior is exact; no runtime call path was observed."
+      }
+    },
+    {
+      "address": "58858650",
+      "name": "FUN_58858650",
+      "size": 19,
+      "symbol": "_FUN_58858650",
+      "source": "src/client-current/Main/FUN_58858650.cpp",
+      "source_sha256": "2453793b25a76bd4909efff38cad4fa7d16886411b0ab12075fb0fcd823a4810",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858650",
+          "size": 19,
+          "symbol": "_FUN_58858650_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858650 / XOR-encoded aircraft panel slot accessor",
+        "called_by": "This method occupies slot +0x2C of the primary RTTI-identified CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh Ghidra exports agree on its exact body and vtable reference.",
+        "behavior": "Returns the 32-bit value at receiver +0x8B8 + 4*index XOR 0xAA. The complete body is 19 bytes across four instructions.",
+        "uncertainty": "The indexed field's semantic type and range, and the purpose of the 0xAA encoding, remain unknown. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58858550",
+      "name": "FUN_58858550",
+      "size": 59,
+      "symbol": "_FUN_58858550",
+      "source": "src/client-current/Main/FUN_58858550.cpp",
+      "source_sha256": "c45b2ac48e64576ac30afbc0a8a02d7e9d42a36f1fcdd9c2db12ffbc307ad223",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858550",
+          "size": 59,
+          "symbol": "_FUN_58858550_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "587A1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858550 / increment XOR-encoded panel slot",
+        "called_by": "This method occupies slot +0x30 of the primary RTTI-identified CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh Ghidra exports agree on its exact body and outgoing calls.",
+        "behavior": "Normalizes the selected value through matched FUN_587A1640, increments its decoded value (stored value XOR 0xAA), re-encodes it with XOR 0xAA, and calls matched FUN_587A15E0.",
+        "uncertainty": "The selected field's semantic type, bounds, and intended effect of increment remain unknown. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58858590",
+      "name": "FUN_58858590",
+      "size": 59,
+      "symbol": "_FUN_58858590",
+      "source": "src/client-current/Main/FUN_58858590.cpp",
+      "source_sha256": "79a194a543ace6f89cefdd7783c9fa6adfab8b9297047d92881f27476084dcc7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58858590",
+          "size": 59,
+          "symbol": "_FUN_58858590_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "587A1640",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58A245FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "587A15E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58858590 / decrement XOR-encoded panel slot",
+        "called_by": "This method occupies slot +0x34 of the primary RTTI-identified CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh Ghidra exports agree on its exact body and outgoing calls.",
+        "behavior": "Normalizes the selected value through matched FUN_587A1640, decrements its decoded value (stored value XOR 0xAA), re-encodes it with XOR 0xAA, and calls matched FUN_587A15E0.",
+        "uncertainty": "The selected field's semantic type, bounds, and intended effect of decrement remain unknown. No emulator runtime test was performed."
       }
     }
   ]

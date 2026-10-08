@@ -64,6 +64,7 @@ from tools import (
     verify_current_main_data_file_aggregate,
     verify_current_main_gun_render,
     verify_current_main_fire_control_aircraft,
+    verify_current_main_fire_control_aircraft_vtable,
     verify_current_main_587a6e90_child_flag_helper,
     verify_current_main_58854300_child_bit_update,
     verify_current_main_indexed_child_slot_updates,
@@ -106,8 +107,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 9_017)
-        self.assertEqual(self.report["measures"]["matched_code"], "2875639")
+        self.assertEqual(self.report["measures"]["matched_functions"], 9_026)
+        self.assertEqual(self.report["measures"]["matched_code"], "2878309")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -118,8 +119,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_884)
-        self.assertEqual(current["measures"]["matched_code"], "1902221")
+        self.assertEqual(current["measures"]["matched_functions"], 2_893)
+        self.assertEqual(current["measures"]["matched_code"], "1904891")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -974,6 +975,21 @@ class ProgressReportTests(unittest.TestCase):
             "four-byte", build_current_main_verifications.EVIDENCE["588585D0"]["behavior"]
         )
         verify_current_main_fire_control_aircraft.main()
+
+    def test_fire_control_aircraft_primary_vtable_remainder_matches_all_open_slots(self):
+        addresses = build_current_main_verifications.MAIN_FIRE_CONTROL_AIRCRAFT_VTABLE_ADDRESSES
+        evidence = build_current_main_verifications.EVIDENCE
+        self.assertEqual(
+            addresses,
+            (
+                "58858670", "58858030", "58857E40", "5885C060", "5885BAF0",
+                "58857F00", "58858650", "58858550", "58858590",
+            ),
+        )
+        self.assertTrue(all(evidence[address]["uncertainty"] for address in addresses))
+        self.assertIn("vtable at 0x5899EA14", evidence["5885BAF0"]["called_by"])
+        self.assertIn("30 indirect", evidence["58858030"]["behavior"])
+        verify_current_main_fire_control_aircraft_vtable.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (

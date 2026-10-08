@@ -19784,8 +19784,9 @@ EVIDENCE.update({
             "virtual-call contract, and contracts for the other three indirect "
             "calls are unresolved. RTTI and a vtable slot "
             "identify the method but do not establish constructor reachability "
-            "or runtime behavior; no emulator test was performed. Other open "
-            "slots in the same class remain outside this five-function closure."
+            "or runtime behavior; no emulator test was performed. The other "
+            "open primary-vtable methods are covered in the separate aircraft "
+            "fire-control vtable remainder slice."
         ),
     },
     "588585D0": {
@@ -19862,6 +19863,187 @@ EVIDENCE.update({
             "refresh effects remain unresolved. The Ghidra function-scoped "
             "exports do not establish the complete caller set; no emulator "
             "runtime test was performed."
+        ),
+    },
+})
+
+MAIN_FIRE_CONTROL_AIRCRAFT_VTABLE_ADDRESSES = (
+    "58858670", "58858030", "58857E40", "5885C060", "5885BAF0",
+    "58857F00", "58858650", "58858550", "58858590",
+)
+ADDRESSES += MAIN_FIRE_CONTROL_AIRCRAFT_VTABLE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FIRE_CONTROL_AIRCRAFT_VTABLE_ADDRESSES)
+EVIDENCE.update({
+    "58858670": {
+        "name_in_analysis": "FUN_58858670 / aircraft panel deleting-destructor wrapper",
+        "called_by": (
+            "This is slot +0x00 of the mapped CPannelFireControlAddOnAircraft "
+            "vtable at 0x5899EA14. Two independent fresh Ghidra exports place "
+            "its exact two body ranges at 0x58858670 and 0x58858688; it directly "
+            "calls derived destructor FUN_58858030 at 0x58858673."
+        ),
+        "behavior": (
+            "Calls FUN_58858030 and, when delete flag bit 0 is set, calls the "
+            "matched operator-delete helper FUN_5897CC42. The complete emitted "
+            "instruction stream covers both Ghidra body ranges (21 and 6 bytes)."
+        ),
+        "uncertainty": (
+            "The caller-specific delete flag contract and the full ownership "
+            "meaning of the derived destructor's child pointers remain unknown. "
+            "The emitted source reproduces bytes; it does not validate runtime "
+            "destruction behavior in the emulator."
+        ),
+    },
+    "58858030": {
+        "name_in_analysis": "FUN_58858030 / aircraft panel derived destructor",
+        "called_by": (
+            "Directly called by the RTTI-vtable deleting-destructor wrapper "
+            "FUN_58858670 at 0x58858673. The mapped primary vtable at "
+            "0x5899EA14 identifies this object as "
+            "CPannelFireControlAddOnAircraft. Two fresh Ghidra body and edge "
+            "exports agree on its 814-byte body and outgoing calls."
+        ),
+        "behavior": (
+            "Restores the derived-class vptr, releases and clears owned child "
+            "pointers through their first virtual methods, then calls the open "
+            "base destructor FUN_58857E40 at 0x58858345. Ghidra shows 30 "
+            "indirect child dispatch sites in the destructor."
+        ),
+        "uncertainty": (
+            "The child pointer types, ownership rules, and all 30 indirect "
+            "dispatch contracts are unresolved. Exact bytes are verified; "
+            "destructor side effects have not been tested in the emulator."
+        ),
+    },
+    "58857E40": {
+        "name_in_analysis": "FUN_58857E40 / CPannelFireControl base destructor",
+        "called_by": (
+            "Directly called by derived destructor FUN_58858030 at "
+            "0x58858345. The base vptr set by this function is consistent with "
+            "CPannelFireControl, the base of the RTTI-identified derived panel. "
+            "Two fresh Ghidra exports agree on its exact body and direct call."
+        ),
+        "behavior": (
+            "Installs the base fire-control vptr, releases and clears the child "
+            "pointer at receiver +0x84 through a virtual call, and invokes "
+            "matched cleanup helper FUN_587B5F50."
+        ),
+        "uncertainty": (
+            "The +0x84 child type, its virtual release contract, and the base "
+            "object's complete field ownership are unresolved. The virtual "
+            "destination is indirect and runtime destruction is untested."
+        ),
+    },
+    "5885C060": {
+        "name_in_analysis": "FUN_5885C060 / aircraft fire-control panel update",
+        "called_by": (
+            "This is slot +0x0C of the primary RTTI-identified "
+            "CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh "
+            "Ghidra exports agree on its exact 228-byte body and data reference."
+        ),
+        "behavior": (
+            "When receiver flag bit 4 is set, iterates eight indexed controls, "
+            "counts down latched per-slot bytes, restores child state and "
+            "resource fields when a counter expires, clears the latch, then "
+            "walks a linked child list and dispatches vtable slot +0x0C."
+        ),
+        "uncertainty": (
+            "The eight indexed slot schema, counter units, global resource "
+            "threshold and resource-record format, linked-list node type, and "
+            "indirect callback contract are unresolved. Exact bytes are "
+            "verified, but update behavior has not been emulator-tested."
+        ),
+    },
+    "5885BAF0": {
+        "name_in_analysis": "FUN_5885BAF0 / aircraft fire-control selection handler",
+        "called_by": (
+            "This is slot +0x18 of the primary RTTI-identified "
+            "CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh "
+            "Ghidra exports agree on its two exact body ranges (1,037 and 310 "
+            "bytes) and all direct call and data references."
+        ),
+        "behavior": (
+            "Runs only when param_3 equals 2, matches param_2 against receiver "
+            "selection ids and indexed values, and handles state cases 1, 2, 4, "
+            "and 0x10. Some transitions update slot flags, timers and selection "
+            "state, emit a four-byte payload with matched event helper "
+            "FUN_587E5A70 using id 0x16, then refresh through FUN_58907990."
+        ),
+        "uncertainty": (
+            "Formal parameter meanings, selection and layout units, slot-field "
+            "schemas, the global coordinate fields at +0x1052C/+0x10530, and "
+            "three indirect call destinations are unresolved. Exact bytes are "
+            "verified; no input sequence has been exercised in the emulator."
+        ),
+    },
+    "58857F00": {
+        "name_in_analysis": "FUN_58857F00 / shared empty fire-control vtable method",
+        "called_by": (
+            "This three-byte no-op occupies slot +0x20 of the aircraft "
+            "fire-control primary vtable at 0x5899EA14. Fresh Ghidra data "
+            "references also show it shared by three other vtables."
+        ),
+        "behavior": (
+            "Returns immediately without reading or writing state. The complete "
+            "one-instruction body is the three-byte RET at 0x58857F00."
+        ),
+        "uncertainty": (
+            "Its virtual method name and why several classes share this no-op "
+            "are unknown. The mapped behavior is exact; no runtime call path "
+            "was observed."
+        ),
+    },
+    "58858650": {
+        "name_in_analysis": "FUN_58858650 / XOR-encoded aircraft panel slot accessor",
+        "called_by": (
+            "This method occupies slot +0x2C of the primary RTTI-identified "
+            "CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh "
+            "Ghidra exports agree on its exact body and vtable reference."
+        ),
+        "behavior": (
+            "Returns the 32-bit value at receiver +0x8B8 + 4*index XOR 0xAA. "
+            "The complete body is 19 bytes across four instructions."
+        ),
+        "uncertainty": (
+            "The indexed field's semantic type and range, and the purpose of "
+            "the 0xAA encoding, remain unknown. No emulator runtime test was "
+            "performed."
+        ),
+    },
+    "58858550": {
+        "name_in_analysis": "FUN_58858550 / increment XOR-encoded panel slot",
+        "called_by": (
+            "This method occupies slot +0x30 of the primary RTTI-identified "
+            "CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh "
+            "Ghidra exports agree on its exact body and outgoing calls."
+        ),
+        "behavior": (
+            "Normalizes the selected value through matched FUN_587A1640, "
+            "increments its decoded value (stored value XOR 0xAA), re-encodes "
+            "it with XOR 0xAA, and calls matched FUN_587A15E0."
+        ),
+        "uncertainty": (
+            "The selected field's semantic type, bounds, and intended effect "
+            "of increment remain unknown. No emulator runtime test was "
+            "performed."
+        ),
+    },
+    "58858590": {
+        "name_in_analysis": "FUN_58858590 / decrement XOR-encoded panel slot",
+        "called_by": (
+            "This method occupies slot +0x34 of the primary RTTI-identified "
+            "CPannelFireControlAddOnAircraft vtable at 0x5899EA14. Two fresh "
+            "Ghidra exports agree on its exact body and outgoing calls."
+        ),
+        "behavior": (
+            "Normalizes the selected value through matched FUN_587A1640, "
+            "decrements its decoded value (stored value XOR 0xAA), re-encodes "
+            "it with XOR 0xAA, and calls matched FUN_587A15E0."
+        ),
+        "uncertainty": (
+            "The selected field's semantic type, bounds, and intended effect "
+            "of decrement remain unknown. No emulator runtime test was "
+            "performed."
         ),
     },
 })

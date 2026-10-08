@@ -6,11 +6,12 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 9,017 verified matches
-totaling 2,875,639 bytes (21.2360% by functions, 27.4647% by bytes), each at
-100.0% under objdiff 3.8.0. The aircraft fire-control event handler and four
-direct helpers add five exact functions / 2,826 bytes; their RTTI, event paths,
-call edges, and unresolved dispatch details are documented in
+identified code bytes across six report units. There are 9,026 verified matches
+totaling 2,878,309 bytes (21.2572% by functions, 27.4902% by bytes), each at
+100.0% under objdiff 3.8.0. The aircraft fire-control handler and primary
+vtable remainder cover 14 exact functions / 5,496 bytes; their RTTI, matched
+constructor path, all primary slots, call edges, and unresolved dispatch details
+are documented in
 [the subsystem note](docs/current-main-fire-control-aircraft.md). Five chat
 command routes add 2,146 exact bytes;
 their original strings, caller paths, shared sender helper, and unresolved

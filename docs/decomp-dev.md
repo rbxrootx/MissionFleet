@@ -52,8 +52,8 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 9,017 of 42,461 functions and 2,875,639 of 10,470,324 bytes (21.2360% by
-functions and 27.4647% by bytes); every counted function match is verified at
+credits 9,026 of 42,461 functions and 2,878,309 of 10,470,324 bytes (21.2572% by
+functions and 27.4902% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. The installed-client `CFCManager` file-integrity
 and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
 five-slot vtable, callback route, two record strides, exact file-status strings,
