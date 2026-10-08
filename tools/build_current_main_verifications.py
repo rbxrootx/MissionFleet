@@ -17587,6 +17587,204 @@ MAIN_58776F20_STATE_REFRESH_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_58776F20_STATE_REFRESH_EVIDENCE)
 
+MAIN_CPANNEL_FORCE_LEVEL_UP_ADDRESSES = (
+    "5876CA70", "5876CCC0", "58779A40", "58779B80", "5886FFC0",
+    "58870170", "58870190", "588702B0", "58871290", "58871870",
+    "58871990",
+)
+ADDRESSES += MAIN_CPANNEL_FORCE_LEVEL_UP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CPANNEL_FORCE_LEVEL_UP_ADDRESSES)
+MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE = {
+    "5876CA70": {
+        "name_in_analysis": "FUN_5876ca70 / keyed text copy helper in CPannelForceLevelUp",
+        "called_by": (
+            "FUN_5876CCC0 calls this at 0x5876CD30 with the low five bits of a "
+            "record field and the shared 0x30-byte output buffer."
+        ),
+        "behavior": (
+            "For observed selector cases 1 through 5, copies from corresponding "
+            "mapped text data into the supplied buffer, stopping at a zero byte "
+            "or after eight copied bytes."
+        ),
+        "uncertainty": (
+            "The text table schema, selector meanings, encoding, and caller-visible "
+            "string contract remain unresolved."
+        ),
+    },
+    "5876CCC0": {
+        "name_in_analysis": "FUN_5876ccc0 / indexed record text lookup for CPannelForceLevelUp",
+        "called_by": (
+            "FUN_58870190 calls this twice at 0x5887020B and 0x5887024F; "
+            "byte-matched FUN_5886BA60 also calls it at 0x5886BFAB and "
+            "0x5886C09D."
+        ),
+        "behavior": (
+            "Scans the count at DAT_58A2481C+0x1C through FUN_58778B20, filters "
+            "records by their short at +0x35E, clears a shared 0x30-byte buffer, "
+            "fills its leading text through FUN_5876CA70, copies 0x30 bytes from "
+            "record +0x33C, and returns the buffer or null."
+        ),
+        "uncertainty": (
+            "The record schema, the meaning of the selector and +0x35E value, "
+            "and the shared buffer's ownership and encoding remain unresolved."
+        ),
+    },
+    "58779A40": {
+        "name_in_analysis": "FUN_58779a40 / indexed-table predicate used by CPannelForceLevelUp",
+        "called_by": (
+            "FUN_58871290 calls this at 0x58871481; "
+            "FUN_5877B0F0 and byte-matched FUN_5877B1F0 also call it at "
+            "0x5877B0FA and 0x5877BCCA."
+        ),
+        "behavior": (
+            "Maps the byte at receiver +0x60 to one of eight negative table-row "
+            "offsets, walks up to eight identifiers returned by FUN_58778AD0, "
+            "and returns 1 when a mapped table byte and a record byte comparison "
+            "both pass; otherwise returns 0."
+        ),
+        "uncertainty": (
+            "The identifier and table schemas, row meanings, byte comparison, "
+            "and predicate's gameplay meaning remain unresolved."
+        ),
+    },
+    "58779B80": {
+        "name_in_analysis": "FUN_58779b80 / packed-table predicate used by CPannelForceLevelUp",
+        "called_by": (
+            "FUN_58871290 calls this at 0x58871562; FUN_5877B0F0 and "
+            "byte-matched FUN_5877B1F0 also call it at 0x5877B119 and "
+            "0x5877BD5D."
+        ),
+        "behavior": (
+            "When the receiver's observed low flag bit is set, indexes a packed "
+            "table using receiver fields +0xA4 and +0x5E, walks the bounded "
+            "entry count, compares mapped values, and returns 1 on a match or 0."
+        ),
+        "uncertainty": (
+            "The packed table schema, receiver-field meanings, compared value "
+            "domain, and predicate's gameplay meaning remain unresolved."
+        ),
+    },
+    "5886FFC0": {
+        "name_in_analysis": "FUN_5886ffc0 / CPannelForceLevelUp object cleanup",
+        "called_by": (
+            "The RTTI-backed CPannelForceLevelUp slot-zero wrapper FUN_58870170 "
+            "calls this at 0x58870173."
+        ),
+        "behavior": (
+            "Installs the CPannelForceLevelUp vtable, checks a fixed set of "
+            "object fields, invokes each non-null child's first vtable entry "
+            "with a deletion flag, clears the field, then calls matched "
+            "FUN_58902C10."
+        ),
+        "uncertainty": (
+            "The child object types, ownership rules, indirect destructor targets, "
+            "and the repeated check of field +0x13C remain unresolved."
+        ),
+    },
+    "58870170": {
+        "name_in_analysis": "FUN_58870170 / CPannelForceLevelUp slot-zero destructor wrapper",
+        "called_by": (
+            "The RTTI-backed CPannelForceLevelUp vftable at 0x5899EDF8 stores "
+            "this function in slot +0x00."
+        ),
+        "behavior": (
+            "Calls FUN_5886FFC0, then when the low bit of the second argument "
+            "is set calls matched thunk FUN_5897CC42 with this; it returns this "
+            "on the other path."
+        ),
+        "uncertainty": (
+            "The scalar-deletion flag contract and the indirect callback and "
+            "allocation behavior behind FUN_5897CC42 are not established."
+        ),
+    },
+    "58870190": {
+        "name_in_analysis": "FUN_58870190 / CPannelForceLevelUp record text refresh helper",
+        "called_by": (
+            "FUN_58871290 calls this at 0x58871514 with its selected record."
+        ),
+        "behavior": (
+            "Reads the selected record's byte and short fields, selects a "
+            "global-backed entry when the observed count and pointer checks "
+            "pass, updates a child object, obtains text through FUN_5876CCC0, "
+            "and updates or clears eight associated child text fields."
+        ),
+        "uncertainty": (
+            "The selected-record and child schemas, the meanings of the two "
+            "record fields, and the visible text roles remain unresolved."
+        ),
+    },
+    "588702B0": {
+        "name_in_analysis": "FUN_588702b0 / CPannelForceLevelUp flag-driven child refresh",
+        "called_by": (
+            "FUN_58871290 calls this at 0x58871538 and 0x5887154D with the "
+            "selected record's +0x64 field."
+        ),
+        "behavior": (
+            "Tests observed bits in the supplied 32-bit field, selects "
+            "versioned global entries under their count and pointer guards, "
+            "updates child data and text state, and positions a selected child."
+        ),
+        "uncertainty": (
+            "The bit meanings, versioned table schema, child identities, and "
+            "visible effects remain unresolved."
+        ),
+    },
+    "58871290": {
+        "name_in_analysis": "FUN_58871290 / CPannelForceLevelUp record and row refresh",
+        "called_by": (
+            "RTTI-backed vftable slots +0x0C and +0x18 point to FUN_58871870 "
+            "and FUN_58871990; those methods call this at 0x5887191B and "
+            "0x588719A0 respectively."
+        ),
+        "behavior": (
+            "Consumes one pending record from up to 32 global slots, derives "
+            "indices from record fields +0xF4 and +0xAE, updates two child "
+            "objects from bounded global tables, and selects a row count of "
+            "one or eleven. Its direct closure includes the record predicates, "
+            "text lookup, and child refresh helpers in this evidence group."
+        ),
+        "uncertainty": (
+            "The global and record schemas, table meanings, field semantics, "
+            "row content, event behavior, and indirect child-control effects "
+            "remain unresolved."
+        ),
+    },
+    "58871870": {
+        "name_in_analysis": "FUN_58871870 / CPannelForceLevelUp slot +0x0C state update",
+        "called_by": (
+            "The RTTI-backed CPannelForceLevelUp vftable at 0x5899EDF8 stores "
+            "this function at slot +0x0C."
+        ),
+        "behavior": (
+            "For observed flag states 0x100 or 0x400, moves the field at +0x58 "
+            "toward +0x28 by at most 0x20 per call. At equality it updates "
+            "state bits, may call FUN_58871290, and traverses the linked list "
+            "at +0x3C through each child's vtable slot +0x0C."
+        ),
+        "uncertainty": (
+            "The field meanings and state semantics, linked-node types, indirect "
+            "slot targets, and return-value contract remain unresolved."
+        ),
+    },
+    "58871990": {
+        "name_in_analysis": "FUN_58871990 / CPannelForceLevelUp slot +0x18 conditional refresh",
+        "called_by": (
+            "The RTTI-backed CPannelForceLevelUp vftable at 0x5899EDF8 stores "
+            "this function at slot +0x18."
+        ),
+        "behavior": (
+            "Calls FUN_58871290 only when its third argument equals 2 and its "
+            "second argument equals the receiver field at +0x60; it then "
+            "returns 0 on every path."
+        ),
+        "uncertainty": (
+            "The argument roles, field meaning, and caller event contract "
+            "remain unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

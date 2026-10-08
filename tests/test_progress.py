@@ -75,6 +75,7 @@ from tools import (
     verify_current_main_component_visual_layout,
     verify_current_main_enable_child_event,
     verify_current_main_58776f20_state_refresh,
+    verify_current_main_cpannel_force_level_up,
 )
 
 
@@ -87,8 +88,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_825)
-        self.assertEqual(self.report["measures"]["matched_code"], "2818394")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_836)
+        self.assertEqual(self.report["measures"]["matched_code"], "2823492")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -99,8 +100,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_692)
-        self.assertEqual(current["measures"]["matched_code"], "1844976")
+        self.assertEqual(current["measures"]["matched_functions"], 2_703)
+        self.assertEqual(current["measures"]["matched_code"], "1850074")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -225,6 +226,24 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("greatest", evidence["58737080"]["behavior"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_58776f20_state_refresh.main()
+
+    def test_cpannel_force_level_up_has_exact_rtti_slot_and_call_closure(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_CPANNEL_FORCE_LEVEL_UP_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE
+        )
+        self.assertEqual(len(addresses), 11)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("FUN_58871870", evidence["58871870"]["name_in_analysis"])
+        self.assertIn("+0x0C", evidence["58871870"]["called_by"])
+        self.assertIn("+0x18", evidence["58871990"]["called_by"])
+        self.assertIn("0x13C", evidence["5886FFC0"]["uncertainty"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_cpannel_force_level_up.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
@@ -1336,6 +1355,25 @@ class ProgressReportTests(unittest.TestCase):
         evidence = (
             build_current_main_verifications
             .MAIN_CPANNEL_TRADE_EVENT_EVIDENCE
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_cpannel_force_level_up_closure_has_evidence_for_every_member(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_CPANNEL_FORCE_LEVEL_UP_ADDRESSES
+        )
+        self.assertEqual(len(addresses), 11)
+        self.assertIn("58871870", addresses)
+        self.assertIn("58870170", addresses)
+        self.assertIn("58871990", addresses)
+        evidence = (
+            build_current_main_verifications
+            .MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE
         )
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:
