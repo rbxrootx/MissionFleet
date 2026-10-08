@@ -19491,6 +19491,65 @@ EVIDENCE.update({
     },
 })
 
+MAIN_ESCORT_CARGO_PACKET_ADDRESSES = ("587BACC0", "587B4470")
+ADDRESSES += MAIN_ESCORT_CARGO_PACKET_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_ESCORT_CARGO_PACKET_ADDRESSES)
+EVIDENCE.update({
+    "587BACC0": {
+        "name_in_analysis": "FUN_587bacc0 / escort-cargo message builder",
+        "called_by": (
+            "Byte-matched FUN_587F2DD0 calls this function at 0x587F5304 "
+            "from a loop over the observed linked structure after its "
+            "callback and field checks. The caller also uses FUN_587B4470 "
+            "at 0x587F499B, and this function calls it at 0x587BADA7. Two "
+            "independent fresh Ghidra exports confirm these edges and both "
+            "selected body ranges."
+        ),
+        "behavior": (
+            "Clears a 0x40-byte temporary area and walks 32 two-byte entries. "
+            "For associated entry tags 5, 6 or 13, it writes observed values "
+            "into the corresponding pair, applying XOR 0xAA on the tag-6 and "
+            "tag-13 paths; tag 5 derives its pair from two owner counters and "
+            "an entry's low byte at +0x98. It calls matched FUN_588F4060 and "
+            "FUN_588E9590 with the observed per-entry values. It logs "
+            "'Left Shell Check' details on the tag-5 path and prints "
+            "'Send Escort Ship Cargo' with a 32-by-2 byte table, then calls "
+            "FUN_58970C70 with message identifier 0x8002F007 and a 0x40-byte "
+            "stack payload. Its only open direct callee, FUN_587B4470, returns "
+            "the DWORD at its argument +0x2EC."
+        ),
+        "uncertainty": (
+            "The entry tags, owner and entry schemas, meaning of the values "
+            "at +0x98/+0x2EC and other accessed fields, exact 0x8002F007 "
+            "payload schema, and server-side handling remain unresolved. The "
+            "contracts of FUN_588F4060/FUN_588E9590 and eight indirect calls "
+            "(six through pointer 0x5898C178 and two through 0x5898C3C4) are "
+            "unknown. The description is from fresh Ghidra pseudocode and "
+            "matched caller evidence; no emulator runtime test was performed."
+        ),
+    },
+    "587B4470": {
+        "name_in_analysis": "FUN_587b4470 / field +0x2EC accessor",
+        "called_by": (
+            "Called by byte-matched FUN_587F2DD0 at 0x587F499B and by the "
+            "escort-cargo message builder FUN_587BACC0 at 0x587BADA7. Two "
+            "independent fresh Ghidra exports report these as its direct "
+            "callers; no other direct callers are present in those exports."
+        ),
+        "behavior": (
+            "Returns the DWORD read from param_1 +0x2EC. This 7-byte, two-"
+            "instruction accessor is used by FUN_587BACC0 on its tag-6 path; "
+            "the matched caller FUN_587F2DD0 also consumes its return as a "
+            "byte in its corresponding tag-6 path."
+        ),
+        "uncertainty": (
+            "The input object's type, the meaning or encoding of its +0x2EC "
+            "field, and the role of tag 6 remain unresolved. Both callers "
+            "are byte-matched, but no emulator runtime test was performed."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()
