@@ -131,12 +131,13 @@ bytes. Its fresh Ghidra ranges, paired record path, bounded coefficient-driven
 calculation, lookup tail-jumps, and matched caller chain are checked by a
 focused verifier; schema and metric meaning remain unresolved. See
 [`current-main-80021101-record-metric-helpers.md`](current-main-80021101-record-metric-helpers.md).
-The tax/investment control refresh adds 19 exact functions / 1,196 bytes across 19
-fresh Ghidra ranges. Its 371 instructions, 76 direct-call references, and the
-matched `0x8002311B` / `0x8002312B` callsites are checked by a focused verifier.
-Four other callers remain unmatched, and the control and table meanings and
-emulator visuals remain uncertain. See
-[`current-main-tax-investment-refresh.md`](current-main-tax-investment-refresh.md).
+The tax/investment control refresh covers 19 exact functions / 1,196 bytes, and
+the paired update-event handlers add 10 exact functions / 1,498 bytes. Focused
+verifiers check both fresh Ghidra exports, the `0x8002311B` / `0x8002311C`
+dispatcher paths, and the complete direct-call boundary. Two other refresh
+callers remain unmatched; control labels, table meanings, and emulator visuals
+remain uncertain. See [`current-main-tax-investment-refresh.md`](current-main-tax-investment-refresh.md)
+and [`current-main-tax-investment-update-events.md`](current-main-tax-investment-update-events.md).
 The vtable-labeled `CPannelCommunicatorMemo` constructor adds one exact function
 / 1,081 bytes. Its matched config-memo parent calls it at `0x588403F3`; all 26
 outgoing direct calls resolve to verified functions and match fresh Ghidra

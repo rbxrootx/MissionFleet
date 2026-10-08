@@ -212,7 +212,10 @@ def main():
 
     callers = {int(edge[0], 16) for edge in incoming}
     expected_callers = {0x5882F270, 0x5882F350, 0x58830010, 0x58830280, 0x588C4210}
-    if callers != expected_callers or callers & matched != {0x588C4210}:
+    expected_matched_callers = {
+        0x58830010, 0x58830280, 0x588C4210,
+    }
+    if callers != expected_callers or callers & matched != expected_matched_callers:
         raise AssertionError("The matched and unmatched incoming caller boundary changed")
     matched_parent_edges = {
         edge for edge in incoming if edge[0] == "588C4210"
@@ -250,8 +253,8 @@ def main():
         f"Tax/investment refresh: {len(selected)} byte-identical functions / "
         f"{total_bytes} bytes in {len(manifest)} fresh Ghidra ranges; "
         f"{checked_instructions} instructions and {len(edge_tuples)} direct "
-        "transfers checked; both matched message-event calls and the four "
-        "unmatched caller functions recorded"
+        "transfers checked; the matched dispatcher and paired update-event "
+        "handlers plus two remaining unmatched callers recorded"
     )
 
 

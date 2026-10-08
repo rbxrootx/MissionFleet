@@ -14276,10 +14276,12 @@ for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES:
         called_by = (
             "Byte-verified FUN_588C4210 calls this updater at 0x588C4DB0 in "
             "its 0x8002311B message case and at 0x588C4EC4 in its 0x8002312B "
-            "message case. Four other caller functions are present in fresh "
-            "Ghidra references but remain unmatched: FUN_5882F270, "
-            "FUN_5882F350, FUN_58830010, and FUN_58830280. The focused verifier "
-            "checks all 20 mapped incoming callsites and both matched-parent sites."
+            "message case. Fresh Ghidra references show 18 calls from four "
+            "other functions. The paired event handlers FUN_58830010 and "
+            "FUN_58830280 are now byte-matched and documented in "
+            "current-main-tax-investment-update-events.md; FUN_5882F270 and "
+            "FUN_5882F350 remain unmatched. The focused verifier checks all "
+            "20 mapped incoming callsites and both matched-parent sites."
         )
     elif parents:
         called_by = "Fresh Ghidra direct-call references: " + "; ".join(
@@ -14318,7 +14320,7 @@ for address in MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES:
         "uncertainty": (
             "The receiver class, child-control labels, business meaning of the "
             "table and field offsets, localization arguments, and visible UI "
-            "effect remain unproven. Four additional caller functions are not "
+            "effect remain unproven. FUN_5882F270 and FUN_5882F350 are not "
             "byte-matched, so their triggering paths are unresolved. This is "
             "static installed-client evidence; no emulator runtime test was run."
         ),
@@ -19184,6 +19186,77 @@ MAIN_COMMUNICATOR_USER_STATUS_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_USER_STATUS_EVIDENCE)
+
+MAIN_TAX_INVESTMENT_UPDATE_EVENT_ADDRESSES = (
+    "58785EB0", "58785EE0", "58785F10", "58785F40",
+    "58785F70", "58785FA0", "58786260", "587862C0",
+    "58830010", "58830280",
+)
+ADDRESSES += MAIN_TAX_INVESTMENT_UPDATE_EVENT_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_TAX_INVESTMENT_UPDATE_EVENT_ADDRESSES)
+MAIN_TAX_INVESTMENT_UPDATE_EVENT_EVIDENCE = {
+    "58830010": {
+        "name_in_analysis": "FUN_58830010 / 0x8002311B paired update-event handler",
+        "called_by": "Matched FUN_588C4210 dispatches event 0x8002311B to this method at 0x588C4E93 and 0x588C4F50. Both fresh Ghidra edge exports confirm these calls. The dispatcher passes an observed record identifier and two payload values on the active path and on subtype 3.",
+        "behavior": "Fresh Ghidra decompilation shows a receiver-selected record comparison at +0x120 indexed by the byte at +0x21C. Depending on that comparison, it updates observed nested values through guarded setters, computes a rounded ratio from the supplied value and a scaled nested field, and on the selected-record path routes MESSAGESTRING__DAILY_INVESTMENT_LIMIT through the text formatter. It then clears receiver fields at +0xCC/+0xC4, calls matched helpers with zero, and writes observed child fields including a 0xFFFFFF color value.",
+        "uncertainty": "The receiver class, record and payload schemas, numeric units/scale, selector meanings, localization callback contracts, and runtime visual effect are unresolved. No emulator runtime test was performed.",
+    },
+    "58830280": {
+        "name_in_analysis": "FUN_58830280 / 0x8002311C paired update-event handler",
+        "called_by": "Matched FUN_588C4210 dispatches event 0x8002311C to this method at 0x588C5028 and 0x588C508E. Both fresh Ghidra edge exports confirm these calls. The dispatcher passes an observed record identifier and two payload values on the active path and on subtype 3.",
+        "behavior": "Fresh Ghidra decompilation shows the paired +0x120/+0x21C record selection and rounded-ratio path, using the +0x4C/+0x5C record values and guarded setters. On the selected-record path it routes MESSAGESTRING__DAILY_INVESTMENT_LIMIT through the text formatter, then clears receiver fields at +0xD0/+0xC8, calls matched helpers with zero, and writes observed child fields including a 0xFFFFFF color value.",
+        "uncertainty": "The receiver class, record and payload schemas, numeric units/scale, selector meanings, localization callback contracts, and runtime visual effect are unresolved. No emulator runtime test was performed.",
+    },
+    "58785EB0": {
+        "name_in_analysis": "FUN_58785EB0 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300C9 and 0x588301CC; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x48; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58785EE0": {
+        "name_in_analysis": "FUN_58785EE0 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x58830339 and 0x5883043C; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x4C; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58785F10": {
+        "name_in_analysis": "FUN_58785F10 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300DC and 0x588301DF; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x58; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58785F40": {
+        "name_in_analysis": "FUN_58785F40 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x5883034C and 0x5883044F; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x5C; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58785F70": {
+        "name_in_analysis": "FUN_58785F70 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300B9 and 0x588301BC; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x50; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58785FA0": {
+        "name_in_analysis": "FUN_58785FA0 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x58830329 and 0x5883042C; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x54; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown.",
+    },
+    "58786260": {
+        "name_in_analysis": "FUN_58786260 / scaled nested +0x48 getter",
+        "called_by": "FUN_58830010 calls it at 0x58830070 and 0x58830173; both fresh Ghidra exports confirm the edges.",
+        "behavior": "Returns zero when receiver +8 is null. Otherwise reads nested +0x48, applies the observed negative-value adjustment, multiplies by the mapped global at 0x5898CB38, rounds, and returns the low DWORD of the result.",
+        "uncertainty": "The scale factor's units, rounding contract, nested value meaning, and runtime use are unknown.",
+    },
+    "587862C0": {
+        "name_in_analysis": "FUN_587862C0 / scaled nested +0x4C getter",
+        "called_by": "FUN_58830280 calls it at 0x588302F8 and 0x588303FB; both fresh Ghidra exports confirm the edges.",
+        "behavior": "Returns zero when receiver +8 is null. Otherwise reads nested +0x4C, applies the observed negative-value adjustment, multiplies by the mapped global at 0x5898CB38, rounds, and returns the low DWORD of the result.",
+        "uncertainty": "The scale factor's units, rounding contract, nested value meaning, and runtime use are unknown.",
+    },
+}
+EVIDENCE.update(MAIN_TAX_INVESTMENT_UPDATE_EVENT_EVIDENCE)
 
 
 if __name__ == "__main__":

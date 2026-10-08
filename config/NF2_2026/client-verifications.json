@@ -443449,9 +443449,9 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_5882fc60 / tax-investment UI refresh path",
-        "called_by": "Byte-verified FUN_588C4210 calls this updater at 0x588C4DB0 in its 0x8002311B message case and at 0x588C4EC4 in its 0x8002312B message case. Four other caller functions are present in fresh Ghidra references but remain unmatched: FUN_5882F270, FUN_5882F350, FUN_58830010, and FUN_58830280. The focused verifier checks all 20 mapped incoming callsites and both matched-parent sites.",
+        "called_by": "Byte-verified FUN_588C4210 calls this updater at 0x588C4DB0 in its 0x8002311B message case and at 0x588C4EC4 in its 0x8002312B message case. Fresh Ghidra references show 18 calls from four other functions. The paired event handlers FUN_58830010 and FUN_58830280 are now byte-matched and documented in current-main-tax-investment-update-events.md; FUN_5882F270 and FUN_5882F350 remain unmatched. The focused verifier checks all 20 mapped incoming callsites and both matched-parent sites.",
         "behavior": "Fresh Ghidra output shows this update routine deriving an indexed table entry from FUN_58786480 and global table fields, copying six entry values into the children at receiver offsets +0x70 and +0x74, then refreshing additional child values through accessors. It formats the mapped MESSAGESTRING__TAXUP_REQUIREDPRODUCTIVITY key when the observed input gates pass, and formats MESSAGESTRING__DAILY_INVESTMENT_LIMIT twice with the values returned by two accessors and argument 1,000,000. Other calls forward values to child controls and update callbacks. These observations describe offsets and calls; they do not assign control or gameplay names.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443485,7 +443485,7 @@
         "name_in_analysis": "FUN_58785ea0 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FD8D; FUN_5882fc60 at 0x5882FDA1; FUN_5882fc60 at 0x5882FDC8; FUN_5882fc60 at 0x5882FDE0; FUN_5882fc60 at 0x5882FDED; FUN_5882fc60 at 0x5882FDFD.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x44. The root uses this getter for child-value refresh and the conditional tax-productivity string.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443519,7 +443519,7 @@
         "name_in_analysis": "FUN_58785ed0 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FE2C; FUN_58830010 at 0x588300B0; FUN_58830010 at 0x588301B3.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x48.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443553,7 +443553,7 @@
         "name_in_analysis": "FUN_58785f00 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FE6E; FUN_58830280 at 0x58830320; FUN_58830280 at 0x58830423.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x4C.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443587,7 +443587,7 @@
         "name_in_analysis": "FUN_58785f30 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FE40; FUN_58830010 at 0x588300D1; FUN_58830010 at 0x588300F0; FUN_58830010 at 0x588301D4.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x58.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443621,7 +443621,7 @@
         "name_in_analysis": "FUN_58785f60 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FE82; FUN_58830280 at 0x58830341; FUN_58830280 at 0x58830360; FUN_58830280 at 0x58830444.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x5C.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443655,7 +443655,7 @@
         "name_in_analysis": "FUN_58785f90 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882f270 at 0x5882F2B4; FUN_5882fc60 at 0x5882FEB5; FUN_58830010 at 0x58830047; FUN_58830010 at 0x58830109; FUN_58830010 at 0x5883014A.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x50. The root passes this value to the daily-investment localization formatter with argument 1,000,000.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443689,7 +443689,7 @@
         "name_in_analysis": "FUN_58785fc0 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882f350 at 0x5882F394; FUN_5882fc60 at 0x5882FEEE; FUN_58830280 at 0x588302B7; FUN_58830280 at 0x58830379; FUN_58830280 at 0x588303BA.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x54. The root passes this value to the daily-investment localization formatter with argument 1,000,000.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443742,7 +443742,7 @@
         "name_in_analysis": "FUN_58785fd0 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FD2E.",
         "behavior": "When the pointer at argument +8 is nonnull, reads its DWORD at +0x48, converts and scales it using mapped floating-point globals, rounds it, stores the result at argument +0x0C, and returns it; otherwise returns zero.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443776,7 +443776,7 @@
         "name_in_analysis": "FUN_58786200 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FF22.",
         "behavior": "Returns the 16-bit value at argument +0x34.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443810,7 +443810,7 @@
         "name_in_analysis": "FUN_58786210 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FF39.",
         "behavior": "Returns the 16-bit value at argument +0x36.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443844,7 +443844,7 @@
         "name_in_analysis": "FUN_58786220 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FF50.",
         "behavior": "Returns the 16-bit value at argument +0x38.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443878,7 +443878,7 @@
         "name_in_analysis": "FUN_58786230 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FF67.",
         "behavior": "Returns the 16-bit value at argument +0x3A.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443912,7 +443912,7 @@
         "name_in_analysis": "FUN_58786240 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FF7E.",
         "behavior": "Returns the 16-bit value at argument +0x3C.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443946,7 +443946,7 @@
         "name_in_analysis": "FUN_58786320 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FD68.",
         "behavior": "Returns the nested pointer at argument +8 plus 0x10 when that pointer is nonnull; otherwise returns zero.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -443980,7 +443980,7 @@
         "name_in_analysis": "FUN_58786330 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FD79.",
         "behavior": "Returns the nested pointer at argument +8 plus 0x28 when that pointer is nonnull; otherwise returns zero.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -444014,7 +444014,7 @@
         "name_in_analysis": "FUN_587863b0 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FFAC.",
         "behavior": "Returns the 16-bit value at argument +0x40.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -444048,7 +444048,7 @@
         "name_in_analysis": "FUN_58786430 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FFC3.",
         "behavior": "Returns the 16-bit value at argument +0x42.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -444082,7 +444082,7 @@
         "name_in_analysis": "FUN_58786630 / tax-investment UI refresh path",
         "called_by": "Fresh Ghidra direct-call references: FUN_5882fc60 at 0x5882FCE7.",
         "behavior": "Returns zero when the pointer at argument +8 is null; otherwise returns the DWORD at nested offset +0x40.",
-        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. Four additional caller functions are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
+        "uncertainty": "The receiver class, child-control labels, business meaning of the table and field offsets, localization arguments, and visible UI effect remain unproven. FUN_5882F270 and FUN_5882F350 are not byte-matched, so their triggering paths are unresolved. This is static installed-client evidence; no emulator runtime test was run."
       }
     },
     {
@@ -482434,6 +482434,794 @@
         "called_by": "CPannelCommunicatorConfigPannel method FUN_58844CA0 calls it at 0x58844E1C; both fresh Ghidra projects confirm the edge.",
         "behavior": "For receiver child pointers at offsets +0xDC, +0xE0, +0xE4, +0xE8, and +0xEC, clears the low four bits of each child's 16-bit state at +0x24 while preserving the remaining bits.",
         "uncertainty": "The child-control identities and meanings of the cleared low-nibble states are unknown; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58785EB0",
+      "name": "FUN_58785eb0",
+      "size": 17,
+      "symbol": "_FUN_58785eb0",
+      "source": "src/client-current/Main/FUN_58785eb0.cpp",
+      "source_sha256": "2a5a1b3bf1808633184fc269e0037fc90b8787c86995bf0acbc7f5810d88d69a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785EB0",
+          "size": 17,
+          "symbol": "_FUN_58785eb0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785EB0 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300C9 and 0x588301CC; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x48; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58785EE0",
+      "name": "FUN_58785ee0",
+      "size": 17,
+      "symbol": "_FUN_58785ee0",
+      "source": "src/client-current/Main/FUN_58785ee0.cpp",
+      "source_sha256": "3a1720c2f4236ef23e3bccc284df62e6f100b1b52baba28c83fcf8d8e35a3551",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785EE0",
+          "size": 17,
+          "symbol": "_FUN_58785ee0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785EE0 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x58830339 and 0x5883043C; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x4C; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58785F10",
+      "name": "FUN_58785f10",
+      "size": 17,
+      "symbol": "_FUN_58785f10",
+      "source": "src/client-current/Main/FUN_58785f10.cpp",
+      "source_sha256": "b32cbd42763d71297a7437f6d7baaf4a108c12ac8f0dbbe35983f0d85a08345c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785F10",
+          "size": 17,
+          "symbol": "_FUN_58785f10_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785F10 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300DC and 0x588301DF; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x58; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58785F40",
+      "name": "FUN_58785f40",
+      "size": 17,
+      "symbol": "_FUN_58785f40",
+      "source": "src/client-current/Main/FUN_58785f40.cpp",
+      "source_sha256": "b360e4e63313b06f370c9e178a1640fe170be97ba813b3716a45397316cb9969",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785F40",
+          "size": 17,
+          "symbol": "_FUN_58785f40_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785F40 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x5883034C and 0x5883044F; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x5C; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58785F70",
+      "name": "FUN_58785f70",
+      "size": 17,
+      "symbol": "_FUN_58785f70",
+      "source": "src/client-current/Main/FUN_58785f70.cpp",
+      "source_sha256": "78cc3c2fdb59b0b7692eaa4b712ee7d9030e61a914230f214f9977c7b8db09e6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785F70",
+          "size": 17,
+          "symbol": "_FUN_58785f70_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785F70 / guarded nested-value setter",
+        "called_by": "FUN_58830010 calls it at 0x588300B9 and 0x588301BC; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x50; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58785FA0",
+      "name": "FUN_58785fa0",
+      "size": 17,
+      "symbol": "_FUN_58785fa0",
+      "source": "src/client-current/Main/FUN_58785fa0.cpp",
+      "source_sha256": "b50bf5b52dbad77f8684edc19ccf47ddfefa8c00c036f0a5c67d08cd4a6dbf3a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58785FA0",
+          "size": 17,
+          "symbol": "_FUN_58785fa0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58785FA0 / guarded nested-value setter",
+        "called_by": "FUN_58830280 calls it at 0x58830329 and 0x5883042C; both fresh Ghidra exports confirm the edges.",
+        "behavior": "When the pointer at receiver +8 is nonnull, stores the supplied value at nested offset +0x54; otherwise it performs no write.",
+        "uncertainty": "The receiver and nested-record types, value meaning, ownership, and runtime effect are unknown."
+      }
+    },
+    {
+      "address": "58786260",
+      "name": "FUN_58786260",
+      "size": 81,
+      "symbol": "_FUN_58786260",
+      "source": "src/client-current/Main/FUN_58786260.cpp",
+      "source_sha256": "63712f8c2360780dfdf955a3abdc84d89b236b35584f0106d4b6ea8fe159d52e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786260",
+          "size": 81,
+          "symbol": "_FUN_58786260_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5898CB38",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786260 / scaled nested +0x48 getter",
+        "called_by": "FUN_58830010 calls it at 0x58830070 and 0x58830173; both fresh Ghidra exports confirm the edges.",
+        "behavior": "Returns zero when receiver +8 is null. Otherwise reads nested +0x48, applies the observed negative-value adjustment, multiplies by the mapped global at 0x5898CB38, rounds, and returns the low DWORD of the result.",
+        "uncertainty": "The scale factor's units, rounding contract, nested value meaning, and runtime use are unknown."
+      }
+    },
+    {
+      "address": "587862C0",
+      "name": "FUN_587862c0",
+      "size": 81,
+      "symbol": "_FUN_587862c0",
+      "source": "src/client-current/Main/FUN_587862c0.cpp",
+      "source_sha256": "58465bc4f65a45d048d79808ef7ffb87833a80f6e88dae2f74c8f2b5cba4d241",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587862C0",
+          "size": 81,
+          "symbol": "_FUN_587862c0_segment_00",
+          "relocations": [
+            {
+              "offset": 27,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "5898CB38",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587862C0 / scaled nested +0x4C getter",
+        "called_by": "FUN_58830280 calls it at 0x588302F8 and 0x588303FB; both fresh Ghidra exports confirm the edges.",
+        "behavior": "Returns zero when receiver +8 is null. Otherwise reads nested +0x4C, applies the observed negative-value adjustment, multiplies by the mapped global at 0x5898CB38, rounds, and returns the low DWORD of the result.",
+        "uncertainty": "The scale factor's units, rounding contract, nested value meaning, and runtime use are unknown."
+      }
+    },
+    {
+      "address": "58830010",
+      "name": "FUN_58830010",
+      "size": 617,
+      "symbol": "_FUN_58830010",
+      "source": "src/client-current/Main/FUN_58830010.cpp",
+      "source_sha256": "bdfb71931f4172852fe7d90f5fa3c2d597ef124575736a3e16169774b6eb3ab8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58830010",
+          "size": 617,
+          "symbol": "_FUN_58830010_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58830141",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58785F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "58786260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "58785ED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58785F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58785EB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58785F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58785F10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "58785F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58785F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "5899E054",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "588301FB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "587867E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "58785F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "58786260",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 420,
+              "target_address": "58785ED0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "58785F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 445,
+              "target_address": "58785EB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "58785F30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "58785F10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "587867E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 507,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 519,
+              "target_address": "5890BC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 604,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58830010 / 0x8002311B paired update-event handler",
+        "called_by": "Matched FUN_588C4210 dispatches event 0x8002311B to this method at 0x588C4E93 and 0x588C4F50. Both fresh Ghidra edge exports confirm these calls. The dispatcher passes an observed record identifier and two payload values on the active path and on subtype 3.",
+        "behavior": "Fresh Ghidra decompilation shows a receiver-selected record comparison at +0x120 indexed by the byte at +0x21C. Depending on that comparison, it updates observed nested values through guarded setters, computes a rounded ratio from the supplied value and a scaled nested field, and on the selected-record path routes MESSAGESTRING__DAILY_INVESTMENT_LIMIT through the text formatter. It then clears receiver fields at +0xCC/+0xC4, calls matched helpers with zero, and writes observed child fields including a 0xFFFFFF color value.",
+        "uncertainty": "The receiver class, record and payload schemas, numeric units/scale, selector meanings, localization callback contracts, and runtime visual effect are unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "58830280",
+      "name": "FUN_58830280",
+      "size": 617,
+      "symbol": "_FUN_58830280",
+      "source": "src/client-current/Main/FUN_58830280.cpp",
+      "source_sha256": "2449319e8b7c0da7fa5894f43304062b68ff9062cdcc08c3f7a46d9b585e1549",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58830280",
+          "size": 617,
+          "symbol": "_FUN_58830280_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "588303B1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "58785FC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "587862C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "58785F00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58785FA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58785EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58785F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58785F40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 225,
+              "target_address": "58785F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "58785FC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "5899E054",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "5883046B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 307,
+              "target_address": "587867E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "58785FC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "587862C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 374,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 420,
+              "target_address": "58785F00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "58785FA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 445,
+              "target_address": "58785EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "58785F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "58785F40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 487,
+              "target_address": "587867E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 507,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 519,
+              "target_address": "5890BC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 604,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58830280 / 0x8002311C paired update-event handler",
+        "called_by": "Matched FUN_588C4210 dispatches event 0x8002311C to this method at 0x588C5028 and 0x588C508E. Both fresh Ghidra edge exports confirm these calls. The dispatcher passes an observed record identifier and two payload values on the active path and on subtype 3.",
+        "behavior": "Fresh Ghidra decompilation shows the paired +0x120/+0x21C record selection and rounded-ratio path, using the +0x4C/+0x5C record values and guarded setters. On the selected-record path it routes MESSAGESTRING__DAILY_INVESTMENT_LIMIT through the text formatter, then clears receiver fields at +0xD0/+0xC8, calls matched helpers with zero, and writes observed child fields including a 0xFFFFFF color value.",
+        "uncertainty": "The receiver class, record and payload schemas, numeric units/scale, selector meanings, localization callback contracts, and runtime visual effect are unresolved. No emulator runtime test was performed."
       }
     }
   ]
