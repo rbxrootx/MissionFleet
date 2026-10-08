@@ -17498,6 +17498,36 @@ MAIN_COMPONENT_VISUAL_LAYOUT_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_COMPONENT_VISUAL_LAYOUT_EVIDENCE)
 
+MAIN_ENABLE_CHILD_EVENT_ADDRESSES = ("587A88A0",)
+ADDRESSES += MAIN_ENABLE_CHILD_EVENT_ADDRESSES
+MAIN_ENABLE_CHILD_EVENT_EVIDENCE = {
+    "587A88A0": {
+        "name_in_analysis": "FUN_587a88a0 / EnableChildEvent child-state update",
+        "called_by": (
+            "Byte-matched FUN_587A90D0 calls this at 0x587A9136 after its "
+            "null-event diagnostic check and before switching on the event "
+            "field at +0x74. The assertion does not gate this call."
+        ),
+        "behavior": (
+            "The Ghidra assertion string names EnableChildEvent. When the "
+            "observed event byte at +0x0A is zero, one path marks the event "
+            "byte at +0x27 as 3 and can mark related entries at +0x9C as 3. "
+            "The other path marks one or more entries at +0x9C as 1, can "
+            "mark related entries as 3, sets the event byte at +0x27 to 2, "
+            "and returns 1. All 28 direct calls reach four byte-matched "
+            "functions; 25 are iterator/bounds-check calls to FUN_5897CC72."
+        ),
+        "uncertainty": (
+            "The event and container schemas, field types, meanings of the "
+            "stored values 1/2/3, and state-transition effects are unresolved. "
+            "The assertion string identifies the routine name but does not "
+            "establish the wider caller contract. No live client or emulator "
+            "runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_ENABLE_CHILD_EVENT_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

@@ -73,6 +73,7 @@ from tools import (
     verify_current_main_periodic_selection_state,
     verify_current_main_efsjs_sprite_refresh,
     verify_current_main_component_visual_layout,
+    verify_current_main_enable_child_event,
 )
 
 
@@ -85,8 +86,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_822)
-        self.assertEqual(self.report["measures"]["matched_code"], "2816884")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_823)
+        self.assertEqual(self.report["measures"]["matched_code"], "2817593")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -97,8 +98,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_689)
-        self.assertEqual(current["measures"]["matched_code"], "1843466")
+        self.assertEqual(current["measures"]["matched_functions"], 2_690)
+        self.assertEqual(current["measures"]["matched_code"], "1844175")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -200,6 +201,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("eight child-control flags", item["behavior"])
         self.assertTrue(item["uncertainty"])
         verify_current_main_component_visual_layout.main()
+
+    def test_enable_child_event_has_matched_dispatcher_and_complete_body(self):
+        addresses = build_current_main_verifications.MAIN_ENABLE_CHILD_EVENT_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_ENABLE_CHILD_EVENT_EVIDENCE
+        self.assertEqual(addresses, ("587A88A0",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["587A88A0"]
+        self.assertIn("0x587A9136", item["called_by"])
+        self.assertIn("EnableChildEvent", item["name_in_analysis"])
+        self.assertIn("+0x9C", item["behavior"])
+        self.assertTrue(item["uncertainty"])
+        verify_current_main_enable_child_event.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
