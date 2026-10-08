@@ -15630,6 +15630,10 @@ MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES = ("5884A820",)
 ADDRESSES += MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_ADDRESSES)
 
+MAIN_FACTORY_HELP_CLEANUP_ADDRESSES = ("58853230",)
+ADDRESSES += MAIN_FACTORY_HELP_CLEANUP_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_FACTORY_HELP_CLEANUP_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -16030,6 +16034,37 @@ MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_ID_POINTER_RANGE_UPDATE_EVIDENCE)
+
+MAIN_FACTORY_HELP_CLEANUP_EVIDENCE = {
+    "58853230": {
+        "name_in_analysis": "FUN_58853230 / factory-help child cleanup helper",
+        "called_by": (
+            "Both fresh Ghidra edge exports record one incoming direct call from "
+            "the byte-matched FUN_588536A0 at 0x588536A3. The RTTI-backed "
+            "CPannelFactoryHelp vtable at 0x5899E8E0 points to that wrapper at "
+            "slot +0x38; the wrapper calls this helper before conditionally "
+            "releasing its receiver when the supplied delete flag has bit 0 set."
+        ),
+        "behavior": (
+            "Both fresh body exports agree on two complete ranges totaling 817 "
+            "bytes and 288 instructions. The current Ghidra decompilation writes "
+            "CPannelFireControl::vftable to the receiver, then repeatedly checks "
+            "child pointers, calls each nonnull child's first vtable entry with "
+            "argument 1, and clears the pointer field. The loops cover observed "
+            "pointer groups and a 32-entry sequence. One direct call at "
+            "0x5885354B reaches the already byte-matched FUN_58902C10; child "
+            "release transfers are indirect virtual calls."
+        ),
+        "uncertainty": (
+            "The exact identities and ownership contracts of the child fields, "
+            "the relationship between CPannelFactoryHelp and the installed "
+            "CPannelFireControl vtable, and the virtual release targets are not "
+            "established. The helper's runtime teardown effects and visual impact "
+            "were not tested in the emulator."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_FACTORY_HELP_CLEANUP_EVIDENCE)
 
 
 if __name__ == "__main__":

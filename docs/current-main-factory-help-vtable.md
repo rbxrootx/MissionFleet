@@ -29,3 +29,6 @@ emulator appearance remain unresolved; no in-game behavior test was performed.
 The child-mode selector and its byte-matched direct-call descendants are
 documented in
 [the child-state selection trace](current-main-factory-help-child-state-selection.md).
+The `+0x38` deleting wrapper also calls the 817-byte child cleanup routine
+`FUN_58853230`; its exact mapped ranges and field-release behavior are recorded
+in [the cleanup-helper notes](current-main-factory-help-cleanup-helper.md).
