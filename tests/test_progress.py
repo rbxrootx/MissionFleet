@@ -95,8 +95,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_951)
-        self.assertEqual(self.report["measures"]["matched_code"], "2851637")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_952)
+        self.assertEqual(self.report["measures"]["matched_code"], "2852315")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -107,8 +107,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_818)
-        self.assertEqual(current["measures"]["matched_code"], "1878219")
+        self.assertEqual(current["measures"]["matched_functions"], 2_819)
+        self.assertEqual(current["measures"]["matched_code"], "1878897")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -336,6 +336,32 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(reset_match["size"], 246)
         self.assertEqual(reset_match["verified_by"], "objdiff-3.8.0-byte-identical")
         verify_current_main_warehouse_slot_manager.main()
+
+    def test_scene_update_object_state_helper_matches_complete_ghidra_range(self):
+        address = "5873B6A0"
+        evidence = build_current_main_verifications.EVIDENCE[address]
+        self.assertIn(address, build_current_main_verifications.ADDRESSES)
+        self.assertIn("FUN_588E3AE0", evidence["called_by"])
+        self.assertIn("45-dword or 43-dword", evidence["behavior"])
+        self.assertTrue(evidence["uncertainty"])
+        root = Path(__file__).resolve().parents[1]
+        catalog = json.loads((root / "config/NF2_2026/client-verifications.json").read_text())
+        match = next(item for item in catalog["matches"] if item["address"] == address)
+        source = (root / match["source"]).read_text(encoding="utf-8")
+        self.assertEqual(match["size"], 678)
+        self.assertEqual(match["verified_by"], "objdiff-3.8.0-byte-identical")
+        self.assertEqual(len(match["relocations"]), 9)
+        targets = [item["target_address"] for item in match["relocations"]]
+        self.assertEqual(targets.count("58778E20"), 2)
+        self.assertEqual(targets.count("58778DC0"), 5)
+        self.assertEqual(targets.count("58907360"), 2)
+        verified_addresses = {
+            item["address"] for item in catalog["matches"]
+            if item["verified_by"] == "objdiff-3.8.0-byte-identical"
+        }
+        self.assertTrue({"58778E20", "58778DC0", "58907360"} <= verified_addresses)
+        self.assertIn("_emit", source)
+        self.assertIn("0x5873B6A0 .. +0x2A6 bytes", source)
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

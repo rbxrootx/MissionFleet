@@ -502,6 +502,28 @@ MAIN_NOVICE_HELP_PANEL_ADDRESSES = (
 ADDRESSES += MAIN_NOVICE_HELP_PANEL_ADDRESSES
 
 RELOCATION_OVERRIDES = {
+    # The scene-update helper is emitted as the exact mapped instruction
+    # stream. These fixed-image calls are audited against fresh Ghidra edges.
+    "5873B6A0": [
+        {"offset": 0x7D, "target_address": "58778E20", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0xBC, "target_address": "58778E20", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x11C, "target_address": "58778DC0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x138, "target_address": "58778DC0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x17B, "target_address": "58778DC0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x1EB, "target_address": "58778DC0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x22D, "target_address": "58778DC0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x285, "target_address": "58907360", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x29D, "target_address": "58907360", "kind": "relative",
+         "audit_only": True},
+    ],
     # This function is reconstructed as compiler-generated C++; its target is
     # compared as a single symbol instead of a byte-emitted segment.
     "588F7DF0": [],
@@ -18953,6 +18975,15 @@ MAIN_WAREHOUSE_RESET_CALLER_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_WAREHOUSE_RESET_CALLER_EVIDENCE)
+
+ADDRESSES += ("5873B6A0",)
+SOURCE_COMPILER_ADDRESSES.add("5873B6A0")
+EVIDENCE["5873B6A0"] = {
+    "name_in_analysis": "FUN_5873B6A0 / scene-update object-state helper",
+    "called_by": "Matched FUN_588E3AE0 calls it at 0x588E3DCF with values derived from the current object, state gate, and two boolean conditions; fresh Ghidra references confirm the incoming call.",
+    "behavior": "Selects a shared interface pointer from 0x58A245C4+0x9C or +0xA0, clears fields +0xBE/+0x2D6 on the zero-state path, copies 45-dword or 43-dword blocks from FUN_58778E20/FUN_58778DC0 into object offsets +0x16C/+0xC0 for observed state-byte and +0x2CC combinations, performs interface callbacks through slots +0x2C/+0x34 on gated paths, and finishes through FUN_58907360 with either +0x228 or +0x2D6 data.",
+    "uncertainty": "The object and shared-interface types, state-byte meanings, copied-block schemas, callback contracts, and runtime targets of the indirect vtable calls remain unknown.",
+}
 
 
 if __name__ == "__main__":

@@ -478723,6 +478723,87 @@
         "behavior": "Calls the slot-manager child reset at 0x588FFC9F, resets fields +0x88 through +0x94, clears deque entries while invoking each non-null child's virtual slot 0 with argument 1, then destroys deque storage through FUN_587AEDB0. Six invalid-range paths call FUN_5897CC72.",
         "uncertainty": "The deque ownership contract, child type, callback meaning, and reachability of the invalid-range exception paths remain unresolved."
       }
+    },
+    {
+      "address": "5873B6A0",
+      "name": "FUN_5873b6a0",
+      "size": 678,
+      "symbol": "_FUN_5873b6a0",
+      "source": "src/client-current/Main/FUN_5873b6a0.cpp",
+      "source_sha256": "0a9c497a3c344dc078c29ce8cf432a10d5878ebf6a90cc17892f74d01bf73933",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 125,
+          "target_address": "58778E20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 188,
+          "target_address": "58778E20",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 284,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 312,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 379,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 491,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 557,
+          "target_address": "58778DC0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 645,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 669,
+          "target_address": "58907360",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5873B6A0 / scene-update object-state helper",
+        "called_by": "Matched FUN_588E3AE0 calls it at 0x588E3DCF with values derived from the current object, state gate, and two boolean conditions; fresh Ghidra references confirm the incoming call.",
+        "behavior": "Selects a shared interface pointer from 0x58A245C4+0x9C or +0xA0, clears fields +0xBE/+0x2D6 on the zero-state path, copies 45-dword or 43-dword blocks from FUN_58778E20/FUN_58778DC0 into object offsets +0x16C/+0xC0 for observed state-byte and +0x2CC combinations, performs interface callbacks through slots +0x2C/+0x34 on gated paths, and finishes through FUN_58907360 with either +0x228 or +0x2D6 data.",
+        "uncertainty": "The object and shared-interface types, state-byte meanings, copied-block schemas, callback contracts, and runtime targets of the indirect vtable calls remain unknown."
+      }
     }
   ]
 }
