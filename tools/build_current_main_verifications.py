@@ -16497,6 +16497,65 @@ MAIN_HOTKEYS_INFO_INPUT_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_HOTKEYS_INFO_INPUT_EVIDENCE)
 
+MAIN_HOTKEYS_INFO_DESTRUCTOR_ADDRESSES = ("58876D40", "58876F80")
+ADDRESSES += MAIN_HOTKEYS_INFO_DESTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_HOTKEYS_INFO_DESTRUCTOR_ADDRESSES)
+
+MAIN_HOTKEYS_INFO_DESTRUCTOR_EVIDENCE = {
+    "58876D40": {
+        "name_in_analysis": "FUN_58876D40 / CPannelHotKeysInfo destructor body",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a direct call from "
+            "0x58876F83 in FUN_58876F80. The caller is the RTTI-backed "
+            "CPannelHotKeysInfo vtable slot +0x00 method at 0x5899EFA0."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 269-byte range (93 instructions), "
+            "[0x58876D40,0x58876E4D). The body writes the "
+            "CPannelHotKeysInfo vtable to the receiver. For each non-null "
+            "member pointer at offsets +0x84, +0x88, +0x8C, +0x90, +0x94, "
+            "+0x98, +0x9C, +0xA0, and +0xAC, it dispatches member vtable "
+            "slot 0 with argument 1, then clears the pointer. Seven static "
+            "indirect-call instructions cover those nine fields. It then "
+            "calls matched FUN_587B5F50 as the base cleanup."
+        ),
+        "uncertainty": (
+            "Member object types, the ownership contract of their virtual "
+            "slot-0 calls, the exact base-class identity, and exception-frame "
+            "unwind behavior remain unresolved. The seven indirect call sites "
+            "have dynamic child-vtable targets."
+        ),
+    },
+    "58876F80": {
+        "name_in_analysis": "FUN_58876F80 / CPannelHotKeysInfo deleting destructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EFA0, slot +0x00 of the secondary vtable. Its Complete "
+            "Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHotKeysInfo@@. Neither export records a direct caller."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "two reachable ranges totaling 27 bytes / 10 instructions: "
+            "[0x58876F80,0x58876F95) and [0x58876F98,0x58876F9E). It calls "
+            "FUN_58876D40, tests parameter bit 0, calls matched thunk "
+            "FUN_5897CC42 when that bit is set, and otherwise returns the "
+            "receiver. The raw contiguous wrapper spans 30 bytes; its "
+            "post-call `add esp, 4` at 0x58876F95 is outside the Ghidra body "
+            "ranges after the call is classified as a terminator, so it is "
+            "preserved and checked as an explicit mapped continuation byte "
+            "fragment."
+        ),
+        "uncertainty": (
+            "The ABI meaning of parameter bit 0, the indirect host callback "
+            "target behind FUN_5897CC42, and its object-ownership contract are "
+            "unresolved. The destructor's child vtable targets are dynamic."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_HOTKEYS_INFO_DESTRUCTOR_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
