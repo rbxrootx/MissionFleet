@@ -16243,6 +16243,53 @@ MAIN_PANEL_HELP_UPDATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_PANEL_HELP_UPDATE_EVIDENCE)
 
+MAIN_PANEL_HELP_EVENT_DISPATCH_ADDRESSES = ("58876820",)
+ADDRESSES += MAIN_PANEL_HELP_EVENT_DISPATCH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PANEL_HELP_EVENT_DISPATCH_ADDRESSES)
+
+MAIN_PANEL_HELP_EVENT_DISPATCH_EVIDENCE = {
+    "58876820": {
+        "name_in_analysis": "FUN_58876820 / CPannelHelpScreen event-dispatch method",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EF90 to this method. It is slot +0x10 in the vtable at "
+            "0x5899EF80; the vtable's mapped Complete Object Locator and "
+            "TypeDescriptor identify .?AVCPannelHelpScreen@@. This establishes "
+            "the class and slot association, while runtime calls to the virtual "
+            "method remain indirect."
+        ),
+        "behavior": (
+            "Two independent fresh Ghidra exports and a targeted headless "
+            "decompilation agree on one complete 495-byte range "
+            "[0x58876820,0x58876A0F) containing 136 instructions. With receiver "
+            "+0x24 bit 1 set, the method passes its event argument to children "
+            "beginning at the pointer in receiver +0x3C, through each child's "
+            "vtable slot +0x10; the callback's returned pointer advances the "
+            "walk until it returns to the first child, and a null result returns "
+            "zero. It then checks receiver flags and event fields at argument "
+            "+4/+8, and maps listed event codes to receiver pointer slots at "
+            "+0x5C, +0x6C, +0x74, +0x7C, +0x84, +0x8C, +0x94, +0x9C, or +0xA4. "
+            "For a selected slot it updates receiver +0xC4/+0xC8, marks bit 0 "
+            "in the selected object and its referenced child, and sends observed "
+            "values through matched helpers. Its 11 direct calls target matched "
+            "FUN_58875830 four times, FUN_587315F0 four times, and FUN_58902D20 "
+            "three times. The event-code switch uses the mapped 11-entry table "
+            "at 0x58876A10."
+        ),
+        "uncertainty": (
+            "The event structure's schema, event-code meanings, receiver flag "
+            "semantics, selected control identities, +0xC4/+0xC8 state roles, "
+            "callback return contract, and returned +0x34 value's meaning are "
+            "not established. The child virtual callback at 0x5887684B remains "
+            "unresolved. The indirect switch jump at 0x5887689E has 11 mapped "
+            "internal destinations, but its case labels are not assigned user "
+            "action names. No live client or emulator visual test was performed; "
+            "the source preserves the mapped x86 instruction bytes."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PANEL_HELP_EVENT_DISPATCH_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
