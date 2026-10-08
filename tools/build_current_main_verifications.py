@@ -520,6 +520,11 @@ MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES = (
     "5882F5E0",
 )
 ADDRESSES += MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES
+MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES = (
+    "58753E80", "587B9320", "58833550", "58833640", "58833680",
+    "588336D0", "588337A0",
+)
+ADDRESSES += MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     # Fixed-address calls emitted literally by the original eight-slot
@@ -963,6 +968,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_LEAVE_TAB_ADDRESSES)
 MAIN_MANAGE_FLEET_TAB_ADDRESSES = (
     "58835900", "58834680", "58835370", "58834120", "58834C00",
 )
@@ -20892,6 +20898,134 @@ MAIN_COMMUNICATOR_HARBOR_INFO_TAB_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_HARBOR_INFO_TAB_EVIDENCE)
+
+MAIN_COMMUNICATOR_LEAVE_TAB_EVIDENCE = {
+    "58753E80": {
+        "name_in_analysis": "FUN_58753E80 / LeaveTab constructor value helper wrapper",
+        "called_by": (
+            "Fresh Ghidra references show the matched LeaveTab constructor "
+            "FUN_58833980 calling this wrapper at 0x5883389E. Both fresh body "
+            "and edge exports agree on the 19-byte body and its call to "
+            "FUN_58753980."
+        ),
+        "behavior": (
+            "Forwards the two DWORDs in its input pair to FUN_58753980 and "
+            "returns. The constructor call establishes its use during "
+            "LeaveTab setup, without establishing the fields' semantic names."
+        ),
+        "uncertainty": (
+            "The values carried by the pair and their UI or server meaning "
+            "are not identified by this wrapper."
+        ),
+    },
+    "587B9320": {
+        "name_in_analysis": "FUN_587B9320 / LeaveTab event message wrapper",
+        "called_by": (
+            "Occupies the direct-call closure from the LeaveTab slot +0x18 "
+            "handler FUN_58833680 at 0x58833698. Both fresh exports agree on "
+            "its 30-byte body and direct-call edge."
+        ),
+        "behavior": (
+            "Calls FUN_58970C70 with literal identifier 0x80010F0B, the two "
+            "global values at 0x58A0B4A0 and 0x58A0B4A4, and three zero "
+            "arguments."
+        ),
+        "uncertainty": (
+            "The message identifier's user-facing text, global field meanings, "
+            "and any server-side effect are unknown."
+        ),
+    },
+    "58833550": {
+        "name_in_analysis": "FUN_58833550 / LeaveTab child cleanup body",
+        "called_by": (
+            "Reached from the LeaveTab deleting-destructor slot FUN_588336D0 "
+            "at 0x588336D3. The constructor and primary vtable identify the "
+            "class; both fresh body/edge exports agree on this 237-byte body."
+        ),
+        "behavior": (
+            "Installs the LeaveTab vtable, invokes destruction on non-null "
+            "child pointers stored at receiver offsets +0x64 through +0x80, "
+            "clears those pointers, then calls FUN_58902C10."
+        ),
+        "uncertainty": (
+            "The child object types and ownership policy are not established "
+            "by the cleanup routine."
+        ),
+    },
+    "58833640": {
+        "name_in_analysis": "FUN_58833640 / LeaveTab state transition slot +0x08",
+        "called_by": (
+            "Occupies slot +0x08 in the RTTI-identified LeaveTab primary "
+            "vtable at 0x5899E184. The two fresh Ghidra body and edge exports "
+            "agree on its 56-byte body and absence of direct calls."
+        ),
+        "behavior": (
+            "When the receiver state bits selected by mask 0x1F00 equal "
+            "0x0200, rewrites those bits to 0x0400 and clears bit 1."
+        ),
+        "uncertainty": (
+            "The framework meaning of the encoded states and the reason for "
+            "this transition are unknown."
+        ),
+    },
+    "58833680": {
+        "name_in_analysis": "FUN_58833680 / LeaveTab event handler slot +0x18",
+        "called_by": (
+            "Occupies slot +0x18 in the RTTI-identified LeaveTab primary "
+            "vtable at 0x5899E184. Fresh Ghidra shows one direct call to "
+            "FUN_587B9320; the two exports agree on its 65-byte body."
+        ),
+        "behavior": (
+            "Handles only event value 2. If the supplied control pointer "
+            "matches receiver field +0x7C it calls FUN_587B9320; if it matches "
+            "field +0x80 it invokes a virtual method at offset +0x18 on the "
+            "object stored at receiver +0x30, passing event 62000 and zero. "
+            "The routine returns zero."
+        ),
+        "uncertainty": (
+            "The identities of the controls, indirect callback target, event "
+            "names, and server-authoritative result are unresolved."
+        ),
+    },
+    "588336D0": {
+        "name_in_analysis": "FUN_588336D0 / LeaveTab deleting destructor slot +0x00",
+        "called_by": (
+            "Occupies slot +0x00 in the RTTI-identified LeaveTab primary "
+            "vtable at 0x5899E184. Both fresh exports agree on its two-range, "
+            "27-byte body and call to cleanup FUN_58833550."
+        ),
+        "behavior": (
+            "Calls the child cleanup body, then calls FUN_5897CC42 with the "
+            "object when the deleting flag's low bit is set; otherwise returns "
+            "the object pointer."
+        ),
+        "uncertainty": (
+            "The caller's ownership policy and the meaning of the deleting "
+            "flag are not established here."
+        ),
+    },
+    "588337A0": {
+        "name_in_analysis": "FUN_588337A0 / LeaveTab vtable slot +0x04 routine",
+        "called_by": (
+            "Occupies slot +0x04 in the RTTI-identified LeaveTab primary "
+            "vtable at 0x5899E184. Both fresh Ghidra exports agree on the "
+            "316-byte body and its direct-call edges."
+        ),
+        "behavior": (
+            "Runs only when receiver state bits selected by mask 0x1F00 equal "
+            "0x0500. It rewrites state bits, calls FUN_58731CE0 four times "
+            "with the same address, then conditionally processes the global "
+            "objects at 0x58A0B4A0 and 0x58A0B4A4 through the observed helper "
+            "calls."
+        ),
+        "uncertainty": (
+            "The virtual-slot purpose, referenced resource, meanings of the "
+            "two globals and state values, and indirect callee behavior remain "
+            "unknown; no emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_LEAVE_TAB_EVIDENCE)
 
 MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE = {
     "58835900": {

@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 9,098 verified matches
-totaling 2,906,519 bytes (21.4267% by functions, 27.7596% by bytes), each at
+identified code bytes across six report units. There are 9,105 verified matches
+totaling 2,907,269 bytes (21.4432% by functions, 27.7668% by bytes), each at
 100.0% under objdiff 3.8.0. The aircraft fire-control handler and primary
 vtable remainder cover 14 exact functions / 5,496 bytes; their RTTI, matched
 constructor path, all primary slots, call edges, and unresolved dispatch details
@@ -38,6 +38,11 @@ closure adds 16 exact functions / 3,855 bytes across 17 Ghidra ranges. Its seven
 primary slots, matched constructor route, 62 direct calls to internal or
 matched code, and 46 unresolved indirect calls are checked in
 [the subsystem note](docs/current-main-communicator-config-harbor-info-tab-event-closure.md).
+The RTTI-backed CPannelCommunicatorConfigLeaveTab closure adds seven exact
+functions / 750 bytes across eight Ghidra ranges. Its four open slots, matched
+constructor route, 22 direct transfers, and eight unresolved indirect call
+sites are documented in
+[the subsystem note](docs/current-main-communicator-leave-tab.md).
 The
 five chat command routes add 2,146 exact bytes;
 their original strings, caller paths, shared sender helper, and unresolved
