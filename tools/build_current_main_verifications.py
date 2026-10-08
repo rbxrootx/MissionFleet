@@ -19550,6 +19550,61 @@ EVIDENCE.update({
     },
 })
 
+MAIN_DATA_FILE_AGGREGATE_ADDRESSES = ("58779500", "587793C0")
+ADDRESSES += MAIN_DATA_FILE_AGGREGATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_DATA_FILE_AGGREGATE_ADDRESSES)
+EVIDENCE.update({
+    "58779500": {
+        "name_in_analysis": "FUN_58779500 / data-file value aggregator",
+        "called_by": (
+            "Byte-matched FUN_587F2DD0 calls this function at 0x587F50E1. "
+            "The mapped caller stores its return value at receiver +0x108EC "
+            "at 0x587F5104. Two independent fresh Ghidra body and call-edge "
+            "exports agree on this caller edge and the selected function bodies."
+        ),
+        "behavior": (
+            "Calls FUN_587793C0 fourteen times with data-file names: Armor.Data, "
+            "Hmbpd.Data, Aircraft.Data, Location.Data, FCS.Data, SpecialItem.Data, "
+            "Torpedo.Data, TpLauncher.Data, Engine.Data, Projectile.Data, "
+            "GunSet.Data, Frame.Data, ShipReinforceItem.Data, and ForceInfo.Data. "
+            "Associated mapped strings label these as FleetMission database or "
+            "data files. It returns the sum of the fourteen helper results; the "
+            "matched caller stores that result at +0x108EC."
+        ),
+        "uncertainty": (
+            "The argument and data-structure schemas, helper arithmetic's "
+            "semantic meaning, the role of receiver +0x108EC, and any later "
+            "server-side use remain unknown. The mapped strings show names "
+            "passed to the helper, but do not prove file loading or parsing. "
+            "Evidence is from fresh Ghidra pseudocode, two independent body/edge "
+            "exports, mapped callsites and the matched caller; no emulator "
+            "runtime test was performed."
+        ),
+    },
+    "587793C0": {
+        "name_in_analysis": "FUN_587793C0 / counted byte accumulator",
+        "called_by": (
+            "Called fourteen times by byte-matched FUN_58779500 at the exact "
+            "sites listed in the two fresh Ghidra call-edge exports. Those "
+            "exports show no other direct caller or outgoing call."
+        ),
+        "behavior": (
+            "The fresh Ghidra body walks 0x30 four-byte groups (0xC0 bytes) "
+            "from a supplied pointer and folds byte-derived products into an "
+            "integer accumulator. When a count read through another supplied "
+            "pointer is positive, it also visits a count-times-stride byte span "
+            "from a second pointer and adds those byte-derived values before "
+            "returning the accumulator. The function has no direct callees."
+        ),
+        "uncertainty": (
+            "The decompiler does not recover a reliable formal signature; "
+            "register/stack argument roles, buffer schemas, arithmetic meaning, "
+            "and the returned value's semantics are unresolved. No emulator "
+            "runtime test was performed."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()
