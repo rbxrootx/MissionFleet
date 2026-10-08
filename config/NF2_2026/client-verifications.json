@@ -449638,6 +449638,921 @@
         "behavior": "The exact body is one 18-byte range with four instructions. It stores the supplied value at receiver offset +0x8E8 plus four times the supplied index; it has no outgoing calls.",
         "uncertainty": "The receiver type, index bounds, field schema, stored-value meaning, and runtime effect remain unknown. No emulator test was performed."
       }
+    },
+    {
+      "address": "58749800",
+      "name": "FUN_58749800",
+      "size": 255,
+      "symbol": "_FUN_58749800",
+      "source": "src/client-current/Main/FUN_58749800.cpp",
+      "source_sha256": "801585a7cbc1bfa46db55ebe2d0c866ade6f9a0ff82851eaeba438edaf3ac935",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58749800",
+          "size": 255,
+          "symbol": "_FUN_58749800_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5898CFB4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58749800 / CAutoRouting constructor",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E09A0. The caller's RTTI-backed class identity and constructor are recorded in docs/current-main-ship-map-screen-constructor.md.",
+        "behavior": "The complete 255-byte body (66 instructions) calls the common screen initializer, installs CAutoRouting::vftable, stores its second argument at +0x50, and initializes the observed state fields. It sets two fields to 0x40000000, two to 0xFFFFFFFF, zeros the listed child/state fields, and clears 0x30 bytes at +0xD4. Its two direct callees are byte-matched.",
+        "uncertainty": "The fields, sentinel meanings, constructor argument roles, and CAutoRouting runtime behavior are not established."
+      }
+    },
+    {
+      "address": "58756750",
+      "name": "FUN_58756750",
+      "size": 579,
+      "symbol": "_FUN_58756750",
+      "source": "src/client-current/Main/FUN_58756750.cpp",
+      "source_sha256": "3cf1f4d736a85f642bbbc6d62dac9667c58846c2d07af6bb8a2ffd872d701183",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58756750",
+          "size": 579,
+          "symbol": "_FUN_58756750_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897E91E",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898D6F8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 253,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "5898C55C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 330,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 355,
+              "target_address": "58756804",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 365,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 387,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 423,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 447,
+              "target_address": "5876E510",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 474,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58756750 / CClickDestinationLine constructor",
+        "called_by": "Both fresh Ghidra edge exports record calls from the matched CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E18B1 and 0x588E18F1.",
+        "behavior": "The complete 579-byte body (165 instructions) calls the common screen initializer, installs CClickDestinationLine::vftable, zeros the observed state slots, and creates 32 child objects with CSpriteDataScreen::vftable. It also creates the observed 0x90-byte allocation gate before calling FUN_5876E510 and setting +0x80 in the returned object. All nine direct call sites target byte-matched functions.",
+        "uncertainty": "The child roles, the 32-entry collection's meaning, and the constructor arguments' semantics remain unknown."
+      }
+    },
+    {
+      "address": "5877E440",
+      "name": "FUN_5877e440",
+      "size": 140,
+      "symbol": "_FUN_5877e440",
+      "source": "src/client-current/Main/FUN_5877e440.cpp",
+      "source_sha256": "96172104cbf9597d164a202af766005d1b8005b21690247185991386406d008a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5877E440",
+          "size": 140,
+          "symbol": "_FUN_5877e440_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "589969AC",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877E440 / CFrameRounding constructor",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E121B.",
+        "behavior": "The complete 140-byte body (45 instructions) calls the common screen initializer, installs CFrameRounding::vftable, sets the observed state values, and derives one field from the word at child +0x15 and another field at +0x1D. Its one direct callee is byte-matched.",
+        "uncertainty": "The rounding object's fields, the divisor 0x24's unit, and its visual or runtime purpose are not established."
+      }
+    },
+    {
+      "address": "5877FC60",
+      "name": "FUN_5877fc60",
+      "size": 441,
+      "symbol": "_FUN_5877fc60",
+      "source": "src/client-current/Main/FUN_5877fc60.cpp",
+      "source_sha256": "6ede611baf30fe4352a5b92c11dfb70ffc22383da2507686f042fbca35d667db",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5877FC60",
+          "size": 441,
+          "symbol": "_FUN_5877fc60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5897F5A9",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "58996A08",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 161,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 234,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "5877FCD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 303,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 352,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 376,
+              "target_address": "587B7350",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5877FC60 / CHCB_Airborne constructor",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E3A19.",
+        "behavior": "The complete 441-byte body (136 instructions) calls the common screen initializer, installs CHCB_Airborne::vftable, and creates four children with CSpriteBundleScreen::vftable in a two-iteration loop. It then initializes additional fields and stores the result of FUN_587B7350. All 11 direct call sites target byte-matched functions.",
+        "uncertainty": "The child bundle roles, field meanings, and resource selected by the constructor arguments remain unresolved."
+      }
+    },
+    {
+      "address": "588C08A0",
+      "name": "FUN_588c08a0",
+      "size": 10,
+      "symbol": "_FUN_588c08a0",
+      "source": "src/client-current/Main/FUN_588c08a0.cpp",
+      "source_sha256": "106e9a41747a2bb482378b5c40bf713cf9236b7ea402ffe39f1002efa9240e40",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588C08A0",
+          "size": 10,
+          "symbol": "_FUN_588c08a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588C08A0 / map-screen child field setter",
+        "called_by": "Both fresh Ghidra edge exports record a call from the matched CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E1233. They also record calls from FUN_5877A060 at 0x5877A0ED and FUN_5877A650 at 0x5877A7FB; those two callers are not byte-matched and are outside this subsystem.",
+        "behavior": "The complete 10-byte, three-instruction leaf stores its second argument at receiver +0x78 and returns. It has no outgoing calls.",
+        "uncertainty": "The receiver class, +0x78 field meaning, and the two unmatched callers' behavior remain unknown."
+      }
+    },
+    {
+      "address": "588D8230",
+      "name": "FUN_588d8230",
+      "size": 667,
+      "symbol": "_FUN_588d8230",
+      "source": "src/client-current/Main/FUN_588d8230.cpp",
+      "source_sha256": "82f28e961901bc6d05d26b22af3b19e59c1c35481b14359f1d9c5c5606208970",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D8230",
+          "size": 667,
+          "symbol": "_FUN_588d8230_segment_00",
+          "relocations": [
+            {
+              "offset": 655,
+              "target_address": "588D8310",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D8230 / map-screen record-derived state setup",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E0959.",
+        "behavior": "The complete 667-byte body (184 instructions) reads the record pointer at receiver +0x100C, extracts packed values from record +6, and writes derived scalars and eight groups of scaled values into receiver offsets around +0x42B0, +0x168C, +0x1690, and +0x411C. It has no direct calls.",
+        "uncertainty": "The record format, packed bit meanings, coordinate units, and destination array roles are not established."
+      }
+    },
+    {
+      "address": "588D9D60",
+      "name": "FUN_588d9d60",
+      "size": 171,
+      "symbol": "_FUN_588d9d60",
+      "source": "src/client-current/Main/FUN_588d9d60.cpp",
+      "source_sha256": "e004df7506d383d9a6e4bc2b758ef91de4efa5e83bc866e3bd350b531a9d2ebb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D9D60",
+          "size": 171,
+          "symbol": "_FUN_588d9d60_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898947B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58A246DC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "587B7350",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "587B7350",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588D9D60 / map-screen indexed resource selection",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E0A3D.",
+        "behavior": "The complete 171-byte body (55 instructions) allocates a 0x20-byte object, obtains an index, bounds-checks that index against a global table, calls FUN_587B7350 with the selected entry or zero, and stores the result at receiver +0x604C. Its three direct callees are byte-matched.",
+        "uncertainty": "The global table's record type, index policy, and resource handle meaning are unknown."
+      }
+    },
+    {
+      "address": "588DA5F0",
+      "name": "FUN_588da5f0",
+      "size": 758,
+      "symbol": "_FUN_588da5f0",
+      "source": "src/client-current/Main/FUN_588da5f0.cpp",
+      "source_sha256": "89636681ad82c28592996d56c3b7db5a2c87d2631efc3a5735f576354a57e19c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DA5F0",
+          "size": 758,
+          "symbol": "_FUN_588da5f0_segment_00",
+          "relocations": [
+            {
+              "offset": 402,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588DA5F0 / map-screen state initialization",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E07CF.",
+        "behavior": "The complete 758-byte body (146 instructions) initializes the screen's observed scalar fields, writes sentinel values including 0x40000000 and 0xAAAAAAAA, and clears three storage regions of 0x200, 0x180, and 0x6C0 bytes. If receiver +0x100C is non-null, it derives a value from the record's word at +0x0C. Its three direct callees are byte-matched.",
+        "uncertainty": "The initialized fields, sentinels, region layouts, and record value's meaning are not established."
+      }
+    },
+    {
+      "address": "588DA8F0",
+      "name": "FUN_588da8f0",
+      "size": 238,
+      "symbol": "_FUN_588da8f0",
+      "source": "src/client-current/Main/FUN_588da8f0.cpp",
+      "source_sha256": "3dfd53305da09d3bc4df9a812afba252401a8d2a81671e6e155103721a0ad002",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DA8F0",
+          "size": 238,
+          "symbol": "_FUN_588da8f0_segment_00",
+          "relocations": [
+            {
+              "offset": 208,
+              "target_address": "588DA903",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588DA8F0 / map-screen child-state flag aggregation",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E0954.",
+        "behavior": "The complete 238-byte body (61 instructions) inspects four pointer slots in each of eight repeated groups, checks corresponding receiver bytes for each non-empty string, ORs 0x10 or 0x20 into a byte at +0x60AD, then copies that result to +0x60AC and +0x60BA. It has no direct calls.",
+        "uncertainty": "The group entries, string roles, state-byte meanings, and the visible effect of these flags are unknown."
+      }
+    },
+    {
+      "address": "588DAD30",
+      "name": "FUN_588dad30",
+      "size": 720,
+      "symbol": "_FUN_588dad30",
+      "source": "src/client-current/Main/FUN_588dad30.cpp",
+      "source_sha256": "529139bf5413a2d607170e1727d4307f8febb56b10176e0b09bd14aeecc4b6d8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DAD30",
+          "size": 720,
+          "symbol": "_FUN_588dad30_segment_00",
+          "relocations": [
+            {
+              "offset": 188,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 355,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 379,
+              "target_address": "588DAF98",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 407,
+              "target_address": "588DAF7A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "5876BFA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 574,
+              "target_address": "588DAECD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 608,
+              "target_address": "588DAEBD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 710,
+              "target_address": "588DAE70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 716,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588DAD30 / map-screen derived mask generation",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E0B20.",
+        "behavior": "The complete 720-byte body (217 instructions) derives dimensions from packed bits in the record at receiver +0x100C, allocates and zeros a square byte grid, then builds 36 additional grids. The inner loops transform grid coordinates through FUN_5876BFA0 and set in-bounds result cells. It finally calls FUN_5897CC42. All five direct callees are byte-matched.",
+        "uncertainty": "The record encoding, grid dimensions' units, 36 transformations, and resulting masks' use remain unresolved."
+      }
+    },
+    {
+      "address": "588DDBF0",
+      "name": "FUN_588ddbf0",
+      "size": 214,
+      "symbol": "_FUN_588ddbf0",
+      "source": "src/client-current/Main/FUN_588ddbf0.cpp",
+      "source_sha256": "e838ccca64436301381e4bbe0be7ade42e73f77cbf46d40b60d85a5cf1ff6236",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DDBF0",
+          "size": 214,
+          "symbol": "_FUN_588ddbf0_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "5898C922",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 15,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "588DDCB2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "589A10A8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "589A10A8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "589A10A8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "589A10A0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "589A1098",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "5898C922",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5898C922",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588DDBF0 / map-screen prefix and color selection",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this body at 0x588E3364.",
+        "behavior": "The complete 214-byte body (47 instructions) switches on its second argument, emits observed strings including '[MD] ', '[GM] ', and '[DV] ' through FUN_58731CE0, and writes one of the observed colors to the object referenced by receiver +0x12E4. All seven direct calls target the same byte-matched helper.",
+        "uncertainty": "The argument values' user-visible roles, color format, and the destination object's class are not identified."
+      }
+    },
+    {
+      "address": "588E6570",
+      "name": "FUN_588e6570",
+      "size": 82,
+      "symbol": "_FUN_588e6570",
+      "source": "src/client-current/Main/FUN_588e6570.cpp",
+      "source_sha256": "d9b1eb261df8bf7790adecb6f653de100940ad70a99746fa4c6ed4e26e3ab37f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E6570",
+          "size": 82,
+          "symbol": "_FUN_588e6570_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588E6570 / map-screen numeric code predicate",
+        "called_by": "Both fresh Ghidra edge exports record calls from the matched CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E3533 and 0x588E356E.",
+        "behavior": "The complete 82-byte body (24 instructions) reads a word at receiver +0xCC0 +0x35E, compares it against the observed constants 0x0403, 0x07D8, 0x0BD2, 0x0FB1, 0x139F, 0x1787, 0x1B71, and 0x1F58, and returns 1 for a listed value or 0 otherwise. It has no outgoing calls.",
+        "uncertainty": "The compared field's schema and why these values are selected are unknown; this evidence establishes only the observed predicate."
+      }
+    },
+    {
+      "address": "5897D180",
+      "name": "FUN_5897d180",
+      "size": 6,
+      "symbol": "_FUN_5897d180",
+      "source": "src/client-current/Main/FUN_5897d180.cpp",
+      "source_sha256": "d60e89ab5b8e18204471eef8a59a0f2926668f029c47a888e8fb8cb6f0900707",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897D180",
+          "size": 6,
+          "symbol": "_FUN_5897d180_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C304",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897D180 / global callback tail thunk",
+        "called_by": "Both fresh Ghidra edge exports record the matched CShip_MapObjectScreen constructor FUN_588E05C0 calling this six-byte body at 0x588E0BC2 and 0x588E0BDA.",
+        "behavior": "The complete six-byte, one-instruction body is an indirect tail jump through the global pointer at 0x5898C304. It contains no direct calls.",
+        "uncertainty": "The global callback's runtime target and contract are unresolved."
+      }
     }
   ]
 }

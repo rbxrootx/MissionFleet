@@ -1441,6 +1441,14 @@ MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES = (
 ADDRESSES += MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SANTA_AIRCRAFT_DAMAGE_CALLBACKS_ADDRESSES)
 
+MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_ADDRESSES = (
+    "58749800", "58756750", "5877E440", "5877FC60", "588C08A0",
+    "588D8230", "588D9D60", "588DA5F0", "588DA8F0", "588DAD30",
+    "588DDBF0", "588E6570", "5897D180",
+)
+ADDRESSES += MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_ADDRESSES)
+
 MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES = ("588D2840",)
 ADDRESSES += MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_SCROLL_TEXT_SCREEN_SLOT0_ADDRESSES)
@@ -15727,6 +15735,260 @@ MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE)
+
+MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_EVIDENCE = {
+    "58749800": {
+        "name_in_analysis": "FUN_58749800 / CAutoRouting constructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E09A0. The caller's RTTI-backed class identity and "
+            "constructor are recorded in docs/current-main-ship-map-screen-constructor.md."
+        ),
+        "behavior": (
+            "The complete 255-byte body (66 instructions) calls the common "
+            "screen initializer, installs CAutoRouting::vftable, stores its "
+            "second argument at +0x50, and initializes the observed state "
+            "fields. It sets two fields to 0x40000000, two to 0xFFFFFFFF, "
+            "zeros the listed child/state fields, and clears 0x30 bytes at "
+            "+0xD4. Its two direct callees are byte-matched."
+        ),
+        "uncertainty": (
+            "The fields, sentinel meanings, constructor argument roles, and "
+            "CAutoRouting runtime behavior are not established."
+        ),
+    },
+    "58756750": {
+        "name_in_analysis": "FUN_58756750 / CClickDestinationLine constructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record calls from the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E18B1 "
+            "and 0x588E18F1."
+        ),
+        "behavior": (
+            "The complete 579-byte body (165 instructions) calls the common "
+            "screen initializer, installs CClickDestinationLine::vftable, "
+            "zeros the observed state slots, and creates 32 child objects "
+            "with CSpriteDataScreen::vftable. It also creates the observed "
+            "0x90-byte allocation gate before calling FUN_5876E510 and setting "
+            "+0x80 in the returned object. All nine direct call sites target "
+            "byte-matched functions."
+        ),
+        "uncertainty": (
+            "The child roles, the 32-entry collection's meaning, and the "
+            "constructor arguments' semantics remain unknown."
+        ),
+    },
+    "5877E440": {
+        "name_in_analysis": "FUN_5877E440 / CFrameRounding constructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E121B."
+        ),
+        "behavior": (
+            "The complete 140-byte body (45 instructions) calls the common "
+            "screen initializer, installs CFrameRounding::vftable, sets the "
+            "observed state values, and derives one field from the word at "
+            "child +0x15 and another field at +0x1D. Its one direct callee is "
+            "byte-matched."
+        ),
+        "uncertainty": (
+            "The rounding object's fields, the divisor 0x24's unit, and its "
+            "visual or runtime purpose are not established."
+        ),
+    },
+    "5877FC60": {
+        "name_in_analysis": "FUN_5877FC60 / CHCB_Airborne constructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E3A19."
+        ),
+        "behavior": (
+            "The complete 441-byte body (136 instructions) calls the common "
+            "screen initializer, installs CHCB_Airborne::vftable, and creates "
+            "four children with CSpriteBundleScreen::vftable in a two-iteration "
+            "loop. It then initializes additional fields and stores the result "
+            "of FUN_587B7350. All 11 direct call sites target byte-matched "
+            "functions."
+        ),
+        "uncertainty": (
+            "The child bundle roles, field meanings, and resource selected by "
+            "the constructor arguments remain unresolved."
+        ),
+    },
+    "588C08A0": {
+        "name_in_analysis": "FUN_588C08A0 / map-screen child field setter",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a call from the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E1233. "
+            "They also record calls from FUN_5877A060 at 0x5877A0ED and "
+            "FUN_5877A650 at 0x5877A7FB; those two callers are not byte-matched "
+            "and are outside this subsystem."
+        ),
+        "behavior": (
+            "The complete 10-byte, three-instruction leaf stores its second "
+            "argument at receiver +0x78 and returns. It has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The receiver class, +0x78 field meaning, and the two unmatched "
+            "callers' behavior remain unknown."
+        ),
+    },
+    "588D8230": {
+        "name_in_analysis": "FUN_588D8230 / map-screen record-derived state setup",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E0959."
+        ),
+        "behavior": (
+            "The complete 667-byte body (184 instructions) reads the record "
+            "pointer at receiver +0x100C, extracts packed values from record "
+            "+6, and writes derived scalars and eight groups of scaled values "
+            "into receiver offsets around +0x42B0, +0x168C, +0x1690, and "
+            "+0x411C. It has no direct calls."
+        ),
+        "uncertainty": (
+            "The record format, packed bit meanings, coordinate units, and "
+            "destination array roles are not established."
+        ),
+    },
+    "588D9D60": {
+        "name_in_analysis": "FUN_588D9D60 / map-screen indexed resource selection",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E0A3D."
+        ),
+        "behavior": (
+            "The complete 171-byte body (55 instructions) allocates a 0x20-byte "
+            "object, obtains an index, bounds-checks that index against a global "
+            "table, calls FUN_587B7350 with the selected entry or zero, and "
+            "stores the result at receiver +0x604C. Its three direct callees "
+            "are byte-matched."
+        ),
+        "uncertainty": (
+            "The global table's record type, index policy, and resource handle "
+            "meaning are unknown."
+        ),
+    },
+    "588DA5F0": {
+        "name_in_analysis": "FUN_588DA5F0 / map-screen state initialization",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E07CF."
+        ),
+        "behavior": (
+            "The complete 758-byte body (146 instructions) initializes the "
+            "screen's observed scalar fields, writes sentinel values including "
+            "0x40000000 and 0xAAAAAAAA, and clears three storage regions of "
+            "0x200, 0x180, and 0x6C0 bytes. If receiver +0x100C is non-null, "
+            "it derives a value from the record's word at +0x0C. Its three "
+            "direct callees are byte-matched."
+        ),
+        "uncertainty": (
+            "The initialized fields, sentinels, region layouts, and record "
+            "value's meaning are not established."
+        ),
+    },
+    "588DA8F0": {
+        "name_in_analysis": "FUN_588DA8F0 / map-screen child-state flag aggregation",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E0954."
+        ),
+        "behavior": (
+            "The complete 238-byte body (61 instructions) inspects four pointer "
+            "slots in each of eight repeated groups, checks corresponding "
+            "receiver bytes for each non-empty string, ORs 0x10 or 0x20 into a "
+            "byte at +0x60AD, then copies that result to +0x60AC and +0x60BA. "
+            "It has no direct calls."
+        ),
+        "uncertainty": (
+            "The group entries, string roles, state-byte meanings, and the "
+            "visible effect of these flags are unknown."
+        ),
+    },
+    "588DAD30": {
+        "name_in_analysis": "FUN_588DAD30 / map-screen derived mask generation",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E0B20."
+        ),
+        "behavior": (
+            "The complete 720-byte body (217 instructions) derives dimensions "
+            "from packed bits in the record at receiver +0x100C, allocates and "
+            "zeros a square byte grid, then builds 36 additional grids. The "
+            "inner loops transform grid coordinates through FUN_5876BFA0 and "
+            "set in-bounds result cells. It finally calls FUN_5897CC42. All "
+            "five direct callees are byte-matched."
+        ),
+        "uncertainty": (
+            "The record encoding, grid dimensions' units, 36 transformations, "
+            "and resulting masks' use remain unresolved."
+        ),
+    },
+    "588DDBF0": {
+        "name_in_analysis": "FUN_588DDBF0 / map-screen prefix and color selection",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this body "
+            "at 0x588E3364."
+        ),
+        "behavior": (
+            "The complete 214-byte body (47 instructions) switches on its "
+            "second argument, emits observed strings including '[MD] ', "
+            "'[GM] ', and '[DV] ' through FUN_58731CE0, and writes one of the "
+            "observed colors to the object referenced by receiver +0x12E4. All "
+            "seven direct calls target the same byte-matched helper."
+        ),
+        "uncertainty": (
+            "The argument values' user-visible roles, color format, and the "
+            "destination object's class are not identified."
+        ),
+    },
+    "588E6570": {
+        "name_in_analysis": "FUN_588E6570 / map-screen numeric code predicate",
+        "called_by": (
+            "Both fresh Ghidra edge exports record calls from the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E3533 "
+            "and 0x588E356E."
+        ),
+        "behavior": (
+            "The complete 82-byte body (24 instructions) reads a word at "
+            "receiver +0xCC0 +0x35E, compares it against the observed constants "
+            "0x0403, 0x07D8, 0x0BD2, 0x0FB1, 0x139F, 0x1787, 0x1B71, and "
+            "0x1F58, and returns 1 for a listed value or 0 otherwise. It has no "
+            "outgoing calls."
+        ),
+        "uncertainty": (
+            "The compared field's schema and why these values are selected are "
+            "unknown; this evidence establishes only the observed predicate."
+        ),
+    },
+    "5897D180": {
+        "name_in_analysis": "FUN_5897D180 / global callback tail thunk",
+        "called_by": (
+            "Both fresh Ghidra edge exports record the matched "
+            "CShip_MapObjectScreen constructor FUN_588E05C0 calling this "
+            "six-byte body at 0x588E0BC2 and 0x588E0BDA."
+        ),
+        "behavior": (
+            "The complete six-byte, one-instruction body is an indirect tail "
+            "jump through the global pointer at 0x5898C304. It contains no "
+            "direct calls."
+        ),
+        "uncertainty": (
+            "The global callback's runtime target and contract are unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_EVIDENCE)
 
 
 if __name__ == "__main__":
