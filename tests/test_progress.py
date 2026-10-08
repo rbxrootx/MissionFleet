@@ -47,6 +47,7 @@ from tools import (
     verify_current_main_hotkeys_info_transition,
     verify_current_main_hotkeys_info_input,
     verify_current_main_hotkeys_info_destructor,
+    verify_current_main_battle_room_destructor,
     verify_current_main_pagefight_ringout_monitor,
     verify_current_main_pagefight_position_bounds,
     verify_current_main_scroll_text_screen_slot0,
@@ -74,8 +75,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_659)
-        self.assertEqual(self.report["measures"]["matched_code"], "2768260")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_661)
+        self.assertEqual(self.report["measures"]["matched_code"], "2768591")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -86,8 +87,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_526)
-        self.assertEqual(current["measures"]["matched_code"], "1794842")
+        self.assertEqual(current["measures"]["matched_functions"], 2_528)
+        self.assertEqual(current["measures"]["matched_code"], "1795173")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -1014,6 +1015,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x58876F95", evidence["58876F80"]["behavior"])
         self.assertIn("unresolved", evidence["58876F80"]["uncertainty"])
         verify_current_main_hotkeys_info_destructor.main()
+
+    def test_battle_room_cleanup_and_deleting_destructor_match_rtti_class(self):
+        addresses = build_current_main_verifications.MAIN_BATTLE_ROOM_DESTRUCTOR_ADDRESSES
+        self.assertEqual(addresses, ("58877980", "58877B40"))
+        evidence = build_current_main_verifications.MAIN_BATTLE_ROOM_DESTRUCTOR_EVIDENCE
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x5899EFE8", evidence["58877B40"]["called_by"])
+        self.assertIn("CPannelInfoBattleRoom", evidence["58877980"]["behavior"])
+        self.assertIn("+0xB0", evidence["58877980"]["behavior"])
+        self.assertIn("0x58877B55", evidence["58877B40"]["behavior"])
+        self.assertIn("unresolved", evidence["58877B40"]["uncertainty"])
+        verify_current_main_battle_room_destructor.main()
 
     def test_manage_fleet_child_matches_original_and_verified_caller(self):
         addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES

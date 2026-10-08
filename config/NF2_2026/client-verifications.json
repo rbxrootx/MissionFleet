@@ -452574,6 +452574,118 @@
         "behavior": "Both fresh body exports and a targeted headless export agree on two reachable ranges totaling 27 bytes / 10 instructions: [0x58876F80,0x58876F95) and [0x58876F98,0x58876F9E). It calls FUN_58876D40, tests parameter bit 0, calls matched thunk FUN_5897CC42 when that bit is set, and otherwise returns the receiver. The raw contiguous wrapper spans 30 bytes; its post-call `add esp, 4` at 0x58876F95 is outside the Ghidra body ranges after the call is classified as a terminator, so it is preserved and checked as an explicit mapped continuation byte fragment.",
         "uncertainty": "The ABI meaning of parameter bit 0, the indirect host callback target behind FUN_5897CC42, and its object-ownership contract are unresolved. The destructor's child vtable targets are dynamic."
       }
+    },
+    {
+      "address": "58877980",
+      "name": "FUN_58877980",
+      "size": 304,
+      "symbol": "_FUN_58877980",
+      "source": "src/client-current/Main/FUN_58877980.cpp",
+      "source_sha256": "0f7af94f1fe164bcb901612effef6996a8903dbdbe980754b52af445b8274bb8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877980",
+          "size": 304,
+          "symbol": "_FUN_58877980_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58987AE8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "5899EFE8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "587B5F50",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877980 / CPannelInfoBattleRoom destructor body",
+        "called_by": "Both fresh Ghidra edge exports record a direct call from 0x58877B43 in FUN_58877B40. The caller is slot +0x00 of the RTTI-backed CPannelInfoBattleRoom vtable at 0x5899EFE8.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 304-byte range (104 instructions), [0x58877980,0x58877AB0). The body installs the CPannelInfoBattleRoom vtable, conditionally dispatches child vtable slot 0 with argument 1 for pointers in fields +0x84, +0x88, +0x8C, +0x90 through +0xA8, +0xB0, +0xB4, +0x190, and +0x194, and clears the fields. Its two-iteration cleanup loop checks +0xB0 twice, with the first non-null pass clearing it. The body then calls matched FUN_587B5F50 as base cleanup.",
+        "uncertainty": "The child object types, ownership contract of their dynamic virtual slot-0 calls, exact base-class identity, and exception unwind behavior remain unresolved. It is also unclear whether the repeated +0xB0 check is intentional source structure or a compiler/decompiler artifact."
+      }
+    },
+    {
+      "address": "58877B40",
+      "name": "FUN_58877b40",
+      "size": 27,
+      "symbol": "_FUN_58877b40",
+      "source": "src/client-current/Main/FUN_58877b40.cpp",
+      "source_sha256": "098acf06fe31f9360c48dabeef1390454fd1183855abe352915937b91d40968f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58877B40",
+          "size": 21,
+          "symbol": "_FUN_58877b40_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58877980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58877B58",
+          "size": 6,
+          "symbol": "_FUN_58877b40_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58877B40 / CPannelInfoBattleRoom deleting destructor",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EFE8, slot +0x00 of the vtable. Its Complete Object Locator at 0x589A8EE0 and TypeDescriptor at 0x589CCFA4 identify .?AVCPannelInfoBattleRoom@@. Neither export records a direct caller.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on two reachable ranges totaling 27 bytes / 10 instructions: [0x58877B40,0x58877B55) and [0x58877B58,0x58877B5E). It calls FUN_58877980, tests parameter bit 0, calls matched thunk FUN_5897CC42 when set, and otherwise returns the receiver. The raw contiguous wrapper includes a three-byte `add esp, 4` at 0x58877B55 that Ghidra omits after classifying the call as a terminator; that mapped fragment is separately preserved.",
+        "uncertainty": "The ABI meaning of parameter bit 0, the indirect host callback target behind FUN_5897CC42, and its object-ownership contract are unresolved. The destructor's child vtable targets are dynamic."
+      }
     }
   ]
 }

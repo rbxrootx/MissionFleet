@@ -16556,6 +16556,64 @@ MAIN_HOTKEYS_INFO_DESTRUCTOR_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_HOTKEYS_INFO_DESTRUCTOR_EVIDENCE)
 
+MAIN_BATTLE_ROOM_DESTRUCTOR_ADDRESSES = ("58877980", "58877B40")
+ADDRESSES += MAIN_BATTLE_ROOM_DESTRUCTOR_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_BATTLE_ROOM_DESTRUCTOR_ADDRESSES)
+
+MAIN_BATTLE_ROOM_DESTRUCTOR_EVIDENCE = {
+    "58877980": {
+        "name_in_analysis": "FUN_58877980 / CPannelInfoBattleRoom destructor body",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a direct call from "
+            "0x58877B43 in FUN_58877B40. The caller is slot +0x00 of the "
+            "RTTI-backed CPannelInfoBattleRoom vtable at 0x5899EFE8."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 304-byte range (104 instructions), "
+            "[0x58877980,0x58877AB0). The body installs the "
+            "CPannelInfoBattleRoom vtable, conditionally dispatches child "
+            "vtable slot 0 with argument 1 for pointers in fields +0x84, "
+            "+0x88, +0x8C, +0x90 through +0xA8, +0xB0, +0xB4, +0x190, and "
+            "+0x194, and clears the fields. Its two-iteration cleanup loop "
+            "checks +0xB0 twice, with the first non-null pass clearing it. "
+            "The body then calls matched FUN_587B5F50 as base cleanup."
+        ),
+        "uncertainty": (
+            "The child object types, ownership contract of their dynamic "
+            "virtual slot-0 calls, exact base-class identity, and exception "
+            "unwind behavior remain unresolved. It is also unclear whether "
+            "the repeated +0xB0 check is intentional source structure or a "
+            "compiler/decompiler artifact."
+        ),
+    },
+    "58877B40": {
+        "name_in_analysis": "FUN_58877B40 / CPannelInfoBattleRoom deleting destructor",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EFE8, slot +0x00 of the vtable. Its Complete Object "
+            "Locator at 0x589A8EE0 and TypeDescriptor at 0x589CCFA4 identify "
+            ".?AVCPannelInfoBattleRoom@@. Neither export records a direct caller."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "two reachable ranges totaling 27 bytes / 10 instructions: "
+            "[0x58877B40,0x58877B55) and [0x58877B58,0x58877B5E). It calls "
+            "FUN_58877980, tests parameter bit 0, calls matched thunk "
+            "FUN_5897CC42 when set, and otherwise returns the receiver. The "
+            "raw contiguous wrapper includes a three-byte `add esp, 4` at "
+            "0x58877B55 that Ghidra omits after classifying the call as a "
+            "terminator; that mapped fragment is separately preserved."
+        ),
+        "uncertainty": (
+            "The ABI meaning of parameter bit 0, the indirect host callback "
+            "target behind FUN_5897CC42, and its object-ownership contract are "
+            "unresolved. The destructor's child vtable targets are dynamic."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_BATTLE_ROOM_DESTRUCTOR_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
