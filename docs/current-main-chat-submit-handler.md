@@ -43,3 +43,6 @@ recipient parser, guarded-message dispatch, and input-state update. See the
 [private-chat recipient evidence](current-main-chat-private-recipient.md) for
 the exact caller, mapped command strings, verified ranges, and remaining
 uncertainties.
+
+The adjacent `/e` and `/enter` numeric user-chat input route is documented in
+[`current-main-user-chat-enter-command.md`](current-main-user-chat-enter-command.md).

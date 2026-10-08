@@ -7,6 +7,11 @@ The installed 2026 `Main.dll` routes slash-prefixed numeric input into
 channel path adjacent to the separately documented `/w` and `/whisper`
 recipient path.
 
+The separate `/e` and `/enter` command route is documented in
+[`current-main-user-chat-enter-command.md`](current-main-user-chat-enter-command.md);
+it dispatches through `FUN_587F7000`, while the numeric `/<digits>` route here
+uses `FUN_587F6C40`.
+
 The routine parses decimal digits from the input, stopping at a space or NUL,
 stores the parsed number at receiver offset `+0x21D1C`, formats it with the
 mapped `%d` string at `0x5898D18C` into receiver buffer `+0x21CEC`, and mirrors

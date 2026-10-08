@@ -48,6 +48,7 @@ from tools import (
     verify_current_main_58833980,
     verify_current_main_5881d570,
     verify_current_main_5888df10,
+    verify_current_main_user_chat_enter_command,
 )
 
 
@@ -60,8 +61,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_621)
-        self.assertEqual(self.report["measures"]["matched_code"], "2753383")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_625)
+        self.assertEqual(self.report["measures"]["matched_code"], "2754804")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -72,8 +73,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_488)
-        self.assertEqual(current["measures"]["matched_code"], "1779965")
+        self.assertEqual(current["measures"]["matched_functions"], 2_492)
+        self.assertEqual(current["measures"]["matched_code"], "1781386")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -854,6 +855,17 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x8002B111", evidence["5888DF10"]["called_by"])
         self.assertIn("0x5888DFC8", evidence["5888DF10"]["uncertainty"])
         verify_current_main_5888df10.main()
+
+    def test_user_chat_enter_command_and_helpers_match_original(self):
+        addresses = build_current_main_verifications.MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE
+        self.assertEqual(addresses, ("587F7000", "587B78D0", "587B7E70", "587EE9C0"))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x587FD674", evidence["587F7000"]["called_by"])
+        self.assertIn("0x8001B111", evidence["587B7E70"]["behavior"])
+        self.assertIn("unmatched FUN_588AB330", evidence["587EE9C0"]["called_by"])
+        self.assertTrue(all(evidence[address]["uncertainty"] for address in addresses))
+        verify_current_main_user_chat_enter_command.main()
 
     def test_page_result_control_menu_cleanup_has_original_code_evidence(self):
         addresses = (

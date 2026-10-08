@@ -15500,6 +15500,122 @@ MAIN_CHAT_CHANNEL_REFRESH_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_CHAT_CHANNEL_REFRESH_EVIDENCE)
 
+MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES = (
+    "587F7000", "587B78D0", "587B7E70", "587EE9C0",
+)
+ADDRESSES += MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_USER_CHAT_ENTER_COMMAND_ADDRESSES)
+
+MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
+    "587F7000": {
+        "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
+        "called_by": (
+            "Both fresh Ghidra edge exports record one incoming call, from the "
+            "byte-matched chat input handler FUN_587FC9C0 at 0x587FD674. The "
+            "mapped call loads ECX from EBX. Its command-string table stores "
+            "the literal strings '/e' and '/enter' at pointer slots "
+            "0x589CC124 and 0x589CC128; the caller's dispatch path requires a "
+            "space after the matched command. This is separate from the "
+            "numeric '/<digits>' path through FUN_587F6C40."
+        ),
+        "behavior": (
+            "Both fresh Ghidra projects agree on ranges 0x587F7000..+570 bytes "
+            "(180 instructions) and 0x587F7240..+365 bytes (114 instructions), "
+            "totaling 935 bytes and 294 instructions. Mapped Main.dll decoding "
+            "covers both ranges exactly. The handler reads the chat input "
+            "buffer, scans a numeric token after the command prefix, updates "
+            "receiver fields around +0x21CEC..+0x21D20, and checks values "
+            "against three 0x18-byte entries through FUN_587B78D0. Eligible "
+            "paths build and send a 0x49-byte record through FUN_587B7E70; "
+            "FUN_587EE9C0 copies a bounded string into receiver +0xC0. The "
+            "disallowed path requests MESSAGESTRING_USERCHAT_NOT_ALLOWED and "
+            "then calls through a global callback. Its 14 direct calls target "
+            "byte-matched functions or the three helpers included in this "
+            "verified subsystem."
+        ),
+        "uncertainty": (
+            "The exact meaning and valid range of the parsed number, the three "
+            "entry records, receiver fields, and selector 0x8001B111 are not "
+            "recovered. The indirect call at 0x587F734E reads its target from "
+            "0x5898C030; callback ownership and policy remain unknown. The "
+            "payload schema and server effect are unverified, and no emulator "
+            "runtime test was performed."
+        ),
+    },
+    "587B78D0": {
+        "name_in_analysis": "FUN_587B78D0 / three-entry chat string comparison",
+        "called_by": (
+            "Both fresh Ghidra edge exports record two incoming calls: "
+            "FUN_587F7000 at 0x587F72C5 and matched FUN_58890110 at "
+            "0x588921CD. The first is the numeric user-chat enter command "
+            "path; the second is another matched chat input path."
+        ),
+        "behavior": (
+            "Both projects agree on the complete 93-byte, 43-instruction leaf, "
+            "which mapped Main.dll decodes exactly. It compares the supplied "
+            "byte string against up to three receiver entries beginning at "
+            "+0x130 and separated by 0x18 bytes, returning 1 on a match and 0 "
+            "after all three entries miss. It has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The entries' semantic type, encoding, and policy meaning are "
+            "unknown. The check proves string equality against three fixed "
+            "receiver slots only; it does not establish membership or access "
+            "authorization semantics. No runtime test was performed."
+        ),
+    },
+    "587B7E70": {
+        "name_in_analysis": "FUN_587B7E70 / user-chat command record builder and sender",
+        "called_by": (
+            "Both fresh Ghidra edge exports record three incoming calls: "
+            "FUN_587F7000 at 0x587F72AA and matched FUN_58890110 at "
+            "0x588921A3 and 0x588921BC. The callers supply the same helper "
+            "along adjacent chat input paths."
+        ),
+        "behavior": (
+            "Both projects agree on three exact ranges: "
+            "0x587B7E70..+121 bytes (41 instructions), "
+            "0x587B7EF0..+61 bytes (23 instructions), and "
+            "0x587B7F30..+149 bytes (53 instructions), totaling 331 bytes and "
+            "117 instructions. Mapped decoding covers all three ranges. The "
+            "helper clears local storage, copies observed text inputs into "
+            "three 0x18-byte areas, assembles a 0x49-byte payload, and sends it "
+            "through matched FUN_58970C70 with selector 0x8001B111 and flags "
+            "0x50000. Its five direct calls target already byte-matched helpers."
+        ),
+        "uncertainty": (
+            "The payload field meanings, string roles, visible meaning of "
+            "selector 0x8001B111, server effect, and response behavior are "
+            "unresolved. Another call path using this helper does not establish "
+            "a complete protocol contract. No client or emulator runtime test "
+            "was performed."
+        ),
+    },
+    "587EE9C0": {
+        "name_in_analysis": "FUN_587EE9C0 / bounded chat-control string copy",
+        "called_by": (
+            "Both fresh Ghidra edge exports record three incoming calls: "
+            "FUN_587F7000 at 0x587F7212 and 0x587F7326, and the currently "
+            "unmatched FUN_588AB330 at 0x588AB48B. The matched handler uses it "
+            "in the user-chat command path; the other caller's wider behavior "
+            "remains outside this subsystem."
+        ),
+        "behavior": (
+            "Both projects agree on the complete 62-byte, 25-instruction leaf, "
+            "which mapped Main.dll decodes exactly. It copies a NUL-terminated "
+            "string into receiver +0xC0, stopping after at most 0x17 data bytes "
+            "and writing a terminator. It has no outgoing calls."
+        ),
+        "uncertainty": (
+            "The copied field's display role, text encoding, and truncation "
+            "behavior as observed by the UI are unknown. FUN_588AB330 is an "
+            "unmatched caller and is recorded as such; its presence does not "
+            "change this leaf's exact byte match. No runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
