@@ -16356,6 +16356,45 @@ MAIN_PANEL_HELP_STATE_TRANSITION_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_PANEL_HELP_STATE_TRANSITION_EVIDENCE)
 
+MAIN_HOTKEYS_INFO_TRANSITION_ADDRESSES = ("58876FA0",)
+ADDRESSES += MAIN_HOTKEYS_INFO_TRANSITION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_HOTKEYS_INFO_TRANSITION_ADDRESSES)
+
+MAIN_HOTKEYS_INFO_TRANSITION_EVIDENCE = {
+    "58876FA0": {
+        "name_in_analysis": "FUN_58876FA0 / CPannelHotKeysInfo vtable transition updater",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EFAC, slot +0x0C of the secondary vtable at 0x5899EFA0. "
+            "Its Complete Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHotKeysInfo@@. Neither export records a direct caller."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 785-byte range (207 instructions), "
+            "[0x58876FA0,0x588772B1). When receiver +0x24 bit 2 is set, state "
+            "0x100 advances child values at +0x28 in six-unit steps through "
+            "matched FUN_58902CE0, with observed upper clamps 0xFA/0xFF; on "
+            "completion it copies receiver +0xA4 to +0xA8, calls matched "
+            "FUN_58770A80 with +0xA4, and changes the state mask to 0x200. "
+            "State 0x400 decrements the same child values by six, clamps at "
+            "zero, and changes to 0x500 when complete; state 0x500 clears bit "
+            "2. The method has 32 direct calls: 31 to matched FUN_58902CE0 "
+            "and one to matched FUN_58770A80. It then traverses the child "
+            "list through a virtual call at slot +0x0C, with an indirect tail "
+            "transfer on the final child."
+        ),
+        "uncertainty": (
+            "The child object types, meaning of the +0x28 values and state "
+            "bits, purpose of the +0xA4/+0xA8 fields, transition names, and "
+            "visible result are not established. The target behind child "
+            "vtable slot +0x0C is dynamic; no client or emulator visual test "
+            "was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_HOTKEYS_INFO_TRANSITION_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
