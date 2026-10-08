@@ -502,6 +502,24 @@ MAIN_NOVICE_HELP_PANEL_ADDRESSES = (
 ADDRESSES += MAIN_NOVICE_HELP_PANEL_ADDRESSES
 
 RELOCATION_OVERRIDES = {
+    # Fixed-address calls emitted literally by the original eight-slot
+    # state/count helper; Ghidra's complete range export audits each edge.
+    "588597F0": [
+        {"offset": offset, "target_address": "589032E0", "kind": "relative",
+         "audit_only": True}
+        for offset in (0x38, 0x48, 0x58, 0x68, 0x83, 0xC3, 0xD0, 0xDD, 0xEA, 0x106)
+    ] + [
+        {"offset": 0x13E, "target_address": "587A15E0", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x169, "target_address": "58907360", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x18C, "target_address": "58907360", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x1E3, "target_address": "58907360", "kind": "relative",
+         "audit_only": True},
+        {"offset": 0x1EC, "target_address": "588592C0", "kind": "relative",
+         "audit_only": True},
+    ],
     # The scene-update helper is emitted as the exact mapped instruction
     # stream. These fixed-image calls are audited against fresh Ghidra edges.
     "5873B6A0": [
@@ -18983,6 +19001,14 @@ EVIDENCE["5873B6A0"] = {
     "called_by": "Matched FUN_588E3AE0 calls it at 0x588E3DCF with values derived from the current object, state gate, and two boolean conditions; fresh Ghidra references confirm the incoming call.",
     "behavior": "Selects a shared interface pointer from 0x58A245C4+0x9C or +0xA0, clears fields +0xBE/+0x2D6 on the zero-state path, copies 45-dword or 43-dword blocks from FUN_58778E20/FUN_58778DC0 into object offsets +0x16C/+0xC0 for observed state-byte and +0x2CC combinations, performs interface callbacks through slots +0x2C/+0x34 on gated paths, and finishes through FUN_58907360 with either +0x228 or +0x2D6 data.",
     "uncertainty": "The object and shared-interface types, state-byte meanings, copied-block schemas, callback contracts, and runtime targets of the indirect vtable calls remain unknown.",
+}
+ADDRESSES += ("588597F0",)
+SOURCE_COMPILER_ADDRESSES.add("588597F0")
+EVIDENCE["588597F0"] = {
+    "name_in_analysis": "FUN_588597F0 / eight-slot child state-count updater",
+    "called_by": "Matched FUN_58857020 calls it at 0x588577DD with the computed active-slot count from its 27-position stride-0x20 cargo scan; fresh Ghidra references confirm this incoming call.",
+    "behavior": "Stores the active count at +0xF0; sets low child-state bits for active slots and updates five resource identifiers per slot through FUN_589032E0; clears unused entries up to eight with resource 0x500; visits four word-valued controls through FUN_587A15E0; then updates shared state through FUN_58907360 and FUN_588592C0 and sets or clears bit 0 on eight child controls according to whether any stored word differs from 0xAA.",
+    "uncertainty": "The receiver and child types, meanings of the eight indexed slots and four word fields, resource identifiers, and the visible meaning of state bit 0 and marker 0xAA remain unidentified.",
 }
 
 
