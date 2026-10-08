@@ -15450,6 +15450,56 @@ MAIN_MANAGE_FLEET_CHILD_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_MANAGE_FLEET_CHILD_EVIDENCE)
 
+MAIN_CHAT_CHANNEL_REFRESH_ADDRESSES = ("5888DF10",)
+ADDRESSES += MAIN_CHAT_CHANNEL_REFRESH_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CHAT_CHANNEL_REFRESH_ADDRESSES)
+
+MAIN_CHAT_CHANNEL_REFRESH_EVIDENCE = {
+    "5888DF10": {
+        "name_in_analysis": "FUN_5888DF10 / main control-menu refresh after channel membership events",
+        "called_by": (
+            "Both fresh Ghidra edge exports record six incoming calls, all from "
+            "the byte-matched chat/channel event handler FUN_587B83E0 at "
+            "0x587B87E2, 0x587B8802, 0x587B8822, 0x587B8A56, 0x587B8A97, and "
+            "0x587B8AD8. The mapped caller loads ECX from [0x58A245C0] before "
+            "each call. The handler's Ghidra body ties the first three calls to "
+            "group/code 0x8002/0x8002B111, subtypes 2, 3, and 4, and stored "
+            "values at +0x188, +0x18C, and +0x190. Its three 0x8002B112 removal "
+            "branches require a matching stored value, call matched "
+            "FUN_5888DD80, refresh this object, then write 0xFFFFFFFF to that "
+            "slot. The existing constructor evidence identifies the global "
+            "object as the CPannelMainControl_MenuScreen instance."
+        ),
+        "behavior": (
+            "Both fresh Ghidra projects agree on ranges "
+            "0x5888DF10..+489 bytes (122 instructions) and "
+            "0x5888E100..+432 bytes (118 instructions), totaling 921 bytes and "
+            "240 instructions. Independent decoding of both mapped Main.dll "
+            "ranges covers every byte. The routine clears the low four bits of "
+            "the word at child +0x24 for 12 receiver-held child pointers at "
+            "+0x600, +0x604, +0x608, +0x60C, +0x610, +0x614, +0x618, +0x61C, "
+            "+0x624, +0x628, +0x62C, and +0x630. It calls matched "
+            "FUN_58903290 ten times to update child positions from receiver "
+            "+4/+8 using fixed offsets. Branches test globals 0x58A0B4A0 and "
+            "0x58A0B4A4 and receiver +0x10C; observed paths conditionally OR "
+            "0x000F into child +0x24 and write receiver fields +0x638 through "
+            "+0x644 and child +0x50. All ten direct calls target matched "
+            "FUN_58903290."
+        ),
+        "uncertainty": (
+            "The child class, field and flag meanings, coordinate units, and "
+            "the conditions represented by globals 0x58A0B4A0/0x58A0B4A4 are "
+            "not recovered. At 0x5888DFC8 the routine calls through child "
+            "+0x620's vtable slot +8; the concrete method target and callback "
+            "contract remain unresolved. The constructor initializes +0x620 "
+            "to null, but current evidence does not identify its runtime "
+            "assignment. This source preserves mapped x86 bytes for matching; "
+            "no emulator runtime or visual test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CHAT_CHANNEL_REFRESH_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

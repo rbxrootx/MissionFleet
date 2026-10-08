@@ -448497,6 +448497,144 @@
         "behavior": "Both fresh projects agree on the complete contiguous range 0x5881D570..0x5881D903: 915 bytes and 284 instructions; mapped Main.dll decoding covers the same extent. The function calls matched FUN_589031A0, writes an observed vtable pointer and receiver fields, allocates and initializes child records under null and bounds checks, then calls matched helpers on its observed branches. Its 17 direct calls target only matched functions: FUN_589031A0 three times, FUN_5897CC4E five times, FUN_588F3D70 once, FUN_58902CE0 once, FUN_58902D20 five times, and FUN_5875DDA0 twice. No indirect call instruction is present.",
         "uncertainty": "The child class associated with vtable 0x5899D9E0, the exact meanings of its fields and constructor arguments, and the resource-to-control mapping are unknown. Its matched caller places it in the Manage Fleet tab, but does not identify labels or runtime interactions. The source preserves the mapped x86 instruction stream for byte matching. No emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "5888DF10",
+      "name": "FUN_5888df10",
+      "size": 921,
+      "symbol": "_FUN_5888df10",
+      "source": "src/client-current/Main/FUN_5888df10.cpp",
+      "source_sha256": "645780114d3e9ac519da3735d250ed8e8ce57aff8925fc7b5d17276f231eb129",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5888DF10",
+          "size": 489,
+          "symbol": "_FUN_5888df10_segment_00",
+          "relocations": [
+            {
+              "offset": 188,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5888E204",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "58A0B4A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 208,
+              "target_address": "5888E0F2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 357,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5888E100",
+          "size": 432,
+          "symbol": "_FUN_5888df10_segment_01",
+          "relocations": [
+            {
+              "offset": 22,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "58A0B4A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 269,
+              "target_address": "5888E2A1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 338,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5888DF10 / main control-menu refresh after channel membership events",
+        "called_by": "Both fresh Ghidra edge exports record six incoming calls, all from the byte-matched chat/channel event handler FUN_587B83E0 at 0x587B87E2, 0x587B8802, 0x587B8822, 0x587B8A56, 0x587B8A97, and 0x587B8AD8. The mapped caller loads ECX from [0x58A245C0] before each call. The handler's Ghidra body ties the first three calls to group/code 0x8002/0x8002B111, subtypes 2, 3, and 4, and stored values at +0x188, +0x18C, and +0x190. Its three 0x8002B112 removal branches require a matching stored value, call matched FUN_5888DD80, refresh this object, then write 0xFFFFFFFF to that slot. The existing constructor evidence identifies the global object as the CPannelMainControl_MenuScreen instance.",
+        "behavior": "Both fresh Ghidra projects agree on ranges 0x5888DF10..+489 bytes (122 instructions) and 0x5888E100..+432 bytes (118 instructions), totaling 921 bytes and 240 instructions. Independent decoding of both mapped Main.dll ranges covers every byte. The routine clears the low four bits of the word at child +0x24 for 12 receiver-held child pointers at +0x600, +0x604, +0x608, +0x60C, +0x610, +0x614, +0x618, +0x61C, +0x624, +0x628, +0x62C, and +0x630. It calls matched FUN_58903290 ten times to update child positions from receiver +4/+8 using fixed offsets. Branches test globals 0x58A0B4A0 and 0x58A0B4A4 and receiver +0x10C; observed paths conditionally OR 0x000F into child +0x24 and write receiver fields +0x638 through +0x644 and child +0x50. All ten direct calls target matched FUN_58903290.",
+        "uncertainty": "The child class, field and flag meanings, coordinate units, and the conditions represented by globals 0x58A0B4A0/0x58A0B4A4 are not recovered. At 0x5888DFC8 the routine calls through child +0x620's vtable slot +8; the concrete method target and callback contract remain unresolved. The constructor initializes +0x620 to null, but current evidence does not identify its runtime assignment. This source preserves mapped x86 bytes for matching; no emulator runtime or visual test was performed."
+      }
     }
   ]
 }
