@@ -16290,6 +16290,72 @@ MAIN_PANEL_HELP_EVENT_DISPATCH_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_PANEL_HELP_EVENT_DISPATCH_EVIDENCE)
 
+MAIN_PANEL_HELP_STATE_TRANSITION_ADDRESSES = ("58876710", "58876790")
+ADDRESSES += MAIN_PANEL_HELP_STATE_TRANSITION_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PANEL_HELP_STATE_TRANSITION_ADDRESSES)
+
+MAIN_PANEL_HELP_STATE_TRANSITION_EVIDENCE = {
+    "58876710": {
+        "name_in_analysis": "FUN_58876710 / CPannelHelpScreen vtable state-setting method",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EF84, slot +0x04 of the vtable at 0x5899EF80. The mapped "
+            "vtable's Complete Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHelpScreen@@. No direct call sites are recorded for this "
+            "virtual method in either whole-program edge export."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 122-byte range (31 instructions), "
+            "[0x58876710,0x5887678A). If receiver +0xCC is nonzero, it calls "
+            "matched FUN_58875830(0). It ORs bit 0 into the +0x24 words of the "
+            "objects referenced through receiver +0x50 and +0x58, calls matched "
+            "FUN_58902D20 with 0xFFFFFEFF and 0x101, updates receiver +0x24 "
+            "using observed masks `| 2` and `& 0xE2FF | 0x200`, and clears "
+            "receiver +0xC8. If the short at +0xCC equals 1, it calls matched "
+            "FUN_58875830(2). Its four direct calls target only these two "
+            "byte-matched helpers."
+        ),
+        "uncertainty": (
+            "The receiver and child flag meanings, pointer roles at +0x50/+0x58, "
+            "short mode semantics, purpose of +0xC8, and visible result of the "
+            "state changes are not established. No indirect control flow is "
+            "present in the mapped body; no client or emulator visual test was "
+            "performed."
+        ),
+    },
+    "58876790": {
+        "name_in_analysis": "FUN_58876790 / CPannelHelpScreen vtable state-clearing method",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EF88, slot +0x08 of the vtable at 0x5899EF80. The mapped "
+            "vtable's Complete Object Locator and TypeDescriptor identify "
+            ".?AVCPannelHelpScreen@@. No direct call sites are recorded for this "
+            "virtual method in either whole-program edge export."
+        ),
+        "behavior": (
+            "Both fresh body exports and a targeted headless export agree on "
+            "one complete 130-byte range (37 instructions), "
+            "[0x58876790,0x58876812). It clears bit 1 in receiver +0x24, then "
+            "clears bit 0 in the +0x24 words of three objects referenced through "
+            "receiver +0x50/+0x54/+0x58. If receiver +0xC4 is nonzero, it clears "
+            "bit 0 in the +0x24 words of the object and nested object reached "
+            "through that pointer, then zeroes +0xC4. If +0xCC is nonzero, it "
+            "calls matched FUN_58875830(0), and finally writes receiver +0x24 "
+            "using `& 0xE5FF | 0x500`. Its sole direct call targets that "
+            "byte-matched helper."
+        ),
+        "uncertainty": (
+            "The exact object types, child ownership, pointer roles at +0x50 "
+            "through +0x58 and +0xC4, flag meanings, mode semantics, and visual "
+            "effect of the final mask are not established. The mapped body has "
+            "no indirect control flow; no client or emulator visual test was "
+            "performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PANEL_HELP_STATE_TRANSITION_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

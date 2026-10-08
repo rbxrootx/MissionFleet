@@ -451899,6 +451899,106 @@
         "behavior": "Two independent fresh Ghidra exports and a targeted headless decompilation agree on one complete 495-byte range [0x58876820,0x58876A0F) containing 136 instructions. With receiver +0x24 bit 1 set, the method passes its event argument to children beginning at the pointer in receiver +0x3C, through each child's vtable slot +0x10; the callback's returned pointer advances the walk until it returns to the first child, and a null result returns zero. It then checks receiver flags and event fields at argument +4/+8, and maps listed event codes to receiver pointer slots at +0x5C, +0x6C, +0x74, +0x7C, +0x84, +0x8C, +0x94, +0x9C, or +0xA4. For a selected slot it updates receiver +0xC4/+0xC8, marks bit 0 in the selected object and its referenced child, and sends observed values through matched helpers. Its 11 direct calls target matched FUN_58875830 four times, FUN_587315F0 four times, and FUN_58902D20 three times. The event-code switch uses the mapped 11-entry table at 0x58876A10.",
         "uncertainty": "The event structure's schema, event-code meanings, receiver flag semantics, selected control identities, +0xC4/+0xC8 state roles, callback return contract, and returned +0x34 value's meaning are not established. The child virtual callback at 0x5887684B remains unresolved. The indirect switch jump at 0x5887689E has 11 mapped internal destinations, but its case labels are not assigned user action names. No live client or emulator visual test was performed; the source preserves the mapped x86 instruction bytes."
       }
+    },
+    {
+      "address": "58876710",
+      "name": "FUN_58876710",
+      "size": 122,
+      "symbol": "_FUN_58876710",
+      "source": "src/client-current/Main/FUN_58876710.cpp",
+      "source_sha256": "58b5fd373cf4a220b7c01b19b0952664f1645fcb7864808d5ac8104efb373242",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58876710",
+          "size": 122,
+          "symbol": "_FUN_58876710_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876710 / CPannelHelpScreen vtable state-setting method",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EF84, slot +0x04 of the vtable at 0x5899EF80. The mapped vtable's Complete Object Locator and TypeDescriptor identify .?AVCPannelHelpScreen@@. No direct call sites are recorded for this virtual method in either whole-program edge export.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 122-byte range (31 instructions), [0x58876710,0x5887678A). If receiver +0xCC is nonzero, it calls matched FUN_58875830(0). It ORs bit 0 into the +0x24 words of the objects referenced through receiver +0x50 and +0x58, calls matched FUN_58902D20 with 0xFFFFFEFF and 0x101, updates receiver +0x24 using observed masks `| 2` and `& 0xE2FF | 0x200`, and clears receiver +0xC8. If the short at +0xCC equals 1, it calls matched FUN_58875830(2). Its four direct calls target only these two byte-matched helpers.",
+        "uncertainty": "The receiver and child flag meanings, pointer roles at +0x50/+0x58, short mode semantics, purpose of +0xC8, and visible result of the state changes are not established. No indirect control flow is present in the mapped body; no client or emulator visual test was performed."
+      }
+    },
+    {
+      "address": "58876790",
+      "name": "FUN_58876790",
+      "size": 130,
+      "symbol": "_FUN_58876790",
+      "source": "src/client-current/Main/FUN_58876790.cpp",
+      "source_sha256": "7a673e9a4e3e37829dfcc0a881a00e676d479d4839481ada2267a9863cf31f8f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58876790",
+          "size": 130,
+          "symbol": "_FUN_58876790_segment_00",
+          "relocations": [
+            {
+              "offset": 100,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876790 / CPannelHelpScreen vtable state-clearing method",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EF88, slot +0x08 of the vtable at 0x5899EF80. The mapped vtable's Complete Object Locator and TypeDescriptor identify .?AVCPannelHelpScreen@@. No direct call sites are recorded for this virtual method in either whole-program edge export.",
+        "behavior": "Both fresh body exports and a targeted headless export agree on one complete 130-byte range (37 instructions), [0x58876790,0x58876812). It clears bit 1 in receiver +0x24, then clears bit 0 in the +0x24 words of three objects referenced through receiver +0x50/+0x54/+0x58. If receiver +0xC4 is nonzero, it clears bit 0 in the +0x24 words of the object and nested object reached through that pointer, then zeroes +0xC4. If +0xCC is nonzero, it calls matched FUN_58875830(0), and finally writes receiver +0x24 using `& 0xE5FF | 0x500`. Its sole direct call targets that byte-matched helper.",
+        "uncertainty": "The exact object types, child ownership, pointer roles at +0x50 through +0x58 and +0xC4, flag meanings, mode semantics, and visual effect of the final mask are not established. The mapped body has no indirect control flow; no client or emulator visual test was performed."
+      }
     }
   ]
 }
