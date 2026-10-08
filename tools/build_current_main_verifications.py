@@ -19100,6 +19100,58 @@ MAIN_CHAT_COMMAND_ROUTE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_CHAT_COMMAND_ROUTE_EVIDENCE)
 
+MAIN_EVENT_PRECONDITION_GATE_ADDRESSES = (
+    "587D96A0", "587D9910", "587DA040", "587DA710",
+    "587DB3F0", "587DB630", "587DB820",
+)
+ADDRESSES += MAIN_EVENT_PRECONDITION_GATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_EVENT_PRECONDITION_GATE_ADDRESSES)
+MAIN_EVENT_PRECONDITION_GATE_EVIDENCE = {
+    "587D96A0": {
+        "name_in_analysis": "FUN_587D96A0 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C41 on the param_3 == 2 path; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through this precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587D9910": {
+        "name_in_analysis": "FUN_587D9910 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C71 after the preceding three checks; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue; the next helper's return is tested for nonzero.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587DA040": {
+        "name_in_analysis": "FUN_587DA040 / nonzero event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C81 after FUN_587D9910 returns 1; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "FUN_587E3080 continues when its return is nonzero; zero branches to the handler's switch case.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587DA710": {
+        "name_in_analysis": "FUN_587DA710 / nested event helper",
+        "called_by": "FUN_587DB3F0 calls it at 0x587DB518, 0x587DB56D, and 0x587DB5A8; FUN_587DB630 calls it at 0x587DB776. Both fresh Ghidra exports confirm these edges.",
+        "behavior": "This helper is nested within two routines in the FUN_587E3080 precondition sequence; the exact caller-side predicate conditions are preserved in their byte-matched bodies.",
+        "uncertainty": "The helper's state fields, return contract, and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587DB3F0": {
+        "name_in_analysis": "FUN_587DB3F0 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C61; it calls FUN_587DA710 at three sites. Two fresh Ghidra exports confirm the edges.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through the precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587DB630": {
+        "name_in_analysis": "FUN_587DB630 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C51; it also calls FUN_587DA710 at 0x587DB776. Two fresh Ghidra exports confirm these edges.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through the precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised.",
+    },
+    "587DB820": {
+        "name_in_analysis": "FUN_587DB820 / final event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C90 after the first five return tests; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1. On any other result FUN_587E3080 calls FUN_5876BAF0 with selector 0x126C, calls FUN_58764D30, and exits this path.",
+        "uncertainty": "The checked condition and the text or action associated with selector 0x126C are unresolved; no live client or emulator event was exercised.",
+    },
+}
+EVIDENCE.update(MAIN_EVENT_PRECONDITION_GATE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

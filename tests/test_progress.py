@@ -84,6 +84,7 @@ from tools import (
     verify_current_main_warehouse_page_button,
     verify_current_main_warehouse_slot_manager,
     verify_current_main_chat_command_routes,
+    verify_current_main_587e3080_precondition_gates,
 )
 
 
@@ -96,8 +97,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_964)
-        self.assertEqual(self.report["measures"]["matched_code"], "2857698")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_971)
+        self.assertEqual(self.report["measures"]["matched_code"], "2860468")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -108,8 +109,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_831)
-        self.assertEqual(current["measures"]["matched_code"], "1884280")
+        self.assertEqual(current["measures"]["matched_functions"], 2_838)
+        self.assertEqual(current["measures"]["matched_code"], "1887050")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -189,6 +190,26 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x8001B112", evidence["587B7FD0"]["behavior"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_chat_command_routes.main()
+
+    def test_screen_event_precondition_gates_match_the_original_call_sequence(self):
+        addresses = (
+            build_current_main_verifications
+            .MAIN_EVENT_PRECONDITION_GATE_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications
+            .MAIN_EVENT_PRECONDITION_GATE_EVIDENCE
+        )
+        self.assertEqual(
+            addresses,
+            tuple(f"{address:08X}"
+                  for address in verify_current_main_587e3080_precondition_gates.FUNCTIONS),
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("param_3 == 2", evidence["587D96A0"]["called_by"])
+        self.assertIn("0x126C", evidence["587DB820"]["behavior"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_587e3080_precondition_gates.main()
 
     def test_periodic_selection_state_update_has_matched_caller_and_body(self):
         addresses = (

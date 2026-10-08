@@ -480867,6 +480867,779 @@
         "behavior": "Compares the input against three 0x18-byte entries at receiver+0x130; on a match, builds a 0x49-byte payload from the selected entry and supplied text, then calls matched FUN_58970C70 with selector 0x8001B112 and flags 0x50000.",
         "uncertainty": "The three-entry schema, selector meaning, and server-side effect are unknown. The helper is shared with a caller outside the chat-submit route."
       }
+    },
+    {
+      "address": "587D96A0",
+      "name": "FUN_587d96a0",
+      "size": 612,
+      "symbol": "_FUN_587d96a0",
+      "source": "src/client-current/Main/FUN_587d96a0.cpp",
+      "source_sha256": "ddb41b132fe47c9e47fc80fe2f01112932d904c1be4d639d15b8b977e4221ca9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D96A0",
+          "size": 612,
+          "symbol": "_FUN_587d96a0_segment_00",
+          "relocations": [
+            {
+              "offset": 97,
+              "target_address": "587D9858",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "587D9848",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "587D9848",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "587D9897",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 265,
+              "target_address": "588E6680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 284,
+              "target_address": "588E75E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 308,
+              "target_address": "588E75E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "587D98B8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 329,
+              "target_address": "588E6680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 338,
+              "target_address": "587D98B8",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "587D98D6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "587D9710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 445,
+              "target_address": "587D98F7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 456,
+              "target_address": "587D98F7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "5899B854",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 482,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 522,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 552,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 578,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 585,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587D96A0 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C41 on the param_3 == 2 path; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through this precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587D9910",
+      "name": "FUN_587d9910",
+      "size": 218,
+      "symbol": "_FUN_587d9910",
+      "source": "src/client-current/Main/FUN_587d9910.cpp",
+      "source_sha256": "34328b6627902723677b83e3c2fbb97aa5aa03bc450e529f5f0f101ec0ceb529",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D9910",
+          "size": 218,
+          "symbol": "_FUN_587d9910_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "587D99E2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "58994700",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587D9910 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C71 after the preceding three checks; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue; the next helper's return is tested for nonzero.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587DA040",
+      "name": "FUN_587da040",
+      "size": 217,
+      "symbol": "_FUN_587da040",
+      "source": "src/client-current/Main/FUN_587da040.cpp",
+      "source_sha256": "a37ecdfcb6c55d5fd9546a4e86e192b3121448354f1b8ebfe95c360454818e38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DA040",
+          "size": 217,
+          "symbol": "_FUN_587da040_segment_00",
+          "relocations": [
+            {
+              "offset": 171,
+              "target_address": "587DA060",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587DA040 / nonzero event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C81 after FUN_587D9910 returns 1; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "FUN_587E3080 continues when its return is nonzero; zero branches to the handler's switch case.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587DA710",
+      "name": "FUN_587da710",
+      "size": 183,
+      "symbol": "_FUN_587da710",
+      "source": "src/client-current/Main/FUN_587da710.cpp",
+      "source_sha256": "e9fa0b9e31d830d964690656aff8ae47c0efe891dc16808bfa50994d569c826e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DA710",
+          "size": 183,
+          "symbol": "_FUN_587da710_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "588E6680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "588E75E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "588E6680",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "588E75E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "588E6680",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587DA710 / nested event helper",
+        "called_by": "FUN_587DB3F0 calls it at 0x587DB518, 0x587DB56D, and 0x587DB5A8; FUN_587DB630 calls it at 0x587DB776. Both fresh Ghidra exports confirm these edges.",
+        "behavior": "This helper is nested within two routines in the FUN_587E3080 precondition sequence; the exact caller-side predicate conditions are preserved in their byte-matched bodies.",
+        "uncertainty": "The helper's state fields, return contract, and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587DB3F0",
+      "name": "FUN_587db3f0",
+      "size": 573,
+      "symbol": "_FUN_587db3f0",
+      "source": "src/client-current/Main/FUN_587db3f0.cpp",
+      "source_sha256": "fe89cbe614b64144b017ffa329a6219c749f4309b46dccf537f7842210fa3b1e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DB3F0",
+          "size": 573,
+          "symbol": "_FUN_587db3f0_segment_00",
+          "relocations": [
+            {
+              "offset": 56,
+              "target_address": "587DB622",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "587DB622",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 109,
+              "target_address": "587DB5DF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "587DB5D2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "587DB5D2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 165,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 207,
+              "target_address": "587DB598",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 287,
+              "target_address": "587DB598",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "587DA710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 305,
+              "target_address": "587DB5D2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "587DB494",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 357,
+              "target_address": "587DB605",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 382,
+              "target_address": "587DA710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "587DB494",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 441,
+              "target_address": "587DA710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "587DB4A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 491,
+              "target_address": "587DB461",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 512,
+              "target_address": "5898FA10",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 518,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 529,
+              "target_address": "587DB494",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 545,
+              "target_address": "587DB494",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587DB3F0 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C61; it calls FUN_587DA710 at three sites. Two fresh Ghidra exports confirm the edges.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through the precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587DB630",
+      "name": "FUN_587db630",
+      "size": 493,
+      "symbol": "_FUN_587db630",
+      "source": "src/client-current/Main/FUN_587db630.cpp",
+      "source_sha256": "1a21a48201e0a4afd1d84b3a8ab1c1d8fa60e0665b2c229cbb30d5a0583693cb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DB630",
+          "size": 493,
+          "symbol": "_FUN_587db630_segment_00",
+          "relocations": [
+            {
+              "offset": 43,
+              "target_address": "587DB813",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "587DB813",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "587DB78C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "587DB783",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "587DB783",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "587DB783",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 188,
+              "target_address": "587DB797",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "587DB7B6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 317,
+              "target_address": "587DB7F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 327,
+              "target_address": "587DA710",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "587DB6A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 371,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 402,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 409,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 433,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 464,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 471,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587DB630 / event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C51; it also calls FUN_587DA710 at 0x587DB776. Two fresh Ghidra exports confirm these edges.",
+        "behavior": "Its return must equal 1 for FUN_587E3080 to continue through the precondition sequence.",
+        "uncertainty": "The predicate's state fields and gameplay or server meaning are not identified; no live client or emulator event was exercised."
+      }
+    },
+    {
+      "address": "587DB820",
+      "name": "FUN_587db820",
+      "size": 474,
+      "symbol": "_FUN_587db820",
+      "source": "src/client-current/Main/FUN_587db820.cpp",
+      "source_sha256": "bfcea03a627d2c132739c6082602aac0689208672564d5468b2c7634dd9b0bcc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DB820",
+          "size": 474,
+          "symbol": "_FUN_587db820_segment_00",
+          "relocations": [
+            {
+              "offset": 60,
+              "target_address": "587DA650",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "587DB9F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "587DB982",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 377,
+              "target_address": "587DB855",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587DB820 / final event precondition helper",
+        "called_by": "Matched FUN_587E3080 calls it at 0x587E3C90 after the first five return tests; two fresh Ghidra exports confirm the call edge.",
+        "behavior": "Its return must equal 1. On any other result FUN_587E3080 calls FUN_5876BAF0 with selector 0x126C, calls FUN_58764D30, and exits this path.",
+        "uncertainty": "The checked condition and the text or action associated with selector 0x126C are unresolved; no live client or emulator event was exercised."
+      }
     }
   ]
 }
