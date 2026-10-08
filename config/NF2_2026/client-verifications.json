@@ -484646,6 +484646,227 @@
         "behavior": "Returns 1 when the two supplied values equal param_4 fields +0x1334/+0x1338. Otherwise it scans the begin/end range reached through receiver +0x54 for records whose first two DWORDs match the supplied values and whose short at +8 is zero. The default result is 3. Under the param_4 +0x6070 mode gate, further checks compare record fields +0x10 or +0x18 and param_4 fields +0x350/+0x354 with fields +0x0C/+0x10/+0x14 reached through matched FUN_587A5080; a qualifying record selects the helper value at +0x0C. FUN_5897CC72 guards inconsistent range and iterator state. The source reproduces the complete Ghidra-bounded 647-byte instruction stream.",
         "uncertainty": "The range, node and record schemas; meanings of param_1's +0x54 range state and param_4 fields +0x1334/+0x1338, +0x6070, +0x350 and +0x354; the semantic meaning of results 1 and 3; and the helper descriptor's field names are unresolved. FUN_5897CC72's assertion contract is also unresolved. The result is supported by fresh Ghidra pseudocode and matched caller evidence, but has not been exercised in the emulator."
       }
+    },
+    {
+      "address": "587754E0",
+      "name": "FUN_587754e0",
+      "size": 520,
+      "symbol": "_FUN_587754e0",
+      "source": "src/client-current/Main/FUN_587754e0.cpp",
+      "source_sha256": "22cc88d68a9ab9029a02675694a14a236fb93c14938941b1490c54757edc9260",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587754E0",
+          "size": 520,
+          "symbol": "_FUN_587754e0_segment_00",
+          "relocations": [
+            {
+              "offset": 71,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "587756DB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58775646",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 172,
+              "target_address": "587756B4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "5877564D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "587756B4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "5877567B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 249,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "587756A6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 309,
+              "target_address": "587756B4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 318,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 335,
+              "target_address": "587756B4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 344,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "58775571",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "5877559F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 380,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 396,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 412,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 439,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 455,
+              "target_address": "587A5080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 473,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 499,
+              "target_address": "58775535",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587754e0 / shell-map secondary fallback check",
+        "called_by": "Byte-matched FUN_58775980 calls this function at 0x58775BE8 only when preceding FUN_587756F0 returns 3; when this function also returns 3, that caller proceeds to matched FUN_587752D0. The matched caller is reached from the RTTI-identified CShell_MapObjectScreen path through FUN_588D4300 and FUN_588D31B0. Two independent fresh Ghidra exports confirm the body and edges.",
+        "behavior": "Returns 1 when param_2 equals param_3 +0x1334 or equals 0xFFFF. Otherwise it scans the range reached through param_1 +0x54 for records with first DWORD equal to param_2 and second DWORD zero; the default result is 3. For matching records, the param_3 +0x6070 mode selects checks against the descriptor reached through matched FUN_587A5080: offsets +0x10/+0x14 for the byte at param_3 +0x354, or offsets +0x18/+0x10/+0x14 against param_3 fields +0x350/+0x1334/+0x1338. A qualifying path returns the descriptor value at +0x0C. FUN_5897CC72 guards range and iterator consistency. The source reproduces the complete Ghidra-bounded 520-byte instruction stream.",
+        "uncertainty": "The param_1 +0x54 range, node and record schemas; meanings of param_2 and param_3 fields +0x1334/+0x1338, +0x6070, +0x350 and +0x354; meanings of results 1 and 3 and descriptor +0x0C; and FUN_5897CC72's assertion contract remain unresolved. The description is based on fresh Ghidra pseudocode and its matched caller; no emulator runtime test has been performed."
+      }
     }
   ]
 }

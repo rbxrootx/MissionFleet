@@ -19453,6 +19453,44 @@ EVIDENCE.update({
     },
 })
 
+MAIN_SHELL_MAP_SECONDARY_FALLBACK_ADDRESSES = ("587754E0",)
+ADDRESSES += MAIN_SHELL_MAP_SECONDARY_FALLBACK_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_SHELL_MAP_SECONDARY_FALLBACK_ADDRESSES)
+EVIDENCE.update({
+    "587754E0": {
+        "name_in_analysis": "FUN_587754e0 / shell-map secondary fallback check",
+        "called_by": (
+            "Byte-matched FUN_58775980 calls this function at 0x58775BE8 only "
+            "when preceding FUN_587756F0 returns 3; when this function also "
+            "returns 3, that caller proceeds to matched FUN_587752D0. The "
+            "matched caller is reached from the RTTI-identified "
+            "CShell_MapObjectScreen path through FUN_588D4300 and FUN_588D31B0. "
+            "Two independent fresh Ghidra exports confirm the body and edges."
+        ),
+        "behavior": (
+            "Returns 1 when param_2 equals param_3 +0x1334 or equals 0xFFFF. "
+            "Otherwise it scans the range reached through param_1 +0x54 for "
+            "records with first DWORD equal to param_2 and second DWORD zero; "
+            "the default result is 3. For matching records, the param_3 "
+            "+0x6070 mode selects checks against the descriptor reached through "
+            "matched FUN_587A5080: offsets +0x10/+0x14 for the byte at "
+            "param_3 +0x354, or offsets +0x18/+0x10/+0x14 against param_3 "
+            "fields +0x350/+0x1334/+0x1338. A qualifying path returns the "
+            "descriptor value at +0x0C. FUN_5897CC72 guards range and iterator "
+            "consistency. The source reproduces the complete Ghidra-bounded "
+            "520-byte instruction stream."
+        ),
+        "uncertainty": (
+            "The param_1 +0x54 range, node and record schemas; meanings of "
+            "param_2 and param_3 fields +0x1334/+0x1338, +0x6070, +0x350 and "
+            "+0x354; meanings of results 1 and 3 and descriptor +0x0C; and "
+            "FUN_5897CC72's assertion contract remain unresolved. The "
+            "description is based on fresh Ghidra pseudocode and its matched "
+            "caller; no emulator runtime test has been performed."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()
