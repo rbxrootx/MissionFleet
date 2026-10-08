@@ -462,6 +462,12 @@ MAIN_EVENT_80025102_ADDRESSES = (
     "588FB8C0", "588FC210", "588FC560", "588FF630", "588FF670",
 )
 ADDRESSES += MAIN_EVENT_80025102_ADDRESSES
+MAIN_EVENT_80021004_ADDRESSES = (
+    "58797460", "58797470", "587D7D80", "587D8610", "587DA9A0",
+    "587DAAC0", "587E4180", "58817800", "588E6530", "588E98E0",
+    "588F4290",
+)
+ADDRESSES += MAIN_EVENT_80021004_ADDRESSES
 MAIN_QUIT_PROMPT_SETUP_ADDRESSES = ("5876B9F0",)
 ADDRESSES += MAIN_QUIT_PROMPT_SETUP_ADDRESSES
 MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES = (
@@ -17247,6 +17253,77 @@ MAIN_EVENT_80025102_EVIDENCE = {
 }
 for _event_80025102_address, _event_80025102_detail in MAIN_EVENT_80025102_EVIDENCE.items():
     EVIDENCE[_event_80025102_address] = _event_80025102_detail
+
+MAIN_EVENT_80021004_EVIDENCE = {
+    "587DAAC0": {
+        "name_in_analysis": "FUN_587daac0 / event 0x80021004 receiver-state 0x100 handler",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFBCB in case 0x80021004 when receiver field +0x134 equals 0x100.",
+        "behavior": "Dispatches observed selectors 1, 2, 0x10, 0x20, and 0x30. Selector 1 updates twelve entries through FUN_587D8610 for values 1 or -1; selector 2 clears state and raises a status; selectors 0x10 and 0x20 route through FUN_58817800. It always applies the observed XOR-0xAAAAAAAA argument to FUN_5888CC70 and clears DAT_58A248D8.",
+        "uncertainty": "The receiver-state and selector meanings, field names, and user-visible effects are unresolved. The selector-1 record arithmetic uses XOR-0xAA encoded fields, but their schema is unknown.",
+    },
+    "58797460": {
+        "name_in_analysis": "FUN_58797460 / selector-1 virtual callback thunk",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB25 when selector 1 has observed value 0.",
+        "behavior": "Invokes the receiver object's virtual function at vtable offset +8.",
+        "uncertainty": "The dynamic receiver type and virtual target are not statically resolved.",
+    },
+    "58797470": {
+        "name_in_analysis": "FUN_58797470 / selector-to-status and receiver-state reset",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB4A for selector 2 with observed value 0.",
+        "behavior": "Maps observed selector values to status identifiers, calls the matched status helpers, then clears the associated state fields and resets several stored values to 0xFFFF or 0xFFFFFFFF.",
+        "uncertainty": "The status identifiers' displayed text and the cleared receiver fields' names are unknown.",
+    },
+    "587D7D80": {
+        "name_in_analysis": "FUN_587d7d80 / event 0x80021004 selector fallback",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFD32 for receiver state other than 0x100, discriminator 5, and selectors outside the four explicit values.",
+        "behavior": "Emits matched status identifier 3, updates the object referenced by DAT_58A248FC, and invokes the receiver's virtual function at offset +0x94.",
+        "uncertainty": "The selector fallback's user-facing meaning, global object type, and virtual callback target are unresolved.",
+    },
+    "587D8610": {
+        "name_in_analysis": "FUN_587d8610 / thirty-two-entry XOR-encoded record update",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAAF1 with value 1 or at 0x587DAB0C with value -1 for selector 1.",
+        "behavior": "Walks thirty-two fixed-stride records, checks their type byte and limits against the current record, accumulates a scaled quantity, and conditionally clears or adjusts XOR-0xAA encoded values.",
+        "uncertainty": "The record layout, units, type meanings, and business effect of the calculated quantities are not established by the decompilation.",
+    },
+    "587DA9A0": {
+        "name_in_analysis": "FUN_587da9a0 / event 0x80021004 selector-1 record selection",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFBF5 for receiver state other than 0x100, discriminator 5, and selector 1.",
+        "behavior": "Passes the event value to FUN_588F4290, conditionally walks a linked record list and calls FUN_587CF690, sets an observed field at DAT_58A245A0+0xAE0, clears DAT_589CC01C, then calls FUN_587B9060 with the observed field at +0xA06.",
+        "uncertainty": "The selected record identity and effects of the list condition and fields are unresolved.",
+    },
+    "587E4180": {
+        "name_in_analysis": "FUN_587e4180 / event 0x80021004 discriminator 0x2C/0x3C handler",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFD5C when event field +0x0A equals 0x2C or 0x3C; these checks follow the state/selector chain as separate conditions.",
+        "behavior": "For the 0x2C path, looks up a record using the first payload word and, when found, XOR-decodes the value at record +0xA4C through FUN_588E6530 before calling FUN_587DF580. For the 0x3C path, maps observed selectors 1, 2, and 3 to status identifiers 0, 1, and 0x23.",
+        "uncertainty": "The discriminator names, record schema, stored field meaning, and status text are unknown.",
+    },
+    "58817800": {
+        "name_in_analysis": "FUN_58817800 / event 0x80021004 selector 0x10/0x20 continuation",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB74 for selector 0x10 or at 0x587DAB88 for selector 0x20.",
+        "behavior": "The selector-0x10 path performs a record lookup, copies a 0x2E-DWORD block plus four trailing fields through FUN_588E98E0, and invokes receiver/child callbacks. The selector-0x20 path sets a receiver flag and may emit matched status identifier 0x12E.",
+        "uncertainty": "The copied record schema, callback target types, and visible effects of the two selector paths are unresolved.",
+    },
+    "588E6530": {
+        "name_in_analysis": "FUN_588e6530 / XOR-encoded record field store",
+        "called_by": "Called by FUN_587E4180 at 0x587E41B0 to store the value from record +0xA4C after XOR with 0xAAAAAAAA.",
+        "behavior": "Writes param_2 XOR 0xAAAAAAAA to receiver offset +0x4C.",
+        "uncertainty": "The field's semantic name and decoded value are unknown.",
+    },
+    "588E98E0": {
+        "name_in_analysis": "FUN_588e98e0 / fixed-width record-field copy",
+        "called_by": "Called by FUN_58817800 at 0x588178A8 after its record lookup succeeds.",
+        "behavior": "Copies 0x2E DWORDs from source offset +0x48 to destination offset +0x48, copies four trailing DWORD fields at +0xCD0 through +0xCDC, then calls FUN_588E8570.",
+        "uncertainty": "The source/destination record types and copied fields' meanings are unknown.",
+    },
+    "588F4290": {
+        "name_in_analysis": "FUN_588f4290 / record lookup and selection helper",
+        "called_by": "Called by FUN_587DA9A0 at 0x587DA9AB.",
+        "behavior": "Clears the previously selected record's low flag bit, searches the linked records for a value matching param_2, and selects the matching record unless its +0xEC field is nonzero; a selected record has its low flag bit set.",
+        "uncertainty": "The record identity key, flag meaning, and +0xEC state are unnamed.",
+    },
+}
+for _event_80021004_address, _event_80021004_detail in MAIN_EVENT_80021004_EVIDENCE.items():
+    EVIDENCE[_event_80021004_address] = _event_80021004_detail
 
 
 if __name__ == "__main__":

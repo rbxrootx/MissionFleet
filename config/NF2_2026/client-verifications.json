@@ -465731,6 +465731,790 @@
         "behavior": "Looks up a record through matched FUN_588FF0F0 and passes a found result into FUN_588FA7F0.",
         "uncertainty": "The record key and schema remain unresolved; the sibling branch is supported by the matched dispatcher's callsite and Ghidra call edges."
       }
+    },
+    {
+      "address": "58797460",
+      "name": "FUN_58797460",
+      "size": 7,
+      "symbol": "_FUN_58797460",
+      "source": "src/client-current/Main/FUN_58797460.cpp",
+      "source_sha256": "8432ce9226d503b9a1825842747089611a6b139c762464b192079e2510ea1327",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58797460",
+          "size": 7,
+          "symbol": "_FUN_58797460_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58797460 / selector-1 virtual callback thunk",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB25 when selector 1 has observed value 0.",
+        "behavior": "Invokes the receiver object's virtual function at vtable offset +8.",
+        "uncertainty": "The dynamic receiver type and virtual target are not statically resolved."
+      }
+    },
+    {
+      "address": "58797470",
+      "name": "FUN_58797470",
+      "size": 319,
+      "symbol": "_FUN_58797470",
+      "source": "src/client-current/Main/FUN_58797470.cpp",
+      "source_sha256": "451b5b23cd5a8eb099d5031fe3571c18f3e330f3a712b5d22ab5dd95785001f2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58797470",
+          "size": 319,
+          "symbol": "_FUN_58797470_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "58797552",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "58797546",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58797546",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58797546",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "58797546",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58797470 / selector-to-status and receiver-state reset",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB4A for selector 2 with observed value 0.",
+        "behavior": "Maps observed selector values to status identifiers, calls the matched status helpers, then clears the associated state fields and resets several stored values to 0xFFFF or 0xFFFFFFFF.",
+        "uncertainty": "The status identifiers' displayed text and the cleared receiver fields' names are unknown."
+      }
+    },
+    {
+      "address": "587D7D80",
+      "name": "FUN_587d7d80",
+      "size": 57,
+      "symbol": "_FUN_587d7d80",
+      "source": "src/client-current/Main/FUN_587d7d80.cpp",
+      "source_sha256": "d4d76186e73f3b4743724a2435b43775de79546f5823ebf5f380fe41db5e483a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D7D80",
+          "size": 57,
+          "symbol": "_FUN_587d7d80_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 19,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d7d80 / event 0x80021004 selector fallback",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFD32 for receiver state other than 0x100, discriminator 5, and selectors outside the four explicit values.",
+        "behavior": "Emits matched status identifier 3, updates the object referenced by DAT_58A248FC, and invokes the receiver's virtual function at offset +0x94.",
+        "uncertainty": "The selector fallback's user-facing meaning, global object type, and virtual callback target are unresolved."
+      }
+    },
+    {
+      "address": "587D8610",
+      "name": "FUN_587d8610",
+      "size": 549,
+      "symbol": "_FUN_587d8610",
+      "source": "src/client-current/Main/FUN_587d8610.cpp",
+      "source_sha256": "fe3151c282c0795725015d8576835112f466e052d5fa372920d6c1f88009fa9a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587D8610",
+          "size": 69,
+          "symbol": "_FUN_587d8610_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "587D8660",
+          "size": 480,
+          "symbol": "_FUN_587d8610_segment_01",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "587D873D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "587D8819",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 466,
+              "target_address": "587D8660",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587d8610 / thirty-two-entry XOR-encoded record update",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAAF1 with value 1 or at 0x587DAB0C with value -1 for selector 1.",
+        "behavior": "Walks thirty-two fixed-stride records, checks their type byte and limits against the current record, accumulates a scaled quantity, and conditionally clears or adjusts XOR-0xAA encoded values.",
+        "uncertainty": "The record layout, units, type meanings, and business effect of the calculated quantities are not established by the decompilation."
+      }
+    },
+    {
+      "address": "587DA9A0",
+      "name": "FUN_587da9a0",
+      "size": 137,
+      "symbol": "_FUN_587da9a0",
+      "source": "src/client-current/Main/FUN_587da9a0.cpp",
+      "source_sha256": "4b2d90e1c8da6c6379054e06d63a7f4320b73d7d59be4013b07cb1e0a2f282e3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DA9A0",
+          "size": 41,
+          "symbol": "_FUN_587da9a0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 12,
+              "target_address": "588F4290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CC01C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587DA9D0",
+          "size": 96,
+          "symbol": "_FUN_587da9a0_segment_01",
+          "relocations": [
+            {
+              "offset": 19,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 26,
+              "target_address": "587CF690",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 39,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "589CC01C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "587B9060",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587da9a0 / event 0x80021004 selector-1 record selection",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFBF5 for receiver state other than 0x100, discriminator 5, and selector 1.",
+        "behavior": "Passes the event value to FUN_588F4290, conditionally walks a linked record list and calls FUN_587CF690, sets an observed field at DAT_58A245A0+0xAE0, clears DAT_589CC01C, then calls FUN_587B9060 with the observed field at +0xA06.",
+        "uncertainty": "The selected record identity and effects of the list condition and fields are unresolved."
+      }
+    },
+    {
+      "address": "587DAAC0",
+      "name": "FUN_587daac0",
+      "size": 268,
+      "symbol": "_FUN_587daac0",
+      "source": "src/client-current/Main/FUN_587daac0.cpp",
+      "source_sha256": "ec81af30f93b37acf19ea801c3c44e5d796d13bee87a34a27f11f638e0408dc9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587DAAC0",
+          "size": 268,
+          "symbol": "_FUN_587daac0_segment_00",
+          "relocations": [
+            {
+              "offset": 14,
+              "target_address": "587DABA6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 50,
+              "target_address": "587D8610",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "58731620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "587DABA6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "587D8610",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58731620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "587DABA6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 102,
+              "target_address": "58797460",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58731620",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "58797470",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "58817800",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "58817800",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 219,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "58A245C0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "5888CC70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "58A248D8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587daac0 / event 0x80021004 receiver-state 0x100 handler",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFBCB in case 0x80021004 when receiver field +0x134 equals 0x100.",
+        "behavior": "Dispatches observed selectors 1, 2, 0x10, 0x20, and 0x30. Selector 1 updates twelve entries through FUN_587D8610 for values 1 or -1; selector 2 clears state and raises a status; selectors 0x10 and 0x20 route through FUN_58817800. It always applies the observed XOR-0xAAAAAAAA argument to FUN_5888CC70 and clears DAT_58A248D8.",
+        "uncertainty": "The receiver-state and selector meanings, field names, and user-visible effects are unresolved. The selector-1 record arithmetic uses XOR-0xAA encoded fields, but their schema is unknown."
+      }
+    },
+    {
+      "address": "587E4180",
+      "name": "FUN_587e4180",
+      "size": 161,
+      "symbol": "_FUN_587e4180",
+      "source": "src/client-current/Main/FUN_587e4180.cpp",
+      "source_sha256": "528e9f4e4a52a85549dd0222c944c7a6fa4814a155aa0b61f5c62764a20aa0df",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E4180",
+          "size": 161,
+          "symbol": "_FUN_587e4180_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "588F4060",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "588E6530",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "587DF580",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 146,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 153,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587e4180 / event 0x80021004 discriminator 0x2C/0x3C handler",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587BFD5C when event field +0x0A equals 0x2C or 0x3C; these checks follow the state/selector chain as separate conditions.",
+        "behavior": "For the 0x2C path, looks up a record using the first payload word and, when found, XOR-decodes the value at record +0xA4C through FUN_588E6530 before calling FUN_587DF580. For the 0x3C path, maps observed selectors 1, 2, and 3 to status identifiers 0, 1, and 0x23.",
+        "uncertainty": "The discriminator names, record schema, stored field meaning, and status text are unknown."
+      }
+    },
+    {
+      "address": "58817800",
+      "name": "FUN_58817800",
+      "size": 234,
+      "symbol": "_FUN_58817800",
+      "source": "src/client-current/Main/FUN_58817800.cpp",
+      "source_sha256": "8dacdb92ac15304f9ecfc832fa6083f10e0dabc0175a376ca2da5e42cb57e18b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58817800",
+          "size": 234,
+          "symbol": "_FUN_58817800_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "588178C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "588F4060",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "588E98E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "588ECEA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 116,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "58A246D8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 219,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58817800 / event 0x80021004 selector 0x10/0x20 continuation",
+        "called_by": "Called by FUN_587DAAC0 at 0x587DAB74 for selector 0x10 or at 0x587DAB88 for selector 0x20.",
+        "behavior": "The selector-0x10 path performs a record lookup, copies a 0x2E-DWORD block plus four trailing fields through FUN_588E98E0, and invokes receiver/child callbacks. The selector-0x20 path sets a receiver flag and may emit matched status identifier 0x12E.",
+        "uncertainty": "The copied record schema, callback target types, and visible effects of the two selector paths are unresolved."
+      }
+    },
+    {
+      "address": "588E6530",
+      "name": "FUN_588e6530",
+      "size": 15,
+      "symbol": "_FUN_588e6530",
+      "source": "src/client-current/Main/FUN_588e6530.cpp",
+      "source_sha256": "7046e88cf89964d34733262c82a62285fabcd4dbce67950e5bde6ae1d099ed35",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E6530",
+          "size": 15,
+          "symbol": "_FUN_588e6530_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e6530 / XOR-encoded record field store",
+        "called_by": "Called by FUN_587E4180 at 0x587E41B0 to store the value from record +0xA4C after XOR with 0xAAAAAAAA.",
+        "behavior": "Writes param_2 XOR 0xAAAAAAAA to receiver offset +0x4C.",
+        "uncertainty": "The field's semantic name and decoded value are unknown."
+      }
+    },
+    {
+      "address": "588E98E0",
+      "name": "FUN_588e98e0",
+      "size": 81,
+      "symbol": "_FUN_588e98e0",
+      "source": "src/client-current/Main/FUN_588e98e0.cpp",
+      "source_sha256": "c8c8b1f4d79963af3271bb6f7ca260c053a8d2347f9442d4722d2d8af8d8c90a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588E98E0",
+          "size": 81,
+          "symbol": "_FUN_588e98e0_segment_00",
+          "relocations": [
+            {
+              "offset": 72,
+              "target_address": "588E8570",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588e98e0 / fixed-width record-field copy",
+        "called_by": "Called by FUN_58817800 at 0x588178A8 after its record lookup succeeds.",
+        "behavior": "Copies 0x2E DWORDs from source offset +0x48 to destination offset +0x48, copies four trailing DWORD fields at +0xCD0 through +0xCDC, then calls FUN_588E8570.",
+        "uncertainty": "The source/destination record types and copied fields' meanings are unknown."
+      }
+    },
+    {
+      "address": "588F4290",
+      "name": "FUN_588f4290",
+      "size": 93,
+      "symbol": "_FUN_588f4290",
+      "source": "src/client-current/Main/FUN_588f4290.cpp",
+      "source_sha256": "20b2428e0364c2730b1a162204777f6f74fe987f62c786038cba919b7106e61b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F4290",
+          "size": 93,
+          "symbol": "_FUN_588f4290_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588f4290 / record lookup and selection helper",
+        "called_by": "Called by FUN_587DA9A0 at 0x587DA9AB.",
+        "behavior": "Clears the previously selected record's low flag bit, searches the linked records for a value matching param_2, and selects the matching record unless its +0xEC field is nonzero; a selected record has its low flag bit set.",
+        "uncertainty": "The record identity key, flag meaning, and +0xEC state are unnamed."
+      }
     }
   ]
 }
