@@ -474,6 +474,14 @@ MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES = ("587B1B70",)
 ADDRESSES += MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES
 MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES = ("587B4100",)
 ADDRESSES += MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES
+MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES = (
+    "58731000", "58731230", "587312D0", "58731840", "58731860",
+    "58731A10",
+    "58731D30", "58732290", "587324A0", "58732710", "58732980",
+    "58732BF0", "58732E60", "587330C0", "58733120", "587331A0",
+    "58733E70", "587344A0", "58734770", "58734850",
+)
+ADDRESSES += MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -16980,6 +16988,73 @@ for _cfc_address in MAIN_CFC_MANAGER_FILE_INTEGRITY_ADDRESSES:
         "called_by": _cfc_detail.get("called_by", _CFC_MANAGER_DEFAULT_EVIDENCE["called_by"]),
         "behavior": _cfc_detail.get("behavior", _CFC_MANAGER_DEFAULT_EVIDENCE["behavior"]),
         "uncertainty": _cfc_detail.get("uncertainty", _CFC_MANAGER_DEFAULT_EVIDENCE["uncertainty"]),
+    }
+
+MAIN_SECOND_PROTECTION_SYSTEM_EVIDENCE = {
+    "58731840": {
+        "name_in_analysis": "FUN_58731840 / C2ndProtectionSystemManager deleting destructor",
+        "called_by": "Installed-image RTTI places FUN_58731840 at slot +0x00 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0.",
+        "behavior": "Calls the class cleanup body and conditionally forwards to the matched runtime deleting-call thunk when the low flag bit is set.",
+        "uncertainty": "The exact ownership of the base subobjects and runtime deallocation effects are outside this class-body reconstruction.",
+    },
+    "58734850": {
+        "name_in_analysis": "FUN_58734850 / C2ndProtectionSystemManager state update",
+        "called_by": "Installed-image RTTI places this body at slot +0x04 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0; matched client setup FUN_5878AF40 constructs the screen.",
+        "behavior": "Checks the receiver's observed state flags and routes into FUN_58734770, which rebuilds the secondary-protection prompt layouts for the observed UI modes.",
+        "uncertainty": "The server meaning of each mode and the meanings of the receiver flags remain unresolved; the emulator has not exercised this screen.",
+    },
+    "58731A10": {
+        "name_in_analysis": "FUN_58731a10 / C2ndProtectionSystemManager state transition",
+        "called_by": "Installed-image RTTI places this body at slot +0x08 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0.",
+        "behavior": "Ghidra shows a guarded state transition, clearing an observed global and requesting a screen refresh through the receiver's virtual table.",
+        "uncertainty": "The numeric state values and global's product-level meaning have not been recovered.",
+    },
+    "58731230": {
+        "name_in_analysis": "FUN_58731230 / C2ndProtectionSystemManager state flag transition",
+        "called_by": "Installed-image RTTI places this body at slot +0x0C of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0.",
+        "behavior": "Updates the receiver among the observed 0x100, 0x200, 0x400, and 0x500 state values.",
+        "uncertainty": "The state constants' meanings and their server-side effects are unknown.",
+    },
+    "58731860": {
+        "name_in_analysis": "FUN_58731860 / C2ndProtectionSystemManager event dispatch",
+        "called_by": "Installed-image RTTI places this body at slot +0x10 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0.",
+        "behavior": "Routes observed window events, consumes Escape and click input paths, and forwards applicable events to child controls.",
+        "uncertainty": "Indirect child callbacks and the complete interaction lifecycle have not been exercised in the emulator.",
+    },
+    "58733E70": {
+        "name_in_analysis": "FUN_58733e70 / C2ndProtectionSystemManager keypad input handler",
+        "called_by": "Installed-image RTTI places this body at slot +0x18 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0.",
+        "behavior": "Processes keypad controls, updates and masks entered digits, handles deletion, compares the observed password entries, and emits messages 0x80016101 and 0x80016102 plus status identifiers 0xBBA and 0xBBB.",
+        "uncertainty": "The protocol semantics of the two message payloads, field names, and status identifiers are unresolved; this is instruction-level evidence, not proof of successful server-side password changes.",
+    },
+    "58734770": {
+        "name_in_analysis": "FUN_58734770 / C2ndProtectionSystemManager prompt-state dispatcher",
+        "called_by": "Fresh Ghidra call edges show FUN_58734850 entering this dispatcher; exact class ranges are recorded in config/NF2_2026/main-second-protection-system-body-ranges.tsv.",
+        "behavior": "Clears and rebuilds the observed prompt/control state, selecting among the class's recovered password-entry layouts.",
+        "uncertainty": "The numeric mode-to-product-flow mapping has not been independently confirmed from server behavior.",
+    },
+}
+for _second_protection_address in MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES:
+    _second_protection_detail = MAIN_SECOND_PROTECTION_SYSTEM_EVIDENCE.get(
+        _second_protection_address, {}
+    )
+    EVIDENCE[_second_protection_address] = {
+        "name_in_analysis": _second_protection_detail.get(
+            "name_in_analysis",
+            f"FUN_{_second_protection_address.lower()} / C2ndProtectionSystemManager class slice",
+        ),
+        "called_by": _second_protection_detail.get(
+            "called_by",
+            "Fresh Ghidra direct-call edges place this function in the open direct-call closure of the primary RTTI-backed C2ndProtectionSystemManager vtable. Exact body ranges are recorded in config/NF2_2026/main-second-protection-system-body-ranges.tsv.",
+        ),
+        "behavior": _second_protection_detail.get(
+            "behavior",
+            "This candidate preserves the exact mapped x86 body in the C2ndProtectionSystemManager method/helper closure; no more specific role is asserted without a direct instruction-level trace.",
+        ),
+        "uncertainty": _second_protection_detail.get(
+            "uncertainty",
+            "The helper's independent data-field and indirect-call semantics remain unresolved; no emulator test has been run.",
+        ),
     }
 
 
