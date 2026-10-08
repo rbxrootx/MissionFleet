@@ -477205,7 +477205,7 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_588F9C00 / warehouse slot-manager child reset",
-        "called_by": "Called by primary slots +0x0C and +0x18, plus the open reset caller FUN_588FFC90.",
+        "called_by": "Called by primary slots +0x0C and +0x18, plus byte-matched auxiliary reset caller FUN_588FFC90.",
         "behavior": "Runs the child low-state cleanup, requests a 0x400-by-0x400 refresh, and dispatches child virtual methods for children whose state has bit 0 set.",
         "uncertainty": "Two indirect child dispatch destinations and their UI effects remain unresolved."
       }
@@ -478647,6 +478647,81 @@
         "called_by": "Installed at primary-vtable slot +0x00 in the RTTI-identified CWarehouseSlotManager table.",
         "behavior": "Calls the class destruction body and invokes the scalar delete helper when the low deletion flag is set.",
         "uncertainty": "The allocator contract and exact object-size behavior are not inferred from the wrapper alone."
+      }
+    },
+    {
+      "address": "588FFC90",
+      "name": "FUN_588ffc90",
+      "size": 246,
+      "symbol": "_FUN_588ffc90",
+      "source": "src/client-current/Main/FUN_588ffc90.cpp",
+      "source_sha256": "4da351a25b0b7a9bdb288d0374566f16af7130591b79428ac1fca63aeaf34f8b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 16,
+          "target_address": "588F9C00",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 82,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 107,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 132,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 168,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 201,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 216,
+          "target_address": "5897CC72",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 234,
+          "target_address": "587AEDB0",
+          "kind": "relative",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FFC90 / warehouse-manager reset caller",
+        "called_by": "The matched CWarehouseManager virtual method FUN_588FC770 calls it at 0x588FC7DA; fresh Ghidra reference export confirms this caller.",
+        "behavior": "Calls the slot-manager child reset at 0x588FFC9F, resets fields +0x88 through +0x94, clears deque entries while invoking each non-null child's virtual slot 0 with argument 1, then destroys deque storage through FUN_587AEDB0. Six invalid-range paths call FUN_5897CC72.",
+        "uncertainty": "The deque ownership contract, child type, callback meaning, and reachability of the invalid-range exception paths remain unresolved."
       }
     }
   ]

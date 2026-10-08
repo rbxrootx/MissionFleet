@@ -11,9 +11,15 @@ import capstone
 from capstone.x86_const import X86_INS_CALL, X86_INS_JMP, X86_OP_IMM
 
 try:
-    from .build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+    from .build_current_main_verifications import (
+        MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+        MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+    )
 except ImportError:  # Support direct execution as a script.
-    from build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+    from build_current_main_verifications import (
+        MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+        MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,22 +34,26 @@ CLOSURE_PATH = ROOT / "config/NF2_2026/main-warehouse-slot-manager-root-closures
 NEXT = ROOT / "var/current-main-next"
 FRESH_LOG = NEXT / "warehouse-slot-manager-primary-vtable-fresh-ghidra.log"
 FRESH_DECOMP = NEXT / "warehouse-slot-manager-primary-vtable-fresh-ghidra.c"
+INCOMING_REFERENCE_LOG = NEXT / "frontier-warehouse-update-fresh-ghidra.log"
 BODY_INVENTORY = NEXT / "main-function-bodies.tsv"
 EDGE_INVENTORY = NEXT / "main-function-edges.tsv"
 MARKER = "objdiff-3.8.0-byte-identical"
 
-FUNCTIONS = tuple(int(address, 16) for address in MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES)
+FUNCTIONS = tuple(int(address, 16) for address in (
+    *MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+    *MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+))
 SELECTED = set(FUNCTIONS)
-OPEN_CALLER = 0x588FFC90
-EXPECTED_FUNCTIONS = 23
-EXPECTED_BYTES = 3741
-EXPECTED_RANGES = 26
-EXPECTED_DIRECT_TRANSFERS = 87
-EXPECTED_INTERNAL_TRANSFERS = 26
-EXPECTED_VERIFIED_BOUNDARY_TRANSFERS = 61
+RESET_CALLER = 0x588FFC90
+EXPECTED_FUNCTIONS = 24
+EXPECTED_BYTES = 3987
+EXPECTED_RANGES = 27
+EXPECTED_DIRECT_TRANSFERS = 95
+EXPECTED_INTERNAL_TRANSFERS = 27
+EXPECTED_VERIFIED_BOUNDARY_TRANSFERS = 68
 EXPECTED_INDIRECT_CALLS = {
     0x588F7E30: 1, 0x588F9C00: 1, 0x588FF180: 1, 0x588FF2F0: 1,
-    0x588FF890: 2, 0x588FF940: 1, 0x588FF9A0: 5,
+    0x588FF890: 2, 0x588FF940: 1, 0x588FF9A0: 5, 0x588FFC90: 1,
 }
 EXPECTED_INDIRECT_JUMPS = {0x588F9C00: 1}
 
@@ -57,6 +67,7 @@ ROOT_CLOSURES = {
         0x588FB850, 0x588FC990, 0x588FCAC0, 0x588FCB80, 0x588FEFE0,
         0x588FF180, 0x588FF200, 0x588FF2F0,
     },
+    0x588FFC90: {0x588FFC90, 0x588F9C00, 0x588F9B80},
 }
 
 ADDRESS_POINT = 0x589A23C4
@@ -281,12 +292,12 @@ def main():
     decomp = FRESH_DECOMP.read_text(encoding="utf-8", errors="replace")
     if "/* failed:" in decomp:
         raise AssertionError("Fresh Ghidra decompilation failed")
-    wanted = SELECTED | {OPEN_CALLER}
+    wanted = SELECTED
     fresh_functions, fresh_ranges, fresh_coverage, fresh_calls, refs_to = parse_log(
         FRESH_LOG.read_text(encoding="utf-8", errors="replace"), wanted
     )
     if set(fresh_functions) != wanted:
-        raise AssertionError("Fresh Ghidra output omits a selected member or open caller")
+        raise AssertionError("Fresh Ghidra output omits a selected member")
     for address in wanted:
         bodies = [row for row in read_tsv(BODY_INVENTORY)
                   if int(row["function"], 16) == address]
@@ -347,10 +358,10 @@ def main():
         if actual != expected_members:
             raise AssertionError(f"Tracked direct closure changed at {root:08X}")
     if set().union(*ROOT_CLOSURES.values()) != SELECTED:
-        raise AssertionError("Selected functions are not the union of all four open class slots")
+        raise AssertionError("Selected functions are not the union of the four class slots and auxiliary reset root")
 
     if SELECTED - set(records) or SELECTED - matched:
-        raise AssertionError("Not every class-slice function has an objdiff-verified record")
+        raise AssertionError("Not every selected function has an objdiff-verified record")
     if SELECTED - set(inventory):
         raise AssertionError("A selected function is missing from installed-client inventory")
 
@@ -473,16 +484,38 @@ def main():
                for start, size in record_ranges(caller_record)):
         raise AssertionError("Matched constructor callsite is outside the verified caller body")
 
-    if OPEN_CALLER in matched:
-        raise AssertionError("Open reset caller unexpectedly entered verified scope")
-    expected_open_edge = (OPEN_CALLER, 0x588FFC9F, 0x588F9C00)
-    actual_open_edges = {
-        (function, site, target) for function, edges in fresh_calls.items()
-        for site, target in edges if function == OPEN_CALLER and target in SELECTED
+    if RESET_CALLER not in matched or RESET_CALLER not in records:
+        raise AssertionError("Auxiliary warehouse reset caller lost byte verification")
+    reset_record = records[RESET_CALLER]
+    if (int(reset_record["size"]) != int(inventory[RESET_CALLER]["size"])
+            or len(record_ranges(reset_record)) != 1):
+        raise AssertionError("Auxiliary reset-caller match no longer covers its exact body")
+    if hashlib.sha256((ROOT / reset_record["source"]).read_bytes()).hexdigest() != reset_record["source_sha256"]:
+        raise AssertionError("Auxiliary reset-caller source hash is stale")
+
+    incoming_ref_log = INCOMING_REFERENCE_LOG.read_text(encoding="utf-8", errors="replace").lower()
+    expected_incoming_reference = (
+        "dumpfunctionrefs.java> ref 588fc7da type=unconditional_call "
+        "source=default caller=fun_588fc770@588fc770"
+    )
+    if expected_incoming_reference not in incoming_ref_log:
+        raise AssertionError("Fresh Ghidra lacks the CWarehouseManager caller reference")
+    if 0x588FC770 not in matched:
+        raise AssertionError("Matched incoming CWarehouseManager caller lost byte verification")
+    require_call(image, decoder, 0x588FC7DA, RESET_CALLER)
+
+    expected_reset_transfers = {
+        (0x588FFC9F, 0x588F9C00),
+        (0x588FFCE1, 0x5897CC72), (0x588FFCFA, 0x5897CC72),
+        (0x588FFD13, 0x5897CC72), (0x588FFD37, 0x5897CC72),
+        (0x588FFD58, 0x5897CC72), (0x588FFD67, 0x5897CC72),
+        (0x588FFD79, 0x587AEDB0),
     }
-    if actual_open_edges != {expected_open_edge}:
-        raise AssertionError(f"Fresh open-caller boundary changed: {actual_open_edges}")
-    require_call(image, decoder, expected_open_edge[1], expected_open_edge[2])
+    actual_reset_transfers = set(fresh_calls[RESET_CALLER])
+    if actual_reset_transfers != expected_reset_transfers:
+        raise AssertionError(f"Fresh Ghidra reset-caller transfers changed: {actual_reset_transfers}")
+    for site, target in expected_reset_transfers:
+        require_call(image, decoder, site, target)
 
     formatted_indirect_calls = {
         f"0x{address:08X}": count for address, count in sorted(indirect_calls.items())
@@ -491,11 +524,14 @@ def main():
         f"0x{address:08X}": count for address, count in sorted(indirect_jumps.items())
     }
     print(
-        f"Main.dll CWarehouseSlotManager: {len(SELECTED)} functions / {byte_count:,} bytes "
+        f"Main.dll CWarehouseSlotManager: {len(MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES)} class functions "
+        f"plus {len(MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES)} auxiliary reset caller "
+        f"({len(SELECTED)} functions / {byte_count:,} bytes) "
         f"across {range_count} exact Ghidra ranges; {EXPECTED_DIRECT_TRANSFERS} direct "
         f"call/tail-transfer edges ({EXPECTED_INTERNAL_TRANSFERS} internal, "
         f"{EXPECTED_VERIFIED_BOUNDARY_TRANSFERS} to verified code); RTTI, four open "
-        "slots, matched constructor path, and open reset caller pass; "
+        "primary slots, auxiliary reset root, matched constructor path, and incoming "
+        "CWarehouseManager caller pass; "
         f"indirect calls={formatted_indirect_calls}, "
         f"indirect jumps={formatted_indirect_jumps}; "
         "complete byte coverage and direct closures pass"

@@ -505,6 +505,26 @@ RELOCATION_OVERRIDES = {
     # This function is reconstructed as compiler-generated C++; its target is
     # compared as a single symbol instead of a byte-emitted segment.
     "588F7DF0": [],
+    # The adjacent warehouse-manager reset caller has one exact body range.
+    # Keep its direct calls as audited fixed-image transfers in that body.
+    "588FFC90": [
+        {"offset": 16, "target_address": "588F9C00", "kind": "relative",
+         "audit_only": True},
+        {"offset": 82, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 107, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 132, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 168, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 201, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 216, "target_address": "5897CC72", "kind": "relative",
+         "audit_only": True},
+        {"offset": 234, "target_address": "587AEDB0", "kind": "relative",
+         "audit_only": True},
+    ],
     "58907380": [
         {"offset": 8, "target_address": "589072A0", "kind": "relative",
          "symbol": "_FUN_589072a0", "audit_only": False},
@@ -18778,6 +18798,10 @@ MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES = (
 ADDRESSES += MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES)
 
+MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES = ("588FFC90",)
+ADDRESSES += MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES)
+
 MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE = {
     "588F7DF0": {
         "name_in_analysis": "FUN_588F7DF0 / warehouse child-state set helper",
@@ -18799,7 +18823,7 @@ MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE = {
     },
     "588F9C00": {
         "name_in_analysis": "FUN_588F9C00 / warehouse slot-manager child reset",
-        "called_by": "Called by primary slots +0x0C and +0x18, plus the open reset caller FUN_588FFC90.",
+        "called_by": "Called by primary slots +0x0C and +0x18, plus byte-matched auxiliary reset caller FUN_588FFC90.",
         "behavior": "Runs the child low-state cleanup, requests a 0x400-by-0x400 refresh, and dispatches child virtual methods for children whose state has bit 0 set.",
         "uncertainty": "Two indirect child dispatch destinations and their UI effects remain unresolved.",
     },
@@ -18919,6 +18943,16 @@ MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE)
+
+MAIN_WAREHOUSE_RESET_CALLER_EVIDENCE = {
+    "588FFC90": {
+        "name_in_analysis": "FUN_588FFC90 / warehouse-manager reset caller",
+        "called_by": "The matched CWarehouseManager virtual method FUN_588FC770 calls it at 0x588FC7DA; fresh Ghidra reference export confirms this caller.",
+        "behavior": "Calls the slot-manager child reset at 0x588FFC9F, resets fields +0x88 through +0x94, clears deque entries while invoking each non-null child's virtual slot 0 with argument 1, then destroys deque storage through FUN_587AEDB0. Six invalid-range paths call FUN_5897CC72.",
+        "uncertainty": "The deque ownership contract, child type, callback meaning, and reachability of the invalid-range exception paths remain unresolved.",
+    },
+}
+EVIDENCE.update(MAIN_WAREHOUSE_RESET_CALLER_EVIDENCE)
 
 
 if __name__ == "__main__":

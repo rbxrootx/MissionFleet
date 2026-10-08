@@ -1,12 +1,18 @@
-"""Write the CWarehouseSlotManager exact-body and direct-transfer manifests."""
+"""Write exact-body and direct-transfer manifests for the warehouse reset slice."""
 import csv
 import re
 from pathlib import Path
 
 try:
-    from .build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+    from .build_current_main_verifications import (
+        MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+        MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+    )
 except ImportError:  # Support direct execution as a script.
-    from build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+    from build_current_main_verifications import (
+        MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+        MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,12 +21,18 @@ FRESH_LOG = NEXT / "warehouse-slot-manager-primary-vtable-fresh-ghidra.log"
 BODY_INVENTORY = NEXT / "main-function-bodies.tsv"
 EDGE_INVENTORY = NEXT / "main-function-edges.tsv"
 OUT = ROOT / "config/NF2_2026"
-ADDRESSES = {address.upper() for address in MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES}
+ADDRESSES = {
+    address.upper() for address in (
+        *MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES,
+        *MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES,
+    )
+}
 ROOT_MANIFESTS = {
     "588FFD90": ("slot-0-deleting-destructor", NEXT / "warehouseslotmanager-588ffd90-a413d91.tsv"),
     "588FF890": ("slot-0x0C-update", NEXT / "warehouseslotmanager-588ff890-a413d91.tsv"),
     "588FF940": ("slot-0x10-event", NEXT / "warehouseslotmanager-588ff940-a413d91.tsv"),
     "588FF6B0": ("slot-0x18-event", NEXT / "warehouseslotmanager-588ff6b0-a413d91.tsv"),
+    "588FFC90": ("aux-warehouse-manager-reset-caller", NEXT / "warehousemanager-resetcaller-588ffc90.tsv"),
 }
 
 FUNCTION_RE = re.compile(
@@ -190,7 +202,7 @@ def main():
         root_rows,
     )
     print(
-        f"wrote CWarehouseSlotManager manifests: {len(ADDRESSES)} functions, "
+        f"wrote warehouse slot-manager manifests: {len(ADDRESSES)} functions, "
         f"{sum(fresh_functions.values()):,} bytes, {len(ranges)} exact ranges, "
         f"{sum(map(len, fresh_calls.values()))} direct calls/transfers"
     )

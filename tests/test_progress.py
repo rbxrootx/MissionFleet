@@ -95,8 +95,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_950)
-        self.assertEqual(self.report["measures"]["matched_code"], "2851391")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_951)
+        self.assertEqual(self.report["measures"]["matched_code"], "2851637")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -107,8 +107,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_817)
-        self.assertEqual(current["measures"]["matched_code"], "1877973")
+        self.assertEqual(current["measures"]["matched_functions"], 2_818)
+        self.assertEqual(current["measures"]["matched_code"], "1878219")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -319,6 +319,12 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("message 0x80015104", evidence["588FF2F0"]["behavior"])
         self.assertIn("6-column by 4-row grid", evidence["588FEFE0"]["behavior"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        reset_addresses = build_current_main_verifications.MAIN_WAREHOUSE_RESET_CALLER_ADDRESSES
+        reset_evidence = build_current_main_verifications.MAIN_WAREHOUSE_RESET_CALLER_EVIDENCE
+        self.assertEqual(reset_addresses, ("588FFC90",))
+        self.assertEqual(set(reset_addresses), set(reset_evidence))
+        self.assertIn("virtual slot 0", reset_evidence["588FFC90"]["behavior"])
+        self.assertTrue(reset_evidence["588FFC90"]["uncertainty"])
         root = Path(__file__).resolve().parents[1]
         catalog = json.loads((root / "config/NF2_2026/client-verifications.json").read_text())
         helper = next(item for item in catalog["matches"] if item["address"] == "588F7DF0")
@@ -326,6 +332,9 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(helper["source_compiler"]["kind"], "clang-cl")
         self.assertNotIn("__declspec(naked)", helper_source)
         self.assertNotIn("_emit", helper_source)
+        reset_match = next(item for item in catalog["matches"] if item["address"] == "588FFC90")
+        self.assertEqual(reset_match["size"], 246)
+        self.assertEqual(reset_match["verified_by"], "objdiff-3.8.0-byte-identical")
         verify_current_main_warehouse_slot_manager.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
