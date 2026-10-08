@@ -456,6 +456,12 @@ MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES = (
     "58841AF0", "588421C0", "5897D124",
 )
 ADDRESSES += MAIN_EVENT_80020A03_LIST_UPDATE_ADDRESSES
+MAIN_EVENT_80025102_ADDRESSES = (
+    "588F9AD0", "588F9B20", "588F9CB0", "588F9EA0", "588FA090",
+    "588FA7F0", "588FA930", "588FAAB0", "588FACD0", "588FB8A0",
+    "588FB8C0", "588FC210", "588FC560", "588FF630", "588FF670",
+)
+ADDRESSES += MAIN_EVENT_80025102_ADDRESSES
 MAIN_QUIT_PROMPT_SETUP_ADDRESSES = ("5876B9F0",)
 ADDRESSES += MAIN_QUIT_PROMPT_SETUP_ADDRESSES
 MAIN_TAX_INVESTMENT_REFRESH_ADDRESSES = (
@@ -17146,6 +17152,101 @@ for _second_protection_address in MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES:
             "The helper's independent data-field and indirect-call semantics remain unresolved; no emulator test has been run.",
         ),
     }
+
+MAIN_EVENT_80025102_EVIDENCE = {
+    "588FB8C0": {
+        "name_in_analysis": "FUN_588fb8c0 / event 0x80025102 primary slot-detail branch",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587C0EB6 in case 0x80025102 when the observed discriminator equals 1 and selector equals 1.",
+        "behavior": "Forwards the observed parameters to FUN_588FF630; the dispatcher supplies either a null payload or param_3+0x62 according to the observed 0x188 length threshold.",
+        "uncertainty": "The packet fields, selector meaning, and user-visible slot identity are unresolved. This is the matched event-case branch, not a recovered server protocol schema.",
+    },
+    "588FF630": {
+        "name_in_analysis": "FUN_588ff630 / event 0x80025102 slot-detail lookup",
+        "called_by": "Called by FUN_588FB8C0; the sibling wrapper FUN_588FB8A0 uses the same matched lookup FUN_588FF0F0.",
+        "behavior": "Looks up a two-value record through byte-matched FUN_588FF0F0 and passes a found record to the cursor-sensitive detail builder FUN_588FA930.",
+        "uncertainty": "The lookup key and returned record schema are not named. The exact body is in the event 0x80025102 direct-call closure.",
+    },
+    "588FA930": {
+        "name_in_analysis": "FUN_588fa930 / slot-detail cursor and child builder",
+        "called_by": "Reached by FUN_588FF630 after the matched FUN_588FF0F0 lookup succeeds.",
+        "behavior": "Checks the observed cursor coordinates against a supplied rectangle; on a hit it releases/replaces the detail child, allocates a 0x27C-byte object, sets its position and flags, and calls FUN_588F9EA0 to build child text/control state.",
+        "uncertainty": "The rectangle, child type, and displayed slot content are not mapped to product terminology. The allocator, constructor, and indirect cleanup contracts remain unverified at runtime.",
+    },
+    "588FA090": {
+        "name_in_analysis": "FUN_588fa090 / secondary slot-detail label update",
+        "called_by": "Called by FUN_588FA930 when its optional item pointer is non-null.",
+        "behavior": "Positions three observed child objects, obtains two localized values through the resource callbacks, formats them with the observed \"%s. %s\" template, copies the result into the detail text child, and sets its visible flag.",
+        "uncertainty": "The two resource IDs and their user-facing slot meanings are not recovered. Runtime clipping and localization behavior are untested.",
+    },
+    "588F9EA0": {
+        "name_in_analysis": "FUN_588f9ea0 / slot-detail child layout",
+        "called_by": "Called by FUN_588FA930 after the detail child is created.",
+        "behavior": "Builds a label through FUN_588F9B20 and FUN_588F9CB0, creates the text child through FUN_58731CE0, and positions/sets flags on child groups selected by the observed record byte at +8.",
+        "uncertainty": "The record layout and the two child-group identities remain unnamed; the observed byte values 0 and 1 are not assigned semantic labels.",
+    },
+    "588F9CB0": {
+        "name_in_analysis": "FUN_588f9cb0 / localized slot-state text selection",
+        "called_by": "Called by FUN_588F9EA0 with state inputs from FUN_588F9B20.",
+        "behavior": "Copies the selected localized resource into the output buffer using observed keys TEXT_SLOT_BASIC, TEXT_SLOT_PCROOM_PREMIUM, TEXT_SLOT_CASH_NOPERIOD, and TEXT_SLOT_LOCKED; the cash/no-period path also checks a mapped slot index from FUN_588F9AD0.",
+        "uncertainty": "The exact meaning of the state values and which visible slot each key labels are not established. These resource identifiers do not prove pricing or purchase behavior.",
+    },
+    "588F9B20": {
+        "name_in_analysis": "FUN_588f9b20 / slot-state selector",
+        "called_by": "Called by FUN_588F9EA0 before localized slot text is selected.",
+        "behavior": "Returns one of the observed state values 0 through 3 from the global value at DAT_58A245F0+0x90, the supplied index, and receiver bytes/fields at +0x68 and +0x6C.",
+        "uncertainty": "The global mode, receiver fields, and returned states are not tied to named account or billing states.",
+    },
+    "588F9AD0": {
+        "name_in_analysis": "FUN_588f9ad0 / slot index calculation",
+        "called_by": "Called by FUN_588F9CB0 on its observed state-2 text path.",
+        "behavior": "Bounds-checks the two supplied indices against observed ranges 1..99 and 1..24, maps the first through a two-slot stride, and returns -1 for invalid input.",
+        "uncertainty": "The index dimensions and whether the derived value represents an item, page, or price slot are unresolved.",
+    },
+    "588FB8A0": {
+        "name_in_analysis": "FUN_588fb8a0 / event 0x80025102 sibling slot-detail branch",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587C0EE0 when the observed discriminator equals 1 and selector equals 0.",
+        "behavior": "Forwards the sibling branch parameters to FUN_588FF670, which shares the byte-matched FUN_588FF0F0 record lookup and calls FUN_588FA7F0 on a result.",
+        "uncertainty": "The selector and relationship to the primary detail branch are unnamed. It is retained as a separate branch because the original dispatcher selects it explicitly.",
+    },
+    "588FF670": {
+        "name_in_analysis": "FUN_588ff670 / sibling slot-detail lookup",
+        "called_by": "Called by FUN_588FB8A0 in event case 0x80025102.",
+        "behavior": "Looks up a record through matched FUN_588FF0F0 and passes a found result into FUN_588FA7F0.",
+        "uncertainty": "The record key and schema remain unresolved; the sibling branch is supported by the matched dispatcher's callsite and Ghidra call edges.",
+    },
+    "588FA7F0": {
+        "name_in_analysis": "FUN_588fa7f0 / sibling slot-detail child builder",
+        "called_by": "Reached by FUN_588FF670 after the shared matched record lookup succeeds.",
+        "behavior": "Checks cursor coordinates against the supplied rectangle, sets an observed receiver child-state field, allocates a 0xF0C-byte child through FUN_588E9F60, positions it, performs the observed child virtual call, and delegates text/layout setup to FUN_588F9EA0.",
+        "uncertainty": "The allocated child's object type, exact displayed content, and virtual callback effects remain unresolved.",
+    },
+    "588FC210": {
+        "name_in_analysis": "FUN_588fc210 / event 0x80025102 discriminator fallback",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587C0EFF when the event discriminator does not equal 1.",
+        "behavior": "Maps observed event/discriminator and selector values to message/status identifiers 0x1777..0x178C, optionally formats a value through the observed formatter, and dispatches the selected message through FUN_5876BAF0 followed by FUN_58764D30.",
+        "uncertainty": "The status identifiers, parameter schema, and user-visible error meanings are unknown; the function is also shared with neighboring 0x800251xx cases.",
+    },
+    "588FAAB0": {
+        "name_in_analysis": "FUN_588faab0 / indexed ring-buffer value lookup",
+        "called_by": "Called by FUN_588FACD0 in the event 0x80025102 fallback closure.",
+        "behavior": "Resolves a value through the observed buffer header and wrapped-index fields, invoking the captured growth/normalization helper on the two observed boundary conditions.",
+        "uncertainty": "The buffer's element type, ownership contract, and index units remain unresolved.",
+    },
+    "588FACD0": {
+        "name_in_analysis": "FUN_588facd0 / indexed fallback state advance",
+        "called_by": "Called by FUN_588FC210 for one observed discriminator branch.",
+        "behavior": "Reads the current value through FUN_588FAAB0, updates child-state flags through FUN_588F7D60, and advances/wraps the observed buffer counters when the active-count field is nonzero.",
+        "uncertainty": "The record fields and buffer-state meanings are not identified; no event sequence has been exercised at runtime.",
+    },
+    "588FC560": {
+        "name_in_analysis": "FUN_588fc560 / event 0x80025102 shared pre-handler state",
+        "called_by": "The byte-matched dispatcher FUN_587BB700 calls it at 0x587C0E7F before selecting a branch in case 0x80025102.",
+        "behavior": "Stores the supplied byte at receiver +0x98, clears the word at +0x94, and sets or clears bit 1 in receiver flags according to whether that byte equals 1.",
+        "uncertainty": "The byte's event-state meaning and the flag's effect on later rendering are unresolved. This helper is shared by other nearby dispatcher cases.",
+    },
+}
+for _event_80025102_address, _event_80025102_detail in MAIN_EVENT_80025102_EVIDENCE.items():
+    EVIDENCE[_event_80025102_address] = _event_80025102_detail
 
 
 if __name__ == "__main__":
