@@ -502,6 +502,9 @@ MAIN_NOVICE_HELP_PANEL_ADDRESSES = (
 ADDRESSES += MAIN_NOVICE_HELP_PANEL_ADDRESSES
 
 RELOCATION_OVERRIDES = {
+    # This function is reconstructed as compiler-generated C++; its target is
+    # compared as a single symbol instead of a byte-emitted segment.
+    "588F7DF0": [],
     "58907380": [
         {"offset": 8, "target_address": "589072A0", "kind": "relative",
          "symbol": "_FUN_589072a0", "audit_only": False},
@@ -543,6 +546,8 @@ SOURCE_NAME_OVERRIDES = {
     "5897D05B": "eh_vector_destructor_iterator",
 }
 SYMBOL_OVERRIDES = {
+    # clang-cl's x86 __fastcall decoration for the semantic source function.
+    "588F7DF0": "@FUN_588f7df0@4",
     "5897D0BE": "_eh_vector_constructor_iterator",
     "5897D05B": "_eh_vector_destructor_iterator",
 }

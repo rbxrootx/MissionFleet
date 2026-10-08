@@ -1,6 +1,7 @@
 import hashlib
 import json
 import unittest
+from pathlib import Path
 
 from tools import (
     build_current_main_verifications,
@@ -318,6 +319,13 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("message 0x80015104", evidence["588FF2F0"]["behavior"])
         self.assertIn("6-column by 4-row grid", evidence["588FEFE0"]["behavior"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        root = Path(__file__).resolve().parents[1]
+        catalog = json.loads((root / "config/NF2_2026/client-verifications.json").read_text())
+        helper = next(item for item in catalog["matches"] if item["address"] == "588F7DF0")
+        helper_source = (root / helper["source"]).read_text(encoding="utf-8")
+        self.assertEqual(helper["source_compiler"]["kind"], "clang-cl")
+        self.assertNotIn("__declspec(naked)", helper_source)
+        self.assertNotIn("_emit", helper_source)
         verify_current_main_warehouse_slot_manager.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):

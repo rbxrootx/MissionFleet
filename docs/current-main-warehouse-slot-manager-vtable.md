@@ -29,6 +29,13 @@ within the open closure and 61 reach functions already verified by objdiff.
 The focused verifier follows all four direct closures and finds no unresolved
 direct target.
 
+`FUN_588F7DF0` now has a semantic C++ implementation: it reads the child pointer
+at receiver offset `+0xA8` and sets that child's low state nibble at `+0x24`.
+The pinned `clang-cl` build emits all 12 original bytes, and the objdiff check
+passes at 100%. The other 22 selected functions still use instruction-emission
+sources; their Ghidra-derived behavior notes are evidence records, not completed
+high-level C++ reconstructions.
+
 The matched constructor `FUN_588FFE10` writes the class address point at
 `0x588FFE84`; the matched initializer `FUN_588FB9B0` calls that constructor at
 `0x588FBB0D`. Those source hashes and the call instruction are checked. The
