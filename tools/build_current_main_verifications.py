@@ -18069,6 +18069,206 @@ MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE)
 
+MAIN_OPCONVOY_AIRCRAFT_UPDATE_ADDRESSES = (
+    "5876C360", "587CB280", "587CB380", "587CB390", "587CB3B0",
+    "587CB580", "587CB5E0", "587CB9B0", "587CBE00", "587EABC0",
+    "587CA9E0", "587CADF0",
+)
+ADDRESSES += MAIN_OPCONVOY_AIRCRAFT_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_OPCONVOY_AIRCRAFT_UPDATE_ADDRESSES)
+
+MAIN_OPCONVOY_AIRCRAFT_UPDATE_EVIDENCE = {
+    "5876C360": {
+        "name_in_analysis": "FUN_5876c360 / coordinate-to-table-index calculation",
+        "called_by": (
+            "FUN_587CB3B0 calls this at 0x587CB3E0 with object coordinate "
+            "fields and the related object's coordinate fields."
+        ),
+        "behavior": (
+            "Scales the coordinate deltas, computes an integer distance with "
+            "FUN_5876BEE0, and compares candidates from DAT_58A0B500 in a "
+            "loop before returning the candidate index with the smallest "
+            "observed squared error."
+        ),
+        "uncertainty": (
+            "The coordinate units, table labels, and caller-facing meaning "
+            "of the returned index are not identified by the available code."
+        ),
+    },
+    "587CB280": {
+        "name_in_analysis": "FUN_587cb280 / bounded field adjustment",
+        "called_by": (
+            "FUN_587CBE00 calls this at 0x587CC109 when field +0x85 equals 1."
+        ),
+        "behavior": (
+            "Adjusts the integer at receiver +0x98 toward the unsigned word "
+            "at +0x9C using the observed 99-percent and 101-percent factors, "
+            "then clamps the result to that word when it crosses the target."
+        ),
+        "uncertainty": (
+            "The semantic names and units of fields +0x98 and +0x9C remain "
+            "unknown; the behavior is recorded from the original operations."
+        ),
+    },
+    "587CB380": {
+        "name_in_analysis": "FUN_587cb380 / field +0x214 getter",
+        "called_by": (
+            "FUN_587CADF0 calls this at 0x587CAE01 and 0x587CAF05."
+        ),
+        "behavior": "Returns the DWORD stored at receiver +0x214.",
+        "uncertainty": (
+            "The state labels represented by the returned integer are not "
+            "established; the observed value is compared with 1 and 3 by "
+            "FUN_587CADF0."
+        ),
+    },
+    "587CB390": {
+        "name_in_analysis": "FUN_587cb390 / conditional field maximum",
+        "called_by": (
+            "FUN_587CB9B0 calls this at 0x587CBC34 with receiver field +0x24."
+        ),
+        "behavior": (
+            "When receiver field +0x214 is not 3 and field +0x8C is below "
+            "the supplied value, stores the supplied value at +0x8C."
+        ),
+        "uncertainty": (
+            "The meanings of fields +0x214, +0x8C, and the supplied value "
+            "remain unresolved."
+        ),
+    },
+    "587CB3B0": {
+        "name_in_analysis": "FUN_587cb3b0 / wrapped table-index difference",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CB9B5.",
+        "behavior": (
+            "Calls FUN_5876C360 with observed receiver coordinates, scales "
+            "the returned index by 10, stores a value from FUN_5897CCA0 at "
+            "+0xB8, and returns a difference adjusted across the observed "
+            "900-unit sectors and 0x708 boundary."
+        ),
+        "uncertainty": (
+            "The units and interpretation of the sectors, index, and random "
+            "value remain unknown."
+        ),
+    },
+    "587CB580": {
+        "name_in_analysis": "FUN_587cb580 / conditional state transition",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CB9F7.",
+        "behavior": (
+            "If receiver +0x204 is nonzero, changes field +0x214 from 2 to 1 "
+            "when the referenced object's +0x214 is 1 and receiver +0xB8 is "
+            "below 0x28; it changes the field from 1 to 2 when +0xB8 is in "
+            "the observed range 1 through 0x1D."
+        ),
+        "uncertainty": (
+            "The state names, threshold units, and relationship represented "
+            "by the pointer at +0x204 are unknown."
+        ),
+    },
+    "587CB5E0": {
+        "name_in_analysis": "FUN_587cb5e0 / paired coordinate-field update",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CBA78.",
+        "behavior": (
+            "Compares receiver fields +0xC4 and +0xC8 with the related "
+            "object's +0xC8 after dividing coordinate values by 1000, "
+            "updates receiver +0xB4, and adjusts +0xCC from their scaled "
+            "difference; the absolute adjusted value is limited to 400."
+        ),
+        "uncertainty": (
+            "The fields' roles, units, and the reason for the 400 limit are "
+            "not identified by the decompiled operations."
+        ),
+    },
+    "587CB9B0": {
+        "name_in_analysis": "FUN_587cb9b0 / state-driven motion and child-screen fields",
+        "called_by": "FUN_587CBE00 calls this at 0x587CBE48.",
+        "behavior": (
+            "Recomputes fields using FUN_587CB3B0 and FUN_587CB580, branches "
+            "on receiver +0x85, applies table-driven coordinate and frame "
+            "updates, and writes the resulting value to child objects at "
+            "+0x82 and +0x83. States 1 and 3 dispatch through receiver "
+            "vtable slots +0x20 and +0x1C."
+        ),
+        "uncertainty": (
+            "Field and state names, the function-pointer targets at slots "
+            "+0x20/+0x1C and the random-number helper contracts remain "
+            "unresolved."
+        ),
+    },
+    "587CBE00": {
+        "name_in_analysis": "FUN_587cbe00 / shared convoy-aircraft vtable update",
+        "called_by": (
+            "RTTI-confirmed vtable slot +0x0C for Cargo, Fighter, and "
+            "DummyAircraft stores this target at 0x5899B214, 0x5899B23C, "
+            "and 0x5899B264."
+        ),
+        "behavior": (
+            "When receiver flag bit 2 is set, updates state-dependent "
+            "coordinate and child-screen fields, checks a linked object list "
+            "through FUN_587EABC0, dispatches the concrete object's vtable "
+            "slot +0x18, and calls each linked child object's slot +0x0C."
+        ),
+        "uncertainty": (
+            "The state and coordinate field meanings, virtual targets for "
+            "slots +0x18 and the linked child slot +0x0C, random-number helper "
+            "effects, and runtime behavior have not been independently "
+            "exercised. The class-specific "
+            "slot +0x18 targets are recorded as separate evidence."
+        ),
+    },
+    "587EABC0": {
+        "name_in_analysis": "FUN_587eabc0 / linked-object bounds predicate",
+        "called_by": "FUN_587CBE00 calls this at 0x587CBF17.",
+        "behavior": (
+            "Traverses the linked records reached through receiver +0x20D54; "
+            "for entries with a non-null object pointer at +0x0C, compares "
+            "the supplied values against bounds read through that object's "
+            "+0x90 record and returns 1 on the first match, otherwise 0."
+        ),
+        "uncertainty": (
+            "The bound coordinate units, linked-record type, and predicate's "
+            "gameplay meaning remain unresolved."
+        ),
+    },
+    "587CA9E0": {
+        "name_in_analysis": "FUN_587ca9e0 / Cargo slot +0x18 update",
+        "called_by": (
+            "The Cargo RTTI vftable at 0x5899B208 stores this target at slot "
+            "+0x18 (pointer at 0x5899B220); FUN_587CBE00 dispatches through "
+            "the receiver's slot +0x18."
+        ),
+        "behavior": (
+            "When receiver +0x8C is nonzero, advances that field toward zero, "
+            "uses the observed map-view globals in a conditional FUN_587B7400 "
+            "call, updates receiver +0x2BC, may query an object via "
+            "FUN_588EBEB0 and invoke its vtable slot +0x04, then creates and "
+            "positions an object through FUN_58907C80."
+        ),
+        "uncertainty": (
+            "The +0x8C/+0x2BC field meanings, queried object identity, global "
+            "contracts, and indirect target at slot +0x04 remain unresolved."
+        ),
+    },
+    "587CADF0": {
+        "name_in_analysis": "FUN_587cadf0 / Fighter slot +0x18 update",
+        "called_by": (
+            "The Fighter RTTI vftable at 0x5899B230 stores this target at slot "
+            "+0x18 (pointer at 0x5899B248); FUN_587CBE00 dispatches through "
+            "the receiver's slot +0x18."
+        ),
+        "behavior": (
+            "When receiver +0x204 is nonzero, reads state +0x214 through "
+            "FUN_587CB380. For state 1 it updates a counter at +0x90, copies "
+            "a child-screen field, decrements the counter, and toggles a low "
+            "child flag; for state 3 it clears +0x204 and stores state 1."
+        ),
+        "uncertainty": (
+            "State labels, counter units, and the meanings of the two child "
+            "pointers remain unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_OPCONVOY_AIRCRAFT_UPDATE_EVIDENCE)
+
 MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES = (
     "58759E90", "587B9CB0", "587B9CF0", "587B9D20", "587B9D50",
     "587B9D80", "587B9DB0", "587B9DD0", "58824630", "588246E0",

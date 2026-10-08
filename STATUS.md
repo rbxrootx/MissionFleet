@@ -6,13 +6,20 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 8,884 verified matches
-totaling 2,834,809 bytes (20.9227% by functions, 27.0747% by bytes), each at
+identified code bytes across six report units. There are 8,896 verified matches
+totaling 2,839,436 bytes (20.9510% by functions, 27.1189% by bytes), each at
 100.0% under objdiff 3.8.0. The installed client's RTTI-backed
 `CPannelCommunicatorConfigDiplomacyTab` event closure adds 30 exact functions /
 3,876 bytes across 31 fresh Ghidra ranges. Its matched callers, mode dispatch,
 constructor path, and indirect callback uncertainties are documented in
-[the subsystem note](docs/current-main-diplomacy-tab-event-closure.md). A
+[the subsystem note](docs/current-main-diplomacy-tab-event-closure.md).
+The RTTI-backed convoy-aircraft update closures add 12 exact functions / 4,627
+bytes across 13 Ghidra ranges. The shared update occupies slot `+0x0C` in the
+Cargo, Fighter, and DummyAircraft vftables; Cargo and Fighter add their open
+slot `+0x18` bodies, while DummyAircraft's is already matched. The matched
+constructor path, 45 direct calls, 35 transfers to verified code, and remaining
+indirect dispatch uncertainties are documented in
+[the subsystem note](docs/current-main-opconvoy-aircraft-update.md). A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The installed client's tax/investment control
 refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases

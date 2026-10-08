@@ -473810,6 +473810,961 @@
         "behavior": "Handles mode-2 click and message events. Click branches update selection/index fields and send observed action identifiers including 0x139; message-kind 62000 follows the included message wrapper paths.",
         "uncertainty": "The original fields, mode labels, control identities, action identifier meanings, and message/event contract remain unresolved. Function-pointer targets at DAT_5898C1A8 and DAT_5898C198, and child virtual targets used during cleanup, are not recovered."
       }
+    },
+    {
+      "address": "5876C360",
+      "name": "FUN_5876c360",
+      "size": 837,
+      "symbol": "_FUN_5876c360",
+      "source": "src/client-current/Main/FUN_5876c360.cpp",
+      "source_sha256": "67bb35aa73d051562dc28dd5df52f367c66c146fd39f5097c0661c9ad68796d1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5876C360",
+          "size": 837,
+          "symbol": "_FUN_5876c360_segment_00",
+          "relocations": [
+            {
+              "offset": 60,
+              "target_address": "5876BEE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58A0B500",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 821,
+              "target_address": "5876C3D2",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5876c360 / coordinate-to-table-index calculation",
+        "called_by": "FUN_587CB3B0 calls this at 0x587CB3E0 with object coordinate fields and the related object's coordinate fields.",
+        "behavior": "Scales the coordinate deltas, computes an integer distance with FUN_5876BEE0, and compares candidates from DAT_58A0B500 in a loop before returning the candidate index with the smallest observed squared error.",
+        "uncertainty": "The coordinate units, table labels, and caller-facing meaning of the returned index are not identified by the available code."
+      }
+    },
+    {
+      "address": "587CA9E0",
+      "name": "FUN_587ca9e0",
+      "size": 584,
+      "symbol": "_FUN_587ca9e0",
+      "source": "src/client-current/Main/FUN_587ca9e0.cpp",
+      "source_sha256": "41d784e26a3cc7401bb39e32e4a3fa278fce907493eecc37d63ae8b7368aa1af",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CA9E0",
+          "size": 584,
+          "symbol": "_FUN_587ca9e0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589894AB",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "587CAC14",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "589C8EDC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "587CAB81",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58A246DC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 242,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 252,
+              "target_address": "587B7400",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "587CAB81",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58A246EC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "588EBEB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "58A248FC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "58907990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 361,
+              "target_address": "58A248D0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 453,
+              "target_address": "58A246F4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 492,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 514,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 540,
+              "target_address": "58907C80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 560,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587ca9e0 / Cargo slot +0x18 update",
+        "called_by": "The Cargo RTTI vftable at 0x5899B208 stores this target at slot +0x18 (pointer at 0x5899B220); FUN_587CBE00 dispatches through the receiver's slot +0x18.",
+        "behavior": "When receiver +0x8C is nonzero, advances that field toward zero, uses the observed map-view globals in a conditional FUN_587B7400 call, updates receiver +0x2BC, may query an object via FUN_588EBEB0 and invoke its vtable slot +0x04, then creates and positions an object through FUN_58907C80.",
+        "uncertainty": "The +0x8C/+0x2BC field meanings, queried object identity, global contracts, and indirect target at slot +0x04 remain unresolved."
+      }
+    },
+    {
+      "address": "587CADF0",
+      "name": "FUN_587cadf0",
+      "size": 309,
+      "symbol": "_FUN_587cadf0",
+      "source": "src/client-current/Main/FUN_587cadf0.cpp",
+      "source_sha256": "83ab17404bf0422c38f8fada53c4bdef7b621770b887701a7765c73745aea570",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CADF0",
+          "size": 309,
+          "symbol": "_FUN_587cadf0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "587CAF23",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "587CB380",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "587CAEFF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 41,
+              "target_address": "587CAEE2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "589C8EDC",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "587B7400",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 278,
+              "target_address": "587CB380",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cadf0 / Fighter slot +0x18 update",
+        "called_by": "The Fighter RTTI vftable at 0x5899B230 stores this target at slot +0x18 (pointer at 0x5899B248); FUN_587CBE00 dispatches through the receiver's slot +0x18.",
+        "behavior": "When receiver +0x204 is nonzero, reads state +0x214 through FUN_587CB380. For state 1 it updates a counter at +0x90, copies a child-screen field, decrements the counter, and toggles a low child flag; for state 3 it clears +0x204 and stores state 1.",
+        "uncertainty": "State labels, counter units, and the meanings of the two child pointers remain unresolved."
+      }
+    },
+    {
+      "address": "587CB280",
+      "name": "FUN_587cb280",
+      "size": 102,
+      "symbol": "_FUN_587cb280",
+      "source": "src/client-current/Main/FUN_587cb280.cpp",
+      "source_sha256": "ff7810409cce15c08506ed52f47596046ffdcade67195368859a2f70c92e0792",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB280",
+          "size": 102,
+          "symbol": "_FUN_587cb280_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb280 / bounded field adjustment",
+        "called_by": "FUN_587CBE00 calls this at 0x587CC109 when field +0x85 equals 1.",
+        "behavior": "Adjusts the integer at receiver +0x98 toward the unsigned word at +0x9C using the observed 99-percent and 101-percent factors, then clamps the result to that word when it crosses the target.",
+        "uncertainty": "The semantic names and units of fields +0x98 and +0x9C remain unknown; the behavior is recorded from the original operations."
+      }
+    },
+    {
+      "address": "587CB380",
+      "name": "FUN_587cb380",
+      "size": 7,
+      "symbol": "_FUN_587cb380",
+      "source": "src/client-current/Main/FUN_587cb380.cpp",
+      "source_sha256": "f557d1f22f2fc0cf27e3367098009514b233cb4e85b13c9c4d3711698e2385a5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB380",
+          "size": 7,
+          "symbol": "_FUN_587cb380_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb380 / field +0x214 getter",
+        "called_by": "FUN_587CADF0 calls this at 0x587CAE01 and 0x587CAF05.",
+        "behavior": "Returns the DWORD stored at receiver +0x214.",
+        "uncertainty": "The state labels represented by the returned integer are not established; the observed value is compared with 1 and 3 by FUN_587CADF0."
+      }
+    },
+    {
+      "address": "587CB390",
+      "name": "FUN_587cb390",
+      "size": 30,
+      "symbol": "_FUN_587cb390",
+      "source": "src/client-current/Main/FUN_587cb390.cpp",
+      "source_sha256": "b6a6359827e66f16319e75829d5520ee40742a554888f442a6070a79d5221928",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB390",
+          "size": 30,
+          "symbol": "_FUN_587cb390_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb390 / conditional field maximum",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CBC34 with receiver field +0x24.",
+        "behavior": "When receiver field +0x214 is not 3 and field +0x8C is below the supplied value, stores the supplied value at +0x8C.",
+        "uncertainty": "The meanings of fields +0x214, +0x8C, and the supplied value remain unresolved."
+      }
+    },
+    {
+      "address": "587CB3B0",
+      "name": "FUN_587cb3b0",
+      "size": 383,
+      "symbol": "_FUN_587cb3b0",
+      "source": "src/client-current/Main/FUN_587cb3b0.cpp",
+      "source_sha256": "b69f53bbdfca4c1c6d8d73fa04ae1219e3a5a0c118d488cb82ee65ced279a811",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB3B0",
+          "size": 383,
+          "symbol": "_FUN_587cb3b0_segment_00",
+          "relocations": [
+            {
+              "offset": 49,
+              "target_address": "5876C360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 129,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "587CB4E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb3b0 / wrapped table-index difference",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CB9B5.",
+        "behavior": "Calls FUN_5876C360 with observed receiver coordinates, scales the returned index by 10, stores a value from FUN_5897CCA0 at +0xB8, and returns a difference adjusted across the observed 900-unit sectors and 0x708 boundary.",
+        "uncertainty": "The units and interpretation of the sectors, index, and random value remain unknown."
+      }
+    },
+    {
+      "address": "587CB580",
+      "name": "FUN_587cb580",
+      "size": 81,
+      "symbol": "_FUN_587cb580",
+      "source": "src/client-current/Main/FUN_587cb580.cpp",
+      "source_sha256": "1bc678596ace2017b7d11d0d7330271eb000daba00f284c59c2a107060f0d90a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB580",
+          "size": 81,
+          "symbol": "_FUN_587cb580_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb580 / conditional state transition",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CB9F7.",
+        "behavior": "If receiver +0x204 is nonzero, changes field +0x214 from 2 to 1 when the referenced object's +0x214 is 1 and receiver +0xB8 is below 0x28; it changes the field from 1 to 2 when +0xB8 is in the observed range 1 through 0x1D.",
+        "uncertainty": "The state names, threshold units, and relationship represented by the pointer at +0x204 are unknown."
+      }
+    },
+    {
+      "address": "587CB5E0",
+      "name": "FUN_587cb5e0",
+      "size": 206,
+      "symbol": "_FUN_587cb5e0",
+      "source": "src/client-current/Main/FUN_587cb5e0.cpp",
+      "source_sha256": "7e07240bf40f5c9eb223538e9e6f4d8e47901f735caecfb94591c5ad6d49f536",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB5E0",
+          "size": 206,
+          "symbol": "_FUN_587cb5e0_segment_00",
+          "relocations": [
+            {
+              "offset": 67,
+              "target_address": "587CB6A8",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb5e0 / paired coordinate-field update",
+        "called_by": "FUN_587CB9B0 calls this at 0x587CBA78.",
+        "behavior": "Compares receiver and related-object values at +0xC8 after dividing by 1000, updates receiver +0xB4, and adjusts +0xCC from their scaled difference; the absolute adjusted value is limited to 400.",
+        "uncertainty": "The fields' roles, units, and the reason for the 400 limit are not identified by the decompiled operations."
+      }
+    },
+    {
+      "address": "587CB9B0",
+      "name": "FUN_587cb9b0",
+      "size": 1104,
+      "symbol": "_FUN_587cb9b0",
+      "source": "src/client-current/Main/FUN_587cb9b0.cpp",
+      "source_sha256": "ba767547c34cfd243c72214fe020f1cd65ca1eae1d31c75637100ebcbf2ede75",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CB9B0",
+          "size": 1104,
+          "symbol": "_FUN_587cb9b0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "587CB3B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "587CB580",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 156,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "587CBC73",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "587CB5E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 220,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "587CBC3B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 296,
+              "target_address": "587CBC68",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 351,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "587CBC83",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 531,
+              "target_address": "5876BEE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 568,
+              "target_address": "5876BEE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 580,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 585,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 617,
+              "target_address": "5897CC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 622,
+              "target_address": "5897CCA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 645,
+              "target_address": "587CB390",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 668,
+              "target_address": "587CBAF3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 703,
+              "target_address": "587CBAF9",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cb9b0 / state-driven motion and child-screen fields",
+        "called_by": "FUN_587CBE00 calls this at 0x587CBE48.",
+        "behavior": "Recomputes fields using FUN_587CB3B0 and FUN_587CB580, branches on receiver +0x85, applies table-driven coordinate and frame updates, and writes the resulting value to child objects at +0x82 and +0x83. States 1 and 3 dispatch through receiver vtable slots +0x20 and +0x1C.",
+        "uncertainty": "Field and state names, the function-pointer targets at slots +0x20/+0x1C, and the callback contract around DAT_5898C1A8 remain unresolved."
+      }
+    },
+    {
+      "address": "587CBE00",
+      "name": "FUN_587cbe00",
+      "size": 860,
+      "symbol": "_FUN_587cbe00",
+      "source": "src/client-current/Main/FUN_587cbe00.cpp",
+      "source_sha256": "9ffa801153512c1a5aa70f19a779ac0f3c84c7c22bedda3672b3d94ff099e8d9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587CBE00",
+          "size": 860,
+          "symbol": "_FUN_587cbe00_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "587CC156",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "587CC118",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 73,
+              "target_address": "587CB9B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 174,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 273,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "587EABC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 337,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 368,
+              "target_address": "587CC042",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 375,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 444,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 449,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 537,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 558,
+              "target_address": "5897CC36",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 584,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 623,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 659,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 671,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 725,
+              "target_address": "58A248F8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 745,
+              "target_address": "587B7500",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 778,
+              "target_address": "587CB280",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587cbe00 / shared convoy-aircraft vtable update",
+        "called_by": "RTTI-confirmed vtable slot +0x0C for Cargo, Fighter, and DummyAircraft stores this target at 0x5899B214, 0x5899B23C, and 0x5899B264.",
+        "behavior": "When receiver flag bit 2 is set, updates state-dependent coordinate and child-screen fields, checks a linked object list through FUN_587EABC0, dispatches the concrete object's vtable slot +0x18, and calls each linked child object's slot +0x0C.",
+        "uncertainty": "The state and coordinate field meanings, virtual targets for the linked child slot +0x0C, random callback effects, and runtime behavior have not been independently exercised. The class-specific slot +0x18 targets are recorded as separate evidence."
+      }
+    },
+    {
+      "address": "587EABC0",
+      "name": "FUN_587eabc0",
+      "size": 124,
+      "symbol": "_FUN_587eabc0",
+      "source": "src/client-current/Main/FUN_587eabc0.cpp",
+      "source_sha256": "8377ed942360d1c47ccc7630a29d7bdb3f6386f854384590307698c3edd1092a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587EABC0",
+          "size": 29,
+          "symbol": "_FUN_587eabc0_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "587EABE0",
+          "size": 95,
+          "symbol": "_FUN_587eabc0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587eabc0 / linked-object bounds predicate",
+        "called_by": "FUN_587CBE00 calls this at 0x587CBF17.",
+        "behavior": "Traverses the linked records reached through receiver +0x20D54; for entries with a non-null object pointer at +0x0C, compares the supplied values against bounds read through that object's +0x90 record and returns 1 on the first match, otherwise 0.",
+        "uncertainty": "The bound coordinate units, linked-record type, and predicate's gameplay meaning remain unresolved."
+      }
     }
   ]
 }
