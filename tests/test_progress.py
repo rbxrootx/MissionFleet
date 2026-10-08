@@ -71,6 +71,7 @@ from tools import (
     verify_current_main_event_80021004,
     verify_current_main_user_command,
     verify_current_main_periodic_selection_state,
+    verify_current_main_efsjs_sprite_refresh,
 )
 
 
@@ -83,8 +84,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_820)
-        self.assertEqual(self.report["measures"]["matched_code"], "2815334")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_821)
+        self.assertEqual(self.report["measures"]["matched_code"], "2816142")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -95,8 +96,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_687)
-        self.assertEqual(current["measures"]["matched_code"], "1841916")
+        self.assertEqual(current["measures"]["matched_functions"], 2_688)
+        self.assertEqual(current["measures"]["matched_code"], "1842724")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -169,6 +170,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("eight receiver-linked buckets", item["behavior"])
         self.assertTrue(item["uncertainty"])
         verify_current_main_periodic_selection_state.main()
+
+    def test_efsj_sprite_refresh_has_matched_event_caller_and_complete_body(self):
+        addresses = build_current_main_verifications.MAIN_EFSJ_SPRITE_REFRESH_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_EFSJ_SPRITE_REFRESH_EVIDENCE
+        self.assertEqual(addresses, ("588DDCE0",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588DDCE0"]
+        self.assertIn("0x5880709E", item["called_by"])
+        self.assertIn("SPR\\EFSJ.spr", item["behavior"])
+        self.assertIn("CSpriteBundleScreen", item["behavior"])
+        self.assertTrue(item["uncertainty"])
+        verify_current_main_efsjs_sprite_refresh.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

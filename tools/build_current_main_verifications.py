@@ -17437,6 +17437,32 @@ MAIN_PERIODIC_SELECTION_STATE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_PERIODIC_SELECTION_STATE_EVIDENCE)
 
+MAIN_EFSJ_SPRITE_REFRESH_ADDRESSES = ("588DDCE0",)
+ADDRESSES += MAIN_EFSJ_SPRITE_REFRESH_ADDRESSES
+MAIN_EFSJ_SPRITE_REFRESH_EVIDENCE = {
+    "588DDCE0": {
+        "name_in_analysis": "FUN_588ddce0 / EFSJ sprite-bundle refresh",
+        "called_by": (
+            "Byte-matched FUN_58806F60 calls this function at 0x5880709E on its "
+            "param_4 == 0 path when the component event ID is 0x1C3, 0x006F, "
+            "0x013E, or 0x1C5. The caller then sets byte +0x1368 on the "
+            "resolved object to 1."
+        ),
+        "behavior": (
+            "Lazily loads SPR\\EFSJ.spr, creates up to three "
+            "CSpriteBundleScreen children, clears flag bits on those children, "
+            "and attaches up to three 0x40-byte-spaced records from the loaded "
+            "bundle. All eleven direct calls reach byte-matched functions."
+        ),
+        "uncertainty": (
+            "The component event meanings, owning class, child field meanings, "
+            "sprite-record schema, and exact rendered appearance remain "
+            "unresolved. No live client or emulator runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_EFSJ_SPRITE_REFRESH_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

@@ -467168,6 +467168,138 @@
         "behavior": "Runs when the global counter at DAT_58A2459C+0x104F4 is divisible by 25. It walks a global linked list, filters entries through a matched helper, scans eight receiver-linked buckets, compares record values, and updates saved/candidate state fields around receiver +0x4C8..+0x4E4. Its other branch looks up an entry and restores or clears that state. All eight direct calls reach byte-matched functions.",
         "uncertainty": "The owning class, counter units, linked-record and bucket schemas, field meanings, and helper contracts remain unresolved. No live client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588DDCE0",
+      "name": "FUN_588ddce0",
+      "size": 808,
+      "symbol": "_FUN_588ddce0",
+      "source": "src/client-current/Main/FUN_588ddce0.cpp",
+      "source_sha256": "2ca3e43c5f9358310372c12df1a96f69f97d764a51a2688d0a6bbeffddaa0ad5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DDCE0",
+          "size": 808,
+          "symbol": "_FUN_588ddce0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "589809AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 20,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "589A10B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58906DE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 216,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 271,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 277,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 340,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 398,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 463,
+              "target_address": "589031A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 469,
+              "target_address": "5898CA74",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 520,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ddce0 / EFSJ sprite-bundle refresh",
+        "called_by": "Byte-matched FUN_58806F60 calls this function at 0x5880709E on its param_4 == 0 path when the component event ID is 0x1C3, 0x006F, 0x013E, or 0x1C5. The caller then sets byte +0x1368 on the resolved object to 1.",
+        "behavior": "Lazily loads SPR\\EFSJ.spr, creates up to three CSpriteBundleScreen children, clears flag bits on those children, and attaches up to three 0x40-byte-spaced records from the loaded bundle. All eleven direct calls reach byte-matched functions.",
+        "uncertainty": "The component event meanings, owning class, child field meanings, sprite-record schema, and exact rendered appearance remain unresolved. No live client or emulator runtime test was performed."
+      }
     }
   ]
 }
