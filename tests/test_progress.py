@@ -95,8 +95,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_953)
-        self.assertEqual(self.report["measures"]["matched_code"], "2852992")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_956)
+        self.assertEqual(self.report["measures"]["matched_code"], "2854847")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -107,8 +107,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_820)
-        self.assertEqual(current["measures"]["matched_code"], "1879574")
+        self.assertEqual(current["measures"]["matched_functions"], 2_823)
+        self.assertEqual(current["measures"]["matched_code"], "1881429")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -390,6 +390,45 @@ class ProgressReportTests(unittest.TestCase):
         self.assertTrue({"589032E0", "587A15E0", "58907360", "588592C0"} <= verified_addresses)
         self.assertIn("_emit", source)
         self.assertIn("0x588597F0 .. +0x2A5 bytes", source)
+
+    def test_chat_channel_input_helpers_match_complete_ghidra_ranges(self):
+        addresses = build_current_main_verifications.MAIN_CHAT_INPUT_HELPER_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CHAT_INPUT_HELPER_EVIDENCE
+        self.assertEqual(addresses, ("587F69B0", "587F6740", "587F64D0"))
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("FUN_587FC9C0", evidence["587F69B0"]["called_by"])
+        self.assertIn("0x587FD680", evidence["587F69B0"]["called_by"])
+        self.assertIn("0x587FD68C", evidence["587F6740"]["called_by"])
+        self.assertIn("0x587FD695", evidence["587F64D0"]["called_by"])
+        self.assertIn("(2,4)", evidence["587F69B0"]["behavior"])
+        self.assertIn("(2,3)", evidence["587F6740"]["behavior"])
+        self.assertIn("(2,2)", evidence["587F64D0"]["behavior"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+
+        root = Path(__file__).resolve().parents[1]
+        catalog = json.loads((root / "config/NF2_2026/client-verifications.json").read_text())
+        expected = {
+            "587F69B0": (639, (("587F69B0", 517), ("587F6BB8", 122))),
+            "587F6740": (608, (("587F6740", 486), ("587F6929", 122))),
+            "587F64D0": (608, (("587F64D0", 486), ("587F66B9", 122))),
+        }
+        for address, (size, expected_segments) in expected.items():
+            match = next(item for item in catalog["matches"] if item["address"] == address)
+            source = (root / match["source"]).read_text(encoding="utf-8")
+            self.assertEqual(match["size"], size)
+            self.assertEqual(match["verified_by"], "objdiff-3.8.0-byte-identical")
+            actual_segments = tuple(
+                (segment["address"], segment["size"]) for segment in match["segments"]
+            )
+            self.assertEqual(actual_segments, expected_segments)
+            self.assertEqual(sum(segment["size"] for segment in match["segments"]), size)
+            self.assertTrue(all(segment["relocations"] for segment in match["segments"]))
+            self.assertIn("__asm _emit", source)
+            for segment_address, segment_size in expected_segments:
+                segment_end = int(segment_address, 16) + segment_size
+                self.assertIn(
+                    f"Ghidra body range 0x{segment_address}..0x{segment_end:X}", source
+                )
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

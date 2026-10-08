@@ -19011,6 +19011,31 @@ EVIDENCE["588597F0"] = {
     "uncertainty": "The receiver and child types, meanings of the eight indexed slots and four word fields, resource identifiers, and the visible meaning of state bit 0 and marker 0xAA remain unidentified.",
 }
 
+MAIN_CHAT_INPUT_HELPER_ADDRESSES = ("587F69B0", "587F6740", "587F64D0")
+ADDRESSES += MAIN_CHAT_INPUT_HELPER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CHAT_INPUT_HELPER_ADDRESSES)
+MAIN_CHAT_INPUT_HELPER_EVIDENCE = {
+    "587F69B0": {
+        "name_in_analysis": "FUN_587F69B0 / direct-fleet chat input handler",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 calls it at 0x587FD680 after recognizing the corresponding input prefix; the fresh Ghidra reference export confirms this edge.",
+        "behavior": "Checks two global gates and a value at DAT_58A245C0+0x640, displays observed direct-fleet denial/filter messages when gated, reads text from [this+0x20D30]+0x80, derives a prefix length from the leading bytes, and routes an accepted channel message through FUN_587EE240 with observed arguments (2,4). A separated trailing-space path allocates and builds a filter buffer, checks it through FUN_587B8370, reports the forbidden-word message when that helper returns zero, and then routes the channel message.",
+        "uncertainty": "The gates' policy meaning, encoded prefix schema, buffer/filter contract, channel-message consumer behavior, and runtime target of the indirect DAT_5898C030 callback are unresolved.",
+    },
+    "587F6740": {
+        "name_in_analysis": "FUN_587F6740 / squadron chat input handler",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 calls it at 0x587FD68C after recognizing the corresponding input prefix; the fresh Ghidra reference export confirms this edge.",
+        "behavior": "Checks the global gate DAT_58A0B4A4 and a value at DAT_58A245C0+0x644, displays the observed squadron-denial or filter-check message when gated, reads text from [this+0x20D30]+0x80, derives a prefix length from the leading bytes, and routes an accepted channel message through FUN_587EE240 with observed arguments (2,3). A separated trailing-space path builds a filter buffer, checks it through FUN_587B8300, reports the forbidden-word message when that helper returns zero, and then routes the channel message.",
+        "uncertainty": "The gate's policy meaning, encoded prefix schema, buffer/filter contract, channel-message consumer behavior, and runtime target of the indirect DAT_5898C030 callback are unresolved.",
+    },
+    "587F64D0": {
+        "name_in_analysis": "FUN_587F64D0 / fleet chat input handler",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 calls it at 0x587FD695 after recognizing the corresponding input prefix; the fresh Ghidra reference export confirms this edge.",
+        "behavior": "Checks the global gate DAT_58A0B4A0 and a value at DAT_58A245C0+0x63C, displays the observed fleet-denial or filter-check message when gated, reads text from [this+0x20D30]+0x80, derives a prefix length from the leading bytes, and routes an accepted channel message through FUN_587EE240 with observed arguments (2,2). A separated trailing-space path builds a filter buffer, checks it through FUN_587B8290, reports the forbidden-word message when that helper returns zero, and then routes the channel message.",
+        "uncertainty": "The gate's policy meaning, encoded prefix schema, buffer/filter contract, channel-message consumer behavior, and runtime target of the indirect DAT_5898C030 callback are unresolved.",
+    },
+}
+EVIDENCE.update(MAIN_CHAT_INPUT_HELPER_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
