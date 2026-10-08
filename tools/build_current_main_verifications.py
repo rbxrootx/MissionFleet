@@ -19605,6 +19605,152 @@ EVIDENCE.update({
     },
 })
 
+MAIN_GUN_RENDER_ADDRESSES = (
+    "587B3200",
+    "587B1AE0",
+    "5875EC90",
+    "5875EC60",
+    "588D2B50",
+    "588DD370",
+)
+ADDRESSES += MAIN_GUN_RENDER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_GUN_RENDER_ADDRESSES)
+EVIDENCE.update({
+    "587B3200": {
+        "name_in_analysis": (
+            "FUN_587b3200 / CMountedWeapon_Gun and CMountedWeapon_GunL render path"
+        ),
+        "called_by": (
+            "The mapped RTTI vtables at 0x58999ED4 and 0x58999F24 point to this "
+            "method in slot +0x3C for CMountedWeapon_Gun and CMountedWeapon_GunL. "
+            "Fresh Ghidra data references confirm both slots. Two independent "
+            "fresh Ghidra body and edge exports agree on its two exact body "
+            "ranges and all direct helper calls."
+        ),
+        "behavior": (
+            "Stores the packed input word at receiver +0x94, extracts the two "
+            "two packed input fields, whose precise coordinate/direction meanings "
+            "remain unresolved, and processes the low-three-bit "
+            "mount count at +0x224. For each active mount it computes a table-based "
+            "offset, configures and creates a sprite/effect object through matched "
+            "FUN_588D3A60 with flag 0x40, initializes selected object callbacks, "
+            "and optionally creates additional CEffectFireSpit_SpriteBundleScreen "
+            "objects through FUN_5875EC90 under two global overlay gates. The "
+            "source covers the two complete Ghidra ranges: 139 bytes and 1,993 "
+            "bytes, separated by a five-byte gap."
+        ),
+        "uncertainty": (
+            "The exact weapon/mount record schema, meanings and units of the "
+            "packed input fields and receiver offsets +0x224/+0x25C/+0x3E4, the "
+            "lookup-table encoding, overlay effect identities, and callback/object "
+            "field names remain unresolved. RTTI identifies the two virtual-table "
+            "slots, but constructor reachability and in-emulator visual behavior "
+            "have not been validated."
+        ),
+    },
+    "587B1AE0": {
+        "name_in_analysis": "FUN_587b1ae0 / table-based direction component helper",
+        "called_by": (
+            "Called by the RTTI-identified CMountedWeapon_Gun and "
+            "CMountedWeapon_GunL method FUN_587B3200 at 0x587B3509. Two "
+            "independent fresh Ghidra exports confirm the exact 143-byte body "
+            "and direct-call edge."
+        ),
+        "behavior": (
+            "Reads two component tables at 0x58A0B4D8 and 0x58A0ED18 and "
+            "combines indexed values with the supplied magnitude using integer "
+            "scaling. It writes four computed components to the supplied output "
+            "record; the caller passes that record to the matched effect creator."
+        ),
+        "uncertainty": (
+            "The table formats, units, signedness conventions, coordinate axis "
+            "mapping, and output record type remain unresolved. The caller path "
+            "is RTTI-backed, but no emulator runtime test was performed."
+        ),
+    },
+    "5875EC90": {
+        "name_in_analysis": "FUN_5875ec90 / CEffectFireSpit_SpriteBundleScreen initializer",
+        "called_by": (
+            "Called by the RTTI-identified FUN_587B3200 draw path at "
+            "0x587B36FA, 0x587B379C, 0x587B3895, and 0x587B392F. It is also "
+            "called from byte-matched FUN_587B4B70 and open FUN_588EB8C0. Two "
+            "independent fresh Ghidra exports agree on its exact 382-byte body "
+            "and outgoing call to matched FUN_58734A30."
+        ),
+        "behavior": (
+            "Calls matched FUN_58734A30, installs the "
+            "CEffectFireSpit_SpriteBundleScreen vtable, copies the supplied "
+            "sprite/frame and position values into object fields, scales four "
+            "provided components by ten, and derives sprite-sheet frame counts "
+            "from the selected resource dimensions and caller-supplied divisors."
+        ),
+        "uncertainty": (
+            "The formal argument types, resource and sprite-sheet schemas, "
+            "units of copied/scaled fields, and meaning of caller-specific "
+            "divisors remain unresolved. This initializer is also reached by "
+            "other client paths; no emulator runtime test was performed."
+        ),
+    },
+    "5875EC60": {
+        "name_in_analysis": "FUN_5875ec60 / sprite-list index range updater",
+        "called_by": (
+            "Called three times by the RTTI-identified FUN_587B3200 draw path "
+            "at 0x587B3713, 0x587B37C9, and 0x587B395C. It is also called from "
+            "byte-matched FUN_587B4B70 and open FUN_588EB8C0. Two independent "
+            "fresh Ghidra exports agree on its exact 38-byte body."
+        ),
+        "behavior": (
+            "Computes (param_2 + param_3 * 0x24) times receiver +0x68 and stores "
+            "the result at receiver +0x64 and +0x50; it stores the result minus "
+            "one plus receiver +0x68 at receiver +0x60."
+        ),
+        "uncertainty": (
+            "The receiver type, the meaning of its +0x50/+0x60/+0x64/+0x68 "
+            "fields, and whether the computed values delimit a sprite or effect "
+            "range remain unresolved. No emulator runtime test was performed."
+        ),
+    },
+    "588D2B50": {
+        "name_in_analysis": "FUN_588d2b50 / effect-object parameter stores",
+        "called_by": (
+            "Called by the RTTI-identified FUN_587B3200 draw path at "
+            "0x587B35F0. Two independent fresh Ghidra exports confirm this "
+            "direct-call edge and the exact 33-byte body."
+        ),
+        "behavior": (
+            "Stores its three stack arguments at receiver offsets +0x230, "
+            "+0x234, and +0x238. The caller supplies values derived from the "
+            "mount's packed direction and receiver state."
+        ),
+        "uncertainty": (
+            "The receiver type and meanings, units, and later consumers of "
+            "fields +0x230/+0x234/+0x238 remain unresolved. No emulator runtime "
+            "test was performed."
+        ),
+    },
+    "588DD370": {
+        "name_in_analysis": "FUN_588dd370 / timed status event emitter",
+        "called_by": (
+            "Called by the RTTI-identified FUN_587B3200 draw path at "
+            "0x587B3A23 and by byte-matched FUN_587B4B70. Two independent "
+            "fresh Ghidra exports agree on its exact 66-byte body and call to "
+            "matched FUN_58970C70."
+        ),
+        "behavior": (
+            "Sets the supplied object's +0x1330 state to one, reads a handle "
+            "from the object at +0x12E8 then +0x6C, calls the function pointer "
+            "at 0x5898C1A8 with that handle and zero, and passes the callback "
+            "result to matched FUN_58970C70 with event identifier 0x80012101."
+        ),
+        "uncertainty": (
+            "The object and handle schemas, callback contract and return value, "
+            "event payload, and relationship of this timed status path to the "
+            "weapon rendering routine remain unknown. No emulator runtime test "
+            "was performed."
+        ),
+    },
+})
+
 
 if __name__ == "__main__":
     main()

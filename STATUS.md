@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 8,964 verified matches
-totaling 2,857,698 bytes (21.1111% by functions, 27.2933% by bytes), each at
+identified code bytes across six report units. There are 9,012 verified matches
+totaling 2,872,813 bytes (21.2242% by functions, 27.4377% by bytes), each at
 100.0% under objdiff 3.8.0. Five chat command routes add 2,146 exact bytes;
 their original strings, caller paths, shared sender helper, and unresolved
 protocol meaning are documented in

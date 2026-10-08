@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,964 matches cover 2,857,698 bytes (21.1111% by functions and
-27.2933% by bytes) and are verified individually at 100.0% by objdiff.
+The current 9,012 matches cover 2,872,813 bytes (21.2242% by functions and
+27.4377% by bytes) and are verified individually at 100.0% by objdiff.
 Five chat command routes add 2,146 exact bytes; their original command strings,
 caller paths, shared sender helper, and unresolved protocol meaning are
 documented in [the subsystem evidence](docs/current-main-chat-command-routes.md).

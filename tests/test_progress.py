@@ -62,6 +62,7 @@ from tools import (
     verify_current_main_shell_map_secondary_fallback,
     verify_current_main_escort_cargo_packet,
     verify_current_main_data_file_aggregate,
+    verify_current_main_gun_render,
     verify_current_main_587a6e90_child_flag_helper,
     verify_current_main_58854300_child_bit_update,
     verify_current_main_indexed_child_slot_updates,
@@ -104,8 +105,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 9_006)
-        self.assertEqual(self.report["measures"]["matched_code"], "2870019")
+        self.assertEqual(self.report["measures"]["matched_functions"], 9_012)
+        self.assertEqual(self.report["measures"]["matched_code"], "2872813")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -116,8 +117,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_873)
-        self.assertEqual(current["measures"]["matched_code"], "1896601")
+        self.assertEqual(current["measures"]["matched_functions"], 2_879)
+        self.assertEqual(current["measures"]["matched_code"], "1899395")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -926,6 +927,26 @@ class ProgressReportTests(unittest.TestCase):
             build_current_main_verifications.EVIDENCE["587793C0"]["uncertainty"],
         )
         verify_current_main_data_file_aggregate.main()
+
+    def test_mounted_weapon_rendering_closure_has_exact_rtti_and_byte_matches(self):
+        addresses = build_current_main_verifications.MAIN_GUN_RENDER_ADDRESSES
+        self.assertEqual(
+            addresses,
+            ("587B3200", "587B1AE0", "5875EC90", "5875EC60", "588D2B50", "588DD370"),
+        )
+        self.assertIn(
+            "CMountedWeapon_GunL",
+            build_current_main_verifications.EVIDENCE["587B3200"]["called_by"],
+        )
+        self.assertIn(
+            "sprite/effect object",
+            build_current_main_verifications.EVIDENCE["587B3200"]["behavior"],
+        )
+        self.assertIn(
+            "callback contract",
+            build_current_main_verifications.EVIDENCE["588DD370"]["uncertainty"],
+        )
+        verify_current_main_gun_render.main()
 
     def test_event_80021101_metric_helper_closure_has_matched_route_and_exact_bodies(self):
         addresses = (

@@ -485431,6 +485431,658 @@
         "behavior": "The fresh Ghidra body walks 0x30 four-byte groups (0xC0 bytes) from a supplied pointer and folds byte-derived products into an integer accumulator. When a count read through another supplied pointer is positive, it also visits a count-times-stride byte span from a second pointer and adds those byte-derived values before returning the accumulator. The function has no direct callees.",
         "uncertainty": "The decompiler does not recover a reliable formal signature; register/stack argument roles, buffer schemas, arithmetic meaning, and the returned value's semantics are unresolved. No emulator runtime test was performed."
       }
+    },
+    {
+      "address": "587B3200",
+      "name": "FUN_587b3200",
+      "size": 2132,
+      "symbol": "_FUN_587b3200",
+      "source": "src/client-current/Main/FUN_587b3200.cpp",
+      "source_sha256": "9ac9a85fbcc75c75a2f997685990f2d3c51cca2f3544766af9136d97454e4410",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B3200",
+          "size": 139,
+          "symbol": "_FUN_587b3200_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58980ED7",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "587B1090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "587B39C1",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587B3290",
+          "size": 1993,
+          "symbol": "_FUN_587b3200_segment_01",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "58A24504",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 12,
+              "target_address": "587B34AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587B34AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 299,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 431,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 634,
+              "target_address": "587B1AE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 657,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 684,
+              "target_address": "58A24914",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 689,
+              "target_address": "58A2491C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 709,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 732,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 786,
+              "target_address": "588D3A60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 793,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 835,
+              "target_address": "5873BD60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 865,
+              "target_address": "588D2B50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 887,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 900,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 965,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 989,
+              "target_address": "588D3E50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 995,
+              "target_address": "589C904C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1002,
+              "target_address": "587B3809",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1024,
+              "target_address": "587B3724",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1029,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1050,
+              "target_address": "58A24684",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1084,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1131,
+              "target_address": "5875EC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1156,
+              "target_address": "5875EC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1168,
+              "target_address": "587B37CE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1173,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1204,
+              "target_address": "58A24680",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1246,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1293,
+              "target_address": "5875EC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1338,
+              "target_address": "5875EC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1350,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1362,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1384,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1397,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1403,
+              "target_address": "589C9050",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1410,
+              "target_address": "587B3990",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1428,
+              "target_address": "587B38B4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1433,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1458,
+              "target_address": "58A2467C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1492,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1542,
+              "target_address": "5875EC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1555,
+              "target_address": "587B3954",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1568,
+              "target_address": "587B3954",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1573,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1604,
+              "target_address": "58A24678",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1646,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1696,
+              "target_address": "5875EC90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1741,
+              "target_address": "5875EC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1753,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1775,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1788,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1837,
+              "target_address": "587B3290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1870,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1882,
+              "target_address": "58A245A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1940,
+              "target_address": "588DD370",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1945,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b3200 / CMountedWeapon_Gun and CMountedWeapon_GunL render path",
+        "called_by": "The mapped RTTI vtables at 0x58999ED4 and 0x58999F24 point to this method in slot +0x3C for CMountedWeapon_Gun and CMountedWeapon_GunL. Fresh Ghidra data references confirm both slots. Two independent fresh Ghidra body and edge exports agree on its two exact body ranges and all direct helper calls.",
+        "behavior": "Stores the packed input word at receiver +0x94, extracts the two two packed input fields, whose precise coordinate/direction meanings remain unresolved, and processes the low-three-bit mount count at +0x224. For each active mount it computes a table-based offset, configures and creates a sprite/effect object through matched FUN_588D3A60 with flag 0x40, initializes selected object callbacks, and optionally creates additional CEffectFireSpit_SpriteBundleScreen objects through FUN_5875EC90 under two global overlay gates. The source covers the two complete Ghidra ranges: 139 bytes and 1,993 bytes, separated by a five-byte gap.",
+        "uncertainty": "The exact weapon/mount record schema, meanings and units of the packed input fields and receiver offsets +0x224/+0x25C/+0x3E4, the lookup-table encoding, overlay effect identities, and callback/object field names remain unresolved. RTTI identifies the two virtual-table slots, but constructor reachability and in-emulator visual behavior have not been validated."
+      }
+    },
+    {
+      "address": "587B1AE0",
+      "name": "FUN_587b1ae0",
+      "size": 143,
+      "symbol": "_FUN_587b1ae0",
+      "source": "src/client-current/Main/FUN_587b1ae0.cpp",
+      "source_sha256": "1ffb88a3d70cd6f8b2f12add96ca81e4e72d3ca7c40215983d80c3031966e512",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B1AE0",
+          "size": 143,
+          "symbol": "_FUN_587b1ae0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587b1ae0 / table-based direction component helper",
+        "called_by": "Called by the RTTI-identified CMountedWeapon_Gun and CMountedWeapon_GunL method FUN_587B3200 at 0x587B3509. Two independent fresh Ghidra exports confirm the exact 143-byte body and direct-call edge.",
+        "behavior": "Reads two component tables at 0x58A0B4D8 and 0x58A0ED18 and combines indexed values with the supplied magnitude using integer scaling. It writes four computed components to the supplied output record; the caller passes that record to the matched effect creator.",
+        "uncertainty": "The table formats, units, signedness conventions, coordinate axis mapping, and output record type remain unresolved. The caller path is RTTI-backed, but no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5875EC90",
+      "name": "FUN_5875ec90",
+      "size": 382,
+      "symbol": "_FUN_5875ec90",
+      "source": "src/client-current/Main/FUN_5875ec90.cpp",
+      "source_sha256": "2dad7261bcfac7bfdb40588674f0fa4849f2e3d9349f2b4394f796eb419257aa",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5875EC90",
+          "size": 382,
+          "symbol": "_FUN_5875ec90_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58734A30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "5898DA1C",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875ec90 / CEffectFireSpit_SpriteBundleScreen initializer",
+        "called_by": "Called by the RTTI-identified FUN_587B3200 draw path at 0x587B36FA, 0x587B379C, 0x587B3895, and 0x587B392F. It is also called from byte-matched FUN_587B4B70 and open FUN_588EB8C0. Two independent fresh Ghidra exports agree on its exact 382-byte body and outgoing call to matched FUN_58734A30.",
+        "behavior": "Calls matched FUN_58734A30, installs the CEffectFireSpit_SpriteBundleScreen vtable, copies the supplied sprite/frame and position values into object fields, scales four provided components by ten, and derives sprite-sheet frame counts from the selected resource dimensions and caller-supplied divisors.",
+        "uncertainty": "The formal argument types, resource and sprite-sheet schemas, units of copied/scaled fields, and meaning of caller-specific divisors remain unresolved. This initializer is also reached by other client paths; no emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "5875EC60",
+      "name": "FUN_5875ec60",
+      "size": 38,
+      "symbol": "_FUN_5875ec60",
+      "source": "src/client-current/Main/FUN_5875ec60.cpp",
+      "source_sha256": "4dee5413c2bdde5584460e9f0982ab3cb2de311af2352223386e804a5a07478e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5875EC60",
+          "size": 38,
+          "symbol": "_FUN_5875ec60_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5875ec60 / sprite-list index range updater",
+        "called_by": "Called three times by the RTTI-identified FUN_587B3200 draw path at 0x587B3713, 0x587B37C9, and 0x587B395C. It is also called from byte-matched FUN_587B4B70 and open FUN_588EB8C0. Two independent fresh Ghidra exports agree on its exact 38-byte body.",
+        "behavior": "Computes (param_2 + param_3 * 0x24) times receiver +0x68 and stores the result at receiver +0x64 and +0x50; it stores the result minus one plus receiver +0x68 at receiver +0x60.",
+        "uncertainty": "The receiver type, the meaning of its +0x50/+0x60/+0x64/+0x68 fields, and whether the computed values delimit a sprite or effect range remain unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588D2B50",
+      "name": "FUN_588d2b50",
+      "size": 33,
+      "symbol": "_FUN_588d2b50",
+      "source": "src/client-current/Main/FUN_588d2b50.cpp",
+      "source_sha256": "ee4ddf1f792955c1f15ce33a0924520694c3782934ff8deccafcc24f7d8e9f38",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588D2B50",
+          "size": 33,
+          "symbol": "_FUN_588d2b50_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588d2b50 / effect-object parameter stores",
+        "called_by": "Called by the RTTI-identified FUN_587B3200 draw path at 0x587B35F0. Two independent fresh Ghidra exports confirm this direct-call edge and the exact 33-byte body.",
+        "behavior": "Stores its three stack arguments at receiver offsets +0x230, +0x234, and +0x238. The caller supplies values derived from the mount's packed direction and receiver state.",
+        "uncertainty": "The receiver type and meanings, units, and later consumers of fields +0x230/+0x234/+0x238 remain unresolved. No emulator runtime test was performed."
+      }
+    },
+    {
+      "address": "588DD370",
+      "name": "FUN_588dd370",
+      "size": 66,
+      "symbol": "_FUN_588dd370",
+      "source": "src/client-current/Main/FUN_588dd370.cpp",
+      "source_sha256": "9242ac98c99ec40fa8bc8b293112d583b1b84c6e553d860424faded6f1129dd8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588DD370",
+          "size": 66,
+          "symbol": "_FUN_588dd370_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588dd370 / timed status event emitter",
+        "called_by": "Called by the RTTI-identified FUN_587B3200 draw path at 0x587B3A23 and by byte-matched FUN_587B4B70. Two independent fresh Ghidra exports agree on its exact 66-byte body and call to matched FUN_58970C70.",
+        "behavior": "Sets the supplied object's +0x1330 state to one, reads a handle from the object at +0x12E8 then +0x6C, calls the function pointer at 0x5898C1A8 with that handle and zero, and passes the callback result to matched FUN_58970C70 with event identifier 0x80012101.",
+        "uncertainty": "The object and handle schemas, callback contract and return value, event payload, and relationship of this timed status path to the weapon rendering routine remain unknown. No emulator runtime test was performed."
+      }
     }
   ]
 }
