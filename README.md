@@ -6,6 +6,8 @@ C pseudocode are available locally. **Start with [the decompilation project](dec
 and [current status](STATUS.md).** A buildable 1:1 recreation is not complete.
 
 The matching project has a deterministic [decomp.dev progress pipeline](docs/decomp-dev.md).
+An [isolated Ghidra Bundle trial](docs/ghidra-bundle-evaluation.md) is available
+for game-server analysis without changing the pinned evidence project.
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.

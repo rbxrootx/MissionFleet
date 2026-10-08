@@ -46,6 +46,11 @@ The release ZIP SHA-256 was verified as
 `93a5d11a9ad510622acaaf908c556a7b9b764d338e78a7567f3689bf5081fd54`.
 The analysis project uses x86 little-endian 32-bit Windows conventions.
 
+An optional [Ghidra Bundle trial](../docs/ghidra-bundle-evaluation.md) records
+how to run its 12.1.4 headless build in separate project and output directories
+on a supported host. The pinned 12.1.3 project and byte-match evidence remain
+the baseline for this checkout.
+
 `python tools/run_decompilation.py --refresh-labels` verifies the existing
 region prefix, appends newly recovered tail bytes, applies import labels and
 exports without repeating the original analysis. A changed code prefix requires
