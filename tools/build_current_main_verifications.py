@@ -15638,6 +15638,10 @@ MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES = ("587EA6C0",)
 ADDRESSES += MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_RINGOUT_MONITOR_ADDRESSES)
 
+MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES = ("587E8260",)
+ADDRESSES += MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -16105,6 +16109,39 @@ MAIN_PAGEFIGHT_RINGOUT_MONITOR_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_PAGEFIGHT_RINGOUT_MONITOR_EVIDENCE)
+
+MAIN_PAGEFIGHT_POSITION_BOUNDS_EVIDENCE = {
+    "587E8260": {
+        "name_in_analysis": "FUN_587E8260 / PageFight map-window position and bounds helper",
+        "called_by": (
+            "Both fresh Ghidra edge exports record one incoming direct call from "
+            "the byte-matched FUN_587FD890 at 0x587FEE0D. The caller is the "
+            "RTTI-backed CPageFightOn_ControlMenuScreen update method at slot "
+            "+0x0C of vtable 0x5899D180, and reloads ECX from ESI immediately "
+            "before the call. No other incoming direct-call site is present in "
+            "either export."
+        ),
+        "behavior": (
+            "Both fresh body exports agree on one complete 815-byte range "
+            "(212 instructions). The helper gates on receiver mode/flags and a "
+            "global state, then samples the global position at +4/+8. It sets "
+            "four direction bits in receiver +0x3A8 and adjusts position fields "
+            "+0x1052C/+0x10530 by receiver speed +0x104CC, with limits derived "
+            "from map geometry through +0x10524. It copies two map values to "
+            "+0x10464/+0x10468 and, when an optional tracked object at +0x10558 "
+            "is within the observed interior bounds, follows its coordinate "
+            "changes using +0x10BB8/+0x10BBC. The original body contains no call "
+            "instructions."
+        ),
+        "uncertainty": (
+            "The exact object types, coordinate units, semantic direction-bit "
+            "names, meaning of the mode/flag fields and global gate, and runtime "
+            "map-window behavior are inferred from arithmetic and field access. "
+            "No live PageFight screen or emulator movement test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PAGEFIGHT_POSITION_BOUNDS_EVIDENCE)
 
 
 if __name__ == "__main__":

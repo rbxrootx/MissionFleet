@@ -451229,6 +451229,125 @@
         "behavior": "Both fresh Ghidra exports agree on one complete 857-byte range (215 instructions). The body gates on a current-player pointer, FUN_588D66E0() == 0x40000000, receiver flags at +0x10474, and a 25-update counter. It compares current-player coordinates at +4/+8 against dimensions from receiver +0x10524 with mode-dependent margins. The out-of-field branch formats the mapped keys MESSAGESTRING__XX_WILL_RINGOUT and MESSAGESTRING__XX_HAS_BEEN_OUT_FROM_FIELD, updates receiver state including bit 0x20000000 at +0x10474, and calls matched FUN_587B9760 and FUN_587315F0. Its 11 direct calls target seven already byte-matched functions; callback and vtable calls remain indirect.",
         "uncertainty": "The object and coordinate types, mode values, units and source of the boundary margins, meaning of the +0x104EC/+0x104F0 state, message callback contract, and gameplay effects are not fully established. The code is statically mapped and byte-matched; no live battle or emulator comparison was performed."
       }
+    },
+    {
+      "address": "587E8260",
+      "name": "FUN_587e8260",
+      "size": 815,
+      "symbol": "_FUN_587e8260",
+      "source": "src/client-current/Main/FUN_587e8260.cpp",
+      "source_sha256": "6e8017e727e1cc0488f915463d44fd94d1cdc4acbd0ab5cff39197ac0e59daf8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587E8260",
+          "size": 815,
+          "symbol": "_FUN_587e8260_segment_00",
+          "relocations": [
+            {
+              "offset": 20,
+              "target_address": "587E858E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "587E84AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58A245C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "587E84AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "587E84AD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 257,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 636,
+              "target_address": "587E858A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 650,
+              "target_address": "587E858A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 669,
+              "target_address": "587E858A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 747,
+              "target_address": "58A247F8",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587E8260 / PageFight map-window position and bounds helper",
+        "called_by": "Both fresh Ghidra edge exports record one incoming direct call from the byte-matched FUN_587FD890 at 0x587FEE0D. The caller is the RTTI-backed CPageFightOn_ControlMenuScreen update method at slot +0x0C of vtable 0x5899D180, and reloads ECX from ESI immediately before the call. No other incoming direct-call site is present in either export.",
+        "behavior": "Both fresh body exports agree on one complete 815-byte range (212 instructions). The helper gates on receiver mode/flags and a global state, then samples the global position at +4/+8. It sets four direction bits in receiver +0x3A8 and adjusts position fields +0x1052C/+0x10530 by receiver speed +0x104CC, with limits derived from map geometry through +0x10524. It copies two map values to +0x10464/+0x10468 and, when an optional tracked object at +0x10558 is within the observed interior bounds, follows its coordinate changes using +0x10BB8/+0x10BBC. The original body contains no call instructions.",
+        "uncertainty": "The exact object types, coordinate units, semantic direction-bit names, meaning of the mode/flag fields and global gate, and runtime map-window behavior are inferred from arithmetic and field access. No live PageFight screen or emulator movement test was performed."
+      }
     }
   ]
 }

@@ -41,6 +41,7 @@ from tools import (
     verify_current_main_communicator_id_pointer_range_update,
     verify_current_main_factory_help_cleanup,
     verify_current_main_pagefight_ringout_monitor,
+    verify_current_main_pagefight_position_bounds,
     verify_current_main_scroll_text_screen_slot0,
     verify_current_main_scroll_text_screen_slot3,
     verify_current_main_shell_map_object_screen_slot5,
@@ -66,8 +67,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_646)
-        self.assertEqual(self.report["measures"]["matched_code"], "2763942")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_647)
+        self.assertEqual(self.report["measures"]["matched_code"], "2764757")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -78,8 +79,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_513)
-        self.assertEqual(current["measures"]["matched_code"], "1790524")
+        self.assertEqual(current["measures"]["matched_functions"], 2_514)
+        self.assertEqual(current["measures"]["matched_code"], "1791339")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -916,6 +917,16 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("11 direct calls", evidence["587EA6C0"]["behavior"])
         self.assertTrue(evidence["587EA6C0"]["uncertainty"])
         verify_current_main_pagefight_ringout_monitor.main()
+
+    def test_pagefight_position_bounds_helper_matches_original_and_update_caller(self):
+        addresses = build_current_main_verifications.MAIN_PAGEFIGHT_POSITION_BOUNDS_ADDRESSES
+        self.assertEqual(addresses, ("587E8260",))
+        evidence = build_current_main_verifications.MAIN_PAGEFIGHT_POSITION_BOUNDS_EVIDENCE
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("0x587FEE0D", evidence["587E8260"]["called_by"])
+        self.assertIn("+0x1052C/+0x10530", evidence["587E8260"]["behavior"])
+        self.assertTrue(evidence["587E8260"]["uncertainty"])
+        verify_current_main_pagefight_position_bounds.main()
 
     def test_manage_fleet_child_matches_original_and_verified_caller(self):
         addresses = build_current_main_verifications.MAIN_MANAGE_FLEET_CHILD_ADDRESSES

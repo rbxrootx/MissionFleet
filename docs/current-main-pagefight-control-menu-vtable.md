@@ -47,3 +47,6 @@ The matched slot `+0x0C` update method also calls the 857-byte out-of-field
 ring-out monitor `FUN_587EA6C0` at `0x587FEE19`. Its exact body and observed
 message/state behavior are recorded in the
 [ring-out monitor notes](current-main-pagefight-ringout-monitor.md).
+The same update sequence calls the 815-byte position-and-bounds helper
+`FUN_587E8260` at `0x587FEE0D`; its observed map-window adjustments are
+documented in the [position helper notes](current-main-pagefight-position-bounds.md).
