@@ -77,6 +77,7 @@ from tools import (
     verify_current_main_58776f20_state_refresh,
     verify_current_main_cpannel_force_level_up,
     verify_current_main_cforce_primary_vtable,
+    verify_current_main_diplomacy_tab,
 )
 
 
@@ -89,8 +90,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_854)
-        self.assertEqual(self.report["measures"]["matched_code"], "2830933")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_884)
+        self.assertEqual(self.report["measures"]["matched_code"], "2834809")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -101,14 +102,26 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_721)
-        self.assertEqual(current["measures"]["matched_code"], "1857515")
+        self.assertEqual(current["measures"]["matched_functions"], 2_751)
+        self.assertEqual(current["measures"]["matched_code"], "1861391")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
         self.assertEqual(core["measures"]["matched_functions"], 431)
         self.assertEqual(core["measures"]["matched_code"], "333421")
+
+    def test_diplomacy_tab_event_closure_has_exact_rtti_and_direct_call_boundaries(self):
+        addresses = build_current_main_verifications.MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_DIPLOMACY_TAB_EVENT_EVIDENCE
+        self.assertEqual(len(addresses), 30)
+        self.assertEqual(
+            set(addresses),
+            {f"{address:08X}" for address in verify_current_main_diplomacy_tab.FUNCTIONS},
+        )
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_diplomacy_tab.main()
 
     def test_fcchs_tutorial_vtable_flow_has_exact_rtti_and_call_closure(self):
         addresses = build_current_main_verifications.MAIN_FCCHS_TUTORIAL_VTABLE_ADDRESSES

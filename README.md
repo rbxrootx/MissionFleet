@@ -9,8 +9,13 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 8,606 matches cover 2,746,798 bytes (20.2680% by functions and
-26.2342% by bytes) and are verified individually at 100.0% by objdiff.
+The current 8,884 matches cover 2,834,809 bytes (20.9227% by functions and
+27.0747% by bytes) and are verified individually at 100.0% by objdiff.
+The installed client's RTTI-backed `CPannelCommunicatorConfigDiplomacyTab`
+event closure adds 30 exact functions / 3,876 bytes across 31 ranges. Its
+mode dispatcher, matched callers, constructor path, and indirect callback
+uncertainties are recorded in
+[the subsystem evidence](docs/current-main-diplomacy-tab-event-closure.md).
 The installed client's battle-room `0x80020115` update closure adds eight
 byte-identical functions / 3,847 bytes. Its matched dispatcher route, 200-position
 bitmap traversal, mode-specific object creation, exact ranges, and unresolved

@@ -1,14 +1,18 @@
-# Native decompilation status — 7 October 2026
+# Native decompilation status — 8 October 2026
 
 The supplied files contain a historical NavyFIELD 2062 client and actual login,
 game and persistence server binaries. They have been extracted and statically
 decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
-The deterministic objdiff v2 report tracks 42,461 functions and 10,470,295
-identified code bytes across six report units. There are 8,582 verified matches
-totaling 2,738,583 bytes (20.2115% by functions, 26.1557% by bytes), each at
-100.0% under objdiff 3.8.0. A
+The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
+identified code bytes across six report units. There are 8,884 verified matches
+totaling 2,834,809 bytes (20.9227% by functions, 27.0747% by bytes), each at
+100.0% under objdiff 3.8.0. The installed client's RTTI-backed
+`CPannelCommunicatorConfigDiplomacyTab` event closure adds 30 exact functions /
+3,876 bytes across 31 fresh Ghidra ranges. Its matched callers, mode dispatch,
+constructor path, and indirect callback uncertainties are documented in
+[the subsystem note](docs/current-main-diplomacy-tab-event-closure.md). A
 verified machine-code match is not by itself proof of recovered high-level
 source or playable behavior. The installed client's tax/investment control
 refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases

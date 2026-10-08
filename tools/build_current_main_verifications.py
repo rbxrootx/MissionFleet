@@ -18069,6 +18069,182 @@ MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE)
 
+MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES = (
+    "58759E90", "587B9CB0", "587B9CF0", "587B9D20", "587B9D50",
+    "587B9D80", "587B9DB0", "587B9DD0", "58824630", "588246E0",
+    "58826F20", "58827070", "58827B90", "58827BD0", "58827C20",
+    "58827C40", "58827C70", "58827CC0", "58827CE0", "58827D10",
+    "58828130", "588281A0", "58828250", "58828270", "58828B60",
+    "58828BE0", "58828CB0", "58828DA0", "58828DC0", "58828DF0",
+)
+ADDRESSES += MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES
+
+MAIN_DIPLOMACY_TAB_EVENT_BEHAVIOR = {
+    "58759E90": (
+        "Reads the pointer at argument +0x84 and returns its DWORD at +0x08; "
+        "returns 0xFFFFFFFF when the pointer is null."
+    ),
+    "587B9CB0": (
+        "Calls the callback at DAT_5898C1A8 and forwards observed arguments "
+        "to FUN_58970C70 with message identifier 0x8001310A."
+    ),
+    "587B9CF0": (
+        "Forwards observed arguments to FUN_58970C70 with message "
+        "identifier 0x80013106."
+    ),
+    "587B9D20": (
+        "Calls the callback at DAT_5898C1A8 and forwards observed arguments "
+        "to FUN_58970C70 with message identifier 0x8001310B."
+    ),
+    "587B9D50": (
+        "Calls the callback at DAT_5898C1A8 and forwards observed arguments "
+        "to FUN_58970C70 with message identifier 0x80013109."
+    ),
+    "587B9D80": (
+        "Calls the callback at DAT_5898C1A8 and forwards observed arguments "
+        "to FUN_58970C70 with message identifier 0x8001310C."
+    ),
+    "587B9DB0": (
+        "Calls FUN_58970C70 with message identifier 0x80013108 and the "
+        "observed global pointer DAT_58A0B4A0."
+    ),
+    "587B9DD0": (
+        "Calls FUN_58970C70 with message identifier 0x80013105 and the "
+        "observed global pointer DAT_58A0B4A0."
+    ),
+    "58824630": (
+        "Stores the selected mode byte at receiver +0x60 and calls the "
+        "mode-specific child-state helper for values 1 through 4."
+    ),
+    "588246E0": (
+        "The +0x18 virtual event handler reads mode byte +0x60. For event "
+        "kind 2, the controls at +0x270 and +0x274 decrement or increment "
+        "the mode within the observed 1-to-4 range; other events route to "
+        "the mode handlers at FUN_58827D10, FUN_58828DF0, FUN_58828270, or "
+        "FUN_58827070."
+    ),
+    "58826F20": (
+        "Clears the low four flag bits on the child objects at receiver "
+        "+0x68, +0xCC, and +0x148, sets those bits on the child at +0x220, "
+        "and clears the byte at +0x26C."
+    ),
+    "58827070": (
+        "Handles mode-4 click and message events. Click paths update the "
+        "selected control and send observed action identifiers 0x140 or "
+        "0x141; message-kind 62000 uses the corresponding record and "
+        "message-wrapper paths."
+    ),
+    "58827B90": (
+        "Selects the first observed mode-specific child by changing low "
+        "four-bit flags on four receiver-held controls, then clears the two "
+        "selection bytes at +0x9C and +0x9D."
+    ),
+    "58827BD0": (
+        "Refreshes a child text value using the callback at DAT_5898C198 "
+        "and the indexed record selected by receiver byte +0x9C; then "
+        "updates the child text-length fields."
+    ),
+    "58827C20": (
+        "Decrements the bounded selection byte at receiver +0x9C and "
+        "refreshes its associated child text when the byte is nonzero."
+    ),
+    "58827C40": (
+        "Increments receiver byte +0x9C while it remains below the observed "
+        "record-count bound, then refreshes its associated child text."
+    ),
+    "58827C70": (
+        "Refreshes a second child text value using the callback at "
+        "DAT_5898C198 and the indexed record selected by receiver byte "
+        "+0x9D; then updates the child text-length fields."
+    ),
+    "58827CC0": (
+        "Decrements the bounded selection byte at receiver +0x9D and "
+        "refreshes its associated child text when the byte is nonzero."
+    ),
+    "58827CE0": (
+        "Increments receiver byte +0x9D while it remains below the observed "
+        "record-count bound, then refreshes its associated child text."
+    ),
+    "58827D10": (
+        "Handles mode-1 click events by matching supplied control pointers, "
+        "updating receiver selection fields, and sending observed action "
+        "identifiers 0x136 through 0x138. Its message-kind 62000 path "
+        "dispatches through the included 0x80013106 and 0x8001310B wrappers."
+    ),
+    "58828130": (
+        "Selects the mode-3 child-state flags, emits message identifier "
+        "0x80013108 when its observed timer field is zero, initializes that "
+        "field to 500, and clears two receiver fields."
+    ),
+    "588281A0": (
+        "Refreshes eight displayed entries from the record selected by "
+        "receiver fields +0x1FC and +0x1F8, copying six observed fields "
+        "to each child object."
+    ),
+    "58828250": (
+        "Increments the receiver page/index field +0x1FC within the observed "
+        "upper bound and refreshes the eight displayed entries."
+    ),
+    "58828270": (
+        "Handles mode-3 click and message events. Click branches update "
+        "selection fields, send action identifiers 0x13A through 0x13F, "
+        "and page through the eight-entry display; message-kind 62000 "
+        "routes through the included message wrappers."
+    ),
+    "58828B60": (
+        "Selects the mode-2 child-state flags, updates an observed child "
+        "flag according to global byte DAT_58A0B4A8, and emits message "
+        "identifier 0x80013105 when its timer field is zero."
+    ),
+    "58828BE0": (
+        "Checks whether the selected record index at receiver +0x13C is "
+        "within the current visible range, updates a child active flag, "
+        "and refreshes the associated displayed record."
+    ),
+    "58828CB0": (
+        "Refreshes up to eight mode-2 entries beginning at receiver index "
+        "+0x13C, copies selected record fields into child objects, then "
+        "updates the currently visible selection."
+    ),
+    "58828DA0": (
+        "Decrements receiver index +0x13C when it is positive and refreshes "
+        "the mode-2 displayed entries."
+    ),
+    "58828DC0": (
+        "Increments receiver index +0x13C while the eight-entry window "
+        "remains within the observed list length, then refreshes the "
+        "mode-2 displayed entries."
+    ),
+    "58828DF0": (
+        "Handles mode-2 click and message events. Click branches update "
+        "selection/index fields and send observed action identifiers "
+        "including 0x139; message-kind 62000 follows the included message "
+        "wrapper paths."
+    ),
+}
+
+MAIN_DIPLOMACY_TAB_EVENT_EVIDENCE = {
+    address: {
+        "name_in_analysis": f"FUN_{address.lower()} / diplomacy-tab event closure member",
+        "called_by": (
+            "Member of the direct-call closure rooted at FUN_588246E0, the "
+            "CPannelCommunicatorConfigDiplomacyTab virtual entry at slot "
+            "+0x18. Incoming direct callsites are checked by the focused "
+            "subsystem verifier."
+        ),
+        "behavior": MAIN_DIPLOMACY_TAB_EVENT_BEHAVIOR[address],
+        "uncertainty": (
+            "The original fields, mode labels, control identities, action "
+            "identifier meanings, and message/event contract remain "
+            "unresolved. Function-pointer targets at DAT_5898C1A8 and "
+            "DAT_5898C198, and child virtual targets used during cleanup, "
+            "are not recovered."
+        ),
+    }
+    for address in MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES
+}
+EVIDENCE.update(MAIN_DIPLOMACY_TAB_EVENT_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
