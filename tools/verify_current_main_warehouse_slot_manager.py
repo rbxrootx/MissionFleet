@@ -1,4 +1,4 @@
-"""Verify the RTTI-backed CWarehousePageButton exact-byte reconstruction slice."""
+"""Verify the RTTI-backed CWarehouseSlotManager byte-match slice."""
 import csv
 import hashlib
 import json
@@ -11,9 +11,9 @@ import capstone
 from capstone.x86_const import X86_INS_CALL, X86_INS_JMP, X86_OP_IMM
 
 try:
-    from .build_current_main_verifications import MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES
+    from .build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
 except ImportError:  # Support direct execution as a script.
-    from build_current_main_verifications import MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES
+    from build_current_main_verifications import MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,61 +21,63 @@ BASE = 0x58730000
 IMAGE_PATH = ROOT / "reports/unpacked-current-main/Main.mapped.bin"
 INVENTORY_PATH = ROOT / "config/NF2_2026/client-functions.tsv"
 CATALOG_PATH = ROOT / "config/NF2_2026/client-verifications.json"
-RANGE_PATH = ROOT / "config/NF2_2026/main-warehouse-page-button-body-ranges.tsv"
-BODY_EXPORTS_PATH = ROOT / "config/NF2_2026/main-warehouse-page-button-body-exports.tsv"
-EDGE_EXPORTS_PATH = ROOT / "config/NF2_2026/main-warehouse-page-button-call-edges.tsv"
-CLOSURE_PATH = ROOT / "config/NF2_2026/main-warehouse-page-button-root-closures.tsv"
+RANGE_PATH = ROOT / "config/NF2_2026/main-warehouse-slot-manager-body-ranges.tsv"
+BODY_EXPORTS_PATH = ROOT / "config/NF2_2026/main-warehouse-slot-manager-body-exports.tsv"
+EDGE_EXPORTS_PATH = ROOT / "config/NF2_2026/main-warehouse-slot-manager-call-edges.tsv"
+CLOSURE_PATH = ROOT / "config/NF2_2026/main-warehouse-slot-manager-root-closures.tsv"
 NEXT = ROOT / "var/current-main-next"
-FRESH_LOG = NEXT / "warehouse-page-button-vtable-fresh-ghidra.log"
-FRESH_DECOMP = NEXT / "warehouse-page-button-vtable-fresh-ghidra.c"
-INCOMING_LOG = NEXT / "warehouse-page-button-incoming-fresh-ghidra.log"
-INCOMING_DECOMP = NEXT / "warehouse-page-button-incoming-fresh-ghidra.c"
+FRESH_LOG = NEXT / "warehouse-slot-manager-primary-vtable-fresh-ghidra.log"
+FRESH_DECOMP = NEXT / "warehouse-slot-manager-primary-vtable-fresh-ghidra.c"
 BODY_INVENTORY = NEXT / "main-function-bodies.tsv"
 EDGE_INVENTORY = NEXT / "main-function-edges.tsv"
 MARKER = "objdiff-3.8.0-byte-identical"
 
-FUNCTIONS = tuple(int(address, 16) for address in MAIN_CWAREHOUSE_PAGE_BUTTON_ADDRESSES)
+FUNCTIONS = tuple(int(address, 16) for address in MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES)
 SELECTED = set(FUNCTIONS)
-EXPECTED_FUNCTIONS = 20
-EXPECTED_BYTES = 3_226
-EXPECTED_RANGES = 22
-EXPECTED_DIRECT_TRANSFERS = 40
-EXPECTED_INTERNAL_TRANSFERS = 23
-EXPECTED_BOUNDARY_TRANSFERS = 17
-EXPECTED_INDIRECT_CALLS = {0x588FDC00: 6, 0x588FE460: 1}
-EXPECTED_INDIRECT_JUMPS = {0x588F7D00: 1}
+OPEN_CALLER = 0x588FFC90
+EXPECTED_FUNCTIONS = 23
+EXPECTED_BYTES = 3741
+EXPECTED_RANGES = 26
+EXPECTED_DIRECT_TRANSFERS = 87
+EXPECTED_INTERNAL_TRANSFERS = 26
+EXPECTED_VERIFIED_BOUNDARY_TRANSFERS = 61
+EXPECTED_INDIRECT_CALLS = {
+    0x588F7E30: 1, 0x588F9C00: 1, 0x588FF180: 1, 0x588FF2F0: 1,
+    0x588FF890: 2, 0x588FF940: 1, 0x588FF9A0: 5,
+}
+EXPECTED_INDIRECT_JUMPS = {0x588F9C00: 1}
 
 ROOT_CLOSURES = {
-    0x588FDDD0: {0x588FDDD0, 0x588FDC00},
-    0x588FE460: {
-        0x588FE460, 0x588F7D00, 0x588F7E00, 0x588F7E10, 0x588FB8E0,
-        0x588FD790, 0x588FDCF0, 0x588FDD10, 0x588FDDF0, 0x588FE010,
-        0x588FE0E0, 0x588FE9C0, 0x588FEA10, 0x588FEA30, 0x588FEB10,
-        0x588FF420, 0x588FF530,
-    },
-    0x588FDD30: {
-        0x588FDD30, 0x588F7D00, 0x588F7E00, 0x588F7E10, 0x588FB8E0,
-        0x588FD790, 0x588FE0E0, 0x588FE9C0, 0x588FEA10, 0x588FEA30,
-        0x588FEB10, 0x588FF420, 0x588FF530,
+    0x588FFD90: {0x588FFD90, 0x588FF9A0},
+    0x588FF890: {0x588FF890, 0x588F9B80, 0x588F9C00, 0x588F9FD0, 0x588FEFE0},
+    0x588FF940: {0x588FF940},
+    0x588FF6B0: {
+        0x588FF6B0, 0x588F7DF0, 0x588F7E30, 0x588F9B80, 0x588F9C00,
+        0x588FAC50, 0x588FAD60, 0x588FAEC0, 0x588FAF30, 0x588FAF70,
+        0x588FB850, 0x588FC990, 0x588FCAC0, 0x588FCB80, 0x588FEFE0,
+        0x588FF180, 0x588FF200, 0x588FF2F0,
     },
 }
 
-ADDRESS_POINT = 0x589A233C
-CLASS_LOCATOR = 0x589AAC74
-TYPE_DESCRIPTOR = 0x589CDE04
-CLASS_HIERARCHY = 0x589AAC88
-PRIMARY_SLOTS = (
-    0x588FDDD0, 0x58903400, 0x58903420, 0x58822F10,
-    0x588FE460, 0x58902FE0, 0x588FDD30,
-)
+ADDRESS_POINT = 0x589A23C4
+CLASS_LOCATOR = 0x589AADC0
+TYPE_DESCRIPTOR = 0x589CDE8C
+CLASS_HIERARCHY = 0x589AADD4
 BASE_NAMES = (
-    ".?AVCWarehousePageButton@@",
+    ".?AVCWarehouseSlotManager@@",
     ".?AVCControlMenuScreen@@",
     ".?AVCMenuScreen@@",
     ".?AVCScreen@@",
 )
-ADJACENT_LOCATOR = 0x589AACC8
-ADJACENT_NAME = ".?AVCWarehousePageInfo@@"
+PRIMARY_SLOTS = (
+    0x588FFD90, 0x58903400, 0x58903420, 0x588FF890,
+    0x588FF940, 0x58902FE0, 0x588FF6B0,
+)
+ADJACENT_LOCATOR = 0x589AAE14
+ADJACENT_NAME = ".?AVCWarehouseTradePanel@@"
+CONSTRUCTOR = 0x588FFE10
+CONSTRUCTOR_CALLER = 0x588FB9B0
+CONSTRUCTOR_CALLSITE = 0x588FBB0D
 
 FUNCTION_RE = re.compile(
     r"DumpExactFunctionRanges\.java> FUNCTION FUN_([0-9a-fA-F]+) "
@@ -274,30 +276,30 @@ def main():
     if (len(SELECTED), byte_count, range_count) != (
         EXPECTED_FUNCTIONS, EXPECTED_BYTES, EXPECTED_RANGES
     ):
-        raise AssertionError("Unexpected CWarehousePageButton slice size")
+        raise AssertionError("Unexpected CWarehouseSlotManager slice size")
 
-    fresh_decomp = FRESH_DECOMP.read_text(encoding="utf-8", errors="replace")
-    incoming_decomp = INCOMING_DECOMP.read_text(encoding="utf-8", errors="replace")
-    if "/* failed:" in fresh_decomp or "/* failed:" in incoming_decomp:
+    decomp = FRESH_DECOMP.read_text(encoding="utf-8", errors="replace")
+    if "/* failed:" in decomp:
         raise AssertionError("Fresh Ghidra decompilation failed")
+    wanted = SELECTED | {OPEN_CALLER}
     fresh_functions, fresh_ranges, fresh_coverage, fresh_calls, refs_to = parse_log(
-        FRESH_LOG.read_text(encoding="utf-8", errors="replace"), SELECTED
+        FRESH_LOG.read_text(encoding="utf-8", errors="replace"), wanted
     )
-    if set(fresh_functions) != SELECTED:
-        raise AssertionError("Fresh Ghidra output omits selected class members")
-    for address in SELECTED:
-        parts = function_ranges[address]
-        expected = tuple((start, size) for start, size, _ in parts)
-        if tuple(sorted(fresh_ranges.get(address, ()))) != expected:
+    if set(fresh_functions) != wanted:
+        raise AssertionError("Fresh Ghidra output omits a selected member or open caller")
+    for address in wanted:
+        bodies = [row for row in read_tsv(BODY_INVENTORY)
+                  if int(row["function"], 16) == address]
+        expected = tuple(sorted((int(row["start"], 16), int(row["length"])) for row in bodies))
+        if not bodies or tuple(sorted(fresh_ranges.get(address, ()))) != expected:
             raise AssertionError(f"Fresh Ghidra ranges disagree at {address:08X}")
-        count, instruction_bytes, range_bytes, body_bytes = fresh_coverage[address]
-        if (
-            instruction_bytes != body_bytes or range_bytes != body_bytes
-            or body_bytes != fresh_functions[address]
-            or sum(size for _, size, _ in parts) != body_bytes
-            or sum(n for _, _, n in parts) != count
-        ):
-            raise AssertionError(f"Fresh Ghidra coverage differs at {address:08X}")
+        body_bytes = sum(size for _, size in expected)
+        coverage = fresh_coverage[address]
+        if coverage != (
+            sum(int(row["instruction_count"]) for row in bodies),
+            body_bytes, body_bytes, body_bytes,
+        ) or fresh_functions[address] != body_bytes:
+            raise AssertionError(f"Fresh Ghidra instruction coverage differs at {address:08X}")
 
     body_exports = read_tsv(BODY_EXPORTS_PATH)
     expected_body_sources = {"main-function-bodies-inventory", "targeted-fresh-ghidra"}
@@ -306,12 +308,14 @@ def main():
     for source in expected_body_sources:
         exported = [row for row in body_exports if row["export"] == source]
         if body_signature(exported) != body_signature(reference_bodies):
-            raise AssertionError(f"CWarehousePageButton body export {source} differs")
+            raise AssertionError(f"CWarehouseSlotManager body export {source} differs")
     if {row["export"] for row in body_exports} != expected_body_sources:
         raise AssertionError("Unexpected body-export source")
     if body_signature(reference_bodies) != body_signature(range_rows):
         raise AssertionError("Tracked ranges disagree with body exports")
 
+    independent_edges = [row for row in read_tsv(EDGE_INVENTORY)
+                         if row["kind"] == "CALL" and int(row["function"], 16) in SELECTED]
     edge_exports = read_tsv(EDGE_EXPORTS_PATH)
     expected_edge_sources = {"main-function-edges-inventory", "targeted-fresh-ghidra"}
     reference_edges = [row for row in edge_exports
@@ -319,11 +323,11 @@ def main():
     for source in expected_edge_sources:
         exported = [row for row in edge_exports if row["export"] == source]
         if edge_signature(exported) != edge_signature(reference_edges):
-            raise AssertionError(f"CWarehousePageButton call export {source} differs")
+            raise AssertionError(f"CWarehouseSlotManager edge export {source} differs")
     if {row["export"] for row in edge_exports} != expected_edge_sources:
-        raise AssertionError("Unexpected call-edge source")
+        raise AssertionError("Unexpected edge-export source")
     if len(reference_edges) != EXPECTED_DIRECT_TRANSFERS:
-        raise AssertionError("Unexpected direct call/tail-transfer edge count")
+        raise AssertionError("Unexpected independent direct-transfer count")
     fresh_signature = sorted(
         (function, site, target)
         for function, edges in fresh_calls.items() if function in SELECTED
@@ -343,21 +347,18 @@ def main():
         if actual != expected_members:
             raise AssertionError(f"Tracked direct closure changed at {root:08X}")
     if set().union(*ROOT_CLOSURES.values()) != SELECTED:
-        raise AssertionError("Selected functions are not the union of the three open slot closures")
+        raise AssertionError("Selected functions are not the union of all four open class slots")
 
     if SELECTED - set(records) or SELECTED - matched:
         raise AssertionError("Not every class-slice function has an objdiff-verified record")
     if SELECTED - set(inventory):
-        raise AssertionError("A selected function is missing from the installed-client inventory")
+        raise AssertionError("A selected function is missing from installed-client inventory")
 
     decoder = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     decoder.detail = True
     graph = {address: set() for address in SELECTED}
-    boundary_transfers = {}
-    indirect_calls = {}
-    indirect_jumps = {}
-    direct_transfers = set()
-    internal_transfers = set()
+    boundary_transfers, indirect_calls, indirect_jumps = {}, {}, {}
+    direct_transfers, internal_transfers = set(), set()
     for address in sorted(SELECTED):
         record = records[address]
         expected_ranges = tuple((start, size) for start, size, _ in function_ranges[address])
@@ -377,158 +378,127 @@ def main():
             if len(instructions) != expected_count:
                 raise AssertionError(f"Capstone/Ghidra instruction count differs at {start:08X}")
             for instruction in instructions:
-                if instruction.id in (X86_INS_CALL, X86_INS_JMP):
-                    if not instruction.operands or instruction.operands[0].type != X86_OP_IMM:
-                        target_map = indirect_calls if instruction.id == X86_INS_CALL else indirect_jumps
-                        target_map[address] = target_map.get(address, 0) + 1
-                        continue
-                    target = instruction.operands[0].imm & 0xFFFFFFFF
-                    if any(low <= target < high for low, high in own_ranges):
-                        continue
-                    direct_transfers.add((address, instruction.address, target))
-                    if target in SELECTED:
-                        internal_transfers.add((address, instruction.address, target))
-                        graph[address].add(target)
-                    elif target in matched:
-                        boundary_transfers[instruction.address] = target
-                    else:
-                        location = "mapped" if BASE <= target < image_end else "external"
-                        raise AssertionError(
-                            f"Unmatched {location} direct transfer to {target:08X} "
-                            f"from {instruction.address:08X}"
-                        )
+                if instruction.id not in (X86_INS_CALL, X86_INS_JMP):
+                    continue
+                if not instruction.operands or instruction.operands[0].type != X86_OP_IMM:
+                    target_map = indirect_calls if instruction.id == X86_INS_CALL else indirect_jumps
+                    target_map[address] = target_map.get(address, 0) + 1
+                    continue
+                target = instruction.operands[0].imm & 0xFFFFFFFF
+                if any(low <= target < high for low, high in own_ranges):
+                    continue
+                direct_transfers.add((address, instruction.address, target))
+                if target in SELECTED:
+                    internal_transfers.add((address, instruction.address, target))
+                    graph[address].add(target)
+                elif target in matched:
+                    boundary_transfers[instruction.address] = target
+                else:
+                    location = "mapped" if BASE <= target < image_end else "external"
+                    raise AssertionError(
+                        f"Unmatched {location} direct transfer to {target:08X} "
+                        f"from {instruction.address:08X}"
+                    )
 
+    if len(direct_transfers) != EXPECTED_DIRECT_TRANSFERS:
+        raise AssertionError(f"Unexpected decoded direct-transfer count: {len(direct_transfers)}")
+    if len(boundary_transfers) != EXPECTED_VERIFIED_BOUNDARY_TRANSFERS:
+        raise AssertionError("Unexpected number of transfers to byte-verified functions")
+    if len(internal_transfers) != EXPECTED_INTERNAL_TRANSFERS:
+        raise AssertionError(f"Unexpected internal direct-transfer count: {len(internal_transfers)}")
     if indirect_calls != EXPECTED_INDIRECT_CALLS:
         raise AssertionError(f"Unexpected indirect call sites: {indirect_calls}")
     if indirect_jumps != EXPECTED_INDIRECT_JUMPS:
         raise AssertionError(f"Unexpected indirect jump sites: {indirect_jumps}")
-    if len(direct_transfers) != EXPECTED_DIRECT_TRANSFERS:
-        raise AssertionError(f"Unexpected decoded direct transfers: {len(direct_transfers)}")
-    if len(boundary_transfers) != EXPECTED_BOUNDARY_TRANSFERS:
-        raise AssertionError("Unexpected number of transfers to byte-verified functions")
-    if len(internal_transfers) != EXPECTED_INTERNAL_TRANSFERS:
-        raise AssertionError(f"Unexpected internal direct transfer count: {len(internal_transfers)}")
     for root, expected_members in ROOT_CLOSURES.items():
         if reachable_from(root, graph) != expected_members:
             raise AssertionError(f"Direct-call closure changed for root {root:08X}")
 
-    # Validate RTTI, the exact seven slots, and the adjacent-class boundary.
+    if 0x588F7D00 in SELECTED:
+        raise AssertionError("Unexpected inclusion of the indirect tail-dispatch helper")
     if read_u32(image, ADDRESS_POINT - 4) != CLASS_LOCATOR:
-        raise AssertionError("CWarehousePageButton address point no longer references its locator")
+        raise AssertionError("CWarehouseSlotManager address point no longer references its locator")
     col = struct.unpack_from("<IIIII", image, CLASS_LOCATOR - BASE)
     if col != (0, 0, 0, TYPE_DESCRIPTOR, CLASS_HIERARCHY):
-        raise AssertionError("CWarehousePageButton complete-object locator changed")
+        raise AssertionError("CWarehouseSlotManager complete-object locator changed")
     if read_type_name(image, TYPE_DESCRIPTOR) != BASE_NAMES[0]:
-        raise AssertionError("CWarehousePageButton type descriptor changed")
+        raise AssertionError("CWarehouseSlotManager type descriptor changed")
     hierarchy = struct.unpack_from("<IIII", image, CLASS_HIERARCHY - BASE)
     if hierarchy[:3] != (0, 0, len(BASE_NAMES)):
-        raise AssertionError("CWarehousePageButton class hierarchy descriptor changed")
+        raise AssertionError("CWarehouseSlotManager class hierarchy descriptor changed")
     names = tuple(
         read_type_name(image, read_u32(image, read_u32(image, hierarchy[3] + index * 4)))
         for index in range(hierarchy[2])
     )
     if names != BASE_NAMES:
-        raise AssertionError(f"Unexpected CWarehousePageButton base chain: {names}")
-    slots = tuple(read_u32(image, ADDRESS_POINT + index * 4)
-                  for index in range(len(PRIMARY_SLOTS)))
-    if slots != PRIMARY_SLOTS:
-        raise AssertionError("CWarehousePageButton primary-vtable slots changed")
-    if any(address not in matched for address in PRIMARY_SLOTS[1:4] + PRIMARY_SLOTS[5:6]):
-        raise AssertionError("A previously matched inherited/neighboring primary slot lost verification")
+        raise AssertionError(f"Unexpected CWarehouseSlotManager base chain: {names}")
+    if tuple(read_u32(image, ADDRESS_POINT + index * 4)
+             for index in range(len(PRIMARY_SLOTS))) != PRIMARY_SLOTS:
+        raise AssertionError("CWarehouseSlotManager primary-vtable slots changed")
+    if any(address not in matched for address in PRIMARY_SLOTS[1:3] + PRIMARY_SLOTS[5:6]):
+        raise AssertionError("A previously matched inherited primary slot lost verification")
     if read_u32(image, ADDRESS_POINT + 4 * len(PRIMARY_SLOTS)) != ADJACENT_LOCATOR:
-        raise AssertionError("Adjacent CWarehousePageInfo locator boundary changed")
+        raise AssertionError("Adjacent warehouse vtable locator boundary changed")
     adjacent_col = struct.unpack_from("<IIIII", image, ADJACENT_LOCATOR - BASE)
     if read_type_name(image, adjacent_col[3]) != ADJACENT_NAME:
-        raise AssertionError("Adjacent table is not CWarehousePageInfo")
+        raise AssertionError("Adjacent table is not CWarehouseTradePanel")
 
     for function, slot in (
-        (0x588FDDD0, ADDRESS_POINT),
-        (0x588FE460, ADDRESS_POINT + 0x10),
-        (0x588FDD30, ADDRESS_POINT + 0x18),
+        (0x588FFD90, ADDRESS_POINT),
+        (0x588FF890, ADDRESS_POINT + 0x0C),
+        (0x588FF940, ADDRESS_POINT + 0x10),
+        (0x588FF6B0, ADDRESS_POINT + 0x18),
     ):
         if (slot, "DATA", None) not in refs_to.get(function, ()):
             raise AssertionError(f"Fresh Ghidra lacks vtable slot reference {slot:08X}->{function:08X}")
     log_text = FRESH_LOG.read_text(encoding="utf-8", errors="replace").lower()
     expected_store_refs = (
-        "ref 588fe591 type=data source=analysis caller=fun_588fe520@588fe520",
-        "ref 588fdc2b type=data source=analysis caller=fun_588fdc00@588fdc00",
-        "ref 589a2338 type=data source=default caller=none",
+        "ref 588ff9cd type=data source=analysis caller=fun_588ff9a0@588ff9a0",
+        "ref 588ffe84 type=data source=analysis caller=fun_588ffe10@588ffe10",
     )
     if any(reference not in log_text for reference in expected_store_refs):
-        raise AssertionError("Fresh Ghidra lacks class vtable install/destructor or locator references")
-    require_vtable_store(image, decoder, 0x588FE591, ADDRESS_POINT)
-    require_vtable_store(image, decoder, 0x588FDC2B, ADDRESS_POINT)
+        raise AssertionError("Fresh Ghidra lacks destructor or constructor vtable-store references")
+    for site in (0x588FF9CD, 0x588FFE84):
+        require_vtable_store(image, decoder, site, ADDRESS_POINT)
 
-    # A matched warehouse-list caller, an open panel caller, and the now-matched
-    # slot-manager event handler provide the surrounding direct-call boundary.
-    incoming_functions = {0x588FBEF0, 0x588FC0D0, 0x588FF6B0}
-    inc_functions, inc_ranges, inc_coverage, inc_calls, _ = parse_log(
-        INCOMING_LOG.read_text(encoding="utf-8", errors="replace"), incoming_functions
-    )
-    if set(inc_functions) != incoming_functions:
-        raise AssertionError("Fresh incoming-caller Ghidra output is incomplete")
-    independent_bodies = read_tsv(BODY_INVENTORY)
-    for address in incoming_functions:
-        body = [row for row in independent_bodies if int(row["function"], 16) == address]
-        if not body:
-            raise AssertionError(f"Independent body inventory omits caller {address:08X}")
-        expected = tuple(sorted((int(row["start"], 16), int(row["length"])) for row in body))
-        if tuple(sorted(inc_ranges[address])) != expected:
-            raise AssertionError(f"Fresh caller ranges disagree at {address:08X}")
-        coverage = inc_coverage[address]
-        if coverage != (
-            sum(int(row["instruction_count"]) for row in body),
-            sum(length for _, length in expected),
-            sum(length for _, length in expected),
-            sum(length for _, length in expected),
-        ):
-            raise AssertionError(f"Fresh caller instruction coverage differs at {address:08X}")
+    if CONSTRUCTOR not in matched or CONSTRUCTOR_CALLER not in matched:
+        raise AssertionError("Matched constructor path lost byte verification")
+    for address in (CONSTRUCTOR, CONSTRUCTOR_CALLER):
+        record = records[address]
+        if hashlib.sha256((ROOT / record["source"]).read_bytes()).hexdigest() != record["source_sha256"]:
+            raise AssertionError(f"Matched constructor-path source hash is stale at {address:08X}")
+    require_call(image, decoder, CONSTRUCTOR_CALLSITE, CONSTRUCTOR)
+    caller_record = records[CONSTRUCTOR_CALLER]
+    if not any(start <= CONSTRUCTOR_CALLSITE < start + size
+               for start, size in record_ranges(caller_record)):
+        raise AssertionError("Matched constructor callsite is outside the verified caller body")
 
-    expected_incoming = {
-        (0x588FBEF0, 0x588FBFBC, 0x588FF530),
-        (0x588FBEF0, 0x588FBFC5, 0x588FE9C0),
-        (0x588FBEF0, 0x588FBFF9, 0x588FF420),
-        (0x588FC0D0, 0x588FC0F9, 0x588FF530),
-        (0x588FC0D0, 0x588FC102, 0x588FE9C0),
-        (0x588FF6B0, 0x588FF756, 0x588F7E00),
+    if OPEN_CALLER in matched:
+        raise AssertionError("Open reset caller unexpectedly entered verified scope")
+    expected_open_edge = (OPEN_CALLER, 0x588FFC9F, 0x588F9C00)
+    actual_open_edges = {
+        (function, site, target) for function, edges in fresh_calls.items()
+        for site, target in edges if function == OPEN_CALLER and target in SELECTED
     }
-    actual_incoming = {
-        (function, site, target)
-        for function, edges in inc_calls.items()
-        for site, target in edges if target in SELECTED
-    }
-    if actual_incoming != expected_incoming:
-        raise AssertionError(f"Fresh incoming call boundary changed: {actual_incoming}")
-    for _function, site, target in expected_incoming:
-        require_call(image, decoder, site, target)
-    if 0x588FBEF0 not in matched:
-        raise AssertionError("The warehouse-list caller is not byte-verified")
-    if 0x588FC0D0 in matched:
-        raise AssertionError("The explicitly open warehouse-panel caller unexpectedly entered verified scope")
-    if 0x588FF6B0 not in matched:
-        raise AssertionError("The warehouse-slot-manager event caller is not byte-verified")
-    caller_record = records[0x588FBEF0]
-    if hashlib.sha256((ROOT / caller_record["source"]).read_bytes()).hexdigest() != caller_record["source_sha256"]:
-        raise AssertionError("Matched warehouse-list caller source hash is stale")
-    for _function, site, _target in expected_incoming:
-        if _function != 0x588FBEF0:
-            continue
-        if not any(start <= site < start + size for start, size in record_ranges(caller_record)):
-            raise AssertionError("Matched warehouse-list callsite is outside its verified body")
-    slot_manager_record = records[0x588FF6B0]
-    if hashlib.sha256((ROOT / slot_manager_record["source"]).read_bytes()).hexdigest() != slot_manager_record["source_sha256"]:
-        raise AssertionError("Matched slot-manager caller source hash is stale")
-    if not any(start <= 0x588FF756 < start + size
-               for start, size in record_ranges(slot_manager_record)):
-        raise AssertionError("Matched slot-manager callsite is outside its verified body")
+    if actual_open_edges != {expected_open_edge}:
+        raise AssertionError(f"Fresh open-caller boundary changed: {actual_open_edges}")
+    require_call(image, decoder, expected_open_edge[1], expected_open_edge[2])
 
+    formatted_indirect_calls = {
+        f"0x{address:08X}": count for address, count in sorted(indirect_calls.items())
+    }
+    formatted_indirect_jumps = {
+        f"0x{address:08X}": count for address, count in sorted(indirect_jumps.items())
+    }
     print(
-        f"Main.dll CWarehousePageButton: {len(SELECTED)} functions / {byte_count:,} bytes "
-        f"across {range_count} exact Ghidra ranges; 40 direct call/tail-transfer edges, "
-        f"23 internal and 17 to verified code; RTTI/base chain and seven slots verified; "
-        f"matched warehouse-list and slot-manager callers plus one open panel caller checked; "
-        f"{sum(indirect_calls.values())} indirect calls plus one indirect jump remain; "
-        "exact byte coverage and direct closures pass"
+        f"Main.dll CWarehouseSlotManager: {len(SELECTED)} functions / {byte_count:,} bytes "
+        f"across {range_count} exact Ghidra ranges; {EXPECTED_DIRECT_TRANSFERS} direct "
+        f"call/tail-transfer edges ({EXPECTED_INTERNAL_TRANSFERS} internal, "
+        f"{EXPECTED_VERIFIED_BOUNDARY_TRANSFERS} to verified code); RTTI, four open "
+        "slots, matched constructor path, and open reset caller pass; "
+        f"indirect calls={formatted_indirect_calls}, "
+        f"indirect jumps={formatted_indirect_jumps}; "
+        "complete byte coverage and direct closures pass"
     )
 
 

@@ -52,8 +52,8 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,927 of 42,461 functions and 2,847,650 of 10,470,324 bytes (21.0240% by
-functions and 27.1973% by bytes); every counted function match is verified at
+credits 8,950 of 42,461 functions and 2,851,391 of 10,470,324 bytes (21.0782% by
+functions and 27.2331% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. The installed-client `CFCManager` file-integrity
 and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
 five-slot vtable, callback route, two record strides, exact file-status strings,
@@ -62,7 +62,7 @@ and open questions are documented in
 This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,794 exact function matches totaling 1,874,232 bytes. The
+inventory has 2,817 exact function matches totaling 1,877,973 bytes. The
 two-function nested-range state-refresh closure at `FUN_58776F20` adds 801
 exact bytes. Fresh Ghidra and the independent body/call-edge inventories agree
 on both complete bodies and all 33 direct calls; the matched `FUN_588DF450`
@@ -103,11 +103,17 @@ child virtual calls are documented in
 [`current-main-cpanel-dashboard-vtable.md`](current-main-cpanel-dashboard-vtable.md).
 The RTTI-backed `CWarehousePageButton` primary-vftable slice adds 20 exact
 functions / 3,226 bytes across 22 complete Ghidra ranges. Its three open slots,
-ten-row page population, matched warehouse-list callsites, two open neighboring
-callers, 17 transfers to verified code, seven indirect calls, and one indirect
-jump are checked by a focused verifier. The row-record schema, child control
+ten-row page population, matched warehouse-list and slot-manager callers, one
+open neighboring caller, 17 transfers to verified code, seven indirect calls,
+and one indirect jump are checked by a focused verifier. The row-record schema, child control
 types, visible state meanings, and runtime appearance remain unresolved. See
 [`current-main-warehouse-page-button-vtable.md`](current-main-warehouse-page-button-vtable.md).
+The adjacent RTTI-backed `CWarehouseSlotManager` primary-vftable slice adds 23
+exact functions / 3,741 bytes across 26 complete Ghidra ranges. The verifier
+checks all four open slots, 87 direct transfers (61 to already verified code),
+the matched constructor path, and an explicit open reset-caller boundary.
+Twelve indirect calls and one indirect jump remain unresolved. See
+[`current-main-warehouse-slot-manager-vtable.md`](current-main-warehouse-slot-manager-vtable.md).
 The `CRoomTypeOccupation` constructor adds one exact function / 960 bytes. Its
 fresh Ghidra body has 287 instructions; a matched `CRoomSettingManager` caller
 and all 13 outgoing transfers to verified functions pass the focused verifier.

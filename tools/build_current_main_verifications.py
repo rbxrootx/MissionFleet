@@ -18647,7 +18647,7 @@ MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE = {
     },
     "588F7E00": {
         "name_in_analysis": "FUN_588F7E00 / child low-state clear helper",
-        "called_by": "FUN_588FF530 calls this at 0x588FF5F6 when FUN_588F7E10 reports the child state is 0xF; open FUN_588FF6B0 also calls it at 0x588FF756.",
+        "called_by": "FUN_588FF530 calls this at 0x588FF5F6 when FUN_588F7E10 reports the child state is 0xF; byte-matched CWarehouseSlotManager event handler FUN_588FF6B0 also calls it at 0x588FF756.",
         "behavior": "Clears the low four bits of the 16-bit field at the child pointer stored at this+0xA8, offset +0x24.",
         "uncertainty": "The child type and the interpretation of its low state bits are not established.",
     },
@@ -18761,6 +18761,159 @@ MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CWAREHOUSE_PAGE_BUTTON_EVIDENCE)
+
+
+MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES = (
+    "588F7DF0", "588F7E30", "588F9B80", "588F9C00", "588F9FD0",
+    "588FAC50", "588FAD60", "588FAEC0", "588FAF30", "588FAF70",
+    "588FB850", "588FC990", "588FCAC0", "588FCB80", "588FEFE0",
+    "588FF180", "588FF200", "588FF2F0", "588FF6B0", "588FF890",
+    "588FF940", "588FF9A0", "588FFD90",
+)
+ADDRESSES += MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES)
+
+MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE = {
+    "588F7DF0": {
+        "name_in_analysis": "FUN_588F7DF0 / warehouse child-state set helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF6F4.",
+        "behavior": "Sets the low four bits at offset +0x24 on the child pointer stored at this+0xA8.",
+        "uncertainty": "The child control type and visible meaning of the state bits are unresolved.",
+    },
+    "588F7E30": {
+        "name_in_analysis": "FUN_588F7E30 / warehouse selection update helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF7B0.",
+        "behavior": "Updates a child state, adjusts a stored short by 1000, requests a 0x400-by-0x400 refresh, and conditionally refreshes two child pointers.",
+        "uncertainty": "The adjusted field's units, child types, and visible state are not identified.",
+    },
+    "588F9B80": {
+        "name_in_analysis": "FUN_588F9B80 / warehouse child low-state cleanup",
+        "called_by": "Called by the selected manager reset helper FUN_588F9C00.",
+        "behavior": "Clears low state bits on the child pointers stored in fields +0xA0 through +0xC8, with conditional groups based on child state.",
+        "uncertainty": "The control identities and full ownership contract are unresolved.",
+    },
+    "588F9C00": {
+        "name_in_analysis": "FUN_588F9C00 / warehouse slot-manager child reset",
+        "called_by": "Called by primary slots +0x0C and +0x18, plus the open reset caller FUN_588FFC90.",
+        "behavior": "Runs the child low-state cleanup, requests a 0x400-by-0x400 refresh, and dispatches child virtual methods for children whose state has bit 0 set.",
+        "uncertainty": "Two indirect child dispatch destinations and their UI effects remain unresolved.",
+    },
+    "588F9FD0": {
+        "name_in_analysis": "FUN_588F9FD0 / slot-manager record presentation helper",
+        "called_by": "Primary slot +0x0C calls it after ten repeated equal record results.",
+        "behavior": "Builds a temporary string from a record argument, submits it to a helper with constants 300 and 0x32, adjusts a screen coordinate by 0x16, and sets a flag.",
+        "uncertainty": "The string contents, record schema, flag meaning, and user-visible trigger are unresolved.",
+    },
+    "588FAC50": {
+        "name_in_analysis": "FUN_588FAC50 / deque length-error construction helper",
+        "called_by": "Deque capacity helper FUN_588FAD60 calls it on an overflow path at 0x588FAD78.",
+        "behavior": "Constructs a C++ length_error with the observed text `deque<T> too long` and enters the exception-throw path.",
+        "uncertainty": "This is a standard-library failure path; the runtime conditions that can reach it are not observed.",
+    },
+    "588FAD60": {
+        "name_in_analysis": "FUN_588FAD60 / deque capacity growth helper",
+        "called_by": "Deque append helper FUN_588FAEC0 calls it at 0x588FAECE when the circular buffer needs capacity.",
+        "behavior": "Grows a circular array of four-byte entries, moves existing entries, zeroes new slots, and releases the old allocation.",
+        "uncertainty": "The owning collection's semantic role is not established from this helper alone.",
+    },
+    "588FAEC0": {
+        "name_in_analysis": "FUN_588FAEC0 / circular deque append helper",
+        "called_by": "Record wrappers FUN_588FAF30 and FUN_588FAF70 call it at 0x588FAF59 and 0x588FAF99.",
+        "behavior": "Appends a four-dword record to a circular deque, growing the buffer when needed and allocating a 16-byte entry when the destination slot is empty.",
+        "uncertainty": "The queued record's gameplay meaning and consumer are not established by this closure.",
+    },
+    "588FAF30": {
+        "name_in_analysis": "FUN_588FAF30 / warehouse state record enqueue wrapper",
+        "called_by": "Called by FUN_588FF2F0 after it finds another child with compatible state.",
+        "behavior": "Builds a four-dword queue record from the child pointer and its byte fields at +0x6A and +0x6B, then appends it through FUN_588FAEC0.",
+        "uncertainty": "The queued record's consumer and the byte fields' meanings remain unknown.",
+    },
+    "588FAF70": {
+        "name_in_analysis": "FUN_588FAF70 / warehouse state record enqueue wrapper",
+        "called_by": "Called by FUN_588FF2F0 when no matching child is found for the requested state.",
+        "behavior": "Builds a four-dword record from a child pointer, a zero field, and a supplied value, then appends it through FUN_588FAEC0.",
+        "uncertainty": "The queued record's consumer and field meanings remain unknown.",
+    },
+    "588FB850": {
+        "name_in_analysis": "FUN_588FB850 / warehouse record transition helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF727 on its event-type-3 subtype-10 path.",
+        "behavior": "Receives a byte-sized record field and two record values from the event payload, then updates state through verified helpers.",
+        "uncertainty": "The record fields and event labels are unknown.",
+    },
+    "588FC990": {
+        "name_in_analysis": "FUN_588FC990 / warehouse message 0x80015104 sender",
+        "called_by": "State-pairing helper FUN_588FF2F0 calls it at 0x588FF413 after a compatible child-state transition.",
+        "behavior": "Updates fields at this+0x94 and this+0x98, clears bit 1 at this+0x24, and sends message 0x80015104 with a packed value derived from this+0x90 and the supplied fields.",
+        "uncertainty": "The packed fields and message consumer's visible outcome are unknown.",
+    },
+    "588FCAC0": {
+        "name_in_analysis": "FUN_588FCAC0 / warehouse child hit and status-message handler",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF87C with the current point and two record fields.",
+        "behavior": "Tests the point against the child rectangle; outside it, looks up the record and sends message 0x80015105 or 0x80017105 depending on the observed record state byte.",
+        "uncertainty": "The record schema, state-byte meanings, and message consumers' visible outcomes remain unknown.",
+    },
+    "588FCB80": {
+        "name_in_analysis": "FUN_588FCB80 / warehouse record status-message handler",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF79B with two event-record values.",
+        "behavior": "Looks up the record, sets fields at this+0x98 and this+0x94, clears bit 1 at this+0x24, and sends message 0x80015105 or 0x80017105 based on the record state byte.",
+        "uncertainty": "The record schema, state-byte meanings, and message consumers' visible outcomes remain unknown.",
+    },
+    "588FEFE0": {
+        "name_in_analysis": "FUN_588FEFE0 / warehouse child-grid hit test",
+        "called_by": "Update slot FUN_588FF890 and event slot FUN_588FF6B0 call it at 0x588FF8ED and 0x588FF828.",
+        "behavior": "Tests the point against a 6-column by 4-row grid of 0x47-by-0x53 rectangles and returns a one-based row-major cell index or -1.",
+        "uncertainty": "The cell labels and whether the grid corresponds to specific visible controls are not recovered.",
+    },
+    "588FF180": {
+        "name_in_analysis": "FUN_588FF180 / warehouse child callback search",
+        "called_by": "State-pairing helper FUN_588FF2F0 calls it at 0x588FF342 and 0x588FF3AD while locating children for requested values.",
+        "behavior": "Scans the child-pointer range at this+0x70..+0x74, invokes each child's virtual slot +0x28 with two values, and returns the first child whose callback returns 1.",
+        "uncertainty": "The child class, callback contract, and requested values' meanings remain unresolved.",
+    },
+    "588FF200": {
+        "name_in_analysis": "FUN_588FF200 / warehouse child rectangle hit test",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF813 before record-state processing.",
+        "behavior": "Scans child rectangles at this+0x70..+0x74 and returns a containing child only when its +0x98 flag is clear and its +0x6A byte matches this+0x88.",
+        "uncertainty": "The child class, byte meaning, and relationship to the caller's event are not established.",
+    },
+    "588FF2F0": {
+        "name_in_analysis": "FUN_588FF2F0 / warehouse child-state pairing and message update",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF7D5 and 0x588FF860 for record-dependent branches.",
+        "behavior": "Uses a child virtual check at +0x24 and child search at +0x28, validates a bounded index, appends a four-dword state record, updates child state helpers, and routes message 0x80015104 through FUN_588FC990.",
+        "uncertainty": "Child class, queue consumer, record-byte meanings, and message outcome remain unresolved.",
+    },
+    "588FF6B0": {
+        "name_in_analysis": "FUN_588FF6B0 / CWarehouseSlotManager primary slot +0x18",
+        "called_by": "Installed at primary-vtable slot +0x18 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "Dispatches observed event values 1 through 4 into record, selection, reset, and state-update helpers; event values and record bytes drive the branches.",
+        "uncertainty": "Event names, record schema, child identities, and the visible outcome of the branches remain unknown.",
+    },
+    "588FF890": {
+        "name_in_analysis": "FUN_588FF890 / CWarehouseSlotManager primary slot +0x0C",
+        "called_by": "Installed at primary-vtable slot +0x0C in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "When the observed state bit is set, iterates a linked child list, refreshes it through virtual slot +0x0C, checks the current record, and advances a counter that reaches the presentation helper at ten.",
+        "uncertainty": "The child type, record schema, counter's user-visible meaning, and indirect callback destination are unresolved.",
+    },
+    "588FF940": {
+        "name_in_analysis": "FUN_588FF940 / CWarehouseSlotManager primary slot +0x10",
+        "called_by": "Installed at primary-vtable slot +0x10 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "When its observed state bit is set, iterates children through virtual slot +0x10 and handles observed event value 0x204 through the shared state helper.",
+        "uncertainty": "The callback contract, event name, child type, and returned field's meaning remain unknown.",
+    },
+    "588FF9A0": {
+        "name_in_analysis": "FUN_588FF9A0 / CWarehouseSlotManager destruction body",
+        "called_by": "The primary deleting-destructor slot wrapper FUN_588FFD90 calls it; matched constructor FUN_588FFE10 installs the same class vtable.",
+        "behavior": "Installs the class vtable, clears entries in a deque-backed collection, invokes child deleting destructors, releases four additional child pointers, and frees collection storage.",
+        "uncertainty": "The child classes and exact ownership roles are unresolved; the body contains indirect destructor calls.",
+    },
+    "588FFD90": {
+        "name_in_analysis": "FUN_588FFD90 / CWarehouseSlotManager deleting-destructor slot",
+        "called_by": "Installed at primary-vtable slot +0x00 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "Calls the class destruction body and invokes the scalar delete helper when the low deletion flag is set.",
+        "uncertainty": "The allocator contract and exact object-size behavior are not inferred from the wrapper alone.",
+    },
+}
+EVIDENCE.update(MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE)
 
 
 if __name__ == "__main__":

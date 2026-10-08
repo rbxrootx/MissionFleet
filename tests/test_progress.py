@@ -81,6 +81,7 @@ from tools import (
     verify_current_main_diplomacy_tab,
     verify_current_main_cpanel_dashboard_vtable,
     verify_current_main_warehouse_page_button,
+    verify_current_main_warehouse_slot_manager,
 )
 
 
@@ -93,8 +94,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_927)
-        self.assertEqual(self.report["measures"]["matched_code"], "2847650")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_950)
+        self.assertEqual(self.report["measures"]["matched_code"], "2851391")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -105,8 +106,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_794)
-        self.assertEqual(current["measures"]["matched_code"], "1874232")
+        self.assertEqual(current["measures"]["matched_functions"], 2_817)
+        self.assertEqual(current["measures"]["matched_code"], "1877973")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -307,6 +308,17 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("matched caller FUN_588FBEF0", evidence["588FF530"]["called_by"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_warehouse_page_button.main()
+
+    def test_warehouse_slot_manager_vtable_has_exact_rtti_and_call_closures(self):
+        addresses = build_current_main_verifications.MAIN_CWAREHOUSE_SLOT_MANAGER_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CWAREHOUSE_SLOT_MANAGER_EVIDENCE
+        self.assertEqual(len(addresses), 23)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("slot +0x18", evidence["588FF6B0"]["name_in_analysis"])
+        self.assertIn("message 0x80015104", evidence["588FF2F0"]["behavior"])
+        self.assertIn("6-column by 4-row grid", evidence["588FEFE0"]["behavior"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_warehouse_slot_manager.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

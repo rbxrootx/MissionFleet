@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 8,927 verified matches
-totaling 2,847,650 bytes (21.0240% by functions, 27.1973% by bytes), each at
+identified code bytes across six report units. There are 8,950 verified matches
+totaling 2,851,391 bytes (21.0782% by functions, 27.2331% by bytes), each at
 100.0% under objdiff 3.8.0. The installed client's RTTI-backed
 `CPannelCommunicatorConfigDiplomacyTab` event closure adds 30 exact functions /
 3,876 bytes across 31 fresh Ghidra ranges. Its matched callers, mode dispatch,
@@ -30,8 +30,14 @@ source or playable behavior. The `CWarehousePageButton` primary-vtable closure
 adds 20 exact functions / 3,226 bytes across 22 complete Ghidra ranges. Its
 three open slots, ten-row page population and navigation paths, 40 direct
 call/tail-transfer edges, 17 transfers to verified code, matched warehouse-list
-calls, two open neighboring callers, seven indirect calls, and one indirect jump
+and slot-manager callers, one open neighboring caller, seven indirect calls, and one indirect jump
 are checked in [the subsystem note](docs/current-main-warehouse-page-button-vtable.md).
+The adjacent RTTI-backed `CWarehouseSlotManager` primary-vtable closure adds
+23 exact functions / 3,741 bytes across 26 complete Ghidra ranges. Its four
+open slots, 87 direct transfers (61 to already matched functions), matched
+constructor path, and open reset-caller boundary are checked in
+[the subsystem note](docs/current-main-warehouse-slot-manager-vtable.md). Twelve
+indirect calls and one indirect jump remain unresolved.
 The installed client's tax/investment control
 refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases
 `0x8002311B` and `0x8002312B`; four other calling functions and the visual

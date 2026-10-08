@@ -475945,7 +475945,7 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_588F7E00 / child low-state clear helper",
-        "called_by": "FUN_588FF530 calls this at 0x588FF5F6 when FUN_588F7E10 reports the child state is 0xF; open FUN_588FF6B0 also calls it at 0x588FF756.",
+        "called_by": "FUN_588FF530 calls this at 0x588FF5F6 when FUN_588F7E10 reports the child state is 0xF; byte-matched CWarehouseSlotManager event handler FUN_588FF6B0 also calls it at 0x588FF756.",
         "behavior": "Clears the low four bits of the 16-bit field at the child pointer stored at this+0xA8, offset +0x24.",
         "uncertainty": "The child type and the interpretation of its low state bits are not established."
       }
@@ -477030,6 +477030,1631 @@
         "called_by": "Called by FUN_588FD790 at 0x588FD7EF, matched caller FUN_588FBEF0 at 0x588FBFBC, and open caller FUN_588FC0D0 at 0x588FC0F9.",
         "behavior": "Stores the requested item index at this+0x88, scans the active child-pointer range, sets or clears each child state word according to its item byte and flag at +0x98, and clears stale low-state bits through child helpers.",
         "uncertainty": "The item identifier, child type, and low-state values' visible interpretation are unresolved."
+      }
+    },
+    {
+      "address": "588F7DF0",
+      "name": "FUN_588f7df0",
+      "size": 12,
+      "symbol": "_FUN_588f7df0",
+      "source": "src/client-current/Main/FUN_588f7df0.cpp",
+      "source_sha256": "24e223f41303617018ddd311feddd266f7599b720f3b352beb92c5a257886e33",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F7DF0",
+          "size": 12,
+          "symbol": "_FUN_588f7df0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7DF0 / warehouse child-state set helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF6F4.",
+        "behavior": "Sets the low four bits at offset +0x24 on the child pointer stored at this+0xA8.",
+        "uncertainty": "The child control type and visible meaning of the state bits are unresolved."
+      }
+    },
+    {
+      "address": "588F7E30",
+      "name": "FUN_588f7e30",
+      "size": 93,
+      "symbol": "_FUN_588f7e30",
+      "source": "src/client-current/Main/FUN_588f7e30.cpp",
+      "source_sha256": "44e9fafe44b1abd5726db3704ced81b6bfd89635ce66ec565ce09229a5407fd2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F7E30",
+          "size": 93,
+          "symbol": "_FUN_588f7e30_segment_00",
+          "relocations": [
+            {
+              "offset": 5,
+              "target_address": "58A24798",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 74,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F7E30 / warehouse selection update helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF7B0.",
+        "behavior": "Updates a child state, adjusts a stored short by 1000, requests a 0x400-by-0x400 refresh, and conditionally refreshes two child pointers.",
+        "uncertainty": "The adjusted field's units, child types, and visible state are not identified."
+      }
+    },
+    {
+      "address": "588F9B80",
+      "name": "FUN_588f9b80",
+      "size": 120,
+      "symbol": "_FUN_588f9b80",
+      "source": "src/client-current/Main/FUN_588f9b80.cpp",
+      "source_sha256": "c3147015860577c0aaff4be1731a8da56766b1f386829fbdc64e9d67d9f5f7c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F9B80",
+          "size": 120,
+          "symbol": "_FUN_588f9b80_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F9B80 / warehouse child low-state cleanup",
+        "called_by": "Called by the selected manager reset helper FUN_588F9C00.",
+        "behavior": "Clears low state bits on the child pointers stored in fields +0xA0 through +0xC8, with conditional groups based on child state.",
+        "uncertainty": "The control identities and full ownership contract are unresolved."
+      }
+    },
+    {
+      "address": "588F9C00",
+      "name": "FUN_588f9c00",
+      "size": 135,
+      "symbol": "_FUN_588f9c00",
+      "source": "src/client-current/Main/FUN_588f9c00.cpp",
+      "source_sha256": "9f669130ec7d9658ec46432cc74e96e06459916e7c3b7f876d100128ee7b45a3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F9C00",
+          "size": 135,
+          "symbol": "_FUN_588f9c00_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "588F9B80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 10,
+              "target_address": "58A24820",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F9C00 / warehouse slot-manager child reset",
+        "called_by": "Called by primary slots +0x0C and +0x18, plus the open reset caller FUN_588FFC90.",
+        "behavior": "Runs the child low-state cleanup, requests a 0x400-by-0x400 refresh, and dispatches child virtual methods for children whose state has bit 0 set.",
+        "uncertainty": "Two indirect child dispatch destinations and their UI effects remain unresolved."
+      }
+    },
+    {
+      "address": "588F9FD0",
+      "name": "FUN_588f9fd0",
+      "size": 181,
+      "symbol": "_FUN_588f9fd0",
+      "source": "src/client-current/Main/FUN_588f9fd0.cpp",
+      "source_sha256": "a9012ce8cef436f502faadbd4ed82ef984bcd4e6094afbea0ccbff288ea34542",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588F9FD0",
+          "size": 181,
+          "symbol": "_FUN_588f9fd0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "588F9B20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "588F9CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "58731CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 89,
+              "target_address": "58A24820",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "587626C0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 112,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "58A24820",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 134,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 139,
+              "target_address": "58A24820",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 168,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F9FD0 / slot-manager record presentation helper",
+        "called_by": "Primary slot +0x0C calls it after ten repeated equal record results.",
+        "behavior": "Builds a temporary string from a record argument, submits it to a helper with constants 300 and 0x32, adjusts a screen coordinate by 0x16, and sets a flag.",
+        "uncertainty": "The string contents, record schema, flag meaning, and user-visible trigger are unresolved."
+      }
+    },
+    {
+      "address": "588FAC50",
+      "name": "FUN_588fac50",
+      "size": 117,
+      "symbol": "_FUN_588fac50",
+      "source": "src/client-current/Main/FUN_588fac50.cpp",
+      "source_sha256": "d70c3ad5f15dcc2f6507e034bf738e5db2abe86160e4a587c2b7417403acd641",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FAC50",
+          "size": 117,
+          "symbol": "_FUN_588fac50_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898A298",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "589A21BC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "58735000",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "58735360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "589ABEA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5898CAA8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAC50 / deque length-error construction helper",
+        "called_by": "Deque capacity helper FUN_588FAD60 calls it on an overflow path at 0x588FAD78.",
+        "behavior": "Constructs a C++ length_error with the observed text `deque<T> too long` and enters the exception-throw path.",
+        "uncertainty": "This is a standard-library failure path; the runtime conditions that can reach it are not observed."
+      }
+    },
+    {
+      "address": "588FAD60",
+      "name": "FUN_588fad60",
+      "size": 345,
+      "symbol": "_FUN_588fad60",
+      "source": "src/client-current/Main/FUN_588fad60.cpp",
+      "source_sha256": "9e67f7729d0e1c02c25f6e6d0bb9c019f1857fdf70abfae4271b4a996cffc355",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FAD60",
+          "size": 325,
+          "symbol": "_FUN_588fad60_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "588FAC50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "587AB430",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 250,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 293,
+              "target_address": "5897CC54",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 321,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588FAEA8",
+          "size": 20,
+          "symbol": "_FUN_588fad60_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAD60 / deque capacity growth helper",
+        "called_by": "Deque append helper FUN_588FAEC0 calls it at 0x588FAECE when the circular buffer needs capacity.",
+        "behavior": "Grows a circular array of four-byte entries, moves existing entries, zeroes new slots, and releases the old allocation.",
+        "uncertainty": "The owning collection's semantic role is not established from this helper alone."
+      }
+    },
+    {
+      "address": "588FAEC0",
+      "name": "FUN_588faec0",
+      "size": 104,
+      "symbol": "_FUN_588faec0",
+      "source": "src/client-current/Main/FUN_588faec0.cpp",
+      "source_sha256": "45a9a40ce4c61adf503ac77cbcfec0362ed660caa2893056044251aadd23de8b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FAEC0",
+          "size": 104,
+          "symbol": "_FUN_588faec0_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "588FAD60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAEC0 / circular deque append helper",
+        "called_by": "Record wrappers FUN_588FAF30 and FUN_588FAF70 call it at 0x588FAF59 and 0x588FAF99.",
+        "behavior": "Appends a four-dword record to a circular deque, growing the buffer when needed and allocating a 16-byte entry when the destination slot is empty.",
+        "uncertainty": "The queued record's gameplay meaning and consumer are not established by this closure."
+      }
+    },
+    {
+      "address": "588FAF30",
+      "name": "FUN_588faf30",
+      "size": 52,
+      "symbol": "_FUN_588faf30",
+      "source": "src/client-current/Main/FUN_588faf30.cpp",
+      "source_sha256": "86870b1c76bfe4876812beb5c2ac06c7729904d1e823ce0c174c4186025889a8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FAF30",
+          "size": 52,
+          "symbol": "_FUN_588faf30_segment_00",
+          "relocations": [
+            {
+              "offset": 42,
+              "target_address": "588FAEC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAF30 / warehouse state record enqueue wrapper",
+        "called_by": "Called by FUN_588FF2F0 after it finds another child with compatible state.",
+        "behavior": "Builds a four-dword queue record from the child pointer and its byte fields at +0x6A and +0x6B, then appends it through FUN_588FAEC0.",
+        "uncertainty": "The queued record's consumer and the byte fields' meanings remain unknown."
+      }
+    },
+    {
+      "address": "588FAF70",
+      "name": "FUN_588faf70",
+      "size": 52,
+      "symbol": "_FUN_588faf70",
+      "source": "src/client-current/Main/FUN_588faf70.cpp",
+      "source_sha256": "34b8319df43a4afaff81ed099a2ef167b555c7c111f0785e321d90057d004dd5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FAF70",
+          "size": 52,
+          "symbol": "_FUN_588faf70_segment_00",
+          "relocations": [
+            {
+              "offset": 42,
+              "target_address": "588FAEC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FAF70 / warehouse state record enqueue wrapper",
+        "called_by": "Called by FUN_588FF2F0 when no matching child is found for the requested state.",
+        "behavior": "Builds a four-dword record from a child pointer, a zero field, and a supplied value, then appends it through FUN_588FAEC0.",
+        "uncertainty": "The queued record's consumer and field meanings remain unknown."
+      }
+    },
+    {
+      "address": "588FB850",
+      "name": "FUN_588fb850",
+      "size": 79,
+      "symbol": "_FUN_588fb850",
+      "source": "src/client-current/Main/FUN_588fb850.cpp",
+      "source_sha256": "9c76baca4de5eeaae1273ea9ef99a3141687c46a55facd1575f239df96fb1f02",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FB850",
+          "size": 79,
+          "symbol": "_FUN_588fb850_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 58,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FB850 / warehouse record transition helper",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF727 on its event-type-3 subtype-10 path.",
+        "behavior": "Receives a byte-sized record field and two record values from the event payload, then updates state through verified helpers.",
+        "uncertainty": "The record fields and event labels are unknown."
+      }
+    },
+    {
+      "address": "588FC990",
+      "name": "FUN_588fc990",
+      "size": 145,
+      "symbol": "_FUN_588fc990",
+      "source": "src/client-current/Main/FUN_588fc990.cpp",
+      "source_sha256": "2f3d6d8dd77acc6e373597359ea640a52778161429e0e95c39908a06d3656216",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FC990",
+          "size": 145,
+          "symbol": "_FUN_588fc990_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 135,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FC990 / warehouse message 0x80015104 sender",
+        "called_by": "State-pairing helper FUN_588FF2F0 calls it at 0x588FF413 after a compatible child-state transition.",
+        "behavior": "Updates fields at this+0x94 and this+0x98, clears bit 1 at this+0x24, and sends message 0x80015104 with a packed value derived from this+0x90 and the supplied fields.",
+        "uncertainty": "The packed fields and message consumer's visible outcome are unknown."
+      }
+    },
+    {
+      "address": "588FCAC0",
+      "name": "FUN_588fcac0",
+      "size": 185,
+      "symbol": "_FUN_588fcac0",
+      "source": "src/client-current/Main/FUN_588fcac0.cpp",
+      "source_sha256": "5c49a7418f6ae6b10d27a234e0dc8018ff3385dee5479328b197430dba7bb293",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FCAC0",
+          "size": 185,
+          "symbol": "_FUN_588fcac0_segment_00",
+          "relocations": [
+            {
+              "offset": 73,
+              "target_address": "588FF0F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "588FC560",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "588FC560",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FCAC0 / warehouse child hit and status-message handler",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF87C with the current point and two record fields.",
+        "behavior": "Tests the point against the child rectangle; outside it, looks up the record and sends message 0x80015105 or 0x80017105 depending on the observed record state byte.",
+        "uncertainty": "The record schema, state-byte meanings, and message consumers' visible outcomes remain unknown."
+      }
+    },
+    {
+      "address": "588FCB80",
+      "name": "FUN_588fcb80",
+      "size": 179,
+      "symbol": "_FUN_588fcb80",
+      "source": "src/client-current/Main/FUN_588fcb80.cpp",
+      "source_sha256": "f4740bc27d4a11057e30fe902f8113e7ee8cdf181e18c503507eb9442ef2fd46",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FCB80",
+          "size": 179,
+          "symbol": "_FUN_588fcb80_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "588FF0F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "588FCC2F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 160,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FCB80 / warehouse record status-message handler",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF79B with two event-record values.",
+        "behavior": "Looks up the record, sets fields at this+0x98 and this+0x94, clears bit 1 at this+0x24, and sends message 0x80015105 or 0x80017105 based on the record state byte.",
+        "uncertainty": "The record schema, state-byte meanings, and message consumers' visible outcomes remain unknown."
+      }
+    },
+    {
+      "address": "588FEFE0",
+      "name": "FUN_588fefe0",
+      "size": 134,
+      "symbol": "_FUN_588fefe0",
+      "source": "src/client-current/Main/FUN_588fefe0.cpp",
+      "source_sha256": "b50c851246a4fd7e22742402f9ab22140aa4c133508bcd88b73c2ecf6104a888",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FEFE0",
+          "size": 134,
+          "symbol": "_FUN_588fefe0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FEFE0 / warehouse child-grid hit test",
+        "called_by": "Update slot FUN_588FF890 and event slot FUN_588FF6B0 call it at 0x588FF8ED and 0x588FF828.",
+        "behavior": "Tests the point against a 6-column by 4-row grid of 0x47-by-0x53 rectangles and returns a one-based row-major cell index or -1.",
+        "uncertainty": "The cell labels and whether the grid corresponds to specific visible controls are not recovered."
+      }
+    },
+    {
+      "address": "588FF180",
+      "name": "FUN_588ff180",
+      "size": 123,
+      "symbol": "_FUN_588ff180",
+      "source": "src/client-current/Main/FUN_588ff180.cpp",
+      "source_sha256": "97286c808b3e614f90e723aeebeb33cf046f3613677a6aeaf9c210e01bddfb3c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF180",
+          "size": 123,
+          "symbol": "_FUN_588ff180_segment_00",
+          "relocations": [
+            {
+              "offset": 46,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF180 / warehouse child callback search",
+        "called_by": "State-pairing helper FUN_588FF2F0 calls it at 0x588FF342 and 0x588FF3AD while locating children for requested values.",
+        "behavior": "Scans the child-pointer range at this+0x70..+0x74, invokes each child's virtual slot +0x28 with two values, and returns the first child whose callback returns 1.",
+        "uncertainty": "The child class, callback contract, and requested values' meanings remain unresolved."
+      }
+    },
+    {
+      "address": "588FF200",
+      "name": "FUN_588ff200",
+      "size": 228,
+      "symbol": "_FUN_588ff200",
+      "source": "src/client-current/Main/FUN_588ff200.cpp",
+      "source_sha256": "ca051e2b18f6eaf27e5514741cf0bab06412e6c252d5dced9a101623b386c968",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF200",
+          "size": 228,
+          "symbol": "_FUN_588ff200_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "588FF2BD",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 46,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "588FF220",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF200 / warehouse child rectangle hit test",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF813 before record-state processing.",
+        "behavior": "Scans child rectangles at this+0x70..+0x74 and returns a containing child only when its +0x98 flag is clear and its +0x6A byte matches this+0x88.",
+        "uncertainty": "The child class, byte meaning, and relationship to the caller's event are not established."
+      }
+    },
+    {
+      "address": "588FF2F0",
+      "name": "FUN_588ff2f0",
+      "size": 303,
+      "symbol": "_FUN_588ff2f0",
+      "source": "src/client-current/Main/FUN_588ff2f0.cpp",
+      "source_sha256": "21f6d771531fe8e3025467a1b3b0a74aeffbd20833326082e7a5c1bc76dc4cbd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF2F0",
+          "size": 303,
+          "symbol": "_FUN_588ff2f0_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "588FF41A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "588FF418",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "588FF418",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "588FF180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "588FF418",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 118,
+              "target_address": "588FAF30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "588F7D60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 190,
+              "target_address": "588FF180",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "588FAF70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "588F7D60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 267,
+              "target_address": "588F7E90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 292,
+              "target_address": "588FC990",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF2F0 / warehouse child-state pairing and message update",
+        "called_by": "CWarehouseSlotManager event slot FUN_588FF6B0 calls it at 0x588FF7D5 and 0x588FF860 for record-dependent branches.",
+        "behavior": "Uses a child virtual check at +0x24 and child search at +0x28, validates a bounded index, appends a four-dword state record, updates child state helpers, and routes message 0x80015104 through FUN_588FC990.",
+        "uncertainty": "Child class, queue consumer, record-byte meanings, and message outcome remain unresolved."
+      }
+    },
+    {
+      "address": "588FF6B0",
+      "name": "FUN_588ff6b0",
+      "size": 473,
+      "symbol": "_FUN_588ff6b0",
+      "source": "src/client-current/Main/FUN_588ff6b0.cpp",
+      "source_sha256": "2fc23d392be947bc606910bcb87ba4b8c58199f4d15a5fc8004ac449f42f3fcd",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF6B0",
+          "size": 473,
+          "symbol": "_FUN_588ff6b0_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "588FF7B5",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "588F7DF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "588FF881",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "588FB850",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "588FF881",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "588FF881",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "588F7E00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "588F9C00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 230,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "588FCB80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 257,
+              "target_address": "588F7E30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 268,
+              "target_address": "588F9C00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "588FF2F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "588FF881",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 316,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "588FF881",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 332,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 343,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 356,
+              "target_address": "588FF200",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 366,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 377,
+              "target_address": "588FEFE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 409,
+              "target_address": "588F7E90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 433,
+              "target_address": "588FF2F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "58A245F0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 461,
+              "target_address": "588FCAC0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF6B0 / CWarehouseSlotManager primary slot +0x18",
+        "called_by": "Installed at primary-vtable slot +0x18 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "Dispatches observed event values 1 through 4 into record, selection, reset, and state-update helpers; event values and record bytes drive the branches.",
+        "uncertainty": "Event names, record schema, child identities, and the visible outcome of the branches remain unknown."
+      }
+    },
+    {
+      "address": "588FF890",
+      "name": "FUN_588ff890",
+      "size": 173,
+      "symbol": "_FUN_588ff890",
+      "source": "src/client-current/Main/FUN_588ff890.cpp",
+      "source_sha256": "b691420222e10bb362bb310b88c84909e54ee81e1aa34d2ef9c023de4554d73a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF890",
+          "size": 173,
+          "symbol": "_FUN_588ff890_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "588FF93B",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "588F9C00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 83,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "588FEFE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "588F9FD0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "588F9C00",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF890 / CWarehouseSlotManager primary slot +0x0C",
+        "called_by": "Installed at primary-vtable slot +0x0C in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "When the observed state bit is set, iterates a linked child list, refreshes it through virtual slot +0x0C, checks the current record, and advances a counter that reaches the presentation helper at ten.",
+        "uncertainty": "The child type, record schema, counter's user-visible meaning, and indirect callback destination are unresolved."
+      }
+    },
+    {
+      "address": "588FF940",
+      "name": "FUN_588ff940",
+      "size": 96,
+      "symbol": "_FUN_588ff940",
+      "source": "src/client-current/Main/FUN_588ff940.cpp",
+      "source_sha256": "9922b161db1d47fefcd8b76e771e0781908fa389e6f1a1963bcaf1c022b52f5c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF940",
+          "size": 96,
+          "symbol": "_FUN_588ff940_segment_00",
+          "relocations": [
+            {
+              "offset": 73,
+              "target_address": "588FF080",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "588F7E90",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF940 / CWarehouseSlotManager primary slot +0x10",
+        "called_by": "Installed at primary-vtable slot +0x10 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "When its observed state bit is set, iterates children through virtual slot +0x10 and handles observed event value 0x204 through the shared state helper.",
+        "uncertainty": "The callback contract, event name, child type, and returned field's meaning remain unknown."
+      }
+    },
+    {
+      "address": "588FF9A0",
+      "name": "FUN_588ff9a0",
+      "size": 385,
+      "symbol": "_FUN_588ff9a0",
+      "source": "src/client-current/Main/FUN_588ff9a0.cpp",
+      "source_sha256": "94f642882be9033c922219bd9f532fc27dcf1a1b3de7de25ae9f582795081242",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FF9A0",
+          "size": 368,
+          "symbol": "_FUN_588ff9a0_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "5898A523",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "589A23C4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "588FFA77",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 211,
+              "target_address": "588FF9F1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 243,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 265,
+              "target_address": "587AEDB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 364,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588FFB13",
+          "size": 17,
+          "symbol": "_FUN_588ff9a0_segment_01",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FF9A0 / CWarehouseSlotManager destruction body",
+        "called_by": "The primary deleting-destructor slot wrapper FUN_588FFD90 calls it; matched constructor FUN_588FFE10 installs the same class vtable.",
+        "behavior": "Installs the class vtable, clears entries in a deque-backed collection, invokes child deleting destructors, releases four additional child pointers, and frees collection storage.",
+        "uncertainty": "The child classes and exact ownership roles are unresolved; the body contains indirect destructor calls."
+      }
+    },
+    {
+      "address": "588FFD90",
+      "name": "FUN_588ffd90",
+      "size": 27,
+      "symbol": "_FUN_588ffd90",
+      "source": "src/client-current/Main/FUN_588ffd90.cpp",
+      "source_sha256": "f1469e3c0612050ed7a3c33bd988e6f222615b117cef9d14a03c6e946ac5d6e6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588FFD90",
+          "size": 21,
+          "symbol": "_FUN_588ffd90_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "588FF9A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "588FFDA8",
+          "size": 6,
+          "symbol": "_FUN_588ffd90_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588FFD90 / CWarehouseSlotManager deleting-destructor slot",
+        "called_by": "Installed at primary-vtable slot +0x00 in the RTTI-identified CWarehouseSlotManager table.",
+        "behavior": "Calls the class destruction body and invokes the scalar delete helper when the low deletion flag is set.",
+        "uncertainty": "The allocator contract and exact object-size behavior are not inferred from the wrapper alone."
       }
     }
   ]

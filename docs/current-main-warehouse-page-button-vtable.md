@@ -40,9 +40,10 @@ to functions already verified by objdiff. It also checks the table entries,
 RTTI base chain, class vtable installation references, and full Capstone
 instruction coverage. The matched warehouse-list function `FUN_588FBEF0`
 calls `FUN_588FF530`, `FUN_588FE9C0`, and `FUN_588FF420` at `0x588FBFBC`,
-`0x588FBFC5`, and `0x588FBFF9`. The open neighboring callers
+`0x588FBFC5`, and `0x588FBFF9`. The neighboring callers
 `FUN_588FC0D0` and `FUN_588FF6B0` account for three additional calls into this
-slice and remain outside the verified boundary.
+slice. The slot-manager event handler is now byte-matched in the adjacent
+`CWarehouseSlotManager` slice; `FUN_588FC0D0` remains open.
 
 Seven indirect calls remain unresolved: six child cleanup dispatches in
 `FUN_588FDC00` and one event callback in `FUN_588FE460`. `FUN_588F7D00` also
