@@ -9,8 +9,8 @@ The matching project has a deterministic [decomp.dev progress pipeline](docs/dec
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 9,057 matches cover 2,891,545 bytes (21.3302% by functions and
-27.6166% by bytes) and are verified individually at 100.0% by objdiff.
+The current 9,062 matches cover 2,895,797 bytes (21.3419% by functions and
+27.6572% by bytes) and are verified individually at 100.0% by objdiff.
 The aircraft fire-control panel's handler and primary-vtable remainder now
 cover 14 exact functions / 5,496 bytes; RTTI, the constructor path, all primary
 vtable slots, call edges, and unresolved indirect dispatch details are recorded
@@ -26,6 +26,11 @@ exact functions / 5,129 bytes across 21 Ghidra ranges. Its six open primary
 slots, matched constructor route, 149 calls to 24 matched functions, and 27
 unresolved indirect calls are checked in
 [the subsystem evidence](docs/current-main-communicator-join-tab.md).
+The adjacent RTTI-backed `CPannelCommunicatorConfigManageFleetTab` slice adds
+five exact functions / 4,252 bytes across 11 Ghidra ranges. Its 11 primary
+slots, matched constructor route, 91 direct calls to 18 matched functions, and
+58 unresolved indirect calls are checked in
+[the subsystem evidence](docs/current-main-communicator-manage-fleet-tab.md).
 Five chat command routes add 2,146 exact bytes; their original command strings,
 caller paths, shared sender helper, and unresolved protocol meaning are
 documented in [the subsystem evidence](docs/current-main-chat-command-routes.md).

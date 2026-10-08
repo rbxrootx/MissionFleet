@@ -955,6 +955,11 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES)
+MAIN_MANAGE_FLEET_TAB_ADDRESSES = (
+    "58835900", "58834680", "58835370", "58834120", "58834C00",
+)
+ADDRESSES += MAIN_MANAGE_FLEET_TAB_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_FLEET_TAB_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -20613,6 +20618,119 @@ MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE)
+
+MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE = {
+    "58835900": {
+        "name_in_analysis": "FUN_58835900 / Manage Fleet tab deleting destructor wrapper",
+        "called_by": (
+            "The RTTI-identified CPannelCommunicatorConfigManageFleetTab primary "
+            "vtable at 0x5899E1D4 points slot +0x00 to this function. Both fresh "
+            "Ghidra exports record its call to cleanup body FUN_58834C00 at "
+            "0x58835903."
+        ),
+        "behavior": (
+            "The complete two-range body is 27 bytes / 10 instructions. It calls "
+            "the class cleanup, then calls matched FUN_5897CC42 with the object "
+            "when the deleting-destructor flag's low bit is set. Its direct calls "
+            "are closed by the 1,793-byte cleanup body and matched free helper."
+        ),
+        "uncertainty": (
+            "The caller's ownership policy and the meaning of the deleting flag "
+            "are not established here. The wrapper is reproduced as the mapped "
+            "instruction stream; no emulator runtime test was performed."
+        ),
+    },
+    "58834680": {
+        "name_in_analysis": "FUN_58834680 / Manage Fleet tab event handler",
+        "called_by": (
+            "The RTTI-identified primary vtable at 0x5899E1D4 points slot "
+            "+0x10 (address 0x5899E1E4) to this function. Matched constructor "
+            "FUN_58836B90 installs that vtable, and matched parent "
+            "FUN_58843380 calls the constructor at 0x588442A1. Both fresh Ghidra "
+            "body exports agree on the complete 0x58834680..+0x3F9 range."
+        ),
+        "behavior": (
+            "The handler checks the receiver's flag at +0x24 and dispatches on "
+            "the event value at argument +4. Observed paths include event values "
+            "0x200 and 0x201, UI event family 0x100 with codes 0x21, 0x22, 0x26, "
+            "and 0x28, plus 0x20A which calls the local selector helper "
+            "FUN_58834120. The 1,017-byte body has 263 instructions and 48 "
+            "direct calls; its only open direct callee is that helper."
+        ),
+        "uncertainty": (
+            "The event record schema, meaning of receiver fields and event "
+            "codes, server-side outcomes, and target of its one indirect child "
+            "callback are unresolved. The body is preserved for byte matching; "
+            "no in-emulator behavior test was performed."
+        ),
+    },
+    "58835370": {
+        "name_in_analysis": "FUN_58835370 / Manage Fleet tab visible-state update",
+        "called_by": (
+            "The RTTI-identified primary vtable at 0x5899E1D4 points slot "
+            "+0x1C (address 0x5899E1F0) to this function. Its constructor path is "
+            "anchored by matched FUN_58836B90 and parent call at 0x588442A1. "
+            "Both fresh Ghidra body exports agree on all three exact ranges."
+        ),
+        "behavior": (
+            "For receiver state masks 0x400 or 0x500 it updates observed child "
+            "flags and values, loops through the current member records, and "
+            "writes status text/color using the original keys "
+            "STR_SHORT_COMMUSERSTATUS_LOGOFF, _SHIPYARD, _CHATTING, "
+            "_BATTLEWAIT, and _UNDERBATTLE. The body totals 1,314 bytes, "
+            "344 instructions, and 34 direct calls, all to matched functions."
+        ),
+        "uncertainty": (
+            "The member-record type, status source, resource-to-control mapping, "
+            "meaning of the receiver state bits, and destination of the local "
+            "indirect string callback are unresolved. Decompiled branches show "
+            "the current implementation, but do not establish final rendered "
+            "pixels or server semantics."
+        ),
+    },
+    "58834120": {
+        "name_in_analysis": "FUN_58834120 / Manage Fleet member-selector step",
+        "called_by": (
+            "Both fresh Ghidra call-edge exports record a single direct call "
+            "from event handler FUN_58834680 at 0x58834A6C."
+        ),
+        "behavior": (
+            "The 101-byte, 31-instruction helper reads selector value through "
+            "matched FUN_58908170. Its direction argument selects a bounded "
+            "increment or decrement using receiver field +0x24C plus 0x88, "
+            "writes the result through matched FUN_58908190 three times, then "
+            "calls matched refresh FUN_58834030."
+        ),
+        "uncertainty": (
+            "The meaning of the direction value, why three matched setters "
+            "receive the same selection, and the visible controls they update "
+            "remain unknown. No runtime interaction test was performed."
+        ),
+    },
+    "58834C00": {
+        "name_in_analysis": "FUN_58834C00 / Manage Fleet tab owned-child cleanup",
+        "called_by": (
+            "Deleting-destructor wrapper FUN_58835900 calls this body at "
+            "0x58835903. Both fresh Ghidra exports agree on all four body "
+            "ranges; the fresh decompilation identifies its vtable store as "
+            "CPannelCommunicatorConfigManageFleetTab::vftable."
+        ),
+        "behavior": (
+            "The 1,793-byte, 572-instruction cleanup sets the class vtable, "
+            "checks and destroys child pointers through virtual slot 0, and "
+            "zeros the corresponding stored pointers. Together the five "
+            "functions contain 91 direct call sites: two internal closure "
+            "edges and 89 calls to 18 already matched functions."
+        ),
+        "uncertainty": (
+            "The exact dynamic types and destruction contracts of each child "
+            "pointer are unresolved. Fifty-six indirect calls in this cleanup "
+            "body still dispatch through child vtables. Byte-identical matching "
+            "does not identify those runtime targets."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE)
 
 
 if __name__ == "__main__":
