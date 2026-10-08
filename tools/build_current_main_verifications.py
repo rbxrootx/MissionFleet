@@ -482,6 +482,12 @@ MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES = (
     "58733E70", "587344A0", "58734770", "58734850",
 )
 ADDRESSES += MAIN_SECOND_PROTECTION_SYSTEM_ADDRESSES
+MAIN_NOVICE_HELP_PANEL_ADDRESSES = (
+    "5889B410", "5889B5A0", "5889B5C0", "5889B630", "5889B930",
+    "5889BC40", "5889BEA0", "5889C070", "5889C6A0", "5889C880",
+    "5889D070", "5889D0A0", "5889D420", "5889D5F0",
+)
+ADDRESSES += MAIN_NOVICE_HELP_PANEL_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     "58907380": [
@@ -6221,11 +6227,95 @@ EVIDENCE = {
         "behavior": "Runs an exception-protected initializer through 0x589031A0 and repeatedly invokes helper 0x5897152E while setting up receiver state.",
         "uncertainty": "The class identity, repeated child roles, and receiver layout are unresolved. The corrected 2,532-byte body includes ret 0x18 at 0x58806B31.",
     },
+    "5889B410": {
+        "name_in_analysis": "FUN_5889b410",
+        "called_by": "Reached by the class deleting wrapper 0x5889B5A0; also occupies the primary-vftable cleanup slot through that wrapper.",
+        "behavior": "Installs the class cleanup vptr, releases the panel's observed child-pointer arrays using repeated 9-by-32-by-2 traversal, then invokes base cleanup 0x58902C10.",
+        "uncertainty": "The meanings and ownership rules of individual child arrays are unresolved. The complete 379-byte body is included in the panel's byte-matched callable slice.",
+    },
+    "5889B5A0": {
+        "name_in_analysis": "FUN_5889b5a0",
+        "called_by": "Primary vftable slot +0x00 at 0x589A01A8.",
+        "behavior": "Forwards panel cleanup to 0x5889B410 and provides the observed object-deletion wrapper path.",
+        "uncertainty": "The wrapper's ownership condition and allocator contract are not inferred from the vtable role alone. The complete 27-byte body is byte-matched.",
+    },
+    "5889B5C0": {
+        "name_in_analysis": "FUN_5889b5c0",
+        "called_by": "Primary vftable slot +0x10 at 0x589A01A8.",
+        "behavior": "Handles a panel virtual operation using receiver state and the observed child-control fields.",
+        "uncertainty": "The virtual method's product-level meaning and receiver fields remain unnamed. The complete 110-byte body is byte-matched.",
+    },
+    "5889B630": {
+        "name_in_analysis": "FUN_5889b630",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D911.",
+        "behavior": "Updates one of the page-dependent sprite/control groups from the receiver's indexed backing data and visibility state.",
+        "uncertainty": "The displayed page and sprite indices are not mapped to visible content. The complete 747-byte helper body is byte-matched.",
+    },
+    "5889B930": {
+        "name_in_analysis": "FUN_5889b930",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D91A.",
+        "behavior": "Updates a page-dependent sprite/control group using the panel's indexed child data and visibility flags.",
+        "uncertainty": "The group-to-page and group-to-text mappings remain unknown. The complete 747-byte helper body is byte-matched.",
+    },
+    "5889BC40": {
+        "name_in_analysis": "FUN_5889bc40",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D923.",
+        "behavior": "Applies the observed receiver-backed sprite data and state to one page-dependent child group.",
+        "uncertainty": "The individual sprite roles and state labels are unresolved. The complete 603-byte helper body is byte-matched.",
+    },
+    "5889BEA0": {
+        "name_in_analysis": "FUN_5889bea0",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D92C.",
+        "behavior": "Updates a page-dependent child group from the panel's observed indexed sprite/control data.",
+        "uncertainty": "The displayed content and control meanings have not been established. The complete 462-byte helper body is byte-matched.",
+    },
+    "5889C070": {
+        "name_in_analysis": "FUN_5889c070",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D935.",
+        "behavior": "Updates one panel child group, including observed sprite-data pointer, coordinate, and visibility fields.",
+        "uncertainty": "The resource-index mapping and presentation meaning of its fields remain unresolved. The complete 1,472-byte helper body is byte-matched.",
+    },
+    "5889C6A0": {
+        "name_in_analysis": "FUN_5889c6a0",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D93E.",
+        "behavior": "Updates a page-dependent child group through the observed indexed sprite/control records.",
+        "uncertainty": "The relationship between the indexed records and visible content is unresolved. The complete 478-byte helper body is byte-matched.",
+    },
+    "5889C880": {
+        "name_in_analysis": "FUN_5889c880",
+        "called_by": "Called by reset slot 0x5889D070, event handler 0x5889D0A0, and update dispatcher 0x5889D5F0.",
+        "behavior": "Resets or hides child-control records through the common panel control path.",
+        "uncertainty": "The exact reset-state semantics and child-control field names are unresolved. The complete 60-byte helper body is byte-matched.",
+    },
+    "5889D070": {
+        "name_in_analysis": "FUN_5889d070",
+        "called_by": "Primary vftable slot +0x08 at 0x589A01A8.",
+        "behavior": "Resets panel state, routes control cleanup through 0x5889C880, and updates observed receiver flags.",
+        "uncertainty": "The triggering lifecycle and meaning of the receiver flags are not identified. The complete 43-byte body is byte-matched.",
+    },
+    "5889D0A0": {
+        "name_in_analysis": "FUN_5889d0a0",
+        "called_by": "Primary vftable slot +0x18 at 0x589A01A8.",
+        "behavior": "Handles the observed type-2 panel event, adjusts a byte-sized page/index field, and routes child-control updates through 0x5889C880.",
+        "uncertainty": "The event's UI label and the page/index field's enum names remain unknown. The complete 872-byte body is byte-matched.",
+    },
+    "5889D420": {
+        "name_in_analysis": "FUN_5889d420",
+        "called_by": "Called twice by update dispatcher 0x5889D5F0 while selecting a panel-page path.",
+        "behavior": "Derives the observed page/index selection from shared-screen pointers and panel state.",
+        "uncertainty": "The returned index-to-page mapping is not tied to localized screen content. The complete 458-byte helper body is byte-matched.",
+    },
+    "5889D5F0": {
+        "name_in_analysis": "FUN_5889d5f0",
+        "called_by": "Primary vftable slot +0x0C at 0x589A01A8.",
+        "behavior": "Advances panel update state, selects a page through 0x5889D420, and dispatches the observed child-group update helpers 0x5889B630, 0x5889B930, 0x5889BC40, 0x5889BEA0, 0x5889C070, and 0x5889C6A0.",
+        "uncertainty": "The numeric state/page meanings and rendered text or illustrations remain unresolved. The complete 1,254-byte body is byte-matched.",
+    },
     "5889C8D0": {
         "name_in_analysis": "FUN_5889c8d0",
-        "called_by": "Directly called by 0x5878AF40 with two zero arguments.",
-        "behavior": "Runs an exception-protected initializer through 0x589031A0 and uses sprite loader 0x588F3D70 on its observed resource branches.",
-        "uncertainty": "The class and sprite/resource roles are unresolved. The corrected 1,952-byte body includes ret 0x18 at 0x5889D06D.",
+        "called_by": "The matched 0x5878AF40 setup routine calls it at 0x5878C43C with two zero arguments.",
+        "behavior": "Initializes the RTTI-identified CPannelNoviceHelp, installs its primary vftable at 0x589A01A8, loads .\\\\SPR\\\\ITFNVCHelp.spr through 0x588F3D70, and constructs its observed child sprite/control arrays.",
+        "uncertainty": "The individual sprite indices, displayed text, and panel-state meanings remain unmapped. The complete 1,952-byte body includes ret 0x18 at 0x5889D06D.",
     },
     "587783B0": {
         "name_in_analysis": "FUN_587783b0",

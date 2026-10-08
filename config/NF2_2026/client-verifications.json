@@ -268817,9 +268817,9 @@
       ],
       "evidence": {
         "name_in_analysis": "FUN_5889c8d0",
-        "called_by": "Directly called by 0x5878AF40 with two zero arguments.",
-        "behavior": "Runs an exception-protected initializer through 0x589031A0 and uses sprite loader 0x588F3D70 on its observed resource branches.",
-        "uncertainty": "The class and sprite/resource roles are unresolved. The corrected 1,952-byte body includes ret 0x18 at 0x5889D06D."
+        "called_by": "The matched 0x5878AF40 setup routine calls it at 0x5878C43C with two zero arguments.",
+        "behavior": "Initializes the RTTI-identified CPannelNoviceHelp, installs its primary vftable at 0x589A01A8, loads .\\\\SPR\\\\ITFNVCHelp.spr through 0x588F3D70, and constructs its observed child sprite/control arrays.",
+        "uncertainty": "The individual sprite indices, displayed text, and panel-state meanings remain unmapped. The complete 1,952-byte body includes ret 0x18 at 0x5889D06D."
       }
     },
     {
@@ -463222,6 +463222,1335 @@
         "called_by": "Installed-image RTTI places this body at slot +0x04 of the C2ndProtectionSystemManager primary vtable at 0x5898C4E0; matched client setup FUN_5878AF40 constructs the screen.",
         "behavior": "Checks the receiver's observed state flags and routes into FUN_58734770, which rebuilds the secondary-protection prompt layouts for the observed UI modes.",
         "uncertainty": "The server meaning of each mode and the meanings of the receiver flags remain unresolved; the emulator has not exercised this screen."
+      }
+    },
+    {
+      "address": "5889B410",
+      "name": "FUN_5889b410",
+      "size": 379,
+      "symbol": "_FUN_5889b410",
+      "source": "src/client-current/Main/FUN_5889b410.cpp",
+      "source_sha256": "e9f712d7d36531ceec404383183e44bca8643144e5418b865ba67a55a98bc0c2",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889B410",
+          "size": 106,
+          "symbol": "_FUN_5889b410_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58987598",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 22,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "589A01A8",
+              "kind": "immediate",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B480",
+          "size": 56,
+          "symbol": "_FUN_5889b410_segment_01",
+          "relocations": []
+        },
+        {
+          "address": "5889B4C0",
+          "size": 217,
+          "symbol": "_FUN_5889b410_segment_02",
+          "relocations": [
+            {
+              "offset": 193,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889b410",
+        "called_by": "Reached by the class deleting wrapper 0x5889B5A0; also occupies the primary-vftable cleanup slot through that wrapper.",
+        "behavior": "Installs the class cleanup vptr, releases the panel's observed child-pointer arrays using repeated 9-by-32-by-2 traversal, then invokes base cleanup 0x58902C10.",
+        "uncertainty": "The meanings and ownership rules of individual child arrays are unresolved. The complete 379-byte body is included in the panel's byte-matched callable slice."
+      }
+    },
+    {
+      "address": "5889B5A0",
+      "name": "FUN_5889b5a0",
+      "size": 27,
+      "symbol": "_FUN_5889b5a0",
+      "source": "src/client-current/Main/FUN_5889b5a0.cpp",
+      "source_sha256": "5e0c34737aff1cd2e4135dfcea7ebd86c6eb7fd66a0e894f877fc2fdb8f39378",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889B5A0",
+          "size": 21,
+          "symbol": "_FUN_5889b5a0_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "5889B410",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B5B8",
+          "size": 6,
+          "symbol": "_FUN_5889b5a0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889b5a0",
+        "called_by": "Primary vftable slot +0x00 at 0x589A01A8.",
+        "behavior": "Forwards panel cleanup to 0x5889B410 and provides the observed object-deletion wrapper path.",
+        "uncertainty": "The wrapper's ownership condition and allocator contract are not inferred from the vtable role alone. The complete 27-byte body is byte-matched."
+      }
+    },
+    {
+      "address": "5889B5C0",
+      "name": "FUN_5889b5c0",
+      "size": 110,
+      "symbol": "_FUN_5889b5c0",
+      "source": "src/client-current/Main/FUN_5889b5c0.cpp",
+      "source_sha256": "aa37c589a54954f3e02f3f6b3175c571b9c63d9c4f180f88a52cdbf26566bd26",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889B5C0",
+          "size": 110,
+          "symbol": "_FUN_5889b5c0_segment_00",
+          "relocations": [
+            {
+              "offset": 72,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58731540",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889b5c0",
+        "called_by": "Primary vftable slot +0x10 at 0x589A01A8.",
+        "behavior": "Handles a panel virtual operation using receiver state and the observed child-control fields.",
+        "uncertainty": "The virtual method's product-level meaning and receiver fields remain unnamed. The complete 110-byte body is byte-matched."
+      }
+    },
+    {
+      "address": "5889B630",
+      "name": "FUN_5889b630",
+      "size": 747,
+      "symbol": "_FUN_5889b630",
+      "source": "src/client-current/Main/FUN_5889b630.cpp",
+      "source_sha256": "7f79688104a6176a614d20a4345e6db57d037e7eeb733e118ad657e40c171431",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889B630",
+          "size": 189,
+          "symbol": "_FUN_5889b630_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "5889B91C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B6F0",
+          "size": 558,
+          "symbol": "_FUN_5889b630_segment_01",
+          "relocations": [
+            {
+              "offset": 93,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 525,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889b630",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D911.",
+        "behavior": "Updates one of the page-dependent sprite/control groups from the receiver's indexed backing data and visibility state.",
+        "uncertainty": "The displayed page and sprite indices are not mapped to visible content. The complete 747-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889B930",
+      "name": "FUN_5889b930",
+      "size": 747,
+      "symbol": "_FUN_5889b930",
+      "source": "src/client-current/Main/FUN_5889b930.cpp",
+      "source_sha256": "8648cc19d28d6d30d74a4295d846aa3c08e01a504129f5d8b365acf7a2a86732",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889B930",
+          "size": 189,
+          "symbol": "_FUN_5889b930_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5889BC1C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889B9F0",
+          "size": 558,
+          "symbol": "_FUN_5889b930_segment_01",
+          "relocations": [
+            {
+              "offset": 93,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 381,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 525,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889b930",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D91A.",
+        "behavior": "Updates a page-dependent sprite/control group using the panel's indexed child data and visibility flags.",
+        "uncertainty": "The group-to-page and group-to-text mappings remain unknown. The complete 747-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889BC40",
+      "name": "FUN_5889bc40",
+      "size": 603,
+      "symbol": "_FUN_5889bc40",
+      "source": "src/client-current/Main/FUN_5889bc40.cpp",
+      "source_sha256": "d789afd866f933f1873a26cc36bf59ecbf79fbc2b7dcf4bad235fea24c628167",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889BC40",
+          "size": 477,
+          "symbol": "_FUN_5889bc40_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5889BCEF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "5889BE99",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889BE20",
+          "size": 126,
+          "symbol": "_FUN_5889bc40_segment_01",
+          "relocations": [
+            {
+              "offset": 93,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889bc40",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D923.",
+        "behavior": "Applies the observed receiver-backed sprite data and state to one page-dependent child group.",
+        "uncertainty": "The individual sprite roles and state labels are unresolved. The complete 603-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889BEA0",
+      "name": "FUN_5889bea0",
+      "size": 462,
+      "symbol": "_FUN_5889bea0",
+      "source": "src/client-current/Main/FUN_5889bea0.cpp",
+      "source_sha256": "ba479e92189ec2ee99f3a33b5126aecb4b6d1e164b5463941bb22988061eb32e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889BEA0",
+          "size": 462,
+          "symbol": "_FUN_5889bea0_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5889BF4F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "5889C069",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 286,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889bea0",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D92C.",
+        "behavior": "Updates a page-dependent child group from the panel's observed indexed sprite/control data.",
+        "uncertainty": "The displayed content and control meanings have not been established. The complete 462-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889C070",
+      "name": "FUN_5889c070",
+      "size": 1472,
+      "symbol": "_FUN_5889c070",
+      "source": "src/client-current/Main/FUN_5889c070.cpp",
+      "source_sha256": "39c3a99a99d95f1d40abda8e5f77d951d5bd9df65697fc0b6c90cde23ffa5358",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889C070",
+          "size": 153,
+          "symbol": "_FUN_5889c070_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "5889C666",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C110",
+          "size": 205,
+          "symbol": "_FUN_5889c070_segment_01",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 152,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C1E0",
+          "size": 105,
+          "symbol": "_FUN_5889c070_segment_02",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C250",
+          "size": 105,
+          "symbol": "_FUN_5889c070_segment_03",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C2C0",
+          "size": 105,
+          "symbol": "_FUN_5889c070_segment_04",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C330",
+          "size": 103,
+          "symbol": "_FUN_5889c070_segment_05",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C3A0",
+          "size": 249,
+          "symbol": "_FUN_5889c070_segment_06",
+          "relocations": [
+            {
+              "offset": 93,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C4A0",
+          "size": 247,
+          "symbol": "_FUN_5889c070_segment_07",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889C5A0",
+          "size": 200,
+          "symbol": "_FUN_5889c070_segment_08",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 150,
+              "target_address": "58734920",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 167,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889c070",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D935.",
+        "behavior": "Updates one panel child group, including observed sprite-data pointer, coordinate, and visibility fields.",
+        "uncertainty": "The resource-index mapping and presentation meaning of its fields remain unresolved. The complete 1,472-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889C6A0",
+      "name": "FUN_5889c6a0",
+      "size": 478,
+      "symbol": "_FUN_5889c6a0",
+      "source": "src/client-current/Main/FUN_5889c6a0.cpp",
+      "source_sha256": "b44309d9feb7ac01e71294b0a5b8d527ce4ebe0267e7e69bb6be75ec71de4a0b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889C6A0",
+          "size": 478,
+          "symbol": "_FUN_5889c6a0_segment_00",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5889C7EE",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "5889C75E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "5889C879",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 445,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889c6a0",
+        "called_by": "Called by the panel update dispatcher 0x5889D5F0 at 0x5889D93E.",
+        "behavior": "Updates a page-dependent child group through the observed indexed sprite/control records.",
+        "uncertainty": "The relationship between the indexed records and visible content is unresolved. The complete 478-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889C880",
+      "name": "FUN_5889c880",
+      "size": 60,
+      "symbol": "_FUN_5889c880",
+      "source": "src/client-current/Main/FUN_5889c880.cpp",
+      "source_sha256": "dd3b45d0d2b4ac9f8fd699064f743dc2013edbf6bc429e90a1c1100288680bfc",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889C880",
+          "size": 23,
+          "symbol": "_FUN_5889c880_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "5889C8A0",
+          "size": 37,
+          "symbol": "_FUN_5889c880_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889c880",
+        "called_by": "Called by reset slot 0x5889D070, event handler 0x5889D0A0, and update dispatcher 0x5889D5F0.",
+        "behavior": "Resets or hides child-control records through the common panel control path.",
+        "uncertainty": "The exact reset-state semantics and child-control field names are unresolved. The complete 60-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889D070",
+      "name": "FUN_5889d070",
+      "size": 43,
+      "symbol": "_FUN_5889d070",
+      "source": "src/client-current/Main/FUN_5889d070.cpp",
+      "source_sha256": "620822f33f757de0ff0ae82b2e8251fa4b78dcec383d985b75494c28c2f6f174",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889D070",
+          "size": 43,
+          "symbol": "_FUN_5889d070_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "5889C880",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889d070",
+        "called_by": "Primary vftable slot +0x08 at 0x589A01A8.",
+        "behavior": "Resets panel state, routes control cleanup through 0x5889C880, and updates observed receiver flags.",
+        "uncertainty": "The triggering lifecycle and meaning of the receiver flags are not identified. The complete 43-byte body is byte-matched."
+      }
+    },
+    {
+      "address": "5889D0A0",
+      "name": "FUN_5889d0a0",
+      "size": 872,
+      "symbol": "_FUN_5889d0a0",
+      "source": "src/client-current/Main/FUN_5889d0a0.cpp",
+      "source_sha256": "9ee0c861bffcf0cf3f4731837a3e5ae983845b1fcb5ffce2517a827e159481ca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889D0A0",
+          "size": 86,
+          "symbol": "_FUN_5889d0a0_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "5889D1F6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "5889D1FC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "5889D1F4",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889D100",
+          "size": 786,
+          "symbol": "_FUN_5889d0a0_segment_01",
+          "relocations": [
+            {
+              "offset": 186,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5889C880",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 260,
+              "target_address": "5889D30C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 512,
+              "target_address": "5889C880",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 532,
+              "target_address": "5889D3F7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 709,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 728,
+              "target_address": "5889D352",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 767,
+              "target_address": "5889D1F4",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889d0a0",
+        "called_by": "Primary vftable slot +0x18 at 0x589A01A8.",
+        "behavior": "Handles the observed type-2 panel event, adjusts a byte-sized page/index field, and routes child-control updates through 0x5889C880.",
+        "uncertainty": "The event's UI label and the page/index field's enum names remain unknown. The complete 872-byte body is byte-matched."
+      }
+    },
+    {
+      "address": "5889D420",
+      "name": "FUN_5889d420",
+      "size": 458,
+      "symbol": "_FUN_5889d420",
+      "source": "src/client-current/Main/FUN_5889d420.cpp",
+      "source_sha256": "948ec24451596e56547309c4a2066eee74b3ccb0cc9dddf8e7eb062de8128608",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889D420",
+          "size": 458,
+          "symbol": "_FUN_5889d420_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 12,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58A245A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "58A2459C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "58A245A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5889D5E4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 196,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 280,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 297,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 357,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 399,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 446,
+              "target_address": "5889D4C0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889d420",
+        "called_by": "Called twice by update dispatcher 0x5889D5F0 while selecting a panel-page path.",
+        "behavior": "Derives the observed page/index selection from shared-screen pointers and panel state.",
+        "uncertainty": "The returned index-to-page mapping is not tied to localized screen content. The complete 458-byte helper body is byte-matched."
+      }
+    },
+    {
+      "address": "5889D5F0",
+      "name": "FUN_5889d5f0",
+      "size": 1254,
+      "symbol": "_FUN_5889d5f0",
+      "source": "src/client-current/Main/FUN_5889d5f0.cpp",
+      "source_sha256": "7e4f8e87b4fd9b72d20e4d49305c97a420b4ffb912449a953c4ce1de06808357",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5889D5F0",
+          "size": 86,
+          "symbol": "_FUN_5889d5f0_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5889DAE7",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5889DA43",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 53,
+              "target_address": "5889D9DB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "5889D420",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5889D798",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889D650",
+          "size": 185,
+          "symbol": "_FUN_5889d5f0_segment_01",
+          "relocations": [
+            {
+              "offset": 77,
+              "target_address": "5889C880",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "58A247F4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889D710",
+          "size": 202,
+          "symbol": "_FUN_5889d5f0_segment_02",
+          "relocations": [
+            {
+              "offset": 56,
+              "target_address": "58A245A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 70,
+              "target_address": "58902EE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 78,
+              "target_address": "58902F50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5889D944",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5889D944",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 122,
+              "target_address": "5889D944",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 132,
+              "target_address": "5889D944",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 175,
+              "target_address": "5889D864",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "5889D943",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5889D7E0",
+          "size": 781,
+          "symbol": "_FUN_5889d5f0_segment_03",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "5889D943",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "5889D943",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 128,
+              "target_address": "5889D943",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "5889B630",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 315,
+              "target_address": "5889B930",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 324,
+              "target_address": "5889BC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "5889BEA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 342,
+              "target_address": "5889C070",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 351,
+              "target_address": "5889C6A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 469,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 481,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 491,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 503,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 508,
+              "target_address": "5889D420",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 522,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 549,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 607,
+              "target_address": "5889DACA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5889d5f0",
+        "called_by": "Primary vftable slot +0x0C at 0x589A01A8.",
+        "behavior": "Advances panel update state, selects a page through 0x5889D420, and dispatches the observed child-group update helpers 0x5889B630, 0x5889B930, 0x5889BC40, 0x5889BEA0, 0x5889C070, and 0x5889C6A0.",
+        "uncertainty": "The numeric state/page meanings and rendered text or illustrations remain unresolved. The complete 1,254-byte body is byte-matched."
       }
     }
   ]
