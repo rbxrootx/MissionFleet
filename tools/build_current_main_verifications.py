@@ -500,6 +500,13 @@ MAIN_NOVICE_HELP_PANEL_ADDRESSES = (
     "5889D070", "5889D0A0", "5889D420", "5889D5F0",
 )
 ADDRESSES += MAIN_NOVICE_HELP_PANEL_ADDRESSES
+MAIN_MANAGE_SQUAD_TAB_ADDRESSES = (
+    "5883ACB0", "587B6A60", "587B6A70", "587B6ED0", "5883A0A0",
+    "587B6F10", "5883B500", "5883ACD0", "5882F000", "587B6A80",
+    "58833D70", "587BAAE0", "58839730", "58839F30", "58839FA0",
+    "5883A4D0", "58848420",
+)
+ADDRESSES += MAIN_MANAGE_SQUAD_TAB_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     # Fixed-address calls emitted literally by the original eight-slot
@@ -940,6 +947,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_MEMO_CONSTRUCTOR_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -20047,6 +20055,315 @@ EVIDENCE.update({
         ),
     },
 })
+
+MAIN_MANAGE_SQUAD_TAB_EVIDENCE = {
+    "5883ACB0": {
+        "name_in_analysis": "FUN_5883ACB0 / ManageSquadTab deleting-destructor wrapper",
+        "called_by": (
+            "Occupies slot +0x00 of the RTTI-identified "
+            "CPannelCommunicatorConfigManageSquadTab primary vtable at "
+            "0x5899E328. Its complete body directly calls FUN_5883A4D0."
+        ),
+        "behavior": (
+            "Calls the derived cleanup method FUN_5883A4D0, then calls the "
+            "matched operator-delete helper FUN_5897CC42 when the low bit of "
+            "param_2 is set; returns param_1 otherwise."
+        ),
+        "uncertainty": (
+            "The caller's deletion-flag convention and exact child ownership "
+            "are unresolved. Ghidra splits the 27-byte body into two ranges; "
+            "the mapped bytes are verified, but cleanup has not been tested "
+            "in the emulator."
+        ),
+    },
+    "587B6A60": {
+        "name_in_analysis": "FUN_587B6A60 / shared child-state method",
+        "called_by": (
+            "Occupies slot +0x04 of the ManageSquadTab primary vtable at "
+            "0x5899E328. Ghidra also records the same function in two other "
+            "vtable tables."
+        ),
+        "behavior": (
+            "Writes byte value 1 at receiver +0x60, loads a child vtable "
+            "entry at +0x1C, and invokes it."
+        ),
+        "uncertainty": (
+            "The child method contract and the semantic name of the byte at "
+            "+0x60 are unknown. This four-instruction body is byte matched; "
+            "the indirect dispatch target is unresolved."
+        ),
+    },
+    "587B6A70": {
+        "name_in_analysis": "FUN_587B6A70 / shared child-state method",
+        "called_by": (
+            "Occupies slot +0x08 of the ManageSquadTab primary vtable at "
+            "0x5899E328. Ghidra also records the same function in two other "
+            "vtable tables."
+        ),
+        "behavior": (
+            "Writes byte value 3 at receiver +0x60, loads a child vtable "
+            "entry at +0x20, and invokes it."
+        ),
+        "uncertainty": (
+            "The child method contract and the semantic name of the byte at "
+            "+0x60 are unknown. This four-instruction body is byte matched; "
+            "the indirect dispatch target is unresolved."
+        ),
+    },
+    "587B6ED0": {
+        "name_in_analysis": "FUN_587B6ED0 / shared flagged-child teardown method",
+        "called_by": (
+            "Occupies slot +0x0C of the ManageSquadTab primary vtable at "
+            "0x5899E328. The same function is referenced by two other "
+            "vtable tables."
+        ),
+        "behavior": (
+            "When receiver flags at +0x24 contain bit 2, invokes receiver "
+            "vtable slots +0x24 and +0x28, then walks the linked children at "
+            "+0x3C and invokes each child's slot +0x0C until the list cycles "
+            "back to its first node."
+        ),
+        "uncertainty": (
+            "The flag's semantic name, child-list node type, and virtual "
+            "method contracts are unresolved. Exact body bytes are verified; "
+            "the virtual targets are not statically fixed."
+        ),
+    },
+    "5883A0A0": {
+        "name_in_analysis": "FUN_5883A0A0 / ManageSquadTab event handler",
+        "called_by": (
+            "Occupies slot +0x10 of the ManageSquadTab primary vtable at "
+            "0x5899E328. Its direct-call edges are identical in two fresh "
+            "Ghidra exports."
+        ),
+        "behavior": (
+            "Reads event identifiers at param_2 +4 and branches for 0x201, "
+            "0x20A, 0x100, and 0x200. The 0x100 branch handles command values "
+            "0x21, 0x22, 0x26, and 0x28 and calls the shared selection helpers "
+            "FUN_58839F30 and FUN_58839FA0 on specific paths."
+        ),
+        "uncertainty": (
+            "The event structure type, command names, receiver field schema, "
+            "and indirect child callback contract are unresolved. These values "
+            "are recorded from Ghidra pseudocode; no live event sequence was "
+            "tested."
+        ),
+    },
+    "587B6F10": {
+        "name_in_analysis": "FUN_587B6F10 / shared linked-child event dispatch",
+        "called_by": (
+            "Occupies slot +0x14 of the ManageSquadTab primary vtable at "
+            "0x5899E328 and is also referenced by two other vtable tables."
+        ),
+        "behavior": (
+            "When receiver flag bit 0 is set and the linked child head at "
+            "+0x4C is non-null, iterates child nodes and invokes each node's "
+            "vtable slot +0x14 with the caller arguments and receiver +0x64."
+        ),
+        "uncertainty": (
+            "The list node type, ordering semantics, meaning of the flag, and "
+            "virtual callback contract remain unknown. The body is byte matched "
+            "but the dispatch is indirect."
+        ),
+    },
+    "5883B500": {
+        "name_in_analysis": "FUN_5883B500 / ManageSquadTab control-event handler",
+        "called_by": (
+            "Occupies slot +0x18 of the ManageSquadTab primary vtable at "
+            "0x5899E328. Its open direct callees are included in this class "
+            "slice; other direct callees are already byte matched."
+        ),
+        "behavior": (
+            "For param_3 == 2, compares param_2 with stored control pointers "
+            "and updates receiver and child flag/state fields. Other branches "
+            "dispatch values 62000 and 0xF235. Two branches look up the "
+            "localization identifiers MESSAGESTRING__CLAN_CREDIT_DEPOSIT and "
+            "MESSAGESTRING__CLAN_CREDIT_WITHDRAW; these are observed string "
+            "keys, not proof of the server-side operation."
+        ),
+        "uncertainty": (
+            "The control identities, state-bit names, protocol effects, "
+            "localized text, and indirect callback contracts are unresolved. "
+            "The body is verified against the mapped image; no control was "
+            "activated in the emulator."
+        ),
+    },
+    "5883ACD0": {
+        "name_in_analysis": "FUN_5883ACD0 / ManageSquadTab state-gated child update",
+        "called_by": (
+            "Occupies slot +0x1C of the ManageSquadTab primary vtable at "
+            "0x5899E328. It directly calls the selected shared helpers "
+            "FUN_58839730 and FUN_58848420."
+        ),
+        "behavior": (
+            "When receiver state bits at +0x24 match 0x400 or 0x500, changes "
+            "state flags, selects records through global data, copies six "
+            "dwords into child fields, clears or sets child flags, and updates "
+            "fixed groups of child controls. It also walks status and control "
+            "records and invokes virtual child methods."
+        ),
+        "uncertainty": (
+            "The child/control identities, resource record schema, state names, "
+            "and virtual call ownership semantics remain unknown. The Ghidra "
+            "body has three disjoint ranges and contains unresolved indirect "
+            "dispatches; no visual result was emulator-tested."
+        ),
+    },
+    "5882F000": {
+        "name_in_analysis": "FUN_5882F000 / shared ManageSquadTab state transition",
+        "called_by": (
+            "Occupies slot +0x20 of the ManageSquadTab primary vtable at "
+            "0x5899E328 and is also referenced by two other vtable tables."
+        ),
+        "behavior": (
+            "Examines state-mask values 0x200 and 0x100 at receiver +0x24; "
+            "for either case it changes the masked state to 0x400 and clears "
+            "the additional tested bit."
+        ),
+        "uncertainty": (
+            "The state names, caller conditions, and user-visible effect are "
+            "not established. The complete 21-instruction body is byte matched."
+        ),
+    },
+    "587B6A80": {
+        "name_in_analysis": "FUN_587B6A80 / shared child position and state update",
+        "called_by": (
+            "Occupies slot +0x24 of the ManageSquadTab primary vtable at "
+            "0x5899E328 and is also referenced by two other vtable tables."
+        ),
+        "behavior": (
+            "Moves receiver coordinates at +0x04/+0x08 toward target values "
+            "at +0x50/+0x54, caps per-update coordinate steps at 0x20, adjusts "
+            "the fields at +0x58/+0x5C, and updates the state byte at +0x60 "
+            "according to receiver flags."
+        ),
+        "uncertainty": (
+            "Coordinate units, timing assumptions, and flag/state meanings "
+            "are unknown. The arithmetic is recovered from Ghidra and verified "
+            "byte-for-byte; animation has not been exercised in the emulator."
+        ),
+    },
+    "58833D70": {
+        "name_in_analysis": "FUN_58833D70 / shared ManageSquadTab flag transition",
+        "called_by": (
+            "Occupies slot +0x28 of the ManageSquadTab primary vtable at "
+            "0x5899E328 and is also referenced by one other vtable table."
+        ),
+        "behavior": (
+            "Uses the packed state at receiver +0x24 and state byte +0x60 to "
+            "select flag patterns including 0x200 and 0x500, clearing tested "
+            "bits on the corresponding branches."
+        ),
+        "uncertainty": (
+            "The bit-field schema and visible state names are unresolved. "
+            "The behavior description is limited to the observed Ghidra "
+            "branches and mapped writes."
+        ),
+    },
+    "587BAAE0": {
+        "name_in_analysis": "FUN_587BAAE0 / ManageSquadTab outbound message helper",
+        "called_by": (
+            "Reached directly from FUN_5883B500 at one call site in its "
+            "0xF235/control-event path."
+        ),
+        "behavior": (
+            "Builds a temporary packet-like buffer from global values and "
+            "sends it through matched FUN_58970C70 with identifier "
+            "0x80010F0F, then releases the temporary storage."
+        ),
+        "uncertainty": (
+            "The packet field meanings, global identities, and server response "
+            "are not recovered. The identifier and matched send call are direct "
+            "static evidence; no network exchange was tested."
+        ),
+    },
+    "58839730": {
+        "name_in_analysis": "FUN_58839730 / ManageSquadTab indexed child refresh",
+        "called_by": (
+            "Reached from FUN_58839F30, FUN_5883A0A0, FUN_5883B500, and "
+            "FUN_5883ACD0; each call is present in both fresh Ghidra edge exports."
+        ),
+        "behavior": (
+            "Updates five pairs of child resource/value fields from a global "
+            "record list using the current selected index and a row discriminator."
+        ),
+        "uncertainty": (
+            "The record schema, selected entity identity, row meanings, and "
+            "visual text are unresolved. The description follows the five-entry "
+            "loop and field offsets in Ghidra pseudocode."
+        ),
+    },
+    "58839F30": {
+        "name_in_analysis": "FUN_58839F30 / ManageSquadTab selection index adjuster",
+        "called_by": (
+            "Reached directly from FUN_5883A0A0's 0x20A event path."
+        ),
+        "behavior": (
+            "Adjusts a shared selection index in the requested direction, "
+            "bounds it against zero and the indexed child count minus five, "
+            "writes the resulting selection to three shared locations, then "
+            "calls FUN_58839730."
+        ),
+        "uncertainty": (
+            "The selected record type, meaning of the three locations, and "
+            "whether the index represents a visible page are not confirmed. "
+            "Only the arithmetic and writes are asserted."
+        ),
+    },
+    "58839FA0": {
+        "name_in_analysis": "FUN_58839FA0 / ManageSquadTab selected-child refresh",
+        "called_by": (
+            "Reached directly from FUN_5883A0A0 and FUN_5883B500; both direct "
+            "call paths are present in the fresh Ghidra exports."
+        ),
+        "behavior": (
+            "When the global mode equals 3, refreshes shared data, clears "
+            "flags on selected child records, reads the active entry, toggles "
+            "three control children, and updates a localized selected-item label."
+        ),
+        "uncertainty": (
+            "The meaning of mode 3, child control identities, selected record "
+            "schema, and displayed label are unknown. Static resource and flag "
+            "updates do not establish the runtime appearance."
+        ),
+    },
+    "5883A4D0": {
+        "name_in_analysis": "FUN_5883A4D0 / ManageSquadTab derived cleanup",
+        "called_by": (
+            "Directly called by the slot +0x00 deleting-destructor wrapper "
+            "FUN_5883ACB0. The matched ManageSquad constructor installs this "
+            "class vtable."
+        ),
+        "behavior": (
+            "Releases and clears a set of owned child pointers through their "
+            "virtual cleanup entries and calls matched delete helpers for "
+            "heap-owned child objects. Ghidra indexes three ranges totaling "
+            "1,961 bytes."
+        ),
+        "uncertainty": (
+            "The semantic identity and ownership policy of each child field, "
+            "and the virtual destructor contracts, are unresolved. Exact "
+            "range bytes are verified; runtime teardown was not tested."
+        ),
+    },
+    "58848420": {
+        "name_in_analysis": "FUN_58848420 / ManageSquadTab index guard",
+        "called_by": (
+            "Reached from FUN_5883ACD0 while it walks indexed child/status "
+            "records."
+        ),
+        "behavior": (
+            "Compares the supplied index with the signed 16-bit receiver field "
+            "+0xF0 and returns through the corresponding branch; the 15 "
+            "instruction body makes no direct calls or state writes."
+        ),
+        "uncertainty": (
+            "The compared field's semantic type and the caller's loop meaning "
+            "remain unresolved. The observed body is byte matched."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_MANAGE_SQUAD_TAB_EVIDENCE)
 
 
 if __name__ == "__main__":
