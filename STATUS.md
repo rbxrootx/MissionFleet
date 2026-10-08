@@ -6,11 +6,14 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 8,950 verified matches
-totaling 2,851,391 bytes (21.0782% by functions, 27.2331% by bytes), each at
-100.0% under objdiff 3.8.0. The installed client's RTTI-backed
-`CPannelCommunicatorConfigDiplomacyTab` event closure adds 30 exact functions /
-3,876 bytes across 31 fresh Ghidra ranges. Its matched callers, mode dispatch,
+identified code bytes across six report units. There are 8,964 verified matches
+totaling 2,857,698 bytes (21.1111% by functions, 27.2933% by bytes), each at
+100.0% under objdiff 3.8.0. Five chat command routes add 2,146 exact bytes;
+their original strings, caller paths, shared sender helper, and unresolved
+protocol meaning are documented in
+[the subsystem note](docs/current-main-chat-command-routes.md). The installed
+client's RTTI-backed `CPannelCommunicatorConfigDiplomacyTab` event closure adds
+30 exact functions / 3,876 bytes across 31 fresh Ghidra ranges. Its matched callers, mode dispatch,
 constructor path, and indirect callback uncertainties are documented in
 [the subsystem note](docs/current-main-diplomacy-tab-event-closure.md).
 The RTTI-backed convoy-aircraft update closures add 12 exact functions / 4,627

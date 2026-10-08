@@ -19061,6 +19061,45 @@ MAIN_COMBAT_EFFECT_RESOLVER_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_COMBAT_EFFECT_RESOLVER_EVIDENCE)
 
+MAIN_CHAT_COMMAND_ROUTE_ADDRESSES = (
+    "587F5EE0", "587F60A0", "587F62A0", "587F73B0", "587B7FD0",
+)
+ADDRESSES += MAIN_CHAT_COMMAND_ROUTE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CHAT_COMMAND_ROUTE_ADDRESSES)
+MAIN_CHAT_COMMAND_ROUTE_EVIDENCE = {
+    "587F5EE0": {
+        "name_in_analysis": "FUN_587F5EE0 / slash reply route",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 dispatches /r and /reply here at 0x587FD6B0; both command literals resolve through the installed pointer table, and two fresh Ghidra projects confirm the edge.",
+        "behavior": "For /r or /reply input with trailing text, builds a 0x30-byte context from two six-word global records, appends the text after the 3- or 7-byte command prefix, and calls FUN_587B8110(1, 0, buffer, size, 1). It resets the stored index at DAT_58A245C0+0x5F4 and calls FUN_587EE240 with observed arguments (1,1).",
+        "uncertainty": "The records' schemas, stored-index meaning, receiver type, and the visible or server-side effects of the routed data are unknown; localized text lookup is indirect through DAT_5898C030.",
+    },
+    "587F60A0": {
+        "name_in_analysis": "FUN_587F60A0 / slash all-chat route",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 dispatches /a and /all here at 0x587FD6A7; both command literals resolve through the installed pointer table, and two fresh Ghidra projects confirm the edge.",
+        "behavior": "With trailing text, builds a context and calls FUN_587B8110(2, 0, buffer, size, 1). The text and bare-token paths set observed fields at DAT_58A2459C+0x20D20, +0x20D24, and +0x21CE4, then request MESSAGESTRING_ALL_CHATTING through FUN_587EE240.",
+        "uncertainty": "The full lifecycle of the three mode fields, server response, and runtime visible effect are not established; localized text lookup is indirect through DAT_5898C030.",
+    },
+    "587F62A0": {
+        "name_in_analysis": "FUN_587F62A0 / slash team-chat route",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 dispatches /t and /team here at 0x587FD69E; both command literals resolve through the installed pointer table, and two fresh Ghidra projects confirm the edge.",
+        "behavior": "With trailing text, calls FUN_587B8110(3, the byte at [DAT_58A247F8+4]+0x354, buffer, size, 1). Both text and bare-token paths update the observed fields at DAT_58A2459C+0x20D20, +0x20D24, and +0x21CE4 and request MESSAGESTRING_TEAM_CHATTING through FUN_587EE240.",
+        "uncertainty": "The byte at +0x354, full lifecycle of the mode fields, server response, and runtime visible effect are not established; localized text lookup is indirect through DAT_5898C030.",
+    },
+    "587F73B0": {
+        "name_in_analysis": "FUN_587F73B0 / slash exit numeric route",
+        "called_by": "Matched chat-submit handler FUN_587FC9C0 dispatches /x and /exit here at 0x587FD668; both command literals resolve through the installed pointer table, and two fresh Ghidra projects confirm the edge.",
+        "behavior": "Parses the numeric argument after the /x or /exit prefix, rejects the observed value-above-0xFFFF path, formats the accepted value, passes it to FUN_587B7FD0, and requests MESSAGESTRING_ALL_CHATTING through FUN_587EE240.",
+        "uncertainty": "The numeric value's domain meaning, the purpose of this route despite the /exit spelling, and the server response are unknown; localized text lookup is indirect through DAT_5898C030.",
+    },
+    "587B7FD0": {
+        "name_in_analysis": "FUN_587B7FD0 / shared 0x8001B112 text sender",
+        "called_by": "FUN_587F73B0 calls it at 0x587F74DC; matched FUN_58890110 also calls it at 0x58892458. Two fresh Ghidra projects confirm both references.",
+        "behavior": "Compares the input against three 0x18-byte entries at receiver+0x130; on a match, builds a 0x49-byte payload from the selected entry and supplied text, then calls matched FUN_58970C70 with selector 0x8001B112 and flags 0x50000.",
+        "uncertainty": "The three-entry schema, selector meaning, and server-side effect are unknown. The helper is shared with a caller outside the chat-submit route.",
+    },
+}
+EVIDENCE.update(MAIN_CHAT_COMMAND_ROUTE_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()

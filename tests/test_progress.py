@@ -83,6 +83,7 @@ from tools import (
     verify_current_main_cpanel_dashboard_vtable,
     verify_current_main_warehouse_page_button,
     verify_current_main_warehouse_slot_manager,
+    verify_current_main_chat_command_routes,
 )
 
 
@@ -95,8 +96,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_959)
-        self.assertEqual(self.report["measures"]["matched_code"], "2855552")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_964)
+        self.assertEqual(self.report["measures"]["matched_code"], "2857698")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -107,8 +108,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_826)
-        self.assertEqual(current["measures"]["matched_code"], "1882134")
+        self.assertEqual(current["measures"]["matched_functions"], 2_831)
+        self.assertEqual(current["measures"]["matched_code"], "1884280")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -176,6 +177,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(set(addresses), set(evidence))
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_user_command.main()
+
+    def test_chat_command_routes_have_exact_dispatch_and_sender_closure(self):
+        addresses = build_current_main_verifications.MAIN_CHAT_COMMAND_ROUTE_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CHAT_COMMAND_ROUTE_EVIDENCE
+        self.assertEqual(len(addresses), 5)
+        self.assertEqual(set(addresses), {f"{address:08X}"
+                                         for address in verify_current_main_chat_command_routes.FUNCTIONS})
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("/reply", evidence["587F5EE0"]["called_by"])
+        self.assertIn("0x8001B112", evidence["587B7FD0"]["behavior"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_chat_command_routes.main()
 
     def test_periodic_selection_state_update_has_matched_caller_and_body(self):
         addresses = (

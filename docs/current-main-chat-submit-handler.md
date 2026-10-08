@@ -46,3 +46,7 @@ uncertainties.
 
 The adjacent `/e` and `/enter` numeric user-chat input route is documented in
 [`current-main-user-chat-enter-command.md`](current-main-user-chat-enter-command.md).
+
+The `/r` and `/reply`, `/a` and `/all`, `/t` and `/team`, and `/x` and `/exit`
+routes are documented in
+[`current-main-chat-command-routes.md`](current-main-chat-command-routes.md).
