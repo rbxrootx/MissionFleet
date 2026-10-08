@@ -479851,6 +479851,205 @@
         "behavior": "Checks the global gate DAT_58A0B4A0 and a value at DAT_58A245C0+0x63C, displays the observed fleet-denial or filter-check message when gated, reads text from [this+0x20D30]+0x80, derives a prefix length from the leading bytes, and routes an accepted channel message through FUN_587EE240 with observed arguments (2,2). A separated trailing-space path builds a filter buffer, checks it through FUN_587B8290, reports the forbidden-word message when that helper returns zero, and then routes the channel message.",
         "uncertainty": "The gate's policy meaning, encoded prefix schema, buffer/filter contract, channel-message consumer behavior, and runtime target of the indirect DAT_5898C030 callback are unresolved."
       }
+    },
+    {
+      "address": "588F4B10",
+      "name": "FUN_588f4b10",
+      "size": 662,
+      "symbol": "_FUN_588f4b10",
+      "source": "src/client-current/Main/FUN_588f4b10.cpp",
+      "source_sha256": "9929f128da38173c96e3f93c24ff2dce1fd6ab8518abcd9a7467bd0a367e9aef",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [
+        {
+          "offset": 46,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 66,
+          "target_address": "588F4D68",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 83,
+          "target_address": "588D66E0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 94,
+          "target_address": "588F4C63",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 111,
+          "target_address": "588D6960",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 128,
+          "target_address": "588F4C73",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 237,
+          "target_address": "588DB040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 266,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 278,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 283,
+          "target_address": "587E5FE0",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 290,
+          "target_address": "588DB040",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 299,
+          "target_address": "58A247F8",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 321,
+          "target_address": "58A246EC",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 335,
+          "target_address": "588EC100",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 346,
+          "target_address": "588F4B60",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 351,
+          "target_address": "588F4D66",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 373,
+          "target_address": "588F4D28",
+          "kind": "relative",
+          "audit_only": true
+        },
+        {
+          "offset": 444,
+          "target_address": "58A2459C",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 468,
+          "target_address": "58A24914",
+          "kind": "absolute",
+          "audit_only": true
+        },
+        {
+          "offset": 473,
+          "target_address": "58A2491C",
+          "kind": "absolute",
+          "audit_only": true
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588F4B10 / combat-effect target and range resolver",
+        "called_by": "Matched combat-effect update FUN_588F55C0 calls it at 0x588F5980; the fresh Ghidra reference export confirms the edge.",
+        "behavior": "Caps the receiver's range input at 60 and squares it, scans the global object list rooted at DAT_58A247F8+0xC, and queries candidates through matched FUN_588D66E0. On the observed 0x40000000 query result, it checks positions through matched FUN_588D6960, stores an accepted target pointer and identifier, and returns observed status 1 or 3. Other candidates contribute a minimum weighted squared distance (dx^2 + 1.4*dy^2); the helper FUN_588DB040 squares the current candidate's field at +0xDC4 for the cutoff comparison. The resolver updates flag bit 0 at receiver+0x24 and returns status 2 for an observed range-threshold path; one branch calls FUN_587E5FE0(1) with [DAT_58A2459C] in ECX, and another emits event arguments (0x20,0x81,0) through matched FUN_588EC100.",
+        "uncertainty": "The object types, field meanings and units, 0x40000000 sentinel meaning, +0x354 classification field, and policy behind statuses 1/2/3 are unknown. The relationship of the object pointed to by DAT_58A2459C to the candidate list is unresolved. The list's runtime ownership and behavior were not tested in the client or emulator."
+      }
+    },
+    {
+      "address": "588DB040",
+      "name": "FUN_588db040",
+      "size": 10,
+      "symbol": "_FUN_588db040",
+      "source": "src/client-current/Main/FUN_588db040.cpp",
+      "source_sha256": "2ca6b326b1c362b097e7402f734b6391e3e63b3a947bd3aafbd62f925875a7c7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_588DB040 / squared candidate cutoff helper",
+        "called_by": "FUN_588F4B10 calls it at 0x588F4BFC and 0x588F4C31. A separate reference from unverified FUN_587A3170 occurs at 0x587A3254; all three incoming references are present in the fresh Ghidra export.",
+        "behavior": "Returns the square of the receiver field at offset 0xDC4. At both FUN_588F4B10 callsites, ECX contains the current candidate, and the result is compared with that candidate's weighted squared distance.",
+        "uncertainty": "The candidate class and the field's physical units or gameplay meaning are unknown; the separate FUN_587A3170 caller is not byte-matched."
+      }
+    },
+    {
+      "address": "587E5FE0",
+      "name": "FUN_587e5fe0",
+      "size": 33,
+      "symbol": "_FUN_587e5fe0",
+      "source": "src/client-current/Main/FUN_587e5fe0.cpp",
+      "source_sha256": "eb6b5426ea21556076509ae273fc26e44ac3c7836ac0f66dfddaa470700f3e5f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "evidence": {
+        "name_in_analysis": "FUN_587E5FE0 / receiver flag and timer update",
+        "called_by": "FUN_588F4B10 calls it at 0x588F4C2A with observed argument 1 and loads [DAT_58A2459C] into ECX as the receiver; the fresh Ghidra reference export and exact caller instructions confirm this.",
+        "behavior": "When its argument is 1, sets bit 0 in the word reached through receiver+0x10BC0 then +0x24, and writes 100 to receiver+0x10BC4. Other argument values return without writes.",
+        "uncertainty": "The class and role of the object pointed to by DAT_58A2459C, these fields' meanings, and the reason for the 100-value update are unknown."
+      }
     }
   ]
 }

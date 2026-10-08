@@ -19036,6 +19036,31 @@ MAIN_CHAT_INPUT_HELPER_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_CHAT_INPUT_HELPER_EVIDENCE)
 
+MAIN_COMBAT_EFFECT_RESOLVER_ADDRESSES = ("588F4B10", "588DB040", "587E5FE0")
+ADDRESSES += MAIN_COMBAT_EFFECT_RESOLVER_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMBAT_EFFECT_RESOLVER_ADDRESSES)
+MAIN_COMBAT_EFFECT_RESOLVER_EVIDENCE = {
+    "588F4B10": {
+        "name_in_analysis": "FUN_588F4B10 / combat-effect target and range resolver",
+        "called_by": "Matched combat-effect update FUN_588F55C0 calls it at 0x588F5980; the fresh Ghidra reference export confirms the edge.",
+        "behavior": "Caps the receiver's range input at 60 and squares it, scans the global object list rooted at DAT_58A247F8+0xC, and queries candidates through matched FUN_588D66E0. On the observed 0x40000000 query result, it checks positions through matched FUN_588D6960, stores an accepted target pointer and identifier, and returns observed status 1 or 3. Other candidates contribute a minimum weighted squared distance (dx^2 + 1.4*dy^2); the helper FUN_588DB040 squares the current candidate's field at +0xDC4 for the cutoff comparison. The resolver updates flag bit 0 at receiver+0x24 and returns status 2 for an observed range-threshold path; one branch calls FUN_587E5FE0(1) with [DAT_58A2459C] in ECX, and another emits event arguments (0x20,0x81,0) through matched FUN_588EC100.",
+        "uncertainty": "The object types, field meanings and units, 0x40000000 sentinel meaning, +0x354 classification field, and policy behind statuses 1/2/3 are unknown. The relationship of the object pointed to by DAT_58A2459C to the candidate list is unresolved. The list's runtime ownership and behavior were not tested in the client or emulator.",
+    },
+    "588DB040": {
+        "name_in_analysis": "FUN_588DB040 / squared candidate cutoff helper",
+        "called_by": "FUN_588F4B10 calls it at 0x588F4BFC and 0x588F4C31. A separate reference from unverified FUN_587A3170 occurs at 0x587A3254; all three incoming references are present in the fresh Ghidra export.",
+        "behavior": "Returns the square of the receiver field at offset 0xDC4. At both FUN_588F4B10 callsites, ECX contains the current candidate, and the result is compared with that candidate's weighted squared distance.",
+        "uncertainty": "The candidate class and the field's physical units or gameplay meaning are unknown; the separate FUN_587A3170 caller is not byte-matched.",
+    },
+    "587E5FE0": {
+        "name_in_analysis": "FUN_587E5FE0 / receiver flag and timer update",
+        "called_by": "FUN_588F4B10 calls it at 0x588F4C2A with observed argument 1 and loads [DAT_58A2459C] into ECX as the receiver; the fresh Ghidra reference export and exact caller instructions confirm this.",
+        "behavior": "When its argument is 1, sets bit 0 in the word reached through receiver+0x10BC0 then +0x24, and writes 100 to receiver+0x10BC4. Other argument values return without writes.",
+        "uncertainty": "The class and role of the object pointed to by DAT_58A2459C, these fields' meanings, and the reason for the 100-value update are unknown.",
+    },
+}
+EVIDENCE.update(MAIN_COMBAT_EFFECT_RESOLVER_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
