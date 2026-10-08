@@ -16082,8 +16082,8 @@ MAIN_SHIP_MAP_CONSTRUCTOR_HELPER_EVIDENCE = {
             "Both fresh Ghidra edge exports record a call from the matched "
             "CShip_MapObjectScreen constructor FUN_588E05C0 at 0x588E1233. "
             "They also record calls from FUN_5877A060 at 0x5877A0ED and "
-            "FUN_5877A650 at 0x5877A7FB; those two callers are not byte-matched "
-            "and are outside this subsystem."
+            "FUN_5877A650 at 0x5877A7FB. Both callers are now byte-matched as "
+            "members of the RTTI-backed CForce primary-vftable closure."
         ),
         "behavior": (
             "The complete 10-byte, three-instruction leaf stores its second "
@@ -17784,6 +17784,290 @@ MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE)
+
+
+MAIN_CFORCE_PRIMARY_VTABLE_ADDRESSES = (
+    "5877B1D0", "58779D10", "5877C8F0", "5877AC40", "5877AD50",
+    "5877BE60", "5877A5D0", "58871FA0", "5877A330", "5877A060",
+    "5877A290", "5881ED70", "5877DE70", "58731650", "5877A650",
+    "58869CF0", "58874310", "588C08B0",
+)
+ADDRESSES += MAIN_CFORCE_PRIMARY_VTABLE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_CFORCE_PRIMARY_VTABLE_ADDRESSES)
+MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE = {
+    "5877B1D0": {
+        "name_in_analysis": "FUN_5877b1d0 / CForce slot +0x00 deleting-destructor wrapper",
+        "called_by": (
+            "The CForce RTTI primary vftable at 0x5899689C stores this method "
+            "at slot +0x00. It calls FUN_58779D10 at 0x5877B1D3."
+        ),
+        "behavior": (
+            "Runs the CForce cleanup helper, then calls the observed deleting-"
+            "destructor thunk FUN_5897CC42 when flag bit 0 of the second argument "
+            "is set; otherwise returns the receiver."
+        ),
+        "uncertainty": (
+            "The host callback behind FUN_5897CC42, allocator contract, and "
+            "complete object lifetime contract remain unresolved."
+        ),
+    },
+    "58779D10": {
+        "name_in_analysis": "FUN_58779d10 / CForce child and registration cleanup",
+        "called_by": "Called by the CForce deleting-destructor wrapper at 0x5877B1D3.",
+        "behavior": (
+            "Restores the CForce vftable during cleanup, checks whether the "
+            "global manager points back to this object, then clears a sequence "
+            "of non-null child fields after dispatching each child's vtable "
+            "slot zero with argument 1."
+        ),
+        "uncertainty": (
+            "The child field identities and ownership rules are unresolved. "
+            "Its 31 indirect child-destructor dispatches are preserved as "
+            "runtime uncertainty; the destinations are not recovered."
+        ),
+    },
+    "5877C8F0": {
+        "name_in_analysis": "FUN_5877c8f0 / CForce slot +0x0C state and linked-child update",
+        "called_by": (
+            "The CForce RTTI primary vftable at 0x5899689C stores this method "
+            "at slot +0x0C."
+        ),
+        "behavior": (
+            "Branches on the receiver flags and state fields, updates two "
+            "observed counters or ring indices, and traverses the linked list "
+            "at +0x3C by calling each node's vtable slot +0x0C. The loop has "
+            "an indirect final-node dispatch as well."
+        ),
+        "uncertainty": (
+            "The counter and collection schemas, global-state meanings, node "
+            "types, and indirect vtable dispatch destinations are unresolved."
+        ),
+    },
+    "5877AC40": {
+        "name_in_analysis": "FUN_5877ac40 / CForce linked-index advance helper",
+        "called_by": "FUN_5877C8F0 calls this at 0x5877CAF6.",
+        "behavior": (
+            "When the observed current and end indices differ, advances the "
+            "current index with wraparound and updates the associated count "
+            "and linked record fields."
+        ),
+        "uncertainty": (
+            "The collection layout, index semantics, and relationship between "
+            "the two receiver-owned records remain unresolved."
+        ),
+    },
+    "5877AD50": {
+        "name_in_analysis": "FUN_5877ad50 / CForce repeated linked-index advance helper",
+        "called_by": (
+            "FUN_5877C8F0 calls this at 0x5877CAEF when the observed global "
+            "pointer equality condition holds."
+        ),
+        "behavior": (
+            "Repeats the observed index advance and wraparound while the "
+            "current and end indices differ, decrementing the associated count."
+        ),
+        "uncertainty": (
+            "The collection element schema, stop condition contract, and "
+            "meaning of the adjusted count remain unresolved."
+        ),
+    },
+    "5877BE60": {
+        "name_in_analysis": "FUN_5877be60 / CForce slot +0x10 event-code handler",
+        "called_by": (
+            "The CForce RTTI primary vftable at 0x5899689C stores this method "
+            "at slot +0x10. It branches on the event code at argument +0x04."
+        ),
+        "behavior": (
+            "Handles observed event values 0x200 through 0x204. The paths "
+            "call the open state helpers FUN_5877A060, FUN_5877A290, "
+            "FUN_5877A330, FUN_58871FA0, and FUN_5877A5D0, and include "
+            "message sends 0x80011035 and 0x8001020C under their recorded "
+            "field and global guards."
+        ),
+        "uncertainty": (
+            "The event schema, receiver field roles, global table meanings, "
+            "message payload contract, and linked-node vtable target remain "
+            "unresolved."
+        ),
+    },
+    "5877A5D0": {
+        "name_in_analysis": "FUN_5877a5d0 / CForce 0x202 transition helper",
+        "called_by": "FUN_5877BE60 calls this at 0x5877BEEE for event 0x202.",
+        "behavior": (
+            "Calls the observed global callback, replaces the receiver state "
+            "bits with 0x400, and when field +0x254 was nonzero clears it, "
+            "calls the matched state helper, invokes FUN_5881ED70 with zero, "
+            "and clears a global field."
+        ),
+        "uncertainty": (
+            "The callback contract, field meanings, and transition semantics "
+            "are unresolved; callback destination is indirect."
+        ),
+    },
+    "58871FA0": {
+        "name_in_analysis": "FUN_58871fa0 / CForce 0x201 coordinate hit-test",
+        "called_by": "FUN_5877BE60 calls this at 0x5877C48F for event 0x201.",
+        "behavior": (
+            "Scans the observed child pointer sequence beginning at receiver "
+            "+0xF8, tests active child rectangles against the global pointer "
+            "coordinates, and stores the matching sequence index in the "
+            "global object at +0xE88."
+        ),
+        "uncertainty": (
+            "The child sequence extent, rectangle field semantics, and global "
+            "selection contract remain unresolved."
+        ),
+    },
+    "5877A330": {
+        "name_in_analysis": "FUN_5877a330 / CForce 0x200 alternate state setup",
+        "called_by": "FUN_5877BE60 calls this at 0x5877C597 when field +0x254 is zero.",
+        "behavior": (
+            "When receiver field +0x25C is not 2, updates state fields, calls "
+            "a geometry helper, positions an observed child around the "
+            "coordinate global, and prepares values from the indexed global "
+            "table before calling FUN_5877DE70."
+        ),
+        "uncertainty": (
+            "The indexed table and state meanings, geometry purpose, and "
+            "visual result are unresolved."
+        ),
+    },
+    "5877A060": {
+        "name_in_analysis": "FUN_5877a060 / CForce 0x200 guarded state entry",
+        "called_by": "FUN_5877BE60 calls this at 0x5877C5C9 when its counter field is zero.",
+        "behavior": (
+            "Requires three observed receiver fields to be zero, sets +0x24C, "
+            "then takes one of two paths based on the decoded value at +0xA4; "
+            "the paths call child setup or a matched helper and may change "
+            "additional receiver flags."
+        ),
+        "uncertainty": (
+            "The encoded value, child identities, state purpose, and indirect "
+            "callback target remain unresolved."
+        ),
+    },
+    "5877A290": {
+        "name_in_analysis": "FUN_5877a290 / CForce 0x200 state exit helper",
+        "called_by": "FUN_5877BE60 calls this at 0x5877C5E4 on its alternate 0x200 path.",
+        "behavior": (
+            "Clears receiver field +0x24C, conditionally clears a global "
+            "manager registration, and updates low flag bits on receiver-held "
+            "child objects. It calls FUN_58731650 to replace the observed "
+            "five-bit state subfield."
+        ),
+        "uncertainty": (
+            "The child fields, global registration, state subfield meaning, "
+            "and transition contract remain unresolved."
+        ),
+    },
+    "5881ED70": {
+        "name_in_analysis": "FUN_5881ed70 / CForce guarded child selection helper",
+        "called_by": (
+            "FUN_5877A5D0 calls this at 0x5877A637 with zero. Byte-matched "
+            "FUN_587E3080 also calls it at 0x587E3D1D."
+        ),
+        "behavior": (
+            "Checks the observed pointer-to-coordinate distance bounds unless "
+            "the explicit override argument is nonzero, tests a bit in the "
+            "record selected through arguments +0xA4 and +0x5E, and on success "
+            "stores the selected object and sets the receiver field +0xD20."
+        ),
+        "uncertainty": (
+            "The coordinate system, record bit meaning, receiver and record "
+            "schemas, and downstream indirect effects are unresolved."
+        ),
+    },
+    "5877DE70": {
+        "name_in_analysis": "FUN_5877de70 / CForce child geometry record initializer",
+        "called_by": "FUN_5877A330 calls this at 0x5877A443 with values from the indexed global record.",
+        "behavior": (
+            "Stores three supplied values, copies six geometry fields from the "
+            "fourth argument when nonzero, clears a field, and calls the two "
+            "matched geometry helpers FUN_58902EE0 and FUN_58902F50."
+        ),
+        "uncertainty": (
+            "The geometry record schema and the meanings of the copied "
+            "coordinates remain unresolved."
+        ),
+    },
+    "58731650": {
+        "name_in_analysis": "FUN_58731650 / five-bit receiver state setter",
+        "called_by": (
+            "FUN_5877A290 calls this at 0x5877A2C4. Other callers are recorded "
+            "at 0x5875F270, 0x5876D5C9, 0x5876D64C, 0x5876D7C3, 0x587CEA60, "
+            "and 0x587CEA80."
+        ),
+        "behavior": (
+            "Replaces bits 8 through 12 of the receiver's 16-bit field at +0x24 "
+            "with the low five bits of its second argument, preserving the other "
+            "observed bits."
+        ),
+        "uncertainty": (
+            "The five-bit state enumeration and effects on rendering or "
+            "interaction remain unresolved."
+        ),
+    },
+    "5877A650": {
+        "name_in_analysis": "FUN_5877a650 / CForce slot +0x18 receiver/argument dispatcher",
+        "called_by": (
+            "The CForce RTTI primary vftable at 0x5899689C stores this method "
+            "at slot +0x18. Its arguments select observed event branches."
+        ),
+        "behavior": (
+            "For event kind 2, compares the supplied control pointer against "
+            "receiver fields and runs guarded actions including 0x8001020D "
+            "message send, FUN_58869CF0, FUN_588C08B0, and FUN_58874310. "
+            "Event kind 3 selects recovered message keys including "
+            "MESSAGESTRING__FORCE_CLASS_CHANGE and "
+            "MESSAGESTRING__DISMISS_THE_FORCE."
+        ),
+        "uncertainty": (
+            "The control identities, event argument contract, selected message "
+            "semantics beyond recovered string keys, and UI effects remain unresolved."
+        ),
+    },
+    "58869CF0": {
+        "name_in_analysis": "FUN_58869cf0 / CForce child record state copy",
+        "called_by": "FUN_5877A650 calls this at 0x5877A798 for the control stored at receiver +0x20C.",
+        "behavior": (
+            "Sets the child object's +0x58 state to 0x100, dispatches two "
+            "child vtable slot +0x08 calls, copies 0x60 DWORDs from a source "
+            "record at +0x50 into the child at +0xCC, and sets observed flag "
+            "and counter fields."
+        ),
+        "uncertainty": (
+            "The source and child record schemas, meanings of the copied "
+            "fields, and effects of the indirect child calls remain unresolved."
+        ),
+    },
+    "58874310": {
+        "name_in_analysis": "FUN_58874310 / CForce name-change value interpolation helper",
+        "called_by": "FUN_5877A650 calls this at 0x5877A8AA for the control stored at receiver +0x248.",
+        "behavior": (
+            "Stores the supplied record pointer, decodes a decimal pair from "
+            "its +0x5E field, interpolates between the observed 14-entry "
+            "constant table, and passes the result to FUN_58907360. The body "
+            "contains the source assertion label PNLFRCNMCNG:STDT."
+        ),
+        "uncertainty": (
+            "The encoded field, table units, interpolation meaning, and target "
+            "setter contract remain unresolved."
+        ),
+    },
+    "588C08B0": {
+        "name_in_analysis": "FUN_588c08b0 / CForce paired value setter",
+        "called_by": "FUN_5877A650 calls this at 0x5877A81D with a global record field and zero.",
+        "behavior": (
+            "Forwards its first argument to FUN_58731CE0 and its second to "
+            "FUN_58907360, then returns."
+        ),
+        "uncertainty": (
+            "The paired setter contracts and the meaning of the associated "
+            "control remain unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE)
 
 
 if __name__ == "__main__":

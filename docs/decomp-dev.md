@@ -52,8 +52,8 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,836 of 42,461 functions and 2,823,492 of 10,470,324 bytes (20.8097% by
-functions and 26.9666% by bytes); every counted function match is verified at
+credits 8,854 of 42,461 functions and 2,830,933 of 10,470,324 bytes (20.8521% by
+functions and 27.0377% by bytes); every counted function match is verified at
 100.0% by objdiff 3.8.0. The installed-client `CFCManager` file-integrity
 and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
 five-slot vtable, callback route, two record strides, exact file-status strings,
@@ -62,7 +62,7 @@ and open questions are documented in
 This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
-inventory has 2,703 exact function matches totaling 1,850,074 bytes. The
+inventory has 2,721 exact function matches totaling 1,857,515 bytes. The
 two-function nested-range state-refresh closure at `FUN_58776F20` adds 801
 exact bytes. Fresh Ghidra and the independent body/call-edge inventories agree
 on both complete bodies and all 33 direct calls; the matched `FUN_588DF450`
@@ -77,6 +77,13 @@ instruction coverage, 48 fresh call edges, and 37 transfers to verified code.
 The class's field meanings, indirect child methods, table schema, and runtime
 visual effect remain unknown. See
 [`current-main-cpannel-force-level-up.md`](current-main-cpannel-force-level-up.md).
+The RTTI-backed `CForce` primary-vftable closure adds 18 exact functions /
+7,441 bytes across 25 complete Ghidra ranges. All four previously open primary
+slots and their direct closures match; the focused check verifies 100 direct
+calls, 86 transfers to verified code, and nine external incoming callsites.
+Forty-nine indirect calls remain unresolved, including 31 child cleanup
+dispatches. The fields, event meanings, and runtime effects remain uncertain.
+See [`current-main-cforce-primary-vtable.md`](current-main-cforce-primary-vtable.md).
 The `CRoomTypeOccupation` constructor adds one exact function / 960 bytes. Its
 fresh Ghidra body has 287 instructions; a matched `CRoomSettingManager` caller
 and all 13 outgoing transfers to verified functions pass the focused verifier.

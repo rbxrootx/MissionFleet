@@ -73,7 +73,7 @@ EXPECTED_INCOMING = {
     0x588E6570: {(CONSTRUCTOR, 0x588E3533), (CONSTRUCTOR, 0x588E356E)},
     0x5897D180: {(CONSTRUCTOR, 0x588E0BC2), (CONSTRUCTOR, 0x588E0BDA)},
 }
-UNMATCHED_OUTSIDE_CALLERS = {0x5877A060, 0x5877A650}
+ADDITIONAL_MATCHED_OUTSIDE_CALLERS = {0x5877A060, 0x5877A650}
 EXPECTED_INDIRECT_JUMPS = {
     0x588DDBF0: {0x588DDC10: "dword ptr [eax*4 + 0x588ddcc8]"},
     0x5897D180: {0x5897D180: "dword ptr [0x5898c304]"},
@@ -273,9 +273,10 @@ def verify_matches(image, decoder):
         for caller, site in callers
     }
     caller_addresses = {caller for caller, _, _ in expected_calls}
-    if CONSTRUCTOR not in matched or UNMATCHED_OUTSIDE_CALLERS & matched:
+    if (CONSTRUCTOR not in matched
+            or not ADDITIONAL_MATCHED_OUTSIDE_CALLERS.issubset(matched)):
         raise AssertionError("Constructor/caller byte-match boundary changed")
-    if caller_addresses != {CONSTRUCTOR} | UNMATCHED_OUTSIDE_CALLERS:
+    if caller_addresses != {CONSTRUCTOR} | ADDITIONAL_MATCHED_OUTSIDE_CALLERS:
         raise AssertionError("Expected incoming caller set changed")
     for caller, site, target in expected_calls:
         instructions = decode_range(image, decoder, site, 5)
@@ -322,7 +323,7 @@ def main():
         f"{TOTAL_INSTRUCTIONS} instructions across 13 functions. Both fresh Ghidra "
         "projects, mapped call edges, and byte-match records agree; 41 direct "
         "calls target matched functions, and one unresolved indirect tail jump "
-        "remains. Two additional setter callers are unmatched and out of scope."
+        "remains. Its two additional setter callers are byte-matched in the CForce slice."
     )
 
 

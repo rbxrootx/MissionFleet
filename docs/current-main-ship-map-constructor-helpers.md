@@ -38,7 +38,10 @@ The constructor calls these functions at `0x588E07CF`, `0x588E0954`,
 `0x588E0BDA`, `0x588E121B`, `0x588E1233`, `0x588E18B1`, `0x588E18F1`,
 `0x588E3364`, `0x588E3533`, `0x588E356E`, and `0x588E3A19`. The setter
 `FUN_588C08A0` also has calls from `FUN_5877A060` and `FUN_5877A650`; those
-callers are not byte-matched and their behavior is outside this slice.
+callers are now byte-matched members of the RTTI-backed
+[`CForce` primary-vftable closure](current-main-cforce-primary-vtable.md).
+Their callsites at `0x5877A0ED` and `0x5877A7FB` remain outside this
+constructor-helper slice.
 
 All 13 emitted instruction streams match the installed mapped `Main.dll` at
 100% under ObjDiff 3.8.0; 77 relocations were checked across the functions with

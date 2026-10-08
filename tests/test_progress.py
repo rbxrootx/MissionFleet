@@ -76,6 +76,7 @@ from tools import (
     verify_current_main_enable_child_event,
     verify_current_main_58776f20_state_refresh,
     verify_current_main_cpannel_force_level_up,
+    verify_current_main_cforce_primary_vtable,
 )
 
 
@@ -88,8 +89,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_836)
-        self.assertEqual(self.report["measures"]["matched_code"], "2823492")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_854)
+        self.assertEqual(self.report["measures"]["matched_code"], "2830933")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -100,8 +101,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_703)
-        self.assertEqual(current["measures"]["matched_code"], "1850074")
+        self.assertEqual(current["measures"]["matched_functions"], 2_721)
+        self.assertEqual(current["measures"]["matched_code"], "1857515")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -244,6 +245,18 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("0x13C", evidence["5886FFC0"]["uncertainty"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_cpannel_force_level_up.main()
+
+    def test_cforce_primary_vtable_has_exact_rtti_slot_and_call_closure(self):
+        addresses = build_current_main_verifications.MAIN_CFORCE_PRIMARY_VTABLE_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE
+        self.assertEqual(len(addresses), 18)
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("CForce RTTI primary", evidence["5877BE60"]["called_by"])
+        self.assertIn("+0x10", evidence["5877BE60"]["called_by"])
+        self.assertIn("0x587E3D1D", evidence["5881ED70"]["called_by"])
+        self.assertIn("31 indirect", evidence["58779D10"]["uncertainty"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_cforce_primary_vtable.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES
@@ -530,7 +543,7 @@ class ProgressReportTests(unittest.TestCase):
         )
         self.assertEqual(set(addresses), set(evidence))
         self.assertIn("FUN_588E05C0", evidence["588DAD30"]["called_by"])
-        self.assertIn("not byte-matched", evidence["588C08A0"]["called_by"])
+        self.assertIn("now byte-matched", evidence["588C08A0"]["called_by"])
         self.assertIn("indirect tail", evidence["5897D180"]["behavior"])
         verify_current_main_ship_map_constructor_helpers.main()
 
@@ -1375,6 +1388,19 @@ class ProgressReportTests(unittest.TestCase):
             build_current_main_verifications
             .MAIN_CPANNEL_FORCE_LEVEL_UP_EVIDENCE
         )
+        self.assertEqual(set(addresses), set(evidence))
+        for address in addresses:
+            self.assertTrue(evidence[address]["called_by"], address)
+            self.assertTrue(evidence[address]["behavior"], address)
+            self.assertTrue(evidence[address]["uncertainty"], address)
+
+    def test_cforce_primary_vtable_closure_has_evidence_for_every_member(self):
+        addresses = build_current_main_verifications.MAIN_CFORCE_PRIMARY_VTABLE_ADDRESSES
+        self.assertEqual(len(addresses), 18)
+        self.assertIn("5877C8F0", addresses)
+        self.assertIn("5877BE60", addresses)
+        self.assertIn("5877A650", addresses)
+        evidence = build_current_main_verifications.MAIN_CFORCE_PRIMARY_VTABLE_EVIDENCE
         self.assertEqual(set(addresses), set(evidence))
         for address in addresses:
             self.assertTrue(evidence[address]["called_by"], address)
