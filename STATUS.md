@@ -6,8 +6,8 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 9,082 verified matches
-totaling 2,902,664 bytes (21.3890% by functions, 27.7228% by bytes), each at
+identified code bytes across six report units. There are 9,098 verified matches
+totaling 2,906,519 bytes (21.4267% by functions, 27.7596% by bytes), each at
 100.0% under objdiff 3.8.0. The aircraft fire-control handler and primary
 vtable remainder cover 14 exact functions / 5,496 bytes; their RTTI, matched
 constructor path, all primary slots, call edges, and unresolved dispatch details
@@ -33,6 +33,12 @@ functions / 6,867 bytes across 25 Ghidra ranges. Its six open slots, 118 direct
 transfers to internal or matched code, matched constructor path, and 62 dynamic
 call sites are checked in
 [the subsystem note](docs/current-main-panel-item-manager.md). The
+installed client's RTTI-backed `CPannelCommunicatorConfigHarborInfoTab` event
+closure adds 16 exact functions / 3,855 bytes across 17 Ghidra ranges. Its seven
+primary slots, matched constructor route, 62 direct calls to internal or
+matched code, and 46 unresolved indirect calls are checked in
+[the subsystem note](docs/current-main-communicator-config-harbor-info-tab-event-closure.md).
+The
 five chat command routes add 2,146 exact bytes;
 their original strings, caller paths, shared sender helper, and unresolved
 protocol meaning are documented in
@@ -68,8 +74,8 @@ constructor path, and open reset-caller boundary are checked in
 indirect calls and one indirect jump remain unresolved.
 The installed client's tax/investment control
 refresh adds 19 exact functions / 1,196 bytes, tied to matched message cases
-`0x8002311B` and `0x8002312B`; four other calling functions and the visual
-result remain unresolved. See
+`0x8002311B` and `0x8002312B`; all four other direct callers are now
+byte-matched, while the visual result remains untested. See
 [the refresh evidence](docs/current-main-tax-investment-refresh.md). The
 `CPannelCommunicatorMemo` constructor adds one exact 1,081-byte function. The
 matched config-memo constructor calls it at `0x588403F3`; the 340-instruction

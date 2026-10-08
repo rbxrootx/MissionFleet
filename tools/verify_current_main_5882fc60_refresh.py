@@ -213,7 +213,7 @@ def main():
     callers = {int(edge[0], 16) for edge in incoming}
     expected_callers = {0x5882F270, 0x5882F350, 0x58830010, 0x58830280, 0x588C4210}
     expected_matched_callers = {
-        0x58830010, 0x58830280, 0x588C4210,
+        0x5882F270, 0x5882F350, 0x58830010, 0x58830280, 0x588C4210,
     }
     if callers != expected_callers or callers & matched != expected_matched_callers:
         raise AssertionError("The matched and unmatched incoming caller boundary changed")
@@ -254,7 +254,7 @@ def main():
         f"{total_bytes} bytes in {len(manifest)} fresh Ghidra ranges; "
         f"{checked_instructions} instructions and {len(edge_tuples)} direct "
         "transfers checked; the matched dispatcher and paired update-event "
-        "handlers plus two remaining unmatched callers recorded"
+        "handlers and HarborInfoTab display callers are byte-matched"
     )
 
 

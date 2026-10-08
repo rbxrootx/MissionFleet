@@ -494895,6 +494895,1565 @@
         "behavior": "Returns false after calling observed helpers with identifier 0x36 when the input object's field +0x0C equals 100; otherwise returns true.",
         "uncertainty": "The native fields, item-record schema, UI labels and images beyond the observed localization keys, and the meanings of the event and identifier values remain unresolved. Across the closure, 62 indirect call sites remain unresolved, including dynamic child virtual calls. Static call sites do not establish successful server transactions or rendered behavior. The source preserves the mapped x86 instruction stream for byte matching; no emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "58786490",
+      "name": "FUN_58786490",
+      "size": 14,
+      "symbol": "_FUN_58786490",
+      "source": "src/client-current/Main/FUN_58786490.cpp",
+      "source_sha256": "5e98acb6f5373f240c30066de0b8bbf3a471e114c7f1384d2683df2da5fe05ba",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786490",
+          "size": 14,
+          "symbol": "_FUN_58786490_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786490 / HarborInfoTab selected-record value accessor",
+        "called_by": "Reached from HarborInfoTab event and control handlers. Both fresh Ghidra exports agree on its 14-byte body and call edges.",
+        "behavior": "Returns the DWORD at +0x0C of the object stored at receiver +8, or zero when that pointer is null.",
+        "uncertainty": "The object type and meanings of its +8 and +0x0C fields are unknown; the accessor's role is inferred only from its callers."
+      }
+    },
+    {
+      "address": "58786590",
+      "name": "FUN_58786590",
+      "size": 80,
+      "symbol": "_FUN_58786590",
+      "source": "src/client-current/Main/FUN_58786590.cpp",
+      "source_sha256": "f95188acdd937420c4a4dcf1f9bd8b9a97458a9f55275cf20b4e9fd814ac223c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58786590",
+          "size": 80,
+          "symbol": "_FUN_58786590_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5898CB38",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58786590 / HarborInfoTab scaled first-value helper",
+        "called_by": "Called by HarborInfoTab display updater FUN_5882F270. Both fresh exports agree on the 80-byte body and direct-call edge.",
+        "behavior": "When the object at receiver +8 exists, multiplies the supplied value by that object's DWORD at +0x48 and a global floating-point scale, rounds the result, and returns it; otherwise returns zero.",
+        "uncertainty": "The nested object schema, units, scale, and rounding purpose are not established by this method."
+      }
+    },
+    {
+      "address": "587865E0",
+      "name": "FUN_587865e0",
+      "size": 80,
+      "symbol": "_FUN_587865e0",
+      "source": "src/client-current/Main/FUN_587865e0.cpp",
+      "source_sha256": "4d5c5e49bd0148ccd984f6de52dbe28fd5c32ca73d1fe1ab650f56dc88342c04",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587865E0",
+          "size": 80,
+          "symbol": "_FUN_587865e0_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "5898D788",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5898CB38",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587865E0 / HarborInfoTab scaled second-value helper",
+        "called_by": "Called by HarborInfoTab display updater FUN_5882F350. Both fresh exports agree on the 80-byte body and direct-call edge.",
+        "behavior": "Mirrors FUN_58786590 but reads the nested DWORD at +0x4C before multiplying by the supplied value and global floating-point scale.",
+        "uncertainty": "The nested object schema, units, scale, and rounding purpose are not established by this method."
+      }
+    },
+    {
+      "address": "587B9E30",
+      "name": "FUN_587b9e30",
+      "size": 46,
+      "symbol": "_FUN_587b9e30",
+      "source": "src/client-current/Main/FUN_587b9e30.cpp",
+      "source_sha256": "ff1330f6ce112af14ada7cf846be0700a778d2e69723b7af8361e6c14986880f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B9E30",
+          "size": 46,
+          "symbol": "_FUN_587b9e30_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B9E30 / HarborInfoTab message 0x8001311B wrapper",
+        "called_by": "Called by the HarborInfoTab primary event handler FUN_5882F5E0; both fresh Ghidra exports confirm the direct edge.",
+        "behavior": "Invokes a function pointer from global 0x5898C1A8 with the supplied third argument and zero, then passes the result and observed message identifier 0x8001311B to FUN_58970C70.",
+        "uncertainty": "The callback, parameter schema, protocol meaning of 0x8001311B, and server-side result remain unknown."
+      }
+    },
+    {
+      "address": "587B9E60",
+      "name": "FUN_587b9e60",
+      "size": 46,
+      "symbol": "_FUN_587b9e60",
+      "source": "src/client-current/Main/FUN_587b9e60.cpp",
+      "source_sha256": "f073fda2de587cf726b64df81ae1c995554dfdad6f10b7644100b92dac891561",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587B9E60",
+          "size": 46,
+          "symbol": "_FUN_587b9e60_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587B9E60 / HarborInfoTab message 0x8001311C wrapper",
+        "called_by": "Called by the HarborInfoTab primary event handler FUN_5882F5E0; both fresh Ghidra exports confirm the direct edge.",
+        "behavior": "Uses the function pointer at global 0x5898C1A8, then calls FUN_58970C70 with observed message identifier 0x8001311C and the resulting values.",
+        "uncertainty": "The callback, parameter schema, protocol meaning of 0x8001311C, and server-side result remain unknown."
+      }
+    },
+    {
+      "address": "587BA020",
+      "name": "FUN_587ba020",
+      "size": 43,
+      "symbol": "_FUN_587ba020",
+      "source": "src/client-current/Main/FUN_587ba020.cpp",
+      "source_sha256": "24f85ed0bbdc4bab70d52094350dc4f68e237f15009c6e7de22ef85a93265176",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587BA020",
+          "size": 43,
+          "symbol": "_FUN_587ba020_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 34,
+              "target_address": "58970C70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587BA020 / HarborInfoTab message 0x8001312A wrapper",
+        "called_by": "Called by HarborInfoTab helper FUN_5882F050, which is reached from the primary event handler FUN_5882F5E0.",
+        "behavior": "Invokes the function pointer at global 0x5898C1A8, then calls FUN_58970C70 with observed message identifier 0x8001312A and the supplied values.",
+        "uncertainty": "The callback, parameter schema, protocol meaning of 0x8001312A, and server-side result remain unknown."
+      }
+    },
+    {
+      "address": "5882BEF0",
+      "name": "FUN_5882bef0",
+      "size": 65,
+      "symbol": "_FUN_5882bef0",
+      "source": "src/client-current/Main/FUN_5882bef0.cpp",
+      "source_sha256": "27afca4971542b159f4dd1b8ae6f648de6ddb0946a13b7c71a7f4f2498d8b3f8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882BEF0",
+          "size": 65,
+          "symbol": "_FUN_5882bef0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882BEF0 / HarborInfoTab rectangle containment test",
+        "called_by": "Called twice by HarborInfoTab input handler FUN_5882F430; both fresh Ghidra exports agree on the body and call sites.",
+        "behavior": "Returns one when the supplied four-DWORD rectangle contains the rectangle formed from receiver offsets +4, +8, +0x14, +0x18, +0x1C, and +0x20; otherwise returns zero.",
+        "uncertainty": "The coordinate units, rectangle field names, and precise caller interaction semantics are unknown."
+      }
+    },
+    {
+      "address": "5882EC80",
+      "name": "FUN_5882ec80",
+      "size": 776,
+      "symbol": "_FUN_5882ec80",
+      "source": "src/client-current/Main/FUN_5882ec80.cpp",
+      "source_sha256": "64fe87063e4e2209436e48f46460d6dd256d2db089468f962e522f72b444ce78",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882EC80",
+          "size": 776,
+          "symbol": "_FUN_5882ec80_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58988648",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5899E000",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 754,
+              "target_address": "58902C10",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882EC80 / HarborInfoTab child cleanup",
+        "called_by": "Called by deleting-destructor wrapper FUN_5882F250. Both fresh Ghidra exports agree on the exact 776-byte body.",
+        "behavior": "Installs the HarborInfoTab vtable, invokes each non-null child pointer's virtual deleting destructor, clears the stored child pointers, and finishes through matched helper FUN_58902C10.",
+        "uncertainty": "Child ownership, individual child roles, and runtime destruction order effects are not validated in the emulator."
+      }
+    },
+    {
+      "address": "5882EF90",
+      "name": "FUN_5882ef90",
+      "size": 111,
+      "symbol": "_FUN_5882ef90",
+      "source": "src/client-current/Main/FUN_5882ef90.cpp",
+      "source_sha256": "1462285539bbdb23dbc785713afa625662050d4a177a140fa31c80287c1f901a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882EF90",
+          "size": 111,
+          "symbol": "_FUN_5882ef90_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882EF90 / HarborInfoTab state reset",
+        "called_by": "Occupies primary-vtable slot +0x04 at 0x5899E000; both fresh Ghidra exports identify its exact body and vtable reference.",
+        "behavior": "When receiver state bits at +0x24 equal 0x500, changes them to 0x100 with observed flag bits set, then clears counters and state bytes at +0xC0, +0xC4, +0xC8, +0xCC, +0xD0, +0x21C, +0x21D, and +0x220.",
+        "uncertainty": "The semantic names of the states, flags, and reset fields are unresolved."
+      }
+    },
+    {
+      "address": "5882F050",
+      "name": "FUN_5882f050",
+      "size": 42,
+      "symbol": "_FUN_5882f050",
+      "source": "src/client-current/Main/FUN_5882f050.cpp",
+      "source_sha256": "ae2a081d9e4dbee33db733d49026b1c989cd2215b23dd350e42bc8acb21013da",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F050",
+          "size": 42,
+          "symbol": "_FUN_5882f050_segment_00",
+          "relocations": [
+            {
+              "offset": 3,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 23,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "587BA020",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F050 / HarborInfoTab conditional message dispatch",
+        "called_by": "Reached from the HarborInfoTab primary event handler; both fresh Ghidra exports confirm its calls to FUN_58786480 and FUN_587BA020.",
+        "behavior": "When global state 0x58A0B4A8 equals six and receiver +0x6C is nonzero, derives a value from its argument and passes it to the observed 0x8001312A message wrapper.",
+        "uncertainty": "The global state meaning, receiver field role, and message protocol outcome are unknown."
+      }
+    },
+    {
+      "address": "5882F250",
+      "name": "FUN_5882f250",
+      "size": 27,
+      "symbol": "_FUN_5882f250",
+      "source": "src/client-current/Main/FUN_5882f250.cpp",
+      "source_sha256": "3e285083b80f9f9f44a94a432ad3ae6700e26c089076cff3b525857c3bbacb4f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F250",
+          "size": 21,
+          "symbol": "_FUN_5882f250_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "5882EC80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5882F268",
+          "size": 6,
+          "symbol": "_FUN_5882f250_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F250 / HarborInfoTab deleting-destructor wrapper",
+        "called_by": "Occupies primary-vtable slot +0x00 at 0x5899E000. Its two Ghidra body ranges total 27 bytes and agree across both fresh exports.",
+        "behavior": "Calls HarborInfoTab child cleanup FUN_5882EC80 and calls matched FUN_5897CC42 with the receiver when the deleting flag's low bit is set; otherwise returns the receiver.",
+        "uncertainty": "The caller's ownership policy and deleting-flag contract are not recovered."
+      }
+    },
+    {
+      "address": "5882F270",
+      "name": "FUN_5882f270",
+      "size": 222,
+      "symbol": "_FUN_5882f270",
+      "source": "src/client-current/Main/FUN_5882f270.cpp",
+      "source_sha256": "9fe5159241db3ddedba19d98ca09dc79d09510307b675982ccd060838446d490",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F270",
+          "size": 222,
+          "symbol": "_FUN_5882f270_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "58786590",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5890BC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58785F90",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F270 / HarborInfoTab first-value display update",
+        "called_by": "Called by the HarborInfoTab event handler after changes to the field at +0xCC; both fresh exports confirm the call graph.",
+        "behavior": "Scales an input through FUN_58786590, stores the result at +0xC4, and selects observed resource offsets +0x8C0 or +0x940 under numeric thresholds, updating child fields at +0xE8 and +0xB8.",
+        "uncertainty": "The metric, thresholds, resource labels, display colors, and nested field meanings are not established."
+      }
+    },
+    {
+      "address": "5882F350",
+      "name": "FUN_5882f350",
+      "size": 222,
+      "symbol": "_FUN_5882f350",
+      "source": "src/client-current/Main/FUN_5882f350.cpp",
+      "source_sha256": "c73de42b0e74a23f5f012378242790952bbb539d2fefc650b08cd111002c23fb",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F350",
+          "size": 222,
+          "symbol": "_FUN_5882f350_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58907360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 25,
+              "target_address": "587865E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5890BC40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 48,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "58785FC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "58A246A4",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F350 / HarborInfoTab second-value display update",
+        "called_by": "Called by the HarborInfoTab event handler after changes to the field at +0xD0; both fresh exports confirm the call graph.",
+        "behavior": "Scales an input through FUN_587865E0, stores the result at +0xC8, and selects observed resource offsets +0x8C0 or +0x940 under numeric thresholds, updating child fields at +0xF4 and +0xBC.",
+        "uncertainty": "The metric, thresholds, resource labels, display colors, and nested field meanings are not established."
+      }
+    },
+    {
+      "address": "5882F430",
+      "name": "FUN_5882f430",
+      "size": 256,
+      "symbol": "_FUN_5882f430",
+      "source": "src/client-current/Main/FUN_5882f430.cpp",
+      "source_sha256": "a6c6a14b40f5ff2d1357ad1828a6b3c6a379363e60bf888d34bf4c7ea6637ba0",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F430",
+          "size": 256,
+          "symbol": "_FUN_5882f430_segment_00",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5882F528",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "5882F528",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 86,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "5882F528",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58A284C8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5882BEF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 187,
+              "target_address": "5882BEF0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F430 / HarborInfoTab child input handler",
+        "called_by": "Occupies primary-vtable slot +0x10 at 0x5899E000; its two direct calls to FUN_5882BEF0 are present in both fresh Ghidra exports.",
+        "behavior": "Forwards input to children through virtual slot +0x10. For the observed event code 0x20A, it checks a selected-record value and rectangle containment, then dispatches through this object's virtual slot +0x18 using child pointers.",
+        "uncertainty": "The event structure, child-control identities, virtual callback contracts, and coordinate units remain unresolved."
+      }
+    },
+    {
+      "address": "5882F530",
+      "name": "FUN_5882f530",
+      "size": 172,
+      "symbol": "_FUN_5882f530",
+      "source": "src/client-current/Main/FUN_5882f530.cpp",
+      "source_sha256": "ecb6f165b7e105fbda64b414277caeb0758f2eaf9a584d672dc13e31abd482ae",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F530",
+          "size": 172,
+          "symbol": "_FUN_5882f530_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "5882F5D6",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F530 / HarborInfoTab state transition and child dispatch",
+        "called_by": "Occupies primary-vtable slot +0x0C at 0x5899E000; both fresh Ghidra exports record its body and vtable references.",
+        "behavior": "When receiver flag bit two is set, changes state 0x100 to 0x200 or 0x400 to 0x500 and adjusts flag bits, then walks the linked child list and invokes each child's virtual slot +0x0C.",
+        "uncertainty": "State names, flag meanings, child-list schema, and child callback effects are unresolved."
+      }
+    },
+    {
+      "address": "5882F5E0",
+      "name": "FUN_5882f5e0",
+      "size": 1653,
+      "symbol": "_FUN_5882f5e0",
+      "source": "src/client-current/Main/FUN_5882f5e0.cpp",
+      "source_sha256": "0c768b2c676441b5985b63da2775f04f21e9d0c62aeb23bccd142b66159fcbf9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5882F5E0",
+          "size": 1653,
+          "symbol": "_FUN_5882f5e0_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5882FA8F",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "587B9E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "587B9E10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5882F6FF",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 177,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5882F763",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 221,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 247,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "587B0900",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 311,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 325,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 333,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 365,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 372,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 399,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 406,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "5882F84E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 442,
+              "target_address": "58A24580",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 448,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "5882F82C",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 467,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 475,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 486,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 495,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 501,
+              "target_address": "5882F6DB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 509,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 515,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 524,
+              "target_address": "58A0B4A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 530,
+              "target_address": "5882F763",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 538,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 544,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 550,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 566,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 573,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 600,
+              "target_address": "5876BAF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 607,
+              "target_address": "58764D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 637,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 643,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 651,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 657,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 679,
+              "target_address": "5882F270",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 711,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 722,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 728,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 735,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 740,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 746,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 752,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 772,
+              "target_address": "5882F270",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 802,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 808,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 815,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 820,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 826,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 832,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 852,
+              "target_address": "5882F350",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 884,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 895,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 901,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 908,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 913,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 919,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 925,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 945,
+              "target_address": "5882F350",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 970,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 977,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 985,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 991,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 997,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1008,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1037,
+              "target_address": "587C8190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1047,
+              "target_address": "5899E038",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1061,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1067,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1074,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1082,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1088,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1094,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1105,
+              "target_address": "58A245B4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1134,
+              "target_address": "587C8190",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1144,
+              "target_address": "5899E01C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1150,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1171,
+              "target_address": "587C8910",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1206,
+              "target_address": "5882FB5E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1219,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1241,
+              "target_address": "5882F050",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1264,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1270,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1276,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1302,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1308,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1314,
+              "target_address": "587B9E30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1333,
+              "target_address": "5882FC4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1341,
+              "target_address": "58786490",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1347,
+              "target_address": "58A0B4A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1353,
+              "target_address": "5882F80A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1379,
+              "target_address": "58786480",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1385,
+              "target_address": "58A24588",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1391,
+              "target_address": "587B9E60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1413,
+              "target_address": "5882FBE9",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1424,
+              "target_address": "587C8850",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1430,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1436,
+              "target_address": "5899E038",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1444,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1472,
+              "target_address": "5882F270",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1494,
+              "target_address": "587C8850",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1500,
+              "target_address": "5899E01C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1530,
+              "target_address": "5882F350",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1564,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1591,
+              "target_address": "58A0B468",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1609,
+              "target_address": "58990CD4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1615,
+              "target_address": "5898C030",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1621,
+              "target_address": "58A24820",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1638,
+              "target_address": "587626C0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5882F5E0 / HarborInfoTab primary event handler",
+        "called_by": "Occupies primary-vtable slot +0x18 at 0x5899E000. Fresh Ghidra pseudocode and two independent body/edge exports agree on its 1,653-byte body and direct-call closure.",
+        "behavior": "Routes observed event kinds 2, 3, 62000, and 0xF235. It gates actions on global selection and state fields, increments or decrements the values displayed by FUN_5882F270/FUN_5882F350, uses message keys MESSAGESTRING__PRODUCTIVITY and MESSAGESTRING__DEFSTRENGTH, and presents MESSAGESTRING__NOT_ENOUGH_CREDIT on one event path. Its message wrappers carry identifiers 0x8001311B, 0x8001311C, and 0x8001312A.",
+        "uncertainty": "Formal event names, control identities, state/global field semantics, protocol identifier meanings, callback targets, and server-authoritative outcomes remain unknown. No emulator runtime test was performed."
+      }
     }
   ]
 }

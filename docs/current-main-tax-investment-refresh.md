@@ -18,10 +18,13 @@ The byte-verified `FUN_588C4210` message handler reaches this updater at
 `0x588C4DB0` in case `0x8002311B` and at `0x588C4EC4` in case `0x8002312B`.
 Fresh Ghidra references also show 18 calls from four other functions:
 `FUN_5882F270`, `FUN_5882F350`, `FUN_58830010`, and `FUN_58830280`. The paired
-update-event handlers `FUN_58830010` and `FUN_58830280` are now byte-matched;
-their dispatcher cases, observed field updates, and direct-call boundary are
-documented in [`current-main-tax-investment-update-events.md`](current-main-tax-investment-update-events.md).
-The other two callers remain unmatched, so their trigger paths are still open.
+update-event handlers `FUN_58830010` and `FUN_58830280` are byte-matched; the
+HarborInfoTab closure now byte-matches `FUN_5882F270` and `FUN_5882F350` as
+well. Their display-update behavior is checked in
+[`current-main-communicator-config-harbor-info-tab-event-closure.md`](current-main-communicator-config-harbor-info-tab-event-closure.md).
+All four incoming callers are now byte-verified. The paired update-event
+handlers' dispatcher cases and observed field updates are documented in
+[`current-main-tax-investment-update-events.md`](current-main-tax-investment-update-events.md).
 The closure's 33 outbound direct calls resolve to functions that are already
 byte-verified.
 

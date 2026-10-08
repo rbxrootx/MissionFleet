@@ -513,6 +513,13 @@ MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES = (
     "588316E0", "58831E20",
 )
 ADDRESSES += MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES
+MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES = (
+    "58786490", "58786590", "587865E0", "587B9E30", "587B9E60",
+    "587BA020", "5882BEF0", "5882EC80", "5882EF90", "5882F050",
+    "5882F250", "5882F270", "5882F350", "5882F430", "5882F530",
+    "5882F5E0",
+)
+ADDRESSES += MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     # Fixed-address calls emitted literally by the original eight-slot
@@ -955,6 +962,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_HARBOR_INFO_TAB_ADDRESSES)
 MAIN_MANAGE_FLEET_TAB_ADDRESSES = (
     "58835900", "58834680", "58835370", "58834120", "58834C00",
 )
@@ -20618,6 +20626,272 @@ MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE)
+
+MAIN_COMMUNICATOR_HARBOR_INFO_TAB_EVIDENCE = {
+    "58786490": {
+        "name_in_analysis": "FUN_58786490 / HarborInfoTab selected-record value accessor",
+        "called_by": (
+            "Reached from HarborInfoTab event and control handlers. Both fresh "
+            "Ghidra exports agree on its 14-byte body and call edges."
+        ),
+        "behavior": (
+            "Returns the DWORD at +0x0C of the object stored at receiver +8, "
+            "or zero when that pointer is null."
+        ),
+        "uncertainty": (
+            "The object type and meanings of its +8 and +0x0C fields are "
+            "unknown; the accessor's role is inferred only from its callers."
+        ),
+    },
+    "58786590": {
+        "name_in_analysis": "FUN_58786590 / HarborInfoTab scaled first-value helper",
+        "called_by": (
+            "Called by HarborInfoTab display updater FUN_5882F270. Both fresh "
+            "exports agree on the 80-byte body and direct-call edge."
+        ),
+        "behavior": (
+            "When the object at receiver +8 exists, multiplies the supplied "
+            "value by that object's DWORD at +0x48 and a global floating-point "
+            "scale, rounds the result, and returns it; otherwise returns zero."
+        ),
+        "uncertainty": (
+            "The nested object schema, units, scale, and rounding purpose are "
+            "not established by this method."
+        ),
+    },
+    "587865E0": {
+        "name_in_analysis": "FUN_587865E0 / HarborInfoTab scaled second-value helper",
+        "called_by": (
+            "Called by HarborInfoTab display updater FUN_5882F350. Both fresh "
+            "exports agree on the 80-byte body and direct-call edge."
+        ),
+        "behavior": (
+            "Mirrors FUN_58786590 but reads the nested DWORD at +0x4C before "
+            "multiplying by the supplied value and global floating-point scale."
+        ),
+        "uncertainty": (
+            "The nested object schema, units, scale, and rounding purpose are "
+            "not established by this method."
+        ),
+    },
+    "587B9E30": {
+        "name_in_analysis": "FUN_587B9E30 / HarborInfoTab message 0x8001311B wrapper",
+        "called_by": (
+            "Called by the HarborInfoTab primary event handler FUN_5882F5E0; "
+            "both fresh Ghidra exports confirm the direct edge."
+        ),
+        "behavior": (
+            "Invokes a function pointer from global 0x5898C1A8 with the supplied "
+            "third argument and zero, then passes the result and observed "
+            "message identifier 0x8001311B to FUN_58970C70."
+        ),
+        "uncertainty": (
+            "The callback, parameter schema, protocol meaning of 0x8001311B, "
+            "and server-side result remain unknown."
+        ),
+    },
+    "587B9E60": {
+        "name_in_analysis": "FUN_587B9E60 / HarborInfoTab message 0x8001311C wrapper",
+        "called_by": (
+            "Called by the HarborInfoTab primary event handler FUN_5882F5E0; "
+            "both fresh Ghidra exports confirm the direct edge."
+        ),
+        "behavior": (
+            "Uses the function pointer at global 0x5898C1A8, then calls "
+            "FUN_58970C70 with observed message identifier 0x8001311C and the "
+            "resulting values."
+        ),
+        "uncertainty": (
+            "The callback, parameter schema, protocol meaning of 0x8001311C, "
+            "and server-side result remain unknown."
+        ),
+    },
+    "587BA020": {
+        "name_in_analysis": "FUN_587BA020 / HarborInfoTab message 0x8001312A wrapper",
+        "called_by": (
+            "Called by HarborInfoTab helper FUN_5882F050, which is reached "
+            "from the primary event handler FUN_5882F5E0."
+        ),
+        "behavior": (
+            "Invokes the function pointer at global 0x5898C1A8, then calls "
+            "FUN_58970C70 with observed message identifier 0x8001312A and the "
+            "supplied values."
+        ),
+        "uncertainty": (
+            "The callback, parameter schema, protocol meaning of 0x8001312A, "
+            "and server-side result remain unknown."
+        ),
+    },
+    "5882BEF0": {
+        "name_in_analysis": "FUN_5882BEF0 / HarborInfoTab rectangle containment test",
+        "called_by": (
+            "Called twice by HarborInfoTab input handler FUN_5882F430; both "
+            "fresh Ghidra exports agree on the body and call sites."
+        ),
+        "behavior": (
+            "Returns one when the supplied four-DWORD rectangle contains the "
+            "rectangle formed from receiver offsets +4, +8, +0x14, +0x18, "
+            "+0x1C, and +0x20; otherwise returns zero."
+        ),
+        "uncertainty": (
+            "The coordinate units, rectangle field names, and precise caller "
+            "interaction semantics are unknown."
+        ),
+    },
+    "5882EC80": {
+        "name_in_analysis": "FUN_5882EC80 / HarborInfoTab child cleanup",
+        "called_by": (
+            "Called by deleting-destructor wrapper FUN_5882F250. Both fresh "
+            "Ghidra exports agree on the exact 776-byte body."
+        ),
+        "behavior": (
+            "Installs the HarborInfoTab vtable, invokes each non-null child "
+            "pointer's virtual deleting destructor, clears the stored child "
+            "pointers, and finishes through matched helper FUN_58902C10."
+        ),
+        "uncertainty": (
+            "Child ownership, individual child roles, and runtime destruction "
+            "order effects are not validated in the emulator."
+        ),
+    },
+    "5882EF90": {
+        "name_in_analysis": "FUN_5882EF90 / HarborInfoTab state reset",
+        "called_by": (
+            "Occupies primary-vtable slot +0x04 at 0x5899E000; both fresh "
+            "Ghidra exports identify its exact body and vtable reference."
+        ),
+        "behavior": (
+            "When receiver state bits at +0x24 equal 0x500, changes them to "
+            "0x100 with observed flag bits set, then clears counters and state "
+            "bytes at +0xC0, +0xC4, +0xC8, +0xCC, +0xD0, +0x21C, +0x21D, and +0x220."
+        ),
+        "uncertainty": (
+            "The semantic names of the states, flags, and reset fields are "
+            "unresolved."
+        ),
+    },
+    "5882F050": {
+        "name_in_analysis": "FUN_5882F050 / HarborInfoTab conditional message dispatch",
+        "called_by": (
+            "Reached from the HarborInfoTab primary event handler; both fresh "
+            "Ghidra exports confirm its calls to FUN_58786480 and FUN_587BA020."
+        ),
+        "behavior": (
+            "When global state 0x58A0B4A8 equals six and receiver +0x6C is "
+            "nonzero, derives a value from its argument and passes it to the "
+            "observed 0x8001312A message wrapper."
+        ),
+        "uncertainty": (
+            "The global state meaning, receiver field role, and message "
+            "protocol outcome are unknown."
+        ),
+    },
+    "5882F250": {
+        "name_in_analysis": "FUN_5882F250 / HarborInfoTab deleting-destructor wrapper",
+        "called_by": (
+            "Occupies primary-vtable slot +0x00 at 0x5899E000. Its two Ghidra "
+            "body ranges total 27 bytes and agree across both fresh exports."
+        ),
+        "behavior": (
+            "Calls HarborInfoTab child cleanup FUN_5882EC80 and calls matched "
+            "FUN_5897CC42 with the receiver when the deleting flag's low bit "
+            "is set; otherwise returns the receiver."
+        ),
+        "uncertainty": (
+            "The caller's ownership policy and deleting-flag contract are not "
+            "recovered."
+        ),
+    },
+    "5882F270": {
+        "name_in_analysis": "FUN_5882F270 / HarborInfoTab first-value display update",
+        "called_by": (
+            "Called by the HarborInfoTab event handler after changes to the "
+            "field at +0xCC; both fresh exports confirm the call graph."
+        ),
+        "behavior": (
+            "Scales an input through FUN_58786590, stores the result at +0xC4, "
+            "and selects observed resource offsets +0x8C0 or +0x940 under "
+            "numeric thresholds, updating child fields at +0xE8 and +0xB8."
+        ),
+        "uncertainty": (
+            "The metric, thresholds, resource labels, display colors, and "
+            "nested field meanings are not established."
+        ),
+    },
+    "5882F350": {
+        "name_in_analysis": "FUN_5882F350 / HarborInfoTab second-value display update",
+        "called_by": (
+            "Called by the HarborInfoTab event handler after changes to the "
+            "field at +0xD0; both fresh exports confirm the call graph."
+        ),
+        "behavior": (
+            "Scales an input through FUN_587865E0, stores the result at +0xC8, "
+            "and selects observed resource offsets +0x8C0 or +0x940 under "
+            "numeric thresholds, updating child fields at +0xF4 and +0xBC."
+        ),
+        "uncertainty": (
+            "The metric, thresholds, resource labels, display colors, and "
+            "nested field meanings are not established."
+        ),
+    },
+    "5882F430": {
+        "name_in_analysis": "FUN_5882F430 / HarborInfoTab child input handler",
+        "called_by": (
+            "Occupies primary-vtable slot +0x10 at 0x5899E000; its two direct "
+            "calls to FUN_5882BEF0 are present in both fresh Ghidra exports."
+        ),
+        "behavior": (
+            "Forwards input to children through virtual slot +0x10. For the "
+            "observed event code 0x20A, it checks a selected-record value and "
+            "rectangle containment, then dispatches through this object's "
+            "virtual slot +0x18 using child pointers."
+        ),
+        "uncertainty": (
+            "The event structure, child-control identities, virtual callback "
+            "contracts, and coordinate units remain unresolved."
+        ),
+    },
+    "5882F530": {
+        "name_in_analysis": "FUN_5882F530 / HarborInfoTab state transition and child dispatch",
+        "called_by": (
+            "Occupies primary-vtable slot +0x0C at 0x5899E000; both fresh "
+            "Ghidra exports record its body and vtable references."
+        ),
+        "behavior": (
+            "When receiver flag bit two is set, changes state 0x100 to 0x200 "
+            "or 0x400 to 0x500 and adjusts flag bits, then walks the linked "
+            "child list and invokes each child's virtual slot +0x0C."
+        ),
+        "uncertainty": (
+            "State names, flag meanings, child-list schema, and child callback "
+            "effects are unresolved."
+        ),
+    },
+    "5882F5E0": {
+        "name_in_analysis": "FUN_5882F5E0 / HarborInfoTab primary event handler",
+        "called_by": (
+            "Occupies primary-vtable slot +0x18 at 0x5899E000. Fresh Ghidra "
+            "pseudocode and two independent body/edge exports agree on its "
+            "1,653-byte body and direct-call closure."
+        ),
+        "behavior": (
+            "Routes observed event kinds 2, 3, 62000, and 0xF235. It gates "
+            "actions on global selection and state fields, increments or "
+            "decrements the values displayed by FUN_5882F270/FUN_5882F350, "
+            "uses message keys MESSAGESTRING__PRODUCTIVITY and "
+            "MESSAGESTRING__DEFSTRENGTH, and presents "
+            "MESSAGESTRING__NOT_ENOUGH_CREDIT on one event path. Its message "
+            "wrappers carry identifiers 0x8001311B, 0x8001311C, and 0x8001312A."
+        ),
+        "uncertainty": (
+            "Formal event names, control identities, state/global field "
+            "semantics, protocol identifier meanings, callback targets, and "
+            "server-authoritative outcomes remain unknown. No emulator "
+            "runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_HARBOR_INFO_TAB_EVIDENCE)
 
 MAIN_COMMUNICATOR_MANAGE_FLEET_TAB_EVIDENCE = {
     "58835900": {
