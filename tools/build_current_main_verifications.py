@@ -1048,6 +1048,22 @@ OPCONVOY_BATTLE_UPDATE_ADDRESSES = (
     "587F2AD0", "58800FD0", "58896200", "588D6D50",
 )
 ADDRESSES += OPCONVOY_BATTLE_UPDATE_ADDRESSES
+
+MAIN_CFC_MANAGER_FILE_INTEGRITY_ADDRESSES = (
+    "58771F50", "58771F60", "58771F70", "587720E0", "58772120",
+    "58772160", "58772210", "58772380", "58772470", "587724D0",
+    "58772530", "58772580", "587725E0", "58772640", "587726A0",
+    "58772720", "587727B0", "587728A0", "587728D0", "58772900",
+    "58772940", "58772980", "58772AC0", "58772B10", "58772B40",
+    "58772B70", "58772BA0", "58772BD0", "58772CB0", "58772CF0",
+    "58772D30", "58772DC0", "58772E50", "58772E80", "58772EB0",
+    "58773090", "58773360", "58773640", "58773660", "58773730",
+    "58773950", "58773A00", "58773AB0", "587741B0", "587743E0",
+    "587745A0", "58774A90", "58774BC0", "58774C40", "58774C90",
+    "58774D50", "58774DB0", "5897CE92", "5897CE9E", "5897CEA4",
+    "5897CEAA", "5897CEB0", "5897CEB6", "5897CEC2",
+)
+ADDRESSES += MAIN_CFC_MANAGER_FILE_INTEGRITY_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(OPCONVOY_BATTLE_UPDATE_ADDRESSES)
 
 PAGEFIGHT_TICK_PROGRESS_ADDRESSES = (
@@ -16837,6 +16853,134 @@ MAIN_BATTLE_ROOM_UPDATE_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_BATTLE_ROOM_UPDATE_EVIDENCE)
+
+MAIN_CFC_MANAGER_FILE_INTEGRITY_EVIDENCE = {
+    "58771F50": {
+        "name_in_analysis": "FUN_58771f50 / CFCManager lifetime counter increment",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x04 (0x5899635C).",
+        "behavior": "Increments the global CFCManager lifetime counter at 0x589CFC9C.",
+        "uncertainty": "The full ownership policy and all callers of the counter remain unresolved.",
+    },
+    "58771F60": {
+        "name_in_analysis": "FUN_58771f60 / CFCManager field setter",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x0C (0x58996364).",
+        "behavior": "Stores its second argument at receiver +4 and returns zero.",
+        "uncertainty": "The field's semantic type and role remain unresolved.",
+    },
+    "58772BD0": {
+        "name_in_analysis": "FUN_58772bd0 / CFCManager release path",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x08 (0x58996360).",
+        "behavior": "Decrements the global lifetime counter. On its zero transition it emits the observed `FCModule is Safe-Released` log, releases the 0x108-byte record list, and clears the shared manager pointer.",
+        "uncertainty": "The global object and version fields are not semantically named; virtual release effects are not followed here.",
+    },
+    "58773640": {
+        "name_in_analysis": "FUN_58773640 / CFCManager deleting wrapper",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x10 (0x58996368).",
+        "behavior": "Calls the manager cleanup routine and transfers to the runtime deleting-call thunk when the low flag bit is set.",
+        "uncertainty": "The runtime deallocation behavior is represented by its exact matched boundary thunk.",
+    },
+    "58772EB0": {
+        "name_in_analysis": "FUN_58772eb0 / CFCManager constructor",
+        "called_by": "Ghidra identifies this body as the CFCManager constructor; its vtable pointer resolves to the RTTI-backed table at 0x58996358.",
+        "behavior": "Installs `CFCManager::vftable`, initializes base fields, validates and releases embedded 0x108-byte and 0x118-byte record arrays, and clears the observed child storage.",
+        "uncertainty": "The record field schemas and semantic meanings of the manager's stored pointers remain unresolved.",
+    },
+    "58774A90": {
+        "name_in_analysis": "FUN_58774a90 / CFCManager file-filter selection",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C40 entering this helper; the helper dispatches through the manager's child callback.",
+        "behavior": "Selects the observed filters `*.*`, `*.Data`, `*.cxf`, `*.cmf`, `*.kmf`, or `*.spr` from receiver flags and forwards the selection through the child callback.",
+        "uncertainty": "The flag names, exact child-control contract, and user-visible selection behavior remain unresolved.",
+    },
+    "58774C40": {
+        "name_in_analysis": "FUN_58774c40 / CFCManager filter-dialog route",
+        "called_by": "The callback adapter FUN_58774D50 references this routine for the observed flag-2 path.",
+        "behavior": "Dispatches child event kind 4, sets the observed 0x32 state, and enters the file-filter selection helper.",
+        "uncertainty": "The event value and 0x32 state have no recovered symbolic names.",
+    },
+    "58774C90": {
+        "name_in_analysis": "FUN_58774c90 / CFCManager resource-integrity scan",
+        "called_by": "The callback adapter FUN_58774D50 has an installed-image data reference to this function at 0x58774D6B; the manager event handler routes into that adapter.",
+        "behavior": "Dispatches child event kind 4, branches on receiver flags 0x10000 and 0x20000, then runs the observed list/scan helpers FUN_587743E0 and FUN_587745A0 before dispatching child event kind 8.",
+        "uncertainty": "The caller that opens this manager in the full client flow is not verified; flag meanings and runtime UI effects remain unresolved.",
+    },
+    "58774D50": {
+        "name_in_analysis": "FUN_58774d50 / CFCManager callback adapter",
+        "called_by": "Both the manager's data reference at 0x58774D6B and a neighboring setup reference at 0x58774D91 identify this callback address.",
+        "behavior": "Dispatches flag 1 through the observed file-integrity scan route and flag 2 through the filter-dialog route.",
+        "uncertainty": "The producer and full lifetime of the callback record remain unresolved.",
+    },
+    "58774DB0": {
+        "name_in_analysis": "FUN_58774db0 / CFCManager event handler",
+        "called_by": "Installed-image RTTI identifies this address as slot +0x00 of the five-entry CFCManager vtable at 0x58996358.",
+        "behavior": "Processes the manager's observed status/list path, updates a 100-unit state, then invokes the callback adapter when the file check is enabled; otherwise it releases the shared file handle.",
+        "uncertainty": "The resource protocol, status fields, and route from a live screen into this vtable are not fully recovered.",
+    },
+    "587745A0": {
+        "name_in_analysis": "FUN_587745a0 / CFCManager file comparison and status update",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C90 invoking this helper as part of its scan path.",
+        "behavior": "Walks 0x118-byte records, builds `%s\\%s` paths, opens the referenced file, and emits the exact `Invalid File`, `modified`, or `OK` status formats with a current/total count.",
+        "uncertainty": "The record schema, comparison source, and UI callback semantics remain unresolved.",
+    },
+    "587743E0": {
+        "name_in_analysis": "FUN_587743e0 / CFCManager resource-list update",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C90 invoking this helper immediately before file comparison.",
+        "behavior": "Branches on receiver flag bits 0x40000 and 0x80000 and passes list entries through the manager's 0x108-byte record storage helpers.",
+        "uncertainty": "The input list format, field meanings, and flag semantics remain unresolved.",
+    },
+    "58773AB0": {
+        "name_in_analysis": "FUN_58773ab0 / CFCManager update-list reader",
+        "called_by": "Fresh Ghidra call edges place this helper in the filter and update-manager routes.",
+        "behavior": "Reads update-list records and branches on the observed `#message`, `#zipurl`, and `#listurl` keys before adding records through the manager's 0x108-byte storage path.",
+        "uncertainty": "The remote protocol and the semantic meaning of its fields and return codes remain unresolved.",
+    },
+    "587741B0": {
+        "name_in_analysis": "FUN_587741b0 / CFCManager tagged-list parser",
+        "called_by": "Fresh Ghidra call edges place this helper in the same file/update record workflow.",
+        "behavior": "Parses the observed `#message`, `#zipurl`, and `#listurl` tags and constructs 0x108-byte records with observed selector values 0, 2, or 4.",
+        "uncertainty": "The record selectors, source encoding, and network/update behavior are not established by this parser alone.",
+    },
+    "58773090": {
+        "name_in_analysis": "FUN_58773090 / 0x108-byte record-array insertion",
+        "called_by": "Fresh Ghidra call edges show this routine used by CFCManager record-list helpers.",
+        "behavior": "Reserves and inserts 0x108-byte records, growing storage when needed and shifting the adjacent records to preserve the observed order.",
+        "uncertainty": "The 0x108-byte record schema and ordering policy remain unresolved.",
+    },
+    "58773360": {
+        "name_in_analysis": "FUN_58773360 / 0x118-byte file-record insertion",
+        "called_by": "Fresh Ghidra call edges show this routine used by the CFCManager file-comparison list.",
+        "behavior": "Reserves and inserts 0x118-byte records, growing storage when needed and shifting the adjacent records to preserve the observed order.",
+        "uncertainty": "The 0x118-byte file-record schema and ordering policy remain unresolved.",
+    },
+}
+
+_CFC_MANAGER_DEFAULT_EVIDENCE = {
+    "called_by": (
+        "Fresh Ghidra call-edge exports place this body in the direct-call closure "
+        "of the installed-image CFCManager vtable at 0x58996358. The exact class "
+        "closure and body ranges are recorded in the focused verifier and "
+        "docs/current-main-cfc-manager-file-integrity.md."
+    ),
+    "behavior": (
+        "The exact mapped instruction body is emitted from the two fresh Ghidra "
+        "body-range exports. Its helper-level semantic role is left unnamed until "
+        "the original instructions establish more than its direct-call position "
+        "in the CFCManager workflow."
+    ),
+    "uncertainty": (
+        "The helper's field meanings, resource schema, and any indirect callback "
+        "targets remain unresolved. No runtime emulator result was observed."
+    ),
+}
+for _cfc_address in MAIN_CFC_MANAGER_FILE_INTEGRITY_ADDRESSES:
+    _cfc_detail = MAIN_CFC_MANAGER_FILE_INTEGRITY_EVIDENCE.get(_cfc_address, {})
+    EVIDENCE[_cfc_address] = {
+        "name_in_analysis": _cfc_detail.get(
+            "name_in_analysis", f"FUN_{_cfc_address.lower()} / CFCManager closure helper"
+        ),
+        "called_by": _cfc_detail.get("called_by", _CFC_MANAGER_DEFAULT_EVIDENCE["called_by"]),
+        "behavior": _cfc_detail.get("behavior", _CFC_MANAGER_DEFAULT_EVIDENCE["behavior"]),
+        "uncertainty": _cfc_detail.get("uncertainty", _CFC_MANAGER_DEFAULT_EVIDENCE["uncertainty"]),
+    }
 
 
 if __name__ == "__main__":

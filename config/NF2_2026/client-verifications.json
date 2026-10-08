@@ -456022,6 +456022,4505 @@
         "behavior": "Deleting-destructor wrapper for CFCCH_PannelTutorialMessage: calls FUN_58770930 and frees the object when the low bit of the deletion flag is set.",
         "uncertainty": "The three vtable identities and slot pointers are tied to the installed Main.dll RTTI records; body boundaries and direct transfers are checked against two agreeing Ghidra exports. Field names, meanings of state masks, localized string contents, runtime rendering, and dynamic child-vtable targets remain unverified. FUN_587B6D10/FUN_587B6D80 have incoming callers outside this tutorial flow. No emulator runtime or visual test was performed."
       }
+    },
+    {
+      "address": "58771F50",
+      "name": "FUN_58771f50",
+      "size": 12,
+      "symbol": "_FUN_58771f50",
+      "source": "src/client-current/Main/FUN_58771f50.cpp",
+      "source_sha256": "6d3fcb4b1fc7e9cf08d915bdff4929c33d45e4a0a731c993b51e27e573a96c1f",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771F50",
+          "size": 12,
+          "symbol": "_FUN_58771f50_segment_00",
+          "relocations": [
+            {
+              "offset": 1,
+              "target_address": "589CFC9C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 7,
+              "target_address": "589CFC9C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771f50 / CFCManager lifetime counter increment",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x04 (0x5899635C).",
+        "behavior": "Increments the global CFCManager lifetime counter at 0x589CFC9C.",
+        "uncertainty": "The full ownership policy and all callers of the counter remain unresolved."
+      }
+    },
+    {
+      "address": "58771F60",
+      "name": "FUN_58771f60",
+      "size": 12,
+      "symbol": "_FUN_58771f60",
+      "source": "src/client-current/Main/FUN_58771f60.cpp",
+      "source_sha256": "b3f0a1e171c53d0895843ecba856bcd38486ed12e858a1e4085afd5a598d1092",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771F60",
+          "size": 12,
+          "symbol": "_FUN_58771f60_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771f60 / CFCManager field setter",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x0C (0x58996364).",
+        "behavior": "Stores its second argument at receiver +4 and returns zero.",
+        "uncertainty": "The field's semantic type and role remain unresolved."
+      }
+    },
+    {
+      "address": "58771F70",
+      "name": "FUN_58771f70",
+      "size": 275,
+      "symbol": "_FUN_58771f70",
+      "source": "src/client-current/Main/FUN_58771f70.cpp",
+      "source_sha256": "5a1b38a1507bb9c2dbca11d5be530499090438ae8775e3b160e40d417fe86c1c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58771F70",
+          "size": 275,
+          "symbol": "_FUN_58771f70_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "5898C414",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 96,
+              "target_address": "5898C418",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 131,
+              "target_address": "5898C41C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "5897CE98",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 173,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 179,
+              "target_address": "5898C420",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 222,
+              "target_address": "5898C410",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 239,
+              "target_address": "5898C424",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 265,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58771f70 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587720E0",
+      "name": "FUN_587720e0",
+      "size": 51,
+      "symbol": "_FUN_587720e0",
+      "source": "src/client-current/Main/FUN_587720e0.cpp",
+      "source_sha256": "0740d627fde227ba9c8fcafd429fc6d77ec965b9da2ee205bb1b3313b58af6de",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587720E0",
+          "size": 21,
+          "symbol": "_FUN_587720e0_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "58772100",
+          "size": 30,
+          "symbol": "_FUN_587720e0_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587720e0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772120",
+      "name": "FUN_58772120",
+      "size": 51,
+      "symbol": "_FUN_58772120",
+      "source": "src/client-current/Main/FUN_58772120.cpp",
+      "source_sha256": "3b03b063f463bb422e820d2763c5954688ee526b9b214126b8a98352ce05c332",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772120",
+          "size": 21,
+          "symbol": "_FUN_58772120_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "58772140",
+          "size": 30,
+          "symbol": "_FUN_58772120_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772120 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772160",
+      "name": "FUN_58772160",
+      "size": 164,
+      "symbol": "_FUN_58772160",
+      "source": "src/client-current/Main/FUN_58772160.cpp",
+      "source_sha256": "7029ac92fa8015e5c001afaa972d56a62a221eb00bf47f8b55c56af8a2504c97",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772160",
+          "size": 41,
+          "symbol": "_FUN_58772160_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "58772190",
+          "size": 123,
+          "symbol": "_FUN_58772160_segment_01",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772160 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772210",
+      "name": "FUN_58772210",
+      "size": 153,
+      "symbol": "_FUN_58772210",
+      "source": "src/client-current/Main/FUN_58772210.cpp",
+      "source_sha256": "b9e014e801388755edb4cf92227875b708d951d99eba8c0f4879f97c33f1d25a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772210",
+          "size": 153,
+          "symbol": "_FUN_58772210_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 38,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 67,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772210 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772380",
+      "name": "FUN_58772380",
+      "size": 229,
+      "symbol": "_FUN_58772380",
+      "source": "src/client-current/Main/FUN_58772380.cpp",
+      "source_sha256": "cfdf251a38056b00469d8d709fc4a034b6164eb0382ffb47bcdf2c754beca077",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772380",
+          "size": 229,
+          "symbol": "_FUN_58772380_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "5898C158",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "589962E0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 84,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 121,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 142,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 183,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 201,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772380 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772470",
+      "name": "FUN_58772470",
+      "size": 91,
+      "symbol": "_FUN_58772470",
+      "source": "src/client-current/Main/FUN_58772470.cpp",
+      "source_sha256": "8b7ce20a9092a1196a7b4c117774096ffd548b938268b5ac7fc8dd0f3639ac25",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772470",
+          "size": 91,
+          "symbol": "_FUN_58772470_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "589ABD70",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898CA90",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772470 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587724D0",
+      "name": "FUN_587724d0",
+      "size": 91,
+      "symbol": "_FUN_587724d0",
+      "source": "src/client-current/Main/FUN_587724d0.cpp",
+      "source_sha256": "5d9751afcc20beb3e52a764631c5daab7f9ca3d9653c179714626d136ed1306d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587724D0",
+          "size": 91,
+          "symbol": "_FUN_587724d0_segment_00",
+          "relocations": [
+            {
+              "offset": 21,
+              "target_address": "5897CC4E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "589ABD70",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 82,
+              "target_address": "5898CA90",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "5897CC78",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587724d0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772530",
+      "name": "FUN_58772530",
+      "size": 80,
+      "symbol": "_FUN_58772530",
+      "source": "src/client-current/Main/FUN_58772530.cpp",
+      "source_sha256": "3fea96a679012af25a8ef54ac105e0a911ef57b0e32e5861157c4f52bd408303",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772530",
+          "size": 80,
+          "symbol": "_FUN_58772530_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772530 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772580",
+      "name": "FUN_58772580",
+      "size": 84,
+      "symbol": "_FUN_58772580",
+      "source": "src/client-current/Main/FUN_58772580.cpp",
+      "source_sha256": "6cb9baf290585e61813cc38340c65553eb1b4dd204bec7c30a82019850d1f160",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772580",
+          "size": 57,
+          "symbol": "_FUN_58772580_segment_00",
+          "relocations": []
+        },
+        {
+          "address": "587725C0",
+          "size": 27,
+          "symbol": "_FUN_58772580_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772580 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587725E0",
+      "name": "FUN_587725e0",
+      "size": 92,
+      "symbol": "_FUN_587725e0",
+      "source": "src/client-current/Main/FUN_587725e0.cpp",
+      "source_sha256": "5380b5b4f599573a962710f6cc03bb740c5232f30771fb3e8a2b87202e2b3c42",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587725E0",
+          "size": 92,
+          "symbol": "_FUN_587725e0_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "587720E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587725e0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772640",
+      "name": "FUN_58772640",
+      "size": 94,
+      "symbol": "_FUN_58772640",
+      "source": "src/client-current/Main/FUN_58772640.cpp",
+      "source_sha256": "cb6bd6b762cd3f2b397faa037d619227f206e102477cc7966bf1f9af57c1b10d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772640",
+          "size": 94,
+          "symbol": "_FUN_58772640_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "58772120",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772640 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587726A0",
+      "name": "FUN_587726a0",
+      "size": 119,
+      "symbol": "_FUN_587726a0",
+      "source": "src/client-current/Main/FUN_587726a0.cpp",
+      "source_sha256": "71d2185373459c3deacda883aa47d1a0b577fe8049cbe5232421d9d8da12ce9d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587726A0",
+          "size": 119,
+          "symbol": "_FUN_587726a0_segment_00",
+          "relocations": [
+            {
+              "offset": 25,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 90,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 98,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 108,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587726a0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772720",
+      "name": "FUN_58772720",
+      "size": 130,
+      "symbol": "_FUN_58772720",
+      "source": "src/client-current/Main/FUN_58772720.cpp",
+      "source_sha256": "8fdedb45affdbdf14d337ce4049d46249a3f9668816c3c60007319b6a8124565",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772720",
+          "size": 130,
+          "symbol": "_FUN_58772720_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 16,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772720 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587727B0",
+      "name": "FUN_587727b0",
+      "size": 239,
+      "symbol": "_FUN_587727b0",
+      "source": "src/client-current/Main/FUN_587727b0.cpp",
+      "source_sha256": "bdc12b6c11526c37a5269c0da8d1b281c6766725cab33d51feeb9508a335558b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587727B0",
+          "size": 239,
+          "symbol": "_FUN_587727b0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5897CE60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 11,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 52,
+              "target_address": "5897CE56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 63,
+              "target_address": "58772883",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "5897CE56",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "587727F4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 226,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587727b0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587728A0",
+      "name": "FUN_587728a0",
+      "size": 43,
+      "symbol": "_FUN_587728a0",
+      "source": "src/client-current/Main/FUN_587728a0.cpp",
+      "source_sha256": "9410691807243d20cd87d82cc325fedef070e9b6e60e97f05170f6a7884e57b3",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587728A0",
+          "size": 43,
+          "symbol": "_FUN_587728a0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587728a0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "587728D0",
+      "name": "FUN_587728d0",
+      "size": 43,
+      "symbol": "_FUN_587728d0",
+      "source": "src/client-current/Main/FUN_587728d0.cpp",
+      "source_sha256": "a14e9438ffb39c299ed18269746db53a83fad61cac4d91298f24f6bfbbf393c5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587728D0",
+          "size": 43,
+          "symbol": "_FUN_587728d0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587728d0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772900",
+      "name": "FUN_58772900",
+      "size": 53,
+      "symbol": "_FUN_58772900",
+      "source": "src/client-current/Main/FUN_58772900.cpp",
+      "source_sha256": "60f0318c883f5c820df08ce5ad610932ae153cc1778a79e5cb75c3428d570a59",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772900",
+          "size": 53,
+          "symbol": "_FUN_58772900_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772900 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772940",
+      "name": "FUN_58772940",
+      "size": 53,
+      "symbol": "_FUN_58772940",
+      "source": "src/client-current/Main/FUN_58772940.cpp",
+      "source_sha256": "7fea05f4fc74252407629a300ece873bf1a1af0af9057be28bf4876d87ea319c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772940",
+          "size": 53,
+          "symbol": "_FUN_58772940_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772940 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772980",
+      "name": "FUN_58772980",
+      "size": 312,
+      "symbol": "_FUN_58772980",
+      "source": "src/client-current/Main/FUN_58772980.cpp",
+      "source_sha256": "b6aba14ba90455c92006a78e69d9cf11793a6d1eed0aa4b9ad4af881b8e10ad6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772980",
+          "size": 312,
+          "symbol": "_FUN_58772980_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "58772AA1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 59,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "587726A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 138,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 168,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 228,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "5898C17C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "587729C1",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772980 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772AC0",
+      "name": "FUN_58772ac0",
+      "size": 69,
+      "symbol": "_FUN_58772ac0",
+      "source": "src/client-current/Main/FUN_58772ac0.cpp",
+      "source_sha256": "dc8c0e25169bed803bce74d892e9a3fd93e748db6f28330f6fde2b6ea3a06f75",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772AC0",
+          "size": 69,
+          "symbol": "_FUN_58772ac0_segment_00",
+          "relocations": [
+            {
+              "offset": 6,
+              "target_address": "5898D68C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 19,
+              "target_address": "5897CE4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "587727B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 56,
+              "target_address": "5897CE3E",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772ac0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772B10",
+      "name": "FUN_58772b10",
+      "size": 43,
+      "symbol": "_FUN_58772b10",
+      "source": "src/client-current/Main/FUN_58772b10.cpp",
+      "source_sha256": "93abc3c67ff68854ff2d94f3281d2e39e6d11c53ff9106280f88dc30c3124eca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772B10",
+          "size": 43,
+          "symbol": "_FUN_58772b10_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "587725E0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772b10 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772B40",
+      "name": "FUN_58772b40",
+      "size": 43,
+      "symbol": "_FUN_58772b40",
+      "source": "src/client-current/Main/FUN_58772b40.cpp",
+      "source_sha256": "7436194cab50ae33393421ba33e075b283d58d9b23ecd2ae429557c66400f12c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772B40",
+          "size": 43,
+          "symbol": "_FUN_58772b40_segment_00",
+          "relocations": [
+            {
+              "offset": 35,
+              "target_address": "58772640",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772b40 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772B70",
+      "name": "FUN_58772b70",
+      "size": 48,
+      "symbol": "_FUN_58772b70",
+      "source": "src/client-current/Main/FUN_58772b70.cpp",
+      "source_sha256": "dea9eb3e57aeede51b12c39fc16ed786dc18b9357f9b6fd4b31b44bae15ad898",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772B70",
+          "size": 48,
+          "symbol": "_FUN_58772b70_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772b70 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772BA0",
+      "name": "FUN_58772ba0",
+      "size": 48,
+      "symbol": "_FUN_58772ba0",
+      "source": "src/client-current/Main/FUN_58772ba0.cpp",
+      "source_sha256": "ffa2f4fbd9ce0c1579445287027b55bd3732470f4b4696d82911f616b468ef9d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772BA0",
+          "size": 48,
+          "symbol": "_FUN_58772ba0_segment_00",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772ba0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772BD0",
+      "name": "FUN_58772bd0",
+      "size": 214,
+      "symbol": "_FUN_58772bd0",
+      "source": "src/client-current/Main/FUN_58772bd0.cpp",
+      "source_sha256": "60f6d79c6fb1c90ad1f273f3a63abbc1a45ff25d558e96191603ed207bfed7d5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772BD0",
+          "size": 214,
+          "symbol": "_FUN_58772bd0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 30,
+              "target_address": "58772980",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 36,
+              "target_address": "589CFC9C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 43,
+              "target_address": "58772C8E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "5898C158",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "58996318",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 106,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 157,
+              "target_address": "58772210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 203,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772bd0 / CFCManager release path",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x08 (0x58996360).",
+        "behavior": "Decrements the global lifetime counter. On its zero transition it emits the observed `FCModule is Safe-Released` log, releases the 0x108-byte record list, and clears the shared manager pointer.",
+        "uncertainty": "The global object and version fields are not semantically named; virtual release effects are not followed here."
+      }
+    },
+    {
+      "address": "58772CB0",
+      "name": "FUN_58772cb0",
+      "size": 61,
+      "symbol": "_FUN_58772cb0",
+      "source": "src/client-current/Main/FUN_58772cb0.cpp",
+      "source_sha256": "dc6eea007b6d4c617f4491ec5b6f21072ad517c0dc3f5d71548c5ffff5c44d8b",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772CB0",
+          "size": 61,
+          "symbol": "_FUN_58772cb0_segment_00",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58772B70",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772cb0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772CF0",
+      "name": "FUN_58772cf0",
+      "size": 61,
+      "symbol": "_FUN_58772cf0",
+      "source": "src/client-current/Main/FUN_58772cf0.cpp",
+      "source_sha256": "f6faa1c5c5ced4c42acba5247643f6c7d00d1a96885e979e37f7fd0ab4c1ac32",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772CF0",
+          "size": 61,
+          "symbol": "_FUN_58772cf0_segment_00",
+          "relocations": [
+            {
+              "offset": 38,
+              "target_address": "58772BA0",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772cf0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772D30",
+      "name": "FUN_58772d30",
+      "size": 141,
+      "symbol": "_FUN_58772d30",
+      "source": "src/client-current/Main/FUN_58772d30.cpp",
+      "source_sha256": "03acee2032ee58b1a036b436623476c551d8dd78e0df646b312d9aa9e69d8a34",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772D30",
+          "size": 141,
+          "symbol": "_FUN_58772d30_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58772530",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772d30 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772DC0",
+      "name": "FUN_58772dc0",
+      "size": 141,
+      "symbol": "_FUN_58772dc0",
+      "source": "src/client-current/Main/FUN_58772dc0.cpp",
+      "source_sha256": "76fde584ccf7fb9f9a3802d91e34bd1b9883841944a957d1afbfee096de03737",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772DC0",
+          "size": 141,
+          "symbol": "_FUN_58772dc0_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 85,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 123,
+              "target_address": "58772580",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772dc0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772E50",
+      "name": "FUN_58772e50",
+      "size": 44,
+      "symbol": "_FUN_58772e50",
+      "source": "src/client-current/Main/FUN_58772e50.cpp",
+      "source_sha256": "0c15f13b4958758d8211219906aab9cfa3facdc996998f214362ded5b2dbb82c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772E50",
+          "size": 44,
+          "symbol": "_FUN_58772e50_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58772900",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772e50 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772E80",
+      "name": "FUN_58772e80",
+      "size": 44,
+      "symbol": "_FUN_58772e80",
+      "source": "src/client-current/Main/FUN_58772e80.cpp",
+      "source_sha256": "c8b07a47e5f7f44c60e343e2f4027cdc97168ec3e09cab929eab7c48a3fefae9",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772E80",
+          "size": 44,
+          "symbol": "_FUN_58772e80_segment_00",
+          "relocations": [
+            {
+              "offset": 34,
+              "target_address": "58772940",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772e80 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58772EB0",
+      "name": "FUN_58772eb0",
+      "size": 335,
+      "symbol": "_FUN_58772eb0",
+      "source": "src/client-current/Main/FUN_58772eb0.cpp",
+      "source_sha256": "7fc30f3f62ed04ab07411d49e7bec84504d2d1c464175664b5a296dd71861930",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58772EB0",
+          "size": 33,
+          "symbol": "_FUN_58772eb0_segment_00",
+          "relocations": [
+            {
+              "offset": 16,
+              "target_address": "58996358",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 29,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58772ED7",
+          "size": 285,
+          "symbol": "_FUN_58772eb0_segment_01",
+          "relocations": [
+            {
+              "offset": 12,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "58772D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 94,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58772D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "58772D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 213,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "58772DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 281,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58772FF9",
+          "size": 17,
+          "symbol": "_FUN_58772eb0_segment_02",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58772eb0 / CFCManager constructor",
+        "called_by": "Ghidra identifies this body as the CFCManager constructor; its vtable pointer resolves to the RTTI-backed table at 0x58996358.",
+        "behavior": "Installs `CFCManager::vftable`, initializes base fields, validates and releases embedded 0x108-byte and 0x118-byte record arrays, and clears the observed child storage.",
+        "uncertainty": "The record field schemas and semantic meanings of the manager's stored pointers remain unresolved."
+      }
+    },
+    {
+      "address": "58773090",
+      "name": "FUN_58773090",
+      "size": 695,
+      "symbol": "_FUN_58773090",
+      "source": "src/client-current/Main/FUN_58773090.cpp",
+      "source_sha256": "966df29f4860601a170b46e58052919571430a366f683ba2703f29a06af5d8c7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773090",
+          "size": 392,
+          "symbol": "_FUN_58773090_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5897F0D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 105,
+              "target_address": "58773338",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 159,
+              "target_address": "58773251",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 194,
+              "target_address": "58772470",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "58772CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 298,
+              "target_address": "58772900",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "58772900",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 388,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5877321B",
+          "size": 33,
+          "symbol": "_FUN_58773090_segment_01",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "58773338",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58773251",
+          "size": 270,
+          "symbol": "_FUN_58773090_segment_02",
+          "relocations": [
+            {
+              "offset": 75,
+              "target_address": "58772E50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "58772CB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "587728A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "58772E50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 205,
+              "target_address": "58772B10",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 224,
+              "target_address": "587728A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 254,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773090 / 0x108-byte record-array insertion",
+        "called_by": "Fresh Ghidra call edges show this routine used by CFCManager record-list helpers.",
+        "behavior": "Reserves and inserts 0x108-byte records, growing storage when needed and shifting the adjacent records to preserve the observed order.",
+        "uncertainty": "The 0x108-byte record schema and ordering policy remain unresolved."
+      }
+    },
+    {
+      "address": "58773360",
+      "name": "FUN_58773360",
+      "size": 711,
+      "symbol": "_FUN_58773360",
+      "source": "src/client-current/Main/FUN_58773360.cpp",
+      "source_sha256": "1abecb11205daf87800a04c7174e46e0f5809fd4bf4fc60e77f2f915b9f46261",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773360",
+          "size": 401,
+          "symbol": "_FUN_58773360_segment_00",
+          "relocations": [
+            {
+              "offset": 17,
+              "target_address": "5897F100",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 32,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 107,
+              "target_address": "58773618",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "588F6660",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 162,
+              "target_address": "5877352A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 197,
+              "target_address": "587724D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 266,
+              "target_address": "58772CF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 302,
+              "target_address": "58772940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 352,
+              "target_address": "58772940",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 397,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "587734F4",
+          "size": 33,
+          "symbol": "_FUN_58773360_segment_01",
+          "relocations": [
+            {
+              "offset": 29,
+              "target_address": "58773618",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "5877352A",
+          "size": 277,
+          "symbol": "_FUN_58773360_segment_02",
+          "relocations": [
+            {
+              "offset": 80,
+              "target_address": "58772E80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "58772CF0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 158,
+              "target_address": "587728D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 192,
+              "target_address": "58772E80",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 212,
+              "target_address": "58772B40",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "587728D0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 261,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773360 / 0x118-byte file-record insertion",
+        "called_by": "Fresh Ghidra call edges show this routine used by the CFCManager file-comparison list.",
+        "behavior": "Reserves and inserts 0x118-byte records, growing storage when needed and shifting the adjacent records to preserve the observed order.",
+        "uncertainty": "The 0x118-byte file-record schema and ordering policy remain unresolved."
+      }
+    },
+    {
+      "address": "58773640",
+      "name": "FUN_58773640",
+      "size": 27,
+      "symbol": "_FUN_58773640",
+      "source": "src/client-current/Main/FUN_58773640.cpp",
+      "source_sha256": "b5f1599407eb727f36d7abe3e9ab5723676f217eaecb79298ed1981e73bdbbe7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773640",
+          "size": 21,
+          "symbol": "_FUN_58773640_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "58772EB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 17,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58773658",
+          "size": 6,
+          "symbol": "_FUN_58773640_segment_01",
+          "relocations": []
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773640 / CFCManager deleting wrapper",
+        "called_by": "Installed-image RTTI places this entry at CFCManager vtable slot +0x10 (0x58996368).",
+        "behavior": "Calls the manager cleanup routine and transfers to the runtime deleting-call thunk when the low flag bit is set.",
+        "uncertainty": "The runtime deallocation behavior is represented by its exact matched boundary thunk."
+      }
+    },
+    {
+      "address": "58773660",
+      "name": "FUN_58773660",
+      "size": 205,
+      "symbol": "_FUN_58773660",
+      "source": "src/client-current/Main/FUN_58773660.cpp",
+      "source_sha256": "08b1542273cf82e5b67e6f6d30869a1874f3cb8d73f9d206ea019e8a9c1c5a0a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773660",
+          "size": 205,
+          "symbol": "_FUN_58773660_segment_00",
+          "relocations": [
+            {
+              "offset": 47,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58773090",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773660 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58773730",
+      "name": "FUN_58773730",
+      "size": 209,
+      "symbol": "_FUN_58773730",
+      "source": "src/client-current/Main/FUN_58773730.cpp",
+      "source_sha256": "3406bed0d87371c7b6d66ba61ffb577f4b08d590e89496127183328b9eeb4fe8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773730",
+          "size": 209,
+          "symbol": "_FUN_58773730_segment_00",
+          "relocations": [
+            {
+              "offset": 49,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 117,
+              "target_address": "58773360",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773730 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58773950",
+      "name": "FUN_58773950",
+      "size": 161,
+      "symbol": "_FUN_58773950",
+      "source": "src/client-current/Main/FUN_58773950.cpp",
+      "source_sha256": "f43f9fdf11fb34777eaf477730270d6204138cf500272e19825865ecec37685d",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773950",
+          "size": 161,
+          "symbol": "_FUN_58773950_segment_00",
+          "relocations": [
+            {
+              "offset": 97,
+              "target_address": "58772B70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 148,
+              "target_address": "58773660",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773950 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58773A00",
+      "name": "FUN_58773a00",
+      "size": 168,
+      "symbol": "_FUN_58773a00",
+      "source": "src/client-current/Main/FUN_58773a00.cpp",
+      "source_sha256": "c62c93e9e1a4c7a22ba62325071ae784e5add8906a5a15b5cfd26c99deb85495",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773A00",
+          "size": 168,
+          "symbol": "_FUN_58773a00_segment_00",
+          "relocations": [
+            {
+              "offset": 102,
+              "target_address": "58772BA0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 133,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 154,
+              "target_address": "58773730",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773a00 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58773AB0",
+      "name": "FUN_58773ab0",
+      "size": 1773,
+      "symbol": "_FUN_58773ab0",
+      "source": "src/client-current/Main/FUN_58773ab0.cpp",
+      "source_sha256": "9224426d8f23e6a1eaa44c18e1606cfdf4dda3dd6331b145eadca6e9ba9c02d6",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58773AB0",
+          "size": 1373,
+          "symbol": "_FUN_58773ab0_segment_00",
+          "relocations": [
+            {
+              "offset": 9,
+              "target_address": "5897F18B",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 27,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "58772720",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 91,
+              "target_address": "58774182",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 101,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "5897CEB6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 124,
+              "target_address": "5897CEB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "588FFDB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 168,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 217,
+              "target_address": "58772D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 227,
+              "target_address": "589963B4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "5897CEAA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "58773C8A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 251,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 256,
+              "target_address": "589963B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "589963AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 312,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 339,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 350,
+              "target_address": "5897CEA4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 369,
+              "target_address": "589963B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "589963AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 425,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 432,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 452,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 463,
+              "target_address": "5897CEA4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 476,
+              "target_address": "5897CE9E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 525,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 548,
+              "target_address": "58773AB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 558,
+              "target_address": "5897CEB6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 618,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 639,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 665,
+              "target_address": "58772D30",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 688,
+              "target_address": "5897CEAA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 704,
+              "target_address": "5897152E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 719,
+              "target_address": "5877413A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 725,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 730,
+              "target_address": "589963B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 746,
+              "target_address": "589963AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 764,
+              "target_address": "58773F46",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 791,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 813,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 837,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 848,
+              "target_address": "5898D68C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 866,
+              "target_address": "5897CE4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 889,
+              "target_address": "587727B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 901,
+              "target_address": "5897CE3E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 930,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 936,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 963,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 991,
+              "target_address": "58996394",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1000,
+              "target_address": "589CFCA4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1065,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1072,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1087,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1108,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1114,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1138,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1144,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1150,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1160,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1170,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1181,
+              "target_address": "5897CEA4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1192,
+              "target_address": "5877413A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1201,
+              "target_address": "589963B0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1216,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1221,
+              "target_address": "589963AC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1236,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1241,
+              "target_address": "5899638C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1256,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1265,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1281,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1290,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1306,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1311,
+              "target_address": "58996384",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 1326,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1337,
+              "target_address": "58774124",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1364,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58774010",
+          "size": 340,
+          "symbol": "_FUN_58773ab0_segment_01",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 35,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 64,
+              "target_address": "5898D0D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 87,
+              "target_address": "5898D0D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "58772AC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "5899636C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 210,
+              "target_address": "589CFCA4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 262,
+              "target_address": "58772210",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 283,
+              "target_address": "5897CEA4",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 294,
+              "target_address": "58773F60",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 310,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 319,
+              "target_address": "5897CE9E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 336,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58774167",
+          "size": 22,
+          "symbol": "_FUN_58773ab0_segment_02",
+          "relocations": [
+            {
+              "offset": 18,
+              "target_address": "5897CC42",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58774182",
+          "size": 38,
+          "symbol": "_FUN_58773ab0_segment_03",
+          "relocations": [
+            {
+              "offset": 28,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58773ab0 / CFCManager update-list reader",
+        "called_by": "Fresh Ghidra call edges place this helper in the filter and update-manager routes.",
+        "behavior": "Reads update-list records and branches on the observed `#message`, `#zipurl`, and `#listurl` keys before adding records through the manager's 0x108-byte storage path.",
+        "uncertainty": "The remote protocol and the semantic meaning of its fields and return codes remain unresolved."
+      }
+    },
+    {
+      "address": "587741B0",
+      "name": "FUN_587741b0",
+      "size": 559,
+      "symbol": "_FUN_587741b0",
+      "source": "src/client-current/Main/FUN_587741b0.cpp",
+      "source_sha256": "7374238b3ace64e0a3017c63bce452cfb6003497c52208c426726c621cd90fe8",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587741B0",
+          "size": 559,
+          "symbol": "_FUN_587741b0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 40,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "587743C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 68,
+              "target_address": "587743C2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 93,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "5897CEBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 143,
+              "target_address": "587743BB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 149,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 176,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "5898D0D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "5898C1A4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 206,
+              "target_address": "589963D0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 231,
+              "target_address": "5877439D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "589963C8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 258,
+              "target_address": "5877439D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 263,
+              "target_address": "589963BC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 285,
+              "target_address": "5877439D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 306,
+              "target_address": "5877439D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 322,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 378,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 429,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 435,
+              "target_address": "5898C15C",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 458,
+              "target_address": "589963B8",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 489,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 506,
+              "target_address": "5897CEBC",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 519,
+              "target_address": "58774250",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 546,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587741b0 / CFCManager tagged-list parser",
+        "called_by": "Fresh Ghidra call edges place this helper in the same file/update record workflow.",
+        "behavior": "Parses the observed `#message`, `#zipurl`, and `#listurl` tags and constructs 0x108-byte records with observed selector values 0, 2, or 4.",
+        "uncertainty": "The record selectors, source encoding, and network/update behavior are not established by this parser alone."
+      }
+    },
+    {
+      "address": "587743E0",
+      "name": "FUN_587743e0",
+      "size": 448,
+      "symbol": "_FUN_587743e0",
+      "source": "src/client-current/Main/FUN_587743e0.cpp",
+      "source_sha256": "7522ddf4d34aa362a4f92c14058d47a4132a1b579d92f692838b78f3c15ee0ca",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587743E0",
+          "size": 448,
+          "symbol": "_FUN_587743e0_segment_00",
+          "relocations": [
+            {
+              "offset": 13,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 79,
+              "target_address": "58771F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 103,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 218,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 237,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 259,
+              "target_address": "58772DC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "58774576",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 365,
+              "target_address": "58773A00",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 416,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 440,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587743e0 / CFCManager resource-list update",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C90 invoking this helper immediately before file comparison.",
+        "behavior": "Branches on receiver flag bits 0x40000 and 0x80000 and passes list entries through the manager's 0x108-byte record storage helpers.",
+        "uncertainty": "The input list format, field meanings, and flag semantics remain unresolved."
+      }
+    },
+    {
+      "address": "587745A0",
+      "name": "FUN_587745a0",
+      "size": 1246,
+      "symbol": "_FUN_587745a0",
+      "source": "src/client-current/Main/FUN_587745a0.cpp",
+      "source_sha256": "9a50ebaba2f3d28cce3aa20c33b18418acd7753ce5a9f6668c91153828f67565",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "587745A0",
+          "size": 89,
+          "symbol": "_FUN_587745a0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "587749F4",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58774600",
+          "size": 1157,
+          "symbol": "_FUN_587745a0_segment_01",
+          "relocations": [
+            {
+              "offset": 32,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 62,
+              "target_address": "58996310",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 69,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 77,
+              "target_address": "5898D68C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 95,
+              "target_address": "5897CE4A",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 114,
+              "target_address": "587727B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 126,
+              "target_address": "5897CE3E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "587747CA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 209,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "58996408",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 245,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 282,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 301,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 314,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 341,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 363,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 384,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 390,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 414,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 420,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 426,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 436,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 454,
+              "target_address": "587749A3",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 488,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 504,
+              "target_address": "5877493E",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 573,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 602,
+              "target_address": "589963F0",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 609,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 646,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 665,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 689,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 716,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 723,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 738,
+              "target_address": "5898C164",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 759,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 765,
+              "target_address": "5898C1A0",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 789,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 795,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 801,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 811,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 890,
+              "target_address": "5897CC72",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 913,
+              "target_address": "589963DC",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 924,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1008,
+              "target_address": "58774600",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 1051,
+              "target_address": "5898C154",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 1146,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_587745a0 / CFCManager file comparison and status update",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C90 invoking this helper as part of its scan path.",
+        "behavior": "Walks 0x118-byte records, builds `%s\\%s` paths, opens the referenced file, and emits the exact `Invalid File`, `modified`, or `OK` status formats with a current/total count.",
+        "uncertainty": "The record schema, comparison source, and UI callback semantics remain unresolved."
+      }
+    },
+    {
+      "address": "58774A90",
+      "name": "FUN_58774a90",
+      "size": 300,
+      "symbol": "_FUN_58774a90",
+      "source": "src/client-current/Main/FUN_58774a90.cpp",
+      "source_sha256": "4466d9724dcc35d681b78bf2e27307e7dbee6a1110dee79feb7f0d0fb50b475a",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774A90",
+          "size": 300,
+          "symbol": "_FUN_58774a90_segment_00",
+          "relocations": [
+            {
+              "offset": 10,
+              "target_address": "58772720",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 18,
+              "target_address": "58774BB2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 24,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 54,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 61,
+              "target_address": "5898C180",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "5897CEB6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 99,
+              "target_address": "589963B4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 113,
+              "target_address": "58996444",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 127,
+              "target_address": "5899643C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 141,
+              "target_address": "58996434",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 155,
+              "target_address": "5899642C",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 169,
+              "target_address": "58996424",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 178,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 186,
+              "target_address": "58773AB0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 232,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 238,
+              "target_address": "5897CEB6",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774a90 / CFCManager file-filter selection",
+        "called_by": "Fresh Ghidra call edges show FUN_58774C40 entering this helper; the helper dispatches through the manager's child callback.",
+        "behavior": "Selects the observed filters `*.*`, `*.Data`, `*.cxf`, `*.cmf`, `*.kmf`, or `*.spr` from receiver flags and forwards the selection through the child callback.",
+        "uncertainty": "The flag names, exact child-control contract, and user-visible selection behavior remain unresolved."
+      }
+    },
+    {
+      "address": "58774BC0",
+      "name": "FUN_58774bc0",
+      "size": 113,
+      "symbol": "_FUN_58774bc0",
+      "source": "src/client-current/Main/FUN_58774bc0.cpp",
+      "source_sha256": "4edcda550f89ed67eedfacb18eafc9551329135a62f18fd96f252482741fb167",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774BC0",
+          "size": 113,
+          "symbol": "_FUN_58774bc0_segment_00",
+          "relocations": [
+            {
+              "offset": 31,
+              "target_address": "58771F70",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 51,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 72,
+              "target_address": "5898D040",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 80,
+              "target_address": "587741B0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 97,
+              "target_address": "5897CE26",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774bc0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "58774C40",
+      "name": "FUN_58774c40",
+      "size": 74,
+      "symbol": "_FUN_58774c40",
+      "source": "src/client-current/Main/FUN_58774c40.cpp",
+      "source_sha256": "7ea679356215af1a6ec9cbc5106e6b6287aefadb48e9adf3226c5bbee3e6b415",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774C40",
+          "size": 74,
+          "symbol": "_FUN_58774c40_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 49,
+              "target_address": "5898C154",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 55,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 60,
+              "target_address": "58774A90",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774c40 / CFCManager filter-dialog route",
+        "called_by": "The callback adapter FUN_58774D50 references this routine for the observed flag-2 path.",
+        "behavior": "Dispatches child event kind 4, sets the observed 0x32 state, and enters the file-filter selection helper.",
+        "uncertainty": "The event value and 0x32 state have no recovered symbolic names."
+      }
+    },
+    {
+      "address": "58774C90",
+      "name": "FUN_58774c90",
+      "size": 189,
+      "symbol": "_FUN_58774c90",
+      "source": "src/client-current/Main/FUN_58774c90.cpp",
+      "source_sha256": "901b243283565cea760b53e281eee4ac0fd46af9a0016aced9ce02a3eb415448",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774C90",
+          "size": 189,
+          "symbol": "_FUN_58774c90_segment_00",
+          "relocations": [
+            {
+              "offset": 4,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "5898C154",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 76,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 92,
+              "target_address": "58772160",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 100,
+              "target_address": "58774BC0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 110,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 115,
+              "target_address": "587743E0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 125,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 130,
+              "target_address": "587745A0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "589CFC98",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774c90 / CFCManager resource-integrity scan",
+        "called_by": "The callback adapter FUN_58774D50 has an installed-image data reference to this function at 0x58774D6B; the manager event handler routes into that adapter.",
+        "behavior": "Dispatches child event kind 4, branches on receiver flags 0x10000 and 0x20000, then runs the observed list/scan helpers FUN_587743E0 and FUN_587745A0 before dispatching child event kind 8.",
+        "uncertainty": "The caller that opens this manager in the full client flow is not verified; flag meanings and runtime UI effects remain unresolved."
+      }
+    },
+    {
+      "address": "58774D50",
+      "name": "FUN_58774d50",
+      "size": 90,
+      "symbol": "_FUN_58774d50",
+      "source": "src/client-current/Main/FUN_58774d50.cpp",
+      "source_sha256": "4a1efad0e20bf136f23bf95061c3df10f0aeec72f6b85709065148855929cc94",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774D50",
+          "size": 90,
+          "symbol": "_FUN_58774d50_segment_00",
+          "relocations": [
+            {
+              "offset": 15,
+              "target_address": "58772380",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 28,
+              "target_address": "58774C90",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 37,
+              "target_address": "5897CEC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 66,
+              "target_address": "58774C40",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 75,
+              "target_address": "5897CEC2",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774d50 / CFCManager callback adapter",
+        "called_by": "Both the manager's data reference at 0x58774D6B and a neighboring setup reference at 0x58774D91 identify this callback address.",
+        "behavior": "Dispatches flag 1 through the observed file-integrity scan route and flag 2 through the filter-dialog route.",
+        "uncertainty": "The producer and full lifetime of the callback record remain unresolved."
+      }
+    },
+    {
+      "address": "58774DB0",
+      "name": "FUN_58774db0",
+      "size": 253,
+      "symbol": "_FUN_58774db0",
+      "source": "src/client-current/Main/FUN_58774db0.cpp",
+      "source_sha256": "72fb5ee93d1de2c767abe9c00283beb9208d00e2ac6efb0ca86b82a9e7fe964c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58774DB0",
+          "size": 253,
+          "symbol": "_FUN_58774db0_segment_00",
+          "relocations": [
+            {
+              "offset": 7,
+              "target_address": "589CFBD4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 44,
+              "target_address": "5897CC48",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 65,
+              "target_address": "5898C1A8",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 81,
+              "target_address": "5898C198",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 104,
+              "target_address": "5898C150",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 119,
+              "target_address": "5897CE92",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "5898D0D4",
+              "kind": "immediate",
+              "audit_only": true
+            },
+            {
+              "offset": 147,
+              "target_address": "5898C3C4",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 163,
+              "target_address": "58773950",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 170,
+              "target_address": "58772720",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 182,
+              "target_address": "5898C154",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 191,
+              "target_address": "58774D50",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 198,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 209,
+              "target_address": "5898C184",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "589CFC90",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 240,
+              "target_address": "5897CBDA",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58774db0 / CFCManager event handler",
+        "called_by": "Installed-image RTTI identifies this address as slot +0x00 of the five-entry CFCManager vtable at 0x58996358.",
+        "behavior": "Processes the manager's observed status/list path, updates a 100-unit state, then invokes the callback adapter when the file check is enabled; otherwise it releases the shared file handle.",
+        "uncertainty": "The resource protocol, status fields, and route from a live screen into this vtable are not fully recovered."
+      }
+    },
+    {
+      "address": "5897CE92",
+      "name": "FUN_5897ce92",
+      "size": 6,
+      "symbol": "_FUN_5897ce92",
+      "source": "src/client-current/Main/FUN_5897ce92.cpp",
+      "source_sha256": "f2cde62795d574a6446a257fa8a662f142c619030d68dab277b6c20a05220e01",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CE92",
+          "size": 6,
+          "symbol": "_FUN_5897ce92_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C268",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ce92 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CE9E",
+      "name": "FUN_5897ce9e",
+      "size": 6,
+      "symbol": "_FUN_5897ce9e",
+      "source": "src/client-current/Main/FUN_5897ce9e.cpp",
+      "source_sha256": "e3eecb829fab5fc3a54d5329aa9d843993de04f2a7ea8ca96d0aff56feb4ddb5",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CE9E",
+          "size": 6,
+          "symbol": "_FUN_5897ce9e_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C270",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ce9e / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CEA4",
+      "name": "FUN_5897cea4",
+      "size": 6,
+      "symbol": "_FUN_5897cea4",
+      "source": "src/client-current/Main/FUN_5897cea4.cpp",
+      "source_sha256": "d2be38ea70ff36e4fef2304c664fad8d83d86265376c2841f49247c0fbbd34d7",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CEA4",
+          "size": 6,
+          "symbol": "_FUN_5897cea4_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C274",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cea4 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CEAA",
+      "name": "FUN_5897ceaa",
+      "size": 6,
+      "symbol": "_FUN_5897ceaa",
+      "source": "src/client-current/Main/FUN_5897ceaa.cpp",
+      "source_sha256": "3175d05e81cb2b2f6a09e3e47464567ed47911f31c0f07780e04140f60d99ea1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CEAA",
+          "size": 6,
+          "symbol": "_FUN_5897ceaa_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C278",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ceaa / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CEB0",
+      "name": "FUN_5897ceb0",
+      "size": 6,
+      "symbol": "_FUN_5897ceb0",
+      "source": "src/client-current/Main/FUN_5897ceb0.cpp",
+      "source_sha256": "cd1435580fbbc6304e8f43453c0ebf5a606f47fcf237f611d9bcf9c48cba9bd1",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CEB0",
+          "size": 6,
+          "symbol": "_FUN_5897ceb0_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C27C",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ceb0 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CEB6",
+      "name": "FUN_5897ceb6",
+      "size": 6,
+      "symbol": "_FUN_5897ceb6",
+      "source": "src/client-current/Main/FUN_5897ceb6.cpp",
+      "source_sha256": "9f23640d4406df3d3b4c077cc367533ec962be841a1bc6f61c8ac3d6ccd21f68",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CEB6",
+          "size": 6,
+          "symbol": "_FUN_5897ceb6_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C280",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897ceb6 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
+    },
+    {
+      "address": "5897CEC2",
+      "name": "FUN_5897cec2",
+      "size": 6,
+      "symbol": "_FUN_5897cec2",
+      "source": "src/client-current/Main/FUN_5897cec2.cpp",
+      "source_sha256": "9628a0c27d20900edde8c2f29e75157bf54c223a4577f6e40e1bf202ddc8972c",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "5897CEC2",
+          "size": 6,
+          "symbol": "_FUN_5897cec2_segment_00",
+          "relocations": [
+            {
+              "offset": 2,
+              "target_address": "5898C288",
+              "kind": "absolute",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_5897cec2 / CFCManager closure helper",
+        "called_by": "Fresh Ghidra call-edge exports place this body in the direct-call closure of the installed-image CFCManager vtable at 0x58996358. The exact class closure and body ranges are recorded in the focused verifier and docs/current-main-cfc-manager-file-integrity.md.",
+        "behavior": "The exact mapped instruction body is emitted from the two fresh Ghidra body-range exports. Its helper-level semantic role is left unnamed until the original instructions establish more than its direct-call position in the CFCManager workflow.",
+        "uncertainty": "The helper's field meanings, resource schema, and any indirect callback targets remain unresolved. No runtime emulator result was observed."
+      }
     }
   ]
 }

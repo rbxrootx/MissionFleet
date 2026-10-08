@@ -52,9 +52,14 @@ rtk python tools/generate_progress.py --check
 ```
 
 Decompiled pseudocode does not count as matching source. The current local report
-credits 8,587 of 42,461 functions and 2,741,911 of 10,470,295 bytes (20.2233% by
-functions and 26.1875% by bytes); every counted function match is verified at
-100.0% by objdiff 3.8.0. This includes 151 archived 2062 `Main.dll` functions
+credits 8,755 of 42,461 functions and 2,791,122 of 10,470,324 bytes (20.6189% by
+functions and 26.6575% by bytes); every counted function match is verified at
+100.0% by objdiff 3.8.0. The new installed-client `CFCManager` file-integrity
+and update-list slice contributes 59 functions / 11,026 bytes. Its RTTI-backed
+five-slot vtable, callback route, two record strides, exact file-status strings,
+and open questions are documented in
+[`current-main-cfc-manager-file-integrity.md`](current-main-cfc-manager-file-integrity.md).
+This includes 151 archived 2062 `Main.dll` functions
 totaling 453,111 bytes; their local verifier is `tools/verify_client_matches.py`
 and its hash-pinned input capture is not committed. The installed 2026 `Main.dll`
 inventory has 2,454 exact function matches totaling 1,768,493 bytes. The
