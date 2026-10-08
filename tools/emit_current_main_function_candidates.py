@@ -109,8 +109,12 @@ def main():
 
         exact_segments = ranges_by_function.get(address, segment_specs)
         if exact_segments:
-            if exact_segments[0][0] != start:
-                raise ValueError(f"First body segment must start at {address}")
+            # A reachable basic block can precede the entry address in memory
+            # when the function jumps backward into shared/out-of-order code.
+            # Keep every Ghidra range, but require the actual entry to be one
+            # of those ranges so the emitted body still anchors the right function.
+            if start not in {segment_start for segment_start, _ in exact_segments}:
+                raise ValueError(f"No exact body segment starts at function entry {address}")
             if sum(segment_size for _, segment_size in exact_segments) != size:
                 raise ValueError(f"Segment byte total does not match indexed extent for {address}")
             segments = []

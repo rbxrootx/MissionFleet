@@ -507,6 +507,12 @@ MAIN_MANAGE_SQUAD_TAB_ADDRESSES = (
     "5883A4D0", "58848420",
 )
 ADDRESSES += MAIN_MANAGE_SQUAD_TAB_ADDRESSES
+MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES = (
+    "588318F0", "58831C30", "58831910", "588336F0", "58832CF0", "588329D0",
+    "58753980", "58753B20", "58754080", "587B92E0", "587B9300", "587BA960",
+    "588316E0", "58831E20",
+)
+ADDRESSES += MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES
 
 RELOCATION_OVERRIDES = {
     # Fixed-address calls emitted literally by the original eight-slot
@@ -948,6 +954,7 @@ SOURCE_COMPILER_ADDRESSES.update(MAIN_STATE6_SPRITE_CHILD_SETUP_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE05_GEOMETRY_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_TYPE06_PACKED_STATE_TRANSFORM_ADDRESSES)
 SOURCE_COMPILER_ADDRESSES.update(MAIN_MANAGE_SQUAD_TAB_ADDRESSES)
+SOURCE_COMPILER_ADDRESSES.update(MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES)
 SOURCE_COMPILER = {
     "kind": "clang-cl",
     "version": "19.1.4",
@@ -13685,8 +13692,8 @@ def main():
                 raise ValueError(f"Missing emitted segments for {address}")
             if sum(int(segment["size"]) for segment in segments) != int(row["size"]):
                 raise ValueError(f"Emitted segment sizes do not match the Ghidra inventory for {address}")
-            if segments[0]["address"].upper() != address:
-                raise ValueError(f"First emitted segment does not start at {address}")
+            if address not in {segment["address"].upper() for segment in segments}:
+                raise ValueError(f"No emitted segment starts at function entry {address}")
             output_segments = []
             for segment in segments:
                 output_segments.append({
@@ -20364,6 +20371,248 @@ MAIN_MANAGE_SQUAD_TAB_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_MANAGE_SQUAD_TAB_EVIDENCE)
+
+MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE = {
+    "588318F0": {
+        "name_in_analysis": "FUN_588318F0 / JoinTab deleting-destructor wrapper",
+        "called_by": (
+            "Occupies slot +0x00 of the RTTI-identified "
+            "CPannelCommunicatorConfigJoinTab primary vtable at 0x5899E164. "
+            "Two fresh Ghidra body and edge exports agree on its exact ranges."
+        ),
+        "behavior": (
+            "Calls derived cleanup FUN_588316E0, then calls matched "
+            "FUN_5897CC42 when the low bit of param_2 is set; otherwise "
+            "returns param_1."
+        ),
+        "uncertainty": (
+            "The caller's delete-flag convention and ownership of the child "
+            "fields are unresolved. The mapped code is byte matched, but "
+            "runtime destruction has not been tested."
+        ),
+    },
+    "58831C30": {
+        "name_in_analysis": "FUN_58831C30 / JoinTab state and record update",
+        "called_by": (
+            "Occupies slot +0x04 of the RTTI-identified JoinTab primary "
+            "vtable. Ghidra's complete body includes two reachable blocks "
+            "before the vtable entry address; the entry jumps backward to "
+            "those blocks. Both fresh exports agree on all four ranges."
+        ),
+        "behavior": (
+            "Runs only when receiver state bits at +0x24 equal 0x400 or "
+            "0x500. It traverses a global linked record chain, checks record "
+            "type values 2, 3, 5, and 6, and sends paired values through the "
+            "observed lookup and child-update helpers."
+        ),
+        "uncertainty": (
+            "The global record schema, field meanings, and user-visible "
+            "labels are not recovered. The backward jump into lower-address "
+            "body ranges is preserved from Ghidra; no emulator test was run."
+        ),
+    },
+    "58831910": {
+        "name_in_analysis": "FUN_58831910 / JoinTab state reset",
+        "called_by": (
+            "Occupies slot +0x08 of the JoinTab primary vtable at "
+            "0x5899E164; its vtable data reference and body are present in "
+            "both fresh Ghidra exports."
+        ),
+        "behavior": (
+            "For state values 0x100 or 0x200 at receiver +0x24, changes the "
+            "state to 0x400, clears a flag bit, resets four child values at "
+            "+0x50, and clears the low four state bits on two child objects."
+        ),
+        "uncertainty": (
+            "The semantic names of the state values, flag, and four child "
+            "values remain unknown."
+        ),
+    },
+    "588336F0": {
+        "name_in_analysis": "FUN_588336F0 / JoinTab state transition and child dispatch",
+        "called_by": (
+            "Occupies slot +0x0C of the JoinTab primary vtable at "
+            "0x5899E164. The fresh Ghidra exports also record its references "
+            "from the adjacent table and one data object."
+        ),
+        "behavior": (
+            "When receiver flag bit 2 is set, changes state 0x100 to 0x200 "
+            "or 0x400 to 0x500 and updates associated bits. It then walks "
+            "the linked child list and invokes each child's virtual slot +0x0C."
+        ),
+        "uncertainty": (
+            "The meanings of the state and flag bits, the linked-list node "
+            "type, and the virtual child callback are unresolved."
+        ),
+    },
+    "58832CF0": {
+        "name_in_analysis": "FUN_58832CF0 / JoinTab primary event handler",
+        "called_by": (
+            "Occupies slot +0x10 of the JoinTab primary vtable at "
+            "0x5899E164. The complete Ghidra body has two ranges totaling "
+            "2,126 bytes, agreed by both fresh exports."
+        ),
+        "behavior": (
+            "Dispatches event records to linked children and handles event "
+            "identifier 0x100 with command values 9, 0x26, and 0x28, plus "
+            "identifier 0x201. The 0x26/0x28 branches adjust bounded "
+            "selection values and call FUN_58831E20 on refresh paths."
+        ),
+        "uncertainty": (
+            "The event-record schema, command labels, selected data, and "
+            "server effects are unresolved. Indirect child and global callback "
+            "targets remain dynamic; static identifiers do not prove a network "
+            "transaction or visible UI result."
+        ),
+    },
+    "588329D0": {
+        "name_in_analysis": "FUN_588329D0 / JoinTab child-event handler",
+        "called_by": (
+            "Occupies slot +0x18 of the JoinTab primary vtable at "
+            "0x5899E164. Its direct-call edges agree between the two fresh "
+            "Ghidra exports."
+        ),
+        "behavior": (
+            "Handles child events when param_3 equals 2. It checks two "
+            "indexed child collections and their state flags, adjusts bounded "
+            "selection offsets, updates child values at +0x50, and calls "
+            "FUN_58831E20 on refresh paths."
+        ),
+        "uncertainty": (
+            "The child-event contract, collection schema, and meaning of the "
+            "selection offsets are not known."
+        ),
+    },
+    "588316E0": {
+        "name_in_analysis": "FUN_588316E0 / JoinTab derived cleanup",
+        "called_by": (
+            "Called by the slot +0x00 deleting-destructor wrapper "
+            "FUN_588318F0. Both fresh exports agree on three body ranges "
+            "totaling 517 bytes."
+        ),
+        "behavior": (
+            "Walks the derived object's child fields, invokes child virtual "
+            "destructors for selected non-null pointers, clears those fields, "
+            "and finishes with matched base cleanup FUN_58902C10."
+        ),
+        "uncertainty": (
+            "The ownership policy and concrete child types are unresolved; "
+            "the indirect destructor targets depend on runtime object vtables."
+        ),
+    },
+    "58831E20": {
+        "name_in_analysis": "FUN_58831E20 / JoinTab indexed child refresh helper",
+        "called_by": (
+            "Reached from the JoinTab event and child-event methods. Its "
+            "direct call paths and exact 168-byte range agree in both fresh "
+            "Ghidra exports."
+        ),
+        "behavior": (
+            "Stores param_3 at receiver +0xCC, searches for the supplied pair "
+            "with FUN_58753B20, and dispatches through FUN_587B92E0 when no "
+            "match exists. On a match it derives a value with FUN_587538B0 "
+            "and passes that value and the found record to matched helpers."
+        ),
+        "uncertainty": (
+            "The searched pair's field meanings and the effects of the matched "
+            "update helpers have not been identified."
+        ),
+    },
+    "58753980": {
+        "name_in_analysis": "FUN_58753980 / two-field table search helper",
+        "called_by": (
+            "Reached from JoinTab state-update method FUN_58831C30. Both "
+            "fresh exports include its 198-byte body and identical call edges."
+        ),
+        "behavior": (
+            "Validates the receiver's indexed bounds, scans entries for the "
+            "supplied two-value pair, and returns the observed match-derived "
+            "integer; invalid iterator conditions call matched helper "
+            "FUN_5897CC72."
+        ),
+        "uncertainty": (
+            "The container type, returned integer's meaning, and assertion "
+            "failure behavior are unresolved."
+        ),
+    },
+    "58753B20": {
+        "name_in_analysis": "FUN_58753B20 / two-field table lookup helper",
+        "called_by": (
+            "Reached from JoinTab refresh helper FUN_58831E20. Both fresh "
+            "exports include its 201-byte body and identical call edges."
+        ),
+        "behavior": (
+            "Validates indexed bounds, scans entries for the supplied "
+            "two-value pair, and returns the matching entry pointer or null; "
+            "invalid iterator conditions call matched helper FUN_5897CC72."
+        ),
+        "uncertainty": (
+            "The container element schema, ownership, and the meaning of the "
+            "pair values are unresolved."
+        ),
+    },
+    "58754080": {
+        "name_in_analysis": "FUN_58754080 / two-field search wrapper",
+        "called_by": (
+            "Reached twice from JoinTab state-update method FUN_58831C30. "
+            "Both fresh exports agree on its exact 19-byte body."
+        ),
+        "behavior": (
+            "Passes the two DWORDs at param_1 and param_1 + 4 to matched "
+            "helper FUN_58753BF0."
+        ),
+        "uncertainty": (
+            "The pair's type and the helper's semantic result are not recovered."
+        ),
+    },
+    "587B92E0": {
+        "name_in_analysis": "FUN_587B92E0 / JoinTab message-dispatch wrapper",
+        "called_by": (
+            "Reached by JoinTab update methods FUN_58831C30 and "
+            "FUN_58831E20. The direct edges are present in both fresh exports."
+        ),
+        "behavior": (
+            "Passes identifier 0x80010F07 and the two supplied DWORDs to "
+            "matched helper FUN_58970C70, with its remaining arguments zero."
+        ),
+        "uncertainty": (
+            "The identifier's protocol meaning, data schema, and downstream "
+            "effect are not established by this call site."
+        ),
+    },
+    "587B9300": {
+        "name_in_analysis": "FUN_587B9300 / JoinTab message-dispatch wrapper",
+        "called_by": (
+            "Reached from JoinTab child-event handler FUN_588329D0. Both "
+            "fresh exports include its exact 29-byte body."
+        ),
+        "behavior": (
+            "Passes identifier 0x80010F08 and two supplied values to matched "
+            "helper FUN_58970C70, with its remaining arguments zero."
+        ),
+        "uncertainty": (
+            "The identifier's protocol meaning, data schema, and downstream "
+            "effect remain unknown."
+        ),
+    },
+    "587BA960": {
+        "name_in_analysis": "FUN_587BA960 / JoinTab formatted message wrapper",
+        "called_by": (
+            "Reached from JoinTab state-update method FUN_58831C30. Both "
+            "fresh exports agree on its 117-byte body and call edges."
+        ),
+        "behavior": (
+            "Measures a supplied string, allocates and fills a temporary "
+            "buffer, passes identifier 0x80010F0C and the buffer to matched "
+            "FUN_58970C70, then releases the temporary storage."
+        ),
+        "uncertainty": (
+            "The string's user-visible meaning, identifier semantics, and "
+            "downstream effect are unresolved."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE)
 
 
 if __name__ == "__main__":

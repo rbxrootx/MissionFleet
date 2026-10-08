@@ -96,6 +96,7 @@ from tools import (
     verify_current_main_chat_command_routes,
     verify_current_main_587e3080_precondition_gates,
     verify_current_main_manage_squad_tab,
+    verify_current_main_communicator_join_tab,
 )
 
 
@@ -108,8 +109,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 9_043)
-        self.assertEqual(self.report["measures"]["matched_code"], "2886416")
+        self.assertEqual(self.report["measures"]["matched_functions"], 9_057)
+        self.assertEqual(self.report["measures"]["matched_code"], "2891545")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -120,8 +121,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_910)
-        self.assertEqual(current["measures"]["matched_code"], "1912998")
+        self.assertEqual(current["measures"]["matched_functions"], 2_924)
+        self.assertEqual(current["measures"]["matched_code"], "1918127")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -180,6 +181,19 @@ class ProgressReportTests(unittest.TestCase):
                       evidence["5883B500"]["behavior"])
         self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
         verify_current_main_manage_squad_tab.main()
+
+    def test_join_tab_has_exact_rtti_and_open_direct_call_closure(self):
+        addresses = build_current_main_verifications.MAIN_COMMUNICATOR_JOIN_TAB_ADDRESSES
+        evidence = build_current_main_verifications.MAIN_COMMUNICATOR_JOIN_TAB_EVIDENCE
+        self.assertEqual(len(addresses), 14)
+        self.assertEqual(set(addresses), {f"{address:08X}"
+                                         for address in verify_current_main_communicator_join_tab.FUNCTIONS})
+        self.assertEqual(set(addresses), set(evidence))
+        self.assertIn("CPannelCommunicatorConfigJoinTab primary vtable",
+                      evidence["588318F0"]["called_by"])
+        self.assertIn("backward", evidence["58831C30"]["called_by"])
+        self.assertTrue(all(item["uncertainty"] for item in evidence.values()))
+        verify_current_main_communicator_join_tab.main()
 
     def test_event_80025102_has_complete_matched_dispatch_case_closure(self):
         addresses = build_current_main_verifications.MAIN_EVENT_80025102_ADDRESSES

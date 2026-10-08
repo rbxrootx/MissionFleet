@@ -81,8 +81,9 @@ def resolve_segments(document, match, image):
     segments = match.get("segments")
     if not isinstance(segments, list) or not segments:
         raise ValueError(f"Segmented match {match['address']} has no segments")
-    if segments[0].get("address", "").upper() != match["address"].upper():
-        raise ValueError(f"First segment for {match['address']} must start at the function entry")
+    if match["address"].upper() not in {
+            segment.get("address", "").upper() for segment in segments}:
+        raise ValueError(f"No segment for {match['address']} starts at the function entry")
 
     resolved = []
     total_size = 0
