@@ -451521,6 +451521,229 @@
         "behavior": "Both fresh body exports agree on two complete ranges totaling 639 bytes and 173 instructions: [0x58875830,0x58875859) and [0x58875860,0x58875AB6). The helper stores its short mode at receiver +0xCC, clears +0xCE, and clears bit 0 in six pointers' pointees at +0xAC/+0xB0/+0xB4/+0xB8/+0xBC/+0xC0. Modes 1, 2, and 3 set bit 0 on different subsets; mode 2 also has a one-time +0xC8 transition that changes pointees at +0x54/+0x58 and +0x6C/+0x70. Mode 0 clears selected +0x6C/+0x70 and +0x84/+0x88 bits. Its 20 direct calls target only the byte-matched FUN_58902CE0 and FUN_58902D20 helpers, which propagate scalar values through flagged child lists.",
         "uncertainty": "The pointed-to object types, meaning of active bit 0, user-facing names for modes 0 through 3, purpose of receiver +0xC8, and visual meaning of values written through +0x28/+0x2C are not established. Ten incoming call sites are in four still-unmatched functions. No live PageFight visual or emulator test has been performed."
       }
+    },
+    {
+      "address": "58876AB0",
+      "name": "FUN_58876ab0",
+      "size": 647,
+      "symbol": "_FUN_58876ab0",
+      "source": "src/client-current/Main/FUN_58876ab0.cpp",
+      "source_sha256": "a7369c1836ed1f8eb5e02b85a0cbfbef952b795f0fbfa804553dbb5621d01364",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "source_compiler": {
+        "kind": "clang-cl",
+        "version": "19.1.4",
+        "sha256": "f169c5b02772a3c9cbce571fe539c3db6a2f664c6d1e36c4ed820de451b49c69"
+      },
+      "relocations": [],
+      "segments": [
+        {
+          "address": "58876AB0",
+          "size": 269,
+          "symbol": "_FUN_58876ab0_segment_00",
+          "relocations": [
+            {
+              "offset": 11,
+              "target_address": "58876D38",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 45,
+              "target_address": "58876B6D",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 120,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 140,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 151,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 171,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 180,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 185,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 195,
+              "target_address": "58876C23",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 209,
+              "target_address": "58876C15",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58876BC0",
+          "size": 42,
+          "symbol": "_FUN_58876ab0_segment_01",
+          "relocations": [
+            {
+              "offset": 5,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        },
+        {
+          "address": "58876BF0",
+          "size": 336,
+          "symbol": "_FUN_58876ab0_segment_02",
+          "relocations": [
+            {
+              "offset": 5,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 13,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 33,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 42,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 47,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 57,
+              "target_address": "58876D15",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 71,
+              "target_address": "58876CC2",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 137,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 145,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 181,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 189,
+              "target_address": "58902CE0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 215,
+              "target_address": "58875830",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 236,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 252,
+              "target_address": "587315F0",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 270,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 289,
+              "target_address": "58902D20",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_58876AB0 / CPannelHelpScreen vtable update method",
+        "called_by": "Both fresh Ghidra edge exports record a DATA reference from 0x5899EF8C to this method. That address is slot +0x0C in the vtable at 0x5899EF80. The mapped image's preceding Complete Object Locator points to a TypeDescriptor whose name is .?AVCPannelHelpScreen@@. This establishes the vtable association; the runtime virtual-call sites are indirect and are not identified as direct callers by these exports.",
+        "behavior": "Two independent fresh Ghidra body exports and a third targeted headless export agree on three complete ranges totaling 647 bytes and 197 instructions: [0x58876AB0,0x58876BBD), [0x58876BC0,0x58876BEA), and [0x58876BF0,0x58876D40). When receiver +0x24 has bit 2 set, the method reads mode +0xCC and advances counter +0xCE. Modes 1, 2, and 3 use thresholds 400, 200, and 400, respectively; below threshold they read a scalar through the pointers at +0xB0, +0xB8, or +0xC0, select a +10 or -10 value from the counter divided into 24-count blocks, and pass that value to matched FUN_58902CE0 call sites. At threshold the method calls matched FUN_58875830 with mode 0, 3, or 0. Mode 3 also stores receiver+0x84 at +0xC4, calls matched FUN_587315F0 twice with 1, and calls matched FUN_58902D20 with 0xFFFFFEFF and 0x101. All 17 direct calls target already byte-matched functions. It then walks the child pointers beginning at +0x3C through each node's +0x38 link and calls the node vtable slot +0x0C indirectly.",
+        "uncertainty": "The meanings of the mode and counter, timer cadence, pointed-to control types, scalar units, \u00b110 visual effect, list ownership, and the indirect callback targets are not established. The mapped body contains one indirect call at 0x58876D3E, which Ghidra also reports as an unrecovered terminal jumptable. No live client or emulator visual test was performed; the source preserves the original mapped instruction bytes for byte matching."
+      }
     }
   ]
 }

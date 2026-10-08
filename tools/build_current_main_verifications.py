@@ -15658,6 +15658,10 @@ MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES = ("58875830",)
 ADDRESSES += MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES
 SOURCE_COMPILER_ADDRESSES.update(MAIN_PAGEFIGHT_CONTROL_LAYOUT_ADDRESSES)
 
+MAIN_PANEL_HELP_UPDATE_ADDRESSES = ("58876AB0",)
+ADDRESSES += MAIN_PANEL_HELP_UPDATE_ADDRESSES
+SOURCE_COMPILER_ADDRESSES.update(MAIN_PANEL_HELP_UPDATE_ADDRESSES)
+
 MAIN_USER_CHAT_ENTER_COMMAND_EVIDENCE = {
     "587F7000": {
         "name_in_analysis": "FUN_587F7000 / numeric user-chat enter command handler",
@@ -16194,6 +16198,50 @@ MAIN_PAGEFIGHT_CONTROL_LAYOUT_EVIDENCE = {
     },
 }
 EVIDENCE.update(MAIN_PAGEFIGHT_CONTROL_LAYOUT_EVIDENCE)
+
+MAIN_PANEL_HELP_UPDATE_EVIDENCE = {
+    "58876AB0": {
+        "name_in_analysis": "FUN_58876AB0 / CPannelHelpScreen vtable update method",
+        "called_by": (
+            "Both fresh Ghidra edge exports record a DATA reference from "
+            "0x5899EF8C to this method. That address is slot +0x0C in the "
+            "vtable at 0x5899EF80. The mapped image's preceding Complete "
+            "Object Locator points to a TypeDescriptor whose name is "
+            ".?AVCPannelHelpScreen@@. This establishes the vtable association; "
+            "the runtime virtual-call sites are indirect and are not identified "
+            "as direct callers by these exports."
+        ),
+        "behavior": (
+            "Two independent fresh Ghidra body exports and a third targeted "
+            "headless export agree on three complete ranges totaling 647 bytes "
+            "and 197 instructions: [0x58876AB0,0x58876BBD), "
+            "[0x58876BC0,0x58876BEA), and [0x58876BF0,0x58876D40). When "
+            "receiver +0x24 has bit 2 set, the method reads mode +0xCC and "
+            "advances counter +0xCE. Modes 1, 2, and 3 use thresholds 400, 200, "
+            "and 400, respectively; below threshold they read a scalar through "
+            "the pointers at +0xB0, +0xB8, or +0xC0, select a +10 or -10 value "
+            "from the counter divided into 24-count blocks, and pass that value "
+            "to matched FUN_58902CE0 call sites. At threshold the method calls "
+            "matched FUN_58875830 with mode 0, 3, or 0. Mode 3 also stores "
+            "receiver+0x84 at +0xC4, calls matched FUN_587315F0 twice with 1, "
+            "and calls matched FUN_58902D20 with 0xFFFFFEFF and 0x101. All 17 "
+            "direct calls target already byte-matched functions. It then walks "
+            "the child pointers beginning at +0x3C through each node's +0x38 "
+            "link and calls the node vtable slot +0x0C indirectly."
+        ),
+        "uncertainty": (
+            "The meanings of the mode and counter, timer cadence, pointed-to "
+            "control types, scalar units, ±10 visual effect, list ownership, "
+            "and the indirect callback targets are not established. The mapped "
+            "body calls the child callback indirectly at 0x58876D2D and has a "
+            "terminal indirect tail jump at 0x58876D3E; Ghidra reports an "
+            "unrecovered terminal jumptable there. No live client or emulator "
+            "visual test was performed; the source preserves the original mapped "
+            "instruction bytes for byte matching."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_PANEL_HELP_UPDATE_EVIDENCE)
 
 
 if __name__ == "__main__":
