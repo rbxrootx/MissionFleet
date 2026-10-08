@@ -467300,6 +467300,156 @@
         "behavior": "Lazily loads SPR\\EFSJ.spr, creates up to three CSpriteBundleScreen children, clears flag bits on those children, and attaches up to three 0x40-byte-spaced records from the loaded bundle. All eleven direct calls reach byte-matched functions.",
         "uncertainty": "The component event meanings, owning class, child field meanings, sprite-record schema, and exact rendered appearance remain unresolved. No live client or emulator runtime test was performed."
       }
+    },
+    {
+      "address": "588BA330",
+      "name": "FUN_588ba330",
+      "size": 742,
+      "symbol": "_FUN_588ba330",
+      "source": "src/client-current/Main/FUN_588ba330.cpp",
+      "source_sha256": "6ccc9d0b9a9b9f245d910bf6e195d1eed798ed5e92f84469819b0765ad0a424e",
+      "verified_by": "objdiff-3.8.0-byte-identical",
+      "flags": [
+        "/O2",
+        "/GX-",
+        "/Zm200"
+      ],
+      "relocations": [],
+      "segments": [
+        {
+          "address": "588BA330",
+          "size": 742,
+          "symbol": "_FUN_588ba330_segment_00",
+          "relocations": [
+            {
+              "offset": 87,
+              "target_address": "58A24598",
+              "kind": "absolute",
+              "audit_only": true
+            },
+            {
+              "offset": 136,
+              "target_address": "588BA5EB",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 193,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 233,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 244,
+              "target_address": "588BA5E6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 272,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 288,
+              "target_address": "588BA5EA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 313,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 326,
+              "target_address": "588BA5EA",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 348,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 385,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 427,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 465,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 494,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 502,
+              "target_address": "588BA5E6",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 524,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 561,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 603,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 648,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            },
+            {
+              "offset": 669,
+              "target_address": "58903290",
+              "kind": "relative",
+              "audit_only": true
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "name_in_analysis": "FUN_588ba330 / selector-driven component visual layout",
+        "called_by": "Byte-matched FUN_587E3080 calls this at 0x587E3981 on the path where param_3 == 2, param_2 matches the component at receiver +0x584 or +0x598, the object at receiver +0xD78 passes its +0x4C validity check, receiver-state +0xCC4 is nonzero, the screen flags masked by 0x3E0 are not 0x40, and +0xCCC is nonnull. A second caller site, 0x587E3A3B, is reached while scanning up to 0x1C child pointers from receiver +0x504 when the child and screen-state predicates pass.",
+        "behavior": "Copies two stored coordinates, clears the low four bits on eight child-control flags, stores a global-backed pointer and two arguments, then switches on the low byte of one argument. Observed selector cases 0, 3, 5, 6, and 0xD position selected controls with FUN_58903290 and set their low flag bits; every direct call reaches that byte-matched helper. It finishes by updating parent flags and setting the observed 0x100 state bit.",
+        "uncertainty": "The owning class, identities of the eight child controls, stored field meanings, selector meanings, and rendered output remain unresolved. Caller predicates are recorded as machine-state conditions, not assigned UI semantics. No live client or emulator runtime test was performed."
+      }
     }
   ]
 }

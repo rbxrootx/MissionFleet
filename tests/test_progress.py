@@ -72,6 +72,7 @@ from tools import (
     verify_current_main_user_command,
     verify_current_main_periodic_selection_state,
     verify_current_main_efsjs_sprite_refresh,
+    verify_current_main_component_visual_layout,
 )
 
 
@@ -84,8 +85,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 8_821)
-        self.assertEqual(self.report["measures"]["matched_code"], "2816142")
+        self.assertEqual(self.report["measures"]["matched_functions"], 8_822)
+        self.assertEqual(self.report["measures"]["matched_code"], "2816884")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -96,8 +97,8 @@ class ProgressReportTests(unittest.TestCase):
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 2_688)
-        self.assertEqual(current["measures"]["matched_code"], "1842724")
+        self.assertEqual(current["measures"]["matched_functions"], 2_689)
+        self.assertEqual(current["measures"]["matched_code"], "1843466")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
@@ -182,6 +183,23 @@ class ProgressReportTests(unittest.TestCase):
         self.assertIn("CSpriteBundleScreen", item["behavior"])
         self.assertTrue(item["uncertainty"])
         verify_current_main_efsjs_sprite_refresh.main()
+
+    def test_component_visual_layout_has_two_matched_caller_paths_and_complete_body(self):
+        addresses = (
+            build_current_main_verifications.MAIN_COMPONENT_VISUAL_LAYOUT_ADDRESSES
+        )
+        evidence = (
+            build_current_main_verifications.MAIN_COMPONENT_VISUAL_LAYOUT_EVIDENCE
+        )
+        self.assertEqual(addresses, ("588BA330",))
+        self.assertEqual(set(addresses), set(evidence))
+        item = evidence["588BA330"]
+        self.assertIn("0x587E3981", item["called_by"])
+        self.assertIn("0x587E3A3B", item["called_by"])
+        self.assertIn("FUN_58903290", item["behavior"])
+        self.assertIn("eight child-control flags", item["behavior"])
+        self.assertTrue(item["uncertainty"])
+        verify_current_main_component_visual_layout.main()
 
     def test_room_type_occupation_constructor_has_verified_caller_and_body(self):
         addresses = build_current_main_verifications.MAIN_ROOM_TYPE_OCCUPATION_ADDRESSES

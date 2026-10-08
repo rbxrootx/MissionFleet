@@ -17463,6 +17463,41 @@ MAIN_EFSJ_SPRITE_REFRESH_EVIDENCE = {
 }
 EVIDENCE.update(MAIN_EFSJ_SPRITE_REFRESH_EVIDENCE)
 
+MAIN_COMPONENT_VISUAL_LAYOUT_ADDRESSES = ("588BA330",)
+ADDRESSES += MAIN_COMPONENT_VISUAL_LAYOUT_ADDRESSES
+MAIN_COMPONENT_VISUAL_LAYOUT_EVIDENCE = {
+    "588BA330": {
+        "name_in_analysis": "FUN_588ba330 / selector-driven component visual layout",
+        "called_by": (
+            "Byte-matched FUN_587E3080 calls this at 0x587E3981 on the path "
+            "where param_3 == 2, param_2 matches the component at receiver "
+            "+0x584 or +0x598, the object at receiver +0xD78 passes its "
+            "+0x4C validity check, receiver-state +0xCC4 is nonzero, the "
+            "screen flags masked by 0x3E0 are not 0x40, and +0xCCC is nonnull. "
+            "A second caller site, 0x587E3A3B, is reached while scanning up to "
+            "0x1C child pointers from receiver +0x504 when the child and "
+            "screen-state predicates pass."
+        ),
+        "behavior": (
+            "Copies two stored coordinates, clears the low four bits on eight "
+            "child-control flags, stores a global-backed pointer and two "
+            "arguments, then switches on the low byte of one argument. "
+            "Observed selector cases 0, 3, 5, 6, and 0xD position selected "
+            "controls with FUN_58903290 and set their low flag bits; every "
+            "direct call reaches that byte-matched helper. It finishes by "
+            "updating parent flags and setting the observed 0x100 state bit."
+        ),
+        "uncertainty": (
+            "The owning class, identities of the eight child controls, stored "
+            "field meanings, selector meanings, and rendered output remain "
+            "unresolved. Caller predicates are recorded as machine-state "
+            "conditions, not assigned UI semantics. No live client or emulator "
+            "runtime test was performed."
+        ),
+    },
+}
+EVIDENCE.update(MAIN_COMPONENT_VISUAL_LAYOUT_EVIDENCE)
+
 
 if __name__ == "__main__":
     main()
