@@ -6,9 +6,12 @@ its evidence and limits are in
 [the FormTab note](docs/current-main-communicator-form-tab.md). Do not treat
 this subsystem or the current progress percentage as completion of the client.
 
-The current verified total is 9,119 / 42,461 functions and 2,912,936 /
-10,470,324 code bytes (21.4762% by function count, 27.8209% by bytes).
-The FormTab closure contributed 14 exact functions / 5,667 bytes across
+The current verified total is 13,041 / 42,461 functions and 2,955,690 /
+10,470,324 code bytes (30.7129% by function count, 28.2292% by bytes).
+The bulk leaf sweep adds 3,922 byte-only functions / 42,754 bytes at or below
+32 bytes each, raising Main.dll function coverage to 81.52%; its scope and
+limits are in [the leaf-sweep note](docs/current-main-leaf-sweep.md). The
+FormTab closure contributed 14 exact functions / 5,667 bytes across
 16 ranges. ObjDiff, the focused verifier, progress freshness check, and
 the full test suite validate this slice. Its primary vtable is fully
 byte-matched, but runtime UI and protocol behavior remain untested.

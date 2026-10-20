@@ -1,0 +1,18 @@
+// Reconstructed from Ghidra evidence and the locally captured mapped client image.
+// Indexed function extent: 0x58986C1C .. +0x9 bytes.
+extern "C" __declspec(naked) void Unwind_58986c1c() {
+    __asm {
+        ; Exact mapped bytes 8B 45 14: mov eax, dword ptr [ebp + 0x14]
+        __asm _emit 0x8b
+        __asm _emit 0x45
+        __asm _emit 0x14
+        ; Exact mapped bytes 50: push eax
+        __asm _emit 0x50
+        ; Exact mapped bytes E8 1D 60 FF FF: call 0x5897cc42
+        __asm _emit 0xe8
+        __asm _emit 0x1d
+        __asm _emit 0x60
+        __asm _emit 0xff
+        __asm _emit 0xff
+    }
+}

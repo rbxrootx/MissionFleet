@@ -6,9 +6,14 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 9,119 verified matches
-totaling 2,912,936 bytes (21.4762% by functions, 27.8209% by bytes), each at
-100.0% under objdiff 3.8.0. The FormTab vtable closure adds 14 exact
+identified code bytes across six report units. There are 13,041 verified matches
+totaling 2,955,690 bytes (30.7129% by functions, 28.2292% by bytes), each at
+100.0% under objdiff 3.8.0. The bulk leaf sweep adds 3,922 exact functions /
+42,754 bytes at or below 32 bytes each; it raises Main.dll function coverage
+from 35.2% to 81.52% but adds only 0.41% of the whole inventory by bytes. These
+are byte-only leaf matches, including compiler-generated handlers and thunks,
+not behavioral subsystem analyses. See
+[the leaf-sweep evidence](docs/current-main-leaf-sweep.md). The FormTab vtable closure adds 14 exact
 functions / 5,667 bytes; its mapped RTTI, 203 direct transfers, and unresolved
 indirect calls are documented in
 [the subsystem note](docs/current-main-communicator-form-tab.md). The aircraft fire-control handler and primary
