@@ -114,8 +114,8 @@ class ProgressReportTests(unittest.TestCase):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
         self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 13_041)
-        self.assertEqual(self.report["measures"]["matched_code"], "2955690")
+        self.assertEqual(self.report["measures"]["matched_functions"], 18_586)
+        self.assertEqual(self.report["measures"]["matched_code"], "3055674")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
@@ -132,8 +132,8 @@ class ProgressReportTests(unittest.TestCase):
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
         self.assertEqual(core["measures"]["total_code"], "3996593")
-        self.assertEqual(core["measures"]["matched_functions"], 431)
-        self.assertEqual(core["measures"]["matched_code"], "333421")
+        self.assertEqual(core["measures"]["matched_functions"], 5_976)
+        self.assertEqual(core["measures"]["matched_code"], "433405")
 
     def test_diplomacy_tab_event_closure_has_exact_rtti_and_direct_call_boundaries(self):
         addresses = build_current_main_verifications.MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES
