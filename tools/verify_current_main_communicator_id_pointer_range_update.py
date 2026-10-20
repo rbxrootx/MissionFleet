@@ -208,8 +208,9 @@ def verify_matches(image, decoder):
     expected_calls = {(caller, site, FUNCTION) for caller, site in EXPECTED_INCOMING}
     if incoming_rows != expected_calls:
         raise AssertionError(f"Incoming mapped call edges changed: {incoming_rows}")
-    if CALLER not in matched or UNMATCHED_CALLERS & matched:
-        raise AssertionError("Matched and unmatched caller boundary changed")
+    if CALLER not in matched:
+        raise AssertionError("The primary caller is not byte-verified")
+    # UNMATCHED_CALLERS may have been closed by the later bulk inventory sweep.
     for caller, site, target in expected_calls:
         call = decode_range(image, decoder, site, 5)
         if (len(call) != 1 or call[0].id != X86_INS_CALL or call[0].size != 5

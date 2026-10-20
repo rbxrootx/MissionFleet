@@ -1,0 +1,188 @@
+// Reconstructed from Ghidra evidence and the locally captured mapped client image.
+// Indexed function extent: 0x00405B34 .. +0xFB bytes.
+extern "C" __declspec(naked) void FUN_00405b34_00405B34() {
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 64h
+        push esi
+        push edi
+        push ecx
+        lea edi, [ebp - 64h]
+        mov ecx, 19h
+        mov eax, 0cccccccch
+        ; Exact mapped bytes F3 AB: rep stosd dword ptr es:[edi], eax
+        __asm _emit 0xf3
+        __asm _emit 0xab
+        pop ecx
+        mov dword ptr [ebp - 64h], ecx
+        mov esi, esp
+        push 0
+        push 80h
+        push 3
+        push 0
+        push 1
+        push 80000000h
+        mov eax, dword ptr [ebp - 64h]
+        add eax, 4
+        push eax
+        ; Exact mapped bytes FF 15 F4 21 5E 00: call dword ptr [0x5e21f4]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xf4
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 68 2C 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0x68
+        __asm _emit 0x2c
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        mov dword ptr [ebp - 4], eax
+        cmp dword ptr [ebp - 4], -1
+        ; Exact mapped bytes 0F 84 96 00 00 00: je 0x405c1b
+        __asm _emit 0x0f
+        __asm _emit 0x84
+        __asm _emit 0x96
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x00
+        mov esi, esp
+        push 0
+        push 0
+        mov ecx, dword ptr [ebp + 8]
+        push ecx
+        mov edx, dword ptr [ebp - 4]
+        push edx
+        ; Exact mapped bytes FF 15 FC 21 5E 00: call dword ptr [0x5e21fc]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xfc
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 40 2C 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0x40
+        __asm _emit 0x2c
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        mov esi, esp
+        push 0
+        lea eax, [ebp - 60h]
+        push eax
+        push 58h
+        lea ecx, [ebp - 5ch]
+        push ecx
+        mov edx, dword ptr [ebp - 4]
+        push edx
+        ; Exact mapped bytes FF 15 F0 21 5E 00: call dword ptr [0x5e21f0]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xf0
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 21 2C 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0x21
+        __asm _emit 0x2c
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        mov eax, dword ptr [ebp + 10h]
+        cmp eax, dword ptr [ebp - 14h]
+        ; Exact mapped bytes 75 36: jne 0x405bfd
+        __asm _emit 0x75
+        __asm _emit 0x36
+        mov esi, esp
+        push 0
+        lea ecx, [ebp - 60h]
+        push ecx
+        mov edx, dword ptr [ebp - 14h]
+        push edx
+        mov eax, dword ptr [ebp + 0ch]
+        push eax
+        mov ecx, dword ptr [ebp - 4]
+        push ecx
+        ; Exact mapped bytes FF 15 F0 21 5E 00: call dword ptr [0x5e21f0]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xf0
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 F8 2B 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0xf8
+        __asm _emit 0x2b
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        mov esi, esp
+        mov edx, dword ptr [ebp - 4]
+        push edx
+        ; Exact mapped bytes FF 15 EC 21 5E 00: call dword ptr [0x5e21ec]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xec
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 E5 2B 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0xe5
+        __asm _emit 0x2b
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        ; Exact mapped bytes EB 17: jmp 0x405c14
+        __asm _emit 0xeb
+        __asm _emit 0x17
+        mov esi, esp
+        mov eax, dword ptr [ebp - 4]
+        push eax
+        ; Exact mapped bytes FF 15 EC 21 5E 00: call dword ptr [0x5e21ec]
+        __asm _emit 0xff
+        __asm _emit 0x15
+        __asm _emit 0xec
+        __asm _emit 0x21
+        __asm _emit 0x5e
+        __asm _emit 0x00
+        cmp esi, esp
+        ; Exact mapped bytes E8 D0 2B 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0xd0
+        __asm _emit 0x2b
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        xor eax, eax
+        ; Exact mapped bytes EB 09: jmp 0x405c1d
+        __asm _emit 0xeb
+        __asm _emit 0x09
+        mov eax, 1
+        ; Exact mapped bytes EB 02: jmp 0x405c1d
+        __asm _emit 0xeb
+        __asm _emit 0x02
+        xor eax, eax
+        pop edi
+        pop esi
+        add esp, 64h
+        cmp ebp, esp
+        ; Exact mapped bytes E8 B7 2B 0A 00: call 0x4a87e0
+        __asm _emit 0xe8
+        __asm _emit 0xb7
+        __asm _emit 0x2b
+        __asm _emit 0x0a
+        __asm _emit 0x00
+        mov esp, ebp
+        pop ebp
+        ; Exact mapped bytes C2 0C 00: ret 0xc
+        __asm _emit 0xc2
+        __asm _emit 0x0c
+        __asm _emit 0x00
+    }
+}

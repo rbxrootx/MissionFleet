@@ -166,8 +166,9 @@ def main():
 
     caller, site, target = EXPECTED_UNVERIFIED_CALLER
     caller_row = inventory.get(caller)
-    if caller_row is None or caller in matched or int(caller_row["size"]) != 1093:
-        raise AssertionError("The third incoming caller's unmatched inventory state changed")
+    if caller_row is None or int(caller_row["size"]) != 1093:
+        raise AssertionError("The third incoming caller's inventory state changed")
+    # The bulk inventory sweep may now have byte-matched this former boundary.
     if not caller <= site < caller + int(caller_row["size"]):
         raise AssertionError(f"Call site {site:08X} is outside its inventory body")
     require_direct_call(image, decoder, site, target)

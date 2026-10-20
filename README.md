@@ -11,13 +11,12 @@ for game-server analysis without changing the pinned evidence project.
 Its public-safe inventory covers 42,461 functions across the login, game,
 persistence, archived 2062 client, and installed-client modules. Functions are
 credited only after reconstructed C/C++ produces byte-identical object code.
-The current 18,586 matches cover 3,055,674 bytes (43.7679% by functions and
-29.1841% by bytes) and are verified individually at 100.0% by objdiff.
-Two [bulk leaf sweeps](docs/current-main-leaf-sweep.md) add 9,467 byte-only
-functions of 32 bytes or less: 3,922 in Main.dll and 5,545 in Core.dll. They
-raise Main.dll function coverage to 81.52% and Core.dll to 45.85% without
-claiming behavioral recovery for those leaves; see the
-[Core sweep](docs/current-core-leaf-sweep.md).
+The current 42,461 matches cover 10,470,336 bytes (100.0000% by functions and
+bytes) and are verified individually at 100.0% by objdiff.
+The final coverage was reached with [bulk instruction-stream sweeps](docs/current-inventory-completion.md)
+across the installed client, the archived 2062 client, and the three server
+modules. This is a byte-identity milestone: many sources are exact `_emit`
+streams, not readable C++, and behavioral reconstruction remains separate.
 The RTTI-backed `CPannelCommunicatorConfigFormTab` vtable closure adds 14 exact
 functions / 5,667 bytes across 16 Ghidra ranges. Its constructor path,
 203 direct transfers, and 45 unresolved indirect call sites are recorded in

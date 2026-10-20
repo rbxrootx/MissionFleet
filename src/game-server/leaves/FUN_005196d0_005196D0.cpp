@@ -1,0 +1,50 @@
+// Reconstructed from Ghidra evidence and the locally captured mapped client image.
+// Indexed function extent: 0x005196D0 .. +0x4C bytes.
+extern "C" __declspec(naked) void FUN_005196d0_005196D0() {
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        mov dword ptr [ebp - 8], ecx
+        mov eax, dword ptr [ebp - 8]
+        cmp dword ptr [eax + 7ch], 0
+        ; Exact mapped bytes 74 36: je 0x519718
+        __asm _emit 0x74
+        __asm _emit 0x36
+        mov ecx, dword ptr [ebp - 8]
+        cmp dword ptr [ecx + 80h], 0
+        ; Exact mapped bytes 74 2A: je 0x519718
+        __asm _emit 0x74
+        __asm _emit 0x2a
+        push 0
+        mov edx, dword ptr [ebp - 8]
+        mov eax, dword ptr [edx + 78h]
+        push eax
+        mov ecx, dword ptr [ebp - 8]
+        mov edx, dword ptr [ecx + 7ch]
+        push edx
+        ; Exact mapped bytes E8 5D DD FF FF: call 0x517460
+        __asm _emit 0xe8
+        __asm _emit 0x5d
+        __asm _emit 0xdd
+        __asm _emit 0xff
+        __asm _emit 0xff
+        mov dword ptr [ebp - 4], eax
+        cmp dword ptr [ebp - 4], 0
+        ; Exact mapped bytes 74 0C: je 0x519718
+        __asm _emit 0x74
+        __asm _emit 0x0c
+        mov eax, dword ptr [ebp - 4]
+        push eax
+        mov ecx, dword ptr [ebp - 8]
+        ; Exact mapped bytes E8 E1 D7 02 00: call 0x546ef9
+        __asm _emit 0xe8
+        __asm _emit 0xe1
+        __asm _emit 0xd7
+        __asm _emit 0x02
+        __asm _emit 0x00
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}

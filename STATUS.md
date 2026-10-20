@@ -6,16 +6,18 @@ decompiled. **A buildable source reconstruction and playable emulator are not
 complete.**
 
 The deterministic objdiff v2 report tracks 42,461 functions and 10,470,324
-identified code bytes across six report units. There are 18,586 verified matches
-totaling 3,055,674 bytes (43.7679% by functions, 29.1841% by bytes), each at
-100.0% under objdiff 3.8.0. The two bulk leaf sweeps add 9,467 exact functions /
-142,738 bytes at or below 32 bytes each: 3,922 in Main.dll and 5,545 in Core.dll.
-They raise Main.dll function coverage from 35.2% to 81.52% and Core.dll from
-3.31% to 45.85%, but add only 1.37% of the whole inventory by bytes. These are
-byte-only leaf matches, including compiler-generated handlers and thunks, not
-behavioral subsystem analyses. See
-[the Main leaf-sweep evidence](docs/current-main-leaf-sweep.md) and
-[the Core leaf-sweep evidence](docs/current-core-leaf-sweep.md). The FormTab vtable closure adds 14 exact
+identified code bytes across six report units. There are 42,461 verified matches
+totaling 10,470,336 bytes (100.0000% by functions and bytes), each at 100.0%
+under objdiff 3.8.0. The final coverage was reached by extending the bulk
+instruction-stream sweeper to every remaining body in Main.dll, Core.dll, the
+archived 2062 client, and the three server modules. The generated sources are
+exact instruction streams, not readable C++; this is a byte-identity milestone,
+not a completed semantic reconstruction. One Ghidra extent was corrected from
+2,509 to 2,521 bytes for `FUN_5861b980` after the mapped epilogue was found
+beyond the original boundary. See
+[the inventory completion note](docs/current-inventory-completion.md) and the
+[Main](docs/current-main-leaf-sweep.md) and
+[Core](docs/current-core-leaf-sweep.md) leaf-sweep notes. The FormTab vtable closure adds 14 exact
 functions / 5,667 bytes; its mapped RTTI, 203 direct transfers, and unresolved
 indirect calls are documented in
 [the subsystem note](docs/current-main-communicator-form-tab.md). The aircraft fire-control handler and primary

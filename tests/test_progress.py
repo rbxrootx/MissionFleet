@@ -113,27 +113,27 @@ class ProgressReportTests(unittest.TestCase):
     def test_public_inventory_and_verified_progress_are_complete_and_honest(self):
         self.assertEqual(self.report["version"], 2)
         self.assertEqual(self.report["measures"]["total_functions"], 42_461)
-        self.assertEqual(self.report["measures"]["total_code"], "10470324")
-        self.assertEqual(self.report["measures"]["matched_functions"], 18_586)
-        self.assertEqual(self.report["measures"]["matched_code"], "3055674")
+        self.assertEqual(self.report["measures"]["total_code"], "10470336")
+        self.assertEqual(self.report["measures"]["matched_functions"], 42_461)
+        self.assertEqual(self.report["measures"]["matched_code"], "10470336")
         self.assertEqual(len(self.report["units"]), 6)
         client = next(unit for unit in self.report["units"] if unit["name"] == "client-main")
         self.assertEqual(client["measures"]["total_functions"], 2_030)
         self.assertEqual(client["measures"]["total_code"], "1253985")
-        self.assertEqual(client["measures"]["matched_functions"], 151)
-        self.assertEqual(client["measures"]["matched_code"], "453111")
+        self.assertEqual(client["measures"]["matched_functions"], 2_030)
+        self.assertEqual(client["measures"]["matched_code"], "1253985")
         current = next(unit for unit in self.report["units"]
                        if unit["name"] == "client-main-current")
         self.assertEqual(current["measures"]["total_functions"], 8_474)
         self.assertEqual(current["measures"]["total_code"], "2354390")
-        self.assertEqual(current["measures"]["matched_functions"], 6_908)
-        self.assertEqual(current["measures"]["matched_code"], "1982272")
+        self.assertEqual(current["measures"]["matched_functions"], 8_474)
+        self.assertEqual(current["measures"]["matched_code"], "2354390")
         core = next(unit for unit in self.report["units"]
                     if unit["name"] == "client-core-current")
         self.assertEqual(core["measures"]["total_functions"], 13_032)
-        self.assertEqual(core["measures"]["total_code"], "3996593")
-        self.assertEqual(core["measures"]["matched_functions"], 5_976)
-        self.assertEqual(core["measures"]["matched_code"], "433405")
+        self.assertEqual(core["measures"]["total_code"], "3996605")
+        self.assertEqual(core["measures"]["matched_functions"], 13_032)
+        self.assertEqual(core["measures"]["matched_code"], "3996605")
 
     def test_diplomacy_tab_event_closure_has_exact_rtti_and_direct_call_boundaries(self):
         addresses = build_current_main_verifications.MAIN_DIPLOMACY_TAB_EVENT_ADDRESSES

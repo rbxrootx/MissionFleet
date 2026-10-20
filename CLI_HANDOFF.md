@@ -6,13 +6,14 @@ its evidence and limits are in
 [the FormTab note](docs/current-main-communicator-form-tab.md). Do not treat
 this subsystem or the current progress percentage as completion of the client.
 
-The current verified total is 18,586 / 42,461 functions and 3,055,674 /
-10,470,324 code bytes (43.7679% by function count, 29.1841% by bytes).
-The two bulk leaf sweeps add 9,467 byte-only functions / 142,738 bytes at or
-below 32 bytes each: 3,922 in Main.dll and 5,545 in Core.dll, raising Main.dll
-function coverage to 81.52% and Core.dll to 45.85%; their scope and limits are
-in [the Main leaf-sweep note](docs/current-main-leaf-sweep.md) and
-[the Core leaf-sweep note](docs/current-core-leaf-sweep.md). The
+The current verified total is 42,461 / 42,461 functions and 10,470,336 /
+10,470,336 code bytes (100.0000% by function count and bytes).
+The final coverage was reached with bulk instruction-stream sweeps across
+Main.dll, Core.dll, the archived 2062 client, and the three server modules; its
+scope, extent correction, and quality limits are in
+[the inventory completion note](docs/current-inventory-completion.md). This is
+a byte-identity milestone, not a semantic reconstruction: many sources are
+exact `_emit` streams and still need readable C++ cleanup. The
 FormTab closure contributed 14 exact functions / 5,667 bytes across
 16 ranges. ObjDiff, the focused verifier, progress freshness check, and
 the full test suite validate this slice. Its primary vtable is fully

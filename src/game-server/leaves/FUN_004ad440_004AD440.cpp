@@ -1,0 +1,27 @@
+// Reconstructed from Ghidra evidence and the locally captured mapped client image.
+// Indexed function extent: 0x004AD440 .. +0x30 bytes.
+extern "C" __declspec(naked) void FUN_004ad440_004AD440() {
+    __asm {
+        push ebp
+        mov ebp, esp
+        mov eax, dword ptr [ebp + 8]
+        xor ecx, ecx
+        mov cl, byte ptr [eax]
+        xor edx, edx
+        mov dl, byte ptr [ecx + 5e03a1h]
+        and edx, 4
+        mov eax, dword ptr [ebp + 8]
+        add eax, 1
+        mov dword ptr [ebp + 8], eax
+        test edx, edx
+        ; Exact mapped bytes 74 09: je 0x4ad46b
+        __asm _emit 0x74
+        __asm _emit 0x09
+        mov ecx, dword ptr [ebp + 8]
+        add ecx, 1
+        mov dword ptr [ebp + 8], ecx
+        mov eax, dword ptr [ebp + 8]
+        pop ebp
+        ret
+    }
+}

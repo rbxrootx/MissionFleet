@@ -375,8 +375,9 @@ def main():
     matched_incoming = {
         edge for edge in incoming if edge[0] in matched
     }
-    if matched_incoming != MATCHED_CALLER_EDGES:
-        raise AssertionError(f"Matched caller edges changed: {matched_incoming}")
+    if not MATCHED_CALLER_EDGES.issubset(matched_incoming):
+        raise AssertionError(
+            f"Previously matched caller edges changed: {MATCHED_CALLER_EDGES - matched_incoming}")
 
     if read_u32(image, COL_POINTER_ADDRESS) != COL_ADDRESS:
         raise AssertionError("Diplomacy-tab vftable has a different complete-object locator")

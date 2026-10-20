@@ -167,8 +167,7 @@ def main():
         raise AssertionError("CSantaAircraft RTTI base hierarchy changed")
     if BASE_CONSTRUCTOR not in matched:
         raise AssertionError("CAircraft base constructor is not byte-verified")
-    if INCOMING_CALLER in matched:
-        raise AssertionError("The recorded creation caller is no longer unmatched")
+    # INCOMING_CALLER may be closed by the later bulk inventory sweep.
 
     for path in EDGE_EXPORTS:
         with path.open(encoding="utf-8", newline="") as stream:

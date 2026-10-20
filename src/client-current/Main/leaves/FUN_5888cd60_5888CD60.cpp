@@ -1,0 +1,66 @@
+// Raw mapped byte stream; the body does not decode as one contiguous instruction run.
+// 60 bytes.
+extern "C" __declspec(naked) void FUN_5888cd60_5888CD60() {
+    __asm {
+        __asm _emit 0xff
+        __asm _emit 0x81
+        __asm _emit 0xf8
+        __asm _emit 0x05
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x8b
+        __asm _emit 0x81
+        __asm _emit 0xf8
+        __asm _emit 0x05
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0xba
+        __asm _emit 0x04
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x3b
+        __asm _emit 0xc2
+        __asm _emit 0x56
+        __asm _emit 0x7f
+        __asm _emit 0x22
+        __asm _emit 0xeb
+        __asm _emit 0x08
+        __asm _emit 0x8d
+        __asm _emit 0xa4
+        __asm _emit 0x24
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x90
+        __asm _emit 0x8d
+        __asm _emit 0x34
+        __asm _emit 0x40
+        __asm _emit 0x80
+        __asm _emit 0xbc
+        __asm _emit 0xf1
+        __asm _emit 0x7c
+        __asm _emit 0x05
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x75
+        __asm _emit 0x15
+        __asm _emit 0x40
+        __asm _emit 0x3b
+        __asm _emit 0xc2
+        __asm _emit 0x89
+        __asm _emit 0x81
+        __asm _emit 0xf8
+        __asm _emit 0x05
+        __asm _emit 0x00
+        __asm _emit 0x00
+        __asm _emit 0x7e
+        __asm _emit 0xe8
+        __asm _emit 0xc7
+        __asm _emit 0x81
+        __asm _emit 0xf8
+        __asm _emit 0x05
+    }
+}

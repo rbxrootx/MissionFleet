@@ -184,8 +184,7 @@ def main():
     if read_rtti_hierarchy(image, VTABLE) != expected_hierarchy:
         raise AssertionError("CSantaAircraft RTTI base hierarchy changed")
 
-    if BASE_CLEANUP_HELPER in matched:
-        raise AssertionError("Recorded cleanup helper is no longer unresolved")
+    # BASE_CLEANUP_HELPER may be closed by the later bulk inventory sweep.
     if CONDITIONAL_HELPER not in matched:
         raise AssertionError("Conditional helper is not byte-verified")
 
