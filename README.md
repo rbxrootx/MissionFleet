@@ -592,6 +592,21 @@ python -m unittest discover -s tests -v
 The generated `NF2_2062_report` is validated against objdiff 3.8.0 locally and
 uploaded by GitHub Actions to the active [decomp.dev dashboard](https://decomp.dev/rbxrootx/MissionFleet).
 
+## Rust server stack
+
+The supplied Chinese server binaries are evidence, not the intended runtime.
+The recovered login transport now has an English Rust implementation in
+`server/`. It covers framing, both checksum paths, protection negotiation,
+connection announcement, liveness probes, and idle timeouts. Credential and
+server-list handlers are logged but not answered until their payloads are
+recovered; the game and save crates refuse to bind until their protocols are
+reconstructed. See [the Rust server notes](docs/rust-server-stack.md).
+
+```powershell
+cd server
+cargo run -p nf-login -- --bind 127.0.0.1:8010
+```
+
 ## First stock-client connection test
 
 The recovered login transport framing and default port are implemented in a
