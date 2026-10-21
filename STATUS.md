@@ -17,7 +17,12 @@ not a completed semantic reconstruction. One Ghidra extent was corrected from
 beyond the original boundary. See
 [the inventory completion note](docs/current-inventory-completion.md) and the
 [Main](docs/current-main-leaf-sweep.md) and
-[Core](docs/current-core-leaf-sweep.md) leaf-sweep notes. The FormTab vtable closure adds 14 exact
+[Core](docs/current-core-leaf-sweep.md) leaf-sweep notes. The Main.dll `.text`
+section can now be rebuilt from the checked-in sources: 8,441 functions /
+2,354,390 bytes with zero byte mismatches, producing the captured image SHA
+exactly. See [the source-image note](docs/current-main-source-image.md). The
+remaining 33 functions are in `.vmp1`, and data/imports/VM sections still come
+from the template. The FormTab vtable closure adds 14 exact
 functions / 5,667 bytes; its mapped RTTI, 203 direct transfers, and unresolved
 indirect calls are documented in
 [the subsystem note](docs/current-main-communicator-form-tab.md). The aircraft fire-control handler and primary

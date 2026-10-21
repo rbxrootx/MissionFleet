@@ -17,6 +17,9 @@ The final coverage was reached with [bulk instruction-stream sweeps](docs/curren
 across the installed client, the archived 2062 client, and the three server
 modules. This is a byte-identity milestone: many sources are exact `_emit`
 streams, not readable C++, and behavioral reconstruction remains separate.
+The Main.dll `.text` section can now be rebuilt from the checked-in sources
+with [the source-image builder](docs/current-main-source-image.md): 8,441
+functions / 2,354,390 bytes, zero mismatches, matching the captured image SHA.
 The RTTI-backed `CPannelCommunicatorConfigFormTab` vtable closure adds 14 exact
 functions / 5,667 bytes across 16 Ghidra ranges. Its constructor path,
 203 direct transfers, and 45 unresolved indirect call sites are recorded in
