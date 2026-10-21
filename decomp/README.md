@@ -1,29 +1,73 @@
-# NavyFIELD native decompilation
+# Native decompilation evidence
 
-The user-supplied `大海战.rar` contains a historical 2062 client and a server
-self-extracting archive. The latter contains native login, game and persistence
-servers, SQL Server database files and an ASP registration site. This project
-now analyzes those actual binaries. The earlier Python lobby is a separate
-experiment and is not the implementation of this protocol.
+This directory records the native-code recovery behind MissionFleet. It is
+evidence and analysis, not a runnable server or a readable C++ port.
+
+The supplied package contains a historical 2.062 client plus native login,
+game, and persistence servers. The earlier Python lobby is a separate
+experiment and is not the implementation of this protocol. The server runtime is
+being replaced by the English Rust workspace under `../server/`; the recovered
+pseudocode here remains the evidence for that work.
+
+## Inventory
+
+The checked-in catalog covers six report units:
+
+| Unit | Functions | Bytes |
+| --- | ---: | ---: |
+| login-server | 1,739 | 211,631 |
+| game-server | 8,952 | 1,492,830 |
+| save-server | 8,234 | 1,160,895 |
+| archived 2.062 client | 2,030 | 1,253,985 |
+| installed `Main.dll` | 8,474 | 2,354,390 |
+| installed `Core.dll` | 13,032 | 3,996,605 |
+| **Total** | **42,461** | **10,470,336** |
+
+Every entry is backed by an object that matches the mapped original at 100.0%
+under objdiff 3.8.0. The final coverage came from bulk instruction-stream
+sweeps, not subsystem-by-subsystem source analysis. Most generated sources are
+`__declspec(naked)` `_emit` streams.
+
+`Main.dll` `.text` can be rebuilt from the checked-in sources: 8,441 functions /
+2,354,390 bytes, zero mismatches, with the output SHA equal to the captured
+image. Thirty-three small functions live in `.vmp1` and remain template-backed.
+Data, imports, resources, relocations, and the VM sections still come from the
+template image. See
+[the source-image note](../docs/current-main-source-image.md).
+
+## What the 100% does not mean
+
+- The sources are not readable or idiomatic C++.
+- Function boundaries are not all independently reviewed.
+- Every entry is not necessarily game logic; some are data, handlers, thunks,
+  or padding.
+- Indirect calls, protocols, and runtime behavior are not recovered.
+- The client and servers are not playable.
+
+Replacing `_emit` sources with analyzed C++ is source-quality work. It should
+not be reported as additional byte coverage.
 
 ## Local artifacts
 
 - `../private-inputs/decompilation/project/NavyField2062.gpr`: Ghidra project.
 - `../private-inputs/decompilation/pseudocode/`: C pseudocode for each server,
-  function indexes, string cross-references, summaries and analysis logs.
+  function indexes, string cross-references, summaries, and analysis logs.
 - `../private-inputs/decompilation/regions/`: recovered raw memory regions,
-  SHA-256 provenance, original entry addresses and recovered import tables.
+  SHA-256 provenance, original entry addresses, and recovered import tables.
 - `../private-inputs/server-package/nf2/`: extracted original server package.
-- `../reports/supplied/`: archive manifests, PE information, source-path strings
-  and comparison with the installed modern client's tables.
+- `../reports/supplied/`: archive manifests, PE information, source-path strings,
+  and comparisons against the installed client's tables.
+- `../reports/unpacked-current-main/` and `../reports/unpacked-client/`: mapped
+  client images used for verification.
 
-These directories are local and Git-ignored. Decompiled output is derived from
-the supplied binaries; it is not original source, compilable C, or covered by
-the workspace MIT license. Recovery tools and Ghidra scripts are workspace code.
+These directories are Git-ignored. Decompiled output is derived from the
+supplied binaries; it is not original source, compilable C, or covered by the
+workspace MIT license. Recovery tools and Ghidra scripts are workspace code.
 
 ## Reproduce
 
-From the workspace root, with Python 3.12, `pefile`, 7-Zip and Java 21 available:
+From the workspace root, with Python 3.12, `pefile`, 7-Zip, Java 21, and the
+pinned Ghidra release available:
 
 ```powershell
 python tools/inspect_inputs.py
@@ -34,35 +78,27 @@ python tools/index_decompilation.py
 python tools/verify_decompilation.py
 ```
 
-The extraction script uses the three supplied files in the user's Downloads
-directory and reads the embedded SFX archive through 7-Zip. Document content
-was treated as evidence, not instructions to execute. The archive password is
-the one stated in the supplied document. None of the extracted game programs,
-installers, registry scripts or bundled database engines has been executed.
+Progress and byte-match verification:
 
-The Ghidra runner expects `.analysis-deps/ghidra_12.1.3_PUBLIC`, downloaded from
-the [official Ghidra release](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.1.3_build).
-The release ZIP SHA-256 was verified as
+```powershell
+python tools/generate_progress.py
+python tools/verify_matches.py
+python -m unittest discover -s tests -v
+```
+
+The Ghidra runner expects `.analysis-deps/ghidra_12.1.3_PUBLIC`. The release ZIP
+SHA-256 is
 `93a5d11a9ad510622acaaf908c556a7b9b764d338e78a7567f3689bf5081fd54`.
-The analysis project uses x86 little-endian 32-bit Windows conventions.
-
-An optional [Ghidra Bundle trial](../docs/ghidra-bundle-evaluation.md) records
-how to run its 12.1.4 headless build in separate project and output directories
-on a supported host. The pinned 12.1.3 project and byte-match evidence remain
-the baseline for this checkout.
 
 `python tools/run_decompilation.py --refresh-labels` verifies the existing
-region prefix, appends newly recovered tail bytes, applies import labels and
+region prefix, appends newly recovered tail bytes, applies import labels, and
 exports without repeating the original analysis. A changed code prefix requires
 a full reimport. Close the GUI project before running headless analysis.
 
-## Recovery evidence and limits
+## Recovered server regions
 
-The servers use NsPack compression. The static tool recovers LZMA bytes and
-restores normalized branch operands using loader metadata. It creates raw
-analysis regions, not executable files. Public format evidence was consulted
-in [ClamAV](https://github.com/Cisco-Talos/clamav/blob/main/libclamav/unsp.c);
-decompression uses Python's standard-library LZMA implementation.
+The servers use NsPack compression. The recovery tool produces raw analysis
+regions, not executable files.
 
 | Server | Recovered bytes | Unrecovered virtual tail | Import slots |
 | --- | ---: | ---: | ---: |
@@ -70,26 +106,31 @@ decompression uses Python's standard-library LZMA implementation.
 | Game | 2,162,688 | 0 | 806 |
 | Persistence | 2,838,528 | 0 | 803 |
 
-The game and persistence payloads reach their declared virtual lengths. The
-login payload is one compressed byte shorter than declared and its final 179
-virtual bytes remain unresolved. No missing bytes are invented. These streams
-have no observed LZMA end marker; completeness is measured against declared
-output length, not a successful end-marker check.
+The login payload is one compressed byte shorter than its declared length and
+its final 179 virtual bytes remain unresolved. No missing bytes are invented.
+The streams have no observed LZMA end marker; completeness is measured against
+the declared output length, not a successful end-marker check.
 
-Recovered source-path strings include battle, ship, sailor, fleet, socket and
-database components. They identify useful investigation anchors, not recovered
-source files. Ghidra success counts indicate that pseudocode was emitted for
-identified functions; they do not prove accurate types or complete behavior.
+## Evidence boundary
 
-The old package is not established as compatible with `D:\FleetMission`:
-10 of 11 compared top-level DATA files differ. Types, structures, message
-semantics, database recovery and native runtime validation remain unfinished.
-No original-client login, harbor entry or battle has been demonstrated.
+Recovered source-path strings identify battle, ship, sailor, fleet, socket, and
+database components. They are investigation anchors, not recovered source
+files. Ghidra success counts do not prove types or complete behavior.
 
-## Project progress
+The old package is not established as compatible with the installed
+`D:\FleetMission` client: most compared top-level `DATA` files differ. Database
+recovery, protocol semantics, and native runtime validation remain unfinished.
 
-Whole-project progress is prepared for [decomp.dev](../docs/decomp-dev.md).
-The initial report contains all 18,925 identified native functions and starts at
-an honest 0%; Ghidra pseudocode is evidence, not a byte-identical source match.
-decomp.me remains useful for testing Visual C++ 6 variants on individual
-functions while the exact service pack and compiler flags are established.
+The login transport is the most completely recovered server subsystem. Its
+framing, checksums, protection table, liveness behavior, and connection
+management are implemented in Rust under `../server/` and tested. Credential
+payloads, server-list responses, game-server behavior, and save-server
+persistence are not yet reconstructed and are not guessed.
+
+## Related documentation
+
+- [Rust server stack](../docs/rust-server-stack.md)
+- [Login transport protocol](../docs/login-protocol.md)
+- [Inventory completion](../docs/current-inventory-completion.md)
+- [Current status](../STATUS.md)
+- [Roadmap](../docs/roadmap.md)
